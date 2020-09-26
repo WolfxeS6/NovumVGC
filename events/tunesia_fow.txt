@@ -1,0 +1,64 @@
+﻿add_namespace = tunesia
+add_namespace = news_TUN
+
+# Turkey demands Tunesia become puppet
+country_event = {
+	id = tunesia.999
+	title = tunesia.999.t
+	desc = tunesia.999.d
+	picture = GFX_report_event_stalin_02
+	
+	is_triggered_only = yes
+	
+	option = { # Accept demands
+		name = tunesia.999.a
+		ai_chance = {	
+			modifier = {
+				factor = 0
+				OR = {
+					any_other_country = {
+	
+						has_guaranteed = TUN
+					}
+					any_other_country = {
+
+						is_in_faction_with = TUN
+					}
+				}
+			}
+			factor = 100	
+		}
+		TUR = { puppet = TUN }
+	}
+
+	option = { # Refuse
+		name = tunesia.999.b
+		ai_chance = {	
+			modifier = {
+				factor = 0
+				NOT = {
+					OR = {
+						any_other_country = {
+
+							has_guaranteed = TUN
+						}
+						any_other_country = {
+
+							is_in_faction_with = TUN
+						}
+					}
+				}
+			}
+			factor = 5	
+		}
+		TUR = { country_event = { id = turkey.997 hours = 6 } }
+		effect_tooltip = {
+			TUR = {
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = TUN		
+				}
+			}			
+		}
+	}
+}

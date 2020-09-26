@@ -1,0 +1,1241 @@
+﻿add_namespace = russia
+
+#Kursk Submarine Disaster
+country_event = {
+	id = russia.1
+	title = russia.1.t
+	desc = russia.1.d
+	picture = GFX_report_event_kursk_sinking
+	
+	fire_only_once = yes
+	
+	trigger = {
+		tag = SOV
+		date > 2000.8.10
+		date < 2001.1.1
+		not = { has_country_flag = sov_kursk_sinking }
+	}
+	
+	immediate = {
+		set_country_flag = sov_kursk_sinking
+	}
+	
+	option = {	#Horrible!
+		name = russia.1.o1
+		navy_experience = 2
+		add_stability = -0.02
+		add_political_power = -10
+		add_popularity = {
+			ideology = reactionary
+			popularity = -0.03
+		}
+		news_event = {
+			hours = 6
+			id = news.50
+		}
+	}
+}
+
+#Belarus: Russia offers Union State
+country_event = {
+	id = russia.2
+	title = russia.2.t
+	desc = russia.2.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = russia.2.o1
+		ai_chance = {
+			factor = 75
+		}
+		SOV = { puppet = BLR }
+		SOV = { country_event = { id = russia.3 } }
+	}
+	
+	option = {
+		name = russia.2.o2
+		ai_chance = {
+			factor = 25
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+		SOV = { add_opinion_modifier = { target = BLR modifier = large_decrease } }
+		SOV = { country_event = { id = russia.4 } }
+	}
+}
+
+#Belarus accepts!
+country_event = {
+	id = russia.3
+	title = russia.3.t
+	desc = russia.3.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = russia.3.o1
+		effect_tooltip = {
+			puppet = BLR
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = SOV
+				NOT = { tag = SOV }
+				NOT = { tag = BLR }
+			}
+			country_event = russia.5
+		}
+	}
+}
+
+#Belarus refuses!
+country_event = {
+	id = russia.4
+	title = russia.4.t
+	desc = russia.4.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = russia.4.o1
+		effect_tooltip = {
+			add_opinion_modifier = { target = BLR modifier = large_decrease }
+		}
+	}
+}
+
+#Faction members (not Belarus): Russian imperialism
+country_event = {
+	id = russia.5
+	title = russia.5.t
+	desc = russia.5.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {	#We will turn our back on Russia
+		name = russia.5.o1
+		ai_chance = {
+			factor = 75
+		}
+		SOV = { remove_from_faction = ROOT }
+		set_country_flag = left_CSTO
+	}
+	
+	option = {	#Loyalty must stay in place
+		name = russia.5.o2
+		ai_chance = {
+			factor = 25
+		}
+		add_political_power = -100
+	}
+}
+
+#ABK/SOS: Southern Strategy
+country_event = {
+	id = russia.6
+	title = russia.6.t
+	desc = russia.6.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = russia.6.o1
+		army_experience = 5
+		navy_experience = 5
+		air_experience = 5
+		add_political_power = 50
+	}
+}
+
+#Ukraine: Russia invades Crimea!
+country_event = {
+	id = russia.7
+	title = russia.7.t
+	desc = russia.7.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {	#We shall stand down.
+		name = russia.7.o1
+		ai_chance = {
+			factor = 75
+		}
+		SOV = { country_event = { id = russia.8 } }
+		SOV = { transfer_state = 137 }
+	}
+	
+	option = { #We will stand and fight!
+		name = russia.7.o2
+		ai_chance = {
+			factor = 25
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+		effect_tooltip = { 
+			SOV = { 
+				declare_war_on = {
+					target = UKR
+					type = take_state_focus
+					generator = { 137 }
+				}
+			}
+		}
+	}
+}
+
+#Russia: Ukraine folds Crimea.
+country_event = {
+	id = russia.8
+	title = russia.8.t
+	desc = russia.8.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {	#Excellent
+		name = russia.8.o1
+		effect_tooltip = {
+			SOV = { transfer_state = 137 }
+		}
+		add_named_threat = {
+			threat = 6
+			name = threat_SOV_annexiation_of_crimea
+		}
+		hidden_effect = {
+			add_opinion_modifier = {
+				target = SOV
+				modifier = annexed_ukraine
+			}
+			add_opinion_modifier = {
+				target = SOV
+				modifier = annexed_ukraine_trade
+			}
+			add_opinion_modifier = {
+				target = UKR
+				modifier = annexed_ukraine_trade
+			}
+		}
+	}
+}
+
+#Russia: Ukraine resists.
+country_event = {
+	id = russia.9
+	title = russia.9.t
+	desc = russia.9.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {	#They know very well what the consequence is.
+		name = russia.9.o1
+		declare_war_on = {
+			target = UKR
+			type = take_state_focus
+			generator = { 137 }
+		}
+	}
+}
+
+#Ukraine: Novorossiya rises against us!
+country_event = {
+	id = russia.10
+	title = russia.10.t
+	desc = russia.10.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = russia.10.o1
+		NOV = { transfer_state = 227 }
+		NOV = { transfer_state = 228 }
+		NOV = { load_oob = "NOV_2016" }
+		NOV = {
+			declare_war_on = {
+				target = UKR
+				type = annex_everything
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = russia.11
+	title = russia.11.t
+	desc = russia.11.desc
+	picture = GFX_event_sov_nedovolstvo
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_preparation_for_the_revolution
+			progress > 0.1
+		}	
+		NOT = {
+			has_government = communist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.11.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.1						
+		}
+	}
+
+country_event = { 
+	id = russia.12
+	title = russia.12.t
+	desc = russia.12.desc
+	picture = GFX_event_sov_prof
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_preparation_for_the_revolution
+			progress > 0.3
+		}	
+		NOT = {
+			has_government = communist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.12.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05	
+		add_ideas = SOV_trade_unions					
+		}
+	}
+
+country_event = { 
+	id = russia.13
+	title = russia.13.t
+	desc = russia.13.desc
+	picture = GFX_event_sov_napadenie
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_preparation_for_the_revolution
+			progress > 0.5
+		}	
+		NOT = {
+			has_government = communist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.13.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05						
+		}
+	}
+
+country_event = { 
+	id = russia.14
+	title = russia.14.t
+	desc = russia.14.desc
+	picture = GFX_event_sov_dok
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_preparation_for_the_revolution
+			progress > 0.9
+		}	
+		NOT = {
+			has_government = communist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.14.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = SOV_strike_dockers						
+		}
+	}
+
+country_event = { 
+	id = russia.15
+	title = russia.15.t
+	desc = russia.15.desc
+	picture = GFX_event_sov_napadenie
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_preparation_for_the_revolution
+			progress > 0.7
+		}	
+		NOT = {
+			has_government = communist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.15.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = -0.05					
+		}
+	}
+
+country_event = { 
+	id = russia.16
+	title = russia.16.t
+	desc = russia.16.desc
+	picture = GFX_event_sov_strike
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_New_October
+			progress > 0.2
+		}	
+		NOT = {
+			has_government = communist
+		}
+	}	
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.16.a
+		ai_chance = {
+			base = 100
+		}
+		remove_ideas = SOV_strike_dockers
+		add_ideas = SOV_general_strike					
+		}
+	}
+
+country_event = { 
+	id = russia.17
+	title = russia.17.t
+	desc = russia.17.desc
+	picture = GFX_event_sov_strike3
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_New_October
+			progress > 0.6
+		}	
+		NOT = {
+			has_government = communist
+		}
+	}	
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.17.a
+		ai_chance = {
+			base = 100
+		}
+		add_war_support = -0.01				
+		}
+	}
+
+country_event = { 
+	id = russia.18
+	title = russia.18.t
+	desc = russia.18.desc
+	picture = GFX_event_sov_strike2
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_New_October
+			progress > 0.4
+		}	
+		NOT = {
+			has_government = communist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.18.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -100			
+		}
+	}
+
+country_event = { 
+	id = russia.19
+	title = russia.19.t
+	desc = russia.19.desc
+	picture = GFX_event_sov_g
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_New_October
+			progress > 0.2
+		}	
+		NOT = {
+			has_government = communist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.19.a
+		ai_chance = {
+			base = 100
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = -0.15
+		}			
+	}
+}
+
+country_event = { 
+	id = russia.20
+	title = russia.20.t
+	desc = russia.20.desc
+	picture = GFX_event_sov_sovet_vlast
+	fire_only_once = yes
+	is_triggered_only
+
+	option = { 
+		name = russia.20.a
+		ai_chance = {
+			base = 100
+	}
+		news_event = {
+				hours = 6
+				id = news.811
+		}
+	}
+}
+
+country_event = { 
+	id = russia.23
+	title = russia.23.t
+	desc = russia.23.desc
+	picture = GFX_event_sov_poland1
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_contr
+			progress > 0.2
+		}	
+		NOT = {
+			has_government = reactionary
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.23.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -100
+			POL = {
+				transfer_state = 741
+			}
+			news_event = {
+				hours = 6
+				id = news.820		
+		}
+	}
+}
+
+country_event = { 
+	id = russia.21
+	title = russia.21.t
+	desc = russia.21.desc
+	picture = GFX_event_sov_china1
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_exp
+			progress > 0.3
+		}	
+		NOT = {
+			has_government = reactionary
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.21.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = -100
+			PRC = {
+				transfer_state = 408
+				transfer_state = 409
+				transfer_state = 537
+				transfer_state = 650
+				transfer_state = 560
+				transfer_state = 655
+				transfer_state = 561
+				transfer_state = 657
+			}
+			PRC = { give_guarantee = SOV }
+			news_event = {
+				hours = 6
+				id = news.809		
+		}
+	}
+}
+
+country_event = { 
+	id = russia.24
+	title = russia.24.t
+	desc = russia.24.desc
+	picture = GFX_event_sov_sov
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_attack_usa
+			progress > 0.5
+		}	
+		NOT = {
+			has_government = reactionary
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.24.a
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = 100
+			SOV = { 
+				annex_country = { target = KAZ transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = UZB transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = TMS transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = KYR transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = TAJ transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = GEO transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = UKR transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = ABK transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = SOS transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = AZR transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = NGK transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = NOV transfer_troops = yes }
+			}
+			SOV = { 
+				annex_country = { target = ARM transfer_troops = yes }
+			}		
+		}
+	}
+
+country_event = { 
+	id = russia.25
+	title = russia.25.t
+	desc = russia.25.desc
+	picture = GFX_event_sov_kom1
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_create_international
+			progress > 0.2
+		}	
+		NOT = {
+			has_government = fascist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.25.a
+		ai_chance = {
+			base = 80
+		}
+		add_ideas = SOV_komintern1_agr
+		add_popularity = {
+			ideology = communist
+			popularity = 0.15
+		}			
+	}
+
+	option = { 
+		name = russia.25.b
+		ai_chance = {
+			base = 20
+		}
+		add_ideas = SOV_komintern1_love
+		add_popularity = {
+			ideology = communist
+			popularity = 0.15
+		}			
+	}
+}
+
+country_event = { 
+	id = russia.26
+	title = russia.26.t
+	desc = russia.26.desc
+	picture = GFX_event_sov_kom2
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_create_international
+			progress > 0.40
+		}	
+		NOT = {
+			has_government = fascist
+		}	
+	}
+	
+	immediate = {
+		set_global_flag = SOV_soviet_union
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.26.a
+		ai_chance = {
+			base = 80
+		}
+		add_ideas = SOV_komintern2_love
+		add_popularity = {
+			ideology = communist
+			popularity = 0.15
+		}			
+	}
+
+	option = { 
+		name = russia.26.b
+		ai_chance = {
+			base = 20
+		}
+		add_ideas = SOV_komintern2_agr
+		add_popularity = {
+			ideology = communist
+			popularity = 0.15
+		}			
+	}
+}
+
+country_event = { 
+	id = russia.27
+	title = russia.27.t
+	desc = russia.27.desc
+	picture = GFX_event_sov_kom3
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_create_international
+			progress > 0.60
+		}
+		PRC = { has_government = communist }
+		NOT = {
+			has_government = fascist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.27.a
+		ai_chance = {
+			base = 20
+		}
+		add_opinion_modifier = { target = PRC modifier = with_china }
+		add_ideas = SOV_china_ideology_help
+		add_popularity = {
+			ideology = communist
+			popularity = 0.1
+		}			
+	}
+
+	option = { 
+		name = russia.27.b
+		ai_chance = {
+			base = 30
+		}
+		add_opinion_modifier = { target = PRC modifier = against_china }
+		add_ideas = SOV_one_communist
+		add_popularity = {
+			ideology = communist
+			popularity = 0.1
+		}			
+	}
+	
+	option = { 
+		name = russia.27.c
+		ai_chance = {
+			base = 50
+		}
+		add_opinion_modifier = { target = PRC modifier = normal_china }
+		add_ideas = SOV_china_industry_help
+		add_popularity = {
+			ideology = communist
+			popularity = 0.1
+		}			
+	}
+}
+
+country_event = { 
+	id = russia.28
+	title = russia.28.t
+	desc = russia.28.desc
+	picture = GFX_event_sov_lenin
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_realism
+			progress > 0.5
+		}	
+		NOT = {
+			has_government = fascist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.28.a
+		ai_chance = {
+			base = 100
+		}
+		SOV = {
+				add_timed_idea = {
+					idea = red_emigrants
+					days = 923
+				} 
+			}
+		}			
+	}
+	
+	country_event = { 
+	id = russia.29
+	title = russia.29.t
+	desc = russia.29.desc
+	picture = GFX_event_sov_voz
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_exp
+			progress > 0.6
+		}	
+		NOT = {
+			has_government = fascist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.29.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = 0.05
+		SOV = {
+				add_timed_idea = {
+					idea = voz
+					days = 550
+				} 
+			}
+		}			
+	}
+	
+	country_event = { 
+	id = russia.30
+	title = russia.30.t
+	desc = russia.30.desc
+	picture = GFX_event_sov_zug
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_realism
+			progress > 0.2
+		}	
+		NOT = {
+			has_government = fascist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.30.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = 0.05
+		GER = {
+				add_timed_idea = {
+					idea = kprf
+					days = 1000
+				} 
+			}
+		ENG = {
+				add_timed_idea = {
+					idea = kprf
+					days = 1000
+				} 
+			}
+		FRA = {
+				add_timed_idea = {
+					idea = kprf
+					days = 1000
+				} 
+			}
+		}			
+	}
+	
+	country_event = { 
+	id = russia.31
+	title = russia.31.t
+	desc = russia.31.desc
+	picture = GFX_event_sov_kaz1
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		focus_progress = {
+			focus = SOV_army
+			progress > 0.1
+		}	
+		NOT = {
+			has_government = fascist
+		}	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.31.a
+		ai_chance = {
+			base = 100
+		}
+		add_stability = 0.01
+		KAZ = {
+				declare_war_on = {
+				target = SOV
+				type = annex_everything
+				}
+				give_military_access = D01
+			}
+		}			
+	}
+	
+	country_event = { 
+	id = russia.32
+	title = russia.32.t
+	desc = russia.32.desc
+	picture = GFX_event_sov_kaz2
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+			has_war_with = KAZ
+			KAZ = {
+			surrender_progress > 0.1
+		}
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.32.a
+		ai_chance = {
+			base = 100
+		}
+		KAZ	= {
+			white_peace = {
+				tag = SOV
+			} 
+		}
+		SOV = {
+			transfer_state = 407	
+			transfer_state = 406
+			transfer_state = 588
+		}			
+	}
+}
+
+	country_event = { 
+	id = russia.33
+	title = russia.33.t
+	desc = russia.33.desc
+	picture = GFX_event_sov_romanovu
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV	
+		NOT = {
+			has_government = communist
+		}
+		has_completed_focus = SOV_monarchy	
+	}
+
+	mean_time_to_happen = { 
+		days = 1
+	}
+
+	option = { 
+		name = russia.33.a
+		ai_chance = {
+			base = 40
+		}
+		create_country_leader = {
+			name = "George Mikhailovich"
+			picture = "George_Mikhailovich.dds"
+			expire = "2050.1.1"
+			ideology = fascist_ideology
+		}
+	}
+	
+	option = { 
+		name = russia.33.b
+		ai_chance = {
+			base = 20
+		}
+		create_country_leader = {
+			name = "Vladimir Kirillovich"
+			picture = "Vladimir_Kirillovich.dds"
+			expire = "2050.1.1"
+			ideology = fascist_ideology
+		}
+	}
+	
+	option = { 
+		name = russia.33.c
+		ai_chance = {
+			base = 40
+		}
+		create_country_leader = {
+			name = "National Russian Council"
+			picture = "fascist_sovet.dds"
+			expire = "2050.1.1"
+			ideology = fascist_ideology
+		}
+	}
+}
+
+country_event = { 
+	id = russia.34
+	title = russia.34.t
+	desc = russia.34.desc
+	picture = GFX_event_sov_sov
+
+	trigger = {
+		any_country = {
+		original_tag = SOV
+		exists = yes 
+		has_war = no
+		has_government = communist
+		}
+		has_war = no
+		is_neighbor_of = SOV
+		has_government = communist
+		has_global_flag = SOV_soviet_union
+		NOT = { is_in_faction_with = SOV 
+		original_tag = PRC
+		original_tag = VIN
+		original_tag = LAO
+		}
+	}
+
+	mean_time_to_happen = { days = 5 }
+
+	option = { 
+		name = russia.34.a
+		ai_chance = {
+		base = 100
+		}	
+		random_other_country = {
+		limit = {
+		original_tag = SOV
+		}
+		annex_country = { target = ROOT }
+		}	
+	}
+}
+
+country_event = { 
+	id = russia.35
+	title = russia.35.t
+	desc = russia.35.desc
+	picture = GFX_event_sov_kaz2
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SOV
+		has_completed_focus = SOV_shtab
+	}
+
+	mean_time_to_happen = { 
+		days = 2
+	}
+
+	option = { 
+		name = russia.35.a
+		ai_chance = {
+			base = 100
+		}
+		create_field_marshal = {
+			name = "Timur Bogdanovich"
+			picture = "generals/Timur_Bogdanovich.dds"
+			traits = { logistics_wizard unyielding_defender politically_connected }
+			skill = 4
+		}
+		create_corps_commander = {
+			name = "Danil Polivanov"
+			picture = "generals/Danil_Polivanov.dds"
+			traits = { adaptable winter_specialist }
+			skill = 2
+		}
+		create_corps_commander = {
+			name = "Yaroslav Brodovich"
+			picture = "generals/Yaroslav_Brodovich.dds"
+			traits = { old_guard trait_engineer urban_assault_specialist fortress_buster }
+			skill = 3
+		}
+		create_corps_commander = {
+			name = "Dmitry Nokiforov"
+			picture = "generals/Dmitry_Nokiforov.dds"
+			traits = { panzer_leader combined_arms_expert skirmisher }
+			skill = 2
+		}
+		create_corps_commander = {
+			name = "Fedor Baturin"
+			picture = "generals/Fedor_Baturin.dds"
+			traits = { camouflage_expert paratrooper  }
+			skill = 2
+		}
+	}
+}

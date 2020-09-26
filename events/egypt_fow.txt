@@ -1,0 +1,64 @@
+﻿add_namespace = egypt
+add_namespace = news_EGY
+
+# Turkey demands egypt become puppet
+country_event = {
+	id = egypt.999
+	title = egypt.999.t
+	desc = egypt.999.d
+	picture = GFX_report_event_stalin_02
+	
+	is_triggered_only = yes
+	
+	option = { # Accept demands
+		name = egypt.999.a
+		ai_chance = {	
+			modifier = {
+				factor = 0
+				OR = {
+					any_other_country = {
+	
+						has_guaranteed = EGY
+					}
+					any_other_country = {
+
+						is_in_faction_with = EGY
+					}
+				}
+			}
+			factor = 100	
+		}
+		TUR = { puppet = EGY }
+	}
+
+	option = { # Refuse
+		name = egypt.999.b
+		ai_chance = {	
+			modifier = {
+				factor = 0
+				NOT = {
+					OR = {
+						any_other_country = {
+
+							has_guaranteed = EGY
+						}
+						any_other_country = {
+
+							is_in_faction_with = EGY
+						}
+					}
+				}
+			}
+			factor = 5	
+		}
+		TUR = { country_event = { id = turkey.998 hours = 6 } }
+		effect_tooltip = {
+			TUR = {
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = EGY		
+				}
+			}			
+		}
+	}
+}

@@ -1,0 +1,3907 @@
+ focus_tree = {
+	
+	id = china_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 20
+			original_tag = PRC
+		}
+	}
+
+	default = no
+
+	@political_reform_tree = 0
+
+	@northern_tree = 2
+	@eastern_tree = 4
+	@central_tree = 6
+	@southern_tree = 8
+	@western_tree = 10
+
+	@china_dream_tree = 22
+	@national_interests_tree = 20
+	@tibet_tree = 18
+	@taiwan_tree = 16
+	@south_sea_tree = 14
+	@east_sea_tree = 12
+
+	@peaceful_rise_tree = 24
+	@africa_mining_tree = 30
+	@african_initiatives_tree = 26
+	@south_africa_tree = 28
+	@india_tree = 32
+	@south_asia_tree = 34
+	@pakistan_tree = 36
+	@negotiation_tree = 38
+	@arbitration_tree = 40
+	@south_sea_negotiation_tree = 42
+
+	@democracy_tree = 44
+	@revolution_tree = 46
+
+	@military_tree = 50
+	@air_tree = 48
+	@mech_tree = 52
+	@navy_tree = 54
+
+	focus = {
+		id = socialism_with_chinese_characteristics
+		icon = communism
+		x = 30
+		y = 0
+		cost = 10
+
+		mutually_exclusive = {
+			focus = PRC_move_towards_democracy
+		}
+
+		available = {
+			has_government = communist
+		}
+
+		completion_reward = {
+			add_political_power = 150
+		}
+		
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+	#Political Reform
+	focus = {
+	id = PRC_political_reform
+	icon = improve_relations
+	x = @political_reform_tree
+	y = 0
+	cost = 10
+
+	completion_reward = {
+	add_political_power = 50
+	add_stability = 0.05
+
+	}
+	ai_will_do = {
+		factor = 10
+	}
+	
+	}
+
+    #Economic Start
+	focus = {
+		id = PRC_economic_revitalization
+		icon = demand_territory2
+		x = 6
+		y = 0
+		cost = 10
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+		}
+		ai_will_do = {
+			factor = 20
+		}
+	}
+
+	#Peaceful Rise Start
+	focus = {
+		id = PRC_peaceful_rise
+		icon = major_alliance
+		x = @peaceful_rise_tree
+		y = 1
+		cost = 10
+
+		prerequisite = {
+			focus = socialism_with_chinese_characteristics
+			focus = PRC_move_towards_democracy
+		}
+
+		mutually_exclusive = {
+			focus = PRC_china_dream
+		}
+
+		completion_reward = {
+
+			add_political_power = 100
+
+			USA = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+			JAP = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+			RAJ = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+		}
+		
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+    #China Dream Start
+   focus = {
+      id = PRC_china_dream
+      icon = demand_territory
+      x = @china_dream_tree
+      y = 1
+      cost = 10
+
+		prerequisite = {
+			focus = socialism_with_chinese_characteristics
+		}
+
+		mutually_exclusive = {
+			focus = PRC_peaceful_rise
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.05
+			add_ideas = {
+				idea_focus_PRC_china_dream
+			}
+		}
+
+		ai_will_do = {
+			factor = 35
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+    }
+
+    #Military Start
+   focus = {
+      id = PRC_military_reorganization
+      icon = army_officers
+      x = 49
+      y = 0
+      cost = 10
+
+		completion_reward = {
+			add_political_power = 25
+			army_experience = 10
+			navy_experience = 10
+			air_experience = 10
+
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+   #####################################################################################################################################################
+
+	#Political Reform
+   focus = {
+      id = PRC_anti_corruption
+      icon = intelligence_exchange
+      x = @political_reform_tree
+      y = 1
+      cost = 10
+
+		prerequisite = {
+			focus = PRC_political_reform
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+      id = PRC_industrial_safety
+      icon = industry_civilian
+      x = @political_reform_tree
+      y = 2
+      cost = 10
+
+		prerequisite = {
+			focus = PRC_anti_corruption
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+      id = PRC_educational_development
+      icon = scientific_exchange
+      x = @political_reform_tree
+      y = 3
+      cost = 10
+
+		prerequisite = {
+		focus = PRC_industrial_safety
+		}
+
+		completion_reward = {
+		add_ideas = {
+			idea_focus_generic_education_reform
+		}
+
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+
+   focus = {
+      id = PRC_public_services
+      icon = industry_civilian
+      x = @political_reform_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_educational_development
+      }
+
+		completion_reward = {
+		add_ideas = {
+		idea_focus_generic_public_service_investment
+		}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_research_initiatives
+      icon = research
+      x = @political_reform_tree
+      y = 5
+      cost = 15
+
+		prerequisite = {
+		focus = PRC_public_services
+		}
+
+		completion_reward = {
+		add_research_slot = 1
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   ########################################################################################################################################################
+   #Northern Development
+
+	focus = {
+		id = PRC_northern_infrastructure
+		icon = infrastructure
+		x = @northern_tree
+		y = 1
+		cost = 10
+
+		prerequisite = {
+		focus = PRC_economic_revitalization
+		}
+
+		completion_reward = {
+
+			609 = {
+			add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+			}
+			}
+
+			610 = {
+			add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+			}
+			}
+
+			608 = {
+			add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+			}
+			}
+
+			716 = {
+			add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+			}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+   focus = {
+      id = PRC_northern_industry
+      icon = industry_civilian
+      x = @northern_tree
+      y = 2
+      cost = 15
+
+      prerequisite = {
+         focus = PRC_northern_infrastructure
+      }
+
+      completion_reward = {
+            
+         609 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         610 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         608 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         716 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_northern_military_industry
+      icon = industry_military
+      x = @northern_tree
+      y = 3
+      cost = 20
+
+      prerequisite = {
+         focus = PRC_northern_industry
+      }
+
+      completion_reward = {
+            
+         609 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         610 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         608 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         716 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+    
+   #########################################################################################################################################################
+   #Eastern Development
+
+   focus = {
+      id = PRC_eastern_infrastructure
+      icon = infrastructure
+      x = @eastern_tree
+      y = 1
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_economic_revitalization
+      }
+
+      completion_reward = {
+            
+         614 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         597 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         598 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         607 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_eastern_industry
+      icon = industry_civilian
+      x = @eastern_tree
+      y = 2
+      cost = 15
+
+      prerequisite = {
+         focus = PRC_eastern_infrastructure
+      }
+
+      completion_reward = {
+            
+         614 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         597 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         598 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         607 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_eastern_military_industry
+      icon = industry_military
+      x = @eastern_tree
+      y = 3
+      cost = 20
+
+      prerequisite = {
+         focus = PRC_eastern_industry
+      }
+
+      completion_reward = {
+            
+         614 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         597 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         598 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         607 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   #########################################################################################################################################################
+   #Southern Development
+
+   focus = {
+      id = PRC_southern_infrastructure
+      icon = infrastructure
+      x = @southern_tree
+      y = 1
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_economic_revitalization
+      }
+
+      completion_reward = {
+            
+         592 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         593 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         595 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         600 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_southern_industry
+      icon = industry_civilian
+      x = @southern_tree
+      y = 2
+      cost = 15
+
+      prerequisite = {
+         focus = PRC_southern_infrastructure
+      }
+
+		completion_reward = {
+
+			592 = {
+            add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+				}
+			}
+
+			593 = {
+            add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+				}
+			}
+
+			595 = {
+            add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+				}
+			}
+
+			600 = {
+            add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_southern_military_industry
+      icon = industry_military
+      x = @southern_tree
+      y = 3
+      cost = 20
+
+      prerequisite = {
+         focus = PRC_southern_industry
+      }
+
+      completion_reward = {
+            
+         592 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         593 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         595 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         600 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_hainan_naval_development
+      icon = naval_dockyards
+      x = @southern_tree
+      y = 4
+      cost = 15
+
+		prerequisite = {
+		focus = PRC_southern_military_industry
+		}
+
+		completion_reward = {
+		591 = { 
+         add_building_construction = { 
+            type = naval_base province = 1070 
+            level = 5 
+            instant_build = yes 
+               } 
+         add_extra_state_shared_building_slots = 5
+         add_building_construction = { 
+         type = dockyard 
+         level = 5 
+         instant_build = yes 
+            } 
+         }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+   #########################################################################################################################################################
+   #Central Development
+
+   focus = {
+      id = PRC_central_infrastructure
+      icon = infrastructure
+      x = @central_tree
+      y = 1
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_economic_revitalization
+      }
+
+      completion_reward = {
+            
+         622 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         615 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         620 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         602 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_central_industry
+      icon = industry_civilian
+      x = @central_tree
+      y = 2
+      cost = 15
+
+      prerequisite = {
+         focus = PRC_central_infrastructure
+      }
+
+      completion_reward = {
+            
+         622 = {
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         615 = {
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         620 = {
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         602 = {
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_central_military_industry
+      icon = industry_military
+      x = @central_tree
+      y = 3
+      cost = 20
+
+      prerequisite = {
+         focus = PRC_central_industry
+      }
+
+      completion_reward = {
+            
+         622 = {
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         615 = {
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         620 = {
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         602 = {
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   #########################################################################################################################################################
+   #Western Development
+
+   focus = {
+      id = PRC_western_infrastructure
+      icon = infrastructure
+      x = @western_tree
+      y = 1
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_economic_revitalization
+      }
+
+
+      completion_reward = {
+            
+         616 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         283 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         604 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         325 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_western_industry
+      icon = industry_civilian
+      x = @western_tree
+      y = 2
+      cost = 15
+
+      prerequisite = {
+         focus = PRC_western_infrastructure
+      }
+
+      completion_reward = {
+            
+         616 = {
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         283 = {
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         604 = {
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         325 = {
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_western_military_industry
+      icon = industry_military
+      x = @western_tree
+      y = 3
+      cost = 20
+
+      prerequisite = {
+         focus = PRC_western_industry
+      }
+
+      completion_reward = {
+            
+         616 = {
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         283 = {
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         604 = {
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+
+         325 = {
+            add_building_construction = {
+               type = arms_factory
+               level = 1
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_xinjiang_infrastructure
+      icon = infrastructure
+      x = @western_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_western_military_industry
+      }
+
+      completion_reward = {
+            
+         617 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         619 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         618 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+
+         287 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 2
+               instant_build = yes
+            }
+            }
+         }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   #########################################################################################################################################################
+
+   #Peaceful Rise
+
+   focus = {
+      id = PRC_diplomatic_initatives
+      icon = national_unity
+      x = @peaceful_rise_tree
+      y = 3
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_peaceful_rise
+      }
+
+      completion_reward = {
+         USA = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         KOR = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         JAP = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         VIN = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         ENG = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         FRA = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         GER = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         ITA = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         RAJ = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         SOV = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+ 
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_trade_deals
+      icon = trade_deal
+      x = @peaceful_rise_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_diplomatic_initatives
+      }
+
+      completion_reward = {
+         #similar to vanilla US trade opinion bonus
+
+         PRC = { add_opinion_modifier = { target = USA modifier = trade_influence_1 } }
+         PRC = { add_opinion_modifier = { target = KOR modifier = trade_influence_1 } }
+         PRC = { add_opinion_modifier = { target = JAP modifier = trade_influence_1 } }
+         PRC = { add_opinion_modifier = { target = VIN modifier = trade_influence_1 } }
+         PRC = { add_opinion_modifier = { target = ENG modifier = trade_influence_1 } }
+         PRC = { add_opinion_modifier = { target = FRA modifier = trade_influence_1 } }
+         PRC = { add_opinion_modifier = { target = GER modifier = trade_influence_1 } }
+         PRC = { add_opinion_modifier = { target = ITA modifier = trade_influence_1 } }
+         PRC = { add_opinion_modifier = { target = RAJ modifier = trade_influence_1 } }
+         PRC = { add_opinion_modifier = { target = SOV modifier = trade_influence_1 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_educational_exchanges
+      icon = scientific_exchange
+      x = @peaceful_rise_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_trade_deals
+      }
+
+      completion_reward = {
+         #increased research speed
+
+         add_ideas = { idea_focus_PRC_educational_exchanges }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_economic_liberalization
+      icon = consumer_goods
+      x = @peaceful_rise_tree
+      y = 6
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_educational_exchanges
+      }
+
+      completion_reward = {
+         #increased construction speed
+
+         add_ideas = { idea_focus_PRC_economic_liberalization }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_free_markets
+      icon = industry_civilian
+      x = @peaceful_rise_tree
+      y = 7
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_economic_liberalization
+      }
+
+      completion_reward = {
+         #increased factory output
+
+         add_ideas = { idea_focus_PRC_free_markets }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   ####################################################################################################################################################################################
+
+   #African Initiatives
+
+   focus = {
+      id = PRC_african_initiatives
+      icon = improve_relations
+      x = @african_initiatives_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_trade_deals
+      }
+
+      completion_reward = {
+
+         add_political_power = 25
+
+         ANG = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         BOT = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         COG = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         DJI = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         ETH = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         KEN = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         MZB = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         NGA = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         SAF = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         SUD = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         TZN = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         UGA = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         ZAM = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         ZIM = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+      }
+
+		ai_will_do = {
+			factor = 20
+		}
+   }
+
+   focus = {
+      id = PRC_east_african_trade
+      icon = improve_relations
+      x = @african_initiatives_tree
+      y = 6
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_african_initiatives
+      }
+
+      completion_reward = {
+         #improved trade opinion for Kenya, Tanzania, Ethiopia, Uganda
+
+         ETH = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+         KEN = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+         TZN = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+         UGA = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_east_african_development
+      icon = industry_civilian
+      x =  @african_initiatives_tree
+      y = 7
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_east_african_trade
+      }
+
+      completion_reward = {
+         #factories+infrastructure for Kenya, Tanzania, Ethiopia, Uganda
+
+         ETH = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+         271 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         271 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+          KEN = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+          547 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         547 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         TZN = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+         546 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         546 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         UGA = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+         548 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         548 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+
+
+
+   }
+
+	focus = {
+		id = PRC_south_african_trade
+		icon = improve_relations
+		x = @south_africa_tree
+		y = 6
+		cost = 10
+
+		prerequisite = {
+		 focus = PRC_african_initiatives
+		}
+
+		completion_reward = {
+			#improved trade opinion for South Africa, MZBambique, Zambia, Angola, Botswana
+
+			MZB = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+			ANG = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+			BOT = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+			SAF = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+			ZAM = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+
+   focus = {
+      id = PRC_south_african_development
+      icon = industry_civilian
+      x =  @south_africa_tree
+      y = 7
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_south_african_trade
+      }
+
+      completion_reward = {
+         #factories+infrastructure for South Africa, MZBambique, Zambia, Angola, Botswana
+
+          ANG = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+          540 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         540 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+          BOT = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+          542 = {
+            
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         542 = {
+            
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         MZB = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+          544 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         544 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         SAF = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+          275 = {
+            
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         275 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         ZAM = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+
+          545 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         545 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_african_mining_interests
+      icon = construction2
+      x =  @africa_mining_tree
+      y = 6
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_african_initiatives
+      }
+
+      completion_reward = {
+         #"Chinese Mining Interests" Event for African countries, accept for +resources, unity hit and ideology drift, refuse for political power, unity bonus and relations hit w/ PRC
+
+         ANG = { country_event = { id = china.20 } }
+         BOT = { country_event = { id = china.20 } }
+         COG = { country_event = { id = china.20 } }
+         ETH = { country_event = { id = china.20 } }
+         KEN = { country_event = { id = china.20 } }
+         MZB = { country_event = { id = china.20 } }
+         SAF = { country_event = { id = china.20 } }
+         TZN = { country_event = { id = china.20 } }
+         UGA = { country_event = { id = china.20 } }
+         ZAM = { country_event = { id = china.20 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_alliance_expansion
+      icon = improve_relations
+      x = @african_initiatives_tree
+      y = 8
+
+      available = {  
+       is_faction_leader = yes  
+      }
+
+      cost = 20
+
+      prerequisite = {
+         focus = PRC_south_african_development
+      }
+      prerequisite = {
+         focus = PRC_east_african_development
+      }
+
+      completion_reward = {
+         #invite aforementioned countries to Chinese alliance
+
+         ANG = { country_event = { id = china.1 } }
+         BOT = { country_event = { id = china.1 } }
+         ETH = { country_event = { id = china.1 } }
+         KEN = { country_event = { id = china.1 } }
+         MZB = { country_event = { id = china.1 } }
+         SAF = { country_event = { id = china.1 } }
+         TZN = { country_event = { id = china.1 } }
+         UGA = { country_event = { id = china.1 } }
+         ZAM = { country_event = { id = china.1 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   ###################################################################################################################################################################
+
+   #Multilateral Negotiations
+
+   focus = {
+      id = PRC_multilateral_negotiation
+      icon = improve_relations
+      x = @negotiation_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_diplomatic_initatives
+      }
+
+      completion_reward = {
+         add_political_power = 75
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_regional_agreements
+      icon = improve_relations
+      x = @negotiation_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_multilateral_negotiation
+      }
+
+      completion_reward = {
+         #relations boost, "Pax Asiatica" event for neighbors, offering Chinese gaurantee
+
+         KOR = { country_event = { id = china.21 } }
+         VIN = { country_event = { id = china.21 } }
+         #PHI = { country_event = { id = china.21 } }
+         INS = { country_event = { id = china.21 } }
+         LAO = { country_event = { id = china.21 } }
+         MAL = { country_event = { id = china.21 } }
+         CAM = { country_event = { id = china.21 } }
+         SIA = { country_event = { id = china.21 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_asian_alliance
+      icon = major_alliance
+      x = @negotiation_tree
+      y = 6
+      cost = 20
+
+      prerequisite = {
+         focus = PRC_regional_agreements
+      }
+
+      completion_reward = {
+         #create china faction/invite Korea, Vietnam, Philipines
+
+         
+         create_faction = "AEDU"
+         every_country = { country_event = { id = china.4 } }
+
+         KOR = { country_event = { id = china.1 } }
+         VIN = { country_event = { id = china.1 } }
+         #PHI = { country_event = { id = china.1 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_taiwan_association_agreement
+      icon = anschluss
+      x = @negotiation_tree
+      y = 8
+      cost = 15
+
+      available = {
+      is_faction_leader = yes
+      CHI = { exists = yes }
+      NOT = { has_war_with = CHI }
+      }
+
+      prerequisite = {
+         focus = PRC_asian_alliance
+      }
+      prerequisite = {
+         focus = PRC_open_communications
+      }
+
+      completion_reward = {
+         #invite Taiwan to China-faction
+
+         CHI = { country_event = { id = china.1 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+      focus = {
+      id = PRC_international_arbitration
+      icon = national_unity
+      x = @arbitration_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_multilateral_negotiation
+      }
+
+      completion_reward = {
+         #relations boost
+
+         USA = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         JAP = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         CHI = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         KOR = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         VIN = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         #PHI = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_taiwan_concensus
+      icon = align_to_taiwan
+      x = @arbitration_tree
+      y = 6
+      cost = 10
+
+      available = {
+      CHI = { exists = yes }
+      NOT = { has_war_with = CHI }
+      }
+
+
+      prerequisite = {
+         focus = PRC_international_arbitration
+      }
+
+      completion_reward = {
+         #relations boost with Taiwan
+
+         add_political_power = 50
+         CHI = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_open_communications
+      icon = improve_relations
+      x = @arbitration_tree
+      y = 7
+      cost = 10
+
+      available = {
+      CHI = { exists = yes }
+      NOT = { has_war_with = CHI }
+      }
+
+      prerequisite = {
+         focus = PRC_taiwan_concensus
+      }
+
+      completion_reward = {
+         #relations boost with Taiwan, political drift
+
+         CHI = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_one_country_two_systems
+      icon = anschluss
+      x = @arbitration_tree
+      y = 8
+      cost = 15
+
+      available = {
+      CHI = { exists = yes }
+      NOT = { has_war_with = CHI }
+      }
+
+      prerequisite = {
+         focus = PRC_open_communications
+      }
+
+      completion_reward = {
+         #puppet taiwan
+
+         CHI = { country_event = { id = china.5 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_one_china
+      icon = align_to_china
+      x = @arbitration_tree
+      y = 9
+      cost = 20
+
+      available = {
+      CHI = { exists = yes }
+      NOT = { has_war_with = CHI }
+      }
+
+      prerequisite = {
+         focus = PRC_one_country_two_systems
+      }
+
+      completion_reward = {
+      annex_country = {
+        target = CHI
+        transfer_troops = yes
+         }
+      annex_country = {
+        target = HKN
+        transfer_troops = yes
+         }
+      annex_country = {
+        target = MCU
+        transfer_troops = yes
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_south_sea_negotiations
+      icon = intelligence_exchange
+      x = @south_sea_negotiation_tree
+      y = 6
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_international_arbitration
+      }
+
+      completion_reward = {
+         #events for Vietnam, Philipines and Taiwan (if it exists) over island disputes
+
+         VIN = { country_event = { id = china.22 }}
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_southeast_asian_outreach
+      icon = improve_relations
+      x = @south_sea_negotiation_tree
+      y = 7
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_south_sea_negotiations
+      }
+
+      completion_reward = {
+         #relations boost with Laos, Cambodia, Thailand, Indonesia, Malaysia, Singapore
+
+         LAO = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         CAM = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         SIA = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         INS = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         MAL = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         SIG = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_southeast_asian_alliance_expansion
+      icon = major_alliance
+      x = @south_sea_negotiation_tree
+      y = 8
+      cost = 10
+
+      available = {
+      is_faction_leader = yes
+      }
+
+      prerequisite = {
+         focus = PRC_southeast_asian_outreach
+      }
+
+      completion_reward = {
+         #invite Laos, Cambodia, Thailand, Indonesia, Malaysia, Singapore to faction
+
+         LAO = { country_event = { id = china.1 } }
+         CAM = { country_event = { id = china.1 } }
+         SIA = { country_event = { id = china.1 } }
+         INS = { country_event = { id = china.1 } }
+         MAL = { country_event = { id = china.1 } }
+         SIG = { country_event = { id = china.1 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   ############################################################################################################################################################################
+   #South Asia
+
+   focus = {
+      id = PRC_south_asian_outreach
+      icon = improve_relations
+      x = @south_asia_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_multilateral_negotiation
+      }
+
+      completion_reward = {
+         #relations boost with India, Pakistan, Bengladesh, etc
+
+         RAJ = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         PAK = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         BAN = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         BHU = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         NEP = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         SRL = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+         BRM = { add_opinion_modifier = { target = PRC modifier = recent_actions_positive } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_south_asian_trade
+      icon = improve_relations
+      x = @south_asia_tree
+      y = 6
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_south_asian_outreach
+      }
+
+      completion_reward = {
+         #trade relations boost
+
+         RAJ = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+         PAK = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+         BAN = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+         BHU = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+         NEP = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+         SRL = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+         BRM = { add_opinion_modifier = { target = PRC modifier = trade_influence_2 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_aid_minor_powers
+      icon = industry_civilian
+      x = @south_asia_tree
+      y = 7
+      cost = 15
+
+      mutually_exclusive = { 
+      focus = PRC_aid_india 
+      focus = PRC_aid_pakistan 
+      }
+
+      prerequisite = {
+         focus = PRC_south_asian_trade
+      }
+
+      completion_reward = {
+         #industrial development for Myanmar, Bangladesh, Sri Lanka
+
+         BRM = { add_opinion_modifier = { target = PRC modifier = aided_industry } }
+         640 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+         640 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         BAN = { add_opinion_modifier = { target = PRC modifier = aided_industry } }
+         430 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+         430 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         SRL = { add_opinion_modifier = { target = PRC modifier = aided_industry } }
+         422 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+         422 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+   }
+
+   focus = {
+      id = PRC_south_asian_alliance
+      icon = major_alliance
+      x = @south_asia_tree
+      y = 8
+      cost = 10
+
+      available = {
+      is_faction_leader = yes
+      }
+
+      prerequisite = {
+         focus = PRC_aid_minor_powers
+      }
+
+      completion_reward = {
+         #invite South Asian nations (excluding India and Pakistan) to alliance
+         BAN = { add_opinion_modifier = { target = PRC modifier = has_expressed_loyalty } }
+         BHU = { add_opinion_modifier = { target = PRC modifier = has_expressed_loyalty } }
+         NEP = { add_opinion_modifier = { target = PRC modifier = has_expressed_loyalty } }
+         SRL = { add_opinion_modifier = { target = PRC modifier = has_expressed_loyalty } }
+         BRM = { add_opinion_modifier = { target = PRC modifier = has_expressed_loyalty } }
+
+         BAN = { country_event = { id = china.1 } }
+         BHU = { country_event = { id = china.1 } }
+         NEP = { country_event = { id = china.1 } }
+         SRL = { country_event = { id = china.1 } }
+         BRM = { country_event = { id = china.1 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_aid_india
+      icon = industry_civilian
+      x = @india_tree
+      y = 7
+      cost = 15
+
+      mutually_exclusive = { 
+      focus = PRC_aid_minor_powers 
+      focus = PRC_aid_pakistan 
+      }
+
+      prerequisite = {
+         focus = PRC_south_asian_trade
+      }
+
+      completion_reward = {
+         #industrial development for India
+
+         RAJ = { add_opinion_modifier = { target = PRC modifier = aided_industry } }
+         439 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+         439 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         431 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+         431 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         429 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+         429 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+   }
+
+   focus = {
+      id = PRC_indian_alliance
+      icon = align_to_india
+      x = @india_tree
+      y = 8
+      cost = 10
+
+      available = {
+      is_faction_leader = yes
+      }
+
+      prerequisite = {
+         focus = PRC_aid_india
+      }
+
+      completion_reward = {
+         #invite India to alliance
+
+         RAJ = {
+         add_opinion_modifier = {
+               target = PRC
+               modifier = has_expressed_loyalty
+            }
+         }
+
+         RAJ = { country_event = { id = china.1 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_aid_pakistan
+      icon = industry_civilian
+      x = @pakistan_tree
+      y = 7
+      cost = 15
+
+      mutually_exclusive = { 
+      focus = PRC_aid_minor_powers 
+      focus = PRC_aid_india
+      }
+
+      prerequisite = {
+         focus = PRC_south_asian_trade
+      }
+
+      completion_reward = {
+         #industrial development for Pakistan
+
+         PAK = { add_opinion_modifier = { target = PRC modifier = aided_industry } }
+         440 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+         440 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         443 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+         443 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+
+         444 = {
+            add_extra_state_shared_building_slots = 1
+            add_building_construction = {
+               type = industrial_complex
+               level = 1
+               instant_build = yes
+            }
+         }
+         444 = {
+            add_building_construction = {
+               type = infrastructure
+               level = 1
+               instant_build = yes
+            }
+         }
+      }
+
+		ai_will_do = {
+			factor = 30
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+   }
+
+   focus = {
+      id = PRC_pakistan_alliance
+      icon = align_to_pakistan
+      x = @pakistan_tree
+      y = 8
+      cost = 10
+
+      available = {
+      is_faction_leader = yes
+      }
+
+      prerequisite = {
+         focus = PRC_aid_pakistan
+      }
+
+      completion_reward = {
+         #invite Pakistan to alliance
+
+         PAK = {
+         add_opinion_modifier = {
+               target = PRC
+               modifier = has_expressed_loyalty
+            }
+         }
+
+         PAK = { country_event = { id = china.1 } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   ############################################################################################################################################################################
+
+   #China Dream
+
+	focus = {
+		id = PRC_tigers_and_flies
+		icon = political_pressure
+		x = @china_dream_tree
+		y = 2
+		cost = 10
+
+		prerequisite = {
+			focus = PRC_china_dream
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.10
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+   focus = {
+      id = PRC_state_media_apparatus
+      icon = propaganda
+      x = @china_dream_tree
+      y = 3
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_tigers_and_flies
+      }
+
+      completion_reward = {
+		add_ideas = idea_PRC_government_propaganda
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_harmonious_society
+      icon = neutrality
+      x = @china_dream_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_state_media_apparatus
+      }
+
+      completion_reward = {
+         add_political_power = 75
+         add_stability = 0.10
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_patriotic_broadcasts
+      icon = propaganda
+      x = @china_dream_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_harmonious_society
+      }
+
+      completion_reward = {
+         #reduce war justification time
+
+         add_ideas = idea_focus_PRC_patriotic_broadcasts
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_to_serve_the_people
+      icon = small_arms
+      x = @china_dream_tree
+      y = 6
+      cost = 15
+
+      prerequisite = {
+         focus = PRC_patriotic_broadcasts
+      }
+
+      completion_reward = {
+         #recruitable population bonus
+
+         add_ideas = idea_focus_PRC_serve_people
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_neo_maoist_doctrine
+      icon = communism
+      x = @china_dream_tree
+      y = 7
+      cost = 15
+
+      prerequisite = {
+         focus = PRC_to_serve_the_people
+      }
+
+      completion_reward = {
+         #power, unity, drift
+
+         add_political_power = 100
+         add_stability = 0.10
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   #####################################################################################################################################################################
+
+   focus = {
+      id = PRC_core_national_interests
+      icon = military_sphere
+      x = @national_interests_tree
+      y = 2
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_china_dream
+      }
+
+      completion_reward = {
+         #reduce war justification time
+
+         add_ideas = idea_focus_PRC_core_interests
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_xinjiang_crackdown
+      icon = political_pressure
+      x = @national_interests_tree
+      y = 3
+      cost = 5
+
+      prerequisite = {
+         focus = PRC_core_national_interests
+      }
+
+      completion_reward = {
+         #triggers "Xinjiang Insurgency" event (can't seem to find a way to add resistance)
+
+         USA = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         RAJ = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         ENG = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         FRA = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         TUR = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         SAU = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         KAZ = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         KYR = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         TMS = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+
+
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+    focus = {
+      id = PRC_xinjiang_security_operations
+      icon = political_pressure
+      x = @national_interests_tree
+      y = 4
+      cost = 5
+
+      prerequisite = {
+         focus = PRC_xinjiang_crackdown
+      }
+
+      completion_reward = {
+         #removes Xinjiang cores
+
+         every_owned_state = { remove_core_of = SIK }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_border_security
+      icon = political_pressure
+      x = @national_interests_tree
+      y = 5
+      cost = 5
+
+      prerequisite = {
+         focus = PRC_xinjiang_security_operations
+      }
+
+      completion_reward = {
+         #gives China claims on neighboring Central Asian states
+
+         add_state_claim = 822
+         add_state_claim = 732
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_tibet_media_blackout
+      icon = political_pressure
+      x = @tibet_tree
+      y = 3
+      cost = 5
+
+      prerequisite = {
+         focus = PRC_core_national_interests
+      }
+
+      completion_reward = {
+         #minor relations hit
+
+         USA = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         RAJ = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         ENG = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         FRA = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         JAP = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         KOR = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         MAL = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         NEP = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         BHU = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         CHI = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+    focus = {
+      id = PRC_demand_dalai_lama
+      icon = forceful_treaty
+      x = @tibet_tree
+      y = 4
+      cost = 5
+
+      prerequisite = {
+         focus = PRC_tibet_media_blackout
+      }
+
+      completion_reward = {
+         #India recieves option to turn over Dalai Lama (Tibet loses cores in China, relations boost with China) or refuse (relations hit with China, boost with West, political power+unity)
+
+         RAJ = { country_event = { id = china.6 }}
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_southern_border_adjustment
+      icon = territory_or_war
+      x = @tibet_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_demand_dalai_lama
+      }
+
+		completion_reward = {
+			#Demand India drop disputed claims; can lead to war if India refuses
+			create_wargoal = {
+				type = take_state
+				target = RAJ
+				generator = { 434 441 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+   }
+
+   focus = {
+      id = PRC_one_china_concensus
+      icon = align_to_china
+      x = @taiwan_tree
+      y = 3
+      cost = 5
+
+      available = {
+      CHI = { exists = yes }
+      NOT = { has_war_with = CHI }
+      }
+
+      prerequisite = {
+         focus = PRC_core_national_interests
+      }
+
+      completion_reward = {
+         #political power bonus, relations hit
+
+         add_political_power = 50
+         CHI = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_demand_rightful_territory
+      icon = political_pressure
+      x = @taiwan_tree
+      y = 4
+      cost = 5
+
+      available = {
+      CHI = { exists = yes }
+      NOT = { has_war_with = CHI }
+      }
+
+      prerequisite = {
+         focus = PRC_one_china_concensus
+      }
+
+      completion_reward = {
+         #demand Taiwan become puppet
+
+         CHI = { country_event = { id = china.5 }}
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_final_ultimatum
+      icon = demand_sudetenland
+      x = @taiwan_tree
+      y = 5
+      cost = 10
+
+      available = {
+      CHI = { exists = yes }
+      NOT = { has_war_with = CHI }
+      }
+
+      prerequisite = {
+         focus = PRC_demand_rightful_territory
+      }
+
+      completion_reward = {
+         #fourth Taiwan Strait crisis. US must decide whether or not to back Taiwan. If yes China must decide whether or not to invade. If no Taiwan must decide whether or not to surrender.
+
+         CHI = { country_event = { id = china.12 }}
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_nine_dash_line
+      icon = political_pressure
+      x = @south_sea_tree
+      y = 3
+      cost = 5
+
+      prerequisite = {
+         focus = PRC_core_national_interests
+      }
+
+      completion_reward = {
+         #political power, relations hit with neighbors+US
+
+         add_political_power = 50
+
+         USA = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         RAJ = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         CHI = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         #PHI = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         VIN = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         INS = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         MAL = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_xisha_claims
+      icon = territory_or_war
+      x = @south_sea_tree
+      y = 4
+      cost = 5
+
+      available = {
+      NOT = { has_war_with = VIN }
+      }
+
+      prerequisite = {
+         focus = PRC_nine_dash_line
+      }
+
+      completion_reward = {
+         #demand Paracels from Vietnam
+
+         VIN = { country_event = { id = china.10 }}
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_nansha_claims
+      icon = territory_or_war
+      x = @south_sea_tree
+      y = 5
+      cost = 5
+
+      available = {
+      NOT = { has_war_with = VIN }
+      }
+
+      prerequisite = {
+         focus = PRC_xisha_claims
+      }
+
+      completion_reward = {
+         #demand Spratlies from Vietnam
+         VIN = { country_event = { id = china.11 }}
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_vietnam_border_adjustment
+      icon = territory_or_war
+      x = @south_sea_tree
+      y = 6
+      cost = 10
+
+      available = {
+      NOT = { has_war_with = VIN }
+
+      }
+
+      prerequisite = {
+         focus = PRC_nansha_claims
+      }
+
+		completion_reward = {
+			#PRC gets claims on Vietnamese border states
+			create_wargoal = {
+				type = take_state
+				target = VIN
+				generator = { 671 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_east_sea_territory
+      icon = political_pressure
+      x = @east_sea_tree
+      y = 3
+      cost = 5
+
+      prerequisite = {
+         focus = PRC_core_national_interests
+      }
+
+      completion_reward = {
+         #political power, relations hit with neighbors+US
+
+         add_political_power = 50
+
+         JAP = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         KOR = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         CHI = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+         USA = { add_opinion_modifier = { target = PRC modifier = recent_actions_negative } }
+
+      }
+
+		ai_will_do = {
+			factor = 7
+		}
+   }
+
+   focus = {
+      id = PRC_diaoyu_claim
+      icon = territory_or_war
+      x = @east_sea_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_east_sea_territory
+      }
+
+      completion_reward = {
+         #demand senkakus from Japan
+
+         JAP = { country_event = { id = china.8 }}
+      }
+
+		ai_will_do = {
+			factor = 5
+		}
+   }
+
+   ############################################################################################################################################################################################
+
+   #Democracy
+
+   focus = {
+      id = PRC_move_towards_democracy
+      icon = democracy
+      x = 32
+      y = 0
+      cost = 10
+
+      mutually_exclusive = {
+         focus = socialism_with_chinese_characteristics
+      }
+
+
+      completion_reward = {
+         #political power and political shift
+
+         add_political_power = 100
+         add_timed_idea = { idea = idea_focus_PRC_democracy days = 730 }
+         
+         news_event = {
+         hours = 6
+         id = news_china.18
+      }
+      }
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+   }
+
+   focus = {
+      id = PRC_free_media
+      icon = radar
+      x = @democracy_tree
+      y = 1
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_move_towards_democracy
+      }
+
+      completion_reward = {
+         #unity and political shift
+
+         add_stability = 0.10
+         add_popularity = { ideology = communist popularity = -0.30 }
+         add_popularity = { ideology = social_liberal popularity = 0.15 }
+         add_popularity = { ideology = conservative popularity = 0.10 }
+
+         set_party_name = {
+         ideology = social_liberal
+         long_name = PRC_social_liberal_party_DPC_long
+         name = PRC_social_liberal_party_DPC
+         }
+
+         set_party_name = {
+         ideology = conservative
+         long_name = PRC_conservative_party_CDL_long
+         name = PRC_conservative_party_CDL
+         }
+
+         create_country_leader = {
+         name = "Xu Wenli"
+         desc = "POLITICIAN_PRC_XU_WENLI_DESC"
+         picture = "Portrait_PRC_Xu_Wenli.dds"
+         expire = "2020.1.1"
+         ideology = liberalist
+   
+         traits = {
+   
+         }
+         }
+
+         create_country_leader = {
+         name = "Zhang Baowen"
+         desc = "POLITICIAN_PRC_ZHANG_BAOWEN_DESC"
+         picture = "Portrait_PRC_Zhang_Baowen.dds"
+         expire = "2020.1.1"
+         ideology = constitutionalist
+   
+         traits = {
+   
+         }
+         }
+         
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_end_the_one_party_state
+      icon = anti_comintern_pact
+      x = @democracy_tree
+      y = 2
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_free_media
+      }
+
+      completion_reward = {
+         #unity and political shift
+
+         remove_ideas = idea_PRC_chinese_socialism
+
+         add_popularity = { ideology = communist popularity = -0.10 }
+         
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+	focus = {
+		id = PRC_KMT_provisional_government
+		icon = align_to_taiwan
+		x = @democracy_tree
+		y = 3
+		cost = 10
+
+		prerequisite = {
+			focus = PRC_end_the_one_party_state
+		}
+
+		mutually_exclusive = {
+			focus = PRC_demand_full_democracy
+		}
+
+		completion_reward = {
+			#puts Democratic Socialists in power, no elections yet
+
+			set_politics = { 
+				ruling_party = democratic_socialist 
+				elections_allowed = no
+			}
+			set_country_flag = PRC_moderate_democracy
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = PRC_local_elections
+		icon = national_unity
+		x = @democracy_tree
+		y = 4
+		cost = 10
+
+		prerequisite = {
+			focus = PRC_KMT_provisional_government
+		}
+
+
+		completion_reward = {
+			#fires local elections event; chance for varying boosts for different parties; chance of separatism in Xinjiang, Tibet, HK, Macau, Taiwan if part of China
+
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = PRC_national_elections
+		icon = national_unity
+		x = @democracy_tree
+		y = 5
+		cost = 10
+
+		prerequisite = {
+			focus = PRC_local_elections
+		}
+
+
+		completion_reward = {
+			if = {
+				limit = { 
+					OR = {
+						has_government = democratic_socialist 
+						has_government = communist
+					}
+				}
+				set_politics = { 
+					ruling_party = democratic_socialist
+					elections_allowed = yes 
+				}
+				add_popularity = {
+					ideology = democratic_socialist
+					popularity = 0.15
+				}
+			}
+			if = {
+				limit = { 
+					NOT = {
+						has_government = democratic_socialist 
+						has_government = communist
+					}
+				}
+				set_politics = { 
+					ruling_party = conservative
+					elections_allowed = yes 
+				}
+				add_popularity = {
+					ideology = conservative
+					popularity = 0.15
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+   focus = {
+      id = PRC_restored_republic
+      icon = constitution
+      x = @democracy_tree
+      y = 6
+      cost = 15
+
+      prerequisite = {
+         focus = PRC_national_elections
+      }
+
+      completion_reward = {
+
+         add_political_power = 150
+         add_stability = 0.10
+         add_ideas = {
+            idea_focus_PRC_restored_republic
+         }
+
+         news_event = {
+         hours = 6
+         id = news_china.19
+      }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   #########################################################################################################################################################################################
+
+   focus = {
+      id = PRC_demand_full_democracy
+      icon = democracy
+      x = @revolution_tree
+      y = 3
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_end_the_one_party_state
+      }
+
+      mutually_exclusive = {
+         focus = PRC_KMT_provisional_government
+      }
+
+
+		completion_reward = {
+			#boost for Demcratic parties, chance of starting Civil War, immediate elections
+
+			add_popularity = { 
+				ideology = social_liberal 
+				popularity = 0.1
+			}
+			add_popularity = { 
+				ideology = democratic_socialist 
+				popularity = 0.05 
+			}
+			add_popularity = { 
+				ideology = progressive 
+				popularity = 0.05 
+			}
+			add_popularity = { 
+				ideology = market_liberal 
+				popularity = 0.05 
+			}
+			add_popularity = { 
+				ideology = conservative 
+				popularity = 0.05 
+			}
+			add_popularity = { 
+				ideology = social_democrat 
+				popularity = 0.05 
+			}
+			set_politics = { 
+				ruling_party = social_liberal
+				elections_allowed = yes 
+			}
+
+			set_country_flag = PRC_full_democracy
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_the_new_republic
+      icon = dangerous_laws
+      x = @revolution_tree
+      y = 6
+      cost = 15
+
+      prerequisite = {
+         focus = PRC_demand_full_democracy
+      }
+
+      completion_reward = {
+
+         add_political_power = 150
+         add_stability = 0.10
+         add_ideas = {
+            idea_focus_PRC_new_republic
+         }
+         news_event = {
+         hours = 6
+         id = news_china.20
+      }  
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   ############################################################################################################################################################################################
+
+
+   #Military Reorganization
+
+   focus = {
+      id = PRC_modern_weapons_systems
+      icon = small_arms
+      x = @military_tree
+      y = 1
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_military_reorganization
+      }
+
+      completion_reward = {
+         #infantry research bonus
+
+         add_tech_bonus = {
+            name = infantry_bonus
+            bonus = 0.5
+            uses = 2
+            category = infantry_weapons
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_modern_heavy_weapons
+      icon = artillery2
+      x = @military_tree
+      y = 2
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_modern_weapons_systems
+      }
+
+      completion_reward = {
+         #artillery research bonus
+
+         add_tech_bonus = {
+            name = artillery_bonus
+            bonus = 0.5
+            uses = 2
+            category = artillery
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_modern_infantry_tactics
+      icon = army_doctrine
+      x = @military_tree
+      y = 3
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_modern_heavy_weapons
+      }
+
+      completion_reward = {
+         #land doctrine research bonus
+
+         add_tech_bonus = {
+            name = land_doctrine_bonus
+            bonus = 0.5
+            uses = 2
+            category = land_doctrine
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_specialized_units
+      icon = special_forces
+      x = @military_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_modern_infantry_tactics
+      }
+
+      completion_reward = {
+         #special forces research bonus
+
+         add_tech_bonus = {
+            name = marine_bonus
+            bonus = 0.5
+            uses = 1
+            category = marine_tech
+         }
+         add_tech_bonus = {
+            name = para_bonus
+            bonus = 0.5
+            uses = 1
+            category = para_tech
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_military_training_and_command
+      icon = special_forces
+      x = @military_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_specialized_units
+      }
+
+      completion_reward = {
+         army_experience = 25
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   #Mechanization
+
+   focus = {
+      id = PRC_army_motorization
+      icon = motorized
+      x = @mech_tree
+      y = 1
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_military_reorganization
+      }
+
+      completion_reward = {
+         army_experience = 5
+         
+         add_tech_bonus = {
+            name = motorized_bonus
+            bonus = 0.2
+            technology = motorised_infantry
+         }
+         
+         add_ideas = idea_focus_generic_motorized_focus
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_armor_design_and_production
+      icon = tank
+      x = @mech_tree
+      y = 2
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_army_motorization
+      }
+
+      completion_reward = {
+      army_experience = 5
+         
+         add_tech_bonus = {
+            name = armor_bonus
+            bonus = 0.35
+            uses = 3
+            category = armor
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_armored_personnel_carriers
+      icon = cavalry
+      x = @mech_tree
+      y = 3
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_armor_design_and_production
+      }
+
+     completion_reward = {
+         add_tech_bonus = {
+            name = apc_bonus
+            bonus = 0.3
+            uses = 2
+            category = motorized_equipment
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_infantry_fighting_vehicles
+      icon = production2
+      x = @mech_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_armored_personnel_carriers
+      }
+
+     completion_reward = {
+         add_tech_bonus = {
+            name = ifv_bonus
+            bonus = 0.3
+            uses = 2
+            category = cat_mechanized_equipment
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   ##########################################################################################################################################################################################
+
+   #Air Force
+
+   focus = {
+      id = PRC_modern_fighter_aircraft
+      icon = fighter
+      x = @air_tree
+      y = 1
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_military_reorganization
+      }
+
+      completion_reward = {
+         #fighter research bonus
+
+         add_tech_bonus = {
+            name = fighter_bonus
+            bonus = 0.5
+            uses = 2
+            category = light_air
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_modern_attack_aircraft
+      icon = bombs2
+      x = @air_tree
+      y = 2
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_modern_fighter_aircraft
+      }
+
+      completion_reward = {
+         #CAS research bonus
+
+         add_tech_bonus = {
+            name = attack_bonus
+            bonus = 0.5
+            uses = 1
+            category = cas_bomber
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_modern_bomber_aircraft
+      icon = bomber
+      x = @air_tree
+      y = 3
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_modern_attack_aircraft
+      }
+
+      completion_reward = {
+         #bomber research bonus
+
+         add_tech_bonus = {
+            name = bomber_bonus
+            bonus = 0.5
+            uses = 1
+            category = cat_strategic_bomber
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_drone_program
+      icon = bombs
+      x = @air_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_modern_bomber_aircraft
+      }
+
+      completion_reward = {
+         #tac research bonus
+
+         add_tech_bonus = {
+            name = tac_bonus
+            bonus = 0.5
+            uses = 1
+            category = tactical_bomber
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_aerial_supremacy
+      icon = fighter2
+      x = @air_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_drone_program
+      }
+
+      completion_reward = {
+         air_experience = 25
+
+         #doctrine bonus
+
+         add_tech_bonus = {
+            name = air_doctrine_bonus
+            bonus = 0.5
+            uses = 1
+            category = air_doctrine
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   ##################################################################################################################################################################
+
+   #Naval
+
+   focus = {
+      id = PRC_naval_rearmament
+      icon = small_arms
+      x = @navy_tree
+      y = 1
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_military_reorganization
+      }
+
+      completion_reward = {
+         #capital ship bonus
+
+         add_tech_bonus = {
+            name = battleship_bonus
+            bonus = 0.5
+            uses = 1
+            category = bb_tech
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_littoral_defense
+      icon = defence
+      x = @navy_tree
+      y = 2
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_naval_rearmament
+      }
+
+      completion_reward = {
+         #screen ship bonus
+
+          add_tech_bonus = {
+            name = destroyer_bonus
+            bonus = 0.5
+            uses = 1
+            category = dd_tech
+         }
+            add_tech_bonus = {
+            name = light_cruiser_bonus
+            bonus = 0.5
+            uses = 1
+            category = cl_tech
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_submarine_development
+      icon = anti_submarine
+      x = @navy_tree
+      y = 3
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_littoral_defense
+      }
+
+      completion_reward = {
+         #sub ship bonus
+
+          add_tech_bonus = {
+            name = sub_bonus
+            bonus = 0.5
+            uses = 1
+            category = ss_tech
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_carrier_navy
+      icon = carriers
+      x = @navy_tree
+      y = 4
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_submarine_development
+      }
+
+      completion_reward = {
+         #carrier bonus
+
+         add_tech_bonus = {
+            name = carrier_bonus
+            bonus = 0.5
+            uses = 1
+            category = cv_tech
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_naval_aviation
+      icon = naval_bomber
+      x = @navy_tree
+      y = 5
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_carrier_navy
+      }
+
+      completion_reward = {
+         #nav bomber bonus
+
+         add_tech_bonus = {
+            name = nav_bomber_bonus
+            bonus = 0.5
+            uses = 1
+            category = naval_bomber
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+   focus = {
+      id = PRC_blue_water_navy
+      icon = naval_doctrine
+      x = @navy_tree
+      y = 6
+      cost = 10
+
+      prerequisite = {
+         focus = PRC_naval_aviation
+      }
+
+      completion_reward = {
+         navy_experience = 25
+
+         add_tech_bonus = {
+            name = nav_doctrine_bonus
+            bonus = 0.5
+            uses = 1
+            category = naval_doctrine
+         }
+      }
+
+		ai_will_do = {
+			factor = 10
+		}
+   }
+
+
+}

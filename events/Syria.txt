@@ -1,0 +1,137 @@
+﻿add_namespace = syria
+
+#Syrian Civil War
+country_event = {
+	id = syria.1
+	title = syria.1.t
+	desc = syria.1.d
+	picture = GFX_report_event_syrian_civil_war
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = syria.1.o1
+		start_civil_war = {
+			ruling_party = nationalist
+			ideology = conservative
+			size = 0
+			states = { 677 }
+			capital = 677
+		}
+		hidden_effect = {
+			random_country = {
+				limit = {
+					original_tag = SYR
+					has_government = conservative
+				}
+				load_oob = "syrian_civil_war_rebels.txt"
+			}
+			set_country_flag = SYR_civil_war_in_action
+		}
+	}
+}
+
+#Death of Hafez al Assad
+country_event = {
+	id = syria.2
+	title = syria.2.t
+	desc = syria.2.d
+	picture = GFX_report_event_political_deal
+	
+	fire_only_once = yes
+	
+	trigger = {
+		original_tag = SYR
+		has_government = nationalist
+		date > 2000.6.1
+		date < 2000.6.20
+	}
+	
+	option = {
+		name = syria.2.o1
+		add_stability = -0.03
+		add_political_power = -25
+		create_country_leader = {
+	        name = "Bashar al-Assad"
+	        ideology = autocrat
+	        picture = "Bashar_Al_Assad.dds"
+        }
+	}
+}
+#Demanding Cyprus
+country_event = {
+	id = syria.3
+	title = syria.3.t
+	desc = syria.3.d
+	picture = GFX_report_event_political_deal
+	is_triggered_only = yes	
+	fire_only_once = yes
+	
+	option = {
+		name = syria.3.o1
+		ai_chance = {
+			factor = 40
+		}
+		SYR = {
+			annex_country = {
+    		target = CYP
+    		transfer_troops = no
+			}	
+		}
+	}
+	option = {
+		name = syria.3.o1
+		SYR = {
+			create_wargoal = {
+   			type = annex_everything
+    		target = CYP
+			}
+		}
+		ai_chance = {
+			factor = 50
+			
+			modifier = {
+				add = 50
+				is_in_faction = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = syria.4
+	title = syria.4.t
+	desc = syria.4.d
+	picture = GFX_report_event_political_deal
+	is_triggered_only = yes	
+	fire_only_once = yes
+	
+	option = {
+		name = syria.4.o1
+		ai_chance = {
+			factor = 40
+		}
+		SYR = {
+			annex_country = {
+    		target = root
+    		transfer_troops = no
+			}	
+		}
+	}
+	option = {
+		name = syria.4.o1
+		SYR = {
+			create_wargoal = {
+   			type = annex_everything
+    		target = root
+			}
+		}
+		ai_chance = {
+			factor = 50
+			
+			modifier = {
+				add = 50
+				is_in_faction = yes
+			}
+		}
+	}
+}

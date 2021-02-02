@@ -71,6 +71,9 @@ focus_tree = {
 			focus = SYR_increase_presence_lebanon
 			focus = SYR_intervene_lebanese_politics
 		}
+		completion_reward = {
+			add_manpower = 5000
+		}
 		x = 2
 		y = 3
 
@@ -84,6 +87,11 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = SYR_announce_democratic_reforms
+		}
+		completion_reward = {
+			add_stability = -0.1
+			add_war_support = 0.05
+			add_popularity = { ideology = nationalist popularity = 0.1 }
 		}
 		x = 4
 		y = 7
@@ -123,7 +131,9 @@ focus_tree = {
 		}
 		x = 5
 		y = 3
-
+		completion_reward = {
+			LEB = {give_military_access = SYR}
+		}
 	}
 	focus = {
 		id = SYR_support_hezbollah
@@ -163,6 +173,10 @@ focus_tree = {
 		}
 		x = 6
 		y = 4
+		completion_reward = {
+			give_guarantee = LEB
+			add_stability = 0.05
+		}
 
 	}
 	focus = {
@@ -237,6 +251,19 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_remain_war
 		}
+		completion_reward = {
+			IRQ = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 1500
+					producer = SYR
+				}
+			}
+			add_timed_idea = {
+				idea = idea_SYR_weapon_shipments
+				days = 100
+			}
+		}
 		x = 12
 		y = 2
 
@@ -245,8 +272,17 @@ focus_tree = {
 		id = SYR_restore_iraqi_baath_party
 		icon = GFX_goal_anti_comintern_pact
 		cost = 10
+		available = {
+			IRQ = {NOT = {has_government = nationalist}}
+		}
 		prerequisite = {
 			focus = SYR_equipment_to_iraq
+		}
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = IRQ
+			}
 		}
 		x = 12
 		y = 4
@@ -288,6 +324,11 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_restore_natural_borders
 		}
+		completion_reward = {
+			454 = {
+				owner = {country_event = syria.4}
+			}
+		}
 		x = 8
 		y = 8
 
@@ -296,12 +337,33 @@ focus_tree = {
 		id = SYR_syrian_iraqi_union
 		icon = GFX_goal_anschluss
 		cost = 10
+		available = {
+			OR = {
+				IRQ = {is_puppet_of = SYR}
+				AND = {
+					owns_state = 815
+					owns_state = 676
+					owns_state = 675
+					owns_state = 291
+				}	
+			}
+		}
 		prerequisite = {
 			focus = SYR_restore_natural_borders
 			focus = SYR_restore_iraqi_baath_party
 		}
 		x = 12
 		y = 8
+		completion_reward = {
+			annex_country = {
+    			target = IRQ
+    			transfer_troops = yes
+			}
+			815 = {add_core_of = SYR}
+			676 = {add_core_of = SYR}
+			675 = {add_core_of = SYR}
+			291 = {add_core_of = SYR}
+		}
 
 	}
 	focus = {
@@ -324,7 +386,14 @@ focus_tree = {
 		}
 		x = 12
 		y = 10
-
+		completion_reward = {
+			413 = {
+				add_claim_by = SYR
+			}
+			421 = {
+				add_claim_by = SYR
+			}
+		}
 	}
 	focus = {
 		id = SYR_work_around_sanctions
@@ -332,6 +401,9 @@ focus_tree = {
 		cost = 10
 		prerequisite = {
 			focus = SYR_equipment_to_iraq
+		}
+		completion_reward = {
+			add_ideas = SYR_avoiding_sanctions
 		}
 		x = 14
 		y = 3
@@ -568,37 +640,55 @@ focus_tree = {
 		id = SYR_fortify_remaining_airbases
 		icon = GFX_goal_generic_construct_military
 		cost = 10
+		available = {
+			has_country_flag = SYR_civil_war_in_action
+		}
 		prerequisite = {
 			focus = SYR_saaf
 		}
 		x = 32
 		y = 2
-				completion_reward = {
-					680 = {
-						add_building_construction = {
-							type = bunker 
-							level = 2
-							province = 12316
-							instant_build = yes
-						}
+		completion_reward = {
+			if = {
+				limit = {
+					controls_state = 680
+				}
+				680 = {
+				add_building_construction = {
+					type = bunker 
+					level = 2
+					province = 12316
+					instant_build = yes
 					}
-					554 = {
-						add_building_construction = {
-							type = bunker 
-							level = 2
-							province = 4486
-							instant_build = yes
-						}
-					}
-					677 = {
-						add_building_construction = {
-							type = bunker 
-							level = 2
-							province = 10087
-							instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 554
+				}
+				554 = {
+					add_building_construction = {
+						type = bunker 
+						level = 2
+						province = 4486
+						instant_build = yes
 						}
 					}
 				}
+				if = {
+					limit = {
+						controls_state = 554
+					}
+				677 = {
+					add_building_construction = {
+						type = bunker 
+						level = 2
+						province = 10087
+						instant_build = yes
+					}
+				}
+			}
+		}
 	}
 	focus = {
 		id = SYR_factory_overhaul
@@ -686,6 +776,18 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SYR_fight_protesters
 		}
+		completion_reward = {
+			add_stability = 0.1
+			add_popularity = { ideology = social_liberal popularity = 0.05 }
+			add_popularity = { ideology = social_democrat popularity = 0.05 }
+			add_popularity = { ideology = progressive popularity = 0.05 }
+			add_popularity = { ideology = democratic_socialist popularity = 0.05 }
+			fourth_estate_democratic_socialist_increase = yes
+			fourth_estate_market_liberal_increase = yes
+			fourth_estate_social_democrat_increase = yes
+			fourth_estate_progressive_increase = yes
+			fourth_estate_nationalist_decrease = yes
+		}
 		x = 2
 		y = 7
 
@@ -694,13 +796,18 @@ focus_tree = {
 		id = SYR_syrian_civil_war
 		icon = political_pressure
 		cost = 10
+		available = {
+			has_country_flag = SYR_civil_war_in_action
+		}
 		prerequisite = {
 			focus = SYR_fight_protesters
 			focus = SYR_announce_democratic_reforms
 		}
 		x = 3
 		y = 8
+		completion_reward = {
 
+		}
 	}
 	focus = {
 		id = SYR_support_from_east
@@ -967,6 +1074,9 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_fight_alone
 		}
+		completion_reward = {
+			add_ideas = SYR_local_weapons
+		}
 		x = 3
 		y = 10
 
@@ -992,7 +1102,11 @@ focus_tree = {
 		}
 		x = 10
 		y = 8
-
+		completion_reward = {
+			CYP = {
+				country_event = syria.3
+			}
+		}
 	}
 	focus = {
 		id = SYR_border_adjustment_turkey
@@ -1014,7 +1128,12 @@ focus_tree = {
 		}
 		x = 8
 		y = 10
-
+		completion_reward = {
+			create_wargoal = {
+   			type = annex_everything
+    		target = EGY
+			}			
+		}
 	}
 	focus = {
 		id = SYR_annex_jordania
@@ -1022,6 +1141,12 @@ focus_tree = {
 		cost = 10
 		prerequisite = {
 			focus = SYR_retake_holy_land
+		}
+		completion_reward = {
+			create_wargoal = {
+   			type = annex_everything
+    		target = JOR
+			}			
 		}
 		x = 8
 		y = 9
@@ -1264,6 +1389,10 @@ focus_tree = {
 		x = 0
 		y = 4
 		relative_position_id = SYR_research_facility
+		completion_reward = {
+			add_stability = -0.1
+			add_ideas = SYR_enforcing_peace
+		}
 	}
 
 ### Syrian Arab Army

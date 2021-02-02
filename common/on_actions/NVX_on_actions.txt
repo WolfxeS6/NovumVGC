@@ -1,0 +1,150 @@
+# Written by E. Wolfe #
+on_actions = {
+	
+	#ROOT is free nation FROM is releaser
+	on_puppet = {		
+		effect = {
+			ROOT = { country_event = { id = political.0 } }
+		}
+	}
+	
+	on_liberate = {		
+		effect = {
+			ROOT = { country_event = { id = political.0	} }
+		}
+	}
+	
+	on_startup = {
+		effect = {
+			USA = { set_global_flag = sandbox_disable_advanced_economy }
+			every_country = {
+				add_ideas = economy_stagnation
+				add_ideas = NVX_idea_economy_disabled_bonus_build_speed
+			}
+		}
+	}
+	
+	on_release_as_free = {
+		effect = {
+			ROOT = { country_event = { id = political.0	} }
+			if = {
+				limit = { has_global_flag = sandbox_disable_advanced_economy }
+				add_ideas = economy_stagnation
+				add_ideas = NVX_idea_economy_disabled_bonus_build_speed
+			}
+		}
+	}
+	
+	on_release_as_puppet = {
+		effect = {
+			ROOT = { country_event = { id = political.0	} }
+			if = {
+				limit = { has_global_flag = sandbox_disable_advanced_economy }
+				add_ideas = economy_stagnation
+				add_ideas = NVX_idea_economy_disabled_bonus_build_speed
+			}
+		}
+	}
+	
+	on_startup = {
+		effect = {
+			every_country = {
+				country_event = political.0
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = PTS_WARFARING_OPTIONS
+						option = DISABLED
+					}
+				}
+				set_global_flag = pts_disable_warfaring
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = PTS_WARFARING_OPTIONS
+						option = INTENSIFY
+					}
+				}
+				set_global_flag = pts_intensify_warfaring
+			}
+		}
+	}
+	
+	on_nuke_drop = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_global_flag = DPTS_disable_nuke_threat }
+					threat < 0.7
+				}
+				ROOT = {
+					if = {
+						limit = { is_ai = yes }
+						NVX_nuke_threat_ai_calc = yes
+						else = {
+							add_named_threat = {
+								threat = 2
+								name = threat_used_nuke
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = IRQ
+						NOT = { has_war_with = SYR }
+					}
+					has_global_flag = SYR_civil_war_ISIS
+					FROM = { original_tag = ISS }
+					FROM.FROM = { state = 680 }
+				}
+				ROOT = { set_country_flag = IRQ_took_state_680 }
+			}
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = IRQ
+						NOT = { has_war_with = SYR }
+					}
+					has_global_flag = SYR_civil_war_ISIS
+					FROM = { original_tag = KUR }
+					FROM.FROM = { state = 814 }
+				}
+				ROOT = { set_country_flag = IRQ_took_state_814 }
+			}
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = SYR
+						NOT = { has_war_with = IRQ }
+					}
+					has_global_flag = SYR_civil_war_ISIS
+					FROM = { original_tag = ISS }
+					FROM.FROM = { state = 676 }
+				}
+				ROOT = { set_country_flag = SYR_took_state_676 }
+			}
+			if = {
+				limit = {
+					ROOT = {
+						original_tag = SYR
+						NOT = { has_war_with = IRQ }
+					}
+					has_global_flag = SYR_civil_war_ISIS
+					FROM = { original_tag = KUR }
+					FROM.FROM = { state = 815 }
+				}
+				ROOT = { set_country_flag = SYR_took_state_815 }
+			}
+		}
+	}
+}

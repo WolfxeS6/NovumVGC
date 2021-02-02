@@ -1,4 +1,4 @@
-version="1.1"
+version="1.2"
 tags={
 	"National Focuses"
 }
@@ -7,5 +7,5 @@ dependencies={
 }
 name="Novum Vexillium Global Conflict"
 picture="thumbnail.png"
-supported_version="1.9.3"
+supported_version="1.10.*"
 remote_file_id="2227081070"

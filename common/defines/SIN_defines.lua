@@ -1,6 +1,6 @@
-NDefines.NBuildings.MAX_SHARED_SLOTS = 50
+NDefines.NBuildings.MAX_SHARED_SLOTS = 40
 NDefines.NBuildings.MAX_BUILDING_LEVELS = 25
-NDefines.NBuildings.MAX_SHARED_SLOTS = 50
+NDefines.NBuildings.MAX_SHARED_SLOTS = 40
 NDefines.NMilitary.MAX_ARMY_EXPERIENCE = 2000
 NDefines.NMilitary.MAX_NAVY_EXPERIENCE = 2000
 NDefines.NMilitary.MAX_AIR_EXPERIENCE = 2000

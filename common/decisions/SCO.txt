@@ -1,0 +1,232 @@
+Scottish_independence_categories= {
+	ENG_sco_Increase_it = {
+		icon = GFX_decision_generic_break_treaty
+
+		visible = {
+			NOT = {has_idea = ENG_scottish_costs}
+			
+		}
+		available = {
+			NOT = {	has_country_flag = ENG_recent_devolution}
+		}
+		fire_only_once = no
+		cost = 75
+
+		complete_effect = {
+			Scottish_devolution_decrease = yes
+			custom_effect_tooltip = ENG_sco_Increase_it_tt
+			add_stability = -0.05
+				add_to_variable = {
+					SAMPLE_half_dial_value = 30
+				}
+				clamp_variable = { var = SAMPLE_half_dial_value min = 0 max = 100 }
+				set_variable = {
+					var = SAMPLE_half_dial_value_shown
+					value = SAMPLE_half_dial_value
+				}
+				divide_variable {
+					var = SAMPLE_half_dial_value_shown
+					value = 164
+				}
+				set_country_flag = {
+					flag = ENG_recent_devolution
+    				days = 180
+					value = 1
+				}
+		}
+	}
+	ENG_sco_Decrease_it = {
+		icon = GFX_decision_eng_trade_unions_support
+
+		visible = {
+			NOT = {has_idea = ENG_scottish_costs4}
+		}
+		available = {
+			NOT = {	has_country_flag = ENG_recent_devolution}
+		}
+		fire_only_once = no
+		cost = 50
+
+		complete_effect = {
+			Scottish_devolution_increase = yes
+			custom_effect_tooltip = ENG_sco_Decrease_it_tt
+				add_to_variable = {
+					SAMPLE_half_dial_value = -5
+				}
+				clamp_variable = { var = SAMPLE_half_dial_value min = 0 max = 100 }
+				set_variable = {
+					var = SAMPLE_half_dial_value_shown
+					value = SAMPLE_half_dial_value
+				}
+				divide_variable {
+					var = SAMPLE_half_dial_value_shown
+					value = 164
+				}
+				set_country_flag = {
+					flag = ENG_recent_devolution
+    				days = 180
+					value = 1
+				}
+		}
+	}
+
+	ENG_sco_promise_economic_investment = {
+		icon = GFX_decision_hol_exchange_intelligence_data
+
+		visible = {
+			NOT = {has_country_flag = SCO_investments}
+		}
+		fire_only_once = no
+		cost = 0
+		days_re_enable = 730
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = {
+					flag = SCO_investments
+    				days = 720
+					value = 1
+				}
+				add_to_variable = {
+					SAMPLE_half_dial_value = -5
+				}
+				clamp_variable = { var = SAMPLE_half_dial_value min = 0 max = 100 }
+				set_variable = {
+					var = SAMPLE_half_dial_value_shown
+					value = SAMPLE_half_dial_value
+				}
+				divide_variable {
+					var = SAMPLE_half_dial_value_shown
+					value = 164
+				}
+				random_owned_state = {
+					limit = {
+						is_core_of = SCO
+					}
+					set_state_flag = SCO_build_factory
+					set_variable = { factory_goal = industrial_complex_level }
+					add_to_variable = { factory_goal = 1 }
+					save_global_event_target_as = SCO_investment_state
+				}
+			}
+			custom_effect_tooltip = SCO_invest_in_scottish_economy_tt
+		}
+	}
+	SCO_invest_in_state_factory = {
+		icon = generic_construction
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SCO_invest_in_state_factory_tt
+				any_owned_state = {
+					has_state_flag = SCO_build_factory
+					check_variable = { factory_goal = industrial_complex_level }
+				}
+			}
+		}
+		highlight_states = {
+			has_state_flag = SCO_build_factory
+		}
+		days_mission_timeout = 360
+		is_good = no
+		activation = {
+			any_owned_state = {
+				has_state_flag = SCO_build_factory
+			}
+		}
+		timeout_effect = {
+			custom_effect_tooltip = SCO_invest_in_state_factory_failure_tt
+			hidden_effect = {
+			random_owned_state = {
+				limit = {
+					has_state_flag = SCO_build_factory
+				}
+				clr_state_flag = SCO_build_factory
+				clear_variable = factory_goal
+			}
+			
+			add_to_variable = {
+					SAMPLE_half_dial_value = 10
+				}
+				clamp_variable = { var = SAMPLE_half_dial_value min = 0 max = 100 }
+			clr_country_flag = SCO_investment
+				set_variable = {
+					var = SAMPLE_half_dial_value_shown
+					value = SAMPLE_half_dial_value
+				}
+				divide_variable {
+					var = SAMPLE_half_dial_value_shown
+					value = 164
+				}
+			}
+
+		}
+		complete_effect = {
+			custom_effect_tooltip = SCO_invest_in_state_factory_complete_tt
+			hidden_effect = {
+			random_owned_state = {
+				limit = {
+					has_state_flag = SCO_build_factory
+				}
+				clr_state_flag = SCO_build_factory
+				clear_variable = factory_goal
+			}
+			ROOT = {
+				add_to_variable = {
+					SAMPLE_half_dial_value = -5
+				}
+				clamp_variable = { var = SAMPLE_half_dial_value min = 0 max = 100 }
+				clr_country_flag = SCO_investment
+				set_variable = {
+					var = SAMPLE_half_dial_value_shown
+					value = SAMPLE_half_dial_value
+				}
+				divide_variable {
+					var = SAMPLE_half_dial_value_shown
+					value = 164
+				}
+			}
+			}
+
+		}
+	}
+	ENG_sco_hold_referendum = {
+		icon = GFX_decision_eng_trade_unions_demand
+
+		visible = {
+			
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SCO_ref_requirements_tt
+				
+			 check_variable = { 70 < SAMPLE_half_dial_value }
+			 }
+		}
+		fire_only_once = no
+		cost = 0
+
+		complete_effect = {
+			country_event = scotland.1
+
+		}
+	}
+	ENG_sco_crackdown = {
+		icon = GFX_decision_eng_trade_unions_demand
+
+		visible = {
+			OR = {
+				has_government = nationalist
+				has_government = fascist
+				has_government = monarchist
+			}
+		}
+		fire_only_once = no
+		cost = 100
+
+		complete_effect = {
+			set_country_flag = ENG_scotland_crackdown
+			add_stability = -0.15
+			add_war_support = 0.05
+			remove_all_scottish_costs = yes
+		}
+	}
+}

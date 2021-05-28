@@ -1,0 +1,580 @@
+ideas = {
+	
+	economy = {
+		law = yes
+		
+		economy_boom = {
+			cost = 0
+			removal_cost = -1
+			level = 5
+			
+			available = {
+				hidden_trigger = {
+					has_idea = economy_boom
+				}
+				custom_trigger_tooltip = {
+					tooltip = TT_NVX_ECOLITE_growth_req_boom
+					check_variable = { NVX_ECO_health > 89.999 }
+				}
+			}
+			
+			on_add = {
+				#custom_effect_tooltip = TT_NVX_ECOLITE_growth_desc
+				#country_event = {
+    			#	id = wxe_news.2
+    			#	days = 2
+   				#	random = 50
+    			#	random_days = 20
+				#}
+			}
+			
+			modifier = {
+				consumer_goods_factor = -0.1
+				industrial_capacity_factory = 0.1
+				research_speed_factor = 0.05
+			}
+			
+			cancel_if_invalid = no
+		}
+		
+		economy_growth = {
+			cost = 0
+			removal_cost = -1
+			level = 4
+			
+			available = {
+				hidden_trigger = {
+					has_idea = economy_growth
+				}
+				custom_trigger_tooltip = {
+					tooltip = TT_NVX_ECOLITE_growth_req_growth
+					check_variable = { NVX_ECO_health > 29.999 }
+					check_variable = { NVX_ECO_health < 90 }
+				}
+			}
+			
+			on_add = {
+				#custom_effect_tooltip = TT_NVX_ECOLITE_growth_desc
+			}
+			
+			modifier = {
+				consumer_goods_factor = -0.05
+				industrial_capacity_factory = 0.05
+				research_speed_factor = 0.02
+			}
+			
+			cancel_if_invalid = no
+		}
+		
+		economy_stagnation = {
+			cost = 0
+			removal_cost = -1
+			level = 3
+			
+			available = {
+				hidden_trigger = {
+					has_idea = economy_stagnation
+				}
+				custom_trigger_tooltip = {
+					tooltip = TT_NVX_ECOLITE_growth_req_stagnation
+					check_variable = { NVX_ECO_health > -30 }
+					check_variable = { NVX_ECO_health < 30 }
+				}
+			}
+			
+			on_add = {
+				#custom_effect_tooltip = TT_NVX_ECOLITE_growth_desc
+			}
+			
+			modifier = {
+				
+			}
+			
+			default = yes
+			
+			cancel_if_invalid = no
+		}
+		
+		economy_recession = {
+			cost = 0
+			removal_cost = -1
+			level = 2
+			
+			available = {
+				hidden_trigger = {
+					has_idea = economy_recession
+				}
+				custom_trigger_tooltip = {
+					tooltip = TT_NVX_ECOLITE_growth_req_recession
+					check_variable = { NVX_ECO_health > -90 }
+					check_variable = { NVX_ECO_health < -29.999 }
+				}
+			}
+			
+			on_add = {
+				#custom_effect_tooltip = TT_NVX_ECOLITE_growth_desc
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.1
+				industrial_capacity_factory = -0.05
+				research_speed_factor = -0.05
+				production_speed_buildings_factor = -0.1
+			}
+			
+			cancel_if_invalid = no
+		}
+		
+		economy_depression = {
+			cost = 0
+			removal_cost = -1
+			level = 1
+			
+			available = {
+				hidden_trigger = {
+					has_idea = economy_depression
+				}
+				custom_trigger_tooltip = {
+					tooltip = TT_NVX_ECOLITE_growth_req_depression
+					check_variable = { NVX_ECO_health < -89.999 }
+				}
+			}
+			
+			on_add = {
+				#custom_effect_tooltip = TT_NVX_ECOLITE_growth_desc
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.2
+				industrial_capacity_factory = -0.1
+				research_speed_factor = -0.1
+				production_speed_buildings_factor = -0.2
+			}
+			
+			cancel_if_invalid = no
+		}
+	}
+	
+	economy_tax_rate_category = {
+		law = yes
+		
+		economy_tax_extreme = {
+			cost = 150
+			removal_cost = -1
+			level = 6
+			
+			available = {
+				NOT = { has_government = market_liberal }
+			}
+			
+			on_add = {
+				NVX_ECO_calc = yes
+				custom_effect_tooltip = TT_NVX_ECOLITE_growth_neg2
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.1
+				stability_factor = -0.05
+				stability_weekly = -0.001
+				conscription = -0.01
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+				modifier = {
+					add = 100
+					has_idea = economy_tax_high
+					check_variable = { NVX_ECO_health > 0 }
+					has_country_flag = NVX_desires_economy_tax_extreme
+				}
+   			}
+		}
+		
+		economy_tax_high = {
+			cost = 150
+			removal_cost = -1
+			level = 5
+			
+			available = {
+				
+			}
+			
+			on_add = {
+				NVX_ECO_calc = yes
+				custom_effect_tooltip = TT_NVX_ECOLITE_growth_neg1
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.2
+				stability_factor = -0.05
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+				modifier = {
+					add = 100
+					has_idea = economy_tax_extreme
+					OR = {
+						has_idea = economy_depression
+						has_country_flag = NVX_desires_economy_tax_moderate
+						has_country_flag = NVX_desires_economy_tax_low
+						has_country_flag = NVX_desires_economy_tax_meager
+					}
+				}
+				modifier = {
+					add = 100
+					has_idea = economy_tax_moderate
+					check_variable = { NVX_ECO_health > 0 }
+					OR = {
+						has_country_flag = NVX_desires_economy_tax_extreme
+						has_country_flag = NVX_desires_economy_tax_high
+					}
+				}
+   			}
+		}
+		
+		economy_tax_moderate = {
+			cost = 150
+			removal_cost = -1
+			level = 4
+			
+			available = {
+			}
+			
+			on_add = {
+				NVX_ECO_calc = yes
+				custom_effect_tooltip = TT_NVX_ECOLITE_growth_0
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.3
+			}
+			
+			default = yes
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+				modifier = {
+					add = 100
+					has_idea = economy_tax_high
+					has_idea = economy_depression
+				}
+   			}
+		}
+		
+		economy_tax_low = {
+			cost = 150
+			removal_cost = -1
+			level = 3
+			
+			available = {
+			}
+			
+			on_add = {
+				NVX_ECO_calc = yes
+				custom_effect_tooltip = TT_NVX_ECOLITE_growth_pos1
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.4
+				stability_factor = 0.05
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+				modifier = {
+					add = 100
+					has_idea = economy_tax_meager
+					has_idea = economy_boom
+				}
+   			}
+		}
+		
+		economy_tax_meager = {
+			cost = 150
+			removal_cost = -1
+			level = 2
+			
+			available = {
+				NOT = { has_government = fascist }
+				NOT = { has_government = progressive }
+				NOT = { has_government = democratic_socialist }
+				NOT = { has_government = communist }
+			}
+			
+			on_add = {
+				NVX_ECO_calc = yes
+				custom_effect_tooltip = TT_NVX_ECOLITE_growth_pos2
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.5
+				stability_factor = 0.05
+				stability_weekly = 0.001
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+		
+		economy_tax_robotic = {
+			cost = 150
+			removal_cost = -1
+			level = 1
+			
+			allowed = {
+				hidden_trigger = {
+					OR = {
+						has_idea = economy_tax_robotic
+						has_country_flag = NVX_flag_secret_ideas_economy_tax_robotic
+					}
+				}
+			}
+			
+			available = {
+				
+			}
+			
+			on_add = {
+				NVX_ECO_calc = yes
+				custom_effect_tooltip = TT_NVX_ECOLITE_growth_pos1
+			}
+			
+			modifier = {
+				consumer_goods_factor = 0.2
+				stability_weekly = 0.001
+				monthly_population = 0.1
+				industrial_capacity_factory = 0.2
+				research_speed_factor = 0.05
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+	}
+	
+	trade_laws = {
+		law = yes
+
+		free_trade = {
+			available = {
+				OR = {
+					NOT = { has_government = communist }
+					has_idea = idea_PRC_chinese_socialism
+					threat > 0.15
+				}
+			}
+			
+			on_add = {
+				
+			}
+		
+			cost = 250
+			removal_cost = -1
+			level = 4
+			
+			modifier = {
+				min_export = 0.8
+				industrial_capacity_factory = 0.15
+				industrial_capacity_dockyard = 0.15
+				production_speed_buildings_factor = 0.15
+				research_speed_factor = 0.10
+				civilian_intel_to_others = 40.0
+				navy_intel_to_others = 20.0
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+		
+		export_focus = {
+			cost = 250
+			removal_cost = -1
+			level = 3
+			
+			on_add = {
+				
+			}
+			
+			modifier = {
+				min_export = 0.5
+				industrial_capacity_factory = 0.1
+				industrial_capacity_dockyard = 0.1
+				production_speed_buildings_factor = 0.1
+				research_speed_factor = 0.05
+				civilian_intel_to_others = 20.0
+				navy_intel_to_others = 10.0
+			}
+			
+			default = yes
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 1
+
+				modifier = {
+					factor = 0
+					
+					is_major = no
+					has_war = no
+					is_in_faction = no
+					OR = {
+						# portugal and sweden are special tungsten snowflakes
+						tag = POR
+						tag = SWE
+
+						# Iraq & Iran are special oil snowflakes
+						tag = PER
+						tag = SAU
+					}
+				}
+   			}
+		}
+		
+		limited_exports = {
+			available = {
+				OR = {
+					AND = {
+						NVX_has_government_system_democratic = yes
+						has_war = yes
+					}
+					NVX_has_government_system_authoritarian = yes
+				}
+			}
+			
+			on_add = {
+				
+			}
+		
+			cost = 250
+			removal_cost = -1
+			level = 2
+			
+			modifier = {
+				min_export = 0.25
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+				production_speed_buildings_factor = 0.05
+				research_speed_factor = 0.01
+				civilian_intel_to_others = 10.0
+				navy_intel_to_others = 5
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+
+   				modifier = {
+					add = -1
+					
+					is_major = no
+					is_in_faction = yes
+					has_war = yes
+				}
+				# minors not at war should want to get the bonuses from free trade
+				modifier = {
+					add = -1
+					
+					is_major = no
+					has_war = no
+				}
+				modifier = {
+					add = 1500
+					
+					# revert from closed_economy if we have large allies
+					has_idea = closed_economy
+					has_large_ally_not_pick_closed_economy = yes
+				}
+				modifier = {
+					add = 1500
+					
+					has_idea = closed_economy
+					OR = {
+						is_puppet = yes
+						is_subject = yes
+					}
+				}
+   			}
+		}
+		
+		closed_economy = {
+			
+			
+			available = {
+				NVX_has_government_ideology_authoritarian = yes
+				has_war = yes
+			}
+			
+			on_add = {
+				
+			}
+			
+			cost = 250
+			removal_cost = -1
+			level = 1
+			
+			
+			modifier = {
+				min_export = 0
+			}
+			
+			on_add = {
+				custom_effect_tooltip = closed_economy_TT
+			}
+			
+			cancel_if_invalid = no
+
+			ai_will_do = {
+   				factor = 1
+
+   				modifier = {
+					factor = 0
+					
+					is_major = no
+					is_in_faction = yes
+					has_war = yes
+				}
+				# minors not at war should want to get the bonuses from free trade
+				modifier = {
+					factor = 0
+					
+					is_major = no
+					has_war = no
+				}
+				modifier = {
+					factor = 0
+					
+					# don't take if we have a reasonable sized ally
+					# since they will require our trades
+					has_large_ally_not_pick_closed_economy = yes
+				}
+				modifier = {
+					factor = 0
+					
+					OR = {
+						is_puppet = yes
+						is_subject = yes
+					}
+				}
+   			}
+		}
+	}
+}

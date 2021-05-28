@@ -1,0 +1,276 @@
+﻿# Written by E. Wolfe #
+
+add_namespace = nvx_syria
+
+country_event = {
+	id = nvx_syria.100
+	title = nvx_syria.100.t
+	desc = nvx_syria.100.d
+	picture = GFX_report_event_syrian_civil_war2
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+
+	}
+	option = {
+		name = nvx_syria.100.1
+		hidden_effect = {
+			set_country_flag = SYR_civil_war_in_action
+			remove_state_core = 680
+			every_state = {
+				limit = {
+					OR = {
+						state = 677
+						state = 680
+						state = 814
+						state = 554
+						state = 168
+						state = 675
+						state = 291
+						state = 676
+						state = 815
+					}
+				}
+				teleport_armies = {
+    				to_state = 554
+				}		
+				add_province_modifier = {
+					static_modifiers = { unplanned_offensive }
+					province = {
+						all_provinces = yes
+					}
+				}
+				set_state_flag = SPR_unplanned_offensive_flag
+			}
+			KUR = {
+				set_state_owner = 814
+				set_state_controller = 814
+				814 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 1634
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 10882
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 1549
+					}
+				}
+				SYR = {
+					puppet = KUR
+				}
+				if = {
+					limit = { IRQ = { has_stability < 0.1 } }
+					set_state_owner = 815
+					set_state_controller = 815
+					815 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							instant_build = yes
+							province = 10804
+						}
+						add_building_construction = {
+							type = bunker
+							level = 2
+							instant_build = yes
+							province = 10811
+						}
+						add_building_construction = {
+							type = bunker
+							level = 2
+							instant_build = yes
+							province = 3916
+						}
+						add_building_construction = {
+							type = bunker
+							level = 2
+							instant_build = yes
+							province = 6826
+						}
+					}
+				}
+				set_technology = {
+					infantry_weapons1 = 1
+					infantry_weapons2 = 1
+					upgraded_infantry_weapons1 = 1
+					infantry_weapons3 = 1
+					basic_machine_tools = 1
+					dispersed_industry = 1
+					dispersed_industry2 = 1
+					dispersed_industry3 = 1
+					dispersed_industry4 = 1
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_3
+					amount = 5000
+					producer = KUR
+				}
+				load_oob = "KUR_rebels1"
+				814 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			ISS = {
+				set_state_owner = 680
+				set_state_controller = 680
+				load_oob = "ISS_2016"
+				complete_national_focus = generic_army_focus
+				complete_national_focus = generic_air_focus
+				complete_national_focus = generic_ideology_focus
+				complete_national_focus = generic_national_strength
+				complete_national_focus = generic_path_of_order
+				complete_national_focus = generic_ideology_islamist
+				complete_national_focus = generic_shariah_lawcode
+				complete_national_focus = generic_jihad
+				remove_ideas = idea_focus_generic_path_of_allah
+				remove_ideas = idea_focus_generic_path_of_order
+				remove_ideas = idea_focus_generic_national_strength
+				add_ideas = {
+					service_by_requirement
+					closed_economy
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 10000
+					producer = ISS
+				}
+				if = {
+					limit = { IRQ = { has_stability < 0.15 } }
+					set_state_owner = 676
+					set_state_controller = 676
+				}
+				add_named_threat = {
+					threat = 8
+					name = threat_ISS_isis_campaign
+				}
+				set_war_support = 0.8
+			declare_war_on = {
+				target = SYR
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = KUR
+				type = annex_everything
+			}
+			}
+			set_global_flag = SYR_civil_war_ISIS
+		}
+		start_civil_war = {
+			ideology = conservative
+			size = 0
+			states = { 677 }
+			capital = 677
+		}
+		hidden_effect = {
+			random_country = {
+				limit = {
+					original_tag = SYR
+					has_government = conservative
+				}
+				set_war_support = 0.8
+				load_oob = "syrian_civil_war_rebels"
+				set_technology = {
+					infantry_weapons1 = 1
+					infantry_weapons2 = 1
+					upgraded_infantry_weapons1 = 1
+					infantry_weapons3 = 1
+					basic_machine_tools = 1
+					concentrated_industry = 1
+					concentrated_industry2 = 1
+					concentrated_industry3 = 1
+					concentrated_industry4 = 1
+				}
+				if = {
+					limit = { SYR = { has_tech = main_battle_tank4 } }
+					set_technology = { main_battle_tank4 = 1 }
+				}
+				if = {
+					limit = { SYR = { has_tech = main_battle_tank5 } }
+					set_technology = { main_battle_tank5 = 1 }
+				}
+				if = {
+					limit = { SYR = { has_tech = main_battle_tank6 } }
+					set_technology = { main_battle_tank6 = 1 }
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_3
+					amount = 5000
+					producer = SUR
+				}
+				KUR = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+				ISS = {
+					declare_war_on = {
+						target = PREV
+						type = annex_everything
+					}
+				}
+			}
+			KUR = {
+				country_event = {
+					id = nvx_syria.101
+					days = 10
+				}
+			}
+		}
+		
+		ai_chance = {
+			factor = 1
+		}
+	}
+	option = {
+		name = nvx_syria.100.2
+		trigger = {
+			has_stability > 0.9
+			has_war_support > 0.8
+			IRQ = { has_stability > 0.7 }
+		}
+		add_stability = -0.3
+		add_war_support = -0.3
+		
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {
+	id = nvx_syria.101
+	is_triggered_only = yes
+	hidden = yes
+	
+	immediate = {
+		KUR = {
+			declare_war_on = {
+				target = ISS
+				type = annex_everything
+			}
+		}
+		ISS = {
+			declare_war_on = {
+				target = SYR
+				type = annex_everything
+			}
+		}
+	}
+}

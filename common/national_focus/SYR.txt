@@ -17,6 +17,9 @@ focus_tree = {
 		cost = 10
 		x = 4
 		y = 0
+		completion_reward = {
+			set_country_flag = SYR_ISR_War
+		}
 
 	}
 	focus = {
@@ -34,8 +37,15 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_peace_talks
 		}
+		available = {
+			has_country_flag = SYR_ISR_Peace
+		}
 		x = 0
 		y = 1
+		completion_reward = {
+			add_stability = -0.1
+			add_war_support = -0.1
+		}
 
 	}
 	focus = {
@@ -47,6 +57,9 @@ focus_tree = {
 		}
 		x = 0
 		y = 2
+		completion_reward = {
+			SYR = { add_opinion_modifier = { target = IRQ modifier = sanctions_relations }}
+		}
 
 	}
 	focus = {
@@ -55,6 +68,10 @@ focus_tree = {
 		cost = 10
 		prerequisite = {
 			focus = SYR_sanction_iraq
+		}
+		completion_reward = {
+			add_manpower = -300
+			add_stability = 0.05
 		}
 		x = 0
 		y = 4
@@ -104,6 +121,13 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_peace_talks
 		}
+		available = {
+			has_country_flag = SYR_ISR_War
+		}
+		completion_reward = {
+			add_war_support = 0.02
+			add_stability = 0.02
+		}
 		x = 8
 		y = 1
 
@@ -117,6 +141,23 @@ focus_tree = {
 		}
 		x = 5
 		y = 2
+		completion_reward = {
+			PAL = {
+				add_political_power = 50
+				add_ideas = {
+					SYR_PAL_assistence
+				}
+			}
+		}
+		bypass = {
+			NOT = {
+				country_exists = PAL
+			}
+			PAL = {
+				is_puppet = yes
+			}
+			
+		}
 
 	}
 	focus = {
@@ -155,6 +196,11 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = SYR_retreat_lebanon
+		}
+		completion_reward = {
+			LEB = {
+				add_ideas = SYR_interference
+			}
 		}
 		x = 8
 		y = 3
@@ -203,6 +249,12 @@ focus_tree = {
 		}
 		x = 10
 		y = 4
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SYR_interference
+				add_idea = SYR_interference2
+			}
+		}
 
 	}
 	focus = {
@@ -247,22 +299,15 @@ focus_tree = {
 	focus = {
 		id = SYR_equipment_to_iraq
 		icon = GFX_goal_generic_army_tanks
-		cost = 10
+		cost = 3
 		prerequisite = {
 			focus = SYR_remain_war
 		}
+		bypass = {
+			IRQ = {NOT = {has_government = nationalist}}
+		}
 		completion_reward = {
-			IRQ = {
-				add_equipment_to_stockpile = {
-					type = infantry_equipment_1
-					amount = 1500
-					producer = SYR
-				}
-			}
-			add_timed_idea = {
-				idea = idea_SYR_weapon_shipments
-				days = 100
-			}
+			custom_effect_tooltip = SYR_equipment_to_iraq_tt
 		}
 		x = 12
 		y = 2
@@ -375,6 +420,12 @@ focus_tree = {
 		}
 		x = 12
 		y = 9
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = KUW
+			}
+		}
 
 	}
 	focus = {
@@ -401,6 +452,9 @@ focus_tree = {
 		cost = 10
 		prerequisite = {
 			focus = SYR_equipment_to_iraq
+		}
+		available = {
+			has_idea = SYR_sanctioned
 		}
 		completion_reward = {
 			add_ideas = SYR_avoiding_sanctions
@@ -595,6 +649,21 @@ focus_tree = {
 		}
 		prerequisite = {
 			focus = SYR_saaf
+		}
+		completion_reward = {
+		add_tech_bonus = {
+				bonus = 0.5
+				uses=1
+				technology = interwar_antiair
+				technology = antiair1
+				technology = antiair2
+				technology = antiair3
+				technology = antiair4
+				technology = antiair5
+				technology = antiair6
+				technology = antiair7
+				technology = antiair8
+			}
 		}
 		x = 28
 		y = 1

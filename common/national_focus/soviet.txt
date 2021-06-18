@@ -62,7 +62,7 @@ focus_tree = {
 	focus = {
 		id = SOV_grozny_offensive
 		icon = demand_sudetenland
-		x = 16
+		x = 18
 		y = 0
 		cost = 10
 		
@@ -107,7 +107,7 @@ focus_tree = {
 	focus = {
 		id = SOV_capitalism
 		icon = money
-		x = 15
+		x = 11
 		y = 1
 		cost = 10
 		
@@ -460,7 +460,7 @@ focus_tree = {
 	focus = {
 		id = SOV_appease_chechnya
 		icon = demand_territory
-		x = 17
+		x = 25
 		y = 1
 		cost = 10
 		
@@ -472,6 +472,9 @@ focus_tree = {
 		
 		completion_reward = {
 			custom_effect_tooltip = SOV_appease_chechnya_tooltip
+			828= {
+				add_core_of = SOV
+			}
 			set_country_flag = chechnyan_terrorists_defeated
 			add_political_power = 10
 			add_stability = 0.03
@@ -505,7 +508,6 @@ focus_tree = {
 			focus = SOV_capitalism
 		}
 		
-		mutually_exclusive = { focus = SOV_peaceful_reform } 
 		
 		completion_reward = {
 			add_popularity = {
@@ -2352,116 +2354,6 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = SOV_peaceful_reform
-		icon = major_alliance
-		x = 16
-		y = 2
-		cost = 10
-		
-		prerequisite = {
-			focus = SOV_capitalism
-		}
-		
-		mutually_exclusive = { 
-			focus = SOV_russia_first
-		}
-		
-		completion_reward = {
-			add_popularity = {
-				ideology = social_liberal
-				popularity = 0.15
-			}
-			add_political_power = -20
-			add_stability = 0.05
-		}
-		
-		ai_will_do = {
-			factor = 0
-			
-			modifier = {
-				factor = 0
-				is_historical_focus_on = no
-			}
-		}
-	}
-
-	focus = {
-		id = SOV_integrate
-		icon = democracy
-		
-		x = 16
-		y = 3
-		cost = 10
-		
-		prerequisite = {
-			focus = SOV_peaceful_reform
-		}
-		
-		mutually_exclusive = {}
-		
-		available = {
-			NOT = { has_war_with = PRC }
-			OR = {
-				JAP = { is_puppet = no }
-				is_puppet_of = PRC
-				JAP = { is_puppet_of = PRCA }
-			}
-		}
-		
-		bypass = {}
-		
-		completion_reward = {
-			PRC = {
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = economic_mission
-				}
-			}
-			remove_ideas = SOV_deindustrialisation
-			USA = {
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = economic_mission
-				}
-			}
-			GER = {
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = economic_mission
-				}
-			}
-			FRA = {
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = economic_mission
-				}
-			}
-			ENG = {
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = economic_mission
-				}
-			}
-			ITA = {
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = economic_mission
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
 		id = SOV_congress
 		icon = communism
 		x = 25
@@ -2497,245 +2389,7 @@ focus_tree = {
 		}
 	}
 	
-	focus = {
-		id = SOV_european_integration
-		icon = trade_with_america
-		x = 15
-		y = 4
-		cost = 10
-		
-		prerequisite = {
-			focus = SOV_integrate
-		}
-		
-		completion_reward = {
-			USA = {
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = economic_mission
-				}
-			}
-			every_country = {
-				limit = { has_idea = idea_eu_member }
-				add_opinion_modifier = {
-					target = SOV
-					modifier = recent_actions_positive
-				}
-			}
-			add_popularity = {
-				ideology = fascist
-				popularity = -0.02
-			}
-			add_popularity = {
-				ideology = nationalist
-				popularity = -0.02
-			}
-			add_popularity = {
-				ideology = reactionary
-				popularity = -0.02
-			}
-			add_popularity = {
-				ideology = monarchist
-				popularity = -0.02
-			}
-			add_popularity = {
-				ideology = communist
-				popularity = -0.02
-			}
-		}
-	}
 
-	focus = {
-		id = SOV_with_china
-		icon = trade_with_china
-		
-		x = 17
-		y = 4
-		cost = 10
-		
-		prerequisite = {
-			focus = SOV_integrate
-		}
-		
-		mutually_exclusive = {}
-		
-		available = {
-			NOT = { has_war_with = PRC }
-			OR = {
-				JAP = { is_puppet = no }
-				is_puppet_of = PRC
-				JAP = { is_puppet_of = PRCA }
-			}
-		}
-		
-		bypass = {}
-		
-		completion_reward = {
-			PRC = {
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = economic_mission
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_more_integrate
-		icon = democracy
-		x = 16
-		y = 5
-		cost = 15
-		
-		prerequisite = {
-			focus = SOV_european_integration
-			focus = SOV_with_china
-		}
-
-		completion_reward = {
-			add_stability = 0.15
-		}	
-			
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_full_integrate_china
-		icon = align_to_china
-		x = 17
-		y = 6
-		cost = 15
-		
-		prerequisite = {
-			focus = SOV_more_integrate
-		}
-		prerequisite = {
-			focus = SOV_with_china
-		}
-
-		mutually_exclusive = { 
-			focus = SOV_not_full_integrate_china
-			focus = SOV_not_full_integrate_usa
-			focus = SOV_full_integrate_usa
-			
-		}
-
-		completion_reward = {
-			add_stability = 0.01
-			PRC = {
-				puppet = SOV
-			}
-		}	
-			
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_not_full_integrate_china
-		icon = trade_with_china
-		x = 19
-		y = 6
-		cost = 15
-		
-		prerequisite = {
-			focus = SOV_more_integrate
-		}
-		prerequisite = {
-			focus = SOV_with_china
-		}
-
-		mutually_exclusive = { 
-			focus = SOV_full_integrate_china
-			focus = SOV_not_full_integrate_usa
-			focus = SOV_full_integrate_usa
-			
-		}
-
-		completion_reward = {
-			add_stability = 0.01
-			add_ideas = expluatation_big
-
-		}	
-			
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_full_integrate_usa
-		icon = american_shield
-		x = 15
-		y = 6
-		cost = 15
-		
-		prerequisite = {
-			focus = SOV_more_integrate
-		}
-		prerequisite = {
-			focus = SOV_european_integration
-		}
-
-		mutually_exclusive = { 
-			focus = SOV_not_full_integrate_china
-			focus = SOV_not_full_integrate_usa
-			focus = SOV_full_integrate_china
-			
-		}
-
-		completion_reward = {
-			add_stability = 0.01
-			USA = {
-				puppet = SOV
-			}
-		}	
-			
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_not_full_integrate_usa
-		icon = trade_with_america
-		x = 13
-		y = 6
-		cost = 15
-		
-		prerequisite = {
-			focus = SOV_more_integrate
-		}
-		prerequisite = {
-			focus = SOV_european_integration
-		}
-
-		mutually_exclusive = { 
-			focus = SOV_not_full_integrate_china
-			focus = SOV_full_integrate_usa
-			focus = SOV_full_integrate_china
-			
-		}
-
-		completion_reward = {
-			add_stability = 0.01
-			add_ideas = economic_colony
-			EU_membership_application = yes
-		}	
-			
-		ai_will_do = {
-			factor = 10
-		}
-	}
 	
 	focus = {
 		id = SOV_preparation_for_the_revolution

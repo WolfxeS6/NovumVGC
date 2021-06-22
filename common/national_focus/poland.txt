@@ -1,0 +1,11135 @@
+
+focus_tree = {
+	
+	id = Polish_focus_tree_NV
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 20
+			tag = POL
+		}
+	}
+	
+	default = no
+	
+	#Industrial path
+	focus = {
+		id = POL_prepare_industrial_expansions
+		icon = production
+		x = 3
+		y = 0
+		cost = 7
+		
+		available = {
+		has_completed_focus = POL_future_of_Poland
+		}
+		
+		completion_reward = {
+			custom_effect_tooltip = POL_unlock_Polish_economy_decisions_tt
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.50
+				uses = 2
+				category = industry
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_industrialise_Silesia
+		icon = industry_civilian
+		x = -2
+		y = 1
+        relative_position_id = POL_prepare_industrial_expansions  
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_prepare_industrial_expansions
+		}
+
+      available = {
+	  has_full_control_of_state = 66 	
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			66 = {
+				
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_steel_plants
+		icon = production2
+		x = 0
+		y = 1
+        relative_position_id = POL_industrialise_Silesia  
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_industrialise_Silesia
+		}
+
+         available = {
+	    has_full_control_of_state =  67	
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			67 = {
+				add_resource = { type = steel amount = 10 }
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+   focus = {
+		id = POL_oil_driling
+		icon = oil_production
+		x = -2
+		y = 1
+		relative_position_id = POL_industrialise_Silesia  
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_industrialise_Silesia
+		}
+		
+		 available = {
+	     has_full_control_of_state = 67	
+		}
+		
+		bypass = {
+		has_completed_focus = POL_green_policies
+		}
+		completion_reward = {
+				67 = { 
+					add_resource = { type = oil amount = 15 }
+				}
+			}
+		
+		ai_will_do = {
+			factor = 10
+	 }
+   }
+		
+		focus = {
+		id = POL_gold_mining_oprations_in_Mikolajkowice
+		icon = Gold
+		x = -1
+		y = 1
+		relative_position_id = POL_oil_driling  
+		cost = 9
+		
+		prerequisite = {
+			focus = POL_oil_driling
+		}
+		
+		 available = {
+	     has_full_control_of_state = 66
+		}
+		
+		completion_reward = {
+		add_offsite_building = { type = industrial_complex level = 1 }
+			}
+		
+		ai_will_do = {
+			factor = 10
+	 }
+   }
+   
+   focus = {
+		id = POL_KGHM
+		icon = industry_democratic4
+		x = 0
+		y = 1
+		relative_position_id = POL_gold_mining_oprations_in_Mikolajkowice  
+		cost = 5
+		
+		mutually_exclusive = {
+			focus = POL_invite_forgein_company_to_Silessia
+		}
+		
+		prerequisite = {
+			focus = POL_gold_mining_oprations_in_Mikolajkowice
+		}
+		
+		 available = {
+	     has_full_control_of_state = 66
+		}
+		
+		completion_reward = {
+		custom_effect_tooltip = available_industrial_concern
+		show_ideas_tooltip = POL_KGHM	
+			}
+		
+		ai_will_do = {
+			factor = 10
+	 }
+   }
+		
+		focus = {
+		id = POL_expand_coal_mining
+		icon = Coal
+		x = 1
+		y = 1
+        relative_position_id = POL_oil_driling  
+		cost = 12
+		
+		prerequisite = {
+			focus = POL_oil_driling
+		    focus = POL_steel_plants
+		}
+
+        bypass = {
+	   
+	    has_completed_focus = POL_green_policies
+		}
+
+        available = {
+	     has_full_control_of_state = 66 	
+		}
+
+		bypass = {
+			or = {
+			has_completed_focus = POL_green_policies
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+	}	
+		completion_reward = {
+			66 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = POL_invite_forgein_company_to_Silessia
+		icon = industry_civilian
+		x = 0
+		y = 1
+        relative_position_id = POL_expand_coal_mining  
+		cost = 8
+		
+		mutually_exclusive = {
+			focus = POL_KGHM
+		}
+		
+		prerequisite = {
+			focus = POL_expand_coal_mining
+		}
+
+        available = {
+	     has_full_control_of_state =  67	
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			67 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+					add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+        focus = {
+		id = expand_polish_railways
+		icon = infrastructure
+		x = 0
+		y = 1
+		relative_position_id = POL_prepare_industrial_expansions 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_prepare_industrial_expansions
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	  focus = {
+		id = POL_PKP
+		icon = infrastructure
+		x = 0
+		y = 1
+		relative_position_id = expand_polish_railways 
+		cost = 5
+		
+		prerequisite = {
+			focus = expand_polish_railways
+		}
+		
+		completion_reward = {
+			add_ideas = POL_PKP
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = POL_fill_road_gaps
+		icon = infrastructure
+		x = 0
+		y = 1
+		relative_position_id = POL_PKP 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_PKP
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		    random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+     focus = {
+		id = POL_revive_Syrena
+		icon = motorized
+		x = 0
+		y = 1
+		relative_position_id = POL_fill_road_gaps 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_fill_road_gaps
+		}
+		
+		
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = Syrena
+			random_owned_state = {
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+      focus = {
+		id = expand_the_vocational_schools 
+		icon = tech_sharing
+		x = 2
+		y = 1
+		relative_position_id = POL_fill_road_gaps 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_fill_road_gaps
+		}
+		
+		available = {
+		}
+		
+		completion_reward = {
+		add_ideas =  expand_the_vocational_schools
+		random_owned_state = {
+		prioritize = { 98} #idk why	
+			add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+     focus = {
+		id = POL_green_island_of_europe_for_scientists
+		icon = scientific_exchange
+		x = -1
+		y = 1
+		relative_position_id = expand_the_vocational_schools 
+		cost = 10
+		
+		prerequisite = {
+			focus = expand_the_vocational_schools
+		}
+		
+		prerequisite = {
+			focus = POL_revive_Syrena
+		}
+		
+		available = {
+	    has_completed_focus = POL_expand_the_Jagiellonian_university
+		}
+		
+		completion_reward = {
+		add_research_slot = 1
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+   
+   focus = {
+		id = POL_arms_indsutry
+		icon = industry_military
+		x = 2
+		y = 1
+		relative_position_id = POL_prepare_industrial_expansions 
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_prepare_industrial_expansions
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	  focus = {
+		id = POL_Panstwowa_wytwurnia_zbrojeniowa
+		icon = industry_military
+		x = 2
+		y = 1
+		relative_position_id = POL_arms_indsutry 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_arms_indsutry
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+   
+    focus = {
+		id = POL_Increase_military_funds
+		icon = industry_military
+		x = 0
+		y = 1
+		relative_position_id = POL_arms_indsutry 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_arms_indsutry
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+		add_ideas = POL_increased_military_funds	
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	  focus = {
+		id = POL_Military_factories_Lucznik
+		icon = industry_military
+		x = 0
+		y = 1
+		relative_position_id = POL_Increase_military_funds 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_Increase_military_funds
+		    focus = POL_Panstwowa_wytwurnia_zbrojeniowa
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+		
+		focus = {
+		id = POL_expand_Chemical_Works_Nitro_Chem
+		icon = industry_military
+		x = 0
+		y = 1
+		relative_position_id = POL_Panstwowa_wytwurnia_zbrojeniowa 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_Increase_military_funds
+		    focus = POL_Panstwowa_wytwurnia_zbrojeniowa
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+		
+	focus = {
+		id = POL_invest_in_Main_Business_School_in_Warsaw
+		icon = research
+		x = 4
+		y = 1
+		relative_position_id = POL_prepare_industrial_expansions 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_prepare_industrial_expansions
+		}
+
+		
+		completion_reward = {
+		add_ideas = POL_invest_in_Main_Business_School_in_Warsaw
+		add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.50
+				uses = 1
+				category = industry
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}	
+		
+		focus = {
+		id = POL_invest_in_Warsaw
+		icon = industry_civilian
+		x = 6
+		y = 1
+		relative_position_id = POL_prepare_industrial_expansions 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_prepare_industrial_expansions
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			10 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+					add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				  }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Law_on_higher_education
+		icon = research
+		x = 2
+		y = 1
+		relative_position_id = POL_invest_in_Warsaw 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_invest_in_Warsaw
+		}
+
+		
+		completion_reward = {
+		add_ideas = POL_Law_on_higher_education
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_expand_the_Jagiellonian_university
+		icon = research
+		x = 0
+		y = 1
+		relative_position_id = POL_Law_on_higher_education 
+		cost = 12
+		
+		available = {
+			has_completed_focus = POL_invest_in_Main_Business_School_in_Warsaw
+		}
+		
+		prerequisite = {
+			focus = POL_Law_on_higher_education
+		}
+
+		
+		completion_reward = {
+		add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_polish_banking
+		icon = Gold
+		x = 0
+		y = 1
+		relative_position_id = POL_invest_in_Warsaw 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_invest_in_Warsaw
+		}
+
+		
+		completion_reward = {
+		add_ideas = POL_Polish_Banking
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_expand_textile_industry
+		icon = industry_civilian
+		x = 0
+		y = 1
+		relative_position_id = POL_polish_banking 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_polish_banking
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_expand_automobile_industry
+		icon = industry_civilian
+		x = 0
+		y = 1
+		relative_position_id = POL_expand_textile_industry 
+		cost = 15
+		
+		prerequisite = {
+			focus = POL_expand_textile_industry
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		    random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		   random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+
+focus = {
+		id = POL_support_agroculture
+		icon = agriculture
+		x = 13
+		y = 0
+		cost = 5
+		
+		mutually_exclusive = {
+			focus = POL_massive_industrialisation
+		}
+		
+		completion_reward = {
+			add_ideas = POL_support_agroculture
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_support_large_supermarkets
+		icon = united_states_dollar
+		x = -2
+		y = 1
+		relative_position_id = POL_support_agroculture 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_support_agroculture
+		}
+
+        mutually_exclusive = {
+			focus = POL_support_agrounion
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = POL_support_agroculture
+					add_idea = POL_support_agroculture_big_corrporations 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_support_agrounion
+		icon = agriculture
+		x = 0
+		y = 1
+		relative_position_id = POL_support_agroculture 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_support_agroculture
+		}
+
+		mutually_exclusive = {
+			focus = POL_support_large_supermarkets
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = POL_support_agroculture
+					add_idea = POL_support_agroculture_agrounion 
+				}
+		  }
+		
+		
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_massive_industrialisation
+		icon = industry_civilian2
+		x = 15
+		y = 0
+		cost = 7
+		
+		mutually_exclusive = {
+			focus = POL_support_agroculture
+		}
+		
+		completion_reward = {
+			add_stability = -0.10
+			add_ideas = POL_massive_industrialisation
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_start_rebuilding_the_central_indusrtail_region
+		icon = industry_civilian
+		x = 0
+		y = 1
+		relative_position_id = POL_massive_industrialisation 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_massive_industrialisation
+		}
+
+         available = {
+	    has_full_control_of_state = 10
+		has_full_control_of_state = 90
+		has_full_control_of_state = 88
+		has_full_control_of_state = 92
+		}
+		
+		completion_reward = {
+			10 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		    90 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		    88 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		     92 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_finish_rebuilding_the_central_indusrtrial_region
+		icon = industry_civilian
+		x = 0
+		y = 1
+		relative_position_id = POL_start_rebuilding_the_central_indusrtail_region 
+		cost = 20
+		
+		prerequisite = {
+			focus = POL_start_rebuilding_the_central_indusrtail_region
+		}
+
+         available = {
+	    has_full_control_of_state = 10
+		has_full_control_of_state = 90
+		has_full_control_of_state = 88
+		has_full_control_of_state = 92
+		}
+		
+		completion_reward = {
+			10 = {
+				add_extra_state_shared_building_slots = 2
+			    add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		    90 = {
+				add_extra_state_shared_building_slots = 1
+			    add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		    88 = {
+				add_extra_state_shared_building_slots = 1
+			    add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		     92 = {
+				add_extra_state_shared_building_slots = 1
+			    add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_prepare_for_war
+		icon = military_sphere
+		x = 17
+		y = 0
+		cost = 5
+		
+		available = {
+		has_completed_focus = POL_future_of_Poland
+		}
+		
+		completion_reward = {
+		add_war_support = 0.10
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Countrywaide_military_training
+		icon = military_mission
+		x = 0
+		y = 1
+		relative_position_id = POL_prepare_for_war 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_prepare_for_war
+		}
+		
+		completion_reward = {
+		add_ideas = POL_countrywide_military_training
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_legacy_of_Wojtek_the_Bear
+		icon = Wojtek_the_bear
+		x = 2
+		y = 1
+		relative_position_id = POL_prepare_for_war 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_prepare_for_war
+		}
+		
+		completion_reward = {
+		add_ideas = POL_legacy_of_Wojtek_the_Bear
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_wepons_of_3rd_world_war
+		icon = nuclear_weapons
+		x = -1
+		y = 1
+		relative_position_id = POL_legacy_of_Wojtek_the_Bear 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_legacy_of_Wojtek_the_Bear
+		}
+		
+		prerequisite = {
+			focus = POL_Countrywaide_military_training
+		}
+		
+		completion_reward = {
+		add_tech_bonus = {
+				name = nuclear_bonus
+				bonus = 0.30
+				uses = 2
+				category = nuclear
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+focus = {
+		id = POL_future_of_Poland
+		icon = major_alliance
+		x = 45
+		y = 1
+		cost = 3
+	
+		
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	   
+	 focus = {
+		id = POL_keep_SLD
+		icon = democracy
+		x = 2
+		y = 2
+		cost = 7
+		relative_position_id = POL_future_of_Poland 
+		
+		available = {
+		NOT = { has_country_flag = SLD_path_disabled }
+		}
+		
+		prerequisite = {
+			focus = POL_future_of_Poland
+		}
+		
+		mutually_exclusive = {
+			focus = POL_United_Left
+		}
+		
+		mutually_exclusive = {
+			focus = POL_PSL
+		}
+		
+		mutually_exclusive = {
+			focus = POL_polish_revanchism
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_LPR
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_PiS
+		}
+		
+		mutually_exclusive = {
+			focus = POL_strenghten_PO
+		}
+		
+		completion_reward = {
+			 increase_social_democrat_influence_by_1 = yes 
+			add_ideas = idea_focus_generic_social_democrat_doctrine
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}   
+	   
+		focus = {
+		id = POL_strenghten_PO
+		icon = democracy
+		x = 4
+		y = 2
+		relative_position_id = POL_future_of_Poland 
+		cost = 5
+		
+		available = {
+		NOT = { has_country_flag = PO_path_disabled }
+		}
+		
+		prerequisite = {
+			focus = POL_future_of_Poland 
+		}
+		
+		mutually_exclusive = {
+			focus = POL_United_Left
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_LPR
+		}
+		
+		mutually_exclusive = {
+			focus = POL_PSL
+		}
+		
+		mutually_exclusive = {
+			focus = POL_polish_revanchism
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_PiS
+		}
+		
+		mutually_exclusive = {
+			focus = POL_keep_SLD
+		}
+		
+		mutually_exclusive = {
+			focus = POL_Wolnosc
+		}
+		
+		completion_reward = {
+			increase_social_liberal_influence_by_1 = yes
+			add_ideas = idea_focus_generic_liberal_doctrine
+		    add_popularity = {
+				ideology = social_liberal
+				popularity = 0.15
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_increase_minimal_wage
+		icon = democracy
+		x = 2
+		y = 1
+		relative_position_id = POL_strenghten_PO 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_strenghten_PO 
+		}
+		
+		completion_reward = {
+		add_ideas = POL_increased_minimal_wage
+		}
+	
+	ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_take_over_TVP
+		icon = propaganda
+		x = 0
+		y = 1
+		relative_position_id = POL_increase_minimal_wage 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_increase_minimal_wage 
+		}
+		
+		completion_reward = {
+		add_political_power = 150
+		}
+	
+	ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_compromise_on_abortion
+		icon = improve_relations
+		x = 0
+		y = 1
+		relative_position_id = POL_take_over_TVP 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_take_over_TVP 
+		}
+		
+		completion_reward = {
+		add_stability = 0.1
+		}
+	
+	ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Politicization_of_normal_life
+		icon = intelligence_exchange
+		x = -8
+		y = 1
+		relative_position_id = POL_strenghten_PO 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_keep_SLD
+		}
+
+		completion_reward = {
+		    add_political_power = 100
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_fight_with_corruption
+		icon = demand_territory2
+		x = 0
+		y = 1
+		relative_position_id = POL_Politicization_of_normal_life 
+		cost = 9
+		
+		prerequisite = {
+			focus = POL_Politicization_of_normal_life
+		}
+
+		completion_reward = {
+		   remove_country_leader_trait = corrupt_public_official
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Increase_income_tax
+		icon = money
+		x = 0
+		y = 1
+		relative_position_id = POL_fight_with_corruption 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_fight_with_corruption
+		}
+
+		completion_reward = {
+		    add_ideas = POL_increased_income_tax
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_protect_worker_rights
+		icon = self_management
+		x = -2
+		y = 1
+		relative_position_id = POL_strenghten_PO 
+		cost = 5
+		
+		
+		prerequisite = {
+			focus = POL_keep_SLD
+		    focus = POL_strenghten_PO
+		    focus = POL_PSL
+		}
+		
+		
+		completion_reward = {
+			add_ideas = POL_protect_worker_rights
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Open_up_to_Imigrants
+		icon = improve_relations
+		x = 2
+		y = 1
+		relative_position_id = POL_protect_worker_rights 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_protect_worker_rights
+		}
+		
+		completion_reward = {
+			add_ideas = POL_Opend_up_to_imigrants
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Beurocratic_reform
+		icon = intelligence_exchange
+		x = 0
+		y = 1
+		relative_position_id = POL_Open_up_to_Imigrants 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_Open_up_to_Imigrants
+		}
+		
+		completion_reward = {
+			add_ideas = POL_Beurocratic_reform
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_reform_conscription_system
+		icon = infantry_axis
+		x = 0
+		y = 1
+		relative_position_id = POL_Beurocratic_reform 
+		cost = 7
+		
+			bypass = {
+		   has_idea = volunteer_only
+		}
+		prerequisite = {
+			focus = POL_Beurocratic_reform
+		}
+		
+		completion_reward = {
+			add_stability = 0.10
+			add_ideas = volunteer_only 
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+		focus = {
+		id = POL_reform_healthcare
+		icon = industry_democratic3
+		x = 2
+		y = 1
+		relative_position_id = POL_Beurocratic_reform 
+		cost = 12
+		
+		prerequisite = {
+			focus = POL_Beurocratic_reform
+		}
+		
+		completion_reward = {
+			remove_ideas = POL_Bad_healthcare_system
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_proggresive_policies
+		icon = national_greatness
+		x = 0
+		y = 1
+		relative_position_id = POL_reform_healthcare 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_reform_healthcare
+		}
+		
+		completion_reward = {
+			add_stability = 0.10
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_antifacist_policies
+		icon = national_greatness
+		x = 2
+		y = 1
+		relative_position_id = POL_proggresive_policies 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_proggresive_policies
+		}
+		
+		completion_reward = {
+			add_stability = 0.10
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_green_policies
+		icon = national_greatness
+		x = 0
+		y = 1
+		relative_position_id = POL_proggresive_policies 
+		cost = 5
+		
+		bypass = {
+		  or = {
+		  has_completed_focus = POL_oil_driling
+		  has_completed_focus = POL_expand_coal_mining
+		  }
+		}
+		prerequisite = {
+			focus = POL_proggresive_policies
+		}
+		
+		completion_reward = {
+			add_ideas = POL_green_policies
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_fill_the_tax_gaps
+		icon = euro
+		x = 2
+		y = 1
+		relative_position_id = POL_keep_SLD 
+		cost = 12
+		
+		
+		prerequisite = {
+			focus = POL_keep_SLD
+		    focus = POL_strenghten_PO
+		    focus = POL_PSL
+		}
+		
+		completion_reward = {
+			remove_ideas = POL_gaps_in_tax_system
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_trade_agrrement_with_EU_members
+		icon = trade_with_europe
+		x = -4
+		y = 1
+		relative_position_id = POL_strenghten_PO 
+		cost = 7
+		
+		available = {
+			is_EU_member = yes
+		}
+		
+		prerequisite = {
+			focus = POL_keep_SLD
+		    focus = POL_strenghten_PO
+		    focus = POL_PSL
+		}
+		
+		completion_reward = {
+			every_country = {
+				limit = { 
+					is_EU_member = yes
+					NOT = { has_war_with = POL }
+				}
+				increase_trade_influence_by_2 = yes
+				add_opinion_modifier = {
+					target = POL
+					modifier = trade_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_support_Bayer_company
+		icon = trade_with_germany
+		x = -2
+		y = 1
+		relative_position_id = POL_trade_agrrement_with_EU_members 
+		cost = 5
+		
+		available = {
+			is_EU_member = yes
+		    GER = {
+		    is_EU_member = yes
+		   }
+		}
+		
+		prerequisite = {
+			focus = POL_trade_agrrement_with_EU_members
+		}
+		
+		completion_reward = {
+		add_offsite_building = { type = industrial_complex level = 1 }	
+			GER = {
+				if = {
+				limit = { 
+					is_EU_member = yes
+					NOT = { has_war_with = POL }
+				}
+				increase_trade_influence_by_2 = yes
+			}
+		}
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_focus_on_german_building_companies
+		icon = infrastructure
+		x = 0
+		y = 1
+		relative_position_id = POL_support_Bayer_company 
+		cost = 5
+		
+		available = {
+			is_EU_member = yes
+		    GER = {
+		    is_EU_member = yes
+		   }
+		}
+		
+		prerequisite = {
+			focus = POL_support_Bayer_company
+		}
+		
+		completion_reward = {
+		random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		    random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_CCIFP
+		icon = trade_with_france
+		x = 0
+		y = 1
+		relative_position_id = POL_trade_agrrement_with_EU_members 
+		cost = 7
+		
+		available = {
+			is_EU_member = yes
+		    FRA = {
+		    is_EU_member = yes
+		   }
+		}
+		
+		prerequisite = {
+			focus = POL_trade_agrrement_with_EU_members
+		}
+		
+		completion_reward = {
+			custom_effect_tooltip = POL_CCIFP_tt
+			FRA = {
+				if = {
+				limit = { 
+					is_EU_member = yes
+					NOT = { has_war_with = POL }
+				}
+				increase_trade_influence_by_2 = yes
+			}
+		}
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_support_Tesco
+		icon = trade_with_britain
+		x = 2
+		y = 1
+		relative_position_id = POL_trade_agrrement_with_EU_members 
+		cost = 5
+		
+		available = {
+			is_EU_member = yes
+		     ENG = {
+		    is_EU_member = yes
+		   }
+		}
+		
+		prerequisite = {
+			focus = POL_trade_agrrement_with_EU_members
+		}
+		
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 1 }	
+			ENG = {
+				if = {
+				limit = { 
+					is_EU_member = yes
+					NOT = { has_war_with = POL }
+				}
+				increase_trade_influence_by_2 = yes
+				
+			}
+		}
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_introduce_euro
+		icon = align_to_europe
+		x = 0
+		y = 1
+		relative_position_id = POL_CCIFP 
+		cost = 12
+		
+		available = {
+			is_EU_member = yes
+		}
+		
+		prerequisite = {
+			focus = POL_support_Tesco
+		}
+		
+		prerequisite = {
+			focus = POL_CCIFP
+		}
+		
+		prerequisite = {
+			focus = POL_support_Bayer_company
+		}
+		
+		completion_reward = {
+			add_ideas = POL_euro
+			every_country = {
+				limit = { 
+					is_EU_member = yes
+					NOT = { has_war_with = POL }
+				}
+				add_opinion_modifier = {
+					target = POL
+					modifier = has_expressed_loyalty
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_priotarise_forgein_buisneses
+		icon = align_to_europe
+		x = 0
+		y = 1
+		relative_position_id = POL_introduce_euro 
+		cost = 12
+		
+		available = {
+			is_EU_member = yes
+		}
+		
+		prerequisite = {
+			focus = POL_introduce_euro
+		}
+		
+		
+		completion_reward = {
+		add_stability = -0.15
+		random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				    }
+					add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+			focus = {
+		id = POL_polish_revanchism
+		icon = political_pressure
+		x = 42
+		y = 2
+		relative_position_id = POL_future_of_Poland 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_future_of_Poland
+		}
+		
+		mutually_exclusive = {
+			focus = POL_United_Left
+		}
+		
+		mutually_exclusive = {
+			focus = POL_strenghten_PO
+		}
+		
+		mutually_exclusive = {
+		    focus = POL_keep_SLD
+		}
+		
+		mutually_exclusive = {
+			focus = POL_PSL
+		}
+		
+		mutually_exclusive = {
+			focus = POL_Wolnosc
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_PiS
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_LPR
+		}
+		
+		completion_reward = {
+	     add_ideas = POL_polish_revanchism
+}     
+
+     	ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Polish_monarchy
+		icon = polish_monarchy
+		x = 40
+		y = 3
+		relative_position_id = POL_future_of_Poland
+		cost = 7
+		
+		available = {
+		or = {
+		has_completed_focus = POL_Make_Korwin_king_of_Poland
+		has_completed_focus = POL_Crown_the_regent
+		has_completed_focus = POL_elect_a_Habsburg
+		has_completed_focus = POL_elect_a_bonaparte
+		has_completed_focus = POL_elect_a_Radziwill
+		has_completed_focus = POL_elect_a_Romanov
+		}
+	}
+		prerequisite = {
+			focus = POL_future_of_Poland
+		}
+		
+		completion_reward = {
+		add_political_power = 100
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+			focus = {
+		id = POL_create_Royal_guard
+		icon = special_forces
+		x = -4
+		y = 1
+		relative_position_id = POL_Polish_monarchy
+		cost = 7
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_Polish_monarchy
+		}
+		
+		completion_reward = {
+		custom_effect_tooltip = ROM_royal_guards_divisions_tt
+			hidden_effect = {
+					division_template = {
+						name = "Gwardia Królewska"
+						priority = 2
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+				
+		    	   		 	infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+				
+		    	   		 	infantry = { x = 2 y = 0 }
+							artillery_brigade = { x = 2 y = 1 }
+							artillery_brigade = { x = 2 y = 2 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							recon = { x = 0 y = 1 }
+						}
+					}
+	}	
+	
+	random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Gwardia Królewska\" division_template = \"Gwardia Królewska\" start_experience_factor = 1.0" 
+						owner = POL
+					}
+				}
+	}
+	ai_will_do = {
+			factor = 10
+		}
+}	
+		focus = {
+		id = POL_focus_on_our_current_problems
+		icon = major_alliance
+		x = -6
+		y = 1
+		relative_position_id = POL_Polish_monarchy
+		cost = 7
+		
+		available = {
+	    NOT = { has_completed_focus = POL_Wolnosc }
+		}
+		prerequisite = {
+			focus = POL_Polish_monarchy
+		}
+		
+		completion_reward = {
+		add_stability = 0.05
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_get_more_doctors
+		icon = army_logistics
+		x = 0
+		y = 1
+		relative_position_id = POL_focus_on_our_current_problems
+		cost = 7
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_focus_on_our_current_problems
+		}
+		
+		completion_reward = {
+		add_political_power = -100
+		remove_ideas = POL_Bad_healthcare_system
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_reform_our_taxation_system
+		icon = money
+		x = -2
+		y = 1
+		relative_position_id = POL_focus_on_our_current_problems
+		cost = 7
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_focus_on_our_current_problems
+		}
+		
+		completion_reward = {
+		remove_ideas = POL_Bad_healthcare_system
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = IDK_professional_army
+		text = POL_professional_army
+		icon = infantry_axis
+		x = 1
+		y = 1
+		relative_position_id = POL_reform_our_taxation_system
+		cost = 7
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_get_more_doctors
+			focus = POL_reform_our_taxation_system
+		}
+		
+		completion_reward = {
+		add_ideas = volunteer_only 
+		    add_ideas = POL_profesional_army
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_royal_education
+		icon = research
+		x = 0
+		y = 1
+		relative_position_id = POL_create_Royal_guard
+		cost = 7
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_create_Royal_guard
+		}
+		
+		completion_reward = {
+		add_ideas = POL_royal_education     
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_royal_university
+		icon = research
+		x = 0
+		y = 1
+		relative_position_id = POL_royal_education
+		cost = 10
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_royal_education
+		}
+		
+		completion_reward = {
+		add_research_slot = 1
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Absolute_monarchy
+		icon = political_pressure
+		x = -2
+		y = 1
+		relative_position_id = POL_Polish_monarchy
+		cost = 7
+		  
+		  mutually_exclusive = {
+		focus = POL_constitional_manorchy
+		}
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_Polish_monarchy
+		}
+		
+		completion_reward = {
+		 add_country_leader_trait = Absolute_monarch       
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+			focus = {
+		id = POL_abolish_sejm_and_senat
+		icon = attack_democracy3
+		x = 0
+		y = 1
+		relative_position_id = POL_Absolute_monarchy
+		cost = 7
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_Absolute_monarchy
+		}
+		
+		completion_reward = {
+		 add_political_power = 200
+         add_stability = -0.08		 
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_constitional_manorchy
+		icon = democracy
+		x = 0
+		y = 1
+		relative_position_id = POL_Polish_monarchy
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_Absolute_monarchy
+		}
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_Polish_monarchy
+		}
+		
+		completion_reward = {
+		 add_country_leader_trait = constituional_moanrch       
+				set_politics = {
+				ruling_party = monarchist
+				elections_allowed = yes #did this to allow elections in the constitional monarchy
+			}
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_aggrements_with_the_opposition
+		icon = major_alliance
+		x = 0
+		y = 1
+		relative_position_id = POL_constitional_manorchy
+		cost = 7
+		
+		available = {
+	}
+		prerequisite = {
+			focus = POL_constitional_manorchy
+		}
+		
+		completion_reward = {
+		  add_stability = 0.1
+		  add_popularity = {
+				ideology = monarchist
+				popularity = 0.1
+			}
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_nationalism
+		icon = political_pressure
+		x = 10
+		y = 1
+		relative_position_id = POL_polish_revanchism
+		cost = 6
+		
+		mutually_exclusive = {
+		focus = POL_revive_Monarchist_sentiments
+		}
+		
+		prerequisite = {
+			focus = POL_polish_revanchism
+		}
+		
+		
+		completion_reward = {
+			add_timed_idea = {
+				idea = idea_focus_generic_national_strength
+				days = 420
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_rapid_radicalization
+		icon = fascism
+		x = 0
+		y = 1
+		relative_position_id = POL_nationalism
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_nationalism
+		}
+		
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_path_of_order
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_take_over_the_independance_march
+		icon = anschluss
+		x = 2
+		y = 1
+		relative_position_id = POL_nationalism
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_nationalism
+		}
+		
+		
+		completion_reward = {
+			add_political_power = 100
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_strenghten_nationalist_media
+		icon = propaganda
+		x = -2
+		y = 1
+		relative_position_id = POL_nationalism
+		cost = 6
+		
+		
+		prerequisite = {
+			focus = POL_nationalism
+		}
+		
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_strenghten_Polish_revanichism
+		icon = Poland_with_fist
+		x = 4
+		y = 1
+		relative_position_id = POL_take_over_the_independance_march
+		cost = 6
+		
+		available = {
+		or = {
+		has_completed_focus = POL_Facist_takeover
+		has_completed_focus = POL_march_on_Myslnice
+		}
+		}
+		
+		prerequisite = {
+			focus = POL_take_over_the_independance_march
+		}
+		
+		
+		completion_reward = {
+			swap_ideas = { 
+					remove_idea = POL_polish_revanchism
+					add_idea = POL_polish_revanchism_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_immigration_restrictions
+		icon = radar
+		x = 0
+		y = 1
+		cost = 6
+		relative_position_id = NAT_get_more_doctors
+		prerequisite = {
+			focus = NAT_get_more_doctors
+		}
+		
+		completion_reward = {
+			add_ideas = FRA_increased_border_controls_1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = NAT_get_more_doctors
+		text = POL_get_more_doctors
+		icon = industry_democratic3
+		x = -2
+		y = 1
+		cost = 6
+		relative_position_id = POL_strenghten_Polish_revanichism
+		prerequisite = {
+			focus = POL_strenghten_Polish_revanichism
+		}
+		
+		completion_reward = {
+			remove_ideas = POL_Bad_healthcare_system
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_ministry_of_border_security
+		text = FRA_ministry_of_border_security
+		icon = entente
+		x = 0
+		y = 1
+		relative_position_id = POL_immigration_restrictions
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_immigration_restrictions
+		}
+		
+		completion_reward = {
+			add_political_power = -50
+			add_ideas = FRA_border_ministry
+		   swap_ideas = {
+				remove_idea = FRA_increased_border_controls_1
+				add_idea = FRA_increased_border_controls_2
+			}
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_prison_workforce
+		text = FRA_prison_workforce
+		icon = become_puppet
+		x = 0
+		y = 1
+		relative_position_id = POL_ministry_of_border_security
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_ministry_of_border_security
+		}
+		
+		completion_reward = {
+			add_ideas = FRA_prison_workforce_mobilized
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_revive_szare_szeregi
+		icon = szare_szeregi
+		x = 0
+		y = 1
+		relative_position_id = POL_strenghten_Polish_revanichism
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_strenghten_Polish_revanichism
+		}
+		
+		completion_reward = {
+			hidden_effect = {
+			division_template = {
+						name = "Szare Szeregi" #this is preety weak division but you will get 4 of them so i think this is preety good deal
+						priority = 1
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							artillery_brigade = { x = 0 y = 3 }
+						}
+						support = {
+							recon = { x = 0 y = 0 }
+						}
+					}
+	}       
+			random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Szare Szeregi 1\" division_template = \"Szare Szeregi\" start_experience_factor = 0.3" 
+						owner = POL
+					}
+				}
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Szare Szeregi 2\" division_template = \"Szare Szeregi\" start_experience_factor = 0.3" 
+						owner = POL
+					}
+				}
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Szare Szeregi 3\" division_template = \"Szare Szeregi\" start_experience_factor = 0.3" 
+						owner = POL
+					}
+				}
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Szare Szeregi 4\" division_template = \"Szare Szeregi\" start_experience_factor = 0.3" 
+						owner = POL
+					}
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_warfare_innovations
+		text = FRA_warfare_innovations
+		icon = army_doctrine
+		x = 0
+		y = 1
+		relative_position_id = POL_revive_szare_szeregi
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_revive_szare_szeregi
+		}
+		
+		completion_reward = {
+			add_ideas = FRA_innovation_of_warfare
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_generic_unity_and_nation
+		text = generic_unity_and_nation
+		icon = infantry_axis
+		x = 0
+		y = 1
+		relative_position_id = POL_warfare_innovations
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_warfare_innovations
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_army_of_purity
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = NAT_assert_our_claims
+		text = POL_assert_our_claims
+		icon = army_logistics
+		x = 0
+		y = 1
+		relative_position_id = POL_generic_unity_and_nation
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_generic_unity_and_nation
+		}
+		
+		
+		completion_reward = {
+			add_ideas = POL_assert_our_claims
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_lower_taxes_for_poles
+		icon = money
+		x = 2
+		y = 1
+		relative_position_id = POL_strenghten_Polish_revanichism
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_strenghten_Polish_revanichism
+		}
+		
+		completion_reward = {
+			remove_ideas = POL_gaps_in_tax_system
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = NAT_support_polish_buisneses
+		text = POL_support_polish_buisneses
+		icon = Polish_buisness
+		x = 0
+		y = 1
+		relative_position_id = POL_lower_taxes_for_poles 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_lower_taxes_for_poles
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+				}
+			   random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+				}
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = NAT_economic_intervensionalism
+		text = POL_economic_intervensionalism
+		icon = Polish_capitalist_chained
+		x = 0
+		y = 1
+		relative_position_id = NAT_support_polish_buisneses 
+		cost = 6
+		
+		mutually_exclusive = {
+		focus = POL_support_capitalists
+		}
+		
+		prerequisite = {
+			focus = NAT_support_polish_buisneses
+		}
+		
+		completion_reward = {
+		add_stability = -0.1
+		add_country_leader_trait = economic_intervensionalist
+			
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_support_capitalists
+		icon = Polish_capitalist
+		x = 2
+		y = 1
+		relative_position_id = NAT_support_polish_buisneses 
+		cost = 6
+		
+		mutually_exclusive = {
+		focus = NAT_economic_intervensionalism
+		}
+		
+		prerequisite = {
+			focus = NAT_support_polish_buisneses
+		}
+		
+		completion_reward = {
+		add_stability = 0.05
+		add_ideas = POL_support_capitalists
+			
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = NAT_militarise_our_industry
+		text = POL_militarise_our_industry
+		icon = Polish_buisness
+		x = 2
+		y = 1
+		relative_position_id = NAT_economic_intervensionalism 
+		cost = 6
+		
+		prerequisite = {
+			focus = NAT_economic_intervensionalism
+			focus = POL_support_capitalists
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Facist_takeover
+		icon = fascism
+		x = 2
+		y = 1
+		relative_position_id = POL_strenghten_nationalist_media
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_strenghten_nationalist_media
+		}
+		
+		available = {
+		NOT = { has_completed_focus = POL_countinue_the_Giedroyc_Doctrine }
+		}
+		
+		mutually_exclusive = {
+		focus = POL_march_on_Myslnice
+		}
+		
+		prerequisite = {
+			focus = POL_rapid_radicalization
+		}
+		
+		prerequisite = {
+			focus = POL_take_over_the_independance_march
+		}
+		
+		
+		completion_reward = {
+		set_politics = {
+				ruling_party = fascist
+				elections_allowed = yes
+			}
+			add_stability = 0.1
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.2
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = -0.1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = Mysl_Narodowa
+		icon = propaganda
+		x = 2
+		y = 1
+		relative_position_id = POL_Facist_takeover
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_Facist_takeover
+		}
+		
+		completion_reward = {
+		add_ideas = Mysl_Narodowa
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_promote_pan_slavism_idea
+		icon = yugoslavia
+		x = 0
+		y = 1
+		relative_position_id = POL_Facist_takeover
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_Facist_takeover
+		}
+		
+		completion_reward = {
+		 add_stability = 0.1
+		 set_party_name = {
+				ideology = fascist 
+				long_name = POL_fascist_party_slav_long
+				name = POL_fascist_party_slav
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_promote_skinhead_idea
+		icon = major_alliance
+		x = -2
+		y = 1
+		relative_position_id = POL_Facist_takeover
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_Facist_takeover
+		}
+		
+		completion_reward = {
+		 add_stability = 0.1
+		add_political_power = 100
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_core_all_Slavic_states
+		icon = yugoslavia
+		x = -0
+		y = 1
+		relative_position_id = POL_promote_pan_slavism_idea
+		cost = 20
+		
+		available = {
+		NOT = { has_global_flag = form_commonwealth_flag }
+		NOT = { has_completed_focus = POL_unite_trujmorze }
+		}
+		
+		prerequisite = {
+			focus = POL_promote_skinhead_idea
+		}
+		
+		prerequisite = {
+			focus = POL_promote_pan_slavism_idea
+		}
+		
+		prerequisite = {
+			focus = Mysl_Narodowa
+		}
+		
+		completion_reward = {
+     every_state = {
+					limit = { is_core_of = CRO }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of =BOS }
+					add_core_of = POL
+				}
+   every_state = {
+					limit = { is_core_of = SER }
+					add_core_of = POL
+				}
+	   every_state = {
+					limit = { is_core_of = BUL }
+					add_core_of = POL
+				}
+	   every_state = {
+					limit = { is_core_of = SLO }
+					add_core_of = POL
+				}
+	  every_state = {
+					limit = { is_core_of = CZE }
+					add_core_of = POL
+				}
+	 every_state = {
+					limit = { is_core_of = BUL }
+					add_core_of = POL
+				}
+	  every_state = {
+					limit = { is_core_of = SOV }
+					add_core_of = POL
+				}
+	  every_state = {
+					limit = { is_core_of = BLR }
+					add_core_of = POL
+				}
+	  every_state = {
+					limit = { is_core_of = UKR }
+					add_core_of = POL
+				}
+	   set_cosmetic_tag = united_Slavs
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_march_on_Myslnice
+		icon = fascism2
+		x = -2
+		y = 1
+		relative_position_id = POL_strenghten_nationalist_media
+		cost = 6
+		
+		mutually_exclusive = {
+		focus = POL_Facist_takeover
+		}
+		
+		prerequisite = {
+			focus = POL_strenghten_nationalist_media
+		}
+		
+		prerequisite = {
+			focus = POL_rapid_radicalization
+		}
+		
+		prerequisite = {
+			focus = POL_take_over_the_independance_march
+		}
+		
+		
+		completion_reward = {
+			set_politics = {
+				ruling_party = nationalist
+				elections_allowed = yes
+			}
+			add_stability = 0.1
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.2
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = -0.1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Dmowskis_legacy
+		icon = Roman_dmowski
+		x = 0
+		y = 1
+		relative_position_id = POL_march_on_Myslnice
+		cost = 6
+		
+		
+		prerequisite = {
+			focus = POL_march_on_Myslnice
+		}
+		
+		
+		completion_reward = {
+			add_ideas = POL_Dmowskis_legacy
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_christian_democracy
+		icon = christianity
+		x = 1
+		y = 1
+		relative_position_id = POL_Dmowskis_legacy 
+		cost = 6 
+		
+		mutually_exclusive = {
+		focus = POL_national_democracy
+		}
+		
+		prerequisite = {
+			focus = POL_Dmowskis_legacy
+		}
+		
+		completion_reward = {
+		add_ideas = POL_Christian_democracy	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_national_democracy
+		icon = falanga
+		x = -1
+		y = 1
+		relative_position_id = POL_Dmowskis_legacy
+		cost = 6
+		
+		mutually_exclusive = {
+		focus = POL_christian_democracy
+		}
+		
+		prerequisite = {
+			focus = POL_Dmowskis_legacy
+		}
+		
+		
+		completion_reward = {
+			add_ideas = POL_national_democracy
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = NAT_cult_of_personality
+		text = POL_cult_of_personality
+		icon = Roman_dmowski_deal
+		x = 1
+		y = 1
+		relative_position_id = POL_national_democracy 
+		cost = 7
+		
+		prerequisite = {
+		focus = POL_christian_democracy
+		focus = POL_national_democracy
+		}
+		
+		completion_reward = {
+			add_ideas = POL_cult_of_personality
+		}
+	}
+	
+		focus = {
+		id = POL_revive_Monarchist_sentiments
+		icon = monarchy
+		x = 0
+		y = 1
+		relative_position_id = POL_polish_revanchism
+		cost = 7
+		
+			mutually_exclusive = {
+		focus = POL_nationalism
+		}
+		
+		prerequisite = {
+			focus = POL_polish_revanchism
+		}
+		
+		
+		completion_reward = {
+			fourth_estate_monarchist_increase = yes
+			add_ideas = idea_focus_generic_royal_doctrine
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = Bring_back_the_monarchy
+		icon = monarchy
+		x = 0
+		y = 1
+		relative_position_id = POL_revive_Monarchist_sentiments
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_revive_Monarchist_sentiments
+		}
+		
+		completion_reward = {
+			fourth_estate_monarchist_increase = yes
+			
+			add_popularity = {
+				ideology = monarchist
+				popularity = 0.3
+			}
+			set_politics = {
+				ruling_party = monarchist
+				elections_allowed = no
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_elect_a_king
+		icon = monarchy
+		x = -1
+		y = 2
+		relative_position_id = Bring_back_the_monarchy
+		cost = 7
+		
+		prerequisite = {
+			focus = Bring_back_the_monarchy
+		}
+		
+		mutually_exclusive = {
+		focus = POL_strenghten_the_position_of_the_regent
+		}
+		
+		completion_reward = {
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_elect_a_Romanov
+		icon = russian_monarchy
+		x = -14
+		y = 1
+		relative_position_id = POL_elect_a_king
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_elect_a_king
+		}
+		
+		mutually_exclusive = {
+		focus = POL_elect_a_Habsburg
+		focus = POL_elect_a_bonaparte
+		focus = POL_elect_a_Radziwill
+		}
+		
+		completion_reward = {
+			add_political_power = 50
+			create_country_leader = {
+				name = "Nicholas Romanov"
+				ideology = absolute_monarchist
+				picture = "Nicholas_Romanov.dds"
+			    traits = {
+		popular_king
+	}	
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Keep_Ortodoxy
+		icon = demand_territory2
+		x = -2
+		y = 1
+		relative_position_id = POL_elect_a_Romanov
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_Convert_to_Ctholicism
+		}
+		
+		prerequisite = {
+			focus = POL_elect_a_Romanov
+		}
+		
+		
+		completion_reward = {
+		add_political_power = 100
+		add_stability = -0.04
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_nationalise_ptopertise_of_the_church
+		icon = demand_territory
+		x = 0
+		y = 1
+		relative_position_id = POL_Keep_Ortodoxy
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_Keep_Ortodoxy
+		}
+		
+		
+		completion_reward = {
+		add_political_power = -50
+		add_offsite_building = { type = industrial_complex level = 2 }	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Convert_to_Ctholicism
+		icon = demand_territory2
+		x = 0
+		y = 1
+		relative_position_id = POL_elect_a_Romanov
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_Keep_Ortodoxy
+		}
+		prerequisite = {
+			focus = POL_elect_a_Romanov
+		}
+		
+		
+		completion_reward = {
+		add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = IDK_christian_trade_unions
+		text = POL_christian_trade_unions
+		icon = major_alliance
+		x = 0
+		y = 1
+		relative_position_id = POL_Convert_to_Ctholicism 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_Convert_to_Ctholicism
+		}
+		
+		completion_reward = {
+		add_ideas = POL_christian_trade_unions	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Sillesia_rich_in_recources_like_Siberia
+		icon = construction2
+		x = 2
+		y = 1
+		relative_position_id = POL_elect_a_Romanov
+		cost = 7
+		
+		available = {
+		has_full_control_of_state = 66
+		has_full_control_of_state = 67
+		}
+		
+		prerequisite = {
+			focus = POL_elect_a_Romanov
+		}
+		
+		
+		completion_reward = {
+			66 = { 
+		add_resource = { type = rubber amount = 4 }
+		add_resource = { type = steel amount = 10 }
+		add_resource = { type = oil amount = 10 }
+				}
+				67 = { 
+		add_resource = { type = rubber amount = 4 }
+		add_resource = { type = steel amount = 10 }
+		add_resource = { type = oil amount = 10 }
+				}
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_force_our_prisoners_to_work
+		icon = become_puppet
+		x = 0
+		y = 1
+		relative_position_id = POL_Sillesia_rich_in_recources_like_Siberia
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_Sillesia_rich_in_recources_like_Siberia
+		}
+		
+		
+		completion_reward = {
+		add_ideas = POL_force_our_prisoners_to_work
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+			focus = {
+		id = POL_heritage_of_the_Romanov_family
+		icon = russian_monarchy2
+		x = 0
+		y = 1
+		relative_position_id = IDK_christian_trade_unions
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_force_our_prisoners_to_work
+			focus = POL_nationalise_ptopertise_of_the_church
+			focus = IDK_christian_trade_unions
+		}
+		
+		
+		completion_reward = {
+		add_ideas = POL_heritage_of_the_Romanov_family
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_support_from_Anton_Bakov
+		icon = major_alliance
+		x = 0
+		y = 1
+		relative_position_id = POL_heritage_of_the_Romanov_family
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_heritage_of_the_Romanov_family
+		}
+		
+		
+		completion_reward = {
+            custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = Anton_Bakov
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	    focus = {
+		id = IDK_militarise_our_shools
+		text = POL_militarise_our_shools
+		icon = military_sphere
+		x = -2
+		y = 1
+		relative_position_id = POL_heritage_of_the_Romanov_family 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_heritage_of_the_Romanov_family
+		}
+		
+		completion_reward = {
+		add_ideas = POL_militarise_our_shools	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_militarise_our_industry
+		icon = industry_military
+		x = 2
+		y = 1
+		relative_position_id = POL_heritage_of_the_Romanov_family 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_heritage_of_the_Romanov_family
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_elect_a_bonaparte
+		icon = french_monarchy2
+		x = -8
+		y = 1
+		relative_position_id = POL_elect_a_king
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_elect_a_king
+		}
+		
+			mutually_exclusive = {
+		focus = POL_elect_a_Habsburg
+		focus = POL_elect_a_Radziwill
+		focus = POL_elect_a_Romanov
+		}
+		
+		completion_reward = {
+			add_political_power = 50
+			create_country_leader = {
+				name = "Jean-Christophe"
+				ideology = absolute_monarchist
+				picture = "Prince_Napoleon.dds"
+			    traits = {
+		popular_king
+	}	
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_a_militarist_king
+		icon = army_doctrine
+		x = 0
+		y = 1
+		relative_position_id = POL_elect_a_bonaparte
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_elect_a_bonaparte
+		}
+		
+		
+		completion_reward = {
+			add_country_leader_trait = militarist_king
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_royal_and_loyal_army
+		icon = military_sphere
+		x = 0
+		y = 1
+		relative_position_id = POL_a_militarist_king
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_a_militarist_king
+		}
+		
+		
+		completion_reward = {
+			add_ideas = POL_royal_and_loyal_army
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_personal_leadership
+		icon = military_mission
+		x = 0
+		y = 1
+		relative_position_id = POL_royal_and_loyal_army
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_royal_and_loyal_army
+		}
+		
+		
+		completion_reward = {
+			create_field_marshal = {
+	name = "Jean-Christophe"
+	picture = "generals/Prince_Napoleon.dds"
+	traits = { offensive_doctrine fast_planner }
+	skill = 5
+}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_heritage_of_the_Bonaparte_family
+		icon = french_monarchy2
+		x = 0
+		y = 1
+		relative_position_id = POL_personal_leadership
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_personal_leadership
+		}
+		
+		
+		completion_reward = {
+		add_ideas = POL_heritage_of_the_Bonaparte_family
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_assert_our_claims
+		icon = army_logistics
+		x = 2
+		y = 1
+		relative_position_id = POL_a_militarist_king
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_a_militarist_king
+		}
+		
+		
+		completion_reward = {
+			add_ideas = POL_assert_our_claims
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	  focus = {
+		id = POL_imperial_industry
+		icon = industry_military
+		x = -2
+		y = 1
+		relative_position_id = POL_a_militarist_king 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_a_militarist_king
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_elect_a_Habsburg
+		icon = align_to_austria
+		x = -4
+		y = 1
+		relative_position_id = POL_elect_a_king
+		cost = 7
+		
+		available = {
+		NOT = { has_completed_focus = POL_Poland_first }
+		}
+		
+			mutually_exclusive = {
+		focus = POL_elect_a_Romanov
+		focus = POL_elect_a_bonaparte
+		focus = POL_elect_a_Radziwill
+		}
+		
+		prerequisite = {
+			focus = POL_elect_a_king
+		}
+		
+		completion_reward = {
+		create_country_leader = {
+	    name = "Karl II"
+	    picture = "Karl_II.dds"
+	    ideology = absolute_monarchist
+	    expire = "2050.1.1"
+         traits = {
+		popular_king
+	}	
+		}
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+
+      focus = {
+		id = POL_secure_the_throne
+		icon = monarchy2 
+		x = 0
+		y = 1
+		relative_position_id = POL_elect_a_Habsburg
+		cost = 7
+		
+		
+		prerequisite = {
+			focus = POL_elect_a_Habsburg
+		}
+		
+		completion_reward = {
+		add_stability = 0.1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+    focus = {
+		id = POL_a_liberal_king
+		icon = democracy 
+		x = 0
+		y = 1
+		relative_position_id = POL_secure_the_throne
+		cost = 7
+		
+		
+		prerequisite = {
+			focus = POL_secure_the_throne
+		}
+		
+		completion_reward = {
+		add_political_power = 100
+		add_stability = 0.05
+		}
+		ai_will_do = {
+			factor = 10
+		}
+}
+
+  focus = {
+		id = POL_invite_Austrian_engeniers
+		icon = align_to_austria 
+		x = 0
+		y = 1
+		relative_position_id = POL_a_liberal_king
+		cost = 7
+		
+		
+		prerequisite = {
+			focus = POL_a_liberal_king
+		}
+		
+		completion_reward = {
+		add_political_power = -50
+	    add_ideas = POL_Austrian_engeniers
+		}
+		ai_will_do = {
+			factor = 10
+		}
+}
+
+focus = {
+		id = POL_use_the_Habsburgs_money
+		icon = industry_civilian2
+		x = 0
+		y = 1
+		relative_position_id = POL_invite_Austrian_engeniers
+		cost = 7
+	
+		
+		prerequisite = {
+			focus = POL_invite_Austrian_engeniers
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+ focus = {
+		id = POL_protectors_of_the_Catholic_faith
+		icon = demand_territory2 
+		x = 2
+		y = 1
+		relative_position_id = POL_a_liberal_king
+		cost = 7
+		
+		
+		prerequisite = {
+			focus = POL_a_liberal_king
+		}
+		
+		completion_reward = {
+		add_political_power = -50
+	    add_ideas = POL_protectors_of_the_Catholic_faith
+		}
+		ai_will_do = {
+			factor = 10
+		}
+}
+
+focus = {
+		id = POL_heritage_of_the_Habsburg_family
+		icon = demand_territory
+		x = -2
+		y = 1
+		relative_position_id = POL_a_liberal_king
+		cost = 7
+		
+		
+		prerequisite = {
+			focus = POL_a_liberal_king
+		}
+		
+		completion_reward = {
+		add_political_power = -50
+	    add_ideas = POL_heritage_of_the_Habsburg_family
+		}
+		ai_will_do = {
+			factor = 10
+		}
+}
+	
+		focus = {
+		id = POL_elect_a_Radziwill
+		icon = polish_monarchy
+		x = 0
+		y = 1
+		relative_position_id = POL_elect_a_king
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_elect_a_king
+		}
+		
+			mutually_exclusive = {
+		focus = POL_elect_a_Habsburg
+		focus = POL_elect_a_bonaparte
+		focus = POL_elect_a_Romanov
+		}
+		
+		completion_reward = {
+		create_country_leader = {
+	    name = "Maciej Radziwiłł"
+	    picture = "Maciej_Radziwill.dds"
+	    ideology = absolute_monarchist
+	    expire = "2050.1.1"
+         traits = {
+		popular_king
+	    economist
+	}	
+		}
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_new_jobs_for_unemployed
+		icon = industry_civilian2
+		x = 0
+		y = 1
+		relative_position_id = POL_elect_a_Radziwill
+		cost = 7
+	
+		
+		prerequisite = {
+			focus = POL_elect_a_Radziwill
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_support_orlen
+		icon = industry_civilian
+		x = -2
+		y = 1
+		relative_position_id = POL_elect_a_Radziwill
+		cost = 7
+	
+		
+		prerequisite = {
+			focus = POL_elect_a_Radziwill
+		}
+		
+		completion_reward = {
+			add_ideas = POL_support_orlen
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_glory_for_Poland
+		icon = align_to_poland2
+		x = 0
+		y = 1
+		relative_position_id = POL_new_jobs_for_unemployed
+		cost = 7
+	
+		
+		prerequisite = {
+			focus = POL_support_orlen
+			focus = POL_new_jobs_for_unemployed
+		    focus = POL_Crown_the_regent
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_a_king_for_the_people
+		icon = align_to_poland
+		x = 0
+		y = 1
+		relative_position_id = POL_glory_for_Poland
+		cost = 7
+	
+		
+		prerequisite = {
+			focus = POL_glory_for_Poland
+		}
+		
+		completion_reward = {
+			add_country_leader_trait = a_King_for_the_the_people
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_protect_the_rights_of_all_our_people
+		icon = monarchy
+		x = 2
+		y = 1
+		relative_position_id = POL_a_king_for_the_people
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_a_king_for_the_people
+		}
+		
+		completion_reward = {
+			add_ideas = POL_protect_the_rights_of_all_our_people
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_national_heretige
+		icon = monarchy
+		x = -2
+		y = 1
+		relative_position_id = POL_a_king_for_the_people
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_a_king_for_the_people
+		}
+		
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_national_heritage
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_strenghten_the_position_of_the_regent
+		icon = monarchy
+		x = 1
+		y = 2
+		relative_position_id = Bring_back_the_monarchy
+		cost = 7
+		
+		prerequisite = {
+			focus = Bring_back_the_monarchy
+		}
+		
+		mutually_exclusive = {
+		focus = POL_elect_a_king
+		}
+		
+		completion_reward = {
+			add_political_power = -50
+			add_stability = 0.05
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_gather_support_of_the_people
+		icon = monarchy
+		x = 0
+		y = 1
+		relative_position_id = POL_strenghten_the_position_of_the_regent
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_strenghten_the_position_of_the_regent
+		}
+		
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.02
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Crown_the_regent
+		icon = polish_monarchy
+		x = 0
+		y = 1
+		relative_position_id = POL_gather_support_of_the_people
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_gather_support_of_the_people
+		}
+		
+		completion_reward = {
+		create_country_leader = {
+	    name = "King Leszek Wierzchowski"
+	    picture = "Leszek_Wierzchowski.dds"
+	    ideology = absolute_monarchist
+	    expire = "2050.1.1"
+         traits = {
+		popular_king
+	} 
+		  }	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_create_LPR
+		icon = democracy
+		x = 18
+		y = 2
+		relative_position_id = POL_future_of_Poland 
+		cost = 5
+		
+		mutually_exclusive = {
+			focus = POL_polish_revanchism
+		}
+		
+		prerequisite = {
+			focus = POL_future_of_Poland
+		}
+		
+		mutually_exclusive = {
+			focus = POL_United_Left
+		}
+		
+		mutually_exclusive = {
+			focus = POL_strenghten_PO
+		}
+		
+		mutually_exclusive = {
+		    focus = POL_keep_SLD
+		}
+		
+		mutually_exclusive = {
+			focus = POL_PSL
+		}
+		
+		mutually_exclusive = {
+			focus = POL_Wolnosc
+		}
+		
+		mutually_exclusive = {
+			focus = POL_polish_revanchism
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_PiS
+		}
+		
+		
+		
+		completion_reward = {
+	     set_party_name = {
+				ideology = reactionary 
+				long_name = POL_reactionary_party_LPR_long
+				name = POL_reactionary_party_LPR
+			}
+	   create_country_leader = {
+	    name = "Witold Balazak"
+	    picture = "Witold_Balazak.dds"
+	    ideology = counter_progressive_democrat
+	    expire = "2015.1.1"
+         traits = {
+        baron_of_terror
+	  }
+	}
+}     
+
+     	ai_will_do = {
+			factor = 10
+		}
+	}
+		
+		focus = {
+		id = POL_strenghten_LPR
+		icon = democracy
+		x = 0
+		y = 1
+		relative_position_id = POL_create_LPR 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_create_LPR
+		}
+		
+		completion_reward = {
+	   fourth_estate_reactionary_increase = yes
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.2
+			}
+			set_politics = {
+				ruling_party = reactionary
+				elections_allowed = yes
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_alliance_with_Mlodziez_wszechpolska
+		icon = improve_relations_red
+		x = 2
+		y = 1
+		relative_position_id = POL_strenghten_LPR 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_strenghten_LPR
+		}
+		
+		completion_reward = {
+		add_ideas = POL_alliance_with_Mlodziez_wszechpolska	
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.05
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_nationalist_education
+		icon = tech_sharing
+		x = 2
+		y = 1
+		relative_position_id = POL_alliance_with_Mlodziez_wszechpolska 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_alliance_with_Mlodziez_wszechpolska
+		}
+		
+		completion_reward = {
+		add_ideas = POL_nationalist_education
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_revive_zwiazek_akademicki_mlodziez_wszechpolska
+		icon = research
+		x = 0
+		y = 1
+		relative_position_id = POL_nationalist_education 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_nationalist_education
+		}
+		
+		mutually_exclusive = {
+		focus = POL_militarise_our_shools
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = POL_nationalist_education
+					add_idea = POL_nationalist_education_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_militarise_Mlodziez_wszechpolska
+		icon = military_sphere
+		x = 0
+		y = 1
+		relative_position_id = POL_alliance_with_Mlodziez_wszechpolska 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_alliance_with_Mlodziez_wszechpolska
+		}
+		
+		completion_reward = {
+		add_political_power = 50
+		swap_ideas = { 
+					remove_idea = POL_alliance_with_Mlodziez_wszechpolska
+					add_idea = POL_alliance_with_Mlodziez_wszechpolska_2 
+				}
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.05
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_militarise_our_shools
+		icon = military_sphere
+		x = 0
+		y = 1
+		relative_position_id = POL_militarise_Mlodziez_wszechpolska 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_militarise_Mlodziez_wszechpolska
+		}
+		
+		mutually_exclusive = {
+		focus = POL_revive_zwiazek_akademicki_mlodziez_wszechpolska
+		}
+		completion_reward = {
+		add_ideas = POL_militarise_our_shools	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_reform_education
+		icon = research
+		x = 1
+		y = 1
+		relative_position_id = POL_militarise_our_shools 
+		cost = 10
+		
+		
+		prerequisite = {
+			focus = POL_militarise_our_shools
+		    focus = POL_revive_zwiazek_akademicki_mlodziez_wszechpolska
+		}
+
+		
+		completion_reward = {
+		add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_new_constitution
+		icon = constitution
+		x = 0
+		y = 1
+		relative_position_id = POL_strenghten_LPR 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_strenghten_LPR
+		}
+		
+		completion_reward = {
+		add_ideas = POL_new_constitution	
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.05
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_economic_intervensionalism
+		icon = Polish_capitalist_chained
+		x = 0
+		y = 1
+		relative_position_id = POL_new_constitution 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_new_constitution
+		}
+		
+		completion_reward = {
+		add_stability = -0.1
+		add_country_leader_trait = economic_intervensionalist
+			
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_lower_taxes_for_families
+		icon = intelligence_exchange2
+		x = 0
+		y = 1
+		relative_position_id = POL_economic_intervensionalism 
+		cost = 7
+		
+		available = {
+		has_completed_focus = LPR_family_values
+		}
+		prerequisite = {
+			focus = POL_economic_intervensionalism
+		}
+		
+		completion_reward = {
+		remove_ideas = POL_gaps_in_tax_system
+		add_ideas = POL_lower_taxes_for_families	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_limit_healthcare_for_people_without_kids
+		icon = industry_democratic3
+		x = 0
+		y = 1
+		relative_position_id = POL_lower_taxes_for_families 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_lower_taxes_for_families
+		}
+		
+		completion_reward = {
+		add_political_power = -100
+		add_stability = -0.1
+		remove_ideas = POL_Bad_healthcare_system
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LPR_christian_democracy
+		icon = christianity
+		x = -2
+		y = 1
+		relative_position_id = POL_economic_intervensionalism 
+		cost = 6 
+		
+		
+		prerequisite = {
+			focus = POL_economic_intervensionalism
+		}
+		
+		completion_reward = {
+		add_ideas = POL_Christian_democracy	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+    	focus = {
+		id = POL_christian_trade_unions
+		icon = major_alliance
+		x = 0
+		y = 1
+		relative_position_id = LPR_christian_democracy 
+		cost = 5
+		
+		prerequisite = {
+			focus = LPR_christian_democracy
+		}
+		
+		completion_reward = {
+		add_ideas = POL_christian_trade_unions	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_christian_factories
+		icon = industry_democratic2
+		x = 0
+		y = 1
+        relative_position_id = POL_christian_trade_unions  
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_christian_trade_unions
+		}
+
+        bypass = {
+	   
+	    has_completed_focus = POL_green_policies
+		}
+
+        available = {
+		}
+
+		bypass = {
+			or = {
+			has_completed_focus = POL_green_policies
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+	}	
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_support_tax_examption_for_church
+		icon = major_alliance
+		x = -2
+		y = 1
+		relative_position_id = LPR_christian_democracy 
+		cost = 5
+		
+		prerequisite = {
+			focus = LPR_christian_democracy
+		}
+		
+		completion_reward = {
+		add_ideas = POL_support_tax_examption_for_church	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_make_church_support_LPR
+		icon = forceful_treaty
+		x = 0
+		y = 1
+		relative_position_id = POL_support_tax_examption_for_church 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_support_tax_examption_for_church
+		}
+		
+		completion_reward = {
+		add_stability = 0.07
+		add_popularity = {
+				ideology = reactionary
+				popularity = 0.05
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LPR_family_values
+		text = generic_family_values
+		icon = diplomatic_treaty
+		x = 6
+		y = 1
+		relative_position_id = POL_strenghten_LPR 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_strenghten_LPR
+		}
+		
+		completion_reward = {
+				add_stability = 0.05
+			add_ideas = idea_focus_family_values
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}	
+		
+		focus = {
+		id = LPR_traditional_values
+		text = generic_traditional_values
+		icon = demand_territory2
+		relative_position_id = LPR_family_values 
+		x = 0
+		y = 1
+		cost = 5
+		
+		prerequisite = {
+			focus = LPR_family_values
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_male_workforce
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	focus = {
+		id = LPR_crackdown_on_contraceptives
+		text = generic_crackdown_on_contraceptives
+		icon = propaganda
+		x = 0
+		y = 1
+		relative_position_id = LPR_traditional_values 
+		cost = 8
+		
+		prerequisite = {
+			focus = LPR_traditional_values
+		}
+		
+		available = {
+			NOT = { has_idea = population_growth_explosion }
+		}
+		
+		completion_reward = {
+			increase_birth_rate = yes
+			add_war_support = -0.05
+		}
+	}	
+	
+		focus = {
+		id = POL_create_PiS
+		icon = democracy
+		x = 10
+		y = 2
+		relative_position_id = POL_future_of_Poland 
+		cost = 5
+		
+		mutually_exclusive = {
+			focus = POL_polish_revanchism
+		}
+		
+		prerequisite = {
+			focus = POL_future_of_Poland
+		}
+		
+		mutually_exclusive = {
+			focus = POL_strenghten_PO
+		}
+		
+		mutually_exclusive = {
+		    focus = POL_keep_SLD
+		}
+		
+		mutually_exclusive = {
+			focus = POL_PSL
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_LPR
+		}
+		
+		mutually_exclusive = {
+			focus = POL_Wolnosc
+		}
+		
+		completion_reward = {
+	    set_party_name = {
+				ideology = conservative 
+				long_name = POL_conservative_party_PiS_long
+				name = POL_conservative_party_PiS
+			}
+	   create_country_leader = {
+	   name = "Jaroslaw Kaczynski"
+	   picture = "Jaroslaw_Kaczynski.dds"
+	   ideology = fiscal_conservative
+	   expire = "2050.1.1"
+          }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	
+		focus = {
+		id = POL_strenghten_PiS
+		icon = democracy
+		x = 0
+		y = 1
+		relative_position_id = POL_create_PiS 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_create_PiS
+		}
+		
+		
+		
+		completion_reward = {
+	    fourth_estate_conservative_increase = yes
+			if = {
+				limit = { NOT = { has_government = conservative } }
+				add_stability = -0.05
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.2
+			}
+			set_politics = {
+				ruling_party = conservative
+				elections_allowed = yes
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_500_plus
+		icon = money
+		x = 0
+		y = 1
+		relative_position_id = POL_strenghten_PiS 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_strenghten_PiS
+		}
+		
+		
+		completion_reward = {
+	    add_ideas = POL_500_plus
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_family_values
+		text = generic_family_values
+		icon = diplomatic_treaty
+		x = 0
+		y = 1
+		relative_position_id = POL_500_plus 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_500_plus
+		}
+		
+		completion_reward = {
+			fourth_estate_conservative_increase = yes
+				add_stability = 0.05
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			add_ideas = idea_focus_family_values
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_strenghten_police
+		icon = diplomatic_treaty
+		x = 0
+		y = 1
+		relative_position_id = POL_family_values 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_family_values
+		}
+		
+		completion_reward = {
+		add_ideas = POL_stronger_police
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_fight_with_tax_mafia
+		icon = destroy_establishment
+		x = 2
+		y = 1
+		relative_position_id = POL_strenghten_PiS 
+		cost = 12
+		
+		
+		prerequisite = {
+			focus = POL_strenghten_PiS
+		}
+		
+		completion_reward = {
+			remove_ideas = POL_gaps_in_tax_system
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_extra_funds_for_TVP
+		icon = improve_relations
+		x = 0
+		y = 1
+		relative_position_id = POL_fight_with_tax_mafia 
+		cost = 5
+		
+		
+		prerequisite = {
+			focus = POL_fight_with_tax_mafia
+		}
+		
+		completion_reward = {
+			add_political_power = 100
+		    add_stability = 0.03
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_fight_with_oppostion
+		icon = destroy_establishment
+		x = 0
+		y = 1
+		relative_position_id = POL_extra_funds_for_TVP 
+		cost = 5
+		
+		
+		prerequisite = {
+			focus = POL_extra_funds_for_TVP
+		}
+		
+		completion_reward = {
+			add_political_power = -100
+		    add_stability = -0.07
+		    add_popularity = {
+				ideology = conservative
+				popularity = 0.1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_social_and_private_healthcare
+		icon = industry_democratic3
+		x = 4
+		y = 1
+		relative_position_id = POL_strenghten_PiS 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_strenghten_PiS
+		}
+		
+		completion_reward = {
+			remove_ideas = POL_Bad_healthcare_system
+		    add_stability = -0.20
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = PIS_POL_reform_conscription_system
+		icon = infantry_axis
+		x = 2
+		y = 1
+		relative_position_id = POL_social_and_private_healthcare 
+		cost = 5
+		
+			bypass = {
+		   has_idea = volunteer_only
+		}
+		prerequisite = {
+			focus = POL_social_and_private_healthcare
+		    focus = POL_new_constitution
+		}
+		
+		completion_reward = {
+			add_stability = 0.10
+			add_ideas = volunteer_only 
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+         focus = {
+		id = POL_trade_with_the_us
+		icon = trade_with_america
+		
+		x = 0
+		y = 1
+		relative_position_id = POL_social_and_private_healthcare
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = {
+			focus = POL_social_and_private_healthcare
+		}
+		
+		mutually_exclusive = {}
+		
+		available = {
+			NOT = { has_war_with = USA }
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		add_offsite_building = { type = industrial_complex level = 1 }	
+			USA = {
+				increase_trade_influence_by_2 = yes
+				add_opinion_modifier = {
+					target = POL
+					modifier = trade_mission
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = POL_American_investments
+		icon = trade_with_america
+		
+		x = 0
+		y = 1
+		relative_position_id = POL_trade_with_the_us
+		
+		cost = 10
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = {
+			focus = POL_trade_with_the_us
+		}
+		
+		mutually_exclusive = {}
+		
+		available = {
+			NOT = { has_war_with = USA }
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+					add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}	
+				}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+		focus = {
+		id = POL_reform_the_judicary_system
+		icon = align_to_poland2
+		x = -2
+		y = 1
+		relative_position_id = POL_strenghten_PiS 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_strenghten_PiS
+		}
+		
+		completion_reward = {
+			add_ideas = POL_reformed_judicary_system
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_new_taxes
+		icon = money
+		x = 0
+		y = 1
+		relative_position_id = POL_reform_the_judicary_system 
+		cost = 7 
+		
+		prerequisite = {
+			focus = POL_reform_the_judicary_system
+		}
+		
+		completion_reward = {
+			add_ideas = POL_new_taxes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}	
+			focus = {
+		id = five_for_animals
+		text = 5_for_animals
+		icon = concessions2
+		x = 0
+		y = 1
+		relative_position_id = POL_new_taxes 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_new_taxes
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+   focus = {
+		id = POL_PSL
+		icon = democracy
+		x = -8
+		y = 2
+		cost = 5
+		relative_position_id = POL_future_of_Poland 
+		
+		available = {
+		NOT = { has_country_flag = PSL_path_disabled }
+		}
+		
+		prerequisite = {
+			focus = POL_future_of_Poland
+		}
+		
+		mutually_exclusive = {
+			focus = POL_United_Left
+		}
+		
+		mutually_exclusive = {
+			focus = POL_polish_revanchism
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_LPR
+		}
+		
+		mutually_exclusive = {
+			focus = POL_Wolnosc
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_PiS
+		}
+		
+		mutually_exclusive = { 
+			focus = POL_keep_SLD
+		}
+		mutually_exclusive = {
+			focus = POL_strenghten_PO
+		}
+		
+		completion_reward = {
+			fourth_estate_democratic_socialist_increase = yes
+			add_ideas = idea_focus_generic_leftist_doctrine
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+     focus = {
+		id = POL_put_PSL_to_power
+		icon = democracy
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = POL_PSL 
+		
+		prerequisite = {
+			focus = POL_PSL
+	 }
+		
+		completion_reward = {
+		add_popularity = {
+				ideology = democratic_socialist
+			popularity = 0.2
+			}
+			set_politics = {
+				ruling_party = democratic_socialist
+				elections_allowed = yes
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+     focus = {
+		id = POL_protect_polish_farmer
+		icon = defence
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = POL_put_PSL_to_power 
+		
+		prerequisite = {
+			focus = POL_put_PSL_to_power
+	 }
+		
+		completion_reward = {
+		add_popularity = {
+				ideology = democratic_socialist
+			popularity = 0.05
+			}
+			add_ideas = POL_protect_polish_farmer
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	  focus = {
+		id = POL_promote_past_of_PSL
+		icon = agriculture
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = POL_protect_polish_farmer 
+		
+		prerequisite = {
+			focus = POL_protect_polish_farmer
+	 }
+		
+		completion_reward = {
+		add_popularity = {
+				ideology = democratic_socialist
+			popularity = 0.05
+			}
+			add_stability = 0.1
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_social_programs
+		icon = concessions
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = POL_promote_past_of_PSL 
+		
+		prerequisite = {
+			focus = POL_promote_past_of_PSL
+	 }
+	   mutually_exclusive = { 
+			focus = POL_public_works
+		}	
+		
+		completion_reward = {
+		add_ideas = POL_social_programs
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+  }
+	
+	
+	
+	  focus = {
+		id = POL_economy_focus
+		icon = consumer_goods
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = POL_put_PSL_to_power 
+		
+		prerequisite = {
+			focus = POL_put_PSL_to_power
+	 }
+		
+		completion_reward = {
+		add_country_leader_trait = economist
+		add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.60
+				uses = 1
+				category = industry
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	focus = {
+		id = POL_nationalise_key_industry_parts
+		icon = industry_communist
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = POL_economy_focus 
+		
+		prerequisite = {
+			focus = POL_economy_focus
+	 }
+		
+		completion_reward = {
+		add_ideas = POL_nationalise_key_industry_parts
+		random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_public_works
+		icon = infrastructure
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = POL_nationalise_key_industry_parts 
+		
+		prerequisite = {
+			focus = POL_nationalise_key_industry_parts
+	 }
+	 
+	 mutually_exclusive = { 
+			focus = POL_social_programs
+		}	
+		
+		completion_reward = {
+	  add_stability = 0.05
+		random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+ focus = {
+		id = POL_United_Left
+		icon = leftism
+		x = -12
+		y = 2
+		cost = 5
+		relative_position_id = POL_future_of_Poland 
+		
+		available = {
+		has_country_flag = United_left_path_enabled
+		}
+		
+		prerequisite = {
+			focus = POL_future_of_Poland
+		}
+		
+		mutually_exclusive = {
+			focus = POL_PSL
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_LPR
+		}
+		
+		mutually_exclusive = {
+			focus = POL_Wolnosc
+		}
+		
+		mutually_exclusive = {
+			focus = POL_polish_revanchism
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_PiS
+		}
+		
+		mutually_exclusive = { 
+			focus = POL_keep_SLD
+		}
+		mutually_exclusive = {
+			focus = POL_strenghten_PO
+		}
+		
+		completion_reward = {
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
+			}
+			fourth_estate_social_democrat_increase = yes
+			add_ideas = idea_focus_generic_social_democrat_doctrine
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+     focus = {
+		id = POL_attack_the_right 
+		icon = ban_fascism
+		x = 0
+		y = 1
+		relative_position_id = POL_United_Left 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_United_Left
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_political_power = 40
+		    fourth_estate_reactionary_decrease = yes
+			fourth_estate_fascist_decrease = yes
+			fourth_estate_nationalist_decrease = yes
+			fourth_estate_conservative_decrease = yes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+    focus = {
+		id = POL_increase_taxes 
+		icon = money
+		x = 2
+		y = 1
+		relative_position_id = POL_United_Left 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_United_Left
+		}
+		
+		completion_reward = {
+		add_ideas = POL_increased_income_tax
+		add_stability = -0.05
+		remove_ideas = POL_gaps_in_tax_system
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+    focus = {
+		id = POL_welfare_state
+		icon = industry_democratic4
+		x = 0
+		y = 1
+		relative_position_id = POL_increase_taxes 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_increase_taxes
+		}
+		
+		completion_reward = {
+		remove_ideas = POL_Bad_healthcare_system
+		add_stability = 0.1
+		add_political_power -75
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+   focus = {
+		id = POL_deal_with_corruption
+		text = POL_fight_with_corruption
+		icon = demand_territory2
+		x = 0
+		y = 1
+		relative_position_id = POL_welfare_state 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_welfare_state
+		}
+		
+		completion_reward = {
+		remove_country_leader_trait = corrupt_public_official
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+    focus = {
+		id = POL_get_minor_parties 
+		icon = major_alliance
+		x = 0
+		y = 1
+		relative_position_id = POL_attack_the_right 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_attack_the_right
+		}
+		
+		completion_reward = {
+            add_political_power = 100
+			fourth_estate_social_democrat_increase = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+     focus = {
+		id = POL_control_media 
+		icon = propaganda_communist
+		x = 0
+		y = 1
+		relative_position_id = POL_get_minor_parties 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_get_minor_parties
+		}
+		
+		completion_reward = {
+			fourth_estate_social_democrat_increase = yes
+			add_ideas = POL_controled_media
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+         focus = {
+		id = POL_renationalization
+		icon = industry_communist
+		x = -2
+		y = 1
+		relative_position_id = POL_United_Left 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_United_Left
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 4
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			add_stability = -0.05
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+    focus = {
+		id = POL_support_farm_consolidation
+		icon = agriculture
+		x = 0
+		y = 1
+		relative_position_id = POL_renationalization 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_renationalization
+		}
+		
+		completion_reward = {
+			add_stability = -0.05
+			random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_manpower = 35000	
+			}
+			random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_manpower = 35000	
+			}
+			random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_manpower = 35000	
+			}
+			random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_manpower = 35000	
+			}
+			random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_manpower = 35000	
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+    focus = {
+		id = POL_ban_anti_Polish_parties 
+		icon = align_to_poland2
+		x = 0
+		y = 1
+		relative_position_id = POL_support_farm_consolidation 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_support_farm_consolidation
+		}
+		
+		completion_reward = {
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
+			}
+			add_stability = -0.05
+			add_political_power = 150
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+    focus = {
+		id = POL_strenghten_Polish_democracy 
+		icon = democracy
+		x = 2
+		y = 1
+		relative_position_id = POL_ban_anti_Polish_parties 
+		cost = 8
+		
+		mutually_exclusive = {
+		focus = POL_social_nationalism
+		}
+		
+		prerequisite = {
+			focus = POL_control_media
+		}
+		
+		prerequisite = {
+			focus = POL_deal_with_corruption
+		}
+		
+		prerequisite = {
+			focus = POL_ban_anti_Polish_parties
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+    focus = {
+		id = POL_social_nationalism 
+		icon = fascism2
+		x = 4
+		y = 1
+		relative_position_id = POL_ban_anti_Polish_parties 
+		cost = 8
+		
+		mutually_exclusive = {
+		focus = POL_strenghten_Polish_democracy
+		}
+		
+		prerequisite = {
+			focus = POL_control_media
+		}
+		
+		prerequisite = {
+			focus = POL_deal_with_corruption
+		}
+		
+		prerequisite = {
+			focus = POL_ban_anti_Polish_parties
+		}
+		
+		completion_reward = {
+			set_party_name = {
+				ideology =  nationalist 
+				long_name = POL_social_democrat_party_united_left
+				name = POL_social_democrat_party_united_left_long
+			}
+			create_country_leader = {
+				name = "Aleksander Kwaśniewski"
+				ideology = social_nationalist
+				picture = "Aleksander_Kwasniewski.dds"
+			    traits = {
+		road_builder
+	}
+	}
+			set_politics = {
+				ruling_party = nationalist
+				elections_allowed = no
+			}
+			add_ideas = idea_focus_generic_path_of_order
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.5
+			}
+			add_political_power = 100
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+    focus = {
+		id = POL_great_remigration
+		icon = military_mission
+		x = 0
+		y = 1
+		relative_position_id = POL_social_nationalism 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_social_nationalism
+		}
+		
+		completion_reward = {
+			add_political_power = -100
+			random_owned_state = {
+			add_manpower = 50000	
+			}
+			random_owned_state = {
+			add_manpower = 50000	
+			}
+			random_owned_state = {
+			add_manpower = 50000	
+			}
+			random_owned_state = {
+			add_manpower = 50000	
+			}
+			random_owned_state = {
+			add_manpower = 50000	
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ZL_militarise_our_industry
+		text = POL_militarise_our_industry
+		icon = Polish_buisness
+		x = 0
+		y = 1
+		relative_position_id = POL_great_remigration 
+		cost = 15
+		
+		prerequisite = {
+			focus = POL_great_remigration
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_declare_4th_rp
+		icon = Poland_with_fist
+		x = 2
+		y = 1
+		relative_position_id = POL_social_nationalism 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_social_nationalism
+		}
+		
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+    focus = {
+		id = POL_the_only_true_Polish_party
+		icon = fascism5
+		x = 0
+		y = 1
+		relative_position_id = POL_declare_4th_rp 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_declare_4th_rp
+		}
+		
+		completion_reward = {
+			add_political_power = 150
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.100
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+ focus = {
+		id = POL_Wolnosc
+		icon = libertarianism
+		x = -18
+		y = 2
+		cost = 5
+		relative_position_id = POL_future_of_Poland 
+		
+		mutually_exclusive = {
+			focus = POL_United_Left
+		}
+		
+		prerequisite = {
+			focus = POL_future_of_Poland
+		}
+		
+		mutually_exclusive = {
+			focus = POL_PSL
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_LPR
+		}
+		
+		mutually_exclusive = {
+			focus = POL_polish_revanchism
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_PiS
+		}
+		
+		mutually_exclusive = { 
+			focus = POL_keep_SLD
+		}
+		mutually_exclusive = {
+			focus = POL_strenghten_PO
+		}
+		
+		completion_reward = {
+			fourth_estate_market_liberal_increase = yes
+			add_ideas = idea_focus_generic_capitalist_doctrine
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_polish_pirate_party
+		icon = Polish_pirate
+		x = -7
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_Wolnosc 
+		
+		mutually_exclusive = {
+		focus = POL_put_Korwin_to_power
+		}
+		
+		prerequisite = {
+			focus = POL_Wolnosc
+	   }
+		
+		completion_reward = {
+		create_country_leader = {
+				name = "Marek Jutkiewicz"
+				desc = "POLITICS_Marek_Jutkiewicz_DESC"
+				ideology = Pirates
+				picture = "Marek_Jutkiewicz.dds"
+			    traits = {
+		       popular_figurehead
+		       businessman
+	           }
+		}
+		set_party_name = {
+				ideology = market_liberal 
+				long_name = POL_market_liberal_party_pirate
+				name = POL_market_liberal_party_pirate_long
+			}
+		add_popularity = {
+				ideology = market_liberal
+			popularity = 0.3
+			}
+			set_politics = {
+				ruling_party = market_liberal
+				elections_allowed = yes
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_no_copyright_no_patents
+		icon = constitution
+		x = -2
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_polish_pirate_party 
+		
+		prerequisite = {
+			focus = POL_polish_pirate_party
+		}
+		
+		completion_reward = {
+			add_ideas = POL_no_copyright_no_patents
+		}
+	}
+	
+	focus = {
+		id = POL_defend_privacy
+		icon = defence
+		x = 0
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_no_copyright_no_patents 
+		
+		prerequisite = {
+			focus = POL_no_copyright_no_patents
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	
+	focus = {
+		id = POL_home_of_hackers
+		icon = cryptologic_bomb
+		x = 0
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_polish_pirate_party 
+		
+		
+		prerequisite = {
+			focus = POL_polish_pirate_party
+		}
+		
+		completion_reward = {
+			if = { 
+				limit = {
+					NOT = { has_dlc = "La Resistance" }
+				}
+				add_tech_bonus = {
+					name = POL_home_of_hackers
+					bonus = 0.5
+					uses = 2
+					category = encryption_tech
+					category = decryption_tech
+				}
+			}
+			else = {
+				hidden_effect = {
+					set_technology = { lar_decryption_bonus_tech = 1 }
+				}
+				custom_effect_tooltip = lar_decryption_bonus_tt
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_support_small_markets
+		icon = consumer_goods
+		x = 0
+		y = 1
+		relative_position_id = POL_home_of_hackers 
+		cost = 7.20
+		
+		
+		prerequisite = {
+			focus = POL_home_of_hackers
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+				}
+			   random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				    }
+				}
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_modern_pirate_nation
+		icon = pirate
+		x = -1
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_support_small_markets 
+		
+		prerequisite = {
+			focus = POL_defend_privacy
+		}
+		
+		prerequisite = {
+			focus = POL_support_small_markets
+		}
+		
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 100
+		}
+	}
+	
+	focus = {
+		id = POL_modernize_the_education_system
+		icon = research
+		x = -7
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_modern_pirate_nation 
+		
+		prerequisite = {
+			focus = POL_modern_pirate_nation
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_ideas = LAT_reformed_education_system
+		}
+	}
+	
+	focus = {
+		id = POL_Young_Pirates
+		icon = military_mission
+		x = 2
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_modernize_the_education_system 
+		
+		prerequisite = {
+			focus = POL_modernize_the_education_system
+		}
+		
+		completion_reward = {
+			add_ideas = POL_Young_Pirates
+		}
+	}
+	
+	focus = {
+		id = POL_modern_country
+		icon = tech_sharing
+		x = 0
+		y = 1
+		cost = 10
+		relative_position_id = POL_Young_Pirates 
+		
+		prerequisite = {
+			focus = POL_Young_Pirates
+		}
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	
+	focus = {
+		id = POL_new_pegasus
+		icon = pegasus
+		x = 0
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_modernize_the_education_system 
+		
+		prerequisite = {
+			focus = POL_modernize_the_education_system
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	
+	focus = {
+		id = POL_new_economic_experts
+		icon = production2
+		x = 0
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_new_pegasus 
+		
+		prerequisite = {
+			focus = POL_new_pegasus
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.50
+				uses = 2
+				category = industry
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_Piratpartiet
+		icon = nordic_council
+		x = -2
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_modern_pirate_nation 
+		
+		
+		prerequisite = {
+			focus = POL_modern_pirate_nation
+	   }
+		
+		completion_reward = {
+		every_country = {
+			limit = { 
+					OR = {
+					original_tag = SWE
+					original_tag = FIN
+					original_tag = NOR
+				    original_tag = DEN
+					original_tag = GRN
+					original_tag = ICE
+				}
+			 }
+		fourth_estate_market_liberal_increase = yes
+		set_country_flag = seeks_polish_alliance
+		add_political_power = -50
+		add_stability = -0.05
+		set_party_name = {
+				ideology = market_liberal 
+				long_name = SWE_market_liberal_party_pirate
+				name = SWE_market_liberal_party_pirate_long
+			}
+		add_popularity = {
+				ideology = market_liberal
+			popularity = 0.07
+			}
+		}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Piraten
+		icon = align_to_germany
+		x = 1
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_Piratpartiet 
+		
+		
+		prerequisite = {
+			focus = POL_Piratpartiet
+	   }
+		
+		completion_reward = {
+		every_country = {
+			limit = { 
+					OR = {
+					original_tag = GER
+					original_tag = AUS
+				}
+			 }
+		fourth_estate_market_liberal_increase = yes
+		set_country_flag = seeks_polish_alliance
+		add_political_power = -50
+		add_stability = -0.05
+		set_party_name = {
+				ideology = market_liberal 
+				long_name = GER_market_liberal_party_pirate
+				name = GER_market_liberal_party_pirate_long
+			}
+		add_popularity = {
+				ideology = market_liberal
+			popularity = 0.07
+			}
+		}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_American_pirating
+		icon = align_to_america
+		x = -1
+		y = 1
+		cost = 7.20
+		relative_position_id = POL_Piratpartiet 
+		
+		
+		prerequisite = {
+			focus = POL_Piratpartiet
+	   }
+		
+		completion_reward = {
+		every_country = {
+			limit = { 
+					OR = {
+					original_tag = USA
+					original_tag = CAN
+				    original_tag = MEX
+				}
+			 }
+		fourth_estate_market_liberal_increase = yes
+		set_country_flag = seeks_polish_alliance
+		add_political_power = -50
+		add_stability = -0.5
+		set_party_name = {
+				ideology = market_liberal 
+				long_name = USA_market_liberal_party_pirate_long 
+				name = USA_market_liberal_party_pirate
+			}
+		add_popularity = {
+				ideology = market_liberal
+			popularity = 0.07
+			}
+		}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_pirates_of_the_world_unite
+		icon = pirate
+		x = 1
+		y = 1
+		cost = 20
+		relative_position_id = POL_American_pirating 
+		
+		prerequisite = {
+			focus = POL_American_pirating
+	   }
+		
+		prerequisite = {
+			focus = POL_Piraten
+	   }
+		
+		completion_reward = {
+		add_ideas = POL_pirates_of_the_world_unite
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Topple_authoritarians
+		icon = ban_fascism
+		x = 0
+		y = 1
+		relative_position_id = POL_pirates_of_the_world_unite 
+		cost = 20
+		
+		prerequisite = {
+		    focus = POL_pirates_of_the_world_unite
+		}
+		
+		completion_reward = {
+	    every_country = {
+					limit = {
+						has_democratic_form_of_government = no
+						NOT = { is_in_faction_with = ROOT }
+					}
+					POL = {
+						create_wargoal = {
+						  	target = PREV
+						    type = topple_government
+						}
+					}
+				}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_put_Korwin_to_power
+		icon = Korwin1
+		x = 0
+		y = 1
+		cost = 7
+		relative_position_id = POL_Wolnosc 
+		
+		mutually_exclusive = {
+		focus = POL_polish_pirate_party
+		}
+		
+		prerequisite = {
+			focus = POL_Wolnosc
+	 }
+		
+		completion_reward = {
+		add_popularity = {
+				ideology = market_liberal
+			popularity = 0.2
+			}
+			set_politics = {
+				ruling_party = market_liberal
+				elections_allowed = yes
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	  
+    focus = {
+		id = POL_expand_civil_liberties
+		icon = local_management
+		x = -2
+		y = 1
+		relative_position_id = POL_put_Korwin_to_power 
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_polish_pirate_party
+			focus = POL_put_Korwin_to_power
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_allow_privite_gun
+		icon = local_management
+		x = 0
+		y = 1
+		relative_position_id = POL_expand_civil_liberties 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_expand_civil_liberties
+		}
+		
+		completion_reward = {
+			add_ideas = POL_privite_gun_ownership_allowed
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	  focus = {
+		id = POL_defund_oppposition_parties
+		icon = attack_democracy3
+		x = 2
+		y = 1
+		cost = 7
+		relative_position_id = POL_put_Korwin_to_power 
+		
+		prerequisite = {
+			focus = POL_polish_pirate_party
+			focus = POL_put_Korwin_to_power
+		}
+		
+		completion_reward = {
+		add_ideas = POL_defund_oppposition_parties
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_lower_taxes
+		icon = democracy
+		x = 0
+		y = 1
+		cost = 7
+		relative_position_id = POL_defund_oppposition_parties 
+		
+		prerequisite = {
+			focus = POL_defund_oppposition_parties
+		}
+		
+		
+		completion_reward = {
+		add_stability = 0.05
+		remove_ideas = POL_gaps_in_tax_system
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_privatization_act
+		icon = consumer_goods
+		x = 0
+		y = 1
+		relative_position_id = POL_put_Korwin_to_power 
+		cost = 7
+		
+		
+		prerequisite = {
+			focus = POL_polish_pirate_party
+			focus = POL_put_Korwin_to_power
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+				}
+			   random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				    }
+				}
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+				focus = {
+		id = POL_privitize_healthcare
+		icon = industry_democratic3
+		x = 0
+		y = 1
+		relative_position_id = POL_privatization_act 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_privatization_act
+		}
+		
+		completion_reward = {
+			remove_ideas = POL_Bad_healthcare_system
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+			focus = {
+		id = POL_focus_on_current_issues
+		icon = major_alliance
+		x = 0
+		y = 1
+		relative_position_id = POL_privitize_healthcare 
+		cost = 7
+		
+		available = {
+		has_completed_focus = POL_put_Korwin_to_power
+		}
+		
+		prerequisite = {
+			focus = POL_privitize_healthcare
+		}
+		
+		prerequisite = {
+			focus = POL_lower_taxes
+		}
+		
+		prerequisite = {
+			focus = POL_allow_privite_gun
+		}
+		
+		completion_reward = {
+			add_political_power = 100
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+					focus = {
+		id = POL_strict_forgein_policy
+		icon = dangerous_deal
+		x = -3
+		y = 1
+		relative_position_id = POL_focus_on_current_issues 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_focus_on_current_issues
+		}
+		
+		mutually_exclusive = {
+		focus = POL_anglo_saxon_economic_principles
+		}
+		
+		completion_reward = {
+			add_ideas = POL_strict_forgein_policy
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_polish_exports
+		icon = trade_deal
+		
+		x = 1
+		y = 1
+		relative_position_id = POL_strict_forgein_policy
+		
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_strict_forgein_policy
+		}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+			add_ideas = POL_polish_exports
+		    add_ideas = free_trade 
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_anglo_saxon_economic_principles
+		icon = consumer_goods
+		
+		x = -1
+		y = 1
+		relative_position_id = POL_focus_on_current_issues
+		
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_focus_on_current_issues
+		}
+		
+		mutually_exclusive = {
+		focus = POL_strict_forgein_policy
+		}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+			add_ideas = USA_anglo_saxon_economic_principles
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+			focus = {
+		id = POL_polish_autarky
+		icon = consumer_goods
+		
+		x = 1
+		y = 1
+		relative_position_id = POL_anglo_saxon_economic_principles
+		
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_anglo_saxon_economic_principles
+		}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+			add_ideas = POL_polish_autarky
+		    add_ideas = closed_economy  
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_finish_economic_reforms
+		icon = consumer_goods
+		
+		x = 0
+		y = 1
+		relative_position_id = POL_polish_autarky
+		
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_polish_autarky
+		    focus = POL_polish_exports
+		}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+			add_stability = 0.05
+		    add_political_power = 120
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_voting_rights_only_for_smart_people
+		icon = tech_sharing
+		x = 1
+		y = 1
+		cost = 7
+		relative_position_id = POL_finish_economic_reforms 
+		
+		mutually_exclusive = {
+			focus = POL_voting_rights_only_for_rich_people
+		}
+		
+		prerequisite = {
+			focus = POL_finish_economic_reforms
+		}
+		
+		
+		completion_reward = {
+		add_popularity = {
+				ideology = market_liberal
+				popularity = 0.1
+			}
+		add_ideas = POL_academic_vote	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_support_the_private_schools
+		icon = research
+		x = 1
+		y = 1
+		cost = 10
+		relative_position_id = POL_voting_rights_only_for_smart_people 
+		
+		
+		prerequisite = {
+			focus = POL_voting_rights_only_for_smart_people
+		}
+		
+		
+		completion_reward = {
+		add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		 focus = {
+		id = POL_cryptological_schools
+		icon = cryptologic_bomb
+		x = 0
+		y = 1
+		cost = 7
+		relative_position_id = POL_support_the_private_schools 
+		
+		
+		prerequisite = {
+			focus = POL_support_the_private_schools
+		}
+		
+		
+		completion_reward = {
+			if = { #it's stolen from the og Poland tree
+				limit = {
+					NOT = { has_dlc = "La Resistance" }
+				}
+				add_tech_bonus = {
+					name = POL_the_cyclometer
+					bonus = 0.5
+					uses = 2
+					category = encryption_tech
+					category = decryption_tech
+				}
+			}
+			else = {
+				hidden_effect = {
+					set_technology = { lar_decryption_bonus_tech = 1 }
+				}
+				custom_effect_tooltip = lar_decryption_bonus_tt
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_voting_rights_only_for_rich_people
+		icon = rich_drinks
+		x = -1
+		y = 1
+		cost = 7
+		relative_position_id = POL_finish_economic_reforms 
+		
+		mutually_exclusive = {
+			focus = POL_voting_rights_only_for_smart_people
+		}
+		
+		prerequisite = {
+			focus = POL_finish_economic_reforms
+		}
+		
+		
+		completion_reward = {
+		add_popularity = {
+				ideology = market_liberal
+				popularity = 0.2
+			}
+		add_ideas = POL_rich_voting_rights	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_support_from_the_rich
+		icon = rich_drinks
+		x = -1
+		y = 1
+		cost = 7
+		relative_position_id = POL_voting_rights_only_for_rich_people 
+		
+		prerequisite = {
+			focus = POL_voting_rights_only_for_rich_people
+		}
+		
+		
+		completion_reward = {
+		add_popularity = {
+				ideology = market_liberal
+				popularity = 0.1
+			}
+		add_offsite_building = { type = industrial_complex level = 3 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_military_factories_parowex
+		icon = industry_military
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = POL_support_from_the_rich 
+		
+		prerequisite = {
+			focus = POL_support_from_the_rich
+		}
+		
+		
+		completion_reward = {
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+		focus = {
+		id = POL_liberal_economics
+		text = ENG_liberal_economics
+		icon = libertarianism
+		x = 1
+		y = 1
+		relative_position_id = POL_voting_rights_only_for_rich_people
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_voting_rights_only_for_smart_people
+		    focus = POL_voting_rights_only_for_rich_people
+		}
+		
+		completion_reward = {
+			add_ideas = ENG_liberal_economics_idea
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_future_of_ZUS
+		icon = industry_democratic3
+		x = 0
+		y = 1
+		relative_position_id = POL_liberal_economics
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_liberal_economics
+		}
+		
+		completion_reward = {
+			POL = {country_event = poland.17 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+			focus = {
+		id = POL_support_polish_buisneses
+		icon = Polish_buisness
+		x = 0
+		y = 1
+		relative_position_id = POL_lower_taxes 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_lower_taxes
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+				}
+			   random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+				}
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_decentralisation
+		icon = align_to_poland
+		x = 0
+		y = 1
+		relative_position_id = POL_support_polish_buisneses 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_support_polish_buisneses
+		}
+
+		
+		completion_reward = {
+			add_ideas = POL_decentralisation
+			
+		}
+	
+	    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_polish_military_industry
+		icon = align_to_poland
+		x = 2
+		y = 1
+		relative_position_id = POL_decentralisation 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_decentralisation
+		}
+
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				    }
+				}
+			   random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				    }
+				}
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_professional_army
+		icon = infantry_axis
+		x = 0
+		y = 1
+		relative_position_id = POL_decentralisation 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_decentralisation
+		}
+		
+		completion_reward = {
+			add_stability = 0.10
+			add_ideas = volunteer_only 
+		    add_ideas = POL_profesional_army
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_christian_values
+		icon = dangerous_deal
+		x = -5
+		y = 1
+		cost = 7
+		relative_position_id = POL_focus_on_current_issues 
+		
+		prerequisite = {
+			focus = POL_focus_on_current_issues
+		}
+		
+		
+		completion_reward = {
+		add_political_power = 100
+		add_stability = 0.1
+		add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	 focus = {
+		id = POL_spread_libertariansim_influance_to_our_neighbours
+		icon = dangerous_deal
+		x = -2
+		y = 1
+		cost = 8
+		relative_position_id = POL_christian_values 
+		
+		prerequisite = {
+			focus = POL_christian_values
+		}
+		
+		
+		completion_reward = {
+		add_political_power = -100
+				every_neighbor_country = {
+					add_popularity = { ideology = market_liberal popularity = 0.05 }
+				}	
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_research_incentives
+		icon = research
+		x = 0
+		y = 1
+		relative_position_id = POL_spread_libertariansim_influance_to_our_neighbours 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_spread_libertariansim_influance_to_our_neighbours
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_ideas = idea_focus_generic_encouraged_private_research
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_traditional_values
+		text = generic_traditional_values
+		icon = demand_territory2
+		relative_position_id = POL_christian_values 
+		x = 0
+		y = 1
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_christian_values
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_male_workforce
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	focus = {
+		id = POL_crackdown_on_contraceptives
+		text = generic_crackdown_on_contraceptives
+		icon = propaganda
+		x = 0
+		y = 1
+		relative_position_id = POL_traditional_values 
+		cost = 8
+		
+		prerequisite = {
+			focus = POL_traditional_values
+		}
+		
+		available = {
+			NOT = { has_idea = population_growth_explosion }
+		}
+		
+		completion_reward = {
+			increase_birth_rate = yes
+			add_war_support = -0.05
+		}
+	}
+	
+    focus = {
+		id = POL_Korwinizm
+		icon = Korwin
+		x = -1
+		y = 1
+		relative_position_id = POL_crackdown_on_contraceptives 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_crackdown_on_contraceptives
+		}
+		
+		prerequisite = {
+			focus = POL_research_incentives
+		}
+		
+		
+		completion_reward = {
+			set_party_name = {
+				ideology = market_liberal 
+				long_name = POL_market_liberal_party_korwin
+				name = POL_market_liberal_party_long_korwin
+			}
+			add_political_power = 100
+		}
+	}
+	
+	  focus = {
+		id = POL_strenghten_Korwin_tv
+		icon = propaganda
+		x = 0
+		y = 1
+		relative_position_id = POL_Korwinizm 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_Korwinizm
+		}
+   
+		completion_reward = {
+			add_political_power = 200
+			add_stability = 0.1
+		}
+	}
+	
+	  focus = {
+		id = POL_democtratic_values
+		icon = democracy
+		x = 0
+		y = 1
+		relative_position_id = POL_strenghten_Korwin_tv 
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_Make_Korwin_king_of_Poland
+		}
+		
+		prerequisite = {
+			focus = POL_strenghten_Korwin_tv
+		}
+   
+		completion_reward = {
+			add_stability = 0.2
+		}
+	}
+	
+	  focus = {
+		id = POL_cult_of_personality
+		icon = Korwin
+		x = -2
+		y = 1
+		relative_position_id = POL_Korwinizm 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_Korwinizm
+		}
+		
+		completion_reward = {
+			add_ideas = POL_cult_of_personality
+		}
+	}
+	
+	  focus = {
+		id = POL_Make_Korwin_king_of_Poland
+		icon = Korwin2
+		x = 0
+		y = 1
+		relative_position_id = POL_cult_of_personality 
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_cult_of_personality
+		}
+		
+		mutually_exclusive = {
+		focus = POL_democtratic_values
+		}
+		
+		
+		completion_reward = {
+				    swap_ideas = { 
+					remove_idea = POL_defund_oppposition_parties
+					add_idea = POL_defund_oppposition_parties_2 
+				}
+		create_country_leader = {
+				name = "King Korwin"
+				ideology = absolute_monarchist
+				picture = "Janusz_Korwin.dds"
+			    traits = {
+		popular_king
+	}
+	}
+	add_popularity = {
+				ideology = monarchist
+				popularity = 0.5
+			}
+			set_politics = {
+				ruling_party = monarchist
+				elections_allowed = no
+			}
+		custom_effect_tooltip = POL_unlock_generic_monarchy_tree_tt	
+		}
+	}
+	
+	
+	focus = {
+		id = POL_polskie_biuro_do_spraw_zagranicznych
+		icon = propaganda
+		x = 110
+		y = 1
+		cost = 4
+		
+		prerequisite = {
+			
+		}
+		
+		completion_reward = {
+			add_political_power = 100
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_countinue_the_Giedroyc_Doctrine
+		icon = propaganda
+		x = 0
+		y = 1
+		relative_position_id = POL_polskie_biuro_do_spraw_zagranicznych
+		cost = 7
+		
+		prerequisite = {
+		focus = POL_polskie_biuro_do_spraw_zagranicznych	
+		}
+		
+		mutually_exclusive = {
+			focus = POL_modyfy_the_Giedroyc_Doctrine
+		}
+		
+		mutually_exclusive = {
+			focus = POL_remove_the_Giedroyc_Doctrine
+		}
+		
+		completion_reward = {
+			add_political_power = 100
+		    add_stability = 0.05
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_modyfy_the_Giedroyc_Doctrine
+		icon = propaganda
+		x = 2
+		y = 1
+		relative_position_id = POL_polskie_biuro_do_spraw_zagranicznych
+		cost = 7
+		
+		prerequisite = {
+		focus = POL_polskie_biuro_do_spraw_zagranicznych	
+		}
+		
+		mutually_exclusive = {
+			focus = POL_countinue_the_Giedroyc_Doctrine
+		}
+		
+		mutually_exclusive = {
+			focus = POL_remove_the_Giedroyc_Doctrine
+		}
+		
+		completion_reward = {
+			add_political_power = -150
+		    swap_ideas = { 
+					remove_idea = POL_Giedroyc_Doctrine
+					add_idea = POL_Giedroyc_Doctrine_1 
+				}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_leave_nato
+		icon = attack_nato
+		x = 0
+		y = 1
+		relative_position_id = POL_modyfy_the_Giedroyc_Doctrine
+		cost = 7
+		
+		prerequisite = {
+		focus = POL_modyfy_the_Giedroyc_Doctrine	
+		}
+		
+		mutually_exclusive = {
+			focus = POL_strenghten_ties_with_west
+		}
+		
+		completion_reward = {
+			random_country = {
+				limit = {
+					is_in_faction_with = POL
+					is_faction_leader = yes
+				}	
+				remove_from_faction = POL
+				}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Poland_first
+		icon = align_to_poland2
+		x = 4
+		y = 1
+		relative_position_id = POL_leave_nato
+		cost = 4
+		
+		prerequisite = {
+		focus = POL_leave_nato	
+		}
+		
+		mutually_exclusive = {
+			focus = POL_create_Trujmorze
+		}
+		
+		available = {
+		NOT = { has_completed_focus = POL_elect_a_Habsburg }
+		}
+		
+		completion_reward = {
+		set_rule = {
+				can_join_factions = no
+			}
+			create_faction = POL_Polska_pierwsza
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_avange_ww2
+		icon = attack_germany
+		x = 0
+		y = 1
+		relative_position_id = POL_Poland_first
+		cost = 7
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_Poland_first	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = GER
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Benelux_more_like_POLOLUX
+		icon = attack_monarchy3
+		x = -2
+		y = 1
+		relative_position_id = POL_avange_ww2
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_avange_ww2	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = HOL
+			}
+		create_wargoal = {
+				type = annex_everything
+				target = BEL
+			}
+		create_wargoal = {
+				type = annex_everything
+				target = LUX
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_the_bad_allies
+		icon = attack_france
+		x = 0
+		y = 1
+		relative_position_id = POL_Benelux_more_like_POLOLUX
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_Benelux_more_like_POLOLUX	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = FRA
+			}
+		create_wargoal = {
+				type = annex_everything
+				target = ENG
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Austro_hungary_but_under_hungary
+		icon = austria_hungary
+		x = 0
+		y = 1
+		relative_position_id = POL_avange_ww2
+		cost = 10
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_avange_ww2	
+		}
+		
+		completion_reward = {
+		HUN = { country_event = poland.12 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Czech_and_Slovak_issue
+		icon = war
+		x = 0
+		y = 1
+		relative_position_id = POL_Austro_hungary_but_under_hungary
+		cost = 5
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_Austro_hungary_but_under_hungary	
+		}
+		
+		completion_reward = {
+		CZE = { country_event = poland.13 }
+		SLO = { country_event = poland.14 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_rule_over_balkans
+		icon = war3
+		x = 0
+		y = 1
+		relative_position_id = POL_Czech_and_Slovak_issue
+		cost = 15
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_Czech_and_Slovak_issue	
+		}
+		
+		completion_reward = {
+		CRO = { country_event = poland.14 }
+		SLV = { country_event = poland.14 }
+		BOS = { country_event = poland.14 }
+		ALB = { country_event = poland.9 }
+		MAC = { country_event = poland.9 }
+		GRE = { country_event = poland.9 }
+		CYP = { country_event = poland.9 }
+		NCY = { country_event = poland.9 }
+		SER = { country_event = poland.15 }
+		ROM = { country_event = poland.16 }
+		
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_revange_on_turkey
+		icon = attack_turkey
+		x = 0
+		y = 1
+		relative_position_id = POL_rule_over_balkans
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_rule_over_balkans	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = TUR
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_atack_ukraine
+		icon = attack_ukraine
+		x = 2
+		y = 1
+		relative_position_id = POL_Poland_first
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_Poland_first	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = UKR
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_atack_MOLdavia
+		icon = attack_monarchy
+		x = 0
+		y = 1
+		relative_position_id = POL_atack_ukraine
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_atack_ukraine	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = TRA
+			}
+		create_wargoal = {
+				type = annex_everything
+				target = MOL
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_go_back_to_baltic
+		icon = align_to_baltic_states
+		x = 2
+		y = 1
+		relative_position_id = POL_atack_MOLdavia
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_atack_MOLdavia	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = EST
+			}
+		
+		create_wargoal = {
+				type = annex_everything
+				target = LIT
+			}
+		
+		create_wargoal = {
+				type = annex_everything
+				target = LAT
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_revenge_on_nords
+		icon = war2_teal
+		x = 0
+		y = 1
+		relative_position_id = POL_go_back_to_baltic
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_go_back_to_baltic	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = DEN
+			}
+		
+		create_wargoal = {
+				type = annex_everything
+				target = SWE
+			}
+		
+		create_wargoal = {
+				type = annex_everything
+				target = NOR
+			}
+			
+			create_wargoal = {
+				type = annex_everything
+				target = FIN
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = IDK_atack_USA
+		text = POL_atack_USA
+		icon = attack_america
+		x = 0
+		y = 1
+		relative_position_id = POL_revenge_on_nords
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_revenge_on_nords	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = USA
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Attack_bealrus
+		icon = align_to_belarus
+		x = 0
+		y = 1
+		relative_position_id = POL_atack_MOLdavia
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_atack_MOLdavia	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = BLR
+			}
+		
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_end_russia
+		icon = attack_russia
+		x = 0
+		y = 1
+		relative_position_id = POL_Attack_bealrus
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_Attack_bealrus	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = SOV
+			}
+		
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_destroy_the_weebs
+		icon = attack_japan
+		x = 0
+		y = 1
+		relative_position_id = POL_end_russia
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		has_war = no
+		}
+		
+		prerequisite = {
+		focus = POL_end_russia	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = JAP
+			}
+		
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_create_Trujmorze
+		icon = improve_relations_green
+		x = 0
+		y = 1
+		relative_position_id = POL_leave_nato
+		cost = 7
+		
+		available = {
+		is_in_faction = no
+		is_subject = no
+		}
+		
+		prerequisite = {
+		focus = POL_leave_nato	
+		}
+		
+		mutually_exclusive = {
+			focus = POL_Poland_first
+		}
+		
+		completion_reward = {
+			 set_rule = {
+				can_join_factions = no
+			}
+			 create_faction = Trójmorze
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_invite_baltic
+		icon = align_to_baltic_states
+		x = 0
+		y = 1
+		relative_position_id = POL_create_Trujmorze
+		cost = 7
+		
+		prerequisite = {
+		focus = POL_create_Trujmorze	
+		}
+		
+		available = {
+		is_faction_leader = yes
+		}
+		
+		completion_reward = {
+			LIT = { country_event = poland.1 }
+		    LAT = { country_event = poland.1 }
+		    EST = { country_event = poland.1 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_invite_balkans
+		icon = improve_relations
+		x = 0
+		y = 1
+		relative_position_id = POL_invite_baltic
+		cost = 7
+		
+		available = {
+		is_faction_leader = yes
+		}
+		
+		prerequisite = {
+		focus = POL_invite_baltic	
+		}
+		
+		
+		completion_reward = {
+			ROM = { country_event = poland.1 }
+		    BUL = { country_event = poland.1 }
+		    SER = { country_event = poland.1 }
+		    GRE = { country_event = poland.1 }
+		    SLV = { country_event = poland.1 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_invite_visegrad_group
+		icon = improve_relations
+		x = 0
+		y = 1
+		relative_position_id = POL_invite_balkans
+		cost = 7
+		
+		available = {
+		is_faction_leader = yes
+		}
+		
+		prerequisite = {
+		focus = POL_invite_balkans	
+		}
+		
+		
+		completion_reward = {
+			CZE = { country_event = poland.1 }
+		    HUN = { country_event = poland.1 }
+		    SLO = { country_event = poland.1 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+		focus = {
+		id = POL_central_bank_of_miedzymorze
+		icon = improve_relations
+		x = 0
+		y = 1
+		relative_position_id = POL_invite_visegrad_group
+		cost = 6
+		
+		available = {
+		is_faction_leader = yes
+		}
+		
+		prerequisite = {
+		focus = POL_invite_visegrad_group	
+		}
+		
+		
+		completion_reward = {
+		every_country = {
+				limit = {
+					is_in_faction_with = POL
+				}
+	         add_ideas =  POL_central_bank_of_miedzymorze
+	       }
+		  }
+		  ai_will_do = {
+			factor = 10
+		}
+	} 
+		focus = {
+		id = POL_invest_in_other_members
+		icon = improve_relations
+		x = 2
+		y = 1
+		relative_position_id = POL_invite_visegrad_group
+		cost = 8
+		
+		prerequisite = {
+		focus = POL_invite_visegrad_group	
+		}
+		
+		available = {
+		is_faction_leader = yes
+		}
+		
+		completion_reward = {
+		every_country = {
+				limit = {
+					NOT = { original_tag = POL }
+					is_in_faction_with = POL
+				}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					    
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				    set_state_flag = TUR_peninsular_network_of_factories_flag
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				    set_state_flag = POL_invest_in_other_members_flag
+				}
+			}	
+    
+	ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_unite_trujmorze
+		icon = improve_relations
+		x = 1
+		y = 1
+		relative_position_id = POL_central_bank_of_miedzymorze
+		cost = 55
+		
+		prerequisite = {
+		focus = POL_central_bank_of_miedzymorze	
+		}
+		available = {
+		is_faction_leader = yes
+		NOT = { has_completed_focus = POL_core_all_Slavic_states }
+		NOT = { has_global_flag = form_commonwealth_flag }
+		}
+		
+		prerequisite = {
+		focus = POL_invest_in_other_members	
+		}
+		
+		
+		completion_reward = {
+		 set_cosmetic_tag = Trujmorze
+		 every_country = {
+				limit = {
+					NOT = { original_tag = POL }
+					is_in_faction_with = POL
+				}
+              country_event = poland.2
+		}
+		}
+			ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_remove_the_Giedroyc_Doctrine
+		icon = propaganda
+		x = 12
+		y = 1
+		relative_position_id = POL_polskie_biuro_do_spraw_zagranicznych
+		cost = 10
+		
+		prerequisite = {
+		focus = POL_polskie_biuro_do_spraw_zagranicznych	
+		}
+		
+		mutually_exclusive = {
+			focus = POL_countinue_the_Giedroyc_Doctrine
+		}
+		
+		mutually_exclusive = {
+			focus = POL_modyfy_the_Giedroyc_Doctrine
+		}
+		
+		completion_reward = {
+			add_political_power = -300
+		    remove_ideas = POL_Giedroyc_Doctrine
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+     
+    	focus = {
+		id = POL_X_RUS_leave_nato
+		text = POL_leave_nato
+		icon = attack_nato
+		x = 0
+		y = 1
+		relative_position_id = POL_remove_the_Giedroyc_Doctrine
+		cost = 4
+		
+		prerequisite = {
+		focus = POL_remove_the_Giedroyc_Doctrine	
+		}
+		
+	
+		
+		completion_reward = {
+			random_country = {
+				limit = {
+					is_in_faction_with = POL
+					is_faction_leader = yes
+				}	
+				remove_from_faction = POL
+				}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_join_CSTO
+		icon = align_to_csto
+		x = 0
+		y = 1
+		relative_position_id = POL_X_RUS_leave_nato
+		cost = 6
+		
+		bypass = {
+		is_in_faction_with = SOV
+		}
+		
+		available = {
+		is_in_faction = no
+		is_subject = no
+		}
+		
+		prerequisite = {
+		focus = POL_X_RUS_leave_nato	
+		}
+		
+		
+		completion_reward = {
+			SOV = { country_event = poland.4 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_ukraine_bad
+		icon = align_to_ukraine
+		x = 0
+		y = 1
+		relative_position_id = POL_join_CSTO
+		cost = 6
+		
+		bypass = {
+		OR = {
+		UKR = {
+			exists = no
+			}
+		has_war_with = UKR 
+		}
+		}
+		
+		available = {
+			NOT = { has_war_with = UKR }
+			UKR = {
+			exists = yes
+			}
+			is_in_faction_with = SOV
+			SOV = {
+				is_faction_leader = yes
+			}
+		}
+		prerequisite = {
+		focus = POL_join_CSTO	
+		}
+		
+		completion_reward = {
+			UKR = { country_event = poland.3 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_carpathia_rutheina_for_membership_in_CSTO
+		icon = austria_hungary
+		x = 0
+		y = 1
+		relative_position_id = POL_ukraine_bad
+		cost = 6
+		
+		bypass = {
+		OR = {
+		HUN = {
+			OR = {
+			exists = no
+		    is_in_faction_with = POL
+		}
+		}
+		has_war_with = HUN 
+		}
+		}
+		
+		available = {
+			NOT = { has_war_with = HUN }
+			HUN = {
+			exists = yes
+			}
+			is_in_faction_with = SOV
+			SOV = {
+				is_faction_leader = yes
+			}
+		}
+		
+		prerequisite = {
+		focus = POL_ukraine_bad	
+		}
+		
+		completion_reward = {
+			HUN = { country_event = poland.7 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_atack_USA
+		icon = attack_america
+		x = 0
+		y = 1
+		relative_position_id = POL_carpathia_rutheina_for_membership_in_CSTO
+		cost = 6
+		
+		bypass = {
+		OR = {
+		USA = {
+			exists = no
+			}
+		has_war_with = USA 
+		}
+		}
+		
+		available = {
+			NOT = { has_war_with = USA }
+			USA = {
+			exists = yes
+			}
+
+			is_in_faction_with = SOV
+			SOV = {
+				is_faction_leader = yes
+			}
+		}
+		
+		prerequisite = {
+		focus = POL_carpathia_rutheina_for_membership_in_CSTO	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = USA
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_bealorus_bad
+		icon = align_to_belarus
+		x = 2
+		y = 1
+		relative_position_id = POL_join_CSTO
+		cost = 6
+		
+		bypass = {
+		OR = {
+		BLR = {
+			exists = no
+			}
+		has_war_with = BLR 
+		}
+		}
+		
+		available = {
+			NOT = { has_war_with = BLR }
+			BLR = {
+			exists = yes
+			}
+			is_in_faction_with = SOV
+			SOV = {
+				is_faction_leader = yes
+			}
+		}
+		
+		prerequisite = {
+		focus = POL_join_CSTO	
+		}
+		
+		completion_reward = {
+			BLR = { country_event = poland.5 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_lithuania_bad
+		icon = attack_lithuania
+		x = 0
+		y = 1
+		relative_position_id = POL_bealorus_bad
+		cost = 6
+		
+		bypass = {
+		OR = {
+		LIT = {
+			exists = no
+			}
+		has_war_with = LIT 
+		}
+		}
+		
+		available = {
+			NOT = { has_war_with = LIT }
+			LIT = {
+			exists = yes
+			}
+			is_in_faction_with = SOV
+			SOV = {
+				is_faction_leader = yes
+			}
+		}
+		
+		prerequisite = {
+		focus = POL_bealorus_bad	
+		}
+		
+		completion_reward = {
+			LIT = { country_event = poland.6 }
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_invite_middle_east_to_CSTO
+		icon = improve_relations_green
+		x = 0
+		y = 1
+		relative_position_id = POL_lithuania_bad
+		cost = 8
+		
+		available = {
+			is_in_faction_with = SOV
+			SOV = {
+				is_faction_leader = yes
+			}
+		}
+		
+		prerequisite = {
+		focus = POL_lithuania_bad	
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					IRQ = { is_subject = no }
+					NOT = { has_war_with = IRQ }
+				}
+			IRQ = { country_event = poland.8 }
+		   }
+		  if = {
+				limit = {
+					SYR = { is_subject = no }
+					NOT = { has_war_with = SYR }
+				}
+		   SYR = { country_event = poland.8 }
+		   }
+		    if = {
+				limit = {
+					TUR = { is_subject = no }
+					NOT = { has_war_with = TUR }
+				}
+		   TUR = { country_event = poland.8 }
+		   }
+		  if = {
+				limit = {
+					JOR = { is_subject = no }
+					NOT = { has_war_with = JOR }
+				}
+		  JOR = { country_event = poland.8 }
+		}
+		 if = {
+				limit = {
+					LEB = { is_subject = no }
+					NOT = { has_war_with = LEB }
+				}
+		LEB = { country_event = poland.8 }
+		}
+			 if = {
+				limit = {
+					PAL = { is_subject = no }
+					NOT = { has_war_with = PAL }
+				}
+			PAL = { country_event = poland.8 }
+		    }
+			if = {
+				limit = {
+					PAL = { is_subject = no }
+					NOT = { has_war_with = PAL }
+				}
+			if = {
+				limit = {
+					ISR = { is_subject = no }
+					NOT = { has_war_with = ISR }
+				}
+			ISR = { country_event = poland.8 }
+		 }
+		if = {
+				limit = {
+					PER = { is_subject = no }
+					NOT = { has_war_with = PER }
+				}
+			PER = { country_event = poland.8 }
+		 }
+		}
+   }
+   ai_will_do = {
+			factor = 10
+		}
+	}
+
+    	focus = {
+		id = POL_strenghten_ties_with_west
+		icon = align_to_nato
+		x = 0
+		y = 1
+		relative_position_id = POL_countinue_the_Giedroyc_Doctrine
+		cost = 6
+		
+		prerequisite = {
+		    focus = POL_modyfy_the_Giedroyc_Doctrine
+		    focus = POL_countinue_the_Giedroyc_Doctrine
+		}
+		
+		available = {
+				USA = {
+				is_faction_leader = yes
+			}
+			is_in_faction_with = USA
+		}
+		
+		mutually_exclusive = {
+			focus = POL_leave_nato
+		}
+		
+	    completion_reward = {
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+		    factor = 10
+		}
+	}
+
+    focus = {
+		id = POL_befriend_america
+		icon = align_to_america
+		x = 0
+		y = 1
+		relative_position_id = POL_strenghten_ties_with_west
+		cost = 6
+		
+		available = {
+				USA = {
+				is_faction_leader = yes
+			}
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = POL_strenghten_ties_with_west
+		}
+		
+	    available = {
+			NOT = { has_war_with = USA }
+		}
+		
+		completion_reward = {
+			USA = {
+				add_opinion_modifier = {
+					target = POL
+					modifier = declaration_of_friendship
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_befriend_europeans
+		icon = align_to_france
+		x = 0
+		y = 1
+		relative_position_id = POL_befriend_america
+		cost = 6
+		
+		prerequisite = {
+		    focus = POL_befriend_america
+		}
+
+        available = {
+				USA = {
+				is_faction_leader = yes
+			}
+			is_in_faction_with = USA
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_war_with = FRA }
+				}
+				FRA = {
+					add_opinion_modifier = {
+						target = POL
+						modifier = declaration_of_friendship
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_war_with = SPR }
+				}
+				SPR = {
+					add_opinion_modifier = {
+						target = POL
+						modifier = declaration_of_friendship
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_war_with = POR }
+				}
+				POR = {
+					add_opinion_modifier = {
+						target = POL
+						modifier = declaration_of_friendship
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_war_with = ENG }
+				}
+				ENG = {
+					add_opinion_modifier = {
+						target = POL
+						modifier = declaration_of_friendship
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_war_with = BEL }
+				}
+				BEL = {
+					add_opinion_modifier = {
+						target = POL
+						modifier = declaration_of_friendship
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_war_with = IRE }
+				}
+				IRE = {
+					add_opinion_modifier = {
+						target = POL
+						modifier = declaration_of_friendship
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = POL_American_Military_advisors
+		icon = american_military_agreement
+		x = 0
+		y = 1
+		relative_position_id = POL_befriend_europeans
+		cost = 6
+		
+		prerequisite = {
+		    focus = POL_befriend_europeans
+		}
+
+        available = {
+				USA = {
+				is_faction_leader = yes
+			}
+			is_in_faction_with = USA
+		}
+
+		completion_reward = {
+	     add_ideas = POL_American_Military_advisors
+	}
+}
+	focus = {
+		id = POL_american_investors
+		icon = concessions
+		x = 0
+		y = 1
+		relative_position_id = POL_American_Military_advisors
+		cost = 6
+		
+		available = {
+				USA = {
+				is_faction_leader = yes
+			}
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = POL_American_Military_advisors
+		}
+
+		completion_reward = {
+	     add_ideas = POL_american_investors
+	}
+}	
+
+    	focus = {
+		id = POL_atack_Russia
+		icon = attack_russia
+		x = 0
+		y = 1
+		relative_position_id = POL_american_investors
+		cost = 10
+		
+		available = {
+			USA = {
+				is_faction_leader = yes
+			}
+			is_in_faction_with = USA
+			NOT = { is_in_faction_with = SOV }
+		}
+		
+		prerequisite = {
+		focus = POL_american_investors	
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = SOV
+			}
+		}
+    ai_will_do = {
+			factor = 10
+		}
+	}
+
+		focus = {
+		id = POL_joint_reaserch
+		icon = scientific_exchange
+		x = -2
+		y = 1
+		relative_position_id = POL_American_Military_advisors
+		cost = 6
+		
+		available = {
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = POL_American_Military_advisors
+		}
+
+		completion_reward = {
+	    USA = { add_to_tech_sharing_group = Polish_american_reaserch_grup }
+			add_to_tech_sharing_group = Polish_american_reaserch_grup
+	}
+}
+	focus = {
+		id = POL_establish_droagon_military_training
+		icon = army_logistics
+		x = 136
+		y = 0
+		cost = 7
+		
+	    completion_reward = {
+		 army_experience = 5
+		 add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+	}
+}	
+	focus = {
+		id = POL_polish_military
+		icon = ladawe_sily
+		x = 0
+		y = 1
+		relative_position_id = POL_establish_droagon_military_training
+		cost = 7
+		prerequisite = {
+		focus = POL_establish_droagon_military_training 
+		}
+		
+		
+	    completion_reward = {
+			army_experience = 35
+		}
+	}
+	
+	focus = {
+		id = POL_new_tactics
+		icon = army_doctrine
+		x = -4
+		y = 1
+		relative_position_id = POL_polish_military
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_polish_military
+		}
+		
+	    completion_reward = {
+	    add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.25
+				uses = 2
+				category = land_doctrine
+			}
+	   }
+	}
+	
+		focus = {
+		id = POL_modernise_our_tanks
+		icon = tank
+		x = 4
+		y = 1
+		relative_position_id = POL_polish_military
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_forgein_licences_for_tanks
+		}
+		
+		prerequisite = {
+		    focus = POL_polish_military
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tank_bonus
+				bonus = 0.3
+				uses = 2
+				category = armor
+			}
+		}
+	}
+	
+		focus = {
+		id = POL_forgein_licences_for_tanks
+		icon = leopard_2a4
+		x = 6
+		y = 1
+		relative_position_id = POL_polish_military
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_modernise_our_tanks
+		}
+		
+		prerequisite = {
+		    focus = POL_polish_military
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_forgein_licences_for_tanks
+		}
+	}
+	
+	focus = {
+		id = POL_further_tanks_modernization
+		icon = tank
+		x = 0
+		y = 1
+		relative_position_id = POL_modernise_our_tanks
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_back_to_idea_of_goryl
+		}
+		
+		prerequisite = {
+		    focus = POL_modernise_our_tanks
+		    focus =POL_forgein_licences_for_tanks
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tank_bonus
+				bonus = 0.3
+				uses = 2
+				category = armor
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_reliable_tanks
+		icon = leopard_2a6
+		x = 0
+		y = 1
+		relative_position_id = POL_further_tanks_modernization
+		cost = 7
+		
+		
+		prerequisite = {
+		    focus = POL_further_tanks_modernization
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_reliable_tanks
+		}
+	}
+	
+		focus = {
+		id = POL_back_to_idea_of_goryl
+		icon = tank_prototype
+		x = 0
+		y = 1
+		relative_position_id = POL_forgein_licences_for_tanks
+		cost = 7
+		
+			mutually_exclusive = {
+		focus = POL_further_tanks_modernization
+		}
+		
+		prerequisite = {
+		    focus = POL_modernise_our_tanks
+		    focus =POL_forgein_licences_for_tanks
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_back_to_idea_of_goryl
+		}
+	}
+	
+	focus = {
+		id = POL_from_tractors_to_tanks
+		icon = tank2
+		x = 0
+		y = 1
+		relative_position_id = POL_back_to_idea_of_goryl
+		cost = 7
+		
+		prerequisite = {
+		    focus =POL_back_to_idea_of_goryl
+		}
+		
+	    completion_reward = {
+			swap_ideas = {
+			remove_idea = POL_back_to_idea_of_goryl
+			add_idea  = POL_back_to_idea_of_goryl_2
+			}
+		}
+	}
+	
+		focus = {
+		id = POL_superior_firepower
+		icon = artillery3
+		x = -4
+		y = 1
+		relative_position_id = POL_new_tactics
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_mobile_warfare
+		}
+		
+		prerequisite = {
+		    focus = POL_new_tactics
+		}
+		
+	    completion_reward = {
+	    add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.3
+				uses = 2
+				category = cat_superior_firepower
+			}
+	   }
+	}
+	
+	focus = {
+		id = POL_endless_barrage
+		icon = air_defense
+		x = -1
+		y = 1
+		relative_position_id = POL_superior_firepower
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_superior_firepower
+		}
+		
+	    completion_reward = {
+	    if = {
+				limit = { has_completed_focus = POL_well_organized_army } 
+				swap_ideas = { 
+					remove_idea = POL_arrtilery_bonus_2
+					add_idea = POL_arrtilery_bonus_3 
+				}
+			}  
+
+       if = {
+				limit = { NOT = { has_completed_focus = POL_well_organized_army } }
+				add_ideas = POL_arrtilery_bonus_1
+			}
+	   }
+	}
+	
+	focus = {
+		id = POL_well_organized_army
+		icon = military_mission
+		x = 1
+		y = 1
+		relative_position_id = POL_superior_firepower
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_superior_firepower
+		}
+		
+	    completion_reward = {
+	   if = {
+				limit = { has_completed_focus = POL_endless_barrage } 
+				swap_ideas = { 
+					remove_idea = POL_arrtilery_bonus_1
+					add_idea = POL_arrtilery_bonus_3 
+				}
+			}  
+
+       if = {
+				limit = { NOT = { has_completed_focus = POL_endless_barrage } }
+				add_ideas = POL_arrtilery_bonus_2
+			}
+	   }
+	}
+	
+	focus = {
+		id = POL_our_furry
+		icon = skull2
+		x = -1
+		y = 1
+		relative_position_id = POL_well_organized_army
+		cost = 7
+		
+	    prerequisite = {
+		    focus = POL_endless_barrage
+		}
+		
+		prerequisite = {
+		    focus = POL_well_organized_army
+		}
+		
+	    completion_reward = {
+	   swap_ideas = { 
+					remove_idea = POL_arrtilery_bonus_3
+					add_idea = POL_arrtilery_bonus_4 
+				}
+	   }
+	}
+	
+	focus = {
+		id = POL_mobile_warfare
+		icon = skull
+		x = 0
+		y = 1
+		relative_position_id = POL_new_tactics
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_new_tactics
+		}
+		
+		mutually_exclusive = {
+		focus = POL_superior_firepower
+		}
+		
+	    completion_reward = {
+	    add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.3
+				uses = 2
+				category = cat_mobile_warfare
+			}
+	   }
+	}
+	
+		focus = {
+		id = POL_motorise_our_army
+		icon = motorized
+		x = 1
+		y = 1
+		relative_position_id = POL_mobile_warfare
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_mobile_warfare
+		}
+		
+	    completion_reward = {
+			add_ideas = idea_focus_generic_motorized_focus
+		}
+	}
+	
+	focus = {
+		id = POL_begin_mechanization
+		icon = motorized
+		x = -1
+		y = 1
+		relative_position_id = POL_mobile_warfare
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_mobile_warfare
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = mechanized_bonus
+				bonus = 0.3
+				uses = 2
+				category = cat_mechanized_equipment
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_Wojna_blyskawiczna_our_blietzkrieg
+		icon = skull2
+		x = -1
+		y = 1
+		relative_position_id = POL_motorise_our_army
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_motorise_our_army
+		}
+		
+		prerequisite = {
+		    focus = POL_begin_mechanization
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_Wojna_blyskawiczna_our_blietzkrieg
+		}
+	}
+	
+	focus = {
+		id = POL_Wojskowa_komisja_uzupelnen
+		icon = military_sphere
+		x = -1
+		y = 1
+		relative_position_id = POL_polish_military
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_polish_military
+		}
+		
+		
+		completion_reward = {
+			add_ideas = POL_Wojskowa_komisja_uzupelnen
+		}
+	}
+	
+	focus = {
+		id = POL_deal_with_Polska_Grupa_Zbrojeniowa
+		icon = small_arms
+		x = 1
+		y = 1
+		relative_position_id = POL_polish_military
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_polish_military
+		}
+		
+		
+		completion_reward = {
+			add_ideas = USA_gun_funding
+		}
+	}
+	
+	focus = {
+		id = POL_artillery_research
+		icon = artillery2
+		
+		x = 0
+		y = 1
+		relative_position_id = POL_Wojskowa_komisja_uzupelnen
+		
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_Wojskowa_komisja_uzupelnen
+			focus = POL_deal_with_Polska_Grupa_Zbrojeniowa
+		}
+		
+		mutually_exclusive = {}
+		
+		available = {}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				uses = 2
+				bonus = 0.25
+				category = artillery
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_modernize_our_weponary
+		icon = small_arms2
+		x = 0
+		y = 1
+		relative_position_id = POL_deal_with_Polska_Grupa_Zbrojeniowa
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_Wojskowa_komisja_uzupelnen
+			focus = POL_deal_with_Polska_Grupa_Zbrojeniowa
+		}
+		
+	    completion_reward = {
+	    add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.3
+				uses = 2
+				category = infantry_weapons
+			}
+	   }
+	}
+	
+	focus = {
+		id = POL_further_modernize_our_weponary
+		icon = small_arms3
+		x = 0
+		y = 1
+		relative_position_id = POL_modernize_our_weponary
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_modernize_our_weponary
+			focus = POL_artillery_research
+		}
+		
+		mutually_exclusive = {
+		focus = POL_further_artillery_research
+		}
+		
+	    completion_reward = {
+	    add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.3
+				uses = 2
+				category = infantry_weapons
+			}
+	   }
+	}
+	
+	focus = {
+		id = POL_further_artillery_research
+		icon = artillery
+		
+		x = 0
+		y = 1
+		relative_position_id = POL_artillery_research
+		
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_modernize_our_weponary
+			focus = POL_artillery_research
+		}
+		
+		mutually_exclusive = {
+		focus = POL_further_modernize_our_weponary
+		}
+		
+		available = {}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				uses = 2
+				bonus = 0.25
+				category = artillery
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_special_forces
+		text = special_forces
+		icon = special_forces
+		x = 1
+		y = 1
+		relative_position_id = POL_further_artillery_research  
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_further_artillery_research
+		    focus = POL_further_modernize_our_weponary
+		}
+		
+		completion_reward = {
+	   add_ideas = LAT_special_forces
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_airport_Warszawa_Modlin
+		icon = air_production
+		x = 148
+		y = 0
+		cost = 7
+		
+	    completion_reward = {
+			random_owned_state = {
+				prioritize = { 10 }
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+		focus = {
+		id = POL_polish_airfoce
+		icon = Polish_air
+		x = 0
+		y = 1
+		relative_position_id = POL_airport_Warszawa_Modlin
+		cost = 7
+		
+		prerequisite = {
+		focus = POL_airport_Warszawa_Modlin
+		}
+		
+	    completion_reward = {
+			air_experience = 35
+		}
+	}
+	
+	focus = {
+		id = POL_promote_Andrzej_Duleba
+		icon = Andrzej_Duleba
+		x = -2
+		y = 1
+		relative_position_id = POL_polish_airfoce
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_promote_Ryszard_Olszewski
+		}
+		
+		prerequisite = {
+		    focus = POL_polish_airfoce
+		}
+		
+	    completion_reward = {
+		add_ideas = Andrzej_Duleba
+		add_tech_bonus = {
+				name = air_doc_bonus
+				bonus = 0.35
+				uses = 2
+				category = air_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_Naval_bomber_research
+		icon = naval_bomber
+		x = -2
+		y = 1
+		relative_position_id = POL_promote_Andrzej_Duleba
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_promote_Andrzej_Duleba
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 0.3
+				uses = 2
+				category = naval_air
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_better_bombing_techniques
+		icon = bombs2
+		x = 0
+		y = 1
+		relative_position_id = POL_Naval_bomber_research
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_Naval_bomber_research
+		}
+		
+		completion_reward = {
+			add_ideas = POL_better_bombing_techniques
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_bomber_research
+		icon = bomber
+		x = 0
+		y = 1
+		relative_position_id = POL_promote_Andrzej_Duleba
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_promote_Andrzej_Duleba
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 0.3
+				uses = 2
+				category = heavy_air
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_PZL_bomber_focus
+		icon = air_production
+		x = 0
+		y = 1
+		relative_position_id = POL_bomber_research
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_bomber_research
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_bomber_focus
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_promote_Ryszard_Olszewski
+		icon = Ryszard_Olszewski
+		x = 2
+		y = 1
+		relative_position_id = POL_polish_airfoce
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_promote_Andrzej_Duleba
+		}
+		
+		prerequisite = {
+		    focus = POL_polish_airfoce
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = air_doc_bonus
+				bonus = 0.35
+				uses = 2
+				category = air_doctrine
+			}
+		add_ideas = Ryszard_Olszewski
+		}
+	}
+	
+	focus = {
+		id = POL_fighter_research
+		icon = fighter
+		x = 0
+		y = 1
+		relative_position_id = POL_promote_Ryszard_Olszewski
+		cost = 7
+		
+		prerequisite = {
+		    focus = POL_promote_Ryszard_Olszewski
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.3
+				uses = 2
+				category = light_fighter
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_PZL_fighter_focus
+		icon = air_production
+		x = 0
+		y = 1
+		relative_position_id = POL_fighter_research
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_fighter_research
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_fighter_focus
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_CAS_research
+		text = LAT_CAS_research
+		icon = fighter2
+		x = 2
+		y = 1
+		relative_position_id = POL_promote_Ryszard_Olszewski
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_promote_Ryszard_Olszewski
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = cas_bomber
+				bonus = 0.25
+				uses = 2
+				category = cas_bomber
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_air_dominance
+		icon = air_defense
+		x = 0
+		y = 1
+		relative_position_id = POL_CAS_research
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_CAS_research
+		}
+		
+		completion_reward = {
+			add_ideas = POL_air_dominance
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_air_safety_reforms
+		text = generic_air_safety_reforms
+		icon = bombs
+		x = 0
+		y = 2
+		relative_position_id = POL_polish_airfoce
+		cost = 5
+		
+		prerequisite = {
+			focus = POL_polish_airfoce
+		}
+		
+		completion_reward = {
+			air_experience = 5
+			add_ideas = generic_air_force_safety_reforms
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_air_force_military_school
+		text = generic_air_force_military_school
+		icon = air_defense
+		x = 0
+		y = 1
+		relative_position_id = POL_air_safety_reforms
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_air_safety_reforms
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_air_force_military_school
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_scorpion_program
+		icon = airforce
+		x = 0
+		y = 1
+		relative_position_id = POL_air_force_military_school
+		cost = 7
+		
+		prerequisite = {
+			focus = POL_air_force_military_school
+		}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_2 
+				amount = 80
+				producer = POL
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_expand_the_Gdansk_port
+		icon = navy
+		x = 144
+		y = 5
+	  
+		cost = 6
+		
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				prioritize = { 85 }
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_polish_navy
+		icon = GFX_focus_Marynarka_Wojenna
+		x = 0
+		y = 1
+		relative_position_id = POL_expand_the_Gdansk_port
+		cost = 6
+		
+		available = {
+		has_completed_focus = POL_future_of_Poland
+		}
+		
+		prerequisite = {
+		focus = POL_expand_the_Gdansk_port
+		}
+		
+		completion_reward = {
+			navy_experience = 35
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Unrugs_legacy
+		icon = Jozef_Unrug
+		x = -2
+		y = 1
+		relative_position_id = POL_polish_navy
+		cost = 6
+		
+		mutually_exclusive = {
+		focus = POL_Wladyslaw_4s_legacy
+		}
+		
+		prerequisite = {
+			focus = POL_polish_navy
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.35
+				uses = 3
+				category = trade_interdiction_tree
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_submarine_research
+		icon = submarines
+		x = 0
+		y = 1
+		relative_position_id = POL_Unrugs_legacy
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_Unrugs_legacy
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.6
+				uses = 3
+				category = ss_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_destroyer_research
+		icon = anti_submarine
+		x = 2
+		y = 1
+		relative_position_id = POL_Unrugs_legacy
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_Unrugs_legacy
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.35
+				uses = 3
+				category = dd_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_destroyer_production
+		icon = battleships
+		x = 0
+		y = 1
+		relative_position_id = POL_destroyer_research
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_destroyer_research
+		}
+		
+		completion_reward = {
+			add_ideas = POL_destroyer_production
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	focus = {
+		id = POL_master_our_doctrine
+		icon = naval_doctrine
+		x = 0
+		y = 1
+		relative_position_id = POL_destroyer_production
+		cost = 6
+
+		
+		prerequisite = {
+			focus = POL_destroyer_production
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.35
+				uses = 3
+				category = trade_interdiction_tree
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_submarine_production
+		icon = create_submarine
+		x = 0
+		y = 1
+		relative_position_id = POL_submarine_research
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_submarine_research
+		}
+		
+		completion_reward = {
+			add_ideas = POL_submarine_production
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Joining_navy_is_adventure
+		icon = military_mission
+		x = 0
+		y = 1
+		relative_position_id = POL_submarine_production
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_submarine_production
+		}
+		
+		completion_reward = {
+			add_ideas = POL_Joining_navy_is_adventure
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_protect_the_coast
+		icon = coastal_fort
+		x = -2
+		y = 1
+		relative_position_id = POL_Unrugs_legacy
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_Unrugs_legacy
+		}
+		
+		completion_reward = {
+			add_ideas = POL_Unrugs_costal_plan
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_new_Pekin_plan
+		icon = navy2
+		x = 0
+		y = 1
+		relative_position_id = POL_protect_the_coast
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_protect_the_coast
+		}
+		
+		completion_reward = {
+			swap_ideas = { 
+					remove_idea = POL_Unrugs_costal_plan
+					add_idea = POL_Unrugs_costal_plan_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Never_surrender #!!!!
+		icon = wolf_packs
+		x = 0
+		y = 1
+		relative_position_id = POL_new_Pekin_plan
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_new_Pekin_plan
+		}
+		
+		completion_reward = {
+			swap_ideas = { 
+					remove_idea = POL_Unrugs_costal_plan_2
+					add_idea = POL_Unrugs_costal_plan_3 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_Wladyslaw_4s_legacy
+		icon = Wladyslaw_4
+		x = 2
+		y = 1
+		relative_position_id = POL_polish_navy
+		cost = 6
+		
+		mutually_exclusive = {
+		focus = POL_Unrugs_legacy
+		}
+		
+		prerequisite = {
+			focus = POL_polish_navy
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.35
+				uses = 3
+				category = fleet_in_being_tree
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_carriers
+		icon = carriers
+		x = 4
+		y = 1
+		relative_position_id = POL_Wladyslaw_4s_legacy
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_Wladyslaw_4s_legacy
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.6
+				uses = 3
+				category = cv_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_air_defences
+		icon = naval_doctrine
+		x = 0
+		y = 1
+		relative_position_id = POL_carriers
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_carriers
+		}
+		
+		completion_reward = {
+			add_ideas = POL_air_defences
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_cruisers_research
+		icon = cruisers
+		x = 2
+		y = 1
+		relative_position_id = POL_Wladyslaw_4s_legacy
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_Wladyslaw_4s_legacy
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.6
+				uses = 3
+				category = ca_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_destroy_the_undersea_rats #!!!!
+		icon = anti_submarine
+		x = 0
+		y = 1
+		relative_position_id = POL_cruisers_research
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_cruisers_research
+		}
+		
+		completion_reward = {
+			add_ideas = POL_destroy_the_undersea_rats
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_frigate_research
+		icon = battleships
+		x = 0
+		y = 1
+		relative_position_id = POL_Wladyslaw_4s_legacy
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_Wladyslaw_4s_legacy
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.35
+				uses = 3
+				category = dd_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_frigate_Production
+		text = POL_destroyer_production
+		icon = amphibious_assault
+		x = 0
+		y = 1
+		relative_position_id = POL_frigate_research
+		cost = 6
+		
+		prerequisite = {
+			focus = POL_frigate_research
+		}
+		
+		completion_reward = {
+			add_ideas = POL_destroyer_production
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Poland_rule_the_waves
+		icon = POL_rule_the_waves
+		x = 2
+		y = 1
+		relative_position_id = POL_frigate_Production
+		cost = 20
+		
+		prerequisite = {
+			focus = POL_frigate_Production
+		}
+		
+		prerequisite = {
+			focus = POL_destroy_the_undersea_rats
+		}
+		
+		prerequisite = {
+			focus = POL_air_defences
+		}
+		
+		completion_reward = {
+			add_ideas = POL_Poland_rule_the_waves
+			remove_ideas = POL_air_defences
+			remove_ideas = POL_destroy_the_undersea_rats
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_expand_Polish_Intelligence_Agency
+		icon = POL_Intelligence_Agency
+		x = 11
+		y = 0
+		relative_position_id = POL_expand_the_Gdansk_port
+		cost = 7
+		
+		allow_branch = {
+			has_dlc = "La Resistance" #without it u don't have agents, so if I want to keep the mod without large amount of dlcs I had to do it.
+		}
+		
+		available = {
+		has_completed_focus = POL_future_of_Poland
+		}
+		
+		completion_reward = {
+		create_intelligence_agency = yes
+		add_ideas = POL_AW
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_more_agents
+		icon = intelligence_exchange
+		x = 1
+		y = 1
+		relative_position_id = POL_expand_Polish_Intelligence_Agency
+		cost = 7
+		 prerequisite = {
+		 focus = POL_expand_Polish_Intelligence_Agency
+		 }
+		
+		completion_reward = {
+		create_operative_leader = {
+				name = "Piotr Krawczyk"
+				GFX = piotr_krawczyk.dds
+				traits = { operative_infiltrator operative_natural_orator }
+				bypass_recruitment = yes
+				available_to_spy_master = yes
+				nationalities = { POL PER }
+			}
+		custom_effect_tooltip = remove_political_advisor
+			show_ideas_tooltip = Marian_Zacharski 
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_learn_from_our_mistakes
+		icon = molotov_ribbentrop_pact
+		x = -1
+		y = 1
+		relative_position_id = POL_expand_Polish_Intelligence_Agency
+		cost = 7
+		 prerequisite = {
+		 focus = POL_expand_Polish_Intelligence_Agency
+		 }
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = POL_AW
+					add_idea = POL_AW_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_expand_ABW
+		icon = national_unity
+		x = 2
+		y = 1
+		relative_position_id = POL_learn_from_our_mistakes
+		cost = 7
+		
+		 prerequisite = {
+		 focus = POL_learn_from_our_mistakes
+		 }
+		
+		prerequisite = {
+		 focus = POL_more_agents
+		 }
+		
+		completion_reward = {
+		add_stability = 0.05
+		swap_ideas = { 
+					remove_idea = POL_AW_2
+					add_idea = POL_AW_3 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_legacy_of_the_3
+		icon = cryptologic_bomb
+		x = 0
+		y = 1
+		relative_position_id = POL_learn_from_our_mistakes
+		cost = 7
+		
+		 prerequisite = {
+		 focus = POL_learn_from_our_mistakes
+		 }
+		
+		prerequisite = {
+		 focus = POL_more_agents
+		 }
+		
+		completion_reward = {
+		add_ideas = POL_legacy_of_the_3
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_new_Stawka_wieksza_niz_zycie
+		icon = propaganda
+		x = 0
+		y = 1
+		relative_position_id = POL_legacy_of_the_3
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_improve_spy_traning
+		}
+		
+		 prerequisite = {
+		 focus = POL_legacy_of_the_3
+		 }
+		
+		prerequisite = {
+		 focus = POL_expand_ABW
+		 }
+		
+		completion_reward = {
+		add_political_power = 50
+		swap_ideas = { 
+					remove_idea = POL_AW_3
+					add_idea = POL_AW_4 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_improve_spy_traning
+		icon = intelligence_exchange2
+		x = 2
+		y = 1
+		relative_position_id = POL_legacy_of_the_3
+		cost = 7
+		
+		mutually_exclusive = {
+		focus = POL_new_Stawka_wieksza_niz_zycie
+		}
+		
+		 prerequisite = {
+		 focus = POL_legacy_of_the_3
+		 }
+		
+		prerequisite = {
+		 focus = POL_expand_ABW
+		 }
+		
+		completion_reward = {
+		add_political_power = 50
+		swap_ideas = { 
+					remove_idea = POL_AW_3
+					add_idea = POL_AW_5 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_revive_LMiR
+		icon = navy2
+		x = 155
+		y = 0
+		cost = 20
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_owned_by = ROOT
+				is_controlled_by = ROOT
+			}
+		}
+		
+		completion_reward = {
+		add_ideas = POL_LMiR	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+focus = {
+		id = POL_focus_on_madegascar
+		icon = alliance_green
+		x = 0
+		y = 1
+		relative_position_id = POL_revive_LMiR
+		cost = 5
+
+        bypass = {
+        NOT = { country_exists = MAD } 
+        }
+
+		available = {
+		   country_exists = MAD 	
+		}
+		
+		prerequisite = {
+			focus = POL_revive_LMiR
+		}
+		
+		completion_reward = {
+		custom_effect_tooltip = POL_madegascar_focus_decisions_tt	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_invest_in_Madegascarian_recources
+		icon = construction2
+		x = 0
+		y = 1
+		relative_position_id = POL_focus_on_madegascar
+		cost = 7
+
+        bypass = {
+        NOT = { country_exists = MAD } 
+        }
+
+		available = {
+		  has_country_flag = invested_in_MAD_recources
+		MAD = { is_subject_of = POL }
+		 }
+		prerequisite = {
+			focus = POL_focus_on_madegascar
+		}
+		
+		completion_reward = {
+		543 = { 
+		add_resource = { type = chromium amount = 4 }
+	    add_resource = { type = tungsten amount = 4 }
+		add_resource = { type = rubber amount = 8 }
+		add_resource = { type = steel amount = 5 }
+		add_resource = { type = oil amount = 8 }
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_reconsile_our_ties_with_liberia
+		icon = alliance_purple
+		x = 2
+		y = 1
+		relative_position_id = POL_revive_LMiR
+		cost = 5
+
+        bypass = {
+        NOT = { country_exists = LIB } 
+        }
+
+		available = {
+		   country_exists = LIB 	
+		}
+		
+		prerequisite = {
+			focus = POL_revive_LMiR
+		}
+		
+		completion_reward = {
+		LIB = { country_event = poland.9 }
+		custom_effect_tooltip = POL_lib_relations_focus_decisions_tt	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_takeover_of_firestone
+		icon = construction2
+		x = 0
+		y = 1
+		relative_position_id = POL_reconsile_our_ties_with_liberia
+		cost = 7
+
+        bypass = {
+        NOT = { country_exists = LIB } 
+        }
+
+		available = {
+		LIB = {
+		 is_subject_of = POL
+		 }
+	}
+		prerequisite = {
+			focus = POL_reconsile_our_ties_with_liberia
+		}
+		
+		completion_reward = {
+		298 = { 
+		add_extra_state_shared_building_slots = 3
+		add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+		add_resource = { type = rubber amount = 20 }
+		add_resource = { type = steel amount = 5 }
+		add_resource = { type = oil amount = 5 }
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_support_fishing_Industry
+		icon = naval_dockyards
+		x = 4
+		y = 1
+		relative_position_id = POL_revive_LMiR
+		cost = 7
+
+        bypass = {
+        }
+
+		available = {
+	  }
+		prerequisite = {
+			focus = POL_revive_LMiR
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = POL_LMiR
+					add_idea = POL_LMiR_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = POL_retake_Gambia
+		icon = improve_relations_dark_green
+		x = 0
+		y = 1
+		relative_position_id = POL_support_fishing_Industry
+		cost = 7
+
+        bypass = {
+        }
+
+		available = {
+	  }
+		prerequisite = {
+			focus = POL_support_fishing_Industry
+		}
+		
+		completion_reward = {
+		GAM = { country_event = poland.9 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	} 
+	
+	focus = {
+		id = POL_retake_Trinad_and_Tobago
+		icon = improve_relations_dark_green
+		x = 0
+		y = 1
+		relative_position_id = POL_retake_Gambia
+		cost = 7
+
+        bypass = {
+        }
+
+		available = {
+	  }
+		prerequisite = {
+			focus = POL_retake_Gambia
+		}
+		
+		completion_reward = {
+		TRI = { country_event = poland.9 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	} 
+	
+	focus = {
+		id = POL_Poltical_alliance_with_Argentina
+		icon = alliance_blue
+		x = 0
+		y = 1
+		relative_position_id = POL_retake_Trinad_and_Tobago
+		cost = 7
+
+        mutually_exclusive = {
+		focus = POL_demand_Rio_grande_sul_and_Santa_Catarina
+		}
+
+        bypass = {
+        }
+
+		available = {
+	  }
+		prerequisite = {
+			focus = POL_retake_Trinad_and_Tobago
+		}
+		
+		completion_reward = {
+		ARG = { country_event = poland.10 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	} 
+	
+	focus = {
+		id = POL_demand_Rio_grande_sul_and_Santa_Catarina
+		icon = align_to_brazil
+		x = 2
+		y = 1
+		relative_position_id = POL_retake_Trinad_and_Tobago
+		cost = 7
+
+        mutually_exclusive = {
+		focus = POL_Poltical_alliance_with_Argentina
+		}
+
+        bypass = {
+        }
+
+		available = {
+	  }
+		prerequisite = {
+			focus = POL_retake_Trinad_and_Tobago
+		}
+		
+		completion_reward = {
+		BRA = { country_event = poland.11 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	} 
+	
+	focus = {
+		id = POL_Polish_colonial_empire
+		icon = align_to_poland
+		x = 0
+		y = 3
+		relative_position_id = POL_takeover_of_firestone
+		cost = 7
+
+        bypass = {
+        }
+
+		available = {
+	  }
+		prerequisite = {
+			focus = POL_demand_Rio_grande_sul_and_Santa_Catarina
+		    focus = POL_Poltical_alliance_with_Argentina
+		}
+		
+		prerequisite = {
+		    focus = POL_takeover_of_firestone
+		}
+		
+		prerequisite = {
+		    focus = POL_invest_in_Madegascarian_recources
+		}
+		
+		completion_reward = {
+		add_stability = 0.05
+		add_political_power = 200
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	}

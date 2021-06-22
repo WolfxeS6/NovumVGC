@@ -1,0 +1,4716 @@
+shared_focus = {
+	id = POL_spread_the_revolution
+	icon = attack_democracy2
+	x = 68
+	y = 0
+	cost = 10
+
+	available = {
+	always = no
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	set_rule = { can_create_factions = yes }
+	create_faction = POL_Warsaw_pact
+	every_country = {
+				limit = { 
+					NOT = { original_tag = POL }
+				}
+				add_popularity = {
+				ideology = democratic_socialist
+			popularity = 0.05
+			}
+				add_popularity = {
+				ideology = communist
+				popularity = 0.05
+			}
+			}
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+		id = POL_unite_all_the_communists
+		dynamic = yes #name change for ZSL from communists to farmers
+		icon = communism5
+		x = -1
+		y = 1
+		relative_position_id = POL_spread_the_revolution 
+		cost = 20
+		
+		mutually_exclusive = {
+		focus = POL_keep_nations
+		}
+		
+		prerequisite = {
+		focus = POL_spread_the_revolution
+		}
+		
+	    completion_reward = {
+			set_country_flag = POL_comonwelth_disabled
+			custom_effect_tooltip = u_get_cores_stuff_and_u_also_get_the_whole_world
+			set_cosmetic_tag = POL_united_comies
+	}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_keep_nations
+		icon = democracy
+		x = 1
+		y = 1
+		relative_position_id = POL_spread_the_revolution 
+		cost = 7.2
+		
+		mutually_exclusive = {
+		focus = POL_unite_all_the_communists
+		}
+		
+		prerequisite = {
+		focus = POL_spread_the_revolution
+		}
+		
+	    completion_reward = {
+			custom_effect_tooltip = u_only_get_cores_on_certain_territories
+			add_stability = 0.05
+	}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_operation_wyprawa_Kijowska
+		icon = attack_ukraine
+		x = -3
+		y = 1
+		relative_position_id = POL_keep_nations 
+		cost = 7.2
+		
+		prerequisite = {
+		focus = POL_keep_nations
+		focus = POL_unite_all_the_communists
+		}
+		
+		will_lead_to_war_with = UKR
+	    completion_reward = {
+		hidden_effect = {
+			create_wargoal = { 
+				type = annex_everything 
+				target = UKR 
+			}
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = UKR 
+		}
+		if = {
+				limit = {
+					has_completed_focus = POL_unite_all_the_communists
+				}
+	every_state = {
+					limit = { is_core_of = UKR }
+					add_core_of = POL
+				}
+	}
+	else = {
+	
+	}
+}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_operation_czerwona_rus
+		icon = war
+		x = 0
+		y = 1
+		relative_position_id = POL_operation_wyprawa_Kijowska 
+		cost = 7.2
+		
+		prerequisite = {
+		focus = POL_operation_wyprawa_Kijowska
+		}
+		
+		will_lead_to_war_with = BLR
+	    completion_reward = {
+		hidden_effect = {
+			create_wargoal = { 
+				type = annex_everything 
+				target = BLR
+			}
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = BLR 
+		}
+		if = {
+				limit = {
+					has_completed_focus = POL_unite_all_the_communists
+				}
+	every_state = {
+					limit = { is_core_of = BLR }
+					add_core_of = POL
+				}
+	}
+	else = {
+	
+	}
+}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_2nd_Bunt_zeligowskiego
+		icon = attack_lithuania
+		x = -1
+		y = 1
+		relative_position_id = POL_keep_nations 
+		cost = 7.2
+		
+		prerequisite = {
+		focus = POL_keep_nations
+		focus = POL_unite_all_the_communists
+		}
+		
+		will_lead_to_war_with = LIT
+	    completion_reward = {
+			LIT = {country_event = CDP.1 }
+	}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_operation_Inflanty
+		icon = war2_teal
+		x = 0
+		y = 1
+		relative_position_id = POL_2nd_Bunt_zeligowskiego 
+		cost = 10
+		
+		prerequisite = {
+		focus = POL_2nd_Bunt_zeligowskiego
+		}
+		
+		will_lead_to_war_with = LAT
+		will_lead_to_war_with = EST
+	    completion_reward = {
+		hidden_effect = {
+			create_wargoal = { 
+				type = annex_everything 
+				target = LAT 
+			}
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = LAT 
+		}
+		hidden_effect = {
+			create_wargoal = { 
+				type = annex_everything 
+				target = EST 
+			}
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = EST 
+		}
+		if = {
+				limit = {
+					has_completed_focus = POL_unite_all_the_communists
+				}
+	every_state = {
+					limit = { is_core_of = LAT }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = EST }
+					add_core_of = POL
+				}
+	}
+	else = {
+	
+	}
+}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_operation_Chrobry
+		icon = war2_purple
+		x = 1
+		y = 1
+		relative_position_id = POL_keep_nations 
+		cost = 10
+		
+		prerequisite = {
+		focus = POL_keep_nations
+		focus = POL_unite_all_the_communists
+		}
+		
+		will_lead_to_war_with = CZE
+		will_lead_to_war_with = SLO
+	    completion_reward = {
+		hidden_effect = {
+			create_wargoal = { 
+				type = annex_everything 
+				target = SLO 
+			}
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = SLO 
+		}
+		hidden_effect = {
+			create_wargoal = { 
+				type = annex_everything 
+				target = CZE 
+			}
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = CZE 
+		}
+		if = {
+				limit = {
+					has_completed_focus = POL_unite_all_the_communists
+				}
+	every_state = {
+					limit = { is_core_of = SLO }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = CZE }
+					add_core_of = POL
+				}
+	}
+	else = {
+	72 = { add_core_of = POL } #adds core on Zaolzie
+	}
+}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_Polak_wegier_dwa_bratanki
+		icon = rich_drinks
+		x = 0
+		y = 1
+		relative_position_id = POL_operation_Chrobry 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_operation_Chrobry
+		}
+		
+		will_lead_to_war_with = HUN
+	    completion_reward = {
+		if = {
+				limit = {
+					has_completed_focus = POL_unite_all_the_communists
+				}
+	HUN = { country_event = CDP.4 }
+	every_state = {
+					limit = { is_core_of = HUN }
+					add_core_of = POL
+				}
+	
+	}
+	else = {
+	HUN = { country_event = poland.9 }
+	}
+}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_2nd_phase
+		icon = army_logistics
+		x = 0
+		y = 1
+		relative_position_id = POL_operation_Inflanty 
+		cost = 5
+		
+		prerequisite = {
+		focus = POL_operation_czerwona_rus
+		}
+		
+		prerequisite = {
+		focus = POL_operation_Inflanty
+		}
+		
+		prerequisite = {
+		focus = POL_Polak_wegier_dwa_bratanki
+		}
+		
+	    completion_reward = {
+		add_political_power = 100
+}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_rule_Balkans
+		icon = align_to_balkans
+		x = 2
+		y = 1
+		relative_position_id = POL_2nd_phase 
+		cost = 30
+		
+		prerequisite = {
+		focus = POL_2nd_phase
+		}
+		
+	    completion_reward = {
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  ROM
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  SER 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  MAC 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  KOS 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  CRO 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  MNT 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  BOS 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  GRE 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  ALB 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  MOL 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  TRA 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  SLV 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  TUR 
+		}
+		if = {
+				limit = {
+					has_completed_focus = POL_unite_all_the_communists
+				}
+	every_state = {
+					limit = { is_core_of = ROM }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = SER }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = MAC }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = KOS }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = MNT }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = BOS }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = CRO }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = GRE }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = ALB }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = MOL }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = TRA }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = SLV }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = TUR }
+					add_core_of = POL
+				}
+	}
+	else = {
+	
+	}
+	}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_Liberate_Scandinavia
+		icon = propaganda_communist
+		x = 0
+		y = 1
+		relative_position_id = POL_2nd_phase 
+		cost = 14.4
+		
+		prerequisite = {
+		focus = POL_2nd_phase
+		}
+		
+		will_lead_to_war_with = FIN
+		will_lead_to_war_with = NOR
+		will_lead_to_war_with = SWE
+	    completion_reward = {
+		hidden_effect = {
+			create_wargoal = { 
+				type = annex_everything 
+				target = NOR 
+			}
+			create_wargoal = { 
+				type = annex_everything 
+				target = SWE 
+			}
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  GRN 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  ICE 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  DEN 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  FIN 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  SWE 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target =  NOR 
+		}
+		if = {
+				limit = {
+					has_completed_focus = POL_unite_all_the_communists
+				}
+	every_state = {
+					limit = { is_core_of = GRN }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = ICE }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = FIN }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = DEN }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = SWE }
+					add_core_of = POL
+				}
+	every_state = {
+					limit = { is_core_of = NOR }
+					add_core_of = POL
+				}
+	}
+	else = {
+	
+	}
+}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_free_the_birth_place_of_Marx
+		icon = marx
+		x = -2
+		y = 1
+		relative_position_id = POL_2nd_phase 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_2nd_phase
+		}
+		
+		will_lead_to_war_with = GER
+	    completion_reward = {
+		hidden_effect = {
+			create_wargoal = { 
+				type = annex_everything 
+				target = GER 
+			}
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = GER 
+		}
+		if = {
+				limit = {
+					has_completed_focus = POL_unite_all_the_communists
+				}
+	every_state = {
+					limit = { is_core_of = GER }
+					add_core_of = POL
+				}
+	}
+	else = {
+	
+	}
+}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_the_time_is_running_out
+		icon = territorial_claims
+		x = 2
+		y = 1
+		relative_position_id = POL_free_the_birth_place_of_Marx 
+		cost = 7.2
+		
+		prerequisite = {
+			focus = POL_free_the_birth_place_of_Marx
+		}
+		
+		prerequisite = {
+			focus = POL_Liberate_Scandinavia
+		}
+		
+		prerequisite = {
+			focus = POL_rule_Balkans
+		}
+		
+		completion_reward = {
+		add_manpower = 50000
+		add_war_support = 1.0
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_prepare_the_industry
+		icon = industry_military
+		x = 0
+		y = 1
+		relative_position_id = POL_the_time_is_running_out 
+		cost = 7.2
+		
+		prerequisite = {
+			focus = POL_the_time_is_running_out
+		}
+		
+		completion_reward = {
+		add_ideas = POL_industry_is_ready
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_militarized_industry
+		icon = construction
+		x = -2
+		y = 1
+		relative_position_id = POL_the_time_is_running_out 
+		cost = 7.2
+		
+		prerequisite = {
+			focus = POL_the_time_is_running_out
+		}
+		
+		completion_reward = {
+		add_political_power = -400
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 3
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 3
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 3
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 3
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_peoples_army
+		icon = army_officers_communist
+		x = 2
+		y = 1
+		relative_position_id = POL_the_time_is_running_out 
+		cost = 7.2
+		
+		prerequisite = {
+			focus = POL_the_time_is_running_out
+		}
+		
+		completion_reward = {
+		add_ideas = POL_peoples_army
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_world_revolution
+		icon = communism9
+		x = -2
+		y = 1
+		relative_position_id = POL_peoples_army 
+		cost = 20
+		
+		available = {
+		is_faction_leader = yes
+		}
+		
+		prerequisite = {
+			focus = POL_militarized_industry
+		}
+		
+		prerequisite = {
+			focus = POL_peoples_army
+		}
+		
+		prerequisite = {
+			focus = POL_prepare_the_industry
+		}
+		
+		completion_reward = {
+		if = {
+				limit = {
+					has_completed_focus = POL_unite_all_the_communists
+				}
+	every_state = {
+					limit = { NOT = { is_core_of = POL } }
+					add_core_of = POL
+				}
+	}
+		custom_effect_tooltip = war_with_every_country
+		hidden_effect = {
+		every_country = {
+				limit = { 
+					is_in_faction_with = POL
+					is_subject = no
+					NOT = { has_war_with = POL }
+				}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = POL 
+	  }
+	 }
+	}
+	     }
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+	id = POL_for_farmers
+	icon = agriculture
+	x = 25
+	y = 0
+	cost = 7.20
+
+	available = {
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	hidden_effect = {
+			mark_focus_tree_layout_dirty = yes
+		}
+	add_stability = 0.1
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+	id = POL_Peasant_Battalions
+	icon = military_sphere
+	x = 0
+	y = 1
+	cost = 7.20
+    relative_position_id = POL_for_farmers
+
+    prerequisite = {
+	focus = POL_for_farmers
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	custom_effect_tooltip = POL_Peasant_Battalions_tt
+	hidden_effect = {
+	division_template = {
+						name = "Bataliony Chłopskie"
+						priority = 2
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+				
+		    	   		 	infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+				
+		    	   		 	infantry = { x = 2 y = 0 }
+							artillery_brigade = { x = 2 y = 1 }
+							artillery_brigade = { x = 2 y = 2 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							recon = { x = 0 y = 1 }
+						}
+					}
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 69 }
+					create_unit = {
+						division = "name = \"Chłopska Straż\" division_template = \"Bataliony Chłopskie\" start_experience_factor = 1.0" 
+						owner = POL
+					}
+				}
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 69 }
+					create_unit = {
+						division = "name = \"Chłostra\" division_template = \"Bataliony Chłopskie\" start_experience_factor = 1.0" 
+						owner = POL
+					}
+				}
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 69 }
+					create_unit = {
+						division = "name = \"Żywią i Bronią\" division_template = \"Bataliony Chłopskie\" start_experience_factor = 1.0" 
+						owner = POL
+					}
+				}
+		}
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+		id = POL_expand_agrarian_part_of_Szczecin_university
+		icon = research
+		x = -2
+		y = 1
+		relative_position_id = POL_for_farmers 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_for_farmers
+		}
+		
+		completion_reward = {
+		add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_further_farmer_subsidization
+		icon = concessions2
+		x = 2
+		y = 1
+		relative_position_id = POL_for_farmers 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_for_farmers
+		}
+		
+		completion_reward = {
+		every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_manpower = 15000
+			}
+		}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+shared_focus = {
+		id = POL_farmers_revolution
+		icon = war3
+		x = 0
+		y = 1
+		relative_position_id = POL_Peasant_Battalions 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_Peasant_Battalions
+		}
+		
+		prerequisite = {
+		focus = POL_further_farmer_subsidization
+		}
+		
+		prerequisite = {
+		focus = POL_expand_agrarian_part_of_Szczecin_university
+		}
+		
+	    completion_reward = {
+			add_war_support = 0.15
+			unlock_national_focus = POL_spread_the_revolution
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_every_man_a_farmer
+		icon = become_puppet
+		x = 0
+		y = 1
+		relative_position_id = POL_farmers_revolution 
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = POL_every_farmer_a_king
+		}
+		
+		prerequisite = {
+		focus = POL_farmers_revolution
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_every_man_a_farmer_idea
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_utalize_the_old_tools
+		icon = production
+		x = 0
+		y = 1
+		relative_position_id = POL_every_man_a_farmer 
+		cost = 10
+		
+		prerequisite = {
+		focus = POL_every_man_a_farmer
+		}
+		
+	    completion_reward = {
+			swap_ideas = { 
+					remove_idea = POL_every_man_a_farmer_idea
+					add_idea = POL_every_man_a_farmer_idea_2 
+				}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_every_farmer_a_king
+		icon = monarchy5
+		x = -2
+		y = 1
+		relative_position_id = POL_farmers_revolution 
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = POL_every_man_a_farmer
+		}
+		
+		prerequisite = {
+		focus = POL_farmers_revolution
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_every_farmer_a_king_idea
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_500_plus_for_farmers
+		icon = agrarian_reform
+		x = 0
+		y = 1
+		relative_position_id = POL_every_farmer_a_king 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_every_farmer_a_king
+		}
+		
+	    completion_reward = {
+			swap_ideas = { 
+					remove_idea = POL_every_farmer_a_king_idea
+					add_idea = POL_every_farmer_a_king_idea_2 
+				}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = Farming_oligarchs
+		icon = rich_drinks
+		x = 2
+		y = 1
+		relative_position_id = POL_farmers_revolution 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_farmers_revolution
+		}
+		
+	    completion_reward = {
+		every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_manpower = 10000
+			}
+		}
+		add_political_power = 150
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_support_small_markets_agrarian
+		icon = money
+		x = 0
+		y = 1
+		relative_position_id = Farming_oligarchs 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = Farming_oligarchs
+		}
+		
+	    completion_reward = {
+		add_offsite_building = { type = industrial_complex level = 2 }
+		add_stability = 0.1
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_modern_agrarian_nation
+		icon = house
+		x = 0
+		y = 1
+		relative_position_id = POL_utalize_the_old_tools 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_500_plus_for_farmers
+		focus = POL_utalize_the_old_tools
+		}
+		
+		prerequisite = {
+		focus = POL_support_small_markets_agrarian
+		}
+		
+	    completion_reward = {
+		add_political_power = 100
+		add_stability = 0.1
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+ 
+shared_focus = {
+		id = POL_protet_farmers_religion
+		icon = christianity
+		x = -2
+		y = 1
+		relative_position_id = POL_modern_agrarian_nation 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_modern_agrarian_nation
+		}
+		
+	    completion_reward = {
+		add_ideas = POL_Christian_democracy_idea
+		}
+	ai_will_do = {
+			factor = 10
+	}
+} 
+ 
+shared_focus = {
+		id = POL_reform_the_prison_system
+		icon = become_puppet
+		x = 0
+		y = 1
+		relative_position_id = POL_modern_agrarian_nation 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_modern_agrarian_nation
+		}
+		
+	    completion_reward = {
+		add_ideas = POL_new_prison_system
+		}
+	ai_will_do = {
+			factor = 10
+	}
+} 
+ 
+shared_focus = {
+		id = POL_strenghten_ZMW
+		icon = wolf_packs
+		x = 2
+		y = 1
+		relative_position_id = POL_modern_agrarian_nation 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_modern_agrarian_nation
+		}
+		
+	    completion_reward = {
+		add_stability = 0.1
+		add_manpower = 50000
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}  
+ 
+shared_focus = {
+		id = POL_agrarian_Sanacja
+		icon = agrarian_reform
+		x = -1
+		y = 1
+		relative_position_id = POL_reform_the_prison_system 
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = POL_strenghten_ZSL
+		}
+		
+		available = {
+		NOT = { has_completed_focus = POL_every_man_a_farmer }
+		}
+		
+		prerequisite = {
+		focus = POL_protet_farmers_religion
+		}
+		
+		prerequisite = {
+		focus = POL_strenghten_ZMW
+		}
+		
+		prerequisite = {
+		focus = POL_reform_the_prison_system
+		}
+		
+	    completion_reward = {
+		set_party_name = {
+				ideology = democratic_socialist
+				long_name = POL_democratic_socialist_party_BBWR_long
+				name = POL_democratic_socialist_party_BBWR
+			}
+		add_stability = 0.1
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}    
+ 
+shared_focus = {
+		id = POL_strenghten_ZSL
+		icon = agrarian_socialism
+		x = 1
+		y = 1
+		relative_position_id = POL_reform_the_prison_system 
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = POL_agrarian_Sanacja
+		}
+		
+		prerequisite = {
+		focus = POL_protet_farmers_religion
+		}
+		
+		prerequisite = {
+		focus = POL_strenghten_ZMW
+		}
+		
+		prerequisite = {
+		focus = POL_reform_the_prison_system
+		}
+		
+	    completion_reward = {
+		add_political_power = 100
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}   
+ 
+shared_focus = {
+	id = POL_victory_for_true_revolution
+	icon = communism4
+	x = 25
+	y = 0
+	cost = 7.20
+
+	available = {
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	hidden_effect = {
+			mark_focus_tree_layout_dirty = yes
+		}
+	add_stability = 0.05
+	add_political_power = 100
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+	id = POL_cult_of_Trotsky
+	icon = Trotsky
+	x = 3
+	y = 1
+	cost = 7.20
+    relative_position_id = POL_victory_for_true_revolution
+
+    mutually_exclusive = {
+	focus = POL_cult_of_Stalin
+	}
+
+    prerequisite = {
+	focus = POL_victory_for_true_revolution
+	}
+
+	available = {
+	has_country_flag = Trotskist_path
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+	remove_idea = POL_down_with_stalin
+	add_idea = POL_cult_of_Trotsky 
+				}
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+		id = POL_literaci_do_piora_studenci_do_nauki
+		icon = tech_sharing
+		x = -3
+		y = 1
+		relative_position_id = POL_cult_of_Trotsky 
+		cost = 10
+		
+		prerequisite = {
+			focus = POL_cult_of_Stalin
+			focus = POL_cult_of_Trotsky
+		}
+		
+		completion_reward = {
+			add_political_power = -100
+			add_stability = -0.1
+			add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_attack_giedroyc_ideas
+		icon = giedroyc_with_chains
+		x = -1
+		y = 1
+		relative_position_id = POL_literaci_do_piora_studenci_do_nauki 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_literaci_do_piora_studenci_do_nauki
+		}
+		
+		completion_reward = {
+			add_war_support = 0.15
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_revive_ZOMO
+		icon = special_forces
+		x = 1
+		y = 1
+		relative_position_id = POL_literaci_do_piora_studenci_do_nauki 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_literaci_do_piora_studenci_do_nauki
+		}
+		
+		completion_reward = {
+			add_ideas = POL_ZOMO
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_workers_revolution
+		icon = war3
+		x = -1
+		y = 1
+		relative_position_id = POL_revive_ZOMO 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_revive_ZOMO
+		}
+		
+		prerequisite = {
+		focus = POL_attack_giedroyc_ideas
+		}
+		
+	    completion_reward = {
+			add_manpower = 5000
+			unlock_national_focus = POL_spread_the_revolution
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_form_Gulags
+		icon = become_puppet
+		x = -1
+		y = 1
+		relative_position_id = POL_workers_revolution 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_workers_revolution
+		}
+		
+	    completion_reward = {
+			add_ideas = Gulags
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_will_of_the_people
+		icon = communism5
+		x = 1
+		y = 1
+		relative_position_id = POL_workers_revolution 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_workers_revolution
+		}
+		
+	    completion_reward = {
+			add_ideas = idea_focus_generic_will_of_the_people
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_anti_facism 
+		icon = attack_fascism
+		x = -1
+		y = 1
+		relative_position_id = POL_cult_of_Trotsky 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_cult_of_Trotsky
+		}
+		
+		completion_reward = {
+			add_political_power = 100
+		    fourth_estate_reactionary_decrease = yes
+			fourth_estate_fascist_decrease = yes
+			fourth_estate_nationalist_decrease = yes
+			fourth_estate_conservative_decrease = yes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_new_fourth_international_congress
+		icon = fourth_international
+		x = 1
+		y = 1
+		relative_position_id = POL_cult_of_Trotsky 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_cult_of_Trotsky
+		}
+		
+		completion_reward = {
+	swap_ideas = { 
+	remove_idea = POL_cult_of_Trotsky
+	add_idea = POL_cult_of_Trotsky_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_no_more_prl
+		icon = attack_communism
+		x = -1
+		y = 1
+		relative_position_id = POL_new_fourth_international_congress 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_new_fourth_international_congress
+		}
+		
+		prerequisite = {
+			focus = POL_anti_facism
+		}
+		
+		completion_reward = {
+	add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_safeguard_the_revolution
+		icon = defence
+		x = 0
+		y = 1
+		relative_position_id = POL_no_more_prl 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_no_more_prl
+		}
+		
+		completion_reward = {
+	custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = Hugo_Blanco #leader of the internationale
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_support_trade_unions
+		icon = work_red
+		x = 2
+		y = 1
+		relative_position_id = POL_no_more_prl 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_no_more_prl
+		}
+		
+		completion_reward = {
+	add_ideas = POL_begin_union_empowerment
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_militarization_of_work
+		icon = industry_military
+		x = 4
+		y = 1
+		relative_position_id = POL_no_more_prl 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_no_more_prl
+		}
+		
+		completion_reward = {
+	add_ideas = POL_militarization_of_work
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_labor_armies
+		icon = military_mission
+		x = 0
+		y = 1
+		relative_position_id = POL_militarization_of_work 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_militarization_of_work
+		}
+		
+		completion_reward = {
+	custom_effect_tooltip = POL_labor_armies_tt
+	hidden_effect = {
+	division_template = {
+						name = "Labor Army"
+						priority = 2
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+				
+		    	   		 	infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+				
+		    	   		 	infantry = { x = 2 y = 0 }
+							artillery_brigade = { x = 2 y = 1 }
+							artillery_brigade = { x = 2 y = 2 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							recon = { x = 0 y = 1 }
+						}
+					}
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 69 }
+					create_unit = {
+						division = "name = \"Labor Army 1\" division_template = \"Labor Army\" start_experience_factor = 0.5" 
+						owner = POL
+					}
+				}
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 69 }
+					create_unit = {
+						division = "name = \"Labor Army 2\" division_template = \"Labor Army\" start_experience_factor = 0.5" 
+						owner = POL
+					}
+				}
+		}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+	id = POL_cult_of_Stalin
+	icon = Stalin
+	x = -3
+	y = 1
+	cost = 7.20
+    relative_position_id = POL_victory_for_true_revolution
+
+    mutually_exclusive = {
+	focus = POL_cult_of_Trotsky
+	}
+
+    prerequisite = {
+	focus = POL_victory_for_true_revolution
+	}
+
+	available = {
+	has_country_flag = Stalinist_path
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_stability = 0.05
+	add_political_power = 100
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+	id = POL_restore_the_1952_constitution
+	icon = constitution
+	x = 0
+	y = 1
+	cost = 7.20
+    relative_position_id = POL_cult_of_Stalin
+
+    prerequisite = {
+	focus = POL_cult_of_Stalin
+	}
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = POL_3_times_yes
+					add_idea = POL_restored_1952_constitution 
+				}
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+	id = POL_ban_unemployment
+	icon = industry_communist
+	x = -2
+	y = 1
+	cost = 10
+    relative_position_id = POL_cult_of_Stalin
+
+    prerequisite = {
+	focus = POL_cult_of_Stalin
+	}
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+	random_owned_state = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				    }
+			}
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+	id = POL_revive_pzpr
+	icon = PZPR
+	x = 1
+	y = 1
+	cost = 7.20
+    relative_position_id = POL_ban_unemployment
+
+    prerequisite = {
+	focus = POL_ban_unemployment
+	}
+
+    prerequisite = {
+	focus = POL_restore_the_1952_constitution
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_stability = 0.1
+	add_political_power = 60
+	set_party_name = {
+				ideology =  communist 
+				long_name = POL_communist_party_pzpr_long
+				name = POL_communist_party_pzpr
+			}
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+	id = POL_restore_Rationing_of_goods
+	icon = consumer_goods
+	x = 0
+	y = 1
+	cost = 7.20
+    relative_position_id = POL_revive_pzpr
+
+    prerequisite = {
+	focus = POL_revive_pzpr
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_war_support = -0.05
+	add_ideas = POL_rationing_of_goods
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+	id = POL_industrialization_schemes
+	icon = industry_civilian
+	x = -4
+	y = 1
+	cost = 10
+    relative_position_id = POL_revive_pzpr
+
+    prerequisite = {
+	focus = POL_revive_pzpr
+	}
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	custom_effect_tooltip = unlock_industrial_build_up_decisions
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+	id = POL_pardon_Gierek
+	icon = Gierek
+	x = -2
+	y = 1
+	cost = 7.20
+    relative_position_id = POL_revive_pzpr
+
+    prerequisite = {
+	focus = POL_revive_pzpr
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_political_power = 140
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = { 
+	id = POL_plans_for_the_future
+	icon = army_logistics
+	x = 25
+	y = 0
+	cost = 7.20
+
+	available = {
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	hidden_effect = {
+			mark_focus_tree_layout_dirty = yes
+		}
+	add_political_power = 100
+	}
+ai_will_do = {
+			factor = 10 
+	}
+}
+
+shared_focus = {
+		id = POL_begin_destroying_bureaucracy
+		icon = restrict_beurocracy
+		x = -2
+		y = 1
+		relative_position_id = POL_plans_for_the_future 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_plans_for_the_future
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_begin_destroying_bureaucracy
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_protect_rights_of_workers
+		icon = construction4
+		x = 2
+		y = 1
+		relative_position_id = POL_plans_for_the_future 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_plans_for_the_future
+		}
+		
+	    completion_reward = {
+			add_stability = 0.1
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_further_union_empowerment
+		icon = work_red
+		x = 0
+		y = 1
+		relative_position_id = POL_plans_for_the_future 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_plans_for_the_future
+		}
+		
+	    completion_reward = {
+			swap_ideas = { 
+					remove_idea = POL_begin_union_empowerment
+					add_idea = POL_full_on_union_empowerment 
+				}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_procliam_workers_revolution
+		icon = war3
+		x = 0
+		y = 1
+		relative_position_id = POL_further_union_empowerment 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_further_union_empowerment
+		}
+		
+		prerequisite = {
+		focus = POL_protect_rights_of_workers
+		}
+		
+		prerequisite = {
+		focus = POL_begin_destroying_bureaucracy
+		}
+		
+	    completion_reward = {
+			add_war_support = 0.15
+			unlock_national_focus = POL_spread_the_revolution
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_no_gods
+		icon = christianity_with_chains
+		x = 1
+		y = 1
+		relative_position_id = POL_procliam_workers_revolution 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_procliam_workers_revolution
+		}
+		
+		mutually_exclusive = {
+		focus = POL_freedom_of_religion
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_no_more_gods
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_freedom_of_religion
+		icon = christianity
+		x = -1
+		y = 1
+		relative_position_id = POL_procliam_workers_revolution 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_procliam_workers_revolution
+		}
+		
+		mutually_exclusive = {
+		focus = POL_no_gods
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_freedom_of_religion
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+ shared_focus = {
+		id = POL_unite_farmers_into_unions
+		icon = agrarian_reform
+		x = 0
+		y = 1
+		relative_position_id = POL_no_gods 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_no_gods
+		focus = POL_freedom_of_religion
+		}
+		
+		mutually_exclusive = {
+		focus = POL_invest_in_rural_areas
+		}
+		
+	    completion_reward = {
+			every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_manpower = 15000
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_support_miner_trade_unions
+		icon = production2
+		x = 2
+		y = 1
+		relative_position_id = POL_no_gods 
+		cost = 14.4
+		
+		prerequisite = {
+		focus = POL_no_gods
+		focus = POL_freedom_of_religion
+		}
+		
+	    completion_reward = {
+			random_owned_state = { 
+		add_resource = { type = chromium amount = 4 }
+	    add_resource = { type = tungsten amount = 4 }
+		add_resource = { type = rubber amount = 8 }
+		add_resource = { type = steel amount = 5 }
+		add_resource = { type = oil amount = 8 }
+				}
+			random_owned_state = { 
+		add_resource = { type = chromium amount = 4 }
+	    add_resource = { type = tungsten amount = 4 }
+		add_resource = { type = rubber amount = 8 }
+		add_resource = { type = steel amount = 5 }
+		add_resource = { type = oil amount = 8 }
+				}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_unionize_education
+		icon = research
+		x = -4
+		y = 1
+		relative_position_id = POL_no_gods 
+		cost = 10
+		
+		
+		prerequisite = {
+		focus = POL_no_gods
+		focus = POL_freedom_of_religion
+		}
+		
+	    completion_reward = {
+			add_research_slot = 1
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_invest_in_rural_areas
+		icon = production2
+		x = -2
+		y = 1
+		relative_position_id = POL_no_gods 
+		cost = 14.4
+		
+		mutually_exclusive = {
+		focus = POL_unite_farmers_into_unions
+		}
+		
+		prerequisite = {
+		focus = POL_no_gods
+		focus = POL_freedom_of_religion
+		}
+		
+	    completion_reward = {
+			random_owned_state = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				    }
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 3
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_beurocratic_decentralization
+		icon = self_management
+		x = -1
+		y = 1
+		relative_position_id = POL_unite_farmers_into_unions 
+		cost = 7.20
+		
+		
+		prerequisite = {
+		focus = POL_unite_farmers_into_unions
+		focus = POL_unionize_education
+		focus = POL_support_miner_trade_unions
+		focus = POL_invest_in_rural_areas
+		}
+		
+	    completion_reward = {
+			swap_ideas = {
+			remove_idea = POL_begin_destroying_bureaucracy
+			add_idea = POL_fully_decentralized_beurocratic_system
+		}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_right_to_bear_arms
+		text = POL_allow_privite_gun
+		icon = small_arms
+		x = -3
+		y = 1
+		relative_position_id = POL_unite_farmers_into_unions 
+		cost = 7.20
+		
+		
+		prerequisite = {
+		focus = POL_unite_farmers_into_unions
+		focus = POL_unionize_education
+		focus = POL_support_miner_trade_unions
+		focus = POL_invest_in_rural_areas
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_privite_gun_ownership_allowed
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = COM_decentralisation
+		text = POL_decentralisation
+		icon = local_management
+		x = 2
+		y = 1
+		relative_position_id = POL_unite_farmers_into_unions 
+		cost = 7.20
+		
+		
+		prerequisite = {
+		focus = POL_unite_farmers_into_unions
+		focus = POL_unionize_education
+		focus = POL_support_miner_trade_unions
+		focus = POL_invest_in_rural_areas
+		}
+		
+	    completion_reward = {
+			add_ideas = POL_decentralisation
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+	id = POL_escpape_our_debts
+	icon = money
+	x = 10
+	y = 0
+	cost = 14.4
+
+	available = {
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	remove_ideas = POL_Polish_national_debt
+	}
+ai_will_do = {
+			factor = 100 #will have stronger economy faster
+	}
+}
+
+shared_focus = {
+		id = POL_kickstart_the_red_economy
+		icon = industry_communist
+		x = -1
+		y = 1
+		relative_position_id = POL_escpape_our_debts 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_escpape_our_debts
+		}
+		
+	    completion_reward = {
+			random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				    }
+			}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_fill_the_road_gaps
+		icon = infrastructure
+		x = 1
+		y = 1
+		relative_position_id = POL_escpape_our_debts 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_escpape_our_debts
+		}
+		
+	    completion_reward = {
+			every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_countinue_nationalization
+		icon = consumer_goods
+		x = -1
+		y = 1
+		relative_position_id = POL_fill_the_road_gaps 
+		cost = 20
+		
+		prerequisite = {
+		focus = POL_kickstart_the_red_economy
+		}
+		
+		prerequisite = {
+		focus = POL_fill_the_road_gaps
+		}
+		
+	    completion_reward = {
+			remove_ideas = POL_Bad_investments
+			random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				    }
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+ shared_focus = {
+		id = POL_more_modern_tools
+		icon = production
+		x = 0
+		y = 1
+		relative_position_id = POL_countinue_nationalization 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_countinue_nationalization
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.8
+				uses = 2
+				category = industry
+			}
+		}
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+shared_focus = {
+		id = POL_increase_PGZs_presence
+		icon = industry_military
+		x = -1
+		y = 1
+		relative_position_id = POL_more_modern_tools 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_more_modern_tools
+		}
+		
+	    completion_reward = {
+					add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+              add_equipment_to_stockpile = { 
+				type = infantry_equipment_2
+				amount = 2000
+				producer = POL
+			}
+	    add_offsite_building = { type = arms_factory level = 1 }
+		}
+	 
+	ai_will_do = {
+			factor = 10
+	}
+}
+
+ shared_focus = {
+		id = COM_oil_driling
+		text = POL_oil_driling
+		icon = oil_production
+		x = 1
+		y = 1
+		relative_position_id = POL_more_modern_tools  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_more_modern_tools
+		}
+		
+		 available = {
+	     has_full_control_of_state = 67	
+		}
+		
+		completion_reward = {
+				67 = { 
+					add_resource = { type = oil amount = 15 }
+				}
+			}
+		
+		ai_will_do = {
+			factor = 10
+	 }
+   }
+
+   shared_focus = {
+		id = COM_increase_industry_investments
+		text = BUL_increase_industry_investments
+		icon = money
+		x = 0
+		y = 1
+		relative_position_id = COM_oil_driling  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = COM_oil_driling
+		}
+		
+		completion_reward = {
+				random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			}
+		
+		ai_will_do = {
+			factor = 10
+	 }
+   }
+
+   shared_focus = {
+		id = POL_revive_pewex
+		icon = consumer_goods
+		x = 0
+		y = 1
+		relative_position_id = COM_increase_industry_investments  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = COM_increase_industry_investments
+		}
+		
+		completion_reward = {
+				random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			}
+		
+		ai_will_do = {
+			factor = 10
+	 }
+   }
+
+
+  shared_focus = {
+		id = COM_Military_factories_Lucznik
+		text = POL_Military_factories_Lucznik
+		icon = industry_military
+		x = -2
+		y = 1
+		relative_position_id = COM_oil_driling 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = COM_oil_driling
+		    focus = POL_increase_PGZs_presence
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+   shared_focus = {
+		id = COM_Panstwowa_wytwurnia_zbrojeniowa
+		text = POL_Panstwowa_wytwurnia_zbrojeniowa
+		icon = industry_military
+		x = 0
+		y = 1
+		relative_position_id = COM_Military_factories_Lucznik 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = COM_Military_factories_Lucznik
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+  shared_focus = {
+		id = POL_expand_Stolmil_poznan
+		text = POL_Panstwowa_wytwurnia_zbrojeniowa
+		icon = industry_military
+		x = 0
+		y = 1
+		relative_position_id = COM_Military_factories_Lucznik 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = COM_Military_factories_Lucznik
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				prioritize = { 98}
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+ shared_focus = {
+		id = POL_agricultural_collectivization
+		icon = agrarian_socialism
+		x = -3
+		y = 1
+		relative_position_id = POL_countinue_nationalization 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_countinue_nationalization
+		}
+		
+		
+		completion_reward = {
+			random_owned_state = {
+			add_manpower = 40000
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}
+			random_owned_state = {
+			add_manpower = 40000
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+    shared_focus = {
+		id = POL_some_stupid_ass_prl_quotat
+		icon = communism2
+		x = 0
+		y = 1
+		relative_position_id = POL_agricultural_collectivization 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_agricultural_collectivization
+		}
+		
+		completion_reward = {
+			add_ideas = POL_some_stupid_ass_prl_quotat
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+   shared_focus = {
+		id = POL_scientific_great_leap_forward
+		icon = socialist_education
+		x = 0
+		y = 1
+		relative_position_id = POL_some_stupid_ass_prl_quotat 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_some_stupid_ass_prl_quotat
+		}
+		
+		completion_reward = {
+			add_ideas = POL_scientific_leap_forward
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	shared_focus = {
+		id = POL_VII_5_yers_plan
+		icon = communism8
+		x = 0
+		y = 1
+		relative_position_id = POL_scientific_great_leap_forward 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_scientific_great_leap_forward
+		}
+		
+		completion_reward = {
+			add_timed_idea = {
+				idea = POL_VII_5_yers_plan
+				days = 1825
+			   } 
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = COM_revive_Syrena
+		icon = motorized
+		x = 3
+		y = 1
+		relative_position_id = POL_countinue_nationalization 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_countinue_nationalization
+		}
+		
+		
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = Syrena
+			random_owned_state = {
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+    shared_focus = {
+		id = POL_prosper_our_recources
+		icon = construction4
+		x = 0
+		y = 1
+		relative_position_id = COM_revive_Syrena 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = COM_revive_Syrena
+		}
+		
+		
+		completion_reward = {
+			custom_effect_tooltip = SPA_reduce_reliance_on_foreign_resources_tt
+			custom_effect_tooltip = available_industrial_concern
+		    show_ideas_tooltip = POL_KGHM	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	shared_focus = {
+		id = POL_expand_ZAK
+		icon = industry_civilian
+		x = 0
+		y = 1
+		relative_position_id = POL_prosper_our_recources 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_prosper_our_recources
+		}
+		
+		
+		completion_reward = {
+			random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				    }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+    shared_focus = {
+		id = POL_expand_Rafineria_Trzebinia
+		icon = oil_production
+		x = 0
+		y = 1
+		relative_position_id = POL_expand_ZAK 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_expand_ZAK
+		}
+		
+		
+		completion_reward = {
+			random_owned_state = {
+			prioritize = { 88 } #Cracov
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				    }
+			}
+			modify_building_resources = {
+        	   building = synthetic_refinery
+        	   resource = oil
+        	   amount = 1
+        	}
+			modify_building_resources = {
+        	   building = synthetic_refinery
+        	   resource = rubber
+        	   amount = 2
+        	}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+		id = POL_new_jagielonian_universiy
+		icon = research
+		x = 1
+		y = 1
+		relative_position_id = COM_Panstwowa_wytwurnia_zbrojeniowa 
+		cost = 10
+		
+		
+		prerequisite = {
+			focus = POL_expand_Rafineria_Trzebinia
+			focus = POL_VII_5_yers_plan
+			focus = COM_Panstwowa_wytwurnia_zbrojeniowa
+		    focus = POL_revive_pewex
+		}
+
+		
+		completion_reward = {
+		add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+shared_focus = {
+	id = POL_military_purges
+	icon = military_sphere
+	x = 48
+	y = 0
+	cost = 20
+
+	available = {
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_timed_idea = {
+				idea = POL_recent_military_purges
+				days = 365
+			}
+	remove_ideas = POL_unloyal_military
+	}
+ai_will_do = {
+			factor = 10
+	}
+}
+
+   shared_focus = {
+		id = POL_Polish_red_army_concept
+		icon = POL_red_army
+		x = 0
+		y = 1
+		relative_position_id = POL_military_purges 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_military_purges
+		}
+		
+	    completion_reward = {
+			army_experience = 30
+			add_tech_bonus = {
+				name = tech_bonus
+			    bonus = 1.0
+			    uses = 1
+			    category = land_doctrine
+			}
+			add_ideas = POL_red_army
+		}
+	}
+ 
+   shared_focus = {
+		id = POL_good_old_ak_47
+		icon = ak_47
+		x = 0
+		y = 1
+		relative_position_id = POL_Polish_red_army_concept 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_Polish_red_army_concept
+		}
+		
+	    completion_reward = {
+	  swap_ideas = { 
+					remove_idea = POL_outdated_equipment
+					add_idea = POL_outdated_equipment_2 
+				}
+	  add_equipment_to_stockpile = { 
+				type = infantry_equipment_1 
+				amount = 6000
+				producer = SOV
+			}
+	    }
+   }
+  
+  shared_focus = {
+		id = POL_well_maybe_not_that_good
+		icon = small_arms
+		x = 0
+		y = 1
+		relative_position_id = POL_good_old_ak_47 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_good_old_ak_47
+		}
+		
+	    completion_reward = {
+	    add_timed_idea = {
+				idea = POL_small_arms_standarization_program
+				days = 400
+			}
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+		swap_ideas = { 
+					remove_idea = POL_outdated_equipment_2
+					add_idea = POL_outdated_equipment_3 
+				}
+	    }
+   }
+   
+   shared_focus = {
+		id = POL_more_modern_wepons
+		icon = small_arms3
+		x = 0
+		y = 1
+		relative_position_id = POL_well_maybe_not_that_good 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_well_maybe_not_that_good
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = infantry_weapons
+			}
+		remove_ideas = POL_outdated_equipment_3
+	    }
+   }
+   
+   shared_focus = {
+		id = POL_AHS_Krab
+		icon = artillery3
+		x = 1
+		y = 1
+		relative_position_id = POL_more_modern_wepons 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_more_modern_wepons
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = artillery
+			}
+	    }
+   }
+   
+   shared_focus = {
+		id = POL_KWM_01
+		icon = support_wepons 
+		x = -1
+		y = 1
+		relative_position_id = POL_more_modern_wepons 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_more_modern_wepons
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = support_tech
+			}
+	    }
+   }
+  
+  shared_focus = {
+		id = POL_AGAT
+		icon = special_forces
+		x = 1
+		y = 1
+		relative_position_id = POL_KWM_01  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_AHS_Krab
+		}
+		
+		prerequisite = {
+			focus = POL_KWM_01
+		}
+		
+		completion_reward = {
+	   add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = mountaineers_tech
+			    category = marine_tech
+			    category = para_tech
+			}
+	    add_ideas = LAT_special_forces
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+   
+    shared_focus = {
+		id = POL_felix_dzierzinski_military_institute
+		icon = research
+		x = 0
+		y = 1
+		relative_position_id = POL_AGAT
+		cost = 10
+		
+		available = {
+	    }
+		prerequisite = {
+			focus = POL_master_old_communist_tactics
+		    focus = POL_modern_communist_warfare
+		}
+		prerequisite = {
+			focus = POL_AGAT
+		}
+		
+		completion_reward = {
+		add_research_slot = 1
+	}	
+		ai_will_do = {
+			factor = 10
+		}
+	}
+   
+   shared_focus = {
+		id = POL_the_first_secretary_demands_more_tanks #!!!!!!
+		icon = tank2
+		x = 4
+		y = 1
+		relative_position_id = POL_Polish_red_army_concept 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_Polish_red_army_concept
+		}
+		
+	    completion_reward = {
+			if = {
+				#Get a new tank tech and some new tanks.
+				limit = { NOT = { has_tech = main_battle_tank3 } }
+				add_equipment_to_stockpile = {
+					type = modern_tank_equipment_3
+					amount = 200
+					producer = POL
+				}
+				set_technology = { main_battle_tank3 = 1 }
+				}
+				#If you already have the tech, you get some more tanks to still have a viable focus.
+				else = {
+					add_tech_bonus = {
+				name = tank_bonus
+				bonus = 1.0
+				uses = 2
+				category = armor
+			}
+					add_equipment_to_stockpile = {
+						type = modern_tank_equipment_4
+						amount = 250
+						producer = POL
+					}
+				}
+	}
+   }
+    shared_focus = {
+		id = COM_mobile_warfare
+		icon = motorized
+		x = 0
+		y = 1
+		relative_position_id = POL_the_first_secretary_demands_more_tanks  
+		cost = 7.20
+		
+		available = {
+		NOT = { has_completed_focus = POL_mass_assult }
+		}
+		
+		prerequisite = {
+			focus = POL_the_first_secretary_demands_more_tanks
+		}
+		
+		completion_reward = {
+	   add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+			    category = cat_mobile_warfare
+			}
+	    swap_ideas = { 
+		remove_idea = POL_red_army
+		add_idea = POL_red_army_mobile 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+   
+   shared_focus = {
+		id = POL_modern_communist_husars
+		icon = cavalry
+		x = 0
+		y = 1
+		relative_position_id = COM_mobile_warfare  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = COM_mobile_warfare
+		}
+		
+		completion_reward = {
+	   hidden_effect = {
+	   division_template = {
+						name = "Winged Husars"
+						priority = 2
+						regiments = {
+							motorized = { x = 0 y = 0 }
+							motorized = { x = 0 y = 1 }
+							motorized = { x = 0 y = 2 }
+				
+		    	   		 	motorized = { x = 1 y = 0 }
+							motorized = { x = 1 y = 1 }
+							motorized = { x = 1 y = 2 }
+				
+		    	   		 	motorized = { x = 2 y = 0 }
+							motorized = { x = 2 y = 1 }
+							motorized = { x = 2 y = 2 }
+						    motorized = { x = 2 y = 3 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							recon = { x = 0 y = 1 }
+						}
+					}
+	   random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"10 Brygada Kawalerrii Narodowej\" division_template = \"Winged Husars\" start_experience_factor = 1.0" 
+						owner = POL
+					}
+				}
+	   random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"9 Brygada Kawalerrii Narodowej\" division_template = \"Winged Husars\" start_experience_factor = 1.0" 
+						owner = POL
+					}
+				}
+	   random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"2 Wołyńska Brygada Kawalerii\" division_template = \"Winged Husars\" start_experience_factor = 1.0" 
+						owner = POL
+					}
+				}
+	   
+	   add_tech_bonus = {
+				name = and_then_the_winged_husars_arrived
+				bonus = 1.0
+				uses = 1
+				category = cat_mechanized_equipment
+			 }
+			}
+		 custom_effect_tooltip = POL_gain_2_winged_husars_divisions
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+   
+   shared_focus = {
+		id = POL_abandon_leg_infantry
+		icon = motorized
+		x = -2
+		y = 1
+		relative_position_id = COM_mobile_warfare  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = COM_mobile_warfare
+		}
+		
+		completion_reward = {
+		add_tech_bonus = {
+				name = POL_abandon_leg_infantry
+				bonus = 1.0
+				uses = 1
+				category = cat_mechanized_equipment
+			 }
+		swap_ideas = { 
+		remove_idea = POL_red_army_mobile
+		add_idea = POL_red_army_mobile_2 
+				}
+				}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+   
+   shared_focus = {
+		id = POL_carefull_attack
+		icon = army_logistics
+		x = 2
+		y = 1
+		relative_position_id = COM_mobile_warfare  
+		cost = 7.20
+		
+		
+		prerequisite = {
+			focus = COM_mobile_warfare
+		}
+		
+		completion_reward = {
+		add_ideas = POL_carefull_attack
+				}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+   
+   shared_focus = {
+		id = POL_modern_communist_warfare
+		icon = skull
+		x = 0
+		y = 1
+		relative_position_id = POL_modern_communist_husars  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_carefull_attack
+		}
+		
+		prerequisite = {
+			focus = POL_abandon_leg_infantry
+		}
+		
+		prerequisite = {
+			focus = POL_modern_communist_husars
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+		remove_idea = POL_red_army_mobile_2
+		add_idea = POL_red_army_mobile_3 
+				}
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+			    category = cat_mobile_warfare
+			}
+				}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+   
+  shared_focus = {
+		id = POL_expand_conscription
+		icon = military_mission
+		x = -4
+		y = 1
+		relative_position_id = POL_Polish_red_army_concept 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_Polish_red_army_concept
+		}
+		
+	    completion_reward = {
+			if = {
+			    limit = { has_idea = disarmed_nation }
+			    add_ideas = volunteer_only
+		    }
+		    else_if = {
+			    limit = { has_idea = volunteer_only }
+			    add_ideas = limited_conscription
+		    }
+		    else_if = {
+			    limit = { has_idea = limited_conscription }
+			    add_ideas = extensive_conscription
+		    }
+		    else_if = {
+			    limit = { has_idea = extensive_conscription }
+			    add_ideas = service_by_requirement
+		    }
+		    else_if = {
+			    limit = { has_idea = service_by_requirement }
+			    add_ideas = all_adults_serve
+		    }
+		    else_if = {
+			    limit = { has_idea = all_adults_serve }
+			    add_ideas = scraping_the_barrel
+		    }
+		}
+	}
+
+  shared_focus = {
+		id = POL_mass_assult
+		icon = communist_people
+		x = 0
+		y = 1
+		relative_position_id = POL_expand_conscription  
+		cost = 7.20
+		
+		available = {
+		NOT = { has_completed_focus = COM_mobile_warfare }
+		}
+		
+		prerequisite = {
+			focus = POL_expand_conscription
+		}
+		
+		completion_reward = {
+	   add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+			    category = cat_mass_assault
+			}
+	    swap_ideas = { 
+		remove_idea = POL_red_army
+		add_idea = POL_red_army_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	shared_focus = {
+		id = POL_red_general_staff
+		icon = army_officers_communist
+		x = -2
+		y = 1
+		relative_position_id = POL_mass_assult  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_mass_assult
+		}
+		
+		completion_reward = {
+	    army_experience = 35
+		add_ideas = POL_red_general_staff
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	shared_focus = {
+		id = POL_break_our_enemies
+		icon = skull2
+		x = 2
+		y = 1
+		relative_position_id = POL_mass_assult  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_mass_assult
+		}
+		
+		completion_reward = {
+	    swap_ideas = { 
+		remove_idea = POL_red_army_2
+		add_idea = POL_red_army_3 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	shared_focus = {
+		id = POL_organize_militia
+		icon = communist_people
+		x = 0
+		y = 1
+		relative_position_id = POL_mass_assult  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_mass_assult
+		}
+		
+		completion_reward = {
+	   hidden_effect = {
+					division_template = {
+						name = "Milicja"
+						priority = 1
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+				
+		    	   		 	infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+				
+		    	   		 	infantry = { x = 2 y = 0 }
+		
+						}
+						support = {
+						}
+					}
+			random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Milicja 1\" division_template = \"Milicja\" start_experience_factor = 0.2" 
+						owner = POL
+					}
+				}
+            random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Milicja 2\" division_template = \"Milicja\" start_experience_factor = 0.2" 
+						owner = POL
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Milicja 3\" division_template = \"Milicja\" start_experience_factor = 0.2" 
+						owner = POL
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Milicja 4\" division_template = \"Milicja\" start_experience_factor = 0.2" 
+						owner = POL
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Milicja 5\" division_template = \"Milicja\" start_experience_factor = 0.2" 
+						owner = POL
+					}
+				}
+             }
+			custom_effect_tooltip = POL_gain_five_militia_division
+	    add_tech_bonus = {
+				name = POL_organize_militia
+				bonus = 0.5
+				uses = 1
+			    category = cat_mass_assault
+			}
+	    
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+  shared_focus = {
+		id = POL_master_old_communist_tactics
+		icon = align_to_soviet_union
+		x = 0
+		y = 1
+		relative_position_id = POL_organize_militia  
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_break_our_enemies
+		}
+		
+		prerequisite = {
+			focus = POL_red_general_staff
+		}
+		
+		prerequisite = {
+			focus = POL_organize_militia
+		}
+		
+		completion_reward = {
+	    add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+			    category = cat_mass_assault
+			}
+		swap_ideas = { 
+		remove_idea = POL_red_army_3
+		add_idea = POL_red_army_4 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+  shared_focus = {
+		id = POL_plans_for_a_red_navy
+		icon = naval_doctrine
+		x = 12
+		y = 1
+		relative_position_id = POL_military_purges
+		cost = 7.20
+		
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+		
+		prerequisite = {
+		focus = POL_military_purges
+		}
+		
+	    completion_reward = {
+	create_navy_leader = {
+	name = "Czesław Kiszczak"
+	picture = "admirals/Czeslaw_Kiszczak.dds"
+	traits = { superior_tactician }
+	skill = 4
+     }
+			add_tech_bonus = {
+				name = POL_plans_for_a_red_navy
+			    bonus = 1.0
+			    uses = 1
+				category = naval_doctrine
+			}
+			navy_experience = 45
+		}
+	}
+  
+   shared_focus = {
+		id = POL_mine_the_Baltic
+		icon = cruisers
+		x = -1
+		y = 1
+		relative_position_id = POL_plans_for_a_red_navy
+		cost = 7.20
+		
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+		
+		prerequisite = {
+		focus = POL_plans_for_a_red_navy
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = POL_mine_the_Baltic
+			    bonus = 1.0
+			    uses = 2
+				category = naval_mines
+			}
+			add_mines = { region = 206 amount = 100 }
+		}
+	}
+  
+  shared_focus = {
+		id = POL_revolutionary_ships
+		icon = navy
+		x = 1
+		y = 1
+		relative_position_id = POL_plans_for_a_red_navy
+		cost = 14.4
+		
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+		
+		prerequisite = {
+		focus = POL_plans_for_a_red_navy
+		}
+		
+	    completion_reward = {
+			 custom_effect_tooltip = POL_revolutionary_ships_tt
+			hidden_effect = {
+			create_equipment_variant = {
+							name = "Rewolucja Class"	
+							type = ship_hull_cruiser_2
+							name_group = POL_DD_HISTORICAL
+							parent_version = 0
+							modules = {
+								fixed_ship_battery_slot = ship_light_battery_1
+								fixed_ship_anti_air_slot = ship_anti_air_2
+								fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+								fixed_ship_radar_slot = empty
+								fixed_ship_engine_slot = light_ship_engine_2
+								fixed_ship_torpedo_slot = ship_torpedo_1
+								mid_1_custom_slot = empty
+								rear_1_custom_slot = ship_depth_charge_1
+							}
+						}
+		 create_ship = { type = ship_hull_cruiser_2 equipment_variant = "Rewolucja Class" creator = POL }
+		 create_ship = { type = ship_hull_cruiser_2 equipment_variant = "Rewolucja Class" creator = POL }
+		 create_ship = { type = ship_hull_cruiser_2 equipment_variant = "Rewolucja Class" creator = POL }
+		}
+	}
+   }
+  shared_focus = {
+		id = POL_keep_it_small
+		icon = wolf_packs
+		x = 0
+		y = 1
+		relative_position_id = POL_mine_the_Baltic
+		cost = 7.20
+		
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+		
+		mutually_exclusive = {
+		focus = POL_make_it_big
+		}
+		
+		prerequisite = {
+		focus = POL_revolutionary_ships
+		focus = POL_mine_the_Baltic
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+			    bonus = 1.0
+			    uses = 2
+				category = trade_interdiction_tree
+			}
+		}
+	}
+  
+  shared_focus = {
+		id = POL_877E
+		icon = submarines
+		x = -1
+		y = 1
+		relative_position_id = POL_keep_it_small
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_keep_it_small
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = ss_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+   shared_focus = {
+		id = POL_Polish_CKB_18
+		icon = create_submarine
+		x = -2
+		y = 1
+		relative_position_id = POL_877E
+		cost = 14.4
+		
+		prerequisite = {
+			focus = POL_877E
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 1
+				category = ss_tech
+			}
+			add_ideas = CKB_18
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+   shared_focus = {
+		id = POL_miecznik_program
+		icon = battleships
+		x = 0
+		y = 1
+		relative_position_id = POL_877E
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_877E
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = dd_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+  shared_focus = {
+		id = POL_make_it_big
+		icon = navy2
+		x = 0
+		y = 1
+		relative_position_id = POL_revolutionary_ships
+		cost = 7.20
+		
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+		
+		mutually_exclusive = {
+		focus = POL_keep_it_small
+		}
+		
+		prerequisite = {
+		focus = POL_revolutionary_ships
+		focus = POL_mine_the_Baltic
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+			    bonus = 1.0
+			    uses = 2
+				category = fleet_in_being_tree
+			}
+		}
+	}
+  
+    shared_focus = {
+		id = POL_countinue_Grom_destroyers_program
+		icon = cruisers
+		x = 1
+		y = 1
+		relative_position_id = POL_make_it_big
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_make_it_big
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = ca_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+    shared_focus = {
+		id = POL_ZOP
+		icon = anti_submarine
+		x = 2
+		y = 1
+		relative_position_id = POL_countinue_Grom_destroyers_program
+		cost = 14.4
+		
+		
+		prerequisite = {
+			focus = POL_countinue_Grom_destroyers_program
+		}
+		
+		completion_reward = {
+			if = {
+					limit = {
+						has_tech = degaussing
+					}
+					add_tech_bonus = {
+						name = CAN_degauss_ship_hulls
+						bonus = 1.5
+						uses = 1
+						category = naval_mines
+					}
+					else = {
+						set_technology = {
+						    degaussing = 1
+						}
+					}
+				}
+			add_ideas = POL_ZOP
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = asw_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+    shared_focus = {
+		id = POL_our_first_carriers
+		icon = carriers
+		x = 0
+		y = 1
+		relative_position_id = POL_countinue_Grom_destroyers_program
+		cost = 7.20
+		
+		available = {
+		OR = {
+		has_completed_focus = POL_naval_cas_and_fighters
+		has_completed_focus = POL_naval_bomber
+		}
+		}
+		
+		prerequisite = {
+			focus = POL_countinue_Grom_destroyers_program
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = cv_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+  shared_focus = {
+		id = COM_expand_the_Gdansk_port
+		text = POL_expand_the_Gdansk_port
+		icon = naval_dockyards
+		x = 1
+		y = 1
+		relative_position_id = POL_keep_it_small
+		cost = 7.20
+		
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+		
+		prerequisite = {
+		focus = POL_keep_it_small
+		focus = POL_make_it_big
+		}
+		
+	    completion_reward = {
+			random_owned_state = {
+				prioritize = { 85 }
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+  
+  shared_focus = {
+		id = POL_confiscate_private_ships
+		icon = dangerous_laws
+		x = 0
+		y = 1
+		relative_position_id = COM_expand_the_Gdansk_port
+		cost = 7.20
+		
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_controlled_by = ROOT
+			}
+		}
+		
+		prerequisite = {
+		focus = COM_expand_the_Gdansk_port
+		}
+		
+	    completion_reward = {
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = 200
+			}
+		}
+	}
+  
+  shared_focus = {
+		id = POL_expand_Gdynia_naval_warfare_university
+		icon = naval_doctrine
+		x = 0
+		y = 1
+		relative_position_id = POL_confiscate_private_ships
+		cost = 14.4
+		
+		available = {
+	  has_full_control_of_state = 85 	
+		}
+		
+		prerequisite = {
+		focus = POL_our_first_carriers
+		focus = POL_ZOP
+		focus = POL_miecznik_program
+		focus = POL_Polish_CKB_18
+		}
+		
+		prerequisite = {
+		focus = POL_confiscate_private_ships
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = POL_expand_Gdynia_naval_warfare_university
+			    bonus = 1.0
+			    uses = 2
+				category = naval_doctrine
+			}
+			navy_experience = 100
+		}
+	}
+  
+  shared_focus = {
+		id = COM_airport_Warszawa_Modlin
+		text = POL_airport_Warszawa_Modlin
+		icon = air_production
+		x = -12
+		y = 1
+		relative_position_id = POL_military_purges 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_military_purges
+		}
+		
+	    completion_reward = {
+			air_experience = 30
+			add_tech_bonus = {
+				name = tech_bonus
+			    bonus = 0.8
+			    uses = 2
+			    category = air_doctrine
+			}
+			random_owned_state = {
+				prioritize = { 10 }
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = POL_communist_radio
+		icon = radar
+		x = -1
+		y = 1
+		relative_position_id = COM_airport_Warszawa_Modlin 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = COM_airport_Warszawa_Modlin
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = radar_tech
+			}
+			random_owned_state = { 
+				prioritize = { 98 }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = { 
+				prioritize = { 66 }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				prioritize = { 10 }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	shared_focus = {
+		id = POL_conscruct_anti_air_defences
+		icon = air_defense
+		x = 1
+		y = 1
+		relative_position_id = COM_airport_Warszawa_Modlin 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = COM_airport_Warszawa_Modlin
+		}
+		
+	    completion_reward = {
+			random_owned_state = {
+			limit = {
+					free_building_slots = {
+						building = anti_air_building
+						size > 1
+						include_locked = yes
+					}
+				}
+			add_building_construction = {
+				type = anti_air_building
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = {
+					free_building_slots = {
+						building = anti_air_building
+						size > 1
+						include_locked = yes
+					}
+				}
+			add_building_construction = {
+				type = anti_air_building
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = {
+					free_building_slots = {
+						building = anti_air_building
+						size > 1
+						include_locked = yes
+					}
+				}
+			add_building_construction = {
+				type = anti_air_building
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+	shared_focus = {
+		id = POL_fighter_primacy
+		icon = fighter
+		x = 0
+		y = 1
+		relative_position_id = POL_conscruct_anti_air_defences 
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = POL_bomber_primacy
+		}
+		
+		prerequisite = {
+		focus = POL_communist_radio
+		focus = POL_conscruct_anti_air_defences
+		}
+		
+	    completion_reward = {
+		custom_effect_tooltip = available_chief_of_airforce
+			show_ideas_tooltip = Ryszard_Olszewski 
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = light_fighter
+			}
+		add_ideas = POL_primacy_of_fighters
+	}
+}
+
+shared_focus = {
+		id = POL_cas_effort
+		icon = fighter2
+		x = 1
+		y = 1
+		relative_position_id = POL_fighter_primacy 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_fighter_primacy
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = cas_bomber
+			}
+		swap_ideas = { 
+		remove_idea = POL_primacy_of_fighters
+		add_idea = POL_primacy_of_fighters_2 
+				}
+	}
+}
+
+shared_focus = {
+		id = POL_battlefield_support
+		icon = air_doctrine
+		x = 0
+		y = 1
+		relative_position_id = POL_cas_effort 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_cas_effort
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = cat_battlefield_support
+			}
+	}
+}
+
+shared_focus = {
+		id = POL_naval_cas_and_fighters
+		icon = naval_bomber
+		x = 0
+		y = 1
+		relative_position_id = POL_battlefield_support 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_battlefield_support
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = naval_air
+			}
+	}
+}
+
+shared_focus = {
+		id = POL_bomber_primacy
+		icon = bomber
+		x = 0
+		y = 1
+		relative_position_id = POL_communist_radio 
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = POL_fighter_primacy
+		}
+		
+		prerequisite = {
+		focus = POL_communist_radio
+		focus = POL_conscruct_anti_air_defences
+		}
+		
+	    completion_reward = {
+		custom_effect_tooltip = available_chief_of_airforce
+			show_ideas_tooltip = Andrzej_Duleba 
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = heavy_air
+			}
+		add_ideas = POL_primacy_of_bombers
+	}
+}
+
+shared_focus = {
+		id = POL_complete_destruction
+		icon = bombs2
+		x = -1
+		y = 1
+		relative_position_id = POL_bomber_primacy 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_bomber_primacy
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 1
+				category = heavy_air
+			}
+		swap_ideas = { 
+		remove_idea = POL_primacy_of_bombers
+		add_idea = POL_primacy_of_bombers_2 
+				}
+	}
+}
+
+shared_focus = {
+		id = POL_strategic_destruction
+		icon = air_doctrine
+		x = 0
+		y = 1
+		relative_position_id = POL_complete_destruction 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_complete_destruction
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = cat_strategic_destruction
+			}
+	}
+}
+
+shared_focus = {
+		id = POL_naval_bomber
+		icon = naval_bomber
+		x = 0
+		y = 1
+		relative_position_id = POL_strategic_destruction 
+		cost = 7.20
+		
+		prerequisite = {
+		focus = POL_strategic_destruction
+		}
+		
+	    completion_reward = {
+		swap_ideas = { 
+		remove_idea = POL_primacy_of_bombers_2
+		add_idea = POL_primacy_of_bombers_3 
+				}
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = naval_air
+			}
+	}
+}
+
+shared_focus = {
+		id = POl_expand_PZL_kalisz
+		icon = industry_military
+		x = -1
+		y = 1
+		relative_position_id = POL_fighter_primacy 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POL_fighter_primacy
+		    focus = POL_bomber_primacy
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = { 
+				type = fighter_equipment_3 
+				amount = 50
+				producer = POL
+			}
+			random_owned_state = {
+				prioritize = { 10 }
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	shared_focus = {
+		id = POl_expand_PZL_Warszawa
+		icon = industry_military
+		x = 0
+		y = 1
+		relative_position_id = POl_expand_PZL_kalisz 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POl_expand_PZL_kalisz
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = tac_bomber_equipment_1
+				amount = 25
+				producer = POL
+			}
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_2
+				amount = 30
+				producer = POL
+			}
+			random_owned_state = {
+				prioritize = { 10 }
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	shared_focus = {
+		id = COM_scorpion_program
+		text = POL_scorpion_program
+		icon = airforce
+		x = 0
+		y = 1
+		relative_position_id = POl_expand_PZL_Warszawa
+		cost = 7.20
+		
+		prerequisite = {
+			focus = POl_expand_PZL_Warszawa
+		}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_2 
+				amount = 90
+				producer = POL
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	shared_focus = {
+		id = POL_perun
+		icon = rocketry
+		x = 0
+		y = 1
+		relative_position_id = COM_scorpion_program 
+		cost = 14.4
+		
+		prerequisite = {
+		focus = POL_naval_bomber
+		focus = POL_naval_cas_and_fighters
+		}
+		
+		prerequisite = {
+		focus = COM_scorpion_program
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = rocketry
+				category = jet_technology
+			}
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = rocketry
+			    category = jet_technology
+			}
+	}
+}
+
+shared_focus = {
+		id = POL_realize_Giereks_dream
+		icon = nuclear_weapons
+		x = 0
+		y = 1
+		relative_position_id = POL_perun 
+		cost = 14.4
+		
+		prerequisite = {
+		focus = POL_perun
+		}
+		
+	    completion_reward = {
+		add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = nuclear
+			}
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+			    category = nuclear
+			}
+	}
+}

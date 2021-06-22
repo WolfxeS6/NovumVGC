@@ -1,0 +1,1211 @@
+focus_tree = {
+	
+	id = POL_start_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 40
+			tag = POL
+		}
+	}
+	
+	focus = {
+		id = POL_memories_of_PRL
+		icon = communism
+		x = 26
+		y = 0
+		cost = 7.20 
+		
+		mutually_exclusive = {
+		focus = POL_SLD_goverment
+		}
+		
+		completion_reward = {
+	    add_popularity = {
+				ideology = communist
+				popularity = 0.08
+			}
+	    fourth_estate_communist_increase = yes
+		add_timed_idea = {
+				idea = idea_focus_generic_path_of_equality
+				days = 500
+			} 
+		add_stability = -0.05
+		add_political_power = 50	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_crackdown_on_nationalists
+		icon = attack_fascism
+		x = -1
+		y = 1
+		cost = 7.20 
+		relative_position_id = POL_memories_of_PRL
+		
+		prerequisite = {
+		focus = POL_memories_of_PRL
+		}
+		
+		completion_reward = {
+	    add_popularity = {
+				ideology = communist
+				popularity = 0.08
+			}
+	    fourth_estate_communist_increase = yes
+		fourth_estate_fascist_decrease = yes
+		fourth_estate_nationalist_decrease = yes
+		fourth_estate_conservative_decrease = yes	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_assasinate_lepper
+		icon = assasinate_lepper
+		x = 1
+		y = 1
+		cost = 7.20 
+		relative_position_id = POL_memories_of_PRL
+		
+		prerequisite = {
+		focus = POL_memories_of_PRL
+		}
+		
+		completion_reward = {
+	 kill_ideology_leader = communist #kills lepper
+	 set_party_name = {
+				ideology =  communist 
+				long_name = POL_communist_party_KPP_long
+				name = POL_communist_party_KPP
+			}
+	 create_country_leader = {
+				name = "Marian Indelak"
+				ideology = stalinist
+				picture = "Marian_Indelak.dds"
+			   traits = {
+		        ex_miner
+              }
+	        }
+	   add_political_power = 50
+	   add_popularity = {
+				ideology = communist
+				popularity = 0.03
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_convince_the_millitary
+		icon = POL_red_army
+		x = -1
+		y = 1
+		cost = 7.20 
+		relative_position_id = POL_assasinate_lepper
+		
+		prerequisite = {
+		focus = POL_assasinate_lepper
+		}
+		
+		prerequisite = {
+		focus = POL_crackdown_on_nationalists
+		}
+		
+		completion_reward = {
+	   add_ideas = POL_loyal_miliary
+	   add_political_power = 25
+	   add_popularity = {
+				ideology = communist
+				popularity = 0.08
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_unite_the_communists
+		icon = national_unity_red
+		x = 0
+		y = 1
+		cost = 10
+		relative_position_id = POL_convince_the_millitary
+		
+		prerequisite = {
+		focus = POL_convince_the_millitary
+		}
+		
+		completion_reward = {
+	   add_political_power = -50
+	   add_popularity = {
+				ideology = communist
+				popularity = 0.15
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_for_the_people_for_communism
+		icon = national_unity_red
+		x = 0
+		y = 1
+		cost = 20
+		relative_position_id = POL_unite_the_communists
+		
+		prerequisite = {
+		focus = POL_unite_the_communists
+		}
+		
+		completion_reward = {
+	  random_country = {
+				limit = {
+					is_in_faction_with = POL
+					is_faction_leader = yes
+				}	
+				remove_from_faction = POL
+				}
+	  remove_ideas = visegrad_group_member
+	  remove_ideas = POL_Giedroyc_Doctrine
+	  set_politics = {
+				ruling_party = communist
+				elections_allowed = no 
+			}
+	  add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.1
+			}
+	   set_party_name = { #farmers of the world, unite
+				ideology =  democratic_socialist 
+				long_name = POL_democratic_socialist_party_ZSL_long
+				name = POL_democratic_socialist_party_ZSL
+			}
+	 create_country_leader = {
+				name = "Roman Malinowski"
+				ideology = radical_agarian
+				picture = "Roman_Malinowski.dds"
+			   traits = {
+		        agricultural_expert
+              }
+	        }
+	   remove_ideas = POL_loyal_miliary
+	   add_ideas = POL_unloyal_military
+	   load_focus_tree = POl_begin_Stabilization_tree
+	   add_stability = -0.1
+	   add_political_power = -50
+	   add_popularity = {
+				ideology = communist
+				popularity = 0.3
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_SLD_goverment
+		icon = democracy
+		x = 5
+		y = 0
+		cost = 4 
+		
+		mutually_exclusive = {
+		focus = POL_memories_of_PRL
+		}
+		
+		completion_reward = {
+		add_political_power = 50	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Kwasniewskis_speach
+		icon = Aleksander_Kwasniewski
+		x = 1
+		y = 1
+		relative_position_id = POL_SLD_goverment 
+		cost = 4
+		
+		
+		prerequisite = {
+			focus = POL_SLD_goverment
+		}
+		
+		
+		completion_reward = {
+		POL = { country_event = SLD.1 }    
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_lift_pressure_of_beurocratcs
+		icon = self_management
+		x = 2
+		y = 1
+		relative_position_id = POL_Kwasniewskis_speach 
+		cost = 4
+		
+		mutually_exclusive = {
+			focus = Lift_pressure_of_medical_workers
+		}
+		
+		prerequisite = {
+			focus = POL_Kwasniewskis_speach
+		}
+		
+		prerequisite = {
+			focus = POL_Pay_our_debts
+		}
+		
+		
+		completion_reward = {
+		add_timed_idea = {
+				idea = POL_lift_pressure_of_beurocratcs
+				days = 200
+			}    
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = Lift_pressure_of_medical_workers
+		icon = industry_democratic4
+		x = 0
+		y = 1
+		relative_position_id = POL_Kwasniewskis_speach 
+		cost = 4
+		
+		mutually_exclusive = {
+			focus = POL_lift_pressure_of_beurocratcs
+		}
+		
+		prerequisite = {
+			focus = POL_Kwasniewskis_speach
+		}
+		
+		prerequisite = {
+			focus = POL_Pay_our_debts
+		}
+		
+		
+		completion_reward = {
+		add_timed_idea = {
+				idea = Lift_pressure_of_medical_workers
+				days = 200
+			}    
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Unite_the_left
+		icon = national_unity_red
+		x = 3
+		y = 1
+		relative_position_id = Lift_pressure_of_medical_workers 
+		cost = 4
+		
+		available = {
+		NOT = { has_country_flag = SLD_path_disabled }
+		}
+		
+		mutually_exclusive = {
+			focus = POL_Status_quo
+		}
+		
+		prerequisite = {
+			focus = POL_lift_pressure_of_beurocratcs
+			focus = Lift_pressure_of_medical_workers
+		}
+		
+		completion_reward = {
+		set_country_flag = United_left_path_enabled
+		set_party_name = {
+				ideology =  social_democrat 
+				long_name = POL_social_democrat_party_united_left
+				name = POL_social_democrat_party_united_left_long
+			}
+		add_political_power = -50
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_invite_PO
+		icon = major_alliance
+		x = 0
+		y = 1
+		relative_position_id = POL_Unite_the_left 
+		cost = 4
+		
+		prerequisite = {
+			focus = POL_Unite_the_left
+		}
+		
+		completion_reward = {
+		set_party_name = {
+				ideology =  social_liberal 
+				long_name = POL_social_democrat_party_united_left
+				name = POL_social_democrat_party_united_left_long
+			}
+		set_country_flag = PO_path_disabled
+		custom_effect_tooltip = POL_PO_path_disabled_tt
+		add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
+			}
+		add_political_power = 50
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_invite_PSL
+		icon = major_alliance
+		x = 2
+		y = 1
+		relative_position_id = POL_Unite_the_left 
+		cost = 4
+		
+		prerequisite = {
+			focus = POL_Unite_the_left
+		}
+		
+		completion_reward = {
+		set_party_name = {
+				ideology =  democratic_socialist 
+				long_name = POL_social_democrat_party_united_left
+				name = POL_social_democrat_party_united_left_long
+			}
+		set_country_flag = PSL_path_disabled
+		custom_effect_tooltip = POL_PSL_path_disabled_tt
+		add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+		add_political_power = 50
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_the_left_stands_united
+		icon = leftism
+		x = -1
+		y = 1
+		relative_position_id = POL_invite_PSL 
+		cost = 2
+		
+		prerequisite = {
+		focus = POL_invite_PSL
+		}
+		
+		prerequisite = {
+			focus = POL_invite_PO
+		}
+		
+		completion_reward = {
+		add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
+			}
+		add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Status_quo
+		icon = democracy
+		x = -1
+		y = 1
+		relative_position_id = Lift_pressure_of_medical_workers 
+		cost = 4
+		
+		mutually_exclusive = {
+			focus = POL_Unite_the_left
+		}
+		
+		prerequisite = {
+			focus = POL_lift_pressure_of_beurocratcs
+			focus = Lift_pressure_of_medical_workers
+		}
+		
+		completion_reward = {
+		add_stability = 0.05
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_countinue_the_coalition
+		icon = major_alliance
+		x = 2
+		y = 1
+		relative_position_id = POL_Status_quo 
+		cost = 4
+		
+		mutually_exclusive = {
+			focus = POL_end_the_coalition
+		}
+		
+		prerequisite = {
+			focus = POL_Status_quo
+		}
+		
+		completion_reward = {
+		add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+		add_stability = 0.05
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_concessions_to_UP
+		icon = concessions
+		x = 0
+		y = 1
+		relative_position_id = POL_countinue_the_coalition 
+		cost = 4
+		
+		
+		prerequisite = {
+			focus = POL_countinue_the_coalition
+		}
+		
+		completion_reward = {
+		add_political_power = -50
+		add_stability = 0.05
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_end_the_coalition
+		icon = attack_democracy
+		x = 0
+		y = 1
+		relative_position_id = POL_Status_quo 
+		cost = 4
+		
+		mutually_exclusive = {
+			focus = POL_countinue_the_coalition
+		}
+		
+		prerequisite = {
+			focus = POL_Status_quo
+		}
+		
+		completion_reward = {
+	   custom_effect_tooltip = POL_SLD_path_disabled_tt
+	   set_party_name = {
+				ideology =  social_democrat #there is only SLD and LSD
+				long_name = POL_social_democrat_party_SLD_only
+				name = POL_social_democrat_party_SLD_only_long
+			}
+	   add_political_power = 100 #more power
+	    set_country_flag = SLD_path_disabled
+		add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+		add_stability = -0.05
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	
+	focus = {
+		id = POL_Increase_our_power
+		icon = demand_territory
+		x = 0
+		y = 1
+		relative_position_id = POL_end_the_coalition 
+		cost = 4
+		
+		prerequisite = {
+			focus = POL_end_the_coalition
+		}
+		
+		
+		completion_reward = {
+	    add_political_power = 75 #more power
+		add_stability = -0.05
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Polish_elections
+		icon = Polish_elections
+		x = 0
+		y = 1
+		relative_position_id = POL_Increase_our_power 
+		cost = 4
+		
+		available = {
+		has_completed_focus = POL_modern_army
+		}
+		
+		prerequisite = {
+			focus = POL_Polish_economic_miracle
+		}
+		
+		prerequisite = {
+			focus = POL_concessions_to_UP
+			focus = POL_Increase_our_power
+			focus = POL_the_left_stands_united
+		}
+		
+		
+		completion_reward = {
+	   load_focus_tree = Polish_focus_tree_NV #changes focus tree to the bigger one
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#semi-economic focuses
+	focus = {
+		id = POL_Pay_our_debts
+		icon = money
+		x = -1
+		y = 1
+		relative_position_id = POL_SLD_goverment 
+		cost = 4
+		
+		prerequisite = {
+			focus = POL_SLD_goverment
+		}
+		
+		
+		completion_reward = {
+		set_country_flag = Debt_decisions_unlocked
+		custom_effect_tooltip = POL_Pay_our_debts_decisions_tt #unlocks decision to lower national debt
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_sell_shares_in_huta_katowice
+		icon = construction2
+		x = -2
+		y = 1
+		relative_position_id = POL_Pay_our_debts 
+		cost = 4
+		
+		
+		prerequisite = {
+			focus = POL_Pay_our_debts
+		}
+		
+		
+		completion_reward = {
+		add_offsite_building = { type = industrial_complex level = 1 }
+		swap_ideas = { 
+					remove_idea = POL_Bad_investments
+					add_idea = POL_Bad_investments_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_devalue_Zloty
+		icon = zloty
+		x = 1
+		y = 1
+		relative_position_id = POL_sell_shares_in_huta_katowice 
+		cost = 4
+		
+		
+		prerequisite = {
+			focus = POL_sell_shares_in_huta_katowice
+		}
+		
+		completion_reward = {
+		add_timed_idea = {
+				idea = POL_devaluing_zloty
+				days = 400
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = POL_Heal_the_wonds
+		icon = align_to_germany
+		x = -1
+		y = 1
+		relative_position_id = POL_sell_shares_in_huta_katowice
+		cost = 4
+		
+		prerequisite = {
+		    focus = POL_sell_shares_in_huta_katowice
+		}
+		
+	    available = {
+			NOT = { has_war_with = USA }
+		}
+		
+		completion_reward = {
+			add_opinion_modifier = {
+					target = GER
+					modifier = declaration_of_friendship
+				}
+			GER = {
+				add_opinion_modifier = {
+					target = POL
+					modifier = declaration_of_friendship
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_German_investors
+		icon = concessions
+		x = 0
+		y = 1
+		relative_position_id = POL_Heal_the_wonds 
+		cost = 4
+		
+		
+		prerequisite = {
+			focus = POL_Heal_the_wonds
+		}
+		
+		
+		completion_reward = {
+		random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	focus = {
+		id = POL_Polish_apple_industry
+		icon = agriculture
+		x = 0
+		y = 1
+		relative_position_id = POL_devalue_Zloty 
+		cost = 4
+		
+		
+		prerequisite = {
+			focus = POL_devalue_Zloty
+		}
+		
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = POL_Bad_investments_2
+					add_idea = POL_Bad_investments_3 
+				}
+		random_owned_state = { #idk why I added this, but I thought that agriculture = extra population
+				add_manpower = 20000
+			}
+		random_owned_state = {
+				add_manpower = 20000
+			}
+		random_owned_state = {
+				add_manpower = 20000
+			}
+		random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_manpower = 20000
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_Polish_economic_miracle
+		icon = POL_economic_miracle
+		x = -1
+		y = 1
+		relative_position_id = POL_Polish_apple_industry 
+		cost = 5.80
+		
+		prerequisite = {
+			focus = POL_Polish_apple_industry
+		}
+		
+		prerequisite = {
+			focus = POL_German_investors
+		}
+		
+		
+		completion_reward = { 
+					add_ideas = POL_Polish_economy_bonus
+					add_stability = 0.07
+					remove_ideas = POL_Bad_investments_3
+				}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = POL_military_modernization_program
+		icon = army_logistics
+		x = 13
+		y = 1
+		cost = 4
+		relative_position_id = POL_Kwasniewskis_speach
+	    
+		prerequisite = {
+			focus = POL_Kwasniewskis_speach
+		}
+		
+		prerequisite = {
+			focus = POL_Pay_our_debts
+		}
+		
+		completion_reward = {
+		 swap_ideas = { 
+					remove_idea = POL_outdated_equipment
+					add_idea = POL_outdated_equipment_2 
+				}
+		 army_experience = 10
+		 add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+	}
+} 
+      #navy tree
+      focus = {
+		id = POL_countinue_navy_restructuring
+		icon = naval_doctrine
+		x = 4
+		y = 1
+		relative_position_id = POL_military_modernization_program
+		cost = 4
+		
+		prerequisite = {
+		focus = POL_military_modernization_program
+		}
+		
+	    completion_reward = {
+			create_equipment_variant = {
+							name = "Riptide Class"	
+							type = destroyer_2
+							name_group = POL_DD_HISTORICAL
+							parent_version = 0
+							modules = {
+								fixed_ship_battery_slot = ship_light_battery_1
+								fixed_ship_anti_air_slot = ship_anti_air_1
+								fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+								fixed_ship_radar_slot = empty
+								fixed_ship_engine_slot = light_ship_engine_2
+								fixed_ship_torpedo_slot = ship_torpedo_1
+								mid_1_custom_slot = ship_mine_layer_1
+								rear_1_custom_slot = ship_depth_charge_1
+							}
+						}
+			create_ship = { type = destroyer_2 equipment_variant = "Riptide Class" creator = GER } #adds modernized ORP Grom that was created in East Germany
+			add_tech_bonus = {
+				name = POL_countinue_navy_restructuring
+			    bonus = 0.7
+			    uses = 1
+				category = naval_doctrine
+			}
+			navy_experience = 45
+		}
+	}
+
+    focus = {
+		id = POL_foreign_ship_making_experts
+		icon = navy
+		x = 0
+		y = 1
+		relative_position_id = POL_countinue_navy_restructuring 
+		cost = 4
+		
+		
+		prerequisite = {
+			focus = POL_countinue_navy_restructuring
+		}
+		
+		completion_reward = {
+		add_timed_idea = {
+				idea = naval_production_bonus4
+				days = 400
+			}
+		}
+       }
+      focus = {
+		id = POL_swinoujscie_tunnel
+		icon = navy2
+		x = 0
+		y = 1
+		relative_position_id = POL_foreign_ship_making_experts 
+		cost = 4
+		
+		
+		prerequisite = {
+			focus = POL_foreign_ship_making_experts
+		}
+		
+		completion_reward = {
+		add_offsite_building = { type = industrial_complex level = 1 }
+		add_offsite_building = { type = dockyard level = 1 }
+		}
+      }
+      #air tree
+	  focus = {
+		id = POL_train_our_pilots
+		icon = air_doctrine
+		x = -4
+		y = 1
+		relative_position_id = POL_military_modernization_program
+		cost = 4
+		
+		prerequisite = {
+		focus = POL_military_modernization_program
+		}
+		
+	    completion_reward = {
+			add_timed_idea = {
+				idea = POL_Pilot_training_programs
+				days = 150
+			}
+			add_tech_bonus = {
+				name = air_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+			air_experience = 45
+		}
+	}
+	
+    focus = {
+		id = POL_American_planes
+		icon = align_to_america
+		x = -1
+		y = 1
+		relative_position_id = POL_train_our_pilots
+		cost = 4
+		
+		mutually_exclusive = {
+		focus = POL_Russian_planes
+		}
+		
+		prerequisite = {
+		focus = POL_train_our_pilots
+		}
+		
+	    completion_reward = {
+			add_equipment_to_stockpile = { 
+				type = fighter_equipment_3 
+				amount = 50
+				producer = USA
+			}
+	  add_equipment_to_stockpile = {
+				type = CAS_equipment_2
+				amount = 40
+				producer = USA
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_Russian_planes
+		icon = align_to_russia
+		x = 1
+		y = 1
+		relative_position_id = POL_train_our_pilots
+		cost = 4
+		
+		mutually_exclusive = {
+		focus = POL_American_planes
+		}
+		
+		prerequisite = {
+		focus = POL_train_our_pilots
+		}
+		
+	    completion_reward = {
+			add_equipment_to_stockpile = { 
+				type = fighter_equipment_3 
+				amount = 50
+				producer = SOV
+			}
+	  add_equipment_to_stockpile = {
+				type = strat_bomber_equipment_2
+				amount = 40
+				producer = SOV
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_Luzyce_airbase
+		icon = air_production
+		x = -1
+		y = 1
+		relative_position_id = POL_Russian_planes
+		cost = 4
+		
+		prerequisite = {
+			focus = POL_Russian_planes
+			focus = POL_American_planes
+		}
+		
+	    completion_reward = {
+			random_owned_state = {
+				prioritize = { 744 }
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	  #army tree
+      focus = {
+		id = POL_newer_models_for_our_wepons
+		icon = small_arms2
+		x = 0
+		y = 1
+		relative_position_id = POL_military_modernization_program
+		cost = 4
+		
+		prerequisite = {
+			focus = POL_military_modernization_program
+		}
+		
+	    completion_reward = {
+	    add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.6
+				uses = 1
+				category = infantry_weapons
+			}
+	   }
+	}
+	
+	focus = {
+		id = POL_small_arms_standarization_program
+		icon = small_arms2
+		x = 1
+		y = 1
+		relative_position_id = POL_newer_models_for_our_wepons
+		cost = 4
+		
+		prerequisite = {
+			focus = POL_newer_models_for_our_wepons
+		}
+		
+	    completion_reward = {
+	   add_timed_idea = {
+				idea = POL_small_arms_standarization_program
+				days = 400
+			}
+	   swap_ideas = { 
+					remove_idea = POL_outdated_equipment_2
+					add_idea = POL_outdated_equipment_3 
+				}
+	   }
+	}
+	
+	 focus = {
+		id = POL_expand_GROM
+		icon = GROM
+		x = -1
+		y = 1
+		relative_position_id = POL_newer_models_for_our_wepons
+		cost = 4
+		
+		prerequisite = {
+			focus = POL_newer_models_for_our_wepons
+		}
+		
+	    completion_reward = {
+	    army_experience = 10
+		add_ideas = POL_GROM
+	   }
+	}
+	
+	focus = {
+		id = POL_forgein_tank_designs
+		icon = tank
+		x = -1
+		y = 1
+		relative_position_id = POL_small_arms_standarization_program
+		cost = 4
+		
+		
+		prerequisite = {
+		    focus = POL_expand_GROM
+		}
+		
+		prerequisite = {
+		    focus = POL_small_arms_standarization_program
+		}
+		
+	    completion_reward = {
+			swap_ideas = { 
+					remove_idea = POL_outdated_equipment_3
+					add_idea = POL_outdated_equipment_4 
+				}
+			add_tech_bonus = {
+				name = tank_bonus
+				bonus = 0.6
+				uses = 1
+				category = armor
+			}
+		}
+	}
+	
+	focus = {
+		id = POL_modern_army
+		icon = infantry_axis
+		x = 0
+		y = 1
+		relative_position_id = POL_forgein_tank_designs
+		cost = 4
+		
+		
+		prerequisite = {
+		    focus = POL_forgein_tank_designs
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			army_experience = 40
+			remove_ideas = POL_outdated_equipment_4
+			add_war_support = 0.1
+		}
+	}

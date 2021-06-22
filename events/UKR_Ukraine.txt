@@ -1,0 +1,906 @@
+﻿###########################
+# Ukrainain Events
+###########################
+
+add_namespace = ukraine
+
+# null 
+country_event = {
+	id = ukraine.1
+	title = ukraine.1.t
+	desc = ukraine.1.d
+	picture = GFX_report_event_soviet_soldiers
+	
+	is_triggered_only = yes
+	
+	option = { # Accept demands
+		name = ukraine.1.a
+		ai_chance = {
+			base = 10
+			modifier = { # Don't accept if in a faction that can protect them
+				factor = 0
+				OR = {
+					any_other_country = {
+						is_major = yes
+						OR = {
+							is_in_faction_with = UKR
+							has_guaranteed = UKR
+						}
+					}
+					has_idea = anti_soviet_pact
+					SOV = { surrender_progress > 0.5 }
+				}
+			}
+		}
+		SOV = {
+			country_event = { days = 5 id = soviet.6 }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+	option = { # Refuse
+		name = ukraine.1.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 1
+				OR = {
+					is_historical_focus_on = no
+					any_other_country = {
+						is_major = yes
+						is_in_faction_with = UKR
+					}
+				}
+			}
+			modifier = {
+				add = 0
+				any_other_country = {
+					is_major = yes
+					has_guaranteed = UKR
+				}
+			}
+		}
+
+		SOV = {
+			country_event = { days = 5 id = soviet.7 }
+			effect_tooltip = {
+				create_wargoal = {
+					type = annex_everything
+					target = UKR
+				}	
+			}
+		}
+	}
+}
+
+# Requests Crimea - yes
+country_event = {
+	id = ukraine.2
+	title = ukraine.2.t
+	desc = ukraine.2.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.2.a
+		UKR = { 
+			transfer_state = 137
+			add_state_core = 137
+		}
+		SOV = { 
+			remove_state_core = 137
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = news.3002 }
+			}
+			news_event = { id = news.3001 }
+		}
+	}
+}
+# Requests Crimea - no
+
+country_event = {
+	id = ukraine.3
+	title = ukraine.3.t
+	desc = ukraine.3.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.3.a
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = news.3003 }
+				add_political_power = -100
+			}
+			news_event = { id = news.3001 }
+		}
+	}
+}
+
+# Requests crimea - soviet
+country_event = {
+	id = ukraine.4
+	title = ukraine.4.t
+	desc = ukraine.4.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.4.a
+		ai_chance {
+			base = 9
+		}
+		diplomatic_relation = {
+			country = UKR
+			relation = docking_rights
+			active = yes
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.2 }
+			}
+			news_event = { id = news.3001 }
+		}
+	}
+		option = {
+		name = ukraine.4.b
+		ai_chance {
+			base = 1
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.3 }
+			}
+			news_event = { id = news.3001 }
+		}
+	}
+}
+
+# Requests Garentee - yes
+country_event = {
+	id = ukraine.5
+	title = ukraine.5.t
+	desc = ukraine.5.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.5.a
+		hidden_effect = {
+
+		}
+	}
+}
+
+# Requests Garentee - no
+
+country_event = {
+	id = ukraine.6
+	title = ukraine.6.t
+	desc = ukraine.6.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.6.a
+		hidden_effect = {
+
+		}
+	}
+}
+
+# Requests Garentee - soviet
+country_event = {
+	id = ukraine.7
+	title = ukraine.7.t
+	desc = ukraine.7.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.7.a
+		ai_chance {
+			base = 10
+		}
+		diplomatic_relation = {
+			country = UKR
+			relation = guarantee
+			active = yes
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.5 }
+			}
+		}
+	}
+		option = {
+		name = ukraine.7.b
+		ai_chance {
+			base = 0
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.6 }
+			}
+		}
+	}
+}
+
+# Requests non- yes
+country_event = {
+	id = ukraine.8
+	title = ukraine.8.t
+	desc = ukraine.8.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.8.a
+		diplomatic_relation = {
+			country = SOV
+			relation = non_aggression_pact
+			active = yes
+		}
+		hidden_effect = {
+
+		}
+	}
+}
+
+# Requests Garentee - no
+
+country_event = {
+	id = ukraine.9
+	title = ukraine.9.t
+	desc = ukraine.9.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.9.a
+		hidden_effect = {
+
+		}
+	}
+}
+
+# Requests Garentee - soviet
+country_event = {
+	id = ukraine.10
+	title = ukraine.10.t
+	desc = ukraine.10.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.10.a
+		ai_chance {
+			base = 10
+		}
+		diplomatic_relation = {
+			country = UKR
+			relation = non_aggression_pact
+			active = yes
+		}
+		UKR = {
+		diplomatic_relation = {
+			country = SOV
+			relation = non_aggression_pact
+			active = yes
+		}
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.8 }
+			}
+		}
+	}
+		option = {
+		name = ukraine.10.b
+		ai_chance {
+			base = 0
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.9 }
+			}
+		}
+	}
+}
+# Requests Romania - yes
+country_event = {
+	id = ukraine.11
+	title = ukraine.11.t
+	desc = ukraine.11.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.11.a
+		UKR = { 
+			transfer_state = 766
+			transfer_state = 80
+			add_state_core = 766
+			add_state_core = 80
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = news.3005 }
+			}
+			news_event = { id = news.3004 }
+		}
+	}
+}
+# Requests Romania - no
+
+country_event = {
+	id = ukraine.12
+	title = ukraine.12.t
+	desc = ukraine.12.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.12.a
+		add_state_core = 766
+		add_state_core = 80
+		create_wargoal = {
+		target = ROM
+		type = take_core_state
+		generator = {80 766}
+		}
+		hidden_effect = {
+			news_event = { id = news.3006 }
+		}
+	}
+}
+
+# Demands Romania - Romania
+country_event = {
+	id = ukraine.13
+	title = ukraine.13.t
+	desc = ukraine.13.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.13.a
+		ai_chance {
+			base = 9
+			modifier = { # 
+				add = 5
+				UKR = {
+					is_major = yes
+				}
+			}
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.11 }
+			}
+			news_event = { id = news.3004 }
+		}
+	}
+		option = {
+		name = ukraine.13.b
+		ai_chance {
+			base = 0
+			modifier = {
+				add = 5
+				any_other_country = {
+					is_major = yes
+					has_guaranteed = ROM
+				}
+			}
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.12 }
+			}
+			news_event = { id = news.3004 }
+		}
+	}
+}
+# Requests Poland - yes
+country_event = {
+	id = ukraine.14
+	title = ukraine.14.t
+	desc = ukraine.14.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.14.a
+		UKR = { 
+			transfer_state = 91
+			transfer_state = 93
+			transfer_state = 89
+			add_state_core = 91
+			add_state_core = 93
+			add_state_core = 89
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = news.3008 }
+			}
+			news_event = { id = news.3008 }
+		}
+	}
+}
+# Requests Poland - no
+
+country_event = {
+	id = ukraine.15
+	title = ukraine.15.t
+	desc = ukraine.15.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.15.a
+		add_state_core = 91
+		add_state_core = 93
+		add_state_core = 89
+		create_wargoal = {
+		target = POL
+		type = take_core_state
+		generator = {91 93 89}
+		}
+		hidden_effect = {
+			news_event = { id = news.3009 }
+		}
+	}
+}
+
+# Demands Poland - Poland
+country_event = {
+	id = ukraine.16
+	title = ukraine.16.t
+	desc = ukraine.16.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.16.a
+		ai_chance {
+			base = 9
+			modifier = { # 
+				add = 5
+				UKR = {
+					is_major = yes
+				}
+			}
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.14 }
+			}
+			news_event = { id = news.3007 }
+		}
+	}
+		option = {
+		name = ukraine.16.b
+		ai_chance {
+			base = 1
+				modifier = {
+				add = 5
+				any_other_country = {
+					is_major = yes
+					has_guaranteed = POL
+				}
+			}
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.15 }
+			}
+			news_event = { id = news.3007 }
+		}
+	}
+}
+
+# Demands Crimea - yes
+country_event = {
+	id = ukraine.17
+	title = ukraine.17.t
+	desc = ukraine.17.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.17.a
+		UKR = { 
+			transfer_state = 137
+			add_state_core = 137
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = news.3011 }
+			}
+			news_event = { id = news.3011 }
+		}
+	}
+}
+# Demands Crimea - no
+
+country_event = {
+	id = ukraine.18
+	title = ukraine.18.t
+	desc = ukraine.18.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.18.a
+		add_state_core = 137
+		create_wargoal = {
+		target = SOV
+		type = take_core_state
+		generator = {137}
+		}
+		hidden_effect = {
+			news_event = { id = news.3012 }
+		}
+	}
+}
+
+# Demands Crimea - Soviet
+country_event = {
+	id = ukraine.19
+	title = ukraine.19.t
+	desc = ukraine.19.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.19.a
+		ai_chance {
+			base = 5
+				modifier = {
+					add = 10
+					UKR = {
+						is_major = yes
+					}
+				}
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.17 }
+			}
+			news_event = { id = news.3010 }
+		}
+	}
+	option = { 
+		name = ukraine.19.b
+		ai_chance {
+			base = 2
+			modifier = {
+				add = -2
+				UKR = {
+					is_major = yes
+				}
+			}
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.18 }
+			}
+			news_event = { id = news.3010 }
+		}
+	}
+}
+# Requests allies - yes
+country_event = {
+	id = ukraine.20
+	title = ukraine.20.t
+	desc = ukraine.20.d
+	picture = GFX_report_event_generic_conference
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.20.a
+		hidden_effect = {
+			news_event = { id = news.3013 }
+		}
+	}
+}
+
+# Requests allies- no
+
+country_event = {
+	id = ukraine.21
+	title = ukraine.21.t
+	desc = ukraine.21.d
+	picture = GFX_report_event_generic_conference
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.21.a
+		hidden_effect = {
+
+		}
+	}
+}
+### allies ###
+country_event = {
+	id = ukraine.22
+	title = ukraine.22.t
+	desc = ukraine.22.d
+	picture = GFX_report_event_generic_conference
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.22.a
+		ai_chance {
+			base = 10
+		}
+		add_to_faction = UKR
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.20 }
+			}
+		}
+	}
+		option = {
+		name = ukraine.22.b
+		ai_chance {
+			base = 0
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.21 }
+			}
+		}
+	}
+}
+# Requests commintern - yes
+country_event = {
+	id = ukraine.23
+	title = ukraine.23.t
+	desc = ukraine.23.d
+	picture = GFX_report_event_generic_conference
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.23.a
+		hidden_effect = {
+			news_event = { id = news.3014 }
+		}
+	}
+}
+
+# Requests commintern - no
+
+country_event = {
+	id = ukraine.24
+	title = ukraine.24.t
+	desc = ukraine.24.d
+	picture = GFX_report_event_generic_conference
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.24.a
+		hidden_effect = {
+
+		}
+	}
+}
+### commintern ###
+country_event = {
+	id = ukraine.25
+	title = ukraine.25.t
+	desc = ukraine.25.d
+	picture = GFX_report_event_generic_conference
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.25.a
+		ai_chance {
+			base = 10
+		}
+		add_to_faction = UKR
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.23 }
+			}
+		}
+	}
+		option = {
+		name = ukraine.25.b
+		ai_chance {
+			base = 0
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.24 }
+			}
+		}
+	}
+}
+# Requests axis - yes
+country_event = {
+	id = ukraine.26
+	title = ukraine.26.t
+	desc = ukraine.26.d
+	picture = GFX_report_event_generic_conference
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.26.a
+		hidden_effect = {
+			news_event = { id = news.3015 }
+		}
+	}
+}
+
+# Requests axis - no
+
+country_event = {
+	id = ukraine.27
+	title = ukraine.27.t
+	desc = ukraine.27.d
+	picture = GFX_report_event_generic_conference
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.27.a
+		hidden_effect = {
+
+		}
+	}
+}
+### commintern ###
+country_event = {
+	id = ukraine.28
+	title = ukraine.28.t
+	desc = ukraine.28.d
+	picture = GFX_report_event_generic_conference
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.28.a
+		ai_chance {
+			base = 10
+		}
+		add_to_faction = UKR
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.23 }
+			}
+		}
+	}
+		option = {
+		name = ukraine.28.b
+		ai_chance {
+			base = 0
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.24 }
+			}
+		}
+	}
+}
+
+# Requests besserabia - yes
+country_event = {
+	id = ukraine.29
+	title = ukraine.29.t
+	desc = ukraine.29.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.29.a
+		UKR = { 
+			transfer_state = 766
+			add_state_core = 766
+			transfer_state = 80
+			add_state_core = 80
+			transfer_state = 78
+			add_state_core = 78
+		}
+		SOV = { 
+			remove_state_claim = 766
+			remove_state_claim = 80
+			remove_state_claim = 78
+			remove_state_core = 766
+			remove_state_core = 80
+			remove_state_core = 78
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = news.3016 }
+			}
+		}
+	}
+}
+# Requests besserabia - no
+
+country_event = {
+	id = ukraine.30
+	title = ukraine.30.t
+	desc = ukraine.30.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.30.a
+		hidden_effect = {
+
+		}
+	}
+}
+
+# Requests besserabia - soviet
+country_event = {
+	id = ukraine.31
+	title = ukraine.31.t
+	desc = ukraine.31.d
+	picture = GFX_report_event_soviet_army_greeted
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = ukraine.31.a
+		ai_chance {
+			base = 10
+		}
+		hidden_effect = {
+			UKR = {
+				country_event = { days = 1 id = ukraine.29 }
+			}
+		}
+	}
+		option = {
+		name = ukraine.31.b
+		ai_chance {
+			base = 0
+		}
+		hidden_effect = {
+		
+			UKR = {
+				country_event = { days = 1 id = ukraine.30 }
+			}
+		}
+	}
+}

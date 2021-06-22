@@ -1,0 +1,92 @@
+﻿add_namespace = poland
+
+#Invitation to Trójmorze
+country_event = {
+	id = poland.1 
+	title = poland.1.t
+	desc = poland.1.d
+	picture = GFX_report_event_political_deal2
+	
+	is_triggered_only = yes
+	
+	option = {	#Accept
+		name = poland.1.o1
+		POL = { add_to_faction = ROOT }
+		set_country_flag = seeks_polish_alliance
+		POL = { country_event = diplomatic_response.1 }
+		ai_chance = {
+			factor = 90
+			modifier = {
+				factor = 40
+				is_neutral = yes
+			}
+			modifier = {
+				factor = 50
+				is_in_faction = yes
+			}
+		}
+	}
+	
+	option = {	#Decline
+		name = poland.1.o2
+		POL = { country_event = diplomatic_response.2 }
+		random_country = {
+			limit = {
+				tag = POL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+			}
+		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+#unification of Trójmorze
+country_event = {
+	id = poland.2
+	title = poland.2.t
+	desc = poland.2.d
+	picture = GFX_report_event_european_union
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = poland.2.o1
+		
+		POL = {
+			country_event = { id = diplomatic_response.1 }
+			annex_country = { 
+				target = ROOT 
+				transfer_troops = yes
+			}
+		  }  
+			every_state = {
+					limit = { is_core_of = ROOT }
+					add_core_of = POL
+				}
+		
+		ai_chance = {
+			factor = 95
+		}
+	
+	option = {
+		name = poland.2.o2
+		
+		random_country = {
+			limit = {
+				tag = POL
+			}
+			country_event = { id = diplomatic_response.2 }
+		}
+		
+		add_political_power = -25
+		
+		ai_chance = {
+			factor = 5
+		}
+	}
+ }
+ }

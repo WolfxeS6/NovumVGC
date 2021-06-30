@@ -1,0 +1,414 @@
+﻿add_namespace = south_korea
+add_namespace = korean_war
+
+country_event = {	#Remove the North Korean cores upon union
+	id = south_korea.1
+	hidden = yes
+	is_triggered_only = yes
+	
+	option = {
+		every_state = {
+			limit = {
+				is_core_of = PRK
+				is_owned_by = KOR
+			}
+			remove_core_of = PRK
+		}
+	}
+}
+
+#Victory in Yeonpyeong
+country_event = {
+	id = south_korea.2
+	title = south_korea.2.t
+	desc = south_korea.2.desc
+	picture = GFX_report_event_PRK_pyongyang_event_2
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.2.a
+		effect_tooltip = {
+			random_list = {
+				50 = { country_event = { id = north_korea.22 days = 3 } }
+				50 = { country_event = { id = north_korea.23 days = 3 } }
+			}
+		}
+	}
+}
+
+#Victory in Yeonpyeong
+country_event = {
+	id = south_korea.3
+	title = south_korea.3.t
+	desc = south_korea.3.desc
+	picture = GFX_report_event_PRK_pyongyang_event_2
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.3.a
+			add_tech_bonus = {
+				name = nav_doctrine_bonus
+				bonus = 1.0
+				uses = 1
+				category = naval_doctrine
+			}
+	}
+}
+
+#Defeat in Yeonpyeong
+country_event = {
+	id = south_korea.4
+	title = south_korea.4.t
+	desc = south_korea.4.desc
+	picture = GFX_report_event_PRK_pyongyang_event_2
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.4.a
+		navy_experience = 25
+	}
+}
+
+#[FROM.GetLeader]'s 'Two Korea' proposal
+country_event = {
+	id = south_korea.5
+	title = south_korea.5.t
+	desc = south_korea.5.desc
+	picture = GFX_report_event_PRK_pyongyang_event_2
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.5.a
+		ai_chance = {
+			base = 90
+		}
+		diplomatic_relation = {
+			country = FROM
+			relation = non_aggression_pact
+			active = yes
+		}
+		PRK = {
+			country_event = { id = north_korea.28 }
+		}
+	}
+	
+	option = {
+		name = south_korea.5.b
+		ai_chance = {
+			base = 10
+		}
+		PRK = {
+			country_event = { id = north_korea.31 }
+		}
+	}
+}
+
+country_event = {	#2000 Korean Swit
+	id = south_korea.6
+	title = south_korea.6.t
+	desc = south_korea.6.desc
+	picture = GFX_report_event_PRK_Imperial_Palace
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 7
+	}
+	
+	trigger = {
+		original_tag = KOR
+		date > 2000.4.1
+		date < 2000.7.1
+	}
+	
+	option = {
+		name = south_korea.6.a
+		PRK = { country_event = { id = north_korea.3 } }
+		add_political_power = -20
+		
+	}
+	
+}
+
+#2000 Korean Swit
+country_event = {
+	id = south_korea.8
+	title = south_korea.8.t
+	desc = south_korea.8.desc
+	picture = GFX_report_event_PRK_2000_inter_korean_summit
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.8.a
+		add_political_power = 120
+		PRK = { country_event = { id = north_korea.61 } }
+		PRK = { add_opinion_modifier = { target = ROOT modifier = korean_peace_agreement } }
+		hidden_effect = {
+			news_event = { id = north_korea_news.19 }
+		}
+	}
+}
+
+#Lose Our Capital
+country_event = {
+	id = korean_war.1
+	title = korean_war.1.t
+	desc = korean_war.1.desc
+	picture = GFX_report_event_soviet_tanks_snow
+	
+	trigger = {
+		tag = KOR
+		has_war_with = PRK
+		surrender_progress > 0.6
+		525 = { #Gyeonggi
+			owner = { original_tag = KOR }
+			is_controlled_by = PRK
+		}
+		has_civil_war = no
+	}
+
+	mean_time_to_happen = { days = 20 }
+
+	fire_only_once = yes
+
+	#Let's ask them for mercy
+	option = {
+		name = korean_war.1.a
+		ai_chance = {
+			base = 8
+		}
+		PRK = {
+			country_event = { id = north_korea.29 }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+		effect_tooltip = {
+			PRK = { 
+				white_peace = {
+					tag = KOR 
+					message = PRK_win_agree_peace 
+				} 
+			}
+		}
+	}
+
+	#No, we can still fight more
+	option = {
+		name = korean_war.1.b
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 0
+				is_in_faction = yes
+			}
+		}
+	}
+}
+
+#Lose Our Capital
+country_event = {
+	id = korean_war.2
+	title = korean_war.2.t
+	desc = korean_war.2.desc
+	picture = GFX_report_event_soviet_tanks_snow
+	
+	is_triggered_only = yes
+	
+	
+	immediate = {
+		hidden_effect = {
+			PRK = { 
+					white_peace = {
+						tag = KOR
+						message = PRK_win_agree_peace 
+					}
+			}
+		}
+	}
+
+	option = {
+		name = korean_war.2.a
+		hidden_effect = {
+			news_event = { id = north_korea_news.10 }
+		}
+		
+		if = {
+			limit = {
+				OR = {
+					PRK = { has_government = fascist }
+					PRK = { has_government = nationalist }
+					PRK = { has_government = communist }
+				}
+			}
+			every_state = {
+				limit = {
+					is_owned_by = ROOT
+					is_core_of = ROOT
+				}
+				set_state_flag = korean_AINDF
+			}
+			every_state = {
+				limit = {
+					has_state_flag = korean_AINDF
+				}
+				add_core_of = NDF
+				NDF = { transfer_state = PREV }
+			}
+		}
+		PRK = { 
+			annex_country = { target = KOR } 
+		}
+		PRK = { puppet = NDF }
+		946 = {
+			limit = {
+				is_owned_by = NDF
+			}
+			JEJ = { transfer_state = 946 }
+		}
+		NDF = {			
+			set_politics = {	
+				ruling_party = fascist
+				elections_allowed = no
+			}
+
+			set_popularities = {
+				fascist = 80
+				nationalist = 20
+			}
+		}
+	}
+}
+
+#Lose Our Capital
+country_event = {
+	id = korean_war.3
+	is_triggered_only = yes
+	hidden = yes
+	
+	immediate = {
+		hidden_effect = {
+			PRK = { 
+					white_peace = {
+						tag = KOR
+						message = PRK_win_agree_peace 
+					}
+			}
+			if = {
+				limit = {
+					OR = {
+						PRK = { has_government = fascist }
+						PRK = { has_government = nationalist }
+						PRK = { has_government = communist }
+					}
+				}
+				every_state = {
+					limit = {
+						is_owned_by = ROOT
+						is_core_of = ROOT
+					}
+					set_state_flag = korean_AINDF
+				}
+				every_state = {
+					limit = {
+						has_state_flag = korean_AINDF
+					}
+					add_core_of = NDF
+					NDF = { transfer_state = PREV }
+				}
+			}
+			PRK = { 
+				annex_country = { target = KOR } 
+			}
+			PRK = { puppet = NDF }
+			946 = {
+				limit = {
+					is_owned_by = NDF
+				}
+				KOR = { transfer_state = 946 }
+			}
+			NDF = {			
+				set_politics = {	
+					ruling_party = fascist
+					elections_allowed = no
+				}
+
+				set_popularities = {
+					fascist = 80
+					nationalist = 20
+				}
+			}
+		}
+	}
+	
+}
+
+country_event = {
+	id = korean_war.4
+	is_triggered_only = yes
+	hidden = yes
+	
+	immediate = {
+		hidden_effect = {
+			KOR = { 
+					white_peace = {
+						tag = PRK
+						message = KOR_win_agree_peace 
+					}
+			}
+			KOR = { 
+				annex_country = { target = PRK } 
+			}
+		}
+	}
+	
+}
+
+#Shelling battle in Seoul
+country_event = {
+	id = korean_war.5
+	title = korean_war.5.t
+	desc = korean_war.5.desc
+	picture = GFX_report_event_PRK_pyongyang_event_2
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korean_war.5.a
+		effect_tooltip = {
+			525 = {
+				damage_building = {
+				    type = infrastructure
+				    damage = 4
+				}
+				damage_building = {
+				    type = industrial_complex
+				    damage = 4
+				}
+				damage_building = {
+				    type = arms_factory
+				    damage = 4
+				}
+			}
+		}
+	}
+}
+
+#Debug
+country_event = {
+	id = korean_war.99
+	picture = GFX_report_event_soviet_tanks_snow
+	
+	is_triggered_only = yes
+
+	option = {
+		name = korean_war.99.a
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = PRK
+		}
+	}
+}

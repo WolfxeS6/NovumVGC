@@ -52,7 +52,7 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-				production_oil_factor = 0.1
+				#production_oil_factor = 0.1
 			}
 		}
 		
@@ -273,7 +273,7 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-				progressive_drift = 0.1
+				#progressive_drift = 0.1
 				conscription_factor = 0.15
 				stability_factor = 0.1
 				political_power_gain = 0.4
@@ -328,7 +328,7 @@ ideas = {
 		}
 	
 		idea_focus_generic_fighter_focus = {
-			picture = air_war_plans_division
+			picture = air_war_plans_division_focus
 			
 			allowed = { always = no }
 			
@@ -377,7 +377,7 @@ ideas = {
 			picture = generic_democracy_drift_bonus
 			
 			modifier = {
-				social_liberal_drift = 0.1
+				#social_liberal_drift = 0.1
 				stability_weekly = 0.002
 			}
 		}
@@ -401,7 +401,7 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-				democratic_socialist_drift = 0.1
+				#democratic_socialist_drift = 0.1
 				conscription_factor = 0.05
 				stability_factor = 0.15
 				consumer_goods_factor = -0.04
@@ -415,7 +415,7 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-				social_democrat_drift = 0.1
+				#social_democrat_drift = 0.1
 				stability_factor = 0.1
 				conscription_factor = 0.05
 				industrial_capacity_factory = 0.25
@@ -429,7 +429,7 @@ ideas = {
 			removal_cost = -1
 			
 			modifier = {
-				market_liberal_drift = 0.1
+				#market_liberal_drift = 0.1
 				stability_factor = 0.05
 				drift_defence_factor = 0.05
 				industrial_capacity_factory = 0.1
@@ -442,9 +442,12 @@ ideas = {
 			allowed = { always = no }
 			removal_cost = -1
 			
+			rule = { can_send_volunteers = yes }
+			
 			modifier = {
 				experience_gain_army = 0.02
 				send_volunteer_divisions_required = -0.75
+				send_volunteers_tension = -0.3
 			}
 		}
 		
@@ -816,6 +819,7 @@ ideas = {
 				drift_defence_factor = 0.2
 				political_power_gain = 0.2
 				army_morale_factor = 0.1
+				army_defence_factor = 0.15
 				justify_war_goal_time = -0.85
 				industrial_capacity_factory = -0.1
 				research_speed_factor = -0.35
@@ -951,77 +955,41 @@ ideas = {
 	aircraft_manufacturer = {}
 
 	industrial_concern = {
-		
-		MMK = {
-
-			picture = MMK_picture	
-			
-			available = {
-				has_completed_focus = SOV_expand_MMK
-			}
-
-			allowed = {
-				original_tag = SOV
-			}
-
-            research_bonus = { industry = 0.1 }
-			modifier = {
-				local_resources_factor = 0.1
-			}
-		}
-		
-		Aurubis = {
-			picture = generic_industrial_concern_1
-			allowed = {
-				original_tag = BUL
-			}
-			cost = 150
-			removal_cost = 10
-			research_bonus = { industry = 0.15 }
-			traits = { industrial_concern }
-		}
-		
 		generic_industrial_concern = {
 			picture = generic_industrial_concern_1
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = BUL
-					original_tag = HUN
 					original_tag = TUR
-				    original_tag = POL
-				}	
+					
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_industrial_concern
+				}
+			}
+			
 			cost = 150
 			removal_cost = 10
 			research_bonus = { industry = 0.15 }
 			traits = { industrial_concern }
 		}
-		
-		Datecs = {
-			picture = generic_electronics_concern
-			allowed = {
-				original_tag = BUL
-			}
-			cost = 150
-			removal_cost = 10
-			research_bonus = { electronics = 0.15 }
-			traits = { electronics_concern }
-		}
-		
 		generic_electronics_concern = {
 			picture = generic_electronics_concern_1
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = BUL
-					original_tag = HUN
 					original_tag = TUR
-				    original_tag = POL
-				}	
+					
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_industrial_concern
+				}
+			}
+			
 			cost = 150
 			removal_cost = 10
 			research_bonus = { electronics = 0.15 }
@@ -1031,44 +999,17 @@ ideas = {
 
 	materiel_manufacturer = {
 		designer = yes
-		MZiK = {
-			picture = MZiK_picture
-			
-			available = {
-			has_completed_focus = SOV_expand_Kalinin_factories
-			}
-			
-			modifier = {
-			army_artillery_attack_factor = 0.02
-		   army_artillery_defence_factor = 0.02
-			}
-			
-			equipment_bonus = {
-				artillery = {
-					reliability = 0.05
-					build_cost_ic = -0.05
-					instant = yes
-				}
-			}
-			
-			allowed = {
-			 original_tag = SOV
-			}
-			
-			cost = 150
-			removal_cost = 10
-			research_bonus = { artillery = 0.15 }
-			traits = { artillery_manufacturer }
-		}
 		generic_motorized_equipment_manufacturer = {
 			picture = generic_motorized_equipment_manufacturer_3
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = HUN
 					original_tag = TUR
-				    original_tag = POL
-				}	
+					
+				}
+			}
+			visible = {
+				NOT = {
+					has_country_flag = unique_industrial_concern
 				}
 			}
 			cost = 150
@@ -1080,11 +1021,13 @@ ideas = {
 			picture = generic_infantry_equipment_manufacturer_2
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = HUN
 					original_tag = TUR
-				    original_tag = POL
-				}	
+					
+				}
+			}
+			visible = {
+				NOT = {
+					has_country_flag = unique_industrial_concern
 				}
 			}
 			cost = 150
@@ -1096,11 +1039,13 @@ ideas = {
 			picture = generic_artillery_manufacturer_2
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = HUN
 					original_tag = TUR
-				    original_tag = POL
-				}	
+					
+				}
+			}
+			visible = {
+				NOT = {
+					has_country_flag = unique_industrial_concern
 				}
 			}
 			cost = 150
@@ -1112,80 +1057,41 @@ ideas = {
 
 	political_advisor = {
 
-        Elwira_Nabiullina = {
-			picture = Elwira_Nabiullina_picture
-			
-			available = {
-				has_completed_focus = SOV_invest_in_Central_Bank_of_Russia
-			}
-			
-			allowed = {
-				    original_tag = SOV
-				}
-					
-			traits = { Russian_banker }
-		}
-
 		generic_armaments_organizer = {
 			picture = advisor4
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER 
+					original_tag = USA
 					
-				 }
 				}
 			}
-			traits = { armaments_organizer }
-		}
-
-       generic_rector = {
-			picture = advisor3
-			allowed = {
+			
+			visible = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					has_country_flag = unique_political_advisor_nomal
 				}
 			}
-			traits = { Rector }
+			
+			traits = { armaments_organizer }
 		}
 
 		generic_agricultural_expert = {
 			picture = advisor1
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { agricultural_expert }
 		}
 
@@ -1193,20 +1099,18 @@ ideas = {
 			picture = advisor8
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { backroom_backstabber }
 		}
 
@@ -1214,20 +1118,18 @@ ideas = {
 			picture = advisor7
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { compassionate_gentleman }
 		}
 
@@ -1235,20 +1137,18 @@ ideas = {
 			picture = advisor1
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { captain_of_industry }
 		}
 
@@ -1256,62 +1156,37 @@ ideas = {
 			picture = advisor2
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
-			traits = { environmentalist }
-		}
-
-		generic_external_intelligence_officer = {
-			picture = advisor4
-			allowed = {
+			
+			visible = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					has_country_flag = unique_political_advisor_nomal
 				}
 			}
-			traits = { external_intelligence_officer }
+			
+			traits = { environmentalist }
 		}
 
 		generic_experienced_attorney = {
 			picture = advisor3
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { experienced_attorney }
 		}
 
@@ -1319,20 +1194,18 @@ ideas = {
 			picture = advisor4
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { famous_businessman }
 		}
 
@@ -1340,20 +1213,17 @@ ideas = {
 			picture = advisor1
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { financial_veteran }
 		}
 		
@@ -1361,20 +1231,17 @@ ideas = {
 			picture = advisor2
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { fortification_engineer }
 		}
 
@@ -1382,62 +1249,36 @@ ideas = {
 			picture = advisor10
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
-			traits = { ideological_crusader }
-		}
-
-		generic_internal_intelligence_officer = {
-			picture = advisor3
-			allowed = {
+			
+			visible = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					has_country_flag = unique_political_advisor_nomal
 				}
 			}
-			traits = { internal_intelligence_officer }
+			
+			traits = { ideological_crusader }
 		}
 
 		generic_international_banker = {
 			picture = advisor3
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { international_banker }
 		}
 
@@ -1445,20 +1286,18 @@ ideas = {
 			picture = advisor8
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { naval_industrialist }
 		}
 
@@ -1466,20 +1305,17 @@ ideas = {
 			picture = advisor3
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { popular_figurehead }
 		}
 
@@ -1487,20 +1323,17 @@ ideas = {
 			picture = advisor6
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			available = {
 				has_democratic_form_of_government = yes
 			}
@@ -1511,20 +1344,17 @@ ideas = {
 			picture = advisor5
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { quartermaster_general }
 		}
 
@@ -1532,20 +1362,18 @@ ideas = {
 			picture = advisor1
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { road_builder }
 		}
 
@@ -1553,20 +1381,17 @@ ideas = {
 			picture = advisor2
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { silent_workhorse }
 		}
 
@@ -1574,20 +1399,17 @@ ideas = {
 			picture = advisor9
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { smooth_talking_charmer }
 		}
 
@@ -1595,20 +1417,18 @@ ideas = {
 			picture = advisor4
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
+					original_tag = GER
+					original_tag = USA
 					
-				 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { staunch_constitutionalist }
 		}
 
@@ -1616,20 +1436,17 @@ ideas = {
 			picture = advisor3
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { war_industrialist }
 		}
 
@@ -1637,159 +1454,40 @@ ideas = {
 			picture = advisor5
 			allowed = {
 				NOT = {
-				OR = {
-				original_tag = ROM
-				original_tag = HUN
-				original_tag = DEN
-				original_tag = LAT
-				original_tag = BUL 
-				original_tag = GER
-				original_tag = USA
-				original_tag = POL
-				original_tag = TUR
-					
-				 }
+					original_tag = GER
+					original_tag = USA
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			
 			traits = { warmonger }
-		} 
-	
-	
-	     Nikolay_Barekov = {
-			picture = Nikolay_Barekov_picture
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { propaganda_expert }
-		}
-	
-	    Georgi_Terziyski = {
-			picture = Georgi_Terziyski_picture
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { road_builder }
-		}
-	
-	Plamen_Oresharsk = {
-			picture = Plamen_Oresharski_picture
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { financial_veteran }
-		}
-	
-	Nikolai_Ibushev = {
-			picture = Nikolai_Ibushev_picture
-			
-			available = {
-				has_completed_focus = BUL_Arsenal_AD
-			}
-			
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { war_industrialist }
-		}
-	
-	Anju_Angelow = {
-			
-			picture = Anju_Angelow_picture
-			
-			available = {
-				has_completed_focus = BUL_Ministry_of_Defence_of_Bulgaria
-			}
-			
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { fortification_engineer }
-		}
-	
-	Martin_Danovsky = {
-			
-			picture = Martin_Danovsky_picture
-			
-			available = {
-				has_completed_focus = BUL_Bulgarian_autarky
-			}
-			
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { Domestic_industry_expert }
-		}
-	
-	Gabriela_Dimitrova = {
-			
-			picture = Gabriela_Dimitrova_picture
-			
-			available = {
-				has_completed_focus = BUL_in_search_for_new_markets
-			}
-			
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { International_relations }
-		}
-	
-	Borislaw_Welikow = {
-			
-			picture = Borislaw_Welikow_picture
-			
-			available = {
-				has_completed_focus = BUL_political_reforms
-			}
-			
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { silent_workhorse }
-		}
-	
-	Alexander_Bojilov = {
-			
-			picture = Alexander_Bojilov_picture
-			
-			available = {
-				has_completed_focus = BUL_bulgarian_economy
-			}
-			
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { captain_of_industry }
 		}
 	
 		#Islamist Preacher
 		idea_advisor_islamic_preacher = {
-			
-			available = { #If playing as BUL u have to gain him by doing some focuses radical Islamism.
-			if = {
-				limit = { original_tag = BUL } 
-				has_completed_focus = BUL_islamic_radicalization
-			}
-			}
-			
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
 				}
-			}
 				NOT = {
 					has_available_idea_with_traits = { idea = islamist_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { islamist_politician }
 			do_effect = { NOT = { has_government = islamist } }
 			ai_will_do = {
@@ -1802,22 +1500,22 @@ ideas = {
 			picture = advisor1
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
-				}
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = fascist_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { fascist_politician }
 			do_effect = {
 				NOT = {
@@ -1834,22 +1532,22 @@ ideas = {
 			picture = advisor2
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
-				}
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = nationalist_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { nationalist_politician }
 			do_effect = {
 				NOT = {
@@ -1866,22 +1564,22 @@ ideas = {
 			picture = advisor3
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
-				}
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = monarchist_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { monarchist_politician }
 			do_effect = {
 				NOT = {
@@ -1898,22 +1596,22 @@ ideas = {
 			picture = advisor4
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = reactionary_politician limit = 1 }
 				}
 			}
-		}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { reactionary_politician }
 			do_effect = {
 				NOT = {
@@ -1930,22 +1628,22 @@ ideas = {
 			picture = advisor5
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
-				}
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = conservative_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { conservative_politician }
 			do_effect = {
 				NOT = {
@@ -1962,22 +1660,22 @@ ideas = {
 			picture = advisor6
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
-				}
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = market_liberal_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { market_liberal_politician }
 			do_effect = {
 				NOT = {
@@ -1994,22 +1692,22 @@ ideas = {
 			picture = advisor7
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
-				}
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = social_liberal_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { social_liberal_politician }
 			do_effect = {
 				NOT = {
@@ -2026,22 +1724,22 @@ ideas = {
 			picture = advisor8
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
-				}
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = social_democrat_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { social_democrat_politician }
 			do_effect = {
 				NOT = {
@@ -2058,22 +1756,22 @@ ideas = {
 			picture = advisor9
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
-				}
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = progressive_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { progressive_politician }
 			do_effect = {
 				NOT = {
@@ -2090,22 +1788,22 @@ ideas = {
 			picture = advisor10
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
-				}
 				}
 				NOT = {
 					has_available_idea_with_traits = { idea = democratic_socialist_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { democratic_socialist_politician }
 			do_effect = {
 				NOT = {
@@ -2122,27 +1820,64 @@ ideas = {
 			picture = advisor11
 			allowed = {
 				NOT = {
-					OR = {
-					original_tag = ROM
-					original_tag = HUN
-					original_tag = DEN
-					original_tag = LAT
-					original_tag = TUR
 					original_tag = GER
 					original_tag = USA
-					original_tag = POL
+					original_tag = JAP
 					
 				}
-				}
-			NOT = {
+				NOT = {
 					has_available_idea_with_traits = { idea = communist_politician limit = 1 }
 				}
 			}
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_party_boost
+				}
+			}
+			
 			traits = { communist_politician }
 			do_effect = { NOT = { has_government = communist } }
 			ai_will_do = {
 				factor = 0
 			}
+		}
+		
+		#Head of Intelligence
+		generic_head_of_intelligence = {
+			picture = advisor3
+			allowed = {
+				NOT = {
+					original_tag = GER
+					original_tag = USA
+				}
+			}
+			visible = {
+				NOT = {
+					has_country_flag = unique_political_advisor_nomal
+				}
+			}
+			traits = { head_of_intelligence }
+		}
+		
+		#Secret Julian Assange
+		generic_secret_julian_assange = {
+			picture = advisor3
+			allowed = {
+				hidden_trigger = {
+					NVX_has_government_ideology_democratic = yes
+					check_variable = { NVX_history_wars_declared_immoral < 11 }
+					has_country_flag = NVX_flag_secret_ideas_advisor_julian_assange
+				}
+			}
+			available = {
+				hidden_trigger = {
+					NVX_has_government_ideology_democratic = yes
+					check_variable = { NVX_history_wars_declared_immoral < 11 }
+					has_country_flag = NVX_flag_secret_ideas_advisor_julian_assange
+				}
+			}
+			traits = { mastermind_code_cracker }
 		}
 	}
 
@@ -2153,46 +1888,30 @@ ideas = {
 			picture = army_advisor1
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_army_chief
+				}
+			}
 			
 			traits = { army_chief_offensive_2 }
 		}
-        
-		Stefan_Janew = {
-		
-			picture = Stefan_Janew_picture
-			
-			available = {
-			has_completed_focus = BUL_Bulgarian_land_forces
-			}
-			
-			allowed = {
-			original_tag = BUL
-			}
-			
-			traits = { army_chief_defensive_2 }
-		}
-		
+
 		generic_army_chief_def = {
 		
 			picture = army_advisor2
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_army_chief
+				}
+			}
+			
 			
 			traits = { army_chief_defensive_2 }
 		}
@@ -2202,14 +1921,14 @@ ideas = {
 			picture = air_advisor3
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_army_chief
+				}
+			}
+			
 			
 			traits = { army_chief_maneuver_2 }			
 		}
@@ -2219,14 +1938,14 @@ ideas = {
 			picture = army_advisor3
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_army_chief
+				}
+			}
+			
 			
 			traits = { army_chief_drill_2 }			
 		}
@@ -2236,14 +1955,14 @@ ideas = {
 			picture = air_advisor2
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_army_chief
+				}
+			}
+			
 			
 			traits = { army_chief_reform_2 }			
 		}
@@ -2253,14 +1972,14 @@ ideas = {
 			picture = army_advisor1
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_army_chief
+				}
+			}
+			
 			
 			traits = { army_chief_organizational_2 }			
 		}
@@ -2270,14 +1989,14 @@ ideas = {
 			picture = army_advisor1
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_army_chief
+				}
+			}
+			
 			
 			traits = { army_chief_morale_2 }			
 		}
@@ -2286,33 +2005,18 @@ ideas = {
 
 	navy_chief = {
 
-        PLAMEN_IVANOV_MANUSHEV = {
-		
-			picture = PLAMEN_IVANOV_MANUSHEV_picture
-
-            available = {
-			has_completed_focus = BUL_navy
-			}
-
-			allowed = {
-			 original_tag = BUL 
-			}
-			
-			traits = { navy_chief_commerce_raiding_2 }			
-		}
-
 		generic_navy_chief_decisive_bat = {
 		
 			picture = navy_advisor3
 			
 			allowed = {
-			NOT = { 
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_navy_chief
+				}
+			}
 			
 			traits = { navy_chief_decisive_battle_2 }
 		}
@@ -2322,13 +2026,13 @@ ideas = {
 			picture = navy_advisor1
 			
 			allowed = {
-			NOT = { 
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_navy_chief
+				}
+			}
 			
 			traits = { navy_chief_naval_aviation_2 }
 		}
@@ -2338,13 +2042,13 @@ ideas = {
 			picture = navy_advisor2
 			
 			allowed = {
-			NOT = { 
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_navy_chief
+				}
+			}
 			
 			traits = { navy_anti_submarine_2 }
 		}
@@ -2354,13 +2058,13 @@ ideas = {
 			picture = navy_advisor1
 
 			allowed = {
-			NOT = { 
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_navy_chief
+				}
+			}
 			
 			traits = { navy_chief_old_guard }			
 		}
@@ -2368,14 +2072,15 @@ ideas = {
 		generic_navy_commerce_raider = {
 		
 			picture = navy_advisor3
-allowed = {
-			NOT = { 
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
+
+			allowed = {
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_navy_chief
+				}
+			}
 			
 			traits = { navy_chief_commerce_raiding_2 }			
 		}
@@ -2384,49 +2089,18 @@ allowed = {
 
 	air_chief = {
 
-     Aleksandyr_Panajotow_Aleksandrow = {
-		
-			picture = Aleksandyr_Panajotow_Aleksandrow_picture
-			
-			available = {
-			has_completed_focus = BUL_airforce
-			}
-			
-			allowed = {
-			original_tag = BUL
-			 }
-			
-			traits = { air_chief_safety_2 }			
-		}
-
-     Rumen_Radew = {
-		
-			picture = Rumen_Radew_picture
-			
-			available = {
-			has_completed_focus = BUL_airforce
-			}
-			
-			allowed = {
-			original_tag = BUL
-		}
-			
-			traits = { air_close_air_support_2 }
-		}
-
 		generic_air_close_air_sup = {
 		
 			picture = air_advisor1
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_air_chief
+				}
+			}
 			
 			traits = { air_close_air_support_2 }
 		}
@@ -2436,14 +2110,13 @@ allowed = {
 			picture = air_advisor2
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_air_chief
+				}
+			}
 			
 			traits = { air_chief_all_weather_2 }			
 		}
@@ -2453,14 +2126,13 @@ allowed = {
 			picture = air_advisor3
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_air_chief
+				}
+			}
 			
 			traits = { air_chief_reform_2 }			
 		}
@@ -2470,14 +2142,13 @@ allowed = {
 			picture = air_advisor3
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_air_chief
+				}
+			}
 			
 			traits = { air_chief_safety_2 }			
 		}
@@ -2487,14 +2158,13 @@ allowed = {
 			picture = air_advisor3
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_air_chief
+				}
+			}
 			
 			traits = { air_chief_night_operations_2 }			
 		}
@@ -2504,14 +2174,13 @@ allowed = {
 			picture = air_advisor3
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			original_tag = TUR
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_air_chief
+				}
+			}
 			
 			traits = { air_chief_old_guard }			
 		}
@@ -2519,75 +2188,18 @@ allowed = {
 
 	high_command = {
 
-          Andrey_Botsev = {
-		
-			picture = Andrey_Botsev_picture
-			
-			available = {
-			has_completed_focus = BUL_Bulgarian_land_forces
-			}
-			
-			allowed = {
-		    original_tag = BUL 
-			}
-			
-			traits = { army_armored_2 }			
-		}
-
-         Krasimir_Stojanow = {
-		
-			picture = Krasimir_Mikhaylov_Stoyanov_picture
-			
-			available = {
-			has_completed_focus = BUL_airforce
-			}
-			
-			allowed = {
-				original_tag = BUL 
-			}
-			
-			traits = { army_concealment_2 }			
-		}
-
-         Atanas_Atanaso = {
-			picture = Atanas_Atanasov_picture
-			
-			available = {
-			has_completed_focus = BUL_Bulgarian_land_forces
-			}
-			
-			allowed = {
-				original_tag = BUL
-			}
-			traits = { army_commando_2 }
-		}
-
-        Angel_Marin = {
-		
-			picture = Angel_Marin_picture
-			
-			available = {
-			has_completed_focus = BUL_Bulgarian_land_forces
-			}
-			
-			allowed = {
-				original_tag = BUL 
-			}
-			
-			traits = { army_artillery_2 }			
-		}
-
 		generic_army_art = {
 		
 			picture = army_advisor1
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { army_artillery_2 }			
 		}
@@ -2597,12 +2209,13 @@ allowed = {
 			picture = army_advisor2
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { army_armored_2 }			
 		}
@@ -2612,12 +2225,13 @@ allowed = {
 			picture = army_advisor3
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { army_regrouping_2 }			
 		}
@@ -2627,12 +2241,13 @@ allowed = {
 			picture = army_advisor1
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { army_concealment_2 }			
 		}
@@ -2642,12 +2257,13 @@ allowed = {
 			picture = army_advisor2
 			
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { army_entrenchment_2 }			
 		}
@@ -2657,12 +2273,13 @@ allowed = {
 			picture = army_advisor3
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { army_logistics_2 }			
 		}
@@ -2672,12 +2289,13 @@ allowed = {
 			picture = army_advisor1
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { army_infantry_2 }			
 		}
@@ -2687,12 +2305,13 @@ allowed = {
 			picture = army_advisor2
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { army_commando_2 }			
 		}
@@ -2702,12 +2321,13 @@ allowed = {
 			picture = army_advisor3
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { army_cavalry_2 }			
 		}
@@ -2717,12 +2337,13 @@ allowed = {
 			picture = navy_advisor1
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { navy_amphibious_assault_2 }			
 		}
@@ -2732,12 +2353,13 @@ allowed = {
 			picture = navy_advisor2
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { navy_fleet_logistics_2 }			
 		}
@@ -2747,12 +2369,13 @@ allowed = {
 			picture = navy_advisor3
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { navy_submarine_2 }			
 		}
@@ -2762,12 +2385,13 @@ allowed = {
 			picture = navy_advisor1
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { navy_capital_ship_2 }			
 		}
@@ -2777,12 +2401,13 @@ allowed = {
 			picture = navy_advisor2
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { navy_screen_2 }			
 		}
@@ -2792,12 +2417,13 @@ allowed = {
 			picture = navy_advisor1
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { navy_carrier_2 }			
 		}
@@ -2807,12 +2433,13 @@ allowed = {
 			picture = air_advisor2
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { air_air_combat_training_2 }			
 		}
@@ -2822,12 +2449,13 @@ allowed = {
 			picture = air_advisor3
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { air_naval_strike_2 }			
 		}
@@ -2837,12 +2465,13 @@ allowed = {
 			picture = air_advisor1
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { air_bomber_interception_2 }			
 		}
@@ -2852,12 +2481,13 @@ allowed = {
 			picture = air_advisor2
 
 			allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { air_air_superiority_2 }			
 		}
@@ -2865,13 +2495,15 @@ allowed = {
 		generic_air_close_supporter = {
 			
 			picture = air_advisor3
-allowed = {
-			NOT = { 
-			original_tag = HUN
-			original_tag = BUL
-			original_tag = POL
+
+			allowed = {
 			}
-			 }
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_high_command
+				}
+			}
 			
 			traits = { air_close_air_support_2 }			
 		}
@@ -2879,39 +2511,22 @@ allowed = {
 
 	theorist = {
 
-        Nikolaj_Petrow = {
-		
-			picture = Nikołaj_Petrow_picture
-			
-			available = {
-			has_completed_focus = BUL_Bulgarian_land_forces
-			}
-			
-			allowed = {
-				original_tag = BUL 
-			}
-			
-			research_bonus = {
-				land_doctrine = 0.1
-			}
-			
-			traits = { military_theorist }
-		}
-
 		generic_military_theorist = {
 		
 			picture = army_advisor1
 			
 			allowed = {
-			NOT = { 
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
 			
 			research_bonus = {
 				land_doctrine = 0.1
+			}
+			
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_theorist
+				}
 			}
 			
 			traits = { military_theorist }
@@ -2922,12 +2537,14 @@ allowed = {
 			picture = navy_advisor2
 			
 			allowed = {
-			NOT = { 
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
 			}
-			 }
+			
+			
+			visible = {
+				NOT = {
+					has_country_flag = unique_theorist
+				}
+			}
 			
 			research_bonus = {
 				naval_doctrine = 0.1
@@ -2941,30 +2558,13 @@ allowed = {
 			picture = air_advisor3
 			
 			allowed = {
-			NOT = { 
-			original_tag = LAT
-			original_tag = BUL
-			original_tag = POL
-			}
-			 }
-			
-			research_bonus = {
-				air_doctrine = 0.1
 			}
 			
-			traits = { air_warfare_theorist }
-		}
-
-        Georgi_ivanov = {
-		
-			picture = Georgi_ivanov_picture
 			
-			available = {
-			has_completed_focus = BUL_airforce
-			}
-			
-			allowed = {
-				original_tag = BUL 
+			visible = {
+				NOT = {
+					has_country_flag = unique_theorist
+				}
 			}
 			
 			research_bonus = {

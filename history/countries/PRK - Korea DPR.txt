@@ -11,67 +11,88 @@ if = {
 
 set_research_slots = 2
 set_convoys = 270
-set_stability = 0.15
+set_stability = 0.3
 
 set_country_flag = country_language_korean
+
+set_country_flag = unique_theorist
+set_country_flag = unique_high_command
+set_country_flag = unique_air_chief
+set_country_flag = unique_navy_chief
+set_country_flag = unique_army_chief
+set_country_flag = unique_industrial_concern
+set_country_flag = unique_materiel_manufacturer
+set_country_flag = unique_political_advisor_nomal
+set_country_flag = unique_political_advisor_party_boost
+
+set_variable = { var = GetDPRKDollarPoint value = 0 }
+set_variable = { var = GetDPRKEconomicReform value = 0 }
+set_variable = { var = DPRK_GainTime_Cost value = 0 }
+set_variable = { var = PRK_hide_equipment_var value = 0 }
+
+set_variable = { var = GetPRKRefmormersInfluence value = 1 }
+set_variable = { var = GetPRKConservativesInfluence value = 5 }
+set_variable = { var = GetPRKTechnocratsPoliticalChoice value = 2 }
+
+set_variable = { var = PRK_Room_39 value = 0 }
+set_variable = { var = PRK_Room_39_Threat value = 0 }
 
 set_technology = {
 	## Infantry ##
 	infantry_weapons1 = 1
+	infantry_weapons2 = 1
 	motorised_infantry = 1
+	infantry_rifle_upgrade = 1
 	support_weapons = 1
 	night_vision = 1
 	body_armor = 1
 	camouflage = 1
 	marines = 1
-	tech_mountaineers = 1
 	paratroopers = 1
 	
 	## Support Companies ##
 	tech_support = 1
 	tech_engineers = 1
 	tech_recon = 1
-	tech_field_hospital = 1
-	tech_logistics_company = 1
 	tech_military_police = 1
 	tech_maintenance_company = 1
+	tech_field_hospital = 1
 	
 	## Armor ##
 	main_battle_tank1 = 1
 	main_battle_tank2 = 1
+	main_battle_tank3 = 1
 	light_tank1 = 1
 	mechanised_infantry1 = 1
-	mechanised_infantry2 = 1
 	light_mechanized_infantry1 = 1
-	light_mechanized_infantry2 = 1
 	
 	## Artillery ##
-	coldwar_artillery = 1
-	coldwar_antiair = 1
-	coldwar_antitank = 1
- 	rocket_artillery = 1
-	sp_antiair0 = 1 
+	gw_artillery = 1
+	interwar_antitank = 1
+	interwar_antiair = 1
 	
 	## Air ##
 	CAS1 = 1
 	CAS2 = 1
-	cv_CAS1 = 1
 	fighter1 = 1
 	fighter2 = 1
 	fighter3 = 1
-	cv_fighter1 = 1
-	cv_fighter2 = 1
 	naval_bomber1 = 1
 	naval_bomber2 = 1
-	cv_naval_bomber1 = 1
-	cv_naval_bomber2 = 1
 	strategic_bomber1 = 1
-	strategic_bomber2 = 1
-	scout_plane1 = 1
+	tactical_bomber1 = 1
+	
+	## Engineering ##
+	electronic_mechanical_engineering = 1
 	
 	## Industry ##
-	fuel_silos = 1
-	fuel_refining = 1
+	basic_machine_tools = 1
+	atomic_research = 1
+	
+	## Doctrines ##
+	mass_assault = 1
+	trade_interdiction = 1
+	force_rotation = 1
 }
 
 if = {
@@ -108,6 +129,18 @@ add_ideas = {
 	population_growth_steady
 	service_by_requirement
 	closed_economy
+	public_safety_secret_police
+	welfare_none
+	
+	PRK_economy_tax_zero	
+	PRK_low_legitimacy_5
+	PRK_simhwajo_purge
+	PRK_national_bankruptcy_5
+	PRK_traitor_to_the_revolution
+	PRK_tiny_economic
+	PRK_china_military_alliance
+	
+	adviser_PRK_kim_jong_il
 }
 
 add_opinion_modifier = {
@@ -115,9 +148,14 @@ add_opinion_modifier = {
 	modifier = past_japanese_war_crimes
 }
 
+#add_opinion_modifier = {
+#	target = KOR
+#	modifier = rival
+#}
+
 add_opinion_modifier = {
 	target = KOR
-	modifier = rival
+	modifier = sunshine_policy_opinion
 }
 
 add_opinion_modifier = {
@@ -126,25 +164,67 @@ add_opinion_modifier = {
 }
 
 set_politics = {	
-	ruling_party = communist
-	last_election = "1997.1.1"
-	election_frequency = 48
+	ruling_party = nationalist
+	last_election = "1998.7.26" #https://en.wikipedia.org/wiki/1998_North_Korean_parliamentary_election
+	election_frequency = 60
 	elections_allowed = no
 }
 
 set_popularities = {
-    conservative = 5
-    social_liberal = 6
-    social_democrat = 7
-    progressive = 8
-    democratic_socialist = 19
-    communist = 55
+	fascist = 30 #Pro-Kim Jong-il
+	nationalist = 50 #Technocrat
+	democratic_socialist = 9
+	conservative = 1
+	market_liberal = 10
+}
+
+#Workers' Party of Korea
+create_country_leader = {
+	name = "Kim Yong-nam"
+	picture = "Kim_Yong_nam.dds"
+	ideology = autocrat
+	desc = "POLITICS_KIM_YONG_NAM_DESC"
+	traits = { juche_korea kim_jong_ils_puppet }
+	id = 1800
+}
+
+#Workers' Party of Korea
+create_country_leader = {
+	name = "Kim Jong-il"
+	picture = "Kim_jong_il.dds"
+	ideology = fascist_ideology
+	desc = "POLITICS_KIM_YONG_NAM_DESC"
+	traits = { juche_korea }
+	id = 1801
+}
+
+#1802 is Kim Jong-il General
+
+create_country_leader = {
+	name = "Hwang Jang-yop"
+	picture = "Hwang_Jang_yop.dds"
+	ideology = market_liberal_ideology
+	desc = "POLITICS_HWANG_JANG_YOP_DESC"
+	traits = { former_jucheist }
+	id = 1803
 }
 
 create_country_leader = {
-	name = "Kim Jong-Il"
-	picture = "Kim_Jong_Il.dds"
-	ideology = juche
+	name = "Joo Seong-ha"
+	picture = "Joo_Seong_ha.dds"
+	ideology = liberalist
+	desc = "POLITICS_JOO_SEONG_HA_DESC"
+	traits = {  }
+	id = 1805
+}
+
+create_country_leader = {
+	name = "Hyon Yong-chol"
+	picture = "generals/Hyon_Yong_Chol.dds"
+	ideology = leninist
+	desc = "POLITICS_HYON_YONG_CHOL_DESC"
+	traits = { leader_of_the_reformists }
+	id = 1806
 }
 
 add_namespace = {
@@ -152,103 +232,241 @@ add_namespace = {
 	type = unit_leader
 }
 
+## Generals
+
+# Edited by. Ran Mitake
+
+#### FIELD MARSHAL
+
+create_field_marshal = { #Add Submod
+	name = "Kim Jong-il"
+	picture = "Kim_jong_il.dds"
+	traits = { harsh_leader politically_connected trait_PRK_paektu_bloodline media_personality }
+	id = 1802
+	skill = 3
+	attack_skill = 3
+	defense_skill = 3
+	planning_skill = 1
+	logistics_skill = 3
+}
+
 create_field_marshal = {
-	name = "Ri Myong Su"
+	name = "Ri Myong-su"
 	picture = "generals/Ri_Myong_Su.dds"
-	traits = { old_guard defensive_doctrine }
+	traits = { politically_connected old_guard defensive_doctrine }
 	skill = 2
+	attack_skill = 1
+	defense_skill = 2
+	planning_skill = 2
+	logistics_skill = 1
 }
 
 create_field_marshal = {
-	name = "Ri Yong Gil"
+	name = "Ri Yong-gil"
 	picture = "generals/Ri_Yong_Gil.dds"
-	traits = { logistics_wizard offensive_doctrine }
+	traits = { politically_connected logistics_wizard offensive_doctrine }
 	skill = 1
+	attack_skill = 1
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
 }
 
+#### CORPS COMMANDER
+
 create_corps_commander = {
-	name = "Hyon Yong Chol"
+	name = "Hyon Yong-chol"
 	picture = "generals/Hyon_Yong_Chol.dds"
-	traits = {  }
-	skill = 1
+	traits = { infantry_officer politically_connected }
+	id = 1807
+	skill = 3
+	expire = "2015.4.30" #He Dead
+	attack_skill = 3
+	defense_skill = 2
+	planning_skill = 3
+	logistics_skill = 2
 }
 
 create_corps_commander = {
-	name = "Cho Ryong Hae"
+	name = "Cho Ryong-hae"
 	picture = "generals/Cho_Ryong_Hae.dds"
-	traits = {  }
+	traits = { old_guard politically_connected media_personality }
 	skill = 1
+	attack_skill = 1
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
 }
 
 create_corps_commander = {
-	name = "Choe Pu Il"
+	name = "Choe Pu-il"
 	picture = "generals/Choe_Pu_Il.dds"
-	traits = {  }
+	traits = { old_guard politically_connected }
 	skill = 1
+	attack_skill = 1
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
 }
 
 create_corps_commander = {
-	name = "Hwang Pyong So"
+	name = "Hwang Pyong-so"
 	picture = "generals/Hwang_Pyong_So.dds"
-	traits = {  }
+	traits = { old_guard politically_connected }
 	skill = 1
+	attack_skill = 1
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
 }
 
-create_corps_commander = {
-	name = "Jo Chun Ryong"
-	picture = "generals/Jo_Chun_Ryong.dds"
-	traits = {  }
-	skill = 1
-}
+#create_corps_commander = {
+#	name = "Jo Chun-ryong" #He is Not General
+#	picture = "generals/Jo_Chun_Ryong.dds"
+#	traits = { old_guard politically_connected }
+#	skill = 1
+#	attack_skill = 1
+#	defense_skill = 1
+#	planning_skill = 1
+#	#logistics_skill = 1
+#}
+
+#create_corps_commander = {
+#	name = "Kim Chun-sop" #He is Not General
+#	picture = "generals/Kim_Chun_Sop.dds"
+#	traits = { old_guard }
+#	skill = 1
+#	attack_skill = 1
+#	defense_skill = 1
+#	planning_skill = 1
+#	logistics_skill = 1
+#}
+
+#create_corps_commander = {
+#	name = "Jo Kyong-chol" 
+#	picture = "generals/Jo_Kyong_Chol.dds" #I couldn't find a good picture
+#	traits = { old_guard }
+#	skill = 1
+#	attack_skill = 1
+#	defense_skill = 1
+#	planning_skill = 1
+#	logistics_skill = 1
+#}
 
 create_corps_commander = {
-	name = "Kim Chun Sop"
-	picture = "generals/Kim_Chun_Sop.dds"
-	traits = {  }
-	skill = 1
-}
-
-create_corps_commander = {
-	name = "Jo Kyong Chol"
-	picture = "generals/Jo_Kyong_Chol.dds"
-	traits = {  }
-	skill = 1
-}
-
-create_corps_commander = {
-	name = "Kim Kyok Sik"
+	name = "Kim Kyok-sik"
 	picture = "generals/Kim_Kyok_Sik.dds"
-	traits = {  }
+	traits = { old_guard }
 	skill = 1
+	attack_skill = 1
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
 }
 
 create_corps_commander = {
-	name = "Kim Myong Kuk"
+	name = "Kim Myong-kuk"
 	picture = "generals/Kim_Myong_Kuk.dds"
-	traits = {  }
+	traits = { }
 	skill = 1
+	attack_skill = 1
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
 }
 
 create_corps_commander = {
-	name = "Kim Won Hong"
+	name = "Kim Won-hong"
 	picture = "generals/Kim_Won_Hong.dds"
-	traits = {  }
+	traits = { }
 	skill = 1
+	attack_skill = 1
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
 }
 
 create_corps_commander = {
-	name = "Kim Yong Chun"
+	name = "Kim Yong-chun"
 	picture = "generals/Kim_Yong_Chun.dds"
-	traits = {  }
-	skill = 1
+	traits = { old_guard }
+	skill = 2
+	attack_skill = 2
+	defense_skill = 2
+	planning_skill = 2
+	logistics_skill = 1
 }
 
 create_corps_commander = {
-	name = "Pak Yong Sik"
+	name = "Pak Yong-sik"
 	picture = "generals/Pak_Yong_Sik.dds"
-	traits = {  }
+	traits = { old_guard }
 	skill = 1
+	attack_skill = 1
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
 }
+
+create_corps_commander = { #Add Submod
+	name = "Jang Song-thaek"
+	id = 1808
+	picture = "generals/Jang_Song_thaek.dds"
+	traits = { old_guard politically_connected trait_PRK_paektu_bloodline }
+	skill = 1
+	attack_skill = 1
+	defense_skill = 1
+	planning_skill = 1
+	logistics_skill = 1
+}
+
+create_corps_commander = { #Add Submod
+	name = "Kim Kyong-hui"
+	picture = "generals/Kim_Kyong_hui.dds"
+	traits = { politically_connected trait_PRK_paektu_bloodline media_personality }
+	female = yes
+	skill = 1
+	attack_skill = 2
+	defense_skill = 2
+	planning_skill = 1
+	logistics_skill = 1
+}
+
+## Navy Leader
+
+create_navy_leader = {
+	name = "Li Yong-ju" #Add Submod
+	picture = "admirals/Li_Yong_ju.dds"
+	traits = { spotter }
+	skill = 2
+	attack_skill = 2
+	defense_skill = 1
+	maneuvering_skill = 2
+	coordination_skill = 2
+}
+
+create_navy_leader = {
+	name = "Kim Myong-sik" #Add Submod
+	picture = "admirals/Kim_Myong_sik.dds"
+	traits = { ironside old_guard_navy }
+	skill = 3
+	attack_skill = 3
+	defense_skill = 2
+	maneuvering_skill = 4
+	coordination_skill = 2
+}
+
+#couldn't find any of his pictures.
+#create_navy_leader = {
+#	name = "Jong Myong-do" #Add Submod
+#	picture = "admirals/Jong_Myong_do.dds"
+#	traits = { naval_lineage old_guard_navy }
+#	skill = 2
+#	attack_skill = 2
+#	defense_skill = 1
+#	maneuvering_skill = 2
+#	coordination_skill = 1
+#}
 
 2011.12.1 = {
 	set_country_flag = prk_death_of_kim_jong_il
@@ -256,12 +474,13 @@ create_corps_commander = {
 		name = "Kim Jong-Un"
 		picture = "Kim_Jong_Un.dds"
 		ideology = juche
+		traits = { juche_korea }
+		id = 1804
 	}
 }
 
 2014.1.1 = {
 	set_technology = {
-		atomic_research = 1
 		nuclear_reactor = 1
 		
 	}
@@ -279,6 +498,7 @@ if = {
 }
 if = {
 	limit = { has_dlc = "Man the Guns" }
+	
 	## Corvettes ##
 	create_equipment_variant = { #Corvette 1
 		name = "Najin-class"
@@ -296,6 +516,24 @@ if = {
 		}
 		obsolete = no
 	}
+	
+	create_equipment_variant = { #Corvette 1
+		name = "Sariwon-class"
+		type = ship_hull_light_1
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = ship_torpedo_1
+			rear_1_custom_slot = empty
+		}
+		obsolete = no
+	}
+	
 	## Submarines ##
 	create_equipment_variant = { #Diesel Sub 1
 		name = "Type 033 Submarine"
@@ -308,4 +546,5 @@ if = {
 		}
 		obsolete = no
 	}
+	
 }

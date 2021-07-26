@@ -12,22 +12,17 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = LAT_economic_reforms
+		id = LAT_focus_on_economy
 		icon = production
 		x = 3
 		y = 0
 		cost = 7.20
 		
 		completion_reward = {
-		swap_ideas = { 
-					remove_idea = LAT_weak_economy
-					add_idea = LAT_weak_economy_2 
-				}	
-			
 			add_tech_bonus = {
 				name = industry_bonus
-				bonus = 0.50
-				uses = 2
+				bonus = 1.0
+				uses = 1
 				category = industry
 			}
 		}
@@ -38,28 +33,24 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = LAT_invest_in_Latvijas_Universitate
+		id = LAT_acknowledge_the_education_issues
 		icon = research
 		x = 0
 		y = 1
-		relative_position_id = LAT_economic_reforms 
-		cost = 10
+		relative_position_id = LAT_focus_on_economy 
+		cost = 7.20
 		
 		available = {
-			NOT = { has_idea = LAT_investments }
+		
 		}
 		
 		prerequisite = {
-			focus = LAT_economic_reforms
+			focus = LAT_focus_on_economy
 		}
 
 		
 		completion_reward = {
 		add_research_slot = 1
-		add_timed_idea = {
-				idea = LAT_investments
-				days = 50
-			}
 		}
 		
 		ai_will_do = {
@@ -68,45 +59,584 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = LAT_education_reform
-		icon = research
-		x = 2
+		id = LAT_support_vocational_education
+		icon = production2
+		x = 1
 		y = 1
-		relative_position_id = LAT_invest_in_Latvijas_Universitate 
+		relative_position_id = LAT_acknowledge_the_education_issues 
 		cost = 7.20
 		
-		prerequisite = {
-			focus = LAT_invest_in_Latvijas_Universitate
+		mutually_exclusive = {
+		focus = LAT_reform_the_education_system
 		}
-
-		
-		completion_reward = {
-		add_ideas = LAT_reformed_education_system
-		remove_ideas = LAT_outdated_education_system
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_utalize_young_minds
-		icon = research
-		x = 0
-		y = 1
-		relative_position_id = LAT_education_reform 
-		cost = 7.20
 		
 		prerequisite = {
-			focus = LAT_education_reform
+			focus = LAT_acknowledge_the_education_issues
 		}
 
 		
 		completion_reward = {
 		swap_ideas = { 
-					remove_idea = LAT_reformed_education_system
-					add_idea = LAT_reformed_education_system_2 
+					remove_idea = LAT_outdated_education_system
+					add_idea = LAT_vocational_education 
+				}
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_reform_the_education_system
+		icon = tech_sharing
+		x = -1
+		y = 1
+		relative_position_id = LAT_acknowledge_the_education_issues 
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = LAT_support_vocational_education
+		}
+		
+		prerequisite = {
+			focus = LAT_acknowledge_the_education_issues
+		}
+
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_outdated_education_system
+					add_idea = LAT_reformed_education_system 
+				}
+		
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = LAT_state_funded_universities
+		icon = scientific_exchange
+		x = 1
+		y = 1
+		relative_position_id = LAT_reform_the_education_system 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = LAT_support_vocational_education
+			focus = LAT_reform_the_education_system
+		}
+
+		
+		completion_reward = {
+		add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+  
+    focus = {
+		id = LAT_the_baltic_tiger
+		icon = booming_economy
+		x = 6
+		y = 1
+		relative_position_id = LAT_focus_on_economy 
+		cost = 7.20
+		
+		available = {
+		has_completed_focus = LAT_put_an_end_to_crisis
+		}
+		
+		prerequisite = {
+			focus = LAT_focus_on_economy
+		}
+
+		
+		completion_reward = {
+		add_timed_idea = {
+				idea = LAT_economic_boom
+				days = 356
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+    focus = {
+		id = LAT_centraly_planned_economy
+		text = GEN_centraly_planned_economy
+		icon = industry_communist
+		x = 3
+		y = 1
+		relative_position_id = LAT_the_baltic_tiger 
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = LAT_free_market_economy
+		}
+		
+		available = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+  }
+		
+		prerequisite = {
+			focus = LAT_the_baltic_tiger
+		}
+
+		
+		completion_reward = {
+		add_ideas = GEN_economy_central_planned	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+    focus = {
+		id = LAT_free_market_economy
+		text = GEN_a_free_market_economy
+		icon = industry_democratic2
+		x = -3
+		y = 1
+		relative_position_id = LAT_the_baltic_tiger 
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = LAT_centraly_planned_economy
+		}
+		
+		available = {
+		NOT = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+  }
+		
+		prerequisite = {
+			focus = LAT_the_baltic_tiger
+		}
+
+		
+		completion_reward = {
+		add_ideas = GEN_free_market_based_economy	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+     focus = {
+		id = LAT_subsidy_goverment_buisness
+		icon = central_management
+		x = 1
+		y = 1
+		relative_position_id = LAT_centraly_planned_economy 
+		cost = 7.20
+		
+		available = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+		
+		prerequisite = {
+			focus = LAT_centraly_planned_economy
+		}
+
+		
+		completion_reward = {
+		add_offsite_building = { type = arms_factory level = 2 }
+		add_offsite_building = { type = industrial_complex level = 1 }
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+     focus = {
+		id = LAT_autarky
+		icon = embargo
+		x = 0
+		y = 1
+		relative_position_id = LAT_subsidy_goverment_buisness 
+		cost = 7.20
+		
+		available = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+		
+		prerequisite = {
+			focus = LAT_subsidy_goverment_buisness
+		}
+
+		
+		completion_reward = {
+		add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1.0
+				uses = 2
+				category = synth_resources
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+     focus = {
+		id = LAT_public_works
+		icon = infrastructure
+		x = -1
+		y = 1
+		relative_position_id = LAT_centraly_planned_economy 
+		cost = 7.20
+		
+		available = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+		
+		prerequisite = {
+			focus = LAT_centraly_planned_economy
+		}
+
+		
+		completion_reward = {
+		every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+     focus = {
+		id = LAT_controlled_trade_unions
+		icon = work_red
+		x = 0
+		y = 1
+		relative_position_id = LAT_public_works 
+		cost = 7.20
+		
+		available = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+		
+		prerequisite = {
+			focus = LAT_public_works
+		}
+
+		
+		completion_reward = {
+		add_ideas = LAT_controlled_trade_unions
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+     focus = {
+		id = LAT_modernise_the_economy 
+		icon = construction3
+		x = 3
+		y = 1
+		relative_position_id = LAT_free_market_economy 
+		cost = 7.20
+		
+		available = {
+		
+  }
+		
+		prerequisite = {
+			focus = LAT_free_market_economy
+		    focus = LAT_centraly_planned_economy
+		}
+
+		
+		completion_reward = {
+		unlock_decision_category_tooltip = LAT_economy_category
+		}
+
+    ai_will_do = {
+			factor = 10
+		}
+    }
+    
+	focus = {
+		id = LAT_oil_in_the_Baltic 
+		icon = oil_production
+		x = 0
+		y = 1
+		relative_position_id = LAT_modernise_the_economy 
+		cost = 7.20
+		
+		available = {
+		has_full_control_of_state = 12
+  }
+		
+		prerequisite = {
+			focus = LAT_modernise_the_economy
+		}
+
+		
+		completion_reward = {
+		12 = { 
+					add_resource = { type = oil amount = 15 }
+				}
+              }
+    ai_will_do = {
+			factor = 10
+		}
+    }
+	
+	focus = {
+		id = LAT_steelworks 
+		icon = industry_steel
+		x = 0
+		y = 1
+		relative_position_id = LAT_oil_in_the_Baltic 
+		cost = 7.20
+		
+		available = {
+		has_full_control_of_state = 12
+  }
+		
+		prerequisite = {
+			focus = LAT_oil_in_the_Baltic
+		}
+
+		
+		completion_reward = {
+		12 = { 
+					add_resource = { type = steel amount = 15 }
+				}
+              }
+    ai_will_do = {
+			factor = 10
+		}
+    }
+	
+	focus = {
+		id = LAT_privatisation_spree 
+		icon = industry_democratic
+		x = -1
+		y = 1
+		relative_position_id = LAT_free_market_economy 
+		cost = 7.20
+		
+		available = {
+		NOT = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+  }
+		
+		prerequisite = {
+			focus = LAT_free_market_economy
+		}
+
+		
+		completion_reward = {
+		add_timed_idea = {
+				idea = LAT_privatisation
+				days = 365
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+    focus = {
+		id = LAT_trade_with_the_world 
+		icon = trade_deal
+		x = 1
+		y = 1
+		relative_position_id = LAT_free_market_economy 
+		cost = 7.20
+		
+		available = {
+		NOT = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+  }
+		
+		prerequisite = {
+			focus = LAT_free_market_economy
+		}
+
+		
+		completion_reward = {
+		every_country = {
+				increase_trade_influence_by_2 = yes
+			}
+		add_offsite_building = { type = industrial_complex level = 1 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+    focus = {
+		id = LAT_foreign_arms_manufacturers
+		icon = industry_military
+		x = 0
+		y = 1
+		relative_position_id = LAT_trade_with_the_world 
+		cost = 7.20
+		
+		available = {
+		NOT = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+  }
+		
+		prerequisite = {
+			focus = LAT_trade_with_the_world
+		}
+
+		
+		completion_reward = {
+		add_offsite_building = { type = arms_factory level = 2 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+ 
+     focus = {
+		id = LAT_develop_the_consumer_goods_industry
+		icon = consumer_goods
+		x = 0
+		y = 1
+		relative_position_id = LAT_privatisation_spree 
+		cost = 7.20
+		
+		available = {
+		NOT = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+  }
+		
+		prerequisite = {
+			focus = LAT_privatisation_spree
+		}
+
+		
+		completion_reward = {
+		add_ideas = HUN_expanded_consumer_goods_industry
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = LAT_save_our_farmers
+		icon = agriculture
+		x = -6
+		y = 1
+		relative_position_id = LAT_focus_on_economy 
+		cost = 7.20
+		
+		prerequisite = {
+			focus = LAT_focus_on_economy
+		}
+
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_weak_economy
+					add_idea = LAT_weak_economy_2 
 				}
 		}
 		
@@ -115,168 +645,25 @@ focus_tree = {
 		}
 	}
 	
-		focus = {
-		id = LAT_expand_the_Daugavpils_Universitate
-		icon = research
-		x = 0
+	focus = {
+		id = LAT_subsidy_local_industry
+		icon = concessions2
+		x = -1
 		y = 1
-		relative_position_id = LAT_utalize_young_minds 
+		relative_position_id = LAT_save_our_farmers 
 		cost = 10
 		
-		prerequisite = {
-			focus = LAT_utalize_young_minds
-		}
-
-		
-		completion_reward = {
-	    add_research_slot = 1
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_invest_in_Latvijas_Lauksaimniecibas_universitate
-		icon = agriculture
-		x = 0
-		y = 1
-		relative_position_id = LAT_invest_in_Latvijas_Universitate 
-		cost = 7.20
-		
-		available = {
-			NOT = { has_idea = LAT_investments }
-		}
-		
-		prerequisite = {
-			focus = LAT_invest_in_Latvijas_Universitate
-		}
-
-		
-		completion_reward = {
-		add_ideas = LAT_invest_in_Latvijas_Lauksaimniecibas_universitate
-		add_timed_idea = {
-				idea = LAT_investments
-				days = 50
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_farmer_protection_act
-		icon = agriculture
-		x = 0
-		y = 1
-		relative_position_id = LAT_invest_in_Latvijas_Lauksaimniecibas_universitate 
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_invest_in_Latvijas_Lauksaimniecibas_universitate
-		}
-
-		
-		completion_reward = {
-		LAT = { country_event = LAT.1 }
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	
-	focus = {
-		id = LAT_expand_trade
-		icon = trade_deal
-		x = -2
-		y = 1
-		relative_position_id = LAT_economic_reforms  
-		cost = 7.20
-		
-		available = {
-		NOT = { has_idea = LAT_investments }
-		}
-		
-		prerequisite = {
-			focus = LAT_economic_reforms
-		}
-		
-		completion_reward = {
-			add_timed_idea = {
-				idea = LAT_investments
-				days = 200
-			}
-			
-			add_offsite_building = { type = industrial_complex level = 2 }
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_investments_in_tourism_industry
-		icon = fighter
-		x = 0
-		y = 1
-		relative_position_id = LAT_expand_trade  
-		cost = 7.20
-		
-		available = {
-		NOT = { has_idea = LAT_investments }
-		}
-		
-		prerequisite = {
-			focus = LAT_expand_trade
-		}
-		
-		completion_reward = {
-			add_timed_idea = {
-				idea = LAT_investments
-				days = 7.200
-			}
-			
-			add_ideas = LAT_investments_in_tourism_industry
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_support_domestic_industry
-		icon = consumer_goods
-		x = 0
-		y = 1
-		relative_position_id = LAT_investments_in_tourism_industry  
-		cost = 7.20
-		
-		available = {
-		NOT = { has_idea = LAT_investments }
-		}
-		
 		mutually_exclusive = {
-			focus = LAT_support_forgein_investors
+		focus = LAT_support_forgein_investors
 		}
 		
 		prerequisite = {
-			focus = LAT_investments_in_tourism_industry
+			focus = LAT_save_our_farmers
 		}
 		
+		
 		completion_reward = {
-		add_ideas = LAT_support_domestic_industry
-		add_timed_idea = {
-				idea = LAT_investments
-				days = 300
-			}
-			
+			add_ideas = LAT_an_independent_economy
 			random_owned_state = {
 				limit = {
 					free_building_slots = {
@@ -285,10 +672,10 @@ focus_tree = {
 						include_locked = yes
 					}
 				}
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -299,50 +686,84 @@ focus_tree = {
 		}
 	}
 	
-
-		focus = {
-		id = LAT_support_forgein_investors
-		icon = concessions
+	focus = {
+		id = LAT_long_term_economic_planning
+		icon = construction2
 		x = -2
 		y = 1
-		relative_position_id = LAT_investments_in_tourism_industry  
+		relative_position_id = LAT_subsidy_local_industry  
 		cost = 7.20
 		
 		available = {
-		NOT = { has_idea = LAT_investments }
-		}
 		
-		mutually_exclusive = {
-			focus = LAT_support_domestic_industry
 		}
 		
 		prerequisite = {
-			focus = LAT_investments_in_tourism_industry
+			focus = LAT_subsidy_local_industry
 		}
 		
 		completion_reward = {
-		add_timed_idea = {
-				idea = LAT_investments
-				days = 50
-			}
-			add_political_power = -200
+	    swap_ideas = { 
+					remove_idea = LAT_weak_economy_2
+					add_idea = LAT_weak_economy_3 
+				}
+		swap_ideas = { 
+					remove_idea = LAT_an_independent_economy
+					add_idea = LAT_an_independent_economy_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_support_forgein_investors
+		icon = concessions
+		x = 1
+		y = 1
+		relative_position_id = LAT_save_our_farmers 
+		cost = 10
+		
+		available = {
+		NOT = {
+		OR = {
+		has_government = communist
+		has_government = islamist
+		has_government = fascist
+		has_government = nationalist
+		has_government = monarchist
+		}
+	}
+  }
+	mutually_exclusive = {
+		focus = LAT_subsidy_local_industry
+		}
+		
+		prerequisite = {
+			focus = LAT_save_our_farmers
+		}
+		
+		
+		completion_reward = {
 			random_owned_state = {
 				limit = {
 					free_building_slots = {
 						building = industrial_complex
-						size > 0
+						size > 2
 						include_locked = yes
 					}
 				}
 				add_building_construction = {
 					type = arms_factory
-					level = 2
+					level = 1
 					instant_build = yes
 				}	
 				add_extra_state_shared_building_slots = 4
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 3
 					instant_build = yes
 				}
 			}
@@ -353,174 +774,74 @@ focus_tree = {
 		}
 	}
 	
-		focus = {
-		id = LAT_end_the_crisis
-		icon = construction3
-		x = 1
-		y = 1
-		relative_position_id = LAT_support_forgein_investors  
-		cost = 10
-		
-		available = {
-		NOT = { has_idea = LAT_investments }
-		}
-		
-		prerequisite = {
-			focus = LAT_support_domestic_industry
-		    focus = LAT_support_forgein_investors
-		}
-		
-		completion_reward = {
-        remove_ideas = LAT_weak_economy_2
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_a_pearl_in_the_baltic
-		icon = align_to_latvia
-		x = 4
-		y = 1
-		relative_position_id = LAT_economic_reforms  
-		cost = 7.20
-		
-		available = {
-		NOT = { has_idea = LAT_weak_economy_2 }
-		NOT = { has_idea = LAT_outdated_education_system }
-		}
-		
-		prerequisite = {
-			focus = LAT_economic_reforms
-		}
-		
-		completion_reward = {
-       add_political_power = 100
-	   add_stability = 0.07.20
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_fill_the_road_gaps
-		icon = infrastructure
-		x = 0
-		y = 1
-		relative_position_id = LAT_a_pearl_in_the_baltic  
-		cost = 7.20
-		
-		
-		prerequisite = {
-			focus = LAT_a_pearl_in_the_baltic
-		}
-		
-		completion_reward = {
-       random_owned_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		    random_owned_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-			focus = {
-		id = Lat_extract_more_recources
-		icon = construction3
-		x = 0
-		y = 1
-		relative_position_id = LAT_fill_the_road_gaps  
-		cost = 7.20
-		
-		
-		prerequisite = {
-			focus = LAT_fill_the_road_gaps
-		}
-		
-		completion_reward = {
-       random_owned_state = {
-		add_resource = { type = chromium amount = 4 }
-	    add_resource = { type = tungsten amount = 4 }
-		add_resource = { type = rubber amount = 8 }
-		add_resource = { type = steel amount = 5 }
-		add_resource = { type = oil amount = 8 }
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-				focus = {
-		id = LAT_economic_boom
-		icon = construction5
-		x = 0
-		y = 1
-		relative_position_id = Lat_extract_more_recources  
-		cost = 7.20
-		
-		
-		prerequisite = {
-			focus = Lat_extract_more_recources
-		}
-		
-		completion_reward = {
-        add_ideas = LAT_economic_boom
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	  focus = {
-		id = LAT_expand_oil_drilling_operations
-		icon = oil_production
-		x = 0
-		y = 1
-		relative_position_id = LAT_economic_boom  
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_economic_boom
-		}
-		
-		
-		completion_reward = {
-				random_owned_state = { 
-					add_resource = { type = oil amount = 10 }
-				}
-			}
-		
-		ai_will_do = {
-			factor = 10
-	 }
-   }
-	
-			focus = {
-		id = LAT_expand_the_Freeport_of_Riga
-		icon = naval_dockyards
+	focus = {
+		id = LAT_boost_the_tourism_industry
+		icon = fighter2
 		x = 2
 		y = 1
-		relative_position_id = LAT_a_pearl_in_the_baltic  
+		relative_position_id = LAT_support_forgein_investors  
+		cost = 7.20
+		
+		available = {
+		
+		}
+		
+		prerequisite = {
+			focus = LAT_support_forgein_investors
+		}
+		
+		completion_reward = {
+	    swap_ideas = { 
+					remove_idea = LAT_weak_economy_2
+					add_idea = LAT_weak_economy_3 
+				}
+		add_ideas = LAT_boosted_tourism_industry
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_end_reliance_on_foreign_equipment
+		icon = license_production
+		x = -1
+		y = 2
+		relative_position_id = LAT_save_our_farmers  
+		cost = 7.20
+		
+		available = {
+	
+		}
+		
+		prerequisite = {
+			focus = LAT_subsidy_local_industry
+			focus = LAT_support_forgein_investors
+		}
+		
+		completion_reward = {
+	           random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_expand_the_Freeport_of_Riga
+		icon = naval_dockyards
+		x = 1
+		y = 2
+		relative_position_id = LAT_save_our_farmers  
 		cost = 7.20
 		
 		available = {
@@ -528,7 +849,8 @@ focus_tree = {
 		}
 		
 		prerequisite = {
-			focus = LAT_a_pearl_in_the_baltic
+			focus = LAT_subsidy_local_industry
+			focus = LAT_support_forgein_investors
 		}
 		
 		completion_reward = {
@@ -548,115 +870,70 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = LAT_expand_fishing_industry
-		icon = naval_dockyards
-		x = 2
+		id = LAT_put_an_end_to_crisis
+		icon = construction
+		x = 1
 		y = 1
-		relative_position_id = LAT_expand_the_Freeport_of_Riga  
-		cost = 7.20
+		relative_position_id = LAT_end_reliance_on_foreign_equipment  
+		cost = 10
 		
 		available = {
-		 has_full_control_of_state = 12	
+	
 		}
 		
 		prerequisite = {
 			focus = LAT_expand_the_Freeport_of_Riga
 		}
 		
-		completion_reward = {   
-			  12 = {
-				add_dynamic_modifier = { modifier = expanded_fishing_industry }   
+		prerequisite = {
+			focus = LAT_end_reliance_on_foreign_equipment
+		}
+		
+		prerequisite = {
+			focus = LAT_boost_the_tourism_industry
+			focus = LAT_long_term_economic_planning
+		}
+		
+		completion_reward = {
+	    remove_ideas = LAT_weak_economy_3
+		add_offsite_building = { type = arms_factory level = 1 }
+		add_offsite_building = { type = industrial_complex level = 1 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_support_the_fishing_industry
+		icon = money
+		x = 1
+		y = 1
+		relative_position_id = LAT_put_an_end_to_crisis  
+		cost = 7.2
+		
+		available = {
+	
+		}
+		
+		prerequisite = {
+			focus = LAT_put_an_end_to_crisis
+		}
+		
+		
+		completion_reward = {
+	   every_owned_state = {
+				limit = {
+				free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				is_controlled_by = ROOT
+				}
+				add_manpower = 50000
 				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = dockyard
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	  focus = {
-		id = LAT_drill_oil_from_baltic_sea
-		icon = oil_production
-		x = 0
-		y = 1
-		relative_position_id = LAT_expand_fishing_industry  
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_expand_fishing_industry
-		}
-		
-		
-		bypass = {
-		has_completed_focus = POL_green_policies
-		}
-		completion_reward = {
-				random_owned_state = { 
-					add_resource = { type = oil amount = 10 }
-				}
-			}
-		
-		ai_will_do = {
-			factor = 10
-	 }
-   }
-	
-		focus = {
-		id = LAT_invest_in_SRC_barca
-		icon = industry_military
-		x = 0
-		y = 1
-		relative_position_id = LAT_expand_the_Freeport_of_Riga  
-		cost = 7.20
-		
-		
-		prerequisite = {
-			focus = LAT_expand_the_Freeport_of_Riga
-		}
-		
-		completion_reward = {
-	           random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_expand_our_investments_over_military_industry
-		icon = industry_military
-		x = 0
-		y = 1
-		relative_position_id = LAT_invest_in_SRC_barca  
-		cost = 7.20
-		
-		
-		prerequisite = {
-			focus = LAT_invest_in_SRC_barca
-		}
-		
-		completion_reward = {
-	           random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
 			}
 		}
 		
@@ -666,27 +943,24 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = LAT_invite_forgein_wepons_manufacturers
-		icon = industry_military
-		x = 0
+		id = LAT_mechanised_farming
+		icon = agrarian_reform
+		x = -1
 		y = 1
-		relative_position_id = LAT_expand_our_investments_over_military_industry  
-		cost = 7.20
+		relative_position_id = LAT_put_an_end_to_crisis  
+		cost = 7.2
 		
-		
-		prerequisite = {
-			focus = LAT_expand_our_investments_over_military_industry
+		available = {
+	
 		}
 		
+		prerequisite = {
+			focus = LAT_put_an_end_to_crisis
+		}
+		
+		
 		completion_reward = {
-	           random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-			}
+	    add_ideas = ROM_mechanized_agriculture
 		}
 		
 		ai_will_do = {
@@ -695,9 +969,9 @@ focus_tree = {
 	}
 	
 		focus = {
-		id = LAT_reform_the_Latvijas_Sauszemes_speki #it litteraly means landforces I just wanted it to sound more fancy
+		id = LAT_reform_the_Latvijas_Sauszemes_speki
 		icon = infantry_axis
-		x = 15
+		x = 18
 		y = 0
 		cost = 7.20
 		
@@ -757,10 +1031,9 @@ focus_tree = {
 		
 		completion_reward = {
 	   add_stability = -0.05
-	   custom_effect_tooltip = nothing_to_see_here_tt # It just won't show
 			hidden_effect = {
 					division_template = {
-						name = "Zemessardze" #this is preety weak division but you will get 4 of them so i think this is preety good deal
+						name = "Zemessardze" 
 						priority = 1
 						regiments = {
 							infantry = { x = 0 y = 0 }
@@ -902,7 +1175,7 @@ focus_tree = {
 	    completion_reward = {
 			add_tech_bonus = {
 				name = mechanized_bonus
-				bonus = 0.3
+				bonus = 0.8
 				uses = 2
 				category = cat_mechanized_equipment
 			}
@@ -925,7 +1198,7 @@ focus_tree = {
 	    completion_reward = {
 			add_tech_bonus = {
 				name = tech_bonus
-				bonus = 0.3
+				bonus = 0.8
 				uses = 2
 				category = armor
 			}
@@ -946,8 +1219,8 @@ focus_tree = {
 		
 		completion_reward = {
 	   add_tech_bonus = {
-				name = tech_bonus #don't ask about that
-				bonus = 0.3
+				name = tech_bonus 
+				bonus = 0.8
 				uses = 2
 				category = artillery
 			}	
@@ -972,10 +1245,22 @@ focus_tree = {
 		
 		completion_reward = {
 	   add_tech_bonus = {
-				name = tech_bonus #don't ask about that
-				bonus = 0.3
+				name = tech_bonus 
+				bonus = 0.8
 				uses = 2
-				category = artillery #this is the same becouse there are not any folders for AA and AT are in the game and I'm too lazy to make that
+				category = cat_anti_tank
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				technology = interwar_antiair
+			    technology = antiair1
+			    technology = antiair2
+			    technology = antiair3
+			    technology = antiair4
+			    technology = antiair5
+			    technology = antiair6
+			    technology = antiair7
+			    technology = antiair8
 			}	
 		}
 		
@@ -1030,8 +1315,8 @@ focus_tree = {
 		
 		completion_reward = {
 	   add_tech_bonus = {
-				name = tech_bonus #don't ask about that
-				bonus = 0.3
+				name = tech_bonus 
+				bonus = 0.8
 				uses = 2
 				category = infantry_weapons
 			}	
@@ -1057,7 +1342,7 @@ focus_tree = {
 		completion_reward = {
 	   add_tech_bonus = {
 				name = tech_bonus 
-				bonus = 0.3
+				bonus = 0.8
 				uses = 2
 				category = support_tech
 			}	
@@ -1113,8 +1398,8 @@ focus_tree = {
 	}
 	
 			focus = {
-		id = LAT_for_Latvia #!!!!!!!!!!!!!!
-		icon = align_to_latvia #I just can't find better picture in the game files
+		id = LAT_for_Latvia 
+		icon = align_to_latvia 
 		x = -1
 		y = 1
 		relative_position_id = LAT_professional_army  
@@ -1211,12 +1496,83 @@ focus_tree = {
 		}
 	}
 	
+	    focus = {
+		id = LAT_the_Latvian_air_force
+		icon = airforce
+		x = 25
+		y = 0
+		cost = 7.20
+		
+		completion_reward = {
+		air_experience = 35
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_acquire_bombers
+		icon = CAS
+		x = 2
+		y = 1
+		relative_position_id = LAT_the_Latvian_air_force
+		cost = 7.20
+		
+		prerequisite = {
+		focus = LAT_the_Latvian_air_force
+		}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = { 
+				type = tac_bomber_equipment_1 
+				amount = 25
+				producer = ROOT
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_purchuse_fighter_planes
+		icon = fighter2
+		x = -2
+		y = 1
+		relative_position_id = LAT_the_Latvian_air_force
+		cost = 7.20
+		
+		prerequisite = {
+		focus = LAT_the_Latvian_air_force
+		}
+		
+		completion_reward = {
+			add_equipment_to_stockpile = { 
+				type = fighter_equipment_3 
+				amount = 50
+				producer = ROOT
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
 		focus = {
 		id = LAT_expand_the_Tukums_air_base
 		icon = air_production
-		x = 21
-		y = 0
+		x = 0
+		y = 1
+		relative_position_id = LAT_the_Latvian_air_force
 		cost = 7.20
+		
+		prerequisite = {
+		focus = LAT_the_Latvian_air_force
+		}
 		
 		completion_reward = {
 			random_owned_state = {
@@ -1240,260 +1596,203 @@ focus_tree = {
 		}
 	}
 	
-		focus = {
-		id = LAT_bomber_production
-		text = generic_bomber_production
-		icon = bombs2
-		x = -1
+ focus = {
+		id = LAT_air_craft_factories
+		icon = fighter2
+		x = 0
 		y = 1
 		relative_position_id = LAT_expand_the_Tukums_air_base
 		cost = 7.20
 		
-		mutually_exclusive = {
-			focus = LAT_fighter_production
+		prerequisite = {
+		focus = LAT_expand_the_Tukums_air_base
 		}
 		
 		prerequisite = {
-		    focus = LAT_expand_the_Tukums_air_base
+		focus = LAT_purchuse_fighter_planes
 		}
 		
-	    completion_reward = {
-			add_ideas = idea_focus_generic_bomber_focus
+		prerequisite = {
+		focus = LAT_acquire_bombers
+		}
+		
+		completion_reward = {
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		add_ideas = LAT_latvian_aviation_industry
+		}
+		
+		ai_will_do = {
+			factor = 10
 		}
 	}
-	
-		focus = {
-		id = LAT_bomber_research
+
+focus = {
+		id = LAT_develop_bombers
 		icon = bomber
-		x = -1
-		y = 1
-		relative_position_id = LAT_bomber_production
-		cost = 7.20
+		x = 1
+		y = 1 
+		relative_position_id = LAT_air_craft_factories
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
 		
 		prerequisite = {
-		    focus = LAT_bomber_production
+		focus = LAT_air_craft_factories
 		}
+		
 		
 	    completion_reward = {
 			add_tech_bonus = {
-				name = bomber_bonus
-				bonus = 0.3
-				uses = 2
-				category = heavy_air
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = tactical_bomber
 			}
+	}
+	ai_will_do = {
+			factor = 10
 		}
 	}
-	
-		focus = {
-		id = LAT_fighter_production
-		text = generic_fighter_production
-		icon = fighter2
-		x = 1
-		y = 1
-		relative_position_id = LAT_expand_the_Tukums_air_base
-		cost = 7.20
+
+
+focus = {
+		id = LAT_lighter_bombs
+		text = GEN_lighter_bombs
+		icon = bombs
+		x = 0
+		y = 1 
+		relative_position_id = LAT_develop_bombers
+		cost = 7.2
 		
-		mutually_exclusive = {
-			focus = LAT_bomber_production
+		bypass = {
+		
+		}
+		
+		available = {
+			
 		}
 		
 		prerequisite = {
-		    focus = LAT_expand_the_Tukums_air_base
+		focus = LAT_develop_bombers
 		}
 		
+		
 	    completion_reward = {
-		add_ideas = idea_focus_generic_fighter_focus
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = cat_strategic_bomber
+			}
+	}
+	ai_will_do = {
+			factor = 10
 		}
 	}
-	
-	focus = {
-		id = LAT_fighter_research
-		icon = fighter2
-		x = 1
-		y = 1
-		relative_position_id = LAT_fighter_production
-		cost = 7.20
+
+focus = {
+		id = LAT_modern_fighters
+		icon = fighter
+		x = -1
+		y = 1 
+		relative_position_id = LAT_air_craft_factories
+		cost = 7.2
 		
-		prerequisite = {
-		    focus = LAT_fighter_production
+		bypass = {
+		
 		}
 		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = LAT_air_craft_factories
+		}
+		
+		
 	    completion_reward = {
-		add_tech_bonus = {
-				name = bomber_bonus
-				bonus = 0.3
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
 				uses = 2
 				category = light_fighter
 			}
+	}
+	ai_will_do = {
+			factor = 10
 		}
 	}
-	
-	focus = {
-		id = LAT_CAS_research
-		icon = fighter
-		x = -1
-		y = 1
-		relative_position_id = LAT_fighter_production
-		cost = 7.20
+
+focus = {
+		id = LAT_friends_in_the_air
+		icon = escort_fighters
+		x = 0
+		y = 1 
+		relative_position_id = LAT_modern_fighters
+		cost = 7.2
 		
-		prerequisite = {
-			focus = LAT_fighter_production
-			focus = LAT_bomber_production
+		bypass = {
+		
 		}
 		
-		completion_reward = {
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = LAT_modern_fighters
+		}
+		
+		
+	    completion_reward = {
 			add_tech_bonus = {
-				name = cas_bomber
-				bonus = 0.25
+				name = tech_bonus
+				bonus = 0.8
 				uses = 2
 				category = cas_bomber
 			}
-		}
-	
-	 ai_will_do = {
-			factor = 10
-		}
 	}
-	
-	focus = {
-		id = LAT_air_safety_reforms
-		text = generic_air_safety_reforms #to lazy to make my own descriptions and names
-		icon = bombs
-		x = 0
-		y = 1
-		relative_position_id = LAT_CAS_research
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_CAS_research
-		}
-		
-		completion_reward = {
-			air_experience = 5
-			add_ideas = generic_air_force_safety_reforms
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	    focus = {
-		id = LAT_create_paratroopers_regiment
-		icon = paratroopers
-		x = 0
-		y = 1
-		relative_position_id = LAT_air_safety_reforms
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_air_safety_reforms
-		}
-		
-		completion_reward = {
-		custom_effect_tooltip = create_paratrooper_division_tt
-          hidden_effect = {
-					division_template = {
-						name = "paratrooper division" #this is preety weak division but I don't care
-						priority = 1
-
-						regiments = {
-							paratrooper = { x = 0 y = 0 }
-							paratrooper = { x = 0 y = 1 }
-							paratrooper = { x = 0 y = 2 }
-                            paratrooper = { x = 0 y = 3 }
-						    paratrooper = { x = 0 y = 4 }
-                        }
-						support = {
-							recon = { x = 0 y = 0 }
-						}
-					}	
-						random_owned_controlled_state = {
-					limit = { ROOT = { has_full_control_of_state = PREV } }
-					prioritize = { 12 }
-					create_unit = {
-						division = "name = \"paratrooper division 1\" division_template = \"paratrooper division\" start_experience_factor = 1.0" 
-						owner = LAT
-					}
-				}
-			}
-		}
-		
-		ai_will_do = {
+	ai_will_do = {
 			factor = 10
 		}
 	}
 
-    focus = {
-		id = LAT_paratroopers_research
-		icon = paratroopers
-		x = 0
+focus = {
+		id = LAT_pilot_traning_program
+		text = HUN_pilot_traning_program
+		icon = air_traning
+		x = 1
 		y = 1
-		relative_position_id = LAT_create_paratroopers_regiment
-		cost = 7.20
+		relative_position_id = LAT_friends_in_the_air
+		cost = 7.2
 		
 		prerequisite = {
-			focus = LAT_create_paratroopers_regiment
+			focus = LAT_lighter_bombs
 		}
-		
-		completion_reward = {
-			add_tech_bonus = {
-				name = para_tech
-				bonus = 0.25
-				uses = 2
-				category = para_tech
-			}
-		}
-	
-	 ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = LAT_air_doctrine_1
-		text = generic_air_doctrine_1
-		icon = air_doctrine
-		x = -2
-		y = 1
-		relative_position_id = LAT_air_safety_reforms
-		cost = 7.20
 		
 		prerequisite = {
-			focus = LAT_air_safety_reforms
+			focus = LAT_friends_in_the_air
 		}
+		
 		
 		completion_reward = {
-			add_tech_bonus = {
-				name = air_doc_bonus
-				bonus = 0.27.20
-				uses = 2
-				category = air_doctrine
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_air_doctrine_2
-		text = generic_air_doctrine_2
-		icon = air_doctrine
-		x = 0
-		y = 1
-		relative_position_id = LAT_air_doctrine_1
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_air_doctrine_1
-		}
-		
-		completion_reward = {
-			add_tech_bonus = {
-				name = air_doc_bonus
-				bonus = 0.27.20
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
 				uses = 2
 				category = air_doctrine
 			}
@@ -1505,27 +1804,25 @@ focus_tree = {
 	}
 
 focus = {
-		id = LAT_naval_bomber_research
-		icon = naval_bomber
-		x = 2
+		id = LAT_paratroopers
+		text = GEN_troops_from_the_air
+		icon = paratroopers
+		x = -2
 		y = 1
-		relative_position_id = LAT_air_safety_reforms
-		cost = 7.20
+		relative_position_id = LAT_pilot_traning_program
+		cost = 7.2
 		
 		prerequisite = {
-			focus = LAT_air_safety_reforms
+			focus = LAT_pilot_traning_program
 		}
 		
-		prerequisite = {
-			focus = LIT_air_doctrine_1
-		}
 		
 		completion_reward = {
-			add_tech_bonus = {
-				name = naval_air
-				bonus = 0.25
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
 				uses = 2
-				category = naval_air
+				category = para_tech
 			}
 		}
 		
@@ -1533,23 +1830,79 @@ focus = {
 			factor = 10
 		}
 	}
-		
-			focus = {
-		id = LAT_air_force_officer_school 
-		text = LIT_air_force_officer_school 
-		icon = airforce
+
+focus = {
+		id = LAT_radar_effort
+		icon = radar
 		x = 0
 		y = 1
-		relative_position_id = LAT_naval_bomber_research
-		cost = 7.20 #orriginaly it was cost = 5 but i want this focus to take more time
+		relative_position_id = LAT_pilot_traning_program
+		cost = 7.2
 		
 		prerequisite = {
-			focus = LAT_naval_bomber_research
+			focus = LAT_pilot_traning_program
 		}
 		
 		completion_reward = {
-			add_ideas = FRA_air_force_officer_school
-			air_experience = 25
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 3.0
+				uses = 1
+				category = radar_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+focus = {
+		id = LAT_legacy_of_Karlis
+		icon = Blueprints
+		x = 2
+		y = 1
+		relative_position_id = LAT_pilot_traning_program
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_pilot_traning_program
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_latvian_aviation_industry
+					add_idea = LAT_latvian_aviation_industry_2
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+focus = {
+		id = LAT_all_for_latvia
+		icon = air_doctrine
+		x = 0
+		y = 1
+		relative_position_id = LAT_radar_effort
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_radar_effort
+		}
+		
+		prerequisite = {
+			focus = LAT_paratroopers
+		}
+		
+		prerequisite = {
+			focus = LAT_legacy_of_Karlis
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_all_for_latvia
 		}
 		
 		ai_will_do = {
@@ -1560,7 +1913,7 @@ focus = {
 focus = {
 		id = LAT_expand_Liepaja_port
 		icon = naval_dockyards
-		x = 26
+		x = 30
 		y = 0
 
 		cost = 7.20
@@ -1618,6 +1971,9 @@ focus = {
 				set_state_flag = CAN_halifax_shipyards_DY
 			}
 		}
+	ai_will_do = {
+			factor = 10
+		}
 	}
 
 	focus = {
@@ -1657,7 +2013,10 @@ focus = {
 				category = dd_tech
 			}
 		}
-	}
+ai_will_do = {
+			factor = 10
+		}
+}
 
 	focus = {
 		id = LAT_light_cruiser_effort
@@ -1695,6 +2054,9 @@ focus = {
 				uses = 1
 				category = cl_tech
 			}
+		}
+	ai_will_do = {
+			factor = 10
 		}
 	}
 
@@ -1734,6 +2096,9 @@ focus = {
 				uses = 1
 				category = ca_tech
 			}
+		}
+	ai_will_do = {
+			factor = 10
 		}
 	}
 
@@ -1779,6 +2144,9 @@ focus = {
 				category = convoy_defense_tree
 			}
 		}
+	ai_will_do = {
+			factor = 10
+		}
 	}
 
 	focus = {
@@ -1818,6 +2186,9 @@ focus = {
 				uses = 2
 				category = cat_fleet_in_being
 			}			
+		}
+	ai_will_do = {
+			factor = 10
 		}
 	}
 
@@ -1873,11 +2244,13 @@ focus = {
 				}
 			}
 		}
+	ai_will_do = {
+			factor = 10
+		}
 	}
 
 	focus = {
 		id = LAT_trade_fleet
-		text = CAN_trade_fleet
         icon = trade_deal
 		prerequisite = { focus = LAT_fleet_in_being focus = LAT_escort_fleet }
 		x = 1
@@ -1906,22 +2279,1447 @@ focus = {
 		completion_reward = {
 			add_ideas = LAT_trade_fleet			
 		}
+	ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_ngs_coup
+		icon = new_generation
+		x = 51
+		y = 10
+		cost = 7.2
+	
+	     available = {
+		 always = no
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    remove_ideas = LAT_modern_day_mercantilism_idea
+		remove_ideas = LAT_support_from_cleargy
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_control_culture
+		icon = territorial_claims
+		x = 1
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_ngs_coup
+	
+	     prerequisite = {
+		focus = LAT_ngs_coup
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_increased_culture_spendings
+		unlock_decision_category_tooltip = LAT_culture_control_category
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_desmita_tiesta
+		icon = Gold
+		x = 1
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_control_culture
+	
+	     prerequisite = {
+		focus = LAT_control_culture
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_a_new_tax
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_it_belongs_to_the_church
+		icon = seize_property
+		x = 2
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_desmita_tiesta
+	
+	     prerequisite = {
+		focus = LAT_desmita_tiesta
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 3
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}	
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+		}
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_cult_of_personality
+		icon = propaganda
+		x = 0
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_desmita_tiesta
+	
+	     prerequisite = {
+		focus = LAT_desmita_tiesta
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_country_leader_trait = nationalist_symbol
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_ruso_latvian_unity
+		icon = national_unity
+		x = -1
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_ngs_coup
+	
+	     prerequisite = {
+		focus = LAT_ngs_coup
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_ruso_latvian_unity_idea
+		remove_ideas = LAT_russian_minority
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_heal_our_soldiers
+		icon = healthcare
+		x = 1
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_ruso_latvian_unity
+	
+	    prerequisite = {
+		focus = LAT_control_culture
+		}
+	
+	     prerequisite = {
+		focus = LAT_ruso_latvian_unity
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_heal_our_soldiers_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_fighting_for_the_rightious_cause
+		icon = jesus
+		x = 0
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_heal_our_soldiers
+	
+	     prerequisite = {
+		focus = LAT_heal_our_soldiers
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    swap_ideas = { 
+					remove_idea = LAT_heal_our_soldiers_idea
+					add_idea = LAT_LAT_fighting_for_the_rightious_cause_idea
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_my_years_in_kazakhstan
+		icon = align_to_kazakhstan
+		x = -1
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_ruso_latvian_unity
+	
+	     prerequisite = {
+		focus = LAT_ruso_latvian_unity
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_timed_idea = {
+				idea = LAT_memories_from_kazahstan
+				days = 365
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_take_from_pagansim
+		icon = offensive_army
+		x = -2
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_my_years_in_kazakhstan
+	
+	     prerequisite = {
+		focus = LAT_my_years_in_kazakhstan
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_learning_from_poganism
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_church_sponsored_welfare
+		icon = bag_of_money
+		x = 0
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_my_years_in_kazakhstan
+	
+	     prerequisite = {
+		focus = LAT_my_years_in_kazakhstan
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_church_sponsored_welfare_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_pacifism
+		icon = neutrality
+		x = -1
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_fighting_for_the_rightious_cause
+	
+	    mutually_exclusive = {
+		focus = LAT_spread_the_word
+		}
+	
+	    prerequisite = {
+		focus = LAT_church_sponsored_welfare
+		}
+	
+	      prerequisite = {
+		focus = LAT_take_from_pagansim
+		}
+	
+	     prerequisite = {
+		focus = LAT_fighting_for_the_rightious_cause
+		}
+	
+	     prerequisite = {
+		focus = LAT_cult_of_personality
+		}
+	
+	     prerequisite = {
+		focus = LAT_it_belongs_to_the_church
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_stability = 0.1
+		add_ideas = neutrality_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_spread_the_word
+		icon = planning_bonus
+		x = 1
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_fighting_for_the_rightious_cause
+	
+	    mutually_exclusive = {
+		focus = LAT_pacifism
+		}
+	
+	    prerequisite = {
+		focus = LAT_church_sponsored_welfare
+		}
+	
+	      prerequisite = {
+		focus = LAT_take_from_pagansim
+		}
+	
+	     prerequisite = {
+		focus = LAT_fighting_for_the_rightious_cause
+		}
+	
+	     prerequisite = {
+		focus = LAT_cult_of_personality
+		}
+	
+	     prerequisite = {
+		focus = LAT_it_belongs_to_the_church
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    set_cosmetic_tag = LAT_new_genetation
+		add_stability = 0.1
+		add_ideas = LAT_spreading_the_word_of_god
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_implement_shunning
+		icon = escape
+		x = 0
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_pacifism
+	
+	    mutually_exclusive = {
+		focus = LAT_clense_the_unholy
+		}
+	
+	    prerequisite = {
+		focus = LAT_pacifism
+		focus = LAT_spread_the_word
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_shuning
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_clense_the_unholy
+		icon = guilotine_for_sinners
+		x = 0
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_spread_the_word
+	
+	    mutually_exclusive = {
+		focus = LAT_implement_shunning
+		}
+	
+	    prerequisite = {
+		focus = LAT_spread_the_word
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_stability = 0.15
+		every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_manpower = -50000
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_united_under_jesus
+		icon = race_relations
+		x = 1
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_implement_shunning
+	
+	    prerequisite = {
+		focus = LAT_clense_the_unholy
+		focus = LAT_implement_shunning
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_umited_under_the_true_god
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_integrate_nationalists
+		icon = military_deal
+		x = -1
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_implement_shunning
+	
+	    prerequisite = {
+		focus = LAT_clense_the_unholy
+		focus = LAT_implement_shunning
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_integrated_nationalists
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_sacred_economics
+		icon = central_management
+		x = 3
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_implement_shunning
+	
+	    prerequisite = {
+		focus = LAT_clense_the_unholy
+		focus = LAT_implement_shunning
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_ideas = LAT_sacred_economics_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_a_holy_nation
+		icon = christianity
+		x = 2
+		y = 1
+		cost = 7.2
+	    relative_position_id = LAT_integrate_nationalists
+	
+	    prerequisite = {
+		focus = LAT_united_under_jesus
+		}
+	
+	    prerequisite = {
+		focus = LAT_sacred_economics
+		}
+	
+	    prerequisite = {
+		focus = LAT_integrate_nationalists
+		}
+	
+	     available = {
+		 has_government = islamist
+		 }
+		
+		completion_reward = {
+	    add_stability = 0.25
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_keep_calm_everything_is_fine
+		icon = propaganda
+		x = 41
+		y = 10
+		cost = 7.2
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		completion_reward = {
+	    add_stability = 0.1
+		LAT = { country_event = LAT_events.9 }
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_martial_Law
+		icon = military_sphere
+		x = -2
+		y = 1
+		relative_position_id = LAT_keep_calm_everything_is_fine
+		cost = 7.2
+	
+	    prerequisite = {
+		focus = LAT_keep_calm_everything_is_fine
+		}
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_political_power = 100
+		swap_ideas = { 
+					remove_idea = LAT_instability
+					add_idea = LAT_instability_2 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_get_back_to_work
+		icon = shovels_with_skull
+		x = 2
+		y = 1
+		relative_position_id = LAT_keep_calm_everything_is_fine
+		cost = 7.2
+	
+	    prerequisite = {
+		focus = LAT_keep_calm_everything_is_fine
+		}
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    remove_ideas = LAT_strikes
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_put_them_on_trials
+		icon = constitution
+		x = 0
+		y = 1
+		relative_position_id = LAT_keep_calm_everything_is_fine
+		cost = 7.2
+	
+	    prerequisite = {
+		focus = LAT_keep_calm_everything_is_fine
+		}
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    LAT = { country_event = LAT_events.10 }
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_outlaw_strikes
+		icon = chained_showels
+		x = -1
+		y = 1
+		relative_position_id = LAT_put_them_on_trials
+		cost = 7.2
+	
+	     prerequisite = {
+		focus = LAT_put_them_on_trials
+		}
+	
+	      prerequisite = {
+		focus = LAT_martial_Law
+		}
+	
+	     prerequisite = {
+		focus = LAT_get_back_to_work
+		}
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	   add_ideas = LAT_outlawed_strikes
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_militarise_education
+		icon = restrict_research
+		x = 1
+		y = 1
+		relative_position_id = LAT_put_them_on_trials
+		cost = 7.2
+	
+	     prerequisite = {
+		focus = LAT_put_them_on_trials
+		}
+	
+	      prerequisite = {
+		focus = LAT_martial_Law
+		}
+	
+	     prerequisite = {
+		focus = LAT_get_back_to_work
+		}
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	   add_ideas = LAT_militarised_education
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_a_metting_with_the_right
+		icon = major_alliance
+		x = -1
+		y = 1
+		relative_position_id = LAT_militarise_education
+		cost = 7.2
+	
+	     prerequisite = {
+		focus = LAT_militarise_education
+		}
+	
+	      prerequisite = {
+		focus = LAT_outlaw_strikes
+		}
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    LAT = { country_event = LAT_events.11 }
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_enforce_the_martial_law
+		icon = attack_democracy2
+		x = 4
+		y = 1
+		relative_position_id = LAT_a_metting_with_the_right
+		cost = 7.2
+	
+	    mutually_exclusive = {
+		focus = LAT_a_softer_approach
+		}
+	
+	     prerequisite = {
+		focus = LAT_a_metting_with_the_right
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    swap_ideas = { 
+					remove_idea = LAT_instability_3
+					add_idea = LAT_instability_4 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_media_censorship
+		icon = media_censorship
+		x = 1
+		y = 1
+		relative_position_id = LAT_enforce_the_martial_law
+		cost = 7.2
+	
+	     prerequisite = {
+		focus = LAT_enforce_the_martial_law
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_ideas = LAT_media_censorship_idea
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_mass_nationalisation_nationalist
+		icon = seize_property
+		x = -1
+		y = 1
+		relative_position_id = LAT_enforce_the_martial_law
+		cost = 10
+	
+	     prerequisite = {
+		focus = LAT_enforce_the_martial_law
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 3
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}	
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_tanks_on_the_streets
+		icon = tank
+		x = 1
+		y = 1
+		relative_position_id = LAT_media_censorship
+		cost = 7.2
+	
+	     prerequisite = {
+		 focus = LAT_mass_nationalisation_nationalist
+		 }
+	
+	     prerequisite = {
+		focus = LAT_media_censorship
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_manpower = -15000
+			}
+		hidden_effect = {
+		division_template = {
+						name = "Tank Brigade"
+						priority = 2
+						regiments = {
+							modern_armor = { x = 0 y = 0 }
+							modern_armor = { x = 0 y = 1 }
+							modern_armor = { x = 0 y = 2 }
+				
+		    	   		 	modern_armor = { x = 1 y = 0 }
+							modern_armor = { x = 1 y = 1 }
+							modern_armor = { x = 1 y = 2 }
+				
+		    
+						}
+						support = {
+							recon = { x = 0 y = 0 }
+						}
+					}
+	   }
+	   random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Tank Brigade 1\" division_template = \"Tank Brigade\" start_experience_factor = 1.0" 
+						owner = LAT
+					}
+				}
+	   random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Tank Brigade 2\" division_template = \"Tank Brigade\" start_experience_factor = 1.0" 
+						owner = LAT
+					}
+				}
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_clamp_down_on_Russian_resistance
+		icon = attack_russia
+		x = -3
+		y = 1
+		relative_position_id = LAT_media_censorship
+		cost = 7.2
+	
+	    prerequisite = {
+		 focus = LAT_mass_nationalisation_nationalist
+		 }
+	
+	     prerequisite = {
+		focus = LAT_media_censorship
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    unlock_decision_tooltip = LAT_attack_the_Russian_minority
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_militarised_police
+		icon = police_force
+		x = -1
+		y = 1
+		relative_position_id = LAT_media_censorship
+		cost = 7.2
+	
+	    prerequisite = {
+		 focus = LAT_mass_nationalisation_nationalist
+		 }
+	
+	     prerequisite = {
+		focus = LAT_media_censorship
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_ideas = LAT_militarised_police_ideas
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_deal_with_the_opposition
+		icon = destroy_establishment
+		x = -1
+		y = 1
+		relative_position_id = LAT_militarised_police
+		cost = 7.2
+	
+	    prerequisite = {
+		focus = LAT_militarised_police
+		}
+	
+	    prerequisite = {
+		focus = LAT_clamp_down_on_Russian_resistance
+		}
+	
+	    prerequisite = {
+		focus = LAT_tanks_on_the_streets
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_stability = 0.1
+		remove_ideas = LAT_instability_4
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_mass_factory_conversion
+		icon = factory_conversion
+		x = 1
+		y = 1
+		relative_position_id = LAT_militarised_police
+		cost = 7.2
+	
+	    prerequisite = {
+		focus = LAT_militarised_police
+		}
+	
+	    prerequisite = {
+		focus = LAT_clamp_down_on_Russian_resistance
+		}
+	
+	    prerequisite = {
+		focus = LAT_tanks_on_the_streets
+		}
+
+	
+	     available = {
+		 any_state = {
+			is_controlled_by = ROOT
+			industrial_complex > 2
+		}
+		 has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    random_owned_state = {
+			remove_building = {
+				type = industrial_complex
+				level = 3
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 3
+				instant_build = yes
+			}
+		}
+	}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_the_best_defense
+		icon = skull
+		x = -1
+		y = 1
+		relative_position_id = LAT_mass_factory_conversion
+		cost = 7.2
+	
+	    prerequisite = {
+		focus = LAT_mass_factory_conversion
+		}
+	
+	    prerequisite = {
+		focus = LAT_deal_with_the_opposition
+		}
+	
+	     available = {
+		 has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_ideas = LAT_charge
+	}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_a_softer_approach
+		icon = democracy
+		x = -4
+		y = 1
+		relative_position_id = LAT_a_metting_with_the_right
+		cost = 7.2
+	
+	    mutually_exclusive = {
+		focus = LAT_enforce_the_martial_law
+		}
+	
+	     prerequisite = {
+		focus = LAT_a_metting_with_the_right
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    swap_ideas = { 
+					remove_idea = LAT_instability_3
+					add_idea = LAT_instability_4 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_rebuild_our_relations
+		icon = diplomatic_treaty
+		x = 1
+		y = 1
+		relative_position_id = LAT_a_softer_approach
+		cost = 7.2
+	
+	     prerequisite = {
+		focus = LAT_a_softer_approach
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_ideas = GEN_more_diplomats
+		every_country = {
+		    limit = { 
+			    has_opinion_modifier = military_rule_bad
+				NOT = {
+					original_tag = LAT
+				}
+
+			}
+			remove_opinion_modifier = {
+                target = LAT
+                modifier = military_rule_bad
+            }
+		}
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_allow_private_properties
+		icon = libertarianism
+		x = -1
+		y = 1
+		relative_position_id = LAT_a_softer_approach
+		cost = 7.2
+	
+	     prerequisite = {
+		focus = LAT_a_softer_approach
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_ideas = LAT_allow_private_properties_idea
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_end_the_state_of_emergency
+		icon = renounce_treaty
+		x = 1
+		y = 1
+		relative_position_id = LAT_rebuild_our_relations
+		cost = 7.2
+	
+	     prerequisite = {
+		 focus = LAT_allow_private_properties
+		 }
+	
+	     prerequisite = {
+		focus = LAT_rebuild_our_relations
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_stability = 0.1
+		remove_ideas = LAT_instability_4
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_compromise_with_the_Russian_minority
+		icon = concessions_to_Russia
+		x = -3
+		y = 1
+		relative_position_id = LAT_rebuild_our_relations
+		cost = 7.2
+	
+	     prerequisite = {
+		 focus = LAT_allow_private_properties
+		 }
+	
+	     prerequisite = {
+		focus = LAT_rebuild_our_relations
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    unlock_decision_tooltip = LAT_concessions_to_the_Russian_minority_dec
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_a_modern_police_force
+		icon = police_force
+		x = -1
+		y = 1
+		relative_position_id = LAT_rebuild_our_relations
+		cost = 7.2
+	
+	      prerequisite = {
+		 focus = LAT_allow_private_properties
+		 }
+	
+	     prerequisite = {
+		focus = LAT_rebuild_our_relations
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_ideas = LAT_a_modern_police_force_ideas
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
 	}
 	
 	
 	focus = {
+		id = LAT_legalise_not_radical_parties
+		icon = dangerous_laws
+		x = -1
+		y = 1
+		relative_position_id = LAT_a_modern_police_force
+		cost = 7.2
+	
+	    prerequisite = {
+		focus = LAT_end_the_state_of_emergency
+		}
+	
+	    prerequisite = {
+		focus = LAT_compromise_with_the_Russian_minority
+		}
+	
+	    prerequisite = {
+		focus = LAT_a_modern_police_force
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_ideas = LAT_legalised_not_radical_parties
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_authoritarian_democracy
+		icon = authoritarian_democrat
+		x = 1
+		y = 1
+		relative_position_id = LAT_a_modern_police_force
+		cost = 7.2
+	
+	    prerequisite = {
+		focus = LAT_end_the_state_of_emergency
+		}
+	
+	    prerequisite = {
+		focus = LAT_compromise_with_the_Russian_minority
+		}
+	
+	    prerequisite = {
+		focus = LAT_a_modern_police_force
+		}
+
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_political_power = 150
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_proclaim_latvian_neutrality
+		icon = neutrality
+		x = -1
+		y = 1
+		relative_position_id = LAT_authoritarian_democracy
+		cost = 7.2
+	
+	    prerequisite = {
+		focus = LAT_authoritarian_democracy
+		}
+	
+	    prerequisite = {
+		focus = LAT_legalise_not_radical_parties
+		}
+	
+	     available = {
+		has_government = nationalist
+		 }
+		
+		
+		completion_reward = {
+	    add_ideas = neutrality_idea
+		add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
 		id = LAT_2001_elections
 		icon = major_alliance
-		x = 40
+		x = 47
 		y = 0
-		cost = 4 #this focus is ment to be that short
+		cost = 5
 	
 	     available = {
 		 date > 2001.01.01
 		 }
 		
 		mutually_exclusive = {
-		focus = LAT_revive_the_Interfronte
+		focus = LAT_reapeal_the_ban_on_communism
 		}
 		
 		completion_reward = {
@@ -1935,11 +3733,15 @@ focus = {
 	
 	focus = {
 		id = LAT_relect_the_Vienotiba
-		icon = democracy
+		icon = social_conservative
 		x = 0
 		y = 1
 		relative_position_id = LAT_2001_elections
 		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		}
 		
 		prerequisite = {
 			focus = LAT_2001_elections
@@ -1957,8 +3759,425 @@ focus = {
 		add_political_power = 100
 		add_popularity = {
 				ideology = conservative
-				popularity = 0.2
+				popularity = 0.1
 			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_strenghten_the_party
+		icon = propaganda
+		x = 1
+		y = 1
+		relative_position_id = LAT_relect_the_Vienotiba
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		}
+		
+		mutually_exclusive = {
+        focus = LAT_create_a_coalition
+		}
+		
+		prerequisite = {
+			focus = LAT_relect_the_Vienotiba
+		}
+		
+		completion_reward = {
+		add_timed_idea = {
+				idea = LAT_strengthening_the_party
+				days = 365
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_create_a_coalition
+		icon = major_alliance
+		x = -1
+		y = 1
+		relative_position_id = LAT_relect_the_Vienotiba
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		}
+		
+		prerequisite = {
+			focus = LAT_relect_the_Vienotiba
+		}
+		
+		mutually_exclusive = {
+        focus = LAT_strenghten_the_party
+		}
+		
+		completion_reward = {
+	    unlock_decision_category_tooltip = LAT_creating_a_coalition
+	    
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_modern_day_mercantilism
+		icon = embargo
+		x = 1
+		y = 1
+		relative_position_id = LAT_create_a_coalition 
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		OR = {
+		has_completed_focus = LAT_strenghten_the_party
+		has_country_flag = LAT_created_coaltion_flag 
+		}
+		}
+		
+		prerequisite = {
+			focus = LAT_create_a_coalition
+		    focus = LAT_strenghten_the_party
+		}
+		
+		completion_reward = {
+			add_ideas = LAT_modern_day_mercantilism_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_support_tatus_youth
+		icon = military_mission
+		x = 2
+		y = 1
+		relative_position_id = LAT_modern_day_mercantilism 
+		cost = 7.20
+		
+		available = {
+		has_country_flag = LAT_destroyed_ng_flag
+		has_government = conservative
+		OR = {
+		has_completed_focus = LAT_strenghten_the_party
+		has_country_flag = LAT_created_coaltion_flag 
+		}
+		}
+		
+		prerequisite = {
+			focus = LAT_modern_day_mercantilism
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_TPJO
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_encorage_latvian_nationalism
+		icon = align_to_latvia
+		x = 1
+		y = 1
+		relative_position_id = LAT_support_tatus_youth 
+		cost = 7.20
+		
+		bypass = {
+		has_completed_focus = LAT_struggle_for_unification
+		}
+		
+		available = {
+		has_government = conservative
+		}
+		
+		prerequisite = {
+			focus = LAT_support_tatus_youth
+		}
+		
+		completion_reward = {
+		add_country_leader_trait = nationalist_symbol
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_dig_deeply
+		icon = construction2
+		x = 0
+		y = 1
+		relative_position_id = LAT_encorage_latvian_nationalism 
+		cost = 7.20
+		
+		bypass = {
+		
+		}
+		
+		available = {
+		has_government = conservative
+		}
+		
+		prerequisite = {
+			focus = LAT_support_tatus_youth
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_dig_deeply_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_liberal_economics
+		icon = libertarianism
+		x = -1
+		y = 1
+		relative_position_id = LAT_support_tatus_youth 
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		}
+		
+		prerequisite = {
+			focus = LAT_support_tatus_youth
+		}
+		
+		completion_reward = {
+		unlock_decision_category_tooltip = LAT_liberal_economics_category
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_for_the_people
+		icon = align_people
+		x = 0
+		y = 1
+		relative_position_id = LAT_liberal_economics 
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		}
+		
+		prerequisite = {
+			focus = LAT_liberal_economics
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_TPJO
+					add_idea = LAT_for_the_people_idea 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_values_of_old
+		icon = demand_territory
+		x = 1
+		y = 1
+		relative_position_id = LAT_for_the_people 
+		cost = 7.20
+		
+		bypass = {
+		
+		}
+		
+		available = {
+		has_government = conservative
+		}
+		
+		prerequisite = {
+			focus = LAT_dig_deeply
+		}
+		
+		prerequisite = {
+			focus = LAT_for_the_people
+		}
+		
+		completion_reward = {
+		add_political_power = 100
+		add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_party_of_cleargy
+		icon = christianity
+		x = -3
+		y = 1
+		relative_position_id = LAT_modern_day_mercantilism 
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		OR = {
+		has_completed_focus = LAT_strenghten_the_party
+		has_country_flag = LAT_created_coaltion_flag 
+		}
+		}
+		
+		prerequisite = {
+			focus = LAT_modern_day_mercantilism
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_support_from_cleargy
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = LAT_subsidy_LG
+		icon = oil_production
+		x = -1
+		y = 1
+		relative_position_id = LAT_modern_day_mercantilism 
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		OR = {
+		has_completed_focus = LAT_strenghten_the_party
+		has_country_flag = LAT_created_coaltion_flag 
+		}
+		}
+		
+		prerequisite = {
+			focus = LAT_modern_day_mercantilism
+		}
+		
+		completion_reward = {
+		12 = { 
+					add_resource = { type = oil amount = 15 }
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_control_ng
+		icon = new_generation
+		x = 0
+		y = 1
+		relative_position_id = LAT_party_of_cleargy 
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		}
+		
+		prerequisite = {
+		focus = LAT_subsidy_LG
+		}
+		
+		prerequisite = {
+			focus = LAT_party_of_cleargy
+		}
+		
+		completion_reward = {
+		LAT = { country_event = { id = LAT_events.27 } }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = LAT_family_values
+		text = generic_family_values
+		icon = diplomatic_treaty
+		x = 0
+		y = 1
+		relative_position_id = LAT_subsidy_LG 
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		}
+		
+		prerequisite = {
+			focus = LAT_party_of_cleargy
+		}
+		
+		prerequisite = {
+			focus = LAT_subsidy_LG
+		}
+		
+		completion_reward = {
+		add_ideas = idea_focus_family_values
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	     focus = {
+		id = LAT_christian_education
+		icon = research
+		x = -1
+		y = 1
+		relative_position_id = LAT_family_values 
+		cost = 7.20
+		
+		available = {
+		has_government = conservative
+		has_country_flag = LAT_destroyed_ng_flag
+		}
+		
+		prerequisite = {
+			focus = LAT_family_values
+		}
+		
+		prerequisite = {
+			focus = LAT_control_ng
+		}
+		
+		completion_reward = {
+		add_stability = 0.05
+		add_ideas = LAT_christian_schools
 		}
 		
 		ai_will_do = {
@@ -1968,14 +4187,14 @@ focus = {
 	
 		focus = {
 		id = LAT_elect_the_Pedeja_partija
-		icon = democracy
-		x = -8
+		icon = leftism
+		x = -10
 		y = 1
 		relative_position_id = LAT_2001_elections
 		cost = 7.20
 		
 		select_effect = {
-			set_country_flag = Pedeja_partija_about_to_be_elected #this is for the event with the Pēteris Viņķelis 
+		
 		}
 		
 		mutually_exclusive = {
@@ -1991,14 +4210,17 @@ focus = {
 		}
 		
 		completion_reward = {
+		hidden_effect = {
+		country_event = { id = LAT_events.1 }			
+		}
 		set_politics = {
-				ruling_party = social_liberal
+				ruling_party = progressive
 				elections_allowed = yes 
 			}
 		
 		add_political_power = -50
 		add_popularity = {
-				ideology = social_liberal
+				ideology = progressive
 				popularity = 0.2
 			}
 		}
@@ -2009,23 +4231,21 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_a_populist_gouverment
-		icon = fascism2
-		x = 0
+		id = LAT_gather_funds
+		icon = money
+		x = -1
 		y = 1
 		relative_position_id = LAT_elect_the_Pedeja_partija
-		cost = 7.20
+		cost = 5
 		
 		prerequisite = {
 			focus = LAT_elect_the_Pedeja_partija
 		}
 		
 		completion_reward = {
-		add_political_power = -100
-		add_stability = 0.1
-		add_popularity = {
-				ideology = social_liberal
-				popularity = 0.05
+		add_timed_idea = {
+				idea = LAT_gather_funds_idea
+				days = 200
 			}
 		}
 		
@@ -2035,295 +4255,22 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_direct_democracy
-		icon = democracy
-		x = 0
+		id = LAT_gather_our_supporters
+		icon = align_people
+		x = 1
 		y = 1
-		relative_position_id = LAT_a_populist_gouverment
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_a_populist_gouverment
-		}
-		
-		completion_reward = {
-		add_political_power = -50
-		add_stability = 0.05
-		add_popularity = {
-				ideology = social_liberal
-				popularity = 0.05
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = PP_agarian_reform
-		text = ROM_agrarian_reform
-		icon = agriculture
-		x = -3
-		y = 1
-		relative_position_id = LAT_direct_democracy
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_direct_democracy
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_agarian_reform
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_economic_intervensionalism
-		text = POL_economic_intervensionalism
-		icon = production
-		x = 0
-		y = 1
-		relative_position_id = PP_agarian_reform 
+		relative_position_id = LAT_elect_the_Pedeja_partija
 		cost = 5
 		
 		prerequisite = {
-			focus = PP_agarian_reform
+			focus = LAT_elect_the_Pedeja_partija
 		}
 		
 		completion_reward = {
-		add_stability = -0.1
-		add_country_leader_trait = economic_intervensionalist
-			
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_lower_taxes_for_families
-		text = POL_lower_taxes_for_families
-		icon = intelligence_exchange2
-		x = 0
-		y = 1
-		relative_position_id = LAT_economic_intervensionalism 
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_economic_intervensionalism
-		}
-		
-		completion_reward = {
-		increase_birth_rate = yes
-		add_ideas = POL_lower_taxes_for_families	
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_a_right_to_happines
-		icon = leftism
-		x = -1
-		y = 1
-		relative_position_id = LAT_direct_democracy
-		cost = 7.20
-		
-		mutually_exclusive = {
-		focus = LAT_a_right_to_health
-		}
-		
-		prerequisite = {
-			focus = LAT_direct_democracy
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_a_right_to_happines
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_a_right_to_health
-		icon = leftism
-		x = 1
-		y = 1
-		relative_position_id = LAT_direct_democracy
-		cost = 7.20
-		
-		mutually_exclusive = {
-		focus = LAT_a_right_to_happines
-		}
-		
-		prerequisite = {
-			focus = LAT_direct_democracy
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_a_right_to_health
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_tolerancy
-		icon = major_alliance
-		x = -1
-		y = 1
-		relative_position_id = LAT_a_right_to_health
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_a_right_to_health
-		    focus = LAT_a_right_to_happines
-		}
-		
-		completion_reward = {
-		add_political_power = 50
-		add_stability = 0.05
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_solidarity
-		icon = constitution
-		x = 3
-		y = 1
-		relative_position_id = LAT_direct_democracy
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_direct_democracy
-		}
-		
-		completion_reward = {
-		add_political_power = 50
-		add_stability = 0.05
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_I_dont_know_I_havent_decided
-		icon = diplomatic_treaty
-		x = -1
-		y = 1
-		relative_position_id = LAT_solidarity
-		cost = 7.20
-		
-		mutually_exclusive = {
-		focus = LAT_WE_have_decided
-		}
-		
-		prerequisite = {
-			focus = LAT_solidarity
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_I_dont_know_I_havent_decided
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_WE_have_decided
-		icon = diplomatic_treaty
-		x = 1
-		y = 1
-		relative_position_id = LAT_solidarity
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_solidarity
-		}
-		
-		mutually_exclusive = {
-		focus = LAT_I_dont_know_I_havent_decided
-		}
-		
-		completion_reward = {
-		add_stability = 0.05
 		add_political_power = 200
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_grant_more_autonomy
-		icon = diplomatic_treaty
-		x = -1
-		y = 1
-		relative_position_id = LAT_WE_have_decided
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_I_dont_know_I_havent_decided
-			focus = LAT_WE_have_decided
-		}
-		
-		completion_reward = {
-		  every_owned_state = {
-				limit = {
-					is_controlled_by = ROOT
-				}
-				add_dynamic_modifier = { modifier = expanded_local_autonomy }   
-				add_extra_state_shared_building_slots = 1 
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_we_rule_alone
-		icon = political_pressure_blue
-		x = 1
-		y = 1
-		relative_position_id = LAT_relect_the_Vienotiba
-		cost = 7.20
-		
-		mutually_exclusive = {
-        focus = LAT_create_a_coalition
-		}
-		
-		prerequisite = {
-			focus = LAT_relect_the_Vienotiba
-		}
-		
-		completion_reward = {
-		add_political_power = -200
 		add_popularity = {
-				ideology = conservative
-				popularity = -0.05
+				ideology = progressive
+				popularity = 0.05
 			}
 		}
 		
@@ -2333,29 +4280,32 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_create_a_coalition
-		icon = political_pressure_blue
+		id = LAT_preparing_for_the_reforms
+		icon = constitution
 		x = -1
 		y = 1
-		relative_position_id = LAT_relect_the_Vienotiba
+		relative_position_id = LAT_gather_our_supporters
 		cost = 7.20
 		
-		prerequisite = {
-			focus = LAT_relect_the_Vienotiba
+		available = {
+		has_country_flag = LAT_the_power_is_secured
 		}
 		
-		mutually_exclusive = {
-        focus = LAT_we_rule_alone
+		prerequisite = {
+			focus = LAT_gather_funds
+		}
+		
+		prerequisite = {
+			focus = LAT_gather_our_supporters
 		}
 		
 		completion_reward = {
-	   set_party_name = {
-				ideology = conservative 
-				long_name = LAT_conservative_party_long_JP
-				name = LAT_conservative_party_JP
+		unlock_decision_category_tooltip = LAT_our_refoms_category
+		add_political_power = 50
+		add_popularity = {
+				ideology = progressive
+				popularity = 0.05
 			}
-	   add_stability = 0.07.20
-	    add_ideas = LAT_coalition_gouverment
 		}
 		
 		ai_will_do = {
@@ -2364,85 +4314,48 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_Beurocratic_reform
-		text = POL_Beurocratic_reform
-		icon = intelligence_exchange
+		id = LAT_concessions_to_the_Russian_minority
+		icon = concessions_to_Russia
+		x = 4
+		y = 1
+		relative_position_id = LAT_preparing_for_the_reforms
+		cost = 7.20
+		
+		available = {
+		has_country_flag = LAT_russian_minority_path_unlocked
+		}
+		
+		prerequisite = {
+			focus = LAT_preparing_for_the_reforms
+		}
+		
+		completion_reward = {
+		unlock_decision_category_tooltip = LAT_russian_minority_category
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_support_immigration
+		icon = nordic_resistance_movement
 		x = 1
 		y = 1
-		relative_position_id = LAT_create_a_coalition 
+		relative_position_id = LAT_concessions_to_the_Russian_minority
 		cost = 7.20
 		
+		available = {
+		
+		}
+		
 		prerequisite = {
-			focus = LAT_create_a_coalition
-		    focus = LAT_we_rule_alone
+			focus = LAT_concessions_to_the_Russian_minority
 		}
 		
 		completion_reward = {
-			add_ideas = POL_Beurocratic_reform
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_christian_schools
-		icon = research
-		x = -2
-		y = 1
-		relative_position_id = LAT_Beurocratic_reform 
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_Beurocratic_reform
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_christian_schools
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	    focus = {
-		id = LAT_church_owned_factories
-		icon = production
-		x = 0
-		y = 1
-		relative_position_id = LAT_christian_schools 
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_christian_schools
-		}
-		
-		completion_reward = {
-		add_offsite_building = { type = industrial_complex level = 2 }
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_family_values
-		text = generic_family_values
-		icon = diplomatic_treaty
-		x = 0
-		y = 1
-		relative_position_id = LAT_Beurocratic_reform 
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_Beurocratic_reform
-		}
-		
-		completion_reward = {
-				add_stability = 0.05
-			add_ideas = idea_focus_family_values
+		add_ideas = HUN_imigrants
 		}
 		
 		ai_will_do = {
@@ -2451,36 +4364,26 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_support_LDz_Infrastruktura
-		icon = infrastructure
+		id = LAT_a_safe_place_for_all
+		icon = national_unity
 		x = 0
 		y = 1
-		relative_position_id = LAT_family_values 
+		relative_position_id = LAT_support_immigration
 		cost = 7.20
 		
-		prerequisite = {
-			focus = LAT_family_values
+		available = {
+		
 		}
 		
-		mutually_exclusive = {
-		focus = LAT_privitize_Latvijas_dzelzcels
+		prerequisite = {
+			focus = LAT_support_immigration
 		}
 		
 		completion_reward = {
-		random_owned_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
+		swap_ideas = { 
+					remove_idea = HUN_imigrants
+					add_idea = LAT_a_safe_place_for_all_idea 
 				}
-			}
-		    random_owned_state = {
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
-				}
-			}
 		}
 		
 		ai_will_do = {
@@ -2489,20 +4392,23 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_christian_trade_unions
-		text = POL_christian_trade_unions
-		icon = major_alliance
-		x = 0
+		id = LAT_bilingualism
+		icon = constitution
+		x = -1
 		y = 1
-		relative_position_id = LAT_support_LDz_Infrastruktura 
+		relative_position_id = LAT_concessions_to_the_Russian_minority
 		cost = 7.20
 		
+		available = {
+		
+		}
+		
 		prerequisite = {
-			focus = LAT_support_LDz_Infrastruktura
+			focus = LAT_concessions_to_the_Russian_minority
 		}
 		
 		completion_reward = {
-		add_ideas = POL_christian_trade_unions	
+		add_ideas = LAT_bilingualism_idea
 		}
 		
 		ai_will_do = {
@@ -2511,53 +4417,24 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_anglo_saxon_economic_principles
-		text = USA_anglo_saxon_economic_principles
-		icon = consumer_goods
-		x = 2
-		y = 1
-		relative_position_id = LAT_Beurocratic_reform
-		
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_Beurocratic_reform
-		}
-		
-		mutually_exclusive = {}
-		
-		available = {}
-		
-		bypass = {}
-		
-		completion_reward = {
-			add_ideas = USA_anglo_saxon_economic_principles
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_privitize_Latvijas_dzelzcels 
-		icon = intelligence_exchange2
+		id = LAT_support_Russian_oligarchs
+		icon = intelligence_exchange
 		x = 0
 		y = 1
-		relative_position_id = LAT_anglo_saxon_economic_principles 
+		relative_position_id = LAT_bilingualism
 		cost = 7.20
 		
-		prerequisite = {
-			focus = LAT_anglo_saxon_economic_principles
+		available = {
+		
 		}
 		
-		mutually_exclusive = {
-		focus = LAT_support_LDz_Infrastruktura
+		prerequisite = {
+			focus = LAT_bilingualism
 		}
 		
 		completion_reward = {
-			add_timed_idea = {
-				idea = LAT_privitize_Latvijas_dzelzcels
+		add_timed_idea = {
+				idea = LAT_supported_oligarchs
 				days = 365
 			}
 		}
@@ -2567,40 +4444,39 @@ focus = {
 		}
 	}
 	
-			focus = {
-		id = LAT_invite_forgein_investors
-		icon = concessions
-		x = 0
-		y = 1
-		relative_position_id = LAT_privitize_Latvijas_dzelzcels 
+	focus = {
+		id = LAT_join_CSTO #?
+		icon = align_to_csto
+		x = 1
+		y = 2
+		relative_position_id = LAT_support_Russian_oligarchs
 		cost = 7.20
 		
+		bypass = {
+		OR = {
+		is_in_faction_with = SOV
+		NO = {
+		SOV = {
+				is_faction_leader = yes
+		}
+	}	
+ }
+}	
+	available = {
+		SOV = {
+				is_faction_leader = yes
+		}
+	}
 		prerequisite = {
-			focus = LAT_privitize_Latvijas_dzelzcels
+			focus = LAT_a_safe_place_for_all
 		}
 		
+		prerequisite = {
+			focus = LAT_support_Russian_oligarchs
+		}
 		
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 2
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}	
-				add_extra_state_shared_building_slots = 3
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
+		 LAT = { country_event = LAT_events.5 }
 		}
 		
 		ai_will_do = {
@@ -2609,134 +4485,23 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_elect_the_LSDSP
-		icon = democracy
-		x = 6
+		id = LAT_politics_are_not_the_only_thing
+		icon = consumer_goods
+		x = -4
 		y = 1
-		relative_position_id = LAT_2001_elections
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_2001_elections
-		}
-		
-		mutually_exclusive = {
-		focus = LAT_relect_the_Vienotiba
-		}
-		
-		mutually_exclusive = {
-		focus = LAT_elect_the_Pedeja_partija
-		}
-		
-		completion_reward = {
-		add_ideas = idea_focus_generic_social_democrat_doctrine
-		set_politics = {
-				ruling_party = social_democrat
-				elections_allowed = yes 
-			}
-		add_popularity = {
-				ideology = social_democrat
-				popularity = 0.15
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_social_democracy
-		icon = leftism
-		x = 0
-		y = 1
-		relative_position_id = LAT_elect_the_LSDSP
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_elect_the_LSDSP
-		}
-		
-		completion_reward = {
-		add_stability = 0.1
-		add_popularity = {
-				ideology = social_democrat
-				popularity = 0.05
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_protect_worker_rights
-		text = POL_protect_worker_rights
-		icon = self_management
-		x = 0
-		y = 1
-		relative_position_id = LAT_social_democracy 
-		cost = 7.20
-		
-		
-		prerequisite = {
-			focus = LAT_social_democracy
-		}
-		
-		
-		completion_reward = {
-			add_ideas = POL_protect_worker_rights
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_new_jobs_for_unemployed
-		icon = major_alliance
-		x = -2
-		y = 1
-		relative_position_id = LAT_social_democracy  
+		relative_position_id = LAT_preparing_for_the_reforms
 		cost = 7.20
 		
 		available = {
-		NOT = { has_idea = LAT_investments }
+		has_country_flag = LAT_a_plan_for_the_economy
 		}
 		
 		prerequisite = {
-			focus = LAT_social_democracy
+			focus = LAT_preparing_for_the_reforms
 		}
 		
 		completion_reward = {
-			add_timed_idea = {
-				idea = LAT_investments
-				days = 100
-			}
-			add_offsite_building = { type = industrial_complex level = 2 }
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_full_employment_policies
-		icon = consumer_goods
-		x = 0
-		y = 1
-		relative_position_id = LAT_new_jobs_for_unemployed  
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_new_jobs_for_unemployed
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_full_employment_policies
+		add_ideas = LAT_a_plan_for_the_economy_idea
 		}
 		
 		ai_will_do = {
@@ -2745,46 +4510,23 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_social_programs
-		text = POL_social_programs
-		icon = concessions
-		x = 2
-		y = 1
-		relative_position_id = LAT_social_democracy  
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_social_democracy
-		}
-		
-		completion_reward = {
-		add_ideas = POL_social_programs	
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = IDK_nationalisation
-		text = LAT_nationalisation
+		id = LAT_nationalise_only_the_vital_parts
 		icon = industry_communist
-		x = 0
+		x = -1
 		y = 1
-		relative_position_id = LAT_social_programs
+		relative_position_id = LAT_politics_are_not_the_only_thing
 		cost = 7.20
 		
-		prerequisite = {
-			focus = LAT_social_programs
+		available = {
+		
 		}
 		
-		mutually_exclusive = {
-		focus = LAT_nationalise_key_industry_parts
+		prerequisite = {
+			focus = LAT_politics_are_not_the_only_thing
 		}
 		
 		completion_reward = {
-		 add_stability = -0.1
+		add_stability = -0.1
 		 random_owned_state = {
 				limit = {
 					free_building_slots = {
@@ -2801,47 +4543,6 @@ focus = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_nationalise_key_industry_parts
-		text = POL_nationalise_key_industry_parts
-		icon = industry_communist2
-		x = 0
-		y = 1
-		cost = 7.20
-		relative_position_id = LAT_protect_worker_rights 
-		
-		mutually_exclusive = {
-		focus = IDK_nationalisation
-		}
-		
-		prerequisite = {
-			focus = LAT_protect_worker_rights
-	    }
-		
-		completion_reward = {
-		add_ideas = POL_nationalise_key_industry_parts
-		random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 1
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
 					level = 2
 					instant_build = yes
 				}
@@ -2854,29 +4555,52 @@ focus = {
 	}
 	
 	focus = {
-		id = IDK_workers_republic
-		text = LAT_workers_republic
-		icon = communism5
+		id = LAT_benefits_for_large_families
+		icon = money
+		x = 0
+		y = 1
+		relative_position_id = LAT_nationalise_only_the_vital_parts
+		cost = 7.20
+		
+		available = {
+		
+		}
+		
+		prerequisite = {
+			focus = LAT_nationalise_only_the_vital_parts
+		}
+		
+		completion_reward = {
+		add_stability = 0.15
+		increase_birth_rate = yes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_intervene_in_the_economy
+		icon = seize_property
 		x = 1
 		y = 1
-		relative_position_id = LAT_nationalise_key_industry_parts  
+		relative_position_id = LAT_politics_are_not_the_only_thing
 		cost = 7.20
 		
-		mutually_exclusive = {
-		focus = LAT_socialist_republic
+		available = {
+		
 		}
 		
 		prerequisite = {
-			focus = LAT_full_employment_policies
-		}
-		
-		prerequisite = {
-			focus = IDK_nationalisation
-		    focus = LAT_nationalise_key_industry_parts
+			focus = LAT_politics_are_not_the_only_thing
 		}
 		
 		completion_reward = {
-        add_ideas = LAT_workers_republic
+		swap_ideas = { 
+					remove_idea = LAT_a_plan_for_the_economy_idea
+					add_idea = LAT_a_plan_for_the_economy_idea_2 
+				}
 		}
 		
 		ai_will_do = {
@@ -2885,29 +4609,511 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_socialist_republic
-		icon = concessions2
+		id = LAT_prog_social_programs
+		icon = concessions
+		x = 0
+		y = 1
+		relative_position_id = LAT_intervene_in_the_economy
+		cost = 7.20
+		
+		available = {
+		
+		}
+		
+		prerequisite = {
+			focus = LAT_intervene_in_the_economy
+		}
+		
+		completion_reward = {
+		custom_effect_tooltip = LAT_unlock_social_program_decisions_tp
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_a_mixed_a_economy_is_a_working_economy
+		icon = production2
+		x = -1
+		y = 2
+		relative_position_id = LAT_prog_social_programs
+		cost = 7.20
+		
+		available = {
+		
+		}
+		
+		prerequisite = {
+			focus = LAT_benefits_for_large_families
+		}
+		
+		prerequisite = {
+			focus = LAT_prog_social_programs
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_a_plan_for_the_economy_idea_2
+					add_idea = LAT_a_mixed_economy 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_direct_democracy
+		icon = democracy
+		x = 0
+		y = 1
+		relative_position_id = LAT_preparing_for_the_reforms
+		cost = 7.20
+		
+		available = {
+		has_country_flag = LAT_is_ready_for_direct_democracy
+		}
+		
+		prerequisite = {
+			focus = LAT_preparing_for_the_reforms
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_direct_democracy_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_vote_vote_vote
+		icon = dangerous_laws
 		x = -1
 		y = 1
-		relative_position_id = LAT_nationalise_key_industry_parts  
+		relative_position_id = LAT_direct_democracy
 		cost = 7.20
 		
-		mutually_exclusive = {
-		focus = IDK_workers_republic
-		}
-		
 		prerequisite = {
-			focus = LAT_full_employment_policies
-		}
-		
-		prerequisite = {
-			focus = IDK_nationalisation
-		    focus = LAT_nationalise_key_industry_parts
+			focus = LAT_direct_democracy
 		}
 		
 		completion_reward = {
-		add_political_power = 100
+		 LAT = { country_event = LAT_events.4 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_politicise_the_army
+		icon = military_mission
+		x = 1
+		y = 1
+		relative_position_id = LAT_direct_democracy
+		cost = 7.20
+		
+		prerequisite = {
+			focus = LAT_direct_democracy
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_politicised_army
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	    focus = {
+		id = LAT_a_right_to_happines
+		icon = destroy_society
+		x = 0
+		y = 1
+		relative_position_id = LAT_politicise_the_army
+		cost = 7.20
+		
+		prerequisite = {
+			focus = LAT_politicise_the_army
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_a_right_to_happines
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = LAT_a_right_to_health
+		icon = industry_democratic3
+		x = 0
+		y = 1
+		relative_position_id = LAT_vote_vote_vote
+		cost = 7.20
+		
+		prerequisite = {
+			focus = LAT_vote_vote_vote
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_a_right_to_health
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_a_country_of_culture
+		icon = national_greatness
+		x = 2
+		y = 1
+		relative_position_id = LAT_a_right_to_health
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = LAT_best_healthcare_in_the_baltic
+		}
+		
+		prerequisite = {
+			focus = LAT_a_right_to_happines
+		}
+		
+		prerequisite = {
+			focus = LAT_a_right_to_health
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_a_right_to_happines
+					add_idea = LAT_a_country_of_culture_idea 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_best_healthcare_in_the_baltic
+		icon = industry_democratic4
+		x = 0
+		y = 1
+		relative_position_id = LAT_a_right_to_health
+		cost = 7.20
+		
+		prerequisite = {
+			focus = LAT_a_right_to_happines
+		}
+		
+		mutually_exclusive = {
+		focus = LAT_a_country_of_culture
+		}
+		
+		prerequisite = {
+			focus = LAT_a_right_to_health
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_a_right_to_health
+					add_idea = LAT_best_healthcare_in_the_baltic_idea 
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_populism
+		icon = propaganda
+		x = -1
+		y = 1
+		relative_position_id = LAT_a_country_of_culture
+		cost = 7.20
+		
+		prerequisite = {
+			focus = LAT_best_healthcare_in_the_baltic
+			focus = LAT_a_country_of_culture
+		}
+		
+		completion_reward = {
+		add_country_leader_trait = nationalist_symbol
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_alone_we_stand
+		icon = align_to_russia
+		x = -1
+		y = 1
+		relative_position_id = LAT_populism
+		cost = 7.20
+		
+		available = {
+		NOT = { is_in_faction_with = SOV }
+		}
+		
+		prerequisite = {
+			focus = LAT_join_CSTO
+		}
+		
+		prerequisite = {
+			focus = LAT_a_mixed_a_economy_is_a_working_economy
+		}
+		
+		prerequisite = {
+			focus = LAT_populism
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_we_shall_stand_idea
+					add_idea = LAT_we_shall_stand_idea_2 
+				}	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_alone_we_stand
+		icon = attack_russia
+		x = -1
+		y = 1
+		relative_position_id = LAT_populism
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = LAT_unite_with_Russia
+		}
+		
+		available = {
+		NOT = { is_in_faction_with = SOV }
+		}
+		
+		prerequisite = {
+			focus = LAT_join_CSTO
+		}
+		
+		prerequisite = {
+			focus = LAT_a_mixed_a_economy_is_a_working_economy
+		}
+		
+		prerequisite = {
+			focus = LAT_populism
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_we_shall_stand_idea
+					add_idea = LAT_we_shall_stand_idea_2 
+				}	
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_take_Baltic
+		icon = war
+		x = 0
+		y = 1
+		relative_position_id = LAT_alone_we_stand
+		cost = 7.20
+		
+		available = {
+		is_subject = no
+		}
+		
+		prerequisite = {
+			focus = LAT_alone_we_stand
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = EST
+			}
+		create_wargoal = {
+				type = annex_everything
+				target = LIT
+			}
+		set_cosmetic_tag = baltic
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_integrate_them
+		icon = national_unity_red
+		x = 1
+		y = 1
+		relative_position_id = LAT_take_Baltic
+		cost = 7.20
+		
+		available = {
+		is_subject = no
+		}
+		
+		prerequisite = {
+			focus = LAT_take_Baltic
+		}
+		
+		completion_reward = {
+		  every_state = {
+					limit = { is_core_of = EST }
+					add_core_of = LAT
+				}
+		 every_state = {
+					limit = { is_core_of = LIT }
+					add_core_of = LAT
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_to_create_an_utopia
+		icon = national_greatness
+		x = -1
+		y = 1
+		relative_position_id = LAT_take_Baltic
+		cost = 7.20
+		
+		available = {
+		is_subject = no
+		}
+		
+		prerequisite = {
+			focus = LAT_take_Baltic
+		}
+		
+		completion_reward = {
+		LAT = { country_event = LAT_events.8 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_unite_with_Russia
+		icon = align_to_russia
+		x = 1
+		y = 1
+		relative_position_id = LAT_populism
+		cost = 7.20
+		
+		mutually_exclusive = {
+		focus = LAT_alone_we_stand
+		}
+		
+		available = {
+		is_in_faction_with = SOV
+		}
+		
+		prerequisite = {
+			focus = LAT_join_CSTO
+		}
+		
+		prerequisite = {
+			focus = LAT_a_mixed_a_economy_is_a_working_economy
+		}
+		
+		prerequisite = {
+			focus = LAT_populism
+		}
+		
+		completion_reward = {
+		SOV = { country_event = LAT_events.7 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_elect_the_LSDSP
+		icon = Social_democracy
+		x = 8
+		y = 1
+		relative_position_id = LAT_2001_elections
+		cost = 7.20
+		
+		prerequisite = {
+			focus = LAT_2001_elections
+		}
+		
+		mutually_exclusive = {
+		focus = LAT_relect_the_Vienotiba
+		}
+		
+		mutually_exclusive = {
+		focus = LAT_elect_the_Pedeja_partija
+		}
+		
+		completion_reward = {
+		set_politics = {
+				ruling_party = social_democrat
+				elections_allowed = yes 
+			}
+		add_popularity = {
+				ideology = social_democrat
+				popularity = 0.1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_a_better_socialism
+		icon = industry_democratic3
+		x = 1
+		y = 1
+		relative_position_id = LAT_elect_the_LSDSP
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_elect_the_LSDSP
+		}
+		
+		completion_reward = {
 		add_stability = 0.1
+		add_ideas = idea_focus_generic_social_democrat_doctrine
 		}
 		
 		ai_will_do = {
@@ -2916,54 +5122,19 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_revive_the_Interfronte
-		icon = propaganda_communist
-		x = 50
-		y = 0
-		cost = 7.20 
-		
-		mutually_exclusive = {
-		focus = LAT_2001_elections
-		}
-		
-		completion_reward = {
-			custom_effect_tooltip = available_political_advisor
-			show_ideas_tooltip = Vilnis_Edvins_Bresis
-			set_party_name = {
-				ideology = communist 
-				long_name = LAT_communist_party_Interfronte
-				name = LAT_communist_party_long_Interfronte
-			}
-			add_popularity = {
-				ideology = communist
-				popularity = 0.05
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_revive_the_soviets
-		icon = communism
+		id = LAT_encourage_immigration
+		icon = planning_bonus
 		x = 0
 		y = 1
-		relative_position_id = LAT_revive_the_Interfronte
-		cost = 7.20
+		relative_position_id = LAT_a_better_socialism
+		cost = 7.2
 		
 		prerequisite = {
-			focus = LAT_revive_the_Interfronte
+			focus = LAT_a_better_socialism
 		}
 		
 		completion_reward = {
-			add_ideas = idea_focus_generic_marxist_doctrine
-			add_popularity = {
-				ideology = communist
-				popularity = 0.05
-			}
-			add_ideas = LAT_revive_the_soviets
+		add_ideas = HUN_imigrants
 		}
 		
 		ai_will_do = {
@@ -2972,90 +5143,19 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_communist_revolution
-		icon = communism2
+		id = LAT_social_programs
+		icon = concessions
 		x = 0
 		y = 1
-		relative_position_id = LAT_revive_the_soviets
-		cost = 7.20
+		relative_position_id = LAT_encourage_immigration
+		cost = 7.2
 		
 		prerequisite = {
-			focus = LAT_revive_the_soviets
+			focus = LAT_encourage_immigration
 		}
 		
 		completion_reward = {
-				set_politics = {
-				ruling_party = communist
-				elections_allowed = no
-			}
-			add_popularity = {
-				ideology = communist
-				popularity = 0.2
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	} 
-	
-		focus = {
-		id = LAT_Latvian_great_purge
-		icon = communism6
-		x = 0
-		y = 1
-		relative_position_id = LAT_communist_revolution
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_communist_revolution
-		}
-		
-		completion_reward = {
-			add_ideas = LAT_Latvian_great_purge
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_rehabilitate_the_Military
-		icon = military_sphere
-		x = 0
-		y = 1
-		relative_position_id = LAT_Latvian_great_purge
-		cost = 15 
-		
-		prerequisite = {
-			focus = LAT_Latvian_great_purge
-		}
-		
-		completion_reward = {
-			add_ideas = LAT_rehabliltated_military
-			remove_ideas = LAT_Latvian_great_purge
-		}
-		
-		ai_will_do = {
-			factor = 50 #ai needs to do this focus as fast as it can
-		}
-	}
-	
-		focus = {
-		id = LAT_our_3_times_yes
-		icon = attack_democracy2
-		x = 0
-		y = 1
-		relative_position_id = LAT_rehabilitate_the_Military
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_rehabilitate_the_Military
-		}
-		
-		completion_reward = {
-		 add_ideas = LAT_our_3_times_yes 
+		add_ideas = LAT_social_programs_idea
 		}
 		
 		ai_will_do = {
@@ -3064,15 +5164,57 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_nationalisation
-		icon = industry_communist
-		x = -2
+		id = LAT_wealth_redistribution
+		icon = Gold
+		x = 2
 		y = 1
-		relative_position_id = LAT_our_3_times_yes
-		cost = 7.20
+		relative_position_id = LAT_social_programs
+		cost = 7.2
 		
 		prerequisite = {
-			focus = LAT_our_3_times_yes
+			focus = LAT_social_programs
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_redistribution_of_wealth
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_a_welfare_state
+		icon = healthcare
+		x = 0
+		y = 1
+		relative_position_id = LAT_social_programs
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_social_programs
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_a_welfare_state_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_mass_induststrailisation
+		icon = National_industry
+		x = -1
+		y = 1
+		relative_position_id = LAT_elect_the_LSDSP
+		cost = 14.4
+		
+		prerequisite = {
+			focus = LAT_elect_the_LSDSP
 		}
 		
 		completion_reward = {
@@ -3097,143 +5239,25 @@ focus = {
 					instant_build = yes
 				}
 			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_agarian_reform
-		text = ROM_agrarian_reform
-		icon = agriculture
-		x = 0
-		y = 1
-		relative_position_id = LAT_nationalisation
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_nationalisation
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_agarian_reform
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_five_year_plan
-		icon = five_year_plan
-		x = 0
-		y = 1
-		relative_position_id = LAT_agarian_reform
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_agarian_reform
-		}
-		
-		completion_reward = {
-		add_timed_idea = {
-				idea = LAT_five_year_plan
-				days = 1825
-			   } 
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_model_communist_family #at the begining of the game Latvia has population_growth_decline national spirit and this focus was created to deal with the effects of it
-		icon = communism7
-		x = -2
-		y = 1
-		relative_position_id = LAT_agarian_reform
-		cost = 10
-		
-		prerequisite = {
-			focus = LAT_agarian_reform
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_model_communist_family
-		increase_birth_rate = yes
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_2nd_five_year_plan
-		icon = five_year_plan
-		x = 0
-		y = 1
-		relative_position_id = LAT_five_year_plan  
-		cost = 7.20
-		
-		available = {
-		NOT = { has_idea = LAT_five_year_plan }
-		}
-		
-		prerequisite = {
-			focus = LAT_five_year_plan
-		}
-		
-		completion_reward = {
-        LAT = { country_event = LAT.2 }
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_abolish_Saeima
-		icon = attack_democracy
-		x = 0
-		y = 1
-		relative_position_id = LAT_our_3_times_yes
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_our_3_times_yes
-		}
-		
-		completion_reward = {
-		 add_political_power = 100 
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_attack_Reactionary_morons
-		icon = attack_democracy3
-		x = 0
-		y = 1
-		relative_position_id = LAT_abolish_Saeima
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_abolish_Saeima
-		}
-		
-		completion_reward = {
-		 add_popularity = {
-				ideology = communist
-				popularity = 0.1
+		 random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}	
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 		
@@ -3242,21 +5266,178 @@ focus = {
 		}
 	}
 	
-		focus = {
-		id = LAT_strenghten_the_legitimacy_of_the_gouverment
-		icon = communism
+	focus = {
+		id = LAT_full_employment
+		icon = industry_communist
 		x = 0
 		y = 1
-		relative_position_id = LAT_attack_Reactionary_morons
-		cost = 7.20
+		relative_position_id = LAT_mass_induststrailisation
+		cost = 7.2
 		
 		prerequisite = {
-			focus = LAT_attack_Reactionary_morons
+			focus = LAT_mass_induststrailisation
 		}
 		
 		completion_reward = {
+		add_ideas = LAT_full_employment_policies
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_work_for_the_poor
+		icon = infrastructure
+		x = 0
+		y = 1
+		relative_position_id = LAT_full_employment
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_full_employment
+		}
+		
+		completion_reward = {
+		every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_manpower = 75000
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_cooperate_with_unions
+		icon = workers_rights
+		x = 0
+		y = 1
+		relative_position_id = LAT_work_for_the_poor
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_work_for_the_poor
+		}
+		
+		completion_reward = {
+		add_Ideas = HUN_alliance_with_trade_unions
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_increase_taxes
+		icon = money_communism
+		x = -2
+		y = 1
+		relative_position_id = LAT_work_for_the_poor
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_work_for_the_poor
+		}
+		
+		completion_reward = {
+		add_Ideas = LAT_increased_taxes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_a_perfect_society
+		icon = industry_democratic4
+		x = 1
+		y = 1
+		relative_position_id = LAT_cooperate_with_unions
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_cooperate_with_unions
+		}
+		
+		prerequisite = {
+			focus = LAT_a_welfare_state
+		}
+		
+		prerequisite = {
+			focus = LAT_wealth_redistribution
+		}
+		
+		prerequisite = {
+			focus = LAT_increase_taxes
+		}
+		
+		completion_reward = {
+		add_political_power = 100
 		add_stability = 0.1
-		add_popularity = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_reapeal_the_ban_on_communism
+		icon = propaganda_communist
+		x = 65
+		y = 0
+		cost = 7.20 
+		
+		mutually_exclusive = {
+		focus = LAT_2001_elections
+		}
+		
+		completion_reward = {
+			set_party_name = {
+				ideology = communist 
+				long_name = LAT_communist_party_Interfronte
+				name = LAT_communist_party_long_Interfronte
+			}
+			add_popularity = {
+				ideology = communist
+				popularity = 0.05
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5 
+		}
+	}
+	
+	focus = {
+		id = LAT_prepare_for_civil_war
+		icon = territorial_claims
+		x = 0
+		y = 1
+		relative_position_id = LAT_reapeal_the_ban_on_communism
+		cost = 5
+		
+		prerequisite = {
+		focus = LAT_reapeal_the_ban_on_communism
+		}
+		
+		completion_reward = {
+			add_war_support = 0.1
+			add_popularity = {
 				ideology = communist
 				popularity = 0.05
 			}
@@ -3268,20 +5449,327 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_socrealism
-		icon = communism2
+		id = LAT_mobilise_workers
+		icon = construction4
+		x = 1
+		y = 1
+		relative_position_id = LAT_prepare_for_civil_war
+		cost = 5
+		
+		prerequisite = {
+		focus = LAT_prepare_for_civil_war
+		}
+		
+		completion_reward = {
+			add_timed_idea = {
+				idea = LAT_strikes
+				days = 365
+			}
+			add_popularity = {
+				ideology = communist
+				popularity = 0.05
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_sway_zessmerdze
+		icon = army_officers_communist
+		x = -1
+		y = 1
+		relative_position_id = LAT_prepare_for_civil_war
+		cost = 5
+		
+		prerequisite = {
+		focus = LAT_prepare_for_civil_war
+		}
+		
+		completion_reward = {
+			custom_effect_tooltip = LAT_after_revolution_starts_2_div_tp
+			add_popularity = {
+				ideology = communist
+				popularity = 0.05
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_workers_of_latvia_unite
+		icon = communism
+		x = 1
+		y = 1
+		relative_position_id = LAT_sway_zessmerdze
+		cost = 5
+		
+		prerequisite = {
+		focus = LAT_mobilise_workers
+		}
+		
+		prerequisite = {
+		focus = LAT_sway_zessmerdze
+		}
+		
+		completion_reward = {
+			start_civil_war = {
+			ruling_party = communist
+			ideology = nationalist
+			size = 0.5
+			states = { 12 }
+		}
+		hidden_effect = {
+					division_template = {
+						name = "Revolutionary Zemessardze" 
+						priority = 1
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							artillery_brigade = { x = 0 y = 3 }
+						    infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+							artillery_brigade = { x = 1 y = 3 }
+						}
+						support = {
+							recon = { x = 0 y = 0 }
+						}
+					}    
+			random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Zemessardze \" division_template = \"Revolutionary Zemessardze\" start_experience_factor = 0.5" 
+						owner = LAT
+					}
+				}
+			random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Zemessardze \" division_template = \"Revolutionary Zemessardze\" start_experience_factor = 0.5" 
+						owner = LAT
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_back_to_the_good_old_days
+		icon = LKP
+		x = 0
+		y = 1
+		relative_position_id = LAT_workers_of_latvia_unite
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_workers_of_latvia_unite
+		}
+		
+		completion_reward = {
+			add_stability = 0.1
+			add_popularity = {
+				ideology = communist
+				popularity = 0.15
+			}
+		}
+		
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+	focus = {
+		id = LAT_towards_a_socialist_utopia
+		icon = destroy_hirarchy
 		x = 2
 		y = 1
-		relative_position_id = LAT_our_3_times_yes
-		cost = 7.20
+		relative_position_id = LAT_back_to_the_good_old_days
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
 		
 		prerequisite = {
-			focus = LAT_our_3_times_yes
+		focus = LAT_back_to_the_good_old_days
 		}
 		
 		completion_reward = {
-		add_stability = 0.1
-		add_political_power = 100 
+			 add_stability = 0.1	
+			 }
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_state_atheism
+		icon = christianity_with_chains
+		x = 1
+		y = 1
+		relative_position_id = LAT_towards_a_socialist_utopia
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_towards_a_socialist_utopia
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_no_gods
+		 }
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_price_control
+		icon = money_communism
+		x = 1
+		y = 1
+		relative_position_id = LAT_state_atheism
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_state_atheism
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_price_control_idea
+		 }
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_propaganda_campaigns
+		icon = media_censorship
+		x = 1
+		y = 1
+		relative_position_id = LAT_price_control
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_price_control
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_communist_propaganda
+		 }
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_internationalist_doctrine
+		icon = fourth_international
+		x = 0
+		y = 2
+		relative_position_id = LAT_state_atheism
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_state_atheism
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_help_our_fellow_revolutionaries
+			 }
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_communist_culture
+		icon = communism5
+		x = 0
+		y = 1
+		relative_position_id = LAT_internationalist_doctrine
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_propaganda_campaigns
+		}
+		
+		prerequisite = {
+		focus = LAT_internationalist_doctrine
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_revolutionary_culture
+			 }
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_great_purge
+		icon = commie_purge
+		x = 0
+		y = 1
+		relative_position_id = LAT_back_to_the_good_old_days
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_back_to_the_good_old_days
+		}
+		
+		completion_reward = {
+			 add_timed_idea = {
+				idea = POL_recent_military_purges
+				days = 420
+			}
 		}
 		
 		ai_will_do = {
@@ -3290,28 +5778,51 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_communist_diplomacy
-		icon = communism2
+		id = LAT_military_reborn
+		icon = military_sphere
 		x = 0
 		y = 1
-		relative_position_id = LAT_socrealism
-		cost = 7.20
+		relative_position_id = LAT_great_purge
+		cost = 7.2
+		
+		available = {
+		NOT = { has_idea = POL_recent_military_purges }
+		has_government = communist
+		}
 		
 		prerequisite = {
-			focus = LAT_socrealism
+		focus = LAT_great_purge
 		}
 		
 		completion_reward = {
-		every_country = {
-					limit = {
-						OR = {
-							NOT = { has_government = communist } #communists won't be angry at our diplomacy
-						}
-					}
-					add_opinion_modifier = {
-						target = ROOT
-						modifier = communist_diplomacy
-					}
+	    add_ideas = LAT_rehabliltated_military
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_establish_political_work_department
+		icon = army_officers_communist
+		x = 0
+		y = 1
+		relative_position_id = LAT_military_reborn
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_military_reborn
+		}
+		
+		completion_reward = {
+	    swap_ideas = { 
+					remove_idea = LAT_rehabliltated_military
+					add_idea = LAT_rehabliltated_military_2
 				}
 		}
 		
@@ -3321,27 +5832,423 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_free_the_Baltic
-		icon = communism2
+		id = LAT_peoples_army
+		icon = communist_people
 		x = 0
 		y = 1
-		relative_position_id = LAT_communist_diplomacy
-		cost = 7.20
+		relative_position_id = LAT_establish_political_work_department
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
 		
 		prerequisite = {
-			focus = LAT_communist_diplomacy
+		focus = LAT_establish_political_work_department
 		}
 		
 		completion_reward = {
-		create_wargoal = {
-				type = annex_everything
+	    swap_ideas = { 
+					remove_idea = LAT_rehabliltated_military_2
+					add_idea = LAT_peoples_army_idea
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_mass_recrutment
+		icon = military_mission
+		x = 1
+		y = 1
+		relative_position_id = LAT_peoples_army
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_peoples_army
+		}
+		
+		completion_reward = {
+	    swap_ideas = { 
+					remove_idea = LAT_peoples_army_idea
+					add_idea = LAT_peoples_army_idea_2
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_copy_nkvd
+		icon = NKVD
+		x = -1
+		y = 1
+		relative_position_id = LAT_peoples_army
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_peoples_army
+		}
+		
+		completion_reward = {
+	    if = {
+	            limit = {
+		            has_dlc = "La Resistance"
+				}
+				add_ideas = LAT_our_own_nkvd_lar
+			}
+			else = {
+				add_ideas = LAT_our_own_nkvd_idea
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_renatinalisation
+		icon = National_industry
+		x = -2
+		y = 1
+		relative_position_id = LAT_back_to_the_good_old_days
+		cost = 10
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_back_to_the_good_old_days
+		}
+		
+		completion_reward = {
+			 random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 3
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}	
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_emppty_the_banks
+		icon = Gold
+		x = -1
+		y = 1
+		relative_position_id = LAT_renatinalisation 
+		cost = 7.2
+		
+		prerequisite = {
+		    focus = LAT_renatinalisation
+		}
+		
+		completion_reward = {
+		add_timed_idea = {
+				idea = LAT_emptied_the_banks
+				days = 356
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_socialist_science
+		icon = communist_research
+		x = -1
+		y = 1
+		relative_position_id = LAT_emppty_the_banks 
+		cost = 7.2
+		
+		prerequisite = {
+		    focus = LAT_emppty_the_banks
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_socialist_science_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_comman_ownership
+		icon = national_unity_red
+		x = -1
+		y = 1
+		relative_position_id = LAT_socialist_science 
+		cost = 7.2
+		
+		prerequisite = {
+		    focus = LAT_socialist_science
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_comman_ownership_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_agricultural_collectivization
+		icon = agrarian_socialism
+		x = 0
+		y = 2
+		relative_position_id = LAT_emppty_the_banks 
+		cost = 7.2
+		
+		prerequisite = {
+		    focus = LAT_emppty_the_banks
+		}
+		
+		completion_reward = {
+		random_owned_state = {
+			add_manpower = 40000
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}
+			random_owned_state = {
+			add_manpower = 40000
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_a_caring_state
+		icon = healthcare
+		x = 0
+		y = 1
+		relative_position_id = LAT_agricultural_collectivization 
+		cost = 7.2
+		
+		prerequisite = {
+		    focus = LAT_agricultural_collectivization
+		}
+		
+		prerequisite = {
+		    focus = LAT_comman_ownership
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_a_welfare_state_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_homosovieticus
+		icon = communism2
+		x = 1
+		y = 1
+		relative_position_id = LAT_copy_nkvd
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_mass_recrutment
+		}
+		
+		prerequisite = {
+		focus = LAT_communist_culture
+		focus = LAT_a_caring_state
+		}
+		
+		prerequisite = {
+		focus = LAT_copy_nkvd
+		}
+		
+		completion_reward = {
+	    unlock_decision_tooltip = LAT_revolutionary_integration
+	    add_ideas = LAT_new_soviet_men
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_the_new_home_of_the_revolution
+		icon = marx
+		x = 4
+		y = 1
+		relative_position_id = LAT_homosovieticus
+		cost = 7.2
+		
+		mutually_exclusive = {
+		focus = LAT_enemies_on_all_sides
+		}
+		
+		mutually_exclusive = {
+		focus = LAT_rejoin_ussr
+		}
+		
+		available = {
+		has_government = communist
+		is_subject = no
+		}
+		
+		prerequisite = {
+		focus = LAT_homosovieticus
+		}
+		
+		completion_reward = {
+	    set_rule = { can_create_factions = yes }
+		add_ideas = LAT_spread_the_revolution_1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_encourage_workers_strikes
+		icon = work_red
+		x = 0
+		y = 1
+		relative_position_id = LAT_the_new_home_of_the_revolution
+		cost = 7.2
+		
+		bypass = {
+		NOT = { country_exists = EST }
+		NOT = { country_exists = LIT }
+		EST = { 
+		is_subject_of = LAT
+		}
+		LIT = { 
+		is_subject_of = LAT
+		}
+	}
+		available = {
+		has_government = communist
+		is_subject = no
+		}
+		
+		prerequisite = {
+		focus = LAT_the_new_home_of_the_revolution
+		}
+		
+		completion_reward = {
+		LIT = { country_event = LAT_events.29 }
+		EST = { country_event = LAT_events.29 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_free_the_baltic
+		icon = attack_fascism
+		x = 0
+		y = 1
+		relative_position_id = LAT_encourage_workers_strikes
+		cost = 7.2
+		
+		will_lead_to_war_with = EST
+		will_lead_to_war_with = LAT
+		bypass = {
+		NOT = { country_exists = EST }
+		NOT = { country_exists = LIT }
+		EST = { 
+		is_subject_of = LAT
+		}
+		LIT = { 
+		is_subject_of = LAT
+		}
+	}
+		available = {
+		has_government = communist
+		is_subject = no
+		}
+		
+		prerequisite = {
+		focus = LAT_encourage_workers_strikes
+		}
+		
+		completion_reward = {
+		set_cosmetic_tag = baltic
+		hidden_effect = {
+			create_wargoal = { 
+				type = annex_everything 
+				target = LIT 
+			}
+			create_wargoal = { 
+				type = annex_everything 
 				target = EST
 			}
-		create_wargoal = {
-				type = annex_everything
-				target = LIT
-			}
-		set_cosmetic_tag = baltic
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = EST 
+		}
+		declare_war_on = { 
+		    type = annex_everything 
+			target = LIT 
+		}
 		}
 		
 		ai_will_do = {
@@ -3350,45 +6257,336 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_core_Lithuania
-		icon = align_to_lithuania
-		x = -1
-		y = 1
-		relative_position_id = LAT_free_the_Baltic
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_free_the_Baltic
-		}
-		
-		completion_reward = {
-		every_state = {
-					limit = { is_core_of = LIT }
-					add_core_of = LAT
-				}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_core_estonia
+		id = LAT_integrate_estonia
 		icon = align_to_estonia
-		x = 1
+		x = -1
 		y = 1
-		relative_position_id = LAT_free_the_Baltic
-		cost = 7.20
+		relative_position_id = LAT_free_the_baltic
+		cost = 7.2
+		
+		bypass = {
+		
+	}
+		available = {
+		has_government = communist
+		has_full_control_of_state = 191
+		has_full_control_of_state = 13
+		has_full_control_of_state = 840
+		}
 		
 		prerequisite = {
-			focus = LAT_free_the_Baltic
+		focus = LAT_free_the_baltic
 		}
 		
 		completion_reward = {
-		every_state = {
-					limit = { is_core_of = EST }
-					add_core_of = LAT
+		custom_effect_tooltip = unlock_decision_to_core_estonia
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_integrate_lithuania
+		icon = align_to_lithuania
+		x = 1
+		y = 1
+		relative_position_id = LAT_free_the_baltic
+		cost = 7.2
+		
+		bypass = {
+		
+	}
+		available = {
+		has_government = communist
+		has_full_control_of_state = 11
+		has_full_control_of_state = 189
+		has_full_control_of_state = 96
+		}
+		
+		prerequisite = {
+		focus = LAT_free_the_baltic
+		}
+		
+		completion_reward = {
+		custom_effect_tooltip = unlock_decision_to_core_lithuania
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_united_under_socialism
+		icon = communism5
+		x = -1
+		y = 1
+		relative_position_id = LAT_integrate_lithuania
+		cost = 7.2
+		
+		bypass = {
+		
+	}
+		available = {
+		has_government = communist
+		has_full_control_of_state = 191
+		has_full_control_of_state = 13
+		has_full_control_of_state = 840
+		has_full_control_of_state = 11
+		has_full_control_of_state = 189
+		has_full_control_of_state = 96
+		}
+		
+		prerequisite = {
+		focus = LAT_integrate_lithuania
+		focus = LAT_integrate_estonia
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_united_under_socialism_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_integrate_computer_project
+		icon = cryptologic_bomb
+		x = -1
+		y = 1
+		relative_position_id = LAT_united_under_socialism
+		cost = 7.2
+		
+		bypass = {
+		
+	}
+		available = {
+		has_government = communist
+		has_full_control_of_state = 191
+		has_full_control_of_state = 13
+		has_full_control_of_state = 840
+		}
+		
+		prerequisite = {
+		focus = LAT_united_under_socialism
+		}
+		
+		prerequisite = {
+		focus = LAT_integrate_estonia
+		}
+		
+		completion_reward = {
+		add_ideas = LAT_computer_project
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_estonian_oil_procesing
+		icon = oil_trade
+		x = 0
+		y = 1
+		relative_position_id = LAT_integrate_computer_project
+		cost = 7.2
+		
+		bypass = {
+		
+	}
+		available = {
+		has_government = communist
+		has_full_control_of_state = 191
+		has_full_control_of_state = 13
+		has_full_control_of_state = 840
+		}
+		
+		prerequisite = {
+		focus = LAT_integrate_computer_project
+		}
+		
+		completion_reward = {
+		modify_building_resources = {
+        	   building = synthetic_refinery
+        	   resource = oil
+        	   amount = 1
+        	}
+			modify_building_resources = {
+        	   building = synthetic_refinery
+        	   resource = rubber
+        	   amount = 1
+        	}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_lithuanian_manufacturies
+		icon = production2
+		x = 1
+		y = 1
+		relative_position_id = LAT_united_under_socialism
+		cost = 7.2
+		
+		bypass = {
+		
+	}
+		available = {
+		has_government = communist
+		has_full_control_of_state = 11
+		has_full_control_of_state = 189
+		has_full_control_of_state = 96
+		}
+		
+		prerequisite = {
+		focus = LAT_united_under_socialism
+		}
+		
+		prerequisite = {
+		focus = LAT_integrate_lithuania
+		}
+		
+		completion_reward = {
+		96 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		189 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		11 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_Visaginas_Nuclear_power_plant
+		icon = nuclear_energy
+		x = 0
+		y = 1
+		relative_position_id = LAT_lithuanian_manufacturies
+		cost = 7.2
+		
+		bypass = {
+		
+	}
+		available = {
+		has_government = communist
+		has_full_control_of_state = 11
+		has_full_control_of_state = 189
+		has_full_control_of_state = 96
+		}
+		
+		prerequisite = {
+		focus = LAT_lithuanian_manufacturies
+		}
+	
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 3.0
+				uses = 1
+				category = nuclear
+			}
+		unlock_decision_tooltip = LAT_Lithuanian_nuclear_power_plant
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_workers_of_the_world_unite
+		icon = communism4
+		x = -1
+		y = 1
+		relative_position_id = LAT_Visaginas_Nuclear_power_plant
+		cost = 7.2
+		
+		bypass = {
+		
+	}
+		available = {
+		has_government = communist
+		is_subject = no
+		}
+		
+		prerequisite = {
+		focus = LAT_Visaginas_Nuclear_power_plant
+		}
+		
+		prerequisite = {
+		focus = LAT_estonian_oil_procesing
+		}
+		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = LAT_spread_the_revolution_1
+					add_idea = LAT_spread_the_revolution_2
 				}
 		}
 		
@@ -3398,93 +6596,35 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_world_revolution
-		icon = communism12
-		x = -1
-		y = 1
-		relative_position_id = LAT_core_estonia
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_core_estonia
-		}
-		
-		prerequisite = {
-			focus = LAT_core_Lithuania
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_world_revolution
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_question_of_the_soviets
-		icon = communism5
-		x = 6
-		y = 1
-		relative_position_id = LAT_our_3_times_yes  
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_our_3_times_yes
-		}
-		
-		completion_reward = {
-        LAT = { country_event = LAT.3 } 
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = LAT_change_the_pupose_of_the_soviets
-		icon = communism5
-		x = -1
-		y = 1
-		relative_position_id = LAT_question_of_the_soviets  
-		cost = 7.20
-		
-		available = {
-		has_country_flag = keep_soviets
-		}
-		
-		prerequisite = {
-			focus = LAT_question_of_the_soviets
-		}
-		
-		completion_reward = {
-       swap_ideas = { 
-					remove_idea = LAT_revive_the_soviets
-					add_idea = LAT_revive_the_soviets_2 
-				}	
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_workers_republic
-		icon = industry_communist2
+		id = LAT_rejoin_ussr
+		icon = align_to_soviet_union
 		x = 0
 		y = 1
-		relative_position_id = LAT_change_the_pupose_of_the_soviets  
-		cost = 7.20
+		relative_position_id = LAT_homosovieticus
+		cost = 7.2
+		
+		available = {
+		SOV = { 
+		has_government = communist 
+		is_subject = no
+	   }
+		has_government = communist
+		}
+		
+		mutually_exclusive = {
+		focus = LAT_the_new_home_of_the_revolution
+		}
+		
+		mutually_exclusive = {
+		focus = LAT_enemies_on_all_sides
+		}
 		
 		prerequisite = {
-			focus = LAT_change_the_pupose_of_the_soviets
+		focus = LAT_homosovieticus
 		}
 		
 		completion_reward = {
-        add_ideas = LAT_workers_republic
+	    SOV = { country_event = LAT_events.7 }
 		}
 		
 		ai_will_do = {
@@ -3492,25 +6632,61 @@ focus = {
 		}
 	}
 	
-		focus = {
-		id = LAT_abolish_the_soviets
-		icon = communism10
+	focus = {
+		id = LAT_enemies_on_all_sides
+		icon = defence
+		x = -4
+		y = 1
+		relative_position_id = LAT_homosovieticus
+		cost = 7.2
+		
+		mutually_exclusive = {
+		focus = LAT_the_new_home_of_the_revolution
+		}
+		
+		mutually_exclusive = {
+		focus = LAT_rejoin_ussr
+		}
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_homosovieticus
+		}
+		
+		completion_reward = {
+	    add_stability = 0.05
+		add_ideas = neutrality_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_protect_the_revolution
+		icon = defence_focus
 		x = 1
 		y = 1
-		relative_position_id = LAT_question_of_the_soviets  
-		cost = 7.20
+		relative_position_id = LAT_enemies_on_all_sides
+		cost = 7.2
 		
 		available = {
-		has_country_flag = abolished_soviets
+		has_government = communist
 		}
 		
 		prerequisite = {
-			focus = LAT_question_of_the_soviets
+		focus = LAT_enemies_on_all_sides
 		}
 		
-		completion_reward = { 
-		add_stability = -0.1
-		remove_ideas = LAT_revive_the_soviets 	
+		completion_reward = {
+	    swap_ideas = { 
+					remove_idea = LAT_new_soviet_men
+					add_idea = LAT_new_soviet_men_2
+				}
 		}
 		
 		ai_will_do = {
@@ -3519,19 +6695,83 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_centralization_of_the_power
-		icon = communism11
+		id = LAT_workers_militia
+		icon = communist_people
 		x = 0
 		y = 1
-		relative_position_id = LAT_abolish_the_soviets  
-		cost = 7.20
+		relative_position_id = LAT_protect_the_revolution
+		cost = 7.2
 		
-		prerequisite = {
-			focus = LAT_abolish_the_soviets
+		available = {
+		has_government = communist
 		}
 		
-		completion_reward = { 
-		add_political_power = 200
+		prerequisite = {
+		focus = LAT_protect_the_revolution
+		}
+		
+		completion_reward = {
+	     hidden_effect = {
+					division_template = {
+						name = "Militia"
+						priority = 1
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+				
+		    	   		 	infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+				
+		    	   		 	infantry = { x = 2 y = 0 }
+		
+						}
+						support = {
+						}
+					}
+			random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Militia 1\" division_template = \"Militia\" start_experience_factor = 0.2" 
+						owner = LAT
+					}
+				}
+            random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Militia 2\" division_template = \"Militia\" start_experience_factor = 0.2" 
+						owner = LAT
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Militia 3\" division_template = \"Militia\" start_experience_factor = 0.2" 
+						owner = LAT
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Militia 4\" division_template = \"Militia\" start_experience_factor = 0.2" 
+						owner = LAT
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 12 }
+					create_unit = {
+						division = "name = \"Militia 5\" division_template = \"Militia\" start_experience_factor = 0.2" 
+						owner = LAT
+					}
+				}
+             }
+			custom_effect_tooltip = POL_gain_five_militia_division
 		}
 		
 		ai_will_do = {
@@ -3539,19 +6779,325 @@ focus = {
 		}
 	}
 	
-		focus = {
+	focus = {
+		id = LAT_expand_our_help
+		icon = fourth_international
+		x = -1
+		y = 1
+		relative_position_id = LAT_enemies_on_all_sides
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_enemies_on_all_sides
+		}
+		
+		completion_reward = {
+	    swap_ideas = { 
+					remove_idea = LAT_help_our_fellow_revolutionaries
+					add_idea = LAT_help_our_fellow_revolutionaries_2
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_safe_from_capitalism
+		icon = city_fort
+		x = 0
+		y = 1
+		relative_position_id = LAT_expand_our_help
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_expand_our_help
+		}
+		
+		completion_reward = {
+	    add_ideas = ENG_defensive_constructions_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_workers_paradise
+		icon = communism5
+		x = 1
+		y = 1
+		relative_position_id = LAT_safe_from_capitalism
+		cost = 7.2
+		
+		available = {
+		has_government = communist
+		}
+		
+		prerequisite = {
+		focus = LAT_workers_militia
+		}
+		
+		prerequisite = {
+		focus = LAT_safe_from_capitalism
+		}
+		
+		completion_reward = {
+	    add_stability = 0.25
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
 		id = LAT_forgein_policy
 		icon = major_alliance
-		x = 65
+		x = 80
 		y = 0
 		cost = 7.20
 	
 	    available = {
-		has_completed_focus = LAT_2001_elections
+		OR = {
+		has_country_flag = LAT_destroyed_ng_flag
+		has_completed_focus = LAT_elect_the_LSDSP
 		 }
+	}	
 		
 		completion_reward = {
 		add_political_power = 100
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_neutriality_will_this_time_work
+		icon = neutrality
+		x = -7
+		y = 1
+		relative_position_id = LAT_forgein_policy  
+		cost = 7.2
+		
+		available = {
+		is_in_faction = no
+		is_subject = no
+		}
+		
+		mutually_exclusive = {
+		focus = LAT_go_with_USA
+		}
+		
+		mutually_exclusive = {
+		focus = LAT_baltic_unity
+		}
+		
+		prerequisite = {
+			focus = LAT_forgein_policy
+		}
+		
+		completion_reward = { 
+		add_stability = 0.05
+		add_ideas = neutrality_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_keeping_to_ourselfes
+		icon = Land_Reform
+		x = 1
+		y = 1
+		relative_position_id = LAT_neutriality_will_this_time_work  
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_neutriality_will_this_time_work
+		}
+		
+		completion_reward = { 
+		add_ideas = LAT_a_peaceful_nation
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_peaceful_diplomacy
+		icon = intelligence_exchange
+		x = 0
+		y = 1
+		relative_position_id = LAT_keeping_to_ourselfes  
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_keeping_to_ourselfes
+		}
+		
+		completion_reward = { 
+		swap_ideas = { 
+					remove_idea = LAT_a_peaceful_nation
+					add_idea = LAT_a_peaceful_nation_2
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_defend_your_home
+		icon = defence_focus
+		x = -1
+		y = 1
+		relative_position_id = LAT_neutriality_will_this_time_work  
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_neutriality_will_this_time_work
+		}
+		
+		completion_reward = { 
+		add_ideas = GEN_defend_our_lands
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_prepare_for_russian_invasion
+		icon = skull_fortification
+		x = 0
+		y = 1
+		relative_position_id = LAT_defend_your_home  
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_defend_your_home
+		}
+		
+		completion_reward = { 
+		unlock_decision_category_tooltip = LAT_preparing_for_inevitable_category
+		unlock_decision_tooltip = LAT_concessions_to_the_Russian_minority_dec
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_armed_neutrality
+		icon = military_sphere
+		x = 1
+		y = 1
+		relative_position_id = LAT_prepare_for_russian_invasion  
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_peaceful_diplomacy
+		}
+		
+		prerequisite = {
+			focus = LAT_prepare_for_russian_invasion
+		}
+		
+		completion_reward = { 
+		swap_ideas = { 
+					remove_idea = GEN_defend_our_lands
+					add_idea = LAT_armed_neutrality_idea
+				}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_expand_fortifications
+		icon = city_fort
+		x = 1
+		y = 1
+		relative_position_id = LAT_armed_neutrality  
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_armed_neutrality
+		}
+		
+		completion_reward = { 
+		add_ideas = ENG_defensive_constructions_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_copy_switzerland
+		icon = bag_of_money
+		x = -1
+		y = 1
+		relative_position_id = LAT_armed_neutrality  
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_armed_neutrality
+		}
+		
+		completion_reward = { 
+		add_ideas = LAT_banking
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_pearl_of_the_baltic
+		icon = booming_economy
+		x = 1
+		y = 1
+		relative_position_id = LAT_copy_switzerland  
+		cost = 7.2
+		
+		prerequisite = {
+			focus = LAT_copy_switzerland
+		}
+		
+		prerequisite = {
+			focus = LAT_expand_fortifications
+		}
+		
+		completion_reward = { 
+		swap_ideas = { 
+					remove_idea = LAT_banking
+					add_idea = LAT_pearl_of_the_baltic_idea
+				}
 		}
 		
 		ai_will_do = {
@@ -3565,14 +7111,19 @@ focus = {
 		x = 0
 		y = 1
 		relative_position_id = LAT_forgein_policy  
-		cost = 7.20
+		cost = 14.4
+		
+		available = {
+		is_in_faction = no
+		is_subject = no
+		}
 		
 		mutually_exclusive = {
 		focus = LAT_go_with_USA
 		}
 		
 		mutually_exclusive = {
-		focus = LAT_go_with_russia
+		focus = LAT_neutriality_will_this_time_work
 		}
 		
 		prerequisite = {
@@ -3582,26 +7133,26 @@ focus = {
 		completion_reward = { 
 		set_rule = { can_create_factions = yes }
 		create_faction = LAT_baltic_entente
-		LIT = { country_event = LAT.5 }
-		EST = { country_event = LAT.5 }
+		LIT = { country_event = LAT_events.16 }
+		EST = { country_event = LAT_events.16 }
 		}
 		
 		ai_will_do = {
-			factor = 1
+			factor = 5
 		}
 	}
 	
 	focus = {
-		id = LAT_work_on_BALTBAT_divisions
-		icon = infantry_commonwealth
-		x = 0
+		id = LAT_baltic_air_policing
+		icon = fighter2
+		x = -1
 		y = 1
 		relative_position_id = LAT_baltic_unity  
-		cost = 7.20
+		cost = 7.2
 		
 		available = {
 			is_faction_leader = yes
-			is_in_faction_with = LAT
+			is_in_faction_with = LIT
 			is_in_faction_with = EST
 		}
 		
@@ -3610,83 +7161,38 @@ focus = {
 		}
 		
 		completion_reward = { 
-          custom_effect_tooltip = LAT_BALTRON_divisions_tt
-			hidden_effect = {
-					division_template = {
-						name = "BALTBAT Division"
-						priority = 2
-						regiments = {
-							infantry = { x = 0 y = 0 }
-							infantry = { x = 0 y = 1 }
-							infantry = { x = 0 y = 2 }
-				
-		    	   		 	infantry = { x = 1 y = 0 }
-							infantry = { x = 1 y = 1 }
-							infantry = { x = 1 y = 2 }
-				
-		    	   		 	infantry = { x = 2 y = 0 }
-							artillery_brigade = { x = 2 y = 1 }
-							artillery_brigade = { x = 2 y = 2 }
-						}
-						support = {
-							engineer = { x = 0 y = 0 }
-							recon = { x = 0 y = 1 }
-						}
-					}
-				random_owned_controlled_state = {
-					limit = { LIT = { has_full_control_of_state = PREV } }
-					prioritize = { 46 }
-					create_unit = {
-						division = "name = \"BALTBAT Division\" division_template = \"BALTBAT Division\" start_experience_factor = 1.0" 
-						owner = LIT
-					  }
-					}
-				random_owned_controlled_state = {
-					limit = { LAT = { has_full_control_of_state = PREV } }
-					prioritize = { 46 }
-					create_unit = {
-						division = "name = \"BALTBAT Division\" division_template = \"BALTBAT Division\" start_experience_factor = 1.0" 
-						owner = LAT
-					  }
-					}
-				random_owned_controlled_state = {
-					limit = { EST = { has_full_control_of_state = PREV } }
-					prioritize = { 46 }
-					create_unit = {
-						division = "name = \"BALTBAT Division\" division_template = \"BALTBAT Division\" start_experience_factor = 1.0" 
-						owner = EST
-					  }
-					}
-				
-				}
+		LIT = { country_event = LAT_events.21 }
+		EST = { country_event = LAT_events.21 }
+		add_ideas = LAT_baltic_air_policing_idea
 		}
+		
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	
-		focus = {
-		id = LAT_joint_army_traning
-		icon = army_doctrine
+	focus = {
+		id = LAT_expand_BALBAT
+		icon = wolf_packs
 		x = 1
 		y = 1
-		relative_position_id = LAT_work_on_BALTBAT_divisions  
-		cost = 7.20
+		relative_position_id = LAT_baltic_unity  
+		cost = 7.2
 		
 		available = {
 			is_faction_leader = yes
-			is_in_faction_with = LAT
+			is_in_faction_with = LIT
 			is_in_faction_with = EST
 		}
 		
 		prerequisite = {
-			focus = LAT_work_on_BALTBAT_divisions
+			focus = LAT_baltic_unity
 		}
 		
 		completion_reward = { 
-		LIT = { army_experience = 30 } 
-		EST = { army_experience = 30 }
-	   army_experience = 30
+		LIT = { country_event = LAT_events.22 }
+		EST = { country_event = LAT_events.22 }
+		add_ideas = LAT_balbat
 		}
 		
 		ai_will_do = {
@@ -3694,46 +7200,32 @@ focus = {
 		}
 	}
 	
-		focus = {
-		id = LAT_work_on_BALTRON
-		icon = wolf_packs
+	focus = {
+		id = LAT_promote_the_idea_of_Baltic_unity
+		icon = national_unity
 		x = -1
 		y = 1
-		relative_position_id = LAT_work_on_BALTBAT_divisions  
-		cost = 7.20
+		relative_position_id = LAT_expand_BALBAT  
+		cost = 7.2
 		
 		available = {
 			is_faction_leader = yes
-			is_in_faction_with = LAT
+			is_in_faction_with = LIT
 			is_in_faction_with = EST
 		}
 		
 		prerequisite = {
-			focus = LAT_work_on_BALTBAT_divisions
+			focus = LAT_baltic_air_policing
+		}
+		
+		prerequisite = {
+			focus = LAT_expand_BALBAT
 		}
 		
 		completion_reward = { 
-		LIT = { 
-		add_tech_bonus = {
-				name = submarine_bonus
-				bonus = 0.3
-				uses = 2
-				category = marine_tech
-			}
-		}	
-		EST = { 
-		add_tech_bonus = {
-				name = submarine_bonus
-				bonus = 0.3
-				uses = 2
-				category = marine_tech
-			}
-		}
-	  add_tech_bonus = {
-				name = submarine_bonus
-				bonus = 0.3
-				uses = 2
-				category = marine_tech
+		add_timed_idea = {
+				idea = LAT_spreading_baltic_unity
+				days = 200
 			}
 		}
 		
@@ -3743,16 +7235,159 @@ focus = {
 	}
 	
 	focus = {
-		id = LAT_establish_Baltic_trade_company
+		id = LAT_inflaunce_Lithuania
+		icon = align_to_lithuania
+		x = -3
+		y = 1
+		relative_position_id = LAT_expand_BALBAT  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+			is_in_faction_with = LIT
+			is_in_faction_with = EST
+		}
+		
+		prerequisite = {
+			focus = LAT_baltic_air_policing
+		}
+		
+		prerequisite = {
+			focus = LAT_expand_BALBAT
+		}
+		
+		completion_reward = { 
+		LIT = { country_event = LAT_events.23 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_inflaunce_Estonia
+		icon = align_to_estonia
+		x = 1
+		y = 1
+		relative_position_id = LAT_expand_BALBAT  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+			is_in_faction_with = LIT
+			is_in_faction_with = EST
+		}
+		
+		prerequisite = {
+			focus = LAT_baltic_air_policing
+		}
+		
+		prerequisite = {
+			focus = LAT_expand_BALBAT
+		}
+		
+		completion_reward = { 
+		EST = { country_event = LAT_events.23 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_join_the_nuclear_race
+		icon = nuclear_energy
+		x = -3
+		y = 1
+		relative_position_id = LAT_inflaunce_Estonia  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+			is_in_faction_with = LIT
+			is_in_faction_with = EST
+		}
+		
+		prerequisite = {
+			focus = LAT_inflaunce_Estonia
+		}
+		
+		prerequisite = {
+			focus = LAT_promote_the_idea_of_Baltic_unity
+		}
+		
+		prerequisite = {
+			focus = LAT_inflaunce_Lithuania
+		}
+		
+		completion_reward = { 
+		LIT = { country_event = LAT_events.25 }
+		EST = { country_event = LAT_events.25 }
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 3.0
+				uses = 1
+				category = nuclear
+			}
+		unlock_decision_tooltip = LAT_Lithuanian_nuclear_power_plant
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_increase_BAs_authority
+		icon = government
+		x = -1
+		y = 1
+		relative_position_id = LAT_inflaunce_Estonia  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+			is_in_faction_with = LIT
+			is_in_faction_with = EST
+		}
+		
+		prerequisite = {
+			focus = LAT_inflaunce_Estonia
+		}
+		
+		prerequisite = {
+			focus = LAT_promote_the_idea_of_Baltic_unity
+		}
+		
+		prerequisite = {
+			focus = LAT_inflaunce_Lithuania
+		}
+		
+		completion_reward = { 
+		add_timed_idea = {
+				idea = LAT_expanded_bas_authority
+				days = 365
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_encourage_trade
 		icon = trade_deal2
-		x = -2
+		x = -3
 		y = 1
 		relative_position_id = LAT_baltic_unity  
 		cost = 7.20
 		
 		available = {
 			is_faction_leader = yes
-			is_in_faction_with = LAT
+			is_in_faction_with = LIT
 			is_in_faction_with = EST
 		}
 		
@@ -3761,9 +7396,12 @@ focus = {
 		}
 		
 		completion_reward = { 
-		LIT = { add_offsite_building = { type = industrial_complex level = 1 } }
-		EST = { add_offsite_building = { type = industrial_complex level = 1 } }
-	   add_offsite_building = { type = industrial_complex level = 1 }
+		LIT = { country_event = LAT_events.12 }
+		EST = { country_event = LAT_events.12 } 
+	   add_timed_idea = {
+				idea = LAT_encouraged_trade
+				days = 365
+			}
 		}
 		
 		ai_will_do = {
@@ -3771,28 +7409,28 @@ focus = {
 		}
 	}
 	
-		focus = {
-		id = LAT_Bank_of_united_Baltic
-		icon = Gold
+	focus = {
+		id = LAT_expand_bib
+		icon = bib
 		x = -1
 		y = 1
-		relative_position_id = LAT_establish_Baltic_trade_company  
+		relative_position_id = LAT_encourage_trade  
 		cost = 7.20
 		
 		available = {
 			is_faction_leader = yes
-			is_in_faction_with = LAT
+			is_in_faction_with = LIT
 			is_in_faction_with = EST
 		}
 		
 		prerequisite = {
-			focus = LAT_establish_Baltic_trade_company
+			focus = LAT_encourage_trade
 		}
 		
 		completion_reward = { 
-		LIT = { add_ideas =  LAT_Bank_of_united_Baltic }
-		EST = { add_ideas =  LAT_Bank_of_united_Baltic }
-	   add_ideas =  LAT_Bank_of_united_Baltic
+		LIT = { country_event = LAT_events.13 }
+		EST = { country_event = LAT_events.13 } 
+	    add_ideas = LAT_expanded_bib
 		}
 		
 		ai_will_do = {
@@ -3801,16 +7439,45 @@ focus = {
 	}
 	
 		focus = {
-		id = LAT_united_political_campaign
+		id = LAT_a_one_currency
+		icon = Gold
+		x = 1
+		y = 1
+		relative_position_id = LAT_expand_bib  
+		cost = 7.20
+		
+		available = {
+			is_faction_leader = yes
+			is_in_faction_with = LIT
+			is_in_faction_with = EST
+		}
+		
+		prerequisite = {
+			focus = LAT_expand_bib
+		}
+		
+		completion_reward = { 
+		LIT = { country_event = LAT_events.14 }
+		EST = { country_event = LAT_events.14 }
+	    add_ideas = LAT_a_one_currency_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = LAT_political_unity
 		icon = propaganda
-		x = 2
+		x = 3
 		y = 1
 		relative_position_id = LAT_baltic_unity  
 		cost = 7.20
 		
 		available = {
 			is_faction_leader = yes
-			is_in_faction_with = LAT
+			is_in_faction_with = LIT
 			is_in_faction_with = EST
 		}
 		
@@ -3830,27 +7497,56 @@ focus = {
 	}
 	
 		focus = {
-		id = LAT_open_borders
-		icon = territorial_claims
+		id = LAT_one_passport
+		icon = passport
 		x = 1
 		y = 1
-		relative_position_id = LAT_united_political_campaign  
+		relative_position_id = LAT_political_unity  
 		cost = 7.20
 		
 		available = {
 			is_faction_leader = yes
-			is_in_faction_with = LAT
+			is_in_faction_with = LIT
 			is_in_faction_with = EST
 		}
 		
 		prerequisite = {
-			focus = LAT_united_political_campaign
+			focus = LAT_political_unity
 		}
 		
 		completion_reward = { 
-		LIT = { add_stability = 0.05 }
-		EST = { add_stability = 0.05 }
-	    add_stability = 0.05
+		LIT = { country_event = LAT_events.15 }
+		EST = { country_event = LAT_events.15 }
+	    add_ideas = LAT_one_passport_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_be_nice_to_each_other
+		icon = improve_relations
+		x = -1
+		y = 1
+		relative_position_id = LAT_one_passport  
+		cost = 7.20
+		
+		available = {
+			is_faction_leader = yes
+			is_in_faction_with = LIT
+			is_in_faction_with = EST
+		}
+		
+		prerequisite = {
+			focus = LAT_one_passport
+		}
+		
+		completion_reward = { 
+		LIT = { add_stability = 0.075 }
+		EST = { add_stability = 0.075 }
+	    add_stability = 0.075
 		}
 		
 		ai_will_do = {
@@ -3859,53 +7555,242 @@ focus = {
 	}
 	
 		focus = {
-		id = LAT_unite_the_Baltic
+		id = LAT_struggle_for_unification
 		icon = align_to_baltic_states2
 		x = -1
 		y = 1
-		relative_position_id = LAT_joint_army_traning  
-		cost = 30
+		relative_position_id = LAT_increase_BAs_authority  
+		cost = 28.8
 		
 		available = {
 			is_faction_leader = yes
-			is_in_faction_with = LAT
+			is_in_faction_with = LIT
 			is_in_faction_with = EST
 		}
 		
 		prerequisite = {
-			focus = LAT_open_borders
+			focus = LAT_be_nice_to_each_other
 		}
 		
 		prerequisite = {
-			focus = LAT_Bank_of_united_Baltic
+			focus = LAT_a_one_currency
 		}
 		
 		prerequisite = {
-			focus = LAT_work_on_BALTRON
+			focus = LAT_join_the_nuclear_race
 		}
 		
 		prerequisite = {
-			focus = LAT_joint_army_traning
+			focus = LAT_increase_BAs_authority
 		}
 		
 		completion_reward = { 
-		every_state = {
-					limit = { is_core_of = EST }
-					add_core_of = LAT
-				}
-		every_state = {
-					limit = { is_core_of = LIT }
-					add_core_of = LAT
-				}
+		LIT = { country_event = LAT_events.24 }
+		EST = { country_event = LAT_events.24 }
 		set_cosmetic_tag = baltic
-		annex_country = { 
-				target = EST 
-				transfer_troops = yes
+	    
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_a_one_langue
+		icon = propaganda
+		x = -1
+		y = 1
+		relative_position_id = LAT_struggle_for_unification  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+		}
+		
+		prerequisite = {
+			focus = LAT_struggle_for_unification
+		}
+	
+		completion_reward = { 
+		add_ideas = LAT_a_one_langue_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_trans_baltic_railway
+		icon = railroad
+		x = 1
+		y = 1
+		relative_position_id = LAT_struggle_for_unification  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+		}
+		
+		prerequisite = {
+			focus = LAT_struggle_for_unification
+		}
+	
+		completion_reward = { 
+		every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
 			}
-		annex_country = { 
-				target = LIT 
-				transfer_troops = yes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_inegrate_russians
+		icon = align_to_russia
+		x = -1
+		y = 1
+		relative_position_id = LAT_trans_baltic_railway  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+		}
+		
+		prerequisite = {
+			focus = LAT_trans_baltic_railway
+			focus = LAT_a_one_langue
+		}
+	
+		completion_reward = { 
+		unlock_decision_tooltip = LAT_integrate_russians_dec
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_create_the_baltic_culture
+		icon = national_greatness
+		x = -1
+		y = 1
+		relative_position_id = LAT_inegrate_russians  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+		}
+		
+		prerequisite = {
+			focus = LAT_a_one_langue
+		}
+		
+		prerequisite = {
+			focus = LAT_inegrate_russians
+		}
+	
+		completion_reward = { 
+		add_ideas = LAT_the_baltic_culture
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_support_local_companies
+		icon = concessions
+		x = 1
+		y = 1
+		relative_position_id = LAT_inegrate_russians  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+		}
+		
+		prerequisite = {
+			focus = LAT_trans_baltic_railway
+		}
+		
+		prerequisite = {
+			focus = LAT_inegrate_russians
+		}
+	
+		completion_reward = { 
+		random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
 			}
+		random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_baltic_this_for_you
+		icon = military_mission
+		x = 1
+		y = 1
+		relative_position_id = LAT_create_the_baltic_culture  
+		cost = 7.2
+		
+		available = {
+			is_faction_leader = yes
+		}
+		
+		prerequisite = {
+			focus = LAT_create_the_baltic_culture
+		}
+		
+		prerequisite = {
+			focus = LAT_support_local_companies
+		}
+	
+		completion_reward = { 
+		add_ideas = LAT_baltic_this_for_you_idea
 		}
 		
 		ai_will_do = {
@@ -3916,7 +7801,7 @@ focus = {
 		focus = {
 		id = LAT_go_with_USA
 		icon = align_to_america
-		x = 6
+		x = 7
 		y = 1
 		relative_position_id = LAT_forgein_policy  
 		cost = 7.20
@@ -3926,7 +7811,7 @@ focus = {
 		}
 		
 		mutually_exclusive = {
-		focus = LAT_go_with_russia
+		focus = LAT_neutriality_will_this_time_work
 		}
 		
 		available = {
@@ -3938,17 +7823,22 @@ focus = {
 		}
 		
 		completion_reward = { 
-		add_political_power = 100
+		USA = {
+				add_opinion_modifier = {
+					target = LAT
+					modifier = declaration_of_friendship
+				}
 		}
-		
+	}
+	
 		ai_will_do = {
-			factor = 50 #the player probably won't enjoy AI doing some weird things and runing player's plans this is whyh AI will do this focus
+			factor = 10 
 		}
 	}
 	
 		focus = {
-		id = friendhip_trety_with_USA
-		icon = american_government
+		id = LAT_NATO_military_exercies
+		icon = align_to_nato
 		x = 0
 		y = 1
 		relative_position_id = LAT_go_with_USA  
@@ -3963,234 +7853,252 @@ focus = {
 		}
 		
 		completion_reward = { 
-		USA = {
+		USA = { country_event = LAT_events.17 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = LAT_establish_the_CPaCB
+		icon = destroy_society
+		x = 1
+		y = 1
+		relative_position_id = LAT_NATO_military_exercies
+		cost = 7.20
+		
+		available = {
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = LAT_NATO_military_exercies
+		}
+
+		completion_reward = {
+	     add_ideas = LAT_fighting_corruption
+	}
+}
+	
+focus = {
+		id = LAT_create_the_lato
+		icon = military_deal
+		x = 0
+		y = 1
+		relative_position_id = LAT_establish_the_CPaCB
+		cost = 7.20
+		
+		available = {
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = LAT_establish_the_CPaCB
+		}
+
+		completion_reward = {
+	    swap_ideas = { 
+					remove_idea = LAT_fighting_corruption
+					add_idea = LAT_lato 
+				}
+	}
+}	
+	
+	focus = {
+		id = LAT_decrease_depndece_on_russia
+		icon = attack_russia
+		x = -1
+		y = 1
+		relative_position_id = LAT_NATO_military_exercies
+		cost = 7.20
+		
+		available = {
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = LAT_NATO_military_exercies
+		}
+
+		completion_reward = {
+	     add_ideas = LAY_an_independent_economy
+	}
+}
+	focus = {
+		id = LAT_acknowledge_the_Russian_minority
+		icon = alliance_brown
+		x = 0
+		y = 1
+		relative_position_id = LAT_decrease_depndece_on_russia
+		cost = 7.20
+		
+		available = {
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = LAT_decrease_depndece_on_russia
+		}
+
+		completion_reward = {
+	     unlock_decision_tooltip = LAT_compomise_with_the_Russian_minority
+	}
+}	
+
+focus = {
+		id = LAT_anti_russian_sentiments
+		icon = destroy_establishment
+		x = 1
+		y = 1
+		relative_position_id = LAT_acknowledge_the_Russian_minority
+		cost = 7.20
+		
+		available = {
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = LAT_create_the_lato
+		}
+		
+		prerequisite = {
+		    focus = LAT_acknowledge_the_Russian_minority
+		}
+
+		completion_reward = {
+	    add_ideas = LAT_anti_russian_sentiments_idea
+	}
+}
+
+focus = {
+		id = LAT_strenghten_baltic_ties
+		icon = align_to_baltic_states
+		x = 0
+		y = 1
+		relative_position_id = LAT_anti_russian_sentiments
+		cost = 7.20
+		
+		available = {
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = LAT_anti_russian_sentiments
+		}
+
+		completion_reward = {
+	     LIT = {
 				add_opinion_modifier = {
 					target = LAT
 					modifier = declaration_of_friendship
 				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
 	}
-	
-	focus = {
-		id = LAT_American_Military_advisors
-		text = POL_American_Military_advisors
-		icon = american_military_agreement
-		x = -1
-		y = 1
-		relative_position_id = friendhip_trety_with_USA
-		cost = 7.20
-		
-		available = {
-			is_in_faction_with = USA
-		}
-		
-		prerequisite = {
-		    focus = friendhip_trety_with_USA
-		}
-
-		completion_reward = {
-	     add_ideas = POL_American_Military_advisors
-	}
-}
-	focus = {
-		id = LAT_american_investors
-		text = POL_american_investors
-		icon = concessions
-		x = 1
-		y = 1
-		relative_position_id = friendhip_trety_with_USA
-		cost = 7.20
-		
-		available = {
-			is_in_faction_with = USA
-		}
-		
-		prerequisite = {
-		    focus = friendhip_trety_with_USA
-		}
-
-		completion_reward = {
-	     add_ideas = POL_american_investors
-	}
-}	
-
-    	focus = {
-		id = LAT_atack_Russia
-		text = POL_atack_Russia
-		icon = attack_russia
-		x = -1
-		y = 1
-		relative_position_id = LAT_american_investors
-		cost = 10
-		
-		available = {
-			is_in_faction_with = USA
-		}
-		
-		prerequisite = {
-		focus = LAT_american_investors	
-		}
-		
-		prerequisite = {
-		focus = LAT_American_Military_advisors	
-		}
-		
-		completion_reward = {
-		create_wargoal = {
-				type = annex_everything
-				target = SOV
-			}
-		}
-    ai_will_do = {
-			factor = 1 # we don't want AI to randomly start war with Russia don't we?
-		}
-	}
-	
-	focus = {
-		id = LAT_go_with_russia
-		icon = align_to_russia
-		x = -6
-		y = 1
-		relative_position_id = LAT_forgein_policy  
-		cost = 7.20
-		
-		prerequisite = {
-			focus = LAT_forgein_policy
-		}
-		
-		mutually_exclusive = {
-		focus = LAT_go_with_USA
-		}
-		
-		mutually_exclusive = {
-		focus = LAT_baltic_unity
-		}
-		
-		completion_reward = { 
-		SOV = { country_event = LAT.6 }
-		}
-		
-		ai_will_do = {
-			factor = 1 #we don't want to Russia to be annexed by Latvia
-		}
-	}
-	
-		focus = {
-		id = LAT_Russian_Investments
-		icon = concessions2
-		x = 0
-		y = 1
-		relative_position_id = LAT_go_with_russia  
-		cost = 7.20
-		
-		available = {
-			is_in_faction_with = SOV
-		}
-		
-		prerequisite = {
-			focus = LAT_go_with_russia
-		}
-		
-		completion_reward = { 
-		SOV = { add_offsite_building = { type = industrial_complex level = 1 } }
-	   add_offsite_building = { type = industrial_complex level = 1 }
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_concessions_to_Russians_living_in_Latvia
-		icon = align_to_russia
-		x = 1
-		y = 1
-		relative_position_id = LAT_Russian_Investments  
-		cost = 7.20
-		
-		available = {
-			is_in_faction_with = SOV
-		}
-		
-		prerequisite = {
-			focus = LAT_Russian_Investments
-		}
-		
-		completion_reward = { 
-		add_political_power = -100
-		add_stability = 0.05
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_frendship_societies
-		icon = propaganda
-		x = -1
-		y = 1
-		relative_position_id = LAT_Russian_Investments  
-		cost = 7.20
-		
-		available = {
-			is_in_faction_with = SOV
-		}
-		
-		prerequisite = {
-			focus = LAT_Russian_Investments
-		}
-		
-		completion_reward = { 
-		add_stability = -0.05
-		SOV = { add_political_power = 200 }
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = LAT_Unite_with_Russia
-		icon = align_to_russia
-		x = 0
-		y = 1
-		relative_position_id = LAT_frendship_societies  
-		cost = 50
-		
-		available = {
-			is_in_faction_with = SOV
-		}
-		
-		prerequisite = {
-			focus = LAT_frendship_societies
-		}
-		
-		prerequisite = {
-		focus = LAT_concessions_to_Russians_living_in_Latvia
-		}
-		
-		completion_reward = { 
-		every_state = {
-					limit = { is_core_of = LAT }
-					add_core_of = SOV
+		EST = {
+				add_opinion_modifier = {
+					target = LAT
+					modifier = declaration_of_friendship
 				}
-	SOV = {
-	annex_country = { 
-				target = LAT 
-				transfer_troops = yes
-			}
-      }
 	}
-	ai_will_do = {
-			factor = 10
+ }	
+}
+	
+focus = {
+		id = LAT_friends_with_the_nords
+		icon = nordic_council
+		x = 2
+		y = 1
+		relative_position_id = LAT_anti_russian_sentiments
+		cost = 7.20
+		
+		available = {
+			is_in_faction_with = USA
 		}
+		
+		prerequisite = {
+		    focus = LAT_anti_russian_sentiments
+		}
+
+		completion_reward = {
+	    DEN = {
+				add_opinion_modifier = {
+					target = LAT
+					modifier = declaration_of_friendship
+				}
 	}
+		NOR = {
+				add_opinion_modifier = {
+					target = LAT
+					modifier = declaration_of_friendship
+				}
+	}
+		SWE = {
+				add_opinion_modifier = {
+					target = LAT
+					modifier = declaration_of_friendship
+				}
+	}
+		FIN = {
+				add_opinion_modifier = {
+					target = LAT
+					modifier = declaration_of_friendship
+				}
+	}
+ }	
+}
+
+focus = {
+		id = LAT_support_Poland
+		icon = align_to_poland
+		x = -2
+		y = 1
+		relative_position_id = LAT_anti_russian_sentiments
+		cost = 7.20
+		
+		available = {
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = LAT_anti_russian_sentiments
+		}
+
+		completion_reward = {
+	    POL = {
+				add_opinion_modifier = {
+					target = LAT
+					modifier = declaration_of_friendship
+				}
+	}
+ }	
+}
+
+focus = {
+		id = LAT_prepare_for_the_inevitable
+		icon = coastal_fort
+		x = 2
+		y = 1
+		relative_position_id = LAT_support_Poland
+		cost = 7.20
+		
+		available = {
+			is_in_faction_with = USA
+		}
+		
+		prerequisite = {
+		    focus = LAT_friends_with_the_nords
+		}
+		
+		prerequisite = {
+		    focus = LAT_strenghten_baltic_ties
+		}
+		
+		prerequisite = {
+		    focus = LAT_support_Poland
+		}
+
+		completion_reward = {
+	    unlock_decision_category_tooltip = LAT_preparing_for_inevitable_category
+	}
+ }	

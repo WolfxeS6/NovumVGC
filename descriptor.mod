@@ -6,6 +6,6 @@ dependencies={
 	"Novum Vexillum"
 }
 name="Novum Vexillum Global Conflict"
-picture="thumbnail.png"
+picture="Thumbbase.png"
 supported_version="1.10.*"
 remote_file_id="2227081070"

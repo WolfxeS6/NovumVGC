@@ -12,11 +12,339 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = POL_revive_RSA
+		icon = RSA
+		x = 30
+		y = 0
+		cost = 6.50
+		
+		mutually_exclusive = {
+		focus = POL_memories_of_PRL
+		}
+		
+		mutually_exclusive = {
+		focus = POL_SLD_goverment
+		}
+		
+		completion_reward = {
+		POL = { country_event = POL_anarchist_events.9 }
+		create_country_leader = {
+					name = "Collective Leadership"
+					picture = "GFX_portrait_SPR_anarchist_commune"
+					ideology = anarchist 
+					traits = {
+					}
+				}
+	      set_party_name = {
+				ideology =  market_liberal 
+				long_name = POL_market_liberal_anarchy_long
+				name = POL_market_liberal_anarchy
+			}
+		 add_popularity = {
+				ideology = market_liberal
+			popularity = 0.05
+			}
+	    fourth_estate_market_liberal_increase = yes
+		add_timed_idea = {
+				idea = POL_anarchist_doctrine_idea
+				days = 250
+			} 
+		add_stability = -0.05
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_start_united_in_goal
+		icon = anarchist_unity
+		x = -1
+		y = 1
+		cost = 6.50 
+		relative_position_id = POL_revive_RSA
+		
+		prerequisite = {
+		focus = POL_revive_RSA
+		}
+		
+		completion_reward = {
+	     add_popularity = {
+				ideology = market_liberal
+			popularity = 0.1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_bring_back_Homek
+		icon = anarchist_propaganda
+		x = 0
+		y = 1
+		cost = 6.50
+		relative_position_id = POL_start_united_in_goal
+		
+		prerequisite = {
+		focus = POL_start_united_in_goal
+		}
+		
+		completion_reward = {
+	    add_timed_idea = {
+				idea = POL_homek
+				days = 250
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_anar_strike_strike
+		icon = anarchist_worker_protest
+		x = 1
+		y = 1
+		cost = 6.50
+		relative_position_id = POL_revive_RSA
+		
+		prerequisite = {
+		focus = POL_revive_RSA
+		}
+		
+		completion_reward = {
+	     add_popularity = {
+				ideology = market_liberal
+			popularity = 0.05
+			}
+	    fourth_estate_market_liberal_increase = yes
+		fourth_estate_communist_increase = yes
+		add_timed_idea = {
+				idea = POL_anarchist_strike
+				days = 250
+			} 
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_start_squating
+		icon = anarchist_take_house
+		x = 0
+		y = 1
+		cost = 6.50
+		relative_position_id = POL_anar_strike_strike
+		
+		prerequisite = {
+		focus = POL_anar_strike_strike
+		}
+		
+		completion_reward = {
+	    hidden_effect = {
+		country_event = { 
+                          id = POL_anarchist_events.2
+                          days = 10
+                          random = 500
+                     }
+		}
+		random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_manpower = 20000
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+	   random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_manpower = 20000
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			} 
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_start_who_shall_lead
+		icon = anarchist_who_shall_lead
+		x = -1
+		y = 1
+		cost = 6.50
+		relative_position_id = POL_start_squating
+		
+		prerequisite = {
+		focus = POL_bring_back_Homek
+		}
+		
+		prerequisite = {
+		focus = POL_start_squating
+		}
+		
+		completion_reward = {
+	    POL = { country_event = POL_anarchist_events.3 }    
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = POL_start_march_on_warsaw
+		icon = anarchist_people
+		x = 0
+		y = 1
+		cost = 10 
+		relative_position_id = POL_start_who_shall_lead
+		
+		prerequisite = {
+		focus = POL_start_who_shall_lead
+		}
+		
+		completion_reward = {
+	    set_country_flag = POL_cant_join_eu_flag 
+		set_country_flag = POL_can_increase_tax_rates #can't increase taxes
+		hidden_effect = { 
+		random_country = {
+				limit = {
+					is_in_faction_with = POL
+					is_faction_leader = yes
+				}	
+				remove_from_faction = POL
+				}
+		add_ideas = economy_tax_meager
+		remove_ideas = POL_Bad_investments
+		remove_ideas = POL_outdated_equipment
+	    remove_ideas = POL_Bad_investments
+	    remove_ideas = POL_Polish_national_debt
+		remove_ideas = visegrad_group_member
+        remove_ideas = POL_gaps_in_tax_system
+        remove_ideas = POL_Bad_healthcare_system
+        remove_ideas = POL_Giedroyc_Doctrine
+		if = {
+				limit = { has_country_flag = POL_classic_anarchism_takes_power_flag }
+			    set_rule = {
+		can_puppet = no
+				    can_create_factions = no
+				    can_join_factions = no
+				    can_boost_own_ideology = no
+					can_generate_female_aces = yes
+					can_create_collaboration_government = no
+			}
+				add_ideas = volunteer_only 
+				add_ideas = closed_economy
+				set_country_flag = POL_unlocked_anarchist_advisors
+				set_country_flag = POL_non_anarchist_advisors_disabled
+			    set_country_flag = NVX_flag_secret_ideas_centralization_anarchy
+				add_ideas = centralization_anarchy
+				set_politics = {
+				ruling_party = market_liberal
+				elections_allowed = no
+			    }
+				set_cosmetic_tag = POL_freeteritory
+				load_focus_tree = POL_normal_anarchist_focus
+		        add_popularity = {
+	            ideology = market_liberal
+	            popularity = 0.05
+			}
+			}
+		    else_if = {
+			    limit = { has_country_flag = POL_anarcho_capitalism_takes_power_flag }
+				add_ideas = volunteer_only 
+				set_country_flag = POL_unlocked_anarchist_advisors
+				add_ideas = centralization_confederate
+			    set_politics = {
+				ruling_party = market_liberal
+				elections_allowed = no
+			    }
+				set_cosmetic_tag = POL_anarcho_capitalist_tag
+				load_focus_tree = POL_anarcho_capitalist_focus
+		        add_popularity = {
+	            ideology = market_liberal
+	            popularity = 0.05
+		    }
+		}
+		else_if = {
+			    limit = { has_country_flag = POL_anarcho_syndycalist_takes_power_flag }
+			    set_rule = {
+		can_puppet = no
+				    can_create_factions = no
+				    can_join_factions = no
+				    can_boost_own_ideology = no
+					can_generate_female_aces = yes
+					can_create_collaboration_government = no
+			}
+			    add_ideas = volunteer_only 
+				add_ideas = closed_economy
+				set_party_name = {
+				ideology =  market_liberal 
+				long_name = POL_communist_party_anarch_synd_long
+				name = POL_communist_party_anarch_synd
+			}
+				set_country_flag = POL_unlocked_anarchist_advisors
+				set_country_flag = POL_non_anarchist_advisors_disabled
+				set_country_flag = NVX_flag_secret_ideas_centralization_anarchy
+				add_ideas = centralization_anarchy
+				set_country_flag = NVX_flag_secret_ideas_centralization_anarchy
+				set_politics = {
+				ruling_party = market_liberal
+				elections_allowed = no
+			    }
+				set_cosmetic_tag = POL_freeteritory
+				load_focus_tree = POL_anarcho_syndycalist_focus_tree
+		         add_popularity = {
+	            ideology = market_liberal
+	            popularity = 0.05
+		    }
+		}
+		}
+		custom_effect_tooltip = POL_anarchist_takover_tp
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
 		id = POL_memories_of_PRL
 		icon = communism
-		x = 26
+		x = 25
 		y = 0
 		cost = 7.20 
+		
+		mutually_exclusive = {
+		focus = POL_revive_RSA
+		}
 		
 		mutually_exclusive = {
 		focus = POL_SLD_goverment
@@ -228,6 +556,10 @@ focus_tree = {
 		x = 5
 		y = 0
 		cost = 4 
+		
+		mutually_exclusive = {
+		focus = POL_revive_RSA
+		}
 		
 		mutually_exclusive = {
 		focus = POL_memories_of_PRL
@@ -1208,4 +1540,5 @@ focus_tree = {
 			remove_ideas = POL_outdated_equipment_4
 			add_war_support = 0.1
 		}
-	}
+}
+}

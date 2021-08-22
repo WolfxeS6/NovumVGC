@@ -319,14 +319,17 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			67 = {
+			if = {
 				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
+					67 = {
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
 					}
 				}
+			67 = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
@@ -337,6 +340,7 @@ focus_tree = {
 					type = arms_factory
 					level = 1
 					instant_build = yes
+				}
 				}
 			}
 		}
@@ -1377,9 +1381,11 @@ focus = {
 		mutually_exclusive = {
 			focus = POL_strenghten_PO
 		}
-		
+		mutually_exclusive = { 
+			focus = POL_Wolnosc
+		}
 		completion_reward = {
-			 increase_social_democrat_influence_by_1 = yes 
+			fourth_estate_social_democrat_increase = yes
 			add_ideas = idea_focus_generic_social_democrat_doctrine
 		}
 		
@@ -1433,7 +1439,7 @@ focus = {
 		}
 		
 		completion_reward = {
-			increase_social_liberal_influence_by_1 = yes
+			fourth_estate_social_liberal_increase = yes
 			add_ideas = idea_focus_generic_liberal_doctrine
 		    add_popularity = {
 				ideology = social_liberal
@@ -2587,26 +2593,6 @@ focus = {
 	}
 	
 	focus = {
-		id = POL_immigration_restrictions
-		icon = radar
-		x = 0
-		y = 1
-		cost = 6
-		relative_position_id = NAT_get_more_doctors
-		prerequisite = {
-			focus = NAT_get_more_doctors
-		}
-		
-		completion_reward = {
-			add_ideas = FRA_increased_border_controls_1
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
 		id = NAT_get_more_doctors
 		text = POL_get_more_doctors
 		icon = industry_democratic3
@@ -2626,7 +2612,27 @@ focus = {
 			factor = 10
 		}
 	}
-	
+
+	focus = {
+		id = POL_immigration_restrictions
+		icon = radar
+		x = 0
+		y = 1
+		cost = 6
+		relative_position_id = NAT_get_more_doctors
+		prerequisite = {
+			focus = NAT_get_more_doctors
+		}
+		
+		completion_reward = {
+			add_ideas = FRA_increased_border_controls_1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
 	focus = {
 		id = POL_ministry_of_border_security
 		text = FRA_ministry_of_border_security
@@ -4972,7 +4978,9 @@ focus = {
 		mutually_exclusive = {
 			focus = POL_Wolnosc
 		}
-		
+		mutually_exclusive = { 
+			focus = POL_United_Left
+		}
 		completion_reward = {
 	    set_party_name = {
 				ideology = conservative 

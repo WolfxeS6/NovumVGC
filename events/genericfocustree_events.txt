@@ -48,7 +48,7 @@ news_event = {
 				tag = FROM
 				OR = {
 				has_government = communist
-				has_government = democratic
+				has_democratic_form_of_government = yes
 				}
 			}
 		}
@@ -64,7 +64,7 @@ news_event = {
 		name = genericfocustree.3.c
 		ai_chance = { factor = 1}
 	trigger = {
-				has_government = democratic
+				has_democratic_form_of_government = yes
 			NOT = {
 				has_completed_focus = Generic_a_conservative_government
 				tag = FROM
@@ -125,84 +125,6 @@ news_event = {
 		ai_chance = { factor = 1}
 	trigger = {
 				tag = FROM
-		}
-	}
-}
-##Event: [From.GetName] announces Permanent Revolution.
-news_event = {
-	id = genericfocustree.5
-	title = genericfocustree.5.title
-	desc = genericfocustree.5.desc
-	picture = GFX_news_event_024
-	fire_only_once = no
-	is_triggered_only = yes
-	major = yes
-	option = {
-		name = genericfocustree.5.a
-		ai_chance = { factor = 1}
-		trigger = {
-				NOT = {
-				OR = { has_government = communist
-				is_neighbor_of = FROM
-				}
-			}
-		}
-	}
-	option = {
-		name = genericfocustree.5.b
-		ai_chance = { factor = 1}
-	trigger = {
-				has_government = communist
-				OR = {
-					has_completed_focus = Generic_permanent_revolutionary
-					OR = {
-							has_country_leader = {
-								name = "Leon Trotsky"
-								ruling_only = yes
-							}
-							has_country_leader = {
-								name = "Hernán Laborde"
-								ruling_only = yes
-							}
-							has_country_leader = {
-								name = "Valentín Campa"
-								ruling_only = yes
-								}
-							}	
-						}
-				}
-		}
-		option = {
-			name = genericfocustree.5.c
-			ai_chance = { factor = 1}
-			trigger = {
-			has_government = communist
-				NOT = {
-					OR = {
-						has_completed_focus = Generic_permanent_revolutionary
-								has_country_leader = {
-									name = "Leon Trotsky"
-									ruling_only = yes
-								}
-								has_country_leader = {
-									name = "Hernán Laborde"
-									ruling_only = yes
-								}
-								has_country_leader = {
-									name = "Valentín Campa"
-									ruling_only = yes
-						}
-					}
-				}
-			}
-		}
-	option = {
-		name = genericfocustree.5.d
-		ai_chance = { factor = 1}
-		trigger = {
-				NOT = {
-				has_government = communist
-			}
 		}
 	}
 }
@@ -393,65 +315,6 @@ country_event = {
 	}
 }
 
-#Rise in Anarchist Sentiment
-country_event = {
-	id = genericfocustree.16
-	title = genericfocustree.16.title
-	desc = genericfocustree.16.desc
-	picture = GFX_report_event_generic_sign_treaty2
-	is_triggered_only = yes
-	fire_only_once = no
-	option = {
-		name = genericfocustree.16.a
-		ai_chance = { factor = 1}
-		set_party_name = { 
-		    ideology = neutrality
-		    long_name = generic_anarchist_party_long
-		    name = generic_anarchist_party
-			}
-		if = {
-			limit = {has_government = neutrality}
-			if = {
-				limit = {tag = FIN}
-				hidden_effect = {
-									set_popularities = {
-										democratic = 80
-										neutrality = 6
-										fascism = 7
-										communist = 7
-									}
-								set_politics = {
-								ruling_party = democratic
-								elections_allowed = yes
-					}
-				}
-			}
-			else = {
-			hidden_effect = {
-					set_popularities = {
-						democratic = 7
-						neutrality = 6
-						fascism = 80
-						communist = 7
-					}			
-				set_politics = {
-				ruling_party = fascism
-				elections_allowed = no
-					}
-				}
-			}
-		}	
-		add_ideas = generic_anarchism
-		add_stability = -0.2
-		hidden_effect = {
-				set_political_party = {
-				    ideology = neutrality
-				    popularity = 5		
-			}
-		}
-	}
-}
-
 
 
 
@@ -613,121 +476,5 @@ country_event = {
 			}
 		add_manpower = 500
 		army_experience = 5
-	}
-}
-
-#Anarchist Uprising
-country_event = {
-	id = genericfocustree.21
-	title = genericfocustree.21.title
-	desc = genericfocustree.21.desc
-	picture = GFX_report_event_generic_riot
-	is_triggered_only = yes
-	fire_only_once = no
-	option = {
-		name = genericfocustree.21.a
-		ai_chance = { factor = 1}
-		set_party_name = { 
-		    ideology = neutrality
-		    long_name = generic_anarchist_party_long
-		    name = generic_anarchist_party
-			}
-		if = {
-			limit = {has_government = democratic}
-		hidden_effect = {
-			set_politics = {
-			ruling_party = neutrality
-			elections_allowed = no
-				}
-			retire_country_leader  = yes
-			create_country_leader = {
-				name = "Anarchist Collective"
-				desc = "POLITICS_ANARCHIST_COMMUNE_DESC"
-				picture = "GFX_portrait_SPR_anarchist_commune"
-				expire = "1965.1.1"
-				ideology = anarchism
-				traits = {
-					#
-				}
-			}
-		add_country_leader_trait = loose_anarchists
-
-				set_politics = {
-			ruling_party = democratic
-			elections_allowed = yes
-				}
-		}
-		start_civil_war = {
-					ideology = neutrality
-					size = 0.2
-				}
-		}
-		if = {
-			limit = {has_government = communist}
-		hidden_effect = {
-			set_politics = {
-			ruling_party = neutrality
-			elections_allowed = no
-				}
-			retire_country_leader  = yes
-			create_country_leader = {
-				name = "Anarchist Collective"
-				desc = "POLITICS_ANARCHIST_COMMUNE_DESC"
-				picture = "GFX_portrait_SPR_anarchist_commune"
-				expire = "1965.1.1"
-				ideology = anarchism
-				traits = {
-					#
-				}
-			}
-		add_country_leader_trait = loose_anarchists
-
-				set_politics = {
-			ruling_party = communist
-			elections_allowed = yes
-				}
-		}
-		start_civil_war = {
-					ideology = neutrality
-					size = 0.2
-				}
-		}
-if = {
-			limit = {has_government = fascism}
-		hidden_effect = {
-			set_politics = {
-			ruling_party = neutrality
-			elections_allowed = no
-				}
-			retire_country_leader  = yes
-			create_country_leader = {
-				name = "Anarchist Collective"
-				desc = "POLITICS_ANARCHIST_COMMUNE_DESC"
-				picture = "GFX_portrait_SPR_anarchist_commune"
-				expire = "1965.1.1"
-				ideology = anarchism
-				traits = {
-					#
-				}
-			}
-		add_country_leader_trait = loose_anarchists
-
-				set_politics = {
-			ruling_party = fascism
-			elections_allowed = yes
-				}
-		}
-		start_civil_war = {
-					ideology = neutrality
-					size = 0.2
-			}
-		}
-
-	every_enemy_country = {
-			if = {
-				limit = {civilwar_target = ROOT}
-				set_cosmetic_tag = generic_anarchism_neutrality
-			}
-		}
 	}
 }

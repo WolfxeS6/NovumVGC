@@ -1,5 +1,6 @@
 ﻿add_namespace = turkey
 add_namespace = Turkeykenes
+add_namespace = icsavas
 
 # supportkenes
  country_event = {
@@ -1029,5 +1030,57 @@ country_event = {
 		}
 		
 	}
+	
+	#SAR Civil War
+country_event = {
+ id = icsavas.1
+ title = icsavas.1.title
+ desc = icsavas.1.desc
+ picture = GFX_report_event_turkish_coup
+ fire_only_once = yes
+
+   	is_triggered_only = yes
+
+
+
+	option = {
+		name = icsavas.1.a
+		ai_chance = { factor = 1}
+
+    hidden_effect = {
+	SAR = {
+	transfer_state = 419
+	transfer_state = 420
+    add_state_core = 421
+    add_state_core = 416
+    
+	create_country_leader = {
+	name = "Army Council"
+	picture = "Council.dds"
+	ideology = national_democrat
+	traits = { nationalist_symbol}
+}
+		load_OOB = SAR_rebels
+
+	         declare_war_on = { target = PER type = annex_everything }
+			 	         declare_war_on = { target = KUR type = annex_everything }
+						 every_country = {
+                    limit = {
+                        has_full_control_of_state = 414 
+                    }
+                    SAR = {
+                        declare_war_on = {
+                              target = PREV
+                            type = annex_everything
+                        }
+                    }
+                }
+				
+
+			 
+	 }
+	}
+}
+}
 
 

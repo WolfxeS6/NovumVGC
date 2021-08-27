@@ -2,6 +2,146 @@
 add_namespace = Turkeykenes
 add_namespace = icsavas
 
+#Ecevit gets sick
+country_event = { 
+	id = turkey.1020010
+	title = turkey.1020010.t1 
+	picture = GFX_report_event_turkey_primeministry
+	desc = turkey.1020010.d1 
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = turkey.1020010.o1
+		decrease_stability_by_1 = yes
+		hidden_effect = {
+	country_event = { id = turkey.1020011 days = 20  }
+
+		}
+		ai_chance = { factor = 96 }
+	}
+	option = {
+		name = turkey.1020010.o2
+		add_political_power = -100
+		hidden_effect = {
+
+		country_event = { id = turkey.1020012 days = 3  }
+		country_event = { id = turkey.1020013 days = 13 } #14/08 AKP
+		}
+		ai_chance = { factor = 4 }
+	}
+}
+
+#Ecevit dies in hospital! (ahistorical)
+country_event = { 
+	id = turkey.1020011
+	title = turkey.1020011.t1 
+	picture = GFX_report_event_turkey_primeministry
+	desc = turkey.1020011.d1 
+	is_triggered_only = yes
+	
+
+	option = {
+	name = turkey.1020011.o1
+	retire_country_leader = yes
+	decrease_stability_by_2 = yes
+	add_national_unity = 0.01
+	country_event = { id = turkey.1020012 days = 1  }
+	country_event = { id = turkey.1020013 days = 13 }
+	}
+}
+
+#The next PM and leader of the DSP - pre-Summer 2002
+country_event = { 
+	id = turkey.1020012
+	title = turkey.1020012.t1 
+	picture = GFX_report_event_turkey_dsp
+	desc = turkey.1020012.d1 
+	is_triggered_only = yes
+	
+
+	option = {
+		name = turkey.1020012.o1
+		create_country_leader = {
+			name = "İsmail Cem"
+			picture = "Ismail_Cem.dds"
+			ideology = social_democrat_ideology
+			traits = { smooth_talking_charmer }
+
+		}
+
+		ai_chance = { factor = 50 }
+	}
+	option = {
+		name = turkey.1020012.o2
+		create_country_leader = {
+			name = "Şükrü Sina Gürel"
+			picture = "Sukru_Sina_Gurel.dds"
+			ideology = social_democrat_ideology
+			traits = { public_moderator }
+		}	
+		add_political_power = 20
+		ai_chance = { factor = 50 }
+	}
+}
+
+#Early Election
+country_event = { 
+	id = turkey.1020013
+	title = turkey.1020013.t1 
+	picture = GFX_report_event_turkey_parliament
+	desc = turkey.1020013.d1 
+	is_triggered_only = yes
+	
+	option = {
+		name = turkey.1020013.o1
+			add_popularity = {
+						ideology = conservative
+							popularity = 0.20
+						}
+						set_politics = {
+							ruling_party = conservative
+							elections_allowed = yes
+						}
+
+		ai_chance = { factor = 50 }
+	}
+}
+
+#Communism in Greece and Turkey: a chance for reconciliation
+country_event = {
+	id = turkey.810
+	title = turkey.810.t1 
+	desc = turkey.810.d1 
+	picture = GFX_report_event_turkey_greece_communism
+	fire_only_once = yes
+	
+	trigger = {
+	tag = TUR
+	TUR = { exists = yes }
+	GRE = { exists = yes }
+	TUR = { has_government = communist }
+	GRE = { has_government = communist }
+	}
+	
+	mean_time_to_happen = { days = 3 }
+	
+	option = {	#Remove rivalry
+		name = turkey.810.o1
+		add_political_power = -10
+		TUR = { remove_opinion_modifier = { target = GRE modifier = rival } }
+		GRE = { remove_opinion_modifier = { target = TUR modifier = rival } }
+		ai_chance = { factor = 96 }
+	}
+	
+	option = {	#Keep rivalry
+		name = turkey.810.o2
+		ai_chance = { factor = 0 }
+		GRE = { add_opinion_modifier = { target = TUR modifier = recent_actions_negative } }
+	}
+}
+
+
 # supportkenes
  country_event = {
 	id = Turkeykenes.3131
@@ -880,7 +1020,63 @@ country_event = {
 }
 
 
+#Turkish Civil War
+country_event = {
+ id = Turkey.1073
+ title = Turkey.1073.title
+ desc = Turkey.1073.desc
+ picture = GFX_report_event_turkish_coup
+ fire_only_once = yes
 
+   	is_triggered_only = yes
+
+	option = {
+		name = Turkey.1073.a
+		ai_chance = { factor = 1}
+
+    hidden_effect = {
+			hidden_effect = { country_event = Turkey_news.1 } 
+	PKK = {
+	transfer_state = 352
+	transfer_state = 350
+
+
+    add_state_core = 353
+
+
+	
+	create_country_leader = {
+	name = "Cemil Bayik"
+	picture = "Cemil_Bayik.dds"
+	ideology = stalinist
+	
+}
+
+	create_corps_commander = {
+		name = "Murat Karayılan"
+		picture = "Murat_Karayilan.dds"
+		traits = {  }
+		skill = 1
+	}
+		load_OOB = PKK_rebels
+
+	         declare_war_on = { target = TUR type = annex_everything }
+			 every_country = {
+                    limit = {
+                        has_full_control_of_state = 354 
+                    }
+                    PKK = {
+                        declare_war_on = {
+                              target = PREV
+                            type = annex_everything
+                        }
+                    }
+                }
+	}
+	
+}
+}	
+}
 
 
 
@@ -1048,6 +1244,8 @@ country_event = {
 		ai_chance = { factor = 1}
 
     hidden_effect = {
+	hidden_effect = {
+			hidden_effect = { country_event = Turkey_news.2 } }
 	SAR = {
 	transfer_state = 419
 	transfer_state = 420

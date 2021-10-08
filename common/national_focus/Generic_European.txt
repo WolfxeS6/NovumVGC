@@ -1,0 +1,5831 @@
+focus_tree = {
+	
+	id = POR_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 20
+			original_tag = POR
+		}
+	}
+
+    ######################################
+    ###                                ###
+    ### Generic European Industry Tree ###
+    ###                                ###
+    ######################################
+
+    ########################
+    ### Generic Industry ###
+    ########################
+
+    focus = {
+        id = POR_Begin_Industrial_Build-up
+        icon = GFX_goal_generic_production
+        x = 9
+        y = 0
+        cost = 10
+
+
+        completion_reward = {
+            add_tech_bonus = {
+                name = industry_bonus
+                bonus = 0.5
+                uses = 2
+                category = Industry
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Improve_State_Infrastructure
+        icon = GFX_goal_generic_construct_infrastructure
+        x = 1
+        y = 1
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Begin_Industrial_Build-up
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_building_construction = {
+                        type = infrastructure
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+                    random_owned_state = {
+                        add_building_construction = {
+                            type = infrastructure
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Increase_Civilian_Manufactures
+        icon = GFX_focus_generic_industry_2
+        x = 0
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Improve_State_Infrastructure
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Improve_Civilian_Industry_Capacity
+        icon = GFX_goal_generic_construct_civ_factory
+        x = 2
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Improve_State_Infrastructure
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_New_Schools_And_Modern_Teaching
+        icon = GFX_goal_tfv_generic_tech_sharing
+        x = 1
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Increase_Civilian_Manufactures
+        }
+        prerequisite = {
+            focus = POR_Improve_Civilian_Industry_Capacity
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_New_Schools_And_Modern_Teaching
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Reveal_Mineral_Wealth
+        icon = GFX_goal_generic_construction2
+        x = 2
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_New_Schools_And_Modern_Teaching
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = infrastructure
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+                    add_tech_bonus = {
+				        name = industry_bonus
+				        bonus = 0.25
+				        technology = excavation1
+				        technology = excavation2
+				        technology = excavation3
+				        technology = excavation4
+				        technology = excavation5
+			        }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Focus_on_Synthetic_Processing
+        icon = GFX_goal_generic_oil_refinery
+        x = 0
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_New_Schools_And_Modern_Teaching
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				    name = industry_bonus
+				    bonus = 1
+				    category = synth_resources
+			}
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = synthetic_refinery
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Tax_Reforms
+        icon = GFX_goal_generic_consumer_goods
+        x = 1
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_New_Schools_And_Modern_Teaching
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Tax_Reforms
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #######################
+    ### Industrial Boom ###
+    #######################
+
+    focus = {
+        id = POR_Economic_Boom
+        icon = GFX_goal_unknown
+        x = 5
+        y = 1
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Begin_Industrial_Build-up
+        }
+        available = {
+			num_of_factories > 50
+		}
+
+        completion_reward = {
+            add_political_power = 150
+            add_stability = 0.05
+            add_timed_idea = {
+                idea = POR_Economic_Boom
+                days = 365
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Nationwide_Industrial_Development
+        icon = GFX_goal_generic_construct_civilian
+        x = 4
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Economic_Boom
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 2
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 2
+                        instant_build = yes
+                    }
+                }
+                    
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modernize_the_Railway_System
+        icon = GFX_goal_generic_construct_infrastructure
+        x = 6
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Economic_Boom
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_building_construction = {
+                    type = infrastructure
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_building_construction = {
+                        type = infrastructure
+                        level = 2
+                        instant_build = yes
+                    }
+                }
+                    random_owned_state = {
+                        add_building_construction = {
+                            type = infrastructure
+                            level = 2
+                            instant_build = yes
+                        }
+                    }
+                        random_owned_state = {
+                            add_building_construction = {
+                                type = infrastructure
+                                level = 2
+                                instant_build = yes
+                            }
+                        }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Electronics_Devices
+        icon = GFX_goal_generic_production2
+        x = 5
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Nationwide_Industrial_Development
+        }
+        prerequisite = {
+            focus = POR_Modernize_the_Railway_System
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 1
+				uses = 2
+				category = electronics
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_New_Research_Complex
+        icon = GFX_focus_research2
+        x = 5
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Modern_Electronics_Devices
+        }
+
+
+        completion_reward = {
+            add_research_slot = 1
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ########################
+    ###                  ###
+    ### European Economy ###
+    ###                  ###
+    ########################
+
+    focus = {
+        id = POR_Attract_Foreign_Investors
+        icon = GFX_goal_generic_intelligence_exchange
+        x = 17
+        y = 1
+        cost = 5
+
+        prerequisite = {
+            focus = POR_Begin_Industrial_Build-up
+        }
+
+
+        completion_reward = {
+            add_political_power = 75
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #########################
+    ### Foreign Investors ###
+    #########################
+
+    focus = {
+        id = POR_Invite_American_Investors
+        icon = align_to_america
+        x = 8
+        y = 2
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Invite_American_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Japanese_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_European_Partners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Russian_Planners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Chinese_Planners
+        }
+
+        prerequisite = {
+            focus = POR_Attract_Foreign_Investors
+        }
+
+
+        completion_reward = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+                ####################################
+                ### Add relation to American +20 ###
+                ####################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_Japanese_Investors
+        icon = align_to_japan
+        x = 12
+        y = 2
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Invite_American_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Japanese_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_European_Partners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Russian_Planners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Chinese_Planners
+        }
+
+        prerequisite = {
+            focus = POR_Attract_Foreign_Investors
+        }
+
+
+        completion_reward = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+                #################################
+                ### Add relation to Japan +20 ###
+                #################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_European_Partners
+        icon = align_to_europe
+        x = 17
+        y = 2
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Invite_American_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Japanese_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_European_Partners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Russian_Planners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Chinese_Planners
+        }
+
+        prerequisite = {
+            focus = POR_Attract_Foreign_Investors
+        }
+
+
+        completion_reward = {
+            add_political_power = 100
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_Russian_Planners
+        icon = align_to_russia
+        x = 22
+        y = 2
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Invite_American_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Japanese_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_European_Partners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Russian_Planners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Chinese_Planners
+        }
+
+        prerequisite = {
+            focus = POR_Attract_Foreign_Investors
+        }
+
+
+        completion_reward = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+                ##################################
+                ### Add relation to Russia +20 ###
+                ##################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_Chinese_Planners
+        icon = align_to_china
+        x = 26
+        y = 2
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Invite_American_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Japanese_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_European_Partners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Russian_Planners
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Chinese_Planners
+        }
+
+        prerequisite = {
+            focus = POR_Attract_Foreign_Investors
+        }
+
+
+        completion_reward = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+                #################################
+                ### Add relation to China +20 ###
+                #################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #################################
+    ### Invite American Investors ###
+    #################################
+
+    focus = {
+        id = POR_Invite_US_Tech_Companies
+        icon = GFX_goal_generic_scientific_exchange
+        x = 8
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_American_Investors
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 1
+				uses = 2
+				category = electronics
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_American_Industries
+        icon = factory_complex
+        x = 9
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_US_Tech_Companies
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+                    random_owned_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = industrial_complex
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+            add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_American_Air_Industry_Expansion
+        icon = GFX_goal_generic_build_airforce
+        x = 8
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_US_Tech_Companies
+        }
+        prerequisite = {
+            focus = POR_Invite_American_Industries
+        }
+
+
+        completion_reward = {
+            air_experience = 15
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = arms_factory
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 2
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 2
+                        instant_build = yes
+                    }
+                }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #################################
+    ### Invite Japanese Investors ###
+    #################################
+
+    focus = {
+        id = POR_Invite_Japanese_Tech_Companies
+        icon = GFX_goal_generic_scientific_exchange
+        x = 12
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Japanese_Investors
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 1
+				uses = 2
+				category = electronics
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_Japanese_Industries
+        icon = GFX_focus_jap_zaibatsu
+        x = 11
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Japanese_Tech_Companies
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+                    random_owned_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = industrial_complex
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+            add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Japanese_Heavy_Industries
+        icon = GFX_goal_generic_construct_civ_factory
+        x = 12
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Japanese_Tech_Companies
+        }
+        prerequisite = {
+            focus = POR_Invite_Japanese_Industries
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 2
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 2
+                        instant_build = yes
+                    }
+                }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ################################
+    ### Invite European Partners ###
+    ################################
+
+    #########################
+    ### European Partners ###
+    #########################
+
+    focus = {
+        id = POR_Invite_German_Investors
+        icon = align_to_germany
+        x = 14
+        y = 3
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Invite_German_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_British_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_French_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Italian_Investors
+        }
+
+        prerequisite = {
+            focus = POR_Invite_European_Partners
+        }
+
+
+        completion_reward = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+            add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 2
+				category = industry
+			}
+                ###################################
+                ### Add relation to Germany +20 ###
+                ###################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_British_Investors
+        icon = align_to_britain
+        x = 16
+        y = 3
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Invite_German_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_British_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_French_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Italian_Investors
+        }
+
+        prerequisite = {
+            focus = POR_Invite_European_Partners
+        }
+
+
+        completion_reward = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+            add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 2
+				category = industry
+			}
+                ##################################
+                ### Add relation to the UK +20 ###
+                ##################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_French_Investors
+        icon = align_to_france
+        x = 18
+        y = 3
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Invite_German_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_British_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_French_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Italian_Investors
+        }
+
+        prerequisite = {
+            focus = POR_Invite_European_Partners
+        }
+
+
+        completion_reward = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+            add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 2
+				category = industry
+			}
+                ##################################
+                ### Add relation to Fracne +20 ###
+                ##################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_Italian_Investors
+        icon = align_to_italy
+        x = 20
+        y = 3
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Invite_German_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_British_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_French_Investors
+        }
+        mutually_exclusive = {
+            focus = POR_Invite_Italian_Investors
+        }
+
+        prerequisite = {
+            focus = POR_Invite_European_Partners
+        }
+
+
+        completion_reward = {
+            add_offsite_building = {
+                type = industrial_complex
+                level = 1
+                instant_build = yes
+            }
+            add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 2
+				category = industry
+			}
+                #################################
+                ### Add relation to Italy +20 ###
+                #################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ###########################
+    ### European Industries ###
+    ###########################
+
+    focus = {
+        id = POR_Developmet_Automobile_Industry 
+        icon = GFX_goal_generic_army_motorized
+        x = 15
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_German_Investors
+            focus = POR_Invite_British_Investors
+            focus = POR_Invite_French_Investors
+            focus = POR_Invite_Italian_Investors
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                add_equipment_to_stockpile = {
+                    type = motorized_equipment
+                    amount = 250
+                }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_European_Logistics
+        icon = align_to_europe
+        x = 19
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_German_Investors
+            focus = POR_Invite_British_Investors
+            focus = POR_Invite_French_Investors
+            focus = POR_Invite_Italian_Investors
+        }
+
+
+        completion_reward = {
+			add_ideas = POR_European_Logistics
+		}
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_German_Auto_Companies
+        icon = volkswagen
+        x = 14
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_German_Investors
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+                    random_owned_state = {
+                        add_extra_state_shared_building_slots = 2
+                        add_building_construction = {
+                            type = industrial_complex
+                            level = 2
+                            instant_build = yes
+                        }
+                    }
+                        random_owned_state = {
+                            add_extra_state_shared_building_slots = 1
+                            add_building_construction = {
+                                type = industrial_complex
+                                level = 1
+                                instant_build = yes
+                            }
+                        }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_British_Heavy_Industries
+        icon = GFX_focus_generic_industry_3
+        x = 16
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_British_Investors
+        }
+
+
+        completion_reward = {
+            navy_experience = 15
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+                    random_owned_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = dockyard
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+                        random_owned_state = {
+                            add_extra_state_shared_building_slots = 1
+                            add_building_construction = {
+                                type = dockyard
+                                level = 1
+                                instant_build = yes
+                            }
+                        }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_Airbus_Aerospace
+        icon = GFX_goal_generic_build_airforce
+        x = 18
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_French_Investors
+        }
+
+
+        completion_reward = {
+            air_experience = 15
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = arms_factory
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 2
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 2
+                        instant_build = yes
+                    }
+                }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_Italian_Motor_Vehicles_Industries
+        icon = GFX_focus_generic_industry_3
+        x = 20
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Italian_Investors
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+                    random_owned_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = industrial_complex
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+                        random_owned_state = {
+                            add_extra_state_shared_building_slots = 1
+                            add_building_construction = {
+                                type = industrial_complex
+                                level = 1
+                                instant_build = yes
+                            }
+                        }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ###############################
+    ### Invite Russian Planners ###
+    ###############################
+
+    focus = {
+        id = POR_Invite_Russian_Oil_Industry
+        icon = oil_trade
+        x = 22
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Russian_Planners
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 2
+				category = synth_resources
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_Russian_Aerospace_Company
+        icon = GFX_focus_rocketry
+        x = 23
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Russian_Oil_Industry
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+                    add_tech_bonus = {
+				        name = tech_bonus
+				        bonus = 1.0
+				        uses = 2
+				        category = rocketry
+			        }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Russian_Heavy_Industry
+        icon = GFX_goal_generic_construct_civ_factory
+        x = 22
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Russian_Oil_Industry
+        }
+        prerequisite = {
+            focus = POR_Invite_Russian_Aerospace_Company
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 2
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 2
+                        instant_build = yes
+                    }
+                }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ###############################
+    ### Invite Chinese Planners ###
+    ###############################
+
+    focus = {
+        id = POR_Invite_Chinese_Tech_Companies
+        icon = GFX_goal_generic_scientific_exchange
+        x = 26
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Chinese_Planners
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+            add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 1
+				uses = 2
+				category = electronics
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invite_Chinese_Industries
+        icon = factory_complex
+        x = 25
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Chinese_Tech_Companies
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 1
+                        instant_build = yes
+                    }
+                }
+                    random_owned_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = industrial_complex
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+            add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Chinese_Heavy_Industry
+        icon = GFX_goal_generic_construct_civ_factory
+        x = 26
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_Chinese_Tech_Companies
+        }
+        prerequisite = {
+            focus = POR_Invite_Chinese_Industries
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 2
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 2
+                        instant_build = yes
+                    }
+                }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ####################################
+    ### Everything Else For Industry ###
+    ####################################
+
+    focus = {
+        id = POR_Automobile_Industries
+        icon = GFX_goal_generic_army_motorized
+        x = 10
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invite_American_Investors
+            focus = POR_Invite_Japanese_Investors
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+                add_equipment_to_stockpile = {
+                    type = motorized_equipment
+                    amount = 250
+                }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Rare_Earth_Refining
+        icon = GFX_goal_generic_production2
+        x = 24
+        y = 3
+        cost = 14.4
+
+        prerequisite = {
+            focus = POR_Invite_Russian_Planners
+            focus = POR_Invite_Chinese_Planners
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+                    add_resource = {
+					    type = tungsten
+					    amount = 15
+				    }
+                    add_resource = {
+					    type = chromium
+					    amount = 10
+				    }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Purchase_Foreign_Licences
+        icon = GFX_focus_generic_license_production
+        x = 17
+        y = 6
+        cost = 10
+
+        prerequisite = {
+            focus = POR_American_Air_Industry_Expansion
+            focus = POR_Japanese_Heavy_Industries
+            focus = POR_Invite_German_Auto_Companies
+            focus = POR_Invite_British_Heavy_Industries
+            focus = POR_Invite_Airbus_Aerospace
+            focus = POR_Invite_Italian_Motor_Vehicles_Industries
+            focus = POR_Russian_Heavy_Industry
+            focus = POR_Chinese_Heavy_Industry
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Purchase_Foreign_Licences
+
+                ########################################
+                ### Add it where foreign liacenes    ###
+                ### has a lesser penalty to build it ###
+                ########################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ##########################
+    ###                    ###
+    ### European Army Tree ###
+    ###                    ###
+    ##########################
+    
+    focus = {
+        id = POR_Expand_The_Army_General_Staff
+        icon = GFX_focus_generic_military_mission
+        x = 32
+        y = 0
+        cost = 10
+
+
+        completion_reward = {
+            add_ideas = POR_Expand_The_Army_General_Staff
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Army_Reform
+        icon = GFX_focus_chi_army_reform
+        x = 32
+        y = 1
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Expand_The_Army_General_Staff
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                category = land_doctrine 
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_New_Equipment_Efforts
+        icon = GFX_goal_generic_small_arms
+        x = 29
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Army_Reform
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = infantry_tech
+				bonus = 0.75
+				uses = 2
+				category = infantry_weapons
+			} 
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Army_Doctrine
+        icon = GFX_goal_generic_army_doctrines
+        x = 32
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Army_Reform
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                category = land_doctrine 
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Army_Modernization_Effort
+        icon = GFX_focus_secret_rearmament
+        x = 36
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Army_Reform
+        }
+
+
+        completion_reward = {
+            army_experience = 10
+            add_tech_bonus = {
+				name = support_folder
+				bonus = 1
+				uses = 1
+				category = support_tech
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modernize_Our_Small_Arms
+        icon = GFX_goal_generic_army_artillery
+        x = 28
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_New_Equipment_Efforts
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = infantry_tech
+				bonus = 1
+				uses = 1
+				category = infantry_weapons
+			}
+            add_tech_bonus = {
+				name = artillery_bonus
+				bonus = 1
+				uses = 1
+				category = artillery
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modernize_Our_Field_Equipment
+        icon = GFX_goal_generic_army_artillery2
+        x = 30
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_New_Equipment_Efforts
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = artillery_bonus
+				bonus = 1
+				uses = 1
+				category = artillery
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Conduct_War_Games
+        icon = GFX_goal_generic_more_territorial_claims
+        x = 32
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Modern_Army_Doctrine
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                category = land_doctrine 
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Focus_On_Tanks
+        icon = GFX_goal_generic_army_tanks
+        x = 35
+        y = 3
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Focus_On_Tanks
+        }
+        mutually_exclusive = {
+            focus = POR_Focus_On_Infantry
+        }
+
+        prerequisite = {
+            focus = POR_Army_Modernization_Effort
+        }
+
+
+        completion_reward = {
+            army_experience = 10
+            add_ideas = POR_Focus_On_Tanks
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Focus_On_Infantry
+        icon = GFX_goal_rhineland
+        x = 37
+        y = 3
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Focus_On_Tanks
+        }
+        mutually_exclusive = {
+            focus = POR_Focus_On_Infantry
+        }
+
+        prerequisite = {
+            focus = POR_Army_Modernization_Effort
+        }
+
+
+        completion_reward = {
+            army_experience = 10
+            add_ideas = POR_Focus_On_Infantry
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Improve_Light_Mechanize_Infantry
+        icon = GFX_goal_generic_army_motorized
+        x = 38
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Focus_On_Infantry
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.5
+				uses = 2
+				category = cat_mechanized_equipment
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    
+    focus = {
+        id = POR_Special_Forces
+        icon = GFX_goal_generic_special_forces
+        x = 29
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Modernize_Our_Small_Arms
+
+        }
+        prerequisite = {
+            focus = POR_Modernize_Our_Field_Equipment            
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Special_Forces
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Signal_Companies
+        icon = GFX_goal_generic_position_armies
+        x = 35
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Tank_Modernization_Effort
+            focus = POR_Improve_our_Field_Hospitals
+            focus = POR_Improve_Light_Mechanize_Infantry
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = support_folder
+				bonus = 1
+				uses = 1
+				category = support_tech
+			}
+            ############################################
+            ### Change this to only Signal Companies ###
+            ###    Note: I don't know how to T~T     ###
+            ############################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Army_Logistics
+        icon = GFX_goal_generic_allies_build_infantry
+        x = 37
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Tank_Modernization_Effort
+            focus = POR_Improve_our_Field_Hospitals
+            focus = POR_Improve_Light_Mechanize_Infantry
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Modern_Army_Logistics
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Tank_Modernization_Effort
+        icon = GFX_focus_generic_army_tanks2
+        x = 34
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Focus_On_Tanks
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = tank_bonus
+				bonus = 0.50
+				uses = 2
+				category = armor
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Improve_our_Field_Hospitals
+        icon = support_wepons
+        x = 36
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Focus_On_Tanks
+            focus = POR_Focus_On_Infantry
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = support_folder
+				bonus = 1
+				uses = 1
+				category = support_tech
+			}
+            ###########################################
+            ### Change this to only Field Hospitals ###
+            ###    Note: I don't know how to T~T    ###
+            ###########################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Establish_A_Military_Academy
+        icon = GFX_focus_generic_military_academy
+        x = 32
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Modernize_Our_Small_Arms
+        }
+        prerequisite = {
+            focus = POR_Modernize_Our_Field_Equipment
+        }
+        prerequisite = {
+            focus = POR_Conduct_War_Games
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Establish_A_Military_Academy
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Small_Professional_Army
+        icon = GFX_focus_generic_manpower
+        x = 30
+        y = 6
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Small_Professional_Army
+        }
+        mutually_exclusive = {
+            focus = POR_Expand_Paramilitary_Forces
+        }
+        mutually_exclusive = {
+            focus = POR_Large_Standing_Army
+        }
+
+        prerequisite = {
+            focus = POR_Establish_A_Military_Academy
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Small_Professional_Army
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Expand_Paramilitary_Forces
+        icon = GFX_focus_focus_fra_maquis
+        x = 32
+        y = 6
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Small_Professional_Army
+        }
+        mutually_exclusive = {
+            focus = POR_Expand_Paramilitary_Forces
+        }
+        mutually_exclusive = {
+            focus = POR_Large_Standing_Army
+        }
+
+        prerequisite = {
+            focus = POR_Establish_A_Military_Academy
+        }
+
+
+        completion_reward = {
+            ###########################################
+            ### Make it where the Militia will get  ###
+            ### some boost and it takes a little    ### 
+            ### less time to train and some army xp ###
+            ###    Note: I don't know how to T~T    ###
+            ###########################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Large_Standing_Army
+        icon = GFX_focus_generic_little_entente
+        x = 34
+        y = 6
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Small_Professional_Army
+        }
+        mutually_exclusive = {
+            focus = POR_Expand_Paramilitary_Forces
+        }
+        mutually_exclusive = {
+            focus = POR_Large_Standing_Army
+        }
+
+        prerequisite = {
+            focus = POR_Establish_A_Military_Academy
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Large_Standing_Army
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ##########################
+    ###                    ###
+    ### European Navy Tree ###
+    ###                    ###
+    ##########################
+
+    focus = {
+        id = POR_Naval_Dockyard_Effort
+        icon = GFX_goal_generic_build_navy
+        x = 45
+        y = 0
+        cost = 7.2
+
+
+        completion_reward = {
+            navy_experience = 25
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Regional_Sea_Dominance
+        icon = GFX_focus_usa_focus_on_europe
+        x = 42
+        y = 1
+        cost = 7.2
+
+        mutually_exclusive = {
+            focus = POR_Regional_Sea_Dominance
+        }
+        mutually_exclusive = {
+            focus = POR_Total_Sea_Dominance
+        }
+
+        prerequisite = {
+            focus = POR_Naval_Dockyard_Effort
+        }
+
+
+        completion_reward = {
+            add_political_power = 150
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Total_Sea_Dominance
+        icon = GFX_focus_spr_anarchism_knows_no_borders
+        x = 48
+        y = 1
+        cost = 7.2
+
+        mutually_exclusive = {
+            focus = POR_Regional_Sea_Dominance
+        }
+        mutually_exclusive = {
+            focus = POR_Total_Sea_Dominance
+        }
+
+        prerequisite = {
+            focus = POR_Naval_Dockyard_Effort
+        }
+
+
+        completion_reward = {
+            add_political_power = 150
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Regional_Navel_Expansion_I
+        icon = GFX_goal_generic_construct_naval_dockyard
+        x = 40
+        y = 2
+        cost = 7.2
+
+        prerequisite = {
+            focus = POR_Regional_Sea_Dominance
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = dockyard
+                        level = 1
+                        instant_build = yes
+                    }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Submarine
+        icon = GFX_goal_generic_navy_submarine
+        x = 42
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Regional_Sea_Dominance
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = submarine_bonus
+				bonus = 1
+				uses = 1
+				category = ss_tech
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Corvettes
+        icon = GFX_goal_generic_navy_cruiser
+        x = 44
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Regional_Sea_Dominance
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = destroyer_bonus
+				bonus = 1
+				uses = 1
+				category = dd_tech
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Advanced_Aircraft_Carriers
+        icon = GFX_goal_generic_navy_carrier
+        x = 46
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Total_Sea_Dominance
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = carrier_bonus
+				bonus = 1
+				uses = 1
+				category = cv_tech
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Destroyers
+        icon = GFX_goal_generic_occupy_states_coastal
+        x = 48
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Total_Sea_Dominance            
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = cruiser_bonus
+				bonus = 1
+				uses = 1
+				category = ca_tech
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Total_Navel_Expansion_I
+        icon = GFX_goal_generic_construct_naval_dockyard
+        x = 50
+        y = 2
+        cost = 7.2
+
+        prerequisite = {
+            focus = POR_Total_Sea_Dominance            
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 1
+                    add_building_construction = {
+                        type = dockyard
+                        level = 1
+                        instant_build = yes
+                    }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Regional_Navel_Expansion_II
+        icon = GFX_goal_generic_construct_naval_dockyard
+        x = 40
+        y = 3
+        cost = 7.2
+
+        prerequisite = {
+            focus = POR_Regional_Navel_Expansion_I
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                    add_building_construction = {
+                        type = dockyard
+                        level = 2
+                        instant_build = yes
+                    }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Cargo_Ship_Production
+        icon = GFX_goal_generic_positive_trade_relations
+        x = 43
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Modern_Corvettes
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Cargo_Ship_Production
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Carrier-Based_Aircraft
+        icon = GFX_goal_generic_air_naval_bomber
+        x = 47
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Advanced_Aircraft_Carriers
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Carrer-Based_Aircraft
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Total_Navel_Expansion_II
+        icon = GFX_goal_generic_construct_naval_dockyard
+        x = 50
+        y = 3
+        cost = 7.2
+
+        prerequisite = {
+            focus = POR_Total_Navel_Expansion_I
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                    add_building_construction = {
+                        type = dockyard
+                        level = 2
+                        instant_build = yes
+                    }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Regional_Navel_Expansion_III
+        icon = GFX_goal_generic_construct_naval_dockyard
+        x = 40
+        y = 4
+        cost = 7.2
+
+        prerequisite = {
+            focus = POR_Regional_Navel_Expansion_II
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 3
+                    add_building_construction = {
+                        type = dockyard
+                        level = 3
+                        instant_build = yes
+                    }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Advance_Torpedo
+        icon = GFX_goal_generic_navy_anti_submarine
+        x = 42
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Modern_Submarine
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Advance_Torpedo
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Battlefleet
+        icon = GFX_goal_generic_navy_doctrines_tactics
+        x = 44
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Modern_Corvettes
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 2
+                category = cat_fleet_in_being
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Carrier_Warfare
+        icon = GFX_goal_generic_navy_doctrines_tactics
+        x = 46
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Advanced_Aircraft_Carriers
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 2
+                category = cat_base_strike
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Advanced_Missile_Cruisers
+        icon = GFX_goal_generic_navy_battleship
+        x = 48
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Modern_Destroyers
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+			    name = battleship_bonus
+				bonus = 1
+				uses = 1
+				category = bb_tech
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Total_Navel_Expansion_III
+        icon = GFX_goal_generic_construct_naval_dockyard
+        x = 50
+        y = 4
+        cost = 7.2
+
+        prerequisite = {
+            focus = POR_Total_Navel_Expansion_II
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 3
+                    add_building_construction = {
+                        type = dockyard
+                        level = 3
+                        instant_build = yes
+                    }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Study_Foreign_Ships_Design
+        icon = GFX_goal_generic_production2
+        x = 45
+        y = 5
+        cost = 14.4
+
+        prerequisite = {
+            focus = POR_Regional_Sea_Dominance
+            focus = POR_Total_Sea_Dominance
+        }
+
+
+        completion_reward = {
+            navy_experience = 25
+                add_tech_bonus = {
+				    name = submarine_bonus
+				    bonus = 0.25
+				    uses = 1
+				    category = ss_tech
+			    }
+                    add_tech_bonus = {
+				        name = destroyer_bonus
+				        bonus = 0.25
+				        uses = 1
+				        category = dd_tech
+			        }
+                        add_tech_bonus = {
+				            name = cruiser_bonus
+				            bonus = 0.25
+				            uses = 1
+				            category = ca_tech
+			            }
+                            add_tech_bonus = {
+			                    name = battleship_bonus
+				                bonus = 0.25
+				                uses = 1
+				                category = bb_tech
+			                }
+                                add_tech_bonus = {
+				                    name = carrier_bonus
+				                    bonus = 0.25
+				                    uses = 1
+				                    category = cv_tech
+			                    }
+
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Mission_to_American_Naval_Yards
+        icon = GFX_focus_chi_mission_to_the_us
+        x = 44
+        y = 6
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Mission_to_American_Naval_Yards
+        }
+        mutually_exclusive = {
+            focus = POR_Mission_to_British_Naval_Yards
+        }
+
+        prerequisite = {
+            focus = POR_Study_Foreign_Ships_Design
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+			    name = battleship_bonus
+				    bonus = 0.25
+				    uses = 1
+				    category = bb_tech
+			    }
+                    add_tech_bonus = {
+				        name = carrier_bonus
+				        bonus = 0.25
+				        uses = 1
+				        category = cv_tech
+			        }
+                        add_ideas = POR_Mission_to_American_Naval_Yards
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Mission_to_British_Naval_Yards
+        icon = GFX_focus_chi_british_cooperation
+        x = 46
+        y = 6
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Mission_to_American_Naval_Yards
+        }
+        mutually_exclusive = {
+            focus = POR_Mission_to_British_Naval_Yards
+        }
+
+        prerequisite = {
+            focus = POR_Study_Foreign_Ships_Design
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = destroyer_bonus
+				bonus = 0.25
+				uses = 1
+			    category = dd_tech
+			}
+                add_tech_bonus = {
+				    name = cruiser_bonus
+				    bonus = 0.25
+				    uses = 1
+				    category = ca_tech
+			    }
+                    add_ideas = POR_Mission_to_British_Naval_Yards
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #########################
+    ###                   ###
+    ### European Air Tree ###
+    ###                   ###
+    #########################
+
+    focus = {
+        id = POR_Expand_The_Airforce
+        icon = GFX_goal_generic_air_production
+        x = 55
+        y = 0
+        cost = 10
+
+
+        completion_reward = {
+            air_experience = 5
+            random_owned_state = {
+                add_building_construction = {
+                    type = air_base
+                    level = 2
+                    instant_build = yes
+                }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Acquire_American_Fighters
+        icon = GFX_goal_unknown
+        x = 52
+        y = 1
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Acquire_American_Fighters
+        }
+        mutually_exclusive = {
+            focus = POR_Acquire_Chinese_Fighters
+        }
+        mutually_exclusive = {
+            focus = POR_Acquire_Russian_Fighters
+        }
+
+        prerequisite = {
+            focus = POR_Expand_The_Airforce
+        }
+
+
+        completion_reward = {
+            add_equipment_to_stockpile = {
+
+            }
+            ##########################################
+            ### Add 25 US Fighter to the stockpile ###
+            ###    Note: I don't know how to T~T   ###
+            ##########################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_American_Quality
+        icon = GFX_focus_usa_recruit_the_free_corps
+        x = 52
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Acquire_American_Fighters
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_American_Quality
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Acquire_Russian_Fighters
+        icon = GFX_goal_unknown
+        x = 58
+        y = 1
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Acquire_American_Fighters
+        }
+        mutually_exclusive = {
+            focus = POR_Acquire_Chinese_Fighters
+        }
+        mutually_exclusive = {
+            focus = POR_Acquire_Russian_Fighters
+        }
+
+        prerequisite = {
+            focus = POR_Expand_The_Airforce
+        }
+
+
+        completion_reward = {
+            add_equipment_to_stockpile = {
+                
+            }
+            ###############################################
+            ### Add 25 Chinese Fighter to the stockpile ###
+            ###    Note: I don't know how to T~T        ###
+            ###############################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Russian_Rocketry
+        icon = GFX_focus_rocketry
+        x = 58
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Acquire_Russian_Fighters
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = rocketry
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Acquire_Chinese_Fighters
+        icon = GFX_goal_unknown
+        x = 55
+        y = 1
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Acquire_American_Fighters
+        }
+        mutually_exclusive = {
+            focus = POR_Acquire_Chinese_Fighters
+        }
+        mutually_exclusive = {
+            focus = POR_Acquire_Russian_Fighters
+        }
+
+        prerequisite = {
+            focus = POR_Expand_The_Airforce
+        }
+
+
+        completion_reward = {
+            add_equipment_to_stockpile = {
+                
+            }
+            ###############################################
+            ### Add 25 Russian Fighter to the stockpile ###
+            ###    Note: I don't know how to T~T        ###
+            ###############################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Air_Warfare
+        icon = GFX_goal_generic_air_doctrine
+        x = 55
+        y = 2
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Acquire_American_Fighters
+            focus = POR_Acquire_Chinese_Fighters
+            focus = POR_Acquire_Russian_Fighters
+        }
+
+
+        completion_reward = {
+            air_experience = 15
+            add_tech_bonus = {
+                bonus = 0.50
+                uses = 1
+                category = air_doctrine 
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Quantity_Over_Quality
+        icon = GFX_goal_generic_neutrality_focus
+        x = 54
+        y = 3
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Quantity_Over_Quality
+        }
+        mutually_exclusive = {
+            focus = POR_Quality_Over_Quantity
+        }
+
+        prerequisite = {
+            focus = POR_Modern_Air_Warfare
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                category = air_doctrine 
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Quality_Over_Quantity
+        icon = GFX_goal_generic_neutrality_focus
+        x = 56
+        y = 3
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Modern_Air_Warfare
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                category = air_doctrine 
+            } 
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Advance_Fighter_Jets
+        icon = GFX_goal_generic_air_fighter2
+        x = 57
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Quality_Over_Quantity
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Advance_Fighter_Jets
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Mass_Production_Of_Bombers
+        icon = GFX_goal_generic_air_bomber
+        x = 53
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Mass_Production_Fighter_Jets
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Mass_Production_Of_Bombers
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Modern_Air_Doctrine
+        icon = GFX_goal_generic_air_doctrine
+        x = 55
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Establish_A_Fighter_Academy
+        }
+
+
+        completion_reward = {
+            add_tech_bonus = {
+                bonus = 1
+                uses = 1
+                category = air_doctrine 
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Advance_Bombers
+        icon = drone
+        x = 57
+        y = 5
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Advance_Fighter_Jets
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Advance_Bombers
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Mass_Production_Fighter_Jets
+        icon = GFX_goal_generic_air_fighter
+        x = 53
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Quantity_Over_Quality
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Mass_Production_Fighter_Jets
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Establish_A_Fighter_Academy
+        icon = GFX_focus_generic_military_academy
+        x = 55
+        y = 4
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Quantity_Over_Quality
+            focus = POR_Quality_Over_Quantity
+        }
+
+
+        completion_reward = {
+            
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Aircraft_Design_Deals
+        icon = GFX_focus_generic_license_production
+        x = 55
+        y = 6
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Mass_Production_Of_Bombers
+            focus = POR_Modern_Air_Doctrine
+            focus = POR_Advance_Bombers
+        }
+
+
+        completion_reward = {
+            ############################################
+            ### Make a decision to buy aircraft from ###
+            ### the nation that you acquire fighters ###
+            ### from. if you can plzzz :D            ###
+            ###    Note: I don't know how to T~T     ###
+            ############################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ######################
+    ###                ###
+    ### Political Tree ###
+    ###                ###
+    ######################
+
+    focus = {
+        id = POR_Political_Effect
+        icon = GFX_goal_generic_propaganda
+        x = 32
+        y = 7
+        cost = 10
+
+
+        completion_reward = {
+            add_political_power = 100
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #################
+    ###           ###
+    ### Democracy ###
+    ###           ###
+    #################
+
+    focus = {
+        id = POR_Path_to_Freedom
+        icon = GFX_goal_support_democracy
+        x = 31
+        y = 8
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Path_to_Freedom
+        }
+        mutually_exclusive = {
+            focus = POR_National_Strength
+        }
+
+        prerequisite = {
+            focus = POR_Political_Effect
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Individual_Freedom
+                days = 365
+            }
+            add_stability = 0.05
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ###########################
+    ###                     ###
+    ### Democratic Progress ###
+    ###                     ###
+    ###########################
+
+    focus = {
+        id = POR_Path_of_Democratic_Progress
+        icon = GFX_focus_generic_diplomatic_treaty
+        x = 15
+        y = 9
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Path_of_Democratic_Progress
+        }
+        mutually_exclusive = {
+            focus = POR_Path_of_Democratic_Freedoms
+        }
+        mutually_exclusive = {
+            focus = POR_Path_of_Democratic_Values
+        }
+
+        prerequisite = {
+            focus = POR_Path_to_Freedom
+        }
+
+
+        completion_reward = {
+            add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.05
+			}
+            add_popularity = {
+				ideology = progressive
+				popularity = 0.05
+			}
+            add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #################
+    ### Socialism ###
+    #################
+    
+    focus = {
+        id = POR_Socialism
+        icon = GFX_goal_support_democracy
+        x = 13
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Socialism
+        }
+        mutually_exclusive = {
+            focus = POR_Social_Democracy
+        }
+        mutually_exclusive = {
+            focus = POR_Progressivism
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Democratic_Progress
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Leftist_Doctrine
+                days = 1095
+            }
+            fourth_estate_democratic_socialist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Redistribution_of_Wealth
+        icon = GFX_goal_anti_comintern_pact
+        x = 13
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Socialism
+        }
+
+
+        completion_reward = {
+            fourth_estate_democratic_socialist_increase = yes
+            add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.10
+			}
+            add_ideas = POR_Redistribution_of_Wealth
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Nationalize_All_Industries
+        icon = GFX_goal_generic_soviet_construction
+        x = 13
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Redistribution_of_Wealth
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+            fourth_estate_democratic_socialist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ########################
+    ### Social Democracy ###
+    ########################
+
+    focus = {
+        id = POR_Social_Democracy
+        icon = Social_democracy
+        x = 15
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Socialism
+        }
+        mutually_exclusive = {
+            focus = POR_Social_Democracy
+        }
+        mutually_exclusive = {
+            focus = POR_Progressivism
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Democratic_Progress
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Social_Democratic_Doctrine
+                days = 1095
+            }
+            fourth_estate_social_democrat_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Strengthen_Unions
+        icon = GFX_focus_eng_concessions_to_the_trade_unions
+        x = 15
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Socialism
+            focus = POR_Social_Democracy
+            focus = POR_Progressivism
+        }
+
+
+        completion_reward = {
+            fourth_estate_social_democrat_increase = yes
+                add_stability = -0.05
+                add_popularity = {
+				    ideology = social_democrat
+				    popularity = 0.10
+			    }
+                    add_ideas = POR_Strong_Unions
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Protect_Workers_Rights
+        icon = work_red
+        x = 15
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Strengthen_Unions
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Protect_Workers_Rights
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #####################
+    ### Progressivism ###
+    #####################
+    
+    focus = {
+        id = POR_Progressivism
+        icon = leftism
+        x = 17
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Socialism
+        }
+        mutually_exclusive = {
+            focus = POR_Social_Democracy
+        }
+        mutually_exclusive = {
+            focus = POR_Progressivism
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Democratic_Progress
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Progressive_Doctrine
+                days = 1095
+            }
+            fourth_estate_progressive_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Environmental_Policy
+        icon = GFX_focus_generic_treaty
+        x = 17
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Progressivism
+        }
+
+
+        completion_reward = {
+            fourth_estate_progressive_increase = yes
+            add_stability = -0.05
+            add_ideas = POR_Environmental_Policy
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Net-Zero_Emissions
+        icon = global_hegemony
+        x = 17
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Environmental_Policy
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Carbon_Tax
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    ###########################
+    ###                     ###
+    ### Democratic Freedoms ###
+    ###                     ###
+    ###########################
+
+    focus = {
+        id = POR_Path_of_Democratic_Freedoms
+        icon = GFX_goal_generic_alliance
+        x = 22
+        y = 9
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Path_of_Democratic_Progress
+        }
+        mutually_exclusive = {
+            focus = POR_Path_of_Democratic_Freedoms
+        }
+        mutually_exclusive = {
+            focus = POR_Path_of_Democratic_Values
+        }
+
+        prerequisite = {
+            focus = POR_Path_to_Freedom
+        }
+
+
+        completion_reward = {
+            add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+            add_popularity = {
+				ideology = social_liberal
+				popularity = 0.05
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #########################
+    ### Social Liberalism ###
+    #########################
+
+    focus = {
+        id = POR_Social_Liberalism
+        icon = libertarianism
+        x = 20
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Social_Liberalism
+        }
+        mutually_exclusive = {
+            focus = POR_Liberalism
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Democratic_Freedoms
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Liberal_Doctrine
+                days = 1095
+            }
+            fourth_estate_social_liberal_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Encourage_Immigration
+        icon = nordic_resistance_movement
+        x = 19
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Social_Democracy
+            focus = POR_Progressivism
+            focus = POR_Social_Liberalism
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Immigrant_Influx
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Jobs_for_Immigrants
+        icon = industry_communist2
+        x = 19
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Encourage_Immigration
+        }
+
+
+        completion_reward = {
+            add_stability = -0.05
+                random_owned_state = {
+                    add_extra_state_shared_building_slots = 2
+                    add_building_construction = {
+                        type = industrial_complex
+                        level = 2
+                        instant_build = yes
+                    }
+                }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Social_Freedoms
+        icon = GFX_focus_spr_torchbearers_of_tomorrow
+        x = 21
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Social_Liberalism
+        }
+
+
+        completion_reward = {
+            fourth_estate_social_liberal_increase = yes
+            add_stability = -0.05
+            add_popularity = {
+				ideology = social_liberal
+				popularity = 0.10
+			}
+            add_ideas = POR_Social_Freedoms
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Social_Programs
+        icon = GFX_focus_generic_concessions
+        x = 21
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Social_Freedoms
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Social_Programs
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ##################
+    ### Liberalism ###
+    ##################
+
+    focus = {
+        id = POR_Liberalism
+        icon = libertarianism
+        x = 24
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Social_Liberalism
+        }
+        mutually_exclusive = {
+            focus = POR_Liberalism
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Democratic_Freedoms
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Capitalist_Doctrine
+                days = 1095
+            }
+            fourth_estate_market_liberal_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Economic_Freedom
+        icon = industry_democratic4
+        x = 23
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Liberalism
+        }
+
+
+        completion_reward = {
+            fourth_estate_market_liberal_increase = yes
+            add_stability = -0.05
+            add_popularity = {
+				ideology = market_liberal
+				popularity = 0.10
+			}
+            add_ideas = POR_Economic_Freedom
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Free_Market_Driven_Economy
+        icon = GFX_goal_generic_positive_trade_relations
+        x = 23
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Economic_Freedom
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Market_Economy
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #########################
+    ###                   ###
+    ### Democratic Values ###
+    ###                   ###
+    #########################
+
+    focus = {
+        id = POR_Path_of_Democratic_Values
+        icon = GFX_goal_generic_neutrality_focus
+        x = 29
+        y = 9
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Path_of_Democratic_Progress
+        }
+        mutually_exclusive = {
+            focus = POR_Path_of_Democratic_Freedoms
+        }
+        mutually_exclusive = {
+            focus = POR_Path_of_Democratic_Values
+        }
+
+        prerequisite = {
+            focus = POR_Path_to_Freedom
+        }
+
+
+        completion_reward = {
+            add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+            add_popularity = {
+				ideology = reactionary
+				popularity = 0.05
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ####################
+    ### Conservatism ###
+    ####################
+
+    focus = {
+        id = POR_Conservatism
+        icon = GFX_goal_support_democracy
+        x = 27
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Conservatism
+        }
+        mutually_exclusive = {
+            focus = POR_Reactionary_Democracy
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Democratic_Values
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Conservative_Doctrine
+                days = 1095
+            }
+            fourth_estate_conservative_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Family_Values
+        icon = GFX_focus_generic_support_the_left_right
+        x = 27
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Conservatism
+        }
+
+
+        completion_reward = {
+            fourth_estate_conservative_increase = yes
+            add_stability = -0.05
+            add_popularity = {
+				ideology = conservative
+				popularity = 0.10
+			}
+            add_ideas = POR_Family_Values
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Oppose_Progressives
+        icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+        x = 27
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Family_Values
+        }
+
+
+        completion_reward = {
+            add_stability = 0.10
+            fourth_estate_progressive_decrease = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Expand_Private_Industries
+        icon = industry_democratic2
+        x = 25
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Liberalism
+            focus = POR_Conservatism
+            focus = POR_Reactionary_Democracy
+        }
+
+
+        completion_reward = {
+            random_owned_state = {
+                add_extra_state_shared_building_slots = 2
+                add_building_construction = {
+                    type = industrial_complex
+                    level = 2
+                    instant_build = yes
+                }
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Market_Driven_Economy
+        icon = GFX_goal_generic_trade
+        x = 25
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Expand_Private_Industries
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Market_Driven_Economy
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ####################
+    ### Conservatism ###
+    ####################
+
+    focus = {
+        id = POR_Reactionary_Democracy
+        icon = GFX_goal_support_democracy
+        x = 31
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Conservatism
+        }
+        mutually_exclusive = {
+            focus = POR_Reactionary_Democracy
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Democratic_Values
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Reactionary_Doctrine
+                days = 1095
+            }
+            fourth_estate_reactionary_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Reduce_Government_Spending
+        icon = GFX_focus_generic_treaty
+        x = 29
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Conservatism
+            focus = POR_Reactionary_Democracy
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Low_Government_Spending
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Increase_Military_Spending
+        icon = GFX_focus_generic_tank_production
+        x = 29
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Reduce_Government_Spending
+        }
+
+
+        completion_reward = {
+            add_stability = -0.05
+            add_war_support = 0.05
+            add_ideas = POR_Large_Military_Spending
+            random_owned_state = {
+                        add_extra_state_shared_building_slots = 2
+                        add_building_construction = {
+                            type = arms_factory
+                            level = 2
+                            instant_build = yes
+                        }
+                    }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Make_Deals_with_the_Oligarchs
+        icon = GFX_goal_generic_improve_relations
+        x = 31
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Reactionary_Democracy
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Oligarchs_Support
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_National_Security
+        icon = GFX_focus_generic_little_entente
+        x = 31
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Make_Deals_with_the_Oligarchs
+        }
+
+
+        completion_reward = {
+            fourth_estate_reactionary_increase = yes
+            add_stability = -0.05
+            add_popularity = {
+				ideology = reactionary
+				popularity = 0.10
+			}
+            add_ideas = POR_National_Security
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ######################
+    ###                ###
+    ### Rgiht is Right ###
+    ###                ###
+    ######################
+
+    focus = {
+        id = POR_National_Strength
+        icon = GFX_goal_generic_political_pressure
+        x = 33
+        y = 8
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Path_to_Freedom
+        }
+        mutually_exclusive = {
+            focus = POR_National_Strength
+        }
+
+        prerequisite = {
+            focus = POR_Political_Effect
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_National_Strength
+                days = 365
+            }
+            add_stability = -0.05
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ############
+    ### Reds ###
+    ############
+
+    focus = {
+        id = POR_Path_of_Equality
+        icon = GFX_focus_generic_join_comintern
+        x = 34
+        y = 9
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Path_of_Equality
+        }
+        mutually_exclusive = {
+            focus = POR_Path_of_Order
+        }
+
+        prerequisite = {
+            focus = POR_National_Strength
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Path_of_Equality
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Communist_Values
+        icon = GFX_goal_support_communism
+        x = 34
+        y = 10
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Path_of_Equality
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Marxist_Doctrine
+                days = 1095
+            }
+            fourth_estate_communist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Government_Control_Trade_Unions
+        icon = GFX_focus_eng_concessions_to_the_trade_unions
+        x = 33
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Communist_Values
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Government_Control_Trade_Unions
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Agricultural_Collectivization
+        icon = GFX_focus_prc_agrarian_socialism
+        x = 35
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Communist_Values
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Agricultural_Collectivization
+                days = 250
+            }
+            random_owned_state = {
+			    add_manpower = -15000
+                add_extra_state_shared_building_slots = 2
+			}
+		    random_owned_state = {
+			    add_manpower = -15000
+                add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+			    add_manpower = -15000
+                add_extra_state_shared_building_slots = 2
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Concessions_to_Loyal_Workers
+        icon = GFX_focus_generic_concessions
+        x = 33
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Government_Control_Trade_Unions
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Concessions_to_Loyal_Workers
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Liberated_Workers
+        icon = work_red
+        x = 35
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Agricultural_Collectivization
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Liberated_Workers
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #####################
+    ###               ###
+    ### Path of Order ###
+    ###               ###
+    #####################
+
+    focus = {
+        id = POR_Path_of_Order
+        icon = GFX_goal_generic_demand_territory
+        x = 44
+        y = 9
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Path_of_Equality
+        }
+        mutually_exclusive = {
+            focus = POR_Path_of_Order
+        }
+
+        prerequisite = {
+            focus = POR_National_Strength
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Path_of_Order
+                days = 730
+            }
+            add_popularity = {
+				ideology = nationalist
+				popularity = 0.05
+			}
+            add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+            add_popularity = {
+				ideology = monarchist
+				popularity = 0.05
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ###############
+    ### Fascism ###
+    ###############
+
+    focus = {
+        id = POR_Fascism
+        icon = GFX_goal_support_fascism
+        x = 38
+        y = 10
+        cost = 10
+        
+        mutually_exclusive = {
+            focus = POR_Fascism
+        }
+        mutually_exclusive = {
+            focus = POR_Nationalism
+        }
+        mutually_exclusive = {
+            focus = POR_Monarchism
+        }
+        mutually_exclusive = {
+            focus = POR_Islamism
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Order
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Neo-Fascist_Doctrine
+                days = 1095
+            }
+            fourth_estate_fascist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Cult_of_Personality
+        icon = GFX_focus_spr_masters_of_our_own_fate
+        x = 37
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Fascism
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Cult_of_Personality
+            add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+            fourth_estate_fascist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Corporatism
+        icon = GFX_goal_generic_production2
+        x = 37
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Cult_of_Personality
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Corporatism
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Racial_Laws
+        icon = GFX_focus_ger_reichskommisariats
+        x = 39
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Fascism
+            focus = POR_Nationalism
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Racial_Laws
+            add_popularity = {
+				ideology = fascist
+				popularity = 0.10
+			}
+            fourth_estate_fascist_increase = yes
+            fourth_estate_nationalist_decrease = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Ban_on_Immigration
+        icon = GFX_focus_generic_strike_at_democracy2
+        x = 39
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Racial_Laws
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Ban_on_Immigration
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Pro-War_Propaganda
+        icon = GFX_goal_generic_propaganda
+        x = 41
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Fascism
+            focus = POR_Nationalism
+        }
+
+
+        completion_reward = {
+            add_war_support = 0.25
+            add_stability = -0.10
+            add_popularity = {
+				ideology = nationalist
+				popularity = 0.05
+			}
+            fourth_estate_fascist_increase = yes
+            fourth_estate_nationalist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Promote_Parmilitary_Organizations
+        icon = GFX_focus_generic_military_mission
+        x = 41
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Pro-War_Propaganda
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Paramilitary_Support
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ####################
+    ### Nationalism  ###
+    ####################
+
+    focus = {
+        id = POR_Nationalism
+        icon = GFX_goal_tfv_saf_support_ossebrandwag
+        x = 42
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Fascism
+        }
+        mutually_exclusive = {
+            focus = POR_Nationalism
+        }
+        mutually_exclusive = {
+            focus = POR_Monarchism
+        }
+        mutually_exclusive = {
+            focus = POR_Islamism
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Order
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Nationalist_Doctrine
+                days = 1095
+            }
+            fourth_estate_nationalist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Emergency_Powers
+        icon = dangerous_laws
+        x = 43
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Nationalism
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Emergency_Powers
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Economic_Interventionism
+        icon = GFX_goal_generic_forceful_treaty
+        x = 43
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Emergency_Powers
+        }
+
+
+        completion_reward = {
+            add_stability = -0.05
+            add_ideas = POR_Economic_Interventionism
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ###################
+    ### Monarchism  ###
+    ###################
+
+    focus = {
+        id = POR_Monarchism
+        icon = GFX_goal_tfv_strengthen_commonwealth_ties
+        x = 46
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Fascism
+        }
+        mutually_exclusive = {
+            focus = POR_Nationalism
+        }
+        mutually_exclusive = {
+            focus = POR_Monarchism
+        }
+        mutually_exclusive = {
+            focus = POR_Islamism
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Order
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Royal_Doctrine
+                days = 1095
+            }
+            fourth_estate_monarchist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Ensure_Support_for_the_Nobility
+        icon = GFX_focus_generic_monarchy_2
+        x = 45
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Monarchism
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Nobility
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_More_Power_to_the_King
+        icon = monarchy5
+        x = 47
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Monarchism
+        }
+
+
+        completion_reward = {
+            add_political_power = 150
+            add_popularity = {
+				ideology = monarchist
+				popularity = 0.10
+			}
+            fourth_estate_monarchist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Cult_of_the_King
+        icon = GFX_focus_rom_royal_dictatorship
+        x = 45
+        y = 12  
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Ensure_Support_for_the_Nobility
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Cult_of_the_King
+            add_popularity = {
+				ideology = monarchist
+				popularity = 0.05
+			}
+            fourth_estate_monarchist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Established_the_Royal_Guard
+        icon = GFX_focus_generic_home_defense
+        x = 47
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_More_Power_to_the_King
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_The_Royal_Guard
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #################
+    ### Islamism  ###
+    #################
+
+    focus = {
+        id = POR_Islamism
+        icon = align_to_pakistan
+        x = 51
+        y = 10
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Fascism
+        }
+        mutually_exclusive = {
+            focus = POR_Nationalism
+        }
+        mutually_exclusive = {
+            focus = POR_Monarchism
+        }
+        mutually_exclusive = {
+            focus = POR_Islamism
+        }
+
+        prerequisite = {
+            focus = POR_Path_of_Order
+        }
+
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = POR_Path_of_Allah
+                days = 1095
+            }
+            fourth_estate_islamist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Establish_Shariah_Police
+        icon = military_mission2
+        x = 49
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Islamism
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Shariah_Police
+            fourth_estate_islamist_increase = yes
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Shariah_Law_Code
+        icon = constitution
+        x = 51
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Islamism
+        }
+
+
+        completion_reward = {
+            fourth_estate_islamist_increase = yes
+            add_political_power = 150
+            add_stability = -0.15
+            add_popularity = {
+				ideology = islamist
+				popularity = 0.10
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Islamic_Militias
+        icon = GFX_goal_generic_military_sphere
+        x = 49
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Establish_Shariah_Police
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Muslim_Militia
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_United_in_Religion
+        icon = GFX_focus_TUR_loosen_the_laws_on_secularism
+        x = 51
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Shariah_Law_Code
+        }
+
+
+        completion_reward = {
+            fourth_estate_islamist_increase = yes
+            add_political_power = 75
+            add_stability = 0.10
+            add_popularity = {
+				ideology = islamist
+				popularity = 0.15
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Legalize_Child_Marriage
+        icon = GFX_goal_generic_forceful_treaty
+        x = 53
+        y = 11
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Islamism
+        }
+
+
+        completion_reward = {
+            fourth_estate_islamist_increase = yes
+            add_ideas = POR_Legalize_Child_Marriage
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Ban_Gay_Marriage
+        icon = generic_LGBT_flag
+
+        ######################################
+        ### Can you put a Red Circle Cross ###
+        ### on the gay flag pleace         ###
+        ######################################
+
+        x = 53
+        y = 12
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Legalize_Child_Marriage
+        }
+
+
+        completion_reward = {
+            
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ####################
+    ###              ###
+    ### Other People ###
+    ###              ###
+    ####################
+
+    focus = {
+        id = POR_Reckless_Progress
+        icon = GFX_focus_research
+        x = 15
+        y = 13
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Nationalize_All_Industries
+            focus = POR_Protect_Workers_Rights
+            focus = POR_Net-Zero_Emissions
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Reckless_Progress
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Commerce_Efficiency
+        icon = industry_democratic3
+        x = 22
+        y = 13
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Social_Programs
+            focus = POR_Free_Market_Driven_Economy
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Commerce_Efficiency
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Realpolitik
+        icon = GFX_goal_demand_sudetenland
+        x = 29
+        y = 13
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Oppose_Progressives
+            focus = POR_National_Security
+        }
+
+
+        completion_reward = {
+            fourth_estate_conservative_increase = yes
+            fourth_estate_reactionary_increase = yes
+            add_political_power = 250
+            add_ideas = POR_Realpolitik
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Will_of_the_People
+        icon = GFX_focus_YUG_pan_slavic_congress
+        x = 34
+        y = 13
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Concessions_to_Loyal_Workers
+        }
+        prerequisite = {
+            focus = POR_Liberated_Workers
+        }
+
+
+        completion_reward = {
+            fourth_estate_communist_increase = yes
+            add_ideas = POR_Will_of_the_People
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Unity_and_Nation
+        icon = GFX_focus_generic_little_entente
+        x = 40
+        y = 13
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Ban_on_Immigration
+        }
+        prerequisite = {
+            focus = POR_Promote_Parmilitary_Organizations
+        }
+
+
+        completion_reward = {
+            fourth_estate_nationalist_increase = yes
+            fourth_estate_fascist_increase = yes
+            add_war_support = 0.05
+            add_ideas = POR_Army_of_Purity
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_The_Values_of_Old
+        icon = monarchy2
+        x = 46
+        y = 13
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Cult_of_the_King
+        }
+        prerequisite = {
+            focus = POR_Established_the_Royal_Guard
+        }
+
+
+        completion_reward = {
+            fourth_estate_monarchist_increase = yes
+            add_ideas = POR_National_Heritage
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Jihad
+        icon = jihad
+        x = 51
+        y = 13
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Islamic_Militias
+        }
+        prerequisite = {
+            focus = POR_United_in_Religion
+        }
+        prerequisite = {
+            focus = POR_Ban_Gay_Marriage
+        }
+
+
+        completion_reward = {
+            fourth_estate_islamist_increase = yes
+			add_ideas = idea_focus_generic_jihad
+			#Trigger the global news event.
+			news_event = news.2
+			#If the faction is not ideal, leave it.
+			if = {
+				limit = {
+					is_in_faction = yes
+					is_faction_leader = no
+					any_country = {
+						is_in_faction_with = ROOT
+						OR = {
+							NOT = { has_government = islamist }
+							islamist < 0.25
+						}
+					}
+				}
+				random_country = {
+					limit = {
+						is_in_faction_with = ROOT
+						is_faction_leader = yes
+					}
+					remove_from_faction = ROOT
+				}
+			}
+			#Everybody should hate them; except for Islamists of their confession
+			if = {
+				limit = { 
+					OR = {
+						has_country_flag = sunni_islam 
+						AND = {	#The rare case of Ibadi or Bug.
+							NOT = { has_country_flag = sunni_islam }
+							NOT = { has_country_flag = shia_islam }
+						}
+					}
+				}
+				every_country = {
+					limit = {
+						OR = {
+							has_country_flag = shia_islam
+							NOT = { has_government = islamist }
+						}
+					}
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = terrorist_menace
+					}
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = terrorist_menace_trade
+					}
+				}
+			}
+			if = {
+				limit = { 
+					has_country_flag = shia_islam 
+				}
+				every_country = {
+					limit = {
+						OR = {
+							has_country_flag = sunni_islam
+							NOT = { has_government = islamist }
+						}
+					}
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = terrorist_menace
+					}
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = terrorist_menace_trade
+					}
+				}
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ############################
+    ###                      ###
+    ### Bonus Political Tree ###
+    ###                      ###
+    ############################
+
+    focus = {
+        id = POR_Political_Policies
+        icon = GFX_focus_generic_self_management
+        x = 32
+        y = 14
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Reckless_Progress
+            focus = POR_Commerce_Efficiency
+            focus = POR_Realpolitik
+            focus = POR_Will_of_the_People
+            focus = POR_Unity_and_Nation
+            focus = POR_The_Values_of_Old
+            focus = POR_Jihad
+        }
+
+
+        completion_reward = {
+            add_political_power = 100
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    #########################
+    ### Internal Politics ###
+    #########################
+
+    focus = {
+        id = POR_Internal_Politics
+        icon = GFX_goal_generic_improve_relations
+        x = 29
+        y = 15
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Political_Policies
+        }
+
+
+        completion_reward = {
+            add_political_power = 75
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Demographic_Studies
+        icon = GFX_focus_generic_treaty
+        x = 26
+        y = 16
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Internal_Politics
+        }
+
+
+        completion_reward = {
+            add_political_power = 50
+            add_stability = 0.02
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Secure_National_Unity
+        icon = GFX_goal_generic_national_unity
+        x = 28
+        y = 16
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Internal_Politics
+        }
+
+
+        completion_reward = {
+            add_war_support = 0.05
+            add_stability = 0.05
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Recruit_more_Administrators
+        icon = GFX_goal_generic_intelligence_exchange
+        x = 30
+        y = 16
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Internal_Politics
+        }
+
+
+        completion_reward = {
+            add_political_power = 25
+            add_war_support = 0.05
+
+            ##########################################################
+            ###                                                    ###
+            ### Popularity increase depends on the ruling ideology ###
+            ###                                                    ###
+            ##########################################################
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Traditional_Values
+        icon = GFX_focus_generic_support_the_left_right
+        x = 25
+        y = 17
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Traditional_Values
+        }
+        mutually_exclusive = {
+            focus = POR_Mobilize_the_Female_Workforce
+        }
+
+        prerequisite = {
+            focus = POR_Demographic_Studies
+        }
+
+
+        completion_reward = {
+            add_ideas = ROR_Male_Workforce
+            add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+            add_popularity = {
+				ideology = reactionary
+				popularity = 0.05
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Mobilize_the_Female_Workforce
+        icon = GFX_goal_unknown ##########################################
+        x = 27                  ### GFX called Woman_In_The_Workforces ###
+        y = 17                  ##########################################
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Traditional_Values
+        }
+        mutually_exclusive = {
+            focus = POR_Mobilize_the_Female_Workforce
+        }
+
+        prerequisite = {
+            focus = POR_Demographic_Studies
+        }
+        prerequisite = {
+            focus = POR_Secure_National_Unity
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Equal_Workforce
+            add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.05
+			}
+            add_popularity = {
+				ideology = progressive
+				popularity = 0.05
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Invest_in_Public_Services
+        icon = GFX_goal_reichsautobahn
+        x = 29
+        y = 17
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Recruit_more_Administrators
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Public_Services_Investment
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Education_Reform
+        icon = GFX_focus_generic_military_academy
+        x = 31
+        y = 17
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Recruit_more_Administrators
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Education_Reform
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Crackdown_on_Contraceptive
+        icon = GFX_goal_unknown #####################################
+        x = 25                  ### GFX called Anti-Birth_Control ###
+        y = 18                  #####################################
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Traditional_Values
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Crackdown_on_Contraceptive
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Birth_Control_Programs
+        icon = GFX_goal_unknown ########################################
+        x = 27                  ### GFX called Birth_Control_Program ###
+        y = 18                  ########################################
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Mobilize_the_Female_Workforce
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Steady_Birth_Rate
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Research_Incentives
+        icon = GFX_goal_generic_scientific_exchange
+        x = 29
+        y = 18
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Invest_in_Public_Services
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Private_Research_and_Census_Reform
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Expand_the_Secret_Service
+        icon = GFX_goal_unknown #################################
+        x = 31                  ### GFX called Secret_Service ###
+        y = 18                  #################################
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Education_Reform
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Secret_Service_Expansion
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Expand_Research_Complexs
+        icon = GFX_focus_research2
+        x = 30
+        y = 19
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Research_Incentives
+        }
+        prerequisite = {
+            focus = POR_Expand_the_Secret_Service
+        }
+
+
+        completion_reward = {
+            add_research_slot = 1
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ########################
+    ### Foreign Politics ###
+    ########################
+
+    focus = {
+        id = POR_Foreign_Policy
+        icon = GFX_goal_generic_major_alliance
+        x = 35
+        y = 15
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Political_Policies
+        }
+
+
+        completion_reward = {
+            add_political_power = 75
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Recruit_more_Diplomats
+        icon = GFX_goal_generic_intelligence_exchange
+        x = 34
+        y = 16
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Foreign_Policy
+        }
+
+
+        completion_reward = {
+            add_political_power = 75
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_International_Alliances
+        icon = GFX_goal_generic_alliance
+        x = 36
+        y = 16
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Foreign_Policy
+        }
+
+
+        completion_reward = {
+            set_rule = {
+                can_create_factions = yes
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Isolationism
+        icon = GFX_goal_unknown ###############################
+        x = 33                  ### GFX called Isolationism ###
+        y = 17                  ###############################
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Isolationism
+        }
+        mutually_exclusive = {
+            focus = POR_Interventionism
+        }
+
+        prerequisite = {
+            focus = POR_Recruit_more_Diplomats
+        }
+
+
+        completion_reward = {
+            if = {
+				limit = { 
+					has_idea = neutrality_idea 
+				}
+				add_political_power = 100
+				add_war_support = 0.05
+			}
+			if = {
+				limit = { 
+					NOT = { has_idea = neutrality_idea }
+				}
+				add_ideas = neutrality_idea
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Interventionism
+        icon = GFX_focus_spr_anarchism_knows_no_borders
+        x = 35
+        y = 17
+        cost = 10
+
+        mutually_exclusive = {
+            focus = POR_Isolationism
+        }
+        mutually_exclusive = {
+            focus = POR_Interventionism
+        }
+
+        prerequisite = {
+            focus = POR_Recruit_more_Diplomats
+        }
+
+
+        completion_reward = {
+            add_political_power = 75
+            army_experience = 10
+            navy_experience = 10
+            air_experience = 10
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Reduce_Foreign_Influence
+        icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+        x = 33
+        y = 18
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Isolationism
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Reduced_Foreign_Influence
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Volunteer_Corps
+        icon = GFX_focus_generic_manpower
+        x = 35
+        y = 18
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Interventionism
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Volunteer_Corps
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Defensive_Constructions
+        icon = GFX_goal_generic_defence
+        x = 33
+        y = 19
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Reduce_Foreign_Influence
+        }
+
+
+        completion_reward = {
+            add_ideas = POR_Defensive_Constructions
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = POR_Political_Influence_Abroad
+        icon = GFX_goal_generic_dangerous_deal
+        x = 35
+        y = 19
+        cost = 10
+
+        prerequisite = {
+            focus = POR_Volunteer_Corps
+        }
+
+
+        completion_reward = {
+            #############################################
+            ### All your neighbor will get a 5% boost ###
+            ### from whatever your ideology is and    ###
+            ### get more relations between each other ###
+            #############################################
+            add_ideas = POR_Political_Influence_Abroad
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+    ##########################
+    ###                    ###
+    ### European Relations ###
+    ###                    ###
+    ##########################
+
+    No idea ye
+}

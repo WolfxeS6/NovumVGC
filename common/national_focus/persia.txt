@@ -1,0 +1,5156 @@
+focus_tree = {
+	id = per
+	continuous_focus_position = { x = 0 y = 1000 } 
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = PER
+		}
+	}
+	#Support for Our Own Technology Companies
+	focus = {
+		id = PER_support_for_our_own_technology_companies
+		icon = industry_civilian
+				text = "Support for Our Own Technology Companies"
+		cost = 7.2
+
+		x = 3
+		y = 3
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = PER_build_up_dockyard  focus = PER_kish_island_tourism  }
+		completion_reward = {
+				add_ideas = civilian_industry_project
+								remove_ideas = ROM_unemployment_crisis_2
+
+
+		}
+	}
+
+	#Nuclear Technology
+	focus = {
+		id = PER_nuclear_technology
+		icon = nuclear_weapons
+				text = "Nuclear Technology"
+		cost = 15
+
+		x = 3
+		y = 4
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = PER_support_for_our_own_technology_companies  }
+			completion_reward = {
+			unlock_decision_tooltip = Bushehr-I 
+		if = {
+				limit = { NOT = { has_tech = atomic_research } }
+				set_technology = { atomic_research = 1 }
+				}
+				else = {
+					add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 1
+				category = nuclear
+			}
+	    }
+			}
+	}
+
+	#Against the Embargo
+	focus = {
+		id = PER_against_the_embargo
+		icon = embargo
+		text = "Fight Unemployment"
+				cost = 7.2
+
+		x = 3
+		y = 0
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+		
+		add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1.0
+				uses = 1
+				category = industry
+			}
+		swap_ideas = { 
+					remove_idea = ROM_unemployment_crisis
+					add_idea = ROM_unemployment_crisis_2 
+				}
+		}
+	}
+
+	#Ministry of Energy
+	focus = {
+		id = PER_ministry_of_energy
+		icon =oil_trade
+				text = "Ministry of Energy"
+		cost = 7.2
+
+		x = 1
+		y = 1
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = PER_against_the_embargo  }
+		completion_reward = { unlock_decision_tooltip = PER_energy2
+		unlock_decision_tooltip = PER_energy3
+		unlock_decision_tooltip = PER_energy4
+		unlock_decision_tooltip = PER_energy1}
+	}
+
+	#Ministry of Roads and Urban Development
+	focus = {
+		id = PER_ministry_of_roads_and_urban_development
+		icon = communism46
+						text = "Ministry of Roads and Urban Development"
+		cost = 7.2
+
+		x = 5
+		y = 1
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = PER_against_the_embargo  }
+		completion_reward = { unlock_decision_tooltip = PER_Ministery_roads1
+		unlock_decision_tooltip = PER_Ministery_roads2
+		unlock_decision_tooltip = PER_Ministery_roads3
+		}
+	}
+
+	#Build Up Dockyard
+	focus = {
+		id = PER_build_up_dockyard
+		icon = navy
+						text = "Build Up Dockyard"
+								cost = 7.2
+
+
+		x = 2
+		y = 2
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = PER_ministry_of_energy} prerequisite = { focus = PER_ministry_of_roads_and_urban_development  }
+		completion_reward = { random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = dockyard
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = dockyard
+								level = 1
+								instant_build = yes
+							}
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = dockyard
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = dockyard
+								level = 1
+								instant_build = yes
+							}
+						}
+						}
+	}
+
+	#Kish Island Tourism
+	focus = {
+		id = PER_kish_island_tourism
+		icon = pers2
+						text = "Kish Island Tourism"
+								cost = 7.2
+
+
+		x = 4
+		y = 2
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		prerequisite = { focus = PER_ministry_of_roads_and_urban_development  focus = PER_ministry_of_energy  }
+		completion_reward = {
+		
+
+		add_ideas = ROM_tourism_industry
+		
+	}
+	}
+--------------------------------- - - - ------------------ - - - ----------------------------------- - - -----------------------------------------
+focus = {
+		id = muhafiz
+		icon = pers1
+		text = "Islamic Revolutionary Guards"
+		cost = 7.2
+
+		x = 80
+		y = 0
+		
+		completion_reward = {
+		army_experience = 75
+		navy_experience = 75
+		air_experience = 75
+		add_ideas = per_guardians
+		}
+	}
+	
+	
+	focus = {
+		id = muhafiz2
+		icon = navy
+		text = "Islamic Revolutionary Guard Corps Navy"
+		cost = 7.2
+
+		x = -9
+		y = 1
+		prerequisite = { focus =muhafiz }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+		navy_experience = 50
+		add_tech_bonus = {
+							name = nav_doctrine_bonus
+							bonus = 0.7
+							uses = 2
+							category = naval_doctrine
+
+						}
+		}
+	}
+	
+	focus = {
+		id = muhafiz3
+		icon = Blueprints
+		text = "The New Generation Corvette"
+		cost = 7.2
+
+		x = -12
+		y = 2
+		prerequisite = { focus =muhafiz2  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = CAN_destroyer_effort
+				bonus = 1.0
+				ahead_reduction = 2
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz4
+		icon = battleships
+		text = "Destroyer Effort"
+		cost = 7.2
+
+		x = -13
+		y = 3
+		prerequisite = { focus =muhafiz3  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = CAN_heavy_cruiser_effort
+				bonus = 1.0
+				ahead_reduction = 2
+				uses = 1
+				category = ca_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz5
+		icon = navy2
+		text = "Frigate Research"
+		cost = 7.2
+
+		x = -11
+		y = 3
+		prerequisite = { focus =muhafiz3  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = CAN_light_cruiser_effort
+				bonus = 1.0
+				ahead_reduction = 2
+				uses = 1
+				category = cl_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz6
+		icon = anti_submarine
+		text = "Degauss Ship Hulls"
+		cost = 7.2
+
+		x = -12
+		y = 4
+		prerequisite = { focus =muhafiz4  }
+		prerequisite = { focus =muhafiz5  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+		add_ideas = LAT_degauss_ship_hulls
+		}
+	}
+	
+	focus = {
+		id = muhafiz7
+		icon = merchant_fleet
+		text = "Establish A Merchant Fleet"
+		cost = 7.2
+
+		x = -6
+		y = 2
+		prerequisite = { focus =muhafiz2  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+					add_ideas = HUN_merchant_fleet
+
+		}
+	}
+	
+	focus = {
+		id = muhafiz8
+		icon = battleships2
+		text = "Improve Landing Crafts"
+		cost = 7.2
+
+		x = -5
+		y = 3
+		prerequisite = { focus =muhafiz7  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+add_equipment_to_stockpile = {
+				type = convoy
+				amount = 50
+			}
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 1
+				category = tp_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz9
+		icon = create_submarine
+		text = "Development Submarine Models"
+		cost = 7.2
+
+		x = -7
+		y = 3
+		prerequisite = { focus =muhafiz7  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = ss_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz10
+		icon = wolf_packs
+		text = "Attack And Run"
+		cost = 7.2
+
+		x = -6
+		y = 4
+		prerequisite = { focus =muhafiz8  }
+		prerequisite = { focus =muhafiz9  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+		add_ideas = BUL_attack_and_run_tactics
+
+		}
+	}
+	
+	focus = {
+		id = muhafiz11
+		icon = amphibious_assault
+		text = "Hire Ship Makers"
+		cost = 7.2
+
+		x = -9
+		y = 2
+		prerequisite = { focus =muhafiz2  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+					add_ideas = naval_production_bonus2
+
+	add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 1
+				category = naval_equipment
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz12
+		icon = mine
+		text = "Mine The Persian Gulf"
+		cost = 7.2
+
+		x = -9
+		y = 3
+		prerequisite = { focus =muhafiz11  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+add_tech_bonus = {
+				name = tech_bonus
+			    bonus = 1.0
+			    uses = 1
+				category = naval_mines
+			}
+			add_mines = { region = 203 amount = 100 }
+		}
+	}
+	
+	focus = {
+		id = muhafiz13
+		icon = navy2
+		text = "A Great Navy"
+		cost = 7.2
+
+		x = -9
+		y = 4
+		prerequisite = { focus =muhafiz12  }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+			add_ideas = GEN_a_great_navy
+
+		}
+	}
+	
+	focus = {
+		id = muhafiz14
+		icon = bombs2
+		text = "Modern Torpedos"
+		cost = 7.2
+
+		x = -10
+		y = 5
+		prerequisite = { focus =muhafiz13  }
+		prerequisite = { focus =muhafiz6  }
+
+		relative_position_id = muhafiz
+
+		completion_reward = {
+		add_ideas = LIT_modern_torpedos
+
+		}
+	}
+	
+	focus = {
+		id = muhafiz15
+		icon = submarines
+		text = "Light Ship Productions"
+		cost = 7.2
+
+		x = -8
+		y = 5
+		prerequisite = { focus =muhafiz13  }
+		prerequisite = { focus =muhafiz10  }
+
+		relative_position_id = muhafiz
+
+		completion_reward = {
+        add_ideas = LIT_Submarine_Production_Focus
+
+		}
+	}
+	
+	focus = {
+		id = muhafiz16
+		icon = naval_doctrine
+		text = "Doctrine Effort"
+		cost = 7.2
+
+		x = -12
+		y = 6
+		prerequisite = { focus =muhafiz14  }
+
+		relative_position_id = muhafiz
+
+		completion_reward = {
+add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz17
+		icon = naval_doctrine
+		text = "Examine The Admirally"
+		cost = 7.2
+
+		x = -6
+		y = 6
+		prerequisite = { focus =muhafiz15  }
+
+		relative_position_id = muhafiz
+
+		completion_reward = {
+add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz18
+		icon = carriers
+		text = "Carrier Program"
+		cost = 7.2
+
+		x = 0
+		y = 3
+		prerequisite = { focus =muhafiz15  }
+				prerequisite = { focus =muhafiz14  }
+
+
+		relative_position_id = muhafiz13
+
+		completion_reward = {
+add_tech_bonus = {
+				name = tech_bonus
+				bonus = 3.0
+				uses = 1
+				category = cv_tech
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz19
+		icon = bordobereli
+		text = "Ground Forces"
+		cost = 7.2
+
+		x = 0
+		y = 1
+		prerequisite = { focus =muhafiz }
+		relative_position_id = muhafiz
+
+		completion_reward = {
+		army_experience = 50
+		add_tech_bonus = {
+							name = nav_doctrine_bonus
+							bonus = 0.7
+							uses = 2
+							category = land_doctrine
+
+						}
+		}
+	}
+	
+	focus = {
+		id = muhafiz20
+		icon = truck
+		text = "Modernize the Army"
+		cost = 7.2
+
+		x = -2
+		y = 1
+		prerequisite = { focus =muhafiz19 }
+		relative_position_id = muhafiz19
+
+		completion_reward = {
+		add_equipment_to_stockpile = {
+								type = motorized_equipment_1
+								amount = 100
+								producer = PER
+
+							}
+		}
+	}
+	
+	focus = {
+		id = muhafiz21
+		icon = tank_prototype
+		text = "Improve the Armored"
+		cost = 7.2
+
+		x = -3
+		y = 2
+		prerequisite = { focus =muhafiz20 }
+		relative_position_id = muhafiz19
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = armor
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz22
+		icon = motorized
+		cost = 7.2
+		text = HUN_mechanization
+
+		x = -1
+		y = 2
+		prerequisite = { focus =muhafiz20 }
+		relative_position_id = muhafiz19
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+			    category = cat_mechanized_equipment
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz23
+		icon = amphibius_tank
+		cost = 7.2
+		text = "Tanks From The Sea"
+
+		x = -1
+		y = 1
+		prerequisite = { focus =muhafiz21 }
+		prerequisite = { focus =muhafiz8 }
+
+		relative_position_id = muhafiz21
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				technology = amphibious_mechanized_infantry1
+			    technology = amphibious_mechanized_infantry2
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz24
+		icon = artillery3
+		cost = 7.2
+		text = "Tanks From The Sea"
+
+		x = 1
+		y = 1
+		prerequisite = { focus =muhafiz21 }
+		prerequisite = { focus =muhafiz22 }
+
+		relative_position_id = muhafiz21
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				uses = 2
+				bonus = 0.8
+				category = artillery
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz25
+		icon = army_doctrine
+		cost = 7.2
+		text = "Tabriz Exercise"
+
+		x = 0
+		y = 1
+		prerequisite = { focus =muhafiz24 }
+		relative_position_id = muhafiz24
+
+		completion_reward = {
+		add_tech_bonus = {
+							name = land_doc_bonus
+							bonus = 0.8
+							uses = 2
+							category = land_doctrine
+						}
+		}
+	}
+	
+	focus = {
+		id = muhafiz26
+		icon = air_defense
+		cost = 7.2
+		text = "Anti-Air Effort"
+
+		x = 2
+		y = 1
+		prerequisite = { focus =muhafiz24 }
+		relative_position_id = muhafiz24
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				technology = interwar_antiair
+			    technology = antiair1
+			    technology = antiair2
+			    technology = antiair3
+			    technology = antiair4
+			    technology = antiair5
+			    technology = antiair6
+			    technology = antiair7
+			    technology = antiair8
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz27
+		icon = artillery
+		cost = 7.2
+		text = "Anti-Tank Effort"
+
+		x = -2
+		y = 1
+		prerequisite = { focus =muhafiz24 }
+		relative_position_id = muhafiz24
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				uses = 2
+				bonus = 0.8
+				category = cat_anti_tank
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz28
+		icon = small_arms2
+		text = POL_modernize_our_weponary
+		cost = 7.2
+
+		x = 2
+		y = 1
+		prerequisite = { focus =muhafiz19 }
+		relative_position_id = muhafiz19
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+	
+	focus = {
+		id = muhafiz29
+		icon = license_production
+		text = "Innovation Of Warfare"
+		cost = 7.2
+
+		x = 1
+		y = 1
+		prerequisite = { focus =muhafiz28 }
+		relative_position_id = muhafiz28
+
+		completion_reward = {
+				add_ideas = FRA_innovation_of_warfare
+
+		}
+	}
+	
+	focus = {
+		id = muhafiz30
+		icon = motorized
+		text = "Cult of Speed"
+		cost = 7.2
+
+		x = -1
+		y = 1
+		prerequisite = { focus =muhafiz28 }
+		relative_position_id = muhafiz28
+
+		completion_reward = {
+		add_ideas = GEN_cult_of_speed
+
+		}
+	}
+	
+	focus = {
+		id = muhafiz31
+		icon = small_arms5
+		text = HUN_increase_wepons_production
+		cost = 7.2
+
+		x = 0
+		y = 2
+		prerequisite = { focus =muhafiz29 }
+		prerequisite = { focus =muhafiz30 }
+
+		relative_position_id = muhafiz28
+
+		completion_reward = {
+		add_ideas = HUN_increased_wepons_production
+
+		}
+	}
+	
+	focus = {
+		id = muhafiz32
+		icon = tank
+		text = "Tank Quality Upgrade"
+		cost = 7.2
+
+		x = -2
+		y = 2
+		prerequisite = { focus =muhafiz22 }
+		prerequisite = { focus =muhafiz30 }
+
+		relative_position_id = muhafiz28
+
+		completion_reward = {
+		add_ideas = GEN_tank_quality_upgrade
+
+		}
+	}
+	
+	focus = {
+		id = muhafiz33
+		icon = army_doctrine
+		text = "Gulf Exercise"
+		cost = 7.2
+
+		x = 0
+		y = 3
+		prerequisite = { focus =muhafiz31 }
+
+		relative_position_id = muhafiz28
+
+		completion_reward = {
+add_tech_bonus = {
+							name = land_doc_bonus
+							bonus = 0.8
+							uses = 2
+							category = land_doctrine
+						}
+		}
+	}
+	
+	focus = {
+		id = pers_modernize_the_airforce
+		icon = airforce
+		text = "Modernize The Airforce"
+		x = 10
+		y = 1
+		cost = 5
+		
+	
+		prerequisite = { focus =muhafiz }
+		relative_position_id = muhafiz
+		
+	    completion_reward = {
+			air_experience = 75
+		}
+	}
+	
+	focus = {
+		id = pers_american_fighters
+		icon = american_plane
+		x = 0
+		y = 1 
+				text = "American Fighters"
+
+		relative_position_id = pers_modernize_the_airforce
+		cost = 7.2
+		
+		bypass = {
+		OR = {
+		USA = {
+			exists = no
+			}
+		has_war_with = USA 
+		}
+		}
+		
+		available = {
+			NOT = { has_war_with = USA }
+			USA = {
+			exists = yes
+			}
+		}
+		
+		prerequisite = {
+		focus = pers_modernize_the_airforce
+		}
+		
+	    completion_reward = {
+			add_equipment_to_stockpile = { 
+				type = fighter_equipment_3 
+				amount = 35
+				producer = USA
+			}
+		}
+	}
+	
+	focus = {
+		id = pers_Russian_bombers
+		icon = Russian_plane
+		text = "Russian Bombers"
+		x = -2
+		y = 1 
+		relative_position_id = pers_modernize_the_airforce
+		cost = 7.2
+		
+		bypass = {
+		OR = {
+		SOV = {
+			exists = no
+			}
+		has_war_with = SOV 
+		}
+		}
+		
+		available = {
+			NOT = { has_war_with = SOV }
+			SOV = {
+			exists = yes
+			}
+		}
+		
+		prerequisite = {
+		focus = pers_modernize_the_airforce
+		}
+		
+	    completion_reward = {
+			add_equipment_to_stockpile = {
+				type = tac_bomber_equipment_1
+				amount = 20
+				producer = ROOT
+			}
+		}
+	}
+	
+	focus = {
+		id = pers_Chinese_CAS
+		icon = Chinese_plane
+			text = "Chinese CAS"
+
+		x = 2
+		y = 1 
+		relative_position_id = pers_modernize_the_airforce
+		cost = 7.2
+		
+		bypass = {
+		OR = {
+		PRC = {
+			exists = no
+			}
+		has_war_with = PRC 
+		}
+		}
+		
+		available = {
+			NOT = { has_war_with = PRC }
+			PRC = {
+			exists = yes
+			}
+		}
+		
+		prerequisite = {
+		focus = pers_modernize_the_airforce
+		}
+		
+	    completion_reward = {
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_2 
+				amount = 45
+				producer = PRC
+			}
+		}
+	}
+	
+	focus = {
+		id = pers_analize_new_planes
+		icon = Blueprints
+				text = "Analize New Planes"
+
+		x = -1
+		y = 1 
+		relative_position_id = pers_american_fighters
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_Chinese_CAS
+		}
+		
+		prerequisite = {
+		focus = pers_Russian_bombers
+		}
+		
+		prerequisite = {
+		focus = pers_american_fighters
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = air_equipment
+			}
+		}
+	}
+	
+	focus = {
+		id = pers_utalize_the_new_planes
+		icon = air_doctrine
+				text = "Utalize The New Planes"
+
+		x = 1
+		y = 1 
+		relative_position_id = pers_american_fighters
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_Chinese_CAS
+		}
+		
+		prerequisite = {
+		focus = pers_Russian_bombers
+		}
+		
+		prerequisite = {
+		focus = pers_american_fighters
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+	}
+	
+	focus = {
+		id = pers_strategic_air_base_locations
+		icon = air_production
+				text = "Strategic Air-Base Locations"
+
+		x = -1
+		y = 1 
+		relative_position_id = pers_utalize_the_new_planes
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_analize_new_planes
+		}
+		
+		prerequisite = {
+		focus = pers_utalize_the_new_planes
+		}
+		
+	    completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = pers_bomb_them
+		icon = bombs2
+				text = "Bomb Them!"
+
+		x = 2
+		y = 1 
+		relative_position_id = pers_utalize_the_new_planes
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_analize_new_planes
+		}
+		
+		prerequisite = {
+		focus = pers_utalize_the_new_planes
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = tactical_bomber
+			}
+	}
+	}
+	
+	focus = {
+		id = pers_lighter_bombs
+		icon = fighter2
+				text = "Lighter Bombs"
+
+		x = 0
+		y = 1 
+		relative_position_id = pers_bomb_them
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_bomb_them
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = cat_strategic_bomber
+			}
+	}
+	}
+	
+	focus = {
+		id = pers_transport_ourselfs
+		icon = CAS
+				text = "Transport Ourselfs"
+
+		x = 0
+		y = 1 
+		relative_position_id = pers_lighter_bombs
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_lighter_bombs
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = medium_air
+			}
+	}
+	}
+	
+	focus = {
+		id = pers_Bomb_the_sea
+		icon = naval_bomber
+				text = "Bomb The Sea"
+
+		x = 2
+		y = 2
+		relative_position_id = pers_bomb_them
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_bomb_them
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = naval_bomber
+			}
+	}
+	}
+	
+	focus = {
+		id = pers_bomb_everything
+		icon = Bomber2
+				text = "Bomb Everything"
+
+		x = 0
+		y = 1
+		relative_position_id = pers_transport_ourselfs
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_transport_ourselfs
+		}
+		
+		prerequisite = {
+		focus = pers_Bomb_the_sea
+		}
+		
+	    completion_reward = {
+			add_ideas = pers_bomb_everything
+	}
+	}
+	
+	focus = {
+		id = pers_fight_them_with_fighters
+		icon = fighter2
+				text = "Fight Them With Fighters"
+
+		x = -4
+		y = 1 
+		relative_position_id = pers_utalize_the_new_planes
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_analize_new_planes
+		}
+		
+		prerequisite = {
+		focus = pers_utalize_the_new_planes
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = light_fighter
+			}
+	}
+	}
+	focus = {
+		id = pers_closer_air_support
+		icon = escort_fighters
+				text = "Closer Air Support"
+
+		x = 0
+		y = 1 
+		relative_position_id = pers_fight_them_with_fighters
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_fight_them_with_fighters
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = cas_bomber
+			}
+	}
+	}
+	
+	focus = {
+		id = pers_scout_the_skies
+		icon = fighter
+				text = "Scout The Skies"
+
+		x = 0
+		y = 1 
+		relative_position_id = pers_closer_air_support
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_closer_air_support
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = cat_scout_plane
+			}
+	}
+	}
+	
+	focus = {
+		id = pers_see_everything
+		icon = radar
+				text = "See Everything"
+
+		x = -2
+		y = 2
+		relative_position_id = pers_fight_them_with_fighters
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_fight_them_with_fighters
+		}
+		
+	    completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = radar_tech
+			}
+	}
+	}
+	
+	focus = {
+		id = pers_best_aces
+		icon = military_mission
+				text = "Best Aces"
+
+		x = 0
+		y = 1
+		relative_position_id = pers_scout_the_skies
+		cost = 7.2
+		
+		bypass = {
+		
+		}
+		
+		available = {
+			
+		}
+		
+		prerequisite = {
+		focus = pers_see_everything
+		}
+		
+		prerequisite = {
+		focus = pers_scout_the_skies
+		}
+		
+	    completion_reward = {
+			add_ideas = GEN_aces
+	}
+	}
+	
+	focus = {
+		id = pers_develop_anti_air_artillery	
+		icon = air_defense
+						text = "Anti-Air Artillery"
+
+		x = -1
+		y = 1
+		relative_position_id = pers_strategic_air_base_locations
+		cost = 7.2
+		
+		prerequisite = {
+			focus = pers_strategic_air_base_locations
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				technology = interwar_antiair
+			    technology = antiair1
+			    technology = antiair2
+			    technology = antiair3
+			    technology = antiair4
+			    technology = antiair5
+			    technology = antiair6
+			    technology = antiair7
+			    technology = antiair8
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = pers_troops_from_the_air
+		icon = paratroopers
+						text = "Troops From The Air"
+
+		x = 1
+		y = 1
+		relative_position_id = pers_strategic_air_base_locations
+		cost = 7.2
+		
+		prerequisite = {
+			focus = pers_strategic_air_base_locations
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = para_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = pers_air_safety_reforms
+		icon = bombs
+						text = "Air Safety Reforms"
+
+		x = -1
+		y = 1
+		relative_position_id = pers_troops_from_the_air
+		cost = 7.2
+		
+		prerequisite = {
+			focus = pers_develop_anti_air_artillery
+		}
+		
+		prerequisite = {
+			focus = pers_troops_from_the_air
+		}
+		
+		completion_reward = {
+			add_ideas = perseric_air_force_safety_reforms
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = pers_art_of_a_deal
+		icon = major_alliance
+						text = "Art Of a Deal"
+
+		x = -1
+		y = 1
+		relative_position_id = pers_air_safety_reforms
+		cost = 7.2
+		
+		prerequisite = {
+			focus = pers_air_safety_reforms
+		}
+		
+		
+		completion_reward = {
+			add_ideas = ROM_acquire_licenses
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = pers_increase_local_airplane_production
+		icon = air_production
+						text = "Increase Local Airplane Production"
+
+		x = 1
+		y = 1
+		relative_position_id = pers_air_safety_reforms
+		cost = 7.2
+		
+		prerequisite = {
+			focus = pers_air_safety_reforms
+		}
+		
+		
+		completion_reward = {
+			add_ideas = ROM_local_development
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = pers_air_force_military_school
+		icon = airforce
+						text = "Airforce Military School"
+
+		x = 1
+		y = 1
+		relative_position_id = pers_art_of_a_deal
+		cost = 7.2
+		
+		prerequisite = {
+			focus = pers_art_of_a_deal
+		}
+		
+		prerequisite = {
+			focus = pers_best_aces
+		    focus = pers_bomb_everything
+		}
+		
+		prerequisite = {
+			focus = pers_increase_local_airplane_production
+		}
+		
+		
+		completion_reward = {
+		add_ideas = idea_focus_air_force_military_school
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = pers_pilot_traning_program
+		text = HUN_pilot_traning_program
+		icon = air_traning
+		x = 0
+		y = 1
+		relative_position_id = pers_air_force_military_school
+		cost = 7.2
+		
+		prerequisite = {
+			focus = pers_air_force_military_school
+		}
+		
+		
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = air_doctrine
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = pers_jets
+		icon = skull
+						text = "Jets"
+
+		x = -1
+		y = 1
+		relative_position_id = pers_pilot_traning_program
+		cost = 7.2
+		
+		prerequisite = {
+			focus = pers_pilot_traning_program
+		}
+		
+		completion_reward = {
+		add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = jet_technology
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = pers_reach_the_light_speed
+		icon = rocketry
+						text = "Reach The Light Speed"
+
+		x = 1
+		y = 1
+		relative_position_id = pers_pilot_traning_program
+		cost = 7.2
+		
+		prerequisite = {
+			focus = pers_pilot_traning_program
+		}
+		
+		completion_reward = {
+		add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = rocketry
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = pers_wepons_for_the_3rd_world_war
+		text = HUN_wepons_for_the_3rd_world_war
+		icon = nuclear_weapons
+		x = -1
+		y = 1
+		relative_position_id = pers_reach_the_light_speed
+		cost = 7.2
+		
+		prerequisite = {
+		focus = pers_reach_the_light_speed
+		}
+		
+		prerequisite = {
+			focus = pers_jets
+		}
+		
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = nuclear
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+		}
+-------------------------------- - - - ------------------ - - - ----------------------------------- - - -----------------------------------------
+
+	focus = {
+		id = islam1
+		icon = kuran
+		text = "Support The Islamic Revolution"
+		cost = 7.2
+		
+mutually_exclusive = {
+			focus = against1
+			focus= pip0
+			focus = pehlevi1
+		}
+		x = 20
+		y = 0
+		
+		completion_reward = {
+					add_political_power = 100
+
+		swap_ideas = { 
+					remove_idea = Islamic_Revolution
+					add_idea = Islamic_Revolution2
+				}
+		}
+	}
+	
+	focus = {
+		id = islam2
+		icon = pers3
+		text = "Leader Khamanei"
+		cost = 7.2
+				relative_position_id = islam1
+
+prerequisite = {
+			focus = islam1
+		}
+		x = -5
+		y = 1
+		
+		completion_reward = {
+					add_political_power = 200
+
+		add_popularity = {
+
+							ideology = islamist
+
+							popularity = 0.05
+
+						}
+		}
+	}
+	
+	focus = {
+		id = islam3
+		icon = align_to_csto
+		text = "Relations with the Eastern Bloc"
+		cost = 7.2
+				relative_position_id = islam2
+
+prerequisite = {
+			focus = islam2
+		}
+		x = 3
+		y = 1
+		
+		completion_reward = {
+							add_political_power = 75
+
+		418 = {
+									add_resource = { type = tungsten amount = 32 }}
+
+		PRC = {
+							add_opinion_modifier = {
+								target = PER
+								modifier = declaration_of_friendship
+							}
+							}
+							SOV = {
+							add_opinion_modifier = {
+								target = PER
+								modifier = declaration_of_friendship
+							}
+							}
+		PRC = {
+							increase_trade_influence_by_3 = yes
+							add_opinion_modifier = {
+								target = PER
+								modifier = economic_mission
+
+							}
+			
+		}
+					every_country = {
+		limit = { is_in_faction_with = SOV
+ }
+				increase_trade_influence_by_3 = yes
+				add_opinion_modifier = {
+								target = PER
+								modifier = long_term_trade_partner
+							}
+				}
+		}
+	}
+	
+	
+	
+	focus = {
+		id = islam4
+		icon = pakistan_industry_2
+		text = "Expand Arsenals"
+		cost = 7.2
+				relative_position_id = islam3
+
+prerequisite = {
+			focus = islam3
+		}
+		x = -1
+		y = 1
+		
+		completion_reward = {
+		random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							limit = {
+								free_building_slots = {
+								building = arms_factory
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							limit = {
+								free_building_slots = {
+								building = arms_factory
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							limit = {
+								free_building_slots = {
+								building = arms_factory
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+
+						}
+		}
+	}
+	
+	focus = {
+		id = islam5
+		icon = industry_military
+		text = "National Aircraft Factory"
+		cost = 7.2
+				relative_position_id = islam3
+
+prerequisite = {
+			focus = islam4
+		}
+		x = -1
+		y =2
+		
+		completion_reward = {
+		random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							limit = {
+								free_building_slots = {
+								building = arms_factory
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							limit = {
+								free_building_slots = {
+								building = arms_factory
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							limit = {
+								free_building_slots = {
+								building = arms_factory
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+
+						}
+		}
+	}
+	
+	focus = {
+		id = islam6
+		icon = production
+		text = "Advanced Military Industry"
+		cost = 7.2
+				relative_position_id = islam3
+
+prerequisite = {
+			focus = islam5
+		}
+		x = -1
+		y =3
+		
+		completion_reward = {
+				add_ideas = military_industry_project4
+
+		}
+	}
+	
+	focus = {
+		id = islam7
+		icon = pakistan_industry_1
+		text = "Incentives to Civilian Companies"
+		cost = 7.2
+				relative_position_id = islam3
+
+prerequisite = {
+			focus = islam3
+		}
+		x = 1
+		y = 1
+		
+		completion_reward = {
+		random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+		}
+	}
+	
+	focus = {
+		id = islam8
+		icon = GFX_Russia_Factory
+		text = "Invite Russian Companies"
+		cost = 7.2
+				relative_position_id = islam3
+
+prerequisite = {
+			focus = islam7
+		}
+		x = 1
+		y = 2
+		
+		completion_reward = {
+							add_political_power = 100
+
+		SOV = {
+							add_opinion_modifier = {
+								target = PER
+								modifier = declaration_of_friendship
+							}
+							}
+		random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+		}
+	}
+	
+	focus = {
+		id = islam9
+		icon = pakcivil
+		text = "Develop the Civil Economy"
+		cost = 7.2
+				relative_position_id = islam3
+
+prerequisite = {
+			focus = islam8
+		}
+		x = 1
+		y = 3
+		
+		completion_reward = {
+				add_ideas = civilian_industry_project4
+
+		}
+	}
+	
+	focus = {
+		id = islam10
+		icon = air_production
+		text = "Chinese Air Base"
+		cost = 7.2
+				relative_position_id = islam3
+
+prerequisite = {
+			focus = islam9
+		}
+		prerequisite = {
+			focus = islam6
+		}
+		x = 0
+		y = 4
+		
+		completion_reward = {
+PRC = {
+							add_opinion_modifier = {
+								target = PER
+								modifier = declaration_of_friendship
+							}
+							}
+					418 = {
+							add_building_construction = {
+								type = air_base
+								level = 4
+								instant_build = yes
+							}
+
+						}
+		}
+	}
+	
+	focus = {
+		id = islam11
+		icon = research
+		text = "Nuclear Agreement with Russia"
+		cost = 15
+				relative_position_id = islam3
+
+
+		prerequisite = {
+			focus = islam10
+		}
+		x = 0
+		y = 5
+		
+		completion_reward = {
+									add_political_power = 100
+
+		add_research_slot = 1
+SOV = {
+							add_opinion_modifier = {
+								target = PER
+								modifier = declaration_of_friendship
+							}
+							}
+					add_tech_bonus = {
+				name = tech_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = nuclear
+			}
+		}
+	}
+	
+	focus = {
+		id = islam12
+		icon = colonial_crackdown
+		text = "Harsh Intervention in Protests"
+		cost = 7.2
+				relative_position_id = islam2
+
+prerequisite = {
+			focus = islam2
+		}
+		x = -3
+		y = 1
+		
+		completion_reward = {
+		add_political_power = 175
+		add_stability = 0.03
+		}
+	}
+	
+	focus = {
+		id = islam13
+		icon = flames_of_rebellion
+		text = "The Kurdish Problem"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam12
+		}
+		x = -1
+		y = 1
+		
+		completion_reward = {
+country_event = persia.1
+		}
+	}
+	
+	focus = {
+		id = islam14
+		icon = streng
+		text = "Strengthen Tabriz"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam13
+		}
+		x = -1
+		y = 2
+		
+		completion_reward = {
+		419 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = islam15
+		icon = islamic_militias
+		text = "Islamic Militias"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam14
+		}
+		x = -1
+		y = 3
+		
+		completion_reward = {
+				add_ideas = BUL_Islamic_militias
+
+		}
+	}
+	focus = {
+		id = islam16
+		icon = fund_arms_organization
+		text = "Support Hezbollah"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam12
+		}
+		x = 1
+		y = 1
+		
+		completion_reward = {
+			unlock_decision_category_tooltip = PER_support_hezb
+
+		}
+	}
+	
+	focus = {
+		id = islam17
+		icon = rioters
+		text = "Support the Houthis"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam16
+		}
+		x = 1
+		y = 2
+		
+		completion_reward = {
+					unlock_decision_category_tooltip = PER_support_houthis
+
+		}
+	}
+	
+	focus = {
+		id = islam18
+		icon = jihad
+		text = "Attack on American Bases"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam17
+		}
+		x = 1
+		y = 3
+		
+		completion_reward = {
+		add_political_power = 120
+		add_stability = 0.03
+		USA = {
+		add_opinion_modifier = {
+								target = PER
+								modifier = terrorist_menace
+							}
+							}
+		}
+	}
+	
+	focus = {
+		id = islam19
+		icon = irredentism
+		text = "Protect Jerusalem"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam18
+		}
+		prerequisite = {
+			focus = islam15
+		}
+		x = 0
+		y = 4
+		
+		completion_reward = {
+							unlock_decision_category_tooltip = PER_support_hamas
+
+		}
+	}
+	
+	focus = {
+		id = islam20
+		icon = pakalligne
+		text = "Iraqi Shiite Militias"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam19
+		}
+		x = 0
+		y = 5
+		
+		completion_reward = {
+									unlock_decision_category_tooltip = PER_support_SCIRI
+
+		}
+	}
+	
+	focus = {
+		id = islam21
+		icon = attack_uae_better
+		text = "Against UAE"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam20
+		}
+		
+		x = -1
+		y = 6
+		
+		completion_reward = {
+		create_wargoal = {
+							type = annex_everything
+							target = UAE
+			}
+		}
+	}
+	
+	focus = {
+		id = islam22
+		icon = attack_saudi_arabia_better
+		text = "Destroy the American Puppet!"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam20
+		}
+		
+		x = 1
+		y = 6
+		
+		completion_reward = {
+	create_wargoal = {
+							type = annex_everything
+							target = SAU
+			}
+		}
+	}
+	
+	focus = {
+		id = islam23
+		icon = spread_islamic_revolution
+		text = "The Islamic Revolution is Spreading"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam21
+		}
+		prerequisite = {
+			focus = islam22
+		}
+		
+		x = 0
+		y = 7
+		
+		completion_reward = {
+		add_stability = 0.05
+		every_country = {
+		limit = { is_neighbor_of = PER}
+add_popularity = {
+						ideology = islamist
+						popularity = 0.1
+					}	
+		}
+		}
+	}
+	
+	focus = {
+		id = islam24
+		icon = jihad_thingy
+		text = "Jihad"
+		cost = 7.2
+				relative_position_id = islam12
+
+prerequisite = {
+			focus = islam23
+		}
+		x = 0
+		y = 8
+		
+		completion_reward = {
+fourth_estate_islamist_increase = yes
+			add_ideas = idea_focus_generic_jihad
+			#Trigger the global news event.
+			news_event = news.2
+			#If the faction is not ideal, leave it.
+			every_country = {
+					limit = {
+								 is_in_faction_with = USA
+
+					}
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = terrorist_menace
+					}
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = terrorist_menace_trade
+					}
+				}
+	
+	
+
+		}
+	}
+	
+	focus = {
+		id = islam25
+		icon = media_censorship
+		text = "Ban Media"
+		cost = 7.2
+				relative_position_id = islam2
+
+prerequisite = {
+			focus = islam12
+						focus = islam3
+
+		}
+		x = 0
+		y = 2
+		
+		completion_reward = {
+		add_political_power = 160
+		add_stability = 0.04
+		}
+	}
+	
+	focus = {
+		id = islam26
+		icon = self_management
+		text = "Healthcare Reform"
+		cost = 7.2
+				relative_position_id = islam2
+
+prerequisite = {
+			focus = islam25
+
+		}
+		x = 0
+		y = 3
+		
+		completion_reward = {
+		add_political_power = 75
+			add_ideas = USA_universal_healthcare_idea
+		}
+	}
+	
+	focus = {
+		id = islam27
+		icon = scientific_exchange
+		text = "Ajatallah"
+		cost = 7.2
+				relative_position_id = islam2
+
+prerequisite = {
+			focus = islam26
+
+		}
+		x = 0
+		y = 4
+		
+		completion_reward = {
+		add_political_power = 75
+		add_ideas = GEN_Ajatollah
+		}
+	}
+	
+	focus = {
+		id = against1
+		icon = demand_territory3
+		text = "Against The Islamic Revolution"
+		cost = 7.2
+mutually_exclusive = {
+			focus = islam1
+						focus = pip0
+						focus = pehlevi1
+
+		}
+		x = 40
+		y = 0
+		
+		completion_reward = {
+						add_ideas = tur_administrative_reforms_1
+			unlock_decision_category_tooltip = PER_meclis 
+	add_to_variable = {
+                var = PER_reformist_influance
+                value = 26
+            }
+        add_to_variable = {
+                var = PER_principlists_influance
+                value = 74
+            }
+			add_timed_idea = {
+				idea = idea_focus_generic_conservative_doctrine
+				days = 1095
+			}
+			fourth_estate_conservative_increase = yes
+		}
+	}
+	
+	focus = {
+		id = against2
+		icon = demand_territory3
+		text = "Elections!"
+		cost = 1.5
+prerequisite = {
+			focus = against1
+		}
+		relative_position_id = against1
+		available = {  custom_trigger_tooltip = { 
+        check_variable = { PER_reformist_influance > PER_principlists_influance }
+        tooltip = PER_reformist_influance_larger_tt
+        }}
+
+		x = 0
+		y = 1
+		
+		completion_reward = {
+		
+		add_popularity = {
+				ideology = conservative
+				popularity = 0.1
+			}
+			
+add_stability = 0.05
+		}
+	}
+	focus = {
+		id = pip0
+		icon = fascism5
+		text = "Fascist Propaganda"
+		cost = 7.2
+mutually_exclusive = {
+			focus = islam1
+						focus = against1
+						focus = pehlevi1
+
+		}
+		x = 30
+		y = 0
+		
+		completion_reward = {
+			add_political_power = 250
+			add_timed_idea = {
+				idea = idea_focus_generic_neo_fascist_doctrine
+				days = 1095
+			}
+			fourth_estate_fascist_increase = yes
+add_popularity = {
+
+							ideology = fascist
+
+							popularity = 0.1
+
+						}		}
+	}
+	focus = {
+		id = pip1
+		icon = demand_territory3
+		text = "PIP Coup "
+		cost = 2
+prerequisite = {
+			focus = pip0
+		}
+		relative_position_id = pip0
+		
+
+		x = 0
+		y = 1
+		
+		completion_reward = {
+		
+add_popularity = {
+							ideology = fascist
+							popularity = 0.15
+						}
+					set_politics = {
+							ruling_party = fascist
+							elections_allowed = yes
+						}
+country_event = persia.4						}
+	}
+	
+	focus = {
+		id = pip2
+		icon = fascism11
+		text = "Expand Military Control"
+		cost = 7.2
+prerequisite = {
+			focus = pip1
+		}
+		relative_position_id = pip1
+		available = { has_civil_war = no}
+
+		x = 0
+		y = 1
+		
+		completion_reward = {
+add_stability = 0.02
+add_ideas =	PAK_expanded_military_control			}
+	}
+	
+	focus = {
+		id = pip3
+		icon = fascism10
+		text = "Investments in the Arms Industry"
+		cost = 7.2
+prerequisite = {
+			focus = pip1
+		}
+		relative_position_id = pip1
+
+		x = -3
+		y = 1
+		
+		completion_reward = {
+random_owned_state = {
+							add_extra_state_shared_building_slots = 1	
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+
+							}
+
+						}	
+random_owned_state = {
+							add_extra_state_shared_building_slots = 1	
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+
+							}
+							}
+							random_owned_state = {
+							add_extra_state_shared_building_slots = 1	
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+
+							}
+
+						}			
+	}
+	}
+	focus = {
+		id = pip4
+		icon = communism46
+		text = "Modern Infrastructure Works"
+		cost = 9
+prerequisite = {
+			focus = pip3
+		}
+		relative_position_id = pip3
+
+		x = -1
+		y =1
+		
+		completion_reward = {
+		random_owned_state = {
+
+							add_building_construction = {
+
+								type = infrastructure
+
+								level = 2
+
+								instant_build = yes
+
+							}
+							}
+
+			random_owned_state = {
+
+							add_building_construction = {
+
+								type = infrastructure
+
+								level = 2
+
+								instant_build = yes
+
+							}
+							}
+
+			random_owned_state = {
+
+							add_building_construction = {
+
+								type = infrastructure
+
+								level = 2
+
+								instant_build = yes
+
+							}
+							}
+			}
+	}
+	
+	focus = {
+		id = pip5
+		icon = central_management
+		text = "Centrally Planned Economy"
+		cost = 7.2
+prerequisite = {
+			focus = pip3
+		}
+		relative_position_id = pip3
+
+		x = 1
+		y = 1
+		
+		completion_reward = {
+				add_ideas = GEN_economy_central_planned	
+
+			}
+	}
+	
+	focus = {
+		id = pip6
+		icon = production2
+		text = "Corporatism"
+		cost = 7.2
+prerequisite = {
+			focus = pip5
+		}
+		prerequisite = {
+			focus = pip4
+		}
+		relative_position_id = pip3
+
+		x = 0
+		y = 2
+		
+		completion_reward = {
+	 add_ideas = GEN_corporatism
+
+
+			}
+	}
+	
+	focus = {
+		id = pip7
+		icon = small_arms2
+		text = "Gun Funding"
+		cost = 7.2
+prerequisite = {
+			focus = pip6
+		}
+	
+		relative_position_id = pip3
+
+		x = -1
+		y = 3
+		
+		completion_reward = {
+	    		add_ideas = USA_gun_funding
+
+
+
+			}
+	}
+	
+	focus = {
+		id = pip8
+		icon = fascism10
+		text = "Expand Arsenals"
+		cost = 7.2
+prerequisite = {
+			focus = pip6
+		}
+	
+		relative_position_id = pip3
+
+		x = 1
+		y = 3
+		
+		completion_reward = {
+
+random_owned_state = {
+							add_extra_state_shared_building_slots = 1	
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+
+							}
+
+						}	
+random_owned_state = {
+							add_extra_state_shared_building_slots = 1	
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+
+							}
+							}
+							random_owned_state = {
+							add_extra_state_shared_building_slots = 1	
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+
+							}
+
+						}
+
+			}
+	}
+	
+	focus = {
+		id = pip9
+		icon = navy
+		text = "Build Up Hormozgan Dockyard"
+		cost = 7.2
+prerequisite = {
+			focus = pip7
+		}
+		prerequisite = {
+			focus = pip8
+		}
+	
+		relative_position_id = pip3
+
+		x = 0
+		y = 4
+		
+		completion_reward = {
+414 = {
+							add_extra_state_shared_building_slots = 2
+							add_building_construction = {
+								type = dockyard
+								level = 2
+								instant_build = yes
+							}
+
+						}
+
+
+			}
+	}
+	
+	focus = {
+		id = pip30
+		icon = production2
+		text = "Focus on the Military Industry"
+		cost = 7.2
+prerequisite = {
+			focus = pip9
+		}
+		
+	
+		relative_position_id = pip3
+
+		x = 0
+		y = 5
+		
+		completion_reward = {
+				add_ideas = military_industry_project4
+
+
+						}
+
+
+			
+	}
+	
+	focus = {
+		id = pip10
+		icon = military_sphere
+		text = "Mass Recruitment"
+		cost = 7.2
+prerequisite = {
+			focus = pip2
+		}
+		
+	
+		relative_position_id = pip2
+
+		x = 2
+		y = 1
+		
+		completion_reward = {
+		add_ideas = additional_recruits5
+
+
+
+			}
+	}
+	
+	focus = {
+		id = pip11
+		icon = wolf_packs
+		text = "Paramilitarizm"
+		cost = 7.2
+prerequisite = {
+			focus = pip2
+		}
+		
+	
+		relative_position_id = pip2
+
+		x = 0
+		y = 1
+		
+		completion_reward = {
+	    add_ideas = GEN_paramilizm
+
+
+
+
+			}
+	}
+	
+		focus = {
+		id = pip12
+		icon = dangerous_laws
+		text = "Emergency Powers"
+		cost = 7.2
+prerequisite = {
+			focus = pip1
+		}
+		
+	
+		relative_position_id = pip2
+
+		x = 2
+		y = 0
+		
+		completion_reward = {
+	    add_country_leader_trait = emergency_powers
+
+
+
+
+			}
+	}
+	
+	focus = {
+		id = pip13
+		icon = propaganda
+		text = "Pro-War Propaganda"
+		cost = 7.2
+prerequisite = {
+			focus = pip10
+		}
+		prerequisite = {
+			focus = pip11
+		}
+		
+	
+		relative_position_id = pip2
+
+		x = 1
+		y = 2
+		
+		completion_reward = {
+add_war_support = 0.1
+add_stability = 0.05
+
+
+
+			}
+	}
+	
+		focus = {
+		id = pip14
+		icon = GFX_goal_continuous_suppression
+		text = "Destroy the Partisans"
+		cost = 7.2
+prerequisite = {
+			focus = pip13
+		}
+	
+		
+	
+		relative_position_id = pip2
+
+		x = 0
+		y = 3
+		
+		completion_reward = {
+		add_ideas = ROM_anti_partisant_tactics
+
+
+			}
+	}
+	
+	focus = {
+		id = pip15
+		icon = fascism12
+		text = "Nationalist Symbol"
+		cost = 7.2
+prerequisite = {
+			focus = pip13
+		}
+	
+		
+	
+		relative_position_id = pip2
+
+		x = 2
+		y = 3
+		
+		completion_reward = {
+		add_country_leader_trait = nationalist_symbol
+
+
+			}
+	}
+	
+	focus = {
+		id = pip16
+		icon = entente
+		text = "Army Of Purity"
+		cost = 7.2
+prerequisite = {
+			focus = pip14
+		}
+		prerequisite = {
+			focus = pip15
+		}
+	
+		
+	
+		relative_position_id = pip2
+
+		x = 1
+		y = 4
+		
+		completion_reward = {
+add_ideas = idea_focus_generic_army_of_purity
+	fourth_estate_fascist_increase = yes
+			add_war_support = 0.05
+
+			}
+	}
+	
+	focus = {
+		id = pip17
+		icon = fascism4
+		text = "The Resurrection of Pan-Iranism"
+		cost = 7.2
+prerequisite = {
+			focus = pip16
+		}
+		
+	
+		
+	
+		relative_position_id = pip2
+
+		x = 1
+		y = 5
+		
+		completion_reward = {
+every_state = {
+					limit = { is_core_of = TMS }
+					add_core_of = PER
+				}		
+	     create_wargoal = {
+				type = annex_everything
+				target = TMS
+			}
+
+			}
+	}
+	
+	focus = {
+		id = pip18
+		icon = fascism9
+		text = "Conquest of Uzbekistan"
+		cost = 7.2
+prerequisite = {
+			focus = pip17
+		}
+		
+	
+		
+	
+		relative_position_id = pip2
+
+		x = 0
+		y = 6
+		
+		completion_reward = {
+every_state = {
+					limit = { is_core_of = UZB }
+					add_core_of = PER
+				}		
+	     create_wargoal = {
+				type = annex_everything
+				target = UZB
+			}
+
+			}
+	}
+	
+	focus = {
+		id = pip19
+		icon = attack_pakistan
+		text = "Expand the Southern Borders"
+		cost = 7.2
+prerequisite = {
+			focus = pip17
+		}
+		
+	
+		
+	
+		relative_position_id = pip2
+
+		x = 2
+		y = 6
+		
+		completion_reward = {
+	
+	     create_wargoal = {
+	type = take_state_focus
+	target = PAK
+	generator = { 442 444 445 }
+}
+
+			}
+	}
+	
+	focus = {
+		id = pip20
+		icon = fascism15
+		text = "Unite with Tajikistan"
+		cost = 7.2
+prerequisite = {
+			focus = pip18
+		}
+		prerequisite = {
+			focus = pip19
+		}
+	
+		relative_position_id = pip2
+
+		x = 1
+		y = 7
+		
+		completion_reward = {
+PER = { annex_country = { target = TAJ transfer_troops = yes } }
+	every_state = {
+					limit = { is_core_of = TAJ }
+					add_core_of = PER
+				}
+
+			}
+	}
+	
+	
+	
+	focus = {
+		id = pip21
+		icon = attack_azerbaijan
+		text = "Solve the Problem of Azerbaijan"
+		cost = 7.2
+prerequisite = {
+			focus = pip20
+		}
+
+		relative_position_id = pip2
+
+		x = -1
+		y = 8
+		
+		completion_reward = {
+		every_state = {
+					limit = { is_core_of = AZR }
+					add_core_of = PER
+				}		
+	     create_wargoal = {
+				type = annex_everything
+				target = AZR
+			}
+			}
+	}
+	
+	focus = {
+		id = pip22
+		icon = attack_georgia
+		text = "Access to the Black Sea"
+		cost = 7.2
+prerequisite = {
+			focus = pip20
+		}
+
+		relative_position_id = pip2
+
+		x = 1
+		y = 8
+		
+		completion_reward = {
+every_state = {
+					limit = { is_core_of = GEO }
+					add_core_of = PER
+				}		
+	     create_wargoal = {
+				type = annex_everything
+				target = GEO
+			}
+
+			}
+	}
+	
+	focus = {
+		id = pip23
+		icon = attack_armenia
+		text = "Conquest of Armenia"
+		cost = 7.2
+prerequisite = {
+			focus = pip20
+		}
+
+		relative_position_id = pip2
+
+		x = 3
+		y = 8
+		
+		completion_reward = {
+every_state = {
+					limit = { is_core_of = ARM }
+					add_core_of = PER
+				}		
+	     create_wargoal = {
+				type = annex_everything
+				target = ARM
+			}
+			ARM = { add_ideas = yalnizlik}
+		NGK = { add_ideas = yalnizlik}
+
+			}
+	}
+	
+	focus = {
+		id = pip24
+		icon = irredentism
+		text = "Claim Mosul and Baghdad"
+		cost = 7.2
+prerequisite = {
+			focus = pip22
+		}
+		prerequisite = {
+			focus = pip21
+		}
+
+		relative_position_id = pip2
+
+		x = 0
+		y = 9
+		
+		completion_reward = {
+		add_state_claim = 815 
+	add_state_claim = 676 
+	add_state_claim = 291 
+	     create_wargoal = {
+				type = annex_everything
+				target = IRQ
+			}
+			IRQ = { add_ideas = yalnizlik}
+
+			}
+	}
+	
+	focus = {
+		id = pip25
+		icon = border_war
+		text = "Claim Hasakah"
+		cost = 7.2
+prerequisite = {
+			focus = pip22
+		}
+		prerequisite = {
+			focus = pip23
+		}
+
+		relative_position_id = pip2
+
+		x = 2
+		y = 9
+		
+		completion_reward = {
+		add_state_claim = 814 
+
+	     create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+
+			}
+	}
+	
+		focus = {
+		id = pip26
+		icon = attack_afganistan
+		text = "Take Over Afghanistan"
+		cost = 7.2
+prerequisite = {
+			focus = pip24
+		}
+		prerequisite = {
+			focus = pip25
+		}
+
+		relative_position_id = pip2
+
+		x = 1
+		y = 10
+		
+		completion_reward = {
+		every_state = {
+					limit = { is_core_of = AFG }
+					add_core_of = PER
+				}		
+	     create_wargoal = {
+				type = annex_everything
+				target = AFG
+			}
+			AFG = { add_ideas = yalnizlik}
+
+			}
+	}
+	
+	focus = {
+		id = pip27
+		icon = attack_russia
+		text = "The Dagestan Problem"
+		cost = 7.2
+prerequisite = {
+			focus = pip26
+		}
+	
+		relative_position_id = pip2
+
+		x = -1
+		y = 11
+		
+		completion_reward = {
+		
+		
+	     create_wargoal = {
+	type = take_state_focus
+	target = SOV
+	generator = { 232   }
+}
+			}
+	}
+	
+	focus = {
+		id = pip28
+		icon = attack_china
+		text = "Yarkand Is Ours"
+		cost = 7.2
+prerequisite = {
+			focus = pip26
+		}
+	
+		relative_position_id = pip2
+
+		x = 3
+		y = 11
+		
+		completion_reward = {
+		
+		
+	     create_wargoal = {
+	type = take_state_focus
+	target = PRC
+	generator = { 619   }
+}
+			}
+	}
+	
+	focus = {
+		id = pip29
+		icon = attack_turkey
+		text = "The Owner of Eastern Anatolia"
+		cost = 7.2
+prerequisite = {
+			focus = pip26
+		}
+	
+		relative_position_id = pip2
+
+		x = 1
+		y = 11
+		
+		completion_reward = {
+		
+		
+	     create_wargoal = {
+	type = take_state_focus
+	target = TUR
+	generator = { 352 350 349 353   }
+}
+			}
+	}
+	
+	
+	
+	
+	focus = {
+		id = mpgrm1
+		icon = demand_territory3
+		text = "MPGRM"
+		cost = 5
+prerequisite = {
+			focus = against2
+		}
+		relative_position_id = against1
+		
+
+		x = 0
+		y = 2
+		
+		completion_reward = {
+		country_event = persia.5
+		set_politics = {
+				ruling_party = conservative
+				elections_allowed = yes
+		}
+add_stability = 0.02
+		}
+	}
+	
+	focus = {
+		id = mpgrm2
+		icon = urbanization
+		text = "Encourage Urbanization"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm1
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = -2
+		y = 1
+		
+		completion_reward = {
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				set_state_category = city
+				add_manpower = 35000
+			}
+		}
+	}
+	
+	focus = {
+		id = mpgrm3
+		icon = agrarian_reform
+		text = "Encourage Urbanization"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm2
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = -3
+		y = 2
+		
+		completion_reward = {
+							add_ideas = LAT_agarian_reform
+
+		}
+	}
+	
+	focus = {
+		id = mpgrm4
+		icon = consumer_goods
+		text = "Subsidy Businesses"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm2
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = -1
+		y = 2
+		
+		completion_reward = {
+		add_offsite_building = { type = industrial_complex level = 2 }
+
+		}
+	}
+	
+	focus = {
+		id = mpgrm5
+		icon = communism46
+		text = "Improve Logistics"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm3
+		}
+		prerequisite = {
+			focus = mpgrm4
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = -2
+		y = 3
+		
+		completion_reward = {
+random_owned_state = {
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}}
+							random_owned_state = {
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}}
+							random_owned_state = {
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}}
+		}
+	}
+	
+	focus = {
+		id = mpgrm6
+		icon = GFX_USA_Factory
+		text = "American Aid"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm5
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = -4
+		y = 4
+		
+		completion_reward = {
+random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+
+						}
+		}
+	}
+	
+	focus = {
+		id = mpgrm7
+		icon = army_doctrine
+		text = "American Commanders"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm6
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = -4
+		y = 5
+		
+		completion_reward = {
+add_tech_bonus = {
+							name = land_doc_bonus
+							bonus = 0.7
+							uses = 1
+							category = land_doctrine
+						}
+
+			army_experience = 100
+		}
+	}
+	
+	focus = {
+		id = mpgrm8
+		icon = GFX_Germany_Factory
+		text = "German Aid"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm5
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = -2
+		y = 4
+		
+		completion_reward = {
+random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+
+						}
+		}
+	}
+	
+	focus = {
+		id = mpgrm9
+		icon = GFX_goal_continuous_non_factory_construct
+		text = "Privatize Mining Companies"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm8
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = -2
+		y = 5
+		
+		completion_reward = {
+		add_ideas = GEN_automative_mines_idea
+
+		}
+	}
+	
+	focus = {
+		id = mpgrm10
+		icon = GFX_Britain_Factory
+		text = "British Companies"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm5
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = 0
+		y = 4
+		
+		completion_reward = {
+random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+								size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+
+						}
+		}
+	}
+	
+	focus = {
+		id = mpgrm11
+		icon = oil_trade
+		text = "Invitation to Oil Companies"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm10
+		}
+		relative_position_id = mpgrm1
+		
+
+		x = 0
+		y = 5
+		
+		completion_reward = {
+410 = {
+							add_extra_state_shared_building_slots = 2	
+							add_building_construction = {
+								type = fuel_silo
+								level = 2
+								instant_build = yes
+							}
+						}
+						413 = {
+							add_extra_state_shared_building_slots = 2	
+							add_building_construction = {
+								type = fuel_silo
+								level = 2
+								instant_build = yes
+							}
+						}
+		}
+	}
+	
+	focus = {
+		id = mpgrm12
+		icon = political_pressure_blue
+		text = "Against Kurdistan"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm1
+		}
+		relative_position_id = mpgrm1
+				available = { has_civil_war = no}
+
+
+		x = 2
+		y = 1
+		
+		completion_reward = {
+		remove_from_faction = KUR
+	declare_war_on = {
+    target = KUR
+    type = annex_everything
+}
+		}
+	}
+	focus = {
+		id = mpgrm13
+		icon = peace
+		text = "The Promise of Democracy to the Turks"
+		cost = 8
+prerequisite = {
+			focus = mpgrm12
+		}
+		relative_position_id = mpgrm1
+
+
+		x = 2
+		y = 2
+		
+		completion_reward = {
+		remove_from_faction = PER
+		PER = { annex_country = { target = SAR transfer_troops = yes } }
+	every_state = {
+					limit = { is_core_of = SAR }
+					add_core_of = PER
+				}
+		}
+	}
+	
+	focus = {
+		id = mpgrm14
+		icon = peace
+		text = "The Promise of Democracy to the Turks"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm12
+		}
+		relative_position_id = mpgrm1
+
+
+		x = 2
+		y = 2
+		
+		completion_reward = {
+		remove_from_faction = PER
+		PER = { annex_country = { target = SAR transfer_troops = yes } }
+	every_state = {
+					limit = { is_core_of = SAR }
+					add_core_of = PER
+				}
+		}
+	}
+	
+	focus = {
+		id = mpgrm15
+		icon = research
+		text = "The New Education System"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm14
+		}
+		relative_position_id = mpgrm1
+
+
+		x = 1
+		y = 3
+		
+		completion_reward = {
+					add_ideas = idea_USA_new_education_program
+
+		}
+	}
+	
+	focus = {
+		id = mpgrm16
+		icon = self_management
+		text = "Healthcare Reform"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm14
+		}
+		relative_position_id = mpgrm1
+
+
+		x = 3
+		y = 3
+		
+		completion_reward = {
+			add_ideas = USA_universal_healthcare_idea
+
+		}
+	}
+	
+	focus = {
+		id = mpgrm17
+		icon = national_unity
+		text = "Woman's Right"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm15
+		}
+		prerequisite = {
+			focus = mpgrm16
+		}
+		relative_position_id = mpgrm1
+
+
+		x = 2
+		y = 4
+		
+		completion_reward = {
+
+			add_political_power = 100
+
+			add_manpower = 10000
+		}
+	}
+	
+	focus = {
+		id = mpgrm18
+		icon = prisoners
+		text = "Release the Political Prisoners "
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm17
+		}
+	
+		relative_position_id = mpgrm1
+
+
+		x = 2
+		y = 5
+		
+		completion_reward = {
+
+		add_stability = 0.07
+
+			add_political_power = 250
+		}
+	}
+	
+	focus = {
+		id = mpgrm19
+		icon = intelligence_exchange
+		text = "Law Reform by European Standards"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm18
+		}
+	
+		relative_position_id = mpgrm1
+
+
+		x = 2
+		y = 6
+		
+		completion_reward = {
+
+		add_stability = 0.1
+
+			add_political_power = 150
+		}
+	}
+	
+	focus = {
+		id = mpgrm20
+		icon = nato3
+		text = "Trade Agreement With NATO"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm7
+		}
+		prerequisite = {
+			focus = mpgrm9
+		}
+		prerequisite = {
+			focus = mpgrm11
+		}
+	
+		relative_position_id = mpgrm1
+
+
+		x = -2
+		y = 6
+		
+		completion_reward = {
+every_country = {
+		limit = { is_in_faction_with = USA
+ }
+				increase_trade_influence_by_3 = yes
+				add_opinion_modifier = {
+								target = PER
+								modifier = long_term_trade_partner
+							}
+				}
+		}
+	}
+	
+	focus = {
+		id = mpgrm21
+		icon = nato2
+		text = "Join NATO"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm20
+		}
+		prerequisite = {
+			focus = mpgrm19
+		}
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x = 0
+		y = 7
+		
+		completion_reward = {
+				country_event = { id = nato.1 }
+
+		}
+	}
+	
+	focus = {
+		id = mpgrm22
+		icon = apc
+		text = "NATO Equipments"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm21
+		}
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x = 1
+		y = 8
+		
+		completion_reward = {
+ add_equipment_to_stockpile = { 
+				type = infantry_equipment_2
+				amount = 700
+				producer = FRA
+			}
+add_equipment_to_stockpile = { 
+				type = motorized_equipment_1
+				amount = 500
+				producer = GER
+			}	
+add_equipment_to_stockpile = { 
+				type = modern_tank_equipment_2
+				amount = 700
+				producer = USA
+			}
+		}
+	}
+	
+	focus = {
+		id = mpgrm23
+		icon = nato
+		text = "NATO Exercises"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm21
+		}
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x = -1
+		y = 8
+		
+		completion_reward = {
+   add_war_support = 0.05
+			army_experience = 100
+			navy_experience = 100
+			air_experience = 100
+		}
+	}
+	
+	focus = {
+		id = mpgrm24
+		icon = research
+		text = "Join NATO Research Team"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm23
+		}
+		prerequisite = {
+			focus = mpgrm22
+		}
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x = 0
+		y = 9
+		
+		completion_reward = {
+ add_research_slot = 1
+		}
+	}
+	
+		focus = {
+		id = mpgrm25
+		icon = attack_afganistan
+		text = "Destroy Terrorists in Afghanistan"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm23
+		}
+	
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x =-1
+		y = 10
+		
+		completion_reward = {
+remove_from_faction = AFG
+create_wargoal = {
+							type = annex_everything
+							target = AFG
+			}
+		}
+	}
+	
+	focus = {
+		id = mpgrm26
+		icon = attack_pakistan
+		text = "Fight With a Supporter of Terrorism"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm22
+		}
+	
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x =1
+		y = 10
+		
+		completion_reward = {
+create_wargoal = {
+							type = annex_everything
+							target = PAK
+			}
+		}
+	}
+	
+	focus = {
+		id = mpgrm27
+		icon = communism46
+		text = "Develop  Infrastructure"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm26
+		}
+		prerequisite = {
+			focus = mpgrm25
+		}
+	available = { controls_state =787
+controls_state =824
+controls_state =267 
+	}
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x =0
+		y = 11
+		
+		completion_reward = {
+787 = {
+
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}
+							}
+							824 = {
+
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}
+							}
+							
+							267 = {
+
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}
+							}
+		}
+	}
+	
+	focus = {
+		id = mpgrm28
+		icon = airforce
+		text = "Expand the Airport of Kabul"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm27
+		}
+	
+	
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x =0
+		y = 12
+		
+		completion_reward = {
+		267 = {
+
+							add_building_construction = {
+							type = air_base
+								level =8
+								instant_build = yes
+							}
+
+						}
+
+		}
+	}
+	
+	focus = {
+		id = mpgrm31
+		icon = attack_india
+		text = "Become the Only Power in South Asia"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm28
+		}
+	
+	
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x =-2
+		y = 13
+		
+		completion_reward = {
+		create_wargoal = {
+							type = annex_everything
+							target = RAJ
+			}
+		
+
+		}
+	}
+	
+	focus = {
+		id = mpgrm29
+		icon = attack_china
+		text = "Defeat Communism!"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm28
+		}
+	
+	
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x =0
+		y = 13
+		
+		completion_reward = {
+		create_wargoal = {
+							type = annex_everything
+							target = PRC
+			}
+		
+
+		}
+	}
+	
+	focus = {
+		id = mpgrm30
+		icon = attack_russia
+		text = "Old Friend Is The New Enemy"
+		cost = 7.2
+prerequisite = {
+			focus = mpgrm28
+		}
+	
+	
+	
+	
+		relative_position_id = mpgrm1
+
+
+		x =2
+		y = 13
+		
+		completion_reward = {
+		create_wargoal = {
+							type = annex_everything
+							target = SOV
+			}
+		
+
+		}
+	}
+	
+	focus = {
+		id = pehlevi1
+		icon = monarchy2
+		text = "Pehlevi"
+		cost = 7.2
+mutually_exclusive = {
+			focus = islam1
+						focus = against1
+						focus = pip0
+
+		}
+		
+
+		x =50
+		y = 0
+		
+		completion_reward = {
+add_timed_idea = {
+				idea = idea_focus_generic_royal_doctrine
+				days = 1095
+			}
+			fourth_estate_monarchist_increase = yes
+		}		}
+	
+	
+	focus = {
+		id = pehlevi2
+		icon = pakalligne
+		text = "Deal With Islamist"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi1
+		}
+
+		relative_position_id = pehlevi1
+
+		x =-2
+		y = 1
+		
+		completion_reward = {
+add_popularity = {
+				ideology = monarchist
+				popularity = 0.1
+			}	
+add_popularity = {
+				ideology = islamist
+				popularity = -0.15
+			}			}
+	}
+	
+	focus = {
+		id = pehlevi3
+		icon = demand_territory
+		text = "Royal Propaganda"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi1
+		}
+
+		relative_position_id = pehlevi1
+
+		x =2
+		y = 1
+		
+		completion_reward = {
+add_popularity = {
+				ideology = monarchist
+				popularity = 0.13
+			}		}
+	}
+	
+	
+	focus = {
+		id = pehlevi4
+		icon = propaganda
+		text = "Deal With Army"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi2
+		}
+		
+		prerequisite = {
+			focus = pehlevi3
+		}
+
+		relative_position_id = pehlevi1
+
+		x =0
+		y = 2
+		
+		completion_reward = {
+add_popularity = {
+				ideology = monarchist
+				popularity = 0.2
+			}		}
+	}
+	
+	focus = {
+		id = pehlevi5
+		icon = monarchy4
+		text = "Pahlavi Dynasty"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi4
+		}
+
+
+		relative_position_id = pehlevi1
+
+		x =0
+		y = 3
+		
+		completion_reward = {
+add_popularity = {
+				ideology = monarchist
+				popularity = 0.05
+			}
+start_civil_war = {
+			ruling_party = monarchist
+			ideology = islamist
+			size = 0.5
+		}			
+			}
+	}
+	
+	focus = {
+		id = pehlevi6
+		icon = monarchy3
+		text = "Create Royal Army"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi5
+		}
+
+
+		relative_position_id = pehlevi5
+
+		x =-2
+		y = 1
+		
+		completion_reward = {
+		add_ideas = ROM_loyal_army
+		add_political_power = 50
+
+		
+			}
+	}
+	
+		focus = {
+		id = pehlevi7
+		icon = monarchy5
+		text = "The Shah of Iran"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi5
+		}
+
+
+		relative_position_id = pehlevi5
+
+		x =0
+		y = 1
+		
+		completion_reward = {
+		add_country_leader_trait = a_King_for_the_the_people
+		add_political_power = 50
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi8
+		icon = fascism12
+		text = "Nationalist Symbol"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi5
+		}
+
+
+		relative_position_id = pehlevi5
+
+		x =2
+		y = 1
+		
+		completion_reward = {
+		add_country_leader_trait = nationalist_symbol
+		add_political_power = 50
+
+		
+			}
+	}
+	
+		focus = {
+		id = pehlevi9
+		icon = ultimatum2
+		text = "The Power of the Shah"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi7
+		}
+			prerequisite = {
+			focus = pehlevi6
+		}
+
+
+		relative_position_id = pehlevi5
+
+		x =-1
+		y =2
+		
+		completion_reward = {
+		add_country_leader_trait = princess_of_terror
+		add_political_power = 50
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi10
+		icon = infantry_japan
+		text = "Imperial Of Honnor"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi7
+		}
+			prerequisite = {
+			focus = pehlevi8
+		}
+
+
+		relative_position_id = pehlevi5
+
+		x =1
+		y = 2
+		
+		completion_reward = {
+add_ideas = FRA_imperial_honor
+add_political_power = 50
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi11
+		icon = entente
+		text = "Improve Army"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi9
+		}
+	
+
+
+		relative_position_id = pehlevi5
+
+		x =-2
+		y = 3
+		
+		completion_reward = {
+swap_ideas = {
+			remove_idea = ROM_loyal_army
+			add_idea  = ROM_loyal_army_2
+			}
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi12
+		icon = military_mission
+		text = "Increase Recruitment"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi10
+		}
+	
+
+
+		relative_position_id = pehlevi5
+
+		x =2
+		y = 3
+		
+		completion_reward = {
+		add_ideas = idea_focus_new_recruitment_strategies
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi13
+		icon = army_doctrine
+		text = "Royal Youth"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi10
+		}
+		
+			prerequisite = {
+			focus = pehlevi9
+		}
+	
+
+
+		relative_position_id = pehlevi5
+
+		x =0
+		y = 3
+		
+		completion_reward = {
+		add_ideas = ROM_royal_youth_idea
+
+		
+			}
+	}
+	
+		focus = {
+		id = pehlevi14
+		icon = industry_military
+		text = "Militarise Our Industry"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi11
+		}
+		
+			prerequisite = {
+			focus = pehlevi13
+		}
+		relative_position_id = pehlevi5
+
+		x =-1
+		y = 4
+		
+		completion_reward = {
+	random_owned_state = {
+							add_extra_state_shared_building_slots = 2
+							add_building_construction = {
+								type = arms_factory
+								level = 2
+							instant_build = yes
+							}
+
+						}
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi15
+		icon = demand_sudetenland
+		text = generic_realpolitik
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi13
+		}
+		
+			prerequisite = {
+			focus = pehlevi12
+		}
+		relative_position_id = pehlevi5
+
+		x =1
+		y = 4
+		
+		completion_reward = {
+	    add_ideas = idea_focus_generic_realpolitik
+
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi16
+		icon = monarchy
+		text = generic_the_values_of_old
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi15
+		}
+		
+	
+		relative_position_id = pehlevi5
+
+		x =2
+		y = 5
+		
+		completion_reward = {
+	    fourth_estate_monarchist_increase = yes
+			add_ideas = idea_focus_generic_national_heritage
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi17
+		icon = army_doctrine
+		text = "Royal Exercises"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi16
+		}
+		
+	
+		relative_position_id = pehlevi5
+
+		x =2
+		y = 6
+		
+		completion_reward = {
+	army_experience = 50
+
+			add_tech_bonus = {
+
+							name = land_doc_bonus
+
+							bonus = 0.9
+
+							uses = 2
+
+							category = land_doctrine
+
+						}
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi18
+		icon = communism46
+		text = "Royal Roads"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi14
+		}
+		
+	
+		relative_position_id = pehlevi14
+
+		x =-1
+		y =1
+		
+		completion_reward = {
+			random_owned_state = {
+
+							add_building_construction = {
+
+								type = infrastructure
+
+								level = 2
+
+								instant_build = yes
+
+							}
+
+			random_owned_state = {
+
+							add_building_construction = {
+
+								type = infrastructure
+
+								level = 2
+
+								instant_build = yes
+
+							}
+		}
+
+		
+			}
+	}
+	}
+	focus = {
+		id = pehlevi19
+		icon = money
+		text = "Increased Military Wages"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi14
+		}
+		
+	
+		relative_position_id = pehlevi14
+
+		x =1
+		y =1
+		
+		completion_reward = {
+		add_ideas = ROM_increased_military_wages
+
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi20
+		icon = industry_military
+		text = "Expand Arsenals"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi14
+		}
+		
+	
+		relative_position_id = pehlevi14
+
+		x =0
+		y =2
+		
+		completion_reward = {
+random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = arms_factory
+								level =1
+							instant_build = yes
+							}
+
+						}
+						
+						random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = arms_factory
+								level =1
+							instant_build = yes
+							}
+
+						}
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi21
+		icon = war
+		text = "Borders of the Caucasus"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi17
+		}
+		
+	
+		relative_position_id = pehlevi17
+
+		x =0
+		y =1
+		
+		completion_reward = {
+every_state = {
+					limit = { is_core_of = AZR }
+					add_core_of = PER
+				}		
+	     create_wargoal = {
+				type = annex_everything
+				target = AZR
+			}
+			
+			every_state = {
+					limit = { is_core_of = GEO }
+					add_core_of = PER
+				}		
+	     create_wargoal = {
+				type = annex_everything
+				target = GEP
+			}
+		add_ideas = ROM_anti_partisant_tactics
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi22
+		icon = GFX_goal_continuous_suppression
+		text = "Anti Partisant Tactics"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi21
+		}
+		
+	
+		relative_position_id = pehlevi17
+
+		x =0
+		y =2
+		
+		completion_reward = {
+
+		add_ideas = ROM_anti_partisant_tactics
+
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi23
+		icon = construction3
+		text = "Encouragement To Supporters"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi18
+		}
+		
+	
+		relative_position_id = pehlevi18
+
+		x =-1
+		y =1
+		
+		completion_reward = {
+
+random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+						random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+		
+			}
+	}
+	
+	focus = {
+		id = pehlevi24
+		icon = destroy_society
+		text = "Nobility"
+		cost = 7.2
+
+		prerequisite = {
+			focus = pehlevi20
+		}
+		
+	
+		relative_position_id = pehlevi20
+
+		x =0
+		y =1
+		
+		completion_reward = {
+
+	    add_ideas = HUN_nobility 
+
+		
+			}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

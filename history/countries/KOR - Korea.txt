@@ -9,6 +9,39 @@ if = {
 	}
 }
 
+set_variable = { var = KORRegimeStability value = 60.0 }
+set_variable = { var = KORBulgomVar value = 100 }
+
+set_variable = { var = KOR_fundamentalists_loyalty_status value = 0 }
+set_variable = { var = KOR_reactionists_loyalty_status value = 5 }
+set_variable = { var = KOR_neocon_loyalty_status value = 5 }
+set_variable = { var = KOR_conservatism_loyalty_status value = 64 }
+set_variable = { var = KOR_social_liberalism_loyalty_status value = 3 }
+set_variable = { var = KOR_democratic_socialism_loyalty_status value = 0 }
+set_variable = { var = KOR_centrist_loyalty_status value = 30 }
+
+set_variable = { var = KOR_reactionists_seats_status value = 10 }
+set_variable = { var = KOR_neocon_seats_status value = 129 }
+set_variable = { var = KOR_conservatism_seats_status value = 70 }
+set_variable = { var = KOR_social_liberalism_seats_status value = 9 }
+set_variable = { var = KOR_centrist_seats_status value = 76 }
+
+set_variable = { var = KOR_all_seats_status value = 299 }
+
+set_variable = { var = KOR_fundamentalists_support_status value = 8 }
+set_variable = { var = KOR_reactionists_support_status value = 18 }
+set_variable = { var = KOR_neocon_support_status value = 110 }
+set_variable = { var = KOR_conservatism_support_status value = 65 }
+set_variable = { var = KOR_social_liberalism_support_status value = 33 }
+set_variable = { var = KOR_centrist_support_status value = 20 }
+
+set_country_flag = unique_industrial_concern
+set_country_flag = KOR_centrist_coalition
+set_country_flag = KOR_social_liberalism_coalition
+set_country_flag = KOR_democratic_socialism_coalition
+
+load_focus_tree = KOR_focus_tree_2000
+
 set_research_slots = 5
 set_convoys = 580
 set_stability = 0.7
@@ -18,7 +51,6 @@ set_country_flag = country_language_korean
 set_technology = {
 	## Infantry ##
 	infantry_weapons1 = 1
-	infantry_weapons2 = 1
 	motorised_infantry = 1
 	infantry_rifle_upgrade = 1
 	support_weapons = 1
@@ -51,6 +83,9 @@ set_technology = {
 	light_mechanized_infantry2 = 1
 	
 	## Artillery ##
+	#coldwar_artillery = 1
+	#coldwar_antiair = 1
+	#coldwar_antitank = 1
 	gw_artillery = 1
 	interwar_antitank = 1
 	interwar_antiair = 1
@@ -126,13 +161,32 @@ if = {
 add_ideas = {
 	national_development_developed
 	economy_growth
-	immigration_policy_loose_regulations
-	civil_liberties_free
+	#immigration_policy_loose_regulations
+	#civil_liberties_free
+	
+	civil_liberties_restricted
+	public_safety_central_law_office
+	welfare_none
+	immigration_policy_strict_regulations
 	population_growth_stagnation
 	extensive_conscription
 	free_trade
+	mobilization_service_time_pure_race_only
+	
+	KOR_WT_OPCON
+	KOR_balancer_theory
+	#KOR_donggyodong_faction
+	KOR_political_violence
+	#KOR_coalition_on_the_brink_of_collapse
+	KOR_cultural_isolation_crisis
+	KOR_danilminjok
+	kor_descendant_of_the_Imperial_army_1
+	generic_asia_idea_article_29
+	generic_asia_idea_civilian_forced_labor_system
+	
+	prime_minister_kim_jong_pil
 }
-
+	
 give_military_access = USA
 
 add_opinion_modifier = {
@@ -156,68 +210,87 @@ add_opinion_modifier = {
 }
 
 set_politics = {	
-	ruling_party = social_liberal
-	last_election = "1997.12.18"
+	ruling_party = conservative
+	last_election = "1997.12.5"
 	election_frequency = 60
 	elections_allowed = yes
 }
 
 set_popularities = {
+	#Left Wings
     nationalist = 2
-    conservative = 30
-    market_liberal = 10
-    social_liberal = 45
     social_democrat = 5
-    progressive = 5
+	
+	#Right Wings
+	reactionary = 7
+    market_liberal = 38
+
+	#Centre-Left Wings
+    conservative = 30
+    social_liberal = 15
     democratic_socialist = 3
 }
 
 create_country_leader = {
-	name = "Chun Doo-hwan"
-	picture = "Chun_Doo-hwan.dds"
-	ideology = fascist_ideology
+	name = "Lee Seok-ki"
+	desc = "POLITICS_WILLIAM_BIRDWOOD_DESC"
+	picture = "gfx/leaders/KOR/Lee_Seok_ki.dds"
+	#expire = "1965.1.1"
+	ideology = juche
+	traits = {
+		juche_korea KOR_eternal_president
+	}
 }
-
+		
 create_country_leader = {
 	name = "Kim Dae-jung"
 	picture = "Kim_Dae_Jung.dds"
+	desc = "POLITICS_KIM_DAE_JUNG_DESC"
+	ideology = christian_democrat
+	traits = { KOR_nelson_mandela_of_asia }
+}
+
+create_country_leader = {
+	name = "Park Geun-hye"
+	picture = "Park_Geun-hye.dds"
+	ideology = counter_progressive_democrat
+	traits = {
+		KOR_shamanism_worship
+	}
+}
+	
+create_country_leader = {
+	name = "Roh Moo-hyun"
+	picture = "Roh_Moo_hyun.dds"
 	ideology = liberalist
+	traits = {
+		KOR_symbol_of_korean_liberalism
+	}
 }
 
 create_country_leader = {
 	name = "Lee Hoi-chang"
 	picture = "Lee_Hoi_Chang.dds"
-	ideology = constitutionalist
+	ideology = market_liberal_ideology
+	traits = {
+		KOR_bamboo_politician
+	}
 }
 
 create_country_leader = {
-	name = "Hong Se-hwa"
-	picture = "Hong_Se_Hwa.dds"
+	name = "Lee Jae-myung"
+	picture = "Lee_Jae_myung.dds"
 	ideology = democratic_socialist_ideology
-}
-
-create_country_leader = {
-	name = "Park Jie-won"
-	picture = "Park_Jie_Won.dds"
-	ideology = libertarian
+	traits = {
+		KOR_trump_of_korea
+		KOR_sanders_of_korea
+	}
 }
 
 create_country_leader = {
 	name = "Sim Sang-jung"
 	picture = "Sim_Sang_Jun.dds"
-	ideology = progressive_ideology
-}
-
-create_country_leader = {
-	name = "Ha Seung-soo"
-	picture = "Ha_Seung_Soo.dds"
 	ideology = social_democrat_ideology
-}
-
-create_country_leader = {
-	name = "Geum Min"
-	picture = "Geum_Min.dds"
-	ideology = marxist
 }
 
 ##### GENERAL
@@ -447,6 +520,7 @@ create_navy_leader = {
 }
 
 2015.10.1 = {
+	load_focus_tree = KOR_focus_tree_democracy
 	set_politics = {
 		ruling_party = conservative
 		last_election = "2012.4.11"
@@ -462,15 +536,17 @@ create_navy_leader = {
     }
 
 	create_country_leader = {
-		name = "Park Geun-hye"
-		picture = "Park_Gyeung_He.dds"
-		ideology = constitutionalist
-	}
-
-	create_country_leader = {
 		name = "Moon Jae-in"
 		picture = "Moon_Jae_In.dds"
+		ideology = christian_democrat
+		traits = { KOR_undaunted_nationalist }
+	}
+	
+	create_country_leader = {
+		name = "Lee Nak-yon"
+		picture = "Lee_Nak_yon.dds"
 		ideology = liberalist
+		traits = {  }
 	}
 }
 

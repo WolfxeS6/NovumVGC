@@ -1,0 +1,9869 @@
+### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_RESEARCH}
+### search_filters = {FOCUS_FILTER_INDUSTRY}
+### search_filters = {FOCUS_FILTER_STABILITY}
+### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+### search_filters = {FOCUS_FILTER_MANPOWER}
+
+ ##############
+ ###
+ ### Sunshine Policy
+ ###
+ ##############
+
+	shared_focus = {
+		id = kor_compromise_with_anti_nort_korean
+		icon = kor_peace_fail_two_korea
+		x = 1
+		y = 5
+		cost = 3
+
+		mutually_exclusive = {
+			focus = kor_sunshine_policy
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		prerequisite = { focus = kor_to_see_the_future }
+
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			add_popularity = { ideology = reactionary popularity = 0.02 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_cultural_exchange
+		icon = democracy
+		x = 0
+		y = 6
+		cost = 7
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		prerequisite = { focus = kor_compromise_with_anti_nort_korean }
+
+		completion_reward = {
+			add_popularity = { ideology = reactionary popularity = 0.03 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_ban_on_aid_to_north_korea
+		icon = kor_anti_north_korea
+		x = 2
+		y = 6
+		cost = 7
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		prerequisite = { focus = kor_compromise_with_anti_nort_korean }
+
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			add_popularity = { ideology = reactionary popularity = 0.02 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_failure_of_the_sunshine_policy
+		icon = kor_attack_two_korea_flag
+		x = 1
+		y = 7
+		cost = 7
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		prerequisite = { focus = kor_cultural_exchange }
+		prerequisite = { focus = kor_ban_on_aid_to_north_korea }
+
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -10 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_10_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_sunshine_policy
+		icon = kor_peace_two_korea
+		x = 5
+		y = 5
+		cost = 7
+	
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_30_tt
+				check_variable = { KORRegimeStability > 30 }
+			}
+		}
+		
+		mutually_exclusive = {
+			focus = kor_compromise_with_anti_nort_korean
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {FOCUS_FILTER_POLITICAL}
+		prerequisite = { focus = kor_to_see_the_future }
+
+		completion_reward = {
+			PRK = { country_event = { id = south_korea.27 } }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_emergency_food_aid
+		icon = generic_food_propaganda
+		x = 0
+		y = 1
+		cost = 7
+	
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_50_tt
+				check_variable = { KORRegimeStability > 50 }
+			}
+		}
+		
+		prerequisite = { focus = kor_sunshine_policy }
+		relative_position_id = kor_sunshine_policy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			country_event = { id = south_korea.25 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_road_to_kaesong
+		icon = generic_red_speed
+		x = -1
+		y = 2
+		cost = 7
+	
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_50_tt
+				check_variable = { KORRegimeStability > 50 }
+			}
+		}
+		
+		prerequisite = { focus = kor_emergency_food_aid }
+		relative_position_id = kor_sunshine_policy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			PRK = { country_event = { id = south_korea.28 } }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_kaesong_industrial_region
+		icon = kor_two_korea_flag
+		x = -1
+		y = 3
+		cost = 7
+	
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_dpr_korea_ok_tt
+				has_country_flag = kaseong_flag
+			}
+			
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_50_tt
+				check_variable = { KORRegimeStability > 50 }
+			}
+		}
+		
+		prerequisite = { focus = kor_road_to_kaesong }
+		relative_position_id = kor_sunshine_policy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		
+			custom_effect_tooltip = kor_increasing_influence_tt
+			PRK = { add_to_variable = { var = RegimeInfluence value = 4 } }
+			PRK = { country_event = { id = south_korea.31 } }
+			
+			947 = { #Hwanghae
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_nuclear_power_plant_construction
+		icon = industry_military
+		x = 1
+		y = 2
+		cost = 7
+	
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_dpr_korea_ok_tt
+				has_country_flag = kaseong_flag
+			}
+			
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_50_tt
+				check_variable = { KORRegimeStability > 50 }
+			}
+		}
+		
+		prerequisite = { focus = kor_emergency_food_aid }
+		relative_position_id = kor_sunshine_policy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = kor_increasing_influence_tt
+			PRK = { add_to_variable = { var = RegimeInfluence value = 4 } }
+			
+			949 = { #Ryanggang
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
+			
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_economic_cooperation_with_dprk
+		icon = align_to_north_korea
+		x = 1
+		y = 3
+		cost = 7
+	
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_dpr_korea_ok_tt
+				has_country_flag = kaseong_flag
+			}
+			
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_50_tt
+				check_variable = { KORRegimeStability > 50 }
+			}
+		}
+		
+		prerequisite = { focus = kor_nuclear_power_plant_construction }
+		relative_position_id = kor_sunshine_policy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = kor_increasing_influence_tt
+			PRK = { add_to_variable = { var = RegimeInfluence value = 4 } }
+			
+			948 = { #Pyongyang
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_build_gyeongui_line
+		icon = infrastructure
+		x = 0
+		y = 4
+		cost = 7
+	
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_dpr_korea_ok_tt
+				has_country_flag = kaseong_flag
+			}
+			
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_75_tt
+				check_variable = { KORRegimeStability > 75 }
+			}
+		}
+		
+		prerequisite = { focus = kor_kaesong_industrial_region }
+		prerequisite = { focus = kor_economic_cooperation_with_dprk }
+		relative_position_id = kor_sunshine_policy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = kor_increasing_influence_tt
+			PRK = { add_to_variable = { var = RegimeInfluence value = 10 } }
+			
+			#all_owned_state = {
+			#	limit = { 
+			#			region = 947 #Hwanghae
+			#			region = 948 #Pyongyang
+			#			region = 527 #South Pyongan 
+			#			region = 875 #North Pyongan 
+			#			infrastructure < 10
+			#	}
+			#	add_building_construction = { 
+			#		type = infrastructure
+			#		level = 1
+			#		instant_build = yes
+			#	}
+			#}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+#	shared_focus = {
+#		id = kor_reunification_negotiations
+#		icon = align_to_north_korea
+#		x = 0
+#		y = 5
+#		cost = 7
+	
+#		available = {
+#			custom_trigger_tooltip = {
+#				tooltip = kor_need_regime_stability_50_tt
+#				check_variable = { KORRegimeStability > 50 }
+#			}
+#		}
+		
+#		prerequisite = { focus = kor_build_gyeongui_line }
+#		relative_position_id = kor_sunshine_policy
+	
+#		cancel_if_invalid = yes
+#		continue_if_invalid = no
+#		available_if_capitulated = no
+
+#		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+#		completion_reward = {
+#		}
+		
+#		ai_will_do = {
+#			base = 5
+#		}
+#	}
+	
+#	shared_focus = {
+#		id = kor_special_favors_to_the_kim_dynasty
+#		icon = generic_food_propaganda
+#		x = -1
+#		y = 6
+#		cost = 7
+	
+#		available = {
+#			custom_trigger_tooltip = {
+#				tooltip = kor_need_regime_stability_75_tt
+#				check_variable = { KORRegimeStability > 75 }
+#			}
+#		}
+		
+#		mutually_exclusive = {
+#			focus = kor_pledge_of_forgiveness
+#		}
+		
+#		prerequisite = { focus = kor_reunification_negotiations }
+#		relative_position_id = kor_sunshine_policy
+	
+#		cancel_if_invalid = yes
+#		continue_if_invalid = no
+#		available_if_capitulated = no#
+
+#		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+#		completion_reward = {
+#			ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+#			custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+#		}
+		
+	#	ai_will_do = {
+	#		base = 5
+	#	}
+	#}
+	
+#	shared_focus = {
+#		id = kor_pledge_of_forgiveness
+#		icon = prk_juche_tower
+#		x = 1
+#		y = 6
+#		cost = 7
+#	
+#		available = {
+#			custom_trigger_tooltip = {
+#				tooltip = kor_need_regime_stability_50_tt
+#				check_variable = { KORRegimeStability > 50 }
+#			}
+#		}
+#		
+#		mutually_exclusive = {
+#			focus = kor_special_favors_to_the_kim_dynasty
+#		}
+#		
+#		prerequisite = { focus = kor_reunification_negotiations }
+#		relative_position_id = kor_sunshine_policy
+#	
+#		cancel_if_invalid = yes
+#		continue_if_invalid = no
+#		available_if_capitulated = no
+#
+#		search_filters = { FOCUS_FILTER_POLITICAL }
+#		
+#		completion_reward = {
+#		}
+#		
+#		ai_will_do = {
+#			base = 5
+#		}
+#	}
+	
+#	shared_focus = {
+#		id = kor_peaceful_reunification_korea
+#		icon = japan_akihabara
+#		x = 0
+#		y = 7
+#		cost = 7
+#		
+#		prerequisite = { focus = kor_special_favors_to_the_kim_dynasty }		
+#		prerequisite = { focus = kor_pledge_of_forgiveness }
+#		relative_position_id = kor_sunshine_policy
+#	
+#		cancel_if_invalid = yes
+#		continue_if_invalid = no
+#		available_if_capitulated = no
+#
+#		search_filters = { FOCUS_FILTER_POLITICAL }
+#		
+#		completion_reward = {
+#		}
+#		
+#		ai_will_do = {
+#			base = 5
+#		}
+#	}
+#	
+	shared_focus = {
+		id = kor_kim_dae_jung_administration
+		icon = generic_asians_democracy
+		x = 14
+		y = 0
+		cost = 7
+	
+		bypass = {
+			has_country_leader = {
+				name = "Kim Dae-jung"
+				ruling_only = yes
+			}
+		}
+		
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {}
+
+		completion_reward = {
+		
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_It_s_the_economy_stupid
+		icon = generic_saemaul
+		x = -2
+		y = 1
+		cost = 5
+		
+		prerequisite = { focus = kor_kim_dae_jung_administration }
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = south_korea.50 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_resume_austerity_policy
+		icon = kor_money_grab
+		x = -3
+		y = 2
+		cost = 5
+		
+		mutually_exclusive = {
+			focus = kor_more_taxes_for_chaebols
+		}
+		
+		prerequisite = { focus = kor_It_s_the_economy_stupid }
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = {  }
+		
+		completion_reward = {
+			add_timed_idea = { idea = kor_resume_austerity_policy_idea days = 365 }
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_more_taxes_for_chaebols
+		icon = kor_grab_chaebol_2
+		x = -1
+		y = 2
+		cost = 5
+	
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_50_tt
+				check_variable = { KORRegimeStability > 50 }
+			}
+		}
+		
+		mutually_exclusive = {
+			focus = kor_resume_austerity_policy
+		}
+		
+		prerequisite = { focus = kor_It_s_the_economy_stupid }
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = {  }
+		
+		completion_reward = {
+			add_timed_idea = { idea = kor_more_taxes_chaebol_idea days = 365 }
+			if = {
+				limit = {
+					has_country_flag = KOR_centrist_coalition
+				}
+				custom_effect_tooltip = KOR_centrist_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_new_cabinet_formation
+		icon = kor_kim_dae_jung_cabinet
+		x = 0
+		y = 1
+		cost = 2
+		
+		prerequisite = { focus = kor_kim_dae_jung_administration }
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_centrist_coalition
+				}
+				country_event = { id = south_korea.33 }
+			}
+			else_if = {
+				limit = {
+					has_country_flag = KOR_social_democracy_coalition
+				}
+				country_event = { id = south_korea.34 }
+			}
+			else_if = {
+				limit = {
+					has_country_flag = KOR_NL_coalition
+				}
+				country_event = { id = south_korea.35 }
+			}
+			else = {
+				country_event = { id = south_korea.36 }
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_ministry_of_gender_equality
+		icon = university #national_unity_red
+		x = 2
+		y = 1
+		cost = 5
+		
+		prerequisite = { focus = kor_kim_dae_jung_administration }
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = {  }
+		
+		completion_reward = {
+			add_ideas = kor_ministry_of_gender_equality_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_NHRCK
+		icon = kor_NHRCK
+		x = 2
+		y = 2
+		cost = 5
+		
+		prerequisite = { focus = kor_ministry_of_gender_equality }
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		
+		completion_reward = {
+			add_stability = 0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_pay_the_debt
+		icon = kor_korean_money
+		x = -2
+		y = 3
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_more_taxes_for_chaebols 
+			focus = kor_resume_austerity_policy 
+		}
+		prerequisite = { focus = kor_new_cabinet_formation }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = 2.5 } }
+			custom_effect_tooltip = kor_add_regime_stability_2_half_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_feminism_debate
+		icon = kor_feminism
+		x = 2
+		y = 3
+		cost = 5
+		
+		prerequisite = { focus = kor_NHRCK }
+		prerequisite = { focus = kor_new_cabinet_formation }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = {  }
+		
+		completion_reward = {
+			country_event = { id = south_korea.49 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_to_see_the_future
+		icon = kor_dual_korean_democracy_flag_blue
+		x = 0
+		y = 4
+		cost = 5
+		
+		prerequisite = { focus = kor_pay_the_debt }
+		prerequisite = { focus = kor_feminism_debate }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		
+		completion_reward = {
+			add_popularity = { ideology = conservative popularity = 0.1 }
+			add_stability = 0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_punish_the_sins_of_the_past
+		icon = GFX_goal_generic_defence
+		x = -5
+		y = 5
+		cost = 3
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_50_tt
+				check_variable = { KORRegimeStability > 50 }
+			}
+		}
+		
+		prerequisite = { focus = kor_to_see_the_future }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_centrist_coalition
+				}
+				custom_effect_tooltip = KOR_centrist_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_kill_chun_doo_hwan
+		icon = chun_doo_hwan_out
+		x = -4
+		y = 6
+		cost = 3
+		
+	
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_75_tt
+				check_variable = { KORRegimeStability > 75 }
+			}
+		}
+		
+		prerequisite = { focus = kor_punish_the_sins_of_the_past }
+		
+		mutually_exclusive = {
+			focus = kor_forgive_them_but_do_not_forget
+		}
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			set_country_flag = death_chun_doo_hwan
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_punishment_of_dictators_descendants_act
+		icon = kor_park_geun_hye_out #
+		x = -4
+		y = 7
+		cost = 3
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_50_tt
+				check_variable = { KORRegimeStability > 50 }
+			}
+		}
+		
+		prerequisite = { focus = kor_kill_chun_doo_hwan }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -10 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_10_tt
+			set_country_flag = ban_park_geun_hye
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_forgive_them_but_do_not_forget
+		icon = improve_relations
+		x = -6
+		y = 6
+		cost = 3
+		
+		prerequisite = { focus = kor_punish_the_sins_of_the_past }
+		
+		mutually_exclusive = {
+			focus = kor_kill_chun_doo_hwan
+		}
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_NL_coalition
+				}
+				custom_effect_tooltip = KOR_NL_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			}
+			else = {
+				ROOT = { add_to_variable = { var = KORRegimeStability value = 2.5 } }
+				custom_effect_tooltip = kor_add_regime_stability_2_half_tt
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_truthfinder_project
+		icon = align_to_south_korea
+		x = -6
+		y = 7
+		cost = 3
+		
+		prerequisite = { focus = kor_forgive_them_but_do_not_forget }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = 2.5 } }
+			custom_effect_tooltip = kor_add_regime_stability_2_half_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_long_live_democracy
+		icon = home_defense
+		x = -5
+		y = 8
+		cost = 3
+		
+		prerequisite = { 
+			focus = kor_punishment_of_dictators_descendants_act
+			focus = kor_truthfinder_project 
+		}
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = 2.5 } }
+			add_popularity = { ideology = reactionary popularity = -0.02 }
+			custom_effect_tooltip = kor_add_regime_stability_2_half_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_social_problem
+		icon = construction
+		x = 2
+		y = 5
+		cost = 5
+		
+		prerequisite = { focus = kor_to_see_the_future }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_political_power = 80
+			add_popularity = { ideology = conservative popularity = 0.05 }
+			add_popularity = { ideology = social_liberal popularity = 0.05 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_economic_problem
+		icon = generic_saemaul
+		x = 9
+		y = 5
+		cost = 5
+		
+		prerequisite = { focus = kor_to_see_the_future }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_political_power = 80
+			add_popularity = { ideology = conservative popularity = 0.05 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_agricultural_support
+		icon = agriculture
+		x = 8
+		y = 6
+		cost = 5
+		
+		prerequisite = { focus = kor_economic_problem }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			869 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			871 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			945 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_NACF
+		icon = central_management
+		x = 9
+		y = 7
+		cost = 5
+		
+		prerequisite = { focus = kor_agricultural_support }
+		
+		bypass = {
+		
+			has_idea = KOR_NACF
+		}
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = KOR_NACF
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_support_for_reemployment
+		icon = industry_civilian
+		x = 10
+		y = 6
+		cost = 5
+		
+		prerequisite = { focus = kor_economic_problem }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+					limit = {
+						is_core_of = KOR
+						industrial_complex > 0
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			add_political_power = 120
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_mass_participatory_economy
+		icon = jap_economic_developement
+		x = -1
+		y = 6
+		cost = 8
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_30_tt
+				check_variable = { KORRegimeStability > 30 }
+			}
+		}
+		
+		mutually_exclusive = {
+			focus = kor_economic_democratization
+		}
+		
+		prerequisite = { focus = kor_social_problem }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_NL_coalition
+				}
+				custom_effect_tooltip = KOR_NL_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			}
+			else_if = {
+				limit = {
+					has_country_flag = KOR_social_democracy_coalition
+				}
+				custom_effect_tooltip = KOR_social_democracy_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			}
+			else = {
+				ROOT = { add_to_variable = { var = KORRegimeStability value = 2.5 } }
+				custom_effect_tooltip = kor_add_regime_stability_2_half_tt
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1.0
+				uses = 1
+				category = industry
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_cooperation_with_chaebol
+		icon = industry_civilian
+		x = -2
+		y = 7
+		cost = 6
+		
+		prerequisite = { focus = kor_mass_participatory_economy }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_NL_coalition
+				}
+				custom_effect_tooltip = KOR_NL_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			}
+			else_if = {
+				limit = {
+					has_country_flag = KOR_social_democracy_coalition
+				}
+				custom_effect_tooltip = KOR_social_democracy_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			}
+			random_owned_state = {
+				limit = { 
+					is_core_of = ROOT 
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_big_capital_big_income
+		icon = kor_money_grab
+		x = -2
+		y = 8
+		cost = 6
+		
+		prerequisite = { focus = kor_cooperation_with_chaebol }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_NL_coalition
+				}
+				custom_effect_tooltip = KOR_NL_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			}
+			else_if = {
+				limit = {
+					has_country_flag = KOR_social_democracy_coalition
+				}
+				custom_effect_tooltip = KOR_social_democracy_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+			}
+			random_owned_controlled_state = {
+					limit = {
+						is_core_of = KOR
+						industrial_complex > 0
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_privatization_of_public_enterprise
+		icon = dangerous_deal
+		x = 0
+		y = 7
+		cost = 6
+		
+		prerequisite = { focus = kor_mass_participatory_economy }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_NL_coalition
+				}
+				custom_effect_tooltip = KOR_NL_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			}
+			else_if = {
+				limit = {
+					has_country_flag = KOR_social_democracy_coalition
+				}
+				custom_effect_tooltip = KOR_social_democracy_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			}
+			random_owned_state = {
+				limit = { 
+					is_core_of = ROOT 
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_simplify_the_process_of_layoffs
+		icon = production
+		x = 0
+		y = 8
+		cost = 6
+		
+		prerequisite = { focus = kor_privatization_of_public_enterprise }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_NL_coalition
+				}
+				custom_effect_tooltip = KOR_NL_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			}
+			else_if = {
+				limit = {
+					has_country_flag = KOR_social_democracy_coalition
+				}
+				custom_effect_tooltip = KOR_social_democracy_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			}
+			
+			add_political_power = 50
+			add_popularity = { ideology = market_liberal popularity = 0.05 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_minimal_welfare
+		icon = constitution
+		x = -1
+		y = 9
+		cost = 6
+		
+		prerequisite = { focus = kor_simplify_the_process_of_layoffs }
+		prerequisite = { focus = kor_big_capital_big_income }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = 2.5 } }
+			custom_effect_tooltip = kor_add_regime_stability_2_half_tt
+			
+			add_political_power = 50
+			add_popularity = { ideology = market_liberal popularity = 0.05 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_economic_democratization
+		icon = jap_gambling
+		x = 5
+		y = 6
+		cost = 8
+		
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = kor_need_regime_stability_50_tt
+				check_variable = { KORRegimeStability > 50 }
+			}
+		}
+		
+		mutually_exclusive = {
+			focus = kor_mass_participatory_economy
+		}
+		
+		prerequisite = { focus = kor_social_problem }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_centrist_coalition
+				}
+				custom_effect_tooltip = KOR_centrist_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1.0
+				uses = 1
+				category = industry
+			}
+			
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_up_corporate_tax
+		icon = kor_grab_chaebol_1
+		x = 4
+		y = 7
+		cost = 6
+		
+		prerequisite = { focus = kor_economic_democratization }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_centrist_coalition
+				}
+				custom_effect_tooltip = KOR_centrist_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			}
+			
+			add_political_power = 50
+			add_popularity = { ideology = social_democrat popularity = 0.05 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_weakening_of_chaebol
+		icon = destroy_society
+		x = 4
+		y = 8
+		cost = 6
+		
+		prerequisite = { focus = kor_up_corporate_tax }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_centrist_coalition
+				}
+				custom_effect_tooltip = KOR_centrist_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			}
+			
+			add_popularity = { ideology = social_democrat popularity = 0.05 }
+			
+			random_owned_state = {
+				limit = { 
+					is_core_of = ROOT 
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_attack_fki
+		icon = communism5
+		x = 6
+		y = 7
+		cost = 6
+		
+		prerequisite = { focus = kor_economic_democratization }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = KOR_centrist_coalition
+				}
+				custom_effect_tooltip = KOR_centrist_angry_tt
+				ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+				custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_worker_right
+		icon = communism3
+		x = 6
+		y = 8
+		cost = 6
+		
+		prerequisite = { focus = kor_attack_fki }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = 2.5 } }
+			custom_effect_tooltip = kor_add_regime_stability_2_half_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_universal_welfare
+		icon = constitution
+		x = 5
+		y = 9
+		cost = 6
+		
+		prerequisite = { focus = kor_weakening_of_chaebol }
+		prerequisite = { focus = kor_worker_right }
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = 2.5 } }
+			custom_effect_tooltip = kor_add_regime_stability_2_half_tt
+			if = {
+				limit = { 
+						OR = {
+							has_idea = welfare_none
+						}
+				}
+				swap_ideas = {
+					remove_idea = welfare_none
+					add_idea = welfare_modest_assistance
+				}
+			}
+			else_if = {
+				limit = { 
+						OR = {
+							has_idea = welfare_basic_subsidies
+						}
+				}
+				swap_ideas = {
+					remove_idea = welfare_basic_subsidies
+					add_idea = welfare_modest_assistance
+				}
+			}
+			else = {
+				add_stability = 0.1
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+ ##############
+ ###
+ ### Sunshine Policy
+ ###
+ ##############
+
+	shared_focus = {
+		id = kor_to_the_sea
+		icon = navy
+		x = 32
+		y = 0
+		cost = 7
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			navy_experience = 40
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_end_force_conscription
+		icon = kor_ROKMC
+		x = 2
+		y = 1
+		cost = 5
+		
+		prerequisite = { focus = kor_to_the_sea }
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_manpower = 20000
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_task_force_theory
+		icon = united_states_marine_corps
+		x = -1
+		y = 1
+		cost = 7
+		
+		mutually_exclusive = {
+			focus = kor_marine_corps_reduction
+		}
+		
+		relative_position_id = kor_end_force_conscription
+		prerequisite = { focus = kor_end_force_conscription }
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_ideas = kor_task_force_theory_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_marine_corps_reduction
+		icon = money
+		x = 1
+		y = 1
+		cost = 7
+		
+		mutually_exclusive = {
+			focus = kor_task_force_theory
+		}
+		
+		relative_position_id = kor_end_force_conscription
+		prerequisite = { focus = kor_end_force_conscription }
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_ideas = idea_focus_army_officer_school
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_marine_militia_issues
+		icon = military_mission
+		x = 0
+		y = 2
+		cost = 7
+		
+		relative_position_id = kor_end_force_conscription
+		prerequisite = { 
+			focus = kor_task_force_theory
+			focus = kor_marine_corps_reduction 
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			army_experience = 25
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_marine_culture_improvement
+		icon = generic_build_korean_style_infantry
+		x = 2
+		y = 2
+		cost = 7
+		
+		relative_position_id = kor_end_force_conscription
+		prerequisite = { 
+			focus = kor_task_force_theory
+			focus = kor_marine_corps_reduction 
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = marine_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_pohang_shipyard
+		icon = naval_dockyards
+		x = -2
+		y = 1
+		cost = 6
+		
+		prerequisite = { focus = kor_to_the_sea }
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_blue_water_navy
+		icon = naval_doctrine
+		x = -1
+		y = 2
+		cost = 6
+		
+		prerequisite = { focus = kor_pohang_shipyard }
+		relative_position_id = kor_to_the_sea
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = nav_doctrine_bonus
+				bonus = 1.0
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_blue_shark
+		icon = submarines
+		x = -3
+		y = 2
+		cost = 6
+		
+		prerequisite = { focus = kor_pohang_shipyard }
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_shark_torpedo_1_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_red_shark
+		icon = submarines
+		x = -4
+		y = 3
+		cost = 6
+		
+		prerequisite = { focus = kor_blue_shark }
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = kor_shark_torpedo_1_idea
+				add_idea = kor_shark_torpedo_2_idea
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_enemy_of_the_north
+		icon = attack_north_korea
+		x = -2
+		y = 5
+		cost = 6
+		
+		prerequisite = { focus = kor_the_end_of_world_war_II }
+		
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = ss_bonus
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_threat_of_the_west
+		icon = attack_china
+		x = 0
+		y = 5
+		cost = 8
+		
+		prerequisite = { focus = kor_the_end_of_world_war_II }
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 1
+				uses = 1
+				category = dd_tech
+			}
+			
+			add_tech_bonus = {
+				name = cl_bonus
+				bonus = 1.0
+				uses = 2
+				category = cl_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_rival_of_the_east
+		icon = attack_japan
+		x = 2
+		y = 5
+		cost = 6
+		
+		prerequisite = { focus = kor_the_end_of_world_war_II }
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = ca_bonus
+				bonus = 1.0
+				uses = 1
+				category = ca_tech
+			}
+		}
+		
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_increased_naval_budget
+		icon = naval_dockyards
+		x = -2
+		y = 3
+		cost = 6
+		
+		prerequisite = { focus = kor_blue_water_navy }
+		
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_the_end_of_world_war_II
+		icon = production
+		x = -3
+		y = 4
+		cost = 6
+		
+	
+		prerequisite = { focus = kor_increased_naval_budget }
+		prerequisite = { focus = kor_red_shark }
+		
+		relative_position_id = kor_to_the_sea
+		
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_war_support = 0.1
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_navy_corruption_reform
+		icon = kor_korean_money
+		x = 0
+		y = 6
+		cost = 8
+		
+		prerequisite = { focus = kor_enemy_of_the_north }
+		prerequisite = { focus = kor_threat_of_the_west }
+		prerequisite = { focus = kor_rival_of_the_east }
+		
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_timed_idea = { idea = kor_combating_corruption_in_navy_idea days = 365 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_six_six_task_fleets
+		icon = carriers
+		x = -3
+		y = 7
+		cost = 6
+		
+		available = {
+			NOT = { has_idea = kor_combating_corruption_in_navy_idea }
+		}
+		
+		mutually_exclusive = {
+			focus = kor_our_iowa
+		}
+		
+		prerequisite = { focus = kor_navy_corruption_reform }
+		
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 2.0
+				uses = 2
+				category = naval_air
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_korean_carrier_plan
+		icon = navy2
+		x = -3
+		y = 8
+		cost = 6
+		
+		available = {
+			NOT = { has_idea = kor_combating_corruption_in_navy_idea }
+		}
+		
+		prerequisite = { focus = kor_six_six_task_fleets }
+		
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = cv_bonus
+				bonus = 3.0
+				uses = 1
+				category = cv_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_our_iowa
+		icon = battleships
+		x = -1
+		y = 7
+		cost = 6
+		
+		available = {
+			NOT = { has_idea = kor_combating_corruption_in_navy_idea }
+		}
+		
+		mutually_exclusive = {
+			focus = kor_six_six_task_fleets
+		}
+		
+		prerequisite = { focus = kor_navy_corruption_reform }
+		
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				#name = ca_bonus
+				bonus = 3.0
+				uses = 1
+				category = bb_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_dokdo_class_plan
+		icon = amphibious_assault
+		x = 1
+		y = 7
+		cost = 6
+
+		available = {
+			NOT = { has_idea = kor_combating_corruption_in_navy_idea }
+		}
+		
+		prerequisite = { focus = kor_navy_corruption_reform }
+		
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = tp_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_jeju_naval_base
+		icon = naval_dockyards
+		x = 3
+		y = 7
+		cost = 6
+
+		available = {
+			NOT = { has_idea = kor_combating_corruption_in_navy_idea }
+		}
+		
+		prerequisite = { focus = kor_navy_corruption_reform }
+		
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			946 = { #Jeju
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+					province = 1177
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 1
+					instant_build = yes
+					province = 1177
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_cheonghae_unit
+		icon = wolf_packs
+		x = 2
+		y = 8
+		cost = 6
+
+		available = {
+			NOT = { has_idea = kor_combating_corruption_in_navy_idea }
+		}
+		
+		prerequisite = { focus = kor_dokdo_class_plan }
+		prerequisite = { focus = kor_jeju_naval_base }
+		
+		relative_position_id = kor_to_the_sea
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = tp_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+ ##############
+ ###
+ ### Sunshine Policy
+ ###
+ ##############
+
+	shared_focus = {
+		id = kor_ROKAF
+		icon = airforce
+		x = 42
+		y = 0
+		cost = 7
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			air_experience = 40
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_air_defense_maintenance
+		icon = air_production
+		x = -1
+		y = 1
+		cost = 6
+
+		prerequisite = { focus = kor_ROKAF }
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		available = {
+			525 = {
+				is_owned_by = KOR
+			}
+			871 = {
+				is_owned_by = KOR
+			}
+			945 = {
+				is_owned_by = KOR
+			}
+		}
+		
+		completion_reward = {
+			525 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+			871 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+			945 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_more_airports
+		icon = air_production
+		x = -1
+		y = 2
+		cost = 6
+
+		prerequisite = { focus = kor_air_defense_maintenance }
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			if = {
+				limit = {
+					capital_scope = {
+						NOT = {
+							free_building_slots = {
+								building = air_base
+								size > 1
+							}
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					ROOT = { set_country_flag = aviation_effort_AB }
+				}
+			}
+			if = {
+				limit = {
+					capital_scope = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+				}
+				capital_scope = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					ROOT = { set_country_flag = aviation_effort_AB }
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_hanseo_air
+		icon = wolf_packs
+		x = 1
+		y = 1
+		cost = 6
+
+		prerequisite = { focus = kor_ROKAF }
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_hanseo_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_three_day_plan
+		icon = dangerous_deal
+		x = 1
+		y = 2
+		cost = 6
+
+		prerequisite = { focus = kor_hanseo_air }
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = air_doc_bonus
+				bonus = 1.0
+				uses = 2
+				category = air_doctrine
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_bomber
+		icon = bomber
+		x = 2
+		y = 3
+		cost = 6
+
+		prerequisite = { focus = kor_three_day_plan }
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH}
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+			    bonus = 1.0
+			    uses = 2
+				category = cas_bomber
+				category = naval_bomber
+				category = cat_strategic_bomber
+				category = tactical_bomber
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_ground_support
+		icon = fighter
+		x = 0
+		y = 3
+		cost = 6
+
+		prerequisite = { focus = kor_three_day_plan }
+		prerequisite = { focus = kor_more_airports }
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_ground_bombing
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_fighter
+		icon = fighter
+		x = -2
+		y = 3
+		cost = 6
+
+		prerequisite = { focus = kor_more_airports }
+
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+			    bonus = 1.0
+			    uses = 2
+				category = light_air
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_ruler_of_sky
+		icon = airforce
+		x = -2
+		y = 4
+		cost = 6
+
+		prerequisite = { focus = kor_fighter }
+
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_focus_on_air_force
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	#
+	shared_focus = {
+		id = kor_strategic_satellite_planning
+		icon = wolf_packs
+		x = -4
+		y = 5
+		cost = 6
+
+		prerequisite = { focus = kor_ruler_of_sky }
+
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = rocketry
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_air_borne_troops
+		icon = paratroopers
+		x = -2
+		y = 5
+		cost = 6
+
+		prerequisite = { focus = kor_ruler_of_sky }
+
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 2.0
+				uses = 1
+				category = para_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_boramae
+		icon = fighter
+		x = 0
+		y = 5
+		cost = 6
+
+		prerequisite = { focus = kor_ruler_of_sky }
+
+		relative_position_id = kor_ROKAF
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = idea_focus_air_force_military_school
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+#	shared_focus = {
+#		id = kor_attack_radical
+#		icon = generic_food_propaganda
+#		x = -2
+#		y = 5
+#		cost = 3
+#		
+#		prerequisite = { focus = kor_to_see_the_future }
+#		
+#		relative_position_id = kor_kim_dae_jung_administration
+#	
+#		cancel_if_invalid = yes
+#		continue_if_invalid = no
+#		available_if_capitulated = no
+
+#		search_filters = { FOCUS_FILTER_POLITICAL }
+#		
+#		completion_reward = {
+#		}
+		
+#		ai_will_do = {
+#			base = 5
+#		}
+#	}
+
+#	shared_focus = {
+#		id = kor_remove_national_security_law
+#		icon = generic_food_propaganda
+#		x = 8
+#		y = 6
+#		cost = 3
+
+#		mutually_exclusive = {
+#			focus = kor_relax_national_security_law
+#		}
+		
+#		prerequisite = { focus = kor_social_problem }
+#		
+#		relative_position_id = kor_kim_dae_jung_administration
+	
+#		cancel_if_invalid = yes
+#		continue_if_invalid = no
+#		available_if_capitulated = no
+
+#		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+#		completion_reward = {
+#		}
+		
+#		ai_will_do = {
+#			base = 5
+#		}
+#	}
+
+#	shared_focus = {
+#		id = kor_relax_national_security_law
+#		icon = generic_food_propaganda
+#		x = 10
+#		y = 6
+#		cost = 3
+		
+#		mutually_exclusive = {
+#			focus = kor_remove_national_security_law
+#		}
+
+#		prerequisite = { focus = kor_social_problem }
+#		
+#		relative_position_id = kor_kim_dae_jung_administration
+#	
+#		cancel_if_invalid = yes
+#		continue_if_invalid = no
+#		available_if_capitulated = no
+#
+#		search_filters = { FOCUS_FILTER_POLITICAL }
+#		
+#		completion_reward = {
+#		}
+#		
+#		ai_will_do = {
+#			base = 5
+#		}
+#	}
+
+	shared_focus = {
+		id = kor_education_reform
+		icon = research
+		x = 2
+		y = 10
+		cost = 8
+
+		prerequisite = { 
+			focus = kor_minimal_welfare 
+			focus = kor_universal_welfare 
+		}
+		
+		relative_position_id = kor_kim_dae_jung_administration
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.02
+			}
+			add_political_power = 50
+			add_stability = 0.03
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+ ##############
+ ###
+ ### Army of Korea
+ ###
+ ##############
+
+	shared_focus = {
+		id = kor_ROKA
+		icon = war
+		x = 52
+		y = 0
+		cost = 5
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			army_experience = 40
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_bulgom_project
+		icon = t90
+		x = -2
+		y = 1
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_ROKA
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			unlock_decision_category_tooltip = KOR_bulgom_project
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_new_tank_design
+		icon = tank2
+		x = -2
+		y = 2
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_bulgom_project
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 1.0
+				uses = 2
+				category = armor
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_military_discipline
+		icon = infantry_japan
+		x = -2
+		y = 3
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_new_tank_design
+		}
+	
+		mutually_exclusive = {
+			focus = kor_CMHRK
+		}
+
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			army_experience = 40
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_put_down_rising_sun_flag
+		icon = army_officers
+		x = 0
+		y = 1
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_ROKA
+		}
+
+		available = {
+			NOT = { has_idea = kor_angry_army }
+		}
+
+		bypass = {
+			AND = {
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_1 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_2 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_3 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_4 }
+			}
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			KOR_army_reform = yes
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_beating_must_stop
+		icon = scientific_exchange
+		x = 0
+		y = 2
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_put_down_rising_sun_flag
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		available = {
+			NOT = { has_idea = kor_angry_army }
+		}
+
+		bypass = {
+			AND = {
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_1 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_2 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_3 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_4 }
+			}
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			KOR_army_reform = yes
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_CMHRK
+		icon = democracy
+		x = 0
+		y = 3
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_beating_must_stop
+		}
+	
+		mutually_exclusive = {
+			focus = kor_military_discipline
+		}
+
+		available = {
+			NOT = { 
+				has_country_leader = {
+					name = "Moon Chang-geuk"
+					ruling_only = yes
+				}
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Lee Seok-ki"
+					ruling_only = yes
+				}
+			}
+		}
+
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = kor_lim_tae_hoon
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_graduated_from_the_19th_century_army
+		icon = leopard_2a4
+		x = -1
+		y = 4
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_military_discipline
+			focus = kor_CMHRK
+		}
+
+		available = {
+			AND = {
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_1 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_2 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_3 }
+				NOT = { has_idea = kor_angry_army }
+			}
+			#has_completed_focus = kor_marine_culture_improvement
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			KOR_army_reform = yes
+			add_ideas = KOR_army_in_a_new_era
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_cogwheel_called_soldier
+		icon = ban_fascism
+		x = -2
+		y = 5
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_graduated_from_the_19th_century_army
+		}
+	
+		bypass = {
+			NOT = { has_idea = generic_asia_idea_article_29 }
+		}
+
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			remove_ideas = generic_asia_idea_article_29
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_our_youngest_patriots
+		icon = fascism
+		x = 2
+		y = 1
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_ROKA
+		}
+
+		mutually_exclusive = {
+			focus = kor_children_have_to_go_to_school
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_ideas = generic_asia_idea_school_military_training
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_children_have_to_go_to_school
+		icon = research
+		x = 4
+		y = 1
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_ROKA
+		}
+
+		mutually_exclusive = {
+			focus = kor_our_youngest_patriots
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_war_support = 0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_reduce_police_conscription
+		icon = infantry_allies
+		x = 2
+		y = 2
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_children_have_to_go_to_school
+			focus = kor_our_youngest_patriots
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_manpower = 35000
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_kempeitai_disbanded
+		icon = samurai
+		x = 2
+		y = 3
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_reduce_police_conscription
+		}
+	
+		available = {
+			NOT = { has_idea = kor_angry_army }
+		}
+
+		bypass = {
+			AND = {
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_1 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_2 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_3 }
+				NOT = { has_idea = kor_descendant_of_the_Imperial_army_4 }
+			}
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			KOR_army_reform = yes
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_warrior_platform
+		icon = skull
+		x = 2
+		y = 4
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_kempeitai_disbanded
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_beyond_race_purity
+		icon = hitler
+		x = 6
+		y = 1
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_ROKA
+		}
+
+		available = {
+			OR = {
+				AND = { has_country_flag = kor_lose_culture_war_flag }
+				AND = {
+					has_country_flag = kor_victory_culture_war
+					date > 2010.1.1
+				}
+			}
+		}
+
+		bypass = {
+			NOT = { has_idea = mobilization_service_time_pure_race_only }
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+				swap_ideas = {
+					remove_idea = mobilization_service_time_pure_race_only
+					add_idea = mobilization_service_time_duty
+				}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_firepower_knows_answer
+		icon = artillery
+		x = 4
+		y = 2
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_beyond_race_purity
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = artillery
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_protect_myself
+		icon = home_defense
+		x = 4
+		y = 3
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_firepower_knows_answer
+		}
+
+		bypass = {
+			NOT = { has_idea = KOR_WT_OPCON }
+		}
+
+		available = {
+			has_war_support > 0.6
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			remove_ideas = KOR_WT_OPCON
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_army_in_esport_gamers
+		icon = small_arms
+		x = 6
+		y = 2
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_beyond_race_purity
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_war_support = 0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_prussia_of_asia
+		icon = german_monarchy
+		x = 6
+		y = 3
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_army_in_esport_gamers
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_ideas = generic_asia_idea_everyone_is_soldier
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_fight_for_the_nation
+		icon = military_fort
+		x = 8
+		y = 3
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_army_in_esport_gamers
+		}
+	
+		relative_position_id = kor_ROKA
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		complete_tooltip = {
+			random_state = {
+				limit = {
+					has_state_flag = generic_arms_industry_1
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = {
+					has_state_flag = generic_arms_industry_2
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				set_state_flag = generic_arms_industry_1
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				set_state_flag = generic_arms_industry_2
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_missile_investment
+		icon = special_forces
+		x = 8
+		y = 2
+		cost = 7
+
+		prerequisite = { 
+			focus = kor_beyond_race_purity
+		}
+	
+		relative_position_id = kor_ROKA
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = rocketry
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_2nd_korean_war
+		icon = attack_north_korea
+		x = 47
+		y = 0
+		cost = 1
+	
+		available = {
+			has_war_with = PRK
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_manpower = 70000
+		}
+		
+		ai_will_do = {
+			base = 20
+		}
+	}
+
+	shared_focus = {
+		id = kor_unlimited_gas_permission
+		icon = army_doctrine
+		x = -2
+		y = 1
+		cost = 3
+
+		available = {
+			has_war_with = PRK
+		}
+
+		prerequisite = { 
+			focus = kor_2nd_korean_war
+		}
+	
+		relative_position_id = kor_2nd_korean_war
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_timed_idea = { idea = kor_gas_of_death_idea days = 180 }
+		}
+		
+		ai_will_do = {
+			base = 20
+		}
+	}
+
+	shared_focus = {
+		id = kor_nuclear_against_nuclear
+		icon = prk_nuke
+		x = -2
+		y = 2
+		cost = 3
+
+		available = {
+			has_war_with = PRK
+		}
+
+		relative_position_id = kor_2nd_korean_war
+
+		prerequisite = { 
+			focus = kor_unlimited_gas_permission
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_tech = atomic_research }
+				}
+				add_tech_bonus = {
+					name = GER_the_mannheim_project
+					bonus = 4.0
+					ahead_reduction = 25
+					technology = atomic_research
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_tech = nuclear_reactor }
+				}
+				add_tech_bonus = {
+					name = GER_the_mannheim_project
+					bonus = 4.0
+					ahead_reduction = 25
+					technology = nuclear_reactor
+				}
+				add_tech_bonus = {
+					name = GER_the_mannheim_project
+					bonus = 4.0
+					ahead_reduction = 25
+					technology = nukes
+				}
+			}
+			if = {
+				limit = {
+					has_tech = nuclear_reactor
+				}
+				525 = {
+					add_building_construction = {
+						type = nuclear_reactor
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_emergency_fortress_in_seoul
+		icon = defence
+		x = 1
+		y = 1
+		cost = 3
+
+		relative_position_id = kor_2nd_korean_war
+
+		available = {
+			has_war_with = PRK
+		}
+
+		prerequisite = { 
+			focus = kor_2nd_korean_war
+		}
+
+		prerequisite = { 
+			focus = kor_ROKA
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			525 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 7125
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 20
+		}
+	}
+
+	shared_focus = {
+		id = kor_mad_dogs_should_die
+		icon = army_logistics
+		x = 0
+		y = 2
+		cost = 3
+
+		relative_position_id = kor_2nd_korean_war
+
+		prerequisite = { 
+			focus = kor_2nd_korean_war
+		}
+
+		available = {
+			has_war_with = PRK
+		}
+
+		prerequisite = { 
+			focus = kor_ROKA
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_timed_idea = { idea = kor_operational_plan_5027 days = 90 }
+		}
+		
+		ai_will_do = {
+			base = 20
+		}
+	}
+
+	shared_focus = {
+		id = kor_trash_needs_to_be_burned
+		icon = kor_burn_hand
+		x = -2
+		y = 4
+		cost = 3
+
+		relative_position_id = kor_2nd_korean_war
+
+		prerequisite = { 
+			focus = kor_three_day_plan
+		}
+
+		prerequisite = { 
+			focus = kor_mad_dogs_should_die
+		}
+
+		available = {
+			has_war_with = PRK
+		}
+
+		prerequisite = { 
+			focus = kor_ROKA
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			add_timed_idea = { idea = kor_unlimited_bombing days = 180 }
+		}
+		
+		ai_will_do = {
+			base = 20
+		}
+	}
+
+
+ ##############
+ ###
+ ### Economic
+ ###
+ ##############
+
+	shared_focus = {
+		id = kor_free_japanese_culture
+		icon = kor_open_japanese_culture
+		x = 74
+		y = 0
+		cost = 7
+	
+		available = {
+			always = no
+		}
+
+		bypass = {
+			has_country_flag = KOR_end_culture_isolationism
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			custom_effect_tooltip = kor_culture_war_start_tt
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	shared_focus = {
+		id = kor_lost_culture_war
+		icon = kor_japanese_palace
+		x = -6
+		y = 1
+		cost = 1
+
+		mutually_exclusive = {
+			focus = kor_victory_culture_war
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+			has_country_flag = kor_lose_culture_war_flag
+		}
+		
+		prerequisite = { 
+			focus = kor_free_japanese_culture
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_nintendo_and_sony
+		icon = industry_civilian
+		x = -2
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_lost_culture_war
+		}
+		
+		relative_position_id = 	kor_lost_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_cooperation_with_japanese
+		icon = align_to_japan
+		x = -4
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_nintendo_and_sony
+		}
+		
+		relative_position_id = 	kor_lost_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1.0
+				uses = 2
+				category = industry
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_not_the_past_but_the_future
+		icon = research
+		x = -2
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_nintendo_and_sony
+		}
+		
+		relative_position_id = 	kor_lost_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_social_openness
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_various_cultures
+		icon = kor_torchbearers_of_tomorrow
+		x = -0
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_lost_culture_war
+		}
+		
+		bypass = {
+			NOT = { has_idea = KOR_danilminjok }
+		}
+
+		relative_position_id = 	kor_lost_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			remove_ideas = KOR_danilminjok
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_we_re_not_in_first
+		icon = kor_masters_of_our_own_fate
+		x = -0
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_various_cultures
+		}
+		
+		relative_position_id = 	kor_lost_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_harmonicus
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_society_with_anime
+		icon = prk_anime
+		x = 2
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_lost_culture_war
+		}
+		
+		relative_position_id = 	kor_lost_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_jpn_culture_power_1
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_even_if_we_no_korean_wave
+		icon = kor_shinto_and_korea
+		x = 2
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_society_with_anime
+		}
+		
+		relative_position_id = 	kor_lost_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = kor_jpn_culture_power_1
+				}
+				swap_ideas = {
+					remove_idea = kor_jpn_culture_power_1
+					add_idea = kor_jpn_culture_power_2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kor_jpn_culture_power_2
+				}
+				swap_ideas = {
+					remove_idea = kor_jpn_culture_power_2
+					add_idea = kor_jpn_culture_power_3
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_we_can_create_new_culture
+		icon = propaganda
+		x = 4
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_society_with_anime
+		}
+		
+		relative_position_id = 	kor_lost_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = kor_jpn_culture_power_1
+				}
+				swap_ideas = {
+					remove_idea = kor_jpn_culture_power_1
+					add_idea = kor_jpn_culture_power_2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = kor_jpn_culture_power_2
+				}
+				swap_ideas = {
+					remove_idea = kor_jpn_culture_power_2
+					add_idea = kor_jpn_culture_power_3
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_victory_culture_war
+		icon = kor_chain_yi_sun_sin
+		x = 6
+		y = 1
+		cost = 1
+
+		mutually_exclusive = {
+			focus = kor_lost_culture_war
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+			has_country_flag = kor_victory_culture_war_flag
+		}
+		
+		prerequisite = { 
+			focus = kor_free_japanese_culture
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_beginning_of_the_korean_Wave
+		icon = kor_dual_korean_democracy_flag_blue
+		x = -3
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_victory_culture_war
+		}
+		
+		relative_position_id = 	kor_victory_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_korean_wave_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_loved_by_everyone
+		icon = japan_akihabara
+		x = -4
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_beginning_of_the_korean_Wave
+		}
+		
+		relative_position_id = 	kor_victory_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_cultural_glory
+		icon = National_industry
+		x = -2
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_beginning_of_the_korean_Wave
+		}
+		
+		relative_position_id = 	kor_victory_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_stability = 0.03
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_pro_japanese_descendants_punishment
+		icon = fascism2
+		x = -1
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_victory_culture_war
+		}
+		
+		relative_position_id = 	kor_victory_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_we_are_paedal_minjok
+		icon = fascism
+		x = 1
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_victory_culture_war
+		}
+		
+		relative_position_id = 	kor_victory_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_dream_of_goguryeo
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_traditional_culture_prosperity
+		icon = kor_keep_dangun
+		x = 0
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_we_are_paedal_minjok
+		}
+		
+		prerequisite = { 
+			focus = kor_pro_japanese_descendants_punishment
+
+		}
+		
+		relative_position_id = 	kor_victory_culture_war
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = KOR_danilminjok
+				add_idea = KOR_danilminjok_strong
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+#############################
+
+	shared_focus = {
+		id = kor_culture_and_industry
+		icon = kor_korean_money
+		x = 0
+		y = 4
+		cost = 1
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+			OR = {
+				has_country_flag = kor_lose_culture_war_flag
+				has_country_flag = kor_victory_culture_war_flag
+			}
+		}
+		
+		prerequisite = { 
+			focus = kor_free_japanese_culture
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_our_korean_peninsula
+		icon = kor_unite_korea
+		x = -6
+		y = 5
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_culture_and_industry
+		}
+		
+		available = {
+			PRK = {
+				OR = {
+					exists = no
+					is_subject_of = KOR
+				}
+			}
+			OR = {
+				has_full_control_of_state = 872
+				has_full_control_of_state = 873
+				has_full_control_of_state = 874
+				has_full_control_of_state = 875
+				has_full_control_of_state = 947
+				has_full_control_of_state = 948
+				has_full_control_of_state = 949
+				has_full_control_of_state = 950
+			}
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		completion_reward = {
+				add_stability = -0.05
+				add_political_power = -150
+			
+				872 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				873 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				874 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				875 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				947 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				948 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				949 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				950 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_north_korea_steel_industry
+		icon = industry_civilian
+		x = -8
+		y = 6
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_our_korean_peninsula
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		available = {
+			PRK = {
+				OR = {
+					exists = no
+					is_subject_of = KOR
+				}
+			}
+			OR = {
+				has_full_control_of_state = 872
+				has_full_control_of_state = 875
+				has_full_control_of_state = 950
+			}
+		}
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			950 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_resource = { type = steel amount = 3 }
+				}
+			}
+			872 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_resource = { type = steel amount = 5 }
+				}
+			}
+			875 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_resource = { type = steel amount = 3 }
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_separated_but_prosperous
+		icon = home_defense
+		x = -6
+		y = 6
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_our_korean_peninsula
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		available = {
+			PRK = {
+				OR = {
+					exists = no
+					is_subject_of = KOR
+				}
+			}
+			OR = {
+				has_full_control_of_state = 872
+				has_full_control_of_state = 873
+				has_full_control_of_state = 874
+				has_full_control_of_state = 875
+				has_full_control_of_state = 947
+				has_full_control_of_state = 948
+				has_full_control_of_state = 949
+				has_full_control_of_state = 950
+			}
+		}
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_stability = 0.03
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_north_korea_economic_investment
+		icon = generic_saemaul
+		x = -4
+		y = 6
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_our_korean_peninsula
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		available = {
+			PRK = {
+				OR = {
+					exists = no
+					is_subject_of = KOR
+				}
+			}
+			OR = {
+				has_full_control_of_state = 872
+				has_full_control_of_state = 873
+				has_full_control_of_state = 874
+				has_full_control_of_state = 875
+				has_full_control_of_state = 947
+				has_full_control_of_state = 948
+				has_full_control_of_state = 949
+				has_full_control_of_state = 950
+			}
+		}
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+		
+			add_stability = -0.02
+			add_political_power = -100
+			
+			872 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+				add_extra_state_shared_building_slots = 2
+				}
+			}
+			873 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+				add_extra_state_shared_building_slots = 2
+				}
+			}
+			874 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+				add_extra_state_shared_building_slots = 2
+				}
+			}
+			875 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+				add_extra_state_shared_building_slots = 2
+				}
+			}
+			947 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+				add_extra_state_shared_building_slots = 2
+				}
+			}
+			948= {
+				if = {
+					limit = { is_controlled_by = ROOT }
+				add_extra_state_shared_building_slots = 2
+				}
+			}
+			949 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+				add_extra_state_shared_building_slots = 2
+				}
+			}
+			950 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+				add_extra_state_shared_building_slots = 2
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_semiconductor_factory_investment
+		icon = license_production
+		x = -2
+		y = 5
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_culture_and_industry
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = industry
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_our_made_smartphone
+		icon = license_production
+		x = -2
+		y = 6
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_semiconductor_factory_investment
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = electronics
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_towards_the_moon
+		icon = technocracy_research
+		x = -2
+		y = 7
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_our_made_smartphone
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 3.0
+				uses = 1
+				category = electronics
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_gyeongbu_expressway
+		icon = infrastructure
+		x = 0
+		y = 5
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_culture_and_industry
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		available = {
+			OR = {
+				has_full_control_of_state = 525
+				has_full_control_of_state = 945
+				has_full_control_of_state = 870
+			}
+		}
+		
+		completion_reward = {
+				525 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				945 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				870 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_88_olympic_expressway
+		icon = infrastructure
+		x = 0
+		y = 6
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_gyeongbu_expressway
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		available = {
+			has_full_control_of_state = 869
+		}
+		
+		completion_reward = {
+				869 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_improvement_of_underdeveloped_areas
+		icon = infrastructure
+		x = 0
+		y = 7
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_88_olympic_expressway
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		
+		available = {
+			OR = {
+				has_full_control_of_state = 946
+				has_full_control_of_state = 871
+			}
+		}
+		
+		completion_reward = {
+				946 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+				871 = {
+					if = {
+						limit = { is_controlled_by = ROOT }
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_gasan_digital_complex
+		icon = construction
+		x = 2
+		y = 5
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_culture_and_industry
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		available = {
+			has_full_control_of_state = 525
+		}
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			525 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_pangyo_techno_valley
+		icon = construction2
+		x = 2
+		y = 6
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_gasan_digital_complex
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		available = {
+			has_full_control_of_state = 525
+		}
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			
+			525 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_yeosu_industrial_complex
+		icon = industry_civilian
+		x = 2
+		y = 7
+		cost = 6
+
+		prerequisite = { 
+			focus = kor_pangyo_techno_valley
+		}
+		
+		relative_position_id = 	kor_free_japanese_culture
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 869
+				}
+				869 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = synthetic_refinery
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			
+			modify_building_resources = {
+        	   building = synthetic_refinery
+        	   resource = rubber
+        	   amount = 1
+        	}
+			modify_building_resources = {
+        	   building = synthetic_refinery
+        	   resource = oil
+        	   amount = 2
+        	}
+			
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+ ##############
+ ###
+ ### democracy
+ ###
+ ##############
+
+	shared_focus = {
+		id = kor_victory_democracy
+		icon = kor_government_parade
+		x = 12
+		y = 16
+		cost = 7
+
+		bypass = {
+			always = yes
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+		
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_social_conservatism
+		icon = research
+		x = -8
+		y = 1
+		cost = 1
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+			has_government = conservative
+		}
+		
+		prerequisite = { 
+			focus = kor_victory_democracy
+		}
+		
+		relative_position_id = kor_victory_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_compromise_on_economic_reform
+		icon = generic_saemaul
+		x = -2
+		y = 1
+		cost = 5
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_social_conservatism
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_boycott_japanese_products
+		icon = attack_japan
+		x = -3
+		y = 2
+		cost = 7
+
+		available = {
+			has_government = conservative
+			has_completed_focus = kor_victory_culture_war
+			country_exists = JAP
+			NOT = { is_in_faction_with = JAP }
+		}
+
+		bypass = {
+
+		}
+		
+		mutually_exclusive = {
+			focus = kor_made_in_korea
+		}
+
+		prerequisite = { 
+			focus = kor_compromise_on_economic_reform
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1.0
+				uses = 1
+				category = industry
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_made_in_korea
+		icon = align_to_south_korea
+		x = -1
+		y = 2
+		cost = 7
+
+		available = {
+			has_government = conservative
+		}
+
+		mutually_exclusive = {
+			focus = kor_boycott_japanese_products
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_compromise_on_economic_reform
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_provide_house_to_all_koreans
+		icon = kor_dual_korean_democracy_flag_blue
+		x = -2
+		y = 3
+		cost = 8
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_boycott_japanese_products
+			focus = kor_made_in_korea
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_economic_healthy
+		icon = jap_economic_developement
+		x = -4
+		y = 3
+		cost = 8
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_boycott_japanese_products
+			focus = kor_made_in_korea
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_every_people_is_king
+		icon = major_alliance
+		x = -3
+		y = 4
+		cost = 8
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+			has_idea = generic_idea_workers_rights
+		}
+		
+		prerequisite = { 
+			focus = kor_economic_healthy
+		}
+
+		prerequisite = { 
+			focus = kor_provide_house_to_all_koreans
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = generic_idea_workers_rights
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_heirs_to_the_kim_dae_jung
+		icon = kor_kim_dae_jung_cabinet
+		x = 0
+		y = 1
+		cost = 5
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_social_conservatism
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = { 
+						OR = {
+							has_idea = welfare_none
+						}
+				}
+				swap_ideas = {
+					remove_idea = welfare_none
+					add_idea = welfare_modest_assistance
+				}
+			}
+			else_if = {
+				limit = { 
+						OR = {
+							has_idea = welfare_basic_subsidies
+						}
+				}
+				swap_ideas = {
+					remove_idea = welfare_basic_subsidies
+					add_idea = welfare_modest_assistance
+				}
+			}
+			else = {
+				add_stability = 0.1
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_build_CIO
+		#https://en.wikipedia.org/wiki/Corruption_Investigation_Office_for_High-ranking_Officials
+		icon = research
+		x = 1
+		y = 2
+		cost = 8
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_heirs_to_the_kim_dae_jung
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = kor_CIO_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_ban_fake_news
+		icon = dangerous_deal
+		x = 2
+		y = 3
+		cost = 8
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_build_CIO
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			fourth_estate_conservative_increase = yes
+			if = {
+				limit = {
+					has_idea = civil_liberties_free
+				}
+				add_ideas = civil_liberties_limited
+				add_political_power = 50
+			}
+			else_if = {
+				limit = {
+					has_idea = civil_liberties_limited
+				}
+				add_ideas = civil_liberties_restricted
+				add_political_power = 75
+			}
+			else = {
+				add_political_power = 150
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_https_censorship
+		icon = kor_Internet_censorship
+		x = 3
+		y = 4
+		cost = 8
+
+		available = {
+			has_government = conservative
+		}
+		
+		prerequisite = { 
+			focus = kor_ban_fake_news
+		}
+		
+		prerequisite = { 
+			focus = kor_historical_pride
+
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		bypass = {
+			has_idea = generic_idea_asia_block_western_influence
+		}
+
+		completion_reward = {
+			add_ideas = generic_idea_asia_block_western_influence
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_social_solemnism
+		icon = construction
+		x = 2
+		y = 1
+		cost = 5
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_social_conservatism
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			fourth_estate_conservative_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_limited_lgbt_right
+		icon = generic_LGBT_flag
+		x = 3
+		y = 2
+		cost = 5
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_social_solemnism
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_historical_pride
+		icon = kor_chain_yi_sun_sin
+		x = 4
+		y = 3
+		cost = 5
+
+		available = {
+			has_government = conservative
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_limited_lgbt_right
+		}
+		
+		relative_position_id = kor_social_conservatism
+	
+		cancel_if_invalid = no
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_stability = 0.05
+
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_social_liberalism
+		icon = research
+		x = 7
+		y = 1
+		cost = 1
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {
+			has_government = social_liberal
+		}
+
+		prerequisite = { 
+			focus = kor_victory_democracy
+		}
+		
+		relative_position_id = kor_victory_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_Government_for_liberty
+		icon = democracy
+		x = 4
+		y = 1
+		cost = 5
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_social_liberalism
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			fourth_estate_social_liberal_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_we_all_have_to_be_friends
+		icon = political_pressure
+		x = 3
+		y = 2
+		cost = 8
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_Government_for_liberty
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_stability = 0.1
+			fourth_estate_social_liberal_increase = yes
+			add_popularity = { ideology = social_liberal popularity = 0.02 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_president_is_not_a_king
+		icon = propaganda
+		x = 5
+		y = 2
+		cost = 8
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_Government_for_liberty
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_political_power = 100
+			add_popularity = { ideology = social_liberal popularity = 0.03 }
+			add_popularity = { ideology = social_democrat popularity = 0.02 }
+			add_popularity = { ideology = democratic_socialist popularity = 0.02 }
+			fourth_estate_social_democrat_increase = yes
+			fourth_estate_democratic_socialist_increase = yes
+			fourth_estate_progressive_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_not_paper_use_computer
+		icon = japan_akihabara
+		x = 0
+		y = 3
+		cost = 8
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_we_all_have_to_be_friends
+		}
+		prerequisite = { 
+			focus = kor_president_is_not_a_king
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = kor_efficient_civil_servant
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_korea_national_railway
+		icon = infrastructure
+		x = 6
+		y = 3
+		cost = 8
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_we_all_have_to_be_friends
+		}
+		prerequisite = { 
+			focus = kor_president_is_not_a_king
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = kor_korean_national_railway_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_education_for_everyone
+		icon = research
+		x = 2
+		y = 3
+		cost = 8
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_we_all_have_to_be_friends
+		}
+		prerequisite = { 
+			focus = kor_president_is_not_a_king
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = kor_EBSi
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_introduction_of_jury_system
+		icon = constitution
+		x = 4
+		y = 3
+		cost = 8
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_we_all_have_to_be_friends
+		}
+		prerequisite = { 
+			focus = kor_president_is_not_a_king
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_expanding_local_autonomy
+		icon = infrastructure
+		x = -5
+		y = 1
+		cost = 1
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_social_liberalism
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_equality_of_all_people
+		icon = kor_dual_korean_democracy_flag_blue
+		x = -5
+		y = 3
+		cost = 8
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_expanding_local_autonomy
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_jeju_for_jeju_people
+		icon = major_alliance
+		x = -3
+		y = 1
+		cost = 5
+
+		available = {
+			is_subject = no
+			has_full_control_of_state = 946
+			NOT = { country_exists = JEJ }
+		}
+
+		bypass = {
+
+		}
+		
+		
+		prerequisite = { 
+			focus = kor_expanding_local_autonomy
+		}
+		
+		relative_position_id = kor_expanding_local_autonomy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			release_puppet = JEJ
+			946 = {
+				if = {
+					limit = { 
+						NOT = { is_core_of = JEJ }
+					}
+					add_core_of = JEJ
+					JEJ = { transfer_state = 946 }
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 8
+		}
+	}
+
+	shared_focus = {
+		id = kor_jeju_development
+		icon = industry_civilian
+		x = -3
+		y = 2
+		cost = 8
+
+		available = {
+			is_subject = no
+			OR = {
+				country_exists = JEJ
+				has_full_control_of_state = 946
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_jeju_for_jeju_people
+		}
+		
+		relative_position_id = kor_expanding_local_autonomy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			946 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_internet_democracy
+		icon = kor_unite_korea
+		x = -3
+		y = 4
+		cost = 8
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_equality_of_all_people
+		}
+		
+		prerequisite = { 
+			focus = kor_not_paper_use_computer
+		}
+		
+		relative_position_id = kor_social_liberalism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = generic_idea_asia_internet_democracy
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_new_capital
+		icon = national_greatness
+		x = -1
+		y = 1
+		cost = 8
+
+		available = {
+			is_subject = no
+			has_full_control_of_state = 945
+		}
+
+		bypass = {
+
+		}
+		
+		mutually_exclusive = {
+			focus = kor_partial_new_capital
+		}
+
+		prerequisite = { 
+			focus = kor_expanding_local_autonomy
+		}
+		
+		relative_position_id = kor_expanding_local_autonomy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			set_capital = 945
+			set_province_name = { id = 11977 name = "Sejong" } #Daejeon
+			945 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_partial_new_capital
+		icon = democracy
+		x = 1
+		y = 1
+		cost = 8
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+		mutually_exclusive = {
+			focus = kor_new_capital
+		}
+		
+		prerequisite = { 
+			focus = kor_expanding_local_autonomy
+		}
+		
+		relative_position_id = kor_expanding_local_autonomy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_political_power = 150
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_support_local_government 
+		icon = central_management
+		x = 3
+		y = 1
+		cost = 8
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_expanding_local_autonomy
+		}
+		
+		relative_position_id = kor_expanding_local_autonomy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_democratic_socialism
+		icon = research
+		x = 22
+		y = 1
+		cost = 1
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+				has_government = democratic_socialist
+			}
+		}
+
+		bypass = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+				has_government = democratic_socialist
+			}
+		}
+		
+		prerequisite = { 
+			focus = kor_victory_democracy
+		}
+		
+		relative_position_id = kor_victory_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_lee_jae_myung_does_it
+		icon = democracy
+		x = -4
+		y = 1
+		cost = 5
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_democratic_socialism
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_feminism_is_madness
+		icon = destroy_society
+		x = -6
+		y = 2
+		cost = 3
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_lee_jae_myung_does_it
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_popularity = { ideology = progressive popularity = -0.02 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_you_re_not_human
+		icon = dangerous_deal
+		x = -4
+		y = 2
+		cost = 3
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_lee_jae_myung_does_it
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_be_afraid_of_me_scum_of_the_earth
+		icon = political_pressure
+		x = -2
+		y = 2
+		cost = 3
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_lee_jae_myung_does_it
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_popularity = { ideology = nationalist popularity = -0.02 }
+			add_popularity = { ideology = fascist popularity = -0.02 }
+			add_popularity = { ideology = market_liberal popularity = -0.02 }
+			add_popularity = { ideology = reactionary popularity = -0.02 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_our_great_reform
+		icon = construction
+		x = -4
+		y = 3
+		cost = 5
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_feminism_is_madness
+		}
+		
+		prerequisite = { 
+			focus = kor_you_re_not_human
+		}
+
+		prerequisite = { 
+			focus = kor_be_afraid_of_me_scum_of_the_earth
+		}
+
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_chaebol_must_die
+		icon = communism2
+		x = -5
+		y = 4
+		cost = 6
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		mutually_exclusive = {
+			focus = kor_chaebol_must_weakened
+		}
+		
+		prerequisite = { 
+			focus = kor_our_great_reform
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		bypass = {
+			has_country_flag = kor_remove_chaebol
+		}
+		
+		completion_reward = {
+			set_country_flag = kor_remove_chaebol
+			custom_effect_tooltip = kor_remove_chaebol_tt
+			add_to_variable = { var = kor_lee_jae_myung_does_it_var value = 1 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_chaebol_must_weakened
+		icon = kor_grab_chaebol_2
+		x = -3
+		y = 4
+		cost = 6
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		mutually_exclusive = {
+			focus = kor_chaebol_must_die
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_our_great_reform
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_basic_house_should_be_implemented
+		icon = industry_civilian
+		x = -5
+		y = 5
+		cost = 6
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		mutually_exclusive = {
+			focus = kor_compromise_on_housing_issues
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_chaebol_must_die
+			focus = kor_chaebol_must_weakened
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_to_variable = { var = kor_lee_jae_myung_does_it_var value = 1 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_compromise_on_housing_issues
+		icon = infrastructure
+		x = -3
+		y = 5
+		cost = 6
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		mutually_exclusive = {
+			focus = kor_basic_house_should_be_implemented
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_chaebol_must_die
+			focus = kor_chaebol_must_weakened
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_special_gift_for_homosexuals
+		icon = generic_LGBT_flag
+		x = -5
+		y = 6
+		cost = 6
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		mutually_exclusive = {
+			focus = kor_careful_issue
+		}
+		
+		prerequisite = { 
+			focus = kor_compromise_on_housing_issues
+			focus = kor_basic_house_should_be_implemented
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		bypass = {
+			has_idea = kor_same_sex_marriage
+		}
+
+		completion_reward = {
+			add_ideas = kor_same_sex_marriage
+			add_to_variable = { var = kor_lee_jae_myung_does_it_var value = 1 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_careful_issue
+		icon = propaganda
+		x = -3
+		y = 6
+		cost = 6
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		mutually_exclusive = {
+			focus = kor_special_gift_for_homosexuals
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_compromise_on_housing_issues
+			focus = kor_basic_house_should_be_implemented
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = generic_idea_lgbt_rights
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_allende_s_dream
+		icon = communism5
+		x = -4
+		y = 7
+		cost = 5
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_special_gift_for_homosexuals
+			focus = kor_careful_issue
+		}
+
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = kor_lee_jae_myung_does_it_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { kor_lee_jae_myung_does_it_var = 3 compare = greater_than_or_equals } 
+					}
+					add_ideas = KOR_legacy_of_lee_fulfilled
+				}
+				else_if = {
+					limit = {
+						check_variable = { kor_lee_jae_myung_does_it_var = 1 compare = greater_than_or_equals } 
+					}
+					add_ideas = KOR_legacy_of_lee_preserved
+				}
+				else = {
+					add_ideas = KOR_legacy_of_lee_defiled
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_path_to_socialism
+		icon = communism3
+		x = 0
+		y = 1
+		cost = 0
+
+		available = {
+		}
+
+		bypass = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+				has_government = democratic_socialist
+			}
+		}
+		
+		prerequisite = { 
+			focus = kor_democratic_socialism
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_expand_workers_rights
+		icon = communism
+		x = 0
+		y = 2
+		cost = 7
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+				has_government = democratic_socialist
+			}
+		}
+
+		bypass = {
+			has_idea = generic_idea_workers_rights
+		}
+		
+		prerequisite = { 
+			focus = kor_path_to_socialism
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			if = {
+				limit = { 
+						OR = {
+							has_idea = welfare_none
+						}
+				}
+				swap_ideas = {
+					remove_idea = welfare_none
+					add_idea = welfare_modest_assistance
+				}
+			}
+			else_if = {
+				limit = { 
+						OR = {
+							has_idea = welfare_basic_subsidies
+						}
+				}
+				swap_ideas = {
+					remove_idea = welfare_basic_subsidies
+					add_idea = welfare_modest_assistance
+				}
+			}
+			else = {
+				add_stability = 0.1
+			}
+
+			add_ideas = generic_idea_workers_rights
+			fourth_estate_social_democrat_increase = yes
+			fourth_estate_democratic_socialist_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_basic_income_reform
+		icon = dangerous_deal
+		x = -1
+		y = 3
+		cost = 7
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+				has_government = democratic_socialist
+			}
+		}
+
+		mutually_exclusive = {
+			focus = kor_welfare_budget_must_increase
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_expand_workers_rights
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		bypass = {
+			OR = {
+				has_idea = welfare_universal_basic_income
+			}
+		}
+		
+		completion_reward = {
+			add_ideas = welfare_universal_basic_income
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_welfare_budget_must_increase
+		icon = money
+		x = 1
+		y = 3
+		cost = 7
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+				has_government = democratic_socialist
+			}
+			NOT  = { has_idea = welfare_considerable_assistance }
+			NOT  = { has_idea = welfare_universal_basic_income }
+		}
+
+		mutually_exclusive = {
+			focus = kor_basic_income_reform
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_expand_workers_rights
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = welfare_considerable_assistance
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_anti_discrimination_law
+		icon = generic_LGBT_flag
+		x = 0
+		y = 4
+		cost = 7
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+				has_government = democratic_socialist
+			}
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_expand_workers_rights
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = kor_anti_discrimination_law_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+
+	shared_focus = {
+		id = kor_social_democracy
+		icon = democracy
+		x = 4
+		y = 1
+		cost = 5
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_democratic_socialism
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_feminism_is_the_future
+		icon = kor_feminism
+		x = 2
+		y = 2
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_social_democracy
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			fourth_estate_progressive_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_for_nature
+		icon = home_defense
+		x = 4
+		y = 2
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_social_democracy
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_stability = 0.15
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_we_re_not_NL
+		icon = kor_anti_north_korea
+		x = 6
+		y = 2
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_social_democracy
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_popularity = { ideology = nationalist popularity = -0.02 }
+			add_popularity = { ideology = fascist popularity = -0.02 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_president_who_changes_my_life
+		icon = industry_civilian
+		x = 4
+		y = 3
+		cost = 5
+
+		available = {
+			has_government = democratic_socialist
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_feminism_is_the_future
+		}
+		
+		prerequisite = { 
+			focus = kor_for_nature
+		}
+
+		prerequisite = { 
+			focus = kor_we_re_not_NL
+		}
+
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_legalization_of_same_sex_marriage
+		icon = generic_LGBT_flag
+		x = 2
+		y = 4
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+			}
+		}
+		
+		prerequisite = { 
+			focus = kor_president_who_changes_my_life
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		bypass = {
+			has_idea = kor_same_sex_marriage
+		}
+
+		completion_reward = {
+			add_ideas = kor_same_sex_marriage
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_more_power_for_women
+		icon = propaganda
+		x = 4
+		y = 4
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_president_who_changes_my_life
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = idea_focus_equal_workforce
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_country_for_immigrants
+		icon = align_to_united_nations
+		x = 6
+		y = 4
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+			}
+		}
+
+		bypass = {
+			has_idea = immigration_policy_open_borders
+		}
+		
+		prerequisite = { 
+			focus = kor_president_who_changes_my_life
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = immigration_policy_open_borders
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_for_our_progress
+		icon = constitution
+		x = 4
+		y = 5
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = progressive
+				has_government = social_democrat
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_legalization_of_same_sex_marriage
+		}
+		
+		prerequisite = { 
+			focus = kor_more_power_for_women
+		}
+		
+		prerequisite = { 
+			focus = kor_country_for_immigrants
+		}
+		
+		relative_position_id = kor_democratic_socialism
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = KOR_progressive_agenda
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_right_wing_conservative
+		icon = research
+		x = 38
+		y = 1
+		cost = 1
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+		}
+
+		bypass = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+		}
+		
+		prerequisite = { 
+			focus = kor_victory_democracy
+		}
+		
+		relative_position_id = kor_victory_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_our_president_park_geun_hye
+		icon = align_to_united_nations
+		x = -5
+		y = 1
+		cost = 5
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_right_wing_conservative
+		}
+		
+		relative_position_id = kor_right_wing_conservative
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_advice_choi_soon_sil
+		icon = alliance
+		x = -1
+		y = 1
+		cost = 5
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_our_president_park_geun_hye
+		}
+		
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_magic_is_always_around_us
+		icon = political_pressure_green
+		x = 1
+		y = 1
+		cost = 5
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_our_president_park_geun_hye
+		}
+		
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_park_geun_hye_the_many_colours
+		icon = dangerous_laws
+		x = 0
+		y = 2
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_advice_choi_soon_sil
+		}
+
+		prerequisite = { 
+			focus = kor_magic_is_always_around_us
+		}
+		
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_watching_dramas
+		icon = national_unity
+		x = -2
+		y = 3
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_park_geun_hye_the_many_colours
+		}
+		
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_don_t_go_to_work
+		icon = national_unity_red
+		x = 0
+		y = 3
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_park_geun_hye_the_many_colours
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_party_should_never_end
+		icon = propaganda
+		x = 2
+		y = 3
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		
+		prerequisite = { 
+			focus = kor_park_geun_hye_the_many_colours
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_queen_s_time
+		icon = money
+		x = 0
+		y = 4
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		prerequisite = { 
+			focus = kor_watching_dramas
+		}
+		prerequisite = { 
+			focus = kor_don_t_go_to_work
+		}
+		prerequisite = { 
+			focus = kor_party_should_never_end
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_creative_economy
+		icon = local_management
+		x = -1
+		y = 5
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		prerequisite = { 
+			focus = kor_queen_s_time
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_four_evils
+		icon = consumer_goods
+		x = 1
+		y = 5
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+		prerequisite = { 
+			focus = kor_queen_s_time
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = kor_i_didn_t_wrong
+		icon = dangerous_deal
+		x = 0
+		y = 6
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+
+		prerequisite = { 
+			focus = kor_creative_economy
+		}
+
+		prerequisite = { 
+			focus = kor_four_evils
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_can_you_just_be_quiet
+		icon = dangerous_laws
+		x = -1
+		y = 7
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+
+		prerequisite = { 
+			focus = kor_i_didn_t_wrong
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_i_say_shut_up
+		icon = kor_burn_hand
+		x = -1
+		y = 8
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+
+		prerequisite = { 
+			focus = kor_i_didn_t_wrong
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_president_loved_by_everyone
+		icon = kor_japanese_palace
+		x = 1
+		y = 7
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+
+		prerequisite = { 
+			focus = kor_i_didn_t_wrong
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_patriots_lift_national_flag
+		icon = align_to_united_nations
+		x = 1
+		y = 8
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "Park Geun-hye"
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+
+		}
+
+		prerequisite = { 
+			focus = kor_president_loved_by_everyone
+		}
+
+		relative_position_id = kor_our_president_park_geun_hye
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = wip_focus_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_market_needs_to_be_free
+		icon = five_year_plan
+		x = 0
+		y = 1
+		cost = 5
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+		}
+		
+		prerequisite = { 
+			focus = kor_right_wing_conservative
+		}
+		
+		relative_position_id = kor_right_wing_conservative
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_for_companies
+		icon = industry_civilian2
+		x = -2
+		y = 1
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+		}
+		
+		prerequisite = { 
+			focus = kor_market_needs_to_be_free
+		}
+		
+		relative_position_id = kor_market_needs_to_be_free
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = generic_idea_asia_corporate_deregulation
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_keep_LGBT_quiet
+		icon = fascism2
+		x = 2
+		y = 1
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { has_idea = generic_idea_lgbt_rights }
+			NOT = { has_idea = kor_same_sex_marriage }
+		}
+		
+		prerequisite = { 
+			focus = kor_market_needs_to_be_free
+		}
+		
+		relative_position_id = kor_market_needs_to_be_free
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_political_power = 150
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_everyone_needs_to_get_a_job
+		icon = industry_democratic
+		x = 0
+		y = 1
+		cost = 6
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+		}
+		
+		prerequisite = { 
+			focus = kor_market_needs_to_be_free
+		}
+		
+		relative_position_id = kor_market_needs_to_be_free
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_liberal_democracy
+		icon = research
+		x = 5
+		y = 1
+		cost = 5
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Park Geun-hye"
+					ruling_only = yes
+				}
+		 	}
+		}
+		
+		prerequisite = { 
+			focus = kor_right_wing_conservative
+		}
+		
+		relative_position_id = kor_right_wing_conservative
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_commie_should_disappear
+		icon = destroy_society
+		x = 1
+		y = 1
+		cost = 8
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Park Geun-hye"
+					ruling_only = yes
+				}
+		 	}
+		}
+		
+		prerequisite = { 
+			focus = kor_liberal_democracy
+		}
+		
+		relative_position_id = kor_liberal_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_popularity = { ideology = fascist popularity = -0.1 }
+			add_popularity = { ideology = nationalist popularity = -0.1 }
+			add_timed_idea = { idea = KOR_NL_suppression days = 720 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_ilbe
+		icon = kor_anti_north_korea
+		x = 1
+		y = 3
+		cost = 8
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Park Geun-hye"
+					ruling_only = yes
+				}
+		 	}
+		}
+		
+		prerequisite = { 
+			focus = kor_commie_should_disappear
+		}
+		
+		relative_position_id = kor_liberal_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_popularity = { ideology = fascist popularity = -0.03 }
+			add_popularity = { ideology = nationalist popularity = -0.03 }
+			add_popularity = { ideology = reactionary popularity = 0.05 }
+			add_political_power = 120
+			add_stability = -0.1
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_right_wing_internet_broadcast
+		icon = fascism3
+		x = 1
+		y = 4
+		cost = 8
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Park Geun-hye"
+					ruling_only = yes
+				}
+		 	}
+		}
+		
+		prerequisite = { 
+			focus = kor_ilbe
+		}
+		
+		relative_position_id = kor_liberal_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_popularity = { ideology = fascist popularity = -0.03 }
+			add_popularity = { ideology = nationalist popularity = -0.03 }
+			add_popularity = { ideology = reactionary popularity = 0.05 }
+			add_popularity = { ideology = market_liberal popularity = 0.05 }
+			add_political_power = 120
+			add_stability = -0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_clean_the_internet
+		icon = kor_Internet_censorship
+		x = -1
+		y = 1
+		cost = 8
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Park Geun-hye"
+					ruling_only = yes
+				}
+		 	}
+		}
+		
+		prerequisite = { 
+			focus = kor_liberal_democracy
+		}
+		
+		relative_position_id = kor_liberal_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		bypass = {
+			has_idea = generic_idea_asia_block_western_influence
+		}
+
+		completion_reward = {
+			add_ideas = generic_idea_asia_block_western_influence
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_korea_parent_federation
+		icon = home_defense
+		x = -2
+		y = 2
+		cost = 8
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Park Geun-hye"
+					ruling_only = yes
+				}
+		 	}
+		}
+		
+		prerequisite = { 
+			focus = kor_keep_LGBT_quiet
+		}
+		
+		prerequisite = { 
+			focus = kor_clean_the_internet
+		}
+		
+		relative_position_id = kor_liberal_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_popularity = { ideology = reactionary popularity = 0.05 }
+			add_ideas = kor_korea_parent_federation_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_powerful_country
+		icon = kor_unite_korea
+		x = 0
+		y = 2
+		cost = 8
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Park Geun-hye"
+					ruling_only = yes
+				}
+		 	}
+		}
+		
+		prerequisite = { 
+			focus = kor_liberal_democracy
+		}
+		
+		relative_position_id = kor_liberal_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_realpolitik
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_reward_for_patriots
+		icon = fascism4
+		x = -1
+		y = 3
+		cost = 8
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Park Geun-hye"
+					ruling_only = yes
+				}
+		 	}
+		}
+		
+		prerequisite = { 
+			focus = kor_powerful_country
+		}
+		
+		relative_position_id = kor_liberal_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = kor_seo_jeong_gap
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_proud_country
+		icon = fascism
+		x = -1
+		y = 4
+		cost = 8
+
+		available = {
+			OR = {
+				has_government = islamist
+				has_government = market_liberal
+				has_government = reactionary
+				has_government = monarchist
+			}
+			NOT = { 
+				has_country_leader = {
+					name = "Park Geun-hye"
+					ruling_only = yes
+				}
+		 	}
+		}
+		
+		prerequisite = { 
+			focus = kor_reward_for_patriots
+		}
+		
+		relative_position_id = kor_liberal_democracy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_victory_democracy_diplomacy
+		icon = kor_government_parade
+		x = 53
+		y = 0
+		cost = 7
+
+		bypass = {
+			always = yes
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		relative_position_id = kor_victory_democracy
+
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+		
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_break_balancer
+		icon = align_to_united_nations
+		x = 0
+		y = 4
+		cost = 5
+
+		available = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = KOR_balance_break_end_tt
+					check_variable = {
+						var = KOR_balance_break
+						value = 5.000
+						compare = greater_than_or_equals
+					}
+				}
+				is_in_faction = yes
+				any_country = {
+					has_war_with = ROOT
+					is_major = yes
+				}
+			}
+		}
+
+		bypass = {
+			NOT = { has_idea = KOR_balancer_theory }
+		}
+		
+		prerequisite = { 
+			focus = kor_victory_democracy_diplomacy
+		}
+		
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			remove_ideas = KOR_balancer_theory
+			set_rule = { can_create_factions = yes }
+			hidden_effect = {
+				news_event = { id = rok_news.9 }
+			}
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+	
+	shared_focus = {
+		id = kor_with_china
+		icon = align_to_china
+		x = -2
+		y = 6
+		cost = 5
+
+		available = {
+			is_subject = no
+			NOT = { has_idea = KOR_balancer_theory }
+			is_in_faction = no
+			NOT = { has_war_with = PRC }
+			country_exists = PRC
+			PRC = { is_faction_leader = yes }
+		}
+
+		bypass = {
+		}
+		
+		mutually_exclusive = {
+			focus = kor_with_usa
+		}
+
+		mutually_exclusive = {
+			focus = kor_with_roc
+		}
+
+		prerequisite = { 
+			focus = kor_break_balancer
+		}
+		
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			PRC = { country_event = south_korea.83 }
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	shared_focus = {
+		id = kor_with_usa
+		icon = align_to_america
+		x = 0
+		y = 6
+		cost = 5
+
+		available = {
+			is_subject = no
+			NOT = { has_idea = KOR_balancer_theory }
+			is_in_faction = no
+			NOT = { has_war_with = USA }
+			country_exists = USA
+			USA = { is_faction_leader = yes }
+		}
+
+		bypass = {
+		}
+		
+		mutually_exclusive = {
+			focus = kor_with_china
+		}
+
+		mutually_exclusive = {
+			focus = kor_with_roc
+		}
+
+		prerequisite = { 
+			focus = kor_break_balancer
+		}
+		
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			USA = { country_event = south_korea.83 }
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	shared_focus = {
+		id = kor_with_roc
+		icon = align_to_taiwan
+		x = 2
+		y = 6
+		cost = 5
+
+		available = {
+			is_subject = no
+			NOT = { has_idea = KOR_balancer_theory }
+			is_in_faction = no
+			NOT = { has_war_with = CHI }
+			OR = {
+				PRC = { is_major = no }
+				NOT = { country_exists = PRC }
+			}
+			country_exists = CHI
+			CHI = { is_faction_leader = yes }
+		}
+
+		bypass = {
+		}
+		
+		mutually_exclusive = {
+			focus = kor_with_china
+		}
+
+		mutually_exclusive = {
+			focus = kor_with_usa
+		}
+
+		prerequisite = { 
+			focus = kor_break_balancer
+		}
+		
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			CHI = { country_event = south_korea.83 }
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	shared_focus = {
+		id = kor_west_question
+		icon = major_alliance
+		x = -1
+		y = 1
+		cost = 5
+
+		available = {
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_victory_democracy_diplomacy
+		}
+		
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			PRC = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = diplomatic_support
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_dominating_madagascar
+		icon = fascism
+		x = -1
+		y = 2
+		cost = 5
+
+		available = {
+			NOT = { has_war_with = MAD }
+			country_exists = MAD
+			MAD = { is_subject = no }
+			NOT = { is_in_faction_with = MAD }
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_west_question
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			custom_effect_tooltip = KOR_madagascar_tt
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+			hidden_effect = {
+				MAD = { country_event = { id = south_korea.100 } }
+			}
+
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_be_friend_north_korea
+		icon = align_to_north_korea
+		x = -2
+		y = 3
+		cost = 5
+
+		available = {
+			NOT = { has_war_with = PRK }
+			country_exists = PRK
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_west_question
+		}
+
+		mutually_exclusive = {
+			focus = kor_bukjin_tongil
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_dokdo_our_dokdo
+		icon = attack_japan
+		x = 3
+		y = 2
+		cost = 5
+
+		available = {
+			has_full_control_of_state = 1082 #Dokdo (Liancourt Rocks)
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_east_question
+		}
+
+		mutually_exclusive = {
+			focus = kor_takeshima_compromise
+		}
+		
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_civilian_forced_labor_suspension
+		icon = samurai
+		x = 4
+		y = 3
+		cost = 5
+
+		available = {
+			has_idea = generic_asia_idea_civilian_forced_labor_system
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_east_question
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+			remove_ideas = generic_asia_idea_civilian_forced_labor_system
+				every_country = {
+						limit = {
+						has_idea = idea_eu_member
+						}
+						add_opinion_modifier = {
+							target = ROOT
+							modifier = korean_aliy_trade
+						}
+						add_opinion_modifier = {
+							target = ROOT
+							modifier = korean_aliy
+						}
+				}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_our_friend_america
+		icon = align_to_america
+		x = 5
+		y = 2
+		cost = 5
+
+		available = {
+			NOT = { has_war_with = USA }
+			country_exists = USA
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_east_question
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+			USA = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy_trade
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_improving_relationship_with_australia
+		icon = align_to_australia
+		x = 7
+		y = 2
+		cost = 5
+
+		available = {
+			NOT = { has_war_with = AST }
+			country_exists = AST
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_east_question
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+			AST = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy_trade
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy
+				}
+			}
+			hidden_effect = {
+				add_ai_strategy = {
+					type = befriend
+					id = AST
+					value = 50
+				}
+				AST = {
+					add_ai_strategy = {
+						type = befriend
+						id = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_east_question
+		icon = major_alliance
+		x = 1
+		y = 1
+		cost = 5
+
+		available = {
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_victory_democracy_diplomacy
+		}
+		
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			USA = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = diplomatic_support
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_our_friend_iran
+		icon = align_to_iran
+		x = -3
+		y = 2
+		cost = 5
+
+		available = {
+			NOT = { has_war_with = PER }
+			country_exists = PER
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_west_question
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+			PER = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy_trade
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy
+				}
+			}
+			hidden_effect = {
+				add_ai_strategy = {
+					type = befriend
+					id = PER
+					value = 50
+				}
+				PER = {
+					add_ai_strategy = {
+						type = befriend
+						id = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_military_cooperation_with_china
+		icon = align_to_china
+		x = -4
+		y = 3
+		cost = 5
+
+		available = {
+			NOT = { has_war_with = PRC }
+			country_exists = PRC
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_west_question
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_we_share_china_dream
+		icon = align_to_china
+		x = -5
+		y = 2
+		cost = 5
+
+		available = {
+			NOT = { has_war_with = PRC }
+			country_exists = PRC
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_west_question
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+			PRC = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy_trade
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy
+				}
+			}
+			hidden_effect = {
+				add_ai_strategy = {
+					type = befriend
+					id = PRC
+					value = 25
+				}
+				PRC = {
+					add_ai_strategy = {
+						type = befriend
+						id = ROOT
+						value = 25
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_cooperation_with_russia
+		icon = align_to_russia
+		x = -7
+		y = 2
+		cost = 5
+
+		available = {
+			NOT = { has_war_with = SOV }
+			country_exists = SOV
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_west_question
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+			SOV = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy_trade
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = korean_aliy
+				}
+			}
+			hidden_effect = {
+				add_ai_strategy = {
+					type = befriend
+					id = SOV
+					value = 50
+				}
+				SOV = {
+					add_ai_strategy = {
+						type = befriend
+						id = ROOT
+						value = 50
+					}
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_takeshima_compromise
+		icon = align_to_japan
+		x = 1
+		y = 2
+		cost = 5
+
+		available = {
+			country_exists = JAP
+			has_full_control_of_state = 1082 #Dokdo (Liancourt Rocks)
+		}
+
+		bypass = {
+		}
+		
+		prerequisite = { 
+			focus = kor_east_question
+		}
+
+		mutually_exclusive = {
+			focus = kor_dokdo_our_dokdo
+		}
+		
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+			JAP = { country_event = { id = south_korea.107 } }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_bukjin_tongil
+		icon = attack_north_korea
+		x = 2
+		y = 3
+		cost = 5
+
+		available = {
+			has_capitulated = no
+			country_exists = PRK
+			NOT = { PRK = {is_in_faction_with = KOR } }
+		}
+
+		bypass = {
+		}
+		
+		mutually_exclusive = {
+			focus = kor_be_friend_north_korea
+		}
+
+		prerequisite = { 
+			focus = kor_east_question
+		}
+
+		select_effect = {
+			random_country = {
+				limit = { controls_state = 948 }
+				ROOT = {
+					add_ai_strategy = {
+						type = prepare_for_war
+						id = PREV
+						value = 100
+					}
+				}
+			}
+		}
+
+		relative_position_id = kor_victory_democracy_diplomacy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		search_filters = { }
+		
+		completion_reward = {
+			add_to_variable = { var = KOR_balance_break value = 1 }
+			custom_effect_tooltip = KOR_add_balance_break_tt
+			create_wargoal = {
+				target = PRK
+				type = annex_everything
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+			
+		}
+	}

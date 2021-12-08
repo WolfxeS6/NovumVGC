@@ -1154,3 +1154,73 @@ KOR_korean_ss = {
  
 
 }
+
+
+
+KOR_our_madagascar = {
+
+	KOR_madagascar_economic_subordination = { 
+		icon = generic_agreement
+
+		#allowed = { always = yes }
+		
+		available = {
+			country_exists = MAD
+			MAD = { is_puppet = NO }
+			NOT = { has_war_with = MAD }
+		}
+
+		visible = {
+			tag = KOR
+		}
+
+		cost = 50
+		fire_only_once = no
+		days_remove = 40
+				
+		complete_effect = {
+			if = {
+				limit = { 
+					NOT = { MAD = { has_idea = kor_exploitation_of_madagascar_1 } }
+					NOT = { MAD = { has_idea = kor_exploitation_of_madagascar_2 } }
+					NOT = { MAD = { has_idea = kor_exploitation_of_madagascar_3 } }
+				}
+				MAD = { add_ideas = kor_exploitation_of_madagascar_1 }
+			}
+			else_if = {
+				limit = { 
+					MAD = { has_idea = kor_exploitation_of_madagascar_1 }
+				}
+				MAD = {
+					swap_ideas = {
+						remove_idea = kor_exploitation_of_madagascar_1
+						add_idea = kor_exploitation_of_madagascar_2
+					}
+				}
+			}
+			else_if = {
+				limit = { 
+					MAD = { has_idea = kor_exploitation_of_madagascar_2 }
+				}
+				MAD = {
+					swap_ideas = {
+						remove_idea = kor_exploitation_of_madagascar_2
+						add_idea = kor_exploitation_of_madagascar_3
+					}
+				}
+			}
+			else_if = {
+				limit = { 
+					MAD = { has_idea = kor_exploitation_of_madagascar_3 }
+				}
+				clr_global_flag = madagascar_kor_project
+				MAD = { country_event = { id = south_korea.103 } }
+			}
+		}
+
+		ai_will_do = {
+			factor = 20
+		}
+	}
+	
+}

@@ -164,6 +164,23 @@ KOR_kim_dae_jung_gov = {
 				factor = 2
 				check_variable = { KORRegimeStability < 50 }
 			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = COMMUNIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = ANARCHIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = FAR_RIGHT_KOR
+					}
+				}
+			}
 		}
 	}
 	
@@ -227,6 +244,23 @@ KOR_kim_dae_jung_gov = {
 			modifier = {
 				factor = 2
 				check_variable = { KORRegimeStability < 50 }
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = COMMUNIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = ANARCHIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = FAR_RIGHT_KOR
+					}
+				}
 			}
 		}
 	}
@@ -1040,7 +1074,7 @@ SOV_bulgom_project = {
 		days_re_enable = 90
 				
 		complete_effect = {
-			SOV = { country_event = { id = south_korea.78 } }
+			SOV = { country_event = { id = south_korea.91 } }
 			KOR = { add_to_variable = { var = KORBulgomVar value = -999 } }
 		}
 
@@ -1155,8 +1189,6 @@ KOR_korean_ss = {
 
 }
 
-
-
 KOR_our_madagascar = {
 
 	KOR_madagascar_economic_subordination = { 
@@ -1220,6 +1252,836 @@ KOR_our_madagascar = {
 
 		ai_will_do = {
 			factor = 20
+		}
+	}
+	
+}
+
+army_decisions = {
+	
+	kor_paik_sun_yup_return = {
+		
+		visible = {
+			NOT = { has_country_flag = kor_paik_sun_yup_die }
+			original_tag = KOR
+		}
+		
+		available = {
+			has_war = yes
+			NOT = { has_government = communist } #Anti-communist
+			NOT = { has_government = fascist } #Anti-communist
+			NOT = { has_country_flag = kor_paik_sun_yup_die }
+		}
+		
+		icon = armed_forces_officers
+		
+		fire_only_once = yes
+		cost = 50
+		
+		complete_effect = {
+			add_stability = -0.05
+			#kor_paik_sun_yup = { set_nationality = ROOT }
+			add_field_marshal_role = {
+				character = "kor_paik_sun_yup"
+				traits={ old_guard politically_connected media_personality harsh_leader war_hero }
+				skill = 4
+				attack_skill = 4
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 5
+				legacy_id=0
+			}
+		}
+		
+		ai_will_do = {
+			factor = 0
+		}
+		
+	}
+	
+}
+
+
+kor_roj_roll = {
+
+	kor_roj_anime = {
+	
+		icon = tur_the_constitutional_arrows
+
+		allowed = { 
+			original_tag = KOR
+		}
+		
+		fire_only_once = no
+		
+		visible = {
+		}
+		
+		available = {
+			NOT = { has_country_flag = kor_kor_roj_roll_flag }
+		}
+
+		days_remove = 60
+
+		cost = 50
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		complete_effect = {
+			KOR_postnationalist_to_gain_strength = yes
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 60 }
+			}
+		}
+	}
+
+	kor_roj_oppression_of_pagans = {
+	
+		icon = tur_the_constitutional_arrows
+
+		allowed = { 
+			original_tag = KOR
+		}
+		
+		fire_only_once = no
+		
+		visible = {
+		}
+		
+		available = {
+			NOT = { has_country_flag = kor_kor_roj_roll_flag }
+			has_country_leader = { ruling_only = yes character = kor_moon_chang_geuk }
+		}
+
+		days_remove = 60
+
+		cost = 50
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		complete_effect = {
+			KOR_fundamentalism_to_gain_strength = yes
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 60 }
+			}
+		
+		}
+	}
+
+	kor_roj_lgbt = {
+	
+		icon = tur_the_constitutional_arrows
+
+		allowed = { 
+			original_tag = KOR
+		}
+		
+		visible = {
+		}
+		
+		available = {
+			NOT = { has_country_flag = kor_kor_roj_roll_flag }
+			NOT = { has_idea = KOR_ban_lgbt }
+		}
+
+		days_remove = 60
+
+		cost = 100
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		complete_effect = {
+			KOR_postnationalist_to_gain_strength = yes
+			add_ideas = kor_same_sex_marriage
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 60 }
+			}
+		
+		}
+	}
+
+	kor_roj_asceticism = {
+	
+		icon = tur_the_constitutional_arrows
+
+		allowed = { 
+			original_tag = KOR
+		}
+		
+		visible = {
+		}
+		
+		available = {
+			NOT = { has_country_flag = kor_kor_roj_roll_flag }
+			has_country_leader = { ruling_only = yes character = kor_moon_chang_geuk }
+		}
+
+		days_remove = 60
+
+		cost = 100
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		complete_effect = {
+			KOR_fundamentalism_to_gain_strength = yes
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 60 }
+			}
+		
+		}
+	}
+
+	kor_roj_give_up_dokdo = {
+	
+		icon = tur_the_constitutional_arrows
+
+		allowed = { 
+			original_tag = KOR
+		}
+		
+		visible = {
+		}
+		
+		available = {
+			NOT = { has_country_flag = kor_kor_roj_roll_flag }
+			country_exists = JAP
+			has_full_control_of_state = 1082 #Dokdo (Liancourt Rocks)
+			has_completed_focus = kor_brother_japan_theory
+		}
+
+		days_remove = 35
+
+		cost = 100
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		complete_effect = {
+			KOR_postnationalist_to_gain_strength = yes
+			JAP = { country_event = { id = south_korea.107 } }
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 35 }
+			}
+		
+		}
+	}
+
+	kor_roj_crusaders = {
+	
+		icon = tur_the_constitutional_arrows
+
+		allowed = { 
+			original_tag = KOR
+		}
+		
+		visible = {
+		}
+		
+		available = {
+			NOT = { has_country_flag = kor_kor_roj_roll_flag }
+			has_country_leader = { ruling_only = yes character = kor_moon_chang_geuk }
+		}
+
+		days_remove = 35
+
+		cost = 100
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		complete_effect = {
+			KOR_fundamentalism_to_gain_strength = yes
+			army_experience = 50
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 35 }
+			}
+		
+		}
+	}
+}
+	
+kor_dprk_rule = {
+
+	kor_hwanghae_stabilize = {
+
+		icon = infiltrate_state
+
+		available = {
+			947 = {
+				has_active_resistance = yes
+			}
+			947 = {
+				is_controlled_by = ROOT
+			}
+		}
+		
+		visible = {
+			947 = {
+				has_active_resistance = yes
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		
+		custom_cost_text = decision_cost_CP_25_pp_25
+		fire_only_once = no
+		days_remove = 21
+		
+		ai_will_do = {
+			factor = 2
+		}
+		
+		modifier = {
+			command_power_gain = -0.05
+			political_power_gain = -0.05
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			947 = {
+				add_resistance = -15
+				add_compliance = 10
+			}
+		}
+	}
+
+	kor_pyongyang_stabilize = {
+
+		icon = infiltrate_state
+
+		available = {
+			948 = {
+				has_active_resistance = yes
+			}
+			948 = {
+				is_controlled_by = ROOT
+			}
+		}
+		
+		visible = {
+			948 = {
+				has_active_resistance = yes
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		
+		custom_cost_text = decision_cost_CP_25_pp_25
+		fire_only_once = no
+		days_remove = 21
+		
+		ai_will_do = {
+			factor = 2
+		}
+		
+		modifier = {
+			command_power_gain = -0.05
+			political_power_gain = -0.05
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			948 = {
+				add_resistance = -15
+				add_compliance = 10
+			}
+		}
+	}
+
+	kor_ryanggang_stabilize = {
+
+		icon = infiltrate_state
+
+		available = {
+			924 = {
+				has_active_resistance = yes
+			}
+			924 = {
+				is_controlled_by = ROOT
+			}
+		}
+		
+		visible = {
+			924 = {
+				has_active_resistance = yes
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		
+		custom_cost_text = decision_cost_CP_25_pp_25
+		fire_only_once = no
+		days_remove = 21
+		
+		ai_will_do = {
+			factor = 2
+		}
+		
+		modifier = {
+			command_power_gain = -0.05
+			political_power_gain = -0.05
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			924 = {
+				add_resistance = -15
+				add_compliance = 10
+			}
+		}
+	}
+
+	kor_rason_stabilize = {
+
+		icon = infiltrate_state
+
+		available = {
+			925 = {
+				has_active_resistance = yes
+			}
+			925 = {
+				is_controlled_by = ROOT
+			}
+		}
+		
+		visible = {
+			925 = {
+				has_active_resistance = yes
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		
+		custom_cost_text = decision_cost_CP_25_pp_25
+		fire_only_once = no
+		days_remove = 21
+		
+		ai_will_do = {
+			factor = 2
+		}
+		
+		modifier = {
+			command_power_gain = -0.05
+			political_power_gain = -0.05
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			925 = {
+				add_resistance = -15
+				add_compliance = 10
+			}
+		}
+	}
+	
+	kor_north_gangwon_stabilize = {
+
+		icon = infiltrate_state
+
+		available = {
+			872 = {
+				has_active_resistance = yes
+			}
+			872 = {
+				is_controlled_by = ROOT
+			}
+		}
+		
+		visible = {
+			872 = {
+				has_active_resistance = yes
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		
+		custom_cost_text = decision_cost_CP_25_pp_25
+		fire_only_once = no
+		days_remove = 21
+		
+		ai_will_do = {
+			factor = 2
+		}
+		
+		modifier = {
+			command_power_gain = -0.05
+			political_power_gain = -0.05
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			872 = {
+				add_resistance = -15
+				add_compliance = 10
+			}
+		}
+	}
+	
+	kor_south_hamgyung_stabilize = {
+
+		icon = infiltrate_state
+
+		available = {
+			873 = {
+				has_active_resistance = yes
+			}
+			873 = {
+				is_controlled_by = ROOT
+			}
+		}
+		
+		visible = {
+			873 = {
+				has_active_resistance = yes
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		
+		custom_cost_text = decision_cost_CP_25_pp_25
+		fire_only_once = no
+		days_remove = 21
+		
+		ai_will_do = {
+			factor = 2
+		}
+		
+		modifier = {
+			command_power_gain = -0.05
+			political_power_gain = -0.05
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			873 = {
+				add_resistance = -15
+				add_compliance = 10
+			}
+		}
+	}
+	kor_north_hamgyung_stabilize = {
+
+		icon = infiltrate_state
+
+		available = {
+			874 = {
+				has_active_resistance = yes
+			}
+			874 = {
+				is_controlled_by = ROOT
+			}
+		}
+		
+		visible = {
+			874 = {
+				has_active_resistance = yes
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		
+		custom_cost_text = decision_cost_CP_25_pp_25
+		fire_only_once = no
+		days_remove = 21
+		
+		ai_will_do = {
+			factor = 2
+		}
+		
+		modifier = {
+			command_power_gain = -0.05
+			political_power_gain = -0.05
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			874 = {
+				add_resistance = -15
+				add_compliance = 10
+			}
+		}
+	}
+	kor_north_pyongan_stabilize = {
+
+		icon = infiltrate_state
+
+		available = {
+			875 = {
+				has_active_resistance = yes
+			}
+			875 = {
+				is_controlled_by = ROOT
+			}
+		}
+		
+		visible = {
+			875 = {
+				has_active_resistance = yes
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		
+		custom_cost_text = decision_cost_CP_25_pp_25
+		fire_only_once = no
+		days_remove = 21
+		
+		ai_will_do = {
+			factor = 2
+		}
+		
+		modifier = {
+			command_power_gain = -0.05
+			political_power_gain = -0.05
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			875 = {
+				add_resistance = -15
+				add_compliance = 10
+			}
+		}
+	}
+	kor_south_pyongan_stabilize = {
+
+		icon = infiltrate_state
+
+		available = {
+			527 = {
+				has_active_resistance = yes
+			}
+			527 = {
+				is_controlled_by = ROOT
+			}
+		}
+		
+		visible = {
+			527 = {
+				has_active_resistance = yes
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		
+		custom_cost_text = decision_cost_CP_25_pp_25
+		fire_only_once = no
+		days_remove = 21
+		
+		ai_will_do = {
+			factor = 2
+		}
+		
+		modifier = {
+			command_power_gain = -0.05
+			political_power_gain = -0.05
+		}
+		
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			527 = {
+				add_resistance = -15
+				add_compliance = 10
+			}
+		}
+	}
+	
+	kor_annex_prk_true = {
+		icon = generic_political_discourse
+		
+		available = {
+			FROM = {
+					owns_state = 527
+					owns_state = 872
+					owns_state = 873
+					owns_state = 874
+					owns_state = 875
+					owns_state = 924
+					owns_state = 925
+					owns_state = 947
+					owns_state = 948
+			}
+			AND = {
+				527 = { compliance > 70 }
+				872 = { compliance > 70 }
+				873 = { compliance > 70 }
+				874 = { compliance > 70 }
+				875 = { compliance > 70 }
+				924 = { compliance > 70 }
+				925 = { compliance > 70 }
+				947 = { compliance > 70 }
+				948 = { compliance > 70 }
+			}
+			AND = {
+				527 = { resistance < 30 } #O
+				872 = { resistance < 30 } #o
+				873 = { resistance < 30 } #o
+				874 = { resistance < 30 } #o
+				875 = { resistance < 30 } #O
+				924 = { resistance < 30 } #O
+				925 = { resistance < 30 } #O
+				947 = { resistance < 30 } #O
+				948 = { resistance < 30 } #O
+			}
+		}
+		
+		visible = {
+			ROOT = { owns_state = 527 }
+			ROOT = { owns_state = 872 }
+			ROOT = { owns_state = 873 }
+			ROOT = { owns_state = 874 }
+			ROOT = { owns_state = 875 }
+			ROOT = { owns_state = 924 }
+			ROOT = { owns_state = 925 }
+			ROOT = { owns_state = 947 }
+			ROOT = { owns_state = 948 }
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		days_remove = 35
+
+		remove_effect = {
+			527 = { add_core_of = ROOT }
+			872 = { add_core_of = ROOT }
+			873 = { add_core_of = ROOT }
+			874 = { add_core_of = ROOT }
+			875 = { add_core_of = ROOT }
+			924 = { add_core_of = ROOT }
+			925 = { add_core_of = ROOT }
+			947 = { add_core_of = ROOT }
+			948 = { add_core_of = ROOT }
+		}
+		
+		ai_will_do = {
+			factor = 20
+		}
+	}
+}
+
+
+
+kor_ayaneru_rule = {
+
+	kor_ayaneru_rule_true = {
+	
+		icon = tur_the_constitutional_arrows
+
+		allowed = { 
+			original_tag = KOR
+		}
+		
+		visible = {
+		}
+		
+		available = {
+			has_country_leader = { ruling_only = yes character = kor_ayane_sakura }
+			
+		}
+
+		days_remove = 720
+
+		cost = 25
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		complete_effect = {
+			
+		}
+
+		remove_effect = {
+			remove_country_leader_trait = KOR_political_beginner
 		}
 	}
 	

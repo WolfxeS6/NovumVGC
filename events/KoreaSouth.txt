@@ -172,7 +172,7 @@ news_event = {
 	title = rok_news.7.t
 	desc = rok_news.7.desc
 	
-	picture = GFX_news_event_blue_house
+	picture = GFX_news_event_jeju
 
 	major = yes
 	is_triggered_only = yes
@@ -260,6 +260,83 @@ news_event = {
 	}
 }
 
+#Madagascar Revolution
+news_event = {
+	id = rok_news.11
+	title = rok_news.11.t
+	desc = rok_news.11.desc
+	
+	picture = GFX_news_event_madagascar_revolution
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.11.a
+		trigger = {
+			original_tag = MAD
+		}
+	}
+	
+	option = {
+		name = rok_news.11.b
+		trigger = {
+			NOT = { original_tag = MAD }
+		}
+	}
+}
+
+#Madagascar Civil War
+news_event = {
+	id = rok_news.12
+	title = rok_news.12.t
+	desc = rok_news.12.desc
+	
+	picture = GFX_news_event_war
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.12.a
+		trigger = {
+			original_tag = MAD
+		}
+	}
+	
+	option = {
+		name = rok_news.12.b
+		trigger = {
+			NOT = { original_tag = MAD }
+		}
+	}
+}
+
+#Collapse of the Madagascar Government
+news_event = {
+	id = rok_news.13
+	title = rok_news.13.t
+	desc = rok_news.13.desc
+	picture = GFX_news_event_madagascar_revolution
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.13.a
+		trigger = {
+			original_tag = MAD
+		}
+	}
+	
+	option = {
+		name = rok_news.13.b
+		trigger = {
+			NOT = { original_tag = MAD }
+		}
+	}
+}
+
 #################
 #
 # Korea Events
@@ -312,12 +389,11 @@ country_event = {
 	
 	option = {
 		name = south_korea.3.a
-			add_tech_bonus = {
-				name = nav_doctrine_bonus
-				bonus = 1.0
-				uses = 1
-				category = naval_doctrine
-			}
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = naval_doctrine
+		}
 	}
 }
 
@@ -726,12 +802,12 @@ country_event = {
 		}
 		add_political_power = 75
 		
-		ROOT = {
-			add_opinion = {
-				target = FROM
-				value = 25
-			}
-		}
+		#ROOT = {
+		#	add_opinion = {
+		#		target = FROM
+		#		value = 25
+		#	}
+		#}
 	}
 	
 	option = {
@@ -746,12 +822,12 @@ country_event = {
 			producer = KOR
 		}
 		
-		ROOT = {
-			add_opinion = {
-				target = FROM
-				value = 25
-			}
-		}
+		#ROOT = {
+		#	add_opinion = {
+		#		target = FROM
+		#		value = 25
+		#	}
+		#}
 	}
 }
 
@@ -2007,7 +2083,17 @@ country_event = {
 	option = {
 		name = south_korea.83.a
 		set_country_flag = aliance_korea_love
-		add_to_faction = FROM
+		if = {
+			limit = { is_faction_leader = yes }
+			add_to_faction = FROM
+		}
+		else = {
+			set_rule = {
+				can_create_factions = yes
+			}
+			create_faction = EASTASIAN_ENTENTE_FACTION
+			add_to_faction = FROM
+		}
 		add_ai_strategy = {
 			type = befriend
 			id = KOR
@@ -2408,7 +2494,7 @@ country_event = {
 	fire_only_once = yes
 	
 	mean_time_to_happen = {
-		days = 250
+		days = 100
 	}
 	
 	trigger = {
@@ -2586,11 +2672,21 @@ country_event = {
 	option = {
 		name = south_korea.103.a
 		KOR = { puppet = ROOT }
+			hidden_effect = {
+				news_event = { id = rok_news.13 hours = 8 }
+			}
 	}
 	
 	option = {
 		name = south_korea.103.b
-		KOR = { country_event = { id = south_korea.104 } }
+		trigger = {
+			num_of_controlled_states > 1
+			#civil war route
+		}
+		KOR = { country_event = { id = south_korea.104 hours = 8 } }
+			hidden_effect = {
+				news_event = { id = rok_news.11 hours = 8 }
+			}
 	}
 }
 
@@ -2606,6 +2702,9 @@ country_event = {
 	option = {
 		name = south_korea.104.a
 		MAD = { country_event = { id = south_korea.105 } }
+		hidden_effect = {
+			news_event = { id = rok_news.12 hours = 8 }
+		}
 	}
 	
 	option = {
@@ -2629,40 +2728,15 @@ country_event = {
 	
 	is_triggered_only = yes
 	
-	option = { #For Korea
+	option = {
 		name = south_korea.105.a
-		ai_chance = {
-			factor = 0
-		}
-		ROOT = {
-			start_civil_war = {
-				ruling_party = nationalist
-				ideology = social_liberal
-				size = 0.5
-				KOR = {
-					puppet = PREV
-					set_autonomy = { target = PREV autonomy_state = autonomy_integrated_puppet }
-				}
-			}
-		}
-	}
-	
-	option = { #For Liberty
-		name = south_korea.105.b
 		start_civil_war = {
 			ruling_party = social_liberal
 			ideology = nationalist
 			size = 0.6
 		}
-		random_other_country = {
-			limit = {
-				original_tag = MAD
-				has_government = nationalist
-			}
-			KOR = {
-				puppet = PREV
-				set_autonomy = { target = PREV autonomy_state = autonomy_integrated_puppet }
-			}
+		hidden_effect = {
+			country_event = { id = south_korea.113 }
 		}
 	}
 }
@@ -2854,6 +2928,64 @@ country_event = {
 	
 	option = {
 		name = south_korea.112.b
+	}
+}
+
+#Madagascar Civil War
+country_event = {
+	id = south_korea.113
+	hidden = yes
+	is_triggered_only = yes
+	
+	option = {
+		random_other_country = {
+			limit = {
+				original_tag = MAD
+				has_government = nationalist
+			}
+			KOR = {
+				puppet = PREV
+				set_autonomy = { target = PREV autonomy_state = autonomy_integrated_puppet }
+			}
+		
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.5
+			}
+			set_politics = {
+				ruling_party = nationalist
+				elections_allowed = no
+			}
+			
+			FROM = {
+				declare_war_on = {
+					target = PREV
+					type = civil_war
+				}
+			}
+			KOR = {
+				add_to_war = {
+					targeted_alliance = PREV
+					enemy = FROM
+					hostility_reason = asked_to_join
+				}
+			}
+		}
+	}
+}
+
+#Chun Doo-hwan's trial
+country_event = {
+	id = south_korea.114
+	title = south_korea.114.t
+	desc = south_korea.114.desc
+	picture = GFX_report_event_KOR_nationalist_angry_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.114.a
+		add_political_power = 100
 	}
 }
 
@@ -3971,8 +4103,8 @@ country_event = {
 				juche_korea
 			}
 		}
-				unit_leader_event = { id = south_korea.63 days = 7 }
-				unit_leader_event = { id = south_korea.64 days = 30 }
+				#unit_leader_event = { id = south_korea.63 days = 7 }
+				#unit_leader_event = { id = south_korea.64 days = 30 }
 				country_event = { id = south_korea.65 days = 1 }
 		
 		#	if = {

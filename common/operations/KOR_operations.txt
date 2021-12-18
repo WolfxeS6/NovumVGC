@@ -1,0 +1,76 @@
+spreading_culture_plan = { ### 1/50
+	icon = GFX_historical_heavy_water
+	map_icon = GFX_historical_heavy_water_small
+	name = spreading_culture_plan
+	desc = spreading_culture_plan_desc
+	days = 60
+
+	allowed = {
+		ROOT = { original_tag = KOR }
+	}
+	
+	available = { 
+		NOT = { has_global_flag = break_influence_korea }
+		country_exists = KOR 
+		country_exists = PRK
+		KOR = { is_subject = no }
+		PRK = { is_subject = no }
+	}
+	
+	visible = {
+		FROM = {
+			tag = PRK
+		}
+		network_national_coverage = {
+			target = PRK
+			value > 0
+		}
+	}
+
+	operatives = 1
+
+	# Integer [0-100] - Every operation has a hard requirement of network strength in the target country
+	network_strength = 35
+
+	equipment = {
+		support_equipment = 200
+	}
+
+	on_start = {  # SCOPE_OPERATION
+		
+	}
+
+	outcome_modifiers = { operation_outcome }
+	cost_modifiers = { operation_cost }
+	risk_modifiers = { operation_risk }
+
+	outcome_potential = {
+		custom_effect_tooltip = spreading_culture_plan_outcome_tt
+	}
+	
+	risk_chance = 0.25
+	experience = 5
+	
+	# outcome is an effect that runs when the operation has completed
+	outcome_execute = { # SCOPE_OPERATION
+		FROM = { 
+			random_list = {
+				25 = { add_to_variable = { var = RegimeInfluence value = 4 } }
+				75 = {  add_to_variable = { var = RegimeInfluence value = 8 }  }
+			}
+		}
+	}
+	
+	# This is where all the separate phases are defined
+	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+	
+	phases = { #infiltration 
+		spreading_culture_flying_balloons = { base = 100 }
+	}
+	phases = { 
+		spreading_culture_smuggling_radio = { base = 100 }
+	}
+	phases = { 
+		spreading_culture_spreading_korean_media = { base = 100 }
+	}
+}

@@ -1,0 +1,1288 @@
+### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_RESEARCH}
+### search_filters = {FOCUS_FILTER_INDUSTRY}
+### search_filters = {FOCUS_FILTER_STABILITY}
+### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+### search_filters = {FOCUS_FILTER_MANPOWER}
+
+ ##############
+ ###
+ ### Lee Seok-ki
+ ###
+ ##############
+
+	shared_focus = {
+		id = kor_lee_seok_ki_government
+		icon = kor_lee_seok_ki
+		x = 14
+		y = 0
+		cost = 7
+
+		bypass = {
+			has_country_leader = {
+				name = "Lee Seok-ki"
+				ruling_only = yes
+			}
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {FOCUS_FILTER_POLITICAL}
+
+		completion_reward = {
+		
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_remove_native_japs
+		icon = fascism3
+		x = -2
+		y = 1
+		cost = 3
+		
+		prerequisite = { 
+			focus = kor_lee_seok_ki_government
+		}
+		
+		relative_position_id = 	kor_lee_seok_ki_government
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_stability = -0.1
+			
+			if = {
+				limit = {  has_idea = public_safety_local_law_enforcement  }
+				swap_ideas = {
+					remove_idea = public_safety_local_law_enforcement
+					add_idea = public_safety_secret_police
+				}
+			}
+			else_if = {
+				limit = {  has_idea = public_safety_subsidized_agencies  }
+				swap_ideas = {
+					remove_idea = public_safety_subsidized_agencies
+					add_idea = public_safety_secret_police
+				}
+			}
+			else_if = {
+				limit = {  has_idea = public_safety_central_law_office  }
+				swap_ideas = {
+					remove_idea = public_safety_central_law_office
+					add_idea = public_safety_secret_police
+				}
+			}
+			else = {
+				add_stability = 0.1
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_reactionist_question
+		icon = GFX_goal_generic_defence
+		x = 2
+		y = 1
+		cost = 3
+		
+		prerequisite = { 
+			focus = kor_lee_seok_ki_government
+		}
+		
+		relative_position_id = 	kor_lee_seok_ki_government
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_timed_idea = { idea = KOR_fanaticism days = 365 }
+			add_stability = -0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_korea_uber_alles
+		icon = hitler
+		x = 0
+		y = 1
+		cost = 3
+		
+		prerequisite = { 
+			focus = kor_lee_seok_ki_government
+		}
+		
+		relative_position_id = 	kor_lee_seok_ki_government
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			remove_ideas = KOR_balancer_theory
+			remove_ideas = KOR_WT_OPCON
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+
+	shared_focus = {
+		id = kor_don_t_repeat_the_mistake_of_1999
+		icon = kor_revolution_mass
+		x = 0
+		y = 2
+		cost = 3
+		
+		prerequisite = { 
+			focus = kor_remove_native_japs
+		}
+
+		prerequisite = { 
+			focus = kor_korea_uber_alles
+		}
+
+		prerequisite = { 
+			focus = kor_reactionist_question
+		}
+		
+		relative_position_id = 	kor_lee_seok_ki_government
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			
+			if = {
+				limit = {  has_idea = civil_liberties_free  }
+				swap_ideas = {
+					remove_idea = civil_liberties_free
+					add_idea = civil_liberties_totalitarian
+				}
+			}
+			else_if = {
+				limit = {  has_idea = civil_liberties_limited  }
+				swap_ideas = {
+					remove_idea = civil_liberties_limited
+					add_idea = civil_liberties_totalitarian
+				}
+			}
+			else_if = {
+				limit = {  has_idea = civil_liberties_restricted  }
+				swap_ideas = {
+					remove_idea = civil_liberties_restricted
+					add_idea = civil_liberties_totalitarian
+				}
+			}
+			else = {
+				add_stability = 0.1
+			}
+
+			add_ideas = generic_asia_idea_leader_worship
+			add_ideas = government_system_one_party
+			add_stability = -0.1
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_focus_on_the_juche
+		icon = align_to_north_korea
+		x = -6
+		y = 3
+		cost = 8
+
+		available = {
+			has_war = no
+			OR = {
+				is_subject_of = PRK
+				is_subject = no
+			}
+			country_exists = PRK
+			#PRK = { has_government = fascist }
+			NOT = { PRK = { has_completed_focus = prk_lyuh_woon_hyung_s_unfulfilled_dream } }
+		}
+		
+		prerequisite = { 
+			focus = kor_don_t_repeat_the_mistake_of_1999
+		}
+
+		mutually_exclusive = {
+			focus = kor_focus_on_the_minjok
+		}
+		
+		relative_position_id = 	kor_lee_seok_ki_government
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_war_support = -0.15
+			add_manpower = -20000
+			PRK = { puppet = KOR }
+			hidden_effect = {
+				set_politics = {	
+					ruling_party = fascist
+					elections_allowed = no
+				}
+
+				set_popularities = {
+					fascist = 80
+					nationalist = 20
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				AND = {
+					has_game_rule = {
+						rule = KOR_AI_COM_BEHAVIOR
+						option = COMMUNIST_KOR_HWAN
+					}
+				}
+			}
+		}
+	}
+
+	shared_focus = {
+		id = kor_remove_our_army
+		icon = generic_red_speed
+		x = -1
+		y = 1
+		cost = 8
+		
+		available = {
+			OR = {
+				is_subject_of = PRK
+				is_subject = no
+			}
+			country_exists = PRK
+			#PRK = { has_government = fascist }
+		}
+
+		prerequisite = { 
+			focus = kor_focus_on_the_juche
+		}
+		
+		relative_position_id = 	kor_focus_on_the_juche
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_war_support = -0.5
+			add_stability = -0.1
+			add_manpower = -100000
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	shared_focus = {
+		id = kor_no_one_can_run_away
+		icon = prk_jail
+		x = 1
+		y = 1
+		cost = 8
+		
+		available = {
+			OR = {
+				is_subject_of = PRK
+				is_subject = no
+			}
+			country_exists = PRK
+			#PRK = { has_government = fascist }
+		}
+
+		prerequisite = { 
+			focus = kor_focus_on_the_juche
+		}
+		
+		relative_position_id = 	kor_focus_on_the_juche
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_war_support = -0.1
+			add_stability = -0.1
+			add_manpower = -100000
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	shared_focus = {
+		id = kor_towards_the_emptiness
+		icon = prk_juche_tower
+		x = 0
+		y = 2
+		cost = 8
+		
+		available = {
+			OR = {
+				is_subject_of = PRK
+				is_subject = no
+			}
+			country_exists = PRK
+			#PRK = { has_government = fascist }
+		}
+
+		prerequisite = { 
+			focus = kor_remove_our_army
+		}
+		
+		prerequisite = { 
+			focus = kor_no_one_can_run_away
+		}
+		
+		relative_position_id = 	kor_focus_on_the_juche
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_war_support = -0.50
+			add_stability = -0.50
+			add_manpower = -500000
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+
+	shared_focus = {
+		id = kor_dissolution_of_the_government
+		icon = fascism4
+		x = 0
+		y = 3
+		cost = 10
+		
+		available = {
+			OR = {
+				is_subject_of = PRK
+				is_subject = no
+			}
+			country_exists = PRK
+			#PRK = { has_government = fascist }
+		}
+
+		prerequisite = { 
+			focus = kor_towards_the_emptiness
+		}
+		
+		relative_position_id = 	kor_focus_on_the_juche
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			custom_effect_tooltip = kor_juche_GAME_OVER_TT
+			hidden_effect = {
+				PRK = {
+					annex_country = { target = KOR } 
+				}
+				every_state = { 
+					limit = { is_core_of = KOR }
+					add_core_of = PRK
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	shared_focus = {
+		id = kor_focus_on_the_minjok
+		icon = align_to_south_korea
+		x = 6
+		y = 3
+		cost = 8
+
+		available = {
+			has_war = no
+		}
+		
+		prerequisite = { 
+			focus = kor_don_t_repeat_the_mistake_of_1999
+		}
+
+		mutually_exclusive = {
+			focus = kor_focus_on_the_juche
+		}
+		
+		relative_position_id = 	kor_lee_seok_ki_government
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_war_support = 0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				AND = {
+					has_game_rule = {
+						rule = KOR_AI_COM_BEHAVIOR
+						option = COMMUNIST_KOR_JUCHE
+					}
+					country_exists = PRK
+					NOT = { PRK = { has_completed_focus = prk_lyuh_woon_hyung_s_unfulfilled_dream } }
+				}
+			}
+		}
+	}
+
+	shared_focus = {
+		id = kor_problem_of_the_north
+		icon = attack_north_korea
+		x = -1
+		y = 1
+		cost = 5
+		
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = PRK }
+				has_war_with = PRK
+			}
+		}
+
+		prerequisite = { 
+			focus = kor_focus_on_the_minjok
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			create_wargoal = {
+				target = PRK
+				type = annex_everything
+				expire = 0
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_problem_of_the_south
+		icon = kor_unite_korea
+		x = 1
+		y = 1
+		cost = 5
+		
+		available = {
+			is_subject = no
+		}
+
+		prerequisite = { 
+			focus = kor_focus_on_the_minjok
+		}
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = JEJ }
+				has_war_with = JEJ
+			}
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			create_wargoal = {
+				target = JEJ
+				type = annex_everything
+				expire = 0
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_hwan_theory
+		icon = fascism5
+		x = 0
+		y = 2
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_focus_on_the_minjok
+		}
+
+		available = {
+			is_subject = no
+			owns_state = 527
+			owns_state = 872
+			owns_state = 873
+			owns_state = 874
+			owns_state = 875
+			owns_state = 947
+			owns_state = 948
+			owns_state = 949
+			owns_state = 950
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = KOR_the_hwan_empire
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_research_dangun_segi
+		icon = generic_chollima
+		x = -1
+		y = 3
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_hwan_theory
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_war_support = 0.15
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_eurasia_is_korea
+		icon = generic_red_tank
+		x = 1
+		y = 3
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_hwan_theory
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					NOT = { is_in_faction_with = KOR }
+						capital_scope = {
+							is_on_continent = asia
+						}
+				}
+				add_opinion_modifier = { target = ROOT modifier = imperialism_madness }
+			}
+			every_state = {
+				limit = {
+					is_on_continent = asia
+				}
+				add_claim_by = ROOT
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_komm_susser_tod
+		icon = prk_beautiful_future
+		x = 0
+		y = 4
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_research_dangun_segi
+		}
+
+		prerequisite = { 
+			focus = kor_eurasia_is_korea
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_korean_lebensraum
+		icon = generic_north_korean_railway_propaganda
+		x = -3
+		y = 5
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_komm_susser_tod
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			unlock_decision_category_tooltip = KOR_korean_ss
+			add_field_marshal_role = {
+				character = "kor_lee_seok_ki"
+				traits={ old_guard politically_connected media_personality harsh_leader }
+				skill=1
+				attack_skill=1
+				defense_skill=1
+				planning_skill=1
+				logistics_skill=1
+				legacy_id=0
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_go_gando
+		icon = attack_china
+		x = -5
+		y = 6
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_korean_lebensraum
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			create_wargoal = {
+				target = PRC
+				type = annex_everything
+				expire = 0
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+			modifier = {
+				any_country = {
+					has_war_with = ROOT
+					is_major = yes
+				}
+				factor = 0 #YABE
+			}
+		}
+	}
+
+	shared_focus = {
+		id = kor_go_russia
+		icon = attack_russia
+		x = -3
+		y = 6
+		cost = 6
+		
+		prerequisite = { 
+			focus = kor_korean_lebensraum
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			create_wargoal = {
+				target = SOV
+				type = annex_everything
+				expire = 0
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+			modifier = {
+				any_country = {
+					has_war_with = ROOT
+					is_major = yes
+				}
+				factor = 0 #YABE
+			}
+		}
+	}
+
+	shared_focus = {
+		id = kor_savages_of_the_east
+		icon = attack_japan
+		x = -1
+		y = 6
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_korean_lebensraum
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			create_wargoal = {
+				target = JAP
+				type = annex_everything
+				expire = 0
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+			modifier = {
+				any_country = {
+					has_war_with = ROOT
+					is_major = yes
+				}
+				factor = 0 #YABE
+			}
+		}
+	}
+
+	shared_focus = {
+		id = kor_eagle_hunting
+		icon = attack_america
+		x = -3
+		y = 7
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_go_gando
+		}
+		
+		prerequisite = { 
+			focus = kor_savages_of_the_east
+		}
+		
+		prerequisite = { 
+			focus = kor_go_russia
+		}
+
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			create_wargoal = {
+				target = USA
+				type = annex_everything
+				expire = 0
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+			modifier = {
+				any_country = {
+					has_war_with = ROOT
+					is_major = yes
+				}
+				factor = 0 #YABE
+			}
+		}
+	}
+
+	shared_focus = {
+		id = kor_hwan_suomi_hyperwar
+		icon = attack_finland
+		x = -3
+		y = 8
+		cost = 5
+		
+		prerequisite = { 
+			focus = kor_eagle_hunting
+		}
+
+		relative_position_id = 	kor_focus_on_the_minjok
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			create_wargoal = {
+				target = FIN
+				type = annex_everything
+				expire = 0
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+			modifier = {
+				any_country = {
+					has_war_with = ROOT
+					is_major = yes
+				}
+				factor = 0 #YABE
+			}
+		}
+	}
+
+	shared_focus = {
+		id = kor_red_reform
+		icon = communism
+		x = 0
+		y = 4
+		cost = 5
+
+		available = {
+			has_war = no
+		}
+		
+		prerequisite = { 
+			focus = kor_don_t_repeat_the_mistake_of_1999
+		}
+		
+		relative_position_id = 	kor_lee_seok_ki_government
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_timed_idea = { idea = kor_four_year_plan_spirit days = 1460 }
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+
+	shared_focus = {
+		id = kor_trial_chaebol
+		icon = kor_grab_chaebol_2
+		x = -2
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_red_reform
+		}
+		
+		relative_position_id = kor_red_reform
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		bypass = {
+			has_country_flag = kor_remove_chaebol
+		}
+		
+		completion_reward = {
+			add_ideas = generic_asia_idea_asian_style_communism
+			set_country_flag = kor_remove_chaebol
+			custom_effect_tooltip = kor_remove_chaebol_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_unions_lead_companies
+		icon = kor_money_grab
+		x = -3
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_trial_chaebol
+		}
+		
+		relative_position_id = kor_red_reform
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_revolutionary_education
+		icon = research
+		x = -1
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_trial_chaebol
+		}
+
+		prerequisite = { 
+			focus = kor_internet_shutdown
+		}
+		
+		relative_position_id = kor_red_reform
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_revolutionary_education_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_seizure_of_foreign_property
+		icon = fascism
+		x = 1
+		y = 2
+		cost = 8
+		
+		bypass = {
+			has_idea = closed_economy
+		}
+
+		prerequisite = { 
+			focus = kor_country_without_unemployment
+		}
+
+		prerequisite = { 
+			focus = kor_internet_shutdown
+		}
+		
+		relative_position_id = kor_red_reform
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = closed_economy
+			add_political_power = 120
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_red_retraining_camp
+		icon = communism2
+		x = 3
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_country_without_unemployment
+		}
+		
+		relative_position_id = kor_red_reform
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_war_support = 0.05
+			add_ideas = generic_asia_idea_commissar
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_internet_shutdown
+		icon = kor_Internet_censorship
+		x = 0
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_red_reform
+		}
+		
+		relative_position_id = kor_red_reform
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		bypass = {
+			has_idea = generic_idea_asia_block_western_influence
+		}
+
+		completion_reward = {
+			add_ideas = generic_idea_asia_block_western_influence
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_country_without_unemployment
+		icon = GFX_focus_generic_self_management
+		x = 2
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_red_reform
+		}
+		
+		relative_position_id = kor_red_reform
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = kor_country_without_unemployment_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = kor_revolutionary_republic
+		icon = kor_dual_korean_democracy_flag_blue
+		x = 0
+		y = 3
+		cost = 8
+		
+		prerequisite = { 
+			focus = kor_unions_lead_companies
+		}
+		
+		prerequisite = { 
+			focus = kor_revolutionary_education
+		}
+		
+		prerequisite = { 
+			focus = kor_seizure_of_foreign_property
+		}
+		
+		prerequisite = { 
+			focus = kor_red_retraining_camp
+		}
+
+		relative_position_id = kor_red_reform
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		completion_reward = {
+			add_ideas = generic_asia_idea_mixed_communism
+			add_war_support = 0.05
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}

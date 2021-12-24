@@ -92,13 +92,13 @@ focus_tree = {
 		icon = consumer_goods
 		x = @industrial_tree_center
 		y = 0
-		cost = 10
+		cost = 5
 		
 		completion_reward = {
 			add_tech_bonus = {
 				name = industry_bonus
-				bonus = 0.25
-				uses = 1
+				bonus = 0.5
+				uses = 2
 				category = industry
 			}
 		}
@@ -5103,7 +5103,7 @@ focus_tree = {
 		completion_reward = {
 			fourth_estate_conservative_decrease = yes
 			fourth_estate_social_democrat_decrease = yes
-			fourth_estate_communist_decease = yes
+			fourth_estate_communist_decrease = yes
 			add_war_support = 0.05
 		}
 	}
@@ -5119,7 +5119,8 @@ focus_tree = {
 		}
 		relative_position_id = GER_npd_funding
 		completion_reward = {
-			
+			EU_membership_termination = yes
+			news_event = news.4
 		}
 	}
 	focus = {
@@ -5155,11 +5156,14 @@ focus_tree = {
 		prerequisite = {
 			focus = GER_close_the_borders
 		}
+		available = {
+			fascist > 0.35
+		}
 		relative_position_id = GER_close_the_borders
 		completion_reward = {
 			add_named_threat = {
 				name = threat_german_nationalism
-				threat = 4
+				threat = 1
 			}
 			set_politics = {
 				ruling_party = fascist
@@ -5216,6 +5220,9 @@ focus_tree = {
 		}
 		relative_position_id = GER_empower_the_president
 		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.1
+			fourth_estate_fascist_increase = yes
 		}
 	}
 	focus = {
@@ -5230,6 +5237,7 @@ focus_tree = {
 		}
 		relative_position_id = GER_spread_propaganda
 		completion_reward = {
+			add_ideas = GER_hitler_youth
 		}
 	}
 	focus = {
@@ -5244,6 +5252,7 @@ focus_tree = {
 		}
 		relative_position_id = GER_spread_propaganda
 		completion_reward = {
+			add_ideas = GER_censored_media
 		}
 	}
 	focus = {
@@ -5276,6 +5285,12 @@ focus_tree = {
 		}
 		relative_position_id = GER_censor_media
 		completion_reward = {
+			add_stability = -0.02
+			fourth_estate_conservative_decrease = yes
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_Market_liberal_decrease = yes
+			fourth_estate_Social_liberal_decrease = yes
+			fourth_estate_Democratic_socialist_decrease = yes
 		}
 	}
 	focus = {
@@ -5293,21 +5308,205 @@ focus_tree = {
 		}
 		relative_position_id = GER_rewrite_history_books
 		completion_reward = {
+			add_war_support = 0.15
+			add_stability = -0.05
+			add_timed_idea = {
+				idea = GER_second_night_of_the_long__knives
+				days = 365
+			}
+		}
+	}
+	focus = {
+		id = GER_restore_our_borders
+		text = "Restore Our Borders"
+		icon = GFX_goal_generic_territory_or_war
+		x = 0
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus =GER_second_night_of_the_long__knives
+		}
+		relative_position_id = GER_second_night_of_the_long__knives
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 100
+			create_wargoal = {
+				target = POL
+				type = annex_everything
+			}			
+			add_state_claim = 69
+			add_state_claim = 742
+			add_state_claim = 743
+			add_state_claim = 66
+			add_state_claim = 85
+			add_state_claim = 5
+			add_state_claim = 741
+			add_state_claim = 28
+			add_state_claim = 153
+			add_state_claim = 152
+			add_state_claim = 4
 		}
 	}
 
 	focus = {
-		id = GER_five_year_plan
-		text = "A Five Year Plan"
-		icon = GFX_goal_generic_propaganda
+		id = GER_GroBraumwirtschaft
+		text = "GroBraumwirtschaft"
+		icon = GFX_goal_generic_construct_civilian
 		x = -5
 		y = 1
-		cost = 12
+		cost = 5
 		prerequisite = {
 			focus =GER_empower_the_president
 		}
 		relative_position_id = GER_empower_the_president
 		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = GER_reject_free_trade
+		text = "Reject Free Trade"
+		icon = GFX_focus_generic_self_management
+		x = 0
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus =GER_GroBraumwirtschaft
+		}
+		relative_position_id = GER_GroBraumwirtschaft
+		completion_reward = {
+			if = {
+			    limit = { has_idea = free_trade }
+			    add_ideas = export_focus
+		    }
+			add_stability = -0.05
+			add_ideas = GER_rejecting_free_trade
+		}
+	}
+	focus = {
+		id = GER_appease_industrial_leaders
+		text = "Appease Industrial Leaders"
+		icon = GFX_goal_generic_dangerous_deal
+		x = -1
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus =GER_reject_free_trade
+		}
+		relative_position_id = GER_reject_free_trade
+		completion_reward = {
+			add_stability = 0.07
+			add_political_power = -60
+		}
+	}
+	focus = {
+		id = GER_autarky
+		text = "Autarky"
+		icon = GFX_goal_generic_oil_refinery
+		x = 1
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus =GER_reject_free_trade
+		}
+		relative_position_id = GER_reject_free_trade
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GER_rejecting_free_trade
+				add_idea = GER_autarky
+			}
+		}
+	}
+	focus = {
+		id = GER_supply_chain
+		text = "Supply Chain Reorganisation"
+		icon = GFX_focus_generic_industry_2
+		x = -1
+		y = 1
+		cost = 5
+		prerequisite = {
+			focus =GER_autarky
+		}
+		prerequisite = {
+			focus =GER_appease_industrial_leaders
+		}
+		relative_position_id = GER_autarky
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GER_autarky
+				add_idea = GER_autarky2
+			}
+		}
+	}
+	focus = {
+		id = GER_economic_rearmament
+		text = "Economic Rearmament"
+		icon = GFX_focus_generic_industry_2
+		x = 0
+		y = 1
+		cost = 10
+		prerequisite = {
+			focus = GER_supply_chain
+		}
+		relative_position_id =  GER_supply_chain
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			swap_ideas = {
+				remove_idea = GER_autarky2
+				add_idea = GER_autarky3
+			}
+		}
+	}
+	focus = {
+		id = GER_war_economy
+		text = "War Fueled Economy"
+		icon = GFX_goal_generic_military_deal
+		x = 0
+		y = 1
+		cost = 10
+		prerequisite = {
+			focus = GER_economic_rearmament
+		}
+		relative_position_id =  GER_economic_rearmament
+		completion_reward = {
+			add_stability = -0.05
+			add_ideas = GER_war_economy
 		}
 	}
 	focus = {
@@ -5322,6 +5521,13 @@ focus_tree = {
 		}
 		relative_position_id = GER_empower_the_president
 		completion_reward = {
+			add_named_threat = {
+				name = threat_german_nationalism
+				threat = 5
+			}
+			army_experience = 50
+			air_experience = 25
+			navy_experience = 10
 		}
 	}
 	focus = {
@@ -5336,6 +5542,30 @@ focus_tree = {
 		}
 		relative_position_id = GER_remilitarisation
 		completion_reward = {
+			if = {
+			    limit = { has_idea = disarmed_nation }
+			    add_ideas = volunteer_only
+		    }
+		    else_if = {
+			    limit = { has_idea = volunteer_only }
+			    add_ideas = limited_conscription
+		    }
+		    else_if = {
+			    limit = { has_idea = limited_conscription }
+			    add_ideas = extensive_conscription
+		    }
+		    else_if = {
+			    limit = { has_idea = extensive_conscription }
+			    add_ideas = service_by_requirement
+		    }
+		    else_if = {
+			    limit = { has_idea = service_by_requirement }
+			    add_ideas = all_adults_serve
+		    }
+		    else_if = {
+			    limit = { has_idea = all_adults_serve }
+			    add_ideas = scraping_the_barrel
+		    }
 		}
 	}
 	focus = {
@@ -5350,6 +5580,13 @@ focus_tree = {
 		}
 		relative_position_id = GER_reintroduce_draft
 		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.5
+				uses = 2
+				category = logistics_tech
+			}
+			political_power = 40
 		}
 	}
 	focus = {
@@ -5364,6 +5601,18 @@ focus_tree = {
 		}
 		relative_position_id = GER_learn_from_past_failings
 		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 2
+				category = land_doctrine 
+			}
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				uses = 1
+				category = air_doctrine 
+			}
 		}
 	}
 	focus = {
@@ -5378,6 +5627,7 @@ focus_tree = {
 		}
 		relative_position_id = GER_learn_from_past_failings
 		completion_reward = {
+			add_political_power = -20
 			remove_ideas = GER_bundeswehr_shortcomings
 		}
 	}
@@ -5396,6 +5646,7 @@ focus_tree = {
 		}
 		relative_position_id = GER_update_the_bundeswehr
 		completion_reward = {
+			add_ideas = GER_rapid_preparations
 		}
 	}
 	focus = {
@@ -5410,6 +5661,7 @@ focus_tree = {
 		}
 		relative_position_id = GER_rapid_preparations
 		completion_reward = {
+			add_ideas = GER_strike_first_doctrine
 		}
 	}
 }

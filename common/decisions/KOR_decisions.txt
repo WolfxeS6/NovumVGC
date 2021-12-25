@@ -113,15 +113,15 @@ KOR_kim_dae_jung_gov = {
 					add_to_variable = { var = KORRegimeStability value = 5 }
 					custom_effect_tooltip = kor_add_regime_stability_5_tt
 				}
-				40 = {
+				50 = {
 					add_to_variable = { var = KORRegimeStability value = 2.5 }
 					custom_effect_tooltip = kor_add_regime_stability_2_half_tt
 				}
-				40 = {
+				35 = {
 					add_to_variable = { var = KORRegimeStability value = -2.5 }
 					custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
 				}
-				10 = {
+				5 = {
 					add_to_variable = { var = KORRegimeStability value = -5 }
 					custom_effect_tooltip = kor_subtract_regime_stability_5_tt
 				}
@@ -148,7 +148,7 @@ KOR_kim_dae_jung_gov = {
 		priority = 10
 		
 		days_remove = 14
-		days_re_enable = 60
+		days_re_enable = 40
 				
 		complete_effect = {
 		}
@@ -159,7 +159,7 @@ KOR_kim_dae_jung_gov = {
 		}
 
 		ai_will_do = {
-			factor = 0.1
+			factor = 1
 			modifier = {
 				factor = 100
 				check_variable = { KORRegimeStability < 30 }
@@ -189,33 +189,64 @@ KOR_kim_dae_jung_gov = {
 		}
 	}
 	
-	#KOR_national_tour = {
-	#	icon = generic_agreement
-
+	KOR_national_tour = {
+		icon = generic_agreement
 		#allowed = { always = yes }
 		
-	#	available = {
-	#		always = yes
-	#	}
+		available = {
+			always = yes
+		}
 
-	#	visible = {
-	#	}
+		visible = {
+		}
 
-	#	cost = 50
-	#	fire_only_once = yes
-				
-	#	complete_effect = {
-	#	
-	#	}
+		#cost = 15
+		fire_only_once = no
 		
-	#	ai_will_do = {
-	#		factor = 0.1
-	#		modifier = {
-	#			factor = 2
-	#			check_variable = { KORRegimeStability < 50 }
-	#		}
-	#	}
-	#}
+		priority = 10
+		
+		days_remove = 30
+		days_re_enable = 335 #+30, 365
+				
+		complete_effect = {
+			political_power_factor = -0.4
+		}
+
+		remove_effect = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = 10 } }
+			custom_effect_tooltip = kor_add_regime_stability_10_tt
+		}
+		
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 100
+				check_variable = { KORRegimeStability < 30 }
+			}
+			modifier = {
+				factor = 25
+				check_variable = { KORRegimeStability < 50 }
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = COMMUNIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = ANARCHIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = FAR_RIGHT_KOR
+					}
+					has_country_flag = kor_non_democratic
+				}
+			}
+		}
+	}
 	
 	KOR_commitment_to_reform = {
 		icon = generic_agreement
@@ -233,7 +264,7 @@ KOR_kim_dae_jung_gov = {
 		fire_only_once = no
 		
 		days_remove = 30
-		days_re_enable = 30
+		days_re_enable = 21
 				
 		modifier = {
 			political_power_factor = -0.2
@@ -245,7 +276,7 @@ KOR_kim_dae_jung_gov = {
 		}
 
 		ai_will_do = {
-			factor = 0.1
+			factor = 1
 			modifier = {
 				factor = 100
 				check_variable = { KORRegimeStability < 30 }

@@ -7,5 +7,5 @@ dependencies={
 }
 name="Novum Vexillum Global Conflict"
 picture="thumbnail.png"
-supported_version="1.10.*"
+supported_version="1.11.*"
 remote_file_id="2227081070"

@@ -73,6 +73,10 @@ news_event = {
 	major = yes
 	is_triggered_only = yes
 	
+	immediate = {
+		set_global_flag = kor_republic_of_japan_sp
+	}
+	
 	option = {
 		name = rok_news.3.a
 		trigger = {
@@ -96,6 +100,10 @@ news_event = {
 	
 	picture = GFX_news_event_blue_house
 
+	immediate = {
+		set_global_flag = kor_anarchism_rev_sp
+	}
+	
 	major = yes
 	is_triggered_only = yes
 	
@@ -122,6 +130,10 @@ news_event = {
 	
 	picture = GFX_news_event_blue_house
 
+	immediate = {
+		set_global_flag = kor_minjok_rev_sp
+	}
+	
 	major = yes
 	is_triggered_only = yes
 	
@@ -718,6 +730,9 @@ country_event = {
 	
 	option = {
 		name = south_korea.22.a
+		hidden_effect = {
+			remove_ideas = KOR_coalition_on_the_brink_of_collapse
+		}
 		KOR_seats_general_election_effect = yes
 		load_focus_tree = KOR_focus_tree_kim_dae_jung
 		custom_effect_tooltip = KOR_general_election_exit_poll_tt
@@ -1124,14 +1139,15 @@ country_event = {
 		original_tag = KOR
 		NOT = { has_country_flag = kor_end_clock }
 		NOT = { has_country_flag = KOR_NL_coalition }
+		NOT = { has_country_flag = kor_protests_suppressed }
 	}
 	
 	mean_time_to_happen = {
-		days = 180
+		days = 237
 		modifier = { factor = 0.9 check_variable = { KORRegimeStability > 90 } }
 		modifier = { factor = 0.9 check_variable = { KORRegimeStability > 80 } }
-		modifier = { factor = 1.05 check_variable = { KORRegimeStability < 50 } }
-		modifier = { factor = 1.05 check_variable = { KORRegimeStability < 45 } }
+		#modifier = { factor = 1.05 check_variable = { KORRegimeStability < 50 } }
+		#modifier = { factor = 1.05 check_variable = { KORRegimeStability < 45 } }
 		modifier = { factor = 1.1 check_variable = { KORRegimeStability < 40 } }
 		modifier = { factor = 1.2 check_variable = { KORRegimeStability < 35 } }
 		modifier = { factor = 1.2 check_variable = { KORRegimeStability < 30 } }
@@ -1141,8 +1157,15 @@ country_event = {
 	
 	option = {
 		name = south_korea.40.a
-		ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
-		custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+		if = {
+			limit = { check_variable = { KORRegimeStability > 30 } }
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+		}
+		else = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+		}
 	}
 }
 
@@ -1156,14 +1179,15 @@ country_event = {
 	trigger = {
 		original_tag = KOR
 		NOT = { has_country_flag = kor_end_clock }
+		NOT = { has_country_flag = kor_protests_suppressed }
 	}
 	
 	mean_time_to_happen = {
-		days = 210
+		days = 258
 		modifier = { factor = 0.9 check_variable = { KORRegimeStability > 90 } }
 		modifier = { factor = 0.9 check_variable = { KORRegimeStability > 80 } }
-		modifier = { factor = 1.05 check_variable = { KORRegimeStability < 50 } }
-		modifier = { factor = 1.05 check_variable = { KORRegimeStability < 45 } }
+		#modifier = { factor = 1.05 check_variable = { KORRegimeStability < 50 } }
+		#modifier = { factor = 1.05 check_variable = { KORRegimeStability < 45 } }
 		modifier = { factor = 1.1 check_variable = { KORRegimeStability < 40 } }
 		modifier = { factor = 1.2 check_variable = { KORRegimeStability < 35 } }
 		modifier = { factor = 1.2 check_variable = { KORRegimeStability < 30 } }
@@ -1174,8 +1198,15 @@ country_event = {
 	
 	option = {
 		name = south_korea.41.a
-		ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
-		custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+		if = {
+			limit = { check_variable = { KORRegimeStability > 30 } }
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+		}
+		else = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+		}
 	}
 }
 
@@ -1190,19 +1221,28 @@ country_event = {
 		original_tag = KOR
 		has_country_flag = KOR_vladimir_tikhonov_naturalization
 		NOT = { has_country_flag = kor_end_clock }
+		NOT = { has_country_flag = kor_protests_suppressed }
+		check_variable = { KORRegimeStability = 30 compare = less_than_or_equals }
 	}
 	
 	mean_time_to_happen = {
-		days = 108
-		modifier = { factor = 0 check_variable = { KORRegimeStability > 30 } }
-		modifier = { factor = 2.0 check_variable = { KORRegimeStability < 20 } }
-		modifier = { factor = 2.0 has_country_flag = KOR_NL_coalition }
+		days = 256 #original 108
+		#modifier = { factor = 0 check_variable = { KORRegimeStability = 30 compare = less_than_or_equals } }
+		#modifier = { factor = 2.0 check_variable = { KORRegimeStability < 20 } }
+		modifier = { factor = 1.1 has_country_flag = KOR_NL_coalition }
 	}
 	
 	option = {
 		name = south_korea.42.a
-		ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
-		custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+		if = {
+			limit = { check_variable = { KORRegimeStability > 30 } }
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_5_tt
+		}
+		else = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = -2.5 } }
+			custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
+		}
 	}
 }
 
@@ -2297,6 +2337,27 @@ country_event = {
 	
 	option = {
 		name = south_korea.92.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = COMMUNIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = ANARCHIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = FAR_RIGHT_KOR
+					}
+					has_country_flag = kor_non_democratic
+				}	
+			}
+		}
 		ROOT = { add_to_variable = { var = KORRegimeStability value = 10 } }
 		custom_effect_tooltip = kor_add_regime_stability_10_tt
 		add_political_power = -100
@@ -2305,6 +2366,25 @@ country_event = {
 	
 	option = {
 		name = south_korea.92.b
+		ai_chance = {
+			base = 4
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = DEMOCRATIC_HISTORICAL_KOR
+					}
+					AND = {
+						is_historical_focus_on = yes
+						has_game_rule = {
+							rule = KOR_AI_BEHAVIOR
+							option = DEFAULT
+						}
+					}
+				}	
+			}
+		}
 		add_political_power = -25
 		add_to_variable = { var = KORRegimeStability value = -5 }
 		custom_effect_tooltip = kor_subtract_regime_stability_5_tt
@@ -2326,6 +2406,27 @@ country_event = {
 	
 	option = {
 		name = south_korea.93.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = COMMUNIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = ANARCHIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = FAR_RIGHT_KOR
+					}
+					has_country_flag = kor_non_democratic
+				}	
+			}
+		}
 		ROOT = { add_to_variable = { var = KORRegimeStability value = 10 } }
 		custom_effect_tooltip = kor_add_regime_stability_10_tt
 		add_political_power = -100
@@ -2334,6 +2435,25 @@ country_event = {
 	
 	option = {
 		name = south_korea.93.b
+		ai_chance = {
+			base = 4
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = DEMOCRATIC_HISTORICAL_KOR
+					}
+					AND = {
+						is_historical_focus_on = yes
+						has_game_rule = {
+							rule = KOR_AI_BEHAVIOR
+							option = DEFAULT
+						}
+					}
+				}	
+			}
+		}
 		add_political_power = -25
 		add_to_variable = { var = KORRegimeStability value = -5 }
 		custom_effect_tooltip = kor_subtract_regime_stability_5_tt
@@ -2351,6 +2471,27 @@ country_event = {
 	
 	option = {
 		name = south_korea.94.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = COMMUNIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = ANARCHIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = FAR_RIGHT_KOR
+					}
+					has_country_flag = kor_non_democratic
+				}	
+			}
+		}
 		ROOT = { add_to_variable = { var = KORRegimeStability value = 10 } }
 		custom_effect_tooltip = kor_add_regime_stability_10_tt
 		add_political_power = -100
@@ -2359,6 +2500,25 @@ country_event = {
 	
 	option = {
 		name = south_korea.94.b
+		ai_chance = {
+			base = 4
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = DEMOCRATIC_HISTORICAL_KOR
+					}
+					AND = {
+						is_historical_focus_on = yes
+						has_game_rule = {
+							rule = KOR_AI_BEHAVIOR
+							option = DEFAULT
+						}
+					}
+				}	
+			}
+		}
 		add_political_power = -25
 		add_to_variable = { var = KORRegimeStability value = -5 }
 		custom_effect_tooltip = kor_subtract_regime_stability_5_tt
@@ -2411,6 +2571,27 @@ country_event = {
 	
 	option = {
 		name = south_korea.96.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = COMMUNIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = ANARCHIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = FAR_RIGHT_KOR
+					}
+					has_country_flag = kor_non_democratic
+				}	
+			}
+		}
 		ROOT = { add_to_variable = { var = KORRegimeStability value = 5 } }
 		custom_effect_tooltip = kor_add_regime_stability_5_tt
 		
@@ -2445,6 +2626,25 @@ country_event = {
 	
 	option = {
 		name = south_korea.96.b
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = DEMOCRATIC_HISTORICAL_KOR
+					}
+					AND = {
+						is_historical_focus_on = yes
+						has_game_rule = {
+							rule = KOR_AI_BEHAVIOR
+							option = DEFAULT
+						}
+					}
+				}	
+			}
+		}
 		add_political_power = 20
 	}
 }
@@ -2470,6 +2670,27 @@ country_event = {
 	
 	option = {
 		name = south_korea.97.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = COMMUNIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = ANARCHIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = FAR_RIGHT_KOR
+					}
+					has_country_flag = kor_non_democratic
+				}	
+			}
+		}
 		ROOT = { add_to_variable = { var = KORRegimeStability value = 5 } }
 		custom_effect_tooltip = kor_add_regime_stability_5_tt
 		add_political_power = -100
@@ -2478,6 +2699,25 @@ country_event = {
 	
 	option = {
 		name = south_korea.97.b
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = DEMOCRATIC_HISTORICAL_KOR
+					}
+					AND = {
+						is_historical_focus_on = yes
+						has_game_rule = {
+							rule = KOR_AI_BEHAVIOR
+							option = DEFAULT
+						}
+					}
+				}	
+			}
+		}
 		add_political_power = 20
 	}
 }
@@ -3011,7 +3251,7 @@ country_event = {
 	trigger = {
 		tag = KOR
 		check_variable = { KORRegimeStability = 50 compare = greater_than_or_equals } 
-		check_variable = { KORRegimeStability = 89 compare = less_than_or_equals } 
+		check_variable = { KORRegimeStability = 89.9 compare = less_than_or_equals } 
 		NOT = { has_country_flag = KOR_democracy_doom }
 		date < 2003.6.1
 	}
@@ -3115,7 +3355,7 @@ country_event = {
 	
 	trigger = {
 		tag = KOR
-		check_variable = { KORRegimeStability = 49 compare = greater_than_or_equals } 
+		check_variable = { KORRegimeStability = 49.9 compare = less_than_or_equals } 
 		NOT = { has_country_flag = KOR_democracy_doom }
 		date < 2003.6.1
 	}

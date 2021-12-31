@@ -113,15 +113,15 @@ KOR_kim_dae_jung_gov = {
 					add_to_variable = { var = KORRegimeStability value = 5 }
 					custom_effect_tooltip = kor_add_regime_stability_5_tt
 				}
-				40 = {
+				50 = {
 					add_to_variable = { var = KORRegimeStability value = 2.5 }
 					custom_effect_tooltip = kor_add_regime_stability_2_half_tt
 				}
-				40 = {
+				35 = {
 					add_to_variable = { var = KORRegimeStability value = -2.5 }
 					custom_effect_tooltip = kor_subtract_regime_stability_2_half_tt
 				}
-				10 = {
+				5 = {
 					add_to_variable = { var = KORRegimeStability value = -5 }
 					custom_effect_tooltip = kor_subtract_regime_stability_5_tt
 				}
@@ -148,7 +148,7 @@ KOR_kim_dae_jung_gov = {
 		priority = 10
 		
 		days_remove = 14
-		days_re_enable = 60
+		days_re_enable = 40
 				
 		complete_effect = {
 		}
@@ -159,10 +159,18 @@ KOR_kim_dae_jung_gov = {
 		}
 
 		ai_will_do = {
-			factor = 0.1
+			factor = 1
 			modifier = {
-				factor = 2
+				factor = 100
+				check_variable = { KORRegimeStability < 30 }
+			}
+			modifier = {
+				factor = 25
 				check_variable = { KORRegimeStability < 50 }
+			}
+			modifier = {
+				factor = 0
+				check_variable = { KORRegimeStability > 75 }
 			}
 			modifier = {
 				factor = 0
@@ -179,38 +187,74 @@ KOR_kim_dae_jung_gov = {
 						rule = KOR_AI_BEHAVIOR
 						option = FAR_RIGHT_KOR
 					}
+					has_country_flag = kor_non_democratic
 				}
 			}
 		}
 	}
 	
-	#KOR_national_tour = {
-	#	icon = generic_agreement
-
+	KOR_national_tour = {
+		icon = generic_agreement
 		#allowed = { always = yes }
 		
-	#	available = {
-	#		always = yes
-	#	}
+		available = {
+			always = yes
+		}
 
-	#	visible = {
-	#	}
+		visible = {
+		}
 
-	#	cost = 50
-	#	fire_only_once = yes
-				
-	#	complete_effect = {
-	#	
-	#	}
+		#cost = 15
+		fire_only_once = no
 		
-	#	ai_will_do = {
-	#		factor = 0.1
-	#		modifier = {
-	#			factor = 2
-	#			check_variable = { KORRegimeStability < 50 }
-	#		}
-	#	}
-	#}
+		priority = 10
+		
+		days_remove = 30
+		days_re_enable = 335 #+30, 365
+				
+		modifier = {
+			political_power_factor = -0.4
+		}
+
+		remove_effect = {
+			ROOT = { add_to_variable = { var = KORRegimeStability value = 10 } }
+			custom_effect_tooltip = kor_add_regime_stability_10_tt
+		}
+		
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 100
+				check_variable = { KORRegimeStability < 30 }
+			}
+			modifier = {
+				factor = 25
+				check_variable = { KORRegimeStability < 50 }
+			}
+			modifier = {
+				factor = 0
+				check_variable = { KORRegimeStability > 75 }
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = COMMUNIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = ANARCHIST_KOR
+					}
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = FAR_RIGHT_KOR
+					}
+					has_country_flag = kor_non_democratic
+				}
+			}
+		}
+	}
 	
 	KOR_commitment_to_reform = {
 		icon = generic_agreement
@@ -228,7 +272,7 @@ KOR_kim_dae_jung_gov = {
 		fire_only_once = no
 		
 		days_remove = 30
-		days_re_enable = 30
+		days_re_enable = 21
 				
 		modifier = {
 			political_power_factor = -0.2
@@ -240,10 +284,18 @@ KOR_kim_dae_jung_gov = {
 		}
 
 		ai_will_do = {
-			factor = 0.1
+			factor = 1
 			modifier = {
-				factor = 2
+				factor = 100
+				check_variable = { KORRegimeStability < 30 }
+			}
+			modifier = {
+				factor = 25
 				check_variable = { KORRegimeStability < 50 }
+			}
+			modifier = {
+				factor = 0
+				check_variable = { KORRegimeStability > 75 }
 			}
 			modifier = {
 				factor = 0
@@ -260,6 +312,7 @@ KOR_kim_dae_jung_gov = {
 						rule = KOR_AI_BEHAVIOR
 						option = FAR_RIGHT_KOR
 					}
+					has_country_flag = kor_non_democratic
 				}
 			}
 		}
@@ -1210,7 +1263,7 @@ KOR_our_madagascar = {
 		fire_only_once = no
 		days_remove = 40
 				
-		complete_effect = {
+		remove_effect = {
 			if = {
 				limit = { 
 					NOT = { MAD = { has_idea = kor_exploitation_of_madagascar_1 } }
@@ -1330,13 +1383,13 @@ kor_roj_roll = {
 		}
 
 		complete_effect = {
-			KOR_postnationalist_to_gain_strength = yes
-		}
-
-		remove_effect = {
 			hidden_effect = {
 				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 60 }
 			}
+		}
+
+		remove_effect = {
+			KOR_postnationalist_to_gain_strength = yes
 		}
 	}
 
@@ -1367,14 +1420,14 @@ kor_roj_roll = {
 		}
 
 		complete_effect = {
-			KOR_fundamentalism_to_gain_strength = yes
-		}
-
-		remove_effect = {
 			hidden_effect = {
 				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 60 }
 			}
+		}
+
+		remove_effect = {
 		
+			KOR_fundamentalism_to_gain_strength = yes
 		}
 	}
 
@@ -1404,14 +1457,14 @@ kor_roj_roll = {
 		}
 
 		complete_effect = {
-			KOR_postnationalist_to_gain_strength = yes
-			add_ideas = kor_same_sex_marriage
-		}
-
-		remove_effect = {
 			hidden_effect = {
 				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 60 }
 			}
+		}
+
+		remove_effect = {
+			KOR_postnationalist_to_gain_strength = yes
+			add_ideas = kor_same_sex_marriage
 		
 		}
 	}
@@ -1442,14 +1495,14 @@ kor_roj_roll = {
 		}
 
 		complete_effect = {
-			KOR_fundamentalism_to_gain_strength = yes
-			add_offsite_building = { type = industrial_complex level = 2 }
-		}
-
-		remove_effect = {
 			hidden_effect = {
 				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 60 }
 			}
+		}
+
+		remove_effect = {
+			KOR_fundamentalism_to_gain_strength = yes
+			add_offsite_building = { type = industrial_complex level = 2 }
 		
 		}
 	}
@@ -1482,14 +1535,14 @@ kor_roj_roll = {
 		}
 
 		complete_effect = {
-			KOR_postnationalist_to_gain_strength = yes
-			JAP = { country_event = { id = south_korea.107 } }
-		}
-
-		remove_effect = {
 			hidden_effect = {
 				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 35 }
 			}
+		}
+
+		remove_effect = {
+			KOR_postnationalist_to_gain_strength = yes
+			JAP = { country_event = { id = south_korea.107 } }
 		
 		}
 	}
@@ -1520,14 +1573,14 @@ kor_roj_roll = {
 		}
 
 		complete_effect = {
-			KOR_fundamentalism_to_gain_strength = yes
-			army_experience = 50
-		}
-
-		remove_effect = {
 			hidden_effect = {
 				set_country_flag = { flag = kor_kor_roj_roll_flag value = 1 days = 35 }
 			}
+		}
+
+		remove_effect = {
+			KOR_fundamentalism_to_gain_strength = yes
+			army_experience = 50
 		
 		}
 	}

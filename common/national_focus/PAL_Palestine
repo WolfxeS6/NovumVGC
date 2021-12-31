@@ -1,0 +1,1184 @@
+focus_tree = {
+	id = Palestine
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = PAL
+		}
+	}
+	#Focus for Seek Help
+	focus = {
+		id = PAL_seekhelp
+		icon = GFX_seekhelp
+		x = 22
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_restorealasifah }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Seek Arab Help
+	focus = {
+		id = PAL_seekarabhelp
+		icon = GFX_seekarabhelp
+		x = 20
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_seekhelp }
+		mutually_exclusive = { focus = PAL_seekwesternhelp }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for The Third Intifada
+	focus = {
+		id = PAL_thethirdintifada
+		icon = GFX_thethirdintifada
+		x = 9
+		y = 8
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_rallythemuslimcountries }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			declare_war_on= { 
+target = ISR 
+type = annex_everything 
+}
+		}
+	}
+
+	#Focus for Rally The Muslim Countries
+	focus = {
+		id = PAL_rallythemuslimcountries
+		icon = GFX_rallythemuslimcountries
+		x = 9
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = PAL_iraniandrones 
+			focus = PAL_hamasrocketssite 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		bypass = {
+			is_in_faction=yes
+		}
+		available = {
+			is_in_faction=no
+has_government=islamist
+		}
+		completion_reward = {
+			create_faction="Muslim League"
+every_other_country = {
+    if = {
+        limit = {
+            has_government=islamist
+            is_in_faction=no
+        }
+        country_event = theriseofthecrescent.20
+    }
+}
+		}
+	}
+
+	#Focus for Restore Al-'Asifah
+	focus = {
+		id = PAL_restorealasifah
+		icon = GFX_restorealasifah
+		x = 22
+		y = 3
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_continuewithresistance }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			country_event= {
+days = 0
+id =  theriseofthecrescent.25
+}
+		}
+	}
+
+	#Focus for Restore Our Land
+	focus = {
+		id = PAL_restoreourland
+		icon = GFX_restoreourland
+		x = 27
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = PAL_arabkingdomsalliance
+			focus = PAL_joinpeninsulashield
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+			num_divisions> 20
+		}
+		completion_reward = {
+			declare_war_on= { 
+target = ISR 
+type = annex_everything 
+}
+		}
+	}
+
+	#Focus for Join Peninsula Shield
+	focus = {
+		id = PAL_joinpeninsulashield
+		icon = GFX_joinpeninsulashield
+		x = 28
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_askforroyalhelp }
+		mutually_exclusive = { focus = PAL_arabkingdomsalliance }
+		ai_will_do = {
+			factor = 1
+		}
+		bypass = {
+			is_in_faction=yes
+		}
+		available = {
+			is_in_faction=no
+SAU={is_faction_leader=yes}
+		}
+		completion_reward = {
+			SAU={add_to_faction=PAL}
+		}
+	}
+
+	#Focus for Ask For Royal Help
+	focus = {
+		id = PAL_askforroyalhelp
+		icon = GFX_askforroyalhelp
+		x = 27
+		y = 3
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_ourownroyaldynasty }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Our Own Royal Dynasty
+	focus = {
+		id = PAL_ourownroyaldynasty
+		icon = GFX_ourownroyaldynasty
+		x = 27
+		y = 2
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_returntoourroyalroots }
+		mutually_exclusive = { focus = PAL_unionwithjordan }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			set_politics = {
+				ruling_party = monarchist
+				elections_allowed = no
+			}
+add_popularity = {
+					ideology = monarchist
+					popularity = 1
+
+				}
+		}
+	}
+
+	#Focus for Embassy to Islamist Countries
+	focus = {
+		id = PAL_embassytoislamistcountries
+		icon = GFX_embassytoislamistcountries
+		x = 9
+		y = 3
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_hamastakesover }
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+			has_government=islamist
+		}
+		completion_reward = {
+			add_opinion_modifier= { 
+target = SUD 
+modifier =  supports_us 
+}
+SUD = {add_opinion_modifier= { 
+target =PAL
+modifier =  supports_us 
+}
+}
+add_opinion_modifier= { 
+target = PAK 
+modifier =  supports_us 
+}
+PAK = {add_opinion_modifier= { 
+target = PAL
+modifier =  supports_us 
+}
+}
+add_opinion_modifier= { 
+target = PER
+modifier =  supports_us 
+}
+PER= {add_opinion_modifier= { 
+target = PAL
+modifier =  supports_us 
+}
+}
+		}
+	}
+
+	#Focus for Join China
+	focus = {
+		id = PAL_joinchina
+		icon = GFX_joinchina
+		x = 17
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_embassytocommunistcountries }
+		mutually_exclusive = { focus = PAL_thecommunistarableague}
+		ai_will_do = {
+			factor = 1
+		}
+		bypass = {
+			is_in_faction=yes
+		}
+		available = {
+			PRC={is_faction_leader=yes}
+is_in_faction=no
+		}
+		completion_reward = {
+			PRC={add_to_faction=PAL}
+		}
+	}
+
+	#Focus for The Palestinian-Israeli Conflict
+	focus = {
+		id = PAL_thepalestinianisraeliconflict
+		icon = GFX_thepalestinianisraeliconflict
+		x = 20
+		y = 0
+		cost = 10
+		available_if_capitulated = yes
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_political_power= 100
+		}
+	}
+
+	#Focus for Hamas Is The Answer
+	focus = {
+		id = PAL_hamasistheanswer
+		icon = GFX_hamasistheanswer
+		x = 9
+		y = 1
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_thepalestinianisraeliconflict }
+		mutually_exclusive = { 
+			focus = PAL_communismisthesolution 
+		}
+		mutually_exclusive = { 
+			focus = PAL_continuewithfatah 
+		}
+		mutually_exclusive = { 
+			focus = PAL_returntoourroyalroots 
+		}
+		mutually_exclusive = { 
+			focus = PAL_arabnationalism 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_popularity = {
+					ideology = islamist
+					popularity = 0.05
+				}
+
+			add_ideas = idea_focus_generic_path_of_allah
+		}
+	}
+
+	#Focus for Communism Is The Solution
+	focus = {
+		id = PAL_communismisthesolution
+		icon = GFX_communismisthesolution
+		x = 15
+		y = 1
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_thepalestinianisraeliconflict }
+		mutually_exclusive = { 
+			focus = PAL_hamasistheanswer 
+		}
+		mutually_exclusive = { 
+			focus = PAL_continuewithfatah 
+		}
+		mutually_exclusive = { 
+			focus = PAL_returntoourroyalroots 
+		}
+		mutually_exclusive = { 
+			focus = PAL_arabnationalism 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_popularity = {
+					ideology = communist 
+					popularity = 0.05
+
+				}
+add_ideas = idea_focus_generic_marxist_doctrine
+		}
+	}
+
+	#Focus for Continue With Fatah
+	focus = {
+		id = PAL_continuewithfatah
+		icon = GFX_continuewithfatah
+		x = 20
+		y = 1
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_thepalestinianisraeliconflict }
+		mutually_exclusive = { 
+			focus = PAL_hamasistheanswer 
+		}
+		mutually_exclusive = { 
+			focus = PAL_communismisthesolution 
+		}
+		mutually_exclusive = { 
+			focus = PAL_returntoourroyalroots 
+		}
+		mutually_exclusive = { 
+			focus = PAL_arabnationalism 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for The Revolution reaches Palestine !
+	focus = {
+		id = PAL_therevolutionreachespalestine
+		icon = GFX_therevolutionreachespalestine
+		x = 15
+		y = 2
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_communismisthesolution }
+		ai_will_do = {
+			factor = 1
+		}
+		bypass = {
+			has_government=communist
+		}
+		completion_reward = {
+			set_politics = {
+				ruling_party = communist
+				elections_allowed = no
+			}
+add_popularity = {
+					ideology = communist 
+					popularity = 1
+
+				}
+		}
+	}
+
+	#Focus for Hamas Takes Over
+	focus = {
+		id = PAL_hamastakesover
+		icon = GFX_hamastakesover
+		x = 9
+		y = 2
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_hamasistheanswer }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			set_politics = {
+				ruling_party = islamist
+				elections_allowed = no
+			}
+load_oob=Hamas
+		}
+	}
+
+	#Focus for Continue Peace Talks
+	focus = {
+		id = PAL_continuepeacetalks
+		icon = GFX_continuepeacetalks
+		x = 18
+		y = 2
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_continuewithfatah }
+		mutually_exclusive = { focus = PAL_continuewithresistance }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			ISR={country_event={days=0 id=theriseofthecrescent.4}}
+		}
+	}
+
+	#Focus for Continue With Resistance
+	focus = {
+		id = PAL_continuewithresistance
+		icon = GFX_continuewithresistance
+		x = 22
+		y = 2
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_continuewithfatah }
+		mutually_exclusive = { focus = PAL_continuepeacetalks }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Embassy To Communist Countries
+	focus = {
+		id = PAL_embassytocommunistcountries
+		icon = GFX_embassytocommunistcountries
+		x = 15
+		y = 3
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_therevolutionreachespalestine }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_opinion_modifier= { 
+target = PRC 
+modifier =  supports_us 
+}
+PRC = {add_opinion_modifier= { 
+target =PAL
+modifier =  supports_us 
+}
+}
+add_opinion_modifier= { 
+target = PRK 
+modifier =  supports_us 
+}
+PRK = {add_opinion_modifier= { 
+target = PAL
+modifier =  supports_us 
+}
+}
+add_opinion_modifier= { 
+target = CUB
+modifier =  supports_us 
+}
+CUB = {add_opinion_modifier= { 
+target = PAL
+modifier =  supports_us 
+}
+}
+		}
+	}
+
+	#Focus for The Communist Arab league
+	focus = {
+		id = PAL_thecommunistarableague
+		icon = GFX_thecommunistarableague
+		x = 13
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_embassytocommunistcountries }
+		mutually_exclusive = { focus = PAL_joinchina }
+		ai_will_do = {
+			factor = 1
+		}
+		bypass = {
+			is_in_faction=yes
+		}
+		available = {
+			is_in_faction=no
+has_government=communist
+		}
+		completion_reward = {
+			create_faction="Communist Arab League"
+every_other_country = {
+    if = {
+        limit = {
+            has_government=communist
+            has_idea=arab_league_member
+            is_in_faction=no
+        }
+        country_event = theriseofthecrescent.7
+    }
+}
+		}
+	}
+
+	#Focus for Hamas Rockets site
+	focus = {
+		id = PAL_hamasrocketssite
+		icon = GFX_hamasrocketssite
+		x = 10
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_hamasrocketsresarech }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			811={add_building_construction= { 
+type = rocket_site
+province = 4088
+level = 2 
+instant_build = yes }}
+		}
+	}
+
+	#Focus for Hamas Rockets Resarech
+	focus = {
+		id = PAL_hamasrocketsresarech
+		icon = GFX_hamasrocketsresarech
+		x = 10
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_seeksaudiarabiashelp }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_tech_bonus = { bonus = 1 uses = 3 category = rocketry}
+		}
+	}
+
+	#Focus for Communist Aids
+	focus = {
+		id = PAL_communistaids
+		icon = GFX_communistaids
+		x = 15
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = PAL_thecommunistarableague 
+			focus = PAL_joinchina 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+		type = infantry_fighting_vehicle_1 
+		amount = 5000
+		producer = PRC
+	}
+
+
+add_equipment_to_stockpile = {
+		type = armored_personnel_carrier_1 
+		amount = 1000
+		producer = PRC
+	}
+
+add_equipment_to_stockpile = {
+		type = infantry_equipment_1
+		amount = 1000
+		producer = PRC
+	}
+add_equipment_to_stockpile = {
+		type = modern_tank_equipment_1 
+		amount = 500
+		producer = PRC
+	}
+add_equipment_to_stockpile = {
+		type = artillery_equipment_1
+		amount = 500
+		producer = PRC
+	}
+add_equipment_to_stockpile = {
+		type = sp_artillery_equipment_1
+		amount = 500
+		producer = PRC
+	}
+add_equipment_to_stockpile = {
+		type = anti_air_equipment_1
+		amount = 500
+		producer = PRC
+	}
+		}
+	}
+
+	#Focus for Seek Western Help
+	focus = {
+		id = PAL_seekwesternhelp
+		icon = GFX_seekwesternhelp
+		x = 24
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_seekhelp }
+		mutually_exclusive = { focus = PAL_seekarabhelp }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Reclaim Palestine
+	focus = {
+		id = PAL_reclaimpalestine
+		icon = GFX_reclaimpalestine
+		x = 22
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_gatherallies }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			declare_war_on= { 
+target = ISR 
+type = annex_everything 
+}
+		}
+	}
+
+	#Focus for Return To Our Royal Roots
+	focus = {
+		id = PAL_returntoourroyalroots
+		icon = GFX_returntoourroyalroots
+		x = 29
+		y = 1
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_thepalestinianisraeliconflict }
+		mutually_exclusive = { 
+			focus = PAL_continuewithfatah 
+		}
+		mutually_exclusive = { 
+			focus = PAL_communismisthesolution 
+		}
+		mutually_exclusive = { 
+			focus = PAL_hamasistheanswer 
+		}
+		mutually_exclusive = { 
+			focus = PAL_arabnationalism 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_opinion_modifier= { 
+target = JOR 
+modifier =  supports_us
+}
+add_popularity = {
+				ideology = monarchist
+				popularity = 0.05
+			}
+		}
+	}
+
+	#Focus for Union With Jordan
+	focus = {
+		id = PAL_unionwithjordan
+		icon = GFX_unionwithjordan
+		x = 31
+		y = 2
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_returntoourroyalroots }
+		mutually_exclusive = { focus = PAL_ourownroyaldynasty }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			JOR = { change_tag_from = PAL }
+JOR={annex_country = { target = PAL transfer_troops = yes } }
+		}
+	}
+
+	#Focus for Arab Kingdoms Alliance
+	focus = {
+		id = PAL_arabkingdomsalliance
+		icon = GFX_arabkingdomsalliance
+		x = 26
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_ask_forroyalhelp }
+		mutually_exclusive = { focus = PAL_joinpeninsulashield }
+		bypass = {
+			is_in_faction=yes
+		}
+		available = {
+			is_in_faction=no
+		}
+		completion_reward = {
+			create_faction="Arab Kingdoms Pact"
+every_other_country = {
+    if = {
+        limit = {
+            has_idea=arab_league_member
+            has_government=monarchist
+           is_in_faction=no
+        }
+        country_event = theriseofthecrescent.15
+    }
+}
+		}
+	}
+
+	#Focus for Take Back Our Lands
+	focus = {
+		id = PAL_takebackourlands
+		icon = GFX_takebackourlands
+		x = 15
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_communistaids }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			declare_war_on= { 
+target = ISR 
+type = annex_everything 
+}
+		}
+	}
+
+	#Focus for Gather Allies
+	focus = {
+		id = PAL_gatherallies
+		icon = GFX_gatherallies
+		x = 22
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = PAL_seekarabhelp 
+			focus = PAL_seekwesternhelp 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Recall The PLA From Syria
+	focus = {
+		id = PAL_recalltheplafromsyria
+		icon = GFX_recalltheplafromsyria
+		x = 34
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_embassytonationalarabcountries }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_manpower= 12000
+		}
+	}
+
+	#Focus for Weapon Shipments From Iraq
+	focus = {
+		id = PAL_weaponshipmentsfromiraq
+		icon = GFX_weaponshipmentsfromiraq
+		x = 36
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_embassytonationalarabcountries }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+type = infantry_fighting_vehicle_1 
+amount = 5000
+producer = SOV
+}
+
+add_equipment_to_stockpile = {
+type = armored_personnel_carrier_1 
+amount = 1000
+producer = SOV
+}
+
+add_equipment_to_stockpile = {
+type = infantry_equipment_1
+amount = 1000
+producer = SOV
+}
+
+add_equipment_to_stockpile = {
+type = modern_tank_equipment_1 
+amount = 500
+producer = SOV
+}
+add_equipment_to_stockpile = {
+type = artillery_equipment_1
+amount = 500
+producer = SOV
+	}
+		}
+	}
+
+	#Focus for The PLA Returns To Palestine
+	focus = {
+		id = PAL_theplareturnstopalestine
+		icon = GFX_theplareturnstopalestine
+		x = 34
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { 
+			focus = PAL_weaponshipmentsfromiraq 
+		}
+		prerequisite = { 
+			focus = PAL_recalltheplafromsyria 
+		}
+		prerequisite = { 
+			focus = PAL_traintroopsinegypt 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			country_event= {
+days = 0
+id =  theriseofthecrescent.26
+}
+		}
+	}
+
+	#Focus for National Arab League
+	focus = {
+		id = PAL_nationalarableague
+		icon = GFX_nationalarableague
+		x = 34
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_theplareturnstopalestine }
+		ai_will_do = {
+			factor = 1
+		}
+		bypass = {
+			is_in_faction=yes
+		}
+		available = {
+			is_in_faction=no
+		}
+		completion_reward = {
+			create_faction="National Arab League"
+every_other_country = {
+    if = {
+        limit = {
+            has_government=nationalist
+            has_idea=arab_league_member
+            is_in_faction=no
+        }
+        country_event = theriseofthecrescent.23
+    }
+}
+		}
+	}
+
+	#Focus for Train Troops in Egypt
+	focus = {
+		id = PAL_traintroopsinegypt
+		icon = GFX_traintroopsinegypt
+		x = 32
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_embassytonationalarabcountries }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			army_experience= 10
+		}
+	}
+
+	#Focus for Nationalist Palestine
+	focus = {
+		id = PAL_nationalistpalestine
+		icon = GFX_nationalistpalestine
+		x = 34
+		y = 2
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_arabnationalism }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			set_politics = {
+				ruling_party = nationalist
+				elections_allowed = no
+			}
+add_popularity = {
+					ideology = nationalist
+					popularity = 1
+
+				}
+		}
+	}
+
+	#Focus for Seek Iran's Help
+	focus = {
+		id = PAL_seekiranshelp
+		icon = GFX_seekiranshelp
+		x = 8
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_embassytoislamistcountries }
+		mutually_exclusive = { focus = PAL_seeksaudiarabiashelp }
+		ai_will_do = {
+			factor = 1
+		}
+		available = {
+			has_government=islamist
+		}
+		completion_reward = {
+			add_opinion_modifier= { 
+target = PER
+modifier =  supports_us 
+}
+PER= {add_opinion_modifier= { 
+target =PAL
+modifier =  supports_us 
+}
+}
+		}
+	}
+
+	#Focus for Iranian Rockets
+	focus = {
+		id = PAL_iranianrockets
+		icon = GFX_iranianrockets
+		x = 8
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_seekiranshelp }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+type = guided_missile_equipment_1
+amount = 5000
+producer = PER
+}
+		}
+	}
+
+	#Focus for Arab Nationalism
+	focus = {
+		id = PAL_arabnationalism
+		icon = GFX_arabnationalism
+		x = 34
+		y = 1
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_thepalestinianisraeliconflict }
+		mutually_exclusive = { 
+			focus = PAL_communismisthesolution 
+		}
+		mutually_exclusive = { 
+			focus = PAL_continuewithfatah 
+		}
+		mutually_exclusive = { 
+			focus = PAL_hamasistheanswer 
+		}
+		mutually_exclusive = { 
+			focus = PAL_returntoourroyalroots 
+		}
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_popularity = {
+					ideology = nationalist
+					popularity = 0.05
+
+				}
+		}
+	}
+
+	#Focus for Seek Saudi Arabia's Help
+	focus = {
+		id = PAL_seeksaudiarabiashelp
+		icon = GFX_seeksaudiarabiashelp
+		x = 10
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_embassytoislamistcountries }
+		mutually_exclusive = { focus = PAL_seekiranshelp }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			add_opinion_modifier= { 
+target = SAU
+modifier =  supports_us 
+}
+SAU = {add_opinion_modifier= { 
+target =PAL
+modifier =  supports_us 
+}
+}
+		}
+	}
+
+	#Focus for Iranian Drones
+	focus = {
+		id = PAL_iraniandrones
+		icon = GFX_iraniandrones
+		x = 8
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_iranianrockets }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Embassy To National Arab Countries
+	focus = {
+		id = PAL_embassytonationalarabcountries
+		icon = GFX_embassytonationalarabcountries
+		x = 34
+		y = 3
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_nationalistpalestine }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for the Fifth Arab Israeli War
+	focus = {
+		id = PAL_thefiftharabisraeliwar
+		icon = GFX_thefiftharabisraeliwar
+		x = 34
+		y = 7
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_nationalarableague }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			declare_war_on= { 
+target = ISR 
+type = annex_everything 
+}
+		}
+	}
+
+	#Focus for The Army Issue
+	focus = {
+		id = PAL_the_army_issue
+		icon = GFX_goal_unknown
+		x = 19
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_the_capital_issue }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			ISR={country_event={days=0 id=theriseofthecrescent.6}}
+		}
+	}
+
+	#Focus for The Capital Issue
+	focus = {
+		id = PAL_the_capital_issue
+		icon = GFX_goal_unknown
+		x = 19
+		y = 3
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_continue_peace_talks }
+		ai_will_do = {
+			factor = 1
+		}
+		completion_reward = {
+			ISR={country_event={days=0 id=theriseofthecrescent.5}}
+		}
+	}
+
+	#Focus for The Border Issue
+	focus = {
+		id = PAL_the_border_issue
+		icon = GFX_goal_unknown
+		x = 19
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_the_army_issue }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	#Focus for Peace Talks Concluded
+	focus = {
+		id = PAL_peace_talks_concluded
+		icon = GFX_goal_unknown
+		x = 19
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = PAL_the_border_issue }
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+#End of focuses 
+ }

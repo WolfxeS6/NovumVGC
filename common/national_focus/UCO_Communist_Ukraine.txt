@@ -1,0 +1,198 @@
+focus_tree = {
+	id = UCO_focus
+
+    country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = UCO
+		}
+	}
+	
+	default = no
+
+    continuous_focus_position = { x = 60 y = 19000 }
+
+    focus = {
+		id = UCO_create_SNK
+		icon = GFX_focus_research
+		x = 5
+		y = 1
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            custom_effect_tooltip = UCO_revmob_TT
+			load_oob = "UCO_red_guard"
+            country_event = {
+            id = UCO_event_cw_started
+            }
+            news_event = {
+            id = UCO_ukr_cw_started
+            }
+            add_to_variable = {
+				uco_state_pp_factor = 0.2
+			}
+            add_to_variable = {
+				uco_state_war_support = 0.2
+			}
+		}
+	}
+
+    focus = {
+		id = UCO_organize_power
+		icon = GFX_focus_research
+		x = 7
+		y = 5
+		cost = 1
+        prerequisite = { focus = UCO_black_guard }
+		ai_will_do = {
+			factor = 5
+		}
+		
+		completion_reward = {
+			add_to_variable = {
+				uco_state_pp_factor = 0.2
+			}
+            add_to_variable = {
+				uco_state_war_support = 0.2
+			}
+        }
+	}
+
+    focus = {
+		id = UCO_black_guard
+		icon = GFX_focus_research
+		x = 5
+		y = 3
+		cost = 1
+        prerequisite = { focus = UCO_create_SNK }
+		ai_will_do = {
+			factor = 5
+		}
+		
+		completion_reward = {
+			custom_effect_tooltip = UCO_black_mob_TT
+			load_oob = "UCO_black_guard"
+        }
+	}
+
+     focus = {
+		id = UCO_barricades
+		icon = GFX_focus_research
+		x = 3
+		y = 5
+		cost = 1
+        prerequisite = { focus = UCO_black_guard }
+		ai_will_do = {
+			factor = 5
+		}
+		
+		completion_reward = {
+			332 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 4
+						province = 332###
+						instant_build = yes
+					}
+				}
+				#add_building_construction = {
+				#	type = bunker
+				#	level = 4
+				#	province = ###
+				#	instant_build = yes
+				#}
+			}
+        }
+	}
+
+    focus = {
+		id = UCO_communal_workshops
+		icon = GFX_focus_research
+		x = 5
+		y = 5
+		cost = 1
+        prerequisite = { focus = UCO_black_guard }
+		ai_will_do = {
+			factor = 5
+		}
+		
+		completion_reward = {
+			if = {
+				limit = {
+					195 = { owner = { tag = SOV } }
+				}
+				195 = {
+					if = {
+						limit = {
+							free_building_slots = {
+								building = industrial_complex
+								size > 1
+								include_locked = yes
+							}
+						}
+						add_extra_state_shared_building_slots = 10
+						add_building_construction = {
+							type = industrial_complex
+							level = 4
+							instant_build = yes
+						}
+					}
+				}
+			}
+	}
+}
+
+focus = {
+		id = UCO_communists_forward
+		icon = GFX_focus_research
+		x = 5
+		y = 7
+		cost = 1
+		prerequisite = { focus = UCO_barricades}
+		prerequisite = { focus = UCO_communal_workshops }
+		prerequisite = { focus = UCO_organize_power }
+		ai_will_do = {
+			factor = 5
+		}
+		
+		completion_reward = {
+            custom_effect_tooltip = UCO_reserves_TT
+			load_oob = "UCO_reserves"
+add_timed_idea = {
+				idea = UCO_forward
+				days = 50
+			}
+        }
+	}     
+
+    focus = {
+		id = UCO_soviet_ukraine
+		icon = GFX_focus_research
+		x = 5
+		y = 9
+		cost = 1
+		prerequisite = { focus = UCO_communists_forward }
+		ai_will_do = {
+			factor = 5
+		}
+		
+		completion_reward = {
+        add_state_core = 111
+        RCO = {
+            puppet = UCO
+        }
+        }
+	}     
+
+
+
+}

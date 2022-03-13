@@ -6,15 +6,35 @@ KOR_parliament_factions = {
 
 	#picture = GFX_decision_cat_picture_faction_management_bulgaria#
 
-	#scripted_gui = kor_parliament_factions_decision_ui#
+	scripted_gui = kor_parliament_factions_decision_ui
 
 	visible = {
 		NOT = { has_country_flag = KOR_factions_locked_flag }
 	}
 
 	allowed = {
-		#original_tag = KOR
-		always = no
+		original_tag = KOR
+		#always = no
+	}
+	
+	visible_when_empty = yes
+}
+
+KOR_parliament_legislation = {
+	priority = 75
+
+	icon = power_struggle#
+
+	#picture = GFX_decision_cat_picture_faction_management_bulgaria#
+
+	scripted_gui = KOR_parliament_legislation_decision_ui
+
+	visible = {
+		NOT = { check_variable = { KOR_parliament_legislation_var = 0 } }
+	}
+
+	allowed = {
+		original_tag = KOR
 	}
 	
 	visible_when_empty = yes
@@ -154,5 +174,60 @@ kor_ayaneru_rule = {
 	}
 	
 	priority = 75
+	
+}
+
+KOR_japan_korea_undersea_tunnel_plan = {
+	picture = GFX_decision_cat_picture_tunnel
+
+	icon = power_struggle#
+
+	visible = {
+		NOT = { has_global_flag = build_japan_korea_undersea_tunnel }
+		NOT = { has_global_flag = end_japan_korea_undersea_tunnel }
+		OR = {
+			owns_state = 870 #South Gyeongsang
+			owns_state = 528 #Kyushu
+		}
+	}
+
+	allowed = {
+	
+	}
+}
+
+KOR_japan_korea_undersea_tunnel_build = {
+	priority = 33
+
+	icon = power_struggle#
+
+	#picture = GFX_decision_cat_picture_faction_management_bulgaria#
+
+	scripted_gui = KOR_nikkan_tonneru_ui
+
+	visible = {
+		has_global_flag = build_japan_korea_undersea_tunnel
+		NOT = { has_global_flag = end_japan_korea_undersea_tunnel }
+	}
+
+	allowed = {
+	
+	}
+	
+	visible_when_empty = yes
+}
+
+KOR_general_strike = {
+	icon = power_struggle
+	priority = 999
+
+	visible = {
+		has_idea = KOR_non_trade_union
+		has_war = yes
+	}
+
+	allowed = {
+	
+	}
 	
 }

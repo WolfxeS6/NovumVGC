@@ -1,6 +1,8 @@
 ﻿add_namespace = south_korea
 add_namespace = rok_news
 add_namespace = korea_election
+add_namespace = korea_parliamentary
+add_namespace = korea_parliamentary_system
 add_namespace = korean_war
 add_namespace = kor_jpn_culture_war
 
@@ -348,6 +350,232 @@ news_event = {
 		}
 	}
 }
+
+#Construction starts of the Japan-Korea Undersea Tunnel
+news_event = {
+	id = rok_news.14
+	title = rok_news.14.t
+	desc = rok_news.14.desc
+	picture = GFX_news_event_korea_japan_undersea_tunnel
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.14.a
+	}
+}
+
+#Opening of the Japan-Korea Undersea Tunnel
+news_event = {
+	id = rok_news.15
+	title = rok_news.15.t
+	desc = rok_news.15.desc
+	picture = GFX_news_event_korea_japan_undersea_tunnel_2
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.15.a
+	}
+}
+
+#Reunification of the Korean Peninsula
+news_event = {
+	id = rok_news.17
+	title = rok_news.17.t
+	
+	desc = {
+		text = rok_news.17.desc_a #Capitalism Win
+		trigger = {
+			KOR = { 
+				AND = {
+					NOT = { has_government = social_democrat }
+					NOT = { has_government = democratic_socialist }
+				}
+			}
+		}
+	}
+	
+	desc = {
+		text = rok_news.17.desc_b #Socialism Win
+		trigger = {
+			KOR = { 
+				OR = {
+					has_government = social_democrat
+					has_government = democratic_socialist
+				}
+			}
+		}
+	}
+	
+	picture = GFX_news_event_korea_manse
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.17.a
+		trigger = {
+			original_tag = KOR
+		}
+	}
+	
+	option = {
+		name = rok_news.17.b
+		trigger = {
+			NOT = { original_tag = KOR }
+		}
+	}
+}
+
+#Communization of the Korean Peninsula
+news_event = {
+	id = rok_news.18
+	title = rok_news.18.t
+	desc = rok_news.18.desc
+	picture = GFX_news_event_korea_march
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.18.a
+		trigger = {
+			original_tag = KOR
+		}
+	}
+	
+	option = {
+		name = rok_news.18.b
+		trigger = {
+			NOT = { original_tag = KOR }
+		}
+	}
+}
+
+#Anarchists Win on the Korean Peninsula
+news_event = {
+	id = rok_news.19
+	title = rok_news.19.t
+	desc = rok_news.19.desc
+	picture = GFX_news_event_seoul_night
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.19.a
+		trigger = {
+			original_tag = KOR
+		}
+	}
+	
+	option = {
+		name = rok_news.19.b
+		trigger = {
+			NOT = { original_tag = KOR }
+		}
+	}
+}
+
+#Japan-led Unification of the Korean Peninsula
+news_event = {
+	id = rok_news.20
+	title = rok_news.20.t
+	desc = rok_news.20.desc
+	picture = GFX_news_event_korea_manse_2
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.20.a
+		trigger = {
+			original_tag = KOR
+		}
+	}
+	
+	option = {
+		name = rok_news.20.b
+		trigger = {
+			NOT = { original_tag = KOR }
+		}
+	}
+}
+
+#2nd Korean War
+news_event = {
+	id = rok_news.21
+	title = rok_news.21.t
+	
+	desc = {
+		text = rok_news.21.desc_a
+		trigger = {
+			KOR = { has_offensive_war_with = PRK }
+		}
+	}
+	
+	desc = {
+		text = rok_news.21.desc_b
+		trigger = {
+			PRK = { has_offensive_war_with = KOR }
+		}
+	}
+	
+	picture = GFX_news_event_dprk_march
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.21.a
+		trigger = {
+			OR = {
+			original_tag = KOR
+			original_tag = PRK
+			}
+		}
+	}
+	
+	option = {
+		name = rok_news.21.b
+		trigger = {
+			NOT = { original_tag = KOR }
+			NOT = { original_tag = PRK }
+		}
+	}
+}
+
+#Reunification of the Korean Peninsula
+news_event = {
+	id = rok_news.17
+	title = rok_news.17.t
+	desc = rok_news.17.desc
+	picture = GFX_news_event_madagascar_revolution
+
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = rok_news.17.a
+		trigger = {
+			original_tag = KOR
+		}
+	}
+	
+	option = {
+		name = rok_news.17.b
+		trigger = {
+			NOT = { original_tag = KOR }
+		}
+	}
+}
+
+
+
+
 
 #################
 #
@@ -718,6 +946,12 @@ country_event = {
 
 	mean_time_to_happen = { 
 		days = 1 
+	}
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = { flag = kor_parliamentary_election_flag value = 1 days = 1460 } #4 Years
+		}
 	}
 	
 	picture = GFX_report_event_KOR_2000_general_election
@@ -3208,6 +3442,475 @@ country_event = {
 	}
 }
 
+#Change of Political Parties
+#country_event = {
+#	id = south_korea.115
+#	title = south_korea.115.t
+#	desc = south_korea.115.desc
+#	picture = GFX_report_event_kor_roh_moo_hyun_2
+
+#	fire_only_once = yes
+#	
+#	mean_time_to_happen = {
+#		days = 32
+#	}
+
+#	trigger = {
+#		original_tag = KOR
+#		date > 2003.4.1
+#		date < 2004.4.1
+#		has_country_flag = kor_roh_moo_hyun_gov
+#	}
+	
+#	option = {
+#		name = south_korea.115.a
+#			set_party_name = { 
+#				ideology = conservative
+#				long_name = KOR_conservative_uri_party_long 
+#				name = KOR_conservative_uri_party
+#			}
+#			set_party_name = { 
+#				ideology = social_liberal
+#				long_name = KOR_social_liberal_uri_party_long 
+#				name = KOR_social_liberal_uri_party
+#			}
+#			set_party_name = { 
+#				ideology = democratic_socialist
+#				long_name = KOR_democratic_socialist_uri_party_long 
+#				name = KOR_democratic_socialist_uri_party
+#			}
+#	}
+#}
+
+#Growth of Lee Myung-bak
+country_event = {
+	id = south_korea.116
+	title = south_korea.116.t
+	desc = south_korea.116.desc
+	picture = GFX_report_event_KOR_lee_myung_bak
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 160
+	}
+	
+	trigger = {
+		original_tag = KOR
+		date > 2003.8.1
+		date < 2006.3.1
+		has_country_flag = kor_roh_moo_hyun_gov
+	}
+	
+	option = {
+		name = south_korea.116.a
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.03
+		}
+		add_country_leader_role = {
+			character = "kor_lee_myung_bak"
+			country_leader = {
+				ideology = market_liberal_ideology
+				desc = "POLITICS_LEE_MYUNG_BAK_DESC"
+				traits = { KOR_bulldozer kor_akihiro_tsukiyama }
+			}
+			promote_leader = yes
+		}
+		
+	}
+}
+
+#Daegu Subway Incident
+country_event = {
+	id = south_korea.117
+	title = south_korea.117.t
+	desc = south_korea.117.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 14
+	}
+	
+	trigger = {
+		original_tag = KOR
+		date > 2002.8.1
+		date < 2003.3.1
+		owns_state = 1108
+	}
+	
+	option = {
+		name = south_korea.117.a
+		1108 = {
+				damage_building = {
+				    type = infrastructure
+				    damage = 1
+				}
+		}
+	}
+}
+
+#Local Autonomy
+country_event = {
+	id = south_korea.119
+	title = south_korea.119.t
+	desc = south_korea.119.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.119.a #Go Jeolla
+		869 = {
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+	
+	option = {
+		name = south_korea.119.b #Go Gyeongsang
+		add_stability = -0.03
+		1108 = {
+			add_extra_state_shared_building_slots = 2
+		}
+		870 = {
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+}
+
+#Proposal for Undersea Tunnel Construction
+country_event = {
+	id = south_korea.122
+	title = south_korea.122.t
+	desc = south_korea.122.desc
+	picture = GFX_report_event_KOR_national_assembly_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.122.a
+		FROM = { country_event = { id = south_korea.123 days = 1 } }
+		ai_chance = {
+			factor = 50
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value < 20
+				}
+				add = -35
+			}
+		}
+	}
+	
+	option = {
+		name = south_korea.122.b
+		FROM = { country_event = { id = south_korea.127 days = 1 } }
+		ai_chance = {
+			factor = 50
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 50
+				}
+				factor = 0
+			}
+		}
+	}
+}
+
+#Proposal for Undersea Tunnel Construction
+country_event = {
+	id = south_korea.123
+	title = south_korea.123.t
+	desc = south_korea.123.desc
+	picture = GFX_report_event_KOR_national_assembly_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.123.a
+		528 = { add_dynamic_modifier = { modifier = underwater_tunnel_under_construction } }
+		870 = { add_dynamic_modifier = { modifier = underwater_tunnel_under_construction } }
+		956 = { add_dynamic_modifier = { modifier = underwater_tunnel_under_construction } }
+		
+		news_event = { id = rok_news.14 hours = 6 }
+		set_global_flag = build_japan_korea_undersea_tunnel
+	}
+}
+
+#Invite Keizo Obuchi
+country_event = {
+	id = south_korea.124
+	title = south_korea.124.t
+	desc = south_korea.124.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.124.a
+		FROM = { country_event = { id = south_korea.125 days = 3 } }
+	}
+}
+
+#Japan's Refusal
+country_event = {
+	id = south_korea.125
+	title = south_korea.125.t
+	desc = south_korea.125.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.125.a
+		add_stability = 0.01
+	}
+	
+}
+
+#[FROM.GetName]'s reject
+country_event = {
+	id = south_korea.127
+	title = south_korea.127.t
+	desc = south_korea.127.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.127.a
+	}
+}
+
+#Independence Day
+country_event = {
+	id = south_korea.130
+	title = south_korea.130.t
+	
+	trigger = {
+		NOT = {
+			has_completed_focus = kor_moon_chang_geuk_government
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			country_event = { id = south_korea.130 days = 365 } # 8.15
+		}
+	}
+	
+	desc = {
+		text = south_korea.130.desc_1
+		trigger = {
+			has_war = no
+		}
+	}
+	
+	desc = {
+		text = south_korea.130.desc_2
+		trigger = {
+			has_war = yes
+		}
+	}
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.130.a
+	}
+}
+
+#The Hero of the Workers
+country_event = {
+	id = south_korea.131
+	title = south_korea.131.t
+	desc = south_korea.131.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	#is_triggered_only = yes
+	
+	
+	mean_time_to_happen = {
+		days = 45
+	}
+	
+	trigger = {
+		original_tag = KOR
+		date > 2006.3.1
+		date < 2006.12.1
+		has_completed_focus = kor_victory_democracy
+		has_country_leader = {
+			character = kor_lee_jae_myung
+			ruling_only = no
+		} 
+	}
+	
+	option = {
+		name = south_korea.131.a
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.05
+		}
+		custom_effect_tooltip = kor_more_influence_pro_lee_1_10_tt
+		set_temp_variable = { KOR_move_support = 0 }
+		randomize_temp_variable = {
+			var = KOR_move_support
+			distribution = binomial
+			min = 1
+			max = 10
+		}
+		KOR_add_democratic_socialism_support_effect = yes
+		
+		hidden_effect = {
+			country_event = { id = south_korea.133 days = 365 } # 1 Years
+		}
+		
+		
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = {
+						rule = KOR_AI_BEHAVIOR
+						option = DEMOCRATIC_HISTORICAL_KOR
+					}
+					AND = {
+						is_historical_focus_on = yes
+						has_game_rule = {
+							rule = KOR_AI_BEHAVIOR
+							option = DEFAULT
+						}
+					}
+				}	
+			}
+		}
+	}
+	
+	option = {
+		name = south_korea.131.b
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.02
+		}
+		
+		hidden_effect = {
+			country_event = { id = south_korea.132 days = 1460 } # 4 Years
+		}
+		
+		ai_chance = {
+			base = 2
+		}
+	}
+}
+
+#Lee Jae-myung's first victory
+country_event = {
+	id = south_korea.132
+	title = south_korea.132.t
+	desc = south_korea.132.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_completed_focus = kor_victory_democracy
+		has_country_leader = {
+			character = kor_lee_jae_myung
+			ruling_only = no
+		} 
+	}
+	
+	option = {
+		name = south_korea.132.a
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.05
+		}
+		custom_effect_tooltip = kor_more_influence_pro_lee_1_10_tt
+		set_temp_variable = { KOR_move_support = 0 }
+		randomize_temp_variable = {
+			var = KOR_move_support
+			distribution = binomial
+			min = 1
+			max = 10
+		}
+		KOR_add_democratic_socialism_support_effect = yes
+		
+		hidden_effect = {
+			country_event = { id = south_korea.133 days = 365 } # 1 Years
+		}
+	}
+}
+
+#The Revolutionary Fingers
+country_event = {
+	id = south_korea.133
+	title = south_korea.133.t
+	desc = south_korea.133.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.133.a
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.07
+		}
+		custom_effect_tooltip = kor_more_influence_pro_lee_1_10_tt
+		set_temp_variable = { KOR_move_support = 0 }
+		randomize_temp_variable = {
+			var = KOR_move_support
+			distribution = binomial
+			min = 1
+			max = 10
+		}
+		KOR_add_democratic_socialism_support_effect = yes
+	}
+}
+
+#Seoul, a city dedicated to God
+country_event = {
+	id = south_korea.137
+	title = south_korea.137.t
+	desc = south_korea.137.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.133.a
+		add_popularity = {
+			ideology = market_liberal
+			popularity = -0.01
+		}
+	}
+}
+
+#The beginning of Korean Trotskyism
+country_event = {
+	id = south_korea.138
+	title = south_korea.138.t
+	desc = south_korea.138.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = south_korea.138.a
+		add_popularity = {
+			ideology = communist
+			popularity = 0.01
+		}
+	}
+}
+
+
 #####################################################
 #
 #      Republic of Korea
@@ -3223,7 +3926,7 @@ country_event = {
 	id = korea_election.1
 	title = korea_election.1.t
 	desc = korea_election.1.desc
-	picture = GFX_report_event_asian_generic_national_assembly2
+	picture = GFX_report_event_kor_roh_moo_hyun_3
 	
 	is_triggered_only = yes
 	
@@ -3282,7 +3985,7 @@ country_event = {
 	id = korea_election.2
 	title = korea_election.2.t
 	desc = korea_election.2.desc
-	picture = GFX_report_event_asian_generic_national_assembly2
+	picture = GFX_report_event_KOR_2002_election
 	
 	is_triggered_only = yes
 	
@@ -3329,7 +4032,7 @@ country_event = {
 	id = korea_election.3
 	title = korea_election.3.t
 	desc = korea_election.3.desc
-	picture = GFX_report_event_asian_generic_national_assembly2
+	picture = GFX_report_event_KOR_2002_election
 	
 	is_triggered_only = yes
 	
@@ -3540,6 +4243,28 @@ country_event = {
 		#	ideology = anarcho_syndycalist
 		#	traits = { }
 		#}
+	}
+}
+
+#[GetYear] [KOR.GetName] General Election
+country_event = {
+	id = korea_election.6
+	title = korea_election.6.t
+	desc = korea_election.6.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			set_country_flag = { flag = kor_parliamentary_election_flag value = 1 days = 1460 } #4 Years
+		}
+	}
+	
+	option = {
+		name = korea_election.6.a
+		KOR_seats_general_election_effect = yes
+		custom_effect_tooltip = KOR_general_election_exit_poll_tt
 	}
 }
 
@@ -4233,6 +4958,925 @@ country_event = {
 		
 	}
 }
+
+#####################################################
+#####################################################
+
+#[kor_parliament_left_party_name_base]'s Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.3
+	title = korea_parliamentary.3.t
+	desc = korea_parliamentary.3.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.3.a
+		set_country_flag = KOR_conservatism_coalition
+		set_country_flag = KOR_social_liberalism_coalition
+		set_country_flag = KOR_democratic_socialism_coalition
+		
+		hidden_effect = {
+			KOR_clear_prime_minster_effect = yes
+			random_list = {
+				34 = { add_ideas = prime_minister_han_myeong_sook }
+				33 = { add_ideas = prime_minister_lee_nak_yon }
+				33 = { add_ideas = prime_minister_goh_kun }
+			}
+		}
+	}
+	
+	option = {
+		name = korea_parliamentary.3.b
+	}
+}
+
+#[kor_parliament_left_party_name_base]'s Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.4
+	title = korea_parliamentary.4.t
+	desc = korea_parliamentary.4.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.4.a
+		add_political_power = -100
+		set_country_flag = KOR_conservatism_coalition
+		set_country_flag = KOR_social_liberalism_coalition
+		set_country_flag = KOR_democratic_socialism_coalition
+	}
+	
+	option = {
+		name = korea_parliamentary.4.b
+	}
+}
+
+
+#[kor_parliament_left_party_name_base]'s Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.5
+	title = korea_parliamentary.5.t
+	desc = korea_parliamentary.5.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.5.a
+		set_country_flag = KOR_conservatism_coalition
+		set_country_flag = KOR_social_liberalism_coalition
+		set_country_flag = KOR_democratic_socialism_coalition
+	}
+}
+
+#[GetKORBosudang_desc]'s Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.6
+	title = korea_parliamentary.6.t
+	desc = korea_parliamentary.6.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.6.a
+		set_country_flag = KOR_fundamentalists_coalition
+		set_country_flag = KOR_reactionists_coalition
+		set_country_flag = KOR_neocon_coalition
+		
+		hidden_effect = {
+			KOR_clear_prime_minster_effect = yes
+			random_list = {
+				34 = { add_ideas = prime_minister_chung_hong_won }
+				33 = { add_ideas = prime_minister_hyun_soong_jong }
+				33 = { add_ideas = prime_minister_hwang_kyo_ahn }
+			}
+		}
+	}
+	
+	option = {
+		name = korea_parliamentary.6.b
+	}
+}
+
+#[GetKORBosudang_desc]'s Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.7
+	title = korea_parliamentary.7.t
+	desc = korea_parliamentary.7.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.7.a
+		set_country_flag = KOR_fundamentalists_coalition
+		set_country_flag = KOR_reactionists_coalition
+		set_country_flag = KOR_neocon_coalition
+		
+		add_political_power = -100
+	}
+	
+	option = {
+		name = korea_parliamentary.7.b
+	}
+}
+
+#[GetKORBosudang_desc]'s Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.8
+	title = korea_parliamentary.8.t
+	desc = korea_parliamentary.8.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.8.a
+		set_country_flag = KOR_fundamentalists_coalition
+		set_country_flag = KOR_reactionists_coalition
+		set_country_flag = KOR_neocon_coalition
+	}
+}
+
+#NL's Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.9
+	title = korea_parliamentary.9.t
+	desc = korea_parliamentary.9.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.9.a
+		set_country_flag = KOR_NL_coalition
+		
+		hidden_effect = {
+			KOR_clear_prime_minster_effect = yes
+			random_list = {
+				100 = { add_ideas = prime_minister_paek_ki_wan }
+			}
+		}
+	}
+	
+	option = {
+		name = korea_parliamentary.9.b
+	}
+}
+
+#NL's Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.10
+	title = korea_parliamentary.10.t
+	desc = korea_parliamentary.10.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.10.a
+		set_country_flag = KOR_NL_coalition
+		
+		add_political_power = -100
+	}
+	
+	option = {
+		name = korea_parliamentary.10.b
+	}
+}
+
+#NL's Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.11
+	title = korea_parliamentary.11.t
+	desc = korea_parliamentary.11.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.11.a
+		set_country_flag = KOR_NL_coalition
+	}
+}
+
+#PD's Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.12
+	title = korea_parliamentary.12.t
+	desc = korea_parliamentary.12.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.12.a
+		set_country_flag = KOR_social_democracy_coalition
+		
+		hidden_effect = {
+			KOR_clear_prime_minster_effect = yes
+			random_list = {
+				50 = { add_ideas = prime_minister_rhyu_si_min }
+				50 = { add_ideas = prime_minister_kwon_young_ghil }
+			}
+		}
+	}
+	
+	option = {
+		name = korea_parliamentary.12.b
+	}
+}
+
+#PD's Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.13
+	title = korea_parliamentary.13.t
+	desc = korea_parliamentary.13.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.13.a
+		set_country_flag = KOR_social_democracy_coalition
+		
+		add_political_power = -100
+	}
+	
+	option = {
+		name = korea_parliamentary.13.b
+	}
+}
+
+#PD's Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.14
+	title = korea_parliamentary.14.t
+	desc = korea_parliamentary.14.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.14.a
+		set_country_flag = KOR_social_democracy_coalition
+	}
+}
+
+#[GetKORCentrist_desc]'s Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.16
+	title = korea_parliamentary.16.t
+	desc = korea_parliamentary.16.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.16.a
+		set_country_flag = KOR_centrist_coalition
+		
+		add_political_power = -100
+	}
+	
+	option = {
+		name = korea_parliamentary.16.b
+	}
+}
+
+#[GetKORCentrist_desc]'s Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.17
+	title = korea_parliamentary.17.t
+	desc = korea_parliamentary.17.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.17.a
+		set_country_flag = KOR_centrist_coalition
+	}
+}
+
+#Feminist's Conditional Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.19
+	title = korea_parliamentary.19.t
+	desc = korea_parliamentary.19.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.19.a
+		set_country_flag = KOR_feminism_coalition
+		
+		add_political_power = -100
+	}
+	
+	option = {
+		name = korea_parliamentary.19.b
+	}
+}
+
+#Feminist's Coalition Government Approval
+country_event = {
+	id = korea_parliamentary.20
+	title = korea_parliamentary.20.t
+	desc = korea_parliamentary.20.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.20.a
+		set_country_flag = KOR_feminism_coalition
+	}
+}
+
+#Abolishing Hoju System be Passed
+country_event = {
+	id = korea_parliamentary.21
+	title = korea_parliamentary.21.t
+	desc = korea_parliamentary.21.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.21.a
+		KOR_female_right_level_up = yes
+		set_country_flag = parliament_legislation_hoju_flag
+	}
+}
+
+#Failed to pass the bill
+country_event = {
+	id = korea_parliamentary.22
+	title = korea_parliamentary.22.t
+	desc = korea_parliamentary.22.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.22.a
+	}
+}
+
+#Dispensing Separation be Passed
+country_event = {
+	id = korea_parliamentary.23
+	title = korea_parliamentary.23.t
+	desc = korea_parliamentary.23.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.23.a
+		add_political_power = 200
+		set_country_flag = parliament_legislation_dispensing_separation_flag
+	}
+}
+
+#Abolishing Additional Military Scores be Passed
+country_event = {
+	id = korea_parliamentary.24
+	title = korea_parliamentary.24.t
+	desc = korea_parliamentary.24.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.24.a
+		KOR_female_right_level_up = yes
+		set_country_flag = parliament_legislation_abolishing_additional_military_scores_flag
+	}
+}
+
+#Foreigner's Right to Vote for Local Elections be Passed
+country_event = {
+	id = korea_parliamentary.25
+	title = korea_parliamentary.25.t
+	desc = korea_parliamentary.25.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.25.a
+		set_country_flag = parliament_legislation_foreigner_s_right_to_vote_for_local_elections_flag
+		add_timed_idea = { idea = KOR_foreigner_s_right_to_vote_for_local_elections days = 720 }
+	}
+ }
+
+#Autonomous Right for Jeju be Passed
+country_event = {
+	id = korea_parliamentary.26
+	title = korea_parliamentary.26.t
+	desc = korea_parliamentary.26.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.26.a
+		set_country_flag = autonomous_right_for_jeju_flag
+	}
+}
+
+#Abolishing National Security Law be Passed
+country_event = {
+	id = korea_parliamentary.27
+	title = korea_parliamentary.27.t
+	desc = korea_parliamentary.27.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.27.a
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.07
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.07
+		}
+		
+		custom_effect_tooltip = kor_more_influence_nl_1_10_tt
+		set_temp_variable = { KOR_move_support = 0 }
+		randomize_temp_variable = {
+			var = KOR_move_support
+			distribution = binomial
+			min = 1
+			max = 10
+		}
+		KOR_add_NL_support_effect = yes
+		
+		set_country_flag = parliament_legislation_abolishing_national_security_law_flag
+	}
+}
+
+#Anti-discrimination Law be Passed
+country_event = {
+	id = korea_parliamentary.28
+	title = korea_parliamentary.28.t
+	desc = korea_parliamentary.28.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.28.a
+		
+		set_country_flag = parliament_legislation_anti_discrimination_law_flag
+	}
+}
+
+#Five-Day Work Week Law be Passed
+country_event = {
+	id = korea_parliamentary.29
+	title = korea_parliamentary.29.t
+	desc = korea_parliamentary.29.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.29.a
+		
+		add_ideas = KOR_five_days_work 
+		set_country_flag = parliament_legislation_five_day_work_week_flag
+	}
+}
+
+#Legalization of Trade Unions Law be Passed
+country_event = {
+	id = korea_parliamentary.30
+	title = korea_parliamentary.30.t
+	desc = korea_parliamentary.30.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.30.a
+		swap_ideas = {
+			remove_idea = KOR_non_trade_union
+			add_idea = KOR_free_trade_union
+		}
+		set_country_flag = parliament_legislation_legalization_of_trade_unions_flag
+	}
+}
+
+#Four-Day Work Week Law be Passed
+country_event = {
+	id = korea_parliamentary.31
+	title = korea_parliamentary.31.t
+	desc = korea_parliamentary.31.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.31.a
+		swap_ideas = {
+			remove_idea = KOR_five_days_work
+			add_idea = KOR_four_days_work
+		}
+		
+		set_country_flag = parliament_legislation_four_day_work_week_flag
+	}
+}
+
+#Legalize Same-sex Marriage be Passed
+country_event = {
+	id = korea_parliamentary.32
+	title = korea_parliamentary.32.t
+	desc = korea_parliamentary.32.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.32.a
+		add_ideas = kor_same_sex_marriage
+		set_country_flag = parliament_legislation_legalize_homosexual_marriage_flag
+	}
+}
+
+#Abolishing Foreign Fingerprint Registration be Passed
+country_event = {
+	id = korea_parliamentary.33
+	title = korea_parliamentary.33.t
+	desc = korea_parliamentary.33.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.33.a
+		add_stability = 0.05
+		set_country_flag = parliament_legislation_abolishing_foreign_fingerprint_registration_flag
+	}
+}
+
+#Accepting Refugees be Passed
+country_event = {
+	id = korea_parliamentary.34
+	title = korea_parliamentary.34.t
+	desc = korea_parliamentary.34.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.34.a
+		
+		add_manpowers = 50000
+		set_country_flag = parliament_legislation_accepting_refugees_flag
+	}
+}
+
+#National Assembly Woman Quota System be Passed
+country_event = {
+	id = korea_parliamentary.35
+	title = korea_parliamentary.35.t
+	desc = korea_parliamentary.35.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.35.a
+		
+		KOR_female_right_level_up = yes
+		set_country_flag = parliament_legislation_national_assembly_woman_quota_flag
+	}
+}
+
+#Expanding the Ministry of Gender Equality and Family be Passed
+country_event = {
+	id = korea_parliamentary.36
+	title = korea_parliamentary.36.t
+	desc = korea_parliamentary.36.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.36.a
+		KOR_female_right_level_up = yes
+		set_country_flag = parliament_legislation_expanding_MoGEF_flag
+	}
+}
+
+#Gender Equality Employment Act be Passed
+country_event = {
+	id = korea_parliamentary.37
+	title = korea_parliamentary.37.t
+	desc = korea_parliamentary.37.desc
+	picture = GFX_report_event_KOR_new_law
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.37.a
+		
+		KOR_female_right_level_up = yes
+		set_country_flag = parliament_legislation_gender_equality_employment_act_flag
+	}
+}
+
+#The Ruling party is Citicized
+country_event = {
+	id = korea_parliamentary.39
+	title = korea_parliamentary.39.t
+	desc = korea_parliamentary.39.desc
+	picture = GFX_report_event_KOR_national_assembly_2
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.39.a
+	}
+}
+
+#Successful Promotion of a Political Party
+country_event = {
+	id = korea_parliamentary.40
+	title = korea_parliamentary.40.t
+	desc = korea_parliamentary.40.desc
+	picture = GFX_report_event_KOR_national_assembly_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.40.a
+	}
+}
+
+#The Ruling Party blames the President
+country_event = {
+	id = korea_parliamentary.41
+	title = korea_parliamentary.41.t
+	desc = korea_parliamentary.41.desc
+	picture = GFX_report_event_KOR_national_assembly_4
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.41.a
+		add_stability = -0.02
+	}
+	option = {
+		name = korea_parliamentary.41.b
+		set_temp_variable = { KOR_move_lawmakers = 1 }
+		custom_effect_tooltip = kor_move_independents_tt #Deport they from the party
+		KOR_move_independents_effect = yes
+		korean_init_parliament = yes
+	}
+}
+
+#The National Assembly into Presidential misconduct
+country_event = {
+	id = korea_parliamentary.42
+	title = korea_parliamentary.42.t
+	desc = korea_parliamentary.42.desc
+	picture = GFX_report_event_KOR_national_assembly_2
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.42.a
+		add_political_power = -25
+	}
+}
+#Prime Minister's political difficulties
+country_event = {
+	id = korea_parliamentary.43
+	title = korea_parliamentary.43.t
+	desc = korea_parliamentary.43.desc
+	picture = GFX_report_event_KOR_national_assembly_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.43.a
+		KOR_clear_prime_minster_effect = yes
+	}
+	
+	option = {
+		name = korea_parliamentary.43.b
+		add_political_power = -25
+	}
+}
+#The Popular Prime Minister
+country_event = {
+	id = korea_parliamentary.44
+	title = korea_parliamentary.44.t
+	desc = korea_parliamentary.44.desc
+	picture = GFX_report_event_KOR_national_assembly_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.44.a
+		add_political_power = 25
+	}
+}
+
+#Break away from the Party
+country_event = {
+	id = korea_parliamentary.45
+	title = korea_parliamentary.45.t
+	desc = korea_parliamentary.45.desc
+	picture = GFX_report_event_KOR_national_assembly_2
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.45.a
+		set_temp_variable = { KOR_move_lawmakers = 1 }
+		randomize_temp_variable = {
+			var = KOR_move_lawmakers
+			distribution = binomial
+			min = 1
+			max = 10
+		}
+		round_variable = KOR_move_lawmakers
+		custom_effect_tooltip = kor_move_independents_tt #Deport they from the party
+		KOR_move_independents_effect = yes
+		korean_init_parliament = yes
+	}
+}
+
+#The National Assembly Supports the government's policy
+country_event = {
+	id = korea_parliamentary.46
+	title = korea_parliamentary.46.t
+	desc = korea_parliamentary.46.desc
+	picture = GFX_report_event_KOR_national_assembly_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.46.a
+		add_political_power = 25
+	}
+}
+
+#Violence in the National Assembly
+country_event = {
+	id = korea_parliamentary.47
+	title = korea_parliamentary.47.t
+	desc = korea_parliamentary.47.desc
+	picture = GFX_report_event_KOR_national_assembly_3
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.47.a
+		add_political_power = -25
+	}
+}
+
+#Violence in the National Assembly
+country_event = {
+	id = korea_parliamentary.48
+	title = korea_parliamentary.48.t
+	desc = korea_parliamentary.48.desc
+	picture = GFX_report_event_PRK_pyongyang_event_2
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.48.a
+	}
+}
+
+#Help National Assembly System
+country_event = {
+	id = korea_parliamentary.1000
+	title = korea_parliamentary.1000.t
+	desc = korea_parliamentary.1000.desc
+	picture = GFX_report_event_asian_generic_national_assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = korea_parliamentary.1000.a
+	}
+}
+
+#####################################################
+#####################################################
+
+country_event = {
+	id = korea_parliamentary_system.0
+	
+	is_triggered_only = yes
+	hidden = yes
+	
+	trigger = {
+		NOT = { has_country_flag = KOR_factions_locked_flag }
+	}
+
+	immediate = {
+		country_event = {
+			id = korea_parliamentary_system.0
+			days = 60
+			random = 140 #20 weeks
+		}
+	}
+	
+	option = {
+		country_event = {
+			id = korea_parliamentary_system.1
+			days = 10
+			random = 110
+		}
+	}
+	option = {
+		trigger = { KOR_prime_minster_only_one = no }
+		country_event = {
+			id = korea_parliamentary_system.2
+			days = 10
+			random = 110
+		}
+	}
+}
+
+country_event = {
+	id = korea_parliamentary_system.1
+	
+	is_triggered_only = yes
+	hidden = yes
+	
+	trigger = {
+		NOT = { has_country_flag = KOR_factions_locked_flag }
+	}
+	
+	option = {
+		country_event = korea_parliamentary.39 #The Ruling party is Citicized
+	}
+	option = {
+		country_event = korea_parliamentary.40 #Successful Promotion of a Political Party
+	}
+	option = {
+		trigger = { KOR_all_ruling_party_status > 10 }
+		country_event = korea_parliamentary.41 #The Ruling Party blames the President
+	}
+	option = {
+		country_event = korea_parliamentary.42 #The National Assembly into Presidential misconduct
+	}
+	option = {
+		trigger = { KOR_all_ruling_party_status > 10 }
+		country_event = korea_parliamentary.45 #Break away from the Party
+	}
+	option = {
+		country_event = korea_parliamentary.47 #Violence in the National Assembly
+	}
+}
+
+country_event = {
+	id = korea_parliamentary_system.2
+	
+	is_triggered_only = yes
+	hidden = yes
+	
+	trigger = {
+		NOT = { has_country_flag = KOR_factions_locked_flag }
+	}
+	
+	option = {
+		country_event = korea_parliamentary.44 #The Ruling party is Citicized
+	}
+	option = {
+		country_event = korea_parliamentary.43 #Successful Promotion of a Political Party
+	}
+	option = {
+		country_event = korea_parliamentary.47 #Violence in the National Assembly
+	}
+}
+
 
 #####################################################
 #

@@ -56,6 +56,15 @@ on_actions = {
 				}
 			}
 		}
+		
+		effect = {
+			KOR = {
+				SAMPLE_generate_random_party_seats = yes
+				KOR_loyalty_setting_effect = yes
+				KOR_parties_support_setting_effect = yes
+				korean_init_parliament = yes
+			}
+		}
 	}
 	
 	on_new_term_election = {
@@ -69,10 +78,11 @@ on_actions = {
 	}
 	
 	on_startup_KOR = {
-		effect = {			
-
+		effect = {	
+			SAMPLE_generate_random_party_seats = yes
 			KOR_loyalty_setting_effect = yes
 			KOR_parties_support_setting_effect = yes
+			korean_init_parliament = yes
 		}
 	}
 	
@@ -186,6 +196,16 @@ on_actions = {
 	
 	on_monthly_KOR = {
 		effect = {
+			if = {
+					limit = {
+						NOT = { has_country_flag = kor_parliamentary_election_flag }
+						date > 2001.1.1 
+						has_election = yes
+					}
+					country_event = { id = korea_election.6 }
+			}
+		}
+		effect = {
 		if = {
 				limit = {
 					islamist > 0.2
@@ -270,7 +290,7 @@ on_actions = {
 	}
 	on_monthly_KOR = {
 		effect = {
-			randomize_temp_variable = {
+			randomize_variable = {
 				var = KOR_bouns_support
 				distribution = uniform
 				min = -10
@@ -282,7 +302,7 @@ on_actions = {
 					}
 					add_to_variable = { var = KOR_fundamentalists_support_status value = KOR_bouns_support }
 			}
-			randomize_temp_variable = {
+			randomize_variable = {
 				var = KOR_bouns_support
 				distribution = uniform
 				min = -10
@@ -294,7 +314,7 @@ on_actions = {
 					}
 					add_to_variable = { var = KOR_reactionists_support_status value = KOR_bouns_support }
 			}
-			randomize_temp_variable = {
+			randomize_variable = {
 				var = KOR_bouns_support
 				distribution = uniform
 				min = -10
@@ -306,7 +326,7 @@ on_actions = {
 					}
 					add_to_variable = { var = KOR_neocon_support_status value = KOR_bouns_support }
 			}
-			randomize_temp_variable = {
+			randomize_variable = {
 				var = KOR_bouns_support
 				distribution = uniform
 				min = -10
@@ -318,7 +338,7 @@ on_actions = {
 					}
 					add_to_variable = { var = KOR_conservatism_support_status value = KOR_bouns_support }
 			}
-			randomize_temp_variable = {
+			randomize_variable = {
 				var = KOR_bouns_support
 				distribution = uniform
 				min = -10
@@ -330,7 +350,7 @@ on_actions = {
 					}
 					add_to_variable = { var = KOR_social_liberalism_support_status value = KOR_bouns_support }
 			}
-			randomize_temp_variable = {
+			randomize_variable = {
 				var = KOR_bouns_support
 				distribution = uniform
 				min = -10
@@ -342,7 +362,7 @@ on_actions = {
 					}
 					add_to_variable = { var = KOR_democratic_socialism_support_status value = KOR_bouns_support }
 			}
-			randomize_temp_variable = {
+			randomize_variable = {
 				var = KOR_bouns_support
 				distribution = uniform
 				min = -10
@@ -354,7 +374,7 @@ on_actions = {
 					}
 					add_to_variable = { var = KOR_social_democracy_support_status value = KOR_bouns_support }
 			}
-			randomize_temp_variable = {
+			randomize_variable = {
 				var = KOR_bouns_support
 				distribution = uniform
 				min = -10
@@ -366,7 +386,7 @@ on_actions = {
 					}
 					add_to_variable = { var = KOR_NL_support_status value = KOR_bouns_support }
 			}
-			randomize_temp_variable = {
+			randomize_variable = {
 				var = KOR_bouns_support
 				distribution = uniform
 				min = -10
@@ -380,5 +400,84 @@ on_actions = {
 			}
 		}
 	}
+	
+	on_war = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = KOR
+					has_war_with = PRK
+				}
+				news_event = { id = rok_news.21 }
+			}
+		}
+	}
+	
+	on_capitulation = {
+		effect = {
+			if = {
+				limit = {
+					FROM = {	original_tag = KOR }
+					ROOT = { original_tag = PRK }
+				}
+				KOR = { annex = PRK }
+				
+				if = {
+					limit = {
+						FROM = { has_completed_focus = kor_moon_chang_geuk_government }
+					}
+					news_event = { id = rok_news.20 }
+				}
+				else_if = {
+					limit = {
+						FROM = { has_completed_focus = kor_no_government }
+					}
+					news_event = { id = rok_news.19 }
+				}
+				else_if = {
+					limit = {
+						FROM = { has_completed_focus = kor_lee_seok_ki_government }
+					}
+					news_event = { id = rok_news.18 }
+				}
+				else = {
+					news_event = { id = rok_news.17 }
+				}
+			}		
+		}
+	}	
+	
+	on_annex = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = {	original_tag = KOR }
+					FROM = { original_tag = PRK }
+				}
+				if = {
+					limit = {
+						ROOT = { has_completed_focus = kor_moon_chang_geuk_government }
+					}
+					news_event = { id = rok_news.20 }
+				}
+				else_if = {
+					limit = {
+						ROOT = { has_completed_focus = kor_no_government }
+					}
+					news_event = { id = rok_news.19 }
+				}
+				else_if = {
+				limit = {
+						ROOT = { has_completed_focus = kor_lee_seok_ki_government }
+					}
+					news_event = { id = rok_news.18 }
+				}
+				else = {
+					news_event = { id = rok_news.17 }
+				}
+			}
+		}
+	}
+
 
 }

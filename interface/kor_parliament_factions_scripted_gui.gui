@@ -3,84 +3,54 @@
 @POPULARITY_TEXT_X = 380
 @FACTION_ICONS_X = 10
 @FACTION_NAMES_X = 55
-@HEADERS_Y = 280
+@FACTION_CENTER = 215
+@HEADERS_Y = 550
 
-# 330 (GNP)
+# -300s
 
-@PARTY_A_Y = 375
-@PARTY_B_Y = 420
-@PARTY_C_Y = 465
+@RIGHT_WING_ICON_Y = 290
+@RIGHT_WING_PARTYNAME_Y = 355
+@RIGHT_WING_FACTIONNAME_Y = 390
+@RIGHT_WING_SEATS_Y = 410
 
-# 555 (MDP)
+@LEFT_WING_ICON_Y = 460
+@LEFT_WING_PARTYNAME_Y = 525
+@LEFT_WING_FACTIONNAME_Y = 560
+@LEFT_WING_SEATS_Y = 580
 
-@PARTY_D_Y = 555 #465
-@PARTY_E_Y = 600 #510
-@PARTY_F_Y = 645 #555
-
-# 690 (ULD)
-
-@PARTY_G_Y = 735 #600
-
-# PROGRESS 780
-
-@PARTY_H_Y = 825 #645
-
-# PROGRESS 2 870
-
-@PARTY_I_Y = 915 #690
-
-# MINORS 3 950
-
-@PARTY_J_Y = 995 #735
-@PARTY_K_Y = 1040 #780
-
-
-@PARTYTEXT_A_Y = 385
-@PARTYTEXT_B_Y = 430
-@PARTYTEXT_C_Y = 475
-
-#475
-
-@PARTYTEXT_D_Y = 565 #475
-@PARTYTEXT_E_Y = 610 #520
-@PARTYTEXT_F_Y = 655 #565
-
-#655
-
-@PARTYTEXT_G_Y = 745 #610
-@PARTYTEXT_H_Y = 835 #655
-
-#790
-
-@PARTYTEXT_I_Y = 925 #700
-@PARTYTEXT_J_Y = 1005 #745
-@PARTYTEXT_K_Y = 1050 #790
-
-@PARTYNAME_A_Y = 330
-@PARTYNAME_B_Y = 510
-@PARTYNAME_C_Y = 690
-@PARTYNAME_D_Y = 780
-@PARTYNAME_E_Y = 870
-@PARTYNAME_F_Y = 950
+@OTHER_PARTYNAME_Y = 625
+@OTHER_FACTIONNAME_ALPHA_Y = 660
+@OTHER_SEATS_ALPHA_Y = 680
+@OTHER_FACTIONNAME_BETA_Y = 720
+@OTHER_SEATS_BETA_Y = 740
+@OTHER_FACTIONNAME_GAMMA_Y = 780
+@OTHER_SEATS_GAMMA_Y = 800
+@FACTION_NAMES_A_X = 3
+@FACTION_NAMES_B_X = 170
+@FACTION_NAMES_C_X = 337
+@FACTION_NAMES_D_X = 66
+@FACTION_NAMES_E_X = 253
 
 guiTypes = {
 
 	containerWindowType = {
 		name = "kor_parliament_factions_decision_ui_window"
 		position = { x = 0 y = 0 }
-		size = { width = 100% height= 1100 }
+		size = { width = 100% height= 850 }
+		orientation = center
+		origo = center
 		
 		iconType = {
 			name ="kor_parliament_factions_decision_ui_icon"
 			spriteType = "GFX_decision_cat_long_picture_kor_night_parliament"
 			pdx_tooltip = "KOR_parliament_tt"
-			position = { x= 20	 y = -10 }
+			position = { x= 8	 y = -10 }
 			#format = left
 		}
 		
 		instantTextboxType = {
 			name = "kor_parliament_factions_decision_text"
-			position = { x = 20 y = 120 }
+			position = { x= 8 y = 120 }
 			font = "hoi_16mbs"
 			text = [Getkor_parliament_factions_decision_desc]
 			maxWidth = 230
@@ -89,8 +59,18 @@ guiTypes = {
 		}
 		
 		instantTextboxType = {
-			name = "kor_parliament_factions_prime_minster_text"
+			name = "kor_parliament_factions_president_text"
 			position = { x = 270 y = 120 }
+			font = "hoi_18mbs"
+			text = [Getkor_parliament_president_desc]
+			maxWidth = 200
+			maxHeight = 50
+			format = left
+		}
+		
+		instantTextboxType = {
+			name = "kor_parliament_factions_prime_minster_text"
+			position = { x = 270 y = 145 }
 			font = "hoi_18mbs"
 			text = [Getkor_parliament_prime_minster_desc]
 			maxWidth = 200
@@ -98,15 +78,15 @@ guiTypes = {
 			format = left
 		}
 		
-		instantTextboxType = {
-			name = "kor_parliament_factions_supporter_text"
-			position = { x = 270 y = 145 }
-			font = "hoi_18mbs"
-			text = [Getkor_parliament_supporter_desc]
-			maxWidth = 200
-			maxHeight = 50
-			format = left
-		}
+		#instantTextboxType = {
+		#	name = "kor_parliament_factions_supporter_text"
+		#	position = { x = 270 y = 145 }
+		#	font = "hoi_18mbs"
+		#	text = [Getkor_parliament_supporter_desc]
+		#	maxWidth = 200
+		#	maxHeight = 50
+		#	format = left
+		#}
 		
 		instantTextboxType = {
 			name = "kor_parliament_factions_seats_text"
@@ -117,494 +97,339 @@ guiTypes = {
 			maxHeight = 50
 			format = left
 		}
+						
+		#containerWindowType = {
+		#	name = "korean_parliament_main_container"
+		#	position = { x = 0 y = 260 }
+		#	size = { width = 490 height = 280 }
+		#	format = center
 
+		#	background = {
+		#		name = "Background"
+		#		quadTextureSprite = "GFX_tiled_window_thin_border2"
+		#	}
+
+		#	gridboxtype = {
+		#		name = "korean_diagram_container"
+		#		position = { x = 10 y = 25 }
+		#		size = { width = 100%% height = 600 }
+		#		slotsize = { width = 100%% height = 0 }
+		#		max_slots_horizontal = 1
+		#		add_horizontal = no
+		#		format = center
+				
+		#	}
+		#}
+		
 		##### Party #####
 		
 		### GNP ###
 	
+		#ICONS
 		iconType = {
-			name ="kor_GNP_box"
-			spriteType = "GFX_decision_cat_parliament_red_box"
-			position = { x= 5 y = @PARTY_A_Y }
+			name ="kor_parliament_right_party_name_icon"
+			spriteType = "GFX_decision_KOR_neocon"
+			position = { x = @FACTION_CENTER y = @RIGHT_WING_ICON_Y }
+			maxWidth = 490
+			format = center
 		}
 		
 		instantTextBoxType = {
 			name ="kor_parliament_right_party_name_base"
-			position = { x = @FACTION_NAMES_X y = @PARTYNAME_A_Y }
-			font = "hoi_22mbs"
-			text = "kor_parliament_right_party_name_base"
-			format = left
-			maxHeight = 48
-		}
-		
-		#ICONS
-		iconType = {
-			name ="kor_fundamentalist_icon"
-			spriteType = "GFX_decision_KOR_fundamentalists"
-			position = { x = @FACTION_ICONS_X y = @PARTY_A_Y }
+			position = { x = 0 y = @RIGHT_WING_PARTYNAME_Y }
+			font = "vic_36"
+			text = [GetKORBosudang_desc]
+			maxWidth = 500
+			format = center
 		}
 		
 		instantTextBoxType = {
 			name ="kor_parliament_fundamentalists_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_A_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_A_X y = @RIGHT_WING_FACTIONNAME_Y }
+			pdx_tooltip = "KOR_fundamentalists_seats_tt"
+			font = "hoi_16mbs"
 			text = "kor_parliament_fundamentalists_name_text"
-			format = left
+			format = center
 			maxHeight = 24
+			maxwidth = 160
 		}
-
-		#Tooltip
-		instantTextBoxType = {
-			name ="ko"
-			position = { x = @FACTION_ICONS_X y = @PARTY_A_Y }
-			maxwidth = 230
-			maxHeight = 38
-			pdx_tooltip = KOR_ZVENO_TOOLTIP
-		}
-
-		iconType = {
-			name ="kor_reactionists_icon"
-			spriteType = "GFX_decision_KOR_reactionists"
-			position = { x = @FACTION_ICONS_X y = @PARTY_B_Y }
-		}
-
+		
 		instantTextBoxType = {
 			name ="kor_parliament_reactionists_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_B_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_B_X y = @RIGHT_WING_FACTIONNAME_Y }
+			pdx_tooltip = "KOR_reactionists_seats_tt"
+			font = "hoi_16mbs"
 			text = "kor_parliament_reactionists_name_text"
-			format = left
+			format = center
 			maxHeight = 24
-		}
-
-		#Tooltip
-		instantTextBoxType = {
-			name ="bs_tooltip_fake"
-			position = { x = @FACTION_ICONS_X y = 375 }
-			maxwidth = 230
-			maxHeight = 38
-			pdx_tooltip = KOR_BS_TOOLTIP
-		}
-
-		iconType = {
-			name ="kor_neocon_icon"
-			spriteType = "GFX_decision_KOR_neocon"
-			position = { x = @FACTION_ICONS_X y = @PARTY_C_Y }
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="kor_parliament_neocon_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_C_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_C_X y = @RIGHT_WING_FACTIONNAME_Y }
+			pdx_tooltip = "KOR_neocon_seats_tt"
+			font = "hoi_16mbs"
 			text = "kor_parliament_neocon_name_text"
-			format = left
+			format = center
 			maxHeight = 24
+			maxwidth = 160
 		}
-
-		#Tooltip
-		instantTextBoxType = {
-			name ="bzns_tooltip_fake"
-			position = { x = @FACTION_ICONS_X y = 420 }
-			maxwidth = 230
-			maxHeight = 38
-			pdx_tooltip = KOR_BZNS_TOOLTIP
+		
+		iconType = {
+			name ="kor_parliament_left_party_name_icon"
+			spriteType = "GFX_decision_KOR_conservatism"
+			position = { x = @FACTION_CENTER y = @LEFT_WING_ICON_Y }
+			maxWidth = 490
+			format = center
 		}
 	
 		instantTextBoxType = {
 			name ="kor_parliament_left_wing_party_name_base"
-			position = { x = @FACTION_NAMES_X y = @PARTYNAME_B_Y }
-			font = "hoi_24mbs"
-			text = "kor_parliament_left_wing_party_name_base"
-			format = left
-			maxHeight = 48
-		}
-		
-		iconType = {
-			name ="kor_DEMOCRATIC_box"
-			spriteType = "GFX_decision_cat_parliament_blue_box"
-			position = { x= 5 y = @PARTY_D_Y }
-		}
-
-		iconType = {
-			name ="kor_conservatism_icon"
-			spriteType = "GFX_decision_KOR_conservatism"
-			position = { x = @FACTION_ICONS_X y = @PARTY_D_Y }
+			position = { x = 0 y = @LEFT_WING_PARTYNAME_Y }
+			font = "vic_36"
+			text = [GetKORMinjudang_desc]
+			maxWidth = 480
+			format = center
 		}
 
 		instantTextBoxType = {
 			name ="kor_parliament_conservatism_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_D_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_A_X y = @LEFT_WING_FACTIONNAME_Y }
+			pdx_tooltip = "KOR_conservatism_seats_tt"
+			font = "hoi_16mbs"
 			text = [GetKORConservatism_desc] 
-			format = left
+			format = center
 			maxHeight = 24
-		}
-
-		#Tooltip
-		instantTextBoxType = {
-			name ="nsm_tooltip_fake"
-			position = { x = @FACTION_ICONS_X y = 465 }
-			maxwidth = 230
-			maxHeight = 38
-			pdx_tooltip = KOR_NSM_TOOLTIP
-		}
-
-		iconType = {
-			name ="kor_social_liberalism_icon"
-			spriteType = "GFX_decision_KOR_social_liberalism"
-			position = { x = @FACTION_ICONS_X y = @PARTY_E_Y }
+			maxwidth = 160
 		}
 		
 		instantTextBoxType = {
 			name ="kor_parliament_social_liberalism_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_E_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_B_X y = @LEFT_WING_FACTIONNAME_Y }
+			pdx_tooltip = "KOR_social_liberalism_seats_tt"
+			font = "hoi_16mbs"
 			text = "kor_parliament_social_liberalism_name_text"
-			format = left
+			format = center
 			maxHeight = 24
-		}
-		
-		iconType = {
-			name ="kor_democratic_socialism_icon"
-			spriteType = "GFX_decision_KOR_democratic_socialism"
-			position = { x = @FACTION_ICONS_X y = @PARTY_F_Y }
+			maxwidth = 160
 		}
 		
 		instantTextBoxType = {
 			name ="kor_parliament_democratic_socialism_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_F_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_C_X y = @LEFT_WING_FACTIONNAME_Y }
+			pdx_tooltip = "KOR_democratic_socialism_seats_tt"
+			font = "hoi_16mbs"
 			text = "kor_parliament_democratic_socialism_name_text"
-			format = left
+			format = center
 			maxHeight = 24
+			maxwidth = 160
 		}
 		
-		#instantTextBoxType = {
-		#	name ="kor_parliament_left_wing_party_name_base"
-		#	position = { x = @FACTION_NAMES_X y = @PARTYNAME_C_Y }
-		#	font = "hoi_24mbs"
-		#	text = "kor_parliament_left_wing_party_name_base"
-		#	format = left
-		#	maxHeight = 48
-		#}
-		
-		iconType = {
-			name ="kor_centrist_icon"
-			spriteType = "GFX_decision_KOR_centrist"
-			position = { x = @FACTION_ICONS_X y = @PARTY_G_Y }
-		}
-
 		instantTextBoxType = {
-			name ="kor_parliament_centrist_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_G_Y }
-			font = "hoi_18mbs"
-			text = [GetKORCentrist_desc]  
-			format = left
-			maxHeight = 24
-		}
-		
-		iconType = {
-			name ="kor_social_democracy_icon"
-			spriteType = "GFX_decision_KOR_social_democracy"
-			position = { x = @FACTION_ICONS_X y = @PARTY_H_Y }
+			name ="kor_parliament_minor_party_name_base"
+			position = { x = 0 y = @OTHER_PARTYNAME_Y }
+			font = "vic_22"
+			text = "kor_parliament_other_text"
+			maxWidth = 500
+			format = center
 		}
 		
 		instantTextBoxType = {
 			name ="kor_parliament_social_democracy_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_H_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_D_X y = @OTHER_FACTIONNAME_ALPHA_Y }
+			pdx_tooltip = "KOR_PD_seats_tt"
+			font = "hoi_16mbs"
 			text = "kor_parliament_social_democracy_name_text"
-			format = left
+			format = center
 			maxHeight = 24
-		}
-		
-		iconType = {
-			name ="kor_NL_icon"
-			spriteType = "GFX_decision_KOR_NL"
-			position = { x = @FACTION_ICONS_X y = @PARTY_I_Y }
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="kor_parliament_NL_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_I_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_E_X y = @OTHER_FACTIONNAME_ALPHA_Y }
+			pdx_tooltip = "KOR_NL_seats_tt"
+			font = "hoi_16mbs"
 			text = "kor_parliament_NL_name_text"
-			format = left
+			format = center
 			maxHeight = 24
-		}
-		
-		iconType = {
-			name ="kor_feminism_icon"
-			spriteType = "GFX_decision_KOR_feminism"
-			position = { x = @FACTION_ICONS_X y = @PARTY_J_Y }
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="kor_parliament_feminism_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_J_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_D_X y = @OTHER_FACTIONNAME_BETA_Y }
+			pdx_tooltip = "KOR_feminists_seats_tt"
+			font = "hoi_16mbs"
 			text = "kor_parliament_feminism_name_text"
-			format = left
+			format = center
 			maxHeight = 24
+			maxwidth = 160
+		}
+
+		instantTextBoxType = {
+			name ="kor_parliament_centrist_name"
+			position = { x = @FACTION_NAMES_E_X y = @OTHER_FACTIONNAME_BETA_Y }
+			pdx_tooltip = "KOR_centrist_seats_tt"
+			font = "hoi_16mbs"
+			text = [GetKORCentrist_desc]  
+			format = center
+			maxHeight = 24
+			maxwidth = 160
 		}
 		
-		iconType = {
-			name ="kor_anarchism_icon"
-			spriteType = "GFX_decision_KOR_anarchism"
-			position = { x = @FACTION_ICONS_X y = @PARTY_K_Y }
-		}
-
 		instantTextBoxType = {
-			name ="kor_parliament_anarchism_name"
-			position = { x = @FACTION_NAMES_X y = @PARTYTEXT_K_Y }
-			font = "hoi_18mbs"
-			text = "kor_parliament_anarchism_name_text"
-			format = left
-			maxHeight = 24
-		}
-
-		#LOYALTY
-		instantTextBoxType = {
-			name ="loyalty_header"
-			position = { x = @LOYALTY_TEXT_X y = @HEADERS_Y }
-			font = "hoi_18mbs"
-			text = "KOR_ui_loyalty_header"
+			name ="kor_parliament_independent_name"
+			position = { x = @FACTION_NAMES_B_X y = @OTHER_FACTIONNAME_GAMMA_Y }
+			pdx_tooltip = "KOR_independent_seats_tt"
+			font = "hoi_16mbs"
+			text = "kor_parliament_independent_name_text"  
 			format = center
 			maxHeight = 24
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_fundamentalists_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_A_Y }
-			font = "hoi_18mbs"
-			text = "KOR_fundamentalists_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_reactionists_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_B_Y }
-			font = "hoi_18mbs"
-			text = "KOR_reactionists_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_neocon_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_C_Y }
-			font = "hoi_18mbs"
-			text = "KOR_neocon_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_conservatism_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_D_Y }
-			font = "hoi_18mbs"
-			text = "KOR_conservatism_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_social_liberalism_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_E_Y }
-			font = "hoi_18mbs"
-			text = "KOR_social_liberalism_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_democratic_socialism_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_F_Y }
-			font = "hoi_18mbs"
-			text = "KOR_democratic_socialism_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_centrist_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_G_Y }
-			font = "hoi_18mbs"
-			text = "KOR_centrist_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_social_democracy_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_H_Y }
-			font = "hoi_18mbs"
-			text = "KOR_social_democracy_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_NL_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_I_Y }
-			font = "hoi_18mbs"
-			text = "KOR_NL_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_feminism_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_J_Y }
-			font = "hoi_18mbs"
-			text = "KOR_feminism_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		instantTextBoxType = {
-			name ="KOR_anarchism_loyalty_status"
-			position = { x = @LOYALTY_TEXT_X y = @PARTYTEXT_K_Y }
-			font = "hoi_18mbs"
-			text = "KOR_anarchism_loyalty_status"
-			format = center
-			maxwidth = 110
-		}
-
-		#Tooltip
-		instantTextBoxType = {
-			name ="loyalty_tooltip_fake"
-			position = { x = @LOYALTY_TEXT_X y = @HEADERS_Y }
-			format = center
-			maxwidth = 110
-			maxHeight = 205
-			pdx_tooltip = KOR_LOYALTY_TOOLTIP
-		}
-
-		#POPULARITY
-		instantTextBoxType = {
-			name ="popularity_header"
-			position = { x = @POPULARITY_TEXT_X y = @HEADERS_Y }
-			font = "hoi_18mbs"
-			text = "KOR_ui_seats_header"
-			format = center
-			maxHeight = 24
-			maxwidth = 120
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="KOR_fundamentalists_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_A_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_A_X y = @RIGHT_WING_SEATS_Y }
+			font = "hoi_16mbs"
 			text = "KOR_fundamentalists_seats_status"
 			format = center
-			maxwidth = 120
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="KOR_reactionists_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_B_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_B_X y = @RIGHT_WING_SEATS_Y }
+			font = "hoi_16mbs"
 			text = "KOR_reactionists_seats_status"
 			format = center
-			maxwidth = 120
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="KOR_neocon_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_C_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_C_X y = @RIGHT_WING_SEATS_Y }
+			font = "hoi_16mbs"
 			text = "KOR_neocon_seats_status"
 			format = center
-			maxwidth = 120
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="KOR_conservatism_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_D_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_A_X y = @LEFT_WING_SEATS_Y }
+			font = "hoi_16mbs"
 			text = "KOR_conservatism_seats_status"
 			format = center
-			maxwidth = 120
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="KOR_social_liberalism_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_E_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_B_X y = @LEFT_WING_SEATS_Y }
+			font = "hoi_16mbs"
 			text = "KOR_social_liberalism_seats_status"
 			format = center
-			maxwidth = 120
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="KOR_democratic_socialism_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_F_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_C_X y = @LEFT_WING_SEATS_Y }
+			font = "hoi_16mbs"
 			text = "KOR_democratic_socialism_seats_status"
 			format = center
-			maxwidth = 120
-		}
-
-		instantTextBoxType = {
-			name ="KOR_centrist_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_G_Y }
-			font = "hoi_18mbs"
-			text = "KOR_centrist_seats_status"
-			format = center
-			maxwidth = 120
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="KOR_social_democracy_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_H_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_D_X y = @OTHER_SEATS_ALPHA_Y }
+			font = "hoi_16mbs"
 			text = "KOR_social_democracy_seats_status"
 			format = center
-			maxwidth = 120
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="KOR_NL_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_I_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_E_X y = @OTHER_SEATS_ALPHA_Y }
+			font = "hoi_16mbs"
 			text = "KOR_NL_seats_status"
 			format = center
-			maxwidth = 120
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
 		}
 
 		instantTextBoxType = {
 			name ="KOR_feminism_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_J_Y }
-			font = "hoi_18mbs"
+			position = { x = @FACTION_NAMES_D_X y = @OTHER_SEATS_BETA_Y }
+			font = "hoi_16mbs"
 			text = "KOR_feminism_seats_status"
 			format = center
-			maxwidth = 120
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
 		}
+		
+		instantTextBoxType = {
+			name ="KOR_centrist_seats_status"
+			position = { x = @FACTION_NAMES_E_X y = @OTHER_SEATS_BETA_Y }
+			font = "hoi_16mbs"
+			text = "KOR_centrist_seats_status"
+			format = center
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
+		}
+		
+		instantTextBoxType = {
+			name ="KOR_centrist_seats_status"
+			position = { x = @FACTION_NAMES_E_X y = @OTHER_SEATS_BETA_Y }
+			font = "hoi_16mbs"
+			text = "KOR_centrist_seats_status"
+			format = center
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
+		}
+		
+		instantTextBoxType = {
+			name ="KOR_independent_seats_status"
+			position = { x = @FACTION_NAMES_B_X y = @OTHER_SEATS_GAMMA_Y }
+			font = "hoi_16mbs"
+			text = "KOR_independent_seats_status"
+			format = center
+			maxHeight = 24
+			#maxwidth = 120
+			maxwidth = 160
+		}
+	}
+	containerWindowType = {
+		name = "korean_parliament_container_seat"
+		position = { x = 0 y = 0 }
 
-		instantTextBoxType = {
-			name ="KOR_anarchism_seats_status"
-			position = { x = @POPULARITY_TEXT_X y = @PARTYTEXT_K_Y }
-			font = "hoi_18mbs"
-			text = "KOR_anarchism_seats_status"
-			format = center
-			maxwidth = 120
-		}
-		
-		
-		
-		
-		
-		#Tooltip
-		instantTextBoxType = {
-			name ="popularity_tooltip_fake"
-			position = { x = @POPULARITY_TEXT_X y = @HEADERS_Y }
-			format = center
-			maxwidth = 110
-			maxHeight = 205
-			pdx_tooltip = KOR_POPULARITY_TOOLTIP
+		iconType = { 
+			name = "korean_parliament_icon_gui"
+			quadTextureSprite = "korean_seat_icon"
+			pdx_tooltip = "korean_parliament_tt"
 		}
 	}
 }

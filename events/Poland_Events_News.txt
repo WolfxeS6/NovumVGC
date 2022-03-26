@@ -1,0 +1,2918 @@
+﻿add_namespace = Poland_Events_News
+
+#taking a loan
+country_event = {
+	id = Poland_Events_News.1
+	title = Poland_Events_News.1.t
+	desc = Poland_Events_News.1.d
+	picture = GFX_report_event_stock_market
+	
+	is_triggered_only = yes 
+	
+	option = {
+		trigger = {
+			NOT = {
+				has_idea = POL_Polish_national_debt_19
+				has_idea = POL_Polish_national_debt_20
+			}
+		}
+		name = Poland_Events_News.1.o1 #create factory
+	    POL_increase_national_debt_by_2 = yes
+		create_random_factory_CIV_1 = yes
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		trigger = {
+			NOT = {
+				has_idea = POL_Polish_national_debt_19
+				has_idea = POL_Polish_national_debt_20
+			}
+		}
+		name = Poland_Events_News.1.o2 #develop arms industry
+	    POL_increase_national_debt_by_2 = yes
+		create_random_factory_MIL_1 = yes
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = Poland_Events_News.1.o3 #fill the road gaps
+		POL_increase_national_debt = yes
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+option = {
+		name = Poland_Events_News.1.o4 #fund culture
+		POL_increase_national_debt = yes
+		 add_stability = 0.03
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}	
+#kwaśniewski goes drinking
+country_event = {
+	id = Poland_Events_News.2
+	title = Poland_Events_News.2.t
+	desc = Poland_Events_News.2.d
+	picture = GFX_report_event_POL_drunk_kwasniewski
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.2.o1 #nothing happens
+	    POL = { country_event = Poland_Events_News.3 }
+		add_political_power = 10
+		set_country_flag = POL_democratic_tree_unlocked
+		custom_effect_tooltip = POL_kaczka_goes_drinking_and_survives_tt
+		
+		ai_chance = {
+			factor = 100
+		modifier = {
+				add = 100
+				has_game_rule = {
+					rule = POL_ai_behavior
+					option = POL_STAY_DEMOCRATIC_OPTION
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = Poland_Events_News.2.o2 #dies
+		set_country_flag = POL_kwasniewski_ded_flag
+		POL = { country_event = Poland_Events_News.4 }
+		custom_effect_tooltip = POL_kaczka_goes_drinking_and_dies_tt
+		
+		ai_chance = {
+			factor = 10
+		modifier = {
+				add = 10000
+				has_game_rule = {
+					rule = POL_ai_behavior
+					option = POL_FALL_INTO_CRISIS
+				}
+			}
+		}
+	}
+	
+	}
+	
+#a little argument
+country_event = {
+	id = Poland_Events_News.3
+	title = Poland_Events_News.3.t
+	desc = Poland_Events_News.3.d
+	picture = GFX_report_event_POL_drunk_kwasniewski
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.3.o1 
+		add_political_power = -5
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+	
+#Kwaśniewski assassinated
+country_event = {
+	id = Poland_Events_News.4
+	title = Poland_Events_News.4.t
+	desc = Poland_Events_News.4.d
+	picture = GFX_report_event_POL_generic_pogrzeb
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.4.o1 #Kwaśniewski is dead!
+		POL = { country_event = Poland_Events_News.5 }
+		if = {
+					limit = {
+						has_character = POL_Jozef_Oleksy
+					}
+					promote_character = POL_Jozef_Oleksy
+				}
+		
+		add_stability = -0.1
+		add_political_power = -100
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#a new government
+country_event = {
+	id = Poland_Events_News.5
+	title = Poland_Events_News.5.t
+	desc = Poland_Events_News.5.d
+	picture = GFX_report_event_POL_generic_pogrzeb
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.5.o1 #we shall fix Poland!
+		load_focus_tree = Polish_tree_chaos
+		set_variable = { var = POL_instability_var value = 20 }
+		add_political_power = 50
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#political parties
+country_event = {
+	id = Poland_Events_News.6
+	title = Poland_Events_News.6.t
+	desc = Poland_Events_News.6.d
+	picture = GFX_report_event_Zgromadzenie_narodowe
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.6.o1 #SLD
+		clr_country_flag = POL_not_yet_shown_last_focus_flag
+		custom_effect_tooltip = POL_unlock_decision_to_support_SLD
+		set_global_flag = POL_unlocks_SLD_decision_flag
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.6.o2 #PO
+		clr_country_flag = POL_not_yet_shown_last_focus_flag
+		custom_effect_tooltip = POL_unlock_decision_to_support_PO
+		set_global_flag = POL_unlocks_PO_decision_flag
+		set_variable = { var = POL_unlock_po_var value = 1 }
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+     option = {
+		name = Poland_Events_News.6.o3 #PiS
+		clr_country_flag = POL_not_yet_shown_last_focus_flag
+		custom_effect_tooltip = POL_unlock_decision_to_support_PiS
+		set_global_flag = POL_unlocks_PiS_decision_flag
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.6.o4 #UPR
+		clr_country_flag = POL_not_yet_shown_last_focus_flag
+		custom_effect_tooltip = POL_unlock_decision_to_support_UPR
+		set_global_flag = POL_unlocks_UPR_decision_flag
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#victory of SLD
+country_event = {
+	id = Poland_Events_News.7
+	title = Poland_Events_News.7.t
+	desc = Poland_Events_News.7.d
+	picture = GFX_report_event_polish_election_victory
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.7.o1 #Kwaśniewski wins
+		load_focus_tree = Polish_tree_democratic
+		set_global_flag = POL_sld_won_flag
+		add_popularity = { 
+		    ideology = social_democrat
+			popularity = 0.10
+		}
+		add_political_power = 50
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#victory of PiS
+country_event = {
+	id = Poland_Events_News.8
+	title = Poland_Events_News.8.t
+	desc = Poland_Events_News.8.d
+	picture = GFX_report_event_polish_election_victory
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.8.o1 #PiS wins
+		load_focus_tree = Polish_tree_democratic
+		set_global_flag = POL_pis_won_flag
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = { 
+		    ideology = conservative
+			popularity = 0.10
+		}
+		add_political_power = 15
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#victory of UPR
+country_event = {
+	id = Poland_Events_News.9
+	title = Poland_Events_News.9.t
+	desc = Poland_Events_News.9.d
+	picture = GFX_report_event_polish_election_victory
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.9.o1 #UPR wins
+		load_focus_tree = Polish_tree_democratic
+		set_global_flag = POL_upr_won_flag
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		add_popularity = { 
+		    ideology = market_liberal
+			popularity = 0.10
+		}
+		add_political_power = 50
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#victory of PO
+country_event = {
+	id = Poland_Events_News.10
+	title = Poland_Events_News.10.t
+	desc = Poland_Events_News.10.d
+	picture = GFX_report_event_polish_election_victory
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.10.o1 #PO wins
+		load_focus_tree = Polish_tree_democratic
+		set_global_flag = POL_po_won_flag
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		add_popularity = { 
+		    ideology = social_liberal
+			popularity = 0.10
+		}
+		add_political_power = 50
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Nowa era, nowe SLD
+country_event = {
+	id = Poland_Events_News.11
+	title = Poland_Events_News.11.t
+	desc = Poland_Events_News.11.d
+	picture = GFX_report_event_POL_vote_for_sld
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.11.o1 #this shall be the new start for PSL!
+		custom_effect_tooltip = POL_sld_rise_popularity
+		add_to_variable = {
+				var = POL_popularity_of_SLD
+				value = 1
+			}
+		add_stability = 0.05
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+option = {
+		name = Poland_Events_News.11.o1 #this shall be the new start for PSL!
+		custom_effect_tooltip = POL_sld_decreasee_popularity
+		add_to_variable = {
+				var = POL_popularity_of_SLD
+				value = -2
+			}
+		add_political_power = 50
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#matters of the economy
+country_event = {
+	id = Poland_Events_News.12
+	title = Poland_Events_News.12.t
+	desc = Poland_Events_News.12.d
+	picture = GFX_report_event_stock_market
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.12.o1 #UP has some good ideas
+		set_country_flag = POL_up_economy_unlock
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+option = {
+		name = Poland_Events_News.12.o1 #SD will help us in liberalisation
+		set_country_flag = POL_sd_economy_unlock
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#internal situation
+country_event = {
+	id = Poland_Events_News.13
+	title = Poland_Events_News.13.t
+	desc = Poland_Events_News.13.d
+	picture = GFX_report_event_SLD_government_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.13.o1 
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#a court case
+country_event = {
+	id = Poland_Events_News.14
+	title = Poland_Events_News.14.t
+	desc = Poland_Events_News.14.d
+	picture = GFX_report_event_prison
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.14.o1 
+		add_political_power = -10
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#social-democratic program for Poland
+country_event = {
+	id = Poland_Events_News.15
+	title = Poland_Events_News.15.t
+	desc = Poland_Events_News.15.d
+	picture = GFX_report_event_SLD_government_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.15.o1 
+		custom_effect_tooltip = POL_upr_decrease_popularity
+		add_to_variable = {
+				var = POL_popularity_of_UPR
+				value = -1
+			}
+		custom_effect_tooltip = POL_pis_decrease_popularity
+		add_to_variable = {
+				var = POL_popularity_of_PiS
+				value = -4
+			}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#blok 2001
+country_event = {
+	id = Poland_Events_News.16
+	title = Poland_Events_News.16.t
+	desc = Poland_Events_News.16.d
+	picture = GFX_report_event_Zgromadzenie_narodowe
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.16.o1 
+		add_timed_idea = {
+				idea = POL_blok_2001
+				days = 70
+			}
+		custom_effect_tooltip = POL_po_rise_popularity
+		add_to_variable = {
+				var = POL_popularity_of_PO
+				value = 1
+			}
+		custom_effect_tooltip = POL_upr_rise_popularity
+		add_to_variable = {
+				var = POL_popularity_of_UPR
+				value = 1
+			}
+		custom_effect_tooltip = POL_pis_rise_popularity
+		add_to_variable = {
+				var = POL_popularity_of_PiS
+				value = 1
+			}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#elections for later
+country_event = {
+	id = Poland_Events_News.17
+	title = Poland_Events_News.17.t
+	desc = Poland_Events_News.17.d
+	picture = GFX_report_event_Zgromadzenie_narodowe
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.17.o1 
+		custom_effect_tooltip = POL_decrease_stability_tt
+		add_to_variable = {
+				var = POL_instability_var
+				value = 5
+			}
+		hidden_effect = {
+		set_politics = {
+				ruling_party = social_democrat
+				elections_allowed = no
+			}
+		}
+		set_country_flag = POL_disband_elections_flag
+		custom_effect_tooltip = POL_elections_will_happen_later_tt
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Kazuyasu Kimura (Grandson of Broniesław Piłsudzki) goes to Poland
+country_event = {
+	id = Poland_Events_News.18
+	title = Poland_Events_News.18.t
+	desc = Poland_Events_News.18.d
+	picture = GFX_report_event_ainu_pilsudzki_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.18.o1 
+		POL = { country_event = Poland_Events_News.19 }
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#reviving sanacja
+country_event = {
+	id = Poland_Events_News.19
+	title = Poland_Events_News.19.t
+	desc = Poland_Events_News.19.d
+	picture = GFX_report_event_pilsudski_plakat_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.19.o1 
+	set_party_name = { ideology = reactionary  long_name = POL_reactionary_sanacja_party_long name = POL_reactionary_sanacja_party }
+	if = {
+					limit = {
+						has_character = POL_kimura_pilsudzki
+					}
+					promote_character = POL_kimura_pilsudzki
+				}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#calming down the masses
+country_event = {
+	id = Poland_Events_News.20
+	title = Poland_Events_News.20.t
+	desc = Poland_Events_News.20.d
+	picture = GFX_report_event_POL_vote_for_sld
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.20.o1 
+	custom_effect_tooltip = POL_increase_stability_tt
+		add_to_variable = {
+				var = POL_instability_var
+				value = -4
+			}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#calming down the masses
+country_event = {
+	id = Poland_Events_News.21
+	title = Poland_Events_News.21.t
+	desc = Poland_Events_News.21.d
+	picture = GFX_report_event_POL_vote_for_sld
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.21.o1 
+	    custom_effect_tooltip = POL_increase_stability_tt
+		add_to_variable = {
+				var = POL_instability_var
+				value = -4
+			}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#'uniting' the coalition
+country_event = {
+	id = Poland_Events_News.22
+	title = Poland_Events_News.22.t
+	desc = Poland_Events_News.22.d
+	picture = GFX_report_event_SLD_government_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.22.o1 
+	    custom_effect_tooltip = POL_coalition_collapses_tt
+		add_political_power = -25
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#revival of the nazi party
+country_event = {
+	id = Poland_Events_News.23
+	title = Poland_Events_News.23.t
+	desc = Poland_Events_News.23.d
+	picture = POL_fascist_march_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.23.o1 
+	    
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#choosing who to support
+country_event = {
+	id = Poland_Events_News.24
+	title = Poland_Events_News.24.t
+	desc = Poland_Events_News.24.d
+	picture = POL_fascist_march_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.24.o1 #nazi
+	    set_country_flag = POL_nazi_supported
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.24.o2 #falangist
+	    set_country_flag = POL_falangist_supported
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.24.o3 #pan-slavic
+	    set_country_flag = POL_pan_slavic_supported
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.24.o4 #monarchist
+	    set_country_flag = POL_monarchist_supported
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#nationalist coup
+country_event = {
+	id = Poland_Events_News.25
+	title = Poland_Events_News.25.t
+	desc = Poland_Events_News.25.d
+	picture = POL_fascist_march_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.25.o1 
+	    if = { #nazi victory
+				limit = { 
+				    AND = {
+					    check_variable = { POL_popularity_of_PFN > POL_popularity_of_ONR }
+						check_variable = { POL_popularity_of_PFN > POL_popularity_of_PWN }
+						check_variable = { POL_popularity_of_PFN > POL_popularity_of_PRM }
+					}
+				}
+			set_politics = {
+			ruling_party = fascist
+		    elections_allowed = yes
+		}
+		    add_popularity = { 
+		    ideology = fascist
+			popularity = 0.15
+		}
+			set_party_name = { ideology = fascist long_name = POL_fascist_party_nazi_long name = POL_fascist_party_nazi }
+			if = {
+					limit = {
+						has_character = POL_Janusz_Bryczkowski
+					}
+					promote_character = POL_Janusz_Bryczkowski
+				}
+			}
+			else_if = { #pan-slavic victory 
+				limit = { 
+				    AND = {
+					    check_variable = { POL_popularity_of_PWN > POL_popularity_of_PRM }
+						check_variable = { POL_popularity_of_PWN > POL_popularity_of_ONR }
+						check_variable = { POL_popularity_of_PWN > POL_popularity_of_PFN }
+					}
+				}
+                set_politics = {
+			    ruling_party = nationalist
+		        elections_allowed = yes
+		 }
+				add_popularity = { 
+		        ideology = nationalist
+			    popularity = 0.15
+		    }
+	    }
+			}
+			else_if = { #monarchist victory
+				limit = { 
+				    AND = {
+					    check_variable = { POL_popularity_of_PRM > POL_popularity_of_ONR }
+						check_variable = { POL_popularity_of_PRM > POL_popularity_of_PWN }
+						check_variable = { POL_popularity_of_PRM > POL_popularity_of_PFN }
+					}
+				}
+				set_global_flag = POL_monarchist_tree_unlocked
+				load_focus_tree = Polish_tree_democratic
+				set_politics = {
+			    ruling_party = monarchist
+		        elections_allowed = no
+		 }
+				add_popularity = { 
+		        ideology = monarchist
+			    popularity = 0.15
+		    }
+			}
+			else = { #Falangist victory
+			set_politics = {
+			ruling_party = fascist
+		    elections_allowed = yes
+		}
+		    add_popularity = { 
+		    ideology = fascist
+			popularity = 0.15
+		}
+			}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#fascist opposition
+country_event = {
+	id = Poland_Events_News.26
+	title = Poland_Events_News.26.t
+	desc = Poland_Events_News.26.d
+	picture = POL_fascist_march_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.26.o1 
+	    add_ideas = POL_fascism_is_more_popular
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#assasination of lepper
+country_event = {
+	id = Poland_Events_News.27
+	title = Poland_Events_News.27.t
+	desc = Poland_Events_News.27.d
+	picture = GFX_report_event_POL_generic_pogrzeb
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.27.o1 
+	    if = {
+					limit = {
+						has_character = POL_jerzy_piasecki
+					}
+					promote_character = POL_jerzy_piasecki
+				}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#after Lepper
+country_event = {
+	id = Poland_Events_News.28
+	title = Poland_Events_News.28.t
+	desc = Poland_Events_News.28.d
+	picture = GFX_report_event_POL_generic_pogrzeb
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.28.o1 #PRL
+	     set_country_flag = POL_prl_revival_path
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+	name = Poland_Events_News.28.o2 #maoist
+	if = {
+					limit = {
+						has_character = POL_Kazimierz_Mijal
+					}
+					promote_character = POL_Kazimierz_Mijal
+				}
+		set_country_flag = POL_maoist_revival_path
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+	name = Poland_Events_News.28.o3 #trotskyist
+	if = {
+					limit = {
+						has_character = POL_Ludwik_Hass
+					}
+					promote_character = POL_Ludwik_Hass
+				}
+}
+		set_country_flag = POL_trotskism_revival_path
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#commie/socialist coup
+country_event = {
+	id = Poland_Events_News.29
+	title = Poland_Events_News.29.t
+	desc = Poland_Events_News.29.d
+	picture = GFX_report_event_Polish_generic_protest_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.29.o1 
+		if = { 
+				limit = { 
+				has_completed_focus = POL_united_under_lepper
+				}
+			set_politics = {
+			ruling_party = democratic_socialist
+		    elections_allowed = yes
+		}
+		    add_popularity = { 
+		    ideology = democratic_socialist
+			popularity = 0.15
+		}
+	}
+		if = { 
+				limit = { 
+				has_completed_focus = POL_assianate_lepper
+				}
+			set_politics = {
+			ruling_party = communist
+		    elections_allowed = yes
+		}
+		    add_popularity = { 
+		    ideology = communist
+			popularity = 0.15
+		}
+	}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#enforcing order
+country_event = {
+	id = Poland_Events_News.30
+	title = Poland_Events_News.30.t
+	desc = Poland_Events_News.30.d
+	picture = GFX_report_event_Polish_generic_protest_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.30.o1 
+		unlock_decision_tooltip = POL_destabilise_the_nation_dec
+		add_political_power = -100
+		custom_effect_tooltip = POL_decrease_stability_by_10_tt
+		        add_to_variable = {
+				var = POL_instability_var
+				value = 10
+			}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#enforcing order
+country_event = {
+	id = Poland_Events_News.30
+	title = Poland_Events_News.30.t
+	desc = Poland_Events_News.30.d
+	picture = GFX_report_event_Polish_generic_protest_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.30.o1 
+		add_political_power = -100
+		custom_effect_tooltip = POL_decrease_stability_by_10_tt
+		        add_to_variable = {
+				var = POL_instability_var
+				value = 75
+			}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#The Three Tenors
+country_event = {
+	id = Poland_Events_News.31
+	title = Poland_Events_News.31.t
+	desc = Poland_Events_News.31.d
+	picture = GFX_report_event_PO_the_three_tenors_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.31.o1 #Maciej Płażyński
+		set_country_flag = POL_PO_Maciej_supported_flag
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.31.o2 #Andrzej Olechowski
+		set_country_flag = POL_PO_Andrzej_supported_flag
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.31.o3 #Donald Tusk
+		set_country_flag = POL_PO_Tusk_supported_flag
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+} 
+
+#PSL asks us to support family
+country_event = {
+	id = Poland_Events_News.32
+	title = Poland_Events_News.32.t
+	desc = Poland_Events_News.32.d
+	picture = GFX_report_event_PSL_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.32.o1 #yea we can do that
+		add_political_power = -35
+		custom_effect_tooltip = POL_increase_loyality_of_pls_tt
+		add_to_variable = {
+				var = POL_loyality_of_psl_var
+				value = 10
+			}
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_manpower = 25000
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.32.o2 #we can't sorry
+		add_political_power = 10
+		custom_effect_tooltip = POL_decrease_loyality_of_pls_tt
+		add_to_variable = {
+				var = POL_loyality_of_psl_var
+				value = -10
+			}
+		
+		ai_chance = {
+			factor = 50
+		}
+	}
+} 
+
+
+#PSL asks us to support farmers
+country_event = {
+	id = Poland_Events_News.33
+	title = Poland_Events_News.33.t
+	desc = Poland_Events_News.33.d
+	picture = GFX_report_event_PSL_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.33.o1 #yea we can do that
+		add_political_power = -35
+		custom_effect_tooltip = POL_increase_loyality_of_pls_tt
+		add_to_variable = {
+				var = POL_loyality_of_psl_var
+				value = 10
+			}
+		add_stability = 0.025
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.33.o2 #we can't sorry
+		add_political_power = 10
+		custom_effect_tooltip = POL_decrease_loyality_of_pls_tt
+		add_to_variable = {
+				var = POL_loyality_of_psl_var
+				value = -10
+			}
+		
+		ai_chance = {
+			factor = 50
+		}
+	}
+} 
+
+#PSL wants us to turn more left
+country_event = {
+	id = Poland_Events_News.36
+	title = Poland_Events_News.36.t
+	desc = Poland_Events_News.36.d
+	picture = GFX_report_event_PSL_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.36.o1 #yea we can do that
+		add_political_power = -60
+		custom_effect_tooltip = POL_increase_popularity_of_this_politician
+		add_to_variable = {
+				var = POL_PODonals_power_var
+				value = 1
+			}
+		custom_effect_tooltip = POL_increase_loyality_of_pls_tt
+		add_to_variable = {
+				var = POL_loyality_of_psl_var
+				value = 10
+			}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.36.o2 #we can't sorry
+		add_political_power = 20
+		custom_effect_tooltip = POL_decrease_loyality_of_pls_tt
+		add_to_variable = {
+				var = POL_loyality_of_psl_var
+				value = -10
+			}
+		
+		ai_chance = {
+			factor = 50
+		}
+	}
+} 
+
+
+#PSL wants us to sponsor cultural events
+country_event = {
+	id = Poland_Events_News.37
+	title = Poland_Events_News.37.t
+	desc = Poland_Events_News.37.d
+	picture = GFX_report_event_PSL_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.37.o1 #yea we can do that
+		add_political_power = -25
+		custom_effect_tooltip = POL_increase_loyality_of_pls_tt
+		add_to_variable = {
+				var = POL_loyality_of_psl_var
+				value = 10
+			}
+		add_stability = 0.02
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.37.o2 #we can't sorry
+		add_political_power = 10
+		custom_effect_tooltip = POL_decrease_loyality_of_pls_tt
+		add_to_variable = {
+				var = POL_loyality_of_psl_var
+				value = -10
+			}
+		
+		ai_chance = {
+			factor = 50
+		}
+	}
+} 
+
+#PIS asks us to support family
+country_event = {
+	id = Poland_Events_News.38
+	title = Poland_Events_News.38.t
+	desc = Poland_Events_News.38.d
+	picture = GFX_report_event_pis_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.38.o1 #yea we can do that
+		add_political_power = -35
+		custom_effect_tooltip = POL_increase_loyality_of_pis_tt
+		add_to_variable = {
+				var = POL_loyality_of_pis_var
+				value = 10
+			}
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_manpower = 25000
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.38.o2 #we can't sorry
+		add_political_power = 10
+		custom_effect_tooltip = POL_decrease_loyality_of_pis_tt
+		add_to_variable = {
+				var = POL_loyality_of_pis_var
+				value = -10
+			}
+		
+		ai_chance = {
+			factor = 50
+		}
+	}
+} 
+
+#PIS asks us for extra fudnings for their party
+country_event = {
+	id = Poland_Events_News.39
+	title = Poland_Events_News.39.t
+	desc = Poland_Events_News.39.d
+	picture = GFX_report_event_pis_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.39.o1 #yea we can do that
+		custom_effect_tooltip = POL_increase_loyality_of_pis_tt
+		add_to_variable = {
+				var = POL_loyality_of_pis_var
+				value = 10
+			}
+		add_popularity = { 
+		    ideology = conservative
+			popularity = 0.015
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.39.o2 #we can't sorry
+		add_political_power = 10
+		custom_effect_tooltip = POL_decrease_loyality_of_pis_tt
+		add_to_variable = {
+				var = POL_loyality_of_pis_var
+				value = -10
+			}
+		
+		ai_chance = {
+			factor = 50
+		}
+	}
+} 
+
+#PiS supports the right wing part of our party
+country_event = {
+	id = Poland_Events_News.40
+	title = Poland_Events_News.40.t
+	desc = Poland_Events_News.40.d
+	picture = GFX_report_event_pis_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.40.o1 #yea 
+		custom_effect_tooltip = POL_increase_loyality_of_pis_tt
+		add_to_variable = {
+				var = POL_loyality_of_pis_var
+				value = 10
+			}
+		add_political_power = -30
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#PIS proposes extra subsidies for the farmers
+country_event = {
+	id = Poland_Events_News.41
+	title = Poland_Events_News.41.t
+	desc = Poland_Events_News.41.d
+	picture = GFX_report_event_pis_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.41.o1 #yea we can do that
+		add_political_power = -35
+		custom_effect_tooltip = POL_increase_loyality_of_pis_tt
+		add_to_variable = {
+				var = POL_loyality_of_pis_var
+				value = 10
+			}
+		add_stability = 0.025
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Poland_Events_News.41.o2 #we can't sorry
+		add_political_power = 10
+		custom_effect_tooltip = POL_decrease_loyality_of_pis_tt
+		add_to_variable = {
+				var = POL_loyality_of_pis_var
+				value = -10
+			}
+		
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
+
+#the end of ausertity
+country_event = {
+	id = Poland_Events_News.42
+	title = Poland_Events_News.42.t
+	desc = Poland_Events_News.42.d
+	picture = GFX_report_event_customers
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.42.o1 #back to normal
+		BHU_law_change_increase_welfare = yes
+		BHU_law_change_tax_derease = yes
+		swap_ideas = { 
+					remove_idea = POL_recovering_economy_idea
+					add_idea = POL_recovering_economy_idea_2
+				}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#the party united
+country_event = {
+	id = Poland_Events_News.43
+	title = Poland_Events_News.43.t
+	desc = Poland_Events_News.43.d
+	picture = GFX_report_event_PO_the_three_tenors_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.43.o1 #yey
+		 set_country_flag = POL_po_disable_power_struggle_decisions
+		 if = { 
+				limit = { 
+				 check_variable = { POL_POMacjes_power_var > 15 } #
+				}
+			if = {
+					limit = {
+						has_character = POL_Maciej_Plazynski
+					}
+					promote_character = POL_Maciej_Plazynski
+				}
+			set_country_flag = POL_maciejs_tree_unlocked
+		 else_if = { 
+				limit = { 
+				 check_variable = { POL_POAndrzejs_power_var > 15 }
+				}
+			set_country_flag = POL_andrzejs_tree_unlocked
+			if = {
+					limit = {
+						has_character = POL_Andrzej_Olechowski
+					}
+					promote_character = POL_Andrzej_Olechowski
+				}       
+			}
+		else_if = { 
+				limit = { 
+				 check_variable = { POL_PODonals_power_var > 15 }
+				}
+			if = {
+					limit = {
+						has_character = POL_donald_tusk
+					}
+					promote_character = POL_donald_tusk
+				}       
+			set_country_flag = POL_doandlds_tree_unlocked
+			ai_chance = {
+			factor = 100
+		}
+			}
+	}
+}
+}
+#not so united after all
+country_event = {
+	id = Poland_Events_News.44
+	title = Poland_Events_News.44.t
+	desc = Poland_Events_News.44.d
+	picture = GFX_report_event_PO_the_three_tenors_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.44.o1 #that not good
+		 unlock_decision_category_tooltip = POL_rebuilding_the_party_cat
+		 add_ideas = POL_po_government_in_crisis
+		 set_variable = { var = POL_party_rebuild_var value = 0 }
+		 set_country_flag = POL_po_unlock_party_rebuilding_decision
+			ai_chance = {
+			factor = 100
+		}
+			}
+	}
+	
+#rebranding
+country_event = {
+	id = Poland_Events_News.45
+	title = Poland_Events_News.45.t
+	desc = Poland_Events_News.45.d
+	picture = GFX_report_event_POL_po
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.45.o1 #very cool
+		 add_political_power = 25
+		 add_stability = 0.05
+		ai_chance = {
+			factor = 100
+		}	
+			}
+	}
+	
+#strenghtening the center
+country_event = {
+	id = Poland_Events_News.46
+	title = Poland_Events_News.46.t
+	desc = Poland_Events_News.46.d
+	picture = GFX_report_event_POL_po
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.46.o1 #center is the best!
+		 unlock_decision_category_tooltip = POL_rebuilding_the_party_cat
+		 add_ideas = POL_po_government_in_crisis
+		 set_variable = { var = POL_party_rebuild_var value = 0 }
+		 set_country_flag = POL_po_unlock_party_rebuilding_decision
+		ai_chance = {
+			factor = 100
+		}	
+			}
+		
+	}
+	
+#touring universities
+country_event = {
+	id = Poland_Events_News.47
+	title = Poland_Events_News.47.t
+	desc = Poland_Events_News.47.d
+	picture = GFX_report_event_POL_university
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.47.o1 
+		add_timed_idea = {
+				idea = POL_toured_the_universities
+				days = 365
+		ai_chance = {
+			factor = 100
+		}
+		}
+		
+	}
+}
+#center-right stands victorius
+country_event = {
+	id = Poland_Events_News.48
+	title = Poland_Events_News.48.t
+	desc = Poland_Events_News.48.d
+	picture = GFX_report_event_POL_po
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.48.o1 #quite
+		 unlock_decision_category_tooltip = POL_rebuilding_the_party_cat
+		 add_ideas = POL_po_government_in_crisis
+		 set_variable = { var = POL_party_rebuild_var value = 0 }
+		 set_country_flag = POL_po_unlock_party_rebuilding_decision
+		ai_chance = {
+			factor = 100
+		}
+			}
+		
+	}
+
+#purging the party
+country_event = {
+	id = Poland_Events_News.49
+	title = Poland_Events_News.49.t
+	desc = Poland_Events_News.49.d
+	picture = GFX_report_event_POL_po
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.49.o1 #a purge but u only kick people out
+		 add_political_power = -75
+		ai_chance = {
+			factor = 100
+		}
+		}
+	}	
+	
+#...but is it really a victory
+country_event = {
+	id = Poland_Events_News.50
+	title = Poland_Events_News.50.t
+	desc = Poland_Events_News.50.d
+	picture = GFX_report_event_SLD_government_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.50.o1 #
+		unlock_decision_category_tooltip = POL_a_weak_government_cat
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+#the report on corruption
+country_event = {
+	id = Poland_Events_News.51
+	title = Poland_Events_News.51.t
+	desc = Poland_Events_News.51.d
+	picture = GFX_report_event_SLD_government_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.51.o1 #
+		unlock_decision_category_tooltip = POL_party_corruption_cat
+		ai_chance = {
+			factor = 100
+		}
+	  }
+	}
+
+#tackling the issues
+country_event = {
+	id = Poland_Events_News.52
+	title = Poland_Events_News.52.t
+	desc = Poland_Events_News.52.d
+	picture = GFX_report_event_SLD_government_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.52.o1 #more liberal approach
+		custom_effect_tooltip = POL_sld_increase_popularity_of_the_third_way
+		add_to_variable = {
+				var = POL_third_way_var
+				value = 1
+			}
+		set_country_flag = POL_sld_third_way_decisions_unlocked
+		custom_effect_tooltip = POL_unlock_extra_decisions
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	option = {
+		name = Poland_Events_News.52.o2 #more socialist approach
+		custom_effect_tooltip = POL_sld_increase_popularity_of_welfare_state
+		add_to_variable = {
+				var = POL_welfare_state_var
+				value = 1
+			}
+		set_country_flag = POL_sld_welfare_state_decisions_unlocked
+		custom_effect_tooltip = POL_unlock_extra_decisions
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	}	
+	
+#kwaśniewski, contain yourself!
+country_event = {
+	id = Poland_Events_News.53
+	title = Poland_Events_News.53.t
+	desc = Poland_Events_News.53.d
+	picture = GFX_report_event_POL_drunk_kwasniewski
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.53.o1 
+		add_political_power = 50
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	option = {
+		name = Poland_Events_News.53.o2
+		remove_country_leader_trait = hedonist
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	}
+	
+#dealing with corruption
+country_event = {
+	id = Poland_Events_News.54
+	title = Poland_Events_News.54.t
+	desc = Poland_Events_News.54.d
+	picture = GFX_report_event_SLD_government_event
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.54.o1 
+		set_country_flag = POL_choosen_to_deal_with_corruption_limited
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	option = {
+		name = Poland_Events_News.54.o2 
+		set_country_flag = POL_choosen_to_deal_with_corruption_big_boi
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	}	
+	
+#party support
+country_event = {
+	id = Poland_Events_News.55
+	title = Poland_Events_News.55.t
+	desc = Poland_Events_News.55.d
+	picture = GFX_report_event_Zgromadzenie_narodowe
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.55.o1 
+		set_country_flag = POL_upr_support_korwinists
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	option = {
+		name = Poland_Events_News.55.o2 
+		set_country_flag = POL_upr_support_normal_bois
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	}
+	
+#Rising Democratic Opposition
+country_event = {
+	id = Poland_Events_News.56
+	title = Poland_Events_News.56.t
+	desc = Poland_Events_News.56.d
+	picture = GFX_report_event_Zgromadzenie_narodowe
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.56.o1 
+		add_ideas = POL_upr_democratic_oposition
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	}
+
+#the future of our education
+country_event = {
+	id = Poland_Events_News.57
+	title = Poland_Events_News.57.t
+	desc = Poland_Events_News.57.d
+	picture = GFX_report_event_POL_university
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.57.o1 
+		add_ideas = POL_upr_privatised_education
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	option = {
+		name = Poland_Events_News.57.o2
+		add_ideas = POL_upr_decentralised_education
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}	
+	
+#the economy's direction
+country_event = {
+	id = Poland_Events_News.58
+	title = Poland_Events_News.58.t
+	desc = Poland_Events_News.58.d
+	picture = GFX_report_event_stock_market
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.58.o1 
+		add_dynamic_modifier = { modifier = POL_pis_economy_modifier }
+		POL_pis_socialist_economy_increase_effect = yes
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	option = {
+		name = Poland_Events_News.58.o2
+		add_dynamic_modifier = { modifier = POL_pis_economy_modifier }
+		POL_pis_liberal_economy_increase_effect = yes
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}
+
+#PO betrayes us
+country_event = {
+	id = Poland_Events_News.59
+	title = Poland_Events_News.59.t
+	desc = Poland_Events_News.59.d
+	picture = GFX_report_event_PO_the_three_tenors_event
+	
+	is_triggered_only = yes 
+	
+	
+	fire_only_once = yes
+	trigger = {
+		original_tag = POL
+		has_government = conservative
+	    has_completed_focus = POL_pis_stands_victorius
+	}
+	
+	mean_time_to_happen = {
+		days = 40
+	}
+	
+	option = {
+		name = Poland_Events_News.59.o1 
+		add_popularity = { 
+		    ideology = social_liberal
+			popularity = 0.05
+		}
+		custom_effect_tooltip = POL_sld_weaken_the_government
+		add_to_variable = {
+				var = POL_SLD_government_strenght
+				value = -4
+			}
+        clamp_variable = { var = POL_SLD_corruption_var min = 0 max = 100 }
+        POL_sld_check_party_strenght = yes
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}
+
+#Giedroyc's Death
+country_event = {
+	id = Poland_Events_News.60
+	title = Poland_Events_News.60.t
+	desc = Poland_Events_News.60.d
+	picture = GFX_report_event_POL_generic_pogrzeb
+	
+	is_triggered_only = yes 
+	
+	
+	fire_only_once = yes
+	trigger = {
+		original_tag = POL
+	date > 2000.05.01
+	date < 2000.9.08
+	}
+	
+	option = {
+		name = Poland_Events_News.60.o1 
+		add_political_power = -15
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}
+
+#the future of our diplomacy
+country_event = {
+	id = Poland_Events_News.61
+	title = Poland_Events_News.61.t
+	desc = Poland_Events_News.61.d
+	picture = GFX_report_event_Zgromadzenie_narodowe
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.61.o1 
+		add_political_power = 50
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}	
+	
+#foreign buisness getting stronger
+country_event = {
+	id = Poland_Events_News.63
+	title = Poland_Events_News.63.t
+	desc = Poland_Events_News.63.d
+	picture = GFX_report_event_european_union
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.63.o1 
+		add_timed_idea = {
+				idea = POL_foreign_companies
+				days = 420
+			}
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}	
+	
+#moving away from Poland
+country_event = {
+	id = Poland_Events_News.62
+	title = Poland_Events_News.62.t
+	desc = Poland_Events_News.62.d
+	picture = GFX_report_event_european_union
+	
+	is_triggered_only = yes 
+	
+	
+	fire_only_once = yes
+	trigger = {
+    is_EU_member = yes
+	}
+	
+	mean_time_to_happen = {
+		days = 40
+	}
+	
+	option = {
+		name = Poland_Events_News.62.o1 
+		add_timed_idea = {
+				idea = POL_more_people_leaving_poland
+				days = 420
+			}
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}
+
+#Poland Deanounces us!
+country_event = {
+	id = Poland_Events_News.64
+	title = Poland_Events_News.64.t
+	desc = Poland_Events_News.64.d
+	picture = GFX_report_event_european_union
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.64.o1 
+		add_political_power = -35
+		add_stability = -0.035
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}
+
+#Poland will stay with NATO
+country_event = {
+	id = Poland_Events_News.65
+	title = Poland_Events_News.65.t
+	desc = Poland_Events_News.65.d
+	picture = GFX_report_event_nato
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.65.o1 
+		add_political_power = 15
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}
+
+#Poland's air mission
+country_event = {
+	id = Poland_Events_News.66
+	title = Poland_Events_News.66.t
+	desc = Poland_Events_News.66.d
+	picture = GFX_report_event_nato
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.66.o1 
+		air_experience = 10
+		add_equipment_to_stockpile = { 
+				type = fighter_equipment_3 
+				amount = 10
+				producer = USA
+			}
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}
+
+#Poland aids us in Defences
+country_event = {
+	id = Poland_Events_News.67
+	title = Poland_Events_News.67.t
+	desc = Poland_Events_News.67.d
+	picture = GFX_report_event_nato
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.67.o1 
+		add_timed_idea = {
+				idea = POL_Polish_aid_in_defences
+				days = 420
+			}
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}
+
+#yearly military tranings
+country_event = {
+	id = Poland_Events_News.68
+	title = Poland_Events_News.68.t
+	desc = Poland_Events_News.68.d
+	picture = GFX_report_event_nato
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.68.o1 
+		hidden_effect = {
+	 country_event = { 
+                          id = Poland_Events_News.63
+                          days = 365
+                     }
+	}
+		army_experience = 10
+	air_experience = 10
+	navy_experience = 10
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}	
+	
+#Poland distances from NATO
+country_event = {
+	id = Poland_Events_News.69 #nice event 
+	title = Poland_Events_News.69.t
+	desc = Poland_Events_News.69.d
+	picture = GFX_report_event_nato
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.69.o1 
+		add_opinion_modifier = { target = POL modifier = hostile_public_opinion }
+		add_political_power = -15
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+	}
+	
+#question of NATO cooperation
+country_event = {
+	id = Poland_Events_News.70 
+	title = Poland_Events_News.70.t
+	desc = Poland_Events_News.70.d
+	picture = GFX_report_event_nato
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.70.o1 
+		add_ideas = POL_nato_bases_idea
+		ai_chance = {
+			factor = 100
+		  }
+		}
+    option = {
+		name = Poland_Events_News.70.o2
+		add_war_support = 0.05
+		add_political_power = 25
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}
+
+#Invitation to Trójmorze
+country_event = {
+	id = Poland_Events_News.71 
+	title = Poland_Events_News.71.t
+	desc = Poland_Events_News.71.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.71.o1 
+		POL = { add_to_faction = ROOT }
+		set_country_flag = seeks_polish_alliance
+		POL = { country_event = diplomatic_response.1 }
+		ai_chance = {
+			factor = 70
+		  }
+		}
+    option = {
+		name = Poland_Events_News.71.o2
+		add_political_power = -50
+		POL = { country_event = diplomatic_response.2 }
+		ai_chance = {
+			factor = 30
+		  }
+		}		
+	}
+
+#Polish investors
+country_event = {
+	id = Poland_Events_News.72
+	title = Poland_Events_News.72.t
+	desc = Poland_Events_News.72.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.72.o1 
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				    }
+			}
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}
+
+#Polish military tranings
+country_event = {
+	id = Poland_Events_News.73
+	title = Poland_Events_News.73.t
+	desc = Poland_Events_News.73.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.73.o1 
+		add_manpower = 5000
+		army_experience = 25
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}	
+
+#economy begin
+country_event = {
+	id = Poland_Events_News.74
+	title = Poland_Events_News.74.t
+	desc = Poland_Events_News.74.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.74.o1 
+		add_ideas = POL_working_with_other_trojmorze_economies
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}	
+	
+#Together we are strong
+country_event = {
+	id = Poland_Events_News.75
+	title = Poland_Events_News.75.t
+	desc = Poland_Events_News.75.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.75.o1 
+		custom_effect_tooltip = POL_sld_tax_the_rich_tt
+	    add_to_variable = { NVX_ECO_health = 2 }
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}
+	
+#increase military budget?
+country_event = {
+	id = Poland_Events_News.76
+	title = Poland_Events_News.76.t
+	desc = Poland_Events_News.76.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.76.o1 
+		add_timed_idea = {
+				idea = POL_increased_military_budget
+				days = 365
+			}
+		ai_chance = {
+			factor = 30
+		  }
+		}		
+	option = {
+		name = Poland_Events_News.76.o2
+		add_political_power = -50
+		ai_chance = {
+			factor = 100
+		  }
+		}
+	}
+
+#border protection imporovments
+country_event = {
+	id = Poland_Events_News.77
+	title = Poland_Events_News.77.t
+	desc = Poland_Events_News.77.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.77.o1 
+		add_ideas = POL_joint_border_protections
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}
+#cool planning bonus
+country_event = {
+	id = Poland_Events_News.78
+	title = Poland_Events_News.78.t
+	desc = Poland_Events_News.78.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.78.o1 
+		every_unit_leader = {
+	    add_planning = 1
+		}
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}	
+	
+#Russia: the true enemy
+country_event = {
+	id = Poland_Events_News.79
+	title = Poland_Events_News.79.t
+	desc = Poland_Events_News.79.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.79.o1 
+		add_ideas = POL_anti_russian_sentiments_idea
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}
+
+#Belarus: are our enemy as well
+country_event = {
+	id = Poland_Events_News.80
+	title = Poland_Events_News.80.t
+	desc = Poland_Events_News.80.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.80.o1 
+		swap_ideas = { 
+					remove_idea = POL_anti_russian_sentiments_idea
+					add_idea = POL_anti_russian_sentiments_idea_2
+				}
+		ai_chance = {
+			factor = 30
+		  }
+		}		
+	}
+
+#Belarus: are our enemy as well
+country_event = {
+	id = Poland_Events_News.81
+	title = Poland_Events_News.81.t
+	desc = Poland_Events_News.81.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.81.o1 
+		SOV = {
+				add_opinion_modifier = {
+					target = POL
+					modifier = declaration_of_friendship
+				}
+			}
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}	
+	
+	
+#they called us cringe!
+country_event = {
+	id = Poland_Events_News.82
+	title = Poland_Events_News.82.t
+	desc = Poland_Events_News.82.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.82.o1 
+		add_political_power = -30
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+}
+#Poland wants to join CSTO
+country_event = {
+	id = Poland_Events_News.83
+	title = Poland_Events_News.83.t
+	desc = Poland_Events_News.83.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.83.o1 
+		FROM = { add_to_faction = ROOT }
+		FROM = { country_event = diplomatic_response.1 }
+
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+    option = {
+		name = Poland_Events_News.83.o2
+		add_political_power = -100
+
+		ai_chance = {
+			factor = 0 #cringe option
+		  }
+		}				
+	 }
+	 
+#Growing Russian Influence
+country_event = {
+	id = Poland_Events_News.83
+	title = Poland_Events_News.83.t
+	desc = Poland_Events_News.83.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+    fire_only_once = yes
+	trigger = {
+		original_tag = POL
+		is_in_faction_with = SOV
+	}
+	
+	option = {
+		name = Poland_Events_News.83.o1 
+		add_ideas = POL_very_low_russian_influence
+		set_country_flag = POL_russian_influence_decisions_unlocked
+
+		ai_chance = {
+			factor = 100
+		  }
+		}					
+	 }
+	 
+#Oligarchic Issue
+country_event = {
+	id = Poland_Events_News.84
+	title = Poland_Events_News.84.t
+	desc = Poland_Events_News.84.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.84.o1 
+		POL_lower_russian_influence_effect = yes
+		add_political_power = 35
+
+		ai_chance = {
+			factor = 100
+		  }
+		}
+
+     option = {
+		name = Poland_Events_News.84.o2
+		POL_increase_russian_influence_effect = yes
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}
+
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	 }
+	 
+#Poland's propsal
+country_event = {
+	id = Poland_Events_News.85
+	title = Poland_Events_News.85.t
+	desc = Poland_Events_News.85.d
+	picture = GFX_report_event_russian_flag
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.85.o1 
+		add_political_power = 50
+
+		ai_chance = {
+			factor = 100
+		  }
+		}					
+	 }
+	 
+#we must prepare
+country_event = {
+	id = Poland_Events_News.86
+	title = Poland_Events_News.86.t
+	desc = Poland_Events_News.86.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.86.o1 
+		add_war_support = 0.05
+
+		ai_chance = {
+			factor = 100
+		  }
+		}					
+	 }
+	 
+#Poland and Russia devide Belarus
+country_event = {
+	id = Poland_Events_News.87
+	title = Poland_Events_News.87.t
+	desc = Poland_Events_News.87.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.87.o1
+	
+	random_country = {
+			limit = {
+				tag = POL
+			}
+			country_event = { id = diplomatic_response.1 }
+		}
+		POL = { transfer_state = 94 }
+		POL = { transfer_state = 808 }
+		POL = { transfer_state = 95 }
+		
+		SOV = { transfer_state = 207 }
+		SOV = { transfer_state = 241 }
+		SOV = { transfer_state = 204 }
+		SOV = { transfer_state = 206 }
+		SOV = { transfer_state = 194 }
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = Poland_Events_News.87.o2
+		
+		random_country = {
+			limit = {
+				tag = POL
+			}
+			country_event = { id = diplomatic_response.2 }
+		}
+		SOV = {
+			create_wargoal = {
+				type = annex_everything
+				target = BLR
+			}
+		}
+		random_country = {
+			limit = {
+				tag = POL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BLR
+			}
+		}
+		
+		add_political_power = -25
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+} 
+
+#Poland and Russia devide Ukraine
+country_event = {
+	id = Poland_Events_News.88
+	title = Poland_Events_News.88.t
+	desc = Poland_Events_News.88.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.88.o1
+	
+	random_country = {
+			limit = {
+				tag = POL
+			}
+			country_event = { id = diplomatic_response.1 }
+		}
+		SOV = { annex_country = { target = UKR } }
+		POL = { transfer_state = 91 }
+		POL = { transfer_state = 89 }
+		POL = { transfer_state = 95 }
+		POL = { transfer_state = 80 }
+		POL = { transfer_state = 93 }
+		HUN = { transfer_state = 73 }
+		
+		
+		ai_chance = {
+			factor = 95
+		}
+	}
+	
+	option = {
+		name = Poland_Events_News.88.o2
+		
+		random_country = {
+			limit = {
+				tag = POL
+			}
+			country_event = { id = diplomatic_response.2 }
+		}
+		SOV = {
+			create_wargoal = {
+				type = annex_everything
+				target = UKR
+			}
+		}
+		POL = {
+			create_wargoal = {
+				type = annex_everything
+				target = UKR
+			}
+		}
+		
+		add_political_power = -25
+		
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+
+#which type of monarchy?
+country_event = {
+	id = Poland_Events_News.89
+	title = Poland_Events_News.89.t
+	desc = Poland_Events_News.89.d
+	picture = GFX_report_event_polish_monarchy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.89.o1 
+		add_political_power = 50
+        add_to_variable = {
+				var = POL_monarchy_support_for_absolute
+				value = 2
+			}
+		custom_effect_tooltip = POL_POL_monarchy_support_for_absolute_increase_tt
+		ai_chance = {
+			factor = 100
+		  }
+		}
+     option = {
+		name = Poland_Events_News.89.o2
+		add_political_power = 50
+        add_to_variable = {
+				var = POL_monarchy_support_for_constituional
+				value = 2
+			}
+		custom_effect_tooltip = POL_monarchy_support_for_constituional_increase_tt
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	 }
+	 
+#which type of monarchy?
+country_event = {
+	id = Poland_Events_News.90
+	title = Poland_Events_News.90.t
+	desc = Poland_Events_News.90.d
+	picture = GFX_report_event_polish_monarchy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.90.o1 
+		set_country_flag = POL_constituional_decisions_and_focus_unlocked
+		custom_effect_tooltip = POL_constituional_decisions_and_focus_unlocked_tt
+		ai_chance = {
+			factor = 100
+		  }
+		}
+     option = {
+		name = Poland_Events_News.90.o2
+		set_country_flag = POL_absolute_decisions_and_focus_unlocked
+		custom_effect_tooltip = POL_absolute_decisions_and_focus_unlocked_tt
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	 }
+	 
+#A new king!
+country_event = {
+	id = Poland_Events_News.91
+	title = Poland_Events_News.91.t
+	desc = Poland_Events_News.91.d
+	picture = GFX_report_event_polish_monarchy
+	
+	fire_only_once = no
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.91.o1 #Maria Emanuel Wettin
+		if = {
+					limit = {
+						has_character = POL_Maria_Emanuel_Wettin
+					}
+					promote_character = POL_Maria_Emanuel_Wettin
+				}
+		ai_chance = {
+			factor = 100
+		  }
+		}
+     option = {
+		name = Poland_Events_News.91.o2 #Prince Edward
+		unlock_national_focus = POL_monarchist_from_a_british_prince_to_a_polish_king
+		if = {
+					limit = {
+						has_character = POL_prince_edward
+					}
+					promote_character = POL_prince_edward
+				}
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+
+    option = {
+		name = Poland_Events_News.91.o3 #Guillaume De Louvencourt-Poniatowski
+		unlock_national_focus = POL_monarchist_an_heir_to_poniatowski
+		if = {
+					limit = {
+						has_character = POL_Guillaume_De_Louvencourt_Poniatowski
+					}
+					promote_character = POL_Guillaume_De_Louvencourt_Poniatowski
+				}
+		ai_chance = {
+			factor = 100
+		  }
+		}
+     option = {
+		name = Poland_Events_News.91.o4 
+		POL = { country_event = Poland_Events_News.92 }
+		}
+		ai_chance = {
+			factor = 100
+		  }
+		}
+
+#maybe diffrent...
+country_event = {
+	id = Poland_Events_News.92
+	title = Poland_Events_News.92.t
+	desc = Poland_Events_News.92.d
+	picture = GFX_report_event_polish_monarchy
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.92.o1 #Karin Sobieski
+		if = {
+					limit = {
+						has_character = POL_Karin_Sobieski
+					}
+					promote_character = POL_Karin_Sobieski
+				}
+		ai_chance = {
+			factor = 100
+		  }
+		}
+     option = {
+		name = Poland_Events_News.92.o2 #Maria Vladimirovna
+		unlock_national_focus = POL_monarchist_a_return_to_romanov
+		if = {
+					limit = {
+						has_character = POL_Maria_Vladimirovna
+					}
+					promote_character = POL_Maria_Vladimirovna
+				}
+		ai_chance = {
+			factor = 100
+		  }
+		}	
+
+    option = {
+		name = Poland_Events_News.92.o3 #Karol Stefan Habsburg
+		unlock_national_focus = POL_monarchist_a_polish_habsurg
+		if = {
+					limit = {
+						has_character = POL_karol_stefan_habsburg
+					}
+					promote_character = POL_karol_stefan_habsburg
+				}
+		ai_chance = {
+			factor = 100
+		  }
+		}
+     option = {
+		name = Poland_Events_News.92.o4 
+		POL = { country_event = Poland_Events_News.91 }
+		ai_chance = {
+			factor = 100
+		  }
+		}
+       }
+#onarchist coup
+country_event = {
+	id = Poland_Events_News.93
+	title = Poland_Events_News.93.t
+	desc = Poland_Events_News.93.d
+	picture = GFX_report_event_coup
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = Poland_Events_News.93.o1 #Monarchists Return
+		POL = {
+				puppet = ROOT
+			}
+		set_politics = {
+			    ruling_party = monarchist
+		        elections_allowed = no
+		 }
+		ai_chance = {
+			factor = 100
+		  }
+		}
+     }		
+	 
+#Invitation to Habsburg faction
+country_event = {
+	id = Poland_Events_News.94
+	title = Poland_Events_News.94.t
+	desc = Poland_Events_News.94.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.94.o1 
+		POL = { add_to_faction = ROOT }
+		set_country_flag = seeks_polish_alliance
+		POL = { country_event = diplomatic_response.1 }
+		ai_chance = {
+			factor = 100
+		  }
+		}
+    option = {
+		name = Poland_Events_News.94.o2
+		add_political_power = -50
+		POL = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+			}
+		}
+		POL = { country_event = diplomatic_response.2 }
+		ai_chance = {
+			factor = 0
+		  }
+		}		
+	}
+	
+#Poland propses unification
+country_event = {
+	id = Poland_Events_News.95
+	title = Poland_Events_News.95.t
+	desc = Poland_Events_News.95.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.95.o1 
+		POL = { annex_country = { target = ROOT } }
+		POL = { country_event = diplomatic_response.1 }
+		ai_chance = {
+			factor = 100
+		  }
+		}
+    option = {
+		name = Poland_Events_News.95.o2
+		add_political_power = -50
+		POL = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+			}
+		}
+		POL = { country_event = diplomatic_response.2 }
+		ai_chance = {
+			factor = 0
+		  }
+		}		
+	}
+	
+#Poland propses unification
+country_event = {
+	id = Poland_Events_News.96
+	title = Poland_Events_News.96.t
+	desc = Poland_Events_News.96.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.96.o1 
+		navy_experience = 25
+		ai_chance = {
+			factor = 100
+		  }
+		}		
+	}
+
+#Invitation to Polish alliance generic
+country_event = {
+	id = Poland_Events_News.97 
+	title = Poland_Events_News.97.t
+	desc = Poland_Events_News.97.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.97.o1 
+		POL = { add_to_faction = ROOT }
+		set_country_flag = seeks_polish_alliance
+		POL = { country_event = diplomatic_response.1 }
+		ai_chance = {
+			factor = 100
+		  }
+		}
+    option = {
+		name = Poland_Events_News.97.o2
+		add_political_power = -50
+		POL = { country_event = diplomatic_response.2 }
+		ai_chance = {
+			factor = 0
+		  }
+		}		
+	}	
+	
+	
+#Poland puppets Liberia
+country_event = {
+	id = Poland_Events_News.98 
+	title = Poland_Events_News.98.t
+	desc = Poland_Events_News.98.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.98.o1 
+		POL = {
+				puppet = LIB
+			}
+		POL = { country_event = diplomatic_response.1 }
+		ai_chance = {
+			factor = 100
+		  }
+		}
+    option = {
+		name = Poland_Events_News.98.o2
+		POL = {
+			create_wargoal = {
+				type = annex_everything
+				target = LIB
+			}
+		}
+		POL = { country_event = diplomatic_response.2 }
+		ai_chance = {
+			factor = 0
+		  }
+		}		
+	}
+	
+#Poland Wants to buy Parana
+country_event = {
+	id = Poland_Events_News.99
+	title = Poland_Events_News.99.t
+	desc = Poland_Events_News.99.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Poland_Events_News.99.o1 
+		add_timed_idea = {
+				idea = POL_sold_lands
+				days = 200
+			}
+		POL = { transfer_state = 503 }
+		POL = { country_event = diplomatic_response.1 }
+		ai_chance = {
+			factor = 100
+		  }
+		}
+    option = {
+		name = Poland_Events_News.99.o2
+		POL = {
+			create_wargoal = {
+				type = annex_everything
+				target = BRA
+			}
+		}
+		POL = { country_event = diplomatic_response.2 }
+		ai_chance = {
+			factor = 0
+		  }
+		}		
+	}	

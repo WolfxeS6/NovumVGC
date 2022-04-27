@@ -1,0 +1,343 @@
+#####
+##### PROPAGANDA SYSTEM #####
+#####
+
+
+JAP_reset_propaganda_campaign_slot_effect = {
+	hidden_effect = {
+		# No use "old poster"
+	}
+}
+
+JAP_pick_propaganda_campaign_slot_effect = {
+	hidden_effect = {
+		if = {
+			limit = {
+				check_variable = { JAP_poster_left_icon_frame = JAP_propaganda_empty_slot_index }
+			}
+			set_variable = { JAP_poster_left_icon_frame = JAP_new_propaganda_campaign }
+			#Ageing posters
+			set_variable = { JAP_propaganda_left_poster_to_age = JAP_poster_left_icon_frame } #This is used to prevent the system to break if a propaganda campaign is cancelled
+			hidden_effect = {
+				#set_country_flag = { flag = JAP_propaganda_left_days_remaining_flag days = JAP_default_propaganda_campaign_duration } #Surprise! This doesnät work with vars :D  Maybe in the future
+				if = { #Debug -> Faster time
+					limit = {
+						has_country_flag = JAP_debug_fast_propaganda_campaigns_flag
+					}
+					set_country_flag = { flag = JAP_propaganda_left_days_remaining_flag days = 5 }
+				}
+				else = { #Regular time
+					set_country_flag = { flag = JAP_propaganda_left_days_remaining_flag days = 180 } #Need code support to use a var here
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { JAP_poster_center_icon_frame = JAP_propaganda_empty_slot_index }
+			}
+			set_variable = { JAP_poster_center_icon_frame = JAP_new_propaganda_campaign }
+			#Ageing posters
+			set_variable = { JAP_propaganda_center_poster_to_age = JAP_poster_center_icon_frame } #This is used to prevent the system to break if a propaganda campaign is cancelled
+			hidden_effect = {
+				#set_country_flag = { flag = JAP_propaganda_center_days_remaining_flag days = JAP_default_propaganda_campaign_duration } #Surprise! This doesnät work with vars :D  Maybe in the future
+				if = { #Debug -> Faster time
+					limit = {
+						has_country_flag = JAP_debug_fast_propaganda_campaigns_flag
+					}
+					set_country_flag = { flag = JAP_propaganda_center_days_remaining_flag days = 5 }
+				}
+				else = { #Regular time
+					set_country_flag = { flag = JAP_propaganda_center_days_remaining_flag days = 180 } #Need code support to use a var here
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { JAP_poster_right_icon_frame = JAP_propaganda_empty_slot_index }
+			}
+			set_variable = { JAP_poster_right_icon_frame = JAP_new_propaganda_campaign }
+			#Ageing posters
+			set_variable = { JAP_propaganda_right_poster_to_age = JAP_poster_right_icon_frame } #This is used to prevent the system to break if a propaganda campaign is cancelled
+			hidden_effect = {
+				#set_country_flag = { flag = JAP_propaganda_right_days_remaining_flag days = JAP_default_propaganda_campaign_duration } #Surprise! This doesnät work with vars :D  Maybe in the future
+				if = { #Debug -> Faster time
+					limit = {
+						has_country_flag = JAP_debug_fast_propaganda_campaigns_flag
+					}
+					set_country_flag = { flag = JAP_propaganda_right_days_remaining_flag days = 5 }
+				}
+				else = { #Regular time
+					set_country_flag = { flag = JAP_propaganda_right_days_remaining_flag days = 180 } #Need code support to use a var here
+				}
+			}
+		}
+		set_variable = { JAP_new_propaganda_campaign = 0 } # Reset var
+		add_to_variable = { JAP_propaganda_campaigns_taken = 1 } #Update propaganda campaigns counter
+	}
+}
+
+JAP_unlock_propaganda_campaign_slot_effect = {
+	hidden_effect = {
+		if = {
+			limit = {
+				check_variable = { JAP_poster_left_icon_frame = JAP_propaganda_locked_slot_index }
+			}
+			set_variable = { JAP_poster_left_icon_frame = JAP_propaganda_empty_slot_index }
+		}
+		else_if = {
+			limit = {
+				check_variable = { JAP_poster_center_icon_frame = JAP_propaganda_locked_slot_index }
+			}
+			set_variable = { JAP_poster_center_icon_frame = JAP_propaganda_empty_slot_index }
+		}
+		else = {
+			set_variable = { JAP_poster_right_icon_frame = JAP_propaganda_empty_slot_index }
+		}
+	}
+}
+
+JAP_increase_propaganda_campaign_cost_effect = {
+	multiply_variable = { JAP_propaganda_cost = JAP_propaganda_cost_increase } #Using generic var JAP_propaganda_cost so that we only need to change this operation to tweak all propagandas' cost escalation
+}
+
+### Jeitai
+
+JAP_JieitaiPopularity_minmax_effect = {
+	clamp_variable = {
+		var = JieitaiPopularity
+		min = 0
+		max = 100
+	}
+	JAP_P_dynamic_modifers_effect = yes
+}
+
+JAP_JieitaiDiscipline_minmax_effect = {
+	clamp_variable = {
+		var = JieitaiDiscipline
+		min = 0
+		max = 100
+	}
+	JAP_D_dynamic_modifers_effect = yes
+}
+
+JAP_JieitaiPopularity_add_2_half_effect = {
+	add_to_variable = { var = JieitaiPopularity value = 2.5 }
+	custom_effect_tooltip = JAP_add_JieitaiPopularity_2_half_tt
+	JAP_JieitaiPopularity_minmax_effect = yes
+}
+
+JAP_JieitaiPopularity_add_5_effect = {
+	add_to_variable = { var = JieitaiPopularity value = 5 }
+	custom_effect_tooltip = JAP_add_JieitaiPopularity_5_tt
+	JAP_JieitaiPopularity_minmax_effect = yes
+}
+
+JAP_JieitaiPopularity_subtract_2_half_effect = {
+	add_to_variable = { var = JieitaiPopularity value = -2.5 }
+	custom_effect_tooltip = JAP_subtract_JieitaiPopularity_2_half_tt
+	JAP_JieitaiPopularity_minmax_effect = yes
+}
+
+JAP_JieitaiPopularity_subtract_5_effect = {
+	add_to_variable = { var = JieitaiPopularity value = -5 }
+	custom_effect_tooltip = JAP_subtract_JieitaiPopularity_5_half_tt
+	JAP_JieitaiPopularity_minmax_effect = yes
+}
+
+JAP_JieitaiPopularity_subtract_10_effect = {
+	add_to_variable = { var = JieitaiPopularity value = -10 }
+	custom_effect_tooltip = JAP_subtract_JieitaiPopularity_10_half_tt
+	JAP_JieitaiPopularity_minmax_effect = yes
+}
+
+JAP_JieitaiDiscipline_add_2_half_effect = {
+	add_to_variable = { var = JieitaiDiscipline value = 2.5 }
+	custom_effect_tooltip = JAP_add_JieitaiDiscipline_2_half_tt
+	JAP_JieitaiDiscipline_minmax_effect = yes
+}
+
+JAP_JieitaiDiscipline_add_5_effect = {
+	add_to_variable = { var = JieitaiDiscipline value = 5 }
+	custom_effect_tooltip = JAP_add_JieitaiDiscipline_5_tt
+	JAP_JieitaiDiscipline_minmax_effect = yes
+}
+
+JAP_JieitaiDiscipline_subtract_2_half_effect = {
+	add_to_variable = { var = JieitaiDiscipline value = -2.5 }
+	custom_effect_tooltip = JAP_subtract_JieitaiDiscipline_2_half_tt
+	JAP_JieitaiDiscipline_minmax_effect = yes
+}
+
+JAP_JieitaiDiscipline_subtract_5_effect = {
+	add_to_variable = { var = JieitaiDiscipline value = -5 }
+	custom_effect_tooltip = JAP_subtract_JieitaiDiscipline_5_half_tt
+	JAP_JieitaiDiscipline_minmax_effect = yes
+}
+
+JAP_JieitaiDiscipline_subtract_10_effect = {
+	add_to_variable = { var = JieitaiDiscipline value = -10 }
+	custom_effect_tooltip = JAP_subtract_JieitaiDiscipline_10_half_tt
+	JAP_JieitaiDiscipline_minmax_effect = yes
+}
+
+JAP_JieitaiPopularity_automatic_edit = {
+	if = {
+		limit = { check_variable = { JieitaiPopularity > 70 } }
+		set_temp_variable = { JieitaiPopularity_subtract_modifier = 0.15 }
+	}
+	else = {
+		limit = { check_variable = { JieitaiPopularity > 50 } }
+		set_temp_variable = { JieitaiPopularity_subtract_modifier = 0.1 }
+	}
+	subtract_from_variable = { JieitaiPopularity = JieitaiPopularity_subtract_modifier }
+	JAP_JieitaiPopularity_minmax_effect = yes
+}
+
+JAP_JieitaiDiscipline_automatic_edit = {
+	if = {
+		limit = { check_variable = { JieitaiDiscipline > 70 } }
+		set_temp_variable = { JieitaiDiscipline_subtract_modifier = 0.15 }
+	}
+	else = {
+		limit = { check_variable = { JieitaiDiscipline > 50 } }
+		set_temp_variable = { JieitaiDiscipline_subtract_modifier = 0.1 }
+	}
+	subtract_from_variable = { JieitaiDiscipline = JieitaiDiscipline_subtract_modifier }
+	JAP_JieitaiDiscipline_minmax_effect = yes
+}
+
+JAP_P_dynamic_modifers_effect = {
+	if = {
+		limit = { check_variable = { JieitaiPopularity > 90 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = 0.1 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = 0.15 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = 0.35 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiPopularity > 80 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = 0.085 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = 0.125 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = 0.3 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiPopularity > 70 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = 0.075 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = 0.1 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = 0.25 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiPopularity > 60 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = 0.06 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = 0.08 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = 0.15 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiPopularity > 50 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = 0.05 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = 0.05 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = 0.1 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiPopularity > 40 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = 0 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = 0 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = 0 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiPopularity > 35 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = -0.05 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = -0.05 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = -0.05 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiPopularity > 30 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = -0.07 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = -0.07 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = -0.07 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiPopularity > 25 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = -0.075 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = -0.1 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = -0.1 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiPopularity > 20 } }
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = -0.1 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = -0.125 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = -0.125 }
+	}
+	else = {
+		set_variable = { var = JAP_p_d_conscription_factor_modifier value = -0.2 }
+		set_variable = { var = JAP_p_d_mobilization_speed_modifier value = -0.25 }
+		set_variable = { var = JAP_p_d_defensive_war_stability_factor_modifier value = -0.25 }
+	}
+}
+
+JAP_D_dynamic_modifers_effect = {
+	if = {
+		limit = { check_variable = { JieitaiDiscipline > 90 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = 0.2 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = 0.15 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = 0.15 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiDiscipline > 80 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = 0.18 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = 0.125 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = 0.125 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiDiscipline > 70 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = 0.15 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = 0.125 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = 0.125 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiDiscipline > 60 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = 0.125 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = 0.1 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = 0.1 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiDiscipline > 50 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = 0.1 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = 0.05 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = 0.05 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiDiscipline > 40 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = 0 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = 0 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = 0 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiDiscipline > 35 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = -0.05 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = -0.05 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = -0.05 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiDiscipline > 30 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = -0.08 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = -0.075 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = -0.075 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiDiscipline > 25 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = -0.1 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = -0.1 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = -0.1 }
+	}
+	else_if = {
+		limit = { check_variable = { JieitaiDiscipline > 20 } }
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = -0.15 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = -0.15 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = -0.15 }
+	}
+	else = {
+		set_variable = { var = JAP_p_d_special_forces_cap_modifier value = -0.2 }
+		set_variable = { var = JAP_p_d_army_org_factor_modifier value = -0.2 }
+		set_variable = { var = JAP_p_d_army_org_regain_modifier value = -0.2 }
+	}
+}

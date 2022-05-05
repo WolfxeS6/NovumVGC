@@ -4,7 +4,7 @@ set_country_flag = country_language_russian
 
 set_research_slots = 2 #(4 +1 в вов)
 set_convoys = 250
-set_stability = 0.3
+set_stability = 0.5
 
 set_war_support = 0.5
 
@@ -36,6 +36,7 @@ set_technology = {
 	tech_military_police = 1
 	tech_signal_company = 1
 	tech_maintenance_company = 1
+	basic_train = 1
 	
 	## Armor ##
 	main_battle_tank1 = 1
@@ -158,11 +159,15 @@ if = {
 #create_equipment_variant = { name = "Tu-22M3" type = strat_bomber_equipment_1 upgrades = { plane_bomb_upgrade = 2 plane_engine_upgrade = 5 plane_reliability_upgrade = 4 } obsolete = yes }
 
 add_ideas = { 
-	centralization_federal
-	public_safety_secret_police
-	immigration_policy_loose_regulations
-	civil_liberties_restricted
-	population_growth_decline
+	centralization_soviet
+	government_system_soviet_republic
+	mobilization_service_time_soviet
+	public_safety_soviet
+	immigration_policy_soviet
+	civil_liberties_soviet
+	welfare_soviet
+	economy_tax_soviet
+	closed_economy
 }
 
 set_politics = {	
@@ -204,12 +209,23 @@ recruit_character = RCO_alexander_chernov
 recruit_character = RCO_alexey_poryadkov
 recruit_character = RCO_andrey_cerebryannikov
 recruit_character = RCO_danil_polivanov
-recruit_character = RCO_dmitry_puchkov
+#recruit_character = RCO_dmitry_puchkov
 recruit_character = RCO_kirill_badalin
 recruit_character = RCO_pyotr_govrushkin
 recruit_character = RCO_roman_molodtsov
 recruit_character = RCO_vasiliy_boldorev
 recruit_character = RCO_vladimir_vysotskiy
+recruit_character = RCO_viktor_bokun 
+recruit_character = RCO_valeriy_ovchinnikov
+recruit_character = RCO_oleg_krasnicki 
+recruit_character = RCO_mikhail_shestepyorov 
+recruit_character = RCO_maksim_provin 
+recruit_character = RCO_luka_ragimov 
+recruit_character = RCO_klim_zhilinskiy 
+recruit_character = RCO_dmitry_kontsevich 
+recruit_character = RCO_artem_kolodun 
+recruit_character = RCO_andrey_zinovich 
+recruit_character = RCO_alezander_lakoschenko 
 
 #New dynamic ideas 
 
@@ -227,11 +243,11 @@ set_variable = { RKKA_org = -0.7 } #+0
 set_variable = { RKKA_conscription = -0.4 } #+3
 set_variable = { RKKA_attrition = 0.4 } #-02
 set_variable = { RKKA_min_train_level = 0.01 } #сейчас 0,2 (001 в вов)
-set_variable = { RKKA_reinforce_rate = 0.5 } #0
+set_variable = { RKKA_reinforce_rate = -0.05 } #0
 set_variable = { RKKA_exp_loss_in_combat = 0.3 } #-15
 set_variable = { RKKA_compliance_in_enemy = -0.2 } # -2
 set_variable = { RKKA_resistance_in_enemy = 0.2 } #+3
-set_variable = { RKKA_damage_to_enemy_garrison = 0.3 } # +2
+set_variable = { RKKA_damage_to_enemy_garrison = 0.15 } # +2
 set_variable = { RKKA_complience_growh = 0.3 } #
 set_variable = { RKKA_resistance_growh = -0.1 } #
 
@@ -242,62 +258,66 @@ add_dynamic_modifier = {
 
 #2
 
-set_variable = { rco_state_ideology_defence = -0.3 } #+4 (05 в вов)
-set_variable = { rco_state_stability = -0.85 } #+75 (30)
-set_variable = { rco_state_pp_factor = -0.4 } #+0,3
-set_variable = { rco_state_pop_growh = -0.5 } #+015
-set_variable = { rco_state_war_support = -0.2 } #+035 (50)
-set_variable = { rco_state_research_speed = -0.6 } #+02
+set_variable = { rco_state_ideology_defence = -0.3 } #+0.5 (05 в вов)
+set_variable = { rco_state_stability = -0.65 } #+91 (30)
+set_variable = { rco_state_pp_factor = -0.4 } #+0.05
+set_variable = { rco_state_pop_growh = -0.5 } #+0.01
+set_variable = { rco_state_war_support = -0.2 } #+085 (50)
+set_variable = { rco_state_research_speed = -0.6 } #+0.05
 set_variable = { rco_state_surrender_limit = 0.4 } #+5
-set_variable = { rco_comm_drift = -0.05 } #+1.2
-set_variable = { rco_state_political_adv_factor = 0.3 } #+02
-set_variable = { rco_state_economy_cost_factor = 0.3 } #+02
-set_variable = { rco_state_trade_law_cost_factor = 0.3 } #+02
+set_variable = { rco_comm_drift = -0.05 } #+0.09
+set_variable = { rco_state_political_adv_factor = 0.3 } #+0
+set_variable = { rco_state_economy_cost_factor = 0.3 } #+0
+set_variable = { rco_state_trade_law_cost_factor = 0.3 } #+0
 
 add_dynamic_modifier = {
 	modifier = rco_state
 }
+
 #3
-
-
-set_variable = { rco_economy_const_slots = 0.0 } #+2
-set_variable = { rco_economy_max_poduction_capacity = -0.5 } #+0
-set_variable = { rco_economy_const_speed = -0.8 } #+0
-set_variable = { rco_economy_prod_output = -0.8 } #+0 (3 в вов)
-set_variable = { rco_economy_CG = 0.7 } #-015
-set_variable = { rco_economy_repair_speed = -0.6 } #+05
-set_variable = { rco_economy_prod_growh = -0.4 } #+005
-set_variable = { rco_economy_resource = -0.6 } #+1 (3.5 в вов)
-
-add_dynamic_modifier = {
-	modifier = rco_economy
-}
-
-#4 
-
-
-set_variable = { rco_labour_max_poduction_capacity = 0.0 } #4
-set_variable = { rco_labour_prod_growh = 0.0 } #35
-set_variable = { rco_labour_const_speed = 0.0 } #1.5
-set_variable = { rco_labour_resource = 0.0 } #3.5
-
-add_dynamic_modifier = {
-	modifier = rco_communist_labour
-}
-#5 
-
 
 set_variable = { rco_opinion_gain_monthly = -0.5 } #
 set_variable = { rco_sameideology_opinion_gain_monthly = 0.6 } #
 set_variable = { rco_add_ally_desire_factor = 0.0 } # -0.5
 set_variable = { rco_same_ideology_opinion_factor = 0.0 } # 0.5
-set_variable = { rco_min_export = 0.4 } # 0
+set_variable = { rco_min_export = 0 } # 0
 set_variable = { rco_trade_opinion = -0.6 } #
 set_variable = { rco_cw_involvment_tension = 0.0 } # -06
 
 add_dynamic_modifier = {
 	modifier = rco_foreign_policy
 }
+
+#4 
+
+
+set_variable = { rco_labour_max_poduction_capacity = 0.0 } #+0,3
+set_variable = { rco_labour_prod_growh = 0.0 } #
+set_variable = { rco_labour_const_speed = 0.0 } #+0,1
+set_variable = { rco_labour_resource = 0.0 } #+0,2
+
+add_dynamic_modifier = {
+	modifier = rco_communist_labour
+}
+
+#5 
+
+#+- каким станет
+
+set_variable = { rco_economy_const_slots = 0.0 } #+0,2
+set_variable = { rco_economy_max_poduction_capacity = -0.5 } #-0
+set_variable = { rco_economy_const_speed = -0.5 } #+0.05
+set_variable = { rco_economy_prod_output = -0.4 } #+0.15 (ещё +0,2 сверху в вов)
+set_variable = { rco_economy_CG = 0.7 } #+0,2
+set_variable = { rco_economy_repair_speed = -0.6 } #+05
+set_variable = { rco_economy_prod_growh = -0.4 } #-0,05
+set_variable = { rco_economy_resource = -0.2 } #+01 (ещё +0,15 сверху в вов)
+
+add_dynamic_modifier = {
+	modifier = rco_economy
+}
+
+
 ### VARIANTS ###
 # 2000 Start #
 if = {

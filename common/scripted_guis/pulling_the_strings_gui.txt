@@ -1,10 +1,45 @@
 scripted_gui = {
 	pulling_the_strings_gui = {
-    window_name = "pulling_the_strings_gui_window"
+		window_name = "pulling_the_strings_gui_window"
+		context_type = player_context
+	
+		visible = {
+			  has_country_flag = open_pulling_the_strings_gui
+			has_game_rule = {
+				rule = PTS_control_panel
+				option = DEFAULT
+			}
+		}
+		effects = {
+			tab_guides_name_click = {
+				clr_country_flag = open_pulling_the_strings_actions_gui
+				set_country_flag = open_pulling_the_strings_guides_gui
+				clr_country_flag = open_pulling_the_strings_country_desc_gui
+				#add_to_array = { Root.pulling_the_strings_guidesarray = This.id }
+			  }	
+			  tab_main_name_click = {
+				set_country_flag = open_pulling_the_strings_actions_gui
+				clr_country_flag = open_pulling_the_strings_guides_gui
+				clr_country_flag = open_pulling_the_strings_country_desc_gui
+			  }
+			  tab_country_desc_name_click = {
+				set_country_flag = open_pulling_the_strings_country_desc_gui
+				clr_country_flag = open_pulling_the_strings_guides_gui
+				clr_country_flag = open_pulling_the_strings_actions_gui
+			  }
+			  gui_close_button_click = {
+				clr_country_flag = open_pulling_the_strings_gui
+			  }
+		}
+	}
+	pulling_the_strings_actions_gui = {
+    window_name = "pulling_the_strings_actions_gui_window"
     context_type = player_context
+	parent_window_name = "pulling_the_strings_gui_window"
+	
 
     visible = {
-		  has_country_flag = open_pulling_the_strings_gui
+		  has_country_flag = open_pulling_the_strings_actions_gui
 		has_game_rule = {
 			rule = PTS_control_panel
 			option = DEFAULT
@@ -12,9 +47,6 @@ scripted_gui = {
     }
 
     effects = {
-      gui_close_button_click = {
-        clr_country_flag = open_pulling_the_strings_gui
-      }
       explain_cw_click = {
         country_event = { id = nvx_oracle_ai_help.500 }
       }
@@ -201,5 +233,46 @@ scripted_gui = {
 
     ai_weights = {
     }
+  }
+  pulling_the_strings_country_desc_gui = {
+    window_name = "pulling_the_strings_country_desc_gui_window"
+    context_type = player_context
+	parent_window_name = "pulling_the_strings_gui_window"
+	
+
+    visible = {
+		  has_country_flag = open_pulling_the_strings_country_desc_gui
+		has_game_rule = {
+			rule = PTS_control_panel
+			option = DEFAULT
+		}
+    }
+
+    effects = {
+	}
+  }
+  pulling_the_strings_guides_gui = {
+    window_name = "pulling_the_strings_guides_gui_window"
+    context_type = player_context
+	parent_window_name = "pulling_the_strings_gui_window"
+	
+
+    visible = {
+		  has_country_flag = open_pulling_the_strings_guides_gui
+		has_game_rule = {
+			rule = PTS_control_panel
+			option = DEFAULT
+		}
+    }
+	dynamic_lists = { 
+		pulling_the_strings_guides = { 
+			array = Root.pulling_the_strings_guidesarray
+			change_scope = yes
+			entry_container = "pulling_the_strings_guides_each_gui_window"
+		}  
+	}
+
+    effects = {
+	}
   }
 }

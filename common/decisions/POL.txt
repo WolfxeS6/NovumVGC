@@ -10559,27 +10559,68 @@ POL_stabilise_the_nation_dec = {
 
 POL_the_elections_cat = {
 
-POL_increase_popularity_of_upr = { 
+POL_pis_and_po_is_created = {
 		
-		icon = GFX_decision_generic_decision
+		visible = {
+		has_government = social_democrat
+		}
+		icon = GFX_decision_generic_speech
+		
+		available = {
+		NOT = { has_country_flag = POL_elections_in_progress_flag }
+		}
+		cancel_trigger = {
+		OR = {
+		has_country_flag = POL_disband_elections_flag
+		NOT = { has_government = social_democrat }
+		 }
+        }
+		days_mission_timeout = 400
+
+		fire_only_once = no
+		is_good = no
+		activation = {
+		has_government = social_democrat
+		original_tag = POL
+		}
+		
+		complete_effect = {
+		}
+
+		timeout_effect = {
+		hidden_effect = {
+	    POL_increase_po_popularity_10 = yes
+		POL_increase_pis_popularity_10 = yes
+		}
+		set_country_flag = POL_pis_active_flag
+		set_country_flag = POL_po_active_flag
+		custom_effect_tooltip = POL_create_pis_and_po_tt
+		}
+	}
+
+POL_political_campaign = { 
+		
+		icon = GFX_decision_eng_propaganda_campaigns
 
 		allowed = {
 		original_tag  = POL
 		}
 
 		available = {
-		has_global_flag = POL_unlocks_UPR_decision_flag
+		
 		}
 
 
 		visible = {
-        has_global_flag = POL_unlocks_UPR_decision_flag
+		NOT = {
+		has_country_flag = POL_disband_elections_flag
+		}
 		has_government = social_democrat
-	   }
+	}
 		fire_only_once = no
 
 		cost = 35
-		days_remove = 40
+		days_remove = 10
 
 		modifier = {
 		
@@ -10589,138 +10630,170 @@ POL_increase_popularity_of_upr = {
 		}
 		
 		remove_effect = {
-		custom_effect_tooltip = POL_upr_rise_popularity
-		add_to_variable = {
-				var = POL_popularity_of_UPR
-				value = 1
+		if = {
+		limit = {
+		has_country_flag = POL_sld_supported_flag
+		}
+		random_list = {
+				40 = { 
+				POL_increase_sld_popularity_1 = yes
+			    }
+				60 = {
+			    POL_increase_sld_popularity_2 = yes
+				}
 			}
 		}
+		else_if = {
+		limit = {
+		has_country_flag = POL_po_supported_flag
+		}
+		random_list = {
+				30 = { 
+				POL_increase_po_popularity_3 = yes
+			    }
+				10 = {
+			    POL_increase_po_popularity_1 = yes
+				}
+				10 = {
+			    POL_increase_po_popularity_5 = yes
+				}
+				50 = {
+			    POL_increase_po_popularity_2 = yes
+				}
+			}
+		}
+		else_if = {
+		limit = {
+		has_country_flag = POL_pis_supported_flag
+		}
+		random_list = {
+				30 = { 
+				POL_increase_pis_popularity_3 = yes
+			    }
+				10 = {
+			    POL_increase_pis_popularity_1 = yes
+				}
+				10 = {
+			    POL_increase_pis_popularity_5 = yes
+				}
+				50 = {
+			    POL_increase_pis_popularity_2 = yes
+				}
+			}
+		}
+		else_if = {
+		limit = {
+		has_country_flag = POL_upr_supported_flag
+		}
+		random_list = {
+				30 = { 
+				POL_increase_upr_popularity_3 = yes
+			    }
+				10 = {
+			    POL_increase_upr_popularity_1 = yes
+				}
+				10 = {
+			    POL_increase_upr_popularity_5 = yes
+				}
+				50 = {
+			    POL_increase_upr_popularity_2 = yes
+				}
+			}
+		}
+	  }
 		ai_will_do = {
 			factor = 1
 		}
 }
 
-POL_increase_popularity_of_pis = { 
+POL_other_parties_makes_moves_dec = {
 		
-		icon = GFX_decision_generic_decision
-
-		allowed = {
-		original_tag  = POL
-		}
-
-		available = {
-		has_global_flag = POL_unlocks_PiS_decision_flag
-		}
-
-
 		visible = {
-        has_global_flag = POL_unlocks_PiS_decision_flag
 		has_government = social_democrat
-	   }
-		fire_only_once = no
-
-		cost = 35
-		days_remove = 40
-
-		modifier = {
-		
 		}
+		icon = GFX_decision_generic_speech
+		
+		available = {
+		NOT = { has_country_flag = POL_elections_in_progress_flag }
+		}
+		cancel_trigger = {
+		OR = {
+		has_country_flag = POL_disband_elections_flag
+		NOT = { has_government = social_democrat }
+		 }
+        }
+		days_mission_timeout = 70
 
+		fire_only_once = no
+		is_good = no
+		activation = {
+		has_government = social_democrat
+		original_tag = POL
+		}
+		
 		complete_effect = {
 		}
-		
-		remove_effect = {
-		custom_effect_tooltip = POL_pis_rise_popularity
-		add_to_variable = {
-				var = POL_popularity_of_PiS
-				value = 1
+
+		timeout_effect = {
+		if = {
+		limit = {
+		NOT = { has_country_flag = POL_sld_supported_flag }
+		}
+		random_list = {
+				60 = { 
+				POL_increase_sld_popularity_1 = yes
+			    }
+				40 = {
+			    
+				}
 			}
 		}
-		ai_will_do = {
-			factor = 1
+		else_if = {
+		limit = {
+		NOT = { has_country_flag = POL_po_supported_flag }
+		has_country_flag = POL_po_active_flag
 		}
+		random_list = {
+				50 = { 
+				POL_increase_po_popularity_1 = yes
+			    }
+				20 = {
+			    POL_increase_po_popularity_2 = yes
+				}
+				30 = {
+				}
+			}
+		}
+		else_if = {
+		limit = {
+		NOT = { has_country_flag = POL_pis_supported_flag }
+		has_country_flag = POL_pis_active_flag
+		}
+		random_list = {
+				50 = { 
+				POL_increase_pis_popularity_1 = yes
+			    }
+				20 = {
+			    POL_increase_pis_popularity_2 = yes
+				}
+				30 = {
+				}
+			}
+		}
+		else_if = {
+		limit = {
+		NOT = { has_country_flag = POL_upr_supported_flag }
+		}
+		random_list = {
+		50 = { 
+				POL_increase_pis_popularity_1 = yes
+			    }
+		50 = {
+			    
+		}
+	}
+  }
 }
-
-POL_increase_popularity_of_sld = { 
-		
-		icon = GFX_decision_generic_decision
-
-		allowed = {
-		original_tag  = POL
-		}
-
-		available = {
-		has_global_flag = POL_unlocks_SLD_decision_flag
-		}
-
-
-		visible = {
-        has_global_flag = POL_unlocks_SLD_decision_flag
-		has_government = social_democrat
-	   }
-		fire_only_once = no
-
-		cost = 35
-		days_remove = 40
-
-		modifier = {
-		
-		}
-
-		complete_effect = {
-		}
-		
-		remove_effect = {
-		custom_effect_tooltip = POL_sld_rise_popularity
-		add_to_variable = {
-				var = POL_popularity_of_SLD
-				value = 1
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
-}
-
-POL_increase_popularity_of_po = { 
-		
-		icon = GFX_decision_generic_decision
-
-		allowed = {
-		original_tag  = POL
-		}
-
-		available = {
-		has_global_flag = POL_unlocks_PO_decision_flag
-		}
-
-
-		visible = {
-        has_global_flag = POL_unlocks_PO_decision_flag
-		has_government = social_democrat
-	   }
-		fire_only_once = no
-
-		cost = 35
-		days_remove = 40
-
-		modifier = {
-		
-		}
-
-		complete_effect = {
-		}
-		
-		remove_effect = {
-		custom_effect_tooltip = POL_po_rise_popularity
-		add_to_variable = {
-				var = POL_popularity_of_PO
-				value = 1
-			}
-		}
-		ai_will_do = {
-			factor = 1
-		}
 }
 
 POL_the_elections_dec = {
@@ -10744,7 +10817,7 @@ POL_the_elections_dec = {
         }
 		days_mission_timeout = 631
 
-		fire_only_once = no
+		fire_only_once = yes
 		is_good = no
 		activation = {
 		has_government = social_democrat
@@ -10808,7 +10881,7 @@ POL_chosing_political_party_dec = {
 		visible = {
         has_government = social_democrat
 	   }
-		fire_only_once = yes
+		fire_only_once = no
 
 		cost = 0
 		days_remove = 1
@@ -10821,6 +10894,7 @@ POL_chosing_political_party_dec = {
 		}
 		
 		remove_effect = {
+		custom_effect_tooltip = POL_chosing_political_party_dec_tt
 		POL = { country_event = Poland_Events_News.6 }
 		}
 		ai_will_do = {

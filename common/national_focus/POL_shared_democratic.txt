@@ -5221,7 +5221,7 @@ shared_focus = {
 shared_focus = {
 	id = POL_army_begin_the_5_year_plan
 	icon = five_year_plan
-	x = 45 
+	x = 45
 	y = 0
 	
 	cost = 5
@@ -5231,16 +5231,24 @@ shared_focus = {
 	}
 
 	offset = { 
-			x = 49
-			y = 1
+			x = 5
+			y = 0
+			trigger = {
+			has_global_flag = POL_sanation_won_flag
+			}
+		}
+	
+	offset = { 
+			x = 4
+			y = 0
 			trigger = {
 			has_global_flag = POL_christian_won_flag
 			}
 		}
 	
 	offset = { 
-			x = 48
-			y = 1
+			x = 3
+			y = 0
 			trigger = {
 			OR = {
 	has_global_flag = POL_prl_revival_path
@@ -5251,16 +5259,16 @@ shared_focus = {
 		}
 	
 	offset = { 
-			x = 48
-			y = 1
+			x = 3
+			y = 0
 			trigger = {
 			has_global_flag = POL_nazi_tree_unlocked
 			}
 		}
 	
 	offset = { 
-			x = 59
-			y = 1
+			x = 14
+			y = 0
 			trigger = {
 			has_global_flag = POL_monarchist_tree_unlocked
 			}
@@ -10264,6 +10272,9 @@ shared_focus = {
 	available_if_capitulated = no
 
 	completion_reward = {
+	hidden_effect = {
+	recruit_character = POL_Wojciech_Jaruzelski
+	}
 	custom_effect_tooltip = POL_commie_meet_with_jaruzelski_tt
 	add_war_support = 0.05
 	}
@@ -12799,7 +12810,7 @@ shared_focus = {
 
 shared_focus = {
 	id = POL_commie_lessons_from_giereks_economic_policies
-	icon = workers_rights
+	icon = POL_aling_to_gierek
 	x = 3
 	y = 1
 	relative_position_id = POL_commie_listen_to_their_demands
@@ -12941,6 +12952,115 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = POL_commie_ensure_loyality
+	icon = POL_commie_worker_propaganda
+	x = 2
+	y = 1
+	relative_position_id = POL_commie_deal_with_the_reformists
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_deal_with_the_reformists
+	}
+	
+	available = {
+	has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	POL_increase_revolutionary_stability_by_10_effect = yes
+	}
+}
+
+shared_focus = {
+	id = POL_commie_loyal_economy_managment
+	icon = POL_controlled_industry
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_ensure_loyality
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_reorganise_the_party
+	}
+	
+	prerequisite = {
+	focus = POL_commie_ensure_loyality
+	}
+	
+	available = {
+	has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = POL_reorganised_party
+					add_idea = POL_reorganised_party_2
+				}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_lessons_from_jaruzelski
+	icon = POL_align_to_jaruzelski
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_loyal_economy_managment
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_loyal_economy_managment
+	}
+	
+	available = {
+	has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	BHU_law_change_decrease_civil_liberties = yes
+	}
+}
+
+shared_focus = {
 	id = POL_commie_strike_from_within
 	icon = POL_commie_destroy_pzpr
 	x = -7
@@ -12983,6 +13103,8 @@ shared_focus = {
 	available_if_capitulated = no
 
 	completion_reward = {
+	set_country_flag = POL_reformists_in_power
+	promote_character = POL_POL_Leszek_Kolakowski
 	set_variable = { var = POL_party_support_for_pulawianie_var value = 0 }
 	set_variable = { var = POL_party_support_for_neomarx_var value = 0 }
 	set_variable = { var = POL_popular_support_for_neomarx_var value = 0 }
@@ -12994,8 +13116,43 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = POL_commie_communism_with_human_face
-	icon = POL_commie_break_the_chains
+	id = POL_commie_protect_the_workers_rights
+	icon = POL_commie_worker
+	x = -2
+	y = 1
+	relative_position_id = POL_commie_strike_from_within
+
+	cost = 5
+	
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_commie_strike_from_within
+	}
+	
+	
+	available = {
+	has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_ideas = POL_workers_rights
+	}
+}
+
+shared_focus = {
+	id = POL_commie_a_policy_of_reconsilation
+	icon = POL_commie_capitalist_cooperation
 	x = 0
 	y = 1
 	relative_position_id = POL_commie_strike_from_within
@@ -13008,6 +13165,84 @@ shared_focus = {
 	
 	prerequisite = {
 	focus = POL_commie_strike_from_within
+	}
+	
+	
+	available = {
+	has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	POL_increase_revolutionary_stability_by_5_effect = yes
+	add_political_power = 35
+	add_popularity = { 
+		    ideology = communist
+			popularity = -0.075
+		}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_a_free_media_for_a_free_nation
+	icon = POL_commie_free_education
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_a_policy_of_reconsilation
+
+	cost = 5
+	
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_commie_a_policy_of_reconsilation
+	}
+	
+	prerequisite = {
+	focus = POL_commie_protect_the_workers_rights
+	}
+	
+	available = {
+	has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	BHU_law_change_increase_civil_liberties = yes
+	}
+}
+
+shared_focus = {
+	id = POL_commie_communism_with_human_face
+	icon = POL_commie_break_the_chains
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_a_free_media_for_a_free_nation
+
+	cost = 5
+	
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_a_free_media_for_a_free_nation
 	}
 	
 	
@@ -13092,9 +13327,7 @@ shared_focus = {
 	available_if_capitulated = no
 
 	completion_reward = {
-	set_variable = { var = POL_natmao_ideology_drift_vat value = 0 }
-	POL = { country_event = Poland_Events_News.133 }
-	custom_effect_tooltip = POL_unlock_national_maoist_decisions
+	POL_set_up_natmao_stuff = yes
 	}
 }
 
@@ -17567,7 +17800,7 @@ shared_focus = {
 
 shared_focus = {
 	id = POL_economy_work_with_our_farmers
-	icon = POL_support_agrounion
+	icon = POL_farmer_worker_cooperation
 	x = -1
 	y = 1
 	relative_position_id = POL_economy_farming_modernisation
@@ -30877,6 +31110,41 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = POL_monarchist_the_habsburgs_new_golden_age
+	icon = Gold
+	x = -1
+	y = 1
+	relative_position_id = POL_monarchist_get_spain_back
+	cost = 5
+	
+	prerequisite = {
+	focus = POL_monarchist_get_spain_back
+	}
+	
+	prerequisite = {
+	focus = POL_monarchist_claim_italian_throne
+	}
+	
+	available = {
+    is_subject = no
+	}
+
+	bypass = {
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+     swap_ideas = { 
+					remove_idea = POL_imperial_ambitions_2
+					add_idea = POL_imperial_ambitions_3
+				}
+	}
+}
+
+shared_focus = {
 	id = POL_monarchist_puppet_france
 	icon = attack_france
 	x = 1
@@ -34683,7 +34951,7 @@ shared_focus = {
 	808 = { add_core_of = POL }
 	94 = { add_core_of = POL }
 	95 = { add_core_of = POL }
-	POL = { country_event = Poland_Events_News.115 }
+	BLR = { country_event = Poland_Events_News.115 }
 }
 }
 
@@ -34730,7 +34998,7 @@ shared_focus = {
 	95 = { add_core_of = POL }
 	80 = { add_core_of = POL }
 	93 = { add_core_of = POL }
-	POL = { country_event = Poland_Events_News.116 }
+	UKR = { country_event = Poland_Events_News.116 }
 }
 }
 
@@ -41717,7 +41985,7 @@ shared_focus = {
 shared_focus = {
 	id = POL_sanation_giedrocys_inharitors
 	icon = POL_giedroyc_bad
-	x = 25
+	x = 28
 	y = 0
 	
 	cost = 5
@@ -41727,7 +41995,7 @@ shared_focus = {
 	}
 
 	allow_branch = {
-	#has_global_flag = POL_sanation_won_flag
+	has_global_flag = POL_sanation_won_flag
 	}
 	
 	available = {
@@ -41942,6 +42210,400 @@ shared_focus = {
 	create_faction = POL_Trojmorze
 	}
 }
+
+shared_focus = {
+	id = POL_sanation_anti_russian_agenda
+	icon = GFX_focus_eng_expose_the_belly_of_the_bear
+	x = 3
+	y = 1
+	relative_position_id = POL_sanation_an_alliance_of_our_own
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_an_alliance_of_our_own
+	}
+	
+	available = {
+     
+	is_subject = no
+	has_government = reactionary
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	bypass = {
+	NOT = { country_exists = SOV }
+	NOT = { country_exists = RCO }
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_timed_idea = {
+				idea = POL_anti_russian_sentiments_sanationist
+				days = 365
+			}
+	}
+} 
+
+shared_focus = {
+	id = POL_sanation_proper_defensive_preparations
+	icon = GFX_goal_generic_fortify_city
+	x = 0
+	y = 1
+	relative_position_id = POL_sanation_anti_russian_agenda
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	mutually_exclusive = {
+	focus = POL_sanation_strike_first
+	}
+
+	prerequisite = {
+	focus = POL_sanation_anti_russian_agenda
+	}
+	
+	available = {
+     
+	is_subject = no
+	has_government = reactionary
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	bypass = {
+	NOT = { country_exists = SOV }
+	NOT = { country_exists = RCO }
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+		remove_idea = POL_better_defences
+		add_idea = POL_better_defences_2
+				}
+	}
+} 
+
+shared_focus = {
+	id = POL_sanation_strike_first
+	icon = GFX_focus_ger_strike_at_the_source
+	x = 2
+	y = 1
+	relative_position_id = POL_sanation_anti_russian_agenda
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_anti_russian_agenda
+	}
+	
+	mutually_exclusive = {
+	focus = POL_sanation_proper_defensive_preparations
+	}
+	
+	available = {
+	is_subject = no
+	has_government = reactionary
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	bypass = {
+	NOT = { country_exists = SOV }
+	NOT = { country_exists = RCO }
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	if = {
+	limit = { 
+	country_exists = SOV
+	}
+	create_wargoal = {
+				    type = puppet_wargoal_focus
+			        target = SOV
+		}
+	}
+    if = {
+	limit = { 
+	country_exists = RCO
+	}
+	create_wargoal = {
+				    type = puppet_wargoal_focus
+			        target = RCO
+		}
+	}
+ } 
+}
+
+shared_focus = {
+	id = POL_sanation_the_devil_returns
+	icon = GFX_focus_attack_germany
+	x = -3
+	y = 1
+	relative_position_id = POL_sanation_an_alliance_of_our_own
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_an_alliance_of_our_own
+	}
+	
+	available = {
+    GER = {
+	OR = {
+	has_government = monarchist
+	has_government = fascist
+	has_government = communist
+	has_government = nationalist
+	}
+	}
+	is_subject = no
+	has_government = reactionary
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	bypass = {
+	NOT = { country_exists = GER }
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_timed_idea = {
+				idea = POL_ready_against_germany
+				days = 365
+			}
+	}
+} 
+
+shared_focus = {
+	id = POL_sanation_an_ultimatum_to_minsk
+	icon = POL_attack_belarus
+	x = -5
+	y = 1
+	relative_position_id = POL_sanation_an_alliance_of_our_own
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_an_alliance_of_our_own
+	}
+	
+	available = {
+	is_subject = no
+	has_government = reactionary
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	bypass = {
+	NOT = { country_exists = BLR }
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	will_lead_to_war_with = BLR
+	completion_reward = {
+	808 = { add_core_of = POL }
+	94 = { add_core_of = POL }
+	95 = { add_core_of = POL }
+	BLR = { country_event = Poland_Events_News.115 }
+	}
+} 
+
+shared_focus = {
+	id = POL_sanation_forgive_and_forget
+	icon = POL_align_to_ukraine
+	x = 0
+	y = 1
+	relative_position_id = POL_sanation_an_ultimatum_to_minsk
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_an_ultimatum_to_minsk
+	}
+	
+	mutually_exclusive = {
+	focus = POL_sanation_reclaim_lviv
+	}
+	
+	available = {
+    
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	bypass = {
+	UKR = { exists = NO }	
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	UKR = { country_event = Poland_Events_News.71  }
+	}
+} 
+
+shared_focus = {
+	id = POL_sanation_reclaim_lviv
+	icon = attack_ukraine
+	x = -2
+	y = 1
+	relative_position_id = POL_sanation_an_ultimatum_to_minsk
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	mutually_exclusive = {
+	focus = POL_sanation_forgive_and_forget
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_an_ultimatum_to_minsk
+	}
+	
+	available = {
+    
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	bypass = {
+	NOT = {
+	country_exists = UKR
+	}
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	will_lead_to_war_with = UKR
+	completion_reward = {
+	91 = { add_core_of = POL } 
+	89 = { add_core_of = POL }
+	95 = { add_core_of = POL }
+	80 = { add_core_of = POL }
+	93 = { add_core_of = POL }
+	UKR = { country_event = Poland_Events_News.116 }
+}
+} 
+
+shared_focus = {
+	id = POL_sanation_do_what_the_marshal_couldnt
+	icon = POL_generic_strike_germany
+	x = 0
+	y = 1
+	relative_position_id = POL_sanation_the_devil_returns
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_the_devil_returns
+	}
+	
+	available = {
+    GER = {
+	OR = {
+	has_government = monarchist
+	has_government = fascist
+	has_government = communist
+	has_government = nationalist
+	}
+	}
+	is_subject = no
+	has_government = reactionary
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	bypass = {
+	NOT = { country_exists = GER }
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	will_lead_to_war_with = GER
+	completion_reward = {
+	create_wargoal = {
+				    type = puppet_wargoal_focus
+			        target = GER
+		}
+	}
+} 
 
 shared_focus = {
 	id = POL_sanation_send_invitation_to_lithuania
@@ -42318,8 +42980,266 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = POL_sanation_bring_in_romania_and_moldavia
+	icon = GFX_focus_invite_romania
+	x = 0
+	y = 1
+	relative_position_id = POL_sanation_into_the_balkans
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_into_the_balkans
+	}
+	
+	available = {
+    is_subject = no
+	has_government = reactionary
+	}
+
+	bypass = {
+	MOL = { exists = NO }	
+	ROM = { exists = NO }	
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	MOL = { country_event = Poland_Events_News.71  }
+	ROM = { country_event = Poland_Events_News.71  }
+	}
+}
+
+shared_focus = {
+	id = POL_sanation_towards_the_medditoranian
+	icon = workers_rights
+	x = 0
+	y = 1
+	relative_position_id = POL_sanation_bring_in_romania_and_moldavia
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_bring_in_romania_and_moldavia
+	}
+	
+	available = {
+    is_subject = no
+	has_government = reactionary
+	}
+
+	bypass = {
+	CRO = { exists = NO }	
+	BOS = { exists = NO }	
+	SLV = { exists = NO }	
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	CRO = { country_event = Poland_Events_News.71  }
+	SLV = { country_event = Poland_Events_News.71  }
+	BOS = { country_event = Poland_Events_News.71  }
+	}
+}
+
+shared_focus = {
+	id = POL_sanation_invite_serbia
+	icon = align_to_serbia
+	x = -2
+	y = 1
+	relative_position_id = POL_sanation_into_the_balkans
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_into_the_balkans
+	}
+	
+	available = {
+    is_subject = no
+	has_government = reactionary
+	}
+
+	bypass = {
+	SER = { exists = NO }	
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	SER = { country_event = Poland_Events_News.71  }
+	}
+}
+
+shared_focus = {
+	id = POL_sanation_alliance_with_bulgaria
+	icon = GFX_focus_BUL_consolidate_the_third_bulgarian_state
+	x = 1
+	y = 2
+	relative_position_id = POL_sanation_invite_serbia
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_towards_the_medditoranian
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_invite_serbia
+	}
+	
+	available = {
+    is_subject = no
+	has_government = reactionary
+	}
+
+	bypass = {
+	BUL = { exists = NO }	
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	BUL = { country_event = Poland_Events_News.71  }
+	}
+}
+
+shared_focus = {
+	id = POL_sanation_press_for_Greek_alliance
+	icon = GFX_focus_GRE_bedrock_of_balkan_stability
+	x = -1
+	y = 1
+	relative_position_id = POL_sanation_alliance_with_bulgaria
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	mutually_exclusive = {
+	focus = POL_sanation_press_for_Turkish_alliance
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_alliance_with_bulgaria
+	}
+	
+	available = {
+    is_subject = no
+	has_government = reactionary
+	}
+
+	bypass = {
+	GRE = { exists = NO }	
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	GRE = { country_event = Poland_Events_News.71  }
+	}
+}
+
+shared_focus = {
+	id = POL_sanation_press_for_Turkish_alliance
+	icon = GFX_focus_generic_befriend_turkey
+	x = 1
+	y = 1
+	relative_position_id = POL_sanation_alliance_with_bulgaria
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	mutually_exclusive = {
+	focus = POL_sanation_press_for_Greek_alliance
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_alliance_with_bulgaria
+	}
+	
+	available = {
+    is_subject = no
+	has_government = reactionary
+	}
+
+	bypass = {
+	TUR = { exists = NO }	
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	TUR = { country_event = Poland_Events_News.71  }
+	}
+}
+
+shared_focus = {
 	id = POL_sanation_into_scandinavia
-	icon = focus_generic_scandinavian_alliance
+	icon = GFX_focus_generic_scandinavian_alliance
 	x = 3
 	y = 1
 	relative_position_id = POL_sanation_ties_with_the_baltic_states
@@ -42387,6 +43307,7 @@ shared_focus = {
 	}
 
 	bypass = {
+	FIN = { exists = NO }	
 	}
 
 	cancel_if_invalid = yes
@@ -42399,7 +43320,87 @@ shared_focus = {
 	available_if_capitulated = no
 
 	completion_reward = {
-	add_political_power = 50
+	FIN = { country_event = Poland_Events_News.71  }
+	}
+}
+
+shared_focus = {
+	id = POL_sanation_a_message_to_stockholm
+	icon = align_to_sweden
+	x = 0
+	y = 1
+	relative_position_id = POL_sanation_into_scandinavia
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_into_scandinavia
+	}
+	
+	available = {
+    is_subject = no
+	has_government = reactionary
+	}
+
+	bypass = {
+	SWE = { exists = NO }	
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	SWE = { country_event = Poland_Events_News.71  }
+	}
+}
+
+shared_focus = {
+	id = POL_sanation_an_invitation_to_norway
+	icon = align_to_norway
+	x = 0
+	y = 1
+	relative_position_id = POL_sanation_a_message_to_stockholm
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+	
+	prerequisite = {
+	focus = POL_sanation_a_message_to_stockholm
+	}
+	
+	available = {
+    is_subject = no
+	has_government = reactionary
+	}
+
+	bypass = {
+	SWE = { exists = NO }	
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	SWE = { country_event = Poland_Events_News.71  }
 	}
 }
 
@@ -42416,7 +43417,7 @@ shared_focus = {
 	}
 
 	allow_branch = {
-	#has_global_flag = POL_sanation_won_flag
+	has_global_flag = POL_sanation_won_flag
 	}
 	
 	available = {
@@ -44227,7 +45228,7 @@ shared_focus = {
 shared_focus = {
 	id = POL_sanationist_justify_elitarism
 	icon = POL_support_hirarchy
-	x = 0
+	x = 1
 	y = 1
 	relative_position_id = POL_sanationist_restore_the_cop
 
@@ -44263,6 +45264,47 @@ shared_focus = {
 	POL_increase_national_debt = yes
 	add_political_power = 50
 	remove_ideas = POL_recovering_economy_idea
+	}
+}
+
+shared_focus = {
+	id = POL_sanation_heal_our_healthcare
+	icon = POL_socialist_healthcare
+	x = -1
+	y = 1
+	relative_position_id = POL_sanationist_restore_the_cop
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_sanationist_restore_the_cop
+	}
+	
+	prerequisite = {
+	focus = POL_sanationist_empowering_state_monopolies
+	focus = POL_sanationist_protect_small_buisness
+	}
+	
+	available = {
+    is_subject = no
+	has_government = reactionary
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	custom_effect_tooltip = POL_unlock_quality_healthcare_deicsion
+	set_country_flag = POL_average_healthcare_decisions_unlocked
 	}
 }
 

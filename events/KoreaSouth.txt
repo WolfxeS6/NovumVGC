@@ -1861,7 +1861,7 @@ country_event = {
 			limit = {
 				has_trait = trait_PRK_north_korean_traits #No Paektu
 			}
-			remove_unit_leader = PREV
+			remove_unit_leader = yes
 		}
 	}
 }
@@ -4265,13 +4265,13 @@ country_event = {
 			news_event = { id = rok_news.5 hours = 8 }
 			random_army_leader = {
 				limit = {
-					nationality = KOR
+					has_nationality = KOR
 				}
 				unit_leader_event = { id = south_korea.63 days = 7 }
 			}
 			random_army_leader = {
 				limit = {
-					nationality = KOR
+					has_nationality = KOR
 				}
 				unit_leader_event = { id = south_korea.64 days = 30 }
 			}
@@ -6356,7 +6356,7 @@ country_event = {
 	option = {
 		name = korea_parliamentary.34.a
 		
-		add_manpowers = 50000
+		add_manpower = 50000
 		set_country_flag = parliament_legislation_accepting_refugees_flag
 	}
 }
@@ -6965,14 +6965,14 @@ country_event = {
 		country_event = korea_parliamentary.40 #Successful Promotion of a Political Party
 	}
 	option = {
-		trigger = { KOR_all_ruling_party_status > 10 }
+		trigger = { check_variable = { KOR_all_ruling_party_status > 10 } }
 		country_event = korea_parliamentary.41 #The Ruling Party blames the President
 	}
 	option = {
 		country_event = korea_parliamentary.42 #The National Assembly into Presidential misconduct
 	}
 	option = {
-		trigger = { KOR_all_ruling_party_status > 10 }
+		trigger = { check_variable = { KOR_all_ruling_party_status > 10 } }
 		country_event = korea_parliamentary.45 #Break away from the Party
 	}
 	option = {
@@ -7229,109 +7229,5 @@ country_event = {
 
 	option = {
 		name = korean_war.99.a
-	}
-}
-
-country_event = {
-	id = korean_war.297
-	desc = korean_war.200.desc
-	picture = GFX_report_event_soviet_tanks_snow
-	
-	is_triggered_only = yes
-
-	option = {
-		name = korean_war.99.a
-				 			if = {
-				 				limit = {
-				 					NOT = {
-				 						is_in_array = {
-				 							array = ROOT.NUKEATTACK
-				 							value = THIS.id
-				 						}
-				 					}
-				 					OR = {
-				 						is_capital = yes
-				 						state_population_k > 4000
-				 						controller = {
-				 							divisions_in_state = {
-				 								size > 4
-				 								state = PREV
-				 							}
-				 						}
-				 						nuclear_reactor > 0
-				 					}
-				 				}
-				 				add_to_array = { ROOT.NUKEATTACK = THIS.id }
-				 				add_to_variable = { SOV.COUNTERATTACK_warhead_cost = 1 }
-				 				set_variable = { state_pop_total = state_population_k }
-				 				if = { limit = { check_variable = { state_pop_total > 1000 } }
-				 					divide_variable = { state_pop_total = 1000 }
-				 					round_variable = state_pop_total
-				 					add_to_variable = { ROOT.NUKEATTACK = state_pop_total }
-				 				}
-				 			}
-		target_point_ID = "[?ROOT.GetID]"
-		target_TAG = "[?ROOT.GetID]"
-	}
-}
-country_event = {
-	id = korean_war.298
-	desc = korean_war.200.desc
-	picture = GFX_report_event_soviet_tanks_snow
-	
-	is_triggered_only = yes
-
-	option = {
-		name = korean_war.99.a
-		add_to_variable = { nuke_attack = 1 }
-	}
-}
-
-			#every_controlled_state = {
-			#	limit = {
-			#		missile_defense_station > 0
-			#		NOT = {
-			#			has_state_flag = defend_land_launch_point
-			#		}
-			#		[target_point_ID] = {
-			#			distance_to = {
-			#				value < [ABM_range]
-			#				target = PREV
-			#			}
-			#		}
-			#	}
-				
-country_event = {
-	id = korean_war.299
-	desc = korean_war.200.desc
-	picture = GFX_report_event_soviet_tanks_snow
-	
-	is_triggered_only = yes
-
-	option = {
-		name = korean_war.99.a
-		while_loop_effect = {
-			limit = {
-				check_variable = { nuke_attack > 0 }
-			}
-			subtract_from_temp_variable = { nuke_attack = 1 }
-			launch_nuke = {
-				state = 525
-				controller = ROOT
-			}
-		}
-	}
-}
-
-country_event = {
-	id = korean_war.301
-	desc = korean_war.200.desc
-	picture = GFX_report_event_soviet_tanks_snow
-	
-	is_triggered_only = yes
-
-	option = {
-		name = korean_war.99.a
-		add_ideas = { KOR_military_gay_hunting } 
 	}
 }

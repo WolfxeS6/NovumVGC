@@ -311,6 +311,31 @@ news_event = {
 	id = north_korea_news.10
 	title = north_korea_news.10.t
 	
+	immediate = {
+		if = {
+			limit = {
+				PRK = { 
+					OR = {
+						has_government = fascist
+						has_government = nationalist
+					}
+				}
+			}
+			set_global_flag = dpr_fascist_DPR_korea_reunification_sp
+		}
+		else_if = {
+			limit = {
+				PRK = { 
+					has_government = communist
+				}
+			}
+			set_global_flag = dpr_communist_DPR_korea_reunification_sp
+		}
+		else = {
+			set_global_flag = dpr_democratic_DPR_korea_reunification_sp
+		}
+	}
+	
 	desc = {
 		text = north_korea_news.10.desc_1 #Darkest Hour in Korea...
 		trigger = {
@@ -345,15 +370,11 @@ news_event = {
 		text = north_korea_news.10.desc_4
 		trigger = {
 			PRK = {
-				NOT = {
-					AND = {
-						has_government = reactionary
-						has_government = fascist
-						has_government = nationalist
-						has_government = communist
-						has_country_leader = { name = "Hayao Miyazaki" }
-					}
-				}
+				NOT = { has_government = reactionary }
+				NOT = { has_government = fascist }
+				NOT = { has_government = nationalist }
+				NOT = { has_government = communist }
+				NOT = { has_country_leader = { name = "Hayao Miyazaki" } }
 			}
 		}
 	}
@@ -746,11 +767,14 @@ country_event = {	#Death of Kim Jong-Il
 	
 	option = {
 		name = north_korea.1.o1
-		create_country_leader = {
-			name = "Kim Jong-Un"
-			picture = "Kim_Jong_Un.dds"
-			ideology = national_socialist
-			traits = { juche_korea }
+		add_country_leader_role = {
+			character = "prk_Kim_Jong_Un"
+			country_leader = {
+				ideology = juche
+				traits = { juche_korea }
+				desc = "POLITICS_KIM_JONG_UN_DESC"
+			}
+			promote_leader = yes
 		}
 		hidden_effect = {
 			news_event = { id = north_korea_news.7 }
@@ -1504,9 +1528,9 @@ country_event = {
 	
 	option = {
 		name = north_korea.36.a
-		add_doctrine_cost_reduction = {
-			name = armydoctrine_bonus
-			cost_reduction = 0.75
+		add_tech_bonus = {
+			name = land_doc_bonus
+			bonus = 3.0
 			uses = 1
 			category = land_doctrine
 		}
@@ -1565,12 +1589,14 @@ country_event = {
 	
 	option = {
 		name = north_korea.39.a
-		create_country_leader = {
-			name = "Hayao Miyazaki"
-			picture = "Hayao_Miyazaki.dds"
-			desc = "POLITICS_HAYAO_MIYAZAKI_DESC"
-			ideology = democratic_socialist_ideology
-			traits = { otaku_hate left_wing_animation_director }
+		add_country_leader_role = {
+			character = "prk_Hayao_Miyazaki"
+			country_leader = {
+				desc = "POLITICS_HAYAO_MIYAZAKI_DESC"
+				ideology = democratic_socialist_ideology
+				traits = { left_wing_animation_director }
+			}
+			promote_leader = yes
 		}
 		add_popularity = {
 			ideology = democratic_socialist
@@ -2895,5 +2921,4 @@ country_event = {
 
 #On the day of Azalea Blooming
 #Liberation of Pyongyang
-
 

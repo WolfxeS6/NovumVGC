@@ -1,0 +1,299 @@
+shared_focus = {
+	id = LIC_the_status_quo_remains
+	icon = LIC_mario
+	x = 15
+	y = 0
+	cost = 8
+	
+	available = {
+	has_government = conservative
+	}
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	LIC_increase_government_approval_var_by_10 = yes
+	}
+}
+
+shared_focus = {
+	id = LIC_focus_on_becks_legacy
+	icon = LIC_beck
+	x = 0
+	y = 1
+	cost = 8
+	relative_position_id = LIC_the_status_quo_remains
+
+	prerequisite = {
+	focus = LIC_the_status_quo_remains
+	}
+	
+	available = {
+	has_government = conservative
+	}
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	add_political_power = 75
+	}
+}
+
+shared_focus = {
+	id = LIC_taking_care_of_diplomatic_matters
+	icon = LIC_beck
+	x = 0
+	y = 1
+	cost = 8
+	relative_position_id = LIC_focus_on_becks_legacy
+
+	prerequisite = {
+	focus = LIC_focus_on_becks_legacy
+	}
+	
+	available = {
+	has_government = conservative
+	}
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	add_political_power = 75
+	}
+}
+
+shared_focus = {
+	id = LIC_in_the_alps
+	icon = LIC_beck
+	x = -2
+	y = 1
+	cost = 8
+	relative_position_id = LIC_taking_care_of_diplomatic_matters
+
+	prerequisite = {
+	focus = LIC_taking_care_of_diplomatic_matters
+	}
+	
+	available = {
+	has_government = conservative
+	}
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	add_political_power = 75
+	}
+}
+
+shared_focus = {
+	id = LIC_establish_an_army
+	icon = GFX_focus_generic_combined_arms
+	x = 7
+	y = 0
+	cost = 8
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	add_ideas = LIC_building_an_army
+	}
+}
+
+shared_focus = {
+	id = LIC_implement_swiss_system
+	icon = GFX_focus_SOV_mobilization_plan
+	x = 2
+	y = 1
+	relative_position_id = LIC_establish_an_army
+
+    prerequisite = {
+	focus = LIC_establish_an_army
+	}
+
+	cost = 8
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	hidden_effect = {
+					division_template = {
+						name = "Militia"
+						priority = 1
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+						}
+						support = {
+						}
+					}
+			}
+			random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					create_unit = {
+						division = "name = \"Militia\" division_template = \"Militia\" start_experience_factor = 0.2" 
+						owner = LIC
+					}
+	       }
+	}
+}
+
+shared_focus = {
+	id = LIC_buy_foreign_arms_factories
+	icon = GFX_Arms_Industry
+	x = 0
+	y = 1
+	relative_position_id = LIC_implement_swiss_system
+
+    prerequisite = {
+	focus = LIC_implement_swiss_system
+	}
+
+	cost = 8
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	add_offsite_building = { type = arms_factory level = 1 }
+	}
+}
+
+shared_focus = {
+	id = LIC_increase_role_of_women_in_the_army
+	icon = GFX_focus_generic_women_in_military
+	x = -2
+	y = 1
+	relative_position_id = LIC_implement_swiss_system
+
+    prerequisite = {
+	focus = LIC_implement_swiss_system
+	}
+
+	cost = 8
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = LIC_building_an_army
+					add_idea = LIC_building_an_army_2
+				}
+	}
+}
+
+shared_focus = {
+	id = LIC_mountain_training
+	icon = GFX_focus_GRE_a_land_of_mountains
+	x = 2
+	y = 1
+	relative_position_id = LIC_implement_swiss_system
+
+    prerequisite = {
+	focus = LIC_implement_swiss_system
+	}
+
+	cost = 8
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	add_tech_bonus = {
+				name = special_bonus
+				bonus = 1.0
+				uses = 2
+				technology = tech_mountaineers
+				technology = tech_mountaineers2
+			}
+			custom_effect_tooltip = GRE_mountain_training_effect
+			hidden_effect = { set_technology = { mountain_warfare = 1 } }
+	}
+}
+
+shared_focus = {
+	id = LIC_fighting_for_the_principality
+	icon = GFX_Focus_generic_manpower
+	x = -2
+	y = 1
+	relative_position_id = LIC_mountain_training
+
+    prerequisite = {
+	focus = LIC_buy_foreign_arms_factories
+	}
+	
+	prerequisite = {
+	focus = LIC_mountain_training
+	}
+	
+	prerequisite = {
+	focus = LIC_increase_role_of_women_in_the_army
+	}
+
+	cost = 8
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	add_manpower = 2500
+	swap_ideas = { 
+					remove_idea = LIC_building_an_army_2
+					add_idea = LIC_for_the_principality
+				}
+	}
+}
+
+shared_focus = {
+	id = LIC_prepare_fortifications
+	icon = GFX_goal_generic_military_sphere
+	x = -1
+	y = 1
+	relative_position_id = LIC_establish_an_army
+
+    prerequisite = {
+	focus = LIC_establish_an_army
+	}
+
+	cost = 8
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	
+	}
+}
+
+shared_focus = {
+	id = LIC_anti_air_defences
+	icon = GFX_goal_generic_military_spheregoal_generic_military_spheregoal_generic_military_sphere
+	x = -1
+	y = 1
+	relative_position_id = LIC_prepare_fortifications
+
+    prerequisite = {
+	focus = LIC_prepare_fortifications
+	}
+
+	cost = 8
+	
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+	random_owned_state = {
+			add_building_construction = {
+					type = anti_air 
+					level = 1
+					instant_build = yes
+				    }
+			}
+	}
+}

@@ -5247,10 +5247,11 @@ shared_focus = {
 		}
 	
 	offset = { 
-			x = 3
+			x = 4
 			y = 0
 			trigger = {
 			OR = {
+	has_global_flag = POL_dengism_revival_path
 	has_global_flag = POL_prl_revival_path
 	has_global_flag = POL_maoist_revival_path
     has_global_flag = POL_trotskism_revival_path
@@ -8096,7 +8097,7 @@ shared_focus = {
 shared_focus = {
 	id = POL_commie_red_star_rises_over_europe
 	icon = GFX_focus_ger_great_red_menace
-	x = 28
+	x = 29
 	y = 0
 	
 	cost = 5
@@ -8107,6 +8108,7 @@ shared_focus = {
 
 	allow_branch = {
 	OR = {
+	has_global_flag = POL_dengism_revival_path
 	has_global_flag = POL_prl_revival_path
 	has_global_flag = POL_maoist_revival_path
     has_global_flag = POL_trotskism_revival_path
@@ -8253,6 +8255,10 @@ shared_focus = {
 	}
 
 	mutually_exclusive = {
+	focus = POL_commie_alliance_with_china
+	}
+	
+	mutually_exclusive = {
 	focus = POL_commie_new_bastion_of_maoism
 	}
 	
@@ -8301,6 +8307,10 @@ shared_focus = {
 
 	ai_will_do = {
 		factor = 10
+	}
+
+	mutually_exclusive = {
+	focus = POL_commie_alliance_with_china
 	}
 
 	mutually_exclusive = {
@@ -8355,6 +8365,10 @@ shared_focus = {
 	}
 
 	mutually_exclusive = {
+	focus = POL_commie_alliance_with_china
+	}
+	
+	mutually_exclusive = {
 	focus = POL_commie_call_the_fourth_international
 	}
 	
@@ -8367,8 +8381,13 @@ shared_focus = {
 	}
 	
 	available = {
+    OR = {
     has_global_flag = POL_maoist_revival_path
-    has_government = communist
+    PRC = {
+	NOT = { has_government = communist }
+	}
+	}
+	has_government = communist
 	}
 
 	bypass = {
@@ -8393,6 +8412,65 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = POL_commie_alliance_with_china
+	icon = POL_align_to_china
+	x = -4
+	y = 1
+	relative_position_id = POL_commie_pursue_the_internationalist_doctrine
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	mutually_exclusive = {
+	focus = POL_commie_new_bastion_of_maoism
+	}
+	
+	mutually_exclusive = {
+	focus = POL_commie_call_the_fourth_international
+	}
+	
+	mutually_exclusive = {
+	focus = POL_commie_legacy_of_the_warsaw_pact
+	}
+	
+	prerequisite = {
+	focus = POL_commie_pursue_the_internationalist_doctrine
+	}
+	
+	available = {
+    PRC = {
+	NOT = { has_government = communist }
+	}
+	has_global_flag = POL_maoist_revival_path
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	PRC = { country_event = Poland_Events_News.138 }
+	if = {
+				limit = {
+				is_in_faction = yes
+				}
+				leave_faction = yes
+			}
+	set_rule = { can_create_factions = yes }
+	create_faction = POL_polish_chinese_alliane
+	PRC = { country_event = diplomatic_message.1 }
+	}
+}
+
+shared_focus = {
 	id = POL_commie_the_ready_for_liberation
 	icon = POL_commie_increased_arms_production
 	x = 3
@@ -8410,6 +8488,7 @@ shared_focus = {
 	}
 	
 	prerequisite = {
+	focus = POL_commie_alliance_with_china
 	focus = POL_commie_legacy_of_the_warsaw_pact
 	focus = POL_commie_call_the_fourth_international
 	focus = POL_commie_new_bastion_of_maoism
@@ -13264,6 +13343,1455 @@ shared_focus = {
 }
 
 shared_focus = {
+	id = POL_commie_the_revolution_begins_anew
+	icon = POL_dengist
+	x = 17
+	y = 0
+	
+	cost = 1
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	allow_branch = {
+    #has_global_flag = POL_dengism_revival_path
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	POL_commie_set_up_stuff_effect = yes
+	add_political_power = 15
+	}
+}
+
+shared_focus = {
+	id = POL_commie_buisness_as_usual
+	icon = GFX_Rich_Businessmen
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_the_revolution_begins_anew
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_the_revolution_begins_anew
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_offsite_building = { type = industrial_complex level = 1 }
+	}
+}
+
+shared_focus = {
+	id = POL_commie_deal_with_mijal
+	icon = POL_kill_mijal
+	x = 1
+	y = 1
+	relative_position_id = POL_commie_the_revolution_begins_anew
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_the_revolution_begins_anew
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	POL_increase_revolutionary_stability_by_10_effect = yes
+	}
+}
+
+shared_focus = {
+	id = POL_commie_counter_the_counter_revolutionaries
+	icon = POL_commie_army_purge
+	x = 1
+	y = 1
+	relative_position_id = POL_commie_deal_with_mijal
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_deal_with_mijal
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	custom_effect_tooltip = POL_lower_opposition_fouth_estate
+	hidden_effect = {
+	fourth_estate_fascist_decrease = yes
+	fourth_estate_nationalist_decrease = yes
+	fourth_estate_democratic_socialist_decrease = yes
+	fourth_estate_social_democrat_decrease = yes
+	fourth_estate_islamist_decrease = yes
+	fourth_estate_progressive_decrease = yes
+	fourth_estate_monarchist_decrease = yes
+	fourth_estate_conservative_decrease = yes
+	fourth_estate_social_liberal_decrease = yes
+	    }
+	}
+}
+
+shared_focus = {
+	id = POL_commie_big_promises
+	icon = POL_commie_culture
+	x = -3
+	y = 1
+	relative_position_id = POL_commie_deal_with_mijal
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_buisness_as_usual
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_popularity = { 
+		    ideology = communist
+			popularity = 0.05
+		}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_prl_astheic
+	icon = POL_commie_pzpr
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_deal_with_mijal
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_buisness_as_usual
+	}
+	
+	prerequisite = {
+	focus = POL_commie_deal_with_mijal
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	set_party_name = { ideology = communist  long_name = POL_communist_pzpr_party_long name = POL_communist_pzpr_party }
+	add_stability = 0.05
+	}
+}
+
+shared_focus = {
+	id = POL_commie_a_very_long_road_to_socialism
+	icon = POL_commie_road
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_prl_astheic
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_prl_astheic
+	}
+	
+	prerequisite = {
+	focus = POL_commie_counter_the_counter_revolutionaries
+	}
+	
+	prerequisite = {
+	focus = POL_commie_big_promises
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_political_power = 75
+	}
+}
+
+shared_focus = {
+	id = POL_commie_socialist_market_economy
+	icon = POL_commie_capitalist_cooperation
+	x = -5
+	y = 1
+	relative_position_id = POL_commie_a_very_long_road_to_socialism
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_a_very_long_road_to_socialism
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_ideas = POL_socialist_market_economy_idea
+	}
+}
+
+shared_focus = {
+	id = POL_commie_satisfy_the_workers
+	icon = POL_commie_worker
+	x = 2
+	y = 1
+	relative_position_id = POL_commie_socialist_market_economy
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_socialist_market_economy
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_stability = 0.05
+	random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				    }
+			}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_promises_to_the_farmers
+	icon = POL_commie_farming
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_satisfy_the_workers
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_satisfy_the_workers
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_ideas = POL_satisfied_farmers
+	}
+}
+
+shared_focus = {
+	id = POL_commie_transforming_capitalism
+	icon = POL_commie_align_to_capitalist
+	x = -2
+	y = 1
+	relative_position_id = POL_commie_socialist_market_economy
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_socialist_market_economy
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = POL_socialist_market_economy_idea
+					add_idea = POL_socialist_market_economy_idea_2
+				}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_keeping_it_in_check
+	icon = POL_commie_worker_propaganda
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_transforming_capitalism
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_transforming_capitalism
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = POL_socialist_market_economy_idea_2
+					add_idea = POL_socialist_market_economy_idea_3
+				}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_a_modern_economy
+	icon = POL_commie_modernise_factories
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_socialist_market_economy
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_socialist_market_economy
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1.5
+				uses = 1
+				category = industry
+	    }
+	}
+}
+
+shared_focus = {
+	id = POL_commie_a_focus_on_science
+	icon = POL_commie_science
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_a_modern_economy
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_a_modern_economy
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_ideas = POL_science_focus
+	}
+}
+
+shared_focus = {
+	id = POL_commie_maximise_exports
+	icon = POL_commie_chess
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_a_focus_on_science
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_keeping_it_in_check
+	}
+	
+	prerequisite = {
+	focus = POL_commie_a_focus_on_science
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = POL_socialist_market_economy_idea_3
+					add_idea = POL_socialist_market_economy_idea_4
+				}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_maximise_profits
+	icon = POL_commie_chess
+	x = 1
+	y = 1
+	relative_position_id = POL_commie_a_focus_on_science
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_promises_to_the_farmers
+	}
+	
+	prerequisite = {
+	focus = POL_commie_a_focus_on_science
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	POL_increase_national_debt_by_2 = yes
+	random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				    }
+			}
+	random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}		
+	}
+}
+
+shared_focus = {
+	id = POL_commie_the_worlds_new_workshop
+	icon = POL_commie_discipline_workers
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_maximise_profits
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_maximise_exports
+	}
+	
+	prerequisite = {
+	focus = POL_commie_maximise_profits
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = POL_socialist_market_economy_idea_4
+					add_idea = POL_socialist_market_economy_idea_5
+				}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_political_pragmatism
+	icon = POL_commie_puppet_government
+	x = 5
+	y = 1
+	relative_position_id = POL_commie_a_very_long_road_to_socialism
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_a_very_long_road_to_socialism
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_ideas = POL_red_pragmatism
+	}
+}
+
+shared_focus = {
+	id = POL_commie_increase_survilance
+	icon = POL_commie_surveliance
+	x = -2
+	y = 1
+	relative_position_id = POL_commie_political_pragmatism
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_political_pragmatism
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_ideas = POL_security
+	}
+}
+
+shared_focus = {
+	id = POL_commie_repress_the_opposition
+	icon = POL_commie_kapitan_zbik
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_increase_survilance
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_political_pragmatism
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_ideas = centralization_unitary
+	add_ideas = government_system_one_party
+	}
+}
+
+shared_focus = {
+	id = POL_commie_purge_disloyal_officals
+	icon = POL_guy_from_prl_poster
+	x = 2
+	y = 1
+	relative_position_id = POL_commie_political_pragmatism
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_political_pragmatism
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_political_power = 70
+	}
+}
+
+shared_focus = {
+	id = POL_commie_ensure_full_loyality
+	icon = POL_commie_lenin_and_men_holding_torch
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_purge_disloyal_officals
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_purge_disloyal_officals
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = POL_red_pragmatism
+					add_idea = POL_red_pragmatism_2
+				}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_the_power_of_the_party
+	icon = GFX_focus_SOV_the_supreme_soviet
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_ensure_full_loyality
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_indoctrinated_and_obidiant_people
+	}
+	
+	prerequisite = {
+	focus = POL_commie_ensure_full_loyality
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = POL_red_pragmatism_2
+					add_idea = POL_red_pragmatism_3
+				}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_distribute_propaganda
+	icon = POL_commie_maoist_man
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_political_pragmatism
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_political_pragmatism
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	POL_commie_set_up_propaganda_stuff_effect = yes
+	}
+}
+
+shared_focus = {
+	id = POL_commie_indoctrinated_and_obidiant_people
+	icon = POL_commie_man
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_distribute_propaganda
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_distribute_propaganda
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	POL_increase_revolutionary_stability_by_5_effect = yes
+	add_popularity = { 
+		    ideology = communist
+			popularity = 0.1
+		}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_reintroduce_secret_police
+	icon = POL_commie_army_purge
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_indoctrinated_and_obidiant_people
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_indoctrinated_and_obidiant_people
+	}
+	
+	prerequisite = {
+	focus = POL_commie_repress_the_opposition
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_ideas = public_safety_secret_police
+	add_stability = -0.05
+	}
+}
+
+shared_focus = {
+	id = POL_commie_honour_marxist_legacy
+	icon = GFX_focus_SOV_the_path_of_marxism_leninism
+	x = 1
+	y = 1
+	relative_position_id = POL_commie_reintroduce_secret_police
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_reintroduce_secret_police
+	}
+	
+	prerequisite = {
+	focus = POL_commie_the_power_of_the_party
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_stability = 0.1
+	add_war_support = 0.05
+	}
+}
+
+shared_focus = {
+	id = POL_commie_our_chinese_friends
+	icon = POL_commie_gay
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_a_very_long_road_to_socialism
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_a_very_long_road_to_socialism
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+	PRC = {
+	NOT = { has_government = communist }
+	}
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_opinion_modifier = {
+					target = PRC
+					modifier = declaration_of_friendship
+				}
+	PRC = {
+				add_opinion_modifier = {
+					target = POL
+					modifier = declaration_of_friendship
+				}
+			}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_increase_chinese_trade
+	icon = trade_with_china
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_our_chinese_friends
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_our_chinese_friends
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+	PRC = {
+	NOT = { has_government = communist }
+	}
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	PRC = { increase_trade_influence_by_3 = yes }
+	}
+}
+
+shared_focus = {
+	id = POL_commie_speak_to_chinese_leadership
+	icon = POL_align_to_china
+	x = 1
+	y = 1
+	relative_position_id = POL_commie_our_chinese_friends
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_our_chinese_friends
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+	PRC = {
+	NOT = { has_government = communist }
+	}
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_political_power = 45
+	PRC = {
+				add_opinion_modifier = {
+					target = POL
+					modifier = offered_support
+				}
+	     }
+	}
+}
+
+shared_focus = {
+	id = POL_commie_lessons_from_the_pla
+	icon = POL_commie_army_propaganda
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_speak_to_chinese_leadership
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_speak_to_chinese_leadership
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+	PRC = {
+	NOT = { has_government = communist }
+	}
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_ideas = POL_pla_tactics
+	}
+}
+
+shared_focus = {
+	id = POL_commie_deanounce_taiwan
+	icon = POL_commie_against_taiwan
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_lessons_from_the_pla
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_investsments_from_their_companies
+	}
+	
+	prerequisite = {
+	focus = POL_commie_lessons_from_the_pla
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+	PRC = {
+	NOT = { has_government = communist }
+	}
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	CHI = {
+				add_opinion_modifier = {
+					target = POL
+					modifier = hostile_public_opinion
+				}
+			}
+	POL = {
+				add_opinion_modifier = {
+					target = CHI
+					modifier = hostile_public_opinion
+				}
+			}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_a_fruitfull_relationship
+	icon = POL_commie_workers_of_the_world_unite
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_deanounce_taiwan
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_deanounce_taiwan
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+	PRC = {
+	NOT = { has_government = communist }
+	}
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	custom_effect_tooltip = POL_sld_tax_the_rich_tt
+	add_to_variable = { NVX_ECO_health = 2 }
+	PRC = {
+	random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				    }
+			}
+	}
+	random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				    }
+			}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_investsments_from_their_companies
+	icon = POL_chinese_capitalism
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_increase_chinese_trade
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_increase_chinese_trade
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+	PRC = {
+	NOT = { has_government = communist }
+	}
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_timed_idea = {
+				idea = POL_chinese_investors
+				days = 250
+			}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_dengism_with_Polish_characteristics
+	icon = POL_commie_little_red_book
+	x = 0
+	y = 1
+	relative_position_id = POL_commie_a_fruitfull_relationship
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_the_worlds_new_workshop
+	}
+	
+	prerequisite = {
+	focus = POL_commie_honour_marxist_legacy
+	}
+	
+	prerequisite = {
+	focus = POL_commie_a_fruitfull_relationship
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_stability = 0.05
+	POL_increase_revolutionary_stability_by_5_effect = yes
+	random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}
+	}
+}
+
+shared_focus = {
+	id = POL_commie_the_spirit_of_communism
+	icon = POL_commie_culture
+	x = -1
+	y = 1
+	relative_position_id = POL_commie_dengism_with_Polish_characteristics
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_dengism_with_Polish_characteristics
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	add_war_support = 0.1
+	}
+}
+
+shared_focus = {
+	id = POL_commie_convince_old_communists
+	icon = POL_commie_polish_communism
+	x = 1
+	y = 1
+	relative_position_id = POL_commie_dengism_with_Polish_characteristics
+
+	cost = 5
+
+	ai_will_do = {
+		factor = 10
+	}
+
+	prerequisite = {
+	focus = POL_commie_dengism_with_Polish_characteristics
+	}
+	
+	available = {
+    has_government = communist
+	}
+
+	bypass = {
+		
+	}
+
+	cancel_if_invalid = yes
+	continue_if_invalid = no
+	available_if_capitulated = no
+
+	completion_reward = {
+	swap_ideas = { 
+					remove_idea = POL_red_pragmatism_3
+					add_idea = POL_red_pragmatism_4
+				}
+	}
+}
+
+shared_focus = {
 	id = POL_commie_third_times_the_charm
 	icon = POL_maoist_government
 	x = 15
@@ -13759,7 +15287,7 @@ shared_focus = {
 
 shared_focus = {
 	id = POL_commie_expand_steel_production
-	icon = POL_commie_steel
+	icon = POL_commie_miner
 	x = 0
 	y = 1
 	relative_position_id = POL_commie_all_to_the_state
@@ -16533,6 +18061,7 @@ shared_focus = {
 
 	allow_branch = {
 	OR = {
+	has_global_flag = POL_dengism_revival_path
 	has_global_flag = POL_prl_revival_path
 	has_global_flag = POL_maoist_revival_path
     has_global_flag = POL_trotskism_revival_path
@@ -17380,6 +18909,7 @@ shared_focus = {
 	allow_branch = {
 	NOT = {
 	OR = {
+	has_global_flag = POL_dengism_revival_path
 	has_global_flag = POL_prl_revival_path
 	has_global_flag = POL_maoist_revival_path
     has_global_flag = POL_trotskism_revival_path
@@ -40128,13 +41658,13 @@ shared_focus = {
 	completion_reward = {
 	if = {
 					limit = {
-					has_idea = POL_army_purification
+					has_idea = POL_army_purification_3
 					}
 					remove_ideas = POL_army_purification_3
 				}	
 	if = {
 					limit = {
-					has_idea = POL_reorganised_legions
+					has_idea = POL_reorganised_legions_2
 					}
 					remove_ideas = POL_reorganised_legions_2
 				}	

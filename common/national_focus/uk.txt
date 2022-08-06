@@ -3885,6 +3885,7 @@ focus = {
 				popularity = 0.05
 			}
 			add_political_power = 50
+			add_stability = -0.05
 		}
 		
 		ai_will_do = {
@@ -3917,7 +3918,6 @@ focus = {
 				ideology = monarchist
 				popularity = 0.05
 			}
-			add_stability = -0.05
 		}
 		
 		ai_will_do = {
@@ -3974,8 +3974,10 @@ focus = {
 		completion_reward = {
 			add_popularity = {
 				ideology = fascist
-				popularity = 0.05
+				popularity = 0.15
 			}
+			fourth_estate_fascist_increase = yes
+
 		}
 		
 		ai_will_do = {
@@ -4362,6 +4364,7 @@ focus = {
 				ruling_party = fascist
 				elections_allowed = no
 			}
+			add_ideas = ENG_union_outrage
 		}
 		
 		ai_will_do = {
@@ -4407,6 +4410,8 @@ focus = {
 				ideology = fascist
 				popularity = 0.05
 			}
+			remove_ideas = ENG_union_outrage
+			add_stability = -0.075
 		}
 		
 		ai_will_do = {
@@ -4429,6 +4434,26 @@ focus = {
 				ideology = fascist
 				popularity = 0.05
 			}
+			all_other_country = {
+				Limit = {
+					OR = {
+						has_government = fascist
+						fascist > 0.2
+						AND = {
+							has_government = nationalist
+							has_opinion = { target = ENG value < 20 }
+						}
+						AND = {
+							has_government = reactionary
+							has_opinion = { target = ENG value < 35 }
+						}
+					}
+				}
+				add_opinion_modifier = {
+					target = ENG
+					modifier = declaration_of_friendship
+				}
+			}
 		}
 		
 		ai_will_do = {
@@ -4447,9 +4472,21 @@ focus = {
 		}
 		relative_position_id = ENG_new_friends
 		completion_reward = {
-			add_popularity = {
-				ideology = fascist
-				popularity = 0.05
+			create_wargoal = {
+    			type = annex_everything
+   				target = GRN
+			}
+			create_wargoal = {
+    			type = annex_everything
+   				target = NOR
+			}
+			create_wargoal = {
+    			type = annex_everything
+   				target = ICE
+			}
+			create_wargoal = {
+    			type = annex_everything
+   				target = NGA
 			}
 		}
 		

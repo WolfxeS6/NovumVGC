@@ -896,6 +896,17 @@
 				ROOT = { add_to_variable = { var = KORRegimeStability value = -5 } }
 				custom_effect_tooltip = kor_subtract_regime_stability_5_tt
 			}
+			else = {
+				custom_effect_tooltip = kor_more_influence_left_con_1_5_tt
+				set_temp_variable = { KOR_move_support = 0 }
+				randomize_temp_variable = {
+					var = KOR_move_support
+					distribution = binomial
+					min = 1
+					max = 5
+				}
+				KOR_add_conservatism_support_effect = yes
+			}
 		}
 		
 		ai_will_do = {
@@ -1220,6 +1231,7 @@
 					limit = {
 						is_core_of = KOR
 						industrial_complex > 0
+						NOT = { state = 1082 }
 					}
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
@@ -1387,6 +1399,7 @@
 					limit = {
 						is_core_of = KOR
 						industrial_complex > 0
+						NOT = { state = 1082 }
 					}
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
@@ -3712,11 +3725,13 @@
 		completion_reward = {
 			random_owned_controlled_state = {
 				limit = {
+					is_in_home_area = yes
 					free_building_slots = {
 						building = arms_factory
 						size > 0
 						include_locked = yes
 					}
+					NOT = { state = 1082 }
 				}
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
@@ -3728,16 +3743,18 @@
 			}
 			random_owned_controlled_state = {
 				limit = {
+					is_in_home_area = yes
 					free_building_slots = {
 						building = arms_factory
 						size > 0
 						include_locked = yes
 					}
+					NOT = { state = 1082 }
 				}
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = arms_factory
-					level = 0
+					level = 1
 					instant_build = yes
 				}
 				set_state_flag = generic_arms_industry_2

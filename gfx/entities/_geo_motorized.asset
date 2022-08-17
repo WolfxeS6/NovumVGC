@@ -1,0 +1,184 @@
+
+ 		##################
+		###自動車化###
+		##################
+
+###クローンベース
+###装甲車
+
+entity = {
+	name = "geo_motorized_withgun_entity"
+	pdxmesh = "ITA_armored_car_1_mesh"
+	
+	state = { name = "idle"				animation = "idle"   animation_blend_time = 0.3 }
+	state = { name = "move"				animation = "move"   animation_blend_time = 0.3 
+		event = { time = 0 node="exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
+		event = { time = 0 node="left_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { time = 0 node="right_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "ITA_car_01_Moving" } }
+	}
+	state = { name = "retreat"				animation = "move"   animation_blend_time = 0.3 
+		event = { time = 0 node="exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
+		event = { time = 0 node="left_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { time = 0 node="right_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "ITA_car_01_Moving" } }
+	}
+	state = { name = "attack"			animation = "attack" animation_blend_time = 0.3 
+		event = { time = 0 node="barrel" particle = "mechanized_attack_barrel_particle"  keep_particle = yes } 
+		event = { sound = { soundeffect = "mechanized_units_mg_fire" } }
+	}
+	state = { name = "defend"			animation = "attack" animation_blend_time = 0.3 
+		event = { time = 0 node="barrel" particle = "mechanized_attack_barrel_particle"  keep_particle = yes } 
+		event = { sound = { soundeffect = "mechanized_units_mg_fire" } }
+	}
+	state = { name = "support_attack"	animation = "attack" animation_blend_time = 0.3 
+		event = { time = 0 node="barrel" particle = "mechanized_attack_barrel_particle"  keep_particle = yes } 
+		event = { sound = { soundeffect = "mechanized_units_mg_fire" } }
+	}
+	state = { name = "training"				animation = "idle" 			animation_blend_time = 0.3 animation_speed = 1.0
+		event = { time = 0 node="exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes }
+	}
+	
+	scale = 1
+}
+
+##ハンヴィー
+
+entity = {
+	name = "generic_motorized_vehicle_entity"
+	pdxmesh = "geo_m1151_mesh"
+
+	state = { name = "idle"				animation = "idle" 				animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "retreat"			animation = "move" 	 		animation_blend_time = 0.3 animation_speed = 1.0
+		event = { time = 0 particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { time = 0 particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "apc_unit_move_animation" } }
+	}
+	state = { name = "death"			animation = "idle" 					animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "support_attack"	animation = "idle" 	animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "attack"				animation = "idle" 					animation_blend_time = 0.3 animation_speed = 1.0
+		event = { time = 0 particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { time = 0 particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "apc_unit_move_animation" } }
+	}
+	state = { name = "defend"			animation = "idle" 					animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "training"				animation = "idle" 				animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "move"			animation = "move" 			animation_blend_time = 0.3 animation_speed = 1.0
+		event = { time = 0 particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { time = 0 particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
+		event = { trigger_once = yes sound = { soundeffect = "utility_move_animation" } }
+	}
+	scale = 0.8
+}
+
+##機械化歩兵
+
+entity = {
+	name = "motorized_entity"
+	pdxmesh = "motorized_frame_mesh"
+
+	state = { name = "idle"				animation = "idle" 					animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "retreat"			animation = "move" 	 				animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "training"			animation = "idle" 					animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "death"			animation = "idle" 					animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "support_attack"	animation = "attack" 					animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "attack"			animation = "attack" 					animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "defend"			animation = "attack" 					animation_blend_time = 0.3 animation_speed = 1.0 }
+	state = { name = "move"				animation = "move" 					animation_blend_time = 0.3 animation_speed = 1.0 }
+	scale = 1.0
+
+	attach = { 	name = "vehicle"			vehicle = "generic_motorized_vehicle_entity" }
+	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
+}
+
+###アフガニスタン
+
+entity = {
+	clone = "motorized_entity"
+	name = "AFG_motorized_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "AFG_motorized_vehicle_entity" }
+	attach = { 	name = "infantry"			infantry = "AFG_infantry_entity" }
+}
+
+entity = {
+	clone = "generic_motorized_vehicle_entity"
+	name = "AFG_motorized_vehicle_entity"
+	pdxmesh = "geo_AFG_m1151_mesh"
+}
+
+##ウクライナ
+
+entity = {
+	clone = "generic_motorized_vehicle_entity"
+	name = "UKR_motorized_vehicle_0_entity"
+	pdxmesh = "UKR_m1151_mesh"
+}
+
+entity = {
+	clone = "generic_motorized_vehicle_entity"
+	name = "UKR_motorized_vehicle_entity"
+	pdxmesh = "UKR_kozak2_mesh"
+}
+
+entity = {
+	clone = "motorized_entity"
+	name = "UKR_motorized_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "UKR_motorized_vehicle_entity" }
+	attach = { 	name = "infantry"			infantry = "UKR_infantry_entity" }
+}
+
+##ギリシャ
+
+entity = {
+	clone = "motorized_entity"
+	name = "GRE_motorized_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "GRE_motorized_vehicle_entity" }
+	attach = { 	name = "infantry"			infantry = "GRE_infantry_entity" }
+}
+
+entity = {
+	clone = "generic_motorized_vehicle_entity"
+	name = "GRE_motorized_vehicle_entity"
+	pdxmesh = "geo_GRE_m1151_mesh"
+}
+
+##トルコ
+
+entity = {
+	clone = "geo_motorized_withgun_entity"
+	name = "TUR_motorized_vehicle_entity"
+	pdxmesh = "geo_kipri_mesh"
+	scale = 2.2
+}
+
+entity = {
+	clone = "motorized_entity"
+	name = "TUR_motorized_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "TUR_motorized_vehicle_entity" }
+	attach = { 	name = "infantry"			infantry = "TUR_infantry_entity" }
+}
+
+entity = {
+	clone = "TUR_MD4_motorized_0_entity"
+	name = "TUR_MD4_motorized_1_entity"
+}
+
+##ポーランド
+
+entity = {
+	clone = "generic_motorized_vehicle_entity"
+	name = "POL_motorized_vehicle_entity"
+	pdxmesh = "geo_m1151_mesh"
+}
+
+entity = {
+	clone = "motorized_entity"
+	name = "POL_motorized_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "POL_motorized_vehicle_entity" }
+	attach = { 	name = "infantry"			infantry = "POL_infantry_entity" }
+}

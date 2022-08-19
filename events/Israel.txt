@@ -13,20 +13,52 @@ country_event = {
 	trigger = {
 		tag = ISR
 		NOT = { has_country_flag = isr_retreat_from_lebanon }
+		NOT = { has_country_flag = isr_stay_in_lebanon }
 		date > 2000.5.20
 		date < 2001.1.1
 	}
 	
 	immediate = {
-		set_country_flag = isr_retreat_from_lebanon
 	}
 	
 	option = {
 		name = israel.1.o1
 		add_stability = 0.03
+		set_country_flag = isr_retreat_from_lebanon
+		LEB = {
+		transfer_state = 1184
+		}
+		#news_event = {
+		#	id = news.48
+		#	hours = 3
+		#}
 		news_event = {
 			id = news_ISR.4
 			hours = 3
+		}
+		
+		ai_chance = {
+			factor = 75
+		}
+	}
+	option = {
+		name = israel.1.o2
+		add_stability = -0.02
+		set_country_flag = isr_stay_in_lebanon
+		add_named_threat = { 
+		threat = 0.5 
+		name = ISR_stay_LEB
+			}
+		country_event = {
+			id = israel.7
+			hours = 3
+		}	
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 	}
 }

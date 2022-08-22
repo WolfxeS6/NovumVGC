@@ -1,0 +1,592 @@
+add_namespace = precw
+add_namespace = pprecw
+add_namespace = precweasy
+###########################
+# Pre Russian civil war events
+###########################
+################## Anti Zuga Coup
+country_event = {
+	id = precw.1
+	title = precw.1.t
+	desc = precw.1.d
+	picture = GFX_CPRF_meeting_in_Petetsrburg
+	
+	is_triggered_only = yes
+	
+	option = { # Accept Junta
+		name = precw.1.a
+		 ai_chance = { 
+
+			 factor = 0
+
+			 modifier = {
+				factor = 50
+				has_game_rule = {
+					rule = SOV_AI_BEHAVIOR
+					option = SOV_RESTORATION_USSR
+				}
+			}
+		 
+		  }
+		  
+		 add_popularity = { 
+			ideology = reactionary
+			popularity = 0.25
+			 }
+		 add_stability = -0.15
+		 add_political_power = -70
+		set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+					set_global_flag = russia_reactionary_nofocus
+		hidden_effect = {
+					SOV = {
+						country_event = { days = 15 id = precw.2 }
+					}
+				}
+			}
+	option = { # Zuga stays in power
+		name = precw.1.b
+		 ai_chance = { 
+			 
+			 factor = 0
+		 modifier = {
+				factor = 50
+				has_game_rule = {
+					rule = SOV_AI_BEHAVIOR
+					option = SOV_USSR
+				}
+			}
+		  }
+
+		add_ideas = SOV_zug_idea_political_instability
+			}
+	    }
+
+		################## INFORMATION 1
+country_event = {
+	id = pprecw.1
+	title = pprecw.1.t
+	desc = pprecw.1.d
+	picture = GFX_russian_ruined_industry
+	 
+	is_triggered_only = yes
+	
+	option = { # ok
+		name = pprecw.1.a
+		 ai_chance = { factor = 75 }
+		add_political_power = -50
+		hidden_effect = {
+					SOV = {
+						country_event = { days = 50 id = precw.1 }
+					}
+				}
+			}
+	    }
+
+############## Meetings, provisional government, anti social measures
+country_event = {
+	id = precw.2
+	title = precw.2.t
+	desc = precw.2.d
+	picture = GFX_communist_meeting_in_moscow
+	
+	is_triggered_only = yes
+	
+	option = { #Ok
+		name = precw.2.a
+		add_political_power = -10
+		swap_ideas = { 
+					remove_idea = SOV_zug_crisis
+					add_idea = SOV_zug_crisis_2 
+				}
+		hidden_effect = {
+					SOV = {
+						country_event = { days = 45 id = precw.3 }
+					}
+				}
+			}
+	    }
+
+################# Economic recession, People is angry 
+country_event = {
+	id = precw.3
+	title = precw.3.t
+	desc = precw.3.d
+	picture = GFX_russian_police_working
+	
+	is_triggered_only = yes
+	
+	option = { #Ok
+		name = precw.3.a
+		add_political_power = -10
+		swap_ideas = { 
+					remove_idea = SOV_zug_crisis_2
+					add_idea = SOV_zug_crisis_3 
+				}
+		hidden_effect = {
+					SOV = {
+						country_event = { days = 45 id = precw.4 }
+					}
+				}
+			}
+	    }
+
+############### Communists unite (including cprf), people are about to support them
+country_event = {
+	id = precw.4
+	title = precw.4.t
+	desc = precw.4.d
+	picture = GFX_russian_communist_coalition_congress
+	
+	is_triggered_only = yes
+	
+	option = { #ok
+		name = precw.4.a
+		 custom_effect_tooltip = SOV_add_cw_desicions_TT
+		 add_ideas = SOV_workers_movement_1
+		hidden_effect = {
+						set_global_flag = SOV_precw_desicions 
+				}
+				
+			}
+	    }
+
+		################################# worker organizations and militia, first soviets
+country_event = {
+	id = precw.8
+	title = precw.8.t
+	desc = precw.8.d
+	picture = GFX_petersburg_dockers
+	
+	is_triggered_only = yes
+	
+	option = { # Destroy it at any cost
+		name = precw.8.a
+		add_political_power = -10
+		swap_ideas = { 
+					remove_idea = SOV_zug_crisis_3
+					add_idea = SOV_zug_crisis_4
+				}
+					}
+	    }
+
+########################### People are supporting new left block, reaction intensifies, RKR and talkings about general strike
+        country_event = {
+	id = precw.5
+	title = precw.5.t
+	desc = precw.5.d
+	picture = GFX_moscow_communist_march_1993
+	
+	is_triggered_only = yes
+	
+	option = { #Ok
+
+		name = precw.5.a
+		add_political_power = 1
+				}
+			}
+
+################################# General strike, Peterburg Soviet, CPRF takls against Soviet
+country_event = {
+	id = precw.6
+	title = precw.6.t
+	desc = precw.6.d
+	picture = GFX_red_barricades_1993
+	
+	is_triggered_only = yes
+	
+	option = { # Destroy it at any cost
+
+	trigger = {
+		NOT = { has_global_flag = SOV_gov_supressed_communists }
+	}
+
+		name = precw.6.a
+		add_political_power = 1
+		hidden_effect = {
+					SOV = {
+						country_event = { days = 10 id = precweasy.7 }
+					}
+				}
+			}
+
+			option = { # Destroy it at any cost
+
+trigger = { has_global_flag = SOV_gov_supressed_communists }
+
+		name = precw.6.a
+		add_political_power = 1
+		hidden_effect = {
+					SOV = {
+						country_event = { days = 10 id = precw.9 }
+					}
+				}
+			}
+	    }
+
+		################################# Communist coalition congress
+country_event = {
+	id = precw.7
+	title = precw.7.t
+	desc = precw.7.d
+	picture = GFX_russian_communist_coalition_congress
+	
+	is_triggered_only = yes
+	
+	option = { # ok
+		name = precw.7.a
+			}
+	    }
+
+############################  Congress, armed uprising in Peterburg and Moscow, garisson and police dont wanna fight 
+country_event = {
+	id = precweasy.7
+	title = precweasy.7.t
+	desc = precweasy.7.d
+	picture = GFX_1993_red_guard
+	
+	is_triggered_only = yes
+	
+	option = { # SOVIET REVOLUTION
+		name = precweasy.7.a
+		add_political_power = -10
+		hidden_effect = {
+			set_global_flag = second_october
+			 SOV = { delete_unit = {              
+             disband = no #will refund equipment and manpower
+              }
+			  set_equipment_fraction = 1
+			  }
+	 		SOV = {
+				  transfer_units_fraction= {
+   					 target = OMA
+    						size = 1
+    					stockpile_ratio = 0
+   					 army_ratio = 0
+    					navy_ratio = 0
+    					air_ratio = 1
+				}
+			  }
+			  SOV = {
+				  load_focus_tree = SOV_cw_focus
+			  }
+			  SOV = {
+				  remove_ideas = {
+    				SOV_depopulation
+   					idea_united_nations_security_council_member
+					SOV_corrupt_oligarchy
+					SOV_deindustrialisation
+					SOV_utechka_mozgov
+					SOV_low_industrial_organisation
+					SOV_expluatate_nation
+				}
+			  }
+			  BLR = { leave_faction = yes }
+			  ARM = { leave_faction = yes }
+			  KYR = { leave_faction = yes }
+			  TAJ = { leave_faction = yes }
+		RCO = {
+			 set_state_owner = 195
+set_state_controller = 195
+			 set_state_owner = 146
+set_state_controller = 146
+			 set_state_owner = 216
+set_state_controller = 216
+			 set_state_owner = 244
+set_state_controller = 244
+			 set_state_owner = 208
+set_state_controller = 208
+			 set_state_owner = 263
+set_state_controller = 263
+			 set_state_owner = 209
+set_state_controller = 209
+			 set_state_owner = 904
+set_state_controller = 904
+			 set_state_owner = 210
+set_state_controller = 210
+			 set_state_owner = 246
+set_state_controller = 246
+			 set_state_owner = 247
+set_state_controller = 247
+			 set_state_owner = 248
+set_state_controller = 248
+			 set_state_owner = 264
+set_state_controller = 264
+			 set_state_owner = 253
+set_state_controller = 253
+			 set_state_owner = 219
+set_state_controller = 219
+			 set_state_owner = 242
+set_state_controller = 242
+			 set_state_owner = 243
+set_state_controller = 243
+			 set_state_owner = 224
+set_state_controller = 224
+			 set_state_owner = 205
+set_state_controller = 205
+			 set_state_owner = 223
+set_state_controller = 223
+			 set_state_owner = 254
+set_state_controller = 254
+			 set_state_owner = 252
+set_state_controller = 252
+			 set_state_owner = 220
+set_state_controller = 220
+			 set_state_owner = 222
+set_state_controller = 222
+			 set_state_owner = 258
+set_state_controller = 258
+			 set_state_owner = 257
+set_state_controller = 257
+			 set_state_owner = 255
+set_state_controller = 255
+			 set_state_owner = 250
+set_state_controller = 250
+			 set_state_owner = 239
+set_state_controller = 239
+			 set_state_owner = 260
+set_state_controller = 260
+			 set_state_owner = 240
+set_state_controller = 240
+			 set_state_owner = 903
+set_state_controller = 903
+		}
+		every_state = {
+			limit = {
+				is_claimed_by = SOV
+				NOT = {
+					is_core_of = SOV
+				}
+			}
+			remove_claim_by = SOV
+		}
+			RCO = {
+			change_tag_from = SOV
+		}
+		set_province_name = {
+				id = 3151
+				name = "Leningrad"
+			}
+	}
+				}
+			}
+
+
+############################  Congress, armed uprising in Peterburg and Moscow, garisson and police dont wanna fight (HARD WARIANT)
+country_event = {
+	id = precw.9
+	title = precw.9.t
+	desc = precw.9.d
+	picture = GFX_1993_red_guard
+	
+	is_triggered_only = yes
+	
+	option = { # SOVIET REVOLUTION
+		name = precw.9.a
+		add_political_power = -10
+		hidden_effect = {
+			set_global_flag = second_october
+			set_global_flag = small_second_october
+		RCO = {
+			 set_state_owner = 195
+set_state_controller = 195
+ set_state_owner = 208
+set_state_controller = 208
+ set_state_owner = 209
+set_state_controller = 209
+ set_state_owner = 263
+set_state_controller = 263
+ set_state_owner = 244
+set_state_controller = 244
+ set_state_owner = 904
+set_state_controller = 904
+ set_state_owner = 210
+set_state_controller = 210
+ set_state_owner = 246
+set_state_controller = 246
+ set_state_owner = 247
+set_state_controller = 247
+ set_state_owner = 248
+set_state_controller = 248
+ set_state_owner = 242
+set_state_controller = 242
+ set_state_owner = 219
+set_state_controller = 219
+ set_state_owner = 253
+set_state_controller = 253
+set_state_owner = 253
+set_state_controller = 253
+set_state_owner = 252
+set_state_controller = 252
+set_state_owner = 243
+set_state_controller = 243
+set_state_owner = 205
+set_state_controller = 205
+set_state_owner = 224
+set_state_controller = 224
+set_state_owner = 222
+set_state_controller = 222
+set_state_owner = 223
+set_state_controller = 223
+set_state_owner = 254
+set_state_controller = 254
+set_state_owner = 220
+set_state_controller = 220
+set_state_owner = 258
+set_state_controller = 258
+
+			 
+		}
+		every_state = {
+			limit = {
+				is_claimed_by = SOV
+				NOT = {
+					is_core_of = SOV
+				}
+			}
+			remove_claim_by = SOV
+		}
+			RCO = {
+			change_tag_from = SOV
+		}
+		set_province_name = {
+				id = 3151
+				name = "Leningrad"
+			}
+	}
+				}
+			}
+
+
+#Communist revolution in Russia
+news_event = {
+	id = news.834
+	title = news.834.t
+	desc = news.834.d
+	picture = GFX_news_soviet_power_russia
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#New hope for the mankind
+		name = news.834.a
+		trigger = {
+			OR = {
+				has_government = communist
+				original_tag = DRK
+			}
+		}
+	}
+	
+	option = {	#Empire strikes back
+		name = news.834.b
+		trigger = {
+			NOT = { has_government = communist }
+		}
+	}
+}
+
+#Limonov
+news_event = {
+	id = news.835
+	title = news.835.t
+	desc = news.835.d
+	picture = GFX_event_news_nazbol_miting
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#New hope for the mankind
+		name = news.835.a
+	}
+}
+
+#Communists win cw
+news_event = {
+	id = news.836
+	title = news.836.t
+	desc = news.836.d
+	picture = GFX_events_new_ucf_won_cw
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#New hope for the mankind
+		name = news.836.a
+		trigger = {
+			OR = {
+				has_government = communist
+				original_tag = DRK
+			}
+		}
+	}
+	
+	option = {	#Empire strikes back
+		name = news.836.b
+		trigger = {
+			NOT = { has_government = communist }
+		}
+	}
+}
+
+#federal government wins cw
+news_event = {
+	id = news.837
+	title = news.837.t
+	desc = news.837.d
+	picture = GFX_events_news_fgwincw
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#ok
+		name = news.837.a
+	}
+}
+
+#independent cossacks
+news_event = {
+	id = news.838
+	title = news.838.t
+	desc = news.838.d
+	picture = GFX_events_news_independent_cossacks
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#ok
+		name = news.838.a
+	}
+}
+
+#lebed winc cw
+news_event = {
+	id = news.839
+	title = news.839.t
+	desc = news.839.d
+	picture = GFX_event_news_lebedwincw
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#ok
+		name = news.839.a
+	}
+}
+
+#zk revolt
+news_event = {
+	id = news.840
+	title = news.840.t
+	desc = news.840.d
+	picture = GFX_event_news_zek_revolt
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#ok
+		name = news.840.a
+	}
+}

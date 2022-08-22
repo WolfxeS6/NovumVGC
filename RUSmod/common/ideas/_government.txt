@@ -1,0 +1,743 @@
+ideas = {
+	
+	centralization_category = {
+		law = yes
+
+		###new
+
+		centralization_soviet = {
+			cost = 0
+			removal_cost = -1
+			level = 1
+			picture = GFX_idea_centralization_soviet
+
+			allowed = {
+		 original_tag = RCO 
+			}
+			
+			available = {
+				original_tag = RCO
+			    has_government = communist
+			}
+			
+			on_add = {
+				hidden_effect = { add_stability = 0 }
+			}
+			
+			modifier = {
+				custom_modifier_tooltip = TT_NVX_LPA_plus_policy_slot_1
+				stability_factor = 0
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+				
+   				modifier = {
+					factor = 0
+					
+					is_major = yes
+				}
+   			}
+		}
+
+		####
+		
+		centralization_unitary = {
+			cost = 500
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+				
+			}
+			
+			on_add = {
+				hidden_effect = { add_stability = -0.2 }
+			}
+			
+			modifier = {
+				custom_modifier_tooltip = TT_NVX_GOV_no_secession
+			}
+			
+			default = yes
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+				
+   				modifier = {
+					factor = 0
+					
+					is_major = yes
+				}
+   			}
+		}
+		
+		centralization_federal = {
+			cost = 500
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+				
+			}
+			
+			on_add = {
+				hidden_effect = { add_stability = -0.2 }
+			}
+			
+			modifier = {
+				custom_modifier_tooltip = TT_NVX_LPA_plus_policy_slot_1
+				political_power_factor = -0.1
+				stability_factor = 0.05
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+				
+   				modifier = {
+					factor = 0
+					
+					is_major = yes
+				}
+   			}
+		}
+		
+		centralization_confederate = {
+			cost = 500
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+
+			}
+			
+			on_add = {
+				hidden_effect = { add_stability = -0.2 }
+			}
+			
+			modifier = {
+				custom_modifier_tooltip = TT_NVX_LPA_plus_policy_slot_1
+				political_power_factor = -0.2
+				stability_factor = 0.1
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+				
+   				modifier = {
+					factor = 0
+					
+					is_major = yes
+				}
+   			}
+		}
+		
+		centralization_anarchy = {
+			cost = 500
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+#				custom_trigger_tooltip = {
+#					tooltip = TT_NVX_GOV_anarchy_cond
+#					OR = {
+#						has_idea = centralization_anarchy
+#						has_country_flag = NVX_flag_secret_ideas_centralization_anarchy
+#					}
+#				}
+				OR = {
+					has_government = market_liberal
+					has_government = communist
+				}
+				has_tech = dispersed_industry
+				has_stability < 0.1
+				has_war_support < 0.1
+				custom_trigger_tooltip = {
+					tooltip = TT_NVX_GOV_anarchy_econreq
+					check_variable = { NVX_ECO_health < 0 }
+				}
+				NOT = { original_tag = RCO }
+			}
+			
+			on_add = {
+				hidden_effect = { add_stability = -0.2 }
+			}
+			
+			modifier = {
+				custom_modifier_tooltip = TT_NVX_GOV_anarchy
+				political_power_factor = -0.4
+				stability_factor = 1
+				war_support_factor = 1
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+				
+   				modifier = {
+					factor = 0
+					
+					is_major = yes
+				}
+   			}
+		}
+	}
+	
+	government_system_category = {
+		law = yes
+
+		###new
+
+		government_system_soviet_republic = {
+			cost = 0
+			removal_cost = -1
+			level = 1
+			
+			allowed = {
+		 original_tag = RCO 
+			}
+			
+			available = {
+				original_tag = RCO
+			    has_government = communist
+			}
+			
+			on_add = {
+				hidden_effect = { add_stability = 0 }
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = {
+				party_popularity_stability_factor = 0
+				custom_modifier_tooltip = TT_NVX_GOV_estate_pol
+			}
+			
+			default = yes
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+
+		###
+		
+		government_system_presidential_republic = {
+			cost = 300
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+				hidden_trigger = {
+					NOT = { has_idea = government_system_provisional }
+					NVX_has_government_ideology_democratic = yes
+				}
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = {
+				party_popularity_stability_factor = 0.05
+				custom_modifier_tooltip = TT_NVX_GOV_estate_pol
+			}
+			
+			default = yes
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+		
+		government_system_parliamentary_republic = {
+			cost = 300
+			removal_cost = -1
+			level = 1
+			
+allowed = {
+		 NOT = { original_tag = RCO }
+			}
+
+			available = {
+				hidden_trigger = {
+					NOT = { has_idea = government_system_provisional }
+					NVX_has_government_ideology_democratic = yes
+				}
+				if = {
+					limit = { original_tag = USA }
+					NOT = { has_idea = idea_USA_political_establishment }
+					NOT = { has_government = market_liberal }
+				}
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = {
+				immigration_policy_category_cost_factor = -0.2
+				civil_liberties_category_cost_factor = -0.2
+				welfare_category_cost_factor = -0.2
+				custom_modifier_tooltip = TT_NVX_GOV_estate_fisc
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+		
+		government_system_constitutional_monarchy = {
+			cost = 300
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+				hidden_trigger = {
+					NOT = { has_idea = government_system_provisional }
+					OR = {
+						NVX_has_government_ideology_democratic = yes
+						has_government = monarchist
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = TT_NVX_political_has_living_monarchy
+					has_country_flag = NVX_COUP_has_living_monarchy
+				}
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = {
+				political_power_gain = 0.05
+				public_safety_category_cost_factor = -0.2
+				custom_modifier_tooltip = TT_NVX_GOV_estate_fisc
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+		
+		government_system_absolute_monarchy = {
+			cost = 300
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+				hidden_trigger = {
+					NOT = { has_idea = government_system_provisional }
+					has_government = monarchist
+				}
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = {
+				political_power_gain = 0.15
+				custom_modifier_tooltip = TT_NVX_GOV_estate_pol
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+		
+		government_system_one_party = {
+			cost = 300
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+				hidden_trigger = {
+					NOT = { has_idea = government_system_provisional }
+					NVX_has_government_ideology_authoritarian = yes
+				}
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = { # fisc
+				political_power_gain = 0.1
+				war_stability_factor = 0.1
+				custom_modifier_tooltip = TT_NVX_GOV_system_one_party
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+		
+		government_system_autocracy = {
+			cost = 300
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+				hidden_trigger = {
+					NOT = { has_idea = government_system_provisional }
+					NVX_has_government_ideology_authoritarian = yes
+				}
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = { # pol
+				political_power_gain = 0.1
+				war_support_factor = 0.05
+				custom_modifier_tooltip = TT_NVX_GOV_estate_pol
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+		
+		government_system_imperial = {
+			cost = 300
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+#				custom_trigger_tooltip = {
+#					tooltip = TT_NVX_SYS_imperial_cond
+#					NOT = { has_idea = government_system_provisional }
+#					NVX_has_government_ideology_authoritarian = yes
+#					has_country_flag = NVX_flag_secret_ideas_government_system_imperial
+#				}
+				NVX_has_government_ideology_authoritarian = yes
+				custom_trigger_tooltip = {
+					tooltip = TT_NVX_SYS_imperial_warreq
+					check_variable = { NVX_history_wars_declared > 14 }
+				}
+				num_of_controlled_states > 60
+				OR = {
+					has_idea = public_safety_central_law_office
+					has_idea = public_safety_secret_police
+				}
+				NOT = { has_idea = civil_liberties_free }
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = {
+				enemy_justify_war_goal_time = -0.75
+				justify_war_goal_time = -0.75
+				political_power_gain = 1
+				non_core_manpower = 0.75
+				custom_modifier_tooltip = TT_NVX_GOV_imperial
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+		
+		government_system_provisional = {
+			cost = -1
+			removal_cost = -1
+			level = 1
+
+			allowed = {
+		 NOT = { original_tag = RCO }
+			}
+			
+			available = {
+				hidden_trigger = {
+					has_idea = government_system_provisional
+				}
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = {
+				justify_war_goal_time = 3
+				political_power_gain = -0.5
+				foreign_subversive_activites = 0.25
+				industrial_capacity_factory = -0.15
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+	}
+	
+	national_development_category = {
+		law = yes
+		
+		national_development_advanced = {
+			cost = 300
+			removal_cost = -1
+			level = 1
+			
+			available = {
+#				custom_trigger_tooltip = {
+#					tooltip = TT_NVX_DEV_advanced_cond
+#					OR = {
+#						has_idea = national_development_advanced
+#						has_country_flag = NVX_flag_secret_ideas_national_development_advanced
+#					}
+#				}
+				OR = {
+					has_elections = yes
+					OR = {
+						has_idea = economy_boom
+						has_idea = economy_growth
+					}
+				}
+				has_idea = national_development_developed
+				NOT = { has_idea = public_safety_secret_police }
+				has_idea = civil_liberties_free
+				NOT = { has_idea = welfare_none }
+				custom_trigger_tooltip = {
+					tooltip = TT_NVX_DEV_advanced_warreq
+					check_variable = { NVX_history_wars_declared_immoral < 4 }
+				}
+				has_stability > 0.90
+				has_tech = industrial_software3
+				has_tech = concentrated_industry9
+				has_tech = future_computing_machine
+				OR = {
+					date < 2028.1.1
+					AND = {
+						has_government = progressive
+						date < 2031.1.1
+					}
+				}
+			}
+			
+			on_add = {
+				NVX_LPA_calc_slots = yes
+				custom_effect_tooltip = TT_NVX_ECOLITE_growth_pos2
+			}
+			
+			modifier = {
+				custom_modifier_tooltip = TT_NVX_LPA_plus_policy_slot_3
+				global_building_slots_factor = 1
+				research_speed_factor = 0.1
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 1
+				
+				modifier = {
+					factor = 0
+					
+					date > 2040.1.1
+				}
+   			}
+		}
+		
+		national_development_developed = {
+			cost = 300
+			removal_cost = -1
+			level = 2
+			
+			available = {
+				hidden_trigger = {
+					NOT = {
+						has_idea = national_development_advanced
+					}
+				}
+				OR = {
+					has_elections = yes
+					OR = {
+						has_idea = economy_boom
+						has_idea = economy_growth
+					}
+				}
+				NOT = { has_idea = economy_recession }
+				NOT = { has_idea = economy_depression }
+				has_tech = advanced_computing_machine
+				has_tech = concentrated_industry5
+				industrial_complex > 14
+			}
+			
+			on_add = {
+				NVX_LPA_calc_slots = yes
+				if = {
+					limit = { original_research_slots < 4 }
+					add_research_slot = 1
+				}
+			}
+			
+			modifier = {
+				custom_modifier_tooltip = TT_NVX_LPA_plus_policy_slot_2
+				research_speed_factor = 0.02
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 1
+				
+				modifier = {
+					factor = 0
+					
+					date > 2040.1.1
+				}
+   			}
+		}
+		
+		national_development_developing = {
+			cost = 300
+			removal_cost = -1
+			level = 3
+			
+			available = {
+				hidden_trigger = {
+					NOT = {
+						OR = {
+							has_idea = national_development_advanced
+							has_idea = national_development_developed
+						}
+					}
+				}
+				NOT = { has_idea = economy_recession }
+				NOT = { has_idea = economy_depression }
+				has_tech = improved_computing_machine
+				has_tech = factory_output_upgrade3
+				industrial_complex > 5
+			}
+			
+			on_add = {
+				NVX_LPA_calc_slots = yes
+				if = {
+					limit = { original_research_slots < 3 }
+					add_research_slot = 1
+				}
+			}
+			
+			modifier = {
+				custom_modifier_tooltip = TT_NVX_LPA_plus_policy_slot_1
+				production_speed_buildings_factor = -0.1
+			}
+			
+			default = yes
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 1
+				
+				modifier = {
+					factor = 0
+					
+					date > 2032.1.1
+				}
+   			}
+		}
+		
+		national_development_undeveloped = {
+			cost = 300
+			removal_cost = -1
+			level = 4
+
+			
+			
+			available = {
+				hidden_trigger = {
+					has_idea = national_development_undeveloped
+				}
+			}
+			
+			on_add = {
+				
+			}
+			
+			modifier = {
+				production_speed_buildings_factor = -0.2
+			}
+			
+			cancel_if_invalid = no
+			
+			ai_will_do = {
+   				factor = 0
+   			}
+		}
+	}
+}

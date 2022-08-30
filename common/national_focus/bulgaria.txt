@@ -2,6 +2,8 @@ focus_tree = {
 	
 	id = BUL_focus_tree_NV
 	
+	continuous_focus_position = { x = 50 y = 1300 }
+
 	country = {
 		factor = 0
 		
@@ -12,18 +14,58 @@ focus_tree = {
 	}
 
 	focus = {
-		id = BUL_bulgarian_economy
-		icon = production
+		id = BUL_fixing_up_the_economy
+		icon = BUL_bulgarian_worker
 		x = 6
 		y = 0
 		cost = 8
 		
 		completion_reward = {
-			custom_effect_tooltip = available_political_advisor
-			#show_ideas_tooltip = Alexander_Bojilov #Unlocks capitan of industry
-			add_tech_bonus = {
+		lower_effects_of_economic_crisis = yes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_strike_at_organised_crime
+		icon = BUL_bulgarian_police
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_fixing_up_the_economy
+
+		prerequisite = {
+		focus = BUL_fixing_up_the_economy
+		}
+
+		completion_reward = {
+		add_stability = 0.075
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_supply_factories_with_modern_machinery
+		icon = POL_invest_in_modern_machinery
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_fixing_up_the_economy
+
+		prerequisite = {
+		focus = BUL_fixing_up_the_economy
+		}
+
+		completion_reward = {
+		add_tech_bonus = {
 				name = industry_bonus
-				bonus = 0.80
+				bonus = 1
 				uses = 1
 				category = industry
 			}	
@@ -33,658 +75,275 @@ focus_tree = {
 			factor = 10
 		}
 	}
-	    
-	focus = {
-	    id = BUL_Bulgarian_autarky
-		icon = embargo
-		x = -2
-		y = 1
-        relative_position_id = BUL_bulgarian_economy  
-		cost = 8
-		
-		mutually_exclusive = {
-		focus = BUL_in_search_for_new_markets
-		}
-		
-		prerequisite = {
-			focus = BUL_bulgarian_economy
-		}
-
-		bypass = {
-			custom_trigger_tooltip = {
-				tooltip = construction_effort_tt
-				all_owned_state = {
-					free_building_slots = {
-						building = industrial_complex
-						size < 1
-						include_locked = yes
-					}					
-				}
-			}
-		}
-		
-		completion_reward = {
-			custom_effect_tooltip = available_political_advisor
-			#show_ideas_tooltip = Martin_Danovsky #Unlocks international relations
-			add_ideas = closed_economy 
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-    focus = {
-	    id = BUL_lower_taxes_for_Bulgarian_products
-		icon = BUL_industry
-		x = -1
-		y = 1
-        relative_position_id = BUL_Bulgarian_autarky  
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_Bulgarian_autarky
-		}
-
-		bypass = {
-			custom_trigger_tooltip = {
-				tooltip = construction_effort_tt
-				all_owned_state = {
-					free_building_slots = {
-						building = industrial_complex
-						size < 1
-						include_locked = yes
-					}					
-				}
-			}
-		}
-		
-		completion_reward = {
-            add_stability = 0.1
-			lower_effects_of_economic_crisis = yes
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-     focus = {
-	    id = BUL_support_small_businesses
-		icon = major_alliance
-		x = 0
-		y = 1
-        relative_position_id = BUL_lower_taxes_for_Bulgarian_products  
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_lower_taxes_for_Bulgarian_products
-		}
-
-		bypass = {
-			custom_trigger_tooltip = {
-				tooltip = construction_effort_tt
-				all_owned_state = {
-					free_building_slots = {
-						building = industrial_complex
-						size < 1
-						include_locked = yes
-					}					
-				}
-			}
-		}
-		
-		completion_reward = {
-            add_ideas = BUL_strenghten_small_buisnesses
-			lower_effects_of_economic_crisis = yes
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
 	
     focus = {
-		id = BUL_increase_industry_investments
-		prerequisite = { focus = BUL_Bulgarian_autarky }
-		icon = industry_civilian2
-		relative_position_id = BUL_Bulgarian_autarky
-		x = 1
-		y = 1
-		cost = 8
-		
-		search_filters = {FOCUS_FILTER_INDUSTRY}
-		completion_reward = {
-			 lower_effects_of_economic_crisis = yes
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 1
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-     focus = {
-	    id = BUL_investments_over_military_industry
-		icon = industry_military
-		x = 0
-		y = 1
-        relative_position_id = BUL_increase_industry_investments  
-		cost = 8
-
-        
-		prerequisite = {
-			focus = BUL_increase_industry_investments
-		}
-		
-		completion_reward = {
-			lower_effects_of_economic_crisis = yes
-			random_owned_state = {
-			 add_extra_state_shared_building_slots = 2
-			 add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-		    }
-	}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-		focus = {
-	    id = BUL_in_search_for_new_markets
-		icon = trade_deal
-		x = -6
-		y = 1
-        relative_position_id = BUL_bulgarian_economy  
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_bulgarian_economy
-		}
-
-        mutually_exclusive = {
-		focus = BUL_Bulgarian_autarky
-		}
-
-		bypass = {
-			custom_trigger_tooltip = {
-				tooltip = construction_effort_tt
-				all_owned_state = {
-					free_building_slots = {
-						building = industrial_complex
-						size < 1
-						include_locked = yes
-					}					
-				}
-			}
-		}
-		
-		completion_reward = {
-			custom_effect_tooltip = available_political_advisor
-			#show_ideas_tooltip = Gabriela_Dimitrova #Unlocks international relations
-			add_ideas = free_trade 
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	   focus = {
-		id = BUL_expand_the_tobacco_industry
-		icon = tobacco
-		x = -1
-		y = 1
-		relative_position_id = BUL_in_search_for_new_markets 
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_in_search_for_new_markets
-		}
-		
-		completion_reward = {
-			 lower_effects_of_economic_crisis = yes
-			add_ideas = BUL_tobacco_exports
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	 focus = {
-		id = BUL_invite_forgein_investors
-		icon = concessions
-		x = 0
-		y = 1
-		relative_position_id = BUL_expand_the_tobacco_industry 
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_expand_the_tobacco_industry
-		}
-		
-		completion_reward = {
-			lower_effects_of_economic_crisis = yes
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	  focus = {
-		id = Bulgaria_National_Tourism_Agency
-		icon = fighter
-		x = 1
-		y = 1
-		relative_position_id = BUL_in_search_for_new_markets 
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_in_search_for_new_markets
-		}
-		
-		completion_reward = {
-			  lower_effects_of_economic_crisis = yes
-			add_ideas = Bulgaria_National_Tourism_Agency
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	 focus = {
-	    id = BUL_invite_forgein_wepons_manufacturers
-		icon = industry_military
-		x = 0
-		y = 1
-        relative_position_id = Bulgaria_National_Tourism_Agency  
-		cost = 8
-
-        
-		prerequisite = {
-			focus = Bulgaria_National_Tourism_Agency
-		}
-		
-		completion_reward = {
-			lower_effects_of_economic_crisis = yes
-			random_owned_state = {
-			  add_extra_state_shared_building_slots = 2
-			  add_building_construction = {
-					type = arms_factory
-					level = 2
-					instant_build = yes
-				}
-		    }
-	}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		       focus = {
-	    id = BUL_economic_recovery
-		icon = national_greatness
-		x = 1
-		y = 1
-        relative_position_id = BUL_invite_forgein_wepons_manufacturers  
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_invite_forgein_wepons_manufacturers
-			focus = BUL_support_small_businesses
-		}
-		
-		prerequisite = {
-			focus = BUL_invite_forgein_investors
-			focus = BUL_investments_over_military_industry
-		}
-
-		
-		completion_reward = {
-			 lower_effects_of_economic_crisis = yes
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		       focus = {
-	    id = BUL_question_of_agriculture
-		icon = agriculture_question
-		x = 6
-		y = 1
-        relative_position_id = BUL_bulgarian_economy  
-		cost = 5
-		
-		prerequisite = {
-			focus = BUL_bulgarian_economy
-		}
-		
-		completion_reward = {
-			BUL = { country_event = BUL.1 }
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = BUL_fight_with_Illiteracy
-		icon = scientific_exchange
-		x = 0
-		y = 2
-		relative_position_id = BUL_question_of_agriculture
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_question_of_agriculture
-		}
-		
-		
-		completion_reward = {
-		 add_stability = 0.05
-		 remove_ideas = BUL_small_lliteracy_rates
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	focus = {
-		id = BUL_reform_education_system
-		icon = scientific_exchange
-		x = 0
-		y = 1
-		relative_position_id = BUL_fight_with_Illiteracy
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_fight_with_Illiteracy
-		}
-		
-		
-		completion_reward = {
-		 add_ideas = BUL_reformed_education_system
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	 focus = {
-	    id = BUL_Industrialization
-		icon = production2
+		id = BUL_a_modern_agriculture
+		icon = GFX_goal_Farm_Production
 		x = 3
 		y = 1
-        relative_position_id = BUL_question_of_agriculture  
 		cost = 8
-		
-		mutually_exclusive = {
-		focus = BUL_agricultural_modernization
-		}
-		
-		available = {
-		has_country_flag = decided_to_industrialize
+		relative_position_id = BUL_supply_factories_with_modern_machinery
+
+		prerequisite = {
+		focus = BUL_strike_at_organised_crime
 		}
 		
 		prerequisite = {
-			focus = BUL_question_of_agriculture
+		focus = BUL_supply_factories_with_modern_machinery
 		}
-		
+
 		completion_reward = {
-			swap_ideas = { 
-					remove_idea = BUL_agricultural_society
-					add_idea = BUL_industrializing_nation 
-				}
+		add_ideas = ROM_mechanized_agriculture
 		}
 		
 		ai_will_do = {
 			factor = 10
 		}
 	}
-	
-		 focus = {
-	    id = BUL_expand_BDZ
-		icon = infrastructure
-		x = -1
-		y = 1
-        relative_position_id = BUL_Industrialization  
-		cost = 8
 
-        
-		prerequisite = {
-			focus = BUL_Industrialization
+	focus = {
+		id = BUL_aid_the_countryside
+		icon = GFX_focus_SOV_breadbasket_of_the_union
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_a_modern_agriculture
+
+		mutually_exclusive = {
+		focus = BUL_support_our_cities
 		}
 		
+		prerequisite = {
+		focus = BUL_a_modern_agriculture
+		}
+
 		completion_reward = {
-			every_owned_state = {
+		every_owned_state = {
 				limit = {
 					is_controlled_by = ROOT
 				}
-				add_building_construction = {
-					type = infrastructure
-					level = 2
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 1
+				add_manpower = 25000
+				add_extra_state_shared_building_slots = 2
 			}
-			add_offsite_building = { type = industrial_complex level = 1 }
 		}
 		
 		ai_will_do = {
 			factor = 10
 		}
 	}
-	
-		 focus = {
-	    id = BUL_strenghten_Armimex
-		icon = industry_military
-		x = 0
-		y = 1
-        relative_position_id = BUL_expand_BDZ  
-		cost = 8
 
-        
-		prerequisite = {
-			focus = BUL_expand_BDZ
+	focus = {
+		id = BUL_support_our_cities
+		icon = POL_housing_projects
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_a_modern_agriculture
+
+		mutually_exclusive = {
+		focus = BUL_aid_the_countryside
 		}
 		
+		prerequisite = {
+		focus = BUL_a_modern_agriculture
+		}
+
 		completion_reward = {
-			random_owned_state = {
-            add_extra_state_shared_building_slots = 2
-            add_building_construction = {
-					type = arms_factory
-					level = 2
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				 add_building_construction = {
+					type = industrial_complex
+					level = 1
 					instant_build = yes
 				}
-		    }
-	}
+			}
+		}
+		
 		ai_will_do = {
 			factor = 10
 		}
 	}
-	
-		 focus = {
-	    id = BUL_revive_Czawdar
-		icon = industry_civilian
+
+	focus = {
+		id = BUL_maximise_output
+		icon = POL_agrarian_reform
 		x = 1
 		y = 1
-        relative_position_id = BUL_Industrialization  
 		cost = 8
+		relative_position_id = BUL_support_our_cities
 
-        
 		prerequisite = {
-			focus = BUL_Industrialization
+		focus = BUL_support_our_cities
+		focus = BUL_aid_the_countryside
 		}
-		
+
 		completion_reward = {
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
+		add_political_power = 50
+		add_stability = 0.05
+        custom_effect_tooltip = POL_sld_tax_the_rich_tt
+	    add_to_variable = { NVX_ECO_health = 2 }
+	    add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
 		}
-	}
-		
 		
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	
-	 focus = {
-	    id = BUL_help_for_Kremikowci
-		icon = industry_civilian
-		x = 0
+	focus = {
+		id = BUL_educate_the_youth
+		icon = GFX_focus_generic_military_academy
+		x = -5
 		y = 1
-        relative_position_id = BUL_revive_Czawdar  
 		cost = 8
+		relative_position_id = BUL_supply_factories_with_modern_machinery
 
-        
 		prerequisite = {
-			focus = BUL_revive_Czawdar
+		focus = BUL_strike_at_organised_crime
+		}
+		
+		prerequisite = {
+		focus = BUL_supply_factories_with_modern_machinery
+		}
+
+		completion_reward = {
+		remove_ideas = BUL_small_lliteracy_rates
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_ensure_quality_schooling
+		icon = GFX_goal_Supremacy_Of_Minds
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_educate_the_youth
+
+		mutually_exclusive = {
+		focus = BUL_universities_are_the_future
+		}
+		
+		prerequisite = {
+		focus = BUL_educate_the_youth
+		}
+
+		completion_reward = {
+		add_ideas = BUL_reformed_education_system
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_universities_are_the_future
+		icon = GFX_goal_Supremacy_Of_Science
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_educate_the_youth
+
+		mutually_exclusive = {
+		focus = BUL_ensure_quality_schooling
+		}
+		
+		prerequisite = {
+		focus = BUL_educate_the_youth
+		}
+
+		completion_reward = {
+		add_ideas = BUL_university_investments
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_an_innovative_nation
+		icon = GFX_focus_research2
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_universities_are_the_future
+
+		
+		prerequisite = {
+		focus = BUL_universities_are_the_future
+		focus = BUL_ensure_quality_schooling
+		}
+
+		completion_reward = {
+		add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_reform_the_central_bank
+		icon = POL_speak_with_economists
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_supply_factories_with_modern_machinery
+
+		prerequisite = {
+		focus = BUL_strike_at_organised_crime
+		}
+		
+		prerequisite = {
+		focus = BUL_supply_factories_with_modern_machinery
+		}
+
+		completion_reward = {
+		lower_effects_of_economic_crisis = yes
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_open_up_to_the_wider_world
+		icon = POL_Liberal_policies
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_reform_the_central_bank
+
+		mutually_exclusive = {
+		focus = BUL_the_road_to_economic_independence
+		}
+		
+		prerequisite = {
+		focus = BUL_reform_the_central_bank
 		}
 		
 		completion_reward = {
-			random_owned_state = {
-			    prioritize = { 48 }
-				add_resource = { type = steel amount = 8 }
-				add_extra_state_shared_building_slots = 1
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
 					instant_build = yes
 				}
-		}
-	}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	 focus = {
-	    id = BUL_complete_industrialization
-		icon = consumer_goods
-		x = 1
-		y = 1
-        relative_position_id = BUL_strenghten_Armimex  
-		cost = 8
-
-        prerequisite = {
-			focus = BUL_help_for_Kremikowci
-		}
-		
-		prerequisite = {
-			focus = BUL_strenghten_Armimex
-		}
-		
-		completion_reward = {
-			remove_ideas = BUL_industrializing_nation
-	}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	
-	 focus = {
-	    id = BUL_agricultural_modernization
-		icon = agriculture
-		x = -3
-		y = 1
-        relative_position_id = BUL_question_of_agriculture  
-		cost = 8
-		mutually_exclusive = {
-		focus = BUL_Industrialization
-		}
-		available = {
-		has_country_flag = decided_to_keep_agriculture
-		}
-		
-		prerequisite = {
-			focus = BUL_question_of_agriculture
-		}
-		
-		completion_reward = {
-			swap_ideas = { 
-					remove_idea = BUL_agricultural_society
-					add_idea = BUL_agricultural_society_2 
-				}
+			}
+		lower_effects_of_economic_crisis = yes
 		}
 		
 		ai_will_do = {
@@ -692,72 +351,222 @@ focus_tree = {
 		}
 	}
 	
-	 focus = {
-	    id = BUL_Petrol_AD
-		icon = oil_production
-		x = 1
-		y = 1
-        relative_position_id = BUL_agricultural_modernization  
-		cost = 8
-
-        
-		prerequisite = {
-			focus = BUL_agricultural_modernization
-		}
-		
-		completion_reward = {
-			random_owned_state =  { 
-		add_extra_state_shared_building_slots = 1
-		add_resource = { type = rubber amount = 2 }
-		add_resource = { type = oil amount = 6 }
-				}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	 focus = {
-	    id = BUL_Kremikowci_AD
-		icon = production
-		x = 0
-		y = 1
-        relative_position_id = BUL_Petrol_AD  
-		cost = 8
-
-        
-		prerequisite = {
-			focus = BUL_Petrol_AD
-		}
-		
-		completion_reward = {
-			random_owned_state =  { 
-		add_extra_state_shared_building_slots = 1
-		add_resource = { type = steel amount = 8 }
-				}
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	 focus = {
-	    id = BUL_support_small_farming_towns
-		icon = house
+    focus = {
+		id = BUL_stimulate_the_tourism_industry
+		icon = BUL_tourism
 		x = -1
 		y = 1
-        relative_position_id = BUL_agricultural_modernization  
 		cost = 8
+		relative_position_id = BUL_open_up_to_the_wider_world
 
-        
 		prerequisite = {
-			focus = BUL_agricultural_modernization
+		focus = BUL_open_up_to_the_wider_world
 		}
 		
 		completion_reward = {
-			every_owned_state = {
+		lower_effects_of_economic_crisis = yes
+		add_ideas = BUL_promoted_tourism
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_invite_investors_with_open_arms
+		icon = POL_industrial_privatisation
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_open_up_to_the_wider_world
+
+		prerequisite = {
+		focus = BUL_open_up_to_the_wider_world
+		}
+		
+		completion_reward = {
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 3
+				 add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_made_in_bulgaria
+		icon = BUL_bulgarian_worker
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_invite_investors_with_open_arms
+
+		prerequisite = {
+		focus = BUL_stimulate_the_tourism_industry
+		}
+		
+		prerequisite = {
+		focus = BUL_invite_investors_with_open_arms
+		}
+		
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = BUL_promoted_tourism
+			add_idea  = BUL_promoted_tourism_2
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_the_road_to_economic_independence
+		icon = POL_public_works
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_reform_the_central_bank
+
+		mutually_exclusive = {
+		focus = BUL_open_up_to_the_wider_world
+		}
+		
+		prerequisite = {
+		focus = BUL_reform_the_central_bank
+		}
+		
+		completion_reward = {
+		lower_effects_of_economic_crisis = yes
+		add_ideas = BUL_local_industry
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+    focus = {
+		id = BUL_a_robust_local_industry
+		icon = GFX_goal_Generic_Civil_Industry_2
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_the_road_to_economic_independence
+
+		prerequisite = {
+		focus = BUL_the_road_to_economic_independence
+		}
+		
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = BUL_local_industry
+			add_idea  = BUL_local_industry_2
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_incentivise_expanded_mining_operations
+		icon = GFX_goal_Generic_Exploit_Mine
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_a_robust_local_industry
+
+		prerequisite = {
+		focus = BUL_a_robust_local_industry
+		}
+		
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = BUL_local_industry_2
+			add_idea  = BUL_local_industry_3
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_bulgarian_people_first
+		icon = BUL_better_wages
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_a_robust_local_industry
+
+		prerequisite = {
+		focus = BUL_a_robust_local_industry
+		}
+		
+		completion_reward = {
+		add_ideas = BUL_fighting_poverty
+		lower_effects_of_economic_crisis = yes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_a_bright_future_ahead_of_us
+		icon = POL_light_in_dark
+		x = -3
+		y = 1
+		cost = 8
+		relative_position_id = BUL_bulgarian_people_first
+
+		prerequisite = {
+		focus = BUL_made_in_bulgaria
+		focus = BUL_incentivise_expanded_mining_operations
+		focus = BUL_bulgarian_people_first
+		}
+		
+		completion_reward = {
+		lower_effects_of_economic_crisis = yes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_renovate_our_roads
+		icon = POL_polish_railway
+		x = -2
+		y = 1
+		cost = 8
+		relative_position_id = BUL_a_bright_future_ahead_of_us
+
+		prerequisite = {
+		focus = BUL_a_bright_future_ahead_of_us
+		}
+		
+		completion_reward = {
+		every_owned_state = {
 				limit = {
 					is_controlled_by = ROOT
 				}
@@ -768,29 +577,6 @@ focus_tree = {
 				}
 				add_extra_state_shared_building_slots = 1 
 			}
-			add_offsite_building = { type = industrial_complex level = 1 }
-		}
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-		focus = {
-		id = BUL_agarian_reform
-		text = ROM_agrarian_reform
-		icon = agrarian_reform
-		x = 0
-		y = 1
-		relative_position_id = BUL_support_small_farming_towns
-		cost = 8
-		
-		prerequisite = {
-			focus = BUL_support_small_farming_towns
-		}
-		
-		completion_reward = {
-		add_ideas = LAT_agarian_reform
 		}
 		
 		ai_will_do = {
@@ -798,54 +584,140 @@ focus_tree = {
 		}
 	}
 
-    	focus = {
-		id = BUL_finish_agricultural_reforms
-		icon = agriculture
-		x = 1
+	focus = {
+		id = BUL_support_military_industrial_complex
+		icon = GFX_focus_POL_beck_ribbentrop
+		x = 0
 		y = 1
-		relative_position_id = BUL_agarian_reform
 		cost = 8
-		
+		relative_position_id = BUL_a_bright_future_ahead_of_us
+
 		prerequisite = {
-			focus = BUL_Kremikowci_AD
-		}
-		
-		prerequisite = {
-			focus = BUL_agarian_reform
+		focus = BUL_a_bright_future_ahead_of_us
 		}
 		
 		completion_reward = {
-		 swap_ideas = { 
-					remove_idea = BUL_agricultural_society_2
-					add_idea = BUL_agricultural_society_3 
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				 add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
 				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		
 		ai_will_do = {
 			factor = 10
 		}
 	}
-	
-	 focus = {
-		id = BUL_expand_university_of_Sofia
-		icon = research
-		x = 3
+
+	focus = {
+		id = BUL_trains_electrionicts_cloths_all_in_bulgaria
+		icon = GFX_goal_Civil_Industry
+		x = 2
 		y = 1
-		relative_position_id = BUL_finish_agricultural_reforms 
 		cost = 8
-		
+		relative_position_id = BUL_a_bright_future_ahead_of_us
+
 		prerequisite = {
-			focus = BUL_finish_agricultural_reforms
-		    focus = BUL_complete_industrialization
-		}
-		
-		prerequisite = {
-			focus = BUL_reform_education_system
+		focus = BUL_a_bright_future_ahead_of_us
 		}
 		
 		completion_reward = {
-		add_research_slot = 1
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				 add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_restore_plama_pleven_refinery
+		icon = GFX_goal_generic_oil_refinery
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = BUL_trains_electrionicts_cloths_all_in_bulgaria
+
+		prerequisite = {
+		focus = BUL_support_military_industrial_complex
+		}
+		
+		prerequisite = {
+		focus = BUL_trains_electrionicts_cloths_all_in_bulgaria
+		}
+		
+		completion_reward = {
+		random_owned_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = synthetic_refinery
+						level = 1
+						instant_build = yes
+					}
+				}
+		add_tech_bonus = {
+				name = BUL_restore_plama_pleven_refinery
+				bonus = 1.0
+				uses = 1
+				category = synth_resources
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = BUL_the_natural_wealth_of_bulgaria
+		icon = construction2
+		x = -3
+		y = 1
+		cost = 8
+		relative_position_id = BUL_trains_electrionicts_cloths_all_in_bulgaria
+
+		prerequisite = {
+		focus = BUL_support_military_industrial_complex
+		}
+		
+		prerequisite = {
+		focus = BUL_renovate_our_roads
+		}
+		
+		completion_reward = {
+		random_owned_state = {
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+			}
+		random_owned_state = {
+				add_resource = {
+					type = aluminium
+					amount = 6
+				}
+			}
+		}
 		
 		ai_will_do = {
 			factor = 10

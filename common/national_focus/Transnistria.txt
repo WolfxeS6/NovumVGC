@@ -1,0 +1,667 @@
+focus_tree = {
+	
+	id = TRA_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 20
+			original_tag = TRA
+		}
+	}
+
+	# Days cost in time
+    @Time_10_days = 1.5
+    @Time_15_days = 2.2
+    @Time_20_days = 2.9
+    @Time_25_days = 3.7
+    @Time_30_days = 4.4
+    @Time_35_days = 5
+    @Time_40_days = 5.8
+    @Time_45_days = 6.5
+    @Time_50_days = 7.2
+    @Time_55_days = 7.9
+    @Time_60_days = 8.6
+    @Time_65_days = 9.4
+    @Time_70_days = 10
+    @Time_75_days = 10.8
+    @Time_80_days = 11.5
+    @Time_85_days = 12.2
+    @Time_90_days = 12.9
+    @Time_95_days = 13.6
+    @Time_100_days = 14.4
+    @Time_110_days = 15.8
+    @Time_115_days = 16.5
+    @Time_120_days = 17.2
+    @Time_125_days = 17.9
+    @Time_130_days = 18.6
+    @Time_135_days = 19.3
+    @Time_140_days = 20
+    @Time_145_days = 20.8
+    @Time_150_days = 21.5
+    @Time_155_days = 22.2
+    @Time_160_days = 22.9
+    @Time_165_days = 23.6
+    @Time_170_days = 24.4
+    @Time_175_days = 25
+
+	###############################
+    ###                         ###
+    ### Transnistria Focus Tree ###
+    ###                         ###
+    ###############################
+
+    focus = {
+        id = TRA_Beginning_of_a_Nation
+        icon = GFX_goal_Transnistria_State
+        x = 6
+        y = 0
+        cost = @Time_70_days
+
+        completion_reward = {
+            add_political_power = 150
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+	#######################
+	### Industrial Path ###
+	#######################
+
+	focus = {
+        id = TRA_Basic_Industry
+        icon = GFX_goal_Civil_Industry
+        x = 2
+        y = 1
+        cost = @Time_70_days
+
+		prerequisite = {
+            focus = TRA_Beginning_of_a_Nation
+        }
+
+        completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1 # 100%
+				uses = 2
+				category = industry
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Education_Reform
+        icon = GFX_focus_generic_treaty
+        x = 0
+        y = 2
+        cost = @Time_45_days
+
+		prerequisite = {
+            focus = TRA_Basic_Industry
+        }
+
+        completion_reward = {
+            add_ideas = TRA_Education_Reform
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Research_Incentives
+        icon = GFX_goal_generic_scientific_exchange
+        x = 0
+        y = 3
+        cost = @Time_45_days
+
+		prerequisite = {
+            focus = TRA_Education_Reform
+        }
+
+        completion_reward = {
+            add_ideas = TRA_Census_Reform
+            swap_ideas = {
+				remove_idea = TRA_Education_Reform
+				add_idea = TRA_Research_Support
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = TRA_Infrastructure_Development
+        icon = GFX_goal_Road_Construction
+        x = 2
+        y = 2
+        cost = @Time_70_days
+
+		prerequisite = {
+            focus = TRA_Basic_Industry
+        }
+
+        completion_reward = {
+			857 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+        id = TRA_Hosuing_Development_Project
+        icon = GFX_goal_City_Construction
+        x = 2
+        y = 3
+        cost = @Time_100_days
+
+		prerequisite = {
+            focus = TRA_Infrastructure_Development
+        }
+
+        completion_reward = {
+			857 = {
+                add_extra_state_shared_building_slots = 2
+                add_manpower = 5000
+            }
+                857 = {
+                    add_extra_state_shared_building_slots = 2
+                    add_manpower = 5000
+                }
+                    857 = {
+                        add_extra_state_shared_building_slots = 2
+                        add_manpower = 5000
+                    }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Expand_Civilian_Industry
+        icon = GFX_goal_generic_construct_civ_factory
+        x = 4
+        y = 2
+        cost = @Time_35_days
+
+		prerequisite = {
+            focus = TRA_Basic_Industry
+        }
+
+        completion_reward = {
+            857 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Support_Local_Companies
+        icon = GFX_focus_generic_the_giant_wakes
+        x = 4
+        y = 3
+        cost = @Time_35_days
+
+		prerequisite = {
+            focus = TRA_Expand_Civilian_Industry
+        }
+
+        completion_reward = {
+            857 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Expand_Research_Department
+        icon = GFX_focus_research2
+        x = 2
+        y = 4
+        cost = @Time_50_days
+
+		prerequisite = {
+            focus = TRA_Research_Incentives
+        }
+		prerequisite = {
+			focus = TRA_Support_Local_Companies
+		}
+
+        completion_reward = {
+            add_research_slot = 1
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+	##############################
+	### Domestic Policies Path ###
+	##############################
+
+	focus = {
+        id = TRA_Recruit_More_Administrators
+        icon = GFX_goal_generic_intelligence_exchange
+        x = 6
+        y = 1
+        cost = @Time_50_days
+
+		prerequisite = {
+            focus = TRA_Beginning_of_a_Nation
+        }
+
+        completion_reward = {
+            add_political_power = 15
+            add_war_support = 0.05 # 5%
+            add_stability = 0.05 # 5%
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Invest_in_Public_Services
+        icon = GFX_goal_generic_construct_civilian
+        x = 6
+        y = 4
+        cost = @Time_70_days
+
+		prerequisite = {
+			focus = TRA_Recruit_More_Administrators
+		}
+
+        completion_reward = {
+            add_ideas = TRA_Public_Service_Investment
+            857 = {
+                add_extra_state_shared_building_slots = 2
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+	#########################################
+	### Diplomacy with Russia Path (Army) ###
+	#########################################
+
+	focus = {
+        id = TRA_Invite_Russian_Planners
+        icon = GFX_goal_Friends_with_Russia
+        x = 10
+        y = 1
+        cost = @Time_50_days
+
+		prerequisite = {
+            focus = TRA_Beginning_of_a_Nation
+        }
+
+        completion_reward = {
+            add_offsite_building = {
+                type = arms_factory
+                level = 1
+                instant_build = yes
+            }
+            add_doctrine_cost_reduction = {
+                name = armydoctrine_bonus
+                cost_reduction = 1 # 100%
+                uses = 1
+                category = land_doctrine
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+    	id = TRA_Invite_Russian_Military_Advisors
+        icon = GFX_focus_RAJ_indian_gentlemen_offcers
+        x = 9
+        y = 2
+        cost = @Time_50_days
+
+		prerequisite = {
+			focus = TRA_Invite_Russian_Planners
+		}
+
+        completion_reward = {
+            add_ideas = TRA_Russian_Military_Advisors
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Russian_Military_Doctrine
+        icon = GFX_goal_Russian_Air_Doctrine
+        x = 9
+        y = 4
+        cost = @Time_65_days
+
+		prerequisite = {
+			focus = TRA_Invite_Russian_Military_Advisors
+		}
+
+        completion_reward = {
+            add_doctrine_cost_reduction = {
+                name = armydoctrine_bonus
+                cost_reduction = 1 # 100%
+                uses = 2
+                category = land_doctrine
+            }
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+    focus = {
+    	id = TRA_Weapons_from_Russia
+        icon = GFX_goal_generic_build_tank
+        x = 10
+        y = 3
+        cost = @Time_70_days
+
+		prerequisite = {
+			focus = TRA_Invite_Russian_Planners
+		}
+
+        completion_reward = {
+            add_equipment_to_stockpile = { 
+				type = infantry_equipment_1
+				amount = 5000
+			}
+            add_equipment_to_stockpile = { 
+				type = support_equipment
+				amount = 250
+			}
+            add_equipment_to_stockpile = { 
+				type = artillery_equipment_1
+				amount = 500
+			}
+            add_manpower = 10000
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Expand_Army_Training
+        icon = GFX_goal_generic_allies_build_infantry
+        x = 11
+        y = 2
+        cost = @Time_50_days
+
+		prerequisite = {
+			focus = TRA_Invite_Russian_Planners
+		}
+
+        completion_reward = {
+            army_experience = 25
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Domestic_Arms_Production
+        icon = GFX_goal_generic_small_arms
+        x = 11
+        y = 4
+        cost = @Time_50_days
+
+		prerequisite = {
+			focus = TRA_Expand_Army_Training
+		}
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = infantry_tech
+				bonus = 0.75
+				uses = 2
+				category = infantry_weapons
+			} 
+            add_ideas = TRA_Domestic_Arms_Production
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Army_Recruitment_Program
+        icon = GFX_goal_Military_Training
+        x = 10
+        y = 5
+        cost = @Time_50_days
+
+		prerequisite = {
+			focus = TRA_Russian_Military_Doctrine
+		}
+		prerequisite = {
+			focus = TRA_Domestic_Arms_Production
+		}
+
+        completion_reward = {
+            add_ideas = TRA_New_Army_Recruitment_Program
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+	##################################
+	### Economic & Nationhood Path ###
+	##################################
+	
+	focus = {
+        id = TRA_Improved_Economy
+        icon = GFX_goal_Generic_Civil_Industry_2
+        x = 4
+        y = 5
+        cost = @Time_50_days
+
+		prerequisite = {
+			focus = TRA_Expand_Research_Department
+			focus = TRA_Invest_in_Public_Services
+		}
+
+        completion_reward = {
+            add_ideas = TRA_Industrial_Development_Program
+            857 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Expand_Military_Industry
+        icon = GFX_goal_generic_construct_mil_factory
+        x = 7
+        y = 5
+        cost = @Time_50_days
+
+		prerequisite = {
+			focus = TRA_Invest_in_Public_Services
+		}
+
+        completion_reward = {
+            857 = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = arms_factory
+					level = 4
+					instant_build = yes
+				}
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Transnistrian_Pride
+        icon = GFX_goal_Transnistria_Pride
+        x = 7
+        y = 6
+        cost = @Time_70_days
+
+		prerequisite = {
+			focus = TRA_Improved_Economy
+			focus = TRA_Expand_Military_Industry
+			focus = TRA_Army_Recruitment_Program
+		}
+
+        completion_reward = {
+            remove_ideas = partially_recognized_state
+            add_ideas = TRA_Transnistrian_Pride
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+
+	########################
+    ### Naval Focus Tree ###
+    ########################
+
+	focus = {
+        id = TRA_Beginning_of_a_Fleet
+        icon = GFX_goal_generic_build_navy
+        x = 13
+        y = 1
+        cost = @Time_50_days
+
+        completion_reward = {
+            navy_experience = 15
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Small_Ship_Program
+        icon = GFX_goal_generic_navy_cruiser
+        x = 13
+        y = 2
+        cost = @Time_50_days
+
+		prerequisite = {
+			focus = TRA_Beginning_of_a_Fleet
+		}
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = destroyer_bonus
+				bonus = 0.5 # 50%
+				uses = 1
+				category = dd_tech
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Basic_Dockyards
+        icon = GFX_goal_generic_construct_naval_dockyard
+        x = 14
+        y = 3
+        cost = @Time_50_days
+
+		prerequisite = {
+			focus = TRA_Small_Ship_Program
+		}
+
+        completion_reward = {
+            random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+	focus = {
+        id = TRA_Russian_Naval_Doctrine
+        icon = GFX_goal_Russian_Naval_Doctrine
+        x = 13
+        y = 4
+        cost = @Time_50_days
+
+		prerequisite = {
+			focus = TRA_Small_Ship_Program
+		}
+
+        completion_reward = {
+            add_tech_bonus = {
+				name = naval_doc_bonus
+				bonus = 1 # 100%
+				uses = 2
+				category = naval_doctrine
+			}
+        }
+
+        ai_will_do = {
+            factor = 10
+        }
+    }
+}

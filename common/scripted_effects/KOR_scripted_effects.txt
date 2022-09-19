@@ -1,5 +1,6 @@
 
 KOR_loyalty_setting_effect = {
+
 	#clear_variable = KOR_all_loyalty_status
 	#clear_variable = KOR_all_ruling_party_status
 	#clear_variable = KOR_all_right_wing_party_seats_status
@@ -28,72 +29,73 @@ KOR_loyalty_setting_effect = {
 	add_to_variable = { var = KOR_all_loyalty_status  value = KOR_NL_loyalty_status }
 	add_to_variable = { var = KOR_all_loyalty_status  value = KOR_feminism_loyalty_status }
 	add_to_variable = { var = KOR_all_loyalty_status  value = KOR_independent_loyalty_status }
+	
 }
 
 KOR_parties_support_setting_effect = {
 	KOR_national_assembly_modifers_effect = yes
 	
 	clamp_variable = {
-		var = KOR_fundamentalists_support_status
+		var = KOR_parliament_seat_support_array^0
 		min = 0
 		max = KOR_all_seats_status
 	}
 	clamp_variable = {
-		var = KOR_reactionists_support_status
+		var = KOR_parliament_seat_support_array^1
 		min = 0
 		max = KOR_all_seats_status
 	}
 	clamp_variable = {
-		var = KOR_neocon_support_status
+		var = KOR_parliament_seat_support_array^2
 		min = 0
 		max = KOR_all_seats_status
 	}
 	clamp_variable = {
-		var = KOR_conservatism_support_status
+		var = KOR_parliament_seat_support_array^3
 		min = 0
 		max = KOR_all_seats_status
 	}
 	clamp_variable = {
-		var = KOR_social_liberalism_support_status
+		var = KOR_parliament_seat_support_array^4
 		min = 0
 		max = KOR_all_seats_status
 	}
 	clamp_variable = {
-		var = KOR_democratic_socialism_support_status
+		var = KOR_parliament_seat_support_array^5
 		min = 0
 		max = KOR_all_seats_status
 	}
 	clamp_variable = {
-		var = KOR_centrist_support_status
+		var = KOR_parliament_seat_support_array^9
 		min = 0
 		max = KOR_all_seats_status
 	}
 	clamp_variable = {
-		var = KOR_social_democracy_support_status
+		var = KOR_parliament_seat_support_array^6
 		min = 0
 		max = KOR_all_seats_status
 	}
 	clamp_variable = {
-		var = KOR_NL_support_status
+		var = KOR_parliament_seat_support_array^7
 		min = 0
 		max = KOR_all_seats_status
 	}
 	clamp_variable = {
-		var = KOR_feminism_support_status
+		var = KOR_parliament_seat_support_array^8
 		min = 0
 		max = KOR_all_seats_status
 	}
 	
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_fundamentalists_support_status }
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_reactionists_support_status }
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_neocon_support_status }
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_conservatism_support_status }
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_social_liberalism_support_status }
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_democratic_socialism_support_status }
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_centrist_support_status }
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_social_democracy_support_status }
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_NL_support_status }
-	add_to_variable = { var = KOR_all_support_status_base  value = KOR_feminism_support_status }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^0 }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^1 }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^2 }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^3 }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^4 }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^5 }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^6 }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^7 }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^8 }
+	add_to_variable = { var = KOR_all_support_status_base  value = KOR_parliament_seat_support_array^9 }
 	
 	
 	if = {
@@ -197,7 +199,83 @@ KOR_parties_support_setting_effect = {
 		korean_init_parliament = yes
 }
 
+korean_overflow_and_minor_check = {
+
+	if = {
+		limit = {
+			check_variable = { temp_seats > 0 }
+		}
+		# loop until seats to be added is 0
+		while_loop_effect = {
+			limit = {
+				check_variable = { temp_seats > 0 }
+			}
+
+			# loops through remaining parties, subtracting 1 seat each time
+			for_loop_effect = {
+				start = 0
+				end = temp_array^size
+
+				if = {
+					limit = {
+						check_variable = { KOR_parliament_seat_support_array^temp_array^v > 0 } # party must have more than 0 seats to be subtracted
+						check_variable = { temp_seats > 0 } # seats to be added is bigger than 0 currently
+					}
+					subtract_from_variable = { KOR_parliament_seat_support_array^temp_array^v = 1 } # subtract from party 1 seat
+					subtract_from_temp_variable = { temp_seats = 1 } # subtract from seats to be added
+				}
+			}
+		}
+	}
+	# if its subtract
+	else_if = {
+		limit = {
+			check_variable = { temp_seats < 0 }
+		}
+		# loop until seats to be subtracted is 0
+		while_loop_effect = {
+			limit = {
+				check_variable = { temp_seats < 0 }
+			}
+
+			# loops through remaining parties, adding 1 seat each time
+			for_loop_effect = {
+				start = 0
+				end = temp_array^size
+
+				if = {
+					limit = {
+						check_variable = { KOR_parliament_seat_support_array^temp_array^v < KOR_parliament_main_array^size } # party must have less than max seats to be added
+						check_variable = { temp_seats < 0 } # seats to be subtracted is less than 0 currently
+					}
+					add_to_variable = { KOR_parliament_seat_support_array^temp_array^v = 1 } # add to party 1 seat
+					add_to_temp_variable = { temp_seats = 1 } # add to seats to be subtracted
+				}
+			}
+		}
+	}
+
+}
+
 korean_init_parliament = {
+
+	# check to see if result overflows
+	set_temp_variable = { temp = KOR_all_seats_status }
+	
+	if = {
+		limit = {
+			check_variable = { temp > KOR_parliament_main_array^size }
+		}
+		subtract_from_temp_variable = { temp = KOR_parliament_main_array^size }
+		subtract_from_temp_variable = { temp_seats = temp }
+	}
+	else_if = {
+		limit = {
+			check_variable = { temp < 0 }
+		}
+		multiply_temp_variable = { temp = -1 }
+		subtract_from_temp_variable = { temp_seats = temp }
+	}
 
 	#KOR_national_assembly_modifers_effect = yes
 		
@@ -901,7 +979,226 @@ korean_init_parliament = {
 
 }
 
+KOR_modify_parliament_support = {
+	
+	
+	ROOT = {
+		if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 0
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^0 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 1
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^1 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 2
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^2 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 3
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^3 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 4
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^4 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 5
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^5 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 6
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^6 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 7
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^7 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 8
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^8 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = add_parties
+					value = 9
+					compare = equals
+				}
+			}
+			add_to_variable = { var = KOR_parliament_seat_support_array^9 value = KOR_move_support }
+		}
+		else = {
+			add_to_variable = { var = KOR_parliament_seat_support_array^10 value = KOR_move_support }
+		}
+		
+		if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 0
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^0 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 1
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^1 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 2
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^2 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 3
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^3 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 4
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^4 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 5
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^5 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 6
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^6 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 7
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^7 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 8
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^8 value = KOR_move_support }
+		}
+		else_if = {
+			limit = {
+				check_variable = { 
+					var = temp_member
+					value = 9
+					compare = equals
+				}
+			}
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^9 value = KOR_move_support }
+		}
+		else = {
+			subtract_from_variable = { var = KOR_parliament_seat_support_array^10 value = KOR_move_support }
+		}
+	}
+			
+	#add_to_variable = { var = KOR_parliament_seat_support_array^add_parties value = KOR_move_support }
+	#add_to_variable = { var = KOR_parliament_seat_support_array^temp_member value = -KOR_move_support }
+}
+
+
 KOR_seats_general_election_effect = {
+
 	#remove loyalty
 	clear_variable = KOR_all_ruling_party_status
 	clear_variable = KOR_all_right_wing_party_seats_status
@@ -919,80 +1216,17 @@ KOR_seats_general_election_effect = {
 	clear_variable = KOR_NL_loyalty_status
 	clear_variable = KOR_feminism_loyalty_status
 	
-			clamp_variable = {
-				var = KOR_fundamentalists_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-			clamp_variable = {
-				var = KOR_reactionists_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-			clamp_variable = {
-				var = KOR_neocon_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-			clamp_variable = {
-				var = KOR_conservatism_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-			clamp_variable = {
-				var = KOR_social_liberalism_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-			clamp_variable = {
-				var = KOR_democratic_socialism_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-			clamp_variable = {
-				var = KOR_centrist_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-			clamp_variable = {
-				var = KOR_social_democracy_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-			clamp_variable = {
-				var = KOR_NL_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-			clamp_variable = {
-				var = KOR_feminism_support_status
-				min = 0
-				max = KOR_all_seats_status
-			}
-	
-	set_variable = { KOR_fundamentalists_seats_status = KOR_fundamentalists_support_status }
-	set_variable = { KOR_reactionists_seats_status = KOR_reactionists_support_status }
-	set_variable = { KOR_neocon_seats_status = KOR_neocon_support_status }
-	set_variable = { KOR_conservatism_seats_status = KOR_conservatism_support_status }
-	set_variable = { KOR_social_liberalism_seats_status = KOR_social_liberalism_support_status }
-	set_variable = { KOR_democratic_socialism_seats_status = KOR_democratic_socialism_support_status }
-	set_variable = { KOR_centrist_seats_status = KOR_centrist_support_status }
-	set_variable = { KOR_social_democracy_seats_status = KOR_social_democracy_support_status }
-	set_variable = { KOR_NL_seats_status = KOR_NL_support_status }
-	set_variable = { KOR_feminism_seats_status = KOR_feminism_support_status }
-	
-	randomize_variable = {
-		var = KOR_fundamentalists_loyalty_status
-		distribution = binomial
-		min = 0
-		max = KOR_fundamentalists_seats_status
-	}
-	randomize_variable = {
-		var = KOR_conservatism_loyalty_status
-		distribution = binomial
-		min = 0
-		max = KOR_conservatism_seats_status
-	}
+	set_variable = { KOR_fundamentalists_seats_status = KOR_parliament_seat_support_array^0 }
+	set_variable = { KOR_reactionists_seats_status = KOR_parliament_seat_support_array^1 }
+	set_variable = { KOR_neocon_seats_status = KOR_parliament_seat_support_array^2 }
+	set_variable = { KOR_conservatism_seats_status = KOR_parliament_seat_support_array^3 }
+	set_variable = { KOR_social_liberalism_seats_status = KOR_parliament_seat_support_array^4 }
+	set_variable = { KOR_democratic_socialism_seats_status = KOR_parliament_seat_support_array^5 }
+	set_variable = { KOR_social_democracy_seats_status = KOR_parliament_seat_support_array^6 }
+	set_variable = { KOR_NL_seats_status = KOR_parliament_seat_support_array^7 }
+	set_variable = { KOR_feminism_seats_status = KOR_parliament_seat_support_array^8 }
+	set_variable = { KOR_centrist_seats_status = KOR_parliament_seat_support_array^9 }
+	set_variable = { KOR_independent_seats_status = KOR_parliament_seat_support_array^10 }
 }
 
 KOR_fundamentalism_to_gain_strength = {
@@ -1672,260 +1906,263 @@ KOR_move_independents_effect = {
 
 KOR_add_fundamentalists_support_effect = {
 	hidden_effect = {
-	random_list = {
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+		set_variable = { add_parties = 0 }
+		random_list = {
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
+				}
+				set_variable = { temp_member = 1 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
+				}
+				set_variable = { temp_member = 2 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
+				}
+				set_variable = { temp_member = 3 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
+				}
+				set_variable = { temp_member = 4 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
+				}
+				set_variable = { temp_member = 5 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
+				}
+				set_variable = { temp_member = 6 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
+				}
+				set_variable = { temp_member = 7 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
+				}
+				set_variable = { temp_member = 8 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
+				}
+				set_variable = { temp_member = 9 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
+				}
+				set_variable = { temp_member = 10 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_fundamentalists_support_status = KOR_move_support }
 		}
-	}
 	}
 }
 
 KOR_add_reactionists_support_effect = {
 	hidden_effect = {
-	random_list = {
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+		set_variable = { add_parties = 1 }
+		random_list = {
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
+				}
+				set_variable = { temp_member = 0 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
+				}
+				set_variable = { temp_member = 2 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
+				}
+				set_variable = { temp_member = 3 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
+				}
+				set_variable = { temp_member = 4 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
+				}
+				set_variable = { temp_member = 5 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
+				}
+				set_variable = { temp_member = 6 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
+				}
+				set_variable = { temp_member = 7 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
+				}
+				set_variable = { temp_member = 8 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
+				}
+				set_variable = { temp_member = 9 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
-		}
-		10 = {
-			modifier = {
-				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+			10 = {
+				modifier = {
+					factor = 0
+					check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
+				}
+				set_variable = { temp_member = 10 }
+				KOR_modify_parliament_support = yes
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_reactionists_support_status = KOR_move_support }
 		}
-	}
 	}
 }
 
 KOR_add_neocon_support_effect = {
 	hidden_effect = {
+		set_variable = { add_parties = 2 }
 	random_list = {
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 0 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 1 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 3 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 4 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 5 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 6 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 7 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 8 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 9 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_neocon_support_status = KOR_move_support }
+			set_variable = { temp_member = 10 }
+			KOR_modify_parliament_support = yes
 		}
 	}
 	}
@@ -1933,86 +2170,87 @@ KOR_add_neocon_support_effect = {
 
 KOR_add_conservatism_support_effect = {
 	hidden_effect = {
+		set_variable = { add_parties = 3 }
 	random_list = {
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 0 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 2 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 1 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 4 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 5 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 6 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 7 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 8 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 9 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_conservatism_support_status = KOR_move_support }
+			set_variable = { temp_member = 10 }
+			KOR_modify_parliament_support = yes
 		}
 	}
 	}
@@ -2020,86 +2258,87 @@ KOR_add_conservatism_support_effect = {
 
 KOR_add_social_liberalism_support_effect = {
 	hidden_effect = {
+		set_variable = { add_parties = 4 }
 	random_list = {
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 0 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 2 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 3 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 1 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 5 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 6 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 7 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 8 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 9 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_liberalism_support_status = KOR_move_support }
+			set_variable = { temp_member = 10 }
+			KOR_modify_parliament_support = yes
 		}
 	}
 	}
@@ -2107,86 +2346,87 @@ KOR_add_social_liberalism_support_effect = {
 
 KOR_add_democratic_socialism_support_effect = {
 	hidden_effect = {
+		set_variable = { add_parties = 5 }
 	random_list = {
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_add_democratic_socialism_support_effect = KOR_move_support }
+			set_variable = { temp_member = 0 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_add_democratic_socialism_support_effect = KOR_move_support }
+			set_variable = { temp_member = 2 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_add_democratic_socialism_support_effect = KOR_move_support }
+			set_variable = { temp_member = 3 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_add_democratic_socialism_support_effect = KOR_move_support }
+			set_variable = { temp_member = 4 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_add_democratic_socialism_support_effect = KOR_move_support }
+			set_variable = { temp_member = 1 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
+			set_variable = { temp_member = 6 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
+			set_variable = { temp_member = 7 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
+			set_variable = { temp_member = 8 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
+			set_variable = { temp_member = 9 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
+			set_variable = { temp_member = 10 }
+			KOR_modify_parliament_support = yes
 		}
 	}
 	}
@@ -2194,86 +2434,87 @@ KOR_add_democratic_socialism_support_effect = {
 
 KOR_add_social_democracy_support_effect = {
 	hidden_effect = {
+		set_variable = { add_parties = 6 }
 	random_list = {
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 0 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 2 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 3 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 4 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 5 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 1 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 7 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 8 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 9 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_social_democracy_support_status = KOR_move_support }
+			set_variable = { temp_member = 10 }
+			KOR_modify_parliament_support = yes
 		}
 	}
 	}
@@ -2281,86 +2522,87 @@ KOR_add_social_democracy_support_effect = {
 
 KOR_add_NL_support_effect = {
 	hidden_effect = {
+		set_variable = { add_parties = 7 }
 	random_list = {
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 0 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 2 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 3 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 4 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 5 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 6 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 1 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 8 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 9 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_NL_support_status = KOR_move_support }
+			set_variable = { temp_member = 10 }
+			KOR_modify_parliament_support = yes
 		}
 	}
 	}
@@ -2368,86 +2610,87 @@ KOR_add_NL_support_effect = {
 
 KOR_add_feminism_support_effect = {
 	hidden_effect = {
+		set_variable = { add_parties = 8 }
 	random_list = {
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 0 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 2 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 3 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 4 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 5 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 6 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 7 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 1 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 9 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_feminism_support_status = KOR_move_support }
+			set_variable = { temp_member = 10 }
+			KOR_modify_parliament_support = yes
 		}
 	}
 	}
@@ -2455,86 +2698,88 @@ KOR_add_feminism_support_effect = {
 
 KOR_add_centrist_support_effect = {
 	hidden_effect = {
+		set_variable = { add_parties = 9 }
+				
 	random_list = {
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 0 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 2 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 3 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 4 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 5 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 6 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 7 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 8 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 1 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_independent_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^10 }
 			}
-			subtract_from_variable = { KOR_independent_support_status = KOR_move_support }
-			add_to_variable = { KOR_centrist_support_status = KOR_move_support }
+			set_variable = { temp_member = 10 }
+			KOR_modify_parliament_support = yes
 		}
 	}
 	}
@@ -2542,86 +2787,87 @@ KOR_add_centrist_support_effect = {
 
 KOR_add_independent_support_effect = {
 	hidden_effect = {
+		set_variable = { add_parties = 10 }
 	random_list = {
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_fundamentalists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^0 }
 			}
-			subtract_from_variable = { KOR_fundamentalists_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 0 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_neocon_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^2 }
 			}
-			subtract_from_variable = { KOR_neocon_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 2 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_conservatism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^3 }
 			}
-			subtract_from_variable = { KOR_conservatism_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 3 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_liberalism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^4 }
 			}
-			subtract_from_variable = { KOR_social_liberalism_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 4 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_democratic_socialism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^5 }
 			}
-			subtract_from_variable = { KOR_democratic_socialism_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 5 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_social_democracy_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^6 }
 			}
-			subtract_from_variable = { KOR_social_democracy_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 6 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_NL_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^7 }
 			}
-			subtract_from_variable = { KOR_NL_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 7 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_feminism_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^8 }
 			}
-			subtract_from_variable = { KOR_feminism_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 8 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_centrist_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^9 }
 			}
-			subtract_from_variable = { KOR_centrist_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 9 }
+			KOR_modify_parliament_support = yes
 		}
 		10 = {
 			modifier = {
 				factor = 0
-				check_variable = { KOR_move_support > KOR_reactionists_support_status }
+				check_variable = { KOR_move_support > KOR_parliament_seat_support_array^1 }
 			}
-			subtract_from_variable = { KOR_reactionists_support_status = KOR_move_support }
-			add_to_variable = { KOR_independent_support_status = KOR_move_support }
+			set_variable = { temp_member = 1 }
+			KOR_modify_parliament_support = yes
 		}
 	}
 	}

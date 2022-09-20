@@ -5,6 +5,7 @@ tags={
 dependencies={
 	"Novum Vexillum"
 }
+replace_path="gfx/interface/equipmentdesigner/tanks/designer"
 name="Novum Vexillum Global Conflict"
 picture="thumbnail.png"
 supported_version="1.11.*"

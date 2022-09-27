@@ -2261,6 +2261,14 @@ country_event = {
 
 	trigger = {
 		IRQ = { has_government = nationalist }
+		NOT = { IRQ = { has_non_aggression_pact_with  = USA } }
+		NOT = { IRQ = { is_in_faction_with  = USA } }
+		NOT = { IRQ = { is_in_faction_with  = SOV } }
+		NOT = { IRQ = { is_in_faction_with  = PRC } }
+		NOT = { has_global_flag = sandbox_tabula_rasa }
+		NOT = { has_global_flag = operation_iraqi_freedom }
+		NOT = {has_war_with = IRQ}
+		has_global_flag = iraq_resolution
 	}
 
 	immediate = {
@@ -2270,27 +2278,119 @@ country_event = {
 	option = {
 		name = usa.72.o1
 		set_global_flag = american_invasion_of_iraq
+		add_timed_idea = {
+		idea = shock_and_awe_US_idea
+		days = 28
+		}
+		
+		IRQ = {
+			country_event = {
+			id = IRQ_flavor.9
+			hours = 1
+			}	
+		}
 		
 		declare_war_on = {
 			target = IRQ
 			type = puppet_wargoal_focus
 		}
-
+		
+		KUR = {
+		add_to_war = { 
+			targeted_alliance = USA
+			enemy = IRQ
+			hostility_reason = asked_to_join
+		}	
+		give_military_access = USA
+		}
+		
 		hidden_effect = {
+			add_timed_idea = {
+			idea = flavor_no_NATO_IRQ 
+			days = 240
+			} 
 			load_oob = "USA_invading_force_IRQ"
 			USA = {
-				set_province_controller = 12879
-				set_province_controller = 2089
-				set_province_controller = 1631
-				set_province_controller = 12726
-				set_province_controller = 10744
-				set_province_controller = 12413
-				set_province_controller = 4951
-			}
-			news_event = {
-				id = usa_news.19
+				set_province_controller = 13316
+				set_province_controller = 15984
+			}	
+		}
+		
+		news_event = {
+				id = fne.8
 				hours = 6
 			}
+		
+		IF = {
+		limit = {
+		is_ai = yes
+		}
+		load_oob = "USA_invading_force_IRQ_AI_help"
+		}
+		
+		IF = {
+		limit = {
+			TUR = { has_country_flag = TUR_iraqi_freedom_ok }
+			}
+	
+		hidden_effect = {
+		TUR = {
+			country_event = {
+				id = TUR_flavor.1
+				hours = 1
+				}
+			add_timed_idea = {
+			idea = flavor_no_NATO_IRQ 
+			days = 240
+			} 
+		}	
+		}	
+		}
+
+		
+		IF = {
+		limit = {
+			ENG = { has_country_flag = ENG_iraqi_freedom_ok }
+		}
+		ENG = {
+			country_event = {
+				id = ENG_flavor.1
+				hours = 1
+				}	
+			hidden_effect = {
+			add_timed_idea = {
+			idea = flavor_no_NATO_IRQ 
+			days = 240
+			} 
+			add_timed_idea = {
+			idea = shock_and_awe_US_idea
+			days = 28
+			}
+			}
+			} 
+		}	
+	
+
+	
+		IF = {
+		limit = {
+		OR = {
+			TUR = { has_country_flag = TUR_iraqi_freedom_ok }
+			TUR = { has_country_flag = TUR_let_US_pass }
+			}
+		}
+		hidden_effect = {
+			load_oob = "USA_invading_force_IRQ_with_TUR"
+		}
+		}
+		ELSE = {
+		hidden_effect = {
+			load_oob = "USA_invading_force_IRQ_without_TUR"
+		}
+		country_event = {
+		id = USA_flavor.4
+		hours = 1
+		}
 		}
 	}
 }

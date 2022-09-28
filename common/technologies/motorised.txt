@@ -1,0 +1,378 @@
+# Written and edited by E. Wolfe #
+
+@1960 = 0
+@1980 = 2
+@2000 = 4
+@2006 = 6
+@2012 = 8
+@2018 = 10
+@2024 = 12
+@2030 = 14
+
+@main_tank_line = -4
+@light_tank_line = -8
+@amphibious = -8
+@ifv_line = 0
+@apc_line = 4
+@upgrade_line = 8
+
+technologies = {
+	motorised_infantry = {
+
+		enable_subunits = {
+			motorized
+		}
+
+		enable_equipments = {
+			motorized_equipment_1
+		}
+
+		on_research_complete_limit = {
+			NOT = {
+				has_template_containing_unit = motorized
+			}
+		}
+		on_research_complete = {
+			hidden_effect = {
+				load_oob = "unlock_motorized"
+			}			
+			custom_effect_tooltip = UNLOCK_DIVISION_TEMPLATE
+		}
+		
+		research_cost = 2
+		start_year = 1960
+		folder = {
+			name = motorised_folder
+			position = { x = @main_tank_line y = @1960}
+		}
+		
+		folder = {
+			name = support_folder
+			position = { x = 7 y = 9 }
+		}
+		
+		categories = {
+			motorized_equipment
+			infantry_tech
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "1980.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "1990.1.1"
+			}
+			
+			modifier = {
+				factor = 2
+				date > "2000.1.1"
+			}
+			modifier = {
+				factor = 10
+				date > "2004.1.1"
+			}
+		}
+	}
+	
+	light_mechanized_infantry1 = {
+		
+		enable_equipments = {
+			light_mechanized_equipment_1
+		}
+		
+		enable_subunits = {
+			light_mechanized
+		}
+		
+		path = {
+			leads_to_tech = light_mechanized_infantry2
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 1
+		start_year = 1960
+		folder = {
+			name = motorised_folder
+			position = { x = @apc_line y = @1960 }
+		}
+		
+		categories = {
+			motorized_equipment
+			cat_mechanized_equipment
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "1960.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2000.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2002.1.1"
+			}
+			modifier = {
+				factor = 5
+				OR = {
+					has_tech = mobile_infantry
+					behavior_competitive_trigger = yes
+				}
+			}
+		}
+	}
+	
+	light_mechanized_infantry2 = {
+		
+		enable_equipments = {
+			light_mechanized_equipment_2
+		}
+		
+		path = {
+			leads_to_tech = light_mechanized_infantry3
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 1980
+		folder = {
+			name = motorised_folder
+			position = { x = @apc_line y = @1980 }
+		}
+		
+		categories = {
+			motorized_equipment
+			cat_mechanized_equipment
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "2000.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2004.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2006.1.1"
+			}
+			modifier = {
+				factor = 5
+				OR = {
+					has_tech = mobile_infantry
+					behavior_competitive_trigger = yes
+				}
+			}
+		}
+	}
+	light_mechanized_infantry3 = {
+		
+		enable_equipments = {
+			light_mechanized_equipment_3
+		}
+		
+		motorized = {
+			hardness = 0.5
+		}
+		mot_artillery_brigade = {
+			hardness = 0.5
+		}
+		mot_anti_air_brigade = {
+			hardness = 0.5
+		}
+		
+		path = {
+			leads_to_tech = light_mechanized_infantry4
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 2006
+		folder = {
+			name = motorised_folder
+			position = { x = @apc_line y = @2006 }
+		}
+		
+		categories = {
+			motorized_equipment
+			cat_mechanized_equipment
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "2008.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2010.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2012.1.1"
+			}
+			modifier = {
+				factor = 5
+				OR = {
+					has_tech = mobile_infantry
+					behavior_competitive_trigger = yes
+				}
+			}
+		}
+	}
+	
+	light_mechanized_infantry4 = {
+		
+		enable_equipments = {
+			light_mechanized_equipment_4
+		}
+		
+		path = {
+			leads_to_tech = light_mechanized_infantry5
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 2012
+		folder = {
+			name = motorised_folder
+			position = { x = @apc_line y = @2012 }
+		}
+		
+		categories = {
+			motorized_equipment
+			cat_mechanized_equipment
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "2014.1.1"
+			} #E##W
+			modifier = {
+				factor = 2
+				date > "2016.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2018.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_tech = mobile_infantry
+			}
+		}
+	}
+	
+	light_mechanized_infantry5 = {
+		
+		enable_equipments = {
+			light_mechanized_equipment_5
+		}
+		
+		path = {
+			leads_to_tech = light_mechanized_infantry6
+			research_cost_coeff = 1
+		}
+		
+		research_cost = 2
+		start_year = 2018
+		folder = {
+			name = motorised_folder
+			position = { x = @apc_line y = @2018 }
+		}
+		
+		categories = {
+			motorized_equipment
+			cat_mechanized_equipment
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "2020.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2022.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2024.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_tech = mobile_infantry
+			}
+			modifier = {
+				factor = 0
+				behavior_indolent_trigger = yes
+			}
+		}
+	}
+	
+	light_mechanized_infantry6 = {
+		
+		enable_equipments = {
+			light_mechanized_equipment_6
+		}
+		
+		research_cost = 2
+		start_year = 2030
+		folder = {
+			name = motorised_folder
+			position = { x = @apc_line y = @2030 }
+		}
+		
+		categories = {
+			motorized_equipment
+			cat_mechanized_equipment
+		}
+		
+		ai_will_do = {
+			factor = 1
+			
+			modifier = {
+				factor = 2
+				date > "2031.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2032.1.1"
+			}
+			modifier = {
+				factor = 2
+				date > "2033.1.1"
+			}
+			modifier = {
+				factor = 5
+				has_tech = mobile_infantry
+			}
+			modifier = {
+				factor = 0
+				behavior_indolent_trigger = yes
+			}
+		}
+	}
+}
+# Written and edited by E. Wolfe #

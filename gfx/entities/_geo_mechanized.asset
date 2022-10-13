@@ -76,16 +76,18 @@ entity = {
 	
 	state = { name = "idle"				animation = "idle"   animation_blend_time = 0.3 }
 	state = { name = "move"				animation = "move"   animation_blend_time = 0.3 
-		event = { time = 0 node="exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
+		event = { time = 0 node="left_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
+		event = { time = 0 node="right_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
 		event = { time = 0 node="left_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
 		event = { time = 0 node="right_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
-		event = { trigger_once = yes sound = { soundeffect = "ITA_car_01_Moving" } }
+		event = { trigger_once = yes sound = { soundeffect = "motorized_unit_move_animation" } }
 	}
 	state = { name = "retreat"				animation = "move"   animation_blend_time = 0.3 
-		event = { time = 0 node="exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
+		event = { time = 0 node="left_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
+		event = { time = 0 node="right_exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
 		event = { time = 0 node="left_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
 		event = { time = 0 node="right_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
-		event = { trigger_once = yes sound = { soundeffect = "ITA_car_01_Moving" } }
+		event = { trigger_once = yes sound = { soundeffect = "motorized_unit_move_animation" } }
 	}
 	state = { name = "attack"			animation = "attack" animation_blend_time = 0.3 
 		event = { time = 0 node="barrel" particle = "mechanized_attack_barrel_particle"  keep_particle = yes } 
@@ -117,13 +119,13 @@ entity = {
 		event = { time = 0 node="exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
 		event = { time = 0 node="left_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
 		event = { time = 0 node="right_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
-		event = { trigger_once = yes sound = { soundeffect = "ITA_car_03_Moving" } }
+		event = { trigger_once = yes sound = { soundeffect = "motorized_unit_move_animation" } }
 	}
 	state = { name = "retreat"				animation = "move"   animation_blend_time = 0.3 
 		event = { time = 0 node="exhaust" particle = "tank_exhaust_particle"  keep_particle = no trigger_once = yes } 
 		event = { time = 0 node="left_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
 		event = { time = 0 node="right_wheel" particle = "tank_moving_tracks_particle"  keep_particle = no trigger_once = yes}
-		event = { trigger_once = yes sound = { soundeffect = "ITA_car_03_Moving" } }
+		event = { trigger_once = yes sound = { soundeffect = "motorized_unit_move_animation" } }
 	}
 	state = { name = "attack"			animation = "attack" animation_blend_time = 0.3 
 		event = { time = 0 node="barrel" particle = "light_tank_attack_barrel_particle" keep_particle = yes sound = { soundeffect = light_armour_fire } }  
@@ -172,8 +174,8 @@ entity = {
 	state = { name = "move"				animation = "move" 					animation_blend_time = 0.3 animation_speed = 1.0 }
 	scale = 1
 
-	attach = { 	name = "vehicle"			vehicle = "AFG_mechanized_vehicle_entity" }
-	attach = { 	name = "infantry"			infantry = "AFG_infantry_entity" }
+	attach = { 	name = "vehicle"			vehicle = "geo_m113a1_mesh" }
+	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
 }
 
 entity = {
@@ -181,8 +183,8 @@ entity = {
 	name = "geo_combined_mechanized_entity"
 	pdxmesh = "geo_motorized_frame_mesh"
 
-	attach = { 	name = "vehicle"			vehicle = "AFG_mechanized_vehicle_entity" }
-	attach = { 	name = "infantry"			infantry = "AFG_infantry_entity" }
+	attach = { 	name = "vehicle"			vehicle = "geo_m113a1_mesh" }
+	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
 }
 
 ##アフガニスタン共和国
@@ -195,18 +197,35 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "AFG_mechanized_entity"
+	name = "AFG_light_mechanized_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "AFG_mechanized_vehicle_entity" }
+	attach = { 	name = "infantry"			infantry = "AFG_infantry_entity" }
 }
 
 ##イラク
 
 entity = {
 	clone = "geo_btr4_entity"
-	name = "IRQ_mechanized_entity"
+	name = "geo_btr4_IRQ_entity"
 	pdxmesh = "geo_IRA_btr4_mesh"
 }
 
+entity = {
+	clone = "geo_combined_mechanized_entity"
+	name = "IRQ_light_mechanized_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "geo_btr4_IRQ_entity" }
+	attach = { 	name = "infantry"			infantry = "IRQ_infantry_entity" }
+}
+
 ##ウクライナ
+
+entity = {
+	clone = "geo_btr80_UKR_entity"
+	name = "geo_btr70_UKR_entity"
+	pdxmesh = "geo_btr70_UKR_mesh"
+}
 
 entity = {
 	clone = "geo_btr4_entity"
@@ -217,47 +236,68 @@ entity = {
 
 entity = {
 	clone = "geo_btr4_entity"
-	name = "UKR_mechanized_entity"
+	name = "geo_btr4_UKR_entity"
 	pdxmesh = "geo_btr4_mesh"
 }
 
 entity = {
+	clone = "geo_btr4_entity"
+	name = "geo_btr4mv_UKR_entity"
+	pdxmesh = "geo_btr4mv_mesh"
+}
+
+entity = {
 	clone = "geo_combined_mechanized_entity"
-	name = "UKR_mechanized_0_entity"
-	pdxmesh = "geo_motorized_frame_mesh"
+	name = "UKR_light_mechanized_0_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "geo_btr70_UKR_entity" }
+	attach = { 	name = "infantry"			infantry = "UKR_infantry_0_entity" }
+}
+
+entity = {
+	clone = "UKR_light_mechanized_0_entity"
+	name = "UKR_light_mechanized_entity"
+	
+}
+
+entity = {
+	clone = "UKR_light_mechanized_0_entity"
+	name = "UKR_light_mechanized_1_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "geo_btr70_UKR_entity" }
+	attach = { 	name = "infantry"			infantry = "UKR_infantry_1_entity" }
+}
+
+entity = {
+	clone = "UKR_light_mechanized_0_entity"
+	name = "UKR_light_mechanized_2_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "geo_btr80_UKR_entity" }
 	attach = { 	name = "infantry"			infantry = "UKR_infantry_entity" }
 }
 
 entity = {
-	clone = "UKR_mechanized_0_entity"
-	name = "UKR_mechanized_1_entity"
-}
-
-entity = {
-	clone = "UKR_mechanized_0_entity"
-	name = "UKR_mechanized_2_entity"
-}
-
-entity = {
-	clone = "UKR_mechanized_0_entity"
-	name = "UKR_mechanized_3_entity"
+	clone = "UKR_light_mechanized_0_entity"
+	name = "UKR_light_mechanized_3_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "geo_btr3_UKR_entity" }
 	attach = { 	name = "infantry"			infantry = "UKR_infantry_entity" }
 }
 
 entity = {
-	clone = "geo_btr4_entity"
-	name = "UKR_mechanized_4_entity"
-	pdxmesh = "geo_btr4_mesh"
+	clone = "UKR_light_mechanized_0_entity"
+	name = "UKR_light_mechanized_4_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "geo_btr4_UKR_entity" }
+	attach = { 	name = "infantry"			infantry = "UKR_infantry_entity" }
 }
 
 entity = {
-	clone = "UKR_mechanized_entity"
-	name = "UKR_mechanized_5_entity"
-	pdxmesh = "geo_btr4mv_mesh"
+	clone = "UKR_light_mechanized_0_entity"
+	name = "UKR_light_mechanized_5_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "geo_btr4mv_UKR_entity" }
+	attach = { 	name = "infantry"			infantry = "UKR_infantry_entity" }
 }
 
 ##エジプト
@@ -302,7 +342,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "TUR_mechanized_entity"
+	name = "TUR_light_mechanized_entity"
 	pdxmesh = "geo_motorized_frame_mesh"
 
 	attach = { 	name = "vehicle"			vehicle = "TUR_mechanized_vehicle_entity" }
@@ -319,7 +359,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "BEL_mechanized_entity"
+	name = "BEL_light_mechanized_entity"
 	pdxmesh = "geo_motorized_frame_mesh"
 
 	attach = { 	name = "vehicle"			vehicle = "BEL_mechanized_vehicle_entity" }
@@ -336,7 +376,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "CHL_mechanized_entity"
+	name = "CHL_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "CHL_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -366,8 +406,8 @@ entity = {
 }
 
 entity = {
-	clone = "geo_mechanized_entity"
-	name = "POL_mechanized_entity"
+	clone = "geo_combined_mechanized_entity"
+	name = "POL_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "POL_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "POL_infantry_entity" }
@@ -383,8 +423,8 @@ entity = {
 }
 
 entity = {
-	clone = "geo_mechanized_entity"
-	name = "CRO_mechanized_entity"
+	clone = "geo_combined_mechanized_entity"
+	name = "CRO_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "CRO_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -400,8 +440,8 @@ entity = {
 }
 
 entity = {
-	clone = "geo_mechanized_entity"
-	name = "SLV_mechanized_entity"
+	clone = "geo_combined_mechanized_entity"
+	name = "SLV_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "SLV_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -417,8 +457,8 @@ entity = {
 }
 
 entity = {
-	clone = "geo_mechanized_entity"
-	name = "SLO_mechanized_entity"
+	clone = "geo_combined_mechanized_entity"
+	name = "SLO_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "SLO_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -434,11 +474,11 @@ entity = {
 }
 
 entity = {
-	clone = "geo_mechanized_entity"
-	name = "FIN_mechanized_entity"
+	clone = "geo_combined_mechanized_entity"
+	name = "FIN_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "FIN_mechanized_vehicle_entity" }
-	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
+	attach = { 	name = "infantry"			infantry = "FIN_vehicle_infantry_rifle_entity" }
 }
 
 ##スウェーデン
@@ -451,8 +491,8 @@ entity = {
 }
 
 entity = {
-	clone = "geo_mechanized_entity"
-	name = "SWE_mechanized_entity"
+	clone = "geo_combined_mechanized_entity"
+	name = "SWE_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "SWE_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "SWE_infantry_entity" }
@@ -469,7 +509,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "ARG_mechanized_entity"
+	name = "ARG_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "ARG_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -485,7 +525,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "AST_mechanized_entity"
+	name = "AST_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "AST_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "AST_vehicle_infantry_rifle_entity" }
@@ -500,7 +540,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "BOS_mechanized_entity"
+	name = "BOS_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "BOS_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "BOS_vehicle_infantry_rifle_entity" }
@@ -515,7 +555,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "BRA_mechanized_entity"
+	name = "BRA_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "BRA_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "BRA_vehicle_infantry_rifle_entity" }
@@ -538,7 +578,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "CAN_mechanized_entity"
+	name = "CAN_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "CAN_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "CAN_vehicle_infantry_rifle_entity" }
@@ -553,7 +593,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "CYP_mechanized_entity"
+	name = "CYP_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "CYP_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -569,7 +609,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "DEN_mechanized_entity"
+	name = "DEN_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "DEN_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "DEN_infantry_entity" }
@@ -585,7 +625,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "ISR_mechanized_entity"
+	name = "ISR_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "ISR_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "ISR_infantry_entity" }
@@ -600,7 +640,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "RWA_mechanized_entity"
+	name = "RWA_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "RWA_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -615,7 +655,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "JOR_mechanized_entity"
+	name = "JOR_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "JOR_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -630,7 +670,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "KUW_mechanized_entity"
+	name = "KUW_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "KUW_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "KUW_vehicle_infantry_rifle_entity" }
@@ -645,7 +685,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "LEB_mechanized_entity"
+	name = "LEB_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "LEB_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "LEB_vehicle_infantry_rifle_entity" }
@@ -660,7 +700,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "MOR_mechanized_entity"
+	name = "MOR_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "MOR_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -675,7 +715,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "MAC_mechanized_entity"
+	name = "MAC_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "MAC_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -691,7 +731,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "NOR_mechanized_entity"
+	name = "NOR_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "NOR_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "NOR_infantry_entity" }
@@ -707,7 +747,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "NZL_mechanized_entity"
+	name = "NZL_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "NZL_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "NZL_vehicle_infantry_rifle_entity" }
@@ -723,7 +763,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "PAK_mechanized_entity"
+	name = "PAK_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "PAK_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -738,7 +778,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "PRU_mechanized_entity"
+	name = "PRU_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "PRU_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -753,7 +793,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "PHI_mechanized_entity"
+	name = "PHI_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "PHI_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -770,7 +810,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "POR_mechanized_entity"
+	name = "POR_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "POR_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -786,7 +826,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "SAU_mechanized_entity"
+	name = "SAU_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "SAU_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "SAU_vehicle_infantry_rifle_entity" }
@@ -801,7 +841,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "SIG_mechanized_entity"
+	name = "SIG_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "SIG_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -816,7 +856,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "SOM_mechanized_entity"
+	name = "SOM_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "SOM_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -832,7 +872,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "SPR_mechanized_entity"
+	name = "SPR_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "SPR_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -848,7 +888,7 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "SWI_mechanized_entity"
+	name = "SWI_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "SWI_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
@@ -866,8 +906,47 @@ entity = {
 
 entity = {
 	clone = "geo_mechanized_entity"
-	name = "URG_mechanized_entity"
+	name = "URG_light_mechanized_entity"
 
 	attach = { 	name = "vehicle"			vehicle = "SPR_mechanized_vehicle_entity" }
 	attach = { 	name = "infantry"			infantry = "generic_western_vehicle_infantry_rifle_entity" }
+}
+
+##アルメニア
+
+entity = {
+	clone = "geo_btr80_UKR_entity"
+	name = "geo_btr70_ARM_entity"
+	pdxmesh = "geo_btr70_ARM_mesh"
+}
+
+entity = {
+	clone = "geo_combined_mechanized_entity"
+	name = "ARM_light_mechanized_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "geo_btr70_ARM_entity" }
+	attach = { 	name = "infantry"			infantry = "ARM_vehicle_infantry_rifle_entity" }
+}
+
+##ナゴルノ・カラバフ
+
+entity = {
+	clone = "ARM_mechanized_entity"
+	name = "NGK_light_mechanized_entity"
+}
+
+##グルジア
+
+entity = {
+	clone = "geo_btr80_UKR_entity"
+	name = "geo_btr70_GEO_entity"
+	pdxmesh = "geo_btr70_GEO_mesh"
+}
+
+entity = {
+	clone = "geo_combined_mechanized_entity"
+	name = "GEO_light_mechanized_entity"
+
+	attach = { 	name = "vehicle"			vehicle = "geo_btr70_GEO_entity" }
+	attach = { 	name = "infantry"			infantry = "GEO_vehicle_infantry_rifle_entity" }
 }

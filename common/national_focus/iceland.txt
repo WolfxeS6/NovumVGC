@@ -1,7 +1,6 @@
 focus_tree = {
 	
 	id = iceland_focus
-
 	
 	country = {
 		factor = 0
@@ -261,7 +260,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_additional_equipment_for_reykjavik_harbor
-		icon = GFX_focus_POL_develop_polish_shipbuilding
+		icon = naval_dockyards
 		
 		x = 0
 		y = 4
@@ -314,7 +313,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_invest_in_the_aluminium_industry
-		icon = GFX_focus_generic_aluminum
+		icon = construction3
 		
 		x = 2
 		y = 4
@@ -390,7 +389,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_affirm_the_status_quo
-		icon = GFX_goal_generic_neutrality_focus
+		icon = improve_relations_green
 		
 		x = 4
 		y = 0
@@ -550,6 +549,9 @@ focus_tree = {
 		
 		available = {
 			has_war = no
+			NOT = { has_government = reactionary }
+			NOT = { has_country_leader = { character = ICE_sigmundur_david_gunnlaugsson } }
+			OR = { NOT = { has_government = market_liberal } has_country_leader = { character = ICE_pirate_party } }
 		}
 		
 		bypass = {}
@@ -646,7 +648,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_further_economic_growth
-		icon = GFX_focus_mex_privatisation
+		icon = industry_civilian
 		
 		x = 2
 		y = 4
@@ -712,6 +714,12 @@ focus_tree = {
 		
 		completion_reward = {
 			add_political_power = -100
+			100 = { add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes }
+	}
 		}
 		
 		ai_will_do = {
@@ -1284,7 +1292,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_militarize_the_coast_guard
-		icon = GFX_goal_generic_amphibious_assault
+		icon = navy2
 		
 		x = -1
 		y = 5
@@ -1315,9 +1323,10 @@ focus_tree = {
 			}
 			navy_experience = 25
 			add_political_power = 50
-			add_tech_bonus = {
+			add_doctrine_cost_reduction = {
 				name = naval_doc_bonus
-				bonus = 0.3
+				cost_reduction = 0.3
+				uses = 1
 				category = naval_doctrine
 			}
 		}
@@ -1329,7 +1338,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_demand_the_faroe_islands
-		icon = attack_faroe_islands
+		icon = war2_green
 		
 		x = 1
 		y = 5
@@ -1423,9 +1432,9 @@ focus_tree = {
 		bypass = {}
 		
 		completion_reward = {
-			add_tech_bonus = {
+			add_doctrine_cost_reduction = {
 				name = naval_doc_bonus
-				bonus = 0.3
+				cost_reduction = 0.3
 				uses = 2
 				category = naval_doctrine
 			}
@@ -1443,7 +1452,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_demand_greenlandic_independence
-		icon = align_to_greenland
+		icon = war2_purple
 		
 		x = 1
 		y = 6
@@ -1472,8 +1481,7 @@ focus_tree = {
 		}
 		
 		bypass = {
-			country_exists = GRN
-			GRN = { is_puppet = no }
+		country_exists = GRN GRN = { is_subject = no }
 		}
 		
 		completion_reward = {
@@ -1540,12 +1548,12 @@ focus_tree = {
 		
 		completion_reward = {
 			add_political_power = 100
-			#DEN = {
-			#	add_opinion_modifier = {
-			#		target = ROOT
-			#		modifier = nordic_council_cooperation
-			#	}
-			#}
+			DEN = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = nordic_council_cooperation
+				}
+			}
 		}
 		
 		ai_will_do = {
@@ -1945,6 +1953,612 @@ focus_tree = {
 					modifier = declaration_of_friendship
 				}
 			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	# 2003 election
+	focus = {
+		id = ICE_end_of_election
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		
+		x = 16
+		y = 6
+		
+		cost = 10
+		
+		prerequisite = {}
+		
+		mutually_exclusive = {}
+		
+		available = { always = no }
+		
+		bypass = { OR = { date > 2003.05.21 NOT = { has_government = conservative } } }
+		
+		completion_reward = {
+			
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_left_green_victory
+		icon = GFX_ideology_green
+		
+		x = 9
+		y = 7
+		
+		cost = 1
+		
+		prerequisite = { focus = ICE_end_of_election }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = progressive }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = progressive popularity = 0.1 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_wealth_taxes
+		icon = GFX_focus_spr_class_war
+		
+		x = 11
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_alliance_victory focus = ICE_left_green_victory }
+		
+		mutually_exclusive = {}
+		
+		available = { OR = { has_government = social_democrat has_government = progressive } }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_political_power = 100
+		add_ideas = ICE_higher_taxes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_support_unions
+		icon = GFX_focus_ITA_corpo_volontari_della_liberta
+		
+		x = 11
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_environmental_reglations focus = ICE_compromise_with_right focus = ICE_wealth_taxes }
+		
+		mutually_exclusive = {}
+		
+		available = { OR = { has_government = social_democrat has_government = progressive } }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_union_support
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_environmental_reglations
+		icon = GFX_focus_usa_guarantee_the_american_dream
+		
+		x = 9
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_left_green_victory }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = progressive }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_stability = -0.05
+		add_ideas = ICE_environmentalism
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_nationalization
+		icon = GFX_focus_generic_annex_country_2
+		
+		x = 9
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_environmental_reglations focus = ICE_wealth_taxes }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = progressive }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_stability = -0.1
+		random_owned_state = { add_extra_state_shared_building_slots = 2
+		add_building_construction = {
+			type = industrial_complex
+			level = 2
+			instant_build = yes
+			} }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_alliance_victory
+		icon = GFX_ideology_social_democrat_ideology
+		
+		x = 13
+		y = 7
+		
+		cost = 1
+		
+		prerequisite = { focus = ICE_end_of_election }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = social_democrat }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = social_democrat popularity = 0.1 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_compromise_with_right
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 13
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_alliance_victory }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = social_democrat NOT = { has_completed_focus = ICE_compromise_with_left } }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_compromises
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_create_jobs
+		icon = GFX_goal_generic_production
+		
+		x = 13
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_compromise_with_right focus = ICE_wealth_taxes }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = social_democrat }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_political_power = -100
+		random_owned_state = { add_extra_state_shared_building_slots = 2
+		add_building_construction = {
+			type = industrial_complex
+			level = 2
+			instant_build = yes
+			} }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_progressive_victory
+		icon = GFX_ideology_centrist
+		
+		x = 16
+		y = 7
+		
+		cost = 1
+		
+		prerequisite = { focus = ICE_end_of_election }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = social_liberal }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = social_liberal popularity = 0.1 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_support_the_farmer
+		icon = GFX_focus_generic_concessions
+		
+		x = 15
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_progressive_victory }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = social_liberal }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_political_power = -50
+		100 = { add_extra_state_shared_building_slots = 2 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_build_rural_schools
+		icon = GFX_focus_generic_improve_the_administration
+		
+		x = 17
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_progressive_victory }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = social_liberal }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_political_power = -50
+		add_ideas = ICE_rural_schools
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_local_power
+		icon = GFX_focus_generic_self_management
+		
+		x = 15
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_support_the_farmer focus = ICE_build_rural_schools }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = social_liberal }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_limited_federalism
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_northern_plantations
+		icon = GFX_focus_generic_coffee
+		
+		x = 17
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_support_the_farmer focus = ICE_build_rural_schools }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = social_liberal }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_plantations
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_independence_victory
+		icon = GFX_ideology_fiscal_conservative 
+		
+		x = 19
+		y = 7
+		
+		cost = 1
+		
+		prerequisite = { focus = ICE_end_of_election }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = conservative
+		date > 2003.05.21 }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = conservative popularity = 0.1 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_deregulation
+		icon = GFX_focus_mex_privatisation
+		
+		x = 21
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_independence_victory focus = ICE_liberal_victory }
+		
+		mutually_exclusive = {}
+		
+		available = { OR = { has_government = conservative has_government = market_liberal } }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_free_market
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_resist_foreign_influence
+		icon = GFX_focus_RAJ_clamp_down_on_corruption
+		
+		x = 21
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_compromise_with_left focus = ICE_deregulation focus = ICE_redistribute_fishing_rights }
+		
+		mutually_exclusive = {}
+		
+		available = { OR = { has_government = conservative has_government = market_liberal } }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_nationalism
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_compromise_with_left
+		icon = GFX_goal_generic_improve_relations
+		
+		x = 19
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_independence_victory }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = conservative NOT = { has_completed_focus = ICE_compromise_with_right } }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_compromises
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_privatization
+		icon = consumer_goods
+		
+		x = 19
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_compromise_with_left focus = ICE_deregulation }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = conservative }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_stability = -0.05
+		random_owned_state = { add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+			} }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_liberal_victory
+		icon = GFX_ideology_market_liberal_group
+		
+		x = 23
+		y = 7
+		
+		cost = 1
+		
+		prerequisite = { focus = ICE_end_of_election }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = market_liberal }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = market_liberal popularity = 0.1 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_redistribute_fishing_rights
+		icon = naval_dockyards
+		
+		x = 23
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_liberal_victory }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = market_liberal }
+		
+		bypass = { }
+		
+		completion_reward = {
+		random_owned_state = { add_extra_state_shared_building_slots = 2
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+			}
+		add_building_construction = {
+			type = dockyard
+			level = 1
+			instant_build = yes
+			} }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_strict_immigration
+		icon = attack_europe
+		
+		x = 23
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_redistribute_fishing_rights }
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = market_liberal }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_stricter_immigration_laws
 		}
 		
 		ai_will_do = {

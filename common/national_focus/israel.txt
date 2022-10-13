@@ -1,19 +1,1939 @@
 focus_tree = {
+	
         id = israel_states_focus
 
         country = {
-                factor = 0
+            factor = 0
 
-                modifier = {
-                        add = 20
-                        original_tag = ISR
-                }
+            modifier = {
+                add = 20
+                original_tag = ISR
+            }
         }
+	
+	################################
+	###							 ###
+	### National Focus of Israel ###
+	###						     ###
+	################################
+
+	#########################
+	### Diplonmatic Focus ###
+	#########################
+
+	focus = {
+		id = ISR_diplomatic_focus
+		x = 2
+		y = 0
+		icon = GFX_focus_goal_ISR_Flag
+		cost = 10
+		
+		ai_will_do = {
+			factor = 30
+		}
+		
+		completion_reward = {
+			add_political_power = 30
+		}
+	}
+
+	#######################
+	### Aggressive Path ###
+	#######################
+
+	focus = {
+		id = ISR_aggressiveFocus_focus
+		icon = demand_territory
+		x = 1
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			factor = 40
+		}
+		
+		available = {
+			NOT = {
+				has_completed_focus = ISR_support_center_left
+				has_completed_focus = ISR_conservative_thought
+			}
+		}
+		prerequisite = { focus = ISR_diplomatic_focus }
+
+		mutually_exclusive = {
+				focus = ISR_peacefulCoexistence_focus
+		}
+
+		completion_reward = {
+			add_named_threat = {
+				threat = 1
+				name = ISR_aggression
+			}
+		EGY = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+				}
+		}
+		PAL = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+				}
+		}
+		SYR = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+				}
+		}
+		LEB = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+				}
+		}
+		SAU = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+				}
+		}
+		JOR = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+						}
+				}
+		}
+	}
+	focus = {
+		id = ISR_westBankClaim_focus
+		icon = forceful_treaty
+		x = 1
+		y = 2
+		cost = 15
+
+		ai_will_do = {
+			factor = 30
+		}
+
+		prerequisite = { focus = ISR_aggressiveFocus_focus }
+		completion_reward = {
+
+				add_named_threat = {
+					threat = 2
+					name = ISR_westBankClaim
+				}
+
+				915 = { add_core_of = ISR }
+				915 = { remove_claim_by = ISR }
+				PAL = {
+					country_event = { id = israel.7 }
+				}
+
+		add_popularity = { ideology = conservative popularity = 0.1 }
+		add_popularity = { ideology = nationalist popularity = 0.05 }
+		add_popularity = { ideology = fascist popularity = 0.05 }
+
+		}
+
+	}
+	focus = {
+		id = ISR_gazaClaim_focus
+		icon = GFX_focus_goal_ISR_strike_palestine
+		x = 1
+		y = 3
+		cost = 15
+
+		ai_will_do = {
+			factor = 30
+		}
+
+
+		prerequisite = { focus = ISR_westBankClaim_focus }
+		completion_reward = {
+
+		add_named_threat = {
+			threat = 2
+			name = ISR_gazaClaim
+		}
+
+		811 = { add_core_of = ISR }
+		811 = { remove_claim_by = ISR }
+				PAL = {
+				country_event = { id = israel.8 }
+				}
+				PAL = {
+						add_opinion_modifier = {
+						target = ISR
+						modifier = rival
+						}
+				}
+				EGY = {
+						add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+						}
+				}
+				SYR = {
+						add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+						}
+				}
+				LEB = {
+						add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+						}
+				}
+				SAU = {
+						add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+						}
+				}
+				JOR = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_negative
+						}
+				}
+		hidden_effect = {
+		453 = { set_demilitarized_zone = no }
+		813 = { set_demilitarized_zone = no }
+		}
+		add_popularity = { ideology = islamist popularity = 0.1 }
+		add_popularity = { ideology = nationalist popularity = 0.1 }
+		add_popularity = { ideology = fascist popularity = 0.1 }
+		}
+	}
+	focus = {
+		id = ISR_JordanClaim_focus
+		icon = forceful_treaty
+		x = 0
+		y = 4
+		cost = 20
+
+		available = {
+				OR = {
+						nationalist > 0.4
+						fascist > 0.4
+						islamist > 0.4
+						communist > 0.4
+				}
+
+				NOT = { has_government = progressive }
+		}
+
+		ai_will_do = {
+				factor = 15
+		}
+
+		prerequisite = { focus = ISR_gazaClaim_focus }
+		completion_reward = {
+
+				add_named_threat = {
+						threat = 3
+						name = ISR_jordanClaim
+				}
+
+
+		455 = { add_core_of = ISR }
+		JOR = {
+				country_event = { id = israel.9 }
+		}
+
+		add_popularity = { ideology = islamist popularity = 0.05 }
+		add_popularity = { ideology = nationalist popularity = 0.05 }
+		add_popularity = { ideology = fascist popularity = 0.05 }
+
+		EGY = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = recent_actions_negative
+				}
+		}
+		SYR = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = recent_actions_negative
+				}
+		}
+		LEB = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = recent_actions_negative
+				}
+		}
+		SAU = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = recent_actions_negative
+				}
+		}
+				JOR = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = rival
+						}
+				}
+		}
+	}
+	focus = {
+		id = ISR_SinaiClaim_focus
+		icon = forceful_treaty
+		x = 2
+		y = 4
+		cost = 20
+
+		available = {
+				OR = {
+						nationalist > 0.4
+						fascist > 0.4
+						islamist > 0.4
+						communist > 0.4
+				}
+
+				NOT = { has_government = progressive }
+		}
+
+		ai_will_do = {
+				factor = 10
+		}
+
+		prerequisite = { focus = ISR_gazaClaim_focus }
+		completion_reward = {
+
+		add_named_threat = {
+						threat = 3
+						name = ISR_EGY_Claim
+				}
+
+		add_state_claim = 453
+		add_state_claim = 813
+
+		EGY = {
+				country_event = { id = israel.10 }
+		}
+
+		add_popularity = { ideology = nationalist popularity = 0.05 }
+		add_popularity = { ideology = fascist popularity = 0.05 }
+
+		EGY = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = rival
+				}
+		}
+		SYR = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = recent_actions_negative
+				}
+		}
+		LEB = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = recent_actions_negative
+				}
+		}
+		SAU = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = recent_actions_negative
+				}
+		}
+		JOR = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = recent_actions_negative
+						}
+				}
+		}
+	}
+	focus = {
+		id = ISR_greater_ISR_focus
+		icon = skull
+		x = 1
+		y = 5
+		cost = 52
+
+		available = {
+				OR = {
+					has_government = communist
+					has_government = islamist
+					has_government = monarchist
+					has_government = fascist
+					has_government = nationalist
+				}
+		}
+
+		ai_will_do = {
+				factor = 5
+		}
+
+		prerequisite = { focus = ISR_SinaiClaim_focus }
+		prerequisite = { focus = ISR_JordanClaim_focus }
+
+		completion_reward = {
+
+		add_named_threat = {
+						threat = 30
+						name = ISR_greater_ISR_plan
+				}
+
+		every_state = {
+			limit = {
+				is_on_continent = middle_east
+				NOT = {
+					is_controlled_by = GRE
+					is_controlled_by = TUR
+					is_controlled_by = PER
+					is_controlled_by = AFG
+					is_controlled_by = PAK
+				}
+			}
+			
+			add_claim_by = ISR
+		}
+
+		ISR = {
+				country_event = { id = news_ISR.13 }
+		}
+
+		add_popularity = { ideology = nationalist popularity = 0.15 }
+		add_popularity = { ideology = fascist popularity = 0.05 }
+		
+		ISR = {
+				create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+		}
+		ISR = {
+				create_wargoal = {
+				type = annex_everything
+				target = LEB
+				}
+			}
+		ISR = {
+				create_wargoal = {
+				type = annex_everything
+				target = IRQ
+				}
+			}
+		ISR = {
+				create_wargoal = {
+				type = annex_everything
+				target = SAU
+				}
+			}
+		ISR = {
+				add_opinion_modifier = {
+				target = SAU
+				modifier = rival
+				}
+		}
+		ISR = {
+				add_opinion_modifier = {
+				target = SYR
+				modifier = rival
+				}
+		}
+		ISR = {
+				add_opinion_modifier = {
+				target = LEB
+				modifier = rival
+				}
+		}
+		ISR = {
+				add_opinion_modifier = {
+				target = IRQ
+				modifier = rival
+				}
+		}
+		SAU = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = rival
+				}
+		}
+
+
+
+		SYR = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = rival
+				}
+		}
+		EGY = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = rival
+				}
+		}
+		LEB = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = rival
+				}
+		}
+		IRQ = {
+				add_opinion_modifier = {
+				target = ISR
+				modifier = rival
+						}
+				}
+		}
+	}
+
+	#####################
+	### Peaceful Path ###
+	#####################
+
+	focus = {
+		id = ISR_peacefulCoexistence_focus
+		icon = improve_relations
+		x = 3
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+				factor = 40
+		}
+
+		prerequisite = { focus = ISR_diplomatic_focus }
+
+		mutually_exclusive = {
+				focus = ISR_aggressiveFocus_focus
+		}
+
+		completion_reward = {
+		EGY = {
+						add_opinion_modifier = {
+								target = ISR
+								modifier = recent_actions_positive
+						}
+				}
+		PAL = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_positive
+						}
+				}
+		SYR = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_positive
+						}
+				}
+		LEB = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_positive
+						}
+				}
+		SAU = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_positive
+						}
+				}
+		JOR = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_positive
+						}
+				}
+		set_global_flag = isr_peaceful_coexistance
+		}
+	}
+
+	### Two State Solution
+	focus = {
+		id = ISR_two_state_solution
+		icon = neutrality
+		x = 3
+		y = 2
+		cost = 10
+
+		ai_will_do = {
+				factor = 10
+		}
+
+		prerequisite = { focus = ISR_peacefulCoexistence_focus }
+		mutually_exclusive = { focus = ISR_one_state_solution }
+		
+		completion_reward = {
+				add_stability = -0.05
+				PAL = {
+				add_opinion_modifier = {
+						target = ISR
+						modifier = recent_actions_positive
+						}
+				}
+		}
+	}
+	focus = {
+		id = ISR_respect_PAL_Sov_focus
+		icon = intelligence_exchange
+		x = 3
+		y = 3
+		cost = 10
+
+		ai_will_do = {
+				factor = 15
+		}
+
+		prerequisite = { focus = ISR_two_state_solution }
+		
+		completion_reward = {
+			PAL = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = recent_actions_very_positive
+					}
+			}
+				
+			810 = {
+				remove_claim_by = ISR
+			}
+				
+			811 = {
+				remove_claim_by = ISR
+			}
+				
+			EGY = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = recent_actions_positive
+				}
+			}
+				
+			SYR = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = recent_actions_positive
+				}
+			}
+			LEB = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = recent_actions_positive
+				}
+			}
+			SAU = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = recent_actions_positive
+				}
+			}
+			JOR = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = recent_actions_positive
+					}
+			}
+		}
+	}
+	focus = {
+        id = ISR_allow_right_of_return
+        icon = national_unity
+        x = 3
+        y = 5
+        cost = 15
+				
+		mutually_exclusive = {
+			focus = ISR_1947_borders
+		}
+        ai_will_do = {
+            factor = 15
+        }
+
+        prerequisite = { focus = ISR_respect_PAL_Sov_focus }
+				
+        completion_reward = {
+			add_stability = -0.05
+			add_timed_idea = {
+				idea = idea_ISR_right_of_return
+				days = 1825
+			}
+						
+			every_owned_state = { remove_core_of = PAL }
+        }
+    }
+	focus = {
+        id = ISR_1947_borders
+        icon = national_unity
+    	x = 5
+        y = 5
+        cost = 15
+				
+		mutually_exclusive = {
+			focus = ISR_allow_right_of_return
+		}
+        ai_will_do = {
+            factor = 20
+        }
+
+        prerequisite = { focus = ISR_respect_PAL_Sov_focus }
+				
+        completion_reward = {
+			PAL = { country_event = { id = israel.22 } }
+						
+			every_owned_state = { remove_core_of = PAL }
+        }
+    }
+
+	### One State Solution
+	focus = {
+		id = ISR_one_state_solution
+		icon = dangerous_deal
+		x = 6
+		y = 2
+		cost = 10
+
+		ai_will_do = {
+				factor = 10
+		}
+
+		prerequisite = { focus = ISR_peacefulCoexistence_focus }
+		mutually_exclusive = { focus = ISR_two_state_solution }
+		
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	focus = {
+		id = ISR_offer_union_state
+		icon = anschluss
+		x = 6
+		y = 3
+		cost = 10
+
+		ai_will_do = {
+				factor = 15
+		}
+
+		prerequisite = { focus = ISR_one_state_solution }
+		
+		completion_reward = {
+			PAL = {
+				country_event = { id = israel.12 }
+			}
+			every_owned_state = { remove_core_of = PAL }
+		}
+	}
+	focus = {
+		id = ISR_offer_unification
+		icon = molotov_ribbentrop_pact
+		x = 6
+		y = 4
+		cost = 15
+
+		ai_will_do = {
+				factor = 10
+		}
+
+		prerequisite = { focus = ISR_offer_union_state}
+		
+		completion_reward = {
+			PAL = {
+				country_event = { id = israel.13 }
+			}
+		}
+	}
+	focus = {
+		id = ISR_offer_Jordan_federation
+		icon = molotov_ribbentrop_pact
+		x = 6
+		y = 6
+		cost = 20
+
+		ai_will_do = {
+				factor = 10
+		}
+
+		prerequisite = { focus = ISR_offer_unification}
+		
+		completion_reward = {
+			JOR = {
+				country_event = { id = israel.20 }
+			}
+		}
+	}
+
+	### Shared Path
+	focus = {
+		id = ISR_middle_east_alliance
+		icon = major_alliance
+		x = 4
+		y = 6
+		cost = 15
+
+		ai_will_do = {
+				factor = 10
+		}
+		
+		available = {
+			threat > 0.49
+		}
+
+		prerequisite =  { 
+			focus = ISR_allow_right_of_return 
+			focus = ISR_1947_borders
+			focus = ISR_offer_unification 
+		}
+		
+		
+		 completion_reward = {
+
+		 create_faction = "Middle East Federation"
+
+		 PAL = { country_event = { id = israel.14 } }
+		 EGY = { country_event = { id = israel.14 } }
+		 SYR = { country_event = { id = israel.14 } }
+		 IRQ = { country_event = { id = israel.14 } }
+		 LEB = { country_event = { id = israel.14 } }
+		 PER = { country_event = { id = israel.14 } }
+		 SAU = { country_event = { id = israel.14 } }
+		 UAE = { country_event = { id = israel.14 } }
+		 OMA = { country_event = { id = israel.14 } }
+		 YEM = { country_event = { id = israel.14 } }
+		 KUW = { country_event = { id = israel.14 } }
+		 ISR = {
+			news_event = { id = news_ISR.19 }
+		}
+		}
+	}
+
+	########################
+	### Industrial Focus ###
+	########################
+
+	focus = {
+		id = ISR_industrial_focus_focus
+		icon = production2
+		x = 11
+		y = 0
+		cost = 10
+
+		ai_will_do = {
+				factor = 50
+		}
+
+		completion_reward = {
+				add_political_power = 20
+				add_tech_bonus = {
+						name = industry_bonus
+						bonus = 0.5
+						uses = 2
+						category = industry
+				}
+		}
+	}
+	focus = {
+		id = ISR_militarization_project_focus
+		icon = industry_military
+		x = 10
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+				factor = 30
+		}
+
+		prerequisite = { focus = ISR_industrial_focus_focus }
+
+		completion_reward = {
+				454 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+								type = arms_factory
+								level = 2
+								instant_build = yes
+						}
+				}
+		}
+	}
+	focus = {
+		id = ISR_militarize_the_negev
+		icon = industry_military
+		x = 8
+		y = 2
+		cost = 15
+
+		ai_will_do = {
+				factor = 30
+		}
+
+		prerequisite = { focus = ISR_militarization_project_focus }
+
+		completion_reward = {
+				812 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+								type = arms_factory
+								level = 2
+								instant_build = yes
+						}
+
+				}
+		}
+	}
+	focus = {
+		id = ISR_militarize_cities
+		icon = industry_military
+		x = 10
+		y = 2
+		cost = 15
+
+		ai_will_do = {
+				factor = 20
+		}
+
+		prerequisite = { focus = ISR_militarization_project_focus }
+
+		completion_reward = {
+				810 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+						}
+
+				}
+				
+				914 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+						}
+
+				}
+		}
+	}
+	focus = {
+		id = ISR_complete_militarization_focus
+		icon = industry_military
+		x = 9
+		y = 3
+		cost = 20
+
+		ai_will_do = {
+				factor = 20
+		}
+
+		prerequisite = { focus = ISR_militarize_cities }
+		prerequisite = { focus = ISR_militarize_the_negev }
+
+		completion_reward = {
+				812 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+								type = arms_factory
+								level = 2
+								instant_build = yes
+						}
+				}
+				
+				454 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+						}
+				}
+				
+			add_ideas = idea_ISR_standardized_production
+		}
+	}
+	focus = {
+		id = ISR_revitalize_eco_focus
+		icon = industry_civilian
+		x = 12
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+				factor = 40
+		}
+
+		prerequisite = { focus = ISR_industrial_focus_focus }
+
+		completion_reward = {
+				454 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+								type = industrial_complex
+								level = 2
+								instant_build = yes
+						}
+				}
+		}
+	}
+	focus = {
+		id = ISR_northern_infrastructure
+		icon = industry_civilian
+		x = 12
+		y = 2
+		cost = 10
+
+		ai_will_do = {
+				factor = 40
+		}
+
+		prerequisite = { focus = ISR_revitalize_eco_focus }
+
+		completion_reward = {
+				454 = {
+						add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+						}
+				}
+				
+				881 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+				}
+		}
+	}
+	focus = {
+		id = ISR_southern_infrastructure
+		icon = industry_civilian
+		x = 14
+		y = 2
+		cost = 10
+
+		ai_will_do = {
+				factor = 30
+		}
+
+		prerequisite = { focus = ISR_revitalize_eco_focus }
+
+		completion_reward = {
+				812 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+				}
+		}
+	}
+	focus = {
+		id = ISR_nationalize_oil_production
+		icon = oil_production
+		x = 12
+		y = 3
+		cost = 15
+
+		ai_will_do = {
+			factor = 20
+		}
+
+		prerequisite = { focus = ISR_northern_infrastructure }
+
+		completion_reward = {
+			454 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource = { 
+				type = oil 
+				amount = 8
+				state = 454 
+				}
+			}
+	}
+	focus = {
+		id = ISR_industrialize_cities
+		icon = industry_civilian
+		x = 14
+		y = 3
+		cost = 15
+
+		ai_will_do = {
+				factor = 20
+		}
+
+		prerequisite = { focus = ISR_southern_infrastructure }
+
+		completion_reward = {
+				914 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+								type = industrial_complex
+								level = 2
+								instant_build = yes
+						}
+				}
+				
+				810 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+								type = industrial_complex
+								level = 2
+								instant_build = yes
+						}
+				}
+		}
+	}
+	focus = {
+		id = ISR_complete_economic_reform
+		icon = industry_civilian
+		x = 13
+		y = 4
+		cost = 20
+
+		ai_will_do = {
+			factor = 20
+		}
+
+		prerequisite = { focus = ISR_nationalize_oil_production }
+		prerequisite = { focus = ISR_industrialize_cities}
+
+		completion_reward = {
+			914 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+					}
+				}
+			812 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+					}
+				}
+			454 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+					}
+				}
+			add_resource = { 
+				type = steel 
+				amount = 10
+				state = 812 
+				}
+				
+			add_ideas = idea_ISR_economyStrengthened
+			}
+	}
+	focus = {
+		id = ISR_industrialResearch_focus
+		icon = research
+		x = 11
+		y = 5
+		cost = 15
+
+		ai_will_do = {
+				factor = 30
+		}
+
+		prerequisite = { focus = ISR_complete_militarization_focus }
+		prerequisite = { focus = ISR_complete_economic_reform }
+
+		completion_reward = {
+				add_research_slot = 1
+		}
+	}
+
+	#############################################
+	### Domestic Focus [Internal & Political] ###
+	#############################################
+
+	focus = {
+		id = ISR_domestic_focus_focus
+		icon = consumer_goods
+		x = 23
+		y = 0
+		cost = 5
+
+		ai_will_do = {
+				factor = 20
+		}
+
+		completion_reward = {
+				add_political_power = 30
+		}
+	}
+
+	#######################
+	### Internal Policy ###
+	#######################
+
+	focus = {
+		id = ISR_internal_policy_focus
+		icon = tripartite_pact
+		x = 19
+		y = 1
+		cost = 5
+
+		ai_will_do = {
+			factor = 20
+		}
+
+		prerequisite = { focus = ISR_domestic_focus_focus }
+
+		completion_reward = {
+			add_political_power = 30
+		}
+	}
+
+	### The Settlements
+	focus = {
+		id = ISR_the_settlements
+		icon = industry_civilian
+		x = 17
+		y = 2
+		cost = 10
+
+		ai_will_do = {
+			factor = 20
+		}
+
+		prerequisite = { focus = ISR_internal_policy_focus }
+
+		completion_reward = {
+			add_political_power = 30
+		}
+	}
+	focus = {
+		id = ISR_integrate_negev
+		icon = consumer_goods
+		x = 17
+		y = 3
+		cost = 10
+
+		ai_will_do = {
+			factor = 30
+		}
+
+		prerequisite = { focus = ISR_the_settlements }
+
+		completion_reward = {
+			if = {
+				limit = {
+					881 = {
+						is_owned_by = ISR
+					}
+				}
+				
+				881 = { add_core_of = ISR }
+			}			
+		}
+	}
+	focus = {
+		id = ISR_westBank_Settlements
+		icon = industry_civilian
+		x = 16
+		y = 4
+		cost = 10
+		
+		ai_will_do = {
+			factor = 20
+		}
+		prerequisite = { focus = ISR_integrate_negev }
+
+		completion_reward = {
+			454 = {
+				add_manpower = 15000
+			}
+			810 = {
+				add_manpower = 15000
+			}
+		}
+	}
+	focus = {
+		id = ISR_Gaza_Settlements
+		icon = industry_civilian
+		x = 18
+		y = 4
+		cost = 10
+		
+		ai_will_do = {
+			factor = 20
+		}
+
+		prerequisite = { focus = ISR_integrate_negev }
+
+		completion_reward = {
+			812 = {
+				add_manpower = 15000
+			}
+			811 = {
+				add_manpower = 15000
+			}
+		}	
+	}
+	focus = {
+		id = ISR_Enlarge_WestBank_Settlements
+		icon = GFX_focus_goal_ISR_settlement_crane
+		x = 16
+		y = 5
+		cost = 20
+		
+		ai_will_do = {
+			factor = 10
+		}
+
+		prerequisite = { focus = ISR_westBank_Settlements }
+
+		completion_reward = {
+			454 = {
+				add_manpower = 15000
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+		}
+		810 = {
+			add_manpower = 15000
+		}
+		}
+	}
+	focus = {
+		id = ISR_Enlarge_Gaza_Settlements
+		icon = GFX_focus_goal_ISR_settlement_crane
+		x = 18
+		y = 5
+		cost = 20
+		
+		ai_will_do = {
+			factor = 10
+		}
+
+		prerequisite = { focus = ISR_Gaza_Settlements }
+
+		completion_reward = {
+			812 = {
+				add_manpower = 15000
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			811 = {
+				add_manpower = 15000
+			}	
+		}	
+	}
+	focus = {
+		id = ISR_defend_settlements
+		x = 17
+		y = 6
+		icon = city_fort
+		cost = 20
+		
+		ai_will_do = {
+			factor = 20
+		}
+
+		prerequisite = { focus = ISR_Enlarge_Gaza_Settlements }
+		prerequisite = {focus = ISR_Enlarge_WestBank_Settlements }
+
+		completion_reward = {
+			914 = {
+				add_building_construction = {
+					type = bunker 
+					level = 1
+					province = 13249
+					instant_build = yes
+				}
+			}
+			810 = {
+				add_building_construction = {
+					type = bunker 
+					level = 1
+					province = 7107
+					instant_build = yes
+				}
+			}
+			812 = {
+			add_building_construction = {
+					type = bunker 
+					level = 1
+					province = 13218
+					instant_build = yes
+				}
+			add_building_construction = {
+					type = bunker 
+					level = 1
+					province = 11970
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = ISR_encourage_settlement_migration
+		icon = GFX_focus_goal_ISR_settlement_immigration
+		x = 17
+		y = 7
+		cost = 30
+		
+		ai_will_do = {
+			factor = 20
+		}
+
+		prerequisite = { focus = ISR_defend_settlements }
+
+		completion_reward = {
+			812 = {
+				add_manpower = 20000
+			}
+			454 = {
+				add_manpower = 20000
+			}
+			add_timed_idea = {
+				idea = idea_ISR_settlement_migration
+				days = 1095
+			}
+		}
+	}
+
+	### Orthodox Jews
+	focus = {
+		id = ISR_the_orthodox_jews
+		icon = neutrality
+		x = 21
+		y = 2
+		cost = 10
+
+		ai_will_do = {
+			factor = 20
+		}
+
+		prerequisite = { focus = ISR_internal_policy_focus }
+
+		completion_reward = {
+			add_political_power = 30
+		}
+	}
+	### Right
+	focus = {
+		id = ISR_fight_the_orthodox
+		icon = anti_comintern_pact
+		x = 20
+		y = 3
+		cost = 10
+		
+		ai_will_do = {
+			factor = 15
+		}
+
+		prerequisite = { focus = ISR_the_orthodox_jews }
+
+		mutually_exclusive = {
+			focus = ISR_support_the_orthodox
+		}
+
+		completion_reward = {
+			add_stability = -0.05
+			add_ideas = idea_ISR_fighting_orthodox
+		}
+	}
+	focus = {
+		id = ISR_remove_compensations_orthodox
+		icon = anti_comintern_pact
+		x = 20
+		y = 4
+		cost = 15
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		prerequisite = { focus = ISR_fight_the_orthodox }
+
+		completion_reward = {
+			add_stability = -0.05
+			add_ideas = idea_ISR_removed_compensation_orthodox
+		}
+	}
+	focus = {
+		id = ISR_universal_conscription
+		icon = anti_comintern_pact
+		x = 20
+		y = 5
+		cost = 15
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		prerequisite = { focus = ISR_remove_compensations_orthodox }
+
+		completion_reward = {
+				add_stability = -0.15
+				add_ideas = idea_ISR_universal_conscription
+				hidden_effect = {
+					ISR = {
+					country_event = { id = israel.18 }
+					}
+				}
+			}
+	}
+	focus = {
+		id = ISR_secular_society
+		icon = anti_comintern_pact
+		x = 20
+		y = 6
+		cost = 15
+		
+		available = {
+			NOT = {
+				has_government = monarchist
+			}
+		}
+		ai_will_do = {
+				factor = 10
+		}
+
+		prerequisite = { focus = ISR_universal_conscription }
+
+		completion_reward = {
+				add_ideas = idea_ISR_secular_society
+		}
+	}
+	### Left
+	focus = {
+		id = ISR_support_the_orthodox
+		icon = attack_communism
+		x = 22
+		y = 3
+		cost = 5
+
+		ai_will_do = {
+			factor = 10
+		}
+		
+		mutually_exclusive = {
+			focus = ISR_fight_the_orthodox
+		}
+
+		prerequisite = { focus = ISR_the_orthodox_jews }
+
+		completion_reward = {
+			add_stability = 0.05
+			add_ideas = idea_ISR_supporting_orthodox
+		}
+	}
+	focus = {
+		id = ISR_encourage_talmund_study
+		icon = attack_communism
+		x = 22
+		y = 4
+		cost = 15
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		prerequisite = { focus = ISR_support_the_orthodox }
+
+		completion_reward = {
+			add_stability = 0.05
+			add_ideas = idea_ISR_talmund_study
+		}
+	}
+	focus = {
+		id = ISR_impliment_jewish_law
+		icon = attack_communism
+		x = 22
+		y = 5
+		cost = 15
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		prerequisite = { focus = ISR_encourage_talmund_study }
+
+		completion_reward = {
+			add_stability = 0.05
+			add_ideas = idea_ISR_jewish_law
+		}
+	}
+	focus = {
+		id = ISR_prepare_for_the_messiah
+		icon = attack_communism
+		x = 22
+		y = 6
+		cost = 20
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		prerequisite = { focus = ISR_impliment_jewish_law }
+
+		completion_reward = {
+			add_popularity = { ideology = monarchist popularity = 0.75 }
+				
+			add_ideas = idea_ISR_prepping_messiah
+		}
+	}
+
+	########################
+	### Political Policy ###
+	########################
+
+	focus = {
+		id = ISR_political_focus_focus
+		icon = tripartite_pact
+		x = 28
+		y = 1
+		cost = 5
+
+		ai_will_do = {
+			factor = 40
+		}
+
+		prerequisite = { focus = ISR_domestic_focus_focus }
+
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	### Support the Left
+	focus = {
+        id = ISR_support_the_left
+        icon = democracy
+        x = 26
+        y = 2
+        cost = 10
+
+        ai_will_do = {
+	        factor = 50
+        }
+
+        mutually_exclusive = { focus = ISR_support_the_right }
+        prerequisite = { focus = ISR_political_focus_focus}
+
+        completion_reward = {
+            add_timed_idea = {
+                idea = idea_ISR_support_left
+                days = 365
+			}
+			fourth_estate_social_liberal_increase = yes
+			fourth_estate_progressive_increase = yes
+			fourth_estate_social_democrat_increase = yes
+			fourth_estate_communist_increase = yes
+			fourth_estate_democratic_socialist_increase = yes    
+        }
+    }
+    focus = {
+        id = ISR_support_far_left
+        icon = communism
+        x = 24
+    	y = 3
+    	cost = 10
+
+        ai_will_do = {
+            factor = 30
+        }
+	
+        mutually_exclusive = { focus = ISR_support_center_left }
+        prerequisite = { focus = ISR_support_the_left }
+
+        completion_reward = {
+            add_timed_idea = {
+			idea = idea_ISR_support_far_left
+			days = 1000
+		}
+
+		fourth_estate_communist_increase = yes
+		fourth_estate_democratic_socialist_increase = yes
+						
+        }
+    }
+    focus = {
+        id = ISR_support_center_left
+        icon = democracy
+        x = 26
+        y = 3
+    	cost = 10
+
+        ai_will_do = {
+            factor = 40
+        }
+
+		available = {
+			NOT = {
+				has_completed_focus = ISR_aggressiveFocus_focus
+			}
+		}
+			
+        mutually_exclusive = { focus = ISR_support_far_left }
+        prerequisite = { focus = ISR_support_the_left}
+
+        completion_reward = {
+            add_timed_idea = {
+				idea = idea_ISR_support_center_left
+				days = 500
+			}
+			fourth_estate_social_liberal_increase = yes
+			fourth_estate_progressive_increase = yes
+			fourth_estate_social_democrat_increase = yes
+						
+        }
+    }
+    focus = {
+        id = ISR_red_israel
+        icon = communism
+        x = 24
+        y = 4
+        cost = 10
+				
+		available = {
+			has_government = communist
+        }
+				
+        ai_will_do = {
+            factor = 20
+        }
+				
+        prerequisite = { focus = ISR_support_far_left }
+
+        completion_reward = {
+            add_ideas = idea_ISR_red_israel
+        }
+    }
+    focus = {
+        id = ISR_scientific_utopia
+        icon = research
+        x = 26
+        y = 4
+        cost = 10
+
+        available = {
+            OR = {
+                has_government = progressive
+                has_government = social_democrat
+                has_government = social_liberal
+            }
+        }
+
+        ai_will_do = {
+            factor = 20
+        }
+
+        prerequisite = { focus = ISR_support_center_left }
+
+        completion_reward = {
+            add_ideas = idea_ISR_scientific_utopia
+        }
+    }
+
+	### Support the Right
+	focus = {
+        id = ISR_support_the_right
+        icon = fascism
+    	x = 30
+        y = 2
+        cost = 10
+
+        ai_will_do = {
+            factor = 50
+        }
+
+        mutually_exclusive = { focus = ISR_support_the_left }
+        prerequisite = { focus = ISR_political_focus_focus}
+
+        completion_reward = {
+            add_timed_idea = {
+            	idea = idea_ISR_support_right
+            	days = 365
+			}
+			fourth_estate_conservative_increase = yes
+			fourth_estate_nationalist_increase = yes
+			fourth_estate_monarchist_increase = yes
+        }
+    }
+    focus = {
+        id = ISR_islamic_thought
+    	icon = align_to_pakistan
+        x = 28
+        y = 3
+        cost = 10
+
+        ai_will_do = {
+            factor = 10
+        }
+
+        mutually_exclusive = { focus = ISR_nationalist_thought }
+        mutually_exclusive = { focus = ISR_conservative_thought }
+
+        prerequisite = { focus = ISR_support_the_right}
+
+        completion_reward = {
+            add_timed_idea = {
+				idea = idea_ISR_islamic_thought
+				days = 1000
+			} 
+			fourth_estate_islamist_increase = yes
+        }
+    }
+	focus = {
+		id = ISR_sharia_law
+		icon = political_pressure
+		x = 28
+		y = 4
+		cost = 10
+
+		ai_will_do = {
+			factor = 20
+		}
+
+		available = {
+			has_government = islamist
+		}
+
+		prerequisite = { focus = ISR_islamic_thought }
+
+		completion_reward = {
+			add_ideas = idea_ISR_sharia_law
+			remove_ideas = idea_ISR_vanguard_of_judaism
+		}
+	}
+	focus = {
+		id = ISR_conservative_thought
+		icon = neutrality
+		x = 30
+		y = 3
+		cost = 10
+
+		ai_will_do = {
+				factor = 60
+		}
+		
+		available = {
+			NOT = {
+				has_completed_focus = ISR_aggressiveFocus_focus
+			}
+		}
+		
+		mutually_exclusive = { focus = ISR_islamic_thought }
+		mutually_exclusive = { focus = ISR_nationalist_thought }
+
+		prerequisite = { focus = ISR_support_the_right}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = idea_ISR_conservative_thought
+				days = 1000
+			} 
+			fourth_estate_conservative_increase = yes
+		}
+	}
+	focus = {
+		id = ISR_realpolitik
+		icon = neutrality
+		x = 30
+		y = 4
+		cost = 10
+
+		ai_will_do = {
+			factor = 20
+		}
+
+		available = {
+			has_government = conservative
+		}
+
+		prerequisite = { focus = ISR_conservative_thought }
+
+		completion_reward = {
+			add_ideas = idea_ISR_realpolitik
+		}
+	}
+    focus = {
+        id = ISR_nationalist_thought
+        icon = GFX_focus_goal_ISR_jewish_state
+        x = 32
+    	y = 3
+        cost = 10
+
+        ai_will_do = {
+            factor = 40
+        }
+
+        mutually_exclusive = { focus = ISR_islamic_thought }
+        mutually_exclusive = { focus = ISR_conservative_thought }
+
+        prerequisite = { focus = ISR_support_the_right}
+
+        completion_reward = {
+            add_timed_idea = {
+				idea = idea_ISR_nationalist_thought
+				days = 1000
+			} 
+			fourth_estate_conservative_increase = yes
+			fourth_estate_nationalist_increase = yes
+			fourth_estate_monarchist_increase = yes
+        }
+    }
+	focus = {
+		id = ISR_jew_state
+		icon = GFX_focus_goal_ISR_jewish_state
+		x = 32
+		y = 4
+		cost = 10
+
+		ai_will_do = {
+			factor = 20
+		}
+
+		available = {
+			has_government = nationalist
+		}
+
+		prerequisite = { focus = ISR_nationalist_thought }
+
+		completion_reward = {
+			add_ideas = idea_ISR_the_jew_state
+		}
+	}
+
+	#############################
+	### Israel Defense Forces ###
+	#############################
+
     focus = {
 		id = ISR_IDF_focus 
 		icon = GFX_focus_goal_ISR_IDF
 		y = 0
-		x = 51
+		x = 45
 		cost = 5
 	
 	
@@ -22,1928 +1942,19 @@ focus_tree = {
 			air_experience = 10
 			navy_experience = 10
 		}
+
 		ai_will_do = {
 				factor = 15
 		}
 	}
-        focus = {
-                id = ISR_industrial_focus_focus
-                icon = production2
-                x = 13
-                y = 0
-                cost = 10
 
-                ai_will_do = {
-                        factor = 50
-                }
-
-                completion_reward = {
-                        add_political_power = 20
-                        add_tech_bonus = {
-                                name = industry_bonus
-                                bonus = 0.5
-                                uses = 2
-                                category = industry
-                        }
-                }
-
-
-        }
-
-
-        focus = {
-                id = ISR_militarization_project_focus
-                icon = industry_military
-                x = 12
-                y = 1
-                cost = 10
-
-                ai_will_do = {
-                        factor = 30
-                }
-
-                prerequisite = { focus = ISR_industrial_focus_focus }
-
-                completion_reward = {
-                        454 = {
-                                add_extra_state_shared_building_slots = 2
-                                add_building_construction = {
-                                        type = arms_factory
-                                        level = 2
-                                        instant_build = yes
-                                }
-                        }
-                }
-        }
-		
-		focus = {
-                id = ISR_revitalize_eco_focus
-                icon = industry_civilian
-                x = 14
-                y = 1
-                cost = 10
-
-                ai_will_do = {
-                        factor = 40
-                }
-
-                prerequisite = { focus = ISR_industrial_focus_focus }
-
-                completion_reward = {
-                        454 = {
-                                add_extra_state_shared_building_slots = 2
-                                add_building_construction = {
-                                        type = industrial_complex
-                                        level = 2
-                                        instant_build = yes
-                                }
-                        }
-                }
-        }
-
-        focus = {
-                id = ISR_northern_infrastructure
-                icon = industry_civilian
-                x = 14
-                y = 2
-                cost = 10
-
-                ai_will_do = {
-                        factor = 40
-                }
-
-                prerequisite = { focus = ISR_revitalize_eco_focus }
-
-                completion_reward = {
-                        454 = {
-                                add_building_construction = {
-                                        type = infrastructure
-                                        level = 2
-                                        instant_build = yes
-                                }
-                        }
-						
-						881 = {
-								add_building_construction = {
-									type = infrastructure
-									level = 2
-									instant_build = yes
-								}
-						}
-                }
-        }
-
-        focus = {
-                id = ISR_southern_infrastructure
-                icon = industry_civilian
-                x = 16
-                y = 2
-                cost = 10
-
-                ai_will_do = {
-                        factor = 30
-                }
-
-                prerequisite = { focus = ISR_revitalize_eco_focus }
-
-                completion_reward = {
-                        812 = {
-								add_building_construction = {
-									type = infrastructure
-									level = 2
-									instant_build = yes
-								}
-						}
-                }
-        }
-		
-		
-		focus = {
-                id = ISR_industrialize_cities
-                icon = industry_civilian
-                x = 16
-                y = 3
-                cost = 15
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                prerequisite = { focus = ISR_southern_infrastructure }
-
-                completion_reward = {
-                        914 = {
-                                add_extra_state_shared_building_slots = 2
-                                add_building_construction = {
-                                        type = industrial_complex
-                                        level = 2
-                                        instant_build = yes
-                                }
-                        }
-						
-						810 = {
-                                add_extra_state_shared_building_slots = 2
-                                add_building_construction = {
-                                        type = industrial_complex
-                                        level = 2
-                                        instant_build = yes
-                                }
-                        }
-                }
-        }
-		
-			focus = {
-			id = ISR_nationalize_oil_production
-            icon = oil_production
-			x = 14
-			y = 3
-			cost = 15
-
-			ai_will_do = {
-				factor = 20
-			}
-
-			prerequisite = { focus = ISR_northern_infrastructure }
-	
-			completion_reward = {
-				454 = {
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-						type = industrial_complex
-						level = 1
-						instant_build = yes
-					}
-				}
-				add_resource = { 
-					type = oil 
-					amount = 8
-					state = 454 
-					}
-				}
-			}
-			
-			focus = {
-			id = ISR_complete_economic_reform
-            icon = industry_civilian
-			x = 15
-			y = 4
-			cost = 20
-
-			ai_will_do = {
-				factor = 20
-			}
-
-			prerequisite = { focus = ISR_nationalize_oil_production }
-			prerequisite = { focus = ISR_industrialize_cities}
-	
-			completion_reward = {
-				914 = {
-						add_extra_state_shared_building_slots = 3
-						add_building_construction = {
-						type = industrial_complex
-						level = 1
-						instant_build = yes
-						}
-					}
-				812 = {
-						add_extra_state_shared_building_slots = 3
-						add_building_construction = {
-						type = industrial_complex
-						level = 1
-						instant_build = yes
-						}
-					}
-				454 = {
-						add_extra_state_shared_building_slots = 3
-						add_building_construction = {
-						type = industrial_complex
-						level = 2
-						instant_build = yes
-						}
-					}
-				add_resource = { 
-					type = steel 
-					amount = 10
-					state = 812 
-					}
-					
-				add_ideas = idea_ISR_economyStrengthened
-				}
-			}
-
-        focus = {
-                id = ISR_militarize_the_negev
-                icon = industry_military
-                x = 10
-                y = 2
-                cost = 15
-
-                ai_will_do = {
-                        factor = 30
-                }
-
-                prerequisite = { focus = ISR_militarization_project_focus }
-
-                completion_reward = {
-                        812 = {
-                                add_extra_state_shared_building_slots = 2
-                                add_building_construction = {
-                                        type = arms_factory
-                                        level = 2
-                                        instant_build = yes
-                                }
-
-                        }
-                }
-        }
-		
-		focus = {
-                id = ISR_militarize_cities
-                icon = industry_military
-                x = 12
-                y = 2
-                cost = 15
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                prerequisite = { focus = ISR_militarization_project_focus }
-
-                completion_reward = {
-                        810 = {
-                                add_extra_state_shared_building_slots = 1
-                                add_building_construction = {
-                                        type = arms_factory
-                                        level = 1
-                                        instant_build = yes
-                                }
-
-                        }
-						
-						914 = {
-                                add_extra_state_shared_building_slots = 1
-                                add_building_construction = {
-                                        type = arms_factory
-                                        level = 1
-                                        instant_build = yes
-                                }
-
-                        }
-                }
-        }
-
-        focus = {
-                id = ISR_complete_militarization_focus
-                icon = industry_military
-                x = 11
-                y = 3
-                cost = 20
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                prerequisite = { focus = ISR_militarize_cities }
-				prerequisite = { focus = ISR_militarize_the_negev }
-
-                completion_reward = {
-                        812 = {
-                                add_extra_state_shared_building_slots = 2
-                                add_building_construction = {
-                                        type = arms_factory
-                                        level = 2
-                                        instant_build = yes
-                                }
-                        }
-						
-						454 = {
-                                add_extra_state_shared_building_slots = 1
-                                add_building_construction = {
-                                        type = arms_factory
-                                        level = 1
-                                        instant_build = yes
-                                }
-                        }
-						
-					add_ideas = idea_ISR_standardized_production
-                }
-        }
-
-        focus = {
-                id = ISR_industrialResearch_focus
-                icon = research
-                x = 13
-                y = 5
-                cost = 15
-
-                ai_will_do = {
-                        factor = 30
-                }
-
-                prerequisite = { focus = ISR_complete_militarization_focus }
-                prerequisite = { focus = ISR_complete_economic_reform }
-
-                completion_reward = {
-                        add_research_slot = 1
-                }
-
-        }
-
-        focus = {
-                id = ISR_domestic_focus_focus
-                icon = consumer_goods
-                x = 25
-                y = 0
-                cost = 5
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                completion_reward = {
-                        add_political_power = 30
-                }
-        }
-		
-
-        focus = {
-                id = ISR_political_focus_focus
-                icon = tripartite_pact
-                x = 31
-                y = 1
-                cost = 5
-
-                ai_will_do = {
-                        factor = 40
-                }
-
-                prerequisite = { focus = ISR_domestic_focus_focus }
-                completion_reward = {
-                        add_political_power = 50
-                }
-        }
-
-        focus = {
-                id = ISR_support_the_left
-                icon = democracy
-                x = 29
-                y = 2
-                cost = 10
-
-                ai_will_do = {
-                        factor = 50
-                }
-
-                mutually_exclusive = { focus = ISR_support_the_right }
-
-                prerequisite = { focus = ISR_political_focus_focus}
-                completion_reward = {
-                        add_timed_idea = {
-                        idea = idea_ISR_support_left
-                        days = 365
-						}
-				fourth_estate_social_liberal_increase = yes
-				fourth_estate_progressive_increase = yes
-				fourth_estate_social_democrat_increase = yes
-				fourth_estate_communist_increase = yes
-				fourth_estate_democratic_socialist_increase = yes    
-                }
-        }
-
-        focus = {
-                id = ISR_support_far_left
-                icon = communism
-                x = 27
-                y = 3
-                cost = 10
-
-                ai_will_do = {
-                        factor = 30
-                }
-				
-                mutually_exclusive = { focus = ISR_support_center_left }
-
-                prerequisite = { focus = ISR_support_the_left }
-                completion_reward = {
-                        add_timed_idea = {
-						idea = idea_ISR_support_far_left
-						days = 1000
-						}
-				fourth_estate_communist_increase = yes
-				fourth_estate_democratic_socialist_increase = yes
-						
-                }
-        }
-
-        focus = {
-                id = ISR_support_center_left
-                icon = democracy
-                x = 29
-                y = 3
-                cost = 10
-
-                ai_will_do = {
-                        factor = 40
-                }
-				available = {
-					NOT = {
-						has_completed_focus = ISR_aggressiveFocus_focus
-					}
-				}
-				
-                mutually_exclusive = { focus = ISR_support_far_left }
-
-                prerequisite = { focus = ISR_support_the_left}
-                completion_reward = {
-                        add_timed_idea = {
-						idea = idea_ISR_support_center_left
-						days = 500
-						}
-					fourth_estate_social_liberal_increase = yes
-					fourth_estate_progressive_increase = yes
-					fourth_estate_social_democrat_increase = yes
-						
-                }
-        }
-
-        focus = {
-                id = ISR_red_israel
-                icon = communism
-                x = 27
-                y = 4
-                cost = 10
-				
-				available = {
-					has_government = communist
-                }
-				
-                ai_will_do = {
-                        factor = 20
-                }
-				
-                prerequisite = { focus = ISR_support_far_left }
-                completion_reward = {
-                        add_ideas = idea_ISR_red_israel
-                }
-        }
-
-        focus = {
-                id = ISR_scientific_utopia
-                icon = research
-                x = 29
-                y = 4
-                cost = 10
-
-                available = {
-                        OR = {
-                        has_government = progressive
-                        has_government = social_democrat
-                        has_government = social_liberal
-                        }
-                }
-                ai_will_do = {
-                        factor = 20
-                }
-
-                prerequisite = { focus = ISR_support_center_left }
-                completion_reward = {
-                        add_ideas = idea_ISR_scientific_utopia
-                }
-        }
-
-        focus = {
-                id = ISR_support_the_right
-                icon = fascism
-                x = 33
-                y = 2
-                cost = 10
-
-                ai_will_do = {
-                        factor = 50
-                }
-
-                mutually_exclusive = { focus = ISR_support_the_left }
-
-                prerequisite = { focus = ISR_political_focus_focus}
-                completion_reward = {
-                        add_timed_idea = {
-                        idea = idea_ISR_support_right
-                        days = 365
-						}
-				fourth_estate_conservative_increase = yes
-				fourth_estate_nationalist_increase = yes
-				fourth_estate_monarchist_increase = yes
-                }
-        }
-
-        focus = {
-                id = ISR_islamic_thought
-                icon = align_to_pakistan
-                x = 31
-                y = 3
-                cost = 10
-
-                ai_will_do = {
-                        factor = 10
-                }
-                mutually_exclusive = { focus = ISR_nationalist_thought }
-                mutually_exclusive = { focus = ISR_conservative_thought }
-
-                prerequisite = { focus = ISR_support_the_right}
-                completion_reward = {
-                        add_timed_idea = {
-						idea = idea_ISR_islamic_thought
-						days = 1000
-						} 
-					fourth_estate_islamist_increase = yes
-                }
-        }
-
-        focus = {
-                id = ISR_nationalist_thought
-                icon = GFX_focus_goal_ISR_jewish_state
-                x = 35
-                y = 3
-                cost = 10
-
-                ai_will_do = {
-                        factor = 40
-                }
-
-                mutually_exclusive = { focus = ISR_islamic_thought }
-                mutually_exclusive = { focus = ISR_conservative_thought }
-
-                prerequisite = { focus = ISR_support_the_right}
-                completion_reward = {
-                        add_timed_idea = {
-						idea = idea_ISR_nationalist_thought
-						days = 1000
-					} 
-				fourth_estate_conservative_increase = yes
-				fourth_estate_nationalist_increase = yes
-				fourth_estate_monarchist_increase = yes
-                }
-        }
-
-        focus = {
-                id = ISR_conservative_thought
-                icon = neutrality
-                x = 33
-                y = 3
-                cost = 10
-
-                ai_will_do = {
-                        factor = 60
-                }
-				
-				available = {
-					NOT = {
-						has_completed_focus = ISR_aggressiveFocus_focus
-					}
-				}
-				
-                mutually_exclusive = { focus = ISR_islamic_thought }
-                mutually_exclusive = { focus = ISR_nationalist_thought }
-
-                prerequisite = { focus = ISR_support_the_right}
-                completion_reward = {
-                      add_timed_idea = {
-						idea = idea_ISR_conservative_thought
-						days = 1000
-						} 
-						fourth_estate_conservative_increase = yes
-                }
-        }
-
-        focus = {
-                id = ISR_jew_state
-                icon = GFX_focus_goal_ISR_jewish_state
-                x = 35
-                y = 4
-                cost = 10
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                available = {
-                        has_government = nationalist
-                }
-
-                prerequisite = { focus = ISR_nationalist_thought }
-                completion_reward = {
-                        add_ideas = idea_ISR_the_jew_state
-                }
-        }
-
-        focus = {
-                id = ISR_sharia_law
-                icon = political_pressure
-                x = 31
-                y = 4
-                cost = 10
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                available = {
-                        has_government = islamist
-                }
-
-                prerequisite = { focus = ISR_islamic_thought }
-                completion_reward = {
-                        add_ideas = idea_ISR_sharia_law
-						remove_ideas = idea_ISR_vanguard_of_judaism
-                }
-        }
-
-        focus = {
-                id = ISR_realpolitik
-                icon = neutrality
-                x = 33
-                y = 4
-                cost = 10
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                available = {
-                        has_government = conservative
-                }
-
-                prerequisite = { focus = ISR_conservative_thought }
-                completion_reward = {
-                        add_ideas = idea_ISR_realpolitik
-                }
-        }
-
-        focus = {
-                id = ISR_internal_policy_focus
-                icon = tripartite_pact
-                x = 21
-                y = 1
-                cost = 5
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                prerequisite = { focus = ISR_domestic_focus_focus }
-                completion_reward = {
-                        add_political_power = 30
-                }
-        }
-		
-		focus = {
-                id = ISR_the_settlements
-                icon = industry_civilian
-                x = 19
-                y = 2
-                cost = 10
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                prerequisite = { focus = ISR_internal_policy_focus }
-
-                completion_reward = {
-                        add_political_power = 30
-                }
-        }
-		
-		focus = {
-				id = ISR_integrate_negev
-				icon = consumer_goods
-                x = 19
-                y = 3
-                cost = 10
-
-                ai_will_do = {
-                        factor = 30
-                }
-				prerequisite = { focus = ISR_the_settlements }
-                completion_reward = {
-					if = {
-						limit = {
-							881 = {
-								is_owned_by = ISR
-							}
-						}
-						
-						881 = { add_core_of = ISR }
-					}			
-                }
-        }
-		
-		focus = {
-				id = ISR_westBank_Settlements
-				icon = industry_civilian
-				x = 18
-				y = 4
-				cost = 10
-				
-				ai_will_do = {
-					factor = 20
-				}
-				prerequisite = { focus = ISR_integrate_negev }
-				completion_reward = {
-				454 = {
-					add_manpower = 15000
-				}
-				810 = {
-					add_manpower = 15000
-				}
-				
-			}
-			
-			
-		}
-		
-		focus = {
-				id = ISR_Gaza_Settlements
-				icon = industry_civilian
-				x = 20
-				y = 4
-				cost = 10
-				
-				ai_will_do = {
-					factor = 20
-				}
-				prerequisite = { focus = ISR_integrate_negev }
-				completion_reward = {
-				812 = {
-					add_manpower = 15000
-				}
-				811 = {
-					add_manpower = 15000
-				}
-				
-			}	
-		}
-		
-		focus = {
-				id = ISR_Enlarge_WestBank_Settlements
-				icon = GFX_focus_goal_ISR_settlement_crane
-				x = 18
-				y = 5
-				cost = 20
-				
-				ai_will_do = {
-					factor = 10
-				}
-				prerequisite = { focus = ISR_westBank_Settlements }
-				completion_reward = {
-				454 = {
-					add_manpower = 15000
-					add_extra_state_shared_building_slots = 1
-                                add_building_construction = {
-                                        type = industrial_complex
-                                        level = 1
-                                        instant_build = yes
-                                }
-				}
-				810 = {
-					add_manpower = 15000
-				}
-			}
-			
-		}
-		
-		focus = {
-				id = ISR_Enlarge_Gaza_Settlements
-				icon = GFX_focus_goal_ISR_settlement_crane
-				x = 20
-				y = 5
-				cost = 20
-				
-				ai_will_do = {
-					factor = 10
-				}
-				prerequisite = { focus = ISR_Gaza_Settlements }
-				completion_reward = {
-				812 = {
-					add_manpower = 15000
-					add_extra_state_shared_building_slots = 1
-                                add_building_construction = {
-                                        type = industrial_complex
-                                        level = 1
-                                        instant_build = yes
-                                }
-				}
-				811 = {
-					add_manpower = 15000
-				}
-				
-			}	
-		}
-		
-		focus = {
-				id = ISR_defend_settlements
-				x = 19
-				y = 6
-				icon = city_fort
-				cost = 20
-				
-				ai_will_do = {
-					factor = 20
-				}
-				prerequisite = { focus = ISR_Enlarge_Gaza_Settlements }
-				prerequisite = {focus = ISR_Enlarge_WestBank_Settlements }
-				completion_reward = {
-					914 = {
-						add_building_construction = {
-							type = bunker 
-							level = 1
-							province = 13249
-							instant_build = yes
-						}
-					}
-					810 = {
-						add_building_construction = {
-							type = bunker 
-							level = 1
-							province = 7107
-							instant_build = yes
-						}
-					}
-					
-					812 = {
-					add_building_construction = {
-							type = bunker 
-							level = 1
-							province = 13218
-							instant_build = yes
-						}
-					add_building_construction = {
-							type = bunker 
-							level = 1
-							province = 11970
-							instant_build = yes
-						}
-					}
-					
-				}
-		}
-		
-		focus = {
-			id = ISR_encourage_settlement_migration
-			icon = GFX_focus_goal_ISR_settlement_immigration
-			x = 19
-			y = 7
-			cost = 30
-				
-			ai_will_do = {
-				factor = 20
-			}
-				prerequisite = { focus = ISR_defend_settlements }
-				completion_reward = {
-				812 = {
-					add_manpower = 20000
-				}
-				454 = {
-					add_manpower = 20000
-				}
-				add_timed_idea = {
-				idea = idea_ISR_settlement_migration
-				days = 1095
-				}
-				
-			}
-		}
-
-        focus = {
-                id = ISR_the_orthodox_jews
-                icon = neutrality
-                x = 23
-                y = 2
-                cost = 10
-
-                ai_will_do = {
-                        factor = 20
-                }
-
-                prerequisite = { focus = ISR_internal_policy_focus }
-
-                completion_reward = {
-                        add_political_power = 30
-                }
-        }
-
-        focus = {
-                id = ISR_support_the_orthodox
-                icon = attack_communism
-                x = 24
-                y = 3
-                cost = 5
-
-                ai_will_do = {
-                        factor = 10
-                }
-				
-				mutually_exclusive = {
-                        focus = ISR_fight_the_orthodox
-                }
-
-                prerequisite = { focus = ISR_the_orthodox_jews }
-
-                completion_reward = {
-                        add_stability = 0.05
-                        add_ideas = idea_ISR_supporting_orthodox
-                }
-        }
-
-        focus = {
-                id = ISR_encourage_talmund_study
-                icon = attack_communism
-                x = 24
-                y = 4
-                cost = 15
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_support_the_orthodox }
-
-                completion_reward = {
-                        add_stability = 0.05
-                        add_ideas = idea_ISR_talmund_study
-                }
-        }
-
-        focus = {
-                id = ISR_impliment_jewish_law
-                icon = attack_communism
-                x = 24
-                y = 5
-                cost = 15
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_encourage_talmund_study }
-
-                completion_reward = {
-                        add_stability = 0.05
-                        add_ideas = idea_ISR_jewish_law
-                }
-        }
-		
-		focus = {
-                id = ISR_prepare_for_the_messiah
-                icon = attack_communism
-                x = 24
-                y = 6
-                cost = 20
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_impliment_jewish_law }
-
-                completion_reward = {
-						add_popularity = { ideology = monarchist popularity = 0.75 }
-						
-                        add_ideas = idea_ISR_prepping_messiah
-                }
-        }
-
-
-        focus = {
-                id = ISR_fight_the_orthodox
-                icon = anti_comintern_pact
-                x = 22
-                y = 3
-				cost = 10
-				
-                ai_will_do = {
-                        factor = 15
-                }
-
-                prerequisite = { focus = ISR_the_orthodox_jews }
-
-                mutually_exclusive = {
-                        focus = ISR_support_the_orthodox
-                }
-
-                completion_reward = {
-                        add_stability = -0.05
-                        add_ideas = idea_ISR_fighting_orthodox
-                }
-
-        }
-
-        focus = {
-                id = ISR_remove_compensations_orthodox
-                icon = anti_comintern_pact
-                x = 22
-                y = 4
-                cost = 15
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_fight_the_orthodox }
-
-                completion_reward = {
-                        add_stability = -0.05
-                        add_ideas = idea_ISR_removed_compensation_orthodox
-                }
-        }
-
-        focus = {
-                id = ISR_universal_conscription
-                icon = anti_comintern_pact
-                x = 22
-                y = 5
-                cost = 15
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_remove_compensations_orthodox }
-
-                completion_reward = {
-                        add_stability = -0.15
-						add_ideas = idea_ISR_universal_conscription
-						hidden_effect = {
-							ISR = {
-							country_event = { id = israel.18 }
-							}
-						}
-                    }
-				}
-
-                focus = {
-                id = ISR_secular_society
-                icon = anti_comintern_pact
-                x = 22
-                y = 6
-                cost = 15
-				
-				available = {
-					NOT = {
-						has_government = monarchist
-					}
-				}
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_universal_conscription }
-
-                completion_reward = {
-                        add_ideas = idea_ISR_secular_society
-                }
-        }
-
-        focus = {
-                id = ISR_diplomatic_focus
-                x = 4
-                y = 0
-                icon = GFX_focus_goal_ISR_Flag
-				cost = 10
-				
-				ai_will_do = {
-					factor = 30
-				}
-				
-                completion_reward = {
-                        add_political_power = 30
-                }
-        }
-
-        focus = {
-                id = ISR_aggressiveFocus_focus
-                icon = demand_territory
-                x = 3
-                y = 1
-                cost = 10
-
-                ai_will_do = {
-                        factor = 40
-                }
-				
-				available = {
-					NOT = {
-						has_completed_focus = ISR_support_center_left
-						has_completed_focus = ISR_conservative_thought
-					}
-				}
-                prerequisite = { focus = ISR_diplomatic_focus }
-
-                mutually_exclusive = {
-                        focus = ISR_peacefulCoexistence_focus
-                }
-
-                completion_reward = {
-                        add_named_threat = {
-                                threat = 1
-                                name = ISR_aggression
-                        }
-                EGY = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                        }
-                }
-                PAL = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                        }
-                }
-                SYR = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                        }
-                }
-                LEB = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                        }
-                }
-                SAU = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                        }
-                }
-                JOR = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                                }
-                        }
-                }
-
-        }
-
-        focus = {
-                id = ISR_westBankClaim_focus
-                icon = forceful_treaty
-                x = 3
-                y = 2
-                cost = 15
-
-                ai_will_do = {
-                        factor = 30
-                }
-
-                prerequisite = { focus = ISR_aggressiveFocus_focus }
-                completion_reward = {
-
-                        add_named_threat = {
-                                threat = 2
-                                name = ISR_westBankClaim
-                        }
-
-                        915 = { add_core_of = ISR }
-						915 = { remove_claim_by = ISR }
-                        PAL = {
-							country_event = { id = israel.7 }
-						}
-
-                add_popularity = { ideology = conservative popularity = 0.1 }
-                add_popularity = { ideology = nationalist popularity = 0.05 }
-                add_popularity = { ideology = fascist popularity = 0.05 }
-
-                }
-
-        }
-
-        focus = {
-                id = ISR_gazaClaim_focus
-                icon = GFX_focus_goal_ISR_strike_palestine
-                x = 3
-                y = 3
-                cost = 15
-
-                ai_will_do = {
-                        factor = 30
-                }
-
-
-                prerequisite = { focus = ISR_westBankClaim_focus }
-                completion_reward = {
-
-                add_named_threat = {
-                                threat = 2
-                                name = ISR_gazaClaim
-                        }
-
-                811 = { add_core_of = ISR }
-				811 = { remove_claim_by = ISR }
-                        PAL = {
-                        country_event = { id = israel.8 }
-						}
-                        PAL = {
-                                add_opinion_modifier = {
-                                target = ISR
-                                modifier = rival
-                                }
-                        }
-                        EGY = {
-                                add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                                }
-                        }
-                        SYR = {
-                                add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                                }
-                        }
-                        LEB = {
-                                add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                                }
-                        }
-                        SAU = {
-                                add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                                }
-                        }
-                        JOR = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_negative
-                                }
-                        }
-				hidden_effect = {
-				453 = { set_demilitarized_zone = no }
-				813 = { set_demilitarized_zone = no }
-				}
-                add_popularity = { ideology = islamist popularity = 0.1 }
-                add_popularity = { ideology = nationalist popularity = 0.1 }
-                add_popularity = { ideology = fascist popularity = 0.1 }
-                }
-
-        }
-
-        focus = {
-                id = ISR_JordanClaim_focus
-                icon = forceful_treaty
-                x = 2
-                y = 4
-                cost = 20
-
-                available = {
-                        OR = {
-                                nationalist > 0.4
-                                fascist > 0.4
-                                islamist > 0.4
-                                communist > 0.4
-                        }
-
-                        NOT = { has_government = progressive }
-                }
-
-                ai_will_do = {
-                        factor = 15
-                }
-
-                prerequisite = { focus = ISR_gazaClaim_focus }
-                completion_reward = {
-
-                        add_named_threat = {
-                                threat = 3
-                                name = ISR_jordanClaim
-                        }
-
-
-                455 = { add_core_of = ISR }
-                JOR = {
-                        country_event = { id = israel.9 }
-                }
-
-                add_popularity = { ideology = islamist popularity = 0.05 }
-                add_popularity = { ideology = nationalist popularity = 0.05 }
-                add_popularity = { ideology = fascist popularity = 0.05 }
-
-                EGY = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = recent_actions_negative
-                        }
-                }
-                SYR = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = recent_actions_negative
-                        }
-                }
-                LEB = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = recent_actions_negative
-                        }
-                }
-                SAU = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = recent_actions_negative
-                        }
-                }
-                        JOR = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = rival
-                                }
-                        }
-                }
-
-        }
-
-        focus = {
-                id = ISR_SinaiClaim_focus
-                icon = forceful_treaty
-                x = 4
-                y = 4
-                cost = 20
-
-                available = {
-                        OR = {
-                                nationalist > 0.4
-                                fascist > 0.4
-                                islamist > 0.4
-                                communist > 0.4
-                        }
-
-                        NOT = { has_government = progressive }
-                }
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_gazaClaim_focus }
-                completion_reward = {
-
-                add_named_threat = {
-                                threat = 3
-                                name = ISR_EGY_Claim
-                        }
-
-                add_state_claim = 453
-                add_state_claim = 813
-
-                EGY = {
-                        country_event = { id = israel.10 }
-                }
-
-                add_popularity = { ideology = nationalist popularity = 0.05 }
-                add_popularity = { ideology = fascist popularity = 0.05 }
-
-                EGY = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = rival
-                        }
-                }
-                SYR = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = recent_actions_negative
-                        }
-                }
-                LEB = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = recent_actions_negative
-                        }
-                }
-                SAU = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = recent_actions_negative
-                        }
-                }
-                JOR = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = recent_actions_negative
-                                }
-                        }
-                }
-        }
-
-        focus = {
-                id = ISR_greater_ISR_focus
-                icon = skull
-                x = 3
-                y = 5
-                cost = 52
-
-                available = {
-                        OR = {
-							has_government = communist
-							has_government = islamist
-							has_government = monarchist
-							has_government = fascist
-							has_government = nationalist
-                        }
-                }
-
-                ai_will_do = {
-                        factor = 5
-                }
-
-                prerequisite = { focus = ISR_SinaiClaim_focus }
-                prerequisite = { focus = ISR_JordanClaim_focus }
-
-                completion_reward = {
-
-                add_named_threat = {
-                                threat = 30
-                                name = ISR_greater_ISR_plan
-                        }
-
-                every_state = {
-					limit = {
-						is_on_continent = middle_east
-						NOT = {
-							is_controlled_by = GRE
-							is_controlled_by = TUR
-							is_controlled_by = PER
-							is_controlled_by = AFG
-							is_controlled_by = PAK
-						}
-					}
-					
-					add_claim_by = ISR
-				}
-
-                ISR = {
-                        country_event = { id = news_ISR.13 }
-                }
-
-                add_popularity = { ideology = nationalist popularity = 0.15 }
-                add_popularity = { ideology = fascist popularity = 0.05 }
-				
-				ISR = {
-						create_wargoal = {
-						type = annex_everything
-						target = SYR
-					}
-				}
-				ISR = {
-						create_wargoal = {
-						type = annex_everything
-						target = LEB
-						}
-					}
-				ISR = {
-						create_wargoal = {
-						type = annex_everything
-						target = IRQ
-						}
-					}
-				ISR = {
-						create_wargoal = {
-						type = annex_everything
-						target = SAU
-						}
-					}
-				ISR = {
-                        add_opinion_modifier = {
-                        target = SAU
-                        modifier = rival
-                        }
-                }
-				ISR = {
-                        add_opinion_modifier = {
-                        target = SYR
-                        modifier = rival
-                        }
-                }
-				ISR = {
-                        add_opinion_modifier = {
-                        target = LEB
-                        modifier = rival
-                        }
-                }
-				ISR = {
-                        add_opinion_modifier = {
-                        target = IRQ
-                        modifier = rival
-                        }
-                }
-				SAU = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = rival
-                        }
-                }
-
-
-
-                SYR = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = rival
-                        }
-                }
-                EGY = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = rival
-                        }
-                }
-                LEB = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = rival
-                        }
-                }
-                IRQ = {
-                        add_opinion_modifier = {
-                        target = ISR
-                        modifier = rival
-                                }
-                        }
-                }
-        }
-		
-        focus = {
-                id = ISR_peacefulCoexistence_focus
-                icon = improve_relations
-                x = 6
-                y = 1
-                cost = 10
-
-                ai_will_do = {
-                        factor = 40
-                }
-
-                prerequisite = { focus = ISR_diplomatic_focus }
-
-                mutually_exclusive = {
-                        focus = ISR_aggressiveFocus_focus
-                }
-
-                completion_reward = {
-                EGY = {
-                                add_opinion_modifier = {
-                                        target = ISR
-                                        modifier = recent_actions_positive
-                                }
-                        }
-                PAL = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_positive
-                                }
-                        }
-                SYR = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_positive
-                                }
-                        }
-                LEB = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_positive
-                                }
-                        }
-                SAU = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_positive
-                                }
-                        }
-                JOR = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_positive
-                                }
-                        }
-				set_global_flag = isr_peaceful_coexistance
-                }
-        }
-
-        focus = {
-                id = ISR_two_state_solution
-                icon = neutrality
-                x = 6
-                y = 2
-                cost = 10
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_peacefulCoexistence_focus }
-				mutually_exclusive = { focus = ISR_one_state_solution }
-				
-                completion_reward = {
-						add_stability = -0.05
-                        PAL = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_positive
-                                }
-                        }
-                }
-        }
-		
-		focus = {
-                id = ISR_respect_PAL_Sov_focus
-                icon = intelligence_exchange
-                x = 6
-                y = 3
-                cost = 10
-
-                ai_will_do = {
-                        factor = 15
-                }
-
-                prerequisite = { focus = ISR_two_state_solution }
-				
-                completion_reward = {
-                        PAL = {
-                        add_opinion_modifier = {
-                                target = ISR
-                                modifier = recent_actions_very_positive
-                                }
-                        }
-						
-						810 = {
-							remove_claim_by = ISR
-						}
-						
-						811 = {
-							remove_claim_by = ISR
-						}
-						
-						EGY = {
-                                add_opinion_modifier = {
-                                        target = ISR
-                                        modifier = recent_actions_positive
-                                }
-                        }
-						
-						SYR = {
-								add_opinion_modifier = {
-										target = ISR
-										modifier = recent_actions_positive
-										}
-								}
-						LEB = {
-								add_opinion_modifier = {
-										target = ISR
-										modifier = recent_actions_positive
-										}
-								}
-						SAU = {
-								add_opinion_modifier = {
-										target = ISR
-										modifier = recent_actions_positive
-										}
-								}
-						JOR = {
-								add_opinion_modifier = {
-										target = ISR
-										modifier = recent_actions_positive
-								}
-						}
-                }
-        }
-		
-		focus = {
-                id = ISR_allow_right_of_return
-                icon = national_unity
-                x = 5
-                y = 5
-                cost = 15
-				
-				mutually_exclusive = {
-					focus = ISR_1947_borders
-				}
-                ai_will_do = {
-                        factor = 15
-                }
-
-                prerequisite = { focus = ISR_respect_PAL_Sov_focus }
-				
-                completion_reward = {
-						add_stability = -0.05
-						add_timed_idea = {
-							idea = idea_ISR_right_of_return
-							days = 1825
-						}
-						
-						every_owned_state = { remove_core_of = PAL }
-                }
-        }
-		
-		focus = {
-                id = ISR_1947_borders
-                icon = national_unity
-                x = 7
-                y = 5
-                cost = 15
-				
-				mutually_exclusive = {
-					focus = ISR_allow_right_of_return
-				}
-                ai_will_do = {
-                        factor = 20
-                }
-
-                prerequisite = { focus = ISR_respect_PAL_Sov_focus }
-				
-                completion_reward = {
-						PAL = { country_event = { id = israel.22 } }
-						
-						every_owned_state = { remove_core_of = PAL }
-                }
-        }
-		
-		focus = {
-                id = ISR_middle_east_alliance
-                icon = major_alliance
-                x = 6
-                y = 6
-                cost = 15
-
-                ai_will_do = {
-                        factor = 10
-                }
-				
-				available = {
-					threat > 0.49
-				}
-
-                prerequisite =  { 
-					focus = ISR_allow_right_of_return 
-					focus = ISR_1947_borders
-					focus = ISR_offer_unification 
-				}
-				
-				
-				 completion_reward = {
-
-				 create_faction = "Middle East Federation"
-
-				 PAL = { country_event = { id = israel.14 } }
-				 EGY = { country_event = { id = israel.14 } }
-				 SYR = { country_event = { id = israel.14 } }
-				 IRQ = { country_event = { id = israel.14 } }
-				 LEB = { country_event = { id = israel.14 } }
-				 PER = { country_event = { id = israel.14 } }
-				 SAU = { country_event = { id = israel.14 } }
-				 UAE = { country_event = { id = israel.14 } }
-				 OMA = { country_event = { id = israel.14 } }
-				 YEM = { country_event = { id = israel.14 } }
-				 KUW = { country_event = { id = israel.14 } }
-				 ISR = {
-					news_event = { id = news_ISR.19 }
-				}
-				}
-			}
-		
-		focus = {
-                id = ISR_one_state_solution
-                icon = dangerous_deal
-                x = 8
-                y = 2
-                cost = 10
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_peacefulCoexistence_focus }
-				mutually_exclusive = { focus = ISR_two_state_solution }
-				
-                completion_reward = {
-					add_stability = 0.05
-                }
-        }
-		
-		focus = {
-                id = ISR_offer_union_state
-                icon = anschluss
-                x = 8
-                y = 3
-                cost = 10
-
-                ai_will_do = {
-                        factor = 15
-                }
-
-                prerequisite = { focus = ISR_one_state_solution }
-				
-                completion_reward = {
-					PAL = {
-						country_event = { id = israel.12 }
-					}
-					every_owned_state = { remove_core_of = PAL }
-                }
-        }
-		
-		focus = {
-                id = ISR_offer_unification
-                icon = molotov_ribbentrop_pact
-                x = 8
-                y = 4
-                cost = 15
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_offer_union_state}
-				
-                completion_reward = {
-					PAL = {
-						country_event = { id = israel.13 }
-					}
-                }
-        }
-		
-		focus = {
-                id = ISR_offer_Jordan_federation
-                icon = molotov_ribbentrop_pact
-                x = 8
-                y = 6
-                cost = 20
-
-                ai_will_do = {
-                        factor = 10
-                }
-
-                prerequisite = { focus = ISR_offer_unification}
-				
-                completion_reward = {
-					JOR = {
-						country_event = { id = israel.20 }
-					}
-                }
-        }
-		
-		
-		focus = {
-	    id = ISR_investInIAF_focus
-		icon=GFX_focus_goal_ISR_IAF
-		x=40
-		y=1
-		cost=10
+	### Israeli Air Force
+	focus = {
+	    id = ISR_invest_in_the_IAF_focus
+		icon = GFX_focus_goal_ISR_IAF
+		x = 37
+		y = 1
+		cost = 10
 		
 		prerequisite = { focus = ISR_IDF_focus }
 		
@@ -1955,66 +1966,68 @@ focus_tree = {
 		air_experience = 30
         }
 	}
-	    focus = {
-	    id = ISR_IsraeliPilotTraining_focus
+	focus = {
+	    id = ISR_Israeli_Pilot_Training_focus
 		icon = airforce
-		x=40
-		y=2
-		cost=12
-		prerequisite = { focus = ISR_investInIAF_focus }
+		x = 37
+		y = 2
+		cost = 12
+
+		prerequisite = { focus = ISR_invest_in_the_IAF_focus }
+
 		ai_will_do = {
 			factor = 10
 		}
+
 		completion_reward = {
-		add_ideas= idea_ISR_israeli_pilot_training 
+			add_ideas= idea_ISR_israeli_pilot_training 
 		}
-		
-		}
-		
-        focus = {
-	    id = ISR_expandTheIsraeliAirbases_focus
-		icon= airforce
-		x=42
-		y=3
-		cost=12
-		prerequisite = { focus = ISR_IsraeliPilotTraining_focus }
+	}
+    focus = {
+	    id = ISR_expand_The_Israeli_Airbases_focus
+		icon = airforce
+		x = 38
+		y = 3
+		cost = 12
+
+		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		completion_reward = {
-		454 = {
-			add_building_construction = {
-				type = air_base
-				level = 3
+			454 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
 				instant_build = yes
 				}
 			}
-		892 = {
-			add_building_construction = {
-				type = air_base
-				level = 3
-				instant_build = yes
+			892 = {
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
 				}
 			}
 		}
-		}
-		
-		focus = {
-	    id = ISR_buildAibasesIntheNegev_focus
-		icon= airforce
-		x=42
-		y=4
-		cost=10
-		prerequisite = { focus = ISR_expandTheIsraeliAirbases_focus }
+	}
+	focus = {
+	    id = ISR_build_Airbases_In_the_Negev_focus
+		icon = airforce
+		x = 38
+		y = 4
+		cost = 10
+
+		prerequisite = { focus = ISR_expand_The_Israeli_Airbases_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		completion_reward = {
-		812 = {
+			812 = {
 				add_building_construction = {
 					type = air_base
 					level = 4
@@ -2022,78 +2035,110 @@ focus_tree = {
 				}
 			}
 		}
+	}
+	focus = {
+		id = ISR_Israeli_Precise_Bombing_Assasinations 
+		icon = fighter2
+		x = 40
+		y = 3
+		cost = 15
+
+		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
+		
+		available = {
+			date>2002.2.1
 		}
 		
-		focus = {
-	    id = ISR_haveBetterFighterPlanes_focus
-		icon= fighter
-		x=38
-		y=3
-		cost=10
-		prerequisite = { focus = ISR_IsraeliPilotTraining_focus }
-		mutually_exclusive = { focus = ISR_haveBetterDrones_focus }
+		ai_will_do = {
+			factor = 15
+		}
+		
+		completion_reward = {
+			air_experience=20
+			add_ideas= idea_ISR_precise_bombing
+			add_tech_bonus = {
+				name = airDoctorine_bonus
+				bonus = 0.25
+				uses = 2
+				category = cat_battlefield_support
+			}
+		}
+	}	
+	focus = {
+	    id = ISR_have_Better_Fighter_Planes_focus
+		icon = fighter
+		x = 34
+		y = 3
+		cost = 10
+
+		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
+		mutually_exclusive = { focus = ISR_have_Better_Drones_focus }
+
 		ai_will_do = {
 			factor = 10
 		}
 		
 		available = {
-		OR = {
-		date > 2004.6.1
-		threat > 0.2
+			OR = {
+				date > 2004.6.1
+				threat > 0.2
+			}
 		}
-		}
+
 		completion_reward = {
-		add_tech_bonus = {
+			add_tech_bonus = {
 				name = fighter_bonus
 				bonus = 0.5
 				uses = 2
 				category = light_fighter
 			}
 		}
-		}
-		
-		   focus = {
-	    id = ISR_haveBetterDrones_focus
-		icon= bomber
-		x=40
-		y=3
-		cost=10
-		prerequisite = { focus = ISR_IsraeliPilotTraining_focus }
-		mutually_exclusive = { focus = ISR_haveBetterFighterPlanes_focus }
+	}
+	focus = {
+	    id = ISR_have_Better_Drones_focus
+		icon = bomber
+		x = 36
+		y = 3
+		cost = 10
+
+		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
+		mutually_exclusive = { focus = ISR_have_Better_Fighter_Planes_focus }
+
 		ai_will_do = {
 			factor = 10
 		}
 		
 		available = {
-		OR = {
-		date > 2004.6.1
-		threat>0.2
+			OR = {
+			date > 2004.6.1
+			threat>0.2
+			}
 		}
-		}
+
 		completion_reward = {
-		add_tech_bonus = {
+			add_tech_bonus = {
 				name = drone_bonus
 				bonus = 0.25
 				uses = 2
 				category = tactical_bomber
 			}
 		}
-		}
-		
-		focus = {
-	    id = ISR_haveWorldLeadingDrones_focus
-		icon= bomber
-		x=40
-		y=4
-		cost=30
-		prerequisite = { focus = ISR_haveBetterDrones_focus }
+	}
+	focus = {
+	    id = ISR_have_World_Leading_Drones_focus
+		icon = bomber
+		x = 36
+		y = 4
+		cost = 30
+
+		prerequisite = { focus = ISR_have_Better_Drones_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		completion_reward = {
-		air_experience=100
-		add_tech_bonus = {
+			air_experience=100
+			add_tech_bonus = {
 				name = drone_bonus
 				bonus = 0.3
 				uses = 1
@@ -2106,31 +2151,33 @@ focus_tree = {
 				instant_build = yes
 				}
 			}
-		add_timed_idea = { 
-			idea = idea_ISR_drone_creating_efficiency
-			days = 730	
+			add_timed_idea = { 
+				idea = idea_ISR_drone_creating_efficiency
+				days = 730	
+			}
 		}
-		}
-		}
-		focus = {
-	    id = ISR_haveFuturisticFighterPlanes_focus
-		icon= fighter
-		x=38
-		y=4
-		cost=10
-		prerequisite = { focus = ISR_haveBetterFighterPlanes_focus }
+	}
+	focus = {
+	    id = ISR_have_Futuristic_Fighter_Planes_focus
+		icon = fighter
+		x = 34
+		y = 4
+		cost = 10
+
+		prerequisite = { focus = ISR_have_Better_Fighter_Planes_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		available = {
-		date > 2012.1.1
-		threat > 0.35
+			date > 2012.1.1
+			threat > 0.35
 		}
+
 		completion_reward = {
-				air_experience=150
-		add_tech_bonus = {
+			air_experience=150
+			add_tech_bonus = {
 				name = drone_bonus
 				bonus = 0.3
 				uses = 1
@@ -2143,19 +2190,20 @@ focus_tree = {
 				instant_build = yes
 				}
 			}
-		add_timed_idea = { 
-			idea = idea_ISR_fighter_creating_efficiency
-			days = 365	
+			add_timed_idea = { 
+				idea = idea_ISR_fighter_creating_efficiency
+				days = 365	
+			}
 		}
-		}
-		}
-		
-		focus ={
-		id = ISR_InvestInTheIsrealiNavy_focus
-		icon= navy
-		x=50
-		y=1
-		cost=10
+	}
+
+	### Israeli Navy
+	focus ={
+		id = ISR_Invest_In_The_Isreali_Navy_focus
+		icon = navy
+		x = 45
+		y = 1
+		cost = 10
 		
 		ai_will_do = {
 			factor = 10
@@ -2164,268 +2212,247 @@ focus_tree = {
 		prerequisite = { focus = ISR_IDF_focus }
 		
 		completion_reward = {
-				navy_experience=30
+			navy_experience=30
 		
 		}
-		}
-		focus= {
-		id = ISR_prepareForExtandingTheNavy_focus
+	}
+	focus= {
+		id = ISR_prepare_For_Extanding_The_Navy_focus
 		icon = navy
 		cost = 20 
-		x = 50 
+		x = 45
 		y = 2
-		prerequisite = { focus = ISR_InvestInTheIsrealiNavy_focus }
+		prerequisite = { focus = ISR_Invest_In_The_Isreali_Navy_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		completion_reward = {
 
-                812 = {
-			add_building_construction = {
-				type = naval_base
-				level = 2
-				instant_build = yes
-				province = 1015
+            812 = {
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+					province = 1015
 				}
 			}
 		}
-		}
-		
-		focus = { 
-		id = ISR_expandIsraeliNavalInf_focus 
+	}
+	focus = { 
+		id = ISR_expand_Israeli_Naval_Inf_focus 
 		icon = amphibious_assault
 		cost = 10
-		x = 48
+		x = 44
 		y = 3
-		prerequisite = { focus = ISR_prepareForExtandingTheNavy_focus }
+		prerequisite = { focus = ISR_prepare_For_Extanding_The_Navy_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		completion_reward = {
-		add_tech_bonus = {
+			add_tech_bonus = {
 				name = capital_ship_bonus
 				bonus = 0.5
 				uses = 2
 				category = bc_tech
 			}
-		add_tech_bonus = {
+			add_tech_bonus = {
 				name = capital_ship_bonus
 				bonus = 0.3
 				uses = 1
 				category = naval_equipment
 			}
 		}
-		}
-		
-		focus = {
+	}
+	focus = {
 		id = ISR_shayetet13_focus
 		icon = GFX_focus_goal_ISR_Shayetet
 		cost = 20
-		x = 50
+		x = 46
 		y = 3
-		prerequisite = { focus = ISR_prepareForExtandingTheNavy_focus }
+
+		prerequisite = { focus = ISR_prepare_For_Extanding_The_Navy_focus }
 		
 		ai_will_do = {
 			factor = 15
 		}
 		
 		completion_reward = {
-		navy_experience=10
-		add_tech_bonus = {
+			navy_experience=10
+			add_tech_bonus = {
 				name = marine_tech_bonus
 				bonus = 0.25
 				uses = 2
 				category = marine_tech
 			}
-		add_ideas = idea_ISR_shayetet13
+			add_ideas = idea_ISR_shayetet13
 		}
-		}
-		
-		focus = {
-		id = ISR_extandTheGER_AGR_focus
+	}
+	focus = {
+		id = ISR_extand_The_GER_AGR_focus
 		icon = intelligence_exchange
 		cost = 15
-		x = 52
+		x = 48
 		y = 3
-		prerequisite = { focus = ISR_prepareForExtandingTheNavy_focus }
+
+		prerequisite = { focus = ISR_prepare_For_Extanding_The_Navy_focus }
 		
 		ai_will_do = {
 			factor = 15
 		}
-		 available = {
-		 NOT = { has_war_with = GER }
-		 }
+
+		available = {
+			NOT = { has_war_with = GER }
+		}
 		 
 		completion_reward = {
-				GER = { country_event = { id = israel.21 } }
-			}
+			GER = { country_event = { id = israel.21 } }
 		}
-		
-		focus = {
-		id = ISR_navalExerciseI_focus
+	}
+	focus = {
+		id = ISR_naval_Exercise_I_focus
 		icon = navy
 		cost = 10
-		x = 46
+		x = 42
 		y = 3
-		prerequisite = { focus = ISR_prepareForExtandingTheNavy_focus }
+
+		prerequisite = { focus = ISR_prepare_For_Extanding_The_Navy_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
+
 		completion_reward = {
-		navy_experience=50
+			navy_experience=50
 		}
-		}
-			focus = {
-		id = ISR_navalExerciseII_focus
+	}
+	focus = {
+		id = ISR_naval_Exercise_II_focus
 		icon = navy
 		cost = 10
-		x = 46
+		x = 42
 		y = 4
-		prerequisite = { focus = ISR_navalExerciseI_focus }
+
+		prerequisite = { focus = ISR_naval_Exercise_I_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		available = {
-		date > 2002.1.1
+			date > 2002.1.1
 		}
 		
 		completion_reward = {
-		navy_experience=50
+			navy_experience=50
 		}
-		}
-			focus = {
-		id = ISR_navalExerciseIII_focus
+	}
+	focus = {
+		id = ISR_naval_Exercise_III_focus
 		icon = navy
 		cost = 15
-		x = 46
+		x = 42
 		y = 5
-		prerequisite = { focus = ISR_navalExerciseII_focus }
+
+		prerequisite = { focus = ISR_naval_Exercise_II_focus }
 		
 		ai_will_do = {
 			factor = 15
 		}
 		
 		available = {
-		date > 2004.1.1
+			date > 2004.1.1
 		}
 		
 		completion_reward = {
-		navy_experience=50
-		add_ideas= idea_ISR_completed_naval_exercises
+			navy_experience=50
+			add_ideas= idea_ISR_completed_naval_exercises
 		}
-		}
-			focus = {
-		id = ISR_developIsraeliShipBuilding_focus
+	}
+	focus = {
+		id = ISR_develop_Israeli_Ship_Building_focus
 		icon = naval_dockyards
 		cost = 20
-		x = 48
+		x = 44
 		y = 4
-		prerequisite = { focus = ISR_expandIsraeliNavalInf_focus  }
+
+		prerequisite = { focus = ISR_expand_Israeli_Naval_Inf_focus  }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		completion_reward = {
-		add_tech_bonus = {
+			add_tech_bonus = {
 				bonus = 0.25
 				uses=2
 				category = naval_equipment
 			}
-		 812 = {
-			add_extra_state_shared_building_slots = 2		
-			add_building_construction = {
-				type = dockyard
-				level = 2
-				instant_build = yes
+			812 = {
+				add_extra_state_shared_building_slots = 2		
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
 				}
 			}
 		}
-		}
-			focus = {
-		id = ISR_learnNavaltech_focus
+	}
+	focus = {
+		id = ISR_learn_Naval_tech_focus
 		icon = navy
 		cost = 10
-		x = 52
+		x = 48
 		y = 4
-		prerequisite = { focus = ISR_extandTheGER_AGR_focus }
+
+		prerequisite = { focus = ISR_extand_The_GER_AGR_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		completion_reward = {
-		add_tech_bonus = {
+			add_tech_bonus = {
 				bonus = 0.75
 				uses=2
 				category = cat_trade_interdiction
 			}
 		}
-		}
-		focus = {
-		id = ISR_shipBuildingEfficiency_focus
-		icon= battleships
-		cost=30
-		x=48
-		y=5
+	}
+	focus = {
+		id = ISR_ship_Building_Efficiency_focus
+		icon = battleships
+		cost = 30
+		x = 44
+		y = 5
 		
-		prerequisite = { focus = ISR_developIsraeliShipBuilding_focus }
+		prerequisite = { focus = ISR_develop_Israeli_Ship_Building_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		completion_reward = {
-		add_tech_bonus = {
+			add_tech_bonus = {
 				bonus = 0.30
 				uses=1
 				category = naval_equipment
 			}
-		add_timed_idea = { 
-			idea = idea_ISR_ship_creating_efficiency
-			days = 730	
-		}
-		}
-		}
-		focus = {
-		id = ISR_IsraeliPreciseBombingAssasinations 
-		icon = fighter2
-		x = 44
-		y = 3
-		cost = 15
-		prerequisite = { focus = ISR_IsraeliPilotTraining_focus }
-		
-		available = {
-		date>2002.2.1
-		}
-		
-		ai_will_do = {
-			factor = 15
-		}
-		
-		completion_reward = {
-		air_experience=20
-		add_ideas= idea_ISR_precise_bombing
-		add_tech_bonus = {
-				name = airDoctorine_bonus
-				bonus = 0.25
-				uses = 2
-				category = cat_battlefield_support
-				}
+			add_timed_idea = { 
+				idea = idea_ISR_ship_creating_efficiency
+				days = 730	
 			}
-		}		
-		
-	    focus = { 
+		}
+	}
+
+	### Israel Defense Forces [Army]
+	focus = { 
 		id = ISR_invest_in_infantry_corps_focus
 		icon = GFX_focus_goal_ISR_army_corps
 		y = 1
-		x= 60
+		x= 55
 		cost = 10
 		
 		ai_will_do = {
@@ -2437,14 +2464,12 @@ focus_tree = {
 		completion_reward = {
 			army_experience = 20
 		}
-		
-		}
-		
-		focus = {
-		id = ISR_supportOurSons_focus 
+	}
+	focus = {
+		id = ISR_support_Our_Sons_focus 
 		icon = GFX_focus_goal_ISR_Support_Sons
 		y= 2
-		x= 54
+		x= 50
 		cost = 15
 		
 		ai_will_do = {
@@ -2454,15 +2479,14 @@ focus_tree = {
 		prerequisite = { focus = ISR_invest_in_infantry_corps_focus}
 		
 		completion_reward = {
-		add_ideas = idea_ISR_supported_the_troops
+			add_ideas = idea_ISR_supported_the_troops
 		}
-		}
-		
-		focus = { 
+	}
+	focus = { 
 		id = ISR_tighten_jerusalem_defence_focus
 		icon = city_fort
 		y=2
-		x= 56
+		x= 52
 		cost = 10
 		
 		ai_will_do = {
@@ -2472,38 +2496,35 @@ focus_tree = {
 		prerequisite = { focus = ISR_invest_in_infantry_corps_focus}
 		
 		completion_reward = {
-		454= {
-		if = {
-						limit = { is_controlled_by = ROOT }
-						add_building_construction = {
-							type = bunker 
-							level = 2
-							province = 13248
-							instant_build = yes
-						}
-						
+			454= {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker 
+						level = 2
+						province = 13248
+						instant_build = yes
+					}			
+				}
+			}
+			914= {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker 
+						level = 2
+						province = 13249
+						instant_build = yes
+					}		
+				}
+			}
 		}
-		}
-		914= {
-		if = {
-						limit = { is_controlled_by = ROOT }
-						add_building_construction = {
-							type = bunker 
-							level = 2
-							province = 13249
-							instant_build = yes
-						}
-						
-		}
-		}
-		}
-		}
-		
-			focus = { 
+	}
+	focus = { 
 		id = ISR_tighten_Golan_defence_focus
 		icon = industry_military
 		y=3
-		x= 56
+		x= 52
 		cost = 10
 		
 		ai_will_do = {
@@ -2513,26 +2534,24 @@ focus_tree = {
 		prerequisite = { focus = ISR_tighten_jerusalem_defence_focus }
 		
 		completion_reward = {
-		881= {
-		if = {
-						limit = { is_controlled_by = ROOT }
-						add_building_construction = {
-							type = bunker 
-							level = 2
-							province = 13221
-							instant_build = yes
-						}
-						
+			881= {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker 
+						level = 2
+						province = 13221
+						instant_build = yes
+					}			
+				}
+			}
 		}
-		}
-		}
-		}
-		
-		focus = { 
+	}
+	focus = { 
 		id = ISR_tighten_Negev_defence_focus
 		icon = industry_military
 		y=4
-		x= 56
+		x= 52
 		cost = 20
 		
 		ai_will_do = {
@@ -2542,43 +2561,41 @@ focus_tree = {
 		prerequisite = { focus = ISR_tighten_Golan_defence_focus }
 		
 		completion_reward = {
-		812= {
-		if = {
-						limit = { is_controlled_by = ROOT }
-						add_building_construction = {
-							type = bunker 
-							level = 3
-							province = 11970
-							instant_build = yes
-						}
-						add_building_construction = {
-							type = bunker 
-							level = 3
-							province = 13219
-							instant_build = yes
-						}
-						add_building_construction = {
-							type = bunker 
-							level = 3
-							province = 13220
-							instant_build = yes
-						}
-						add_building_construction = {
-							type = bunker 
-							level = 3
-							province = 1015
-							instant_build = yes
-						}
-						
+			812= {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker 
+						level = 3
+						province = 11970
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker 
+						level = 3
+						province = 13219
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker 
+						level = 3
+						province = 13220
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker 
+						level = 3
+						province = 1015
+						instant_build = yes
+					}			
+				}
+			}
 		}
-		}
-		}
-		}
-		
-		focus = {
+	}
+	focus = {
 		id = ISR_guard_the_skies_focus 
 		icon = tank
-		x = 55
+		x = 51
 		y = 5
 		cost = 20	
 		ai_will_do = {
@@ -2587,26 +2604,24 @@ focus_tree = {
 		
 		prerequisite = { focus = ISR_tighten_Negev_defence_focus }
 		mutually_exclusive = { focus = ISR_guard_israeli_cities_sky_focus } 
+
 		completion_reward = {
-				add_tech_bonus = {
-                                name = aa_tech
-                                bonus = 0.5
-                                uses = 1
-                                category = artillery
-								}
-				add_timed_idea = { 
+			add_tech_bonus = {
+                name = aa_tech
+                bonus = 0.5
+                uses = 1
+                category = artillery
+			}
+			add_timed_idea = { 
 				idea = idea_ISR_AA_creating_efficiency 
 				days = 150 
-				}
-         }
-		
-		}
-		
-		
-		focus = {
+			}
+        }
+	}
+	focus = {
 		id = ISR_guard_israeli_cities_sky_focus 
 		icon = defence
-		x = 57
+		x = 53
 		y = 5
 		cost = 16
 		
@@ -2618,53 +2633,52 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		812= {
-		if = {
-						limit = { is_controlled_by = ROOT }
-						add_building_construction = {
-							type = anti_air_building 
-							level = 1
-							instant_build = yes
-						}			
-		}
-		}
-		454= {
-		if = {
-						limit = { is_controlled_by = ROOT }
-						add_building_construction = {
-							type = anti_air_building 
-							level = 1
-							instant_build = yes
-						}			
-			}
-		}
-		914= {
-			if = {
-						limit = { is_controlled_by = ROOT }
-						add_building_construction = {
-							type = anti_air_building 
-							level = 1
-							instant_build = yes
-						}		
-					}		
+			812= {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = anti_air_building 
+						level = 1
+						instant_build = yes
+					}			
 				}
 			}
+			454= {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = anti_air_building 
+						level = 1
+						instant_build = yes
+					}			
+				}	
+			}
+			914= {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = anti_air_building 
+						level = 1
+						instant_build = yes
+					}		
+				}		
+			}
 		}
-		
-		focus = { 
+	}
+	focus = { 
 		id = ISR_israeli_army_draft
 		icon = propaganda
-		x = 64
+		x = 58
 		y = 3
 		cost = 8
 		
-			prerequisite = { focus = ISR_invest_in_infantry_corps_focus}
+		prerequisite = { focus = ISR_invest_in_infantry_corps_focus}
 			
-			ai_will_do = {				
+		ai_will_do = {				
 			factor = 10		
-		    }
+		}
 		
-			available = {
+		available = {
 			OR = {
 				threat > 0.65
 				has_war = yes
@@ -2702,81 +2716,79 @@ focus_tree = {
 				army_experience = 50
 			}
 		}
-		}
-		
-		
-		focus = {
-		id = ISR_armyExerciseI_focus
+	}
+	focus = {
+		id = ISR_army_Exercise_I_focus
 		icon = small_arms
 		cost = 10
-		x = 60
+		x = 55
 		y = 3
+
 		prerequisite = { 
-		focus = ISR_obligatory_conscription_focus
-		focus = ISR_expert_army_conscription_focus
+			focus = ISR_obligatory_conscription_focus
+			focus = ISR_expert_army_conscription_focus
 		} 
 		
 		ai_will_do = {
 			factor = 10
 		}
 		completion_reward = {
-		army_experience=15
+			army_experience=15
 		}
-		}
-		
-		focus = {
-		id = ISR_armyExerciseII_focus
+	}
+	focus = {
+		id = ISR_army_Exercise_II_focus
 		icon = small_arms
 		cost = 10
-		x = 60
+		x = 55
 		y = 4
-		prerequisite = { focus = ISR_armyExerciseI_focus }
+
+		prerequisite = { focus = ISR_army_Exercise_I_focus }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		available = {
-		date > 2001.1.1
+			date > 2001.1.1
 		}
 		
 		completion_reward = {
-		army_experience=15
+			army_experience=15
 		}
-		}
-		
-		focus = {
-		id = ISR_armyExerciseIII_focus
+	}
+	focus = {
+		id = ISR_army_Exercise_III_focus
 		icon = GFX_focus_RAJ_lions_of_the_great_war
 		cost = 15
-		x = 60
+		x = 55
 		y = 5
-		prerequisite = { focus = ISR_armyExerciseII_focus }
+
+		prerequisite = { focus = ISR_army_Exercise_II_focus }
 		
 		ai_will_do = {
 			factor = 20
 		}
 		
 		available = {
-		date > 2004.1.1
+			date > 2004.1.1
 		}
 		
 		completion_reward = {
-		army_experience=35
-		add_ideas = idea_ISR_completed_army_exercises
-		add_doctrine_cost_reduction = {
-			name = armydoctrine_bonus
-			cost_reduction = 0.5
-			uses = 1
-			category = land_doctrine
+			army_experience=35
+			add_ideas = idea_ISR_completed_army_exercises
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
 		}
-		}
-		}
-		
-		focus = { 
+	}
+	focus = { 
 		id = ISR_obligatory_conscription_focus
         icon = infantry_axis
-        x = 59		
+        x = 54		
 		y = 2
 		cost = 20
 		
@@ -2788,14 +2800,13 @@ focus_tree = {
 		mutually_exclusive = { focus = ISR_expert_army_conscription_focus } 
 		
 		completion_reward = {
-		add_ideas = idea_ISR_obligatory_conscription
+			add_ideas = idea_ISR_obligatory_conscription
 		}
-		}
-		
-		focus = { 
+	}
+	focus = { 
 		id = ISR_expert_army_conscription_focus
         icon = infantry_allies
-        x = 61		
+        x = 56
 		y = 2
 		cost = 20
 		
@@ -2807,94 +2818,92 @@ focus_tree = {
 		mutually_exclusive = { focus = ISR_obligatory_conscription_focus } 
 		
 		completion_reward = {
-		add_ideas = idea_ISR_expert_army_conscription
+			add_ideas = idea_ISR_expert_army_conscription
 		}
-		}
-		
-		focus = {
-		id = ISR_israeliArmyTacticsSchool_focus 
+	}
+	focus = {
+		id = ISR_israeli_Army_Tactics_School_focus 
 		icon = GFX_focus_generic_military_mission
-		x = 63
+		x = 58
 		y = 4
 		cost = 10
-		prerequisite = { focus = ISR_armyExerciseI_focus }
+		prerequisite = { focus = ISR_israeli_army_draft }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		completion_reward = {
-		add_tech_bonus = {
-                                name = cat_superior_firepower_bonus
-                                bonus = 0.25
-                                uses = 1
-                                category = cat_superior_firepower
+			add_tech_bonus = {
+                name = cat_superior_firepower_bonus
+                bonus = 0.25
+                uses = 1
+                category = cat_superior_firepower
+			}
 		}
-		}
-		}
-		focus = { 
+	}
+	focus = { 
 		id = ISR_infantry_focus_focus 
 		icon = small_arms
-		x = 62
+		x = 57
 		y = 5
 		cost = 15
 		
-		prerequisite = { focus = ISR_israeliArmyTacticsSchool_focus  }
+		prerequisite = { focus = ISR_israeli_Army_Tactics_School_focus  }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		completion_reward = {
-		add_tech_bonus = {
-                                name = infantry_tech_bonus
-                                bonus = 0.25
-                                uses = 2
-                                category = infantry_tech
-         }
-		 add_timed_idea = {
-		 idea = idea_ISR_small_arms_creating_efficiency
-		 days = 365 
-		 }
+			add_tech_bonus = {
+                name = infantry_tech_bonus
+                bonus = 0.25
+                uses = 2
+                category = infantry_tech
+         	}
+		 	add_timed_idea = {
+		 		idea = idea_ISR_small_arms_creating_efficiency
+		 		days = 365 
+		 	}
 		}
-		}
-		focus = { 
+	}
+	focus = { 
 		id = ISR_mech_focus_focus 
 		icon = motorized
-		x = 64
+		x = 59
 		y = 5
 		cost = 15
 		
-		prerequisite = { focus = ISR_israeliArmyTacticsSchool_focus  }
+		prerequisite = { focus = ISR_israeli_Army_Tactics_School_focus  }
 		
 		ai_will_do = {
 			factor = 10
 		}
 		
 		completion_reward = {
-		 add_tech_bonus = {
-
-		                        name = cat_mechanized_equipment_tech_bonus
-                                bonus = 0.25
-                                uses = 2
-                                category = cat_mechanized_equipment
-         }
-		 add_timed_idea = {
-		 idea = idea_ISR_mech_creating_efficiency
-		 days = 200 
-		 }
+			add_tech_bonus = {
+		        name = cat_mechanized_equipment_tech_bonus
+                bonus = 0.25
+                uses = 2
+                category = cat_mechanized_equipment
+         	}
+		 	add_timed_idea = {
+		 		idea = idea_ISR_mech_creating_efficiency
+		 		days = 200 
+		 	}
 		}
-		}
-		focus = { 
+	}
+	focus = { 
 		id = ISR_israeli_armour_effort_focus 
 		icon = tank
-		x = 63
+		x = 58
 		y = 6
 		cost = 15 
 		
 		prerequisite = { 
-		focus = ISR_mech_focus_focus   
-		focus = ISR_infantry_focus_focus   
+			focus = ISR_mech_focus_focus   
+			focus = ISR_infantry_focus_focus   
 		}
 		
 		ai_will_do = {
@@ -2902,13 +2911,12 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-		add_tech_bonus = {
-                                name = cat_heavy_armor_tech_bonus
-                                bonus = 0.35
-                                uses = 3
-                                category = armor
-				}		         
+			add_tech_bonus = {
+                name = cat_heavy_armor_tech_bonus
+                bonus = 0.35
+                uses = 3
+                category = armor
+			}		         
 		}				
 	}
-
 }

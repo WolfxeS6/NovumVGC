@@ -113,6 +113,27 @@ focus_tree = {
 		
 		completion_reward = {
 			100 = { add_extra_state_shared_building_slots = 1 }
+			100 = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			100 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 		
 		ai_will_do = {
@@ -143,7 +164,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = industry_bonus
-				bonus = 0.2
+				bonus = 0.5
 				uses = 3
 				category = industry
 			}
@@ -207,13 +228,14 @@ focus_tree = {
 		
 		completion_reward = {
 			random_owned_state = {
-				limit = {
+			limit = {
 					free_building_slots = {
 						building = industrial_complex
 						size > 0
 						include_locked = yes
 					}
 				}
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
@@ -260,7 +282,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_additional_equipment_for_reykjavik_harbor
-		icon = naval_dockyards
+		icon = GFX_focus_POL_develop_polish_shipbuilding
 		
 		x = 0
 		y = 4
@@ -281,6 +303,7 @@ focus_tree = {
 		bypass = {}
 		
 		completion_reward = {
+			100 = { add_extra_state_shared_building_slots = 1 }
 			100 = {
 				add_building_construction = {
 					type = dockyard
@@ -313,7 +336,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_invest_in_the_aluminium_industry
-		icon = construction3
+		icon = GFX_focus_generic_aluminum
 		
 		x = 2
 		y = 4
@@ -334,7 +357,6 @@ focus_tree = {
 		bypass = {}
 		
 		completion_reward = {
-			100 = { add_extra_state_shared_building_slots = 1 }
 			100 = {
 				add_resource = {
 					type = aluminium
@@ -371,7 +393,6 @@ focus_tree = {
 		bypass = {}
 		
 		completion_reward = {
-			100 = { add_extra_state_shared_building_slots = 1 }
 			100 = {
 				add_resource = {
 					type = aluminium
@@ -389,7 +410,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_affirm_the_status_quo
-		icon = improve_relations_green
+		icon = GFX_goal_generic_neutrality_focus
 		
 		x = 4
 		y = 0
@@ -477,7 +498,7 @@ focus_tree = {
 		mutually_exclusive = {}
 		
 		available = {
-			has_defensive_war = yes
+		OR = { has_war = yes threat > 0.7 }
 		}
 		
 		bypass = {}
@@ -518,7 +539,7 @@ focus_tree = {
 			100 = {
 				add_building_construction = {
 					type = infrastructure
-					level = 2
+					level = 3
 					instant_build = yes
 				}
 			}
@@ -598,10 +619,10 @@ focus_tree = {
 						include_locked = yes
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -648,7 +669,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_further_economic_growth
-		icon = industry_civilian
+		icon = GFX_focus_mex_privatisation
 		
 		x = 2
 		y = 4
@@ -675,10 +696,10 @@ focus_tree = {
 						include_locked = yes
 					}
 				}
-				add_extra_state_shared_building_slots = 1
+				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = industrial_complex
-					level = 1
+					level = 2
 					instant_build = yes
 				}
 			}
@@ -719,7 +740,7 @@ focus_tree = {
 				type = arms_factory
 				level = 1
 				instant_build = yes }
-	}
+			}
 		}
 		
 		ai_will_do = {
@@ -754,6 +775,21 @@ focus_tree = {
 		bypass = {}
 		
 		completion_reward = {
+		add_equipment_to_stockpile = {
+		type = infantry_equipment
+		amount = 3000
+		producer = USA
+		}
+		add_equipment_to_stockpile = {
+		type = support_equipment_1
+		amount = 300
+		producer = USA
+		}
+		add_equipment_to_stockpile = {
+		type = motorized_equipment_1
+		amount = 200
+		producer = USA
+		}
 			every_country = {
 				limit = {
 					NOT = { original_tag = ICE }
@@ -800,6 +836,7 @@ focus_tree = {
 		}
 		
 		completion_reward = {
+			add_political_power = 100
 			every_country = {
 				limit = {
 					is_in_faction_with = ICE
@@ -840,6 +877,12 @@ focus_tree = {
 		
 		completion_reward = {
 			army_experience = 25
+			random_owned_state = { add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes }
+			}
 		}
 		
 		ai_will_do = {
@@ -869,6 +912,12 @@ focus_tree = {
 		
 		completion_reward = {
 			navy_experience = 25
+			random_owned_state = { add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes }
+			}
 		}
 		
 		ai_will_do = {
@@ -898,6 +947,12 @@ focus_tree = {
 		
 		completion_reward = {
 			air_experience = 25
+			random_owned_state = { add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes }
+			}
 		}
 		
 		ai_will_do = {
@@ -928,7 +983,7 @@ focus_tree = {
 		completion_reward = {
 			add_tech_bonus = {
 				name = tank_bonus
-				bonus = 0.4
+				bonus = 1
 				category = armor
 			}
 		}
@@ -1033,7 +1088,10 @@ focus_tree = {
 		
 		completion_reward = {
 			add_ideas = limited_conscription
+			custom_effect_tooltip = ICE_oob_loading
 		}
+		
+		hidden_effect = { load_oob = "ICE_conscripts" }
 		
 		ai_will_do = {
 			factor = 10
@@ -1044,7 +1102,7 @@ focus_tree = {
 		id = ICE_icelandic_militias
 		icon = small_arms4
 		
-		x = 0
+		x = 1
 		y = 3
 		relative_position_id = ICE_the_militarization_of_iceland
 		
@@ -1088,7 +1146,7 @@ focus_tree = {
 		icon = align_to_sweden
 		
 		x = 3
-		y = 3
+		y = 4
 		relative_position_id = ICE_the_militarization_of_iceland
 		
 		cost = 10
@@ -1097,7 +1155,7 @@ focus_tree = {
 			focus = ICE_international_outreach
 		}
 		
-		mutually_exclusive = {}
+		mutually_exclusive = { focus = ICE_join_csto focus = ICE_chinese_alliance }
 		
 		available = {
 			has_completed_focus = ICE_befriend_sweden
@@ -1130,7 +1188,7 @@ focus_tree = {
 		y = 3
 		relative_position_id = ICE_the_militarization_of_iceland
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
 			focus = ICE_international_outreach
@@ -1168,42 +1226,33 @@ focus_tree = {
 	}
 	
 	focus = {
-		id = ICE_north_sea_interests
-		icon = molotov_ribbentrop_pact
+		id = ICE_join_csto
+		icon = align_to_russia
 		
-		x = 1
+		x = 5
 		y = 4
 		relative_position_id = ICE_the_militarization_of_iceland
 		
 		cost = 10
 		
 		prerequisite = {
-			focus = ICE_fortress_iceland
+			focus = ICE_befriend_russia
 		}
 		
-		mutually_exclusive = {}
+		mutually_exclusive = { focus = ICE_propose_an_alliance_to_sweden focus = ICE_chinese_alliance }
 		
-		available = {}
+		available = {
+			NOT = { has_war_with = SOV }
+			country_exists = SOV
+			SOV = { is_faction_leader = yes }
+			
+		}
 		
-		bypass = {}
+		bypass = {
+		}
 		
 		completion_reward = {
-			add_ideas = political_power_bonus2
-			if = {
-				limit = {
-					has_idea = additional_recruits2
-				}
-				swap_ideas = {
-					remove_idea = additional_recruits2
-					add_idea = additional_recruits5
-				}
-			}
-			if = {
-				limit = {
-					NOT = { has_idea = additional_recruits2 }
-				}
-				add_ideas = additional_recruits2
-			}
+			SOV = { country_event = { id = iceland.9 hours = 2 } }
 		}
 		
 		ai_will_do = {
@@ -1211,12 +1260,13 @@ focus_tree = {
 		}
 	}
 	
+	
 	focus = {
 		id = ICE_invite_finland
 		icon = align_to_finland
 		
 		x = 3
-		y = 4
+		y = 5
 		relative_position_id = ICE_the_militarization_of_iceland
 		
 		cost = 10
@@ -1249,14 +1299,14 @@ focus_tree = {
 		id = ICE_befriend_china
 		icon = align_to_china
 		
-		x = 5
-		y = 4
+		x = 7
+		y = 3
 		relative_position_id = ICE_the_militarization_of_iceland
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
-			focus = ICE_befriend_russia
+			focus = ICE_international_outreach
 		}
 		
 		mutually_exclusive = {}
@@ -1291,8 +1341,86 @@ focus_tree = {
 	}
 	
 	focus = {
+		id = ICE_chinese_alliance
+		icon = align_to_china
+		
+		x = 7
+		y = 4
+		relative_position_id = ICE_the_militarization_of_iceland
+		
+		cost = 10
+		
+		prerequisite = {
+			focus = ICE_befriend_china
+		}
+		
+		mutually_exclusive = { focus = ICE_join_csto focus = ICE_propose_an_alliance_to_sweden }
+		
+		available = {
+			NOT = { has_war_with = PRC }
+			country_exists = PRC
+			PRC = { is_faction_leader = yes }
+		}
+		
+		bypass = {
+		}
+		
+		completion_reward = {
+			PRC = { country_event = { id = iceland.10 hours = 2 } }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_north_sea_interests
+		icon = molotov_ribbentrop_pact
+		
+		x = 0
+		y = 4
+		relative_position_id = ICE_the_militarization_of_iceland
+		
+		cost = 10
+		
+		prerequisite = {
+			focus = ICE_fortress_iceland focus = ICE_reassure_nato focus = ICE_international_outreach
+		}
+		
+		mutually_exclusive = {}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+			add_ideas = political_power_bonus2
+			if = {
+				limit = {
+					has_idea = additional_recruits2
+				}
+				swap_ideas = {
+					remove_idea = additional_recruits2
+					add_idea = additional_recruits5
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_idea = additional_recruits2 }
+				}
+				add_ideas = additional_recruits2
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
 		id = ICE_militarize_the_coast_guard
-		icon = navy2
+		icon = GFX_goal_generic_amphibious_assault
 		
 		x = -1
 		y = 5
@@ -1301,7 +1429,6 @@ focus_tree = {
 		cost = 10
 		
 		prerequisite = {
-			focus = ICE_reassure_nato
 			focus = ICE_north_sea_interests
 		}
 		
@@ -1315,6 +1442,7 @@ focus_tree = {
 		
 		completion_reward = {
 			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = dockyard
 					level = 1
@@ -1338,7 +1466,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_demand_the_faroe_islands
-		icon = war2_green
+		icon = attack_faroe_islands
 		
 		x = 1
 		y = 5
@@ -1452,7 +1580,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_demand_greenlandic_independence
-		icon = war2_purple
+		icon = align_to_greenland
 		
 		x = 1
 		y = 6
@@ -1467,6 +1595,7 @@ focus_tree = {
 		mutually_exclusive = {}
 		
 		available = {
+			GRN = { NOT = { is_in_faction_with = ICE is_subject_of = ICE } }
 			OR = {
 				GRN = { exists = no }
 				GRN = { 
@@ -1481,7 +1610,8 @@ focus_tree = {
 		}
 		
 		bypass = {
-		country_exists = GRN GRN = { is_subject = no }
+		country_exists = GRN
+		OR = { owns_state = 101 GRN = { OR = { is_subject = no is_subject_of = ICE } } }
 		}
 		
 		completion_reward = {
@@ -1519,7 +1649,7 @@ focus_tree = {
 		x = 20
 		y = 0
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {}
 		
@@ -1569,7 +1699,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = ICE_nordic_cooperation_programs
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
 			focus = ICE_nordic_cooperation_programs
@@ -1614,7 +1744,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = ICE_nordic_cooperation_programs
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
 			focus = ICE_nordic_cooperation_programs
@@ -1659,7 +1789,7 @@ focus_tree = {
 		y = 1
 		relative_position_id = ICE_nordic_cooperation_programs
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
 			focus = ICE_nordic_cooperation_programs
@@ -1704,7 +1834,7 @@ focus_tree = {
 		y = 2
 		relative_position_id = ICE_nordic_cooperation_programs
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
 			focus = ICE_befriend_norway
@@ -1750,7 +1880,7 @@ focus_tree = {
 		y = 2
 		relative_position_id = ICE_nordic_cooperation_programs
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
 			focus = ICE_befriend_finland
@@ -1833,7 +1963,7 @@ focus_tree = {
 		y = 3
 		relative_position_id = ICE_nordic_cooperation_programs
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
 			focus = ICE_befriend_denmark
@@ -1878,7 +2008,7 @@ focus_tree = {
 		y = 3
 		relative_position_id = ICE_nordic_cooperation_programs
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
 			focus = ICE_befriend_denmark
@@ -1923,7 +2053,7 @@ focus_tree = {
 		y = 4
 		relative_position_id = ICE_nordic_cooperation_programs
 		
-		cost = 10
+		cost = 5
 		
 		prerequisite = {
 			focus = ICE_befriend_germany
@@ -1965,8 +2095,8 @@ focus_tree = {
 		id = ICE_end_of_election
 		icon = GFX_focus_eng_concessions_to_the_trade_unions
 		
-		x = 16
-		y = 6
+		x = 18
+		y = 5
 		
 		cost = 10
 		
@@ -1989,10 +2119,10 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_left_green_victory
-		icon = GFX_ideology_green
+		icon = leftism
 		
-		x = 9
-		y = 7
+		x = 11
+		y = 6
 		
 		cost = 1
 		
@@ -2017,8 +2147,8 @@ focus_tree = {
 		id = ICE_wealth_taxes
 		icon = GFX_focus_spr_class_war
 		
-		x = 11
-		y = 8
+		x = 13
+		y = 7
 		
 		cost = 10
 		
@@ -2044,8 +2174,8 @@ focus_tree = {
 		id = ICE_support_unions
 		icon = GFX_focus_ITA_corpo_volontari_della_liberta
 		
-		x = 11
-		y = 9
+		x = 13
+		y = 8
 		
 		cost = 10
 		
@@ -2070,8 +2200,8 @@ focus_tree = {
 		id = ICE_environmental_reglations
 		icon = GFX_focus_usa_guarantee_the_american_dream
 		
-		x = 9
-		y = 8
+		x = 11
+		y = 7
 		
 		cost = 10
 		
@@ -2097,8 +2227,8 @@ focus_tree = {
 		id = ICE_nationalization
 		icon = GFX_focus_generic_annex_country_2
 		
-		x = 9
-		y = 9
+		x = 11
+		y = 8
 		
 		cost = 10
 		
@@ -2127,10 +2257,10 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_alliance_victory
-		icon = GFX_ideology_social_democrat_ideology
+		icon = Social_democracy
 		
-		x = 13
-		y = 7
+		x = 15
+		y = 6
 		
 		cost = 1
 		
@@ -2155,8 +2285,8 @@ focus_tree = {
 		id = ICE_compromise_with_right
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 13
-		y = 8
+		x = 15
+		y = 7
 		
 		cost = 10
 		
@@ -2181,8 +2311,8 @@ focus_tree = {
 		id = ICE_create_jobs
 		icon = GFX_goal_generic_production
 		
-		x = 13
-		y = 9
+		x = 15
+		y = 8
 		
 		cost = 10
 		
@@ -2211,10 +2341,10 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_progressive_victory
-		icon = GFX_ideology_centrist
+		icon = nordic_resistance_movement
 		
-		x = 16
-		y = 7
+		x = 18
+		y = 6
 		
 		cost = 1
 		
@@ -2239,8 +2369,8 @@ focus_tree = {
 		id = ICE_support_the_farmer
 		icon = GFX_focus_generic_concessions
 		
-		x = 15
-		y = 8
+		x = 17
+		y = 7
 		
 		cost = 10
 		
@@ -2266,8 +2396,8 @@ focus_tree = {
 		id = ICE_build_rural_schools
 		icon = GFX_focus_generic_improve_the_administration
 		
-		x = 17
-		y = 8
+		x = 19
+		y = 7
 		
 		cost = 10
 		
@@ -2293,8 +2423,8 @@ focus_tree = {
 		id = ICE_local_power
 		icon = GFX_focus_generic_self_management
 		
-		x = 15
-		y = 9
+		x = 17
+		y = 8
 		
 		cost = 10
 		
@@ -2319,8 +2449,8 @@ focus_tree = {
 		id = ICE_northern_plantations
 		icon = GFX_focus_generic_coffee
 		
-		x = 17
-		y = 9
+		x = 19
+		y = 8
 		
 		cost = 10
 		
@@ -2343,10 +2473,10 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_independence_victory
-		icon = GFX_ideology_fiscal_conservative 
+		icon = industry_democratic2 
 		
-		x = 19
-		y = 7
+		x = 21
+		y = 6
 		
 		cost = 1
 		
@@ -2372,8 +2502,8 @@ focus_tree = {
 		id = ICE_deregulation
 		icon = GFX_focus_mex_privatisation
 		
-		x = 21
-		y = 8
+		x = 23
+		y = 7
 		
 		cost = 10
 		
@@ -2398,8 +2528,8 @@ focus_tree = {
 		id = ICE_resist_foreign_influence
 		icon = GFX_focus_RAJ_clamp_down_on_corruption
 		
-		x = 21
-		y = 9
+		x = 23
+		y = 8
 		
 		cost = 10
 		
@@ -2424,8 +2554,8 @@ focus_tree = {
 		id = ICE_compromise_with_left
 		icon = GFX_goal_generic_improve_relations
 		
-		x = 19
-		y = 8
+		x = 21
+		y = 7
 		
 		cost = 10
 		
@@ -2450,8 +2580,8 @@ focus_tree = {
 		id = ICE_privatization
 		icon = consumer_goods
 		
-		x = 19
-		y = 9
+		x = 21
+		y = 8
 		
 		cost = 10
 		
@@ -2480,10 +2610,10 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_liberal_victory
-		icon = GFX_ideology_market_liberal_group
+		icon = GFX_goal_demand_sudetenland
 		
-		x = 23
-		y = 7
+		x = 25
+		y = 6
 		
 		cost = 1
 		
@@ -2508,8 +2638,8 @@ focus_tree = {
 		id = ICE_redistribute_fishing_rights
 		icon = naval_dockyards
 		
-		x = 23
-		y = 8
+		x = 25
+		y = 7
 		
 		cost = 10
 		
@@ -2544,8 +2674,8 @@ focus_tree = {
 		id = ICE_strict_immigration
 		icon = attack_europe
 		
-		x = 23
-		y = 9
+		x = 25
+		y = 8
 		
 		cost = 10
 		

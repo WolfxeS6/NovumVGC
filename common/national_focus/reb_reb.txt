@@ -1,0 +1,2595 @@
+focus_tree = {
+	
+	id = red_reb
+		continuous_focus_position = { x = 0 y = 2500 } 
+initial_show_position = {
+        focus = reb1
+    }
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 20
+			original_tag = KAZ
+		}
+	}
+	
+	#bgmsz1
+	focus = {
+		id = bgmsz1
+		text = "Communist Party"
+		icon = tkp
+		x = 14
+		y = 0
+		cost = 5
+										mutually_exclusive = { focus = dogu1 }
+
+		completion_reward = {
+						fourth_estate_dcommunist_increase = yes
+									add_ideas =  idea_focus_generic_marxist_doctrine
+
+						set_politics = {
+							ruling_party = communist
+							elections_allowed = yes
+
+						}
+						
+	}
+	} 
+	
+			#dogu1
+	focus = {
+		id = dogu1
+		text = "Socialist Turkey"
+		icon = agrarian_socialism
+		x = 26
+		y = 0
+		cost = 5
+								mutually_exclusive = { focus = bgmsz1 }
+
+		completion_reward = {
+						fourth_estate_democratic_socialist_increase = yes
+							add_ideas =  idea_focus_generic_leftist_doctrine
+
+						set_politics = {
+							ruling_party = democratic_socialist
+							elections_allowed = yes
+
+						}
+						
+	}
+	} 
+	#dogu2
+	focus = {
+		id = dogu2
+		text = "Shut Down the US Bases"
+		icon = southern
+		x = -4
+		y = 1
+		cost = 5
+		
+							relative_position_id = dogu1
+				prerequisite = { focus = dogu1 
+				focus = bgmsz1}	
+		completion_reward = {
+		add_political_power = 75
+		add_stability = 0.03
+		 reverse_add_opinion_modifier = {
+								target = USA
+								modifier = hostile_status
+
+}					
+						
+	}
+	} 
+	
+	#train1
+	focus = {
+		id = train1
+		text = "Socialist Education"
+		icon = socialist_education
+		x = 0
+		y = 1
+		cost = 5
+		
+							relative_position_id = dogu2
+				prerequisite = { focus = dogu2 }					
+
+			
+		completion_reward = {
+					add_ideas = BUL_socialist_education
+
+						
+	}
+	}
+	
+	#train2
+	focus = {
+		id = train2
+		text = "Scientific Advances"
+		icon = communism40
+		x = 0
+		y = 1
+		cost = 5
+		
+							relative_position_id = train1
+				prerequisite = { focus = train1 }					
+
+			
+		completion_reward = {
+add_ideas = scientific_advances
+				
+	}
+	}
+	
+	#train4
+	focus = {
+		id = train4
+		text = "New Advances"
+		icon = university
+		x = 0
+		y = 1
+		cost = 5
+		
+							relative_position_id = train2
+				prerequisite = { focus = train2 }					
+
+			
+		completion_reward = {
+swap_ideas = {
+	add_idea = scientific_advances2
+	remove_idea = scientific_advances
+}				
+	}
+	}
+	
+	#train3
+	focus = {
+		id = train3
+		text = "Communist Scientists"
+		icon = communist_research
+		x = 0
+		y = 1
+		cost = 5
+		
+							relative_position_id = train4
+				prerequisite = { focus = train4 }					
+
+			
+		completion_reward = {
+swap_ideas = {
+	add_idea = scientific_advances3
+	remove_idea = scientific_advances2
+}					
+	}
+	}
+	#dogu3
+	focus = {
+		id = dogu3
+		text = "Chinese Goal"
+		icon = focus_prc_china_dream
+		x = 0
+		y = 1
+		cost = 5
+		
+							relative_position_id = dogu1
+				prerequisite = { focus = dogu1 }	
+		completion_reward = {
+		add_political_power = 100
+					
+reverse_add_opinion_modifier = {
+								target = PRC
+								modifier = with_china
+
+}
+						
+	}
+	}
+	
+	#dogu4
+	focus = {
+		id = dogu4
+		text = "Support Russia"
+		icon = BLR_work_with_russia
+		x = 6
+		y = 1
+		cost = 5
+		
+							relative_position_id = dogu1
+				prerequisite = { focus = dogu1 }	
+		completion_reward = {
+		add_political_power = 100
+			
+reverse_add_opinion_modifier = {
+								target = SOV
+								modifier = declaration_of_friendship
+
+}
+						
+	}
+	}
+	#dogu5
+	focus = {
+		id = dogu5
+		text = "Trade Agreements"
+		icon = trade_with_china
+		x = 3
+		y = 1
+		cost = 5
+		
+							relative_position_id = dogu3
+				prerequisite = { focus = dogu3 }
+				prerequisite = { focus = dogu4 }	
+				
+		completion_reward = {
+				PRC = { increase_trade_influence_by_3 = yes }
+				SOV = { increase_trade_influence_by_3 = yes }
+
+						
+	}
+	}
+	
+	#dogu6
+	focus = {
+		id = dogu6
+		text = "Create Trade Routes"
+		icon = POL_commie_road
+		x = 3
+		y = 2
+		cost = 5
+		
+							relative_position_id = dogu3
+				prerequisite = { focus = dogu5 }
+				
+		completion_reward = {
+				random_owned_state = {
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}
+						}
+						random_owned_state = {
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}
+						}
+						
+	}
+	}
+	
+	#dogu7
+	focus = {
+		id = dogu7
+		text = "Invite Chinese Companies"
+		icon = communism25
+		x = 2
+		y = 3
+		cost = 5
+		
+							relative_position_id = dogu3
+				prerequisite = { focus = dogu6 }
+				
+		completion_reward = {
+					random_owned_state = {
+							add_extra_state_shared_building_slots = 2
+							add_building_construction = {
+								type = industrial_complex
+							level = 2
+								instant_build = yes
+							}
+
+						}
+						random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+							level = 1
+								instant_build = yes
+							}
+
+						}
+						
+	}
+	}
+	
+	#dogu7
+	focus = {
+		id = dogu7
+		text = "Chinese Resources"
+		icon = POL_commie_modernise_factories
+		x = 4
+		y = 3
+		cost = 5
+		
+							relative_position_id = dogu3
+				prerequisite = { focus = dogu6 }
+				
+		completion_reward = {
+			random_owned_state = {
+			add_resource = {	
+				type = tungsten
+				amount = 32
+			}
+			}
+				random_owned_state = {
+			add_resource = {	
+				type = tungsten
+				amount = 25
+			}
+			}		
+	}
+	}
+	
+	
+	#reb1
+	focus = {
+		id = reb1
+		text = "Raising Public Consciousness"
+		icon = POL_commie_workers_of_the_world_unite
+		x = 0
+		y = 1
+		cost = 5
+							relative_position_id = bgmsz1
+				prerequisite = { focus = bgmsz1 }		
+
+		completion_reward = {
+		add_ideas = SOV_povush
+				
+	
+	}
+	}
+	
+	#reb2
+	focus = {
+		id = reb2
+		text = "Will of the People"
+		icon = red_dragon
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id = reb1
+			prerequisite = { focus = reb1 }		
+		completion_reward = {
+		add_ideas = idea_focus_generic_will_of_the_people
+				
+	
+	}
+	}
+	
+	#bgmsz2
+	focus = {
+		id = bgmsz2
+		text = "Communist Militias"
+		icon = Communal_Militias
+		x = -2
+		y = 1
+		cost = 5
+							relative_position_id = bgmsz1
+				prerequisite = { focus = bgmsz1 }		
+
+		completion_reward = {
+add_ideas = communist_militias
+			add_war_support = 0.04				
+	
+	}
+	}
+	
+	#bgmsz3
+	focus = {
+		id = bgmsz3
+		text = "Red Guards"
+		icon = GFX_focus_SOV_the_glory_of_the_red_army_communism
+		x = -2
+		y = 2
+		cost = 5
+							relative_position_id = bgmsz1
+				prerequisite = { focus = bgmsz2}		
+
+		completion_reward = {
+			add_ideas = FRA_red_guards_idea
+	
+	}
+	}
+	
+	#bgmsz4
+	focus = {
+		id = bgmsz4
+		text = "Redistribution Of Wealth"
+		icon = communism32
+		x = 2
+		y = 1
+		cost = 5
+							relative_position_id = bgmsz1
+				prerequisite = { focus = bgmsz1 }		
+
+		completion_reward = {
+		add_ideas = idea_focus_redistribution_of_wealth
+			
+	
+	}
+	}
+	
+	#bgmsz5
+	focus = {
+		id = bgmsz5
+		text = "Prison Workforce"
+		icon = GFX_focus_SOV_penal_battalions
+		x = 2
+		y = 2
+		cost = 5
+							relative_position_id = bgmsz1
+				prerequisite = { focus = bgmsz4 }		
+
+		completion_reward = {
+		add_political_power = 20
+			add_ideas = FRA_prison_workforce_mobilized			
+	
+	}
+	}
+	
+	#bgmsz6
+	focus = {
+		id = bgmsz6
+		text = "Price Control"
+		icon = money_communism
+		x = 1
+		y = 3
+		cost = 5
+							relative_position_id = bgmsz1
+				prerequisite = { focus = bgmsz5					}
+prerequisite = { focus = reb2 						}
+
+		completion_reward = {
+				add_ideas = LAT_price_control_idea
+	
+	
+	}
+	}
+	
+	#bgmsz7
+	focus = {
+		id = bgmsz7
+		text = "Help Revolutionaries"
+		icon = fourth_international
+		x = -1
+		y = 3
+		cost = 5
+							relative_position_id = bgmsz1
+				prerequisite = { focus = bgmsz3				}
+prerequisite = { focus = reb2 						}
+
+		completion_reward = {
+		add_ideas = LAT_help_our_fellow_revolutionaries
+	
+	
+	}
+	}
+	
+	#bgmsz8
+	focus = {
+		id = bgmsz8
+		text = "Revolutionary Culture"
+		icon = communism5
+		x = 0
+		y = 4
+		cost = 5
+							relative_position_id = bgmsz1
+				prerequisite = { focus = bgmsz6				}
+prerequisite = { focus = bgmsz7						}
+
+		completion_reward = {
+		add_ideas = LAT_revolutionary_culture
+	
+	
+	}
+	}
+	
+	#bgmsz9
+	focus = {
+		id = bgmsz9
+		text = "Political Commisars"
+		icon = army_officers_communist
+		x = 0
+		y = 5
+		cost = 5
+							relative_position_id = bgmsz1
+				prerequisite = { focus = bgmsz8				}
+
+
+		completion_reward = {
+		add_ideas = LIT_politcal_commisaries_idea
+	
+	
+	}
+	}
+	
+	#sov1
+	focus = {
+		id = sov1
+		text = "Members of the KGB"
+		icon = Polish_russian_friendship
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id = dogu4
+			prerequisite = { focus = dogu4 }		
+		completion_reward = {
+		add_ideas = yardim_rus_2
+				
+	
+	}
+	}
+	
+	#sov2
+	focus = {
+		id = sov2
+		text = "Russian Companies"
+		icon = communism34
+		x = 1
+		y = 1
+		cost = 5
+			relative_position_id = sov1
+			prerequisite = { focus = sov1 }		
+		completion_reward = {
+random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+swap_ideas = { 
+					remove_idea = yardim_rus_2
+					add_idea = yardim_rus_3
+				}			
+	
+	}
+	}
+	
+	#sov3
+	focus = {
+		id = sov3
+		text = "Russian Aid"
+		icon = commie_the_power_of_tanks
+		x = -1
+		y = 1
+		cost = 5
+			relative_position_id = sov1
+			prerequisite = { focus = sov1 }		
+		completion_reward = {
+add_equipment_to_stockpile = {
+								type = infantry_equipment_2
+								amount = 7500
+								producer = SOV
+							}		
+add_equipment_to_stockpile = {
+								type = modern_tank_equipment_2
+								amount = 1050
+								producer = SOV
+
+							}
+							
+							add_equipment_to_stockpile = {
+								type = light_mechanized_equipment_2
+								amount = 3000
+								producer = SOV
+
+							}							
+	
+	}
+	}
+	
+	#sov4
+	focus = {
+		id = sov4
+		text = "Training Young People"
+		icon = commie_fast_infantry
+		x = 0
+		y = 2
+		cost = 5
+			relative_position_id = sov1
+			prerequisite = { focus = sov2 }
+		prerequisite = {	focus = sov3}		
+		completion_reward = {
+						swap_ideas = { 
+					remove_idea = yardim_rus_3
+					add_idea = yardim_rus_4
+				}	
+						
+	
+	}
+	}
+	
+	#cin1
+	focus = {
+		id = cin1
+		text = "Members of Chinese Army"
+		icon = communist_china2
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id = dogu3
+			prerequisite = { focus = dogu3 }		
+		completion_reward = {
+		add_ideas = yardim_rus
+				
+	
+	}
+	}
+	
+		#cin2
+	focus = {
+		id = cin2
+		text = "Army Traditions"
+		icon = commie_modernise_army
+		x = -1
+		y = 1
+		cost = 5
+			relative_position_id = cin1
+			prerequisite = { focus = cin1 }		
+		completion_reward = {
+		swap_ideas = { 
+					remove_idea = yardim_rus
+					add_idea = yardim_rus1 
+				}
+army_experience = 100				
+	
+	}
+	}
+	
+			#cin3
+	focus = {
+		id = cin3
+		text = "Chinese Plane"
+		icon = Chinese_plane
+		x = 1
+		y = 1
+		cost = 5
+			relative_position_id = cin1
+			prerequisite = { focus = cin1 }		
+		completion_reward = {
+ air_experience = 25
+            add_equipment_to_stockpile = { 
+				type = fighter_equipment_3 
+				amount = 25
+				producer = PRC
+			}	
+	}
+	}
+	
+		#cin4
+	focus = {
+		id = cin4
+		text = "Improve Army"
+		icon = communism22
+		x = 0
+		y = 2
+		cost = 5
+			relative_position_id = cin1
+			prerequisite = { focus = cin2}
+prerequisite = { focus = cin3			}		
+		completion_reward = {
+swap_ideas = { 
+					remove_idea = yardim_rus1
+					add_idea = yardim_rus2 
+				}
+	}
+	}
+	
+			#cin5
+	focus = {
+		id = cin5
+		text = "Warfare Innovation"
+		icon = commie_special_forces
+		x = 3
+		y = 3
+		cost = 5
+			relative_position_id = cin1
+			prerequisite = { focus = cin4}
+		prerequisite = {focus =	sov4}		
+		completion_reward = {
+ 		add_ideas = FRA_innovation_of_warfare
+
+	}
+	}
+	
+	#asya1
+	focus = {
+		id = asya1
+		text = "Revolution on the Eastern Border"
+		icon = war_in_asia
+		x = 2
+		y = 1
+		cost = 5
+			relative_position_id =  savas1
+		prerequisite = {focus =	savas1}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = PER
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = GEO
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = ARM
+			}
+		
+	}
+	}
+	
+	#asya2
+	focus = {
+		id = asya2
+		text = "Our Turkish Brothers about the Revolution"
+		icon = attack_azerbaijan
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  asya1
+		prerequisite = {focus =	asya1}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = AZR
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = TMS
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = UZB
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = KAZ
+			}
+		
+	}
+	}
+	
+	#asya3
+	focus = {
+		id = asya3
+		text = "The Border with China"
+		icon = attack_pakistan
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  asya2
+		prerequisite = {focus =	asya2}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = PAK
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = AFG
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = TAJ
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = KYR
+			}
+		
+	}
+	}
+	
+		#asya4
+	focus = {
+		id = asya4
+		text = "Indian Revolution"
+		icon = attack_india
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  asya3
+		prerequisite = {focus =	asya3}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = RAJ
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = BAN
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = BRM
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = SIA
+			}
+		
+	}
+	}
+	
+		#savas1
+	focus = {
+		id = savas1
+		text = "Communist Propaganda"
+		icon = propaganda_communist
+		x = 21
+		y = 7
+		cost = 5
+		prerequisite = {focus =	bgmsz9
+		focus = cin5}		
+		completion_reward = {
+		add_political_power = 150
+every_neighbor_country = {
+			add_popularity = {
+							ideology = communist
+							popularity = 0.05
+						}
+						add_popularity = {
+							ideology = democratic_socialist
+							popularity = 0.05
+						}
+					}
+	}
+	}
+	
+	#avrupa1
+	focus = {
+		id = avrupa1
+		text = "Spread the Revolution to the Europen Border"
+		icon = attack_greece
+		x = -2
+		y = 1
+		cost = 5
+			relative_position_id =  savas1
+		prerequisite = {focus =	savas1}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = BUL
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = GRE
+			}
+			
+		
+	}
+	}
+	
+	#avrupa2
+	focus = {
+		id = avrupa2
+		text = "Communism In Central europe"
+		icon = attack_romania
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  avrupa1
+		prerequisite = {focus =	avrupa1}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = YUG
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = ROM
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+							target = MAC
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = ALB
+			}
+			
+		
+	}
+	}
+	
+	#avrupa3
+	focus = {
+		id = avrupa3
+		text = "Communism In Vienna"
+		icon = attack_austria
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  avrupa2
+		prerequisite = {focus =	avrupa2}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = AUS
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = HUN
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+							target = CRO
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = SLV
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = BOS
+			}
+			
+		
+	}
+	}
+	
+	#avrupa4
+	focus = {
+		id = avrupa4
+		text = "Against European Capitalists"
+		icon = attack_germany
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  avrupa3
+		prerequisite = {focus =	avrupa3}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = GER
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = UKR
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+							target = ITA
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = SWI
+			}
+			
+			
+		
+	}
+	}
+	
+	#savas2
+	focus = {
+		id = savas2
+		text = "Spread the Revolution to the Southern Border"
+		icon = attack_communism
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  savas1
+		prerequisite = {focus =	savas1}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = SYR
+			}
+			create_wargoal = {
+							type = puppet_wargoal_focus
+						target = IRQ
+			}
+			create_wargoal = {
+							type = annex_everything
+						target = KUR
+			}
+		
+	}
+	}
+	
+	#savas3
+	focus = {
+		id = savas3
+		text = "Revolution in Middle East"
+		icon = communism18
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  savas2
+		prerequisite = {focus =	savas2}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = JOR
+			}
+			create_wargoal = {
+						type = puppet_wargoal_focus
+							target = LEB
+			}
+		
+	}
+	}
+	
+	#savas4
+	focus = {
+		id = savas4
+		text = "Revolution in Pennisula"
+		icon = attack_saudi_arabia
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  savas3
+		prerequisite = {focus =	savas3}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = SAU
+			}
+			create_wargoal = {
+						type = puppet_wargoal_focus
+							target = KUW
+			}
+			create_wargoal = {
+						type = puppet_wargoal_focus
+							target = QAT
+			}
+			create_wargoal = {
+						type = puppet_wargoal_focus
+							target = BAR
+			}
+		
+	}
+	}
+	
+	#savas5
+	focus = {
+		id = savas5
+		text = "To the Gulf of Aden"
+		icon = flames_of_rebellion
+		x = 0
+		y = 1
+		cost = 5
+			relative_position_id =  savas4
+		prerequisite = {focus =	savas4}		
+		completion_reward = {
+		create_wargoal = {
+							type = puppet_wargoal_focus
+							target = YEM
+			}
+			create_wargoal = {
+						type = puppet_wargoal_focus
+							target = OMA
+			}
+			create_wargoal = {
+						type = puppet_wargoal_focus
+							target = UAE
+			}
+		
+	}
+	}
+	
+	focus = {
+		id = kriz1
+		text = "Economic Reform"
+		icon = tl3
+		x = -4
+		y = 0
+		cost = 5
+		
+														relative_position_id = dogu2
+
+prerequisite = { focus = dogu1 
+				focus = bgmsz1}	
+				completion_reward = {
+			swap_ideas = {
+			remove_idea = TUR_2000
+			add_idea  = reform_for_2000_crisis
+			}
+		}
+	}
+	
+	focus = {
+		id = kriz2
+		text = "Turkish Lira Movement"
+		icon = tl2
+		x = 0
+		y = 1
+		cost = 5
+		
+														relative_position_id = kriz1
+
+prerequisite = { focus = kriz1 }	
+				completion_reward = {
+			swap_ideas = {
+			remove_idea = reform_for_2000_crisis 
+			add_idea  = reform_2_for_2000_crisis
+			}
+		}
+	}
+	
+	focus = {
+		id = kriz3
+		text = "End Of The Crisis"
+		icon = POL_capitalist_economy
+		x = 0
+		y = 1
+		cost = 5
+		
+														relative_position_id = kriz2
+
+prerequisite = { focus = kriz2 }	
+				completion_reward = {
+			remove_ideas =	reform_2_for_2000_crisis
+
+		}
+	}
+	
+	focus = {
+		id = kriz4
+		text = "Communist Fighters"
+		icon = communist_arms_factory
+		x = 0
+		y = 1
+		cost = 5
+		
+														relative_position_id = kriz3
+
+prerequisite = { focus = kriz3 }	
+				completion_reward = {
+			add_ideas =	fighter_production_bonus
+
+		}
+	}
+	
+	#Socialist Industry
+	focus = {
+		id = endüstri1
+		text = "Socialist Industry"
+		icon = National_industry
+		x = -2
+		y = 0
+		cost = 5
+		
+														relative_position_id = dogu2
+
+prerequisite = { focus = dogu1 
+				focus = bgmsz1}	
+				completion_reward = {
+			random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 1
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 2	
+							add_building_construction = {
+								type = industrial_complex
+								level = 2
+								instant_build = yes
+							}
+						}
+		}
+	}
+
+	#Rebuild the Country
+	focus = {
+		id = endüstri2
+				text = "Rebuild the Country"
+
+		icon = work_red
+		x = 0
+		y = 1
+		cost = 5
+		
+														relative_position_id = endüstri1
+
+		prerequisite = { focus = endüstri1  }
+		completion_reward = {
+			random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 2	
+							add_building_construction = {
+								type = industrial_complex
+								level = 2
+								instant_build = yes
+							}
+					}
+		}
+	}
+
+	#New Infrastructures
+	focus = {
+		id = endüstri3
+						text = "New Infrastructures"
+
+		icon = communism46
+		x = 0
+		y = 1
+		cost = 5
+																	relative_position_id = endüstri2
+
+		prerequisite = { focus = endüstri2  }
+		completion_reward = {
+			random_owned_state = {
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}
+			random_owned_state = {
+							add_building_construction = {
+								type = infrastructure
+								level = 2
+								instant_build = yes
+							}
+		}
+	}
+	}
+	}
+	#Industrial Project
+	focus = {
+		id = endüstri4
+								text = "Industrial Project"
+
+		icon = communism25
+		x = 0
+		y = 1
+		cost = 5
+																		relative_position_id = endüstri3
+
+		prerequisite = { focus = endüstri3  }
+		completion_reward = {
+			random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+			random_owned_state = {
+							limit = {
+								free_building_slots = {
+									building = industrial_complex
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+		}
+	}
+
+	#Military Industry
+	focus = {
+		id = endüstri5
+										text = "Military Industry"
+
+		icon = communism34
+		x = 0
+		y = 1
+		cost = 5
+														relative_position_id = endüstri4
+
+		prerequisite = { focus = endüstri4 }
+		completion_reward = {
+			random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+							limit = {
+								free_building_slots = {
+									building = arms_factory
+									size > 0
+									include_locked = yes
+								}
+							}
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+						}
+			random_owned_state = {
+							add_extra_state_shared_building_slots = 1
+						limit = {
+								free_building_slots = {
+									building = arms_factory
+									size > 0
+								include_locked = yes
+							}
+							}
+							add_building_construction = {
+							type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+						}
+		}
+	}
+	#army1
+	focus = {
+		id = army121
+		text = "Turkish Army Force"
+		icon = TSK
+		x = 30
+		y = 12
+		cost = 7
+
+
+		completion_reward = {
+							unlock_decision_category_tooltip = TUR_army
+
+		add_political_power = 50
+add_ideas = turkish_army
+		set_country_flag = TSK
+			army_experience = 75
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		
+	#army2
+	focus = {
+		id = army221
+		text = "Turkish Air Force"
+		icon = airtsk
+		x = -10
+		y = 1
+		cost = 7
+		relative_position_id = army121
+
+		prerequisite = { focus = army121 }
+
+		completion_reward = {
+		air_experience = 80
+			add_tech_bonus = {
+							name = air_doc_bonus
+							bonus = 1
+						uses = 1
+							category = air_doctrine
+
+						}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		
+	
+	#army4
+	focus = {
+		id = army421
+		text = "MİG-31"
+		icon = Russian_plane
+		x = 2
+		y = 1
+		cost = 7
+		relative_position_id = army221
+						mutually_exclusive = { focus = army321 }
+
+		prerequisite = { focus = army221 }
+bypass = {
+		OR = {
+		SOV = {
+			exists = no
+			}
+		has_war_with = SOV 
+		}
+		}
+		available = {
+			NOT = { has_war_with = SOV }
+			SOV = {
+			exists = yes
+			}
+		}
+		completion_reward = {
+		SOV = {add_opinion_modifier = {
+								target = TUR
+								modifier = long_term_trade_partner
+							}
+							}
+		add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount =45
+				producer = SOV
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army5
+	focus = {
+		id = army521
+		text = "TFX"
+		icon = f35
+		x = 0
+		y = 3
+		cost = 7
+		relative_position_id = army221
+
+		prerequisite = { focus = army221 }
+
+		completion_reward = {
+		 set_country_flag  = tfx	
+
+		unlock_decision_category_tooltip = TUR_tfx
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army6
+	focus = {
+		id = army621
+		text = "Bomber Focus"
+		icon = Bomber2
+		x = 1
+		y = 2
+		cost = 7
+		relative_position_id = army221
+
+		prerequisite = { focus = army221 }
+						mutually_exclusive = { focus = army721}
+
+		completion_reward = {
+		
+					add_ideas = idea_focus_generic_bomber_focus
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army7
+	focus = {
+		id = army721
+		text = "Fighter Focus"
+		icon = bhu_cast_down_other_planes
+		x = -1
+		y = 2
+		cost = 7
+		relative_position_id = army221
+
+		prerequisite = { focus = army221 }
+						mutually_exclusive = { focus = army621 }
+
+		completion_reward = {
+					add_ideas = idea_focus_generic_fighter_focus
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army821
+	focus = {
+		id = army821
+		text = "Support Bayraktar"
+		icon = drone
+		x = 0
+		y = 5
+		cost = 7
+		relative_position_id = army221
+
+		prerequisite = { focus = army521}
+
+		completion_reward = {
+		
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		
+
+		
+	
+	
+	#army1021
+	focus = {
+		id = army1021
+		text = "Buy Russian Plane"
+		icon = production
+		x = 0
+		y = 2
+		cost = 7
+		relative_position_id = army421
+
+		prerequisite = { focus = army421 }
+				prerequisite = { focus = army621 }
+
+
+		completion_reward = {
+SOV = {add_opinion_modifier = {
+								target = TUR
+								modifier = long_term_trade_partner
+							}
+							}
+		add_equipment_to_stockpile = {
+				type = CAS_equipment_2
+				amount =45
+				producer = SOV
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army1121
+	focus = {
+		id = army1121
+		text = "Early Fighter Models"
+		icon = fighter
+		x = 0
+		y = 2
+		cost = 7
+		relative_position_id = army721
+
+		prerequisite = { focus = army521 }
+
+
+		completion_reward = {
+					add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = light_fighter
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		
+	#army1221
+	focus = {
+		id = army1221
+		text = "Early Bomber Models"
+		icon = bomber
+		x = 0
+		y = 2
+		cost = 7
+		relative_position_id = army621
+
+		prerequisite = { focus = army521}
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 0.8
+				uses = 2
+				category = heavy_air
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army1321
+	focus = {
+		id = army1321
+		text = "Air Training"
+		icon = air_doctrine
+		x = -4
+		y = 1
+		cost = 7
+		relative_position_id = army221
+
+		prerequisite = { focus = army221 }
+
+
+		completion_reward = {
+					air_experience = 45
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army22
+	focus = {
+		id = army2221
+		text = "New Pilots"
+		icon = GFX_focus_SOV_flying_clubs
+		x = -4
+		y = 3
+		cost = 7
+		relative_position_id = army221
+
+		prerequisite = { focus = army1321 }
+
+
+		completion_reward = {
+					add_ideas = idea_focus_air_force_military_school
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army1421
+	focus = {
+		id = army1421
+		text = "Improve Airports"
+		icon = air_production
+		x = -5
+		y = 2
+		cost = 7
+		relative_position_id = army221
+
+		prerequisite = { focus = army1321 }
+
+
+		completion_reward = {
+		350 = {
+			
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			344 = {
+			
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			353 = {
+			
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army1521
+	focus = {
+		id = army1521
+		text = "CAS"
+		icon = CAS
+		x = -2
+		y = 2
+		cost = 7
+		relative_position_id = army521
+
+		prerequisite = { focus = army1121
+focus = army1221		}
+
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = cas_bomber
+				bonus = 0.8
+				uses = 2
+				category = cas_bomber
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army1621
+	focus = {
+		id = army1621
+		text = "Naval Bomber"
+		icon = naval_bomber
+		x = 2
+		y = 2
+		cost = 7
+		relative_position_id = army521
+
+		prerequisite = { focus = army1121
+focus = army1221		}
+
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = naval_air
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#army1721
+	focus = {
+		id = army1721
+		text = "Best Ace"
+		icon = military_mission
+		x =1
+		y = 3
+		cost = 7
+		relative_position_id = army521
+
+	prerequisite = { focus = army1521
+focus = army821
+focus = army1621	}
+
+
+		completion_reward = {
+					add_ideas = GEN_aces
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#army1821
+	focus = {
+		id = army1821
+		text = "Increase Local Airplane Production"
+		icon = air_production
+		x = -1
+		y = 3
+		cost = 7
+		relative_position_id = army521
+
+	prerequisite = { focus = army1521
+focus = army1821
+focus = army1621	}
+
+
+		completion_reward = {
+					add_ideas = ROM_local_development
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+			#army1921
+	focus = {
+		id = army1921
+		text = "Jet Technology"
+		icon = skull
+		x = 0
+		y = 4
+		cost = 7
+		relative_position_id = army521
+
+	prerequisite = { focus = army1821 }
+prerequisite = {focus = army1721	}
+
+
+		completion_reward = {
+add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = jet_technology
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+			#army2021
+	focus = {
+		id = army2021
+		text = "Rockets Technology"
+		icon = rocketry
+		x = 0
+		y = 5
+		cost = 7
+		relative_position_id = army521
+
+	prerequisite = { focus = army1921 }
+
+
+
+		completion_reward = {
+add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = rocketry
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#army2121
+	focus = {
+		id = army2121
+		text = HUN_wepons_for_the_3rd_world_war
+		icon = nuclear_weapons
+		x = 0
+		y = 6
+		cost = 7
+		relative_position_id = army521
+
+	prerequisite = { focus = army2021 }
+
+
+
+		completion_reward = {
+	add_tech_bonus = {
+				name = tech_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = nuclear
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#kara121
+	focus = {
+		id = kara121
+		text = "Turkish Ground Forces"
+		icon = karakuv
+		x = 0
+		y = 1
+		cost = 7
+		relative_position_id = army121
+
+		prerequisite = { focus = army121 }
+
+		completion_reward = {
+		army_experience = 50
+			add_tech_bonus = {
+							name = land_doc_bonus
+							bonus = 0.9
+							uses = 2
+							category = land_doctrine
+
+						}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#kara221
+	focus = {
+		id = kara221
+		text = "Military Camps Abroad"
+		icon = coups_on_the_world
+		x = 0
+		y = 1
+		cost = 7
+		relative_position_id = kara121
+
+		prerequisite = { focus = kara121 }
+
+		completion_reward = {
+		add_manpower = 3000
+		add_ideas = additional_recruits4
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#kara321
+	focus = {
+		id = kara321
+		text = "Upgrade Weapons"
+		icon = small_arms3
+		x = -2
+		y = 1
+		cost = 7
+		relative_position_id = kara121
+
+		prerequisite = { focus = kara121 }
+
+		completion_reward = {
+		add_tech_bonus = {
+							name = infantry_tech
+							bonus = 1
+							uses = 2
+							category = infantry_weapons
+						}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#kara4
+	focus = {
+		id = kara421
+		text = "Tank Project"
+		icon = turktank
+		x = 2
+		y = 1
+		cost = 7
+		relative_position_id = kara121
+
+		prerequisite = { focus = kara121 }
+
+		completion_reward = {
+		add_tech_bonus = {
+							name = tank_bonus
+							bonus = 0.8
+							uses = 2
+							category = armor
+
+						}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#kara5
+	focus = {
+		id = kara521
+		text = "Fırtına T-155"
+		icon = artillery2
+		x = -3
+		y = 2
+		cost = 7
+		relative_position_id = kara121
+
+		prerequisite = { focus = kara321 }
+
+		completion_reward = {
+		add_tech_bonus = {
+							name = artillery_bonus
+							bonus = 1
+							uses = 2
+							category = artillery
+
+						}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#kara6
+	focus = {
+		id = kara621
+		text = "Innovation of Warfare"
+		icon = border_war
+		x = -2
+		y = 3
+		cost = 7
+		relative_position_id = kara121
+
+		prerequisite = { focus = kara321 }
+				prerequisite = { focus = kara221 }
+
+
+		completion_reward = {
+					add_ideas = FRA_innovation_of_warfare
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	
+		#kara7
+	focus = {
+		id = kara721
+		text = "Upgrade Mechanized"
+		icon = yugoslav_air_force
+		x = 3
+		y = 2
+		cost = 7
+		relative_position_id = kara121
+
+		prerequisite = { focus = kara421 }
+
+
+		completion_reward = {
+add_tech_bonus = {
+				name = special_forces_bonus
+				bonus = 1
+				category = cat_mechanized_equipment
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#kara8
+	focus = {
+		id = kara821
+		text = "Funding to Automotive Industry"
+		icon = motorized
+		x = 2
+		y = 3
+		cost = 7
+		relative_position_id = kara121
+
+		prerequisite = { focus = kara421 }
+				prerequisite = { focus = kara221 }
+
+
+
+		completion_reward = {
+		add_ideas = USA_automotive_industry_funding
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#kara9
+	focus = {
+		id = kara921
+		text = "BMC"
+		icon = apc
+		x = 4
+		y = 3
+		cost = 7
+		relative_position_id = kara121
+
+		prerequisite = { focus = kara721 }
+
+
+		completion_reward = {
+									add_ideas = TUR_bmc
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#kara10
+	focus = {
+		id = kara1021
+		text = "Focus On Tanks"
+		icon = t90
+		x = 3
+		y = 4
+		cost = 7
+		relative_position_id = kara121
+
+		prerequisite = { focus = kara821}
+				prerequisite = { focus = kara921}
+
+				mutually_exclusive = { focus = kara1521 }
+
+
+		completion_reward = {
+			            add_ideas = GEF_Focus_On_Tanks
+
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#kara1121
+	focus = {
+		id = kara1121
+		text = "Hisar Project"
+		icon = hisar
+		x = -4
+		y = 3
+		cost = 7
+		relative_position_id = kara121
+
+				prerequisite = { focus = kara521}
+		completion_reward = {
+				341 = {
+							add_extra_state_shared_building_slots = 2	
+							add_building_construction = {
+								type = anti_air_building
+								level = 2
+								instant_build = yes
+							}
+						}					
+						352 = {
+							add_extra_state_shared_building_slots = 2	
+							add_building_construction = {
+								type = anti_air_building
+								level = 2
+								instant_build = yes
+							}
+						}						
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	#kara15
+	focus = {
+		id = kara1521
+		text = "Focus On Infantry"
+		icon = GFX_goal_rhineland
+		x = -3
+		y = 4
+		cost = 7
+		relative_position_id = kara121
+				mutually_exclusive = { focus = kara1021 }
+
+				prerequisite = { focus = kara521}
+								prerequisite = { focus = kara621}
+
+
+
+
+		completion_reward = {
+		            add_ideas = GEF_Focus_On_Infantry
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#kara12
+	focus = {
+		id = kara1221
+		text = "Fields In Hospitan"
+		icon = subsidy_healthcare
+		x = 0
+		y = 2
+		cost = 7
+		relative_position_id = kara221
+
+				prerequisite = { focus = kara221}
+
+
+
+
+		completion_reward = {
+		add_ideas = GEN_hospitals_in_the_field
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	
+		#kara13
+	focus = {
+		id = kara1321
+		text = HUN_increase_wepons_production
+		icon = small_arms5
+		x = -1
+		y = 1
+		cost = 7
+		relative_position_id = kara221
+
+				prerequisite = { focus = kara321}
+								prerequisite = { focus = kara221}
+
+
+
+
+
+		completion_reward = {
+		add_ideas = HUN_increased_wepons_production
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#kara14
+	focus = {
+		id = kara1421
+		text = "Cult Of Speed"
+		icon = fund_tiger_force_motorization
+		x = 1
+		y = 1
+		cost = 7
+		relative_position_id = kara221
+
+				prerequisite = { focus = kara421}
+								prerequisite = { focus = kara221}
+
+
+
+
+
+		completion_reward = {
+		add_ideas = GEN_cult_of_speed
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+		#kara16
+	focus = {
+		id = kara1621
+		text = "Special Forces Command"
+		icon = bordobereli
+		x = 0
+		y = 4
+		cost = 7
+		relative_position_id = kara221
+
+				prerequisite = { focus = kara1521
+								focus = kara1021}
+
+		completion_reward = {
+				add_ideas =	ozelkuvvetler
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#kara17
+	focus = {
+		id = kara1721
+		text = "Adaptation to Weather Conditions"
+		icon = defence
+		x = 0
+		y = 5
+		cost = 7
+		relative_position_id = kara221
+
+				prerequisite = { focus = kara1621
+								}
+	completion_reward = {
+				add_ideas =	tur_weatherc
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#deniz121
+	focus = {
+		id = deniz121
+		text = "Turkish Navy Forces"
+		icon = navyftsk
+		x = 10
+		y = 1
+		cost = 7
+		relative_position_id = army121
+
+		prerequisite = { focus = army121 }
+
+		completion_reward = {
+		navy_experience = 50
+
+			add_tech_bonus = {
+							name = naval_doc_bonus
+							bonus = 0.8
+							uses = 2
+							category = naval_doctrine
+						}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#deniz2
+	focus = {
+		id = deniz221
+		text = "Submarine Program"
+		icon = submarines
+		x = -2
+		y = 1
+		cost = 7
+		relative_position_id = deniz121
+
+		prerequisite = { focus = deniz121 }
+
+		completion_reward = {
+	add_tech_bonus = {
+				name = submarine_bonus
+				bonus = 0.9
+				uses = 1
+				category = ss_tech
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#deniz3
+	focus = {
+		id = deniz321
+		text = "Destroyer Project"
+		icon = battleships
+		x = 0
+		y = 1
+		cost = 7
+		relative_position_id = deniz121
+
+		prerequisite = { focus = deniz121 }
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = cruiser_bonus
+				bonus = 0.7
+				uses = 2
+				category = ca_tech
+			}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	}
+	
+		#deniz4
+	focus = {
+		id = deniz421
+		text = "Cruiser Project"
+		icon = cruisers
+		x = 2
+		y = 1
+		cost = 7
+		relative_position_id = deniz121
+
+		prerequisite = { focus = deniz121 }
+
+		completion_reward = {
+		add_tech_bonus = {
+				name = destroyer_bonus
+				bonus = 1
+				uses = 1
+				category = dd_tech
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#deniz5
+	focus = {
+		id = deniz521
+		text = CAN_degauss_ship_hulls
+		icon = anti_submarine
+		x = 1
+		y = 2
+		cost = 7
+		relative_position_id = deniz121
+
+		prerequisite = { focus = deniz421 }
+				prerequisite = { focus = deniz321 }
+
+
+		completion_reward = {
+				add_ideas = LAT_degauss_ship_hulls
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#deniz6
+	focus = {
+		id = deniz621
+		text = BUL_attack_and_run_tactics
+		icon = wolf_packs
+		x =-2
+		y = 2
+		cost = 7
+		relative_position_id = deniz121
+
+		prerequisite = { focus = deniz221 }
+
+
+		completion_reward = {
+		add_ideas = BUL_attack_and_run_tactics
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#deniz7
+	focus = {
+		id = deniz721
+		text = HUN_establish_a_merchant_fleet
+		icon = merchant_fleet
+		x =-1
+		y = 3
+		cost = 7
+		relative_position_id = deniz121
+
+		prerequisite = { focus = deniz621 }
+				prerequisite = { focus = deniz321 }
+
+
+
+		completion_reward = {
+		add_ideas = HUN_merchant_fleet
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#deniz8
+	focus = {
+		id = deniz821
+		text = "Submarine Tactics"
+		icon = torpedo
+		x =-3
+		y = 3
+		cost = 7
+		relative_position_id = deniz121
+
+		prerequisite = { focus = deniz621 }
+
+
+
+		completion_reward = {
+add_ideas = USA_submarine_tactics
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#deniz9
+	focus = {
+		id = deniz921
+		text = "TCG ANADOLU"
+		icon = carriers
+		x =1
+		y = 3
+		cost = 7
+		relative_position_id = deniz121
+
+		prerequisite = { focus = deniz521}
+
+
+
+		completion_reward = {
+add_tech_bonus = {
+							name = carrier_bonus
+							bonus = 0.9
+							uses = 2
+							category = cv_tech
+						}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#deniz10
+	focus = {
+		id = deniz1021
+		text = "Sultan of The Seas"
+		icon = create_submarine
+		x =0
+		y = 4
+		cost = 7
+		relative_position_id = deniz121
+
+		prerequisite = { focus = deniz721 }
+				prerequisite = { focus = deniz921 }
+
+
+
+
+		completion_reward = {
+			add_ideas = barbaros
+
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	}
+	
+	

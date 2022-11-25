@@ -1,6 +1,647 @@
 ﻿add_namespace = turkey
 add_namespace = Turkeykenes
 add_namespace = icsavas
+add_namespace = olay
+add_namespace = turkey.junta
+
+
+#ordu
+country_event = { 
+	id = turkey.junt
+	title = turkey.junt.t1 
+	picture = GFX_report_event_turkish_coup
+	desc = turkey.junt.d1 
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = turkey.junt.o1
+		 create_country_leader = {
+		name = "Hüseyin Kıvrıkoğlu"
+		picture = "Huseyin_Kivrikoglu.dds"
+		ideology = pro_turkish_naitonalist
+		traits = { Genelkurmay }
+		}
+	set_politics = {
+				ruling_party = nationalist
+				elections_allowed = no
+			}
+							add_ideas = ROM_military_goverment
+add_political_power = 25
+remove_ideas = necdet
+			remove_ideas = TUR_coalition_government
+hidden_effect = { 
+		set_party_name = {
+			ideology = nationalist
+			long_name = TSK
+			name = TSK
+		}}
+		add_popularity = {
+		ideology = nationalist		
+		popularity = 0.07
+						}
+					
+		
+		fourth_estate_nationalist_increase = yes
+	}
+		ai_chance = { factor = 96 }
+	}
+	
+
+##Event: Turkish Protests Against Government
+country_event = {
+ id = olay.1
+ title = olay.1.t1
+ desc = olay.1.d1
+ picture = GFX_report_event_turkey_pro_est_protest
+  fire_only_once = yes
+
+    trigger = {
+         tag = TUR
+		 NOT = {
+		 has_government = fascist
+		 has_capitulated = yes
+		 }
+         AND = {
+             date > 2001.4.13
+             date < 2001.5.13
+         }
+    }
+
+    mean_time_to_happen = {days = 1}
+
+	option = {
+		name = olay.1.o1
+		ai_chance = { factor = 1}
+    
+	add_political_power = -75
+	add_stability = -0.02
+	}
+}
+
+##Event: Turkish Cargo Plane Fell Down
+country_event = {
+ id = olay.2
+ title = olay.2.t1
+ desc = olay.2.d1
+ picture = GFX_report_event_turkish_army_patrol
+  fire_only_once = yes
+
+    trigger = {
+         tag = TUR
+		 NOT = {
+		 has_government = fascism
+		 has_capitulated = yes
+		 }
+         AND = {
+             date > 2001.4.15
+             date < 2001.5.15
+         }
+    }
+
+    mean_time_to_happen = {days = 1}
+
+	option = {
+		name = olay.2.o1
+		ai_chance = { factor = 1}
+    
+	add_manpower = -34
+	add_political_power = -0.05
+	}
+}
+
+##Event: 30 agust
+country_event = {
+ id = olay.3
+ title = olay.3.t1
+ desc = olay.3.d1
+ picture = GFX_report_event_turkey_turkey_yas
+  fire_only_once = yes
+
+    trigger = {
+         tag = TUR
+		 NOT = {
+		 has_capitulated = yes
+		 }
+         AND = {
+             date > 2000.8.29
+             date < 2000.8.30
+         }
+    }
+
+    mean_time_to_happen = {days = 1}
+
+	option = {
+		name = olay.3.o1
+		ai_chance = { factor = 1}
+    
+	add_war_support = 0.03
+hidden_effect = {
+
+		country_event = { id = olay.3 days = 365  }
+		}
+	}
+}
+
+##Event: Rahşan Remission
+country_event = {
+ id = olay.4
+ title = olay.4.t1
+ desc = olay.4.d1
+ picture = GFX_report_event_turkey_ecevit
+ fire_only_once = yes
+ is_triggered_only = yes
+
+
+	option = {
+		name = olay.4.o1
+		ai_chance = { factor = 1}
+
+     add_stability = -0.02
+	 
+  }
+  }
+
+
+##Event: Turkish Civil War
+country_event = {
+ id = icsavas.3
+ title = icsavas.3.t1
+ desc = Ticsavas.3.d1
+ picture = GFX_report_event_turkish_army_patrol
+ fire_only_once = yes
+
+   	is_triggered_only = yes
+
+
+    mean_time_to_happen = {days = 1}
+
+	option = {
+		name = icsavas.3.o1
+		ai_chance = { factor = 1}
+		
+		leave_faction = yes
+
+add_named_threat = {
+    threat = 10
+    name = turcivil
+}
+
+    hidden_effect = {
+	
+				start_civil_war = {
+			ruling_party = communist
+			ideology = islamist
+			size = 0.5
+			states = { 1000 345 344 346 1186 1189 876 1188 827 }
+		}
+		
+		country_event = Turkey_news.8
+
+recruit_character = TUR_bülent_ecevit
+recruit_character = TUR_devlet_bahçeli
+recruit_character = TUR_recai_kutan
+recruit_character = TUR_mesut_yılmaz
+recruit_character = TUR_recep_tayyip_erdoğan
+recruit_character = TUR_deniz_baykal
+recruit_character = TUR_murat_bozlak
+recruit_character = TUR_muhsin_yazıcıoğlu
+
+	CTR = {
+	transfer_state = 1187
+	transfer_state = 354
+	transfer_state = 355
+	transfer_state = 356
+	transfer_state = 49
+	transfer_state = 349
+	transfer_state = 348
+		transfer_state = 353
+				transfer_state = 1185
+	add_core_of = TUR
+
+		create_country_leader = {
+	name = "Bülent Ecevit"
+	picture = "Bulent_Ecevit.dds"
+	ideology = social_democrat_ideology
+}
+
+
+
+	
+
+	every_country = {
+                    limit = {
+                        has_full_control_of_state = 346 
+                    }
+                    CTR = {
+                        declare_war_on = {
+                              target = PREV
+                            type = annex_everything
+                        }
+                    }
+                }
+	
+	
+		
+	load_OOB = CTR
+		TUR = {
+	         declare_war_on = { target = CTR type = annex_everything }
+	}  } 
+		PKK = {
+	transfer_state = 352
+	transfer_state = 350
+		transfer_state = 999
+
+
+	add_core_of = TUR
+
+	create_country_leader = {
+	name = "Cemil Bayik"
+	picture = "Cemil_Bayik.dds"
+	ideology = stalinist
+}
+	create_corps_commander = {
+		name = "Murat Karayılan"
+		picture = "Murat_Karayilan.dds"
+		traits = {  }
+		skill = 1
+	}
+		load_OOB = PKK_rebels
+	     declare_war_on = { target = TUR type = annex_everything }
+		 	     declare_war_on = { target = CTR type = annex_everything }
+				 every_country = {
+                    limit = {
+                        has_full_control_of_state = 346 
+                    }
+                    PKK = {
+                        declare_war_on = {
+                              target = PREV
+                            type = annex_everything
+                        }
+                    }
+                }
+
+	}} } }
+
+##Event: Turkish Civil War
+country_event = {
+ id = icsavas.1
+ title = icsavas.1.t1
+ desc = Ticsavas.1.d1
+ picture = GFX_report_event_turkish_army_patrol
+ fire_only_once = yes
+
+   	is_triggered_only = yes
+
+
+    mean_time_to_happen = {days = 1}
+
+	option = {
+		name = icsavas.1.o1
+		ai_chance = { factor = 1}
+
+TUR_hüseyin_kıvrıkoğlu = {
+    remove_unit_leader_role = yes
+}
+
+TUR_hilmi_Özkök = {
+    remove_unit_leader_role = yes
+}
+
+TUR_Çetin_doğan = {
+    remove_unit_leader_role = yes
+}
+TUR_yaşar_büyükanıt = {
+    remove_unit_leader_role = yes
+}
+
+TUR_İlker_başbuğ = {
+    remove_unit_leader_role = yes
+}
+
+TUR_salih_zeki_Çolak = {
+    remove_unit_leader_role = yes
+}
+
+TUR_abidin_Ünal = {
+    remove_unit_leader_role = yes
+}
+
+TUR_zekai_aksakallı = {
+    remove_unit_leader_role = yes
+}
+TUR_ismail_metin_temel = {
+    remove_unit_leader_role = yes
+}
+
+TUR_işık_koşaner = {
+    remove_unit_leader_role = yes
+}
+
+TUR_aytaç_yalman = {
+    remove_unit_leader_role = yes
+}
+TUR_ilhami_erdil = {
+    remove_unit_leader_role = yes
+}
+TUR_Özden_Örnek = {
+    remove_unit_leader_role = yes
+}
+
+    hidden_effect = {
+		country_event = Turkey_news.8
+
+recruit_character = hüseyin_kıvrıkoğlu
+recruit_character = hilmi_Özkök
+recruit_character = Çetin_doğan
+recruit_character = yaşar_büyükanıt
+recruit_character = İlker_başbuğ
+recruit_character = salih_zeki_Çolak 
+recruit_character = abidin_Ünal
+recruit_character = zekai_aksakallı
+recruit_character = ismail_metin_temel
+recruit_character = işık_koşaner 
+recruit_character = aytaç_yalman
+recruit_character = ilhami_erdil
+recruit_character = Özden_Örnek
+	
+	TSK = {
+	transfer_state = 340
+	transfer_state = 339
+	transfer_state = 791
+	transfer_state = 164
+	transfer_state = 343
+	transfer_state = 342
+	transfer_state = 345
+
+	add_core_of = TUR
+	
+	create_country_leader = {
+		name = "Hüseyin Kıvrıkoğlu"
+		picture = "Huseyin_Kivrikoglu.dds"
+		ideology = pro_turkish_naitonalist
+		traits = { Genelkurmay }
+		}
+	
+	create_field_marshal = {
+		name = "Hüseyin Kıvrıkoğlu"
+		picture = "Huseyin_Kivrikoglu.dds"
+		traits = {  }
+		skill = 3
+		attack_skill = 3
+		defense_skill = 1
+		planning_skill = 2
+		logistics_skill = 3
+	}
+
+	create_corps_commander = {
+		name = "Hilmi Özkök"
+		picture = "Hilmi_Ozkok.dds"
+		traits = { fortress_buster }
+		skill = 2
+		attack_skill = 2
+		defense_skill = 1
+		planning_skill = 1
+		logistics_skill = 1
+	}
+
+	create_corps_commander = {
+		name = "Çetin Doğan"
+		picture = "Cetin_Dogan.dds"
+		traits = { panzer_leader }
+		skill = 2
+		attack_skill = 1
+		defense_skill = 2
+		planning_skill = 1
+		logistics_skill = 3
+	}
+
+	create_corps_commander = {
+		name = "Yaşar Büyükanıt"
+		picture = "Yasar_Buyukanit.dds"
+		traits = { organizer }
+		skill = 2
+		attack_skill = 1
+		defense_skill = 2
+		planning_skill = 2
+		logistics_skill = 2
+	}
+	
+	create_corps_commander = {
+		name = "İlker Başbuğ"
+		picture = "Ilker_Basbug.dds"
+		traits = { infantry_leader }
+		skill = 2
+		attack_skill = 2
+		defense_skill = 3
+		planning_skill = 2
+		logistics_skill = 3
+	}
+
+	create_corps_commander = {
+		name = "Aytaç Yalman"
+		picture = "Aytac_Yalman.dds"
+		traits = { ambusher }
+		skill = 2
+		attack_skill = 2
+		defense_skill = 1
+		planning_skill = 3
+		logistics_skill = 1
+	}
+
+	create_corps_commander = {
+		name = "Işık Koşaner"
+		picture = "Isik_Kosaner.dds"
+		traits = {  }
+		skill = 2
+		attack_skill = 2
+		defense_skill = 1
+		planning_skill = 1
+		logistics_skill = 1
+	}
+
+	create_corps_commander = {
+		name = "Abidin Ünal"
+		picture = "Portrait_Abidin_Uenal.dds"
+		skill = 2
+		attack_skill = 1
+		defense_skill = 1
+		planning_skill = 2
+		logistics_skill = 3
+	}
+	
+	create_corps_commander = {
+		name = "Salih Zeki Çolak"
+		picture = "Portrait_Salih_Zeki_Colak.dds"
+		skill = 2
+		attack_skill = 1
+		defense_skill = 1
+		planning_skill = 2
+		logistics_skill = 3
+	}
+	
+	create_corps_commander = {
+		name = "Zekai Aksakallı"
+		picture = "Portrait_Zekai_Aksakalli.dds"
+		skill = 2
+		attack_skill = 1
+		defense_skill = 1
+		planning_skill = 2
+		logistics_skill = 3
+	}
+	
+	create_corps_commander = {
+		name = "İsmail Metin Temel"
+		picture = "Portrait_Ismail_Metin_Temel.dds"
+		skill = 2
+		attack_skill = 1
+		defense_skill = 1
+		planning_skill = 2
+		logistics_skill = 3
+	}
+	
+		
+	load_OOB = TSK
+		TUR = {
+	         declare_war_on = { target = TSK type = annex_everything }
+	}  } } } }
+
+##Event: Turkish Civil War2
+country_event = {
+ id = icsavas.2
+ title = icsavas.2.t1
+ desc = Ticsavas.2.d1
+ picture = GFX_report_event_turkish_army_patrol
+ fire_only_once = yes
+
+   	is_triggered_only = yes
+
+
+    mean_time_to_happen = {days = 1}
+
+	option = {
+		name = icsavas.2.o1
+		ai_chance = { factor = 1}
+		TUR_akın_Öztürk = {
+    remove_unit_leader_role = yes
+}
+
+    hidden_effect = {
+	country_event = Turkey_news.8
+	retire_character = ilhan_tolu
+	retire_character = mustafa_ozsoy
+recruit_character = TUR_akın_Öztürk
+	
+	GUL = {
+	transfer_state = 791
+	transfer_state = 341
+	transfer_state = 998
+	transfer_state = 49
+
+	add_core_of = TUR
+	
+	create_field_marshal = {
+		name = "Akın Öztürk"
+		picture = "TUR_ozturk.dds"
+		traits = {  }
+		skill = 2
+		attack_skill = 3
+		defense_skill = 1
+		planning_skill = 2
+		logistics_skill = 3
+	}
+
+	create_corps_commander = {
+		name = "Mustafa Kaya"
+		picture = "TUR_mustafa_kaya.dds"
+		traits = { fortress_buster }
+		skill = 1
+		attack_skill = 2
+		defense_skill = 1
+		planning_skill = 1
+		logistics_skill = 1
+	}
+
+	create_corps_commander = {
+		name = "Murat Aygün"
+		picture = "TUR_murat_aygun.dds"
+		traits = { panzer_leader }
+		skill = 1
+		attack_skill = 1
+		defense_skill = 2
+		planning_skill = 1
+		logistics_skill = 3
+	}
+
+	create_corps_commander = {
+		name = "Adem Huduti"
+		picture = "TUR_huduti.dds"
+		traits = { organizer }
+		skill = 2
+		attack_skill = 1
+		defense_skill = 2
+		planning_skill = 2
+		logistics_skill = 2
+	}
+	
+	create_corps_commander = {
+		name = "Metin Akkaya"
+		picture = "TUR_akkaya.dds"
+		traits = { infantry_leader }
+		skill = 2
+		attack_skill = 2
+		defense_skill = 2
+		planning_skill = 2
+		logistics_skill = 3
+	}
+
+	create_corps_commander = {
+		name = "Alpaslan Çetin"
+		picture = "TUR_alpaslan.dds"
+		traits = { ambusher }
+		skill = 2
+		attack_skill = 2
+		defense_skill = 1
+		planning_skill = 3
+		logistics_skill = 1
+	}
+
+	create_corps_commander = {
+		name = "Ilhan Tolu"
+		picture = "ilhan_tolu.dds"
+		traits = {  }
+		id = 919990
+		skill = 2
+		attack_skill = 2
+		defense_skill = 1
+		planning_skill = 1
+		logistics_skill = 1
+	}
+
+	create_corps_commander = {
+		name = "Mustafa Özsoy"
+		picture = "mustafa_ozsoy.dds"
+		traits = {  }
+		id = 909990
+		skill = 2
+		attack_skill = 1
+		defense_skill = 1
+		planning_skill = 2
+		logistics_skill = 3
+	}
+	
+	create_navy_leader = {
+		name = "Hasan Kulaç"
+		picture = "TUR_kulac.dds"
+		traits = { air_controller }
+	}
+	
+	load_OOB = GUL_seperatists
+		TUR = {
+	         declare_war_on = { target = GUL type = annex_everything }
+	}  } } } } 
+
+
 
 #Ecevit gets sick
 country_event = { 
@@ -26,7 +667,6 @@ country_event = {
 		hidden_effect = {
 
 		country_event = { id = turkey.1020012 days = 3  }
-		country_event = { id = turkey.1020013 days = 13 } #14/08 AKP
 		}
 		ai_chance = { factor = 4 }
 	}
@@ -46,7 +686,6 @@ country_event = {
 	retire_country_leader = yes
 	add_stability = -0.02
 	country_event = { id = turkey.1020012 days = 1  }
-	country_event = { id = turkey.1020013 days = 13 }
 	}
 }
 
@@ -83,63 +722,6 @@ country_event = {
 		ai_chance = { factor = 50 }
 	}
 }
-
-#Early Election
-country_event = { 
-	id = turkey.1020013
-	title = turkey.1020013.t1 
-	picture = GFX_report_event_turkey_parliament
-	desc = turkey.1020013.d1 
-	is_triggered_only = yes
-	
-	option = {
-		name = turkey.1020013.o1
-			add_popularity = {
-						ideology = conservative
-							popularity = 0.20
-						}
-						set_politics = {
-							ruling_party = conservative
-							elections_allowed = yes
-						}
-
-		ai_chance = { factor = 50 }
-	}
-}
-
-#Communism in Greece and Turkey: a chance for reconciliation
-country_event = {
-	id = turkey.810
-	title = turkey.810.t1 
-	desc = turkey.810.d1 
-	picture = GFX_report_event_turkey_greece_communism
-	fire_only_once = yes
-	
-	trigger = {
-	tag = TUR
-	TUR = { exists = yes }
-	GRE = { exists = yes }
-	TUR = { has_government = communist }
-	GRE = { has_government = communist }
-	}
-	
-	mean_time_to_happen = { days = 3 }
-	
-	option = {	#Remove rivalry
-		name = turkey.810.o1
-		add_political_power = -10
-		TUR = { remove_opinion_modifier = { target = GRE modifier = rival } }
-		GRE = { remove_opinion_modifier = { target = TUR modifier = rival } }
-		ai_chance = { factor = 96 }
-	}
-	
-	option = {	#Keep rivalry
-		name = turkey.810.o2
-		ai_chance = { factor = 0 }
-		GRE = { add_opinion_modifier = { target = TUR modifier = recent_actions_negative } }
-	}
-}
-
 
 # supportkenes
  country_event = {
@@ -367,7 +949,7 @@ country_event = {
 	}
 		load_OOB = PKK_rebels
 
-	         declare_war_on = { target = TUR type = independence_wargoal }
+	         declare_war_on = { target = TUR type = annex_everything }
 	}
 country_event = {
 			id = Turkey.6400
@@ -712,6 +1294,10 @@ country_event = {
 			id =  european_union.5
 			days = 30
 		}
+		country_event = {
+			id =  turkey.82
+			days = 60
+		}
 		
 		}
 	}
@@ -928,10 +1514,24 @@ country_event = {
 	picture = GFX_report_event_turkey_uefa2000_win
 	desc = turkey.16.d1 
 	 	is_triggered_only = yes
+		
+    trigger = {
+         tag = TUR
+		 NOT = {
+		 has_capitulated = yes
+		 }
+         AND = {
+             date > 2000.5.16
+             date < 2000.5.17
+         }
+    }
+
+    mean_time_to_happen = {days = 1}
 
 	
 	option = {
 		name = turkey.16.o1
+		add_political_power = 10
 	}
 }
 	country_event = { 
@@ -1057,7 +1657,7 @@ country_event = {
 	}
 		load_OOB = PKK_rebels
 
-	         declare_war_on = { target = TUR type = independence_wargoal }
+	         declare_war_on = { target = TUR type = annex_everything }
 			 every_country = {
                     limit = {
                         has_full_control_of_state = 354 
@@ -1065,7 +1665,7 @@ country_event = {
                     PKK = {
                         declare_war_on = {
                               target = PREV
-                            type = independence_wargoal
+                            type = annex_everything
                         }
                     }
                 }
@@ -1226,9 +1826,9 @@ country_event = {
 	
 	#SAR Civil War
 country_event = {
- id = icsavas.1
- title = icsavas.1.title
- desc = icsavas.1.desc
+ id = icsavas.4
+ title = icsavas.4.title
+ desc = icsavas.4.desc
  picture = GFX_report_event_turkish_coup
  fire_only_once = yes
 
@@ -1237,7 +1837,7 @@ country_event = {
 
 
 	option = {
-		name = icsavas.1.a
+		name = icsavas.4.a
 		ai_chance = { factor = 1}
 
     hidden_effect = {

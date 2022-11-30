@@ -69,7 +69,49 @@ add_ideas = turkish_army
 		}
 	}
 	
+		#TUR_APK_army3
+	focus = {
+		id = TUR_APK_army311
+		text = "F-16"
+		icon = american_plane
+		x = -2
+		y = 1
+		cost = 7
+		relative_position_id = TUR_APK_army211
+						mutually_exclusive = { focus = TUR_APK_army411 }
+
+		prerequisite = { focus = TUR_APK_army211 }
+bypass = {
+		OR = {
+		USA = {
+			exists = no
+			}
+		has_war_with = USA 
+		}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			USA = {
+			exists = yes
+			}
+		}
+		completion_reward = {
+		USA = {add_opinion_modifier = {
+								target = TUR
+								modifier = long_term_trade_partner
+							}
+							}
+		add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount =45
+				producer = USA
+			}
 		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
 	
 	#TUR_APK_army4
 	focus = {
@@ -104,7 +146,7 @@ bypass = {
 							}
 							}
 		add_equipment_to_stockpile = {
-				type = fighter_equipment_3
+				type = CAS_equipment_2
 				amount =45
 				producer = SOV
 			}
@@ -205,6 +247,38 @@ bypass = {
 		}
 	}
 	
+	
+	#TUR_APK_army7011
+	focus = {
+		id = TUR_APK_army7011
+		text = "Buy American Plane"
+		icon = production
+		x = 0
+		y = 2
+		cost = 7
+		relative_position_id = TUR_APK_army311
+
+		prerequisite = { focus = TUR_APK_army311 }
+		prerequisite = { focus = TUR_APK_army711 }
+
+
+		completion_reward = {
+USA = {add_opinion_modifier = {
+								target = TUR
+								modifier = long_term_trade_partner
+							}
+							}
+		add_equipment_to_stockpile = {
+				type = CAS_equipment_2
+				amount =45
+				producer = USA
+			}
+		
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
 		
 
 		
@@ -1279,11 +1353,10 @@ add_tech_bonus = {
 		cost = 5
 		
 		completion_reward = {
+				add_ideas = islamist_Movements
+
 			add_political_power = 50
-  add_timed_idea = {
-                idea = GEF_Conservative_Doctrine
-                days = 1000
-            }
+  
 																		fourth_estate_conservative_increase = yes
 
 						fourth_estate_islamist_decrease = yes
@@ -1429,23 +1502,13 @@ prerequisite = {focus = kampanya3}
 prerequisite = {focus = kampanya4}		
 prerequisite = {focus = kampanya5}
 		completion_reward = {
- create_country_leader = {
-		name = "Abdullah Gül"
-		picture = "Abdullah_gul.dds"
-		ideology = right_wing_conservative
-		traits = { International_relations }
-		}
-					add_political_power =75
-
- add_popularity = {
-				ideology = conservative
-				popularity = 0.05
-			}
-		
-		}
+		add_ideas = apk_movement
+ country_event = apk.1
+ add_political_power = 35
 		ai_will_do = {
 			factor = 10
 		}
+	}
 	}
 	
 	#kampanya7
@@ -1460,6 +1523,10 @@ prerequisite = {focus = kampanya5}
 prerequisite = {focus = kampanya6}
 
 		completion_reward = {
+		 swap_ideas = {
+			remove_idea = islamist_Movements
+			add_idea  = islamist_Movements_2
+			}
 		add_political_power =50
   add_popularity = {
 				ideology = conservative
@@ -1484,6 +1551,7 @@ prerequisite = {focus = kampanya6}
 prerequisite = {focus = kampanya7}
 
 		completion_reward = {
+		remove_ideas = TUR_coalition_government
 							add_political_power =75
 
 		add_popularity = {
@@ -1508,7 +1576,7 @@ prerequisite = {focus = kampanya7}
 		icon = POL_government_question
 		x = 0
 		y = 1
-		cost = 1
+		cost = 0
 				relative_position_id = kampanya8
 prerequisite = {focus = kampanya8}
 available = { USA = {
@@ -1516,7 +1584,8 @@ available = { USA = {
 }
 }
 		completion_reward = {
- 
+  country_event = apk.2
+
 		}
 		ai_will_do = {
 			factor = 10
@@ -2552,12 +2621,7 @@ prerequisite = {focus = kampanya9}
 
 		completion_reward = {
 		add_political_power = 75
- create_country_leader = {
-		name = "Recep Tayyip Erdoğan"
-		picture = "Recep_Tayyip_Erdogan.dds"
-		ideology = right_wing_conservative
-		traits = { popular_figurehead }
-		}
+ country_event = apk.6
 		}
 		ai_will_do = {
 			factor = 10
@@ -2662,6 +2726,10 @@ prerequisite = {focus = government5}
 
 
 		completion_reward = {
+		swap_ideas = {
+			remove_idea = islamist_Movements_2
+			add_idea  = islamist_Movements_3
+			}
  add_political_power = 100
 		}
 		ai_will_do = {
@@ -2784,8 +2852,10 @@ prerequisite = {
 focus = government7}
 
 		completion_reward = {
- add_ideas = TUR_lira_movement
-		}
+	swap_ideas = {
+	add_idea = TUR_lira_movement_2
+	remove_idea = TUR_lira_movement
+}		}
 		ai_will_do = {
 			factor = 10
 		}
@@ -2939,7 +3009,7 @@ prerequisite = {focus = tl2}
 
 		completion_reward = {
  	swap_ideas = {
-	add_idea = gül
+	add_idea = gul
 	remove_idea = necdet
 }
 		}
@@ -2994,6 +3064,10 @@ prerequisite = {focus = yy1}
 				relative_position_id = yy1
 prerequisite = {focus = yy1}
 		completion_reward = {
+		 swap_ideas = {
+			remove_idea = islamist_Movements_3
+			add_idea  = islamist_Movements_4
+			}
  add_command_power = 30
 		}
 		ai_will_do = {
@@ -3049,8 +3123,8 @@ prerequisite = {focus = yy4}
 
 		completion_reward = {
  	swap_ideas = {
-	add_idea = TUR_lira_movement_2
-	remove_idea = TUR_lira_movement
+	add_idea = TUR_lira_movement_3
+	remove_idea = TUR_lira_movement_2
 }
 		}
 		ai_will_do = {
@@ -3071,8 +3145,8 @@ prerequisite = {focus = yy6}
 
 		completion_reward = {
   	swap_ideas = {
-	add_idea = TUR_lira_movement_3
-	remove_idea = TUR_lira_movement_2
+	add_idea = TUR_lira_movement_4
+	remove_idea = TUR_lira_movement_3
 }
 		}
 		ai_will_do = {
@@ -3090,8 +3164,7 @@ prerequisite = {focus = yy6}
 				relative_position_id = yy7
 prerequisite = {focus = yy7}	
 		completion_reward = {
- add_stability = -0.05
-		}
+country_event = apk.9		}
 		ai_will_do = {
 			factor = 10
 		}
@@ -3110,6 +3183,7 @@ prerequisite = {focus = yy7}
 
 
 		completion_reward = {
+		add_ideas = mavi_marmara
   add_stability = -0.05
 
 		}
@@ -3129,7 +3203,7 @@ prerequisite = {focus = yy7}
 prerequisite = {focus = marmara}
 prerequisite = {focus = ergenekon1}
 		completion_reward = {
- 
+ country_event = icsavas.2
 		}
 		ai_will_do = {
 			factor = 10
@@ -3147,13 +3221,11 @@ prerequisite = {focus = ergenekon1}
 prerequisite = {focus = 12}
 
 
-
-
-
-
-
 		completion_reward = {
- 
+  swap_ideas = {
+			remove_idea = islamist_Movements_4
+			add_idea  = islamist_Movements_5
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3170,14 +3242,9 @@ prerequisite = {focus = 12}
 				relative_position_id = yy7
 prerequisite = {focus = 12}
 
-
-
-
-
-
-
 		completion_reward = {
- 
+ add_political_power = 150
+ add_stability = 0.1
 		}
 		ai_will_do = {
 			factor = 10
@@ -3197,13 +3264,19 @@ prerequisite = {focus = typ1
 focus = typ2}
 		mutually_exclusive = {  focus = liberal1
 		 focus = te1}
-		
-
-
-
 
 		completion_reward = {
- 
+ set_party_name = {
+			ideology = islamist
+			long_name = AKP
+			name = AKP
+		}
+		 create_country_leader = {
+		name = "Ahmet Davutoğlu"
+		picture = "davutoglu.dds"
+		ideology = islamic_republican
+		traits = { friendly_islam }
+		}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3221,13 +3294,12 @@ focus = typ2}
 				relative_position_id = davut1
 prerequisite = {focus =davut1 }
 
-		
-
-
-
-
 		completion_reward = {
- 
+ add_political_power = 75
+  add_popularity = {
+		ideology = islamist		
+		popularity = 0.05
+						}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3245,13 +3317,17 @@ prerequisite = {focus =davut1 }
 				relative_position_id = davut1
 prerequisite = {focus =davut1 }
 
-		
-
-
-
 
 		completion_reward = {
- 
+ add_political_power = 50
+  add_popularity = {
+		ideology = conservative		
+		popularity = -0.1
+						}
+						  add_popularity = {
+		ideology = islamist		
+		popularity = 0.05
+						}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3270,13 +3346,13 @@ prerequisite = {focus =davut1 }
 prerequisite = {focus =davut2}
 prerequisite = {focus=davut3 }
 
-		
-
-
-
 
 		completion_reward = {
- 
+   add_popularity = {
+		ideology = islamist		
+		popularity = 0.05
+						}
+						add_stability = -0.03
 		}
 		ai_will_do = {
 			factor = 10
@@ -3288,18 +3364,16 @@ prerequisite = {focus=davut3 }
 		id = avrupa
 		text = "Negotiations with the European Union"
 		icon = generic_euroscepticism
-		x = -4
+		x = -14
 		y = 4
 		cost = 5
 				relative_position_id = davut1
 prerequisite = {focus =liberal4
 focus=te4 }
+						mutually_exclusive = { focus = brother 
+						focus = hedef }
 
-		
-
-
-
-
+	
 		completion_reward = {
  
 		}
@@ -3319,6 +3393,8 @@ focus=te4 }
 				relative_position_id = davut1
 prerequisite = {focus =davut4
 focus=te4 }
+mutually_exclusive = { focus = avrupa 
+						focus = hedef }
 
 		
 
@@ -3338,14 +3414,16 @@ focus=te4 }
 		id = hedef
 		text = "2023"
 		icon = 2023
-		x = 6
+		x = 14
 		y = 4
 		cost = 5
 				relative_position_id = davut1
 prerequisite = {focus =davut4
 focus=te4 }
 
-		
+		mutually_exclusive = { focus = avrupa 
+						focus = brother }
+
 
 
 

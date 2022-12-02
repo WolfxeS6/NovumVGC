@@ -3183,9 +3183,10 @@ prerequisite = {focus = yy7}
 
 
 		completion_reward = {
-		add_ideas = mavi_marmara
-  add_stability = -0.05
-
+add_timed_idea = {
+				idea = mavi_marmara
+				days = 750
+			}
 		}
 		ai_will_do = {
 			factor = 10
@@ -3364,45 +3365,464 @@ prerequisite = {focus=davut3 }
 		id = avrupa
 		text = "Negotiations with the European Union"
 		icon = generic_euroscepticism
-		x = -14
+		x = -7
 		y = 4
 		cost = 5
 				relative_position_id = davut1
-prerequisite = {focus =liberal4
-focus=te4 }
+		available = {has_completed_focus = liberal4}
+
 						mutually_exclusive = { focus = brother 
 						focus = hedef }
 
 	
 		completion_reward = {
- 
+ add_ideas =ROM_local_development
+ add_political_power = 150
+ every_country = {
+		limit = { is_in_faction_with = USA
+ }
+				increase_trade_influence_by_3 = yes
+				add_opinion_modifier = {
+								target = TUR
+								modifier = long_term_trade_partner
+							}
+				}
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	
-	#brother
+	#odenek
 	focus = {
-		id = brother
-		text = "Muslim Brotherhood "
-		icon = umayyad_caliphate
-		x = 1
-		y = 4
+		id = odenek
+		text = "European Grant"
+		icon = europe_tank
+		x = 0
+		y = 1
 		cost = 5
-				relative_position_id = davut1
-prerequisite = {focus =davut4
-focus=te4 }
-mutually_exclusive = { focus = avrupa 
-						focus = hedef }
+				relative_position_id = avrupa
+prerequisite = {focus =avrupa}
 
-		
+		completion_reward = {
+				add_ideas = USA_automotive_industry_funding
+
+ add_equipment_to_stockpile = { 
+				type = fighter_equipment_3 
+				amount = 250
+				producer = USA
+			}	
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#svas1
+	focus = {
+		id = svas1
+		text = "Fight with Terrorists"
+		icon = war2
+		x = -2
+		y = 2
+		cost = 5
+				relative_position_id = avrupa
+prerequisite = {focus =avrupa}
+
+		completion_reward = {
+ create_wargoal = {
+				type = annex_everything
+				target = IRQ
+			}
+			 create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+			 create_wargoal = {
+				type = annex_everything
+				target = EGY
+			}
+			 create_wargoal = {
+				type = annex_everything
+				target = LBA
+			}}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#pers1
+	focus = {
+		id = pers1
+		text = "Solve the Persian Problem"
+		icon = attack_iran
+		x = 2
+		y = 2
+		cost = 5
+				relative_position_id = avrupa
+prerequisite = {focus =avrupa}
+
+		completion_reward = {
+ create_wargoal = {
+				type = annex_everything
+				target = PER
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = GEO
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#avrupa5
+	focus = {
+		id = avrupa5
+		text = "The Front of Preparation for the Great War"
+		icon = border_war
+		x = -1
+		y = 1
+		cost = 5
+				relative_position_id = pers1
+prerequisite = {focus =pers1}
+prerequisite = {focus =svas1}
+prerequisite = {focus =odenek1}
+
+
+
+		completion_reward = {
+ create_wargoal = {
+				type = annex_everything
+				target = PAK
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = AFG
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#avrupa6
+	focus = {
+		id = avrupa6
+		text = "Democracy in the Turkish Homeland"
+		icon = war_in_asia
+		x = 1
+		y = 1
+		cost = 5
+				relative_position_id = svas1
+prerequisite = {focus =pers1}
+prerequisite = {focus =svas1}
+prerequisite = {focus =odenek1}
+
+
+		completion_reward = {
+ create_wargoal = {
+				type = annex_everything
+				target = TMS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = UZB
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = AZR
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#odenek1
+	focus = {
+		id = odenek1
+		text = "Cyprus Questions"
+		icon = GFX_focus_TUR_cyprus_question
+		x = 0
+		y = 1
+		cost = 5
+				relative_position_id = odenek
+prerequisite = {focus =odenek}
 
 
 
 
 		completion_reward = {
- 
+ transfer_state = 836
+ transfer_state = 183
+transfer_state = 187
+
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#odenek2
+	focus = {
+		id = odenek2
+		text = "Teach Democracy to Communists"
+		icon = attack_china
+		x = 0
+		y = 3
+		cost = 5
+				relative_position_id = odenek
+prerequisite = {focus =avrupa5}
+prerequisite = {focus =avrupa6}
+
+		completion_reward = {
+ create_wargoal = {
+				type = annex_everything
+				target = PRC
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+
+	
+	
+	
+	#brother
+	focus = {
+		id = brother
+		text = "Organization of the Islamic Union"
+		icon = umayyad_caliphate
+		x = 0
+		y = 4
+		cost = 5
+		available = {has_completed_focus = davut4}
+
+				relative_position_id = davut1
+
+mutually_exclusive = { focus = avrupa 
+						focus = hedef }
+
+
+		completion_reward = {
+ every_country = {
+		limit = { has_government = islamist 
+			NOT = { tag = HLS }
+			NOT = { tag = TUR }}
+							add_opinion_modifier = {
+								target = TUR
+								modifier = islam_tur	} 
+										country_event = turkey.19
+
+		}
+		create_faction = islam_union
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#brother2
+	focus = {
+		id = brother2
+		text = "Islamism in the Middle East"
+		icon = align_to_arab_league
+		x = 0
+		y = 1
+		cost = 5
+				relative_position_id = brother
+prerequisite = {focus =brother}
+		completion_reward = {
+every_country = {
+		limit = { has_idea =arab_league_member}
+		    add_stability  = -0.1
+		add_popularity = {
+				ideology = islamist
+				popularity = 0.15
+			}
+			}
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#brother3
+	focus = {
+		id = brother3
+		text = "Islamism in the Africa"
+		icon = africa2
+		x = -2
+		y = 1
+		cost = 5
+				relative_position_id = brother
+prerequisite = {focus =brother}
+		completion_reward = {
+ 	every_country = {
+		limit = { has_idea =african_union_member}
+		    add_stability  = -0.1
+		add_popularity = {
+				ideology = islamist
+				popularity = 0.15
+			}
+			}
+		
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#brother4
+	focus = {
+		id = brother4
+		text = "Islamism in the Asia"
+		icon = asia
+		x = 2
+		y = 1
+		cost = 5
+				relative_position_id = brother
+prerequisite = {focus =brother}
+		completion_reward = {
+ UZB = {
+		
+		    add_stability  = -0.1
+		add_popularity = {
+				ideology = islamist
+				popularity = 0.15
+			}}
+			 KAZ = {
+		
+		    add_stability  = -0.1
+		add_popularity = {
+				ideology = islamist
+				popularity = 0.15
+			}}
+			 AZR = {
+		
+		    add_stability  = -0.1
+		add_popularity = {
+				ideology = islamist
+				popularity = 0.15
+			}}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#brother5
+	focus = {
+		id = brother5
+		text = "Islamic Army"
+		icon = spread_islamic_revolution
+		x = 0
+		y = 2
+		cost = 5
+				relative_position_id = brother
+prerequisite = {focus =brother3}
+prerequisite = {focus =brother2}
+prerequisite = {focus =brother4}
+
+		completion_reward = {
+ every_country = {
+		limit ={	islamist > 0.3}
+		limit ={		is_in_faction_with = TUR}
+		limit = { has_government > islamist  }
+
+					start_civil_war = {
+			ruling_party = islamist
+			ideology = PREV
+			size = 0.5
+
+			}
+}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#brother6
+	focus = {
+		id = brother6
+		text = "War Against the Opponents of Islam"
+		icon = attack_csto
+		x = 2
+		y = 3
+		cost = 5
+				relative_position_id = brother
+prerequisite = {focus =brother5}
+
+		completion_reward = {
+ create_wargoal = {
+							type = annex_everything
+							target = SOV
+			}
+			 create_wargoal = {
+							type = annex_everything
+							target = PRC
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#brother7
+	focus = {
+		id = brother7
+		text = "Battle Against the Crusader Army"
+		icon = attack_europe
+		x = -2
+		y = 3
+		cost = 5
+				relative_position_id = brother
+prerequisite = {focus =brother5}
+
+		completion_reward = {
+ create_wargoal = {
+							type = annex_everything
+							target = ENG
+			}
+			create_wargoal = {
+							type = annex_everything
+							target = GER
+			}
+			create_wargoal = {
+							type = annex_everything
+							target = USA
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#brother8
+	focus = {
+		id = brother8
+		text = "The Century of Theocracy"
+		icon = jihad
+		x = 0
+		y = 4
+		cost = 5
+				relative_position_id = brother
+prerequisite = {focus =brother6
+focus =brother7}
+
+
+		completion_reward = {
+ 		add_ideas = additional_recruits4
+					add_ideas = idea_focus_generic_jihad
+
 		}
 		ai_will_do = {
 			factor = 10
@@ -3414,22 +3834,255 @@ mutually_exclusive = { focus = avrupa
 		id = hedef
 		text = "2023"
 		icon = 2023
-		x = 14
+		x = 7
 		y = 4
 		cost = 5
+				available = {has_completed_focus = te4}
+
 				relative_position_id = davut1
-prerequisite = {focus =davut4
-focus=te4 }
+
 
 		mutually_exclusive = { focus = avrupa 
 						focus = brother }
 
+		completion_reward = {
+		every_country = {
+		limit = { has_opinion = {
+    target = TUR
+    value > 90
+}  }
+TUR ={
+annex_country = {
+    target = PREV
+    transfer_troops = yes
+}}
+		}
+		has_opinion = { target = TUR value > 100 }
+ add_ideas = hedef_2023
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#20232
+	focus = {
+		id = hedef2
+		text = "Expedition to Bulgaria"
+		icon = european_affairs
+		x = 1
+		y = 1
+		cost = 5
+				relative_position_id = hedef
+prerequisite = {focus =hedef}
+		completion_reward = {
+ create_wargoal = {
+							type = annex_everything
+							target = BUL
+			}
+			 add_state_claim = 211
+		        add_state_claim = 212
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#20233
+	focus = {
+		id = hedef3
+		text = "Own the Arab Lands"
+		icon = attack_saudi_arabia_better
+		x = -1
+		y = 1
+		cost = 5
+				relative_position_id = hedef
+prerequisite = {focus =hedef}
+		completion_reward = {
+ create_wargoal = {
+							type = annex_everything
+							target = SYR
+			}
+			 create_wargoal = {
+							type = annex_everything
+							target = IRQ
+			}
+			 create_wargoal = {
+							type = annex_everything
+							target = LEB
+			}
+			 create_wargoal = {
+							type = annex_everything
+							target = JOR
+			}
+			create_wargoal = {
+							type = annex_everything
+							target = SAU
+			}
+			create_wargoal = {
+							type = annex_everything
+							target = KUW
+			}
+			create_wargoal = {
+							type = annex_everything
+							target = QAT
+			}
+			create_wargoal = {
+							type = annex_everything
+							target = BAR
+			}
+		
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#20234
+	focus = {
+		id = hedef4
+		text = "The Batumi Problem"
+		icon = attack_georgia
+		x = 0
+		y = 2
+		cost = 5
+				relative_position_id = hedef
+prerequisite = {focus =hedef}
+		completion_reward = {
+ 			 add_state_claim = 1159
 
-
-
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#20235
+	focus = {
+		id = hedef5
+		text = "The Armenian Problem"
+		icon = attack_armenia
+		x = 0
+		y = 3
+		cost = 5
+				relative_position_id = hedef
+prerequisite = {focus =hedef4}
+		completion_reward = {
+ create_wargoal = {
+							type = annex_everything
+							target = ARM
+			}
+			create_wargoal = {
+							type = annex_everything
+							target = NGK
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#20236
+	focus = {
+		id = hedef6
+		text = "The Third Balkan War"
+		icon = balkan_conflict
+		x = 1
+		y = 1
+		cost = 5
+				relative_position_id = hedef2
+prerequisite = {focus =hedef2}
+		completion_reward = {
+ create_wargoal = {
+							type = annex_everything
+							target = MAC
+			}
+			 create_wargoal = {
+							type = annex_everything
+							target = ALB
+			}
+			 create_wargoal = {
+							type = annex_everything
+							target = SER
+			}
+			 create_wargoal = {
+							type = annex_everything
+							target = KOS
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#20237
+	focus = {
+		id = hedef7
+		text = "African Sovereignty"
+		icon = african_expedition
+		x = -1
+		y = 1
+		cost = 5
+				relative_position_id = hedef3
+prerequisite = {focus =hedef3}
+		completion_reward = {
+  create_wargoal = {
+							type = annex_everything
+							target = EGY
+			}
+			 create_wargoal = {
+							type = annex_everything
+							target = LBA
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#20238
+	focus = {
+		id = hedef8
+		text = "Destroy NATO"
+		icon = attack_nato
+		x = -1
+		y = 4
+		cost = 5
+				relative_position_id = hedef
+prerequisite = {focus =hedef5}
+prerequisite = {focus =hedef6}
+prerequisite = {focus =hedef7}
 
 		completion_reward = {
- 
+  create_wargoal = {
+							type = annex_everything
+							target = USA
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	#20239
+	focus = {
+		id = hedef9
+		text = "Destroy CSTO"
+		icon = attack_csto
+		x = 1
+		y = 4
+		cost = 5
+				relative_position_id = hedef
+prerequisite = {focus =hedef5}
+prerequisite = {focus =hedef6}
+prerequisite = {focus =hedef7}
+
+		completion_reward = {
+  create_wargoal = {
+							type = annex_everything
+							target = SOV
+			}
 		}
 		ai_will_do = {
 			factor = 10

@@ -1,0 +1,181 @@
+focus_tree = {
+	id = NMO_focus
+
+    country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = NMO
+		}
+	}
+	
+	default = no
+
+    continuous_focus_position = { x = 60 y = 7000 }
+
+    focus = {
+		id = NMO_initial_stabilization
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Crack_Down_Rioters
+		x = 4
+		y = 1
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            country_event = {
+            id = cw_nmo.1
+            }
+		}
+	}
+
+	focus = {
+		id = NMO_rosguard_punititive_squads
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Mandatory_Conscription
+		x = 4
+		y = 2
+		cost = 10
+		 prerequisite = { focus = NMO_initial_stabilization }
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            swap_ideas = {
+    		remove_idea = nmo_workers_movement_1
+   			 add_idea = nmo_workers_movement_2
+}
+		}
+	}
+
+	focus = {
+		id = NMO_contact_finland
+		icon = NVGC_Russia_Focus_Icon_Fight_the_Oligarchs
+		x = 6
+		y = 2
+		cost = 10
+		 prerequisite = { focus = NMO_initial_stabilization }
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            custom_effect_tooltip = NMO_contact_finland_TT
+			FIN = {
+				country_event = {
+					id = cw_nmo.2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = NMO_shake_army_command
+		icon = NVGC_Russia_Focus_Icon_To_Serve_Russia
+		x = 2
+		y = 2
+		cost = 10
+		 prerequisite = { focus = NMO_initial_stabilization }
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            swap_ideas = {
+    		remove_idea = nmo_military_1
+   			 add_idea = nmo_military_2
+}
+		}
+	}
+
+	focus = {
+		id = NMO_organization_effort
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Enlist_Talented_Officers
+		x = 1
+		y = 3
+		cost = 10
+		 prerequisite = { focus = NMO_shake_army_command }
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            swap_ideas = {
+    		remove_idea = nmo_military_2
+   			 add_idea = nmo_military_3
+}
+		}
+	}
+
+	focus = {
+		id = NMO_sailors_mobilization
+		icon = NVGC_Russia_Civil_War_Focus_Icon_To_Serve_Mother_Russia
+		x = 3
+		y = 3
+		cost = 10
+		 prerequisite = { focus = NMO_shake_army_command }
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            NMO = {load_oob = "NMO_sailors" }
+		}
+	}
+
+	focus = {
+		id = NMO_archangelsk_defensive_district
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Fortify_Moscow
+		x = 2
+		y = 4
+		cost = 10
+		 prerequisite = { focus = NMO_organization_effort }
+		 prerequisite = { focus = NMO_sailors_mobilization }
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            214 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 3338
+						instant_build = yes
+					}
+				}
+		
+			}  
+			214 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 1
+						province = 312
+						instant_build = yes
+					}
+				}
+		
+			}  
+		}
+	}
+}

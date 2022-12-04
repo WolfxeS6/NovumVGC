@@ -259,46 +259,34 @@ country_event = {
               }
 			  set_equipment_fraction = 1
 			  }
-			NMO = {
-			 set_state_owner = 213
-set_state_controller = 213
-set_state_owner = 214
-set_state_controller = 214
-set_state_owner = 262
-set_state_controller = 262
-set_state_owner = 351
-set_state_controller = 351
-set_state_owner = 215
-set_state_controller = 215
-set_state_owner = 147
-set_state_controller = 147
-set_state_owner = 772
-set_state_controller = 772
-			}
-			SMO = {
-			 set_state_owner = 217
-set_state_controller = 217
-set_state_owner = 245
-set_state_controller = 245
-set_state_owner = 236
-set_state_controller = 236
-set_state_owner = 237
-set_state_controller = 237
-set_state_owner = 238
-set_state_controller = 238
-set_state_owner = 218
-set_state_controller = 218
-set_state_owner = 234
-set_state_controller = 234
-set_state_owner = 233
-set_state_controller = 233
-set_state_owner = 235
-set_state_controller = 235
-set_state_owner = 828
-set_state_controller = 828
-set_state_owner = 232
-set_state_controller = 232
-			}
+	 		SOV = {
+				  transfer_units_fraction= {
+   					 target = OMA
+    						size = 1
+    					stockpile_ratio = 0
+   					 army_ratio = 0
+    					navy_ratio = 0
+    					air_ratio = 1
+				}
+			  }
+			  SOV = {
+				  load_focus_tree = SOV_cw_focus
+			  }
+			  SOV = {
+				  remove_ideas = {
+    				SOV_depopulation
+   					idea_united_nations_security_council_member
+					SOV_corrupt_oligarchy
+					SOV_deindustrialisation
+					SOV_utechka_mozgov
+					SOV_low_industrial_organisation
+					SOV_expluatate_nation
+				}
+			  }
+			  BLR = { leave_faction = yes }
+			  ARM = { leave_faction = yes }
+			  KYR = { leave_faction = yes }
+			  TAJ = { leave_faction = yes }
 		RCO = {
 			 set_state_owner = 195
 set_state_controller = 195
@@ -365,68 +353,6 @@ set_state_controller = 240
 			 set_state_owner = 903
 set_state_controller = 903
 		}
-		RCO = {
-			add_state_core = 195
-			 add_state_core = 146
-			 add_state_core = 216
-			 add_state_core = 244
-			 add_state_core = 208
-			 add_state_core = 263
-			 add_state_core = 209
-			 add_state_core = 604
-			 add_state_core = 210
-			 add_state_core = 246
-			 add_state_core = 247
-			 add_state_core = 248
-			 add_state_core = 264
-			 add_state_core = 253
-			 add_state_core = 219
-			 add_state_core = 242
-			 add_state_core = 243
-			 add_state_core = 224
-			 add_state_core = 205
-			 add_state_core = 223
-			 add_state_core = 254
-			 add_state_core = 252
-			 add_state_core = 220
-			 add_state_core = 222
-			 add_state_core = 258
-			 add_state_core = 257
-			 add_state_core = 255
-			 add_state_core = 250
-			 add_state_core = 239
-			 add_state_core = 260
-			 add_state_core = 240
-			 add_state_core = 903
-		}
-		SOV = {
-    		if = {
-       			limit = {
-            		has_dlc = "Together for Victory"
-        		}
-        		set_autonomy = {
-            		target = SMO
-            		autonomous_state = autonomy_puppet
-        		}
-        		else = {
-            		puppet = SMO
-        		}
-    		}
-		}
-		SOV = {
-    		if = {
-       			limit = {
-            		has_dlc = "Together for Victory"
-        		}
-        		set_autonomy = {
-            		target = NMO
-            		autonomous_state = autonomy_puppet
-        		}
-        		else = {
-            		puppet = NMO
-        		}
-    		}
-		}
 		every_state = {
 			limit = {
 				is_claimed_by = SOV
@@ -462,6 +388,7 @@ country_event = {
 		add_political_power = -10
 		hidden_effect = {
 			set_global_flag = second_october
+			set_global_flag = small_second_october
 		RCO = {
 			 set_state_owner = 195
 set_state_controller = 195
@@ -533,18 +460,18 @@ set_state_controller = 258
 			}
 
 
-#Communist revolution in Russia (1)
+#Communist revolution in Russia
 news_event = {
 	id = news.834
 	title = news.834.t
 	desc = news.834.d
-	picture = GFX_soviet_power_russia
+	picture = GFX_news_soviet_power_russia
 	
 	is_triggered_only = yes
 	major = yes
 	
 	option = {	#New hope for the mankind
-		name = news.834.o1
+		name = news.834.a
 		trigger = {
 			OR = {
 				has_government = communist
@@ -554,16 +481,112 @@ news_event = {
 	}
 	
 	option = {	#Empire strikes back
-		name = news.834.o2
+		name = news.834.b
 		trigger = {
 			NOT = { has_government = communist }
 		}
 	}
-	option = {	#The devil returns!
-		name = news.834.o3
+}
+
+#Limonov
+news_event = {
+	id = news.835
+	title = news.835.t
+	desc = news.835.d
+	picture = GFX_event_news_nazbol_miting
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#New hope for the mankind
+		name = news.835.a
+	}
+}
+
+#Communists win cw
+news_event = {
+	id = news.836
+	title = news.836.t
+	desc = news.836.d
+	picture = GFX_events_new_ucf_won_cw
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#New hope for the mankind
+		name = news.836.a
 		trigger = {
-			original_tag = POL
+			OR = {
+				has_government = communist
+				original_tag = DRK
+			}
+		}
+	}
+	
+	option = {	#Empire strikes back
+		name = news.836.b
+		trigger = {
 			NOT = { has_government = communist }
 		}
+	}
+}
+
+#federal government wins cw
+news_event = {
+	id = news.837
+	title = news.837.t
+	desc = news.837.d
+	picture = GFX_events_news_fgwincw
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#ok
+		name = news.837.a
+	}
+}
+
+#independent cossacks
+news_event = {
+	id = news.838
+	title = news.838.t
+	desc = news.838.d
+	picture = GFX_events_news_independent_cossacks
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#ok
+		name = news.838.a
+	}
+}
+
+#lebed winc cw
+news_event = {
+	id = news.839
+	title = news.839.t
+	desc = news.839.d
+	picture = GFX_event_news_lebedwincw
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#ok
+		name = news.839.a
+	}
+}
+
+#zk revolt
+news_event = {
+	id = news.840
+	title = news.840.t
+	desc = news.840.d
+	picture = GFX_event_news_zek_revolt
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {	#ok
+		name = news.840.a
 	}
 }

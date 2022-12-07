@@ -2,8 +2,264 @@
 # Taiwanese Events
 ###########################
 
+add_namespace = piotrtaiwan
 add_namespace = thundertaiwan
 
+country_event = {
+	id = piotrtaiwan.1
+	title = piotrtaiwan.1_t
+	desc = piotrtaiwan.1_d
+	picture = GFX_report_event_war
+	is_triggered_only = yes
+	
+	option = { #Start plotting
+	name = piotrtaiwan.o1
+	ai_chance = { factor = 10 }
+	custom_effect_tooltip = CHI_the_military_will_interupt_the_elections
+	set_country_flag = CHI_military_coup_flag	
+	hidden_effect = {
+	country_event = { 
+                          id = piotrtaiwan.2
+                          days = 2
+                          random = 80
+                     }
+	}
+	}
+	option = { # Don't (historical)
+	name = piotrtaiwan.o1
+	ai_chance = { factor = 90 }
+    }
+}
+
+country_event = { #a little plottin'
+	id = piotrtaiwan.2
+	title = piotrtaiwan.2_t
+	desc = piotrtaiwan.2_d
+	picture = GFX_report_event_political_deal
+	is_triggered_only = yes
+	
+	option = { #Start plotting
+	name = piotrtaiwan2.o1
+	add_popularity = {
+				ideology = nationalist
+				popularity = 0.03
+			}
+	}
+}
+
+country_event = { #the coup!
+	id = piotrtaiwan.3
+	title = piotrtaiwan.3_t
+	desc = piotrtaiwan.3_d
+	picture = GFX_report_event_political_deal
+	is_triggered_only = yes
+	
+	option = { #Start plotting
+	name = piotrtaiwan3.o1
+	 add_ideas = CHI_a_nation_in_flames
+	 set_politics = {
+			    ruling_party = nationalist
+		        elections_allowed = no
+		 }
+				add_popularity = { 
+		        ideology = nationalist
+			    popularity = 0.15
+		    }
+	}
+}
+
+country_event = { #the elections
+	id = piotrtaiwan.4
+	title = piotrtaiwan.4_t
+	desc = piotrtaiwan.4_d
+	picture = GFX_report_event_coup_political_agreement
+	is_triggered_only = yes
+	
+	option = { 
+	name = piotrtaiwan4.o1 #kmt wins
+				add_popularity = { 
+		        ideology = conservative
+			    popularity = 0.05
+		    }
+	}
+	
+	option = {
+	name = piotrtaiwan4.o2 #progressive people wins
+			set_politics = {
+			ruling_party = progressive
+		    elections_allowed = yes
+		    }
+			add_popularity = { 
+		    ideology = progressive
+			popularity = 0.05
+		    }
+	}
+	
+	option = {
+	name = piotrtaiwan4.o3 #reactionary people wins
+			set_politics = {
+			ruling_party = reactionary
+		    elections_allowed = yes
+		    }
+			add_popularity = { 
+		    ideology = reactionary
+			popularity = 0.15
+		    }
+	}
+}
+
+country_event = { #on fire once more
+	id = piotrtaiwan.5
+	title = piotrtaiwan.5_t
+	desc = piotrtaiwan.5_d
+	picture = GFX_report_event_coup_political_agreement
+	is_triggered_only = yes
+	
+	option = { 
+	name = piotrtaiwan5.o1 #zad
+				add_political_power = -300
+				add_stability = -0.15
+				add_war_support = -0.35
+				add_ideas = CHI_a_nation_in_flames
+				add_popularity = { 
+		        ideology = communist
+			    popularity = 0.3
+		    }
+	}
+}
+
+country_event = { #Boycot
+	id = piotrtaiwan.6
+	title = piotrtaiwan.6_t
+	desc = piotrtaiwan.6_d
+	picture = GFX_report_event_coup_political_agreement
+	is_triggered_only = yes
+	
+	option = { 
+	name = piotrtaiwan6.o1 #zad
+				add_timed_idea = {
+				idea = CHI_products_boycotted
+				days = 200
+			   } 
+	}
+}
+
+#Mass protests
+country_event = {
+	id = piotrtaiwan.7
+	title = piotrtaiwan.7.t
+	desc = piotrtaiwan.7.d
+	picture = GFX_report_event_political_deal
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = piotrtaiwan.7.o1
+		CHI = { annex_country = { target = YUG transfer_troops = yes } }
+		ai_chance = {
+			factor = 20
+	   }
+	}
+	
+	option = {
+		name = piotrtaiwan.7.o2
+		hidden_effect = {
+		division_template = {
+						name = "Rebels"
+						priority = 1
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+				
+		    	   		 	infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+				
+						}
+						support = {
+						}
+					}
+		596 = {
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+				}
+		613 = {
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+				}
+		593 = {
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+				}
+
+			595 = {
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+				}
+
+        591 = {
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+					create_unit = {
+						division = "name = \"Rebels\" division_template = \"Rebels\" start_experience_factor = 0.2" 
+						owner = CHI
+					}
+			}				
+		}
+		CHI = {
+		declare_war_on = { 
+		    type = annex_everything 
+			target = PRC
+		}
+		}
+		PRC = {
+		release = TIB
+		declare_war_on = {
+        target = TIB
+        type = annex_everything
+        }
+		}
+		PRC = { transfer_units_fraction = {
+	target = TIB
+	size = 0.1
+	stockpile_ratio = 0.01
+	army_ratio = 0.1 
+	 } 
+	}
+		ai_chance = {
+			factor = 80
+	   }
+	}
+}
+
+###old
 country_event = {
 	id = thundertaiwan.1
 	title = thundertaiwan.1_title
@@ -110,7 +366,7 @@ country_event = {
 	option = { # Let them join
 		name = "thundertaiwan.3_option1"
 		ai_chance = { factor = 70 }
-		ENG = { add_to_faction = CHI }
+		USA = { add_to_faction = CHI }
 		add_ai_strategy = {
                             type = alliance
                             id = CHI
@@ -123,13 +379,7 @@ country_event = {
 	}
 	option = { # Do not let them join
 		name = "thundertaiwan.3_option2"
-		ai_chance = { factor = 30 }
-    reverse_add_opinion_modifier = {
-    target = CHI
-    modifier = medium_decrease }
-	reverse_add_opinion_modifier = {
-    target = PRC
-    modifier = medium_increase }
+		ai_chance = { factor = 0 }
 	CHI = {country_event = { id = thundertaiwan.32 }}
 }
 }

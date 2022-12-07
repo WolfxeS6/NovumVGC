@@ -1,0 +1,200 @@
+focus_tree = {
+	id = tur_com
+	default = no
+		continuous_focus_position = { x = 0 y = 2500 } 
+		
+		
+		#propaganda1
+	focus = {
+		id = propaganda1
+		text = "Propaganda Work with Young People"
+		icon = POL_commie_strike
+		x = 0
+		y = 0
+		cost = 3
+					
+		completion_reward = {
+		add_political_power = 30
+add_popularity = {
+							ideology = communist
+							popularity = 0.05
+						}
+				
+	
+	}
+	}
+	
+	
+		#propaganda2
+	focus = {
+		id = propaganda2
+		text = "Fight Fascism"
+		icon = POL_commie_destroy_facism
+		x = -1
+		y = 1
+		cost = 3
+		relative_position_id = propaganda1
+
+								prerequisite = { focus = propaganda1 }
+
+		completion_reward = {
+		add_political_power = 30
+		add_popularity = {
+							ideology = fascist
+							popularity = -0.03
+						}
+add_popularity = {
+							ideology = communist
+							popularity = 0.03
+						}
+				
+		
+	}
+	}
+	
+	#propaganda3
+	focus = {
+		id = propaganda3
+		text = "Fight Capitalism"
+		icon = capitalist_attack
+		x = 1
+		y = 1
+		cost = 3
+		relative_position_id = propaganda1
+
+								prerequisite = { focus = propaganda1 }
+
+		completion_reward = {
+		add_political_power = 30
+every_country = {
+				limit = {
+					OR = {
+						has_government = market_liberal
+						has_idea = free_trade
+					}
+				}
+				add_opinion_modifier = {
+					target = TUR
+					modifier = communist_diplomacy
+				}
+			}
+			add_popularity = {
+							ideology = communist
+							popularity = 0.03
+						}
+				
+		
+	}
+	}
+	
+	#propaganda4
+	focus = {
+		id = propaganda4
+		text = "Rise Of Atheism"
+		icon = communism38
+		x = 0
+		y = 2
+		cost = 3
+		relative_position_id = propaganda1
+		prerequisite = { focus = propaganda3}
+prerequisite = {focus = propaganda2								}
+		 completion_reward = {
+		 add_ideas = POL_no_more_gods
+			add_popularity = {
+				ideology = islamist
+				popularity = -0.05			}
+		}			
+	}
+	
+	#propaganda5
+	focus = {
+		id = propaganda5
+		text = "Crackdown on Nationalist"
+		icon = GFX_focus_focus_fra_fascist_threat
+		x = -2
+		y = 3
+		cost = 3
+		relative_position_id = propaganda1
+		prerequisite = { focus = propaganda4}
+		 completion_reward = {
+		 fourth_estate_nationalist_decrease = yes
+			fourth_estate_fascist_decrease = yes
+			fourth_estate_monarchist_decrease = yes
+			add_political_power = 50
+			add_popularity = {
+				ideology = nationalist
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = monarchist
+				popularity = -0.05
+			}		}
+		}			
+	
+	#propaganda6
+	focus = {
+		id = propaganda6
+		text = "Crackdown on Democrats"
+		icon = POL_commie_destroy_capitalism
+		x = 2
+		y = 3
+		cost = 3
+		relative_position_id = propaganda1
+		prerequisite = { focus = propaganda4}
+		 completion_reward = {
+					fourth_estate_conservative_decrease = yes
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_social_liberal_decrease = yes
+			fourth_estate_market_liberal_decrease = yes
+			fourth_estate_democratic_socialist_decrease = yes
+			fourth_estate_progressive_decrease = yes
+			add_political_power = 50
+			add_popularity = {
+				ideology = reactionary
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}		}
+		}	
+
+
+#propaganda8
+	focus = {
+		id = propaganda8
+		text = "Red Revolution"
+		icon = POL_communist_revolution
+		x = 0
+		y = 4
+		cost = 3
+		relative_position_id = propaganda1
+		prerequisite = { focus = propaganda5
+		focus = propaganda6}
+		 completion_reward = {
+		 country_event = icsavas.3
+		 		remove_ideas = necdet
+								remove_ideas = TUR_coalition_government
+		 load_focus_tree = red_reb		
+add_stability = -0.1
+
+					
+		}
+}					
+		} 

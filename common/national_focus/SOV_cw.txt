@@ -1,0 +1,630 @@
+focus_tree = {
+	id = SOV_cw_focus
+
+    country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = SOV
+		}
+	}
+	
+	default = no
+
+    continuous_focus_position = { x = 60 y = 7000 }
+
+    focus = {
+		id = SOV_solving_initial_chaos
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Crack_Down_Rioters
+		x = 17
+		y = 0
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            random_list = {
+                20 = {
+                    country_event= { id = cw.3 }
+                }
+                50 = {
+                    country_event= { id = cw.4 }
+                }
+                30 = {
+                    country_event= { id = cw.5 }
+                }
+            }
+			country_event = {
+            id = cw.6
+            }
+			country_event = {
+            id = cw.7
+            }
+			country_event = {
+            id = cw.8
+            }
+		}
+	}
+
+	focus = {
+		id = SOV_counter_terrorist_operation
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Anti-Communist_Propaganda
+		x = 17
+		y = 1
+		prerequisite = { focus = SOV_solving_initial_chaos }
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+		will_lead_to_war_with = RCO
+		available_if_capitulated = no
+		
+		completion_reward = {
+		
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+add_timed_idea = {
+    idea = SOV_cw_counterterrorist_operation
+    days = 50
+}
+		}
+	}
+	###army
+
+	focus = {
+		id = SOV_martial_law_in_army
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Mandatory_Conscription
+		x = 10
+		y = 2
+		prerequisite = { focus = SOV_counter_terrorist_operation }
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_arm_rights
+		icon = NVGC_Russia_Civil_War_Focus_Icon_To_Serve_Mother_Russia
+		x = 7
+		y = 3
+		prerequisite = { focus = SOV_martial_law_in_army }
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_focus_on_kuzbass
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Military_Jingoism
+		x = 9
+		y = 3
+		prerequisite = { focus = SOV_focus_on_rco }
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+		mutually_exclusive = {
+		focus = SOV_focus_on_rco
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_focus_on_rco
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Military_Jingoism
+		x = 11
+		y = 3
+		prerequisite = { focus = SOV_martial_law_in_army }
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+		mutually_exclusive = {
+		focus = SOV_focus_on_kuzbass
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_rosguard_expansion
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Enlist_Talented_Officers
+		x = 10
+		y = 4
+		prerequisite = {
+		focus = SOV_focus_on_kuzbass
+		focus = SOV_focus_on_rco
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_counter_partisan_squads
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Anti_Communist_Death_Squads
+		x = 9
+		y = 5
+		prerequisite = {
+		focus = SOV_rosguard_expansion
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_shrafbats
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Rejoice_in_Death
+		x = 11
+		y = 5
+		prerequisite = {
+		focus = SOV_rosguard_expansion
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_solving_army_chaos
+		icon = NVGC_Russia_Focus_Icon_To_Serve_Russia
+		x = 10
+		y = 6
+		prerequisite = {
+		focus = SOV_counter_partisan_squads
+		}
+		prerequisite = {
+		focus = SOV_shrafbats
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	##### economy
+
+	
+focus = {
+		id = SOV_adresing_oligarchs
+		icon = NVGC_Russia_Focus_Icon_Support_the_Oligarchy
+		x = 13
+		y = 3
+		prerequisite = {
+		focus = SOV_counter_terrorist_operation
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_initial_industry_revitalization
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Rebuilding_Mother_Russia
+		x = 13
+		y = 4
+		prerequisite = {
+		focus = SOV_adresing_oligarchs
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_orginizing_industry
+		icon = NVGC_Russia_Focus_Icon_Rebuild_Russias_Strength
+		x = 13
+		y = 5
+		prerequisite = {
+		focus = SOV_initial_industry_revitalization
+		}
+		prerequisite = {
+		focus = SOV_supress_strikes
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	### internal politics
+
+	focus = {
+		id = SOV_the_enemy_within
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Red_Scare_in_Russia
+		x = 17
+		y = 3
+		prerequisite = {
+		focus = SOV_counter_terrorist_operation
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_supress_strikes
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Crack_Down_Rioters
+		x = 15
+		y = 4
+		prerequisite = {
+		focus = SOV_the_enemy_within
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_supress_local_soviets
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Establish_Siberian_Labor_Camps
+		x = 17
+		y = 4
+		prerequisite = {
+		focus = SOV_the_enemy_within
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_disband_workers_unions
+		icon = NVGC_Russia_Civil_War_Focus_Icon_State-Sponsered_Trials
+		x = 19
+		y = 4
+		prerequisite = {
+		focus = SOV_the_enemy_within
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_orthodox_militia
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Eastern_Orthodoxy
+		x = 17
+		y = 5
+		prerequisite = {
+		focus = SOV_supress_local_soviets
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	### foreign policy 
+
+	focus = {
+		id = SOV_foreign_connections
+		icon = NVGC_Russia_Focus_Icon_Putin_In_Office
+		x = 22
+		y = 3
+		prerequisite = {
+		focus = SOV_counter_terrorist_operation
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_limited_support
+		icon = NVGC_Russia_Focus_Icon_Strengthen_the_Russian_Orthodox_Church
+		x = 21
+		y = 4
+		prerequisite = {
+		focus = SOV_foreign_connections
+		}
+		mutually_exclusive = {
+		focus = SOV_sell_russia
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_sell_russia
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Honor_the_White_Army
+		x = 23
+		y = 4
+		prerequisite = {
+		focus = SOV_foreign_connections
+		}
+		mutually_exclusive = {
+		focus = SOV_limited_support
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_belarus_question
+		icon = NVGC_Russia_Focus_Icon_Strengthen_the_CSTO
+		x = 22
+		y = 5
+		prerequisite = {
+		focus = SOV_limited_support
+		focus = SOV_sell_russia
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_treaty_with_japan
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Anti-Communist_Propaganda
+		x = 20
+		y = 6
+		prerequisite = {
+		focus = SOV_belarus_question
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_treaty_with_usa
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Request_American_Aid
+		x = 22
+		y = 6
+		prerequisite = {
+		focus = SOV_belarus_question
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+	focus = {
+		id = SOV_treaty_with_china
+		icon = NVGC_Russia_Civil_War_Focus_Icon_Seek_Chinese_Aid
+		x = 24
+		y = 6
+		prerequisite = {
+		focus = SOV_belarus_question
+		}
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = RCO
+    			type = annex_everything
+}	
+		}
+	}
+
+
+
+}

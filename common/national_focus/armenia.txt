@@ -15,7 +15,7 @@ focus_tree = {
     focus = {
 		id = ARM_new_millennia
 		icon = construction2
-		x = 40
+		x = 41
 		y = 0
 		cost = 4
 		
@@ -341,7 +341,7 @@ focus_tree = {
     focus = {
 		id = ARM_beyond_our_borders
 		icon = construction2
-		x = 29
+		x = 30
 		y = 0
 		cost = 6
 		
@@ -673,6 +673,9 @@ focus_tree = {
 
 		prerequisite = {
             focus = ARM_our_neighbours
+		}
+		NOT = {
+			has_completed_focus = ARM_exonorate_the_hero
 		}
 
         relative_position_id = ARM_our_neighbours
@@ -1033,7 +1036,7 @@ focus_tree = {
 	focus = {
 		id = ARM_trust_in_the_clans
 		icon = fascism11
-		x = -5
+		x = -6
 		y = 1
 		cost = 6
 
@@ -1303,6 +1306,9 @@ focus_tree = {
 		cost = 6
 		available = {
 			has_country_flag = ARM_hero_jailed
+			NOT = {
+				has_completed_focus = ARM_negotiate_with_azeris
+			}
 		}
 		mutually_exclusive = {
 			focus = ARM_trust_in_the_clans
@@ -1317,6 +1323,7 @@ focus_tree = {
 		
 		completion_reward = {
 			add_stability = -0.1
+			country_event = ARM.2
 		}
 		
 		ai_will_do = {
@@ -1428,7 +1435,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_secure_yerkrapah
-		icon = GFX_goal_generic_national_unity
+		icon = GFX_focus_SWI_issue_war_bonds
 		x = 2
 		y = 1
 		cost = 6
@@ -1463,6 +1470,7 @@ focus_tree = {
 		relative_position_id = ARM_secure_generals
 		
 		completion_reward = {
+			country_event = ARM.3
 		}
 		
 		ai_will_do = {
@@ -1550,6 +1558,11 @@ focus_tree = {
 		relative_position_id = ARM_purge_the_clans
 		
 		completion_reward = {
+			remove_ideas = ARM_corruption
+			add_timed_idea = {
+				idea = ARM_corruption_fighting
+				days = 180
+			}
 		}
 		
 		ai_will_do = {
@@ -1566,8 +1579,28 @@ focus_tree = {
 			focus = ARM_patriotism_will_overcome_corruption
 		}
 		relative_position_id = ARM_patriotism_will_overcome_corruption
+		bypass = {
+			NOT = {
+				NGK = {is_puppet_of = ARM}
+			}
+		}
 		
 		completion_reward = {
+			832 = {
+				add_core_of = ARM
+			}
+			annex_country = {
+				target = NGK
+				transfer_troops = yes
+			}
+			AZR = {
+				add_opinion_modifier = {
+					target = ARM
+					modifier = imminent_danger_to_national_security
+				}
+			}
+			add_stability = 0.05
+			add_war_support = 0.02
 		}
 		
 		ai_will_do = {
@@ -1586,6 +1619,10 @@ focus_tree = {
 		relative_position_id = ARM_unify_with_kabbach
 		
 		completion_reward = {
+			add_timed_idea = {
+				idea = ARM_diaspora_returns
+				days = 200
+			}
 		}
 		
 		ai_will_do = {
@@ -1595,7 +1632,7 @@ focus_tree = {
 	focus = {
 		id = ARM_reject_the_mafia
 		icon = support_democracy
-		x = 5
+		x = 6
 		y = 1
 		cost = 6
 		mutually_exclusive = {
@@ -1608,6 +1645,356 @@ focus_tree = {
 			focus = ARM_recovery_from_Parliment_shooting
 		}
 		relative_position_id = ARM_recovery_from_Parliment_shooting
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_release_the_journalist
+		icon = prisoners
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_reject_the_mafia
+		}
+		relative_position_id = ARM_reject_the_mafia
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_appeal_to_the_countryside
+		icon = GFX_goal_generic_major_alliance
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_reject_the_mafia
+		}
+		relative_position_id = ARM_reject_the_mafia
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_reform_laws
+		icon = GFX_focus_generic_improve_the_administration
+		x = 3
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_reject_the_mafia
+		}
+		relative_position_id = ARM_reject_the_mafia
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_coalition_with_lesser_oligarchs
+		icon = GFX_goal_generic_dangerous_deal
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_appeal_to_the_countryside
+			focus = ARM_release_the_journalist
+		}
+		mutually_exclusive = {
+			focus = ARM_ngo_support
+		}
+		relative_position_id = ARM_appeal_to_the_countryside
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_ngo_support
+		icon = GFX_goal_generic_national_unity
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_release_the_journalist
+		}
+		mutually_exclusive = {
+			focus = ARM_coalition_with_lesser_oligarchs
+		}
+		relative_position_id = ARM_release_the_journalist
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_words_not_bullets
+		icon = GFX_goal_generic_forceful_treaty
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_ngo_support
+		}
+		relative_position_id = ARM_ngo_support
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_attack_the_weakest_spots
+		icon = GFX_focus_generic_conspiracy
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_ngo_support
+			focus = ARM_coalition_with_lesser_oligarchs
+		}
+		relative_position_id = ARM_ngo_support
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_grass_roots_resistence
+		icon = GFX_focus_generic_national_security
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_coalition_with_lesser_oligarchs
+		}
+		relative_position_id = ARM_coalition_with_lesser_oligarchs
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_my_step
+		icon = support_democracy
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_words_not_bullets
+		}
+		prerequisite = {
+			focus = ARM_attack_the_weakest_spots
+		}
+		relative_position_id = ARM_words_not_bullets
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_velvet_revolution
+		icon = support_democracy
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_my_step
+		}
+		relative_position_id = ARM_my_step
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_general_strike
+		icon = GFX_focus_generic_support_the_left_right
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_grass_roots_resistence
+		}
+		prerequisite = {
+			focus = ARM_attack_the_weakest_spots
+		}
+		relative_position_id = ARM_grass_roots_resistence
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_pay_off_security_forces
+		icon = GFX_focus_generic_infiltration
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_grass_roots_resistence
+		}
+		prerequisite = {
+			focus = ARM_attack_the_weakest_spots
+		}
+		relative_position_id = ARM_grass_roots_resistence
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_violet_revolution #Stepan Demirchyan, grand candy + commies
+		icon = GFX_goal_support_communism
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_pay_off_security_forces
+		}
+		prerequisite = {
+			focus = ARM_general_strike
+		}
+		relative_position_id = ARM_pay_off_security_forces
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_shaky_coalition
+		icon = GFX_goal_support_communism
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_violet_revolution
+		}
+		relative_position_id = ARM_violet_revolution
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_stabalise_the_nation
+		icon = GFX_goal_support_communism
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_shaky_coalition
+		}
+		mutually_exclusive = {
+			focus = ARM_counter_revolutionary_sentiment
+		}
+		relative_position_id = ARM_shaky_coalition
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_counter_revolutionary_sentiment
+		icon = GFX_goal_support_communism
+		x = 3
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_shaky_coalition
+		}
+		mutually_exclusive = {
+			focus = ARM_stabalise_the_nation
+		}
+		relative_position_id = ARM_shaky_coalition
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_reasure_moscow
+		icon = GFX_goal_support_communism
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_stabalise_the_nation
+		}
+		relative_position_id = ARM_stabalise_the_nation
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_invest_in_domestic_production
+		icon = GFX_goal_support_communism
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_stabalise_the_nation
+		}
+		relative_position_id = ARM_stabalise_the_nation
 		
 		completion_reward = {
 		}

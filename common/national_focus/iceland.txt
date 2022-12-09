@@ -11,6 +11,8 @@ focus_tree = {
 		}
 	}
 	
+	continuous_focus_position = { x = 2400 y = 50 }
+	
 	#Invest in the Fishing Industry
 	
 	focus = {
@@ -114,13 +116,6 @@ focus_tree = {
 		completion_reward = {
 			100 = { add_extra_state_shared_building_slots = 1 }
 			100 = {
-				limit = {
-					free_building_slots = {
-						building = industrial_complex
-						size > 0
-						include_locked = yes
-					}
-				}
 				add_building_construction = {
 					type = industrial_complex
 					level = 1
@@ -143,7 +138,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_industrial_investments
-		icon = GFX_goal_Invest_Industry
+		icon = industry_civilian
 		
 		x = 0
 		y = 2
@@ -770,7 +765,9 @@ focus_tree = {
 			focus = ICE_leave_nato
 		}
 		
-		available = {}
+		available = {
+		is_in_faction_with = USA
+		}
 		
 		bypass = {}
 		
@@ -1027,7 +1024,7 @@ focus_tree = {
 	
 	focus = {
 		id = ICE_international_outreach
-		icon = GFX_focus_usa_union_representation_act
+		icon = alliance_purple
 		
 		x = 3
 		y = 2
@@ -1089,7 +1086,7 @@ focus_tree = {
 		completion_reward = {
 			add_ideas = limited_conscription
 			custom_effect_tooltip = ICE_oob_loading
-			hidden_effect = { load_oob = "ICE_conscripts" }
+			load_oob = "ICE_conscripts"
 		}
 		
 		
@@ -1640,6 +1637,417 @@ focus_tree = {
 		}
 	}
 	
+	#Path of War
+	focus = {
+		id = ICE_destroy_denmark
+		icon = attack_denmark
+		
+		x = 8
+		y = 7
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_demand_greenlandic_independence }
+		prerequisite = { focus = ICE_militarize_the_coast_guard }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			DEN = { NOT = { is_in_faction_with = ICE is_subject_of = ICE } }
+			DEN = { exists = yes }
+		}
+		
+		bypass = {
+		OR = { ICE = { owns_state = 37 owns_state = 99 owns_state = 887}
+		DEN = { is_subject_of = ICE } DEN = { is_in_faction_with = ICE } }
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = DEN }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_neutralize_norway
+		icon = attack_norway
+		
+		x = 7
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_destroy_denmark }
+		
+		mutually_exclusive = {}
+		
+		available = {
+		OR = { ICE = { owns_state = 37 owns_state = 99 owns_state = 887}
+		DEN = { is_subject_of = ICE } DEN = { is_in_faction_with = ICE } }
+			NOR = { NOT = { is_in_faction_with = ICE is_subject_of = ICE } }
+			NOR = { exists = yes }
+		}
+		
+		bypass = {
+		OR = { ICE = { owns_state = 110 owns_state = 142 owns_state = 960 owns_state = 143 owns_state = 144 }
+		NOR = { is_subject_of = ICE } NOR = { is_in_faction_with = ICE } }
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = NOR }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_icelandic_scandinavia
+		icon = attack_sweden
+		
+		x = 7
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_neutralize_norway }
+		
+		mutually_exclusive = { focus = ICE_danish_scandinavia focus = ICE_invite_estonia }
+		
+		available = {
+		OR = { ICE = { owns_state = 110 owns_state = 142 owns_state = 960 owns_state = 143 owns_state = 144 }
+		NOR = { is_subject_of = ICE } NOR = { is_in_faction_with = ICE } }
+		NOT = { country_exists = DEN }
+			OR= { SWE = { exists = yes NOT = { is_in_faction_with = ICE is_subject_of = ICE } } }
+		}
+		
+		bypass = {
+		OR = { owns_state = 141 owns_state = 140 owns_state = 138
+		SWE = { is_subject_of = ICE } SWE = { is_in_faction_with = ICE } }
+		OR = { owns_state = 111 owns_state = 145 owns_state = 149
+		FIN = { is_subject_of = ICE } FIN = { is_in_faction_with = ICE } }
+		OR = { owns_state = 13 owns_state = 840
+		EST = { is_subject_of = ICE } EST = { is_in_faction_with = ICE } }
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = SWE }
+		create_wargoal = {
+			type = annex_everything
+			target = FIN }
+		create_wargoal = {
+			type = annex_everything
+			target = EST }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_danish_scandinavia
+		icon = align_to_denmark
+		
+		x = 5
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_neutralize_norway }
+		
+		mutually_exclusive = { focus = ICE_icelandic_scandinavia focus = ICE_invite_estonia }
+		
+		available = {
+		OR = { ICE = { owns_state = 110 owns_state = 142 owns_state = 960 owns_state = 143 owns_state = 144 }
+		NOR = { is_subject_of = ICE } NOR = { is_in_faction_with = ICE } }
+		DEN = { is_subject_of = ICE }
+			OR= { SWE = { exists = yes NOT = { is_in_faction_with = ICE is_subject_of = ICE } } }
+		}
+		
+		bypass = {
+		OR = { owns_state = 141 owns_state = 140 owns_state = 138
+		SWE = { is_subject_of = ICE } SWE = { is_in_faction_with = ICE } }
+		OR = { owns_state = 111 owns_state = 145 owns_state = 149
+		FIN = { is_subject_of = ICE } FIN = { is_in_faction_with = ICE } }
+		OR = { owns_state = 13 owns_state = 840
+		EST = { is_subject_of = ICE } EST = { is_in_faction_with = ICE } }
+		}
+		
+		completion_reward = {
+		DEN = { add_ideas = ICE_Icelandic_garrison_aid }
+		every_state = { limit = { is_core_of = SWE } add_claim_by = DEN }
+		every_state = { limit = { is_core_of = FIN } add_claim_by = DEN }
+		every_state = { limit = { is_core_of = EST } add_claim_by = DEN }
+		create_wargoal = {
+			type = annex_everything
+			target = SWE }
+		create_wargoal = {
+			type = annex_everything
+			target = FIN }
+		create_wargoal = {
+			type = annex_everything
+			target = EST }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_invite_estonia
+		icon = align_to_estonia
+		
+		x = 3
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = {
+			focus = ICE_neutralize_norway
+		}
+		
+		mutually_exclusive = { focus = ICE_icelandic_scandinavia focus = ICE_danish_scandinavia }
+		
+		available = {
+			has_completed_focus = ICE_befriend_the_baltic_states
+			is_faction_leader = yes
+			NOT = { has_war_with = EST }
+			country_exists = EST
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+			EST = { country_event = { id = iceland.2 hours = 2 } }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	focus = {
+		id = ICE_invade_isles
+		icon = attack_britain
+		
+		x = 9
+		y = 8
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_destroy_denmark }
+		
+		mutually_exclusive = {}
+		
+		available = {
+		OR = { ICE = { owns_state = 37 owns_state = 99 owns_state = 887}
+		DEN = { is_subject_of = ICE } DEN = { is_in_faction_with = ICE } }
+			OR= { ENG = { exists = yes NOT = { is_in_faction_with = ICE is_subject_of = ICE } }
+			IRE = { exists = yes NOT = { is_in_faction_with = ICE is_subject_of = ICE } } }
+		}
+		
+		bypass = {
+		OR = { owns_state = 126 owns_state = 133 owns_state = 122
+		ENG = { is_subject_of = ICE } ENG = { is_in_faction_with = ICE } }
+		OR = { owns_state = 119 owns_state = 113
+		IRE = { is_subject_of = ICE } IRE = { is_in_faction_with = ICE } }
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = ENG }
+		create_wargoal = {
+			type = annex_everything
+			target = IRE }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_crush_canada
+		icon = attack_canada
+		
+		x = 9
+		y = 9
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_invade_isles }
+		
+		mutually_exclusive = {}
+		
+		available = {
+		OR = { owns_state = 126 owns_state = 133 owns_state = 122
+		ENG = { is_subject_of = ICE } ENG = { is_in_faction_with = ICE } }
+		OR = { owns_state = 119 owns_state = 113
+		IRE = { is_subject_of = ICE } IRE = { is_in_faction_with = ICE } }
+			CAN = { exists = yes NOT = { is_in_faction_with = ICE is_subject_of = ICE } }
+		}
+		
+		bypass = {
+		OR = { ICE = { owns_state = 331 owns_state = 332 owns_state = 464 owns_state = 465 }
+		CAN = { is_subject_of = ICE } CAN = { is_in_faction_with = ICE } }
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+			type = annex_everything
+			target = CAN }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_conquer_europe
+		icon = attack_europe
+		
+		x = 5
+		y = 10
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_invite_estonia focus = ICE_danish_scandinavia focus = ICE_icelandic_scandinavia }
+		prerequisite = { focus = ICE_crush_canada }
+		
+		mutually_exclusive = {}
+		
+		available = {
+		OR = { owns_state = 141 owns_state = 140 owns_state = 138
+		DEN = { owns_state = 141 owns_state = 140 owns_state = 138 }
+		SWE = { is_subject_of = ICE } SWE = { is_in_faction_with = ICE } }
+		OR = { owns_state = 111 owns_state = 145 owns_state = 149
+		DEN = { owns_state = 111 owns_state = 145 owns_state = 149 }
+		FIN = { is_subject_of = ICE } FIN = { is_in_faction_with = ICE } }
+		OR = { owns_state = 13 owns_state = 840
+		DEN = { owns_state = 13 owns_state = 840 }
+		EST = { is_subject_of = ICE } EST = { is_in_faction_with = ICE } }
+		OR = { owns_state = 126 owns_state = 133 owns_state = 122
+		ENG = { is_subject_of = ICE } ENG = { is_in_faction_with = ICE } }
+		OR = { owns_state = 119 owns_state = 113
+		IRE = { is_subject_of = ICE } IRE = { is_in_faction_with = ICE } }
+		}
+		
+		bypass = {
+		
+		}
+		
+		completion_reward = {
+		every_country = {
+			limit = {
+				is_in_europe = yes
+			}
+			ICE = {
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = PREV
+				}
+			}
+		}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_turkish_revenge
+		icon = attack_turkey
+		
+		x = 5
+		y = 11
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_conquer_europe }
+		
+		mutually_exclusive = {}
+		
+		available = {
+		
+		}
+		
+		bypass = {
+		
+		}
+		
+		completion_reward = {
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = MOR }
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = ALG }
+			create_wargoal = {
+			type = puppet_wargoal_focus
+			target = TUN }
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = LBA }
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = EGY }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_claim_new_england
+		icon = GFX_focus_spa_the_war_of_vengeance
+		
+		x = 9
+		y = 10
+		
+		cost = 5
+		
+		prerequisite = { focus = ICE_crush_canada }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			OR = { ICE = { owns_state = 331 owns_state = 332 owns_state = 464 owns_state = 465 }
+		CAN = { is_subject_of = ICE } CAN = { is_in_faction_with = ICE } }
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		792 = { add_claim_by = ICE }
+		793 = { add_claim_by = ICE }
+		794 = { add_claim_by = ICE }
+		357 = { add_claim_by = ICE }
+		795 = { add_claim_by = ICE }
+		1090 = { add_claim_by = ICE }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
 	#Diplomatic Tree
 	
 	focus = {
@@ -1678,12 +2086,6 @@ focus_tree = {
 		
 		completion_reward = {
 			add_political_power = 100
-			DEN = {
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = nordic_council_cooperation
-				}
-			}
 		}
 		
 		ai_will_do = {
@@ -2083,6 +2485,246 @@ focus_tree = {
 					modifier = declaration_of_friendship
 				}
 			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#Bank collapse
+	focus = {
+		id = ICE_nationalize_glitnir
+		icon = self_management
+		
+		x = 25
+		y = 0
+		
+		cost = 5
+		
+		allow_branch = { has_country_flag = ICE_broken_economy }
+		
+		prerequisite = { }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			has_country_flag = ICE_broken_economy
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		add_political_power = 100
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_restore_bank_faith
+		icon = national_unity
+		
+		x = 25
+		y = 1
+		
+		cost = 5
+		
+		prerequisite = { focus = ICE_nationalize_glitnir }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			has_country_flag = ICE_broken_economy
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		add_stability = 0.05
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_FME_control
+		icon = secret_service
+		
+		x = 25
+		y = 2
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_restore_bank_faith }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			has_country_flag = ICE_broken_economy
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = ICE_aftermath_of_2008
+			add_idea = ICE_aftermath_of_2008_2 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_new_banks
+		icon = central_management
+		
+		x = 24
+		y = 3
+		
+		cost = 5
+		
+		prerequisite = { focus = ICE_FME_control }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			has_country_flag = ICE_broken_economy
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		add_political_power = -50
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_liquidate_old_banks
+		icon = GFX_goal_Trade_Deal
+		
+		x = 26
+		y = 3
+		
+		cost = 5
+		
+		prerequisite = { focus = ICE_FME_control }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			has_country_flag = ICE_broken_economy
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		100 = {
+		remove_building = {
+			type = industrial_complex
+			level = 1 } }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_capital_controls
+		icon = construction
+		
+		x = 25
+		y = 4
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_new_banks }
+		prerequisite = { focus = ICE_liquidate_old_banks }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			has_country_flag = ICE_broken_economy
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		swap_ideas = {
+			remove_idea = ICE_aftermath_of_2008_2
+			add_idea = ICE_aftermath_of_2008_3 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_foreign_debt_package
+		icon = GFX_goal_generic_intelligence_exchange
+		
+		x = 26
+		y = 5
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_capital_controls }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			has_country_flag = ICE_broken_economy
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		add_timed_idea = {
+    idea = ICE_debt_package
+    days = 365
+}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_end_of_crisis
+		icon = construction3
+		
+		x = 27
+		y = 6
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_foreign_debt_package }
+		
+		mutually_exclusive = {}
+		
+		available = {
+			has_country_flag = ICE_broken_economy
+			NOT = { has_idea = ICE_debt_package }
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+		remove_ideas = ICE_aftermath_of_2008_3
+		clr_country_flag = ICE_broken_economy
 		}
 		
 		ai_will_do = {
@@ -2511,7 +3153,7 @@ focus_tree = {
 		
 		mutually_exclusive = {}
 		
-		available = { OR = { has_government = conservative has_government = market_liberal } }
+		available = { OR = { has_government = conservative has_government = market_liberal has_government = reactionary } }
 		
 		bypass = { }
 		
@@ -2537,7 +3179,7 @@ focus_tree = {
 		
 		mutually_exclusive = {}
 		
-		available = { OR = { has_government = conservative has_government = market_liberal } }
+		available = { OR = { has_government = conservative has_government = market_liberal has_government = reactionary } }
 		
 		bypass = { }
 		
@@ -2621,12 +3263,14 @@ focus_tree = {
 		
 		mutually_exclusive = {}
 		
-		available = { has_government = market_liberal }
+		available = { OR = { has_government = market_liberal has_government = reactionary }
+		NOT = { has_country_leader = { character = ICE_pirate_party } } }
 		
 		bypass = { }
 		
 		completion_reward = {
-		add_popularity = { ideology = market_liberal popularity = 0.1 }
+		add_popularity = { ideology = market_liberal popularity = 0.05 }
+		add_popularity = { ideology = reactionary popularity = 0.05 }
 		}
 		
 		ai_will_do = {
@@ -2647,7 +3291,8 @@ focus_tree = {
 		
 		mutually_exclusive = {}
 		
-		available = { has_government = market_liberal }
+		available = { OR = { has_government = market_liberal has_government = reactionary }
+		NOT = { has_country_leader = { character = ICE_pirate_party } } }
 		
 		bypass = { }
 		
@@ -2679,17 +3324,835 @@ focus_tree = {
 		
 		cost = 10
 		
-		prerequisite = { focus = ICE_redistribute_fishing_rights }
+		prerequisite = { focus = ICE_redistribute_fishing_rights focus = ICE_deregulation }
 		
 		mutually_exclusive = {}
 		
-		available = { has_government = market_liberal }
+		available = { OR = { has_government = market_liberal has_government = reactionary }
+		NOT = { has_country_leader = { character = ICE_pirate_party } } }
 		
 		bypass = { }
 		
 		completion_reward = {
 		add_ideas = ICE_stricter_immigration_laws
 		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_end_of_republic
+		icon = become_puppet
+		
+		x = 18
+		y = 9
+		
+		cost = 1
+		
+		prerequisite = {}
+		
+		mutually_exclusive = {}
+		
+		available = { OR = {
+		DEN = { has_war_with = ICE NOT = { has_completed_focus = DEN_broken_system } }
+		ENG = { has_war_with = ICE NOT = { has_completed_focus = ENG_towards_the_left } } } } 
+		
+		bypass = { OR = { is_subject_of = DEN is_subject_of = ENG } }
+		
+		completion_reward = {
+		if = {
+			limit = { DEN = { has_war_with = ICE } }
+			DEN = { country_event = { id = iceland.11 } }
+			}
+		if = {
+			limit = { ENG = { has_war_with = ICE } }
+			ENG = { country_event = { id = iceland.11 } }
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_danish_monarch
+		icon = align_to_denmark
+		
+		x = 17
+		y = 10
+		
+		cost = 4
+		
+		prerequisite = { focus = ICE_end_of_republic }
+		
+		mutually_exclusive = { focus = ICE_english_monarch }
+		
+		available = { is_subject_of = DEN }
+		
+		bypass = { }
+		
+		completion_reward = {
+		remove_ideas = ICE_olafur_ragnar_grimsson
+		create_country_leader = {
+	name = "Joachim Holger Waldemar Christian"
+	picture = gfx_portrait_joachim_holger_waldemar_christian
+	expire = "1.1.1.1"
+	ideology = absolute_monarchist }
+		set_politics = {	
+	ruling_party = monarchist
+	last_election = "1999.5.8"
+	election_frequency = 48
+	elections_allowed = no }
+		add_popularity = {
+    ideology = monarchist
+    popularity = 0.3 } }
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_english_monarch
+		icon = align_to_britain
+		
+		x = 19
+		y = 10
+		
+		cost = 4
+		
+		prerequisite = { focus = ICE_end_of_republic }
+		
+		mutually_exclusive = { focus = ICE_danish_monarch }
+		
+		available = { is_subject_of = ENG }
+		
+		bypass = { }
+		
+		completion_reward = {
+		remove_ideas = ICE_olafur_ragnar_grimsson
+		create_country_leader = {
+	name = "Andrew Albert Christian Edward"
+	picture = gfx_portrait_andrew_albert_christian_edward
+	expire = "1.1.1.1"
+	ideology = absolute_monarchist }
+		set_politics = {	
+	ruling_party = monarchist
+	last_election = "1999.5.8"
+	election_frequency = 48
+	elections_allowed = no }
+		add_popularity = {
+    ideology = monarchist
+    popularity = 0.3 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_royal_investments
+		icon = monarchy
+		
+		x = 18
+		y = 11
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_danish_monarch focus = ICE_english_monarch }
+		
+		mutually_exclusive = { }
+		
+		available = { has_government = monarchist }
+		
+		bypass = { }
+		
+		completion_reward = {
+		random_owned_state = { add_extra_state_shared_building_slots = 2
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+			}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+			} }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_new_aristocracy
+		icon = GFX_goal_Rich_Businessmen
+		
+		x = 18
+		y = 12
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_royal_investments }
+		
+		mutually_exclusive = { }
+		
+		available = { has_government = monarchist }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = GEF_Nobility
+		if = { limit = { is_subject_of = DEN } add_opinion_modifier = {
+		target = DEN
+		modifier = medium_decrease } }
+		if = { limit = { is_subject_of = ENG } add_opinion_modifier = {
+		target = ENG
+		modifier = medium_decrease } } }
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_protecting_the_king
+		icon = GFX_goal_generic_defence
+		
+		x = 18
+		y = 13
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_new_aristocracy }
+		
+		mutually_exclusive = { }
+		
+		available = { has_government = monarchist }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = GEF_The_Royal_Guard
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_by_masters_side
+		icon = GFX_focus_generic_military_mission
+		
+		x = 17
+		y = 14
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_protecting_the_king }
+		
+		mutually_exclusive = { focus = ICE_remembering_history }
+		
+		available = { has_government = monarchist }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_autonomy_score = { value = -500 }
+		add_ideas = ICE_loyal_kingdom
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_remembering_history
+		icon = demand_territory2
+		
+		x = 19
+		y = 14
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_protecting_the_king }
+		
+		mutually_exclusive = { focus = ICE_by_masters_side }
+		
+		available = { has_government = monarchist }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_disloyal_subject
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_path_of_equality
+		icon = GFX_goal_Overthrow_Bourgeosie
+		
+		x = 13
+		y = 9
+		
+		cost = 1
+		
+		prerequisite = {}
+		
+		mutually_exclusive = {}
+		
+		available = { OR = {
+		has_government = democratic_socialist has_government = communist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = democratic_socialist popularity = 0.05 }
+		add_popularity = { ideology = communist popularity = 0.05 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_humane_conditions
+		icon = GFX_focus_YUG_pan_slavic_congress
+		
+		x = 11
+		y = 10
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_path_of_equality }
+		
+		mutually_exclusive = {}
+		
+		available = { OR = {
+		has_government = democratic_socialist has_government = communist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_better_conditions
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_socialist_taxation
+		icon = POL_commie_seize_wealth
+		
+		x = 15
+		y = 10
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_path_of_equality }
+		
+		mutually_exclusive = {}
+		
+		available = { OR = {
+		has_government = democratic_socialist has_government = communist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_socialist_taxes
+		random_owned_state = { add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+			} }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_reform_healthcare
+		icon = production2
+		
+		x = 12
+		y = 11
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_path_of_equality }
+		
+		mutually_exclusive = {}
+		
+		available = { OR = {
+		has_government = democratic_socialist has_government = communist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_free_healthcare
+		random_owned_state = { add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+			} }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_less_work
+		icon = POL_commie_miner
+		
+		x = 14
+		y = 11
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_path_of_equality }
+		
+		mutually_exclusive = {}
+		
+		available = { OR = {
+		has_government = democratic_socialist has_government = communist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_shorter_work_weeks
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_keep_parliament
+		icon = democracy
+		
+		x = 12
+		y = 12
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_humane_conditions }
+		prerequisite = { focus = ICE_socialist_taxation }
+		prerequisite = { focus = ICE_reform_healthcare }
+		prerequisite = { focus = ICE_less_work }
+		
+		mutually_exclusive = { focus = ICE_create_union }
+		
+		available = { has_government = democratic_socialist } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = democratic_socialist popularity = 0.1 }
+		add_popularity = { ideology = communist popularity = -0.05 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_create_union
+		icon = GFX_focus_generic_strike_at_democracy2
+		
+		x = 14
+		y = 12
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_humane_conditions }
+		prerequisite = { focus = ICE_socialist_taxation }
+		prerequisite = { focus = ICE_reform_healthcare }
+		prerequisite = { focus = ICE_less_work }
+		
+		mutually_exclusive = { focus = ICE_keep_parliament }
+		
+		available = { OR = {
+		has_government = democratic_socialist has_government = communist } }  
+		
+		bypass = { }
+		
+		completion_reward = {
+		remove_ideas = ICE_olafur_ragnar_grimsson
+		add_popularity = { ideology = communist popularity = party_popularity@democratic_socialist }
+		add_popularity = { ideology = democratic_socialist popularity = -1 }
+		set_politics = {	
+			ruling_party = communist
+			last_election = "1999.5.8"
+			election_frequency = 48
+			elections_allowed = no }
+		set_cosmetic_tag = ICE_union
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_path_of_pride
+		icon = demand_territory2
+		
+		x = 23
+		y = 9
+		
+		cost = 1
+		
+		prerequisite = {}
+		
+		mutually_exclusive = {}
+		
+		available = { OR = {
+		has_government = nationalist has_government = fascist has_government = islamist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = nationalist popularity = 0.05 }
+		add_popularity = { ideology = fascist popularity = 0.02 }
+		add_popularity = { ideology = islamist popularity = 0.02 }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_christian_dominance
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		
+		x = 22
+		y = 10
+		
+		cost = 4
+		
+		prerequisite = { focus = ICE_path_of_pride}
+		
+		mutually_exclusive = { focus = ICE_pagan_dominance }
+		
+		available = { OR = {
+		has_government = nationalist has_government = fascist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = islamist popularity = -0.05 }
+		add_ideas = ICE_christian_influence
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_pagan_dominance
+		icon = GFX_focus_mex_triumph_over_the_cristeros
+		
+		x = 24
+		y = 10
+		
+		cost = 4
+		
+		prerequisite = { focus = ICE_path_of_pride}
+		
+		mutually_exclusive = { focus = ICE_christian_dominance }
+		
+		available = { OR = {
+		has_government = nationalist has_government = fascist has_government = islamist } }
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_popularity = { ideology = islamist popularity = 0.05 }
+		add_ideas = ICE_pagan_influence
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_islamic_restrictions
+		icon = GFX_focus_CZE_german_puppet
+		
+		x = 21
+		y = 11
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_christian_dominance }
+		
+		mutually_exclusive = { }
+		
+		available = { OR = {
+		has_government = nationalist has_government = fascist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_no_new_mosques
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_radicalize_asatru
+		icon = GFX_goal_generic_propaganda
+		
+		x = 25
+		y = 11
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_pagan_dominance }
+		
+		mutually_exclusive = { }
+		
+		available = { OR = {
+		has_government = nationalist has_government = fascist has_government = islamist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_radicalized_heathens
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_defend_sovereignty
+		icon = national_unity
+		
+		x = 23
+		y = 11
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_christian_dominance focus = ICE_pagan_dominance }
+		
+		mutually_exclusive = { }
+		
+		available = { OR = {
+		has_government = nationalist has_government = fascist has_government = islamist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		if = { limit = { has_idea = ICE_nationalism } swap_ideas = {
+			remove_idea = ICE_nationalism
+			add_idea = ICE_ultranationalism } }
+		if = { limit = { NOT = { has_idea = ICE_nationalism } } add_ideas = ICE_ultranationalism }
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_new_currency
+		icon = GFX_focus_mex_privatisation
+		
+		x = 22
+		y = 12
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_defend_sovereignty }
+		
+		mutually_exclusive = { }
+		
+		available = { OR = {
+		has_government = nationalist has_government = fascist has_government = islamist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_strengthened_krona
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_leave_schengen
+		icon = attack_europe
+		
+		x = 24
+		y = 12
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_defend_sovereignty }
+		
+		mutually_exclusive = { }
+		
+		available = { OR = {
+		has_government = nationalist has_government = fascist has_government = islamist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_timed_idea = {
+    idea = ICE_left_schengen
+    days = 90
+}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_nationalist_democracy
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		
+		x = 23
+		y = 13
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_new_currency }
+		prerequisite = { focus = ICE_leave_schengen }
+		prerequisite = { focus = ICE_islamic_restrictions focus = ICE_radicalize_asatru }
+		
+		mutually_exclusive = { focus = ICE_stronger_rule focus = ICE_pagan_government }
+		
+		available = { has_government = nationalist } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		add_ideas = ICE_nationalist_democracy_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_stronger_rule
+		icon = fascism
+		
+		x = 21
+		y = 13
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_new_currency }
+		prerequisite = { focus = ICE_leave_schengen }
+		prerequisite = { focus = ICE_islamic_restrictions }
+		
+		mutually_exclusive = { focus = ICE_nationalist_democracy }
+		
+		available = { OR = { has_government = nationalist has_government = fascist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		remove_ideas = ICE_olafur_ragnar_grimsson
+		if = { limit = { has_country_leader = { character = ICE_helgi_helgason } }
+		create_country_leader = {
+	name = "Helgi Helgason"
+	picture = gfx_portrait_helgi_helgason
+	expire = "1.1.1.1"
+	ideology = fascist_ideology }
+	set_politics = {	
+	ruling_party = fascist
+	last_election = "1999.5.8"
+	election_frequency = 48
+	elections_allowed = no } }
+	
+		if = { limit = { has_country_leader = { character = ICE_gudmundur_thorleifsson } }
+		create_country_leader = {
+	name = "Guðmundur Þorleifsson"
+	picture = gfx_portrait_gudmundur_thorleifsson
+	expire = "1.1.1.1"
+	ideology = fascist_ideology }
+	set_politics = {	
+	ruling_party = fascist
+	last_election = "1999.5.8"
+	election_frequency = 48
+	elections_allowed = no } }
+	
+	swap_ideas = {
+			remove_idea = ICE_ultranationalism
+			add_idea = ICE_fascism } }
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = ICE_pagan_government
+		icon = war
+		
+		x = 25
+		y = 13
+		
+		cost = 10
+		
+		prerequisite = { focus = ICE_new_currency }
+		prerequisite = { focus = ICE_leave_schengen }
+		prerequisite = { focus = ICE_radicalize_asatru }
+		
+		mutually_exclusive = { focus = ICE_nationalist_democracy }
+		
+		available = { OR = { has_government = nationalist has_government = islamist } } 
+		
+		bypass = { }
+		
+		completion_reward = {
+		remove_ideas = ICE_olafur_ragnar_grimsson
+		set_politics = {	
+	ruling_party = islamist
+	last_election = "1999.5.8"
+	election_frequency = 48
+	elections_allowed = no }
+		swap_ideas = {
+			remove_idea = ICE_pagan_influence
+			add_idea = ICE_paganist_rule } }
 		
 		ai_will_do = {
 			factor = 10

@@ -7,14 +7,14 @@
 
  ##############
  ###
- ### ARMY FOCUS
+ ### ECONOMIC FOCUS
  ###
  ##############
 
 	shared_focus = {
 		id = prk_poorest_country
 		icon = prk_farm
-		x = 60
+		x = 50
 		y = 0
 		cost = 5
 	
@@ -391,6 +391,7 @@
 		
 		prerequisite = { focus = prk_tuntian }
 		prerequisite = { focus = prk_vinalon }
+
 		relative_position_id = prk_poorest_country
 	
 		cancel_if_invalid = yes
@@ -917,7 +918,7 @@
 						rule = PRK_ai_behavior
 						option = DEFAULT
 					}
-					NOT = { KOR = { has_completed_focus = generic_asia_asian_value } }
+					#NOT = { KOR = { has_completed_focus = generic_asia_asian_value } }
 				}
 			}
 			
@@ -1219,7 +1220,7 @@
 		}
 		
 		ai_will_do = {
-			base = 5
+			base = 80
 		}
 	}
 	
@@ -1244,6 +1245,30 @@
 		
 		ai_will_do = {
 			base = 5
+		}
+	}
+	
+	shared_focus = {
+		id = prk_calling_for_support_in_the_revolution
+		icon = focus_prc_remove_dprk
+		x = -4
+		y = 7
+		cost = 3
+		
+		prerequisite = { focus = prk_volunteer_army }
+		
+		relative_position_id = prk_lyuh_woon_hyung_s_unfulfilled_dream
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+
+		completion_reward = {
+			unlock_decision_category_tooltip = PRK_democratic_rev_decisions
+		}
+		
+		ai_will_do = {
+			base = 45
 		}
 	}
 	
@@ -2922,8 +2947,14 @@
 		available_if_capitulated = no
 
 		completion_reward = {
-			ROOT = { add_to_variable = { var = GetDPRKDollarPoint value = 2 } }
-			custom_effect_tooltip = getdprkdollars_2_tt
+			if = {
+				NOT = { has_country_flag = PRK_economic_reform_end_flag }
+				ROOT = { add_to_variable = { var = GetDPRKDollarPoint value = 2 } }
+				custom_effect_tooltip = getdprkdollars_2_tt
+			}
+			else = {
+				PRK_bop_very_low_increase_effect = yes
+			}
 		}
 		
 		ai_will_do = {
@@ -2950,6 +2981,7 @@
 
 		completion_reward = {
 			add_ideas = prk_religious_education_idea
+			PRK_bop_very_low_increase_effect = yes
 		}
 		
 		ai_will_do = {
@@ -3255,7 +3287,7 @@
 		available_if_capitulated = no
 
 		completion_reward = {
-			#PRK_legitimacy_rise = yes
+			PRK_bop_low_increase_effect = yes
 		}
 		
 		ai_will_do = {
@@ -3285,6 +3317,7 @@
 		available_if_capitulated = no
 
 		completion_reward = {
+			PRK_bop_high_decrease_effect = yes
 			add_war_support = -0.05
 			add_stability = 0.05
 		}
@@ -3312,6 +3345,7 @@
 		available_if_capitulated = no
 
 		completion_reward = {
+			PRK_bop_very_low_decrease_effect = yes
 			add_war_support = 0.05
 		}
 		
@@ -3346,6 +3380,8 @@
 		available_if_capitulated = no
 
 		completion_reward = {
+			PRK_bop_very_low_decrease_effect = yes
+
 			947 = {
 				add_building_construction = {
 					type = bunker
@@ -3398,6 +3434,7 @@
 		available_if_capitulated = no
 
 		completion_reward = {
+			PRK_bop_medium_increase_effect =  yes
 			random_owned_controlled_state = {
 				limit = {
 					free_building_slots = {
@@ -3798,9 +3835,9 @@
 		relative_position_id = prk_ryongchon_gamble
 	
 		available = {
-			has_full_control_of_state = 948
-			has_full_control_of_state = 872
-			has_full_control_of_state = 947
+			has_full_control_of_state = 950
+			has_full_control_of_state = 874
+			has_full_control_of_state = 873
 		}
 		
 		cancel_if_invalid = yes
@@ -3808,26 +3845,9 @@
 		available_if_capitulated = no
 
 		completion_reward = {
-			948 = { #Pyongan
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			872 = { #North Gangwon
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			947 = { #Hwanghae
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
+			build_railway = {
+				level = 2
+				path = { 6944 898 6822 959 6922 3852 3981 }
 			}			
 		}
 		
@@ -4216,3 +4236,1107 @@
 		}
 	}
 	
+ ##############
+ ###
+ ### diplomacy FOCUS
+ ###
+ ##############
+
+	shared_focus = {
+		id = prk_diplomacy_start
+		icon = JAP_global_immigrants
+		x = 59
+		y = 0
+		cost = 5
+
+		available = {
+			OR = {
+				has_completed_focus = prk_end_of_juche
+				has_completed_focus = prk_we_will_follow_you_only
+				has_completed_focus = prk_ryongchon_gamble
+			}
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = prk_solution_of_the_korean_problem
+		icon = kor_keep_dangun
+		x = -2
+		y = 1
+		cost = 3
+		
+		prerequisite = { 
+			focus = prk_diplomacy_start
+		}
+
+		available = {
+			is_subject = no
+			OR = {
+				AND = { 
+					country_exists = NDF 
+					NDF = { is_subject_of = ROOT } 
+					has_war = no
+				}
+				AND = {
+					has_full_control_of_state = 525
+					has_war = no
+				}
+			}
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			add_political_power = 200
+
+			every_state = {
+				limit = {
+					is_owned_by = ROOT
+					is_core_of = KOR
+				}
+				set_state_flag = korean_AINDF
+			}
+		}
+		
+		ai_will_do = {
+			base = 8 #important focus
+		}
+	}
+
+	shared_focus = {
+		id = prk_maintenance_of_public_order
+		icon = constitution
+		x = -3
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = prk_solution_of_the_korean_problem
+		}
+		
+		mutually_exclusive = {
+			focus = prk_maintenance_of_autonomous_government
+		}
+
+		available = {
+			is_subject = no
+			OR = {
+				AND = { 
+					country_exists = NDF 
+					NDF = { is_subject_of = ROOT } 
+					has_war = no
+				}
+				AND = {
+					has_full_control_of_state = 525
+					has_war = no
+				}
+			}
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			if = {
+				limit = { country_exists = NDF }
+				annex_country = { target = NDF } 
+				every_state = {
+					limit = {
+						is_owned_by = ROOT
+						is_core_of = KOR
+					}
+					set_state_flag = korean_AINDF
+				}
+				every_state = {
+					limit = {
+						has_state_flag = korean_AINDF
+					}
+					add_compliance = 10
+					add_resistance = -5
+				}
+			}
+			else = {
+				every_state = {
+					limit = {
+						is_owned_by = ROOT
+						is_core_of = KOR
+					}
+					set_state_flag = korean_AINDF
+				}
+				every_state = {
+					limit = {
+						has_state_flag = korean_AINDF
+					}
+					add_compliance = 10
+					add_resistance = -5
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 8 #important focus
+		}
+	}
+
+	shared_focus = {
+		id = prk_find_collaborators
+		icon = kor_two_korea_flag
+		x = -3
+		y = 3
+		cost = 8
+		
+		prerequisite = { 
+			focus = prk_maintenance_of_public_order
+		}
+
+		available = {
+			is_subject = no
+			OR = {
+				AND = { 
+					country_exists = NDF 
+					NDF = { is_subject_of = ROOT } 
+					has_war = no
+				}
+				AND = {
+					has_full_control_of_state = 525
+					has_war = no
+				}
+			}
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			every_state = {
+				limit = {
+					has_state_flag = korean_AINDF
+				}
+				add_compliance = 15
+				add_resistance = -5
+			}
+		}
+		
+		ai_will_do = {
+			base = 8 #important focus
+		}
+	}
+
+	shared_focus = {
+		id = prk_maintenance_of_autonomous_government
+		icon = kor_revolution
+		x = -1
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = prk_solution_of_the_korean_problem
+		}
+		
+		mutually_exclusive = {
+			focus = prk_maintenance_of_public_order
+		}
+
+		available = {
+			is_subject = no
+			OR = {
+				AND = { 
+					country_exists = NDF 
+					NDF = { is_subject_of = ROOT } 
+					has_war = no
+				}
+				AND = {
+					has_full_control_of_state = 525
+					has_war = no
+				}
+			}
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			if = {
+				limit = { NOT = { country_exists = NDF } }
+				every_state = {
+					limit = {
+						is_owned_by = ROOT
+						is_core_of = KOR
+					}
+					set_state_flag = korean_AINDF
+				}
+				every_state = {
+					limit = {
+						has_state_flag = korean_AINDF
+					}
+					add_core_of = NDF
+					NDF = { transfer_state = PREV }
+				}
+				PRK = { puppet = NDF }
+			}
+			else = {
+				NDF = { add_stability = 0.1 }
+			}
+		}
+		
+		ai_will_do = {
+			base = 8 #important focus
+		}
+	}
+
+	shared_focus = {
+		id = prk_reward_to_collaborators
+
+		icon = kor_revolution_mass
+		x = -1
+		y = 3
+		cost = 8
+		
+		prerequisite = { 
+			focus = prk_maintenance_of_autonomous_government
+		}
+
+		available = {
+			is_subject = no
+			OR = {
+				AND = { 
+					country_exists = NDF 
+					NDF = { is_subject_of = ROOT } 
+					has_war = no
+				}
+				AND = {
+					has_full_control_of_state = 525
+					has_war = no
+				}
+			}
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			NDF = { add_stability = 0.1 }
+		}
+		
+		ai_will_do = {
+			base = 8 #important focus
+		}
+	}
+
+	shared_focus = {
+		id = prk_reunification_of_the_korean_Peninsula
+		icon = kor_unite_korea
+		x = -2
+		y = 4
+		cost = 5
+		
+		prerequisite = { 
+			focus = prk_reward_to_collaborators
+			focus = prk_find_collaborators
+		}
+
+		available = {
+			is_subject = no
+			OR = {
+				AND = { 
+					country_exists = NDF 
+					NDF = { is_subject_of = ROOT } 
+					has_war = no
+				}
+				AND = {
+					has_full_control_of_state = 525
+					has_war = no
+				}
+			}
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			if = {
+				limit = { has_completed_focus = prk_maintenance_of_autonomous_government }
+				NDF = { remove_ideas = NDF_the_land_of_sin }
+			}
+			else = {
+				every_state = {
+					limit = {
+						has_state_flag = korean_AINDF
+					}
+					add_compliance = 10
+					add_resistance = -10
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 8 #important focus
+		}
+	}
+
+	shared_focus = {
+		id = prk_abandonment_of_isolationism
+		icon = prk_abandonment_of_isolationism
+		x = 1
+		y = 1
+		cost = 5
+		
+		prerequisite = { 
+			focus = prk_diplomacy_start
+		}
+		
+		mutually_exclusive = {
+			focus = prk_our_order
+		}
+
+		available = {
+			OR = {
+				has_completed_focus = prk_end_of_juche
+				has_completed_focus = prk_we_will_follow_you_only
+				has_completed_focus = prk_ryongchon_gamble
+			}
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			if = {
+				limit = { has_power_balance = { id = PRK_power_balance } }
+				PRK_bop_low_increase_effect = yes
+			}
+			add_war_support = -0.03
+		}
+		
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				AND = {
+					is_historical_focus_on = yes
+					has_game_rule = {
+						rule = PRK_ai_behavior
+						option = DEFAULT
+					}
+				}
+			}
+		}
+	}
+
+	shared_focus = {
+		id = prk_find_new_partner
+		icon = PRK_defence_country
+		x = 1
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = prk_abandonment_of_isolationism
+		}
+
+		available = {
+			is_subject = no
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			if = {
+				limit = { has_power_balance = { id = PRK_power_balance } }
+				PRK_bop_low_increase_effect = yes
+			}
+
+			unlock_decision_category_tooltip = prk_find_new_partner_categories
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = prk_our_order
+		icon = prk_our_order
+		x = 3
+		y = 1
+		cost = 5
+		
+		prerequisite = { 
+			focus = prk_diplomacy_start
+		}
+		
+		mutually_exclusive = {
+			focus = prk_abandonment_of_isolationism
+		}
+
+		available = {
+			OR = {
+				has_completed_focus = prk_end_of_juche
+				has_completed_focus = prk_we_will_follow_you_only
+				has_completed_focus = prk_ryongchon_gamble
+			}
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			if = {
+				limit = { has_power_balance = { id = PRK_power_balance } }
+				PRK_bop_low_decrease_effect = yes
+			}
+			add_war_support = 0.03
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = prk_diplomacy_in_our_way
+		icon = JAP_korean_immigrants
+		x = 3
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = prk_our_order
+		}
+		
+		available = {
+			is_subject = no
+		}
+		
+		relative_position_id = prk_diplomacy_start
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			if = {
+				limit = { has_power_balance = { id = PRK_power_balance } }
+				PRK_bop_low_decrease_effect = yes
+			}
+			add_ideas = PRK_dignified_isolationism
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+ ##############
+ ###
+ ### Navy FOCUS
+ ###
+ ##############
+
+	shared_focus = {
+		id = PRK_divided_navy
+		icon = navy
+		x = 37
+		y = 0
+		cost = 10
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			navy_experience = 50
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_romeo_and_juliet
+		icon = submarines
+		x = -1
+		y = 1
+		cost = 8
+		
+		prerequisite = { 
+			focus = PRK_divided_navy
+		}
+		
+		relative_position_id = PRK_divided_navy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = sub_bonus
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_torpedo_boat_plan
+		icon = navy
+		x = -2
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = PRK_romeo_and_juliet
+		}
+
+		bypass = {
+			NOT = { has_dlc = "No Step Back" }
+		}
+		
+		relative_position_id = PRK_divided_navy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			custom_effect_tooltip = PRK_torpedo_boat_plan_tt
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_effort_we_can_make
+		icon = generic_chollima
+		x = -2
+		y = 3
+		cost = 8
+		
+		prerequisite = { 
+			focus = PRK_torpedo_boat_plan
+		}
+
+		available = {
+			industrial_complex > 14
+		}
+		
+		relative_position_id = PRK_divided_navy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			PRK_navy_reform_effect = yes
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_marine_corps_plan
+		icon = amphibious_assault
+		x = 2
+		y = 1
+		cost = 5
+		
+		prerequisite = { 
+			focus = PRK_divided_navy
+		}
+		
+		relative_position_id = PRK_divided_navy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = marine_tech
+			}
+			add_tech_bonus = {
+				name = tp_tech
+				bonus = 1
+				uses = 1
+				category = tp_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_sinpo_submarine
+		icon = anti_submarine
+		x = 0
+		y = 2
+		cost = 8
+		
+		prerequisite = { 
+			focus = PRK_romeo_and_juliet
+		}
+		
+		prerequisite = { 
+			focus = PRK_marine_corps_plan
+		}
+		
+		relative_position_id = PRK_divided_navy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = sub_bonus
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_rason_development
+		icon = PRK_rason_1
+		x = 2
+		y = 3
+		cost = 8
+		
+		prerequisite = { 
+			focus = PRK_marine_corps_plan
+		}
+		
+		mutually_exclusive = {
+			focus = PRK_rason_autonomous_government
+		}
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+
+		available = {
+			any_country = {
+				OR = {
+					tag = PRK
+					is_in_faction_with = PRK
+				}
+				has_full_control_of_state = 950
+			}
+		}
+		
+		relative_position_id = PRK_divided_navy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {  }
+
+		completion_reward = {
+			950 = { 
+				remove_dynamic_modifier = { modifier = dynamic_imperfect_free_trade_zone } 
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_rason_base_trade
+		icon = infrastructure
+		x = 1
+		y = 4
+		cost = 8
+		
+		prerequisite = { 
+			focus = PRK_rason_development
+		}
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+
+		available = {
+			any_country = {
+				OR = {
+					tag = PRK
+					is_in_faction_with = PRK
+				}
+				has_full_control_of_state = 950
+			}
+		}
+		
+		relative_position_id = PRK_divided_navy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {  }
+
+		completion_reward = {
+			950 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_rason_autonomous_government
+		icon = PRK_rason_2
+		x = 5
+		y = 3
+		cost = 8
+
+		available = {
+			OR = {
+				has_completed_focus = prk_we_will_follow_you_only
+				has_completed_focus = prk_ryongchon_gamble
+			}
+			any_country = {
+				OR = {
+					tag = PRK
+					is_in_faction_with = PRK
+				}
+				has_full_control_of_state = 950
+			}
+		}
+		
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+
+		prerequisite = { 
+			focus = PRK_protect_pyongyang
+		}
+		
+		mutually_exclusive = {
+			focus = PRK_rason_development
+		}
+		
+		relative_position_id = PRK_divided_navy
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {  }
+
+		completion_reward = {
+			add_popularity = {
+			    ideology = market_liberal
+			    popularity = 0.02
+			}
+			950 = { 
+				remove_dynamic_modifier = { modifier = dynamic_imperfect_free_trade_zone } 
+			}
+			950 = { 
+				add_dynamic_modifier = { modifier = dynamic_full_free_trade_zone } 
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+
+			modifier = {
+				factor = 0
+				AND = {
+					is_historical_focus_on = yes
+					has_game_rule = {
+						rule = PRK_ai_behavior
+						option = DEFAULT
+					}
+				}
+			}
+		}
+	}
+
+	shared_focus = {
+		id = PRK_accepting_foreign_corporation
+		icon = JAP_merge_plants
+		x = 6
+		y = 4
+		cost = 8
+		
+		prerequisite = { 
+			focus = PRK_rason_autonomous_government
+		}
+
+		available = {
+			any_country = {
+				OR = {
+					tag = PRK
+					is_in_faction_with = PRK
+				}
+				has_full_control_of_state = 950
+			}
+		}
+		
+		relative_position_id = PRK_divided_navy
+	
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {  }
+
+		completion_reward = {
+			add_popularity = {
+			    ideology = market_liberal
+			    popularity = 0.05
+			}
+			950 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_resource = { type = steel amount = 7 }
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_our_air_force
+		icon = airforce
+		x = 41
+		y = 0
+		cost = 10
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			air_experience = 50
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_protect_pyongyang
+		icon = PRK_defence_country
+		x = 0
+		y = 1
+		cost = 8
+
+		relative_position_id = PRK_our_air_force
+		
+		available = {
+			has_full_control_of_state = 948 #Pyongyang
+		}
+
+		bypass = {
+			948 = {
+				free_building_slots = {
+					building = anti_air_building
+					size < 1
+				}
+			}
+		}
+
+		prerequisite = { 
+			focus = PRK_our_air_force
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { }
+
+		completion_reward = {
+			948 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_lumber_transport_plane
+		icon = bombs2
+		x = 2
+		y = 1
+		cost = 8
+
+		relative_position_id = PRK_our_air_force
+		
+		prerequisite = { 
+			focus = PRK_our_air_force
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = {  }
+
+		completion_reward = {
+			add_ideas = PRK_lumber_transport_plane_idea
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+
+	shared_focus = {
+		id = PRK_airborne_project
+		icon = fighter
+		x = 0
+		y = 2
+		cost = 8
+
+		relative_position_id = PRK_our_air_force
+		
+		prerequisite = { 
+			focus = PRK_marine_corps_plan
+		}
+		
+		prerequisite = { 
+			focus = PRK_protect_pyongyang
+		}
+		
+		prerequisite = { 
+			focus = PRK_lumber_transport_plane
+		}
+	
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = para_tech
+			}
+		}
+		
+		ai_will_do = {
+			base = 5
+		}
+	}

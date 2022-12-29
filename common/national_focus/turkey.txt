@@ -316,10 +316,8 @@ add_ideas tur_administrative_reforms_1
 			focus = military_plot
 	 	}
 		completion_reward = {
-			news_event = { id = tr_news.2 }
-
-			country_event = turkey.junt
-			load_focus_tree = tur_junta	
+			add_political_power = 50
+			load_focus_tree = tur_fasc
 		}	
 		ai_will_do = {
 			factor = 10
@@ -360,14 +358,114 @@ add_ideas tur_administrative_reforms_1
 		}
 	}
 	
+	#ekonomibas1
+	focus = {
+		id = ekonomibas1
+		text = "Urban Focus"
+		icon =  urbanization
+		x = -4
+		y = 0
+		cost = 5
+		relative_position_id = atas_legacy
 
+
+		completion_reward = {
+		
+	add_timed_idea = {
+				idea = generic_urban_focus
+				days = 360
+			} 
+}	
+		
+		
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	#ekonomibas2
+	focus = {
+		id = ekonomibas2
+		text = "Tungsten Production"
+		icon =  GFX_focus_generic_tungsten
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = ekonomibas1
+		prerequisite = { focus = ekonomibas1 }
+		mutually_exclusive = {  focus = ekonomibas3}
+
+		completion_reward = {
+		add_ideas = tungsten_production_bonus
+	340 = {
+				add_resource = {
+					type = tungsten
+					amount = 15
+				}
+}	
+		}
+		
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	#ekonomibas3
+	focus = {
+		id = ekonomibas3
+		text = "Rubber Production"
+		icon =  GFX_focus_generic_rubber
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = ekonomibas1
+		prerequisite = { focus = ekonomibas1 }
+		mutually_exclusive = {  focus = ekonomibas2}
+
+
+		completion_reward = {
+		add_ideas = rubber_production_bonus
+998 = {
+				add_resource = {
+					type = rubber
+					amount = 15
+				}
+}	
+		}
+		
+		ai_will_do = {
+			factor = 7
+		}
 	
+	}
+	
+	#ekonomibas4
+	focus = {
+		id = ekonomibas4
+		text = "Rural Focus"
+		icon =  GFX_focus_ITA_grande_rivolta_rurale
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = ekonomibas1
+		prerequisite = { focus = ekonomibas3 focus = ekonomibas2 }
+		completion_reward = {
+		add_timed_idea = {
+				idea = generic_rural_focus
+				days = 360
+			} 
+	
+		}
+		
+		ai_will_do = {
+			factor = 7
+		}
+	
+	}
 	#deprem1
 	focus = {
 		id = deprem1
 		text = "The Wounds of the 1999 Earthquake"
 		icon =  POL_build_up_the_cities
-		x = -5
+		x = -8
 		y = 0
 		cost = 5
 		relative_position_id = atas_legacy
@@ -384,6 +482,8 @@ add_ideas tur_administrative_reforms_1
 			factor = 7
 		}
 	}
+	
+	
 	
 	#deprem2
 	focus = {
@@ -458,11 +558,11 @@ relative_position_id = deprem1
 		id = deprem4
 		text = "The Millennium Industry"
 		icon = GFX_focus_TUR_science_heaven
-		x = 0
+		x = 2
 		y = 3
 		cost = 5
 relative_position_id = deprem1
-		prerequisite = { focus = deprem3 }
+		prerequisite = { focus = deprem3 focus =ekonomibas4}
 
 		completion_reward = {
 add_research_slot = 1
@@ -482,7 +582,7 @@ add_research_slot = 1
 		id = nato1
 		text = "NATO Missions"
 		icon = align_to_nato
-		x = -10
+		x = -12
 		y = 0
 		cost = 5
 		relative_position_id = atas_legacy

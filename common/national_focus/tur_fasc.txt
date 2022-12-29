@@ -1,13 +1,8 @@
 focus_tree = {
-	id = tr
+	id = tur_fasc
+	default = no	
 	continuous_focus_position = { x = 10 y = 2300 } 
-	country = {
-		factor = 0
-		modifier = {
-			add = 10
-			tag = KAZ
-		}
-	}
+	
 	initial_show_position = {
         focus = eleman1
     }
@@ -16,7 +11,7 @@ focus_tree = {
 	focus = {
 		id = eleman1
 		icon = GFX_focus_TUR_rise_of_fascism
-		x = 0
+		x = 15
 		y = 0
 		cost = 5
 		
@@ -1116,22 +1111,7 @@ start_civil_war = {
 
 
 		completion_reward = {
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
+			add_ideas = generic_foreign_investment_3
 			random_owned_state = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
@@ -2555,12 +2535,62 @@ add_equipment_to_stockpile = {
 		}
 	}
 	
+	#ortak1
+	focus = {
+		id = ortak1
+		icon = golden_wolf
+		x = 4
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_ozdag
+		prerequisite = { focus =  fasc_ozdag focus =  fasc_muhsin }
+		completion_reward = {
+add_country_leader_trait = nationalist_symbol		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#ortak2
+	focus = {
+		id = ortak2
+		icon = GFX_focus_TUR_new_system
+		x = 0
+		y = 1
+		cost = 5
+				relative_position_id =  ortak1
+		prerequisite = { focus =  ortak1}
+		completion_reward = {
+add_ideas = idea_focus_generic_fatherland_unity		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#ortak3
+	focus = {
+		id = ortak3
+		icon = trhomedefence
+		x = 0
+		y = 2
+		cost = 5
+				relative_position_id =  ortak1
+		prerequisite = { focus =  ortak2}
+		completion_reward = {
+add_ideas = generic_reconquest		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	
 	#fasc_muhsin
 	focus = {
 		id = fasc_muhsin
 		icon = GFX_focus_TUR_islamist_army
-		x = 8
-		y = 20
+		x = 3
+		y = 17
 		cost = 5
 				relative_position_id =  eleman1
 		mutually_exclusive = { focus =  fasc_ozdag }
@@ -2823,7 +2853,7 @@ every_state = {
 	focus = {
 		id = fasc_muhsin_11
 		icon = GFX_focus_TUR_sharia_laws
-		x = 2
+		x = -2
 		y = 1
 		cost = 5
 				relative_position_id =  fasc_muhsin_9
@@ -2843,7 +2873,7 @@ every_state = {
 	focus = {
 		id = fasc_muhsin_12
 		icon = attack_egypt
-		x = -2
+		x = 2
 		y = 1
 		cost = 5
 				relative_position_id =  fasc_muhsin_9
@@ -2896,8 +2926,8 @@ create_wargoal = {
 		x = 1
 		y = 1
 		cost = 5
-				relative_position_id =  fasc_muhsin_12
-		prerequisite = { focus =  fasc_muhsin_12 }
+				relative_position_id =  fasc_muhsin_11
+		prerequisite = { focus =  fasc_muhsin_11 }
 				prerequisite = { focus =  fasc_muhsin_13 }
 
 
@@ -2923,8 +2953,8 @@ hidden_effect = {
 		x = -1
 		y = 1
 		cost = 5
-				relative_position_id =  fasc_muhsin_11
-		prerequisite = { focus =  fasc_muhsin_11 }
+				relative_position_id =  fasc_muhsin_12
+		prerequisite = { focus =  fasc_muhsin_12}
 				prerequisite = { focus =  fasc_muhsin_13 }
 
 
@@ -3019,8 +3049,8 @@ create_wargoal = {
 	focus = {
 		id = fasc_ozdag
 		icon = TR_chief 
-		x = 0
-		y = 20
+		x = -5
+		y = 17
 		cost = 5
 				relative_position_id =  eleman1
 		mutually_exclusive = { focus =  fasc_muhsin }

@@ -37,7 +37,7 @@ add_timed_idea = {
 	#ocak1
 	focus = {
 		id = ocak1
-		icon = ulkists
+		icon = ulkist2
 		x = -1
 		y = 1
 		cost = 5
@@ -137,7 +137,7 @@ add_political_power = 50
 	#wtr
 	focus = {
 		id = wtr
-		icon = tur_thrace
+		icon = wtr1
 		x = -1
 		y = 1
 		cost = 5
@@ -304,7 +304,7 @@ start_civil_war = {
 	focus = {
 		id = TUR_fasc_ekonomi1
 		text = "Subsidise Economy"
-		icon = POL_subsidise_economy
+		icon = turkeconmysubsidise
 		x = -4
 		y = 2
 		cost = 7
@@ -2555,15 +2555,475 @@ add_equipment_to_stockpile = {
 		}
 	}
 	
+	#fasc_muhsin
+	focus = {
+		id = fasc_muhsin
+		icon = GFX_focus_TUR_islamist_army
+		x = 8
+		y = 20
+		cost = 5
+				relative_position_id =  eleman1
+		mutually_exclusive = { focus =  fasc_ozdag }
+
+available = { has_country_flag = muhsin_yazicioglu }
+		completion_reward = {
+ add_political_power = 25
+		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#anlasslef
+	focus = {
+		id = fasc_muhsin_2
+		icon = kuran
+		x = 1
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin
+		prerequisite = { focus =  fasc_muhsin }
+
+		completion_reward = {
+ add_political_power = 75
+  add_stability = 0.05
+		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#anlasfasc
+	focus = {
+		id = fasc_muhsin_3
+		icon = GFX_focus_TUR_towards_to_the_islamic_state
+		x = -1
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin
+		prerequisite = { focus =  fasc_muhsin }
+
+		completion_reward = {
+ add_political_power = 75
+ add_stability = 0.05
+ army_experience= 75
+		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#muslcagri
+	focus = {
+		id = fasc_muhsin_4 
+		icon = GFX_focus_TUR_ban_other_religions
+		x = 0
+		y = 2
+		cost = 5
+				relative_position_id =  fasc_muhsin
+		prerequisite = { focus =  fasc_muhsin_3 }
+				prerequisite = { focus =  fasc_muhsin_2 }
+
+
+		completion_reward = {
+ add_political_power = 75
+ add_command_power = 50
+
+		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#turkislamarmy
+	focus = {
+		id = fasc_muhsin_5
+		icon = army1
+		x = 0
+		y = 3
+		cost = 5
+				relative_position_id =  fasc_muhsin
+		prerequisite = { focus =  fasc_muhsin_4 }
+
+
+		completion_reward = {
+ add_political_power = 50
+ add_ideas = turkislam_army
+ } 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#guneykomsu
+	focus = {
+		id = fasc_muhsin_6
+		icon = attack_syria
+		x = -1
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_5
+		prerequisite = { focus =  fasc_muhsin_5 }
+
+
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = IRQ
+			}
+create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+			hidden_effect = { 
+				every_state = {
+				limit = { is_core_of = SYR }
+				add_core_of = TUR
+			}
+				every_state = {
+				limit = { is_core_of = IRQ }
+				add_core_of = TUR
+			}}
+			} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#bulgar
+	focus = {
+		id = fasc_muhsin_7
+		icon = BUL_militarizm
+		x = 1
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_5
+		prerequisite = { focus =  fasc_muhsin_5 }
+
+
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = BUL
+			}
+			hidden_effect = { 
+				every_state = {
+				limit = { is_core_of = BUL }
+				add_core_of = TUR
+			}		} }
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#lebjor
+	focus = {
+		id = fasc_muhsin_8
+		icon = puppetmaster
+		x = 0
+		y = 2
+		cost = 5
+				relative_position_id =  fasc_muhsin_5
+		prerequisite = { focus =  fasc_muhsin_6 }
+				prerequisite = { focus =  fasc_muhsin_7 }
+
+
+
+		completion_reward = {
+ add_political_power = 25
+create_wargoal = {
+				type = annex_everything
+				target = LEB
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = JOR
+			}
+			hidden_effect = { 
+				every_state = {
+				limit = { is_core_of = LEB }
+				add_core_of = TUR
+			}
+every_state = {
+				limit = { is_core_of = JOR }
+				add_core_of = TUR
+			}			}}		 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#gulf
+	focus = {
+		id = fasc_muhsin_9
+		icon = seize_the_gulf
+		x = 0
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_8
+		prerequisite = { focus =  fasc_muhsin_8 }
+
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = SAU
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = YEM
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = UAE
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = OMA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = QAT
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = KUW
+			}
+			hidden_effect = { 
+				every_state = {
+				limit = { is_core_of = SAU }
+				add_core_of = TUR
+			}
+every_state = {
+				limit = { is_core_of = YEM }
+				add_core_of = TUR
+			}
+every_state = {
+				limit = { is_core_of = UAE }
+				add_core_of = TUR
+			}
+every_state = {
+				limit = { is_core_of = QAT }
+				add_core_of = TUR
+			}	
+every_state = {
+				limit = { is_core_of = OMA }
+				add_core_of = TUR
+			}
+every_state = {
+				limit = { is_core_of = KUW }
+				add_core_of = TUR
+			}			}		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	
+	#halife
+	focus = {
+		id = fasc_muhsin_11
+		icon = GFX_focus_TUR_sharia_laws
+		x = 2
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_9
+		prerequisite = { focus =  fasc_muhsin_9 }
+
+		completion_reward = {
+ add_political_power = 85
+ add_ideas = idea_focus_generic_jihad
+		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	#misir
+	focus = {
+		id = fasc_muhsin_12
+		icon = attack_egypt
+		x = -2
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_9
+		prerequisite = { focus =  fasc_muhsin_9 }
+
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = EGY
+			}
+			hidden_effect = { 
+				every_state = {
+				limit = { is_core_of = EGY }
+				add_core_of = TUR
+			}		} }
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#iran
+	focus = {
+		id = fasc_muhsin_13
+		icon = attack_iran
+		x = 0
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_9
+		prerequisite = { focus =  fasc_muhsin_9 }
+
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = PER
+			}
+			hidden_effect = { 
+				every_state = {
+				limit = { is_core_of = PER }
+				add_core_of = TUR
+			}		}		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#turkmen
+	focus = {
+		id = fasc_muhsin_14
+		icon = GFX_focus_TUR_unite_nations_under_islam
+		x = 1
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_12
+		prerequisite = { focus =  fasc_muhsin_12 }
+				prerequisite = { focus =  fasc_muhsin_13 }
+
+
+		completion_reward = {
+annex_country = {
+    target = TMS
+    transfer_troops = yes
+} 		
+hidden_effect = { 
+				every_state = {
+				limit = { is_core_of = TMS }
+				add_core_of = TUR
+			}		}} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#uzbek
+	focus = {
+		id = fasc_muhsin_15
+		icon = align_to_uzbekistan
+		x = -1
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_11
+		prerequisite = { focus =  fasc_muhsin_11 }
+				prerequisite = { focus =  fasc_muhsin_13 }
+
+
+		completion_reward = {
+annex_country = {
+    target = UZB
+    transfer_troops = yes
+} 		
+hidden_effect = { 
+				every_state = {
+				limit = { is_core_of = UZB }
+				add_core_of = TUR
+			}		}		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#azr
+	focus = {
+		id = fasc_muhsin_16
+		icon = GFX_focus_TUR_unite_the_azeri_diaspora
+		x = -1
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_15
+		prerequisite = { focus =  fasc_muhsin_14}
+		prerequisite = { focus =  fasc_muhsin_15 }
+
+
+		completion_reward = {
+annex_country = {
+    target = AZR
+    transfer_troops = yes
+} 		
+hidden_effect = { 
+				every_state = {
+				limit = { is_core_of = AZR }
+				add_core_of = TUR
+			}		}		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#isr
+	focus = {
+		id = fasc_muhsin_17
+		icon = attack_israel
+		x = 0
+		y = 1
+		cost = 5
+				relative_position_id =  fasc_muhsin_16
+		prerequisite = { focus =  fasc_muhsin_16}
+
+
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = ISR
+			} 		
+	} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#csto
+	focus = {
+		id = fasc_muhsin_18
+		icon = war_against_russia
+		x = 0
+		y = 2
+		cost = 5
+				relative_position_id =  fasc_muhsin_16
+		prerequisite = { focus =  fasc_muhsin_17}
+
+
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = SOV
+			}	
+		} 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
 	
 	#fasc_ozdag
 	focus = {
 		id = fasc_ozdag
-		icon = umit_ozdag_mhf
+		icon = TR_chief 
 		x = 0
 		y = 20
 		cost = 5
 				relative_position_id =  eleman1
+		mutually_exclusive = { focus =  fasc_muhsin }
 
 available = { has_country_flag = umit_ozdag }
 		completion_reward = {
@@ -2644,7 +3104,7 @@ add_popularity = {
 	#ozdag2
 	focus = {
 		id = ozdag2
-		icon = GFX_focus_TUR_turanist_propaganda
+		icon = GFX_focus_TUR_turanist_propaganda 
 		x = 1
 		y = 1
 		cost = 5

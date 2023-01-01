@@ -1,1936 +1,1936 @@
-    
-	# Days cost in time
-    @Time_10_days = 1.5
-    @Time_15_days = 2.2
-    @Time_20_days = 2.9
-    @Time_25_days = 3.7
-    @Time_30_days = 4.4
-    @Time_35_days = 5
-    @Time_40_days = 5.8
-    @Time_45_days = 6.5
-    @Time_50_days = 7.2
-    @Time_55_days = 7.9
-    @Time_60_days = 8.6
-    @Time_65_days = 9.4
-    @Time_70_days = 10
-    @Time_75_days = 10.8
-    @Time_80_days = 11.5
-    @Time_85_days = 12.2
-    @Time_90_days = 12.9
-    @Time_95_days = 13.6
-    @Time_100_days = 14.4
-    @Time_110_days = 15.8
-    @Time_115_days = 16.5
-    @Time_120_days = 17.2
-    @Time_125_days = 17.9
-    @Time_130_days = 18.6
-    @Time_135_days = 19.3
-    @Time_140_days = 20
-    @Time_145_days = 20.8
-    @Time_150_days = 21.5
-    @Time_155_days = 22.2
-    @Time_160_days = 22.9
-    @Time_165_days = 23.6
-    @Time_170_days = 24.4
-    @Time_175_days = 25
-	
-	#########################################
-    ###                            	      ###
-    ### Generic South American Focus Tree ###
-    ###                                   ###
-    #########################################
 
-	#######################
-	### Industrial Path ###
-	#######################
+# Days cost in time
+@Time_10_days = 1.5
+@Time_15_days = 2.2
+@Time_20_days = 2.9
+@Time_25_days = 3.7
+@Time_30_days = 4.4
+@Time_35_days = 5
+@Time_40_days = 5.8
+@Time_45_days = 6.5
+@Time_50_days = 7.2
+@Time_55_days = 7.9
+@Time_60_days = 8.6
+@Time_65_days = 9.4
+@Time_70_days = 10
+@Time_75_days = 10.8
+@Time_80_days = 11.5
+@Time_85_days = 12.2
+@Time_90_days = 12.9
+@Time_95_days = 13.6
+@Time_100_days = 14.4
+@Time_110_days = 15.8
+@Time_115_days = 16.5
+@Time_120_days = 17.2
+@Time_125_days = 17.9
+@Time_130_days = 18.6
+@Time_135_days = 19.3
+@Time_140_days = 20
+@Time_145_days = 20.8
+@Time_150_days = 21.5
+@Time_155_days = 22.2
+@Time_160_days = 22.9
+@Time_165_days = 23.6
+@Time_170_days = 24.4
+@Time_175_days = 25
 
-    shared_focus = {
-		id = SAT_New_Economy
-		icon = GFX_goal_generic_consumer_goods
-		x = 6
-		y = 0
-		cost = @Time_70_days
+#########################################
+###                            	      ###
+### Generic South American Focus Tree ###
+###                                   ###
+#########################################
+
+#######################
+### Industrial Path ###
+#######################
+
+shared_focus = {
+	id = SAT_New_Economy
+	icon = GFX_goal_generic_consumer_goods
+	x = 6
+	y = 0
+	cost = @Time_70_days
 
 
-    	completion_reward = {
-        	add_tech_bonus = {
-				name = industry_bonus
-				bonus = 0.50
-				uses = 2
-				category = industry
+	completion_reward = {
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.50
+			uses = 2
+			category = industry
+		}
+		add_political_power = 150
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+
+### Planned Economy ###
+shared_focus = {
+	id = SAT_Centrally_Planned_Economy
+	icon = GFX_goal_generic_soviet_construction
+	x = 1
+	y = 1
+	cost = @Time_70_days
+
+	available = {
+		OR = {
+			has_completed_focus = GEN_ideology_socialist
+			has_completed_focus = GEN_ideology_nationalist
+			has_completed_focus = GEN_values_of_equality
+			has_completed_focus = GEN_ideology_fascist
+		}
+	}
+
+	mutually_exclusive = {
+		focus = SAT_Centrally_Planned_Economy
+	}
+	mutually_exclusive = {
+		focus = SAT_Free_Market_Economy
+	}
+
+	prerequisite = {
+		focus = SAT_New_Economy
+	}
+
+	completion_reward = {
+		add_ideas = SAT_Centrally_Planned_Economy
+	}
+
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Fund_Public_Schools
+	icon = GFX_goal_generic_scientific_exchange
+	x = 0
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Centrally_Planned_Economy
+	}
+
+
+	completion_reward = {
+		add_ideas = SAT_Fund_Public_Schools
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Invests_In_Heavy_Industry
+	icon = GFX_goal_Invest_Industry
+	x = 2
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Centrally_Planned_Economy
+	}
+
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build =yes
 			}
-            add_political_power = 150
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
 
-
-    ### Planned Economy ###
-    shared_focus = {
-		id = SAT_Centrally_Planned_Economy
-		icon = GFX_goal_generic_soviet_construction
-		x = 1
-		y = 1
-		cost = @Time_70_days
-
-		available = {
-			OR = {
-				has_completed_focus = GEN_ideology_socialist 
-				has_completed_focus = GEN_ideology_nationalist
-				has_completed_focus = GEN_values_of_equality
-				has_completed_focus = GEN_ideology_fascist
-			} 
-		}
-
-        mutually_exclusive = {
-            focus = SAT_Centrally_Planned_Economy
-        }
-        mutually_exclusive = {
-            focus = SAT_Free_Market_Economy
-        }
-
-        prerequisite = {
-            focus = SAT_New_Economy
-        }
-
-    	completion_reward = {
-        	add_ideas = SAT_Centrally_Planned_Economy
-        }
-		
-		
-		ai_will_do = {
-			factor = 10
-		}
+	ai_will_do = {
+		factor = 10
 	}
-    shared_focus = {
-		id = SAT_Fund_Public_Schools
-		icon = GFX_goal_generic_scientific_exchange
-		x = 0
-		y = 2
-		cost = @Time_70_days
+}
+shared_focus = {
+	id = SAT_State-Owned_Enterprises
+	icon = GFX_focus_por_workers_of_iberia
+	x = 0
+	y = 3
+	cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Centrally_Planned_Economy
-        }
-
-
-    	completion_reward = {
-        	add_ideas = SAT_Fund_Public_Schools
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	prerequisite = {
+		focus = SAT_Fund_Public_Schools
 	}
-    shared_focus = {
-		id = SAT_Invests_In_Heavy_Industry
-		icon = GFX_goal_Invest_Industry
-		x = 2
-		y = 2
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Centrally_Planned_Economy
-        }
 
 
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_building_construction = {
-                    type = industrial_complex
-                    level = 2
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_State-Owned_Enterprises
-		icon = GFX_focus_por_workers_of_iberia
-		x = 0
-		y = 3
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Fund_Public_Schools
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_building_construction = {
-                    type = industrial_complex
-                    level = 2
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_Nationalize_Arms_Industries
-		icon = GFX_goal_Planned_Industry
-		x = 2
-		y = 3
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Invests_In_Heavy_Industry
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_building_construction = {
-                    type = arms_factory
-                    level = 2
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_Land_Owned_By_The_State
-		icon = GFX_focus_generic_soviet_politics
-		x = 1
-		y = 4
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_State-Owned_Enterprises
-        }
-        prerequisite = {
-            focus = SAT_Nationalize_Arms_Industries
-        }
-
-
-    	completion_reward = {
-        	every_owned_state = {
-				limit = {
-					is_controlled_by = ROOT
-				}
-				add_extra_state_shared_building_slots = 2
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
-    shared_focus = {
-		id = SAT_Total_Government_Control
-		icon = GFX_focus_prc_agrarian_socialism
-		x = 0
-		y = 5
-		cost = @Time_70_days
 
-        mutually_exclusive = {
-            focus = SAT_Total_Government_Control
-        }
-        mutually_exclusive = {
-            focus = SAT_Lessons_From_China
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Nationalize_Arms_Industries
+	icon = GFX_goal_Planned_Industry
+	x = 2
+	y = 3
+	cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Land_Owned_By_The_State
-        }
+	prerequisite = {
+		focus = SAT_Invests_In_Heavy_Industry
+	}
 
 
-    	completion_reward = {
-            swap_ideas = {
-				remove_idea = SAT_Centrally_Planned_Economy
-				add_idea = SAT_Total_Government_Control
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
-    shared_focus = {
-		id = SAT_Lessons_From_China
-		icon = GFX_focus_prc_maoism
-		x = 2
-		y = 5
-		cost = @Time_70_days
 
-        mutually_exclusive = {
-            focus = SAT_Total_Government_Control
-        }
-        mutually_exclusive = {
-            focus = SAT_Lessons_From_China
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Land_Owned_By_The_State
+	icon = GFX_focus_generic_soviet_politics
+	x = 1
+	y = 4
+	cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Land_Owned_By_The_State
-        }
+	prerequisite = {
+		focus = SAT_State-Owned_Enterprises
+	}
+	prerequisite = {
+		focus = SAT_Nationalize_Arms_Industries
+	}
 
 
-    	completion_reward = {
-        	swap_ideas = {
-				remove_idea = SAT_Centrally_Planned_Economy
-				add_idea = SAT_Lessons_From_China
+	completion_reward = {
+		every_owned_state = {
+			limit = {
+				is_controlled_by = ROOT
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
+			add_extra_state_shared_building_slots = 2
 		}
 	}
 
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Total_Government_Control
+	icon = GFX_focus_prc_agrarian_socialism
+	x = 0
+	y = 5
+	cost = @Time_70_days
 
-    ### Free Market Economy ###
-    shared_focus = {
-		id = SAT_Free_Market_Economy
-		icon = GFX_focus_generic_the_giant_wakes
-		x = 11
-		y = 1
-		cost = @Time_70_days
+	mutually_exclusive = {
+		focus = SAT_Total_Government_Control
+	}
+	mutually_exclusive = {
+		focus = SAT_Lessons_From_China
+	}
 
-		available = {
-			NOT = {
-				has_completed_focus = GEN_ideology_socialist 
-				has_completed_focus = GEN_ideology_nationalist
-				has_completed_focus = GEN_values_of_equality
-				has_completed_focus = GEN_ideology_fascist
-			} 
-		}
-
-        mutually_exclusive = {
-            focus = SAT_Centrally_Planned_Economy
-        }
-        mutually_exclusive = {
-            focus = SAT_Free_Market_Economy
-        }
-
-        prerequisite = {
-            focus = SAT_New_Economy
-        }
+	prerequisite = {
+		focus = SAT_Land_Owned_By_The_State
+	}
 
 
-    	completion_reward = {
-        	add_ideas = SAT_Free_Market_Economy
-        }
-		
-		ai_will_do = {
-			factor = 10
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = SAT_Centrally_Planned_Economy
+			add_idea = SAT_Total_Government_Control
 		}
 	}
-    shared_focus = {
-		id = SAT_Invite_Foreign_Investors
-		icon = GFX_goal_generic_intelligence_exchange
-		x = 10
-		y = 2
-		cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Free_Market_Economy
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Lessons_From_China
+	icon = GFX_focus_prc_maoism
+	x = 2
+	y = 5
+	cost = @Time_70_days
+
+	mutually_exclusive = {
+		focus = SAT_Total_Government_Control
+	}
+	mutually_exclusive = {
+		focus = SAT_Lessons_From_China
+	}
+
+	prerequisite = {
+		focus = SAT_Land_Owned_By_The_State
+	}
 
 
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_building_construction = {
-                    type = industrial_complex
-                    level = 2
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = SAT_Centrally_Planned_Economy
+			add_idea = SAT_Lessons_From_China
 		}
 	}
-    shared_focus = {
-		id = SAT_Free_Trade_Agreements
-		icon = GFX_goal_generic_positive_trade_relations
-		x = 12
-		y = 2
-		cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Free_Market_Economy
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
 
 
-    	completion_reward = {
-			add_political_power = 75
-			add_stability = 0.05 # 5%
-        	add_ideas = free_trade
-        }
-		
-		ai_will_do = {
-			factor = 10
+### Free Market Economy ###
+shared_focus = {
+	id = SAT_Free_Market_Economy
+	icon = GFX_focus_generic_the_giant_wakes
+	x = 11
+	y = 1
+	cost = @Time_70_days
+
+	available = {
+		NOT = {
+			has_completed_focus = GEN_ideology_socialist
+			has_completed_focus = GEN_ideology_nationalist
+			has_completed_focus = GEN_values_of_equality
+			has_completed_focus = GEN_ideology_fascist
 		}
 	}
-    shared_focus = {
-		id = SAT_Foreign_Arms_Companies
-		icon = GFX_focus_generic_combined_arms
-		x = 10
-		y = 3
-		cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Invite_Foreign_Investors
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_building_construction = {
-                    type = arms_factory
-                    level = 2
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	mutually_exclusive = {
+		focus = SAT_Centrally_Planned_Economy
 	}
-    shared_focus = {
-		id = SAT_Anti-Monopoly_Laws
-		icon = GFX_focus_renounce_the_treaty_of_trianon
-		x = 12
-		y = 3
-		cost = @Time_70_days
+	mutually_exclusive = {
+		focus = SAT_Free_Market_Economy
+	}
 
-        prerequisite = {
-            focus = SAT_Free_Trade_Agreements
-        }
+	prerequisite = {
+		focus = SAT_New_Economy
+	}
 
 
-    	completion_reward = {
-        	swap_ideas = {
-				remove_idea = SAT_Free_Market_Economy
-				add_idea = SAT_Anti-Monopoly_Laws
+	completion_reward = {
+		add_ideas = SAT_Free_Market_Economy
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Invite_Foreign_Investors
+	icon = GFX_goal_generic_intelligence_exchange
+	x = 10
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Free_Market_Economy
+	}
+
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
-    shared_focus = {
-		id = SAT_Sell_Goverment_Bonds_to_Companies
-		icon = GFX_focus_mex_privatisation
-		x = 11
-		y = 4
-		cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Anti-Monopoly_Laws
-        }
-        prerequisite = {
-            focus = SAT_Foreign_Arms_Companies
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Free_Trade_Agreements
+	icon = GFX_goal_generic_positive_trade_relations
+	x = 12
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Free_Market_Economy
+	}
 
 
-    	completion_reward = {
-        	add_timed_idea = { 
-				idea = SAT_Goverment_Bonds_Sell_Off  
-				days = 365
+	completion_reward = {
+		add_political_power = 75
+		add_stability = 0.05 # 5%
+		add_ideas = free_trade
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Foreign_Arms_Companies
+	icon = GFX_focus_generic_combined_arms
+	x = 10
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Invite_Foreign_Investors
+	}
+
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
-    shared_focus = {
-		id = SAT_Domestic_Universities
-		icon = GFX_focus_research2
-		x = 10
-		y = 5
-		cost = @Time_70_days
-        
-        mutually_exclusive = {
-            focus = SAT_Domestic_Universities
-        }
-        mutually_exclusive = {
-            focus = SAT_Foreign_School_Institutions
-        }
 
-        prerequisite = {
-            focus = SAT_Sell_Goverment_Bonds_to_Companies
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Anti-Monopoly_Laws
+	icon = GFX_focus_renounce_the_treaty_of_trianon
+	x = 12
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Free_Trade_Agreements
+	}
 
 
-    	completion_reward = {
-        	swap_ideas = {
-				remove_idea = SAT_Anti-Monopoly_Laws
-				add_idea = SAT_Domestic_Universities
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = SAT_Free_Market_Economy
+			add_idea = SAT_Anti-Monopoly_Laws
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Sell_Goverment_Bonds_to_Companies
+	icon = GFX_focus_mex_privatisation
+	x = 11
+	y = 4
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Anti-Monopoly_Laws
+	}
+	prerequisite = {
+		focus = SAT_Foreign_Arms_Companies
+	}
+
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = SAT_Goverment_Bonds_Sell_Off
+			days = 365
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Domestic_Universities
+	icon = GFX_focus_research2
+	x = 10
+	y = 5
+	cost = @Time_70_days
+
+	mutually_exclusive = {
+		focus = SAT_Domestic_Universities
+	}
+	mutually_exclusive = {
+		focus = SAT_Foreign_School_Institutions
+	}
+
+	prerequisite = {
+		focus = SAT_Sell_Goverment_Bonds_to_Companies
+	}
+
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = SAT_Anti-Monopoly_Laws
+			add_idea = SAT_Domestic_Universities
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Foreign_School_Institutions
+	icon = GFX_goal_tfv_generic_tech_sharing
+	x = 12
+	y = 5
+	cost = @Time_70_days
+
+	mutually_exclusive = {
+		focus = SAT_Domestic_Universities
+	}
+	mutually_exclusive = {
+		focus = SAT_Foreign_School_Institutions
+	}
+
+	prerequisite = {
+		focus = SAT_Sell_Goverment_Bonds_to_Companies
+	}
+
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = SAT_Anti-Monopoly_Laws
+			add_idea = SAT_Foreign_School_Institutions
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+
+### Shared Industrial Path ###
+shared_focus = {
+	id = SAT_Modern_Building_Construction_Techniques
+	icon = GFX_goal_generic_construction
+	x = 5
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Centrally_Planned_Economy
+		focus = SAT_Free_Market_Economy
+	}
+
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 1 # 100%
+			uses = 2
+			category = construction_tech
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Invests_in_Mining_Industries
+	icon = GFX_goal_generic_construction2
+	x = 7
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Centrally_Planned_Economy
+		focus = SAT_Free_Market_Economy
+	}
+
+
+	completion_reward = {
+		add_ideas = SAT_Invest_in_Mining_Companies
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
-    shared_focus = {
-		id = SAT_Foreign_School_Institutions
-		icon = GFX_goal_tfv_generic_tech_sharing
-		x = 12
-		y = 5
-		cost = @Time_70_days
 
-        mutually_exclusive = {
-            focus = SAT_Domestic_Universities
-        }
-        mutually_exclusive = {
-            focus = SAT_Foreign_School_Institutions
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Expand_The_Arms_Industries
+	icon = GFX_goal_Arms_Industry
+	x = 4
+	y = 3
+	cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Sell_Goverment_Bonds_to_Companies
-        }
+	prerequisite = {
+		focus = SAT_Modern_Building_Construction_Techniques
+		focus = SAT_Invests_in_Mining_Industries
+	}
 
 
-    	completion_reward = {
-        	swap_ideas = {
-				remove_idea = SAT_Anti-Monopoly_Laws
-				add_idea = SAT_Foreign_School_Institutions
+	completion_reward = {
+		add_timed_idea = {
+			idea = SAT_Rearmament_Program
+			days = 365
+		}
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
 
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Infrastructure_Development
+	icon = GFX_goal_Road_Construction
+	x = 6
+	y = 3
+	cost = @Time_70_days
 
-    ### Shared Industrial Path ###
-    shared_focus = {
-		id = SAT_Modern_Building_Construction_Techniques
-		icon = GFX_goal_generic_construction
-		x = 5
-		y = 2
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Centrally_Planned_Economy
-            focus = SAT_Free_Market_Economy
-        }
+	prerequisite = {
+		focus = SAT_Modern_Building_Construction_Techniques
+		focus = SAT_Invests_in_Mining_Industries
+	}
 
 
-    	completion_reward = {
-        	add_tech_bonus = {
-				name = industry_bonus
-				bonus = 1 # 100%
-				uses = 2
-				category = construction_tech
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
-	}
-    shared_focus = {
-		id = SAT_Invests_in_Mining_Industries
-		icon = GFX_goal_generic_construction2
-		x = 7
-		y = 2
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Centrally_Planned_Economy
-            focus = SAT_Free_Market_Economy
-        }
-
-
-    	completion_reward = {
-        	add_ideas = SAT_Invest_in_Mining_Companies
-				random_owned_controlled_state = {
-                	add_extra_state_shared_building_slots = 1
-                	add_building_construction = {
-                    	type = industrial_complex
-                    	level = 1
-                    	instant_build =yes
-                	}
-            	}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_Expand_The_Arms_Industries
-		icon = GFX_goal_Arms_Industry
-		x = 4
-		y = 3
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Modern_Building_Construction_Techniques
-            focus = SAT_Invests_in_Mining_Industries
-        }
-
-
-    	completion_reward = {
-        	add_timed_idea = {
-				idea = SAT_Rearmament_Program
-				days = 365
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build =yes
 			}
-			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build =yes
-				}
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Civil_Industry_Expansion
+	icon = GFX_goal_Civil_Industry
+	x = 8
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Building_Construction_Techniques
+		focus = SAT_Invests_in_Mining_Industries
+	}
+
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
-    shared_focus = {
-		id = SAT_Infrastructure_Development
-		icon = GFX_goal_Road_Construction
-		x = 6
-		y = 3
-		cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Modern_Building_Construction_Techniques
-            focus = SAT_Invests_in_Mining_Industries
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_building_construction = {
-                    type = infrastructure
-                    level = 1
-                    instant_build =yes
-                }
-            }
-            	random_owned_controlled_state = {
-                	add_building_construction = {
-                    	type = infrastructure
-                    	level = 1
-                    	instant_build =yes
-                	}
-            	}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	ai_will_do = {
+		factor = 10
 	}
-    shared_focus = {
-		id = SAT_Civil_Industry_Expansion
-		icon = GFX_goal_Civil_Industry
-		x = 8
-		y = 3
-		cost = @Time_70_days
+}
+shared_focus = {
+	id = SAT_Military_Arsenal
+	icon = GFX_goal_generic_construct_mil_factory
+	x = 4
+	y = 4
+	cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Modern_Building_Construction_Techniques
-            focus = SAT_Invests_in_Mining_Industries
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_building_construction = {
-                    type = industrial_complex
-                    level = 2
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	prerequisite = {
+		focus = SAT_Expand_The_Arms_Industries
 	}
-    shared_focus = {
-		id = SAT_Military_Arsenal
-		icon = GFX_goal_generic_construct_mil_factory
-		x = 4
-		y = 4
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Expand_The_Arms_Industries
-        }
 
 
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_building_construction = {
-                    type = arms_factory
-                    level = 2
-                    instant_build = yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_Increase_Urbanization
-		icon = GFX_goal_Urban_Construction
-		x = 6
-		y = 4
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Infrastructure_Development
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_manpower = 15000
-            }
-				random_owned_controlled_state = {
-                	add_extra_state_shared_building_slots = 2
-                	add_manpower = 15000
-            	}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_Expand_Consumer_Goods_Industries
-		icon = GFX_goal_Consumer_Goods_Production
-		x = 8
-		y = 4
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Civil_Industry_Expansion
-        }
-
-
-    	completion_reward = {
-        	add_ideas = SAT_Domestic_Goods_Industries
-				random_owned_controlled_state = {
-                	add_extra_state_shared_building_slots = 1
-                	add_building_construction = {
-                    	type = industrial_complex
-                    	level = 1
-                    	instant_build = yes
-                	}
-            	}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_Expand_Steel_Mills
-		icon = GFX_focus_generic_steel
-		x = 5
-		y = 5
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Military_Arsenal
-        }
-		prerequisite = {
-            focus = SAT_Expand_Consumer_Goods_Industries
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_resource = {
-					type = steel
-					amount = 15
-                } 
-				add_extra_state_shared_building_slots = 1
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_New_Aluminum_Foundries
-		icon = GFX_focus_generic_aluminum
-		x = 7
-		y = 5
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Military_Arsenal
-        }
-		prerequisite = {
-            focus = SAT_Expand_Consumer_Goods_Industries
-        }
-
-
-    	completion_reward = {
-			random_owned_controlled_state = {
-				add_resource = {
-					type = aluminium
-					amount = 10
-				}
-				add_extra_state_shared_building_slots = 1
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_Agricultural_Subsidy
-		icon = agriculture
-		x = 4
-		y = 6
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Expand_Steel_Mills
-        }
-        prerequisite = {
-            focus = SAT_New_Aluminum_Foundries
-        }
-
-
-    	completion_reward = {
-			add_timed_idea = { 
-				idea = SAT_Agricultural_Subsidy
-				days = 182.6
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_Housing_Development_Projects
-		icon = GFX_goal_City_Construction
-		x = 6
-		y = 6
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Expand_Steel_Mills
-        }
-        prerequisite = {
-            focus = SAT_New_Aluminum_Foundries
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 1
-                add_manpower = 5500
-            }
-                random_owned_controlled_state = {
-                    add_extra_state_shared_building_slots = 1
-                    add_manpower = 5500
-                }
-                    random_owned_controlled_state = {
-                        add_extra_state_shared_building_slots = 1
-                        add_manpower = 5500
-                    }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_Agricultural_Reforms
-		icon = agrarian_reform
-		x = 8
-		y = 6
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Expand_Steel_Mills
-        }
-        prerequisite = {
-            focus = SAT_New_Aluminum_Foundries
-        }
-
-
-    	completion_reward = {
-        	add_ideas = SAT_Agricultural_Subsidy
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-    shared_focus = {
-		id = SAT_New_Universities
-		icon = GFX_focus_research
-		x = 6
-		y = 7
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Agricultural_Subsidy
-        }
-        prerequisite = {
-            focus = SAT_Housing_Development_Projects
-        }
-        prerequisite = {
-            focus = SAT_Agricultural_Reforms
-        }
-
-
-    	completion_reward = {
-        	add_research_slot = 1
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
 
-	#####################
-    ### Military Path ###
-    #####################
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Increase_Urbanization
+	icon = GFX_goal_Urban_Construction
+	x = 6
+	y = 4
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Infrastructure_Development
+	}
 
 
-	### Army
-	shared_focus = {
-		id = SAT_Army_Reforms
-		icon = GFX_goal_generic_allies_build_infantry
-		x = 16
-		y = 0
-		cost = @Time_70_days
-
-
-    	completion_reward = {
-        	army_experience = 10
-			add_political_power = 75
-        }
-		
-		ai_will_do = {
-			factor = 10
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_manpower = 15000
+		}
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_manpower = 15000
 		}
 	}
-	shared_focus = {
-		id = SAT_Army_Recruitment_Program 
-		icon = GFX_focus_generic_military_mission
-		x = 14
-		y = 1
-		cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Army_Reforms
-        }
-
-
-    	completion_reward = {
-        	add_ideas = SAT_Army_Recruitment_Program
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	ai_will_do = {
+		factor = 10
 	}
-	shared_focus = {
-		id = SAT_Weapon_Modernization_Effort
-		icon = GFX_goal_generic_small_arms
-		x = 16
-		y = 1
-		cost = @Time_70_days
+}
+shared_focus = {
+	id = SAT_Expand_Consumer_Goods_Industries
+	icon = GFX_goal_Consumer_Goods_Production
+	x = 8
+	y = 4
+	cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Army_Reforms
-        }
-
-
-    	completion_reward = {
-			army_experience = 5
-        		add_tech_bonus = {
-					name = special_forces_bonus
-					bonus = 0.75 # 75%
-					uses = 2
-					category = infantry_weapons
-				}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	prerequisite = {
+		focus = SAT_Civil_Industry_Expansion
 	}
-	shared_focus = {
-		id = SAT_Motorization_Expasion
-		icon = GFX_goal_generic_army_motorized
-		x = 18
-		y = 1
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Army_Reforms
-        }
 
 
-    	completion_reward = {
-        	add_timed_idea = {
-				idea = SAT_Motorization_Expasion
-				days = 180
+	completion_reward = {
+		add_ideas = SAT_Domestic_Goods_Industries
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
 			}
-			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build =yes
-				}
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Expand_Steel_Mills
+	icon = GFX_focus_generic_steel
+	x = 5
+	y = 5
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Military_Arsenal
+	}
+	prerequisite = {
+		focus = SAT_Expand_Consumer_Goods_Industries
+	}
+
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_resource = {
+				type = steel
+				amount = 15
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
+			add_extra_state_shared_building_slots = 1
 		}
 	}
-	shared_focus = {
-		id = SAT_Special_Forces
-		icon = GFX_goal_generic_special_forces
-		x = 15
-		y = 2
-		cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Army_Recruitment_Program
-        }
-		prerequisite = {
-            focus = SAT_Weapon_Modernization_Effort
-        }
-
-
-    	completion_reward = {
-        	add_ideas = SAT_Special_Forces
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	ai_will_do = {
+		factor = 10
 	}
-	shared_focus = {
-		id = SAT_Modern_Warfare_Doctrine
-		icon = GFX_goal_generic_army_doctrines
-		x = 14
-		y = 3
-		cost = @Time_70_days
+}
+shared_focus = {
+	id = SAT_New_Aluminum_Foundries
+	icon = GFX_focus_generic_aluminum
+	x = 7
+	y = 5
+	cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Army_Recruitment_Program
-        }
-
-
-    	completion_reward = {
-        	add_doctrine_cost_reduction = {
-                name = armydoctrine_bonus
-                cost_reduction = 1 # 100%
-                uses = 2
-                category = land_doctrine
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	prerequisite = {
+		focus = SAT_Military_Arsenal
 	}
-	shared_focus = {
-		id = SAT_Modern_Artillery
-		icon = GFX_goal_generic_army_artillery2
-		x = 16
-		y = 3
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Weapon_Modernization_Effort
-        }
-
-
-    	completion_reward = {
-			army_experience = 10
-        		add_tech_bonus = {
-					name = special_forces_bonus
-					bonus = 0.50 # 50%
-					uses = 2
-					category = artillery
-				}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	prerequisite = {
+		focus = SAT_Expand_Consumer_Goods_Industries
 	}
-	shared_focus = {
-		id = SAT_New_Armor_Effort
-		icon = GFX_goal_generic_army_tanks
-		x = 18
-		y = 3
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Motorization_Expasion
-        }
 
 
-    	completion_reward = {
-			army_experience = 10
-        		add_tech_bonus = {
-					name = special_forces_bonus
-					bonus = 0.50 # 50%
-					uses = 1
-					category = armor
-				}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Military_Exercise
-		icon = GFX_goal_generic_military_sphere
-		x = 15
-		y = 4
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Modern_Warfare_Doctrine
-        }
-		prerequisite = {
-			focus = SAT_Modern_Artillery
-		}
-
-
-    	completion_reward = {
-        	add_timed_idea = {
-				idea = SAT_Military_Exercise
-				days = 10
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_resource = {
+				type = aluminium
+				amount = 10
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
+			add_extra_state_shared_building_slots = 1
 		}
 	}
-	shared_focus = {
-		id = SAT_Mechanized_Infantry_Effort
-		icon = GFX_goal_generic_army_motorized
-		x = 17
-		y = 4
-		cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_New_Armor_Effort
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Agricultural_Subsidy
+	icon = agriculture
+	x = 4
+	y = 6
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Expand_Steel_Mills
+	}
+	prerequisite = {
+		focus = SAT_New_Aluminum_Foundries
+	}
 
 
-    	completion_reward = {
-			army_experience = 5
-        		add_tech_bonus = {
-					name = special_forces_bonus
-					bonus = 0.75 # 75%
-					uses = 1
-					category = cat_mechanized_equipment
-				}
-        }
-		
-		ai_will_do = {
-			factor = 10
+	completion_reward = {
+		add_timed_idea = {
+			idea = SAT_Agricultural_Subsidy
+			days = 182.6
 		}
 	}
-	shared_focus = {
-		id = SAT_Advanced_Weapon
-		icon = GFX_focus_secret_rearmament
-		x = 16
-		y = 5
-		cost = @Time_70_days
 
-        prerequisite = {
-            focus = SAT_Military_Exercise
-        }
-		prerequisite = {
-			focus = SAT_Mechanized_Infantry_Effort
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Housing_Development_Projects
+	icon = GFX_goal_City_Construction
+	x = 6
+	y = 6
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Expand_Steel_Mills
+	}
+	prerequisite = {
+		focus = SAT_New_Aluminum_Foundries
+	}
+
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_manpower = 5500
 		}
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_manpower = 5500
+		}
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_manpower = 5500
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Agricultural_Reforms
+	icon = agrarian_reform
+	x = 8
+	y = 6
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Expand_Steel_Mills
+	}
+	prerequisite = {
+		focus = SAT_New_Aluminum_Foundries
+	}
 
 
-    	completion_reward = {
-        	add_tech_bonus = {
-				name = special_forces_bonus
-				bonus = 1 # 100%
-				uses = 1
-				category = infantry_weapons
+	completion_reward = {
+		add_ideas = SAT_Agricultural_Subsidy
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_New_Universities
+	icon = GFX_focus_research
+	x = 6
+	y = 7
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Agricultural_Subsidy
+	}
+	prerequisite = {
+		focus = SAT_Housing_Development_Projects
+	}
+	prerequisite = {
+		focus = SAT_Agricultural_Reforms
+	}
+
+
+	completion_reward = {
+		add_research_slot = 1
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+#####################
+### Military Path ###
+#####################
+
+
+### Army
+shared_focus = {
+	id = SAT_Army_Reforms
+	icon = GFX_goal_generic_allies_build_infantry
+	x = 16
+	y = 0
+	cost = @Time_70_days
+
+
+	completion_reward = {
+		army_experience = 10
+		add_political_power = 75
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Army_Recruitment_Program
+	icon = GFX_focus_generic_military_mission
+	x = 14
+	y = 1
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Army_Reforms
+	}
+
+
+	completion_reward = {
+		add_ideas = SAT_Army_Recruitment_Program
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Weapon_Modernization_Effort
+	icon = GFX_goal_generic_small_arms
+	x = 16
+	y = 1
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Army_Reforms
+	}
+
+
+	completion_reward = {
+		army_experience = 5
+		add_tech_bonus = {
+			name = special_forces_bonus
+			bonus = 0.75 # 75%
+			uses = 2
+			category = infantry_weapons
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Motorization_Expasion
+	icon = GFX_goal_generic_army_motorized
+	x = 18
+	y = 1
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Army_Reforms
+	}
+
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = SAT_Motorization_Expasion
+			days = 180
+		}
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build =yes
 			}
-			add_tech_bonus = {
-				name = special_forces_bonus
-				bonus = 1 # 100%
-				uses = 1
-				category = artillery
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Special_Forces
+	icon = GFX_goal_generic_special_forces
+	x = 15
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Army_Recruitment_Program
+	}
+	prerequisite = {
+		focus = SAT_Weapon_Modernization_Effort
+	}
+
+
+	completion_reward = {
+		add_ideas = SAT_Special_Forces
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Warfare_Doctrine
+	icon = GFX_goal_generic_army_doctrines
+	x = 14
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Army_Recruitment_Program
+	}
+
+
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			name = armydoctrine_bonus
+			cost_reduction = 1 # 100%
+			uses = 2
+			category = land_doctrine
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Artillery
+	icon = GFX_goal_generic_army_artillery2
+	x = 16
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Weapon_Modernization_Effort
+	}
+
+
+	completion_reward = {
+		army_experience = 10
+		add_tech_bonus = {
+			name = special_forces_bonus
+			bonus = 0.50 # 50%
+			uses = 2
+			category = artillery
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_New_Armor_Effort
+	icon = GFX_goal_generic_army_tanks
+	x = 18
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Motorization_Expasion
+	}
+
+
+	completion_reward = {
+		army_experience = 10
+		add_tech_bonus = {
+			name = special_forces_bonus
+			bonus = 0.50 # 50%
+			uses = 1
+			category = armor
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Military_Exercise
+	icon = GFX_goal_generic_military_sphere
+	x = 15
+	y = 4
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Warfare_Doctrine
+	}
+	prerequisite = {
+		focus = SAT_Modern_Artillery
+	}
+
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = SAT_Military_Exercise
+			days = 10
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Mechanized_Infantry_Effort
+	icon = GFX_goal_generic_army_motorized
+	x = 17
+	y = 4
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_New_Armor_Effort
+	}
+
+
+	completion_reward = {
+		army_experience = 5
+		add_tech_bonus = {
+			name = special_forces_bonus
+			bonus = 0.75 # 75%
+			uses = 1
+			category = cat_mechanized_equipment
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Advanced_Weapon
+	icon = GFX_focus_secret_rearmament
+	x = 16
+	y = 5
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Military_Exercise
+	}
+	prerequisite = {
+		focus = SAT_Mechanized_Infantry_Effort
+	}
+
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = special_forces_bonus
+			bonus = 1 # 100%
+			uses = 1
+			category = infantry_weapons
+		}
+		add_tech_bonus = {
+			name = special_forces_bonus
+			bonus = 1 # 100%
+			uses = 1
+			category = artillery
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Main_Battle_Tanks
+	icon = GFX_focus_generic_army_tanks2
+	x = 18
+	y = 5
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_New_Armor_Effort
+	}
+
+
+	completion_reward = {
+		army_experience = 25
+		add_tech_bonus = {
+			name = special_forces_bonus
+			bonus = 1 # 100%
+			uses = 1
+			category = armor
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+
+### Navy
+shared_focus = {
+	id = SAT_Naval_Progarm
+	icon = GFX_goal_generic_build_navy
+	x = 25
+	y = 0
+	cost = @Time_50_days
+
+
+	completion_reward = {
+		navy_experience = 25
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+### Flexible Navy
+shared_focus = {
+	id = SAT_Flexible_Navy
+	icon = GFX_focus_generic_destroyer
+	x = 23
+	y = 1
+	cost = @Time_50_days
+
+	mutually_exclusive = {
+		focus = SAT_Flexible_Navy
+	}
+	mutually_exclusive = {
+		focus = SAT_Large_Navy
+	}
+
+	prerequisite = {
+		focus = SAT_Naval_Progarm
+	}
+
+
+	completion_reward = {
+		add_political_power = 150
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Submarine
+	icon = GFX_goal_generic_navy_submarine
+	x = 22
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Flexible_Navy
+	}
+
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = submarine_bonus
+			bonus = 1
+			uses = 1
+			category = ss_tech
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Corvettes
+	icon = GFX_goal_generic_navy_cruiser
+	x = 24
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Flexible_Navy
+	}
+
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = destroyer_bonus
+			bonus = 1
+			uses = 1
+			category = dd_tech
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modular_Construction_FN
+	icon = GFX_goal_generic_construct_naval_dockyard
+	x = 23
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Submarine
+	}
+	prerequisite = {
+		focus = SAT_Modern_Corvettes
+	}
+
+
+	completion_reward = {
+		add_ideas = SAT_Modular_Construction
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Advanced_Torpedo
+	icon = GFX_goal_generic_navy_anti_submarine
+	x = 22
+	y = 4
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Submarine
+	}
+
+
+	completion_reward = {
+		add_ideas = SAT_Advanced_Torpedo
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Battlefleet
+	icon = GFX_goal_generic_navy_doctrines_tactics
+	x = 24
+	y = 4
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Corvettes
+	}
+
+
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = cat_fleet_in_being
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+### Dockyard Expansion (Flexible Navy)
+shared_focus = {
+	id = SAT_Dockyard_Expansion_FN_1
+	icon = GFX_goal_generic_construct_naval_dockyard
+	x = 20
+	y = 2
+	cost = @Time_50_days
+
+	prerequisite = {
+		focus = SAT_Flexible_Navy
+	}
+
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Modern_Main_Battle_Tanks
-		icon = GFX_focus_generic_army_tanks2
-		x = 18
-		y = 5
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_New_Armor_Effort
-        }
-
-
-    	completion_reward = {
-			army_experience = 25
-        		add_tech_bonus = {
-					name = special_forces_bonus
-					bonus = 1 # 100%
-					uses = 1
-					category = armor
-				}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
 
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Dockyard_Expansion_FN_2
+	icon = GFX_goal_generic_construct_naval_dockyard
+	x = 20
+	y = 3
+	cost = @Time_50_days
 
-	### Navy
-	shared_focus = {
-		id = SAT_Naval_Progarm
-		icon = GFX_goal_generic_build_navy
-		x = 25
-		y = 0
-		cost = @Time_50_days
-
-
-    	completion_reward = {
-			navy_experience = 25
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	prerequisite = {
+		focus = SAT_Dockyard_Expansion_FN_1
 	}
 
-	### Flexible Navy
-	shared_focus = {
-		id = SAT_Flexible_Navy
-		icon = GFX_focus_generic_destroyer
-		x = 23
-		y = 1
-		cost = @Time_50_days
 
-		mutually_exclusive = {
-			focus = SAT_Flexible_Navy
-		}
-		mutually_exclusive = {
-			focus = SAT_Large_Navy
-		}
-
-		prerequisite = {
-            focus = SAT_Naval_Progarm
-        }
-
-
-    	completion_reward = {
-        	add_political_power = 150
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Modern_Submarine
-		icon = GFX_goal_generic_navy_submarine
-		x = 22
-		y = 2
-		cost = @Time_70_days
-
-		prerequisite = {
-            focus = SAT_Flexible_Navy
-        }
-
-
-    	completion_reward = {
-        	add_tech_bonus = {
-				name = submarine_bonus
-				bonus = 1
-				uses = 1
-				category = ss_tech
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
-	shared_focus = {
-		id = SAT_Modern_Corvettes
-		icon = GFX_goal_generic_navy_cruiser
-		x = 24
-		y = 2
-		cost = @Time_70_days
 
-		prerequisite = {
-            focus = SAT_Flexible_Navy
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Dockyard_Expansion_FN_3
+	icon = GFX_goal_generic_construct_naval_dockyard
+	x = 20
+	y = 4
+	cost = @Time_50_days
+
+	prerequisite = {
+		focus = SAT_Dockyard_Expansion_FN_2
+	}
 
 
-    	completion_reward = {
-        	add_tech_bonus = {
-				name = destroyer_bonus
-				bonus = 1
-				uses = 1
-				category = dd_tech
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = dockyard
+				level = 3
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Modular_Construction_FN
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = 23
-		y = 3
-		cost = @Time_70_days
-
-		prerequisite = {
-            focus = SAT_Modern_Submarine
-        }
-		prerequisite = {
-			focus = SAT_Modern_Corvettes
-		}
-
-
-    	completion_reward = {
-        	add_ideas = SAT_Modular_Construction
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Advanced_Torpedo
-		icon = GFX_goal_generic_navy_anti_submarine
-		x = 22
-		y = 4
-		cost = @Time_70_days
-
-		prerequisite = {
-            focus = SAT_Modern_Submarine
-        }
-
-
-    	completion_reward = {
-        	add_ideas = SAT_Advanced_Torpedo
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Modern_Battlefleet
-		icon = GFX_goal_generic_navy_doctrines_tactics
-		x = 24
-		y = 4
-		cost = @Time_70_days
-
-		prerequisite = {
-            focus = SAT_Modern_Corvettes
-        }
-
-
-    	completion_reward = {
-        	add_tech_bonus = {
-                bonus = 1
-                uses = 2
-                category = cat_fleet_in_being
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
 
-	### Dockyard Expansion (Flexible Navy)
-	shared_focus = {
-		id = SAT_Dockyard_Expansion_FN_1
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = 20
-		y = 2
-		cost = @Time_50_days
-
-		prerequisite = {
-            focus = SAT_Flexible_Navy
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 1
-                add_building_construction = {
-                    type = dockyard
-                    level = 1
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	ai_will_do = {
+		factor = 10
 	}
-	shared_focus = {
-		id = SAT_Dockyard_Expansion_FN_2
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = 20
-		y = 3
-		cost = @Time_50_days
+}
 
-		prerequisite = {
-            focus = SAT_Dockyard_Expansion_FN_1
-        }
+### Large Navy
+shared_focus = {
+	id = SAT_Large_Navy
+	icon = GFX_focus_generic_navy_battleship2
+	x = 27
+	y = 1
+	cost = @Time_50_days
 
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_building_construction = {
-                    type = dockyard
-                    level = 2
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	mutually_exclusive = {
+		focus = SAT_Flexible_Navy
 	}
-	shared_focus = {
-		id = SAT_Dockyard_Expansion_FN_3
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = 20
-		y = 4
-		cost = @Time_50_days
+	mutually_exclusive = {
+		focus = SAT_Large_Navy
+	}
 
-		prerequisite = {
-            focus = SAT_Dockyard_Expansion_FN_2
-        }
+	prerequisite = {
+		focus = SAT_Naval_Progarm
+	}
 
 
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 3
-                add_building_construction = {
-                    type = dockyard
-                    level = 3
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
+	completion_reward = {
+		add_political_power = 150
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Advanced_Aircraft_Carriers
+	icon = GFX_goal_generic_navy_carrier
+	x = 26
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Large_Navy
+	}
+
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = carrier_bonus
+			bonus = 1
+			uses = 1
+			category = cv_tech
 		}
 	}
 
-	### Large Navy
-	shared_focus = {
-		id = SAT_Large_Navy
-		icon = GFX_focus_generic_navy_battleship2
-		x = 27
-		y = 1
-		cost = @Time_50_days
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Destroyers
+	icon = GFX_goal_generic_occupy_states_coastal
+	x = 28
+	y = 2
+	cost = @Time_70_days
 
-		mutually_exclusive = {
-			focus = SAT_Flexible_Navy
-		}
-		mutually_exclusive = {
-			focus = SAT_Large_Navy
-		}
-
-		prerequisite = {
-            focus = SAT_Naval_Progarm
-        }
+	prerequisite = {
+		focus = SAT_Large_Navy
+	}
 
 
-    	completion_reward = {
-        	add_political_power = 150
-        }
-		
-		ai_will_do = {
-			factor = 10
+	completion_reward = {
+		add_tech_bonus = {
+			name = cruiser_bonus
+			bonus = 1
+			uses = 1
+			category = ca_tech
 		}
 	}
-	shared_focus = {
-		id = SAT_Advanced_Aircraft_Carriers
-		icon = GFX_goal_generic_navy_carrier
-		x = 26
-		y = 2
-		cost = @Time_70_days
 
-		prerequisite = {
-            focus = SAT_Large_Navy
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Advanced_Radar_Technology
+	icon = GFX_goal_generic_radar
+	x = 27
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Advanced_Aircraft_Carriers
+	}
+	prerequisite = {
+		focus = SAT_Modern_Destroyers
+	}
 
 
-    	completion_reward = {
-        	add_tech_bonus = {
-				name = carrier_bonus
-				bonus = 1
-				uses = 1
-				category = cv_tech
+	completion_reward = {
+		add_tech_bonus = {
+			name = radar_tech
+			bonus = 1 # 100%
+			uses = 2
+			category = engineers_tech
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Carrier_Warfare
+	icon = GFX_goal_generic_navy_doctrines_tactics
+	x = 26
+	y = 4
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Advanced_Aircraft_Carriers
+	}
+
+
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = cat_base_strike
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Advanced_Missile_Cruisers
+	icon = GFX_goal_generic_navy_battleship
+	x = 28
+	y = 4
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Destroyers
+	}
+
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = battleship_bonus
+			bonus = 1
+			uses = 1
+			category = bb_tech
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+### Dockyard Expansion (Large Navy)
+shared_focus = {
+	id = SAT_Dockyard_Expansion_LN_1
+	icon = GFX_goal_generic_construct_naval_dockyard
+	x = 30
+	y = 2
+	cost = @Time_50_days
+
+	prerequisite = {
+		focus = SAT_Large_Navy
+	}
+
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
-	shared_focus = {
-		id = SAT_Modern_Destroyers
-		icon = GFX_goal_generic_occupy_states_coastal
-		x = 28
-		y = 2
-		cost = @Time_70_days
 
-		prerequisite = {
-            focus = SAT_Large_Navy
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Dockyard_Expansion_LN_2
+	icon = GFX_goal_generic_construct_naval_dockyard
+	x = 30
+	y = 3
+	cost = @Time_50_days
+
+	prerequisite = {
+		focus = SAT_Dockyard_Expansion_LN_1
+	}
 
 
-    	completion_reward = {
-        	add_tech_bonus = {
-				name = cruiser_bonus
-				bonus = 1
-				uses = 1
-				category = ca_tech
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
-	shared_focus = {
-		id = SAT_Advanced_Radar_Technology
-		icon = GFX_goal_generic_radar
-		x = 27
-		y = 3
-		cost = @Time_70_days
 
-		prerequisite = {
-            focus = SAT_Advanced_Aircraft_Carriers
-        }
-		prerequisite = {
-			focus = SAT_Modern_Destroyers
-		}
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Dockyard_Expansion_LN_3
+	icon = GFX_goal_generic_construct_naval_dockyard
+	x = 30
+	y = 4
+	cost = @Time_50_days
+
+	prerequisite = {
+		focus = SAT_Dockyard_Expansion_LN_2
+	}
 
 
-    	completion_reward = {
-        	add_tech_bonus = {
-				name = radar_tech
-				bonus = 1 # 100%
-				uses = 2
-				category = engineers_tech
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = dockyard
+				level = 3
+				instant_build =yes
 			}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Modern_Carrier_Warfare
-		icon = GFX_goal_generic_navy_doctrines_tactics
-		x = 26
-		y = 4
-		cost = @Time_70_days
-
-		prerequisite = {
-            focus = SAT_Advanced_Aircraft_Carriers
-        }
-
-
-    	completion_reward = {
-        	add_tech_bonus = {
-                bonus = 1
-                uses = 2
-                category = cat_base_strike
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Advanced_Missile_Cruisers
-		icon = GFX_goal_generic_navy_battleship
-		x = 28
-		y = 4
-		cost = @Time_70_days
-
-		prerequisite = {
-            focus = SAT_Modern_Destroyers
-        }
-
-
-    	completion_reward = {
-        	add_tech_bonus = {
-			    name = battleship_bonus
-				bonus = 1
-				uses = 1
-				category = bb_tech
-			}
-        }
-		
-		ai_will_do = {
-			factor = 10
 		}
 	}
 
-	### Dockyard Expansion (Large Navy)
-	shared_focus = {
-		id = SAT_Dockyard_Expansion_LN_1
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = 30
-		y = 2
-		cost = @Time_50_days
-
-		prerequisite = {
-            focus = SAT_Large_Navy
-        }
-
-
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 1
-                add_building_construction = {
-                    type = dockyard
-                    level = 1
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	ai_will_do = {
+		factor = 10
 	}
-	shared_focus = {
-		id = SAT_Dockyard_Expansion_LN_2
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = 30
-		y = 3
-		cost = @Time_50_days
-
-		prerequisite = {
-            focus = SAT_Dockyard_Expansion_LN_1
-        }
+}
 
 
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 2
-                add_building_construction = {
-                    type = dockyard
-                    level = 2
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+### Air Force
+shared_focus = {
+	id = SAT_Air_Force_Expasion
+	icon = GFX_goal_generic_build_airforce
+	x = 33
+	y = 0
+	cost = @Time_70_days
+
+
+	completion_reward = {
+		air_experience = 10
 	}
-	shared_focus = {
-		id = SAT_Dockyard_Expansion_LN_3
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = 30
-		y = 4
-		cost = @Time_50_days
 
-		prerequisite = {
-            focus = SAT_Dockyard_Expansion_LN_2
-        }
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Jet_Fighters
+	icon = GFX_goal_generic_air_fighter
+	x = 32
+	y = 1
+	cost = @Time_70_days
 
+	mutually_exclusive = {
+		focus = SAT_Modern_Jet_Fighters
+	}
+	mutually_exclusive = {
+		focus = SAT_Modern_Jet_Bombers
+	}
 
-    	completion_reward = {
-        	random_owned_controlled_state = {
-                add_extra_state_shared_building_slots = 3
-                add_building_construction = {
-                    type = dockyard
-                    level = 3
-                    instant_build =yes
-                }
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
+	prerequisite = {
+		focus = SAT_Air_Force_Expasion
 	}
 
 
-	### Air Force
-	shared_focus = {
-		id = SAT_Air_Force_Expasion
-		icon = GFX_goal_generic_build_airforce
-		x = 33
-		y = 0
-		cost = @Time_70_days
-
-
-    	completion_reward = {
-			air_experience = 10
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Modern_Jet_Fighters
-		icon = GFX_goal_generic_air_fighter
-		x = 32
-		y = 1
-		cost = @Time_70_days
-
-		mutually_exclusive = {
-            focus = SAT_Modern_Jet_Fighters
-        }
-		mutually_exclusive = {
-            focus = SAT_Modern_Jet_Bombers
-        }
-
-        prerequisite = {
-            focus = SAT_Air_Force_Expasion
-        }
-
-
-    	completion_reward = {
-			air_experience = 5
-        	add_tech_bonus = {
-				name = industry_bonus
-				bonus = 0.75 # 75%
-				uses = 1
-				category = light_fighter
-			}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Modern_Jet_Bombers
-		icon = GFX_goal_generic_air_bomber
-		x = 34
-		y = 1
-		cost = @Time_70_days
-
-		mutually_exclusive = {
-            focus = SAT_Modern_Jet_Fighters
-        }
-		mutually_exclusive = {
-            focus = SAT_Modern_Jet_Bombers
-        }
-
-        prerequisite = {
-            focus = SAT_Air_Force_Expasion
-        }
-
-
-    	completion_reward = {
-			air_experience = 5
-            add_tech_bonus = {
-				name = industry_bonus
-				bonus = 0.75 # 75%
-				uses = 1
-				category = tactical_bomber
-			}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Modern_Air_Combat
-		icon = GFX_goal_generic_air_doctrine
-		x = 33
-		y = 2
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Modern_Jet_Fighters
-			focus = SAT_Modern_Jet_Bombers
-        }
-
-
-    	completion_reward = {
-        	add_doctrine_cost_reduction = {
-                cost_reduction = 1 # 100%
-                uses = 2
-                category = air_doctrine 
-            }
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Modern_Attack_Aircraft
-		icon = GFX_goal_generic_CAS
-		x = 32
-		y = 3
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Modern_Air_Combat
-        }
-
-
-    	completion_reward = {
-			air_experience = 5
-            add_tech_bonus = {
-				name = industry_bonus
-				bonus = 0.75 # 75%
-				uses = 1
-				category = cas_bomber
-			}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Establish_a_Drone_Program
-		icon = drone
-		x = 34
-		y = 3
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Modern_Jet_Bombers
-        }
-
-
-    	completion_reward = {
-			air_experience = 5
-        	add_tech_bonus = {
-				name = industry_bonus
-				bonus = 0.75 # 75%
-				uses = 1
-				category = cat_strategic_bomber
-			}
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Aviation_Academy
-		icon = GFX_focus_generic_air_defense
-		x = 33
-		y = 4
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Modern_Air_Combat
-        }
-
-
-    	completion_reward = {
-        	add_ideas = SAT_Aviation_Academy
-        }
-		
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	shared_focus = {
-		id = SAT_Advanced_Jet_Fighters
-		icon = GFX_goal_generic_air_fighter2
-		x = 33
-		y = 5
-		cost = @Time_70_days
-
-        prerequisite = {
-            focus = SAT_Aviation_Academy
-        }
-
-
-    	completion_reward = {
-			air_experience = 15
-        	add_tech_bonus = {
-				name = industry_bonus
-				bonus = 1 # 100%
-				uses = 1
-				category = light_fighter
-			}
-        }
-		
-		ai_will_do = {
-			factor = 10
+	completion_reward = {
+		air_experience = 5
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.75 # 75%
+			uses = 1
+			category = light_fighter
 		}
 	}
 
-	###########################
-    ### Political Tree Path ###
-    ###########################
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Jet_Bombers
+	icon = GFX_goal_generic_air_bomber
+	x = 34
+	y = 1
+	cost = @Time_70_days
 
-	# Political Tree
-	# GenHenry start from here
+	mutually_exclusive = {
+		focus = SAT_Modern_Jet_Fighters
+	}
+	mutually_exclusive = {
+		focus = SAT_Modern_Jet_Bombers
+	}
+
+	prerequisite = {
+		focus = SAT_Air_Force_Expasion
+	}
+
+
+	completion_reward = {
+		air_experience = 5
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.75 # 75%
+			uses = 1
+			category = tactical_bomber
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Air_Combat
+	icon = GFX_goal_generic_air_doctrine
+	x = 33
+	y = 2
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Jet_Fighters
+		focus = SAT_Modern_Jet_Bombers
+	}
+
+
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 1 # 100%
+			uses = 2
+			category = air_doctrine
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Modern_Attack_Aircraft
+	icon = GFX_goal_generic_CAS
+	x = 32
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Air_Combat
+	}
+
+
+	completion_reward = {
+		air_experience = 5
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.75 # 75%
+			uses = 1
+			category = cas_bomber
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Establish_a_Drone_Program
+	icon = drone
+	x = 34
+	y = 3
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Jet_Bombers
+	}
+
+
+	completion_reward = {
+		air_experience = 5
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.75 # 75%
+			uses = 1
+			category = cat_strategic_bomber
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Aviation_Academy
+	icon = GFX_focus_generic_air_defense
+	x = 33
+	y = 4
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Modern_Air_Combat
+	}
+
+
+	completion_reward = {
+		add_ideas = SAT_Aviation_Academy
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = SAT_Advanced_Jet_Fighters
+	icon = GFX_goal_generic_air_fighter2
+	x = 33
+	y = 5
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = SAT_Aviation_Academy
+	}
+
+
+	completion_reward = {
+		air_experience = 15
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 1 # 100%
+			uses = 1
+			category = light_fighter
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+###########################
+### Political Tree Path ###
+###########################
+
+# Political Tree
+# GenHenry start from here

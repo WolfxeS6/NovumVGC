@@ -27,7 +27,7 @@ armenian_init_corruption = {
     }
     add_to_array = {
         array = armenian_state_map
-        value = 4
+        value = 3
         index = 3
     }
     add_to_array = {
@@ -47,20 +47,62 @@ armenian_init_corruption = {
     }
     add_to_array = {
         array = armenian_state_map
-        value = 4
+        value = 3
         index = 7
     }
     add_to_array = {
         array = armenian_state_map
-        value = 4
+        value = 2
         index = 8
     }
     add_to_array = {
         array = armenian_state_map
-        value = 4
+        value = 1
         index = 9
     }
     armenian_recalc_control = yes
+}
+armenian_add_sark_control = {
+    for_each_loop = {
+        array = armenian_state_map
+        value = v
+        break = break
+        if = {
+            limit = {
+                NOT = {check_variable = { v = 2 }}
+            }
+            set_variable = { armenian_state_map^v = 2 }
+            set_temp_variable = { break = 1 }
+        }
+    }
+}
+armenian_add_dem = {
+    for_each_loop = {
+        array = armenian_state_map
+        value = v
+        break = break
+        if = {
+            limit = {
+                NOT = {check_variable = { v = 4 }}
+            }
+            set_variable = { armenian_state_map^v = 4 }
+            set_temp_variable = { break = 1 }
+        }
+    }
+}
+armenian_add_koch_control = {
+    for_each_loop = {
+        array = armenian_state_map
+        value = v
+        break = break
+        if = {
+            limit = {
+                NOT = {check_variable = { v = 3 }}
+            }
+            set_variable = { armenian_state_map^v = 3 }
+            set_temp_variable = { break = 1 }
+        }
+    }
 }
 armenian_recalc_control = {
     set_variable = { ARM_military_control = 0 }
@@ -117,5 +159,46 @@ armenian_recalc_control = {
                 value = 1
             }
         }
+    }
+    if = {
+        limit = {
+            has_completed_focus = ARM_sarksian_struggle
+            set_variable = {ARM_stab_factor = ARM_sarksian_control}
+            add_to_variable = {
+                var = ARM_stab_factor
+                value = -5
+            }
+            divide_variable = { ARM_stab_factor = 100 }
+        }
+    }
+    else_if = {
+        limit = {
+            has_completed_focus = ARM_reject_the_mafia
+        }
+        set_variable = {ARM_stab_factor = ARM_independent_control}
+        add_to_variable = {
+            var = ARM_stab_factor
+            value = -5
+        }
+        divide_variable = { ARM_stab_factor = 100 }
+    }
+    else_if = {
+        limit = {
+            has_completed_focus = ARM_launch_the_coup
+        }
+        set_variable = {ARM_stab_factor = ARM_independent_control}
+        add_to_variable = {
+            var = ARM_stab_factor
+            value = -5
+        }
+        divide_variable = { ARM_stab_factor = 100 }
+    }
+    else = {
+        set_variable = {ARM_stab_factor = ARM_koch_control}
+            add_to_variable = {
+                var = ARM_stab_factor
+                value = -5
+            }
+        divide_variable = { ARM_stab_factor = 50 }
     }
 }

@@ -280,7 +280,10 @@ focus_tree = {
 		y = 1
 		cost = 15
 		available = {
-			has_completed_focus = ARM_reject_the_mafia
+			custom_trigger_tooltip = { 
+				check_variable = { ARM_democratic_control > 3 }
+				tooltip = ARM_min_dem_control_4
+			}
 		}
 		prerequisite = {
 			focus = ARM_earthquake_rebuilding
@@ -291,6 +294,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_stability = -0.05
 		}
 
 		ai_will_do = {
@@ -310,6 +314,7 @@ focus_tree = {
 		relative_position_id = ARM_independent_industrial_base
 
 		completion_reward = {
+			remove_ideas = ARM_multi_group
 		}
 
 		ai_will_do = {
@@ -395,6 +400,9 @@ focus_tree = {
 		available = {
 			NOT = {
 				has_idea = ARM_corruption
+			}
+			NOT = {
+				has_dynamic_modifier = {modifier = ARM_corruption_modifier}
 			}
 		}
 		prerequisite = {
@@ -790,6 +798,10 @@ focus_tree = {
 
 
 		completion_reward = {
+			add_opinion_modifier = {
+				target = SOV
+				modifier = aided_industry
+			}
 		}
 
 		ai_will_do = {
@@ -1027,6 +1039,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_stability = 0.05
+			country_event = ARM.4
 		}
 
 		ai_will_do = {
@@ -1110,7 +1123,7 @@ focus_tree = {
 		icon = POL_commie_seize_industry #POL_expand_the_coal_industry BLR_belarusian_soldier align_to_csto POL_support_nato
 		x = 2
 		y = 1
-		cost = 6
+		cost = 3
 
 		prerequisite = {
 			focus = ARM_sarksian_struggle
@@ -1119,6 +1132,17 @@ focus_tree = {
 		relative_position_id = ARM_maintain_koch_coalition
 
 		completion_reward = {
+			add_political_power = 50
+			custom_effect_tooltip = ARM_secure_our_strength_tt
+			if = {
+				limit = {
+					has_completed_focus = ARM_sarksian_struggle
+				}
+				armenian_add_sark_control = yes
+			}
+			else = {
+				armenian_add_koch_control = yes
+			}
 		}
 
 		ai_will_do = {
@@ -1145,6 +1169,8 @@ focus_tree = {
 				target = ARM
 				modifier = football_diplomacy
 			}
+			add_stability = 0.05
+			add_war_support = -0.2
 		}
 
 		ai_will_do = {
@@ -1185,6 +1211,7 @@ focus_tree = {
 		relative_position_id = ARM_thaw_turkish_relations
 
 		completion_reward = {
+
 		}
 
 		ai_will_do = {
@@ -1207,6 +1234,8 @@ focus_tree = {
 		relative_position_id = ARM_seek_agreement_from_moscow
 
 		completion_reward = {
+			add_to_variable = {ARM_consumer_goods_factor = 0.02 }
+			add_political_power = 20
 		}
 
 		ai_will_do = {
@@ -1270,6 +1299,7 @@ focus_tree = {
 		relative_position_id = ARM_two_popes_one_mafia
 
 		completion_reward = {
+			add_political_power = 75
 			swap_ideas = {
 				remove_idea = ARM_diaspora
 				add_idea = ARM_diaspora_exploited
@@ -1370,6 +1400,7 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = 0.05
 			add_stability = -0.02
+			armenian_add_dem = yes
 		}
 
 		ai_will_do = {
@@ -1495,7 +1526,11 @@ focus_tree = {
 		relative_position_id = ARM_launch_the_coup
 
 		completion_reward = {
-			add_stability = 0.15
+			add_stability = 0.1
+			add_to_variable = {ARM_army_org_factor = 0.03 }
+			add_to_variable = {ARM_army_morale_factor = 0.01 }
+			add_to_variable = {ARM_army_defence_factor = 0.05 }
+			armenian_add_dem = yes
 		}
 
 		ai_will_do = {
@@ -1578,6 +1613,7 @@ focus_tree = {
 				idea = ARM_corruption_fighting
 				days = 180
 			}
+			armenian_add_dem = yes
 		}
 
 		ai_will_do = {
@@ -1614,8 +1650,8 @@ focus_tree = {
 					modifier = imminent_danger_to_national_security
 				}
 			}
-			add_stability = 0.05
-			add_war_support = 0.02
+			add_stability = -0.05
+			add_war_support = 0.1
 		}
 
 		ai_will_do = {
@@ -1736,7 +1772,7 @@ focus_tree = {
 			focus = ARM_ngo_support
 		}
 		relative_position_id = ARM_appeal_to_the_countryside
-
+		allow_branch = ARM_grass_root_resistence
 		available = {
 			custom_trigger_tooltip = ARM_not_yet_here
 		}
@@ -1765,6 +1801,7 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = -0.05
 			add_political_power = 20
+			armenian_add_dem = yes
 		}
 
 		ai_will_do = {
@@ -1786,6 +1823,7 @@ focus_tree = {
 			fourth_estate_Market_liberal_increase = yes
 			fourth_estate_social_democrat_increase = yes
 			fourth_estate_social_liberal_increase = yes
+			set_country_flag = ARM_dem_raise_support
 		}
 
 		ai_will_do = {
@@ -1805,6 +1843,7 @@ focus_tree = {
 		relative_position_id = ARM_ngo_support
 
 		completion_reward = {
+			armenian_add_dem = yes
 		}
 
 		ai_will_do = {
@@ -1844,6 +1883,8 @@ focus_tree = {
 		relative_position_id = ARM_words_not_bullets
 
 		completion_reward = {
+			add_political_power = 25
+			add_stability = 0.05
 		}
 
 		ai_will_do = {
@@ -1860,6 +1901,12 @@ focus_tree = {
 			focus = ARM_my_step
 		}
 		relative_position_id = ARM_my_step
+		available = {
+			custom_trigger_tooltip = { 
+				check_variable = { ARM_democratic_control > 4 }
+				tooltip = ARM_min_dem_control
+			}
+		}
 
 		completion_reward = {
 			add_political_power = 100

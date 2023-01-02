@@ -1,0 +1,502 @@
+﻿add_namespace = Belarus_Events_News
+
+#Oligarchs demand positions in the government
+country_event = {
+	id = Belarus_Events_News.1
+	title = Belarus_Events_News.1.t
+	desc = Belarus_Events_News.1.d
+	picture = GFX_report_event_government_centralization
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.1.o1 
+	    add_political_power = -50
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = Belarus_Events_News.1.o2 
+	    BLR_decrease_oligarhic_relations_by_5 = yes
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Oligarchs get frustrated with the government
+country_event = {
+	id = Belarus_Events_News.2
+	title = Belarus_Events_News.2.t
+	desc = Belarus_Events_News.2.d
+	picture = GFX_report_event_government_centralization
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.2.o1 
+	     BLR_decrease_oligarhic_relations_by_5 = yes
+		ai_chance = {
+			factor = 100
+		}
+	}
+}		
+
+#Oligarchs ask for subsidies
+country_event = {
+	id = Belarus_Events_News.3
+	title = Belarus_Events_News.3.t
+	desc = Belarus_Events_News.3.d
+	picture = GFX_report_event_national_development
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.3.o1 
+	     add_timed_idea = {
+				idea = BLR_subsidies
+				days = 40
+			}
+		ai_chance = {
+			factor = 100
+		}
+	
+	option = {
+		name = Belarus_Events_News.3.o2 
+	    BLR_decrease_oligarhic_relations_by_5 = yes
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	}
+}
+
+#Oligarchs aks for public support
+country_event = {
+	id = Belarus_Events_News.4
+	title = Belarus_Events_News.4.t
+	desc = Belarus_Events_News.4.d
+	picture = GFX_report_event_national_development
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.4.o1 
+	    add_stability = -0.03
+		ai_chance = {
+			factor = 100
+		}
+	
+	option = {
+		name = Belarus_Events_News.4.o2 
+	    BLR_decrease_oligarhic_relations_by_5 = yes
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	}
+}
+
+#Oligarchs show support for government
+country_event = {
+	id = Belarus_Events_News.5
+	title = Belarus_Events_News.5.t
+	desc = Belarus_Events_News.5.d
+	picture = GFX_report_event_national_development
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.5.o1 
+	   BLR_increase_oligarhic_relations_by_2 = yes
+		ai_chance = {
+			factor = 100
+		}
+	
+	}
+}
+
+#Oligarchic protests
+country_event = {
+	id = Belarus_Events_News.6
+	title = Belarus_Events_News.6.t
+	desc = Belarus_Events_News.6.d
+	picture = GFX_report_event_national_development
+	
+	
+	trigger = {
+	NOT = { has_country_flag = BLR_angry_oligarch_flag }
+	NOT = { has_country_flag = BLR_oligarchs_crushd_flag }
+	original_tag = BLR
+	check_variable = { BRL_oligarchic_relations_var < 31 }
+	}
+	
+	mean_time_to_happen = {
+		days = 5
+	}
+	
+	option = {
+		name = Belarus_Events_News.6.o1 
+	   set_country_flag = BLR_angry_oligarch_flag
+	   add_ideas = BLR_low_oligarchic_relations
+		custom_effect_tooltip = BLR_your_action_have_consequences_oligarch_tt
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Oligarchs appeased
+country_event = {
+	id = Belarus_Events_News.7
+	title = Belarus_Events_News.7.t
+	desc = Belarus_Events_News.7.d
+	picture = GFX_report_event_national_development
+	
+	
+	trigger = {
+	has_country_flag = BLR_angry_oligarch_flag 
+	original_tag = BLR
+	check_variable = { BRL_oligarchic_relations_var > 39 }
+	}
+	
+	mean_time_to_happen = {
+		days = 5
+	}
+	
+	option = {
+		name = Belarus_Events_News.7.o1 
+	    clr_country_flag = BLR_angry_oligarch_flag
+	    remove_ideas = BLR_low_oligarchic_relations
+		ai_chance = {
+			factor = 100
+		}
+	}
+}	
+
+#Democracts win elections
+country_event = {
+	id = Belarus_Events_News.8
+	title = Belarus_Events_News.8.t
+	desc = Belarus_Events_News.8.d
+	picture = GFX_report_event_election
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.8.o1 
+	    if = {
+		limit = {
+		has_country_flag = BLR_social_democrat_major_flag
+		}
+		set_politics = {
+			    ruling_party = social_democrat
+		        elections_allowed = yes
+		 }
+		}
+		else_if = {
+		limit = {
+		has_country_flag = BLR_conservative_major_flag
+		}
+		set_politics = {
+			    ruling_party = conservative
+		        elections_allowed = yes
+		 }
+		}
+		else_if = {
+		limit = {
+		has_country_flag = BLR_liberal_major_flag
+		}
+		set_politics = {
+			    ruling_party = social_liberal
+		        elections_allowed = yes
+		 }
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}	
+
+#Communists win elections
+country_event = {
+	id = Belarus_Events_News.9
+	title = Belarus_Events_News.9.t
+	desc = Belarus_Events_News.9.d
+	picture = GFX_report_event_election
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.9.o1 
+	    if = {
+		limit = {
+		has_country_flag = BLR_communist_party_of_belarus_major
+		}
+		set_politics = {
+			    ruling_party = communist
+		        elections_allowed = yes
+		 }
+		}
+		else_if = {
+		limit = {
+		has_country_flag = BLR_conservative_major_flag
+		}
+		set_politics = {
+			    ruling_party = democratic_socialist
+		        elections_allowed = yes
+		 }
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Lukashenko victory
+country_event = {
+	id = Belarus_Events_News.10
+	title = Belarus_Events_News.10.t
+	desc = Belarus_Events_News.10.d
+	picture = GFX_report_event_election
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.10.o1 
+	    add_political_power = 35
+		hidden_effect = {
+		country_event = Belarus_Events_News.18
+		}
+		load_focus_tree = Belarus_tree_reactionary
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Lukashenko strenghtens his rule
+country_event = {
+	id = Belarus_Events_News.11
+	title = Belarus_Events_News.11.t
+	desc = Belarus_Events_News.11.d
+	picture = GFX_report_event_election
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.11.o1 
+	    add_political_power = 20
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Belarus support Putin
+country_event = {
+	id = Belarus_Events_News.12
+	title = Belarus_Events_News.12.t
+	desc = Belarus_Events_News.12.d
+	picture = GFX_report_event_election
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.12.o1 
+	    add_popularity = { 
+		    ideology = reactionary
+			popularity = 0.01
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Uniting the democrats, under who?
+country_event = {
+	id = Belarus_Events_News.13
+	title = Belarus_Events_News.13.t
+	desc = Belarus_Events_News.13.d
+	picture = GFX_report_event_election
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.13.o1 
+	    
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Belarus_Events_News.13.o2
+	    clr_country_flag = BLR_conservative_major_flag 
+		set_country_flag = BLR_social_democrat_major_flag
+		custom_effect_tooltip = BLR_social_democrats_become_main_tt
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#opposition protests againsts elections
+country_event = {
+	id = Belarus_Events_News.14
+	title = Belarus_Events_News.14.t
+	desc = Belarus_Events_News.14.d
+	picture = GFX_report_event_election
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.14.o1 
+	    add_ideas = BLR_smaller_voter_turnout
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#opposition protests againsts elections
+country_event = {
+	id = Belarus_Events_News.15
+	title = Belarus_Events_News.15.t
+	desc = Belarus_Events_News.15.d
+	picture = GFX_report_event_election
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.15.o1 
+	    if = {
+		limit = { 
+		has_completed_focus = BLR_organise_belarussian_branch_of_nazbols
+		}
+		set_politics = {
+			    ruling_party = fascist
+		        elections_allowed = yes
+		 }
+	}
+		if = {
+		limit = { 
+		has_completed_focus = BLR_the_return_of_the_prince
+		}
+		set_politics = {
+			    ruling_party = monarchist
+		        elections_allowed = yes
+		 }
+	}
+	    if = {
+		limit = { 
+		has_completed_focus = BLR_arise_the_flag_of_independence
+		}
+		set_politics = {
+			    ruling_party = nationalist
+		        elections_allowed = yes
+		 }
+	}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#opposition protests againsts elections
+country_event = {
+	id = Belarus_Events_News.16
+	title = Belarus_Events_News.16.t
+	desc = Belarus_Events_News.16.d
+	picture = GFX_report_event_election
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.16.o1 
+	    
+		ai_chance = {
+			factor = 100
+		}
+	}
+    option = {
+		name = Belarus_Events_News.16.o2
+	    clr_country_flag = BLR_communist_party_of_belarus_major 
+		set_country_flag = BLR_party_of_belarussian_communists_flag
+		custom_effect_tooltip = BLR_communist_party_of_belarussians_tt
+		ai_chance = {
+			factor = 100
+		}
+	}
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+#sanctions affect the Economy!
+country_event = {
+	id = Belarus_Events_News.17
+	title = Belarus_Events_News.17.t
+	desc = Belarus_Events_News.17.d
+	picture = GFX_report_event_tax_rate
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.17.o1 
+	    add_ideas = BLR_sanctioned_by_west
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Anti-government protests intensify
+country_event = {
+	id = Belarus_Events_News.18
+	title = Belarus_Events_News.18.t
+	desc = Belarus_Events_News.18.d
+	picture = GFX_report_event_protests
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.18.o1 
+	    add_ideas = BLR_intensified_protests
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Belarus proposes Union State
+country_event = {
+	id = Belarus_Events_News.19
+	title = Belarus_Events_News.19.t
+	desc = Belarus_Events_News.19.d
+	picture = GFX_report_event_vladimir_putin_young
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.19.o1 
+	    BLR_start_up_union_state_stuff = yes
+		BLR = { country_event = Belarus_Events_News.20 }
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Russia agreed!
+country_event = {
+	id = Belarus_Events_News.20
+	title = Belarus_Events_News.20.t
+	desc = Belarus_Events_News.20.d
+	picture = GFX_report_event_vladimir_putin_young
+	is_triggered_only = yes 
+	
+	option = {
+		name = Belarus_Events_News.20.o1 
+	   custom_effect_tooltip = BLR_union_state_decisions_unlocked_tt
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+}

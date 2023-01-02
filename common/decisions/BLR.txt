@@ -1,0 +1,986 @@
+BLR_the_struggle_for_the_union_state = {
+
+BLR_the_states_unify = {
+		
+		visible = {
+		has_government = reactionary
+		has_global_flag = BLR_union_state_decisions_unlocked
+	}
+		icon = GFX_decision_category_generic_democracy
+		cancel_trigger	= {
+		
+		}
+		available = {
+		}
+		days_mission_timeout = 300
+
+		fixed_random_seed = no
+		fire_only_once = no
+		is_good = no
+		activation = {
+		has_government = reactionary
+	    has_global_flag = BLR_union_state_decisions_unlocked
+		original_tag = BLR
+		}
+		
+		complete_effect = {
+		}
+
+		timeout_effect = {
+		if = { 
+				limit = { 
+				    AND = { #Belarusian unification
+					    check_variable = { BLR_Belarussian_influence_union_state > BLR_Russian_influence_union_state }
+					}
+				}
+			   BLR = {	annex_country = { target = SOV transfer_troops = yes } }
+			   BLR = {
+			   set_country_flag = BLR_union_state_thingy
+			   add_stability = -0.15
+			   add_war_support = -0.15
+			   add_political_power = -150
+			   }
+			   SOV = {
+				every_unit_leader = {
+                set_nationality = BLR
+            }
+         }
+			every_state = {
+				limit = {
+					is_core_of = SOV
+				}
+				add_core_of = BLR
+			}
+			}
+			else_if = { #Russian unification
+				limit = { 
+				    AND = {
+					    check_variable = { BLR_Russian_influence_union_state > BLR_Belarussian_influence_union_state }
+					}
+				}
+				SOV = { annex_country = { target = BLR transfer_troops = yes } }
+			    BLR = {
+				every_unit_leader = {
+                set_nationality = SOV
+            }
+         }
+			every_state = {
+				limit = {
+					is_core_of = BLR
+				}
+				add_core_of = SOV
+			}
+       }
+   }
+}
+#Russian decisions
+
+BLR_buy_loyality_of_oligarchs = { 
+
+		icon = GFX_decision_generic_operation
+
+		allowed = {
+		original_tag = SOV
+		}
+
+		available = {
+		NOT = { has_country_flag = BLR_doing_union_state_decision_flag }
+     }
+		visible = {
+		has_global_flag = BLR_union_state_decisions_unlocked
+     }
+		fire_only_once = no
+		cost = 75
+        days_remove = 25
+		
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		set_country_flag = BLR_doing_union_state_decision_flag
+		}
+
+		remove_effect = {
+		clr_country_flag = BLR_doing_union_state_decision_flag
+		BLR_increase_Russian_influence_by_2_5 = yes
+      }
+	}
+	
+BLR_gather_popular_support = { 
+
+		icon = GFX_decision_generic_operation
+
+		allowed = {
+		original_tag = SOV
+		}
+
+		available = {
+		NOT = { has_country_flag = BLR_doing_union_state_decision_flag }
+     }
+		visible = {
+		has_global_flag = BLR_union_state_decisions_unlocked
+     }
+		fire_only_once = no
+		cost = 100
+        days_remove = 25
+		
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		set_country_flag = BLR_doing_union_state_decision_flag
+		}
+
+		remove_effect = {
+		clr_country_flag = BLR_doing_union_state_decision_flag
+		BLR_increase_Russian_influence_by_10 = yes
+      }
+	}	
+
+BLR_threaten_belarussian_politicians = { 
+
+		icon = GFX_decision_generic_operation
+
+		allowed = {
+		original_tag = SOV
+		}
+
+		available = {
+		NOT = { has_country_flag = BLR_doing_union_state_decision_flag }
+     }
+		visible = {
+		has_global_flag = BLR_union_state_decisions_unlocked
+     }
+		fire_only_once = no
+		cost = 75
+        days_remove = 25
+		
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		set_country_flag = BLR_doing_union_state_decision_flag
+		}
+
+		remove_effect = {
+		clr_country_flag = BLR_doing_union_state_decision_flag
+		random_list = {
+				50 = { 
+				BLR_increase_Russian_influence_by_2_5 = yes
+			}
+				50 = { 
+				BLR_increase_Russian_influence_by_5 = yes
+			  }
+			}
+      }
+	}
+
+#Belaurusian decisions
+
+BLR_blackmail_Russian_politicians = { 
+
+		icon = GFX_decision_generic_operation
+
+		allowed = {
+		original_tag = BLR
+		}
+
+		available = {
+		NOT = { has_country_flag = BLR_doing_union_state_decision_flag }
+     }
+		visible = {
+		has_global_flag = BLR_union_state_decisions_unlocked
+     }
+		fire_only_once = no
+		cost = 75
+        days_remove = 20
+		
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		set_country_flag = BLR_doing_union_state_decision_flag
+		}
+
+		remove_effect = {
+		clr_country_flag = BLR_doing_union_state_decision_flag
+		BLR_increase_belarusian_influence_by_7 = yes
+      }
+	}
+	
+BLR_promise_concessions_to_oligarchs = { 
+
+		icon = GFX_decision_eng_trade_unions_demand
+
+		allowed = {
+		original_tag = BLR
+		}
+
+		available = {
+		NOT = { has_country_flag = BLR_doing_union_state_decision_flag }
+     }
+		visible = {
+		has_global_flag = BLR_union_state_decisions_unlocked
+     }
+		fire_only_once = no
+		cost = 50
+        days_remove = 20
+		
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		set_country_flag = BLR_doing_union_state_decision_flag
+		}
+
+		remove_effect = {
+		clr_country_flag = BLR_doing_union_state_decision_flag
+		BLR_increase_belarusian_influence_by_5 = yes
+      }
+	}	
+	
+BLR_secure_support_of_beurocrtats = { 
+
+		icon = GFX_decision_generic_break_treaty
+
+		allowed = {
+		original_tag = BLR
+		}
+
+		available = {
+		NOT = { has_country_flag = BLR_doing_union_state_decision_flag }
+     }
+		visible = {
+		has_global_flag = BLR_union_state_decisions_unlocked
+     }
+		fire_only_once = no
+		cost = 35
+        days_remove = 20
+		
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		set_country_flag = BLR_doing_union_state_decision_flag
+		}
+
+		remove_effect = {
+		clr_country_flag = BLR_doing_union_state_decision_flag
+		random_list = {
+				60 = { 
+				BLR_increase_belarusian_influence_by_5 = yes
+			}
+				40 = { 
+				BLR_increase_belarusian_influence_by_2_5 = yes
+			  }
+			}
+      }
+	}	
+	
+BLR_political_assasinations = { 
+
+		icon = GFX_decision_spr_political_assassination
+
+		allowed = {
+		original_tag = BLR
+		}
+
+		available = {
+		NOT = { has_country_flag = BLR_doing_union_state_decision_flag }
+     }
+		visible = {
+		has_global_flag = BLR_union_state_decisions_unlocked
+     }
+		fire_only_once = yes
+		cost = 90
+        days_remove = 20
+		
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		set_country_flag = BLR_doing_union_state_decision_flag
+		}
+
+		remove_effect = {
+		clr_country_flag = BLR_doing_union_state_decision_flag
+		BLR_increase_belarusian_influence_by_10 = yes
+      }
+	}
+
+BLR_promise_better_positions = { 
+
+		icon = GFX_decision_generic_intelligence_operation
+
+		allowed = {
+		original_tag = BLR
+		}
+
+		available = {
+		NOT = { has_country_flag = BLR_doing_union_state_decision_flag }
+     }
+		visible = {
+		has_global_flag = BLR_union_state_decisions_unlocked
+     }
+		fire_only_once = yes
+		cost = 90
+        days_remove = 20
+		
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		set_country_flag = BLR_doing_union_state_decision_flag
+		}
+
+		remove_effect = {
+		clr_country_flag = BLR_doing_union_state_decision_flag
+		BLR_increase_belarusian_influence_by_10 = yes
+      }
+	}	
+
+}
+
+BLR_securing_the_reign = {
+
+BLR_speak_on_foreign_media = { 
+
+		icon = GFX_decision_category_generic_propaganda
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionary_now_unto_the_unexpected
+     }
+		fire_only_once = no
+		cost = 75
+        days_remove = 45
+		
+		modifier = {
+		improve_relations_maintain_cost_factor = -0.1
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		BLR_decrease_western_concern_level = yes
+      }
+	}
+	
+BLR_expand_propaganda_campaigns = { 
+
+		icon = GFX_decision_category_generic_propaganda
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionary_now_unto_the_unexpected
+     }
+		fire_only_once = no
+		cost = 40
+        days_remove = 45
+		
+		modifier = {
+		reactionary_drift = 0.01
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		BLR_increase_reactionary_reforms_support_by_5 = yes
+      }
+	}	
+
+}
+
+BLR_the_new_economy = {
+
+BLR_profit_from_chinese_trade = { 
+
+		icon = GFX_decision_generic_factory
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionry_uncle_sam_got_the_money
+     }
+		fire_only_once = yes
+		days_remove = 150
+		cost = 50
+
+		modifier = {
+		consumer_goods_factor = -0.05
+		production_speed_buildings_factor = 0.1
+		production_factory_efficiency_gain_factor = 0.05
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		
+      }
+	}
+
+BLR_expand_russian_trade = { 
+
+		icon = GFX_decision_generic_factory
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionry_uncle_sam_got_the_money
+     }
+		fire_only_once = yes
+		days_remove = 150
+		cost = 50
+
+		modifier = {
+		consumer_goods_factor = -0.05
+		production_speed_buildings_factor = 0.1
+		production_factory_efficiency_gain_factor = 0.05
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		
+      }
+	}
+
+BLR_privatise_Beltransgaz = { 
+
+		icon = GFX_decision_generic_factory
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionry_give_in_to_the_bear
+     }
+		fire_only_once = yes
+		days_remove = 150
+		cost = 50
+
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		random_owned_state = {
+				add_resource = {
+					type = oil
+					amount = 5
+				}
+			}
+      }
+	}
+
+BLR_expand_american_trade = { 
+
+		icon = GFX_decision_generic_factory
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionry_uncle_sam_got_the_money
+     }
+		fire_only_once = yes
+		days_remove = 150
+		cost = 50
+
+		modifier = {
+		consumer_goods_factor = -0.05
+		production_speed_buildings_factor = 0.1
+		production_factory_efficiency_gain_factor = 0.05
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		
+      }
+	}
+
+BLR_investors_from_the_west = { 
+
+		icon = GFX_decision_generic_factory
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionry_uncle_sam_got_the_money
+     }
+		fire_only_once = yes
+		days_remove = 40
+		cost = 50
+
+		modifier = {
+		political_power_gain = -0.1
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}
+      }
+	}
+
+BLR_modernise_the_manufacturing_industry = { 
+
+		icon = GFX_decision_generic_factory
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionary_develop_the_eeconomy
+     }
+		fire_only_once = yes
+		days_remove = 40
+		cost = 50
+
+		modifier = {
+		production_speed_buildings_factor = 0.1
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				    }
+			}
+      }
+	}
+
+BLR_strenghten_the_safm = { 
+
+		icon = GFX_decision_generic_factory
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionary_develop_the_eeconomy
+     }
+		fire_only_once = yes
+		days_remove = 40
+		cost = 50
+
+		modifier = {
+		industrial_capacity_factory = 0.1
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				    }
+			}
+      }
+	}
+
+BLR_subsidy_MAP = { 
+
+		icon = GFX_decision_rubber
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		has_completed_focus = BLR_reactionary_develop_the_eeconomy
+     }
+		fire_only_once = no
+		days_remove = 40
+		cost = 50
+
+		modifier = {
+		
+		}
+
+		complete_effect = {
+		
+		}
+
+		remove_effect = {
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				    }
+			}
+		custom_effect_tooltip = available_designer
+		show_ideas_tooltip = BLR_MAP
+      }
+	}
+
+}
+
+BLR_political_influence_cat = {
+
+BLR_first_elections_dec = {
+		
+		visible = {
+		has_government = reactionary
+		OR = {
+		NOT = { has_country_flag = BLR_disable_factions_flag }
+		NOT = { has_country_flag = BLR_radical_takeover }
+		}
+	}
+		icon = GFX_decision_category_generic_democracy
+		cancel_trigger	= {
+		
+		}
+		available = {
+		has_country_flag = BLR_radical_takeover
+		}
+		days_mission_timeout = 288
+
+		fixed_random_seed = no
+		fire_only_once = no
+		is_good = no
+		activation = {
+		has_government = reactionary
+		NOT = { has_country_flag = BLR_radical_takeover }
+		original_tag = BLR
+		}
+		
+		complete_effect = {
+		}
+
+		timeout_effect = {
+		if = { #democratic victory
+				limit = { 
+				    AND = {
+					    check_variable = { BLR_democrat_popular_support > BLR_Lukashenko_support }
+						check_variable = { BLR_democrat_popular_support > BLR_commie_support_var }
+					}
+				}
+				BLR = { country_event = Belarus_Events_News.8 }
+			}
+			else_if = { #commie_victory
+				limit = { 
+				    AND = {
+					    check_variable = { BLR_commie_support_var > BLR_Lukashenko_support }
+						check_variable = { BLR_commie_support_var > BLR_democrat_popular_support }
+					}
+				}
+				BLR = { country_event = Belarus_Events_News.9 }
+			}
+			else = { #current government stays
+			BLR = { country_event = Belarus_Events_News.10 }
+			}
+    }
+  }
+
+BLR_communist_campaign_dec = { 
+
+		icon = GFX_decision_eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		NOT = { has_country_flag = BLR_disable_factions_flag }
+		has_country_flag = BLR_commies_supported_flag
+     }
+		fire_only_once = no
+		days_remove = 40
+		cost = 35
+
+		modifier = {
+		communist_drift = 0.01
+		democratic_socialist_drift = 0.01
+		}
+
+		complete_effect = {
+		BLR_increase_commie_support_2 = yes
+		}
+
+		remove_effect = {
+		
+      }
+	}
+
+BLR_democratic_campaign_dec = { 
+
+		icon = GFX_decision_eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		NOT = { has_country_flag = BLR_disable_factions_flag }
+		has_country_flag = BLR_democrats_supported_flag
+     }
+		fire_only_once = no
+		days_remove = 40
+		cost = 35
+
+		modifier = {
+		conservative_drift = 0.01
+		social_liberal_drift = 0.01
+		social_democrat_drift = 0.01
+		}
+
+		complete_effect = {
+		BLR_increase_democratic_support_2 = yes
+		}
+
+		remove_effect = {
+		
+      }
+	}
+
+BLR_pro_Lukashenko_campaign_dec = { 
+
+		icon = GFX_decision_eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		NOT = { has_country_flag = BLR_disable_factions_flag }
+		has_country_flag = BLR_Lukashenko_supported_flag
+     }
+		fire_only_once = no
+		days_remove = 40
+		cost = 35
+
+		modifier = {
+		reactionary_drift = 0.01
+		}
+
+		complete_effect = {
+		BLR_increase_lukashenko_support_2 = yes
+		}
+
+		remove_effect = {
+		
+      }
+	}
+
+}
+
+BLR_oligarchic_system = {
+
+BLR_oligarchs_make_their_moves = {
+		
+		visible = {
+		NOT = { has_country_flag = BLR_oligarchs_crushd_flag }
+		}
+		icon = GFX_decision_hol_attract_foreign_investors
+		cancel_trigger	= {
+		}
+		available = {
+		has_country_flag = BLR_oligarchs_crushd_flag
+		}
+		days_mission_timeout = 70
+
+		fixed_random_seed = no
+		fire_only_once = no
+		is_good = no
+		activation = {
+		NOT = { has_country_flag = BLR_oligarchs_crushd_flag }
+		original_tag = BLR
+		}
+		
+		complete_effect = {
+		}
+
+		timeout_effect = {
+		custom_effect_tooltip = BLR_get_random_event
+		hidden_effect = {
+		random_list = {
+				20 = { 
+				BLR = { country_event = Belarus_Events_News.1 }
+			}
+				20 = { 
+				BLR = { country_event = Belarus_Events_News.2 }
+			}
+				20 = {
+			    BLR = { country_event = Belarus_Events_News.3 }
+				}
+				20 = { 
+				BLR = { country_event = Belarus_Events_News.4 }
+			}
+				20 = {
+			    BLR = { country_event = Belarus_Events_News.5 }
+				}
+			}
+      }
+    }
+  }
+
+BLR_utalise_the_oligarchs_dec = { 
+
+		icon = GFX_decision_generic_construction
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		custom_trigger_tooltip = {
+					tooltip = POL_at_least_30_oligarchist_support_var
+					check_variable = { BRL_oligarchic_relations_var > 30 }
+				}
+     }
+		visible = {
+		NOT = { has_country_flag = BLR_oligarchs_crushd_flag }
+     }
+		fire_only_once = no
+		days_remove = 120
+        days_re_enable = 100
+		cost = 50
+
+		modifier = {
+		consumer_goods_factor = -0.05
+		production_speed_buildings_factor = 0.1
+		}
+
+		complete_effect = {
+		BLR_decrease_oligarhic_relations_by_10 = yes
+		}
+
+		remove_effect = {
+		
+      }
+	}
+
+BLR_concessions_to_oligarchs_dec = { 
+
+		icon = GFX_decision_eng_trade_unions_support
+
+		allowed = {
+			original_tag = BLR
+		}
+
+		available = {
+		
+     }
+		visible = {
+		NOT = { has_country_flag = BLR_oligarchs_crushd_flag }
+     }
+		fire_only_once = no
+		days_remove = 35
+
+		cost = 40
+
+		modifier = {
+		political_power_gain = -0.05
+		}
+
+		complete_effect = {
+		}
+
+		remove_effect = {
+		BLR_increase_oligarhic_relations_by_5 = yes
+      }
+	}
+
+}

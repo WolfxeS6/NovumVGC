@@ -5,7 +5,7 @@ country_event = {
 	id = wp.1
 	title = wp.1.t
 	desc = wp.1.d
-	
+
 	trigger = {
 		AND = {
 			any_owned_state = { is_on_continent = europe }
@@ -18,42 +18,42 @@ country_event = {
 			NOT = { has_country_flag = wpevent }
 		}
 	}
-	
+
 	mean_time_to_happen = {
 		days = 50
 	}
-	
+
 	immediate = {
 		set_country_flag = wpevent
 	}
-	
+
 	option = { #Join the Soviets
 		name = wp.1.o1
-		
+
 		ai_chance = {
 			factor = 40
-			
+
 			modifier = {
 				is_neighbor_of = SOV
-				
+
 				factor = 80
 			}
-			
+
 			modifier = {
 				is_in_faction_with = SOV
-				
+
 				factor = 100
 			}
-			
+
 			modifier = {
 				is_in_faction_with = USA
-				
+
 				factor = 0
 			}
-			
+
 			modifier = {
 				has_government = communist
-				
+
 				factor = 70
 			}
 		}
@@ -70,13 +70,13 @@ country_event = {
 					tag = NGK
 					tag = GEO
 				}
-				
+
 			}
-			
+
 			SOV = {
 				country_event = { id = wp.4}
 			}
-			
+
 		}
 		if = {
 			limit = {
@@ -91,24 +91,24 @@ country_event = {
 					NOT = { tag = NGK }
 					NOT = { tag = GEO }
 				}
-				
+
 			}
-			
+
 			SOV = {
 				country_event = { id = wp.2}
 			}
-			
+
 		}
-		
-			
+
+
 		set_country_flag = wpevent
-			
-		
+
+
 		add_timed_idea = {
 			idea = sov_communist_pressure_light
 			days = 750
 		}
-		
+
 		every_country = {
 			limit = {
 				tag = USA
@@ -120,22 +120,22 @@ country_event = {
 		}
 	}
 
-	
+
 	option = { #Join NATO
 		name = wp.1.o2
-		
+
 		ai_chance = {
 			factor = 40
-			
+
 			modifier = {
 				is_in_faction_with = USA
-				
+
 				factor = 100
 			}
-			
+
 			modifier = {
 				is_in_faction_with = SOV
-				
+
 				factor = 0
 			}
 		}
@@ -143,8 +143,8 @@ country_event = {
 			limit = { tag = USA }
 			country_event = { id = wp.3}
 		}
-		
-		
+
+
 		set_country_flag = wpevent
 		SOV = {
 			add_opinion_modifier = {
@@ -153,32 +153,32 @@ country_event = {
 			}
 		}
 	}
-	
+
 	option = { #Neutrality FTW
 		name = wp.1.o3
-		
+
 		ai_chance = {
 			factor = 20
-			
+
 			modifier = {
 				is_in_faction_with = USA
-				
+
 				factor = 0.5
 			}
-			
+
 			modifier = {
 				is_in_faction_with = SOV
-				
+
 				factor = 0.5
 			}
-			
+
 			modifier = {
 				has_idea = neutrality_idea
-				
+
 				factor = 10000
 			}
 		}
-		
+
 		add_political_power = 100
 		set_country_flag = neutralWPNATO
 		set_country_flag = wpevent
@@ -188,29 +188,29 @@ country_event = {
 country_event = { #soviet receives request to join faction (non-sr)
 	id = wp.2
 	title = wp.2.t
-	desc = wp.2.d 
-	
+	desc = wp.2.d
+
 	is_triggered_only = yes
-	
+
 	option = { #we accept
 		name = wp.2.o1
-		
+
 		ai_chance = {
 			factor = 95
 		}
-		
+
 		add_to_faction = FROM
-		
+
 		FROM = { set_country_flag = seek_WP_membership }
 	}
-	
+
 	option = {
 		name = wp.2.o2
-		
+
 		ai_chance = {
 			factor = 5
 		}
-		
+
 		FROM = {
 			add_opinion_modifier = {
 				modifier = recent_actions_negative
@@ -223,28 +223,28 @@ country_event = { #soviet receives request to join faction (non-sr)
 country_event = { #USA receives request to join faction
 	id = wp.3
 	title = wp.3.t
-	desc = wp.3.d 
-	
+	desc = wp.3.d
+
 	is_triggered_only = yes
-	
+
 	option = { #we accept
 		name = wp.3.o1
-		
+
 		ai_chance = {
 			factor = 90
 		}
-		
+
 		add_to_faction = FROM
 		FROM = { set_country_flag = has_joined_NATO_by_event }
 	}
-	
+
 	option = {
 		name = wp.3.o2
-		
+
 		ai_chance = {
 			factor = 10
 		}
-		
+
 		FROM = {
 			add_opinion_modifier = {
 				modifier = recent_actions_negative
@@ -257,24 +257,24 @@ country_event = { #USA receives request to join faction
 country_event = { #soviet receives request to join faction (sr)
 	id = wp.4
 	title = wp.4.t
-	desc = wp.4.d 
-	
+	desc = wp.4.d
+
 	is_triggered_only = yes
-	
+
 	option = { #we accept (no conditions)
 		name = wp.4.o1
-		
+
 		ai_chance = {
 			factor = 20
-			
+
 			modifier = {
 				strength_ratio = {
 					tag = FROM ratio > 1.8
 				}
-				
+
 				factor = 60
 			}
-			
+
 			modifier = {
 				strength_ratio = {
 					tag = FROM ratio < 1.8
@@ -282,21 +282,21 @@ country_event = { #soviet receives request to join faction (sr)
 				factor = 0
 			}
 		}
-		
+
 		add_to_faction = FROM
-		
+
 		FROM = {
 			set_country_flag = seek_WP_membership
 		}
 	}
-	
+
 	option = { #uhhh no
 		name = wp.4.o2
-		
+
 		ai_chance = {
 			factor = 30
 		}
-		
+
 		FROM = {
 			add_opinion_modifier = {
 				modifier = recent_actions_negative
@@ -304,14 +304,14 @@ country_event = { #soviet receives request to join faction (sr)
 			}
 		}
 	}
-	
+
 	option = { #THEY MUST BECOME A PUPPET!
 		name = wp.4.o3
-		
+
 		ai_chance = {
 			factor = 50
 		}
-		
+
 		FROM = {
 			country_event = { id = wp.5 }
 		}
@@ -321,27 +321,27 @@ country_event = { #soviet receives request to join faction (sr)
 country_event = {
 	id = wp.5
 	title = wp.5.t
-	desc = wp.5.d 
-	
+	desc = wp.5.d
+
 	is_triggered_only = yes
-	
+
 	option = { #fine. We will become a puppet.
 		name = wp.5.o1
-		
+
 		ai_chance = {
 			factor = 70
 		}
-		
+
 		ROOT = { puppet = FROM }
 	}
-	
+
 	option = { #NEVER!
 		name = wp.5.o2
-		
+
 		ai_chance = {
 			factor = 30
 		}
-		
+
 		FROM = {
 			add_opinion_modifier = {
 				modifier = recent_actions_negative

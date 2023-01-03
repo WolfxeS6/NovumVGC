@@ -62,6 +62,7 @@ set_variable = { JAP_propaganda_campaigns_taken = 0 } #Used as a requirement for
 ### JIEITAI ###
 set_variable = { var = JieitaiPopularity value = 60.0 } #NIPPON TSUYOOOOOOO
 set_variable = { var = JieitaiDiscipline value = 20.0 } #KUSOZAKO MOVE
+set_variable = { var = japan_gerrilla_cost value = 15.0 }
 
 set_variable = { var = JAP_p_d_conscription_factor_modifier value = 0.05 }
 set_variable = { var = JAP_p_d_mobilization_speed_modifier value = 0.05 }
@@ -72,6 +73,14 @@ set_variable = { var = JAP_p_d_army_org_regain_modifier value = -0.2 }
 
 ### Dokdo vs Takeshima ###
 set_variable = { GetTakeshimaSupport = 60.0 }
+
+### Softpower ###
+add_dynamic_modifier = { modifier = JAP_softpower_dynamic_modifier }
+set_variable = { var = JAP_softpower_political_power_dynamic_modifier value = 0.05 } 
+set_variable = { var = JAP_softpower_civilian_intel_factor_dynamic_modifier value = 0.05 } 
+
+country_event = { id = japan_flavor_events.9 days = 700 } #The Birth of Princess Aiko
+country_event = { id = japan_flavor_events.10 days = 2440 } #The Birth of Prince Hisahito
 
 set_technology = {
 	## Infantry ##
@@ -322,7 +331,11 @@ add_ideas = {
 	japanese_article_9
 	JAP_full_employment
 	JAP_focus_on_domestic_weapons
+        JAP_afterglow_of_sun
+        JAP_heisei_fukyo_4
+	JAP_low_birth_rate
 }
+
 
 set_politics = {	
 	ruling_party = conservative
@@ -334,19 +347,32 @@ set_politics = {
 }
 
 set_popularities = {
-    reactionary = 10
-    conservative = 40
-    social_liberal = 30
-    democratic_socialist = 20
+    nationalist = 3
+    reactionary = 6
+    market_liberal = 4
+    conservative = 62
+    social_liberal = 15
+    democratic_socialist = 10
 }
 
 1999.1.1 = {
-  add_ideas = {
-    JAP_afterglow_of_sun
-    #JAP_inefficient_electricity_supply_system #(Now, dynamic modifier)
-    JAP_hereditary_politicians
-    JAP_heisei_fukyo
-  }
+  complete_national_focus = JAP_heisei_ojisan
+  complete_national_focus = JAP_hot_pizza
+  complete_national_focus = JAP_economy_obuchi
+  complete_national_focus = JAP_obuchi_issue_government_bonds
+  complete_national_focus = JAP_obuchi_better_environmental_protection
+  complete_national_focus = JAP_obuchi_more_public_works
+  complete_national_focus = JAP_obuchi_developing_economy
+  complete_national_focus = JAP_1999_party_leadership_election
+  complete_national_focus = JAP_obuchi_overpowering_kato
+  complete_national_focus = JAP_alliance_with_seiwa_faction
+  unlock_national_focus = JAP_obuchi_election_win
+  complete_national_focus = JAP_obuchi_korean_question
+  complete_national_focus = JAP_obuchi_can_we_be_friends
+  complete_national_focus = JAP_obuchi_japanese_culture_negotiations
+  complete_national_focus = JAP_obuchi_apology_for_colonial_rule
+  unlock_national_focus = JAP_obuchi_japan_korea_joint_declaration
+  unlock_national_focus = JAP_obuchi_awaken_samurai
 }
 
 	recruit_character = JAP_kiyofumi_iwata
@@ -388,12 +414,15 @@ set_popularities = {
 	recruit_character = JAP_miho_otani
 	recruit_character = JAP_junko_kawashima
 	recruit_character = JAP_takamori_makino
+	recruit_character = JAP_kazunari_yamashita
+	recruit_character = JAP_shizuka_kamei
+	#recruit_character = JAP_Yoshiro_Mori
 
 	#Advisors
 	recruit_character = JAP_tsuneo_isojima
 	recruit_character = JAP_taizo_terashima
 	recruit_character = JAP_fusako_shigenobu
-	#recruit_character = JAP_keiji_akahoshi
+	recruit_character = JAP_keiji_akahoshi
 	recruit_character = JAP_koichi_furusho
 	recruit_character = JAP_masahiko_sugimoto
 	recruit_character = JAP_tadashi_yoshida
@@ -403,7 +432,7 @@ set_popularities = {
 	recruit_character = JAP_goro_matsumura
 	recruit_character = JAP_tadao_maeda
 	recruit_character = JAP_yoji_koda
-	#recruit_character = JAP_keiji_akahoshi
+	recruit_character = JAP_keiji_akahoshi
 	recruit_character = JAP_keiko_kashihara
 	recruit_character = JAP_kenichiro_hokazono
 
@@ -417,20 +446,32 @@ set_popularities = {
 }
 
 2015.1.1 = { 
+	load_focus_tree = japan_focus_democratic
+	
 	set_politics = {		
 		ruling_party = conservative
 		last_election = "2014.12.14"
 		election_frequency = 36
 		elections_allowed = yes
 	}
+	
+	recruit_character = JAP_keizo_obuchi
+	promote_character = JAP_keizo_obuchi
 
-    set_popularities = {
-        reactionary = 10
-        conservative = 45
-        social_liberal = 30
-        democratic_socialist = 15
-    }
-
+   	set_popularities = {
+        	reactionary = 10
+       		conservative = 45
+        	social_liberal = 30
+        	democratic_socialist = 15
+	}
+	
+	create_country_leader = {
+    		name = "Shinzo Abe"
+		picture = "Shinzo_Abe.dds"
+		desc = "POLITICS_Shinzo_Abe_DESC"
+		traits = { determination_of_japan }
+    		ideology = right_wing_conservative
+	}
 }
 
 ### VARIANTS ###

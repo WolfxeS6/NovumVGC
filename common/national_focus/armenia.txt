@@ -562,7 +562,8 @@ focus_tree = {
 
 
 		completion_reward = {
-			add_political_power = 80
+			army_experience = 25
+			custom_effect_tooltip = ARM_reduce_corruption_tt
 		}
 
 		ai_will_do = {
@@ -587,7 +588,12 @@ focus_tree = {
 
 
 		completion_reward = {
-			add_political_power = 80
+			GRE = {
+				give_guarantee = ARM
+			}
+			ARM = {
+				give_guarantee = GRE
+			}
 		}
 
 		ai_will_do = {
@@ -676,7 +682,9 @@ focus_tree = {
 
 
 		completion_reward = {
-			add_political_power = 80
+			PER = {
+				give_guarantee = ARM
+			}
 		}
 
 		ai_will_do = {
@@ -701,7 +709,21 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 80
+			add_equipment_to_stockpile = {
+				type = support_equipment_1
+				amount = 100
+				producer = PER
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment_1
+				amount = 250
+				producer = PER
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2000
+				producer = PER
+			}
 		}
 
 		ai_will_do = {
@@ -881,46 +903,25 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ARM_south_ossetia
-		icon = GFX_goal_generic_dangerous_deal
-		x = 1
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = ARM_russian_investments
-			focus = ARM_bastion_of_christianity
-		}
-
-		relative_position_id = ARM_russian_investments
-
-
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
 		id = ARM_ally_georgia
 		icon = align_to_georgia
-		x = 1
+		x = 3
 		y = 1
 		cost = 6
 
 		prerequisite = {
-			focus = ARM_south_ossetia
-		}
-		prerequisite = {
 			focus = ARM_bastion_of_christianity
 		}
-
-		relative_position_id = ARM_south_ossetia
+		mutually_exclusive = {
+			focus = ARM_recognise_south_ossetia
+		}
+		relative_position_id = ARM_russian_economic_integration
 
 
 		completion_reward = {
-
+			ARM = {
+				give_guarantee = GEO
+			}
 		}
 
 		ai_will_do = {
@@ -930,21 +931,23 @@ focus_tree = {
 	focus = {
 		id = ARM_recognise_south_ossetia
 		icon = align_to_abkhazia
-		x = -1
+		x = 1
 		y = 1
 		cost = 6
 
 		prerequisite = {
-			focus = ARM_south_ossetia
-		}
-		prerequisite = {
 			focus = ARM_russian_investments
 		}
 
-		relative_position_id = ARM_south_ossetia
-
+		relative_position_id = ARM_russian_economic_integration
+		mutually_exclusive = {
+			focus = ARM_ally_georgia
+		}
 
 		completion_reward = {
+			ARM = {
+				give_guarantee = ABK
+			}
 		}
 
 		ai_will_do = {
@@ -974,7 +977,7 @@ focus_tree = {
 					instant_build = yes
 				}
 				add_building_construction = {
-					type = infrastructure
+					type = air_base
 					level = 2
 					instant_build = yes
 				}

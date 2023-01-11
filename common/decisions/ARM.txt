@@ -3,14 +3,84 @@ ARM_corruption_categories = {
 		icon = GFX_decision_onmap_recruit_operative
 
 		visible = {
+			has_completed_focus = ARM_release_the_journalist
+			has_dynamic_modifier = {modifier = ARM_corruption_modifier}
+			check_variable = { ARM_democratic_control < 10 }
+		}
+		available = {
+		}
+		fire_only_once = no
+		cost = 25
+		days_remove = 60
+		days_re_enable = 14
+		modifier = {
+			consumer_goods_factor = 0.05
+			political_power_factor = -0.1
+		}
+		complete_effect = {
+			custom_effect_tooltip = ARM_add_dem_tt
+			hidden_effect = {
+				armenian_add_dem = yes
+			}
+		}
+	}
+	ARM_crack_down_on_corruption = {
+		icon = GFX_decision_onmap_recruit_operative
+
+		visible = {
+			has_completed_focus = ARM_velvet_revolution
+			has_dynamic_modifier = {modifier = ARM_corruption_modifier}
 		}
 		available = {
 		}
 		fire_only_once = no
 		cost = 75
 
-		complete_effect = {
-			set_variable = { armenian_state_map^0 = 2 }
+		cost = 60
+		days_remove = 50
+		days_re_enable = 14
+
+		modifier = {
+			consumer_goods_factor = 0.02
+			political_power_factor = -0.1
+			stability_factor = -0.04
+		}
+		remove_effect = {
+			custom_effect_tooltip = ARM_reduce_corruption_tt
+			hidden_effect = {
+				ARM_reduce_corruption = yes
+			}
+		}
+	}
+	ARM_remove_corruption = {
+		icon = GFX_decision_onmap_recruit_operative
+
+		visible = {
+			has_completed_focus = ARM_velvet_revolution
+			has_dynamic_modifier = {modifier = ARM_corruption_modifier}
+			
+		}
+		available = {
+			
+			custom_trigger_tooltip = {
+				tooltip = ARM_corruption_low_tt
+				check_variable = {ARM_consumer_goods_factor < 0.01}
+				check_variable = {ARM_research_speed_factor > -0.01}
+				check_variable = {ARM_enemy_army_bonus_air_superiority_factor > -0.01}
+				check_variable = {ARM_political_power_gain > -0.01}
+				check_variable = {ARM_production_speed_industrial_complex_factor > -0.01}
+			}
+		}
+		fire_only_once = yes
+		cost = 75
+
+		cost = 60
+		days_remove = 50
+
+		remove_effect = {
+			remove_dynamic_modifier = {modifier = ARM_corruption_modifier}
+			add_stability = 0.25
+			add_political_power = 100
 		}
 	}
 	ARM_remove_oligarch = {

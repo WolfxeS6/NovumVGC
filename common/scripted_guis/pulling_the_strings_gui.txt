@@ -87,6 +87,7 @@ scripted_gui = {
 				every_country = {
 					dismantle_faction = yes
 				}
+				set_global_flag = DPTS_dismantle_factions
       }
       cw_dismantle_eu_click = {
 				every_country = {
@@ -96,6 +97,7 @@ scripted_gui = {
 						idea_eu_sanctions
 					}
 				}
+				set_global_flag = DPTS_dismantled_eu
       }
 	  cw_disable_nukes_click = {
 		  	every_country = {
@@ -110,6 +112,7 @@ scripted_gui = {
 				set_global_flag = DPTS_disable_nukes
 	  }
       cw_remove_guarentees_click = {
+				set_global_flag = DPTS_remove_guarentees
 				ALG = {
 					diplomatic_relation = { country = WES relation = guarantee active = no }
 				}
@@ -178,12 +181,28 @@ scripted_gui = {
 				}
       }
       cw_natural_estates_click = {
+			if = {
+				limit = {
+					has_global_flag = sandbox_disable_natural_estate_drift
+				}
+				clr_global_flag = sandbox_disable_natural_estate_drift
+			}
+			else = {
 				set_global_flag = sandbox_disable_natural_estate_drift
+			}
       }
       cw_aberrant_estates_click = {
-				set_global_flag = sandbox_disable_aberrant_estate_drift
+				if = {
+					limit = {
+						has_global_flag = sandbox_disable_aberrant_estate_drift
+					}
+					clr_global_flag = sandbox_disable_aberrant_estate_drift
+				}
+				else = {
+					set_global_flag = sandbox_disable_aberrant_estate_drift
+				}
       }
-      cw_title_disable_nukes_click = {
+      cw_disable_nukes_click = {
 				every_country = {
 					add_ideas = {
 						disable_nukes
@@ -195,6 +214,28 @@ scripted_gui = {
 				}
 				set_global_flag = DPTS_disable_nukes
       }
+	  cw_turn_off_super_events_click= {
+			if = {
+				limit = {
+					has_global_flag = NVX_Super_Events_off
+				}
+				clr_global_flag = NVX_Super_Events_off
+			}
+			else = {
+				set_global_flag = NVX_Super_Events_off
+			}
+		}
+		cw_division_limiter_click= {
+			if = {
+				limit = {
+					has_global_flag = sandbox_enable_division_limits
+				}
+				clr_global_flag = sandbox_enable_division_limits
+			}
+			else = {
+				set_global_flag = sandbox_enable_division_limits
+			}
+		}
     }
 
     triggers = {
@@ -219,6 +260,30 @@ scripted_gui = {
 		cw_background_mover_cha = {
 			image = "[WXE_Getbackground_mover_cha]"
 		}	
+		cw_background_mover_super_events = {
+			image = "[WXE_Getbackground_mover_super_events]"
+		}	
+		cw_background_mover_division_limiter = {
+			image = "[WXE_Getbackground_mover_division_limiter]"
+		}
+		cw_background_mover_natural_estates = {
+			image = "[WXE_Getbackground_mover_natural_estates]"
+		}
+		cw_background_mover_aberrant_estates = {
+			image = "[WXE_Getbackground_mover_aberrant_estates]"
+		}
+		cw_background_mover_disable_nukes = {
+			image = "[WXE_Getbackground_mover_disable_nukes]"
+		}
+		cw_background_mover_dismantle_eu = {
+			image = "[WXE_Getbackground_mover_dismantle_eu]"
+		}
+		cw_background_mover_dismantle_factions = {
+			image = "[WXE_Getbackground_mover_dismantle_factions]"
+		}
+		cw_background_mover_remove_guarentees = {
+			image = "[WXE_Getbackground_mover_remove_guarentees]"
+		}
     }
 
     ai_enabled = {

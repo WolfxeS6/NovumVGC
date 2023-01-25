@@ -818,31 +818,44 @@ POL_decrease_religius_fevour_by_5 = {
 POL_update_church_variables = {
 	hidden_effect = {
 	#stuff for POL_religius_fevour_var
-	POL_church_conscription_factor = POL_religius_fevour_var
-	POL_church_army_defence_factor = POL_religius_fevour_var
-	POL_church_army_attack_factor = POL_religius_fevour_var
-	POL_church_army_org_Factor = POL_religius_fevour_var
+	if = {
+		limit = {
+			has_variable = POL_religius_fevour_var
+		}
+		set_variable = {POL_church_conscription_factor = POL_religius_fevour_var}
+		set_variable = {POL_church_army_defence_factor = POL_religius_fevour_var}
+		set_variable = {POL_church_army_attack_factor = POL_religius_fevour_var}
+		set_variable = {POL_church_army_org_Factor = POL_religius_fevour_var}
+		divide_variable = { POL_church_army_defence_factor = 1000 }
+		divide_variable = { POL_church_conscription_factor = 1000 }
+		divide_variable = { POL_church_army_attack_factor = 1000 }
+		divide_variable = { POL_church_army_org_Factor = 1000 }
+	}
+	if = {
+		limit = {
+			has_variable = POL_church_strenght_var
+		}
+		set_variable = {POL_church_stability_factor = POL_church_strenght_var}
+		set_variable = {POL_church_political_power_gain = POL_church_strenght_var}
+		set_variable = {POL_church_drift_defence_factor = POL_church_strenght_var}
+		divide_variable = { POL_church_stability_factor = 1000 }
+		divide_variable = { POL_church_political_power_gain = 800 }
+		divide_variable = { POL_church_drift_defence_factor = 800 }
+	}
+	if = {
+		limit = {
+			has_variable = POL_unity_and_obidience_var
+		}
+		set_variable = {POL_church_industrial_capacity_factory = POL_unity_and_obidience_var}
+		set_variable = {POL_church_production_factory_efficiency_gain_factor = POL_unity_and_obidience_var}
+		set_variable = {POL_church_production_speed_buildings_factor = POL_unity_and_obidience_var}
+		divide_variable = { POL_church_industrial_capacity_factory = 1000 }
+		divide_variable = { POL_church_production_factory_efficiency_gain_factor = 900 }
+		divide_variable = { POL_church_production_speed_buildings_factor = 1000 }
+	}
 	
-	#stuff for POL_church_strenght_var
-	POL_church_stability_factor = POL_church_strenght_var
-	POL_church_political_power_gain = POL_church_strenght_var
-	POL_church_drift_defence_factor = POL_church_strenght_var
 	
 	#stuff for POL_unity_and_obidience_var
-	POL_church_industrial_capacity_factory = POL_unity_and_obidience_var
-	POL_church_production_factory_efficiency_gain_factor = POL_unity_and_obidience_var
-	POL_church_production_speed_buildings_factor = POL_unity_and_obidience_var
-
-			divide_variable = { POL_church_army_defence_factor = 1000 }
-			divide_variable = { POL_church_conscription_factor = 1000 }
-			divide_variable = { POL_church_army_attack_factor = 1000 }
-			divide_variable = { POL_church_army_org_Factor = 1000 }
-			divide_variable = { POL_church_stability_factor = 1000 }
-			divide_variable = { POL_church_political_power_gain = 800 }
-			divide_variable = { POL_church_drift_defence_factor = 800 }
-			divide_variable = { POL_church_industrial_capacity_factory = 1000 }
-			divide_variable = { POL_church_production_factory_efficiency_gain_factor = 900 }
-			divide_variable = { POL_church_production_speed_buildings_factor = 1000 }
 		force_update_dynamic_modifier = yes
 	}
 }

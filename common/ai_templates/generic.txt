@@ -1,7 +1,7 @@
 
-    armor_generic = {
+armor_generic = {
 
-        blocked_for = {
+    blocked_for = {
 		RCO
 	}
 
@@ -27,7 +27,7 @@
 		}
 		
 		production_prio = {
-			factor = 1
+			factor = 0.1
 
 			modifier = {
 				factor = 1
@@ -92,7 +92,7 @@
 			}
 			
 			regiments = {
-				light_armor = 5
+				light_armor = 1
 				motorized = 4
 			}
 		}
@@ -175,8 +175,9 @@
 			}
 			
 			regiments = {
-				modern_armor = 6
-				mechanized = 3
+				modern_armor = 1
+				mechanized = 1
+				light_mechanized = 2
 			}
 		}
 		
@@ -185,6 +186,7 @@
 			modern_armor
 			motorized
 			mechanized
+			light_mechanized
 			engineer
 			mot_recon
 			maintenance_company
@@ -276,12 +278,12 @@ garrison_generic = {
 			}
 			
 			regiments = {
-				infantry = 4
+				motorized = 4
 			}
 		}
 		
 		allowed_types = {
-			infantry
+			motorized
 			engineer
 		}
 	}
@@ -364,7 +366,7 @@ suppression_generic = {
 			}
 			
 			regiments = {
-				motorized = 6
+				motorized = 4
 			}
 		}
 		
@@ -402,6 +404,19 @@ infantry_generic = {
 
 			modifier = {
 				factor = 1
+			}
+		}
+		production_prio = {
+			factor = 1
+
+			modifier = {
+				factor = 0
+					OR = {
+						tag = USA
+						tag = FRA
+						tag = ENG 
+						tag = GER 
+					}
 			}
 		}
 		
@@ -456,12 +471,11 @@ infantry_generic = {
 				recon = 1
 				field_hospital = 1
 				anti_tank = 1
-				artillery = 1
 			}
 			
 			regiments = {
-				motorized = 7
-				mot_artillery_brigade = 2
+				motorized = 4
+				mot_artillery_brigade = 1
 			}
 		}
 		
@@ -473,9 +487,107 @@ infantry_generic = {
 			field_hospital
 			logistics_company
 			anti_tank
-			artillery
-			rocket_artillery
 			mot_artillery_brigade
+			light_mechanized
+		}
+	}
+	western_infantry_default = {
+	
+		upgrade_prio = {
+			factor = 2
+
+			modifier = {
+				factor = 1
+			}
+		}
+		production_prio = {
+			factor = 0.5
+
+			modifier = {
+				factor = 2
+					OR = {
+						tag = USA
+						tag = FRA
+						tag = ENG 
+						tag = GER 
+						tag = SOV 
+						tag = PRC 
+						tag = ITA 
+						tag = JAP
+						tag = CAN 
+					}
+			}
+		}
+		
+		target_width = 20.0
+		width_weight = 1.0
+		column_swap_factor = 0.5
+		
+		stat_weights = {
+			0.00 #-- default_morale
+			0.00 #-- defense
+			1.00 #-- breakthrough
+			0.00 #-- hardness
+			4.00 #-- soft_attack
+			0.00 #-- hard_attack
+			0.00 #-- recon
+			1.00 #-- entrenchment
+			0.00 #-- initiative
+			0.00 #-- casualty_trickleback
+			0.00 #-- supply_consumption_factor
+			0.00 #-- supply_consumption
+			0.00 #-- suppression
+			0.00 #-- suppression_factor
+			0.00 #-- experience_loss_factor
+			0.00 #-- equipment_capture_factor
+			0.00 #-- fuel_capacity
+			#-- Air Values
+			0.00 #-- air_attack
+			#-- Common Values
+			0.60 #-- max_organisation
+			0.40 #-- max_strength
+			0.00 #-- maximum_speed
+			0.00 #-- armor_value
+			0.20 #-- ap_attack
+			0.00 #-- reliability
+			0.00 #-- reliability_factor
+			0.00 #-- weight
+			0.00 #-- fuel_consumption
+			0.00 #-- fuel_consumption_factor
+			0.00 #-- strat_attack
+			0.00 #-- carrier_size
+			0.00 #-- acc_hot_gain
+			0.00 #-- acc_cold_gain
+			0.00 #-- build_cost_ic
+		}
+		
+		target_template = {
+			weight = 0.9
+			match_value = 3000.0
+			
+			support = {
+				engineer = 1
+				recon = 1
+				field_hospital = 1
+				anti_tank = 1
+			}
+			
+			regiments = {
+				light_mechanized = 4
+				mot_artillery_brigade = 1
+			}
+		}
+		
+		allowed_types = {
+			infantry
+			motorized		
+			engineer
+			recon
+			field_hospital
+			logistics_company
+			anti_tank
+			mot_artillery_brigade
+			light_mechanized
 		}
 	}
 }
@@ -508,7 +620,7 @@ mechanized_default = {
 		}
 		
 		production_prio = {
-			factor = 1
+			factor = 10
 
 			modifier = {
 				factor = 1
@@ -561,8 +673,8 @@ mechanized_default = {
 			}
 			
 			regiments = {
-				light_mechanized = 5
 				mechanized = 4
+				mot_artillery_brigade = 1
 			}
 		}
 
@@ -575,7 +687,7 @@ mechanized_default = {
 			maintenance_company
 			logistics_company
 			anti_tank
-			artillery
+			mot_artillery_brigade
 		}
 		
 		replace_at_match = 0.4
@@ -670,8 +782,8 @@ mountaineers_generic = {
 			}
 			
 			regiments = {
-				mountaineers = 8
-				artillery_brigade = 2
+				mountaineers = 4
+				mot_artillery_brigade = 1
 			}
 		}
 		
@@ -684,6 +796,7 @@ mountaineers_generic = {
 			field_hospital
 			logistics_company
 			anti_tank
+			mot_artillery_brigade
 		}
 	}
 }
@@ -773,7 +886,8 @@ marines_generic = {
 			}
 			
 			regiments = {
-				marine = 9
+				marine = 5
+				mot_artillery_brigade = 1
 			}
 		}
 
@@ -782,6 +896,7 @@ marines_generic = {
 			marine
 			engineer
 			logistics_company
+			mot_artillery_brigade
 		}
 	}
 	
@@ -856,8 +971,8 @@ marines_generic = {
 			}
 			
 			regiments = {
-				amphibious_armor = 4
 				amphibious_mechanized = 6
+				mot_artillery_brigade = 1
 			}
 		}
 
@@ -865,10 +980,10 @@ marines_generic = {
 		allowed_types = {
 			marine
 			amphibious_mechanized
-			amphibious_armor
 			mot_recon
 			engineer
 			logistics_company
+			mot_artillery_brigade
 		}
 	}
 }
@@ -957,7 +1072,7 @@ paratrooper_generic = {
 			}
 			
 			regiments = {
-				paratrooper = 9
+				paratrooper = 5
 			}
 		}
 		
@@ -972,7 +1087,6 @@ paratrooper_generic = {
 			military_police
 			artillery
 			anti_air
-			rocket_artillery
 		}
 	}
 }

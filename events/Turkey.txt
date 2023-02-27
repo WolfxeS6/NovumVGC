@@ -496,7 +496,7 @@ country_event = {
 		hidden_effect = {
 			complete_national_focus = fasc_muhsin
 			set_country_flag = muhsin_yazicioglu
-
+				country_event = icsavas.5
 		}
 	}
 	option = {
@@ -516,7 +516,9 @@ country_event = {
 				ideology = fascist
 				long_name = "Milliyetçi Hareket Partisi"
 				name = MHP
-				}}
+				}
+								country_event = icsavas.5
+}
 	}
 }
 
@@ -597,6 +599,8 @@ country_event = {
 
 
 		TRK = {
+					transfer_state = 814
+
 			declare_war_on = { target = SYR type = independence_wargoal }
 		}
 	}
@@ -633,6 +637,8 @@ country_event = {
 
 
 		TRK = {
+					transfer_state = 676
+
 			declare_war_on = { target = IRQ type = independence_wargoal }
 		}
 	}
@@ -1165,6 +1171,137 @@ country_event = {
 	}
 }
 
+##Event: Turkish Civil War
+country_event = {
+	id = icsavas.5
+	title = icsavas.5.title
+	desc = icsavas.5.desc1
+	picture = GFX_report_event_iraq_war3
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+
+	mean_time_to_happen = {days = 1}
+
+	option = {
+		name = icsavas.5.o1
+		ai_chance = { factor = 1}
+
+		leave_faction = yes
+
+		add_named_threat = {
+			threat = 3
+			name = turcivil
+		}
+
+		hidden_effect = {
+			set_global_flag = TUR_savas_ic
+
+
+			start_civil_war = {
+				ruling_party = fascist
+				ideology = islamist
+				size = 0.5
+				states = { 1000 345 344 346 1186 1189 876 1188 827 }
+			}
+
+			country_event = Turkey_news.8
+
+			retire_character = TUR_bulent_ecevit
+			retire_character = TUR_devlet_bahceli
+			retire_character = TUR_recai_kutan
+			retire_character = TUR_mesut_yilmaz
+			retire_character = TUR_recep_tayyip_erdogan
+			retire_character = TUR_deniz_baykal
+			retire_character = TUR_murat_bozlak
+			retire_character = TUR_muhsin_yazicioglu
+
+			CTR = {
+				transfer_state = 1187
+				transfer_state = 354
+				transfer_state = 355
+				transfer_state = 356
+				transfer_state = 49
+				transfer_state = 349
+				transfer_state = 348
+				transfer_state = 353
+				transfer_state = 1185
+				1187 ={add_core_of = TUR}
+				354={add_core_of = TUR}
+				355={add_core_of = TUR}
+				356={add_core_of = TUR}
+				49={add_core_of = TUR}
+				349={add_core_of = TUR}
+				348={add_core_of = TUR}
+				1185={add_core_of = TUR}
+				353={add_core_of = TUR}
+
+				create_country_leader = {
+					name = "Bülent Ecevit"
+					picture = "Bulent_Ecevit.dds"
+					ideology = social_democrat_ideology
+				}
+
+
+
+
+
+				every_country = {
+					limit = {
+						has_full_control_of_state = 346
+					}
+					CTR = {
+						declare_war_on = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+
+
+
+				load_OOB = CTR
+				TUR = {
+					declare_war_on = { target = CTR type = annex_everything }
+					}  }
+			PKK = {
+				transfer_state = 352
+				transfer_state = 350
+				transfer_state = 999
+
+
+				352 = {add_core_of = TUR}
+				350 = {add_core_of = TUR}
+				999 = {add_core_of = TUR}
+
+				create_country_leader = {
+					name = "Cemil Bayik"
+					picture = "Cemil_Bayik.dds"
+					ideology = stalinist
+				}
+				create_corps_commander = {
+					name = "Murat Karayılan"
+					picture = "Murat_Karayilan.dds"
+					traits = {  }
+					skill = 1
+				}
+				load_OOB = PKK_rebels
+				declare_war_on = { target = TUR type = annex_everything }
+				declare_war_on = { target = CTR type = annex_everything }
+				every_country = {
+					limit = {
+						has_full_control_of_state = 346
+					}
+					PKK = {
+						declare_war_on = {
+							target = PREV
+							type = annex_everything
+						}
+					}
+				}
+
+				}} } }
 
 ##Event: Turkish Civil War
 country_event = {

@@ -15,7 +15,7 @@ focus_tree = {
 	focus = {
 		id = otto1
 		text = "Support for Dynasty Members"
-		icon = monarchy3
+		icon = Ottoman_Monarchy
 		x = 0
 		y = 0
 		cost = 5
@@ -169,68 +169,6 @@ focus_tree = {
 			remove_ideas = TUR_coalition_government
 			add_ideas = turk_ottomans
 			add_stability = -0.1
-			
-		hidden_effect = {
-		
-			every_state = {
-			limit = { is_core_of = GRE }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = BUL }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = ROM }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = ALB }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = YUG }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = BOS }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = SYR }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = IRQ }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = LEB }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = JOR }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = ISR }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = PAL }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = SAU }
-			add_core_of = TUR
-		}
-		every_state = {
-			limit = { is_core_of = KUW }
-			add_core_of = TUR
-		}
-			
-	}
-			
 		}
 	}
 	
@@ -351,8 +289,12 @@ focus_tree = {
 		relative_position_id = otto1
 		prerequisite = { focus = otto8}
 		completion_reward = {
-		TUR = {
-						set_autonomy = { target = NCY autonomy_state = ottoman_eyalet }}
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = { target = NCY autonomy_state = ottoman_eyalet }
+		}
 NCY = { add_ideas = ottoman_eyaleti }
 		}
 	}
@@ -438,7 +380,7 @@ set_capital = {state = 341}
 				size = 0.5
 				states = { 837 320 }
 			}}
-					country_event = olay.afgan
+					country_event = olay.15
 
 	
 		
@@ -467,7 +409,7 @@ add_ideas = cizye
 		id = otto18
 		text = "Hilal-i Ahmer"
 		icon = field_hospital_muslim
-		x = 2
+		x = 3
 		y = 1
 		cost = 5
 		relative_position_id = otto10
@@ -477,7 +419,706 @@ add_ideas = hilali_ahmer_cemiyeti
 		
 		}
 			}
+			
+	#otto19
+	focus = {
+		id = otto19
+		text = "Destroy the Gülenists"
+		icon = GFX_focus_TUR_jihad
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = otto10
+		prerequisite = { focus = otto10}
+		completion_reward = {
+add_stability = 0.1		
+		}
+			}
+	#otto20
+	focus = {
+		id = otto20
+		text = "The Ottoman Caliphate"
+		icon = ott_missionary
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = otto10
+		prerequisite = { focus = otto10}
+		completion_reward = {
+		add_country_leader_trait = halife_TUR
+		}
+			}
+#osmanli1
+	focus = {
+		id = osmanli1
+		icon = ott_amblemcol
+		x = 8
+		y = 10
+		cost = 5
+		relative_position_id = otto9
+		mutually_exclusive = {focus = roma1	}
+		available = { has_completed_focus = otto8 }
+		completion_reward = {
+	    add_political_power = 100
+		add_command_power = 15
+		}
+	}
+	#osmanli2
+	focus = {
+		id = osmanli2
+		icon = GFX_focus_TUR_unite_the_azeri_diaspora
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli1 }
+		completion_reward = {
+		puppet = AZR
+			if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = { target = AZR autonomy_state = ottoman_eyalet }
+		}
 
+AZR = { add_ideas = ottoman_eyaleti }
+		}
+	}
+		#osmanli3
+	focus = {
+		id = osmanli3
+		icon = focus_hun_monarchso
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli1 }
+		completion_reward = {
+puppet = HUN
+	if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = { target = HUN autonomy_state = ottoman_eyalet }
+		}
+
+HUN = { add_ideas = ottoman_eyaleti }		}
+	}
+		#osmanli4
+	focus = {
+		id = osmanli4
+		icon = ott_caliphate
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli3 focus = osmanli2  }
+		completion_reward = {
+		annex_country = {
+					target = PAL
+					transfer_troops = yes
+				}
+ISR = {
+				declare_war_on = {
+					target = TUR
+					type = annex_everything
+				}
+			}		}
+	}
+		#osmanli5
+	focus = {
+		id = osmanli5
+		icon = attack_iraq_kingdom
+		x = -2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli3 focus = osmanli2  }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = IRQ
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LEB
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = SYR }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = IRQ }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = IRQ }
+			add_core_of = LEB
+		}		}
+		}
+	}
+	#osmanli6
+	focus = {
+		id = osmanli6
+		icon = attack_georgia
+		x = 2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli3 focus = osmanli2  }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = GEO
+			}
+
+				declare_war_on = {
+				type = annex_everything
+				target = NGK
+			}
+				declare_war_on = {
+				type = annex_everything
+				target = ARM
+			}
+	    hidden_effect = {
+		NGK = { add_ideas = yalnizlik }
+		ARM = { add_ideas = yalnizlik }
+		every_state = {
+			limit = { is_core_of = GEO }
+			add_core_of = TUR
+		}		}
+	}
+	}
+		#osmanli7
+	focus = {
+		id = osmanli7
+		icon = seize_the_gulf
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli2
+		prerequisite = { focus = osmanli2  }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = JOR
+			}	
+create_wargoal = {
+				type = annex_everything
+				target = SAU
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BAR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = QAT
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = UAE
+			}
+				create_wargoal = {
+				type = annex_everything
+				target = KUW
+			}
+			hidden_effect = {
+		every_state = {
+			limit = { is_core_of = SAU }
+			add_core_of = TUR
+		}	
+every_state = {
+			limit = { is_core_of = JOR }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = BAR }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = QAT }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = UAE }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = UAE }
+			add_core_of = KUW
+		}		}
+			
+			}
+	}
+	#osmanli8
+	focus = {
+		id = osmanli8
+		icon = ott_balkan
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli3
+		prerequisite = { focus = osmanli3  }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = GRE
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BUL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MAC
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ALB
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = YUG
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = KOS
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = GRE }
+			add_core_of = TUR
+		}	
+every_state = {
+			limit = { is_core_of = BUL }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = MAC }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = ALB }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = YUG }
+			add_core_of = TUR
+		}		}		
+		}
+	}
+	#osmanli9
+	focus = {
+		id = osmanli9
+		icon = azer_pers
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli4
+		prerequisite = { focus = osmanli4  }
+		prerequisite = { focus = osmanli8 focus = osmanli7   }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = PER
+			}
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = PER }
+			add_core_of = TUR
+		}				}}
+	}
+	
+	#osmanli10
+	focus = {
+		id = osmanli10
+		icon = attack_monarchy2
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = osmanli7
+		prerequisite = { focus = osmanli7   }
+		completion_reward = {
+		puppet = YEM
+		puppet = OMA
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = { target = YEM autonomy_state = ottoman_eyalet }
+			set_autonomy = { target = OMA autonomy_state = ottoman_eyalet }
+		}
+		
+YEM = { add_ideas = ottoman_eyaleti }
+OMA = { add_ideas = ottoman_eyaleti }
+}
+	}
+	#osmanli11
+	focus = {
+		id = osmanli11
+		icon = attack_romania
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli8   }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = ROM
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MOL
+			}
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = ROM }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = MOL }
+			add_core_of = TUR
+		}		}}
+	}
+	#osmanli12
+	focus = {
+		id = osmanli12
+		icon = army1
+		x = -2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli11  }
+		completion_reward = {
+annex_country = {
+					target = BOS
+					transfer_troops = yes
+				}
+			create_wargoal = {
+				type = annex_everything
+				target = CRO
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SLV
+			}
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = BOS }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = CRO }
+			add_core_of = TUR
+		}	
+every_state = {
+			limit = { is_core_of = SLV }
+			add_core_of = TUR
+		}		}}
+	}
+	#osmanli13
+	focus = {
+		id = osmanli13
+		icon = tur_kirim
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli11  }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = UKR
+			}
+			CRI = {
+						transfer_state = 137	
+					declare_war_on = { target = UKR type = independence_wargoal }
+			}
+			puppet = CRI
+				if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = { target = CRI autonomy_state = ottoman_eyalet }
+		}
+CRI = { add_ideas = ottoman_eyaleti }
+
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = UKR }
+			add_core_of = TUR
+		}
+	}}
+	}
+	#osmanli14
+	focus = {
+		id = osmanli14
+		icon = attack_egypt
+		x = 2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli10  }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = EGY
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LBA
+			}
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = EGY }
+			add_core_of = TUR
+		}
+		every_state = {
+			limit = { is_core_of = LBA }
+			add_core_of = TUR
+		}
+	}}
+	}
+	#osmanli15
+	focus = {
+		id = osmanli15
+		icon = attack_sudan
+		x = 4
+		y = 2
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli10  }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = SUD
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ERI
+			}
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = SUD }
+			add_core_of = TUR
+		}
+		every_state = {
+			limit = { is_core_of = ERI }
+			add_core_of = TUR
+		}
+	}}
+	}
+		#osmanli16
+	focus = {
+		id = osmanli16
+		icon = reclaim_mediterranean
+		x = 3
+		y = 3
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli15  }
+		prerequisite = { focus = osmanli14  }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = TUN
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ALG
+			}
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = TUN }
+			add_core_of = TUR
+		}
+		every_state = {
+			limit = { is_core_of = ALG }
+			add_core_of = TUR
+		}
+	}}
+	}
+			#osmanli17
+	focus = {
+		id = osmanli17
+		icon = the_suleyman
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli12  }
+		prerequisite = { focus = osmanli13 }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = AUS
+			}
+
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = AUS }
+			add_core_of = TUR
+		}
+
+	}}
+	}
+			#osmanli18
+	focus = {
+		id = osmanli18
+		icon = turan_state
+		x = 2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli9  }
+		completion_reward = {
+		add_country_leader_trait = kagan_TUR
+annex_country = {
+					target = TMS
+					transfer_troops = yes
+				}
+				annex_country = {
+					target = UZB
+					transfer_troops = yes
+				}
+
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = TRK }
+			add_core_of = TUR
+		}
+		every_state = {
+			limit = { is_core_of = UZB }
+			add_core_of = TUR
+		}
+
+	}}
+	}
+	#osmanli19
+	focus = {
+		id = osmanli19
+		icon = attack_russia
+		x = 1
+		y = 3
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli17  }
+		prerequisite = { focus = osmanli18  }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = SOV
+			}
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = SOV }
+			add_core_of = TUR
+		}
+
+	}}
+	}
+		#osmanli20
+	focus = {
+		id = osmanli20
+		icon = attack_italy
+		x = 3
+		y = 3
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli16 }
+		prerequisite = { focus = osmanli18  }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = ITA
+			}
+			2= {
+add_core_of = TUR
+}
+	}
+	}
+	#osmanli21
+	focus = {
+		id = osmanli21
+		icon = attack_britain
+		x = 2
+		y = 4
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli20 }
+		prerequisite = { focus = osmanli19  }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = ENG
+			}
+			
+	}
+	}
+	#romaosmanli
+	focus = {
+		id = romaosmanli
+		icon = POL_globabl_science
+		x = 5
+		y = 1
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma1 focus = osmanli1  }
+		completion_reward = {
+	    add_political_power = 25
+        add_ideas = scientific_advances
+		}
+	}
+	#romaosmanli2
+	focus = {
+		id = romaosmanli2
+		icon = POL_smort_economy
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = romaosmanli
+		prerequisite = { focus = romaosmanli  }
+		completion_reward = {
+	    every_owned_state = {
+				if = {
+					limit = {
+						is_core_of = TUR
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+		#romaosmanli3
+	focus = {
+		id = romaosmanli3
+		icon = bhu_infrastracture
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = romaosmanli
+		prerequisite = { focus = romaosmanli  }
+		completion_reward = {
+	    every_owned_state = {
+				if = {
+					limit = {
+						is_core_of = TUR
+					}
+				}
+add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}			}
+		}
+	}
 	
 		#roma1
 	focus = {
@@ -487,6 +1128,7 @@ add_ideas = hilali_ahmer_cemiyeti
 		y = 10
 		cost = 5
 		relative_position_id = otto9
+		mutually_exclusive = {focus = osmanli1	}
 		available = { has_completed_focus = otto8 }
 		completion_reward = {
 	    add_political_power = 100
@@ -507,14 +1149,14 @@ add_ideas = hilali_ahmer_cemiyeti
 		available = { has_decision = TUR_byzan_3 }
 		completion_reward = {
 	    add_political_power = 25
-        country_event = olay.bizans
+        country_event = olay.16
 		}
 	}
 	
 	#roma3
 	focus = {
 		id = roma3
-		icon = balkan_conflict
+		icon = attack_bulgaria
 		x = 1
 		y = 1
 		cost = 5
@@ -570,7 +1212,7 @@ add_ideas = hilali_ahmer_cemiyeti
 		#roma4
 	focus = {
 		id = roma4
-		icon = border_war
+		icon = ultimatum
 		x = 0
 		y = 2
 		cost = 5
@@ -611,7 +1253,7 @@ add_ideas = hilali_ahmer_cemiyeti
 	#roma5
 	focus = {
 		id = roma5
-		icon = attack_syria
+		icon = irredentism
 		x = -1
 		y = 3
 		cost = 5
@@ -675,7 +1317,7 @@ add_ideas = hilali_ahmer_cemiyeti
 	#roma7
 	focus = {
 		id = roma7
-		icon = naval_bomber2
+		icon = levant_and_anatolia
 		x = 0
 		y = 4
 		cost = 5
@@ -748,14 +1390,37 @@ add_ideas = hilali_ahmer_cemiyeti
 	#roma9
 	focus = {
 		id = roma9
-		icon = the_roman_vision
-		x = 0
+		icon = spqr
+		x = -1
 		y = 6
 		cost = 5
 		relative_position_id = roma1
 		prerequisite = { focus = roma8 }
 		completion_reward = {
 		set_cosmetic_tag = TUR_ROM
+			create_wargoal = {
+				type = annex_everything
+				target = ITA
+			}
+			
+	    hidden_effect = {
+        every_state = {
+			limit = { is_core_of = ITA }
+			add_core_of = TUR
+		}		
+		}
+		}
+	}
+		#roma10
+	focus = {
+		id = roma10
+		icon = the_roman_vision
+		x = 1
+		y = 6
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma8 }
+		completion_reward = {
 		create_wargoal = {
 				type = annex_everything
 				target = SPR
@@ -763,10 +1428,6 @@ add_ideas = hilali_ahmer_cemiyeti
 		create_wargoal = {
 				type = annex_everything
 				target = FRA
-			}
-			create_wargoal = {
-				type = annex_everything
-				target = ITA
 			}
 			
 	    hidden_effect = {
@@ -778,10 +1439,7 @@ add_ideas = hilali_ahmer_cemiyeti
 			limit = { is_core_of = FRA }
 			add_core_of = TUR
 		}
-        every_state = {
-			limit = { is_core_of = ITA }
-			add_core_of = TUR
-		}		
+		
 		}
 		}
 	}

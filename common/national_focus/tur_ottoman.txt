@@ -15,7 +15,7 @@ focus_tree = {
 	focus = {
 		id = otto1
 		text = "Support for Dynasty Members"
-		icon = Ottoman_Monarchy
+		icon = ottoman_dynasty
 		x = 0
 		y = 0
 		cost = 5
@@ -38,7 +38,7 @@ focus_tree = {
 	focus = {
 		id = otto2
 		text = "Against the Reds"
-		icon = fascism14
+		icon = ottoman_againstred
 		x = -1
 		y = 1
 		cost = 5
@@ -61,7 +61,7 @@ focus_tree = {
 	focus = {
 		id = otto3
 		text = "Against the Fascists"
-		icon = anti_fascist_diplomacy
+		icon = ottoman_againstfasc
 		x = 1
 		y = 1
 		cost = 5
@@ -84,7 +84,7 @@ focus_tree = {
 	focus = {
 		id = otto4
 		text = "Gather the support of the Islamists"
-		icon = kuran
+		icon = ottoman_kuran
 		x = 0
 		y = 2
 		cost = 5
@@ -106,7 +106,7 @@ focus_tree = {
 	focus = {
 		id = otto5
 		text = "The Ottoman Dream in Newspapers"
-		icon = support_private_media
+		icon = ottoman_media
 		x = -1
 		y = 3
 		cost = 5
@@ -136,7 +136,7 @@ focus_tree = {
 	focus = {
 		id = otto6
 		text = "Ottoman Dream of Officers"
-		icon = tsk_officers
+		icon = ottoman_tskofficers
 		x = 1
 		y = 3
 		cost = 5
@@ -176,7 +176,7 @@ focus_tree = {
 	focus = {
 		id = otto9
 		text = "Sultan's Guards"
-		icon = OTT_gendarmerie
+		icon = ottoman_guard
 		x = 0
 		y = 5
 		cost = 5
@@ -340,7 +340,7 @@ set_capital = {state = 341}
 	focus = {
 		id = otto15
 		text = "Treaty of Cyprus"
-		icon = GFX_focus_TUR_cyprus_question
+		icon = ottoman_kıbrıs
 		x = 1
 		y = 8
 		cost = 5
@@ -642,6 +642,7 @@ every_state = {
 		cost = 5
 		relative_position_id = osmanli2
 		prerequisite = { focus = osmanli2  }
+		prerequisite = { focus = osmanli5  }
 		completion_reward = {
 create_wargoal = {
 				type = annex_everything
@@ -1159,10 +1160,29 @@ add_building_construction = {
 		}
 	}
 	
+	#romaosmanli4
+	focus = {
+		id = romaosmanli4
+		icon = scientific_government
+		x = 0
+		y = 2
+		cost = 8
+		relative_position_id = romaosmanli
+		prerequisite = { focus = romaosmanli3  }
+		prerequisite = { focus = romaosmanli2  }
+		completion_reward = {
+	    	swap_ideas = {
+				remove_idea = scientific_advances
+				add_idea  = scientific_advances3
+			}
+			add_research_slot = 1
+		}
+	}
+	
 		#roma1
 	focus = {
 		id = roma1
-		icon = bizans
+		icon = focus_GRE_reviving_the_double_headed_eagle
 		x = -2
 		y = 10
 		cost = 5
@@ -1189,6 +1209,102 @@ add_building_construction = {
 		completion_reward = {
 	    add_political_power = 25
         country_event = olay.16
+		add_ideas = reviving_the_double_headed_eagle_spirit
+		if = {
+    			limit = {
+    				has_idea = turk_ottomans
+    			}
+    				remove_ideas = turk_ottomans
+    			}
+    		}
+		}
+	
+	#roma11
+	focus = {
+		id = roma11
+		icon = POL_buisness_starting_reforms
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = roma2
+		prerequisite = { focus = roma2 }
+		completion_reward = {
+		add_ideas = byz_economy
+		if = {
+    			limit = {
+    				has_idea = turk_ottomans_economy
+    			}
+    				remove_ideas = turk_ottomans_economy
+    			}
+    		}
+		}
+	
+	#roma12
+	focus = {
+		id = roma12
+		icon = bizans
+		x = -2
+		y = 2
+		cost = 5
+		relative_position_id = roma2
+		prerequisite = { focus = roma11 }
+		completion_reward = {
+			swap_ideas = {
+    				remove_idea = reviving_the_double_headed_eagle_spirit
+    				add_idea = reviving_the_double_headed_eagle_2
+    			}
+		}
+	}
+	
+		#roma13
+	focus = {
+		id = roma13
+		icon = oil_production
+		x = -1
+		y = 3
+		cost = 5
+		relative_position_id = roma2
+		prerequisite = { focus = roma11 }
+		prerequisite = { focus = roma5 }
+		completion_reward = {
+677 = {
+				add_resource = {
+					type = oil
+					amount = 45
+				}
+				}
+		}
+	}
+	
+		#roma14
+	focus = {
+		id = roma14
+		icon = self_management
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = roma12
+		prerequisite = { focus = roma12 }
+		completion_reward = {
+        add_stability = 0.1
+		add_command_power = 20
+		}
+	}
+	
+		#roma15
+	focus = {
+		id = roma15
+		icon = attack_romania
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = roma3
+		prerequisite = { focus = roma3 }
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = ROM
+			}
 		}
 	}
 	
@@ -1489,7 +1605,7 @@ add_building_construction = {
 		id = ottoman_ekonomi1
 		text = "Subsidise Economy"
 		icon = turkeconmysubsidise
-		x = -5
+		x = -15
 		y = 1
 		cost = 5
 		relative_position_id = otto11
@@ -2347,8 +2463,8 @@ add_building_construction = {
 	focus = {
 		id = ottoman_army1
 		text = "Turkish Army Force"
-		icon = TSK
-		x = 5
+		icon = OTT_army_2
+		x = 15
 		y = 1
 		cost = 5
 
@@ -2376,7 +2492,7 @@ add_building_construction = {
 	focus = {
 		id = ottoman_army2
 		text = "Turkish Air Force"
-		icon = airtsk
+		icon = OTT_air_command
 		x = 20
 		y = 1
 		cost = 5
@@ -2916,7 +3032,7 @@ add_building_construction = {
 	focus = {
 		id = ottoman_kara1
 		text = "Turkish Ground Forces"
-		icon = karakuv
+		icon = OTT_gendarmerie
 		x = 0
 		y = 1
 		cost = 5
@@ -3048,7 +3164,7 @@ add_building_construction = {
 	focus = {
 		id = ottoman_kara6
 		text = "Innovation of Warfare"
-		icon = border_war
+		icon = GFX_goal_War_Economy
 		x = -2
 		y = 3
 		cost = 5
@@ -3428,7 +3544,7 @@ add_building_construction = {
 	focus = {
 		id = ottoman_deniz1
 		text = "Turkish Navy Forces"
-		icon = navyftsk
+		icon = OTT_navy
 		x = 10
 		y = 1
 		cost = 5

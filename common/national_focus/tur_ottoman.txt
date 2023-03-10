@@ -495,7 +495,7 @@ add_stability = 0.1
 		y = 10
 		cost = 5
 		relative_position_id = otto9
-		mutually_exclusive = {focus = roma1	}
+		mutually_exclusive = {focus = roma1	focus = selcuk1}
 		available = { has_completed_focus = otto8 }
 		completion_reward = {
 	    add_political_power = 100
@@ -1102,6 +1102,46 @@ add_core_of = TUR
 			
 	}
 	}
+	#selcukosmanli
+	focus = {
+		id = selcukosmanli
+		icon = defence_focus
+		x = 5
+		y = 1
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = roma1 focus = osmanli1 focus = selcuk1  }
+		completion_reward = {
+	    add_political_power = 25
+        add_ideas = generic_desperate_def
+		}
+	}
+	#selcukosmanli
+	focus = {
+		id = selcukosmanli2
+		icon = POL_army_purge
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcukosmanli
+		prerequisite = { focus = selcukosmanli }
+		completion_reward = {
+        add_ideas = generic_prepare_for_war
+		}
+	}
+	#selcukosmanli
+	focus = {
+		id = selcukosmanli3
+		icon = royalist_people
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = selcukosmanli
+		prerequisite = { focus = selcukosmanli }
+		completion_reward = {
+        add_ideas = additional_recruits8
+		}
+	}
 	#romaosmanli
 	focus = {
 		id = romaosmanli
@@ -1110,7 +1150,7 @@ add_core_of = TUR
 		y = 1
 		cost = 5
 		relative_position_id = roma1
-		prerequisite = { focus = roma1 focus = osmanli1  }
+		prerequisite = { focus = roma1 focus = osmanli1 focus = selcuk1  }
 		completion_reward = {
 	    add_political_power = 25
         add_ideas = scientific_advances
@@ -1163,7 +1203,7 @@ add_building_construction = {
 	#romaosmanli4
 	focus = {
 		id = romaosmanli4
-		icon = scientific_government
+		icon = GFX_Smart_City_Plan
 		x = 0
 		y = 2
 		cost = 8
@@ -1187,11 +1227,11 @@ add_building_construction = {
 		y = 10
 		cost = 5
 		relative_position_id = otto9
-		mutually_exclusive = {focus = osmanli1	}
+		mutually_exclusive = {focus = osmanli1	focus = selcuk1}
 		available = { has_completed_focus = otto8 }
 		completion_reward = {
 	    add_political_power = 100
-		add_country_leader_trait = kayserirum
+		add_command_power = 15
 		unlock_decision_category_tooltip = TUR_byzan
 		set_country_flag = TUR_byzantium
 		}
@@ -1209,13 +1249,38 @@ add_building_construction = {
 		completion_reward = {
 	    add_political_power = 25
         country_event = olay.16
-		add_ideas = reviving_the_double_headed_eagle_spirit
 		if = {
     			limit = {
     				has_idea = turk_ottomans
     			}
     				remove_ideas = turk_ottomans
     			}
+    		}
+		}
+		#roma16
+	focus = {
+		id = roma16
+		icon = monarchy3
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma1 }
+		completion_reward = {
+		add_country_leader_trait = kayserirum	    
+    		}
+		}
+		#roma17
+	focus = {
+		id = roma17
+		icon = take_earth
+		x = -4
+		y = 2
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma16 }
+		completion_reward = {
+		add_ideas = reviving_the_double_headed_eagle_spirit
     		}
 		}
 	
@@ -1248,6 +1313,7 @@ add_building_construction = {
 		cost = 5
 		relative_position_id = roma2
 		prerequisite = { focus = roma11 }
+		prerequisite = { focus = roma17 }
 		completion_reward = {
 			swap_ideas = {
     				remove_idea = reviving_the_double_headed_eagle_spirit
@@ -1599,13 +1665,441 @@ create_wargoal = {
 		}
 	}
 	
+	#selcuk1
+	focus = {
+		id = selcuk1
+		icon = tur_selcuk
+		x = 18
+		y = 10
+		cost = 5
+		relative_position_id = otto9
+		mutually_exclusive = {focus = roma1	focus = osmanli1}
+		available = { has_completed_focus = otto8 }
+		completion_reward = {
+	    add_political_power = 100
+		add_command_power = 15
+		}
+	}
+	#selcuk2
+	focus = {
+		id = selcuk2
+		icon = GFX_focus_TUR_unite_the_azeri_diaspora
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = selcuk1
+		prerequisite = { focus = selcuk1 }
+		completion_reward = {
+	    annex_country = {
+					target = AZR
+					transfer_troops = yes
+				}
+		}
+	}
+	#selcuk18
+	focus = {
+		id = selcuk18
+		icon = tur_legacy_of_the_sultanate_of_rum
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = selcuk1
+		prerequisite = { focus = selcuk1 }
+		completion_reward = {
+		add_country_leader_trait = sultan_TUR
+		}
+	}
+	#selcuk3
+	focus = {
+		id = selcuk3
+		icon = attack_armenia
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk2
+		prerequisite = { focus = selcuk2 }
+		completion_reward = {
+	   create_wargoal = {
+				type = annex_everything
+				target = GEO
+			}
+				declare_war_on = {
+				type = annex_everything
+				target = NGK
+			}
+				declare_war_on = {
+				type = annex_everything
+				target = ARM
+			}
+	    hidden_effect = {
+		NGK = { add_ideas = yalnizlik }
+		ARM = { add_ideas = yalnizlik }
+		every_state = {
+			limit = { is_core_of = NGK }
+			add_core_of = TUR
+		}
+		every_state = {
+			limit = { is_core_of = GEO }
+			add_core_of = TUR
+		}
+every_state = {
+			limit = { is_core_of = ARM }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+	#selcuk4
+	focus = {
+		id = selcuk4
+		icon = azer_pers
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk2
+		prerequisite = { focus = selcuk2 }
+		completion_reward = {
+	   create_wargoal = {
+				type = annex_everything
+				target = PER
+			}
+
+	    hidden_effect = {
+every_state = {
+			limit = { is_core_of = PER }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+	#selcuk5
+	focus = {
+		id = selcuk5
+		icon = attack_iraq_republic
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk4
+		prerequisite = { focus = selcuk4 }
+		completion_reward = {
+	   create_wargoal = {
+				type = annex_everything
+				target = IRQ
+			}
+
+	    hidden_effect = {
+every_state = {
+			limit = { is_core_of = IRQ }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+		#selcuk6
+	focus = {
+		id = selcuk6
+		icon = reconfigure_turkish_foreign_policy
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk4
+		prerequisite = { focus = selcuk4 }
+		completion_reward = {
+	   create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+
+	    hidden_effect = {
+every_state = {
+			limit = { is_core_of = SYR }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+		#selcuk7
+	focus = {
+		id = selcuk7
+		icon = territory_or_war
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk6
+		prerequisite = { focus = selcuk6 focus = selcuk5 }
+		completion_reward = {
+	   create_wargoal = {
+				type = annex_everything
+				target = LEB
+			}
+
+	    hidden_effect = {
+every_state = {
+			limit = { is_core_of = LEB }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+		#selcuk8
+	focus = {
+		id = selcuk8
+		icon = bhu_traning_programme
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk6
+		prerequisite = { focus = selcuk6 focus = selcuk5 }
+		completion_reward = {
+	   create_wargoal = {
+				type = annex_everything
+				target = JOR
+			}
+
+	    hidden_effect = {
+every_state = {
+			limit = { is_core_of = JOR }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+		#selcuk9
+	focus = {
+		id = selcuk9
+		icon = attack_israel
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk6
+		prerequisite = { focus = selcuk6 focus = selcuk5 }
+		completion_reward = {
+	   create_wargoal = {
+				type = annex_everything
+				target = ISR
+			}
+ create_wargoal = {
+				type = annex_everything
+				target = PAL
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = ISR }
+			add_core_of = TUR
+		}	
+every_state = {
+			limit = { is_core_of = PAL }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+	#selcuk10
+	focus = {
+		id = selcuk10
+		icon = attack_uae_better
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk4
+		prerequisite = { focus = selcuk4  }
+		completion_reward = {
+	   create_wargoal = {
+				type = annex_everything
+				target = OMA
+			}
+ create_wargoal = {
+				type = annex_everything
+				target = UAE
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = OMA }
+			add_core_of = TUR
+		}	
+every_state = {
+			limit = { is_core_of = UAE }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+	#selcuk11
+	focus = {
+		id = selcuk11
+		icon = attack_afganistan
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk4
+		prerequisite = { focus = selcuk4  }
+		completion_reward = {
+	   create_wargoal = {
+				type = annex_everything
+				target = AFG
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = AFG }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+		#selcuk12
+	focus = {
+		id = selcuk12
+		icon = TR_khan
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk11
+		prerequisite = { focus = selcuk11  }
+		completion_reward = {
+		add_country_leader_trait = kagan_TUR
+	  annex_country = {
+					target = TMS
+					transfer_troops = yes
+				}
+				annex_country = {
+					target = UZB
+					transfer_troops = yes
+				}
+hidden_effect = {
+		every_state = {
+			limit = { is_core_of = TRK }
+			add_core_of = TUR
+		}
+		every_state = {
+			limit = { is_core_of = UZB }
+			add_core_of = TUR
+		}
+
+	}
+		}
+	}
+	
+		#selcuk13
+	focus = {
+		id = selcuk13
+		icon = attack_pakistan
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = selcuk11
+		prerequisite = { focus = selcuk11  }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = PAK
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = PAK }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+	#selcuk14
+	focus = {
+		id = selcuk14
+		icon = military_mission
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk8
+		prerequisite = { focus = selcuk7 }
+		prerequisite = { focus = selcuk8 }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = TAJ
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = TAJ }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+	#selcuk15
+	focus = {
+		id = selcuk15
+		icon = entente
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk8
+		prerequisite = { focus = selcuk7 }
+		prerequisite = { focus = selcuk9 }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = KYR
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = KYR }
+			add_core_of = TUR
+		}		}
+		}
+	}
+	
+	#selcuk16
+	focus = {
+		id = selcuk16
+		icon = attack_india
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk13
+		prerequisite = { focus = selcuk13 }
+		prerequisite = { focus = selcuk14 }
+		prerequisite = { focus = selcuk15 }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = RAJ
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = RAJ }
+			add_core_of = TUR
+		}		}
+		}
+	}
+		#selcuk17
+	focus = {
+		id = selcuk17
+		icon = attack_china
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk13
+		prerequisite = { focus = selcuk13 }
+		prerequisite = { focus = selcuk14 }
+		prerequisite = { focus = selcuk15 }
+		completion_reward = {
+	create_wargoal = {
+				type = annex_everything
+				target = PRC
+			}
+	    hidden_effect = {
+		every_state = {
+			limit = { is_core_of = PRC }
+			add_core_of = TUR
+		}		}
+		}
+	}
 	
 	#ottoman_ekonomi1
 	focus = {
 		id = ottoman_ekonomi1
 		text = "Subsidise Economy"
 		icon = turkeconmysubsidise
-		x = -15
+		x = -7
 		y = 1
 		cost = 5
 		relative_position_id = otto11
@@ -2464,7 +2958,7 @@ create_wargoal = {
 		id = ottoman_army1
 		text = "Turkish Army Force"
 		icon = OTT_army_2
-		x = 15
+		x = 7
 		y = 1
 		cost = 5
 

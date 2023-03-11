@@ -293,9 +293,16 @@ focus_tree = {
 			limit = {
 				has_dlc = "Together for Victory"
 			}
-			set_autonomy = { target = NCY autonomy_state = ottoman_eyalet }
-		}
-NCY = { add_ideas = ottoman_eyaleti }
+			every_country = {
+			limit = { is_puppet_of = TUR }
+			add_ideas = ottoman_eyaleti 
+			set_autonomy = { target = PREV autonomy_state = ottoman_eyalet }
+		}	}
+		else = {
+			limit = { NOT = { has_dlc = "Together for Victory" } }
+limit = { is_puppet_of = TUR }
+			add_ideas = ottoman_eyaleti 
+}
 		}
 	}
 	
@@ -512,15 +519,19 @@ add_stability = 0.1
 		relative_position_id = osmanli1
 		prerequisite = { focus = osmanli1 }
 		completion_reward = {
-		puppet = AZR
-			if = {
+	if = {
 			limit = {
 				has_dlc = "Together for Victory"
 			}
+					puppet = AZR
+					AZR = { add_ideas = ottoman_eyaleti }
 			set_autonomy = { target = AZR autonomy_state = ottoman_eyalet }
 		}
-
+		else = {
+			limit = { NOT = { has_dlc = "Together for Victory" } }
+					puppet = AZR
 AZR = { add_ideas = ottoman_eyaleti }
+}
 		}
 	}
 		#osmanli3
@@ -533,15 +544,19 @@ AZR = { add_ideas = ottoman_eyaleti }
 		relative_position_id = osmanli1
 		prerequisite = { focus = osmanli1 }
 		completion_reward = {
-puppet = HUN
-	if = {
+if = {
 			limit = {
 				has_dlc = "Together for Victory"
 			}
+					puppet = HUN
+					HUN = { add_ideas = ottoman_eyaleti }
 			set_autonomy = { target = HUN autonomy_state = ottoman_eyalet }
 		}
-
-HUN = { add_ideas = ottoman_eyaleti }		}
+		else = {
+			limit = { NOT = { has_dlc = "Together for Victory" } }
+					puppet = HUN
+HUN = { add_ideas = ottoman_eyaleti }
+}		}
 	}
 		#osmanli4
 	focus = {
@@ -789,18 +804,23 @@ hidden_effect = {
 		relative_position_id = osmanli7
 		prerequisite = { focus = osmanli7   }
 		completion_reward = {
-		puppet = YEM
-		puppet = OMA
 		if = {
 			limit = {
 				has_dlc = "Together for Victory"
 			}
-			set_autonomy = { target = YEM autonomy_state = ottoman_eyalet }
-			set_autonomy = { target = OMA autonomy_state = ottoman_eyalet }
-		}
-		
+					puppet = YEM
+					puppet = OMA
 YEM = { add_ideas = ottoman_eyaleti }
-OMA = { add_ideas = ottoman_eyaleti }
+OMA = { add_ideas = ottoman_eyaleti }		
+set_autonomy = { target = YEM autonomy_state = ottoman_eyalet }	
+set_autonomy = { target = OMA autonomy_state = ottoman_eyalet }
+		}
+		else = {
+			limit = { NOT = { has_dlc = "Together for Victory" } }
+puppet = YEM
+puppet = OMA
+YEM = { add_ideas = ottoman_eyaleti }
+OMA = { add_ideas = ottoman_eyaleti }}
 }
 	}
 	#osmanli11
@@ -885,15 +905,18 @@ create_wargoal = {
 						transfer_state = 137	
 					declare_war_on = { target = UKR type = independence_wargoal }
 			}
-			puppet = CRI
-				if = {
+if = {
 			limit = {
 				has_dlc = "Together for Victory"
 			}
+			puppet = CRI
+			CRI = { add_ideas = ottoman_eyaleti }
 			set_autonomy = { target = CRI autonomy_state = ottoman_eyalet }
 		}
+		else = {
+			limit = { NOT = { has_dlc = "Together for Victory" } }
 CRI = { add_ideas = ottoman_eyaleti }
-
+}
 hidden_effect = {
 		every_state = {
 			limit = { is_core_of = UKR }

@@ -473,11 +473,14 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_equipment_to_iraq
 		}
-		#available = {
-			#	has_idea = SYR_sanctioned
-			#}
+		available = {
+				has_idea = SYR_sanctioned
+		}
 		completion_reward = {
-			add_ideas = SYR_avoiding_sanctions
+			swap_ideas = {
+				remove_idea = SYR_sanctioned
+				add_idea = SYR_avoiding_sanctions
+			}
 		}
 		x = 14
 		y = 3
@@ -540,6 +543,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			custom_effect_tooltip = SYR_raise_militias_tt
+			add_ideas = SYR_independent_miltias
 			hidden_effect = {
 				division_template = {
 					name = "Tribal Militia"
@@ -716,6 +720,12 @@ focus_tree = {
 		}
 		x = 25
 		y = 8
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SYR_independent_miltias
+				add_idea = SYR_independent_miltias2
+			}
+		}
 
 	}
 	focus = {
@@ -797,7 +807,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SYR_air_defence
-		icon = GFX_focus_rocketry
+		icon = air_defense
 		cost = 10
 		prerequisite = {
 			focus = SYR_saa
@@ -836,6 +846,9 @@ focus_tree = {
 		}
 		x = 28
 		y = 4
+		completion_reward = {
+			add_ideas = SYR_modernise_systems
+		}
 
 	}
 	focus = {
@@ -1215,6 +1228,38 @@ focus_tree = {
 		}
 		x = 3
 		y = 16
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
 
 	}
 	focus = {
@@ -1229,6 +1274,32 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = SYR_help_from_turkey
+		}
+		bypass = {
+			NOT = {
+				OR = {
+					KUS = {is_puppet_of = SYR}
+					KUR  = {is_puppet_of = SYR}
+				}
+			}
+		}
+		available = {
+			OR = {
+				KUS = {is_puppet_of = SYR}
+				KUR  = {is_puppet_of = SYR}
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					KUR = {is_puppet_of = SYR}
+				}
+				release = KUR
+			}
+			else = {
+				release = KUS
+			}
+			add_stability = 0.1
 		}
 		x = 2
 		y = 13

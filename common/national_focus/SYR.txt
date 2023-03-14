@@ -249,6 +249,15 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_retreat_lebanon
 		}
+		bypass = {
+			NOT = {
+				ISR = {owns_state = 881}
+			}
+			ISR = {has_war = yes}
+		}
+		completion_reward = {
+			SYR = {transfer_state = 881}
+		}
 		x = 2
 		y = 5
 
@@ -493,6 +502,12 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_work_around_sanctions
 		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SYR_avoiding_sanctions
+				add_idea = SYR_avoiding_sanctions2
+			}
+		}
 		x = 14
 		y = 4
 
@@ -505,7 +520,12 @@ focus_tree = {
 			focus = SYR_lessons_from_past
 		}
 		completion_reward = {
-			
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = infantry_weapons
+			}
 		}
 		x = 25
 		y = 4
@@ -949,7 +969,23 @@ focus_tree = {
 		}
 		x = 32
 		y = 4
-
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
 	}
 	focus = {
 		id = SYR_mediterranian_fleet
@@ -990,11 +1026,13 @@ focus_tree = {
 			has_full_control_of_state = 104
 		}
 		completion_reward = {
-			add_extra_state_shared_building_slots = 2
-			add_building_construction = {
-				type = dockyard
-				level = 2
-				instant_build = yes
+			104 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
 			}
 		}
 		x = 35
@@ -1631,20 +1669,20 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_start_atomic_program
 		}
+		available = {has_tech = atomic_research}
 		x = -2
 		y = 2
 		relative_position_id = SYR_research_facility
-	}
-	focus = {
-		id = SYR_prouce_atomic_weapons
-		icon = GFX_focus_rocketry
-		cost = 10
-		prerequisite = {
-			focus = SYR_build_al_kibar_reactor
+		completion_reward = {
+			1049 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
-		x = -2
-		y = 3
-		relative_position_id = SYR_research_facility
 	}
 
 	focus = {
@@ -1657,6 +1695,14 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = SYR_research_facility
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+		}
 	}
 	focus = {
 		id = SYR_new_facilities
@@ -1728,25 +1774,13 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
-		id = SYR_buy_chemical_weapons
-		icon = GFX_goal_generic_scientific_exchange
-		cost = 10
-		prerequisite = {
-			focus = SYR_missile
-		}
-		x = 2
-		y = 3
-		relative_position_id = SYR_research_facility
-	}
 
 	focus = {
 		id = SYR_use_against_own_people
 		icon = skull
 		cost = 10
 		prerequisite = {
-			focus = SYR_prouce_atomic_weapons
-			focus = SYR_buy_chemical_weapons
+			focus = SYR_arm_allies
 		}
 		x = 0
 		y = 4

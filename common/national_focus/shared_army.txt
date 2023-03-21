@@ -4186,7 +4186,7 @@ shared_focus = {
 shared_focus = {
 	id = GEN_modernize_the_navy
 	icon = navy
-	x = 90
+	x = 87
 	y =0
 	cost = 5
 
@@ -4213,6 +4213,20 @@ shared_focus = {
 		y = 0
 		trigger = {
 			tag = FIN
+		}
+	}
+	offset = {
+		x = -32
+		y = 0
+		trigger = {
+			tag = SIA
+		}
+	}
+	offset = {
+		x = -30
+		y = 0
+		trigger = {
+			has_focus_tree = generic_european_focus_tree
 		}
 	}
 
@@ -4255,9 +4269,9 @@ shared_focus = {
 
 
 	completion_reward = {
-		add_tech_bonus = {
-			name = tech_bonus
-			bonus = 0.5
+		add_doctrine_cost_reduction = {
+			name = armydoctrine_bonus
+			cost_reduction = 0.5
 			uses = 2
 			category = naval_doctrine
 		}
@@ -4266,7 +4280,7 @@ shared_focus = {
 
 shared_focus = {
 	id = GEN_analize_our_ships
-	icon = Blueprints
+	icon = POL_upgrade_naval_designes
 	x = -1
 	y = 1
 	relative_position_id = GEN_modernize_the_navy
@@ -4349,7 +4363,8 @@ shared_focus = {
 
 shared_focus = {
 	id = GEN_destroy_the_with_destroyers
-	icon = cruisers
+	text = HUN_frigate_research
+	icon = battleships
 	x = 4
 	y = 1
 	relative_position_id = GEN_analize_our_ships
@@ -4386,46 +4401,12 @@ shared_focus = {
 	}
 }
 
-shared_focus = {
-	id = GEN_frigates
-	text = HUN_frigate_research
-	icon = battleships
-	x = 0
-	y = 1
-	relative_position_id = GEN_destroy_the_with_destroyers
-	cost = 7.2
-
-	bypass = {
-
-	}
-
-	available = {
-		any_state = {
-			is_coastal = yes
-			is_owned_by = ROOT
-			is_controlled_by = ROOT
-		}
-	}
-
-	prerequisite = {
-		focus = GEN_destroy_the_with_destroyers
-	}
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = tech_bonus
-			bonus = 0.8
-			uses = 2
-			category = cl_tech
-		}
-	}
-}
 
 shared_focus = {
 	id = GEN_anti_submarine_warfare
 	icon = anti_submarine
-	x = 2
-	y = 2
+	x = 0
+	y = 1
 	relative_position_id = GEN_destroy_the_with_destroyers
 	cost = 7.2
 
@@ -4454,48 +4435,13 @@ shared_focus = {
 		}
 	}
 }
-
 shared_focus = {
-	id = GEN_our_first_carriers
-	icon = carriers
+	id = GEN_a_mercahnt_fleet
+	text = HUN_establish_a_merchant_fleet
+	icon = merchant_fleet
 	x = 0
 	y = 1
-	relative_position_id = GEN_frigates
-	cost = 7.2
-
-	bypass = {
-
-	}
-
-	available = {
-		any_state = {
-			is_coastal = yes
-			is_owned_by = ROOT
-			is_controlled_by = ROOT
-		}
-	}
-
-	prerequisite = {
-		focus = GEN_frigates
-	}
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = tech_bonus
-			bonus = 3.0
-			uses = 1
-			category = cv_tech
-		}
-	}
-}
-
-shared_focus = {
-	id = GEN_degauss_ship_hulls
-	text = CAN_degauss_ship_hulls
-	icon = anti_submarine
-	x = 0
-	y = 1
-	relative_position_id = GEN_our_first_carriers
+	relative_position_id = GEN_anti_submarine_warfare
 	cost = 7.2
 
 	bypass = {
@@ -4514,32 +4460,40 @@ shared_focus = {
 		focus = GEN_anti_submarine_warfare
 	}
 
+	completion_reward = {
+		add_ideas = HUN_merchant_fleet
+	}
+}
+shared_focus = {
+	id = GEN_our_first_carriers
+	icon = carriers
+	x = 2
+	y = 1
+	relative_position_id = GEN_destroy_the_with_destroyers
+	cost = 7.2
+
+	bypass = {
+
+	}
+
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_owned_by = ROOT
+			is_controlled_by = ROOT
+		}
+	}
+
 	prerequisite = {
-		focus = GEN_our_first_carriers
+		focus = GEN_destroy_the_with_destroyers
 	}
 
 	completion_reward = {
-		add_ideas = LAT_degauss_ship_hulls
-		if = {
-			limit = {
-				has_dlc = "Man the Guns"
-			}
-			if = {
-				limit = {
-					has_tech = degaussing
-				}
-				add_tech_bonus = {
-					name = CAN_degauss_ship_hulls
-					bonus = 0.5
-					uses = 2
-					category = naval_mines
-				}
-				else = {
-					set_technology = {
-						degaussing = 1
-					}
-				}
-			}
+		add_tech_bonus = {
+			name = tech_bonus
+			bonus = 3.0
+			uses = 1
+			category = cv_tech
 		}
 	}
 }
@@ -4586,8 +4540,8 @@ shared_focus = {
 shared_focus = {
 	id = GEN_corrvete_development
 	text = HUN_corrvete_development
-	icon = battleships
-	x = 0
+	icon = GFX_focus_generic_destroyer
+	x = -2
 	y = 1
 	relative_position_id = GEN_attacks_from_under_the_sea
 	cost = 7.2
@@ -4619,11 +4573,10 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = GEN_a_mercahnt_fleet
-	text = HUN_establish_a_merchant_fleet
-	icon = merchant_fleet
-	x = -2
-	y = 2
+	id = GEN_torpedos
+	icon = GFX_goal_generic_navy_anti_submarine
+	x = 0
+	y = 1
 	relative_position_id = GEN_attacks_from_under_the_sea
 	cost = 7.2
 
@@ -4641,35 +4594,6 @@ shared_focus = {
 
 	prerequisite = {
 		focus = GEN_attacks_from_under_the_sea
-	}
-
-	completion_reward = {
-		add_ideas = HUN_merchant_fleet
-	}
-}
-
-shared_focus = {
-	id = GEN_torpedos
-	icon = bombs2
-	x = 0
-	y = 1
-	relative_position_id = GEN_corrvete_development
-	cost = 7.2
-
-	bypass = {
-
-	}
-
-	available = {
-		any_state = {
-			is_coastal = yes
-			is_owned_by = ROOT
-			is_controlled_by = ROOT
-		}
-	}
-
-	prerequisite = {
-		focus = GEN_corrvete_development
 	}
 
 	completion_reward = {
@@ -4713,10 +4637,6 @@ shared_focus = {
 
 	prerequisite = {
 		focus = GEN_torpedos
-	}
-
-	prerequisite = {
-		focus = GEN_a_mercahnt_fleet
 	}
 
 	completion_reward = {
@@ -4785,11 +4705,9 @@ shared_focus = {
 	}
 }
 
-
-
 shared_focus = {
-	id = GEN_tanks_from_the_sea
-	icon = amphibius_tank
+	id = GEN_hire_ship_makers
+	icon = create_submarine
 	x = 1
 	y = 1
 	relative_position_id = GEN_improved_landing_crafts
@@ -4803,44 +4721,9 @@ shared_focus = {
 
 	}
 
+
 	prerequisite = {
 		focus = GEN_improved_landing_crafts
-	}
-
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = tech_bonus
-			bonus = 0.8
-			uses = 2
-			technology = amphibious_mechanized_infantry1
-			technology = amphibious_mechanized_infantry2
-		}
-	}
-}
-
-shared_focus = {
-	id = GEN_hire_ship_makers
-	icon = create_submarine
-	x = -1
-	y = 1
-	relative_position_id = GEN_tanks_from_the_sea
-	cost = 7.2
-
-	bypass = {
-
-	}
-
-	available = {
-
-	}
-
-	prerequisite = {
-		focus = GEN_tanks_from_the_sea
-	}
-
-	prerequisite = {
-		focus = GEN_our_own_marine_corps
 	}
 
 
@@ -4852,7 +4735,7 @@ shared_focus = {
 shared_focus = {
 	id = GEN_a_great_navy
 	icon = navy2
-	x = 0
+	x = -1
 	y = 1
 	relative_position_id = GEN_hire_ship_makers
 	cost = 7.2
@@ -4870,11 +4753,7 @@ shared_focus = {
 	}
 
 	prerequisite = {
-		focus = GEN_attack_and_run_tactics
-	}
-
-	prerequisite = {
-		focus = GEN_degauss_ship_hulls
+		focus = GEN_our_own_marine_corps
 	}
 
 
@@ -4915,6 +4794,20 @@ shared_focus = {
 			tag = FIN
 		}
 	}
+	offset = {
+		x = -32
+		y = 0
+		trigger = {
+			tag = SIA
+		}
+	}
+	offset = {
+		x = -30
+		y = 0
+		trigger = {
+			has_focus_tree = generic_european_focus_tree
+		}
+	}
 
 	completion_reward = {
 		air_experience = 35
@@ -4945,13 +4838,21 @@ shared_focus = {
 		}
 	}
 
+	mutually_exclusive = {
+		focus = GEN_Russian_bombers
+	}
+
+	mutually_exclusive = {
+		focus = GEN_Chinese_CAS
+	}
+
 	prerequisite = {
 		focus = GEN_modernize_the_airforce
 	}
 
 	completion_reward = {
 		add_equipment_to_stockpile = {
-			type = fighter_equipment_3
+			type = fighter_equipment_2
 			amount = 35
 			producer = USA
 		}
@@ -4986,11 +4887,19 @@ shared_focus = {
 		focus = GEN_modernize_the_airforce
 	}
 
+	mutually_exclusive = {
+		focus = GEN_american_fighters
+	}
+
+	mutually_exclusive = {
+		focus = GEN_Chinese_CAS
+	}
+
 	completion_reward = {
 		add_equipment_to_stockpile = {
-			type = tac_bomber_equipment_1
-			amount = 20
-			producer = ROOT
+			type = CAS_equipment_2
+			amount = 45
+			producer = SOV
 		}
 	}
 }
@@ -5023,10 +4932,19 @@ shared_focus = {
 		focus = GEN_modernize_the_airforce
 	}
 
+	mutually_exclusive = {
+		focus = GEN_american_fighters
+	}
+
+	mutually_exclusive = {
+		focus = GEN_Russian_bombers
+	}
+
 	completion_reward = {
+		
 		add_equipment_to_stockpile = {
-			type = CAS_equipment_2
-			amount = 45
+			type = tac_bomber_equipment_1
+			amount = 20
 			producer = PRC
 		}
 	}
@@ -5034,7 +4952,7 @@ shared_focus = {
 
 shared_focus = {
 	id = GEN_analize_new_planes
-	icon = Blueprints
+	icon = plane_designs
 	x = -1
 	y = 1
 	relative_position_id = GEN_american_fighters
@@ -5050,14 +4968,8 @@ shared_focus = {
 
 	prerequisite = {
 		focus = GEN_Chinese_CAS
-	}
-
-	prerequisite = {
-		focus = GEN_Russian_bombers
-	}
-
-	prerequisite = {
 		focus = GEN_american_fighters
+		focus = GEN_Russian_bombers
 	}
 
 	completion_reward = {
@@ -5088,14 +5000,8 @@ shared_focus = {
 
 	prerequisite = {
 		focus = GEN_Chinese_CAS
-	}
-
-	prerequisite = {
-		focus = GEN_Russian_bombers
-	}
-
-	prerequisite = {
 		focus = GEN_american_fighters
+		focus = GEN_Russian_bombers
 	}
 
 	completion_reward = {
@@ -5177,16 +5083,16 @@ shared_focus = {
 	completion_reward = {
 		add_tech_bonus = {
 			name = tech_bonus
-			bonus = 0.8
-			uses = 2
-			category = tactical_bomber
+			bonus = 1
+			uses = 1
+			category = cas_bomber
 		}
 	}
 }
 
 shared_focus = {
 	id = GEN_lighter_bombs
-	icon = fighter2
+	icon = drone
 	x = 0
 	y = 1
 	relative_position_id = GEN_bomb_them
@@ -5209,37 +5115,7 @@ shared_focus = {
 			name = tech_bonus
 			bonus = 0.8
 			uses = 2
-			category = cat_strategic_bomber
-		}
-	}
-}
-
-shared_focus = {
-	id = GEN_transport_ourselfs
-	icon = CAS
-	x = 0
-	y = 1
-	relative_position_id = GEN_lighter_bombs
-	cost = 7.2
-
-	bypass = {
-
-	}
-
-	available = {
-
-	}
-
-	prerequisite = {
-		focus = GEN_lighter_bombs
-	}
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = tech_bonus
-			bonus = 0.8
-			uses = 2
-			category = medium_air
+			category = tactical_bomber
 		}
 	}
 }
@@ -5276,10 +5152,10 @@ shared_focus = {
 
 shared_focus = {
 	id = GEN_bomb_everything
-	icon = Bomber2
+	icon = bombs
 	x = 0
 	y = 1
-	relative_position_id = GEN_transport_ourselfs
+	relative_position_id = GEN_lighter_bombs
 	cost = 7.2
 
 	bypass = {
@@ -5291,11 +5167,7 @@ shared_focus = {
 	}
 
 	prerequisite = {
-		focus = GEN_transport_ourselfs
-	}
-
-	prerequisite = {
-		focus = GEN_Bomb_the_sea
+		focus = GEN_lighter_bombs
 	}
 
 	completion_reward = {
@@ -5336,71 +5208,13 @@ shared_focus = {
 		}
 	}
 }
-shared_focus = {
-	id = GEN_closer_air_support
-	icon = escort_fighters
-	x = 0
-	y = 1
-	relative_position_id = GEN_fight_them_with_fighters
-	cost = 7.2
 
-	bypass = {
-
-	}
-
-	available = {
-
-	}
-
-	prerequisite = {
-		focus = GEN_fight_them_with_fighters
-	}
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = tech_bonus
-			bonus = 0.8
-			uses = 2
-			category = cas_bomber
-		}
-	}
-}
 
 shared_focus = {
 	id = GEN_scout_the_skies
-	icon = fighter
+	icon = radar
 	x = 0
 	y = 1
-	relative_position_id = GEN_closer_air_support
-	cost = 7.2
-
-	bypass = {
-
-	}
-
-	available = {
-
-	}
-
-	prerequisite = {
-		focus = GEN_closer_air_support
-	}
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = tech_bonus
-			bonus = 0.8
-			uses = 2
-			category = cat_scout_plane
-		}
-	}
-}
-
-shared_focus = {
-	id = GEN_see_everything
-	icon = radar
-	x = -2
-	y = 2
 	relative_position_id = GEN_fight_them_with_fighters
 	cost = 7.2
 
@@ -5423,6 +5237,38 @@ shared_focus = {
 			uses = 2
 			category = radar_tech
 		}
+		
+	}
+}
+
+shared_focus = {
+	id = GEN_see_everything
+	icon = fighter
+	x = -2
+	y = 2
+	relative_position_id = GEN_fight_them_with_fighters
+	cost = 7.2
+
+	bypass = {
+
+	}
+	allow_branch = { has_dlc = "La Resistance" }
+
+	available = {
+
+	}
+
+	prerequisite = {
+		focus = GEN_fight_them_with_fighters
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = tech_bonus
+			bonus = 0.8
+			uses = 2
+			category = cat_scout_plane
+		}
 	}
 }
 
@@ -5440,10 +5286,6 @@ shared_focus = {
 
 	available = {
 
-	}
-
-	prerequisite = {
-		focus = GEN_see_everything
 	}
 
 	prerequisite = {
@@ -5551,6 +5393,11 @@ shared_focus = {
 	prerequisite = {
 		focus = GEN_air_safety_reforms
 	}
+	prerequisite = {
+		focus = GEN_best_aces
+		focus = GEN_bomb_everything
+	}
+
 
 
 	completion_reward = {
@@ -5573,6 +5420,11 @@ shared_focus = {
 	prerequisite = {
 		focus = GEN_air_safety_reforms
 	}
+	prerequisite = {
+		focus = GEN_best_aces
+		focus = GEN_bomb_everything
+	}
+
 
 
 	completion_reward = {
@@ -5586,7 +5438,7 @@ shared_focus = {
 
 shared_focus = {
 	id = GEN_air_force_military_school
-	icon = airforce
+	icon = air_expert
 	x = 1
 	y = 1
 	relative_position_id = GEN_art_of_a_deal
@@ -5597,128 +5449,12 @@ shared_focus = {
 	}
 
 	prerequisite = {
-		focus = GEN_best_aces
-		focus = GEN_bomb_everything
-	}
-
-	prerequisite = {
 		focus = GEN_increase_local_airplane_production
 	}
 
 
 	completion_reward = {
 		add_ideas = idea_focus_air_force_military_school
-	}
-
-	ai_will_do = {
-		factor = 10
-	}
-}
-
-shared_focus = {
-	id = GEN_pilot_traning_program
-	text = HUN_pilot_traning_program
-	icon = air_expert
-	x = 0
-	y = 1
-	relative_position_id = GEN_air_force_military_school
-	cost = 7.2
-
-	prerequisite = {
-		focus = GEN_air_force_military_school
-	}
-
-
-	completion_reward = {
-		add_doctrine_cost_reduction = {
-			name = tech_bonus
-			cost_reduction = 0.3
-			uses = 2
-			category = air_doctrine
-		}
-	}
-
-	ai_will_do = {
-		factor = 10
-	}
-}
-
-shared_focus = {
-	id = GEN_jets
-	icon = skull
-	x = -1
-	y = 1
-	relative_position_id = GEN_pilot_traning_program
-	cost = 7.2
-
-	prerequisite = {
-		focus = GEN_pilot_traning_program
-	}
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = jet_rocket_bonus
-			ahead_reduction = 1
-			uses = 2
-			category = jet_technology
-		}
-	}
-
-	ai_will_do = {
-		factor = 10
-	}
-}
-
-shared_focus = {
-	id = GEN_reach_the_light_speed
-	icon = rocketry
-	x = 1
-	y = 1
-	relative_position_id = GEN_pilot_traning_program
-	cost = 7.2
-
-	prerequisite = {
-		focus = GEN_pilot_traning_program
-	}
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = jet_rocket_bonus
-			ahead_reduction = 1
-			uses = 2
-			category = rocketry
-		}
-	}
-
-	ai_will_do = {
-		factor = 10
-	}
-}
-
-shared_focus = {
-	id = GEN_wepons_for_the_3rd_world_war
-	text = HUN_wepons_for_the_3rd_world_war
-	icon = nuclear_weapons
-	x = -1
-	y = 1
-	relative_position_id = GEN_reach_the_light_speed
-	cost = 7.2
-
-	prerequisite = {
-		focus = GEN_reach_the_light_speed
-	}
-
-	prerequisite = {
-		focus = GEN_jets
-	}
-
-	completion_reward = {
-		add_tech_bonus = {
-			name = tech_bonus
-			ahead_reduction = 1
-			uses = 2
-			category = nuclear
-		}
 	}
 
 	ai_will_do = {

@@ -1,0 +1,375 @@
+focus_tree = {
+	id = tur_elections
+	continuous_focus_position = { x = 10 y = 500 }
+	initial_show_position = {
+	focus = elections1
+	} 
+	focus = {
+		id = elections1
+		icon = GFX_focus_TUR_turkish_elections
+		text = "Elections"
+		x = 20
+		y = 0
+		cost = 1
+		completion_reward = {
+			add_political_power = 25
+		}
+	}
+	
+	#kampanya1
+	focus = {
+		id = TUR_APK_kampanya1
+		text = "Traditionalists Vs Innovators"
+		icon = innovation_in_agriculture
+		x = 0
+		y = 1
+		cost = 5
+       	relative_position_id = elections1
+		prerequisite = { focus = elections1}
+		completion_reward = {
+			add_ideas = islamist_Movements
+            country_event = olay.21
+			add_political_power = 50
+			fourth_estate_conservative_increase = yes
+			fourth_estate_islamist_increase = yes
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.05
+			}
+				add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#Traditionalists
+	focus = {
+		id = Traditionalists
+		text = "Traditionalists"
+		icon = loosen_the_laws_on_secularism
+		x = 2
+		y = 1
+		cost = 25
+		relative_position_id = TUR_APK_kampanya1
+		mutually_exclusive = { focus = Innovators }
+		prerequisite = { focus = TUR_APK_kampanya1}
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	#Innovators
+	focus = {
+		id = Innovators
+		text = "Innovators"
+		icon = democracy
+		x = -2
+		y = 1
+		cost = 25
+		relative_position_id = TUR_APK_kampanya1
+		mutually_exclusive = { focus = Traditionalists }
+		prerequisite = { focus = TUR_APK_kampanya1}
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya2
+	focus = {
+		id = TUR_APK_kampanya2
+		text = "Get the Support of Business People"
+		icon = POL_industrial_privatisation
+		x = -1
+		y = 1
+		cost = 5
+		prerequisite = { focus = Innovators focus = Traditionalists}
+		relative_position_id = Innovators
+		completion_reward = {
+			add_political_power = 30
+            add_popularity = {
+				ideology = islamist
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.03
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya3
+	focus = {
+		id = TUR_APK_kampanya3
+		text = "Get the Public's Support"
+		icon = bhu_conservative_peoples_propaganda
+		x = 5
+		y = 1
+		cost = 5
+		prerequisite = { focus = Innovators focus = Traditionalists}
+		relative_position_id = Innovators
+		completion_reward = {
+		add_political_power = 25
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.03
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya4
+	focus = {
+		id = TUR_APK_kampanya4
+		text = "Aspire to Liberal Votes"
+		icon = BLR_liberalisation
+		x = 1
+		y = 1
+		cost = 5
+		prerequisite = { focus = Innovators focus = Traditionalists}
+		relative_position_id = Innovators
+		completion_reward = {
+			add_political_power = 45
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.03
+			}
+			fourth_estate_conservative_increase = yes
+			fourth_estate_islamist_increase = yes
+			fourth_estate_market_liberal_decrease = yes
+
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya5
+	focus = {
+		id = TUR_APK_kampanya5
+		text = "Aspire to Democratic Votes"
+		icon = social_conservative
+		x = 3
+		y = 1
+		cost = 5
+		prerequisite = { focus = Innovators focus = Traditionalists}
+		relative_position_id = Innovators
+		completion_reward = {
+			add_political_power =30
+
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.05
+			}
+			fourth_estate_conservative_increase = yes
+			fourth_estate_islamist_increase = yes
+			fourth_estate_social_liberal_decrease = yes
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_progressive_decrease = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = progressive
+				popularity = -0.05
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya6
+	focus = {
+		id = TUR_APK_kampanya6
+		text = "Justice and Development Party"
+		icon = akp
+		x = 0
+		y = 2
+		cost = 8
+		relative_position_id = Innovators
+		mutually_exclusive = { focus = fp }
+		available = { has_completed_focus = Innovators }
+		prerequisite = {focus = TUR_APK_kampanya2}
+		prerequisite = {focus = TUR_APK_kampanya3}
+		prerequisite = {focus = TUR_APK_kampanya4}
+		prerequisite = {focus = TUR_APK_kampanya5}
+		completion_reward = {
+			add_ideas = apk_movement
+			country_event = apk.1
+			add_political_power = 35
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya7
+	focus = {
+		id = TUR_APK_kampanya7
+		text = "Rallies of the New Party"
+		icon = wajdelota_class
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = TUR_APK_kampanya6
+		prerequisite = {focus = TUR_APK_kampanya6}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = islamist_Movements
+				add_idea  = islamist_Movements_2
+			}
+			add_political_power =50
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			fourth_estate_conservative_increase = yes
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya8
+	focus = {
+		id = TUR_APK_kampanya88
+		text = "The Winner of the Early Elections"
+		icon = 2023_elections
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = TUR_APK_kampanya6
+		prerequisite = {focus = TUR_APK_kampanya7}
+
+		completion_reward = {
+			load_focus_tree = tur_apk
+			remove_ideas = TUR_coalition_government
+			add_political_power = 75
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			set_politics = {
+				ruling_party = conservative
+				elections_allowed = yes
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#fp
+	focus = {
+		id = fp
+		text = "Fazilet Party"
+		icon = umayyad_caliphate
+		x = 0
+		y = 2
+		cost = 8
+		relative_position_id = Traditionalists
+		mutually_exclusive = { focus = TUR_APK_kampanya6 }
+		available = { has_completed_focus = Traditionalists }
+		prerequisite = {focus = TUR_APK_kampanya2}
+		prerequisite = {focus = TUR_APK_kampanya3}
+		prerequisite = {focus = TUR_APK_kampanya4}
+		prerequisite = {focus = TUR_APK_kampanya5}
+		completion_reward = {
+			add_ideas = fazilet_movement
+			add_political_power = 35
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#fp2
+	focus = {
+		id = fp2
+		text = "Congress of Fazilet"
+		icon = generic_islamic_constitution
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = fp
+		prerequisite = {focus = fp}
+		completion_reward = {
+		swap_ideas = {
+				remove_idea = islamist_Movements
+				add_idea  = islamist_Movements_2
+			}
+			add_political_power =50
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.05
+			}
+			fourth_estate_islamist_increase = yes
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#fp3
+	focus = {
+		id = fp3
+		text = "Fazilet Government"
+		icon = generic_islam
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = fp2
+		prerequisite = {focus = fp2}
+		completion_reward = {
+		load_focus_tree = tur_fp
+		remove_ideas = TUR_coalition_government
+		add_political_power = 75
+		add_popularity = {
+				ideology = islamist
+				popularity = 0.05
+			}
+			set_politics = {
+				ruling_party = islamist
+				elections_allowed = yes
+			}
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	}

@@ -1,0 +1,374 @@
+# befriend
+# conquer
+# antagonize
+# build_ship
+# build_army
+# unit_ratio
+# build_building
+# research_tech
+# garrison
+# protect
+# influence
+
+support_RCD = {
+	allowed = {
+		original_tag = RWA
+	}
+	enable = {
+		country_exists = RCD
+	}
+	abort = {
+		NOT = { country_exists = MLC }
+	}
+
+	ai_strategy = {
+		type = support
+		id = RCD
+		value = 100
+	}
+}
+
+support_MLC = {
+	allowed = {
+		original_tag = UGA
+	}
+	enable = {
+		country_exists = MLC
+	}
+	abort = {
+		NOT = { country_exists = MLC }
+	}
+
+	ai_strategy = {
+		type = support
+		id = MLC
+		value = 100
+	}
+}
+
+support_RCK = {
+	allowed = {
+		original_tag = UGA
+	}
+	enable = {
+		country_exists = RCK
+	}
+	abort = {
+		OR = {
+			NOT = { country_exists = MLC }
+			RCK = {
+				has_government = nationalist
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = support
+		id = RCK
+		value = 100
+	}
+}
+
+support_RWA = {
+	allowed = {
+		original_tag = BRD
+	}
+	enable = {
+		RWA = {
+			has_war_with = SUD
+		}
+	}
+	abort = {
+		OR = {
+			RWA = {
+				has_war = no
+			}
+			has_country_leader = { ruling_only = yes character = BRD_pierre_nkurunziza }
+		}
+	}
+
+	ai_strategy = {
+		type = support
+		id = RWA
+		value = 100
+	}
+	ai_strategy = {
+		type = send_lend_lease_desire
+		id = RWA
+		value = 50
+	}
+}
+
+support_SSD = {
+	allowed = {
+		original_tag = UGA
+	}
+	enable = {
+		SSD = {
+			has_war_with = SUD
+		}
+	}
+	abort = {
+		SSD = {
+			has_war = NO
+		}
+	}
+	ai_strategy = {
+		type = support
+		id = SSD
+		value = 100
+	}
+	ai_strategy = {
+		type = send_lend_lease_desire
+		id = SSD
+		value = 50
+	}
+}
+
+SUD_support_COG = {
+	allowed = {
+		original_tag = SUD
+	}
+	enable = {
+		COG = {
+			has_war_with = UGA
+		}
+	}
+	abort = {
+		COG = {
+			has_war = NO
+		}
+	}
+	ai_strategy = {
+		type = support
+		id = COG
+		value = 50
+	}
+}
+
+UNI_support_COG = {
+	allowed = {
+		original_tag = UNI
+	}
+	enable = {
+		COG = {
+			has_war_with = ANG
+		}
+	}
+	abort = {
+		COG = {
+			has_war = NO
+		}
+	}
+	ai_strategy = {
+		type = support
+		id = COG
+		value = 50
+	}
+}
+
+support_COG_medium = {
+	allowed = {
+		original_tag = NAM
+	}
+	enable = {
+		COG = {
+			has_war_with = UGA
+			has_war_with = RWA
+		}
+	}
+	abort = {
+		COG = {
+			has_war = NO
+		}
+	}
+	ai_strategy = {
+		type = support
+		id = COG
+		value = 100
+	}
+}
+
+support_COG_a_lot = {
+	allowed = {
+		original_tag = ZIM
+	}
+	enable = {
+		COG = {
+			has_war_with = UGA
+			has_war_with = RWA
+		}
+	}
+	abort = {
+		COG = {
+			has_war = NO
+		}
+	}
+	ai_strategy = {
+		type = send_volunteers_desire
+		id = COG
+		value = 100
+	}
+	ai_strategy = {
+		type = send_lend_lease_desire
+		id = COG
+		value = 100
+	}
+	ai_strategy = {
+		type = support
+		id = COG
+		value = 200
+	}
+}
+
+find_RWA_sus = {
+	allowed = {
+		OR = {
+			original_tag = UGA
+			original_tag = COG
+		}
+	}
+	enable = {
+		country_exists = RWA
+	}
+	abort = {
+		NOT = {
+			country_exists = RWA
+		}
+	}
+	ai_strategy = {
+		type = antagonize
+		id = RWA
+		value = 50
+	}
+	ai_strategy = {
+		type = prepare_for_war
+		id = RWA
+		value = 50
+	}
+}
+
+find_UGA_sus = {
+	allowed = {
+		OR = {
+			original_tag = RWA
+			original_tag = COG
+		}
+	}
+	enable = {
+		country_exists = UGA
+	}
+	abort = {
+		NOT = {
+			country_exists = UGA
+		}
+	}
+	ai_strategy = {
+		type = antagonize
+		id = UGA
+		value = 50
+	}
+	ai_strategy = {
+		type = prepare_for_war
+		id = UGA
+		value = 50
+	}
+}
+
+antagonize_COG = {
+	allowed = {
+		OR = {
+			original_tag = MLC
+			original_tag = RCK
+			original_tag = RCD
+		}
+	}
+	enable = {
+		country_exists = COG
+	}
+	abort = {
+		NOT = {
+			country_exists = COG
+		}
+	}
+	ai_strategy = {
+		type = antagonize
+		id = RCD
+		value = 1000
+	}
+}
+
+antagonize_RCD = {
+	allowed = {
+		OR = {
+			original_tag = MLC
+			original_tag = RCK
+		}
+	}
+	enable = {
+		country_exists = UGA
+	}
+	abort = {
+		NOT = {
+			country_exists = UGA
+		}
+	}
+	ai_strategy = {
+		type = antagonize
+		id = RCD
+		value = 100
+	}
+	ai_strategy = {
+		type = prepare_for_war
+		id = RCD
+		value = 50
+	}
+}
+
+antagonize_MLC = {
+	allowed = {
+		original_tag = RCD
+	}
+	enable = {
+		country_exists = MLC
+	}
+	abort = {
+		NOT = {
+			country_exists = MLC
+		}
+	}
+	ai_strategy = {
+		type = antagonize
+		id = MLC
+		value = 100
+	}
+	ai_strategy = {
+		type = prepare_for_war
+		id = MLC
+		value = 50
+	}
+}
+
+antagonize_RCK = {
+	allowed = {
+		original_tag = RCD
+	}
+	enable = {
+		country_exists = MLC
+	}
+	abort = {
+		NOT = {
+			country_exists = MLC
+		}
+	}
+	ai_strategy = {
+		type = antagonize
+		id = MLC
+		value = 100
+	}
+	ai_strategy = {
+		type = prepare_for_war
+		id = MLC
+		value = 50
+	}
+}

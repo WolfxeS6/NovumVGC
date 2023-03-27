@@ -7,26 +7,54 @@ country_event = {
 	title = israel.1.t
 	desc = israel.1.d
 	picture = GFX_report_event_retreat_from_lebanon
-
+	
 	fire_only_once = yes
-
+	
 	trigger = {
 		tag = ISR
 		NOT = { has_country_flag = isr_retreat_from_lebanon }
+		NOT = { has_country_flag = isr_stay_in_lebanon }
 		date > 2000.5.20
 		date < 2001.1.1
 	}
-
+	
 	immediate = {
-		set_country_flag = isr_retreat_from_lebanon
 	}
-
+	
 	option = {
 		name = israel.1.o1
 		add_stability = 0.03
+		set_country_flag = isr_retreat_from_lebanon
+		LEB = {
+		transfer_state = 1184
+		}
 		news_event = {
-			id = news_ISR.4
+			id = news.48
 			hours = 3
+		}
+		
+		ai_chance = {
+			factor = 75
+		}
+	}
+	option = {
+		name = israel.1.o2
+		add_stability = -0.02
+		set_country_flag = isr_stay_in_lebanon
+		add_named_threat = { 
+		threat = 0.5 
+		name = ISR_stay_LEB
+			}
+		country_event = {
+			id = israel.7
+			hours = 3
+		}	
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 	}
 }
@@ -167,7 +195,7 @@ country_event = {
 		}
 		add_stability = -0.1
 		ai_chance = {
-			factor = 75
+			factor = 15
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -185,7 +213,7 @@ country_event = {
 			}
 		}
 		ai_chance = {
-			factor = 25
+			factor = 65
 		}
 	}
 }
@@ -323,7 +351,6 @@ country_event = {
 				target = SYR
 			}
 		}
-		881 = { remove_core_of = ISR }
 
 		LEB = {
 			add_opinion_modifier = {
@@ -385,18 +412,53 @@ country_event = {
 		}
 	}
 }
-
-#Palestine: Israel demands West Bank
-country_event = {
+#Israeli stays in Lebanon
+news_event = {
 	id = israel.7
 	title = israel.7.t
 	desc = israel.7.d
+	picture = GFX_news_event_retreat_from_lebanon
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = israel.7.o1
+		trigger = {
+			original_tag = ISR
+		}
+	}
+	
+	option = {
+		name = israel.7.o2
+		trigger = {
+			OR = {
+				original_tag = LEB
+				original_tag = SYR
+			}
+		}
+	}
+	
+	option = {
+		name = option.interesting
+		trigger = {
+			NOT = { original_tag = ISR }
+			NOT = { original_tag = SYR }
+			NOT = { original_tag = LEB }
+		}
+	}
+}
+#Palestine: Israel demands West Bank
+country_event = {
+	id = israel.28
+	title = israel.28.t
+	desc = israel.28.d
 	picture = GFX_report_event_ISR_golan_negotiations
 
 	is_triggered_only = yes
 
 	option = {
-		name = israel.7.o1
+		name = israel.28.o1
 		set_country_flag = pal_accepted_wb_demand
 
 		add_threat = -1
@@ -417,7 +479,7 @@ country_event = {
 		}
 	}
 	option = {
-		name = israel.7.o2
+		name = israel.28.o2
 		set_country_flag = pal_rejected_wb_demand
 
 		add_threat = 2
@@ -1517,7 +1579,7 @@ news_event = {
 	id = news_ISR.7
 	title = news_ISR.7.t
 	desc = news_ISR.7.d
-	picture = GFX_news_event_ISR_retreat_from_lebanon
+	picture = GFX_news_event_retreat_from_lebanon
 
 	is_triggered_only = yes
 	major = yes
@@ -1550,7 +1612,7 @@ news_event = {
 	id = news_ISR.8
 	title = news_ISR.8.t
 	desc = news_ISR.8.d
-	picture = GFX_news_event_ISR_retreat_from_lebanon
+	picture = GFX_news_event_retreat_from_lebanon
 
 	is_triggered_only = yes
 	major = yes
@@ -1583,7 +1645,7 @@ news_event = {
 	id = news_ISR.9
 	title = news_ISR.9.t
 	desc = news_ISR.9.d
-	picture = GFX_news_event_ISR_retreat_from_lebanon
+	picture = GFX_news_event_retreat_from_lebanon
 
 	is_triggered_only = yes
 	major = yes
@@ -1608,7 +1670,7 @@ news_event = {
 	id = news_ISR.10
 	title = news_ISR.10.t
 	desc = news_ISR.10.d
-	picture = GFX_news_event_ISR_retreat_from_lebanon
+	picture = GFX_news_event_retreat_from_lebanon
 
 	is_triggered_only = yes
 	major = yes

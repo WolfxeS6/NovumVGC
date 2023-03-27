@@ -1,0 +1,197 @@
+add_namespace = angola
+add_namespace = angola_news
+
+country_event = {			#Jonas Savimbi killed
+	id = angola.1
+	title = angola.1.t
+	desc = angola.1.d
+	picture = GFX_report_event_jonas_savimbi
+
+	trigger = {
+		tag = UNI
+		date > 2002.2.22
+		date < 2002.4.4
+		has_war_with = ANG
+		ANG = {
+			surrender_progress < 0.65
+		}
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = angola.1.a
+		ai_chance = {
+			factor = 100
+		}
+		retire_character = UNI_jonas_savimbi
+		retire_character = UNI_antonio_dembo
+		add_country_leader_role = {
+			character = UNI_paulo_lukamba_gato
+			country_leader = {
+				ideology = warlordist
+			}
+			promote_leader = yes
+		}
+		ANG = {
+			change_tag_from = root
+			country_event = angola.2
+		}
+	}
+	option = {
+		name = angola.1.b
+		ai_chance = {
+			factor = 0
+		}
+		retire_character = UNI_jonas_savimbi
+		retire_character = UNI_antonio_dembo
+		add_country_leader_role = {
+			character = UNI_paulo_lukamba_gato
+			country_leader = {
+				ideology = warlordist
+			}
+			promote_leader = yes
+		}
+		add_war_support = -0.2
+	}
+}
+
+country_event = {			#Victory in the Angolan Civil War
+	id = angola.2
+	title = angola.2.t
+	desc = angola.2.d
+	picture = GFX_report_event_angola_peace
+
+	is_triggered_only = yes
+
+	option = {
+		name = angola.2.a
+		ai_chance = {
+			factor = 100
+		}
+		UNI = {
+			set_nationality = {
+				target_country = ANG
+				character = UNI_isaias_samakuva
+				character = UNI_abreu_kamorteiro
+			}
+		}
+		annex_country = {
+			target = UNI
+			transfer_troops = no
+		}
+	}
+	option = {
+		name = angola.2.b
+		ai_chance = {
+			factor = 0
+		}
+		add_political_power = -100
+		add_war_support = -0.15
+	}
+}
+
+country_event = {			#Restore democracy?
+	id = angola.3
+	title = angola.3.t
+	desc = angola.3.d
+	picture = GFX_report_event_unita
+
+	trigger = {
+		tag = UNI
+		has_war = no
+		ANG = {
+			exists = no
+		}
+		has_government = nationalist
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = angola.3.a
+		ai_chance = {
+			factor = 50
+		}
+		ANG = {
+			set_nationality = {
+				target_country = UNI
+				character = ANG_holden_roberto
+			}
+		}
+		if = {
+			limit = {
+				has_country_leader = { ruling_only = no character = UNI_jonas_savimbi }
+			}
+			add_country_leader_role = {
+				character = UNI_jonas_savimbi
+				country_leader = {
+					ideology = big_tent
+				}
+				promote_leader = yes
+			}
+			set_portraits = {
+				character = UNI_jonas_savimbi
+				civilian = { large ="gfx/leaders/UNI/Portrait_Jonas_Savimbi2.dds" }
+			}
+		}
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.2
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = -0.1
+		}
+	}
+	option = {
+		name = angola.3.b
+		ai_chance = {
+			factor = 50
+		}
+		add_political_power = -50
+		if = {
+			limit = {
+				has_country_leader = { ruling_only = no character = UNI_jonas_savimbi }
+			}
+			add_country_leader_role = {
+				character = UNI_jonas_savimbi
+				country_leader = {
+					ideology = autocrat
+				}
+				promote_leader = yes
+			}
+		}
+		ANG = {
+			set_nationality = {
+				target_country = UNI
+				character = ANG_holden_roberto
+			}
+		}
+	}
+}
+
+news_event = {			##UNITA victory in Angola
+	id = angola_news.1
+	title = angola_news.1.t
+	desc = angola_news.1.d
+	picture = GFX_news_unita
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = angola_news.1.a
+	}
+	option = {
+		trigger ={
+			TAG = UNI
+		}
+		name = angola_news.1.b
+		set_cosmetic_tag = UNI_ANG
+	}
+}

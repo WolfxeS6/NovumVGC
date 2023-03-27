@@ -1,0 +1,4386 @@
+focus_tree = {
+	id = tur_ottoman
+	default = no
+	continuous_focus_position = { x = 0 y = 2000 }
+	initial_show_position = {
+		focus = otto8
+	}
+
+	#otto1
+	focus = {
+		id = otto1
+		text = "Support for Dynasty Members"
+		icon = ottoman_dynasty
+		x = 0
+		y = 0
+		cost = 5
+
+		completion_reward = {
+
+			add_political_power = 35
+			add_stability = -0.05
+			add_popularity = {
+				ideology = monarchist
+				popularity = 0.05
+			}
+
+
+		}
+	}
+
+
+	#otto2
+	focus = {
+		id = otto2
+		text = "Against the Reds"
+		icon = ottoman_againstred
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = otto1
+
+		prerequisite = { focus = otto1 }
+
+		completion_reward = {
+			add_political_power = 35
+			add_popularity = {
+				ideology = monarchist
+				popularity = 0.03
+			}
+
+
+		}
+	}
+
+	#otto3
+	focus = {
+		id = otto3
+		text = "Against the Fascists"
+		icon = ottoman_againstfasc
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = otto1
+
+		prerequisite = { focus = otto1 }
+
+		completion_reward = {
+			add_political_power = 35
+			add_popularity = {
+				ideology = monarchist
+				popularity = 0.03
+			}
+
+
+		}
+	}
+
+	#otto4
+	focus = {
+		id = otto4
+		text = "Gather the support of the Islamists"
+		icon = ottoman_kuran
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto3}
+		prerequisite = {focus = otto2}
+		completion_reward = {
+			add_stability = -0.05
+			add_popularity = {
+				ideology = islamist
+				popularity = -0.05			}
+			add_popularity = {
+				ideology = monarchist
+				popularity = 0.05			}
+		}
+	}
+
+	#otto5
+	focus = {
+		id = otto5
+		text = "The Ottoman Dream in Newspapers"
+		icon = ottoman_media
+		x = -1
+		y = 3
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto4}
+		completion_reward = {
+			add_stability = -0.05
+			fourth_estate_nationalist_decrease = yes
+			fourth_estate_fascist_decrease = yes
+			fourth_estate_monarchist_increase = yes
+			add_political_power = 35
+			add_popularity = {
+				ideology = nationalist
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = monarchist
+				popularity = 0.07
+				}		}
+	}
+
+	#otto6
+	focus = {
+		id = otto6
+		text = "Ottoman Dream of Officers"
+		icon = ottoman_tskofficers
+		x = 1
+		y = 3
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto4}
+		completion_reward = {
+			add_stability = -0.1
+			add_political_power = -70
+			add_popularity = {
+				ideology = monarchist
+				popularity = 0.07
+				}		}
+	}
+
+
+	#otto8
+	focus = {
+		id = otto8
+		text = "Ottoman Dream"
+		icon = the_greater_ottoman_empire
+		x = 0
+		y = 4
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto5
+			focus = otto6}
+		completion_reward = {
+			set_politics = {
+				ruling_party = monarchist
+				elections_allowed = no
+			}
+			country_event = ottoman.1
+			remove_ideas = necdet
+			remove_ideas = TUR_coalition_government
+			add_ideas = turk_ottomans
+			add_stability = -0.1
+		}
+	}
+
+	#otto9
+	focus = {
+		id = otto9
+		text = "Sultan's Guards"
+		icon = ottoman_guard
+		x = 0
+		y = 5
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto8}
+		completion_reward = {
+			army_experience = 30
+			341 = {
+				create_unit = {
+					division = "name = \"Sultan's Guards\" division_template = \"Infantry Regiment\" start_experience_factor = 1.0"
+					owner = TUR
+				}
+				create_unit = {
+					division = "name = \"Sultan's Guards\" division_template = \"Infantry Regiment\" start_experience_factor = 1.0"
+					owner = TUR
+				}
+				create_unit = {
+					division = "name = \"Sultan's Guards\" division_template = \"Infantry Regiment\" start_experience_factor = 1.0"
+					owner = TUR
+				}
+				create_unit = {
+					division = "name = \"Sultan's Guards\" division_template = \"Infantry Regiment\" start_experience_factor = 1.0"
+					owner = TUR
+				}
+				create_unit = {
+					division = "name = \"Sultan's Guards\" division_template = \"Infantry Regiment\" start_experience_factor = 1.0"
+					owner = TUR
+				}
+			}
+		}
+	}
+
+	#otto10
+	focus = {
+		id = otto10
+		text = "Reforms in the Military System"
+		icon = OTT_army
+		x = 2
+		y = 5
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto8}
+		completion_reward = {
+			army_experience = 25
+			add_ideas = turk_ottomans_army
+
+		}
+	}
+
+	#otto11
+	focus = {
+		id = otto11
+		text = "Ottoman Lira"
+		icon = ottoman_lira
+		x = -2
+		y = 5
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto8}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = TUR_2000
+				add_idea  = reform_for_2000_crisis
+			}
+			add_ideas = turk_ottomans_economy
+		}
+	}
+	#ottokriz
+	focus = {
+		id = ottokriz
+		text = "Reforms in the Economy"
+		icon = POL_economic_improvments
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = otto11
+		prerequisite = { focus = otto11}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = reform_for_2000_crisis
+				add_idea  = reform_2_for_2000_crisis
+			}
+		}
+	}
+
+	#ottokriz1
+	focus = {
+		id = ottokriz1
+		text = "End Of the Crisis"
+		icon = POL_capitalist_economy
+		x = -1
+		y = 2
+		cost = 5
+		relative_position_id = otto11
+		prerequisite = { focus = ottokriz}
+		completion_reward = {
+			remove_ideas =	reform_2_for_2000_crisis
+
+		}
+	}
+
+	#otto12
+	focus = {
+		id = otto12
+		text = "Adopt Eyalet System"
+		icon = ottoman_emblem
+		x = 1
+		y = 6
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto8}
+		completion_reward = {
+			if = {
+				limit = {
+					has_dlc = "Together for Victory"
+				}
+				puppet = NCY
+				NCY = { 
+				create_country_leader = {
+					name = "Army Council"
+					picture = "Council.dds"
+					ideology = absolute_monarchist
+					traits = { nationalist_symbol}
+				}
+				add_ideas = ottoman_eyaleti }
+				set_autonomy = { target = NCY autonomy_state = ottoman_eyalet }
+				puppet = TRK
+				TRK = {
+				create_country_leader = {
+					name = "Army Council"
+					picture = "Council.dds"
+					ideology = absolute_monarchist
+					traits = { nationalist_symbol}
+				}
+				add_ideas = ottoman_eyaleti }
+				set_autonomy = { target = TRK autonomy_state = ottoman_eyalet }
+			}
+			else = {
+				puppet = NCY
+				NCY = { 
+				create_country_leader = {
+					name = "Army Council"
+					picture = "Council.dds"
+					ideology = absolute_monarchist
+					traits = { nationalist_symbol}
+				}
+				add_ideas = ottoman_eyaleti }
+				puppet = TRK
+				TRK = { 
+				create_country_leader = {
+					name = "Army Council"
+					picture = "Council.dds"
+					ideology = absolute_monarchist
+					traits = { nationalist_symbol}
+				}
+				add_ideas = ottoman_eyaleti }
+			}
+		}
+	}
+
+	#otto13
+	focus = {
+		id = otto13
+		text = "Yıldız Teşkilatı"
+		icon = GFX_intelligence_agency_logo_tur_alternate
+		x = -1
+		y = 6
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto8}
+		completion_reward = {
+			add_political_power = 25
+			add_ideas = yildiz_teskilati
+
+		}
+	}
+
+	#otto14
+	focus = {
+		id = otto14
+		text = "Topkapı Palace"
+		icon = topkapi
+		x = 0
+		y = 7
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto13}
+		prerequisite = { focus = otto12}
+		completion_reward = {
+			add_political_power = 100
+			TUR = {
+				set_capital = {state = 341}
+			}
+
+		}
+	}
+
+	#otto15
+	focus = {
+		id = otto15
+		text = "Treaty of Cyprus"
+		icon = ottoman_kıbrıs
+		x = 1
+		y = 8
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto14}
+		completion_reward = {
+			add_political_power = 75
+			NCY = {
+				annex_country = {
+					target = CYP
+					transfer_troops = yes
+				}
+			}
+			every_state = {
+				limit = { is_core_of = CYP }
+				add_core_of = NCY
+			}
+		}
+	}
+
+	#otto16
+	focus = {
+		id = otto16
+		text = "Tarzi Dynasty in Afghanistan"
+		icon = Ottoman_Golden_Age
+		x = -1
+		y = 8
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto14}
+		completion_reward = {
+		country_event = olay.15
+		}
+	}
+
+	#otto17
+	focus = {
+		id = otto17
+		text = "Jizya Tax"
+		icon = GFX_focus_TUR_golden_age_of_turkey
+		x = 0
+		y = 9
+		cost = 5
+		relative_position_id = otto1
+		prerequisite = { focus = otto14}
+		prerequisite = { focus = ottokriz1}
+		completion_reward = {
+		add_ideas = cizye
+		}
+	}
+
+	#otto18
+	focus = {
+		id = otto18
+		text = "Hilal-i Ahmer"
+		icon = field_hospital_muslim
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = otto10
+		prerequisite = { focus = otto10}
+		completion_reward = {
+		add_ideas = hilali_ahmer_cemiyeti
+		}
+	}
+
+	#otto19
+	focus = {
+		id = otto19
+		text = "Destroy the Gülenists"
+		icon = GFX_focus_TUR_jihad
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = otto10
+		prerequisite = { focus = otto10}
+		completion_reward = {
+		add_stability = 0.1
+		}
+	}
+	#otto20
+	focus = {
+		id = otto20
+		text = "The Ottoman Caliphate"
+		icon = ott_missionary
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = otto10
+		prerequisite = { focus = otto10}
+		prerequisite = { focus = otto23}
+		completion_reward = {
+		add_country_leader_trait = halife_TUR
+		}
+	}
+	#otto21
+	focus = {
+		id = otto21
+		text = "Islam Army"
+		icon = islamic_militarization
+		x = 1
+		y = 3
+		cost = 5
+		relative_position_id = otto10
+		prerequisite = { focus = otto20}
+		prerequisite = { focus = otto19}
+		completion_reward = {
+		add_ideas = turkislam_army
+		}
+	}
+	#otto22
+	focus = {
+		id = otto22
+		text = "Devshirme System"
+		icon = OTT_ferman
+		x = 0
+		y = 4
+		cost = 5
+		relative_position_id = otto10
+		prerequisite = { focus = otto21}
+		prerequisite = { focus = otto15}
+		completion_reward = {
+		add_ideas = devsirme_system
+		}
+	}
+
+	#otto23
+	focus = {
+		id = otto23
+		text = "Ottoman language"
+		icon = GFX_focus_TUR_free_press
+		x = 2
+		y = 0
+		cost = 5
+		relative_position_id = otto10
+		prerequisite = { focus = otto8}
+		completion_reward = {
+		add_ideas = ottoman_language
+		}
+	}
+	#osmanli1
+	focus = {
+		id = osmanli1
+		icon = ott_amblemcol
+		x = 8
+		y = 10
+		cost = 5
+		relative_position_id = otto9
+		mutually_exclusive = {focus = roma1	focus = selcuk1}
+		available = { has_completed_focus = otto8 }
+		completion_reward = {
+		add_political_power = 100
+		add_command_power = 15
+		}
+	}
+	#osmanli2
+	focus = {
+		id = osmanli2
+		icon = GFX_focus_TUR_unite_the_azeri_diaspora
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli1 }
+		completion_reward = {
+		if = {
+				limit = {
+					has_dlc = "Together for Victory"
+				}
+				puppet = AZR
+				AZR = { 
+				create_country_leader = {
+					name = "Army Council"
+					picture = "Council.dds"
+					ideology = absolute_monarchist
+					traits = { nationalist_symbol}
+				}
+				add_ideas = ottoman_eyaleti }
+				set_autonomy = { target = AZR autonomy_state = ottoman_eyalet }
+			}
+		else = {
+				puppet = AZR
+				AZR = {
+				create_country_leader = {
+					name = "Army Council"
+					picture = "Council.dds"
+					ideology = absolute_monarchist
+					traits = { nationalist_symbol}
+				}
+				add_ideas = ottoman_eyaleti }
+			}
+		}
+	}
+	#osmanli3
+	focus = {
+		id = osmanli3
+		icon = focus_hun_monarchso
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli1 }
+		completion_reward = {
+		if = {
+				limit = {
+					has_dlc = "Together for Victory"
+				}
+				puppet = HUN
+				HUN = { add_ideas = ottoman_eyaleti }
+				set_autonomy = { target = HUN autonomy_state = ottoman_eyalet }
+			}
+		else = {
+				puppet = HUN
+				HUN = { add_ideas = ottoman_eyaleti }
+			}		
+		}
+	}
+	#osmanli4
+	focus = {
+		id = osmanli4
+		icon = ott_caliphate
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli3 focus = osmanli2  }
+		completion_reward = {
+		annex_country = {
+				target = PAL
+				transfer_troops = yes
+			}
+		ISR = {
+				declare_war_on = {
+					target = TUR
+					type = annex_everything
+				}
+				}		}
+	}
+	#osmanli5
+	focus = {
+		id = osmanli5
+		icon = attack_iraq_kingdom
+		x = -2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli3 focus = osmanli2  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = KUR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = IRQ
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LEB
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = SYR }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = IRQ }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = IRQ }
+					add_core_of = LEB
+					}		}
+		}
+	}
+	#osmanli6
+	focus = {
+		id = osmanli6
+		icon = attack_georgia
+		x = 2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = osmanli3 focus = osmanli2  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = GEO
+			}
+
+			create_wargoal = {
+				type = annex_everything
+				target = NGK
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ARM
+			}
+			hidden_effect = {
+				NGK = { add_ideas = yalnizlik }
+				ARM = { add_ideas = yalnizlik }
+				every_state = {
+					limit = { is_core_of = GEO }
+					add_core_of = TUR
+					}		}
+		}
+	}
+	#osmanli7
+	focus = {
+		id = osmanli7
+		icon = seize_the_gulf
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli2
+		prerequisite = { focus = osmanli2  }
+		prerequisite = { focus = osmanli5  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = JOR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SAU
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BAR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = QAT
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = UAE
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = KUW
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = SAU }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = JOR }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = BAR }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = QAT }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = UAE }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = UAE }
+					add_core_of = KUW
+					}		}
+
+		}
+	}
+	#osmanli8
+	focus = {
+		id = osmanli8
+		icon = ott_balkan
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli3
+		prerequisite = { focus = osmanli3  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = GRE
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BUL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MAC
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ALB
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = YUG
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = KOS
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = GRE }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = BUL }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = MAC }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = ALB }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = YUG }
+					add_core_of = TUR
+					}		}
+		}
+	}
+	#osmanli9
+	focus = {
+		id = osmanli9
+		icon = azer_pers
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli4
+		prerequisite = { focus = osmanli4  }
+		prerequisite = { focus = osmanli8 focus = osmanli7   }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PER
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = PER }
+					add_core_of = TUR
+				}				
+			}
+		}
+	}
+
+	#osmanli10
+	focus = {
+		id = osmanli10
+		icon = attack_monarchy2
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = osmanli7
+		prerequisite = { focus = osmanli7   }
+		completion_reward = {
+			if = {
+				limit = {
+					has_dlc = "Together for Victory"
+				}
+				puppet = YEM
+				puppet = OMA
+				YEM = { add_ideas = ottoman_eyaleti }
+				OMA = { add_ideas = ottoman_eyaleti }
+				set_autonomy = { target = YEM autonomy_state = ottoman_eyalet }
+				set_autonomy = { target = OMA autonomy_state = ottoman_eyalet }
+			}
+			else = {
+				puppet = YEM
+				puppet = OMA
+				YEM = { add_ideas = ottoman_eyaleti }
+				OMA = { add_ideas = ottoman_eyaleti }
+			}
+		}
+	}
+	#osmanli11
+	focus = {
+		id = osmanli11
+		icon = attack_romania
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli8   }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROM
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MOL
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = ROM }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = MOL }
+					add_core_of = TUR
+				}		
+			}
+		}
+	}
+	#osmanli12
+	focus = {
+		id = osmanli12
+		icon = army1
+		x = -2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli11  }
+		completion_reward = {
+			annex_country = {
+				target = BOS
+				transfer_troops = yes
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CRO
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SLV
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = BOS }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = CRO }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = SLV }
+					add_core_of = TUR
+				}		
+			}
+		}
+	}
+	#osmanli13
+	focus = {
+		id = osmanli13
+		icon = tur_kirim
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli11  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = UKR
+			}
+			CRI = {
+				transfer_state = 137
+				declare_war_on = { target = UKR type = independence_wargoal }
+			}
+			if = {
+				limit = {
+					has_dlc = "Together for Victory"
+				}
+				puppet = CRI
+				CRI = { 
+				create_country_leader = {
+					name = "Army Council"
+					picture = "Council.dds"
+					ideology = absolute_monarchist
+					traits = { nationalist_symbol}
+				}
+				add_ideas = ottoman_eyaleti }
+				set_autonomy = { target = CRI autonomy_state = ottoman_eyalet }
+			}
+			else = {
+				puppet = CRI
+				CRI = { 
+				create_country_leader = {
+					name = "Army Council"
+					picture = "Council.dds"
+					ideology = absolute_monarchist
+					traits = { nationalist_symbol}
+				}
+				add_ideas = ottoman_eyaleti }
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = UKR }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+	#osmanli14
+	focus = {
+		id = osmanli14
+		icon = attack_egypt
+		x = 2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli10  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = EGY
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LBA
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = EGY }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = LBA }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+	#osmanli15
+	focus = {
+		id = osmanli15
+		icon = attack_sudan
+		x = 4
+		y = 2
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli10  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SUD
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ERI
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = SUD }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = ERI }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+	#osmanli16
+	focus = {
+		id = osmanli16
+		icon = reclaim_mediterranean
+		x = 3
+		y = 3
+		cost = 5
+		relative_position_id = osmanli8
+		prerequisite = { focus = osmanli15  }
+		prerequisite = { focus = osmanli14  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = TUN
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ALG
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = TUN }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = ALG }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+	#osmanli17
+	focus = {
+		id = osmanli17
+		icon = the_suleyman
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli12  }
+		prerequisite = { focus = osmanli13 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = AUS
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = AUS }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+	#osmanli18
+	focus = {
+		id = osmanli18
+		icon = turan_state
+		x = 2
+		y = 2
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli9  }
+		completion_reward = {
+			add_country_leader_trait = kagan_TUR
+			annex_country = {
+				target = TMS
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = UZB
+				transfer_troops = yes
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = TRK }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = UZB }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+	#osmanli19
+	focus = {
+		id = osmanli19
+		icon = attack_russia
+		x = 1
+		y = 3
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli17  }
+		prerequisite = { focus = osmanli18  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SOV
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = SOV }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+	#osmanli20
+	focus = {
+		id = osmanli20
+		icon = attack_italy
+		x = 3
+		y = 3
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli16 }
+		prerequisite = { focus = osmanli18  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ITA
+			}
+			2= {
+				add_core_of = TUR
+			}
+		}
+	}
+	#osmanli21
+	focus = {
+		id = osmanli21
+		icon = attack_britain
+		x = 2
+		y = 4
+		cost = 5
+		relative_position_id = osmanli11
+		prerequisite = { focus = osmanli20 }
+		prerequisite = { focus = osmanli19  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ENG
+			}
+		}
+	}
+	#selcukosmanli
+	focus = {
+		id = selcukosmanli
+		icon = defence_focus
+		x = 5
+		y = 1
+		cost = 5
+		relative_position_id = osmanli1
+		prerequisite = { focus = roma1 focus = osmanli1 focus = selcuk1  }
+		completion_reward = {
+			add_political_power = 25
+			add_ideas = generic_desperate_def
+		}
+	}
+	#selcukosmanli
+	focus = {
+		id = selcukosmanli2
+		icon = POL_army_purge
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcukosmanli
+		prerequisite = { focus = selcukosmanli }
+		completion_reward = {
+			add_ideas = generic_prepare_for_war
+		}
+	}
+	#selcukosmanli
+	focus = {
+		id = selcukosmanli3
+		icon = royalist_people
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = selcukosmanli
+		prerequisite = { focus = selcukosmanli }
+		completion_reward = {
+			add_ideas = additional_recruits8
+		}
+	}
+
+	#roma1
+	focus = {
+		id = roma1
+		icon = focus_GRE_reviving_the_double_headed_eagle
+		x = -2
+		y = 10
+		cost = 5
+		relative_position_id = otto9
+		mutually_exclusive = {focus = osmanli1	focus = selcuk1}
+		available = { has_completed_focus = otto8 }
+		completion_reward = {
+			add_political_power = 100
+			add_command_power = 15
+			unlock_decision_category_tooltip = TUR_byzan
+			set_country_flag = TUR_byzantium
+		}
+	}
+	#roma2
+	focus = {
+		id = roma2
+		icon = GFX_focus_TUR_helenoturkism_in_government
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma1 }
+		available = { has_decision = TUR_byzan_3 }
+		completion_reward = {
+			add_political_power = 25
+			country_event = olay.16
+			if = {
+				limit = {
+					has_idea = turk_ottomans
+				}
+				remove_ideas = turk_ottomans
+			}
+		}
+	}
+	
+
+	#roma3
+	focus = {
+		id = roma3
+		icon = attack_bulgaria
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma1 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = BUL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = MAC
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ALB
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = SER
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = KOS
+			}
+			hidden_effect = {
+
+				every_state = {
+					limit = { is_core_of = BUL }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = ROM }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = ALB }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = SER }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = BOS }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+
+	#roma4
+	focus = {
+		id = roma4
+		icon = ultimatum
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma2 }
+		prerequisite = { focus = roma3 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SLV
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CRO
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = BOS
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = BOS }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = SLV }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = CRO}
+					add_core_of = TUR
+				}
+
+			}
+		}
+	}
+	#roma5
+	focus = {
+		id = roma5
+		icon = irredentism
+		x = -1
+		y = 3
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma4 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LEB
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = SYR }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = LEB }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+
+	#roma6
+	focus = {
+		id = roma6
+		icon = attack_israel
+		x = 1
+		y = 3
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma4 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ISR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = PAL
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = ISR }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = PAL }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+
+	#roma7
+	focus = {
+		id = roma7
+		icon = levant_and_anatolia
+		x = 0
+		y = 4
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma5 }
+		prerequisite = { focus = roma6 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = EGY
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LBA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = TUN
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = EGY }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = LBA }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = TUN }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+	#roma8
+	focus = {
+		id = roma8
+		icon = african_expedition
+		x = 0
+		y = 5
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma7 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = MOR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ALG
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = MOR }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = ALG }
+					add_core_of = TUR
+				}
+
+			}
+		}
+	}
+
+	#roma9
+	focus = {
+		id = roma9
+		icon = spqr
+		x = -1
+		y = 6
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma8 }
+		completion_reward = {
+			set_cosmetic_tag = TUR_ROM
+			create_wargoal = {
+				type = annex_everything
+				target = ITA
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = ITA }
+					add_core_of = TUR
+				}
+			}
+		}
+	}
+	#roma10
+	focus = {
+		id = roma10
+		icon = the_roman_vision
+		x = 1
+		y = 6
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma8 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SPR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = FRA
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = SPR }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = FRA }
+					add_core_of = TUR
+				}
+
+			}
+		}
+	}
+
+	#roma11
+	focus = {
+		id = roma11
+		icon = POL_buisness_starting_reforms
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = roma2
+		prerequisite = { focus = roma2 }
+		completion_reward = {
+			add_ideas = byz_economy
+			if = {
+				limit = {
+					has_idea = turk_ottomans_economy
+				}
+				remove_ideas = turk_ottomans_economy
+			}
+		}
+	}
+
+	#roma12
+	focus = {
+		id = roma12
+		icon = bizans
+		x = -2
+		y = 2
+		cost = 5
+		relative_position_id = roma2
+		prerequisite = { focus = roma11 }
+		prerequisite = { focus = roma17 }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = reviving_the_double_headed_eagle_spirit
+				add_idea = reviving_the_double_headed_eagle_2
+			}
+		}
+	}
+
+	#roma13
+	focus = {
+		id = roma13
+		icon = oil_production
+		x = -1
+		y = 3
+		cost = 5
+		relative_position_id = roma2
+		prerequisite = { focus = roma11 }
+		prerequisite = { focus = roma5 }
+		completion_reward = {
+			677 = {
+				add_resource = {
+					type = oil
+					amount = 45
+				}
+			}
+		}
+	}
+
+	#roma14
+	focus = {
+		id = roma14
+		icon = self_management
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = roma12
+		prerequisite = { focus = roma12 }
+		completion_reward = {
+			add_stability = 0.15
+			add_command_power = 20
+		}
+	}
+
+	#roma15
+	focus = {
+		id = roma15
+		icon = attack_romania
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = roma3
+		prerequisite = { focus = roma3 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROM
+			}
+		}
+	}
+	
+		#roma16
+	focus = {
+		id = roma16
+		icon = monarchy3
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma1 }
+		completion_reward = {
+			add_country_leader_trait = kayserirum
+		}
+	}
+	#roma17
+	focus = {
+		id = roma17
+		icon = take_earth
+		x = -4
+		y = 2
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma16 }
+		completion_reward = {
+			add_ideas = reviving_the_double_headed_eagle_spirit
+		}
+	}
+
+	#selcuk1
+	focus = {
+		id = selcuk1
+		icon = tur_selcuk
+		x = 18
+		y = 10
+		cost = 5
+		relative_position_id = otto9
+		mutually_exclusive = {focus = roma1	focus = osmanli1}
+		available = { has_completed_focus = otto8 }
+		completion_reward = {
+			set_cosmetic_tag = TUR_great_seljuk
+			set_global_flag = TUR_selcuksp_sp
+			add_political_power = 100
+			add_command_power = 15
+		}
+	}
+	#selcuk2
+	focus = {
+		id = selcuk2
+		icon = GFX_focus_TUR_unite_the_azeri_diaspora
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = selcuk1
+		prerequisite = { focus = selcuk1 }
+		completion_reward = {
+			annex_country = {
+				target = AZR
+				transfer_troops = yes
+			}
+		}
+	}
+	#selcuk18
+	focus = {
+		id = selcuk18
+		icon = tur_legacy_of_the_sultanate_of_rum
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = selcuk1
+		prerequisite = { focus = selcuk1 }
+		completion_reward = {
+			add_country_leader_trait = sultan_TUR
+		}
+	}
+	#selcuk3
+	focus = {
+		id = selcuk3
+		icon = attack_armenia
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk2
+		prerequisite = { focus = selcuk2 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = GEO
+			}
+			declare_war_on = {
+				type = annex_everything
+				target = NGK
+			}
+			declare_war_on = {
+				type = annex_everything
+				target = ARM
+			}
+			hidden_effect = {
+				NGK = { add_ideas = yalnizlik }
+				ARM = { add_ideas = yalnizlik }
+				every_state = {
+					limit = { is_core_of = NGK }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = GEO }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = ARM }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk4
+	focus = {
+		id = selcuk4
+		icon = azer_pers
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk2
+		prerequisite = { focus = selcuk2 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PER
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = PER }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk5
+	focus = {
+		id = selcuk5
+		icon = attack_iraq_republic
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk4
+		prerequisite = { focus = selcuk4 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = IRQ
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = IRQ }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk6
+	focus = {
+		id = selcuk6
+		icon = reconfigure_turkish_foreign_policy
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk4
+		prerequisite = { focus = selcuk4 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = KUR
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = SYR }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk7
+	focus = {
+		id = selcuk7
+		icon = territory_or_war
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk6
+		prerequisite = { focus = selcuk6 focus = selcuk5 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = LEB
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = LEB }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk8
+	focus = {
+		id = selcuk8
+		icon = bhu_traning_programme
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk6
+		prerequisite = { focus = selcuk6 focus = selcuk5 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = JOR
+			}
+
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = JOR }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk9
+	focus = {
+		id = selcuk9
+		icon = attack_israel
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk6
+		prerequisite = { focus = selcuk6 focus = selcuk5 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ISR
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = PAL
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = ISR }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = PAL }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk10
+	focus = {
+		id = selcuk10
+		icon = attack_uae_better
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk4
+		prerequisite = { focus = selcuk4  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = OMA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = UAE
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = OMA }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = UAE }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk11
+	focus = {
+		id = selcuk11
+		icon = attack_afganistan
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk4
+		prerequisite = { focus = selcuk4  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = AFG
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = AFG }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk12
+	focus = {
+		id = selcuk12
+		icon = TR_khan
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk11
+		prerequisite = { focus = selcuk11  }
+		completion_reward = {
+			add_country_leader_trait = kagan_TUR
+			annex_country = {
+				target = TMS
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = UZB
+				transfer_troops = yes
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = TRK }
+					add_core_of = TUR
+				}
+				every_state = {
+					limit = { is_core_of = UZB }
+					add_core_of = TUR
+				}
+
+			}
+		}
+	}
+
+	#selcuk13
+	focus = {
+		id = selcuk13
+		icon = attack_pakistan
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = selcuk11
+		prerequisite = { focus = selcuk11  }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PAK
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = PAK }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk14
+	focus = {
+		id = selcuk14
+		icon = military_mission
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk8
+		prerequisite = { focus = selcuk7 }
+		prerequisite = { focus = selcuk8 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = TAJ
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = TAJ }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk15
+	focus = {
+		id = selcuk15
+		icon = entente
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk8
+		prerequisite = { focus = selcuk7 }
+		prerequisite = { focus = selcuk9 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = KYR
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = KYR }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#selcuk16
+	focus = {
+		id = selcuk16
+		icon = attack_india
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = selcuk13
+		prerequisite = { focus = selcuk13 }
+		prerequisite = { focus = selcuk14 }
+		prerequisite = { focus = selcuk15 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = RAJ
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = RAJ }
+					add_core_of = TUR
+					}		}
+		}
+	}
+	#selcuk17
+	focus = {
+		id = selcuk17
+		icon = attack_china
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = selcuk13
+		prerequisite = { focus = selcuk13 }
+		prerequisite = { focus = selcuk14 }
+		prerequisite = { focus = selcuk15 }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PRC
+			}
+			hidden_effect = {
+				every_state = {
+					limit = { is_core_of = PRC }
+					add_core_of = TUR
+					}		}
+		}
+	}
+
+	#ottoman_ekonomi1
+	focus = {
+		id = ottoman_ekonomi1
+		text = "Subsidise Economy"
+		icon = turkeconmysubsidise
+		x = -7
+		y = 1
+		cost = 5
+		relative_position_id = otto11
+
+		prerequisite = { focus = otto11 }
+
+		completion_reward = {
+			add_political_power = -50
+			set_country_flag  = EconomicReform
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1
+				uses = 1
+				category = industry
+			}
+			add_stability = 0.05
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+
+	#ottoman_ekonomi2
+	focus = {
+		id = ottoman_ekonomi2
+		text = "Improve The West"
+		icon = infrastructure
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_ekonomi1
+
+		prerequisite = { focus = ottoman_ekonomi1 }
+		mutually_exclusive = { focus = ottoman_ekonomi3 }
+
+		completion_reward = {
+			add_ideas = infrastructure_project
+			341 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			340 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			343 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			342 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi3
+	focus = {
+		id = ottoman_ekonomi3
+		text = "Improve The East"
+		icon = infrastructure
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_ekonomi1
+
+		prerequisite = { focus = ottoman_ekonomi1 }
+		mutually_exclusive = { focus = ottoman_ekonomi2 }
+
+		completion_reward = {
+			add_ideas = infrastructure_project
+			344 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			350 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			352 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			999 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi4
+	focus = {
+		id = ottoman_ekonomi4
+		text = "Investment Civilian Industry"
+		icon = TUR_civil
+		x = -3
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_ekonomi1
+
+		prerequisite = { focus = ottoman_ekonomi1 }
+		mutually_exclusive = { focus = ottoman_ekonomi5 }
+
+		completion_reward = {
+			add_political_power = -25
+			add_ideas = civilian_industry_project
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi5
+	focus = {
+		id = ottoman_ekonomi5
+		text = "Enlarge The MKE"
+		icon = MKE
+		x = 3
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_ekonomi1
+
+		prerequisite = { focus = ottoman_ekonomi1 }
+		mutually_exclusive = { focus = ottoman_ekonomi4 }
+
+		completion_reward = {
+			add_political_power = -25
+			add_ideas = military_industry_project
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi6
+	focus = {
+		id = ottoman_ekonomi6
+		text ="Agrarian Reform"
+		icon = GFX_focus_TUR_agrarian_society
+		x = -2
+		y = 3
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi1
+
+
+		prerequisite = { focus = ottoman_ekonomi2
+			focus = ottoman_ekonomi3	}
+		completion_reward = {
+			add_political_power = 70
+			add_ideas = LAT_agarian_reform
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi7
+	focus = {
+		id = ottoman_ekonomi7
+		text ="Tourism Industry"
+		icon = buy_fighter
+		x = 2
+		y = 3
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi1
+
+
+		prerequisite = { focus = ottoman_ekonomi2
+			focus = ottoman_ekonomi3	}
+		completion_reward = {
+			add_political_power = 75
+			add_ideas = ROM_tourism_industry
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi8
+	focus = {
+		id = ottoman_ekonomi8
+		text ="Turkish Mining System"
+		icon = GFX_goal_Turkish_Mining_Companies
+		x = -1
+		y = 4
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi1
+
+
+		prerequisite = { focus = ottoman_ekonomi1 }
+		completion_reward = {
+			add_political_power = -25
+			add_ideas = TUR_mining
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = excavation_tech
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+
+	#ottoman_ekonomi9
+	focus = {
+		id = ottoman_ekonomi9
+		text ="Investment in Petrol Ofisi"
+		icon = petrolofisi
+		x = 1
+		y = 4
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi1
+
+
+		prerequisite = { focus = ottoman_ekonomi1 }
+		completion_reward = {
+			add_political_power = -25
+			add_ideas = oil_production_bonus
+			352 = {
+				add_resource = {
+					type = oil
+					amount = 25
+				}
+				}			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = synth_resources
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi10
+	focus = {
+		id = ottoman_ekonomi10
+		text ="Support Minor Company"
+		icon = subsidy_industry
+		x = -4
+		y = 3
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi1
+
+
+		prerequisite = { focus = ottoman_ekonomi4 }
+		completion_reward = {
+			add_political_power = -25
+			swap_ideas = {
+				remove_idea = civilian_industry_project
+				add_idea  = civilian_industry_project2
+				}			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi11
+	focus = {
+		id = ottoman_ekonomi11
+		text ="Support Major Company"
+		icon = focus_prc_distribution_of_wealth
+		x = -5
+		y = 4
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi1
+
+
+		prerequisite = { focus = ottoman_ekonomi10 }
+		completion_reward = {
+			add_political_power = -25
+			swap_ideas = {
+				remove_idea = civilian_industry_project2
+				add_idea  = civilian_industry_project3
+				}			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi12
+	focus = {
+		id = ottoman_ekonomi12
+		text ="Advanced Military Factories"
+		icon = bhu_modernize_army
+		x = 4
+		y = 3
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi1
+
+
+		prerequisite = { focus = ottoman_ekonomi5 }
+		completion_reward = {
+			add_political_power = -25
+			swap_ideas = {
+				remove_idea = military_industry_project
+				add_idea  = military_industry_project2
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi13
+	focus = {
+		id = ottoman_ekonomi13
+		text ="Improve Military Factories"
+		icon = industry_military
+		x = 5
+		y = 4
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi1
+
+
+		prerequisite = { focus = ottoman_ekonomi12 }
+		completion_reward = {
+			add_political_power = -25
+			swap_ideas = {
+				remove_idea = military_industry_project2
+				add_idea  = military_industry_project3
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi14
+	focus = {
+		id = ottoman_ekonomi14
+		text ="Defence to Anatolia"
+		icon = military_fort
+		x = 1
+		y = 1
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi8
+
+
+		prerequisite = { focus = ottoman_ekonomi9}
+		prerequisite = {	focus = ottoman_ekonomi8 }
+
+		completion_reward = {
+			add_ideas = TUR_savunma
+			add_tech_bonus = {
+				name = TUR_anadolu_savun
+				bonus = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi15
+	focus = {
+		id = ottoman_ekonomi15
+		text ="Develop Mining System"
+		icon = GFX_goal_continuous_non_factory_construct
+		x = 0
+		y = 2
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi8
+
+
+		prerequisite = {	focus = ottoman_ekonomi8 }
+
+		completion_reward = {
+			add_ideas = GEN_automative_mines_idea
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.5
+				uses = 1
+				category = excavation_tech
+
+			}
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi16
+	focus = {
+		id = ottoman_ekonomi16
+		text ="Develop Consumer Goods Industry"
+		icon = GFX_focus_TUR_believe_in_domestic_production
+		x = 0
+		y = 2
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi9
+
+
+		prerequisite = {	focus = ottoman_ekonomi9 }
+
+		completion_reward = {
+			add_ideas = HUN_expanded_consumer_goods_industry
+			add_political_power = 50
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi17
+	focus = {
+		id = ottoman_ekonomi17
+		text ="Welfare State"
+		icon = GFX_focus_TUR_supremacy_of_the_domestic_production
+		x = -1
+		y = 3
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi9
+
+
+		prerequisite = {	focus = ottoman_ekonomi16 }
+
+		prerequisite = {focus = ottoman_ekonomi15 }
+
+		completion_reward = {
+			add_ideas = GER_welfare_state_idea
+
+			add_political_power = 50
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi18
+	focus = {
+		id = ottoman_ekonomi18
+		text ="Farming Improvments"
+		icon = POL_farming_improvments
+		x = -1
+		y = 1
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi6
+
+
+		prerequisite = {	focus = ottoman_ekonomi6 }
+
+
+		completion_reward = {
+			add_ideas = AFT_Improve_Agricultural
+
+
+			add_political_power = 50
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi19
+	focus = {
+		id = ottoman_ekonomi19
+		text ="Encourage Exports"
+		icon = GFX_goal_Trade_Deal
+		x = 1
+		y = 1
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi7
+
+
+		prerequisite = {	focus = ottoman_ekonomi7 }
+
+
+		completion_reward = {
+			increase_trade_influence_by_2 = yes
+			add_political_power = 50
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi20
+	focus = {
+		id = ottoman_ekonomi20
+		text ="Expand Housing"
+		icon = GFX_goal_Invest_Industry
+		x = 1
+		y = 1
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi18
+
+
+		prerequisite = {	focus = ottoman_ekonomi8 }
+		prerequisite = {	focus = ottoman_ekonomi18 }
+
+
+
+		completion_reward = {
+			every_owned_state = {
+				if = {
+					limit = {
+						is_core_of = TUR
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi21
+	focus = {
+		id = ottoman_ekonomi21
+		text ="Advance Factory Technology"
+		icon = GFX_focus_generic_industry_3
+		x = -1
+		y = 1
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi19
+
+
+		prerequisite = {	focus = ottoman_ekonomi19}
+		prerequisite = {	focus = ottoman_ekonomi9}
+
+
+
+		completion_reward = {
+			add_ideas = GER_automation_of_factories_idea
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi22
+	focus = {
+		id = ottoman_ekonomi22
+		text ="TOKİ"
+		icon = GFX_support_turkish_companies
+		x = 1
+		y = 2
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi2
+
+
+		prerequisite = {	focus = ottoman_ekonomi2
+			focus = ottoman_ekonomi3}
+
+
+
+		completion_reward = {
+			unlock_decision_category_tooltip = TUR_toki
+			add_ideas = toki_working
+			set_country_flag = EconomicReform
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi26
+	focus = {
+		id = ottoman_ekonomi26
+		text ="Eastern Express"
+		icon = railroad
+		x = 0
+		y = 2
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi1
+
+
+		prerequisite = {focus = ottoman_ekonomi1}
+
+
+
+		completion_reward = {
+			unlock_decision_category_tooltip = TUR_east_express
+			set_country_flag = express
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi23
+	focus = {
+		id = ottoman_ekonomi23
+		text ="International Arms Trade"
+		icon = bag_of_money
+		x = -1
+		y = 1
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi13
+
+		prerequisite = {focus = ottoman_ekonomi12}
+
+		prerequisite = {focus = ottoman_ekonomi19}
+
+		available = { has_equipment = {
+				infantry_equipment > 3000
+			}
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -3000
+				producer = TUR
+			}
+			add_political_power = 100
+			add_command_power = 25
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi24
+	focus = {
+		id = ottoman_ekonomi24
+		text ="Foreign Investments"
+		icon = global_hegemony
+		x = -1
+		y = 1
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi18
+
+
+		prerequisite = {focus = ottoman_ekonomi10}
+
+		prerequisite = {focus = ottoman_ekonomi18}
+
+
+
+		completion_reward = {
+			add_ideas = generic_foreign_investment_3
+
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_ekonomi25
+	focus = {
+		id = ottoman_ekonomi25
+		text ="New Technology"
+		icon = turkarastirma
+		x = 0
+		y = 1
+		cost = 5
+
+		relative_position_id = ottoman_ekonomi17
+		prerequisite = {focus = ottoman_ekonomi17}
+		completion_reward = {
+			add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army1
+	focus = {
+		id = ottoman_army1
+		text = "Turkish Army Force"
+		icon = OTT_army_2
+		x = 7
+		y = 1
+		cost = 5
+
+		relative_position_id = otto10
+
+		prerequisite = { focus = otto10 }
+
+
+		completion_reward = {
+			unlock_decision_category_tooltip = TUR_army_resists
+
+			add_political_power = 50
+			add_ideas = turkish_army
+			set_country_flag = TSK
+			army_experience = 75
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+
+	#ottoman_army2
+	focus = {
+		id = ottoman_army2
+		text = "Turkish Air Force"
+		icon = OTT_air_command
+		x = 20
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_army1
+
+		prerequisite = { focus = ottoman_army1 }
+
+		completion_reward = {
+			air_experience = 80
+			add_tech_bonus = {
+				name = air_doc_bonus
+				bonus = 1
+				uses = 1
+				category = air_doctrine
+
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+
+
+	#ottoman_army4
+	focus = {
+		id = ottoman_army4
+		text = "MİG-31"
+		icon = GFX_focus_mig_plane
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_army2
+		
+		mutually_exclusive = { focus =  ottoman_army3 }
+
+		prerequisite = { focus = ottoman_army2 }
+		bypass = {
+			OR = {
+				SOV = {
+					exists = no
+				}
+				has_war_with = SOV
+			}
+		}
+		available = {
+			NOT = { has_war_with = SOV }
+			SOV = {
+				exists = yes
+			}
+		}
+		completion_reward = {
+			SOV = {add_opinion_modifier = {
+					target = TUR
+					modifier = long_term_trade_partner
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount =45
+				producer = SOV
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army5
+	focus = {
+		id = ottoman_army5
+		text = "TFX"
+		icon = f35
+		x = 0
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_army2
+
+		prerequisite = { focus = ottoman_army2 }
+
+		completion_reward = {
+			set_country_flag  = tfx
+
+			unlock_decision_category_tooltip = TUR_tfx
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army6
+	focus = {
+		id = ottoman_army6
+		text = "Bomber Focus"
+		icon = bombs
+		x = 1
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_army2
+
+		prerequisite = { focus = ottoman_army2 }
+		mutually_exclusive = { focus = ottoman_army7}
+
+		completion_reward = {
+
+			add_ideas = idea_focus_generic_bomber_focus
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army7
+	focus = {
+		id = ottoman_army7
+		text = "Fighter Focus"
+		icon = fighter
+		x = -1
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_army2
+
+		prerequisite = { focus = ottoman_army2 }
+		mutually_exclusive = { focus = ottoman_army6 }
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_fighter_focus
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army8
+	focus = {
+		id = ottoman_army8
+		text = "Support Bayraktar"
+		icon = turkish_drone
+		x = 0
+		y = 5
+		cost = 5
+		relative_position_id = ottoman_army2
+
+		prerequisite = { focus = ottoman_army5 }
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = tac_bomber_equipment_1
+				amount = 250
+				producer = TUR
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+
+
+
+
+
+	#ottoman_army10
+	focus = {
+		id = ottoman_army10
+		text = "Buy Russian Plane"
+		icon = production
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_army4
+
+		prerequisite = { focus = ottoman_army4 }
+		prerequisite = { focus = ottoman_army6 }
+
+
+		completion_reward = {
+			SOV = {add_opinion_modifier = {
+					target = TUR
+					modifier = long_term_trade_partner
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_2
+				amount =45
+				producer = SOV
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army11
+	focus = {
+		id = ottoman_army11
+		text = "Early Fighter Models"
+		icon = fighter
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_army7
+
+		prerequisite = { focus = ottoman_army5 }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = light_fighter
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+
+	#ottoman_army12
+	focus = {
+		id = ottoman_army12
+		text = "Early Bomber Models"
+		icon = bomber
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_army6
+
+		prerequisite = { focus = ottoman_army5 }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 0.8
+				uses = 2
+				category = heavy_air
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army13
+	focus = {
+		id = ottoman_army13
+		text = "Air Training"
+		icon = GFX_focus_TUR_modern_turkish_air_forces
+		x = -4
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_army2
+
+		prerequisite = { focus = ottoman_army2 }
+
+
+		completion_reward = {
+			air_experience = 45
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army22
+	focus = {
+		id = ottoman_army22
+		text = "New Pilots"
+		icon = GFX_focus_SOV_flying_clubs
+		x = -4
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_army2
+
+		prerequisite = { focus = ottoman_army13 }
+
+
+		completion_reward = {
+			add_ideas = idea_focus_air_force_military_school
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army14
+	focus = {
+		id = ottoman_army14
+		text = "Improve Airports"
+		icon = air_production
+		x = -5
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_army2
+
+		prerequisite = { focus = ottoman_army13 }
+
+
+		completion_reward = {
+			350 = {
+
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			344 = {
+
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			353 = {
+
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army15
+	focus = {
+		id = ottoman_army15
+		text = "CAS"
+		icon = CAS
+		x = -2
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_army5
+
+		prerequisite = { focus = ottoman_army11
+			focus = ottoman_army12		}
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = cas_bomber
+				bonus = 0.8
+				uses = 2
+				category = cas_bomber
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army16
+	focus = {
+		id = ottoman_army16
+		text = "Naval Bomber"
+		icon = naval_bomber
+		x = 2
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_army5
+
+		prerequisite = { focus = ottoman_army11
+			focus = ottoman_army12		}
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = naval_air
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army17
+	focus = {
+		id = ottoman_army17
+		text = "Best Ace"
+		icon = military_mission
+		x =1
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_army5
+
+		prerequisite = { focus = ottoman_army15
+			focus = ottoman_army8
+			focus = ottoman_army16	}
+
+
+		completion_reward = {
+			add_ideas = GEN_aces
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army18
+	focus = {
+		id = ottoman_army18
+		text = "Increase Local Airplane Production"
+		icon = air_production
+		x = -1
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_army5
+
+		prerequisite = { focus = ottoman_army15
+			focus = ottoman_army18
+			focus = ottoman_army16	}
+
+
+		completion_reward = {
+			add_ideas = ROM_local_development
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army19
+	focus = {
+		id = ottoman_army19
+		text = "Jet Technology"
+		icon = skull
+		x = 0
+		y = 4
+		cost = 5
+		relative_position_id = ottoman_army5
+
+		prerequisite = { focus = ottoman_army18 }
+		prerequisite = {focus = ottoman_army17	}
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = jet_technology
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army20
+	focus = {
+		id = ottoman_army20
+		text = "Rockets Technology"
+		icon = rocketry
+		x = 0
+		y = 5
+		cost = 5
+		relative_position_id = ottoman_army5
+
+		prerequisite = { focus = ottoman_army19 }
+
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = rocketry
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_army21
+	focus = {
+		id = ottoman_army21
+		text = HUN_wepons_for_the_3rd_world_war
+		icon = GFX_focus_TUR_nuclear_research_institute
+		x = 0
+		y = 6
+		cost = 5
+		relative_position_id = ottoman_army5
+
+		prerequisite = { focus = ottoman_army20 }
+
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = nuclear
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara1
+	focus = {
+		id = ottoman_kara1
+		text = "Turkish Ground Forces"
+		icon = OTT_gendarmerie
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_army1
+
+		prerequisite = { focus = ottoman_army1 }
+
+		completion_reward = {
+			army_experience = 50
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.9
+				uses = 2
+				category = land_doctrine
+
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara2
+	focus = {
+		id = ottoman_kara2
+		text = "Military Camps Abroad"
+		icon = coups_on_the_world
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara1 }
+
+		completion_reward = {
+			add_manpower = 3000
+			add_ideas = additional_recruits4
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara3
+	focus = {
+		id = ottoman_kara3
+		text = "Upgrade Weapons"
+		icon = GFX_focus_TUR_modern_turkish_army
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara1 }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_tech
+				bonus = 1
+				uses = 2
+				category = infantry_weapons
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara4
+	focus = {
+		id = ottoman_kara4
+		text = "Tank Project"
+		icon = turktank
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara1 }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = tank_bonus
+				bonus = 0.8
+				uses = 2
+				category = armor
+
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara5
+	focus = {
+		id = ottoman_kara5
+		text = "Fırtına T-155"
+		icon = artillery2
+		x = -3
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara3 }
+
+		completion_reward = {
+			add_ideas = GEN_bring_out_the_big_guns
+			add_tech_bonus = {
+				name = artillery_bonus
+				bonus = 1
+				uses = 2
+				category = artillery
+
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara6
+	focus = {
+		id = ottoman_kara6
+		text = "Innovation of Warfare"
+		icon = GFX_goal_War_Economy
+		x = -2
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara3 }
+		prerequisite = { focus = ottoman_kara2 }
+
+
+		completion_reward = {
+			add_ideas = FRA_innovation_of_warfare
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+
+	#ottoman_kara7
+	focus = {
+		id = ottoman_kara7
+		text = "Upgrade Mechanized"
+		icon = yugoslav_air_force
+		x = 3
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara4 }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = special_forces_bonus
+				bonus = 1
+				category = cat_mechanized_equipment
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara8
+	focus = {
+		id = ottoman_kara8
+		text = "Funding to Automotive Industry"
+		icon = motorized
+		x = 2
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara4 }
+		prerequisite = { focus = ottoman_kara2 }
+
+
+
+		completion_reward = {
+			add_ideas = USA_automotive_industry_funding
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara9
+	focus = {
+		id = ottoman_kara9
+		text = "BMC"
+		icon = apc
+		x = 4
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara7 }
+
+
+		completion_reward = {
+			add_ideas = TUR_bmc
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara10
+	focus = {
+		id = ottoman_kara10
+		text = "Focus On Tanks"
+		icon = t90
+		x = 3
+		y = 4
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara8}
+		prerequisite = { focus = ottoman_kara9}
+
+		mutually_exclusive = { focus = ottoman_kara15 }
+
+
+		completion_reward = {
+			add_ideas = GEF_Focus_On_Tanks
+
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara11
+	focus = {
+		id = ottoman_kara11
+		text = "Hisar Project"
+		icon = hisar
+		x = -4
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_kara1
+
+		prerequisite = { focus = ottoman_kara5}
+		completion_reward = {
+			341 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			352 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	#ottoman_kara15
+	focus = {
+		id = ottoman_kara15
+		text = "Focus On Infantry"
+		icon = GFX_goal_rhineland
+		x = -3
+		y = 4
+		cost = 5
+		relative_position_id = ottoman_kara1
+		mutually_exclusive = { focus = ottoman_kara10 }
+
+		prerequisite = { focus = ottoman_kara5}
+		prerequisite = { focus = ottoman_kara6}
+
+
+
+
+		completion_reward = {
+			add_ideas = GEF_Focus_On_Infantry
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara12
+	focus = {
+		id = ottoman_kara12
+		text = "Fields In Hospitan"
+		icon = subsidy_healthcare
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_kara2
+
+		prerequisite = { focus = ottoman_kara2}
+
+
+
+
+		completion_reward = {
+			add_ideas = GEN_hospitals_in_the_field
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+
+	#ottoman_kara13
+	focus = {
+		id = ottoman_kara13
+		text = HUN_increase_wepons_production
+		icon = QBZ_95
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_kara2
+
+		prerequisite = { focus = ottoman_kara3}
+		prerequisite = { focus = ottoman_kara2}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = HUN_increased_wepons_production
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara14
+	focus = {
+		id = ottoman_kara14
+		text = "Cult Of Speed"
+		icon = GFX_focus_TUR_supply_is_everything
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_kara2
+
+		prerequisite = { focus = ottoman_kara4}
+		prerequisite = { focus = ottoman_kara2}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = GEN_cult_of_speed
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	#ottoman_kara16
+	focus = {
+		id = ottoman_kara16
+		text = "Special Forces Command"
+		icon = GFX_focus_TUR_army_of_the_misaki_milli
+		x = 0
+		y = 4
+		cost = 5
+		relative_position_id = ottoman_kara2
+
+		prerequisite = { focus = ottoman_kara15
+			focus = ottoman_kara10}
+
+		completion_reward = {
+			add_ideas =	ozelkuvvetler
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#ottoman_kara17
+	focus = {
+		id = ottoman_kara17
+		text = "Adaptation to Weather Conditions"
+		icon = defence
+		x = 0
+		y = 5
+		cost = 5
+		relative_position_id = ottoman_kara2
+
+		prerequisite = { focus = ottoman_kara16
+		}
+		completion_reward = {
+			add_ideas =	tur_weatherc
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	
+
+	# ottoman_army3
+	focus = {
+		id =  ottoman_army3
+		text = "F-16"
+		icon = american_plane
+		x = -2
+		y = 1
+		cost = 7
+		relative_position_id =  ottoman_army2
+		mutually_exclusive = { focus =  ottoman_army4 }
+
+		prerequisite = { focus =  ottoman_army2 }
+		bypass = {
+			OR = {
+				USA = {
+					exists = no
+				}
+				has_war_with = USA
+			}
+		}
+		available = {
+			NOT = { has_war_with = USA }
+			USA = {
+				exists = yes
+			}
+		}
+		completion_reward = {
+			USA = {add_opinion_modifier = {
+					target = TUR
+					modifier = long_term_trade_partner
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount =45
+				producer = USA
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#ottoman_army9
+	focus = {
+		id = ottoman_army9
+		text = "Buy American Plane"
+		icon = production
+		x = 0
+		y = 2
+		cost = 7
+		relative_position_id =ottoman_army3
+
+		prerequisite = { focus = ottoman_army3}
+		prerequisite = { focus = ottoman_army7 }
+
+
+		completion_reward = {
+			USA = {add_opinion_modifier = {
+					target = TUR
+					modifier = long_term_trade_partner
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_2
+				amount =45
+				producer = USA
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz1
+	focus = {
+		id = ottoman_deniz1
+		text = "Turkish Navy Forces"
+		icon = OTT_navy
+		x = 10
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_army1
+
+		prerequisite = { focus = ottoman_army1 }
+
+		completion_reward = {
+			navy_experience = 50
+
+			add_tech_bonus = {
+				name = naval_doc_bonus
+				bonus = 0.8
+				uses = 2
+				category = naval_doctrine
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz2
+	focus = {
+		id = ottoman_deniz2
+		text = "Submarine Program"
+		icon = submarines
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_deniz1
+
+		prerequisite = { focus = ottoman_deniz1 }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = submarine_bonus
+				bonus = 0.9
+				uses = 1
+				category = ss_tech
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz3
+	focus = {
+		id = ottoman_deniz3
+		text = "Destroyer Project"
+		icon = battleships
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_deniz1
+
+		prerequisite = { focus = ottoman_deniz1 }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = cruiser_bonus
+				bonus = 0.7
+				uses = 2
+				category = ca_tech
+			}
+
+			}	ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz4
+	focus = {
+		id = ottoman_deniz4
+		text = "Cruiser Project"
+		icon = cruisers
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = ottoman_deniz1
+
+		prerequisite = { focus = ottoman_deniz1 }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = destroyer_bonus
+				bonus = 1
+				uses = 1
+				category = dd_tech
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz5
+	focus = {
+		id = ottoman_deniz5
+		text = CAN_degauss_ship_hulls
+		icon = anti_submarine
+		x = 1
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_deniz1
+
+		prerequisite = { focus = ottoman_deniz4 }
+		prerequisite = { focus = ottoman_deniz3 }
+
+
+		completion_reward = {
+			add_ideas = LAT_degauss_ship_hulls
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz6
+	focus = {
+		id = ottoman_deniz6
+		text = BUL_attack_and_run_tactics
+		icon = wolf_packs
+		x =-2
+		y = 2
+		cost = 5
+		relative_position_id = ottoman_deniz1
+
+		prerequisite = { focus = ottoman_deniz2 }
+
+
+		completion_reward = {
+			add_ideas = BUL_attack_and_run_tactics
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz7
+	focus = {
+		id = ottoman_deniz7
+		text = HUN_establish_a_merchant_fleet
+		icon = merchant_fleet
+		x =-1
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_deniz1
+
+		prerequisite = { focus = ottoman_deniz6 }
+		prerequisite = { focus = ottoman_deniz3 }
+
+
+
+		completion_reward = {
+			add_ideas = HUN_merchant_fleet
+
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz8
+	focus = {
+		id = ottoman_deniz8
+		text = "Submarine Tactics"
+		icon = torpedo
+		x =-3
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_deniz1
+
+		prerequisite = { focus = ottoman_deniz6 }
+
+		completion_reward = {
+			add_ideas = USA_submarine_tactics
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz9
+	focus = {
+		id = ottoman_deniz9
+		text = "TCG ANADOLU"
+		icon = focus_tur_izmir
+		x =1
+		y = 3
+		cost = 5
+		relative_position_id = ottoman_deniz1
+
+		prerequisite = { focus = ottoman_deniz5 }
+
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = carrier_bonus
+				bonus = 0.5
+				uses = 2
+				category = cv_tech
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	#deniz10
+	focus = {
+		id = ottoman_deniz10
+		text = "Sultan of The Seas"
+		icon = create_submarine
+		x =0
+		y = 4
+		cost = 5
+		relative_position_id = ottoman_deniz1
+
+		prerequisite = { focus = ottoman_deniz7 }
+		prerequisite = { focus = ottoman_deniz9 }
+
+		completion_reward = {
+			add_ideas = barbaros
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+#romaosmanli
+	focus = {
+		id = romaosmanli
+		icon = POL_globabl_science
+		x = 5
+		y = 1
+		cost = 5
+		relative_position_id = roma1
+		prerequisite = { focus = roma1 focus = osmanli1 focus = selcuk1  }
+		completion_reward = {
+			add_political_power = 25
+			add_ideas = scientific_advances
+		}
+	}
+	#romaosmanli2
+	focus = {
+		id = romaosmanli2
+		icon = POL_smort_economy
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = romaosmanli
+		prerequisite = { focus = romaosmanli  }
+		completion_reward = {
+			every_owned_state = {
+				if = {
+					limit = {
+						is_core_of = TUR
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+	#romaosmanli3
+	focus = {
+		id = romaosmanli3
+		icon = bhu_infrastracture
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = romaosmanli
+		prerequisite = { focus = romaosmanli  }
+		completion_reward = {
+			every_owned_state = {
+				if = {
+					limit = {
+						is_core_of = TUR
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+					}			}
+		}
+	}
+
+	#romaosmanli4
+	focus = {
+		id = romaosmanli4
+		icon = GFX_Smart_City_Plan
+		x = 0
+		y = 2
+		cost = 8
+		relative_position_id = romaosmanli
+		prerequisite = { focus = romaosmanli3  }
+		prerequisite = { focus = romaosmanli2  }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = scientific_advances
+				add_idea  = scientific_advances3
+			}
+			add_research_slot = 1
+		}
+	}
+
+
+
+
+
+}

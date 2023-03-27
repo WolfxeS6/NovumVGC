@@ -1,0 +1,100 @@
+# befriend
+# conquer
+# antagonize
+# build_ship
+# build_army
+# unit_ratio
+# build_building
+# research_tech
+# garrison
+# protect
+# influence
+
+
+support_ANG = {
+	allowed = {
+		OR = {
+			original_tag = NMB
+			original_tag = COG
+			original_tag = ZIM
+		}
+	}
+	enable = {
+		country_exists = UNI
+		ANG = {
+			has_war_with = UNI
+		}
+	}
+	abort = {
+		NOT = {
+			country_exists = UNI
+		}
+	}
+	ai_strategy = {
+		type = support
+		id = ANG
+		value = 100
+	}
+}
+
+ANG_support_COG = {
+	allowed = {
+		original_tag = ANG
+	}
+	enable = {
+		ANG = {
+			NOT = {
+				has_war_with = UNI
+			}
+		}
+		COG = {
+			OR = {
+				has_war_with = RWA
+				has_war_with = UGA
+			}
+		}
+	}
+	abort = {
+		COG = {
+			has_war = NO
+		}
+	}
+	ai_strategy = {
+		type = send_volunteers_desire
+		id = COG
+		value = 100
+	}
+	ai_strategy = {
+		type = send_lend_lease_desire
+		id = COG
+		value = 100
+	}
+	ai_strategy = {
+		type = support
+		id = COG
+		value = 200
+	}
+}
+
+ANG_dont_overrun_COG = {		#So that Angola doesn't send it's whole army to the DRC after beating UNITA
+	allowed = {
+		original_tag = ANG
+	}
+	enable = {
+		ANG = {
+			has_war_with = UNI
+		}
+		COG = {
+			OR = {
+				has_war_with = RWA
+				has_war_with = UGA
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+	    type = dont_defend_ally_borders
+	    id = COG
+	    value = 10
+	}
+}

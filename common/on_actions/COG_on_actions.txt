@@ -1,0 +1,84 @@
+on_actions = {	
+	# ROOT is capitulated country, FROM is winner
+	on_capitulation = {
+		effect = {
+			if = {
+				limit = {
+					ROOT  = {
+						original_tag = COG
+					}
+					date < 2016.1.1
+					NOT = { has_global_flag = COG_great_war_over }
+				}
+				random_list ={
+					100 = {
+						country_event = congo.7
+					}
+					100 = {
+						country_event = congo.8
+					}
+					100 = {
+						country_event = congo.9
+					}
+				}
+				set_global_flag = COG_great_war_over
+				set_global_flag = COG_war_second_stage
+			}
+			if = {
+				limit = {
+					ROOT  = {
+						OR = {
+							original_tag = MLC
+							original_tag = RCD
+							original_tag = RCK
+						}
+					}
+					date < 2016.1.1
+					NOT = { has_global_flag = COG_great_war_over }
+				}
+				country_event = congo.10
+
+				set_global_flag = COG_great_war_over
+			}
+			if = {
+				limit = {
+					ROOT  = {
+						original_tag = RCD
+					}
+					date < 2016.1.1
+					has_global_flag = COG_great_war_over
+				}
+				country_event = congo.11
+			}
+			if = {
+				limit = {
+					ROOT  = {
+						OR = {
+							original_tag = RCK
+							original_tag = MLC
+						}
+					}
+					date < 2016.1.1
+					has_global_flag = COG_great_war_over
+				}
+				country_event = congo.12
+			}
+		}
+	}
+	on_capitulation = {
+		effect = {
+			if = {
+				limit = {
+					ROOT  = {
+						original_tag = ANG
+					}
+					FROM  = {
+						original_tag = UNI
+					}
+				}
+				news_event = angola_news.1
+				set_global_flag = ANG_war_over
+			}
+		}
+	}
+}

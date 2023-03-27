@@ -9,7 +9,7 @@ focus_tree = {
 		}
 	}
 	initial_show_position = {
-		focus = atas_legacy
+	focus = atas_legacy
 	}
 
 	#Ataturks legacy
@@ -98,9 +98,9 @@ focus_tree = {
 		}
 		prerequisite = { focus = war_corruption_2 }
 		completion_reward = {
-			add_stability = 0.03
+			add_stability = 0.02
 			unlock_decision_category_tooltip = TUR_mafia
-			set_country_flag = Mafia
+			set_country_flag = Mafya
 
 		}
 		ai_will_do = {
@@ -122,10 +122,8 @@ focus_tree = {
 		}
 		prerequisite = { focus = war_corruption }
 		completion_reward = {
-			swap_ideas = {
-				add_idea = necdet
-				remove_idea = demirel
-				}		add_political_power = 50
+		country_event = olay.20
+        add_political_power = 50
 		}
 		ai_will_do = {
 			factor = 10
@@ -238,7 +236,7 @@ focus_tree = {
 	focus = {
 		id = communism1
 		icon = GFX_focus_TUR_patriotism_over_internationalism
-		x = -3
+		x = -4
 		y = 6
 		cost = 5
 		relative_position_id = atas_legacy
@@ -248,8 +246,9 @@ focus_tree = {
 		prerequisite = { focus = TUR_2001_cris }
 		mutually_exclusive = {
 			focus = military_plot
-			focus = apk
+			focus = election
 			focus = fasc_turkey
+			focus = osmanempire
 		}
 		completion_reward = {
 			add_political_power = 25
@@ -284,12 +283,63 @@ focus_tree = {
             }
         }
 	}
+	
+	#ottoman
+	focus = {
+		id = osmanempire
+		icon = ottoman_emblem
+		x = 4
+		y = 6
+		cost = 5
+		relative_position_id = atas_legacy
+		available = { has_country_flag = ottoman_empire }
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TUR_2001_cris }
+		mutually_exclusive = {
+			focus = military_plot
+			focus = election
+			focus = fasc_turkey
+			focus = communism1
+		}
+		completion_reward = {
+			add_political_power = 75
+			load_focus_tree = tur_ottoman
+		}
+		
+	}
+	
+	#election
+	focus = {
+		id = election
+		icon = GFX_focus_TUR_turkish_elections
+		x = 0
+		y = 6
+		cost = 5
+		relative_position_id = atas_legacy
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TUR_2001_cris }
+		mutually_exclusive = {
+			focus = military_plot
+			focus = ottoman
+			focus = fasc_turkey
+			focus = communism1
+		}
+		completion_reward = {
+			add_political_power = 75
+			load_focus_tree = tur_elections
+		}
+		
+	}
 
 	#army
 	focus = {
 		id = military_plot
 		icon = harbiye
-		x = 1
+		x = -2
 		y = 6
 		cost = 5
 		relative_position_id = atas_legacy
@@ -299,10 +349,9 @@ focus_tree = {
 		prerequisite = { focus = TUR_2001_cris }
 		mutually_exclusive = {
 			focus = communism1
-			focus = apk
+			focus = election
 			focus = fasc_turkey
-
-
+			focus = osmanempire
 		}
 		completion_reward = {
 			news_event = { id = tr_news.2 }
@@ -345,7 +394,7 @@ focus_tree = {
 	focus = {
 		id = fasc_turkey
 		icon = fasctur
-		x = 3
+		x = 2
 		y = 6
 		cost = 5
 		relative_position_id = atas_legacy
@@ -355,8 +404,9 @@ focus_tree = {
 		prerequisite = { focus = TUR_2001_cris }
 		mutually_exclusive = {
 			focus = communism1
-			focus = apk
+			focus = election
 			focus = military_plot
+			focus = osmanempire
 		}
 		completion_reward = {
 			add_political_power = 50
@@ -391,39 +441,6 @@ focus_tree = {
             }
         }
 
-	}
-
-
-
-	#apk
-	focus = {
-		id = apk
-		icon = 2023_elections
-		x = -1
-		y = 6
-		cost = 5
-		relative_position_id = atas_legacy
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = TUR_2001_cris }
-		mutually_exclusive = {
-			focus = communism1
-			focus = military_plot
-			focus = fasc_turkey
-		}
-		completion_reward = {
-			add_political_power = 25
-			fourth_estate_conservative_increase = yes
-			load_focus_tree = tur_apk
-			add_popularity = {
-				ideology = conservative
-				popularity = 0.10
-			}
-		}
-		ai_will_do = {
-			factor = 10
-		}
 	}
 
 	#ekonomibas1
@@ -595,7 +612,7 @@ focus_tree = {
 		prerequisite = { focus = deprem2 }
 
 		completion_reward = {
-			remove_ideas = duzce_earthquake_2
+			remove_ideas = duzce_earthquake_3
 			random_owned_state = {
 				add_building_construction = {
 					type = infrastructure

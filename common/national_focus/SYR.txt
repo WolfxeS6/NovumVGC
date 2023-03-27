@@ -51,6 +51,9 @@ focus_tree = {
 			add_stability = -0.1
 			add_war_support = -0.1
 		}
+		ai_will_do = {
+			factor = 10000
+		}
 
 	}
 	focus = {
@@ -64,6 +67,13 @@ focus_tree = {
 		y = 2
 		completion_reward = {
 			SYR = { add_opinion_modifier = { target = IRQ modifier = sanctions_relations }}
+		}
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				factor = 10000
+				date > "2002.1.1"
+			}
 		}
 
 	}
@@ -95,6 +105,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			add_manpower = 5000
+			add_war_support = -0.05
 		}
 		x = 2
 		y = 3
@@ -192,7 +203,7 @@ focus_tree = {
 		y = 5
 		completion_reward = {
 			LEB = {
-				add_popularity = { ideology = islamist popularity = 0.1 }
+				add_popularity = { ideology = islamist popularity = 0.15 }
 				add_equipment_to_stockpile = {
 					type = infantry_equipment_1
 					amount = 1000
@@ -226,7 +237,6 @@ focus_tree = {
 		cost = 10
 		prerequisite = {
 			focus = SYR_intervene_lebanese_politics
-			focus = SYR_retreat_lebanon
 		}
 		mutually_exclusive = {
 			focus = SYR_sponsor_pro_syrian_politicians
@@ -244,8 +254,19 @@ focus_tree = {
 		icon = GFX_goal_generic_intelligence_exchange
 		cost = 10
 		prerequisite = {
-			focus = SYR_protect_little_brother
+			focus = SYR_join_mnf
+		}
+		prerequisite = {
 			focus = SYR_retreat_lebanon
+		}
+		bypass = {
+			NOT = {
+				ISR = {owns_state = 881}
+			}
+			ISR = {has_war = yes}
+		}
+		completion_reward = {
+			SYR = {transfer_state = 881}
 		}
 		x = 2
 		y = 5
@@ -471,11 +492,14 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_equipment_to_iraq
 		}
-		#available = {
-			#	has_idea = SYR_sanctioned
-			#}
+		available = {
+				has_idea = SYR_sanctioned
+		}
 		completion_reward = {
-			add_ideas = SYR_avoiding_sanctions
+			swap_ideas = {
+				remove_idea = SYR_sanctioned
+				add_idea = SYR_avoiding_sanctions
+			}
 		}
 		x = 14
 		y = 3
@@ -488,6 +512,12 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_work_around_sanctions
 		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SYR_avoiding_sanctions
+				add_idea = SYR_avoiding_sanctions2
+			}
+		}
 		x = 14
 		y = 4
 
@@ -499,6 +529,14 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_lessons_from_past
 		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = infantry_weapons
+			}
+		}
 		x = 25
 		y = 4
 
@@ -509,6 +547,10 @@ focus_tree = {
 		cost = 10
 		prerequisite = {
 			focus = SYR_our_biggest_challenge
+		}
+		completion_reward = {
+			set_technology = { urban_warfare_secret_tech = 1 }
+			custom_effect_tooltip = POL_urban_warfare_tactics_tp
 		}
 		x = 23
 		y = 5
@@ -531,6 +573,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			custom_effect_tooltip = SYR_raise_militias_tt
+			add_ideas = SYR_independent_miltias
 			hidden_effect = {
 				division_template = {
 					name = "Tribal Militia"
@@ -551,7 +594,7 @@ focus_tree = {
 					limit = { ROOT = { has_full_control_of_state = PREV } }
 					prioritize = { 10 }
 					create_unit = {
-						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.5"
+						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.2"
 						owner = ROOT
 					}
 				}
@@ -559,7 +602,7 @@ focus_tree = {
 					limit = { ROOT = { has_full_control_of_state = PREV } }
 					prioritize = { 10 }
 					create_unit = {
-						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.5"
+						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.2"
 						owner = ROOT
 					}
 				}
@@ -567,7 +610,7 @@ focus_tree = {
 					limit = { ROOT = { has_full_control_of_state = PREV } }
 					prioritize = { 10 }
 					create_unit = {
-						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.5"
+						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.2"
 						owner = ROOT
 					}
 				}
@@ -575,7 +618,7 @@ focus_tree = {
 					limit = { ROOT = { has_full_control_of_state = PREV } }
 					prioritize = { 10 }
 					create_unit = {
-						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.5"
+						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.2"
 						owner = ROOT
 					}
 				}
@@ -583,7 +626,7 @@ focus_tree = {
 					limit = { ROOT = { has_full_control_of_state = PREV } }
 					prioritize = { 10 }
 					create_unit = {
-						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.5"
+						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.2"
 						owner = ROOT
 					}
 				}
@@ -591,7 +634,7 @@ focus_tree = {
 					limit = { ROOT = { has_full_control_of_state = PREV } }
 					prioritize = { 10 }
 					create_unit = {
-						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.5"
+						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.2"
 						owner = ROOT
 					}
 				}
@@ -599,7 +642,7 @@ focus_tree = {
 					limit = { ROOT = { has_full_control_of_state = PREV } }
 					prioritize = { 10 }
 					create_unit = {
-						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.5"
+						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.2"
 						owner = ROOT
 					}
 				}
@@ -607,7 +650,7 @@ focus_tree = {
 					limit = { ROOT = { has_full_control_of_state = PREV } }
 					prioritize = { 10 }
 					create_unit = {
-						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.5"
+						division = "name = \"Tribal Militia\" division_template = \"Tribal Militia\" start_experience_factor = 0.2"
 						owner = ROOT
 					}
 				}
@@ -637,8 +680,8 @@ focus_tree = {
 		completion_reward = {
 			add_doctrine_cost_reduction = {
 				name = armydoctrine_bonus
-				cost_reduction = 0.5
-				uses = 1
+				cost_reduction = 0.25
+				uses = 3
 				category = land_doctrine
 			}
 		}
@@ -707,6 +750,12 @@ focus_tree = {
 		}
 		x = 25
 		y = 8
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SYR_independent_miltias
+				add_idea = SYR_independent_miltias2
+			}
+		}
 
 	}
 	focus = {
@@ -748,11 +797,47 @@ focus_tree = {
 		}
 		x = 27
 		y = 5
+		completion_reward = {
+			custom_effect_tooltip = SYR_republican_guard_tt
+			hidden_effect = {
+				division_template = {
+					name = "Republican Guard"
+					priority = 2
+					#division_names_group = ROOT_INF_01
+					regiments = {
+						motorized = { x = 0 y = 0 }
+						motorized = { x = 0 y = 1 }
+						motorized = { x = 0 y = 2 }
+
+						motorized = { x = 1 y = 0 }
+						motorized = { x = 1 y = 1 }
+						mechanized = { x = 1 y = 2 }
+					}
+				}
+
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Republican Guard\" division_template = \"Republican Guard\" start_experience_factor = 0.5"
+						owner = ROOT
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Republican Guard\" division_template = \"Republican Guard\" start_experience_factor = 0.5"
+						owner = ROOT
+					}
+				}
+			}
+		}
 
 	}
 	focus = {
 		id = SYR_air_defence
-		icon = GFX_focus_rocketry
+		icon = air_defense
 		cost = 10
 		prerequisite = {
 			focus = SYR_saa
@@ -791,6 +876,9 @@ focus_tree = {
 		}
 		x = 28
 		y = 4
+		completion_reward = {
+			add_ideas = SYR_modernise_systems
+		}
 
 	}
 	focus = {
@@ -891,7 +979,23 @@ focus_tree = {
 		}
 		x = 32
 		y = 4
-
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
 	}
 	focus = {
 		id = SYR_mediterranian_fleet
@@ -903,6 +1007,20 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SYR_coastel_defence_Fleet
 		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = destroyer_bonus
+				bonus = 0.5
+				uses = 1
+				category = dd_tech
+			}
+			add_tech_bonus = {
+				name = light_cruiser_bonus
+				bonus = 0.5
+				uses = 1
+				category = cl_tech
+			}
+		}
 		x = 36
 		y = 1
 
@@ -913,6 +1031,19 @@ focus_tree = {
 		cost = 10
 		prerequisite = {
 			focus = SYR_mediterranian_fleet
+		}
+		available = {
+			has_full_control_of_state = 104
+		}
+		completion_reward = {
+			104 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 		x = 35
 		y = 2
@@ -927,7 +1058,14 @@ focus_tree = {
 		}
 		x = 35
 		y = 3
-
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = naval_doc_bonus
+				cost_reduction = 0.2
+				uses = 3
+				category = naval_doctrine
+			}
+		}
 	}
 	focus = {
 		id = SYR_leave_past_behind
@@ -958,9 +1096,6 @@ focus_tree = {
 		id = SYR_announce_democratic_reforms
 		icon = democracy
 		cost = 10
-		prerequisite = {
-			focus = SYR_join_mnf
-		}
 		prerequisite = {
 			focus = SYR_negotiate_about_golan_heights
 			focus = SYR_arabic_spring
@@ -1141,6 +1276,38 @@ focus_tree = {
 		}
 		x = 3
 		y = 16
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
 
 	}
 	focus = {
@@ -1155,6 +1322,32 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = SYR_help_from_turkey
+		}
+		bypass = {
+			NOT = {
+				OR = {
+					KUS = {is_puppet_of = SYR}
+					KUR  = {is_puppet_of = SYR}
+				}
+			}
+		}
+		available = {
+			OR = {
+				KUS = {is_puppet_of = SYR}
+				KUR  = {is_puppet_of = SYR}
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					KUR = {is_puppet_of = SYR}
+				}
+				release = KUR
+			}
+			else = {
+				release = KUS
+			}
+			add_stability = 0.1
 		}
 		x = 2
 		y = 13
@@ -1183,6 +1376,23 @@ focus_tree = {
 		cost = 10
 		prerequisite = {
 			focus = SYR_support_from_east
+		}
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_1
+				amount = 2500
+				producer = SOV
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment_1
+				amount = 500
+				producer = SOV
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment_1
+				amount = 200
+				producer = SOV
+			}
 		}
 		x = 5
 		y = 10
@@ -1254,6 +1464,9 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SYR_support_from_east
 			focus = SYR_support_west
+		}
+		completion_reward = {
+			add_war_support = 0.1
 		}
 		x = 3
 		y = 9
@@ -1412,7 +1625,12 @@ focus_tree = {
 		}
 		x = 39
 		y = 3
-
+		available = {
+			has_full_control_of_state = 104
+		}
+		completion_reward = {
+			add_ideas = GER_coastal_protection
+		}
 	}
 
 	### SSSRC
@@ -1461,20 +1679,20 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_start_atomic_program
 		}
+		available = {has_tech = atomic_research}
 		x = -2
 		y = 2
 		relative_position_id = SYR_research_facility
-	}
-	focus = {
-		id = SYR_prouce_atomic_weapons
-		icon = GFX_focus_rocketry
-		cost = 10
-		prerequisite = {
-			focus = SYR_build_al_kibar_reactor
+		completion_reward = {
+			1049 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
-		x = -2
-		y = 3
-		relative_position_id = SYR_research_facility
 	}
 
 	focus = {
@@ -1487,6 +1705,14 @@ focus_tree = {
 		x = 0
 		y = 1
 		relative_position_id = SYR_research_facility
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+		}
 	}
 	focus = {
 		id = SYR_new_facilities
@@ -1558,25 +1784,13 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
-		id = SYR_buy_chemical_weapons
-		icon = GFX_goal_generic_scientific_exchange
-		cost = 10
-		prerequisite = {
-			focus = SYR_missile
-		}
-		x = 2
-		y = 3
-		relative_position_id = SYR_research_facility
-	}
 
 	focus = {
 		id = SYR_use_against_own_people
 		icon = skull
 		cost = 10
 		prerequisite = {
-			focus = SYR_prouce_atomic_weapons
-			focus = SYR_buy_chemical_weapons
+			focus = SYR_arm_allies
 		}
 		x = 0
 		y = 4
@@ -1592,11 +1806,11 @@ focus_tree = {
 	focus = {
 		id = SYR_saa
 		icon = army_logistics
-		cost = 10
+		cost = 5
 		x = 25
 		y = 0
 		completion_reward = {
-			army_experience = 15
+			army_experience = 25
 		}
 	}
 
@@ -1605,7 +1819,7 @@ focus_tree = {
 	focus = {
 		id = SYR_saaf
 		icon = fighter
-		cost = 10
+		cost = 5
 		x = 31
 		y = 0
 		completion_reward = {
@@ -1618,7 +1832,7 @@ focus_tree = {
 	focus = {
 		id = SYR_san
 		icon = navy2
-		cost = 10
+		cost = 5
 		x = 37
 		y = 0
 		completion_reward = {

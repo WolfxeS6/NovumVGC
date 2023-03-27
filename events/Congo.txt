@@ -1,0 +1,886 @@
+add_namespace = congo
+add_namespace = congo_news
+
+country_event = {			#Laurent Kabila's Child Soldiers
+	id = congo.1
+	title = congo.1.t
+	desc = congo.1.d
+	picture = GFX_report_event_kadogos
+
+	trigger = {
+		tag = COG
+		date > 2000.11.19
+		date < 2000.12.19
+		has_government = democratic_socialist
+	}
+
+	fire_only_once = yes
+
+	option = {                  #Keep them
+		name = congo.1.a
+		ai_chance = {
+			factor = 100
+		}
+		hidden_effect = {
+			country_event= {
+				days = 60
+				id = congo.2
+			}
+		}
+	}
+	option = {
+		name = congo.1.b        #Dismiss them
+		ai_chance = {
+			factor = 0
+		}
+		add_ideas = extensive_conscription
+		add_manpower = -10000
+		add_political_power = 50
+		add_war_support = 0.05
+	}
+}
+
+country_event = {			#Laurent Kabila assassinated
+	id = congo.2
+	title = congo.2.t
+	desc = congo.2.d
+	picture = GFX_report_event_laurent_kabila
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = congo.2.a
+		retire_character = COG_laurent_kabila
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.3
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = -0.4
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		set_party_name = { ideology = democratic_socialist long_name = COG_democratic_socialist_PALU_party_long name = COG_democratic_socialist_PALU_party }
+		set_country_flag = COG_kabila_gone
+	}
+}
+
+country_event = {			#An opportunity for peace
+	id = congo.3
+	title = congo.3.t
+	desc = congo.3.d
+	picture = GFX_report_event_drc_diplomacy
+
+	trigger = {
+		tag = COG
+		date > 2002.10.5
+		date < 2003.7.18
+		NOT ={
+			has_country_leader = { ruling_only = no character = COG_laurent_kabila }
+		}
+		has_war_with = UGA
+		has_war_with = RWA
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = congo.3.a
+		ai_chance = { factor = 100 }
+		RWA = {
+			country_event= {
+				days = 30
+				id = congo.4
+			}
+		}
+		UGA = {
+			country_event= {
+				days = 30
+				id = congo.4
+			}
+		}
+	}
+	option = {
+		name = congo.3.b
+		ai_chance = { factor = 0 }
+		add_political_power = -100
+		add_war_support = -0.1
+		add_stability = -0.1
+	}
+}
+
+country_event = {			#Peace offer for Uganda and Rwanda
+	id = congo.4
+	title = congo.4.t
+	desc = congo.4.d
+	picture = GFX_report_event_drc_diplomacy
+	is_triggered_only = yes
+
+	#fire_only_once = yes
+
+	option = {
+		name = congo.4.a
+		ai_chance = {
+			factor = 100
+		}
+		if = {
+			limit = { tag = RWA }
+			white_peace= COG
+			white_peace= ANG
+			white_peace= ZIM
+			COG = {
+				annex_country = {
+					target = RCD
+					transfer_troops = no
+				}
+				#				every_core_state = {
+					#					remove_core_of = RCD
+					#				}
+				set_cosmetic_tag = COG_2003
+			}
+			BRD = {
+				white_peace= ANG
+				white_peace= ZIM
+				white_peace= COG
+			}
+			set_global_flag = RWA_peace
+		}
+		else_if = {
+			limit = { tag = UGA }
+			white_peace= COG
+			white_peace= ANG
+			white_peace= ZIM
+			MLC = {
+				set_nationality = {
+					target_country = COG
+					character = MLC_Jean_Pierre_Bemba
+				}
+			}
+			COG = {
+				annex_country = {
+					target = RCK
+					transfer_troops = no
+				}
+				annex_country = {
+					target = MLC
+					transfer_troops = no
+				}
+				every_core_state = {
+					remove_core_of = MLC
+					remove_core_of = RCK
+				}
+			}
+			set_global_flag = UGA_peace
+		}
+	}
+	option = {                  #Refuse
+		name = congo.1.a
+		ai_chance = {
+			factor = 0
+		}
+		add_political_power = -100
+		add_war_support = -0.1
+		add_stability = -0.1
+	}
+}
+
+country_event = {			#RCD-Kisangani change in leadership
+	id = congo.5
+	title = congo.5.t
+	desc = congo.5.d
+	picture = GFX_report_event_rcd_soldiers
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = congo.5.a            #Antipas Mbusa takes over
+		add_country_leader_role = {
+			character = RCK_antipas_mbusa
+			country_leader = {
+				ideology = moderate
+			}
+			promote_leader = yes
+		}
+		#country_event = { days = 15 id = congo.15 }
+	}
+}
+
+country_event = {			#RCD-Goma change in leadership
+	id = congo.6
+	title = congo.6.t
+	desc = congo.6.d
+	picture = GFX_report_event_rcd_soldiers
+	is_triggered_only = yes
+
+	trigger = {
+		tag = RCD
+		date > 2000.7.11
+		date < 2000.11.1
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = congo.6.a
+		add_country_leader_role = {
+			character = RCD_Adolphe_Onusumba
+			country_leader = {
+				ideology = moderate
+			}
+			promote_leader = yes
+		}
+	}
+}
+
+country_event = {			#Second stage of the conflict if the RCD wins
+	id = congo.7
+	title = congo.7.t
+	desc = congo.7.d
+	picture = GFX_report_event_rcd_soldiers
+	trigger = {
+		TAG = RWA
+		#		COG = {
+			#			OR = {
+				#				exists = no
+				#				has_capitulated = yes
+				#			}
+			#		}
+		OR ={
+			RCD = {
+				controls_state = 295
+			}
+			RWA = {
+				controls_state = 295
+			}
+			BRD = {
+				controls_state = 295
+			}
+			COG = {
+				is_puppet_of = RWA
+				controls_state = 295
+			}
+		}
+		NOT = {
+			has_global_flag = COG_war_over
+		}
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = congo.7.a
+		RCD = {
+			declare_war_on= {
+				target = MLC
+				type = civil_war
+			}
+			declare_war_on= {
+				target = RCK
+				type = civil_war
+			}
+			annex_country = {
+				target = COG
+				transfer_troops = no
+			}
+		}
+		ANG = {
+			white_peace= RWA
+			white_peace= UGA
+			white_peace= BRD
+			white_peace= RCD
+			white_peace= RCK
+			white_peace= MLC
+		}
+		ZIM = {
+			white_peace= RWA
+			white_peace= UGA
+			white_peace= BRD
+			white_peace= RCD
+			white_peace= RCK
+			white_peace= MLC
+		}
+		set_global_flag = COG_war_over
+	}
+}
+
+country_event = {			#Second stage of the conflict if the MLC wins
+	id = congo.8
+	title = congo.7.t		#Same as the last event
+	desc = congo.7.d
+	picture = GFX_report_event_mlc_soldiers
+	trigger = {
+		TAG = UGA
+		#		COG = {
+			#			OR = {
+				#				exists = no
+				#				has_capitulated = yes
+				#			}
+			#		}
+		OR ={
+			MLC = {
+				controls_state = 295
+			}
+			UGA = {
+				controls_state = 295
+			}
+			COG = {
+				is_puppet_of = UGA
+				controls_state = 295
+			}
+		}
+		NOT = {
+			has_global_flag = COG_war_over
+		}
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = congo.7.a
+		RCD = {
+			declare_war_on= {
+				target = MLC
+				type = civil_war
+			}
+			declare_war_on= {
+				target = RCK
+				type = civil_war
+			}
+		}
+		MLC = {
+			annex_country = {
+				target = COG
+				transfer_troops = no
+			}
+		}
+		ANG = {
+			white_peace= RWA
+			white_peace= UGA
+			white_peace= BRD
+			white_peace= RCD
+			white_peace= RCK
+			white_peace= MLC
+		}
+		ZIM = {
+			white_peace= RWA
+			white_peace= UGA
+			white_peace= BRD
+			white_peace= RCD
+			white_peace= RCK
+			white_peace= MLC
+		}
+		set_global_flag = COG_war_over
+	}
+}
+
+country_event = {			#Second stage of the conflict if the RCD-K wins
+	id = congo.9
+	title = congo.7.t
+	desc = congo.7.d
+	picture = GFX_report_event_rcd_soldiers
+	trigger = {
+		TAG = UGA
+		#		COG = {
+			#			OR = {
+				#				exists = no
+				#				has_capitulated = yes
+				#			}
+			#		}
+		RCK = {
+			controls_state = 295
+		}
+		NOT = {
+			has_global_flag = COG_war_over
+		}
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = congo.7.a
+		RCD = {
+			declare_war_on= {
+				target = MLC
+				type = civil_war
+			}
+			declare_war_on= {
+				target = RCK
+				type = civil_war
+			}
+		}
+		RCK = {
+			annex_country = {
+				target = COG
+				transfer_troops = no
+			}
+		}
+		ANG = {
+			white_peace= RWA
+			white_peace= UGA
+			white_peace= BRD
+			white_peace= RCD
+			white_peace= RCK
+			white_peace= MLC
+		}
+		ZIM = {
+			white_peace= RWA
+			white_peace= UGA
+			white_peace= BRD
+			white_peace= RCD
+			white_peace= RCK
+			white_peace= MLC
+		}
+		set_global_flag = COG_war_over
+	}
+}
+
+country_event = {			#DRC Victory
+	id = congo.10
+	title = congo.10.t
+	desc = congo.10.d
+	picture = GFX_report_event_larent_kabila
+	trigger = {
+		TAG = COG
+		RCD = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+				is_puppet_of = COG
+			}
+		}
+		RCK = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+				is_puppet_of = COG
+			}
+		}
+		MLC = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+				is_puppet_of = COG
+			}
+		}
+		NOT = {
+			has_global_flag = COG_peace
+		}
+	}
+
+	fire_only_once = no
+	is_triggered_only = yes
+
+	immediate = {
+		set_global_flag = COG_peace
+	}
+
+	option = {
+		name = congo.10.a
+		white_peace= RWA
+		white_peace= UGA
+		white_peace= BRD
+		annex_country = {
+			target = RCD
+			transfer_troops = no
+		}
+		annex_country = {
+			target = RCK
+			transfer_troops = no
+		}
+		annex_country = {
+			target = MLC
+			transfer_troops = no
+		}
+		every_core_state = {
+			remove_core_of = MLC
+			remove_core_of = RCK
+		}
+		ANG = {
+			white_peace= RWA
+			white_peace= UGA
+			white_peace= BRD
+		}
+		ZIM = {
+			white_peace= RWA
+			white_peace= UGA
+			white_peace= BRD
+		}
+		set_cosmetic_tag = COG_2003
+		news_event = congo_news.2
+	}
+}
+
+country_event = {			#Ugandan Rebel Victory
+	id = congo.11
+	title = congo.11.t
+	desc = congo.11.d
+	picture = GFX_report_event_mlc
+	trigger = {
+		TAG = UGA
+		#		COG = {
+			#			OR = {
+				#				exists = no
+				#				has_capitulated = yes
+				#				is_puppet_of = UGA
+				#			}
+			#		}
+		RCD = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+			}
+		}
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = congo.11.a
+		RWA = {
+			white_peace= UGA
+			white_peace= RCK
+			white_peace= MLC
+		}
+		if = {
+			limit = {
+				OR ={
+					MLC = {
+						controls_state = 295
+					}
+					UGA = {
+						controls_state = 295
+					}
+				}
+			}
+			MLC = {
+				annex_country = {
+					target = RCK
+					transfer_troops = no
+				}
+				set_cosmetic_tag = COG_2003
+			}
+			every_state = {
+				limit = { is_core_of = MLC }
+				MLC = { transfer_state = PREV }
+				remove_core_of = RCD
+				remove_core_of = RCK
+			}
+		}
+		else_if = {
+			limit = {
+				RCK = {
+					controls_state = 295
+				}
+			}
+			RCK = {
+				annex_country = {
+					target = MLC
+					transfer_troops = no
+				}
+				set_cosmetic_tag = COG_2003
+			}
+			every_state = {
+				limit = { is_core_of = RCK }
+				RCK = { transfer_state = PREV }
+				remove_core_of = MLC
+				remove_core_of = RCD
+			}
+		}
+		transfer_state = 718
+		transfer_state = 862
+		transfer_state = 1112
+		news_event = congo_news.4
+	}
+}
+
+country_event = {			#Rwandan Rebel Victory
+	id = congo.12
+	title = congo.12.t
+	desc = congo.12.d
+	picture = GFX_report_event_rcd_soldiers
+	trigger = {
+		TAG = RWA
+		#		COG = {
+			#			OR = {
+				#				exists = no
+				#				has_capitulated = yes
+				#			}
+			#		}
+		MLC = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+			}
+		}
+		RCK = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+			}
+		}
+		NOT = {
+			has_global_flag = RWA_peace
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		set_global_flag = RWA_peace
+	}
+
+	option = {
+		name = congo.12.a
+		UGA = {
+			white_peace= RWA
+			white_peace= RCD
+		}
+		every_state = {
+			limit = { is_core_of = RCD }
+			RCD = { transfer_state = PREV }
+			remove_core_of = MLC
+			remove_core_of = RCK
+		}
+		transfer_state = 862
+		transfer_state = 863
+		RCD = {
+			set_cosmetic_tag = COG_2003
+		}
+		news_event = congo_news.3
+	}
+}
+
+country_event = {			#Kivu Conflict - DRC and UGA		#RCD-G 	doesn't get it because they already have the "Interahamwe insurgency" national spirit
+	id = congo.13
+	title = congo.13.t
+	desc = congo.13.d
+	picture = GFX_report_event_nkunda
+	trigger = {
+		owns_state = 295
+		OR = {
+			TAG = COG
+			TAG = RCK
+			TAG = MLC
+		}
+		has_war = no
+		date > 2004.6.2
+		date < 2016.1.1
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = congo.13.a
+		#RCD = {
+			#	transfer_state = 862
+			#	transfer_state = 863
+			#	add_state_core  = 862
+			#	add_state_core  = 863
+			#	add_popularity = {
+				#		ideology = nationalist
+				#		popularity = 0.2
+				#	}
+			#    	set_politics = {
+				#       	 ruling_party = nationalist
+				#       	 elections_allowed = no
+				#    	}
+			#	load_oob = KIV_2000
+			#	declare_war_on = { target = ROOT type = civil_war }
+			#}
+		#news_event = congo_news.5
+		862 ={
+			add_dynamic_modifier = { modifier = COG_kivu_conflict }
+		}
+		863 ={
+			add_dynamic_modifier = { modifier = COG_kivu_conflict }
+		}
+	}
+}
+
+country_event = {			#Kivu Conflict - RWA		#Unused event
+	id = congo.14
+	title = congo.14.t
+	desc = congo.14.d
+	picture = GFX_report_event_interahamwe
+	#	trigger = {
+		#		TAG = RWA
+		#		RCD = {
+			#			owns_state = 295
+			#			has_war = no
+			#		}
+		#		has_war = no
+		#		date > 2004.6.2
+		#		date < 2016.1.1
+		#	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = congo.14.a
+		remove_ideas = interahamwe_insurgency
+		RCK = {
+			remove_ideas = FNI_insurgency
+			transfer_state = 862
+			transfer_state = 863
+			add_state_core  = 862
+			add_state_core  = 863
+			add_state_core  = 781
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.5
+			}
+			set_politics = {
+				ruling_party = fascist
+				elections_allowed = no
+			}
+			load_oob = KIV_2000
+			declare_war_on = { target = RWA type = civil_war }
+			declare_war_on = { target = RCD type = puppet_wargoal_focus }
+		}
+	}
+}
+
+country_event = {			#Ituri Conflict		#Unused event
+	id = congo.15
+	title = congo.15.t
+	desc = congo.15.d
+	picture = GFX_report_event_drc_soldiers
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = congo.15.a
+		remove_ideas = FNI_insurgency
+		start_civil_war = {
+			ideology = nationalist
+			size = 0.2
+			states = {
+				1112
+			}
+		}
+		random_other_country = {
+			limit = {
+				original_tag = RCK
+				has_government = nationalist
+			}
+			declare_war_on = { target = COG type = puppet_wargoal_focus }
+			declare_war_on = { target = RCD type = puppet_wargoal_focus }
+		}
+	}
+}
+
+country_event = {			#Change flag
+	id = congo.16
+	title = congo.16.t
+	desc = congo.16.d
+	picture = GFX_report_event_COG_flag
+
+	trigger = {
+		OR = {
+			tag = COG
+			tag = RCD
+			tag = RCK
+			tag = MLC
+		}
+		owns_state = 295
+		date > 2006.2.20
+		date < 2006.3.20
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = congo.16.a
+		set_cosmetic_tag = COG_2006
+	}
+}
+
+news_event = {			##War end, peace deal
+	id = congo_news.1
+	title = congo_news.1.t
+	desc = congo_news.1.d
+	picture = GFX_news_congo_peace
+
+	trigger = {
+		has_global_flag = UGA_peace
+		has_global_flag = RWA_peace
+	}
+
+	fire_only_once = yes
+	major = yes
+
+	option = {
+		name = congo_news.1.a
+	}
+}
+
+news_event = {			##War end, drc government victory
+	id = congo_news.2
+	title = congo_news.1.t
+	desc = congo_news.2.d
+	picture = GFX_news_kabila
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = congo_news.1.a
+	}
+}
+
+news_event = {			##War end, rwanda victory
+	id = congo_news.3
+	title = congo_news.1.t
+	desc = congo_news.3.d
+	picture = GFX_news_rcd
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = congo_news.1.a
+	}
+}
+
+news_event = {			##War end, uganda victory
+	id = congo_news.4
+	title = congo_news.1.t
+	desc = congo_news.4.d
+	picture = GFX_news_mlc
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = congo_news.1.a
+	}
+}
+
+news_event = {			##Kivu Conflict
+	id = congo_news.5
+	title = congo_news.5.t
+	desc = congo_news.5.d
+	picture = GFX_news_congo_nkunda
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = congo_news.1.a
+	}
+}

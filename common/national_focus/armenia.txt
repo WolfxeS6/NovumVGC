@@ -142,7 +142,7 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ARM_invest_in_mining
+		id = ARM_invest_in_mining #gold
 		icon = GFX_goal_Coal_Mine
 		x = 1
 		y = 1
@@ -165,6 +165,96 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = ARM_karabakh_mining
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_tourism
+		icon = GFX_goal_Coal_Mine
+		x = 3
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_infrastructure_boom
+			focus = ARM_earthquake_rebuilding
+		}
+		relative_position_id = ARM_infrastructure_boom
+
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_invest_in_local_infra
+		icon = GFX_goal_Coal_Mine
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_invest_in_mining
+			focus = ARM_tourism
+		}
+		relative_position_id = ARM_invest_in_mining
+
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_mining_over_tourism
+		icon = GFX_goal_Coal_Mine
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_invest_in_mining
+		}
+		prerequisite = {
+			focus = ARM_invest_in_local_infra
+		}
+		
+		relative_position_id = ARM_invest_in_local_infra
+
+		mutually_exclusive = {
+			focus = ARM_tourism_over_mining
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_tourism_over_mining
+		icon = GFX_goal_Coal_Mine
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_tourism
+		}
+		prerequisite = {
+			focus = ARM_invest_in_local_infra
+		}
+		
+		relative_position_id = ARM_invest_in_local_infra
+		mutually_exclusive = {
+			focus = ARM_mining_over_tourism
+		}
+
+		completion_reward = {
 		}
 
 		ai_will_do = {
@@ -380,7 +470,73 @@ focus_tree = {
 			230 = {
 				add_resource = {
 					type = aluminium
-					amount = 8
+					amount = 5
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_armenal_foil_mill_retrofit #2006 by RUSAL
+		icon = GFX_focus_generic_aluminum
+		x = -2
+		y = 1
+		cost = 4
+
+		prerequisite = {
+			focus = ARM_grand_tobacco
+		}
+		relative_position_id = ARM_grand_tobacco
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = ARM_mafia_backed_industry
+				} 
+				custom_effect_tooltip = ARM_worsen_corruption_tt
+				add_to_variable = {ARM_resource_corruption = -0.1 }
+
+			}
+			230 = {
+				add_resource = {
+					type = aluminium
+					amount = 5
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_steel_factory #Charentsavan Kotaiks region steel
+		icon = GFX_focus_generic_steel
+		x = -4
+		y = 1
+		cost = 4
+
+		prerequisite = {
+			focus = ARM_grand_tobacco
+		}
+		relative_position_id = ARM_grand_tobacco
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = ARM_mafia_backed_industry
+				} 
+				custom_effect_tooltip = ARM_worsen_corruption_tt
+				add_to_variable = {ARM_resource_corruption = -0.03 }
+
+			}
+			230 = {
+				add_resource = {
+					type = steel
+					amount = 5
 				}
 			}
 		}

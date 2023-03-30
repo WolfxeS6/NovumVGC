@@ -1,6 +1,6 @@
 focus_tree = {
 	id = tr
-	continuous_focus_position = { x = 10 y = 500 }
+	continuous_focus_position = { x = 10 y = 200 }
 	country = {
 		factor = 0
 		modifier = {
@@ -38,7 +38,6 @@ focus_tree = {
 	#war on corruption
 	focus = {
 		id = war_corruption
-		text = "The War on Corruption"
 		icon = turkish_republic
 		x = 0
 		y = 1
@@ -63,7 +62,6 @@ focus_tree = {
 	#war on corruption2
 	focus = {
 		id = war_corruption_2
-		text = "The Mafia and Deputies"
 		icon = GFX_focus_TUR_capitalism_focus
 		x = 1
 		y = 2
@@ -83,12 +81,10 @@ focus_tree = {
 			factor = 10
 		}
 	}
-
-	#confiscate mafia land
+	#sabiha
 	focus = {
-		id = mafia
-		text = "Confiscate Mafia Land"
-		icon = GFX_focus_TUR_supremacy_of_the_domestic_production
+		id = sabiha
+		icon = POL_air_industry
 		x = 2
 		y = 3
 		cost = 5
@@ -98,20 +94,24 @@ focus_tree = {
 		}
 		prerequisite = { focus = war_corruption_2 }
 		completion_reward = {
-			add_stability = 0.02
-			unlock_decision_category_tooltip = TUR_mafia
-			set_country_flag = Mafya
-
+			add_political_power = 50
+			998 = {
+				add_building_construction = {
+					type = air_base
+					instant_build = yes
+					level = 5
+				}
+			}
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
+	
 
 	#sezer
 	focus = {
 		id = president
-		text = "New President"
 		icon = trhomedefence
 		x = -1
 		y = 2
@@ -130,10 +130,9 @@ focus_tree = {
 		}
 	}
 
-	#sezer
+	#reform
 	focus = {
 		id = reform1
-		text = "Reforms"
 		icon = reformtur
 		x = -2
 		y = 3
@@ -158,7 +157,6 @@ focus_tree = {
 	#rahsan
 	focus = {
 		id = rahsan_af
-		text = "Rahsan Affi"
 		icon = rahsanaffi
 		x = 0
 		y = 3
@@ -178,11 +176,10 @@ focus_tree = {
 		}
 	}
 
-	#sabiha
+#confiscate mafia land
 	focus = {
-		id = sabiha
-		text = "Complete Sabiha Gökçen Airport"
-		icon = POL_air_industry
+		id = mafia
+		icon = GFX_focus_TUR_supremacy_of_the_domestic_production
 		x = 0
 		y = 4
 		cost = 5
@@ -192,24 +189,18 @@ focus_tree = {
 		}
 		prerequisite = { focus = rahsan_af }
 		completion_reward = {
-			add_political_power = 50
-			998 = {
-				add_building_construction = {
-					type = air_base
-					instant_build = yes
-					level = 5
-				}
-			}
+			add_stability = 0.02
+			unlock_decision_category_tooltip = TUR_mafia
+			set_country_flag = Mafya
+
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
-
 	#cris
 	focus = {
 		id = TUR_2001_cris
-		text = "2001 Crisis"
 		icon = economic_revivial
 		x = 0
 		y = 5
@@ -219,7 +210,7 @@ focus_tree = {
 			FOCUS_FILTER_POLITICAL
 		}
 
-		prerequisite = { focus = sabiha }
+		prerequisite = { focus = mafia }
 		completion_reward = {
 			add_stability = -0.05
 			swap_ideas = {
@@ -235,18 +226,17 @@ focus_tree = {
 	#communism
 	focus = {
 		id = communism1
-		icon = GFX_focus_TUR_patriotism_over_internationalism
-		x = -4
-		y = 6
+		icon = Soviet_Turkey
+		x = -2
+		y = 1
 		cost = 5
-		relative_position_id = atas_legacy
+		relative_position_id = guc
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = TUR_2001_cris }
+		prerequisite = { focus = guc }
 		mutually_exclusive = {
 			focus = military_plot
-			focus = election
 			focus = fasc_turkey
 			focus = osmanempire
 		}
@@ -288,18 +278,17 @@ focus_tree = {
 	focus = {
 		id = osmanempire
 		icon = ottoman_emblem
-		x = 4
-		y = 6
+		x = 2
+		y = 1
 		cost = 5
-		relative_position_id = atas_legacy
+		relative_position_id = guc
 		available = { has_country_flag = ottoman_empire }
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = TUR_2001_cris }
+		prerequisite = { focus = guc }
 		mutually_exclusive = {
 			focus = military_plot
-			focus = election
 			focus = fasc_turkey
 			focus = communism1
 		}
@@ -314,7 +303,7 @@ focus_tree = {
 	focus = {
 		id = election
 		icon = GFX_focus_TUR_turkish_elections
-		x = 0
+		x = -5
 		y = 6
 		cost = 5
 		relative_position_id = atas_legacy
@@ -323,14 +312,32 @@ focus_tree = {
 		}
 		prerequisite = { focus = TUR_2001_cris }
 		mutually_exclusive = {
-			focus = military_plot
-			focus = osmanempire
-			focus = fasc_turkey
-			focus = communism1
+			focus = guc
+
 		}
 		completion_reward = {
 			add_political_power = 75
-			load_focus_tree = tur_elections
+		}
+		
+	}
+	
+	#guc
+	focus = {
+		id = guc
+		icon = demand_sudetenland
+		x = 5
+		y = 6
+		cost = 5
+		relative_position_id = atas_legacy
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = TUR_2001_cris }
+		mutually_exclusive = {
+			focus = election
+		}
+		completion_reward = {
+			add_political_power = 75
 		}
 		
 	}
@@ -339,17 +346,16 @@ focus_tree = {
 	focus = {
 		id = military_plot
 		icon = harbiye
-		x = -2
-		y = 6
+		x = 0
+		y = 1
 		cost = 5
-		relative_position_id = atas_legacy
+		relative_position_id = guc
 		search_filters = {
 			FOCUS_FILTER_POLITICAL
 		}
-		prerequisite = { focus = TUR_2001_cris }
+		prerequisite = { focus = guc }
 		mutually_exclusive = {
 			focus = communism1
-			focus = election
 			focus = fasc_turkey
 			focus = osmanempire
 		}
@@ -390,75 +396,30 @@ focus_tree = {
 
 	}
 
-	#fasc
-	focus = {
-		id = fasc_turkey
-		icon = fasctur
-		x = 2
-		y = 6
-		cost = 5
-		relative_position_id = atas_legacy
-		search_filters = {
-			FOCUS_FILTER_POLITICAL
-		}
-		prerequisite = { focus = TUR_2001_cris }
-		mutually_exclusive = {
-			focus = communism1
-			focus = election
-			focus = military_plot
-			focus = osmanempire
-		}
-		completion_reward = {
-			add_political_power = 50
-			load_focus_tree = tur_fasc
-		}
-		ai_will_do = {
-            factor = 10
-            modifier = {
-                factor = 0
-                is_historical_focus_on = yes
-            }
-            modifier = {
-                factor = 10
-                has_game_rule = {
-                    rule = TUR_ai_behavior
-                    option = TUR_FASCIST_1
-                }
-            }
-			 modifier = {
-                factor = 10
-                has_game_rule = {
-                    rule = TUR_ai_behavior
-                    option = TUR_FASCIST_2
-                }
-            }
-			 modifier = {
-                factor = 10
-                has_game_rule = {
-                    rule = TUR_ai_behavior
-                    option = TUR_FASCIST_3
-                }
-            }
-        }
-
-	}
-
 	#ekonomibas1
 	focus = {
 		id = ekonomibas1
-		text = "Rural Reforms"
-		icon =  GFX_focus_ITA_grande_rivolta_rurale
-		x = -4
+		icon =  GFX_Turkish_Assets
+		x = 9
 		y = 0
 		cost = 5
 		relative_position_id = atas_legacy
 
 
 		completion_reward = {
-
-			add_timed_idea = {
-				idea = generic_rural_focus
-				days = 360
+random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			356 = {
+				add_resource = {
+					type = steel
+					amount = 25
+				}
 			}
 		}
 
@@ -470,7 +431,6 @@ focus_tree = {
 	#ekonomibas2
 	focus = {
 		id = ekonomibas2
-		text = "Bursa Tungsten Deposits"
 		icon =  turtunggold
 		x = -1
 		y = 1
@@ -480,11 +440,10 @@ focus_tree = {
 		mutually_exclusive = {  focus = ekonomibas3}
 
 		completion_reward = {
-			add_ideas = tungsten_production_bonus
 			340 = {
 				add_resource = {
 					type = tungsten
-					amount = 15
+					amount = 25
 				}
 			}
 		}
@@ -496,7 +455,6 @@ focus_tree = {
 	#ekonomibas3
 	focus = {
 		id = ekonomibas3
-		text = "Tyre Industry"
 		icon =  tiretur2
 		x = 1
 		y = 1
@@ -507,11 +465,10 @@ focus_tree = {
 
 
 		completion_reward = {
-			add_ideas = rubber_production_bonus
 			998 = {
 				add_resource = {
 					type = rubber
-					amount = 15
+					amount = 25
 				}
 			}
 		}
@@ -525,7 +482,6 @@ focus_tree = {
 	#ekonomibas4
 	focus = {
 		id = ekonomibas4
-		text = "Urbanisation Policy"
 		icon =  trurbanfocus2
 		x = 0
 		y = 2
@@ -534,7 +490,7 @@ focus_tree = {
 		prerequisite = { focus = ekonomibas3 focus = ekonomibas2 }
 		completion_reward = {
 			add_timed_idea = {
-				idea = generic_urban_focus
+				idea = generic_rural_focus
 				days = 360
 			}
 
@@ -548,9 +504,8 @@ focus_tree = {
 	#deprem1
 	focus = {
 		id = deprem1
-		text = "The Wounds of the 1999 Earthquake"
 		icon =  POL_build_up_the_cities
-		x = -8
+		x = 12
 		y = 0
 		cost = 5
 		relative_position_id = atas_legacy
@@ -573,7 +528,6 @@ focus_tree = {
 	#deprem2
 	focus = {
 		id = deprem2
-		text = "Rebuild Infrastructure in the Earthquake Zone"
 		icon = infrtur
 		x = 0
 		y = 1
@@ -603,7 +557,6 @@ focus_tree = {
 	#deprem3
 	focus = {
 		id = deprem3
-		text = "Earthquake Resistant Structures"
 		icon = GFX_focus_TUR_common_destiny_for_all_turkey
 		x = 0
 		y = 2
@@ -641,13 +594,14 @@ focus_tree = {
 	#deprem4
 	focus = {
 		id = deprem4
-		text = "The Millennium Industry"
 		icon = GFX_focus_TUR_science_heaven
-		x = 2
+		x = -3
 		y = 3
 		cost = 5
 		relative_position_id = deprem1
-		prerequisite = { focus = deprem3 focus =ekonomibas4}
+		prerequisite = { focus = deprem3 }
+		prerequisite = {  focus =ekonomibas4}
+		prerequisite = { focus = nato7}
 
 		completion_reward = {
 			add_research_slot = 1
@@ -657,21 +611,14 @@ focus_tree = {
 			factor = 7
 		}
 	}
-
-
-
-
-
 	#nato1
 	focus = {
 		id = nato1
-		text = "NATO Missions"
-		icon = align_to_nato
-		x = -12
+		icon = POL_support_nato
+		x =4
 		y = 0
 		cost = 5
 		relative_position_id = atas_legacy
-
 
 		completion_reward = {
 			army_experience = 40
@@ -687,7 +634,6 @@ focus_tree = {
 	#nato4
 	focus = {
 		id = nato4
-		text = "Stabilisation Force"
 		icon = SFOR
 		x = -1
 		y = 1
@@ -712,7 +658,6 @@ focus_tree = {
 	#nato5
 	focus = {
 		id = nato5
-		text = "Kosovo Force"
 		icon = KFOR
 		x = 1
 		y = 1
@@ -738,7 +683,6 @@ focus_tree = {
 	#nato6
 	focus = {
 		id = nato6
-		text = "International Security Assistance Force"
 		icon = ISAF
 		x = 0
 		y = 2
@@ -759,6 +703,690 @@ focus_tree = {
 		}
 		ai_will_do = {
 			factor = 7
+		}
+	}
+	
+	#nato7
+	focus = {
+		id = nato7
+		icon = Build_a_new_turkey
+		x = 3
+		y = 2
+		cost = 5
+		relative_position_id = nato1
+
+		prerequisite = { focus = nato1 }
+
+		completion_reward = {
+random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#nato8
+	focus = {
+		id = nato8
+		icon = fund_arms_organization
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = nato7
+		prerequisite = { focus = nato5 }
+		prerequisite = { focus = nato7 }
+
+		completion_reward = {
+random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#nato9
+	focus = {
+		id = nato9
+		icon = establish_air_force
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = nato6
+
+		prerequisite = { focus = nato6 }
+		prerequisite = { focus = sabiha }
+
+
+		completion_reward = {
+add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount =20
+				producer = USA
+			}
+			air_experience = 15
+			add_ideas = HUN_Fighter_primacy
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#sag1
+	focus = {
+		id = sag1
+		icon = fasctur
+		x = 5
+		y = 2
+		cost = 5
+       	relative_position_id = election
+		prerequisite = { focus = election}
+				mutually_exclusive = {
+			focus = TUR_APK_kampanya1
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = turk_sag
+				days = 360
+			}
+			add_political_power = 50
+
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sag2
+	focus = {
+		id = sag2
+		icon = tsk_officers
+		x = 0
+		y = 1
+		cost = 5
+       	relative_position_id = sag1
+		prerequisite = { focus = sag1}
+		completion_reward = {
+			add_stability = -0.05
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.05
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sag3
+	focus = {
+		id = sag3
+		icon = bozkurt
+		x = 2
+		y = 1
+		cost = 5
+       	relative_position_id = sag1
+		prerequisite = { focus = sag1}
+		completion_reward = {
+add_political_power = 50
+			add_popularity = {
+				ideology = islamist
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity =0.05
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	#sag4
+	focus = {
+		id = sag4
+		icon = fascist_ministry_of_propaganda
+		x = 4
+		y = 1
+		cost = 5
+       	relative_position_id = sag1
+		prerequisite = { focus = sag1}
+		completion_reward = {
+add_popularity = {
+				ideology = nationalist
+				popularity =0.07
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.07
+			}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sag5
+	focus = {
+		id = sag5
+		icon = ulkist2
+		x = 2
+		y = 2
+		cost = 5
+       	relative_position_id = sag1
+		prerequisite = { focus = sag2}
+		prerequisite = { focus = sag3}
+		prerequisite = { focus = sag4}
+
+		completion_reward = {
+add_ideas = tur_greywolves
+			add_war_support = 0.03
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.02
+			}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+		#mhp1
+	focus = {
+		id = mhp1
+		icon = GFX_focus_TUR_all_for_the_empire
+		x = -1
+		y = 1
+		cost = 5
+       	relative_position_id = sag5
+		prerequisite = { focus = sag5}
+		mutually_exclusive = { focus = bbp1 }
+
+		completion_reward = {
+swap_ideas = {
+				remove_idea = tur_greywolves
+				add_idea  = tur_greywolves_m1
+			}
+			add_stability = 0.02
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+		#mhp2
+	focus = {
+		id = mhp2
+		icon = mhp
+		x = 0
+		y = 1
+		cost = 5
+       	relative_position_id = mhp1
+		prerequisite = { focus = mhp1}
+
+
+		completion_reward = {
+load_focus_tree = tur_nationalist
+			remove_ideas = TUR_coalition_government
+			add_political_power = 75
+			set_politics = {
+				ruling_party = nationalist
+				elections_allowed = yes
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.02
+			}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#bbp1
+	focus = {
+		id = bbp1
+		icon = turkish_authoritarianism
+		x = 1
+		y = 1
+		cost = 5
+       	relative_position_id = sag5
+		prerequisite = { focus = sag5}
+		mutually_exclusive = { focus = mhp1 }
+
+		completion_reward = {
+swap_ideas = {
+				remove_idea = tur_greywolves
+				add_idea  = tur_greywolves_b1
+			}			
+			add_war_support = 0.03
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	#bbp2
+	focus = {
+		id = bbp2
+		icon = GFX_focus_TUR_rise_of_fascism
+		x = 0
+		y = 1
+		cost = 5
+       	relative_position_id = bbp1
+		prerequisite = { focus = bbp1}
+
+
+		completion_reward = {
+load_focus_tree = tur_fasc
+			remove_ideas = TUR_coalition_government
+			add_political_power = 75
+			set_politics = {
+				ruling_party = fascist
+				elections_allowed = yes
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	#kampanya1
+	focus = {
+		id = TUR_APK_kampanya1
+		icon = innovation_in_agriculture
+		x = 0
+		y = 2
+		cost = 5
+       	relative_position_id = election
+		prerequisite = { focus = election}
+		mutually_exclusive = {
+			focus = sag1
+		}
+		completion_reward = {
+			add_ideas = islamist_Movements
+            country_event = olay.21
+			add_political_power = 50
+			fourth_estate_conservative_increase = yes
+			fourth_estate_islamist_increase = yes
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.05
+			}
+				add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#Traditionalists
+	focus = {
+		id = Traditionalists
+		icon = loosen_the_laws_on_secularism
+		x = 2
+		y = 1
+		cost = 25
+		relative_position_id = TUR_APK_kampanya1
+		mutually_exclusive = { focus = Innovators }
+		prerequisite = { focus = TUR_APK_kampanya1}
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	#Innovators
+	focus = {
+		id = Innovators
+		icon = democracy
+		x = -2
+		y = 1
+		cost = 25
+		relative_position_id = TUR_APK_kampanya1
+		mutually_exclusive = { focus = Traditionalists }
+		prerequisite = { focus = TUR_APK_kampanya1}
+		completion_reward = {
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya2
+	focus = {
+		id = TUR_APK_kampanya2
+		icon = POL_industrial_privatisation
+		x = -1
+		y = 1
+		cost = 5
+		prerequisite = { focus = Innovators focus = Traditionalists}
+		relative_position_id = Innovators
+		completion_reward = {
+			add_political_power = 30
+            add_popularity = {
+				ideology = islamist
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.03
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya3
+	focus = {
+		id = TUR_APK_kampanya3
+		icon = bhu_conservative_peoples_propaganda
+		x = 5
+		y = 1
+		cost = 5
+		prerequisite = { focus = Innovators focus = Traditionalists}
+		relative_position_id = Innovators
+		completion_reward = {
+		add_political_power = 25
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.03
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya4
+	focus = {
+		id = TUR_APK_kampanya4
+		icon = BLR_liberalisation
+		x = 1
+		y = 1
+		cost = 5
+		prerequisite = { focus = Innovators focus = Traditionalists}
+		relative_position_id = Innovators
+		completion_reward = {
+			add_political_power = 45
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.03
+			}
+			fourth_estate_conservative_increase = yes
+			fourth_estate_islamist_increase = yes
+			fourth_estate_market_liberal_decrease = yes
+
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya5
+	focus = {
+		id = TUR_APK_kampanya5
+		icon = social_conservative
+		x = 3
+		y = 1
+		cost = 5
+		prerequisite = { focus = Innovators focus = Traditionalists}
+		relative_position_id = Innovators
+		completion_reward = {
+			add_political_power =30
+
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.05
+			}
+			fourth_estate_conservative_increase = yes
+			fourth_estate_islamist_increase = yes
+			fourth_estate_social_liberal_decrease = yes
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_progressive_decrease = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = progressive
+				popularity = -0.05
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya6
+	focus = {
+		id = TUR_APK_kampanya6
+		icon = akp
+		x = 0
+		y = 2
+		cost = 8
+		relative_position_id = Innovators
+		mutually_exclusive = { focus = fp }
+		available = { has_completed_focus = Innovators }
+		prerequisite = {focus = TUR_APK_kampanya2}
+		prerequisite = {focus = TUR_APK_kampanya3}
+		prerequisite = {focus = TUR_APK_kampanya4}
+		prerequisite = {focus = TUR_APK_kampanya5}
+		completion_reward = {
+			add_ideas = apk_movement
+			country_event = apk.1
+			add_political_power = 35
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya7
+	focus = {
+		id = TUR_APK_kampanya7
+		icon = wajdelota_class
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = TUR_APK_kampanya6
+		prerequisite = {focus = TUR_APK_kampanya6}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = islamist_Movements
+				add_idea  = islamist_Movements_2
+			}
+			add_political_power =50
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			fourth_estate_conservative_increase = yes
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	#kampanya8
+	focus = {
+		id = TUR_APK_kampanya88
+		icon = 2023_elections
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = TUR_APK_kampanya6
+		prerequisite = {focus = TUR_APK_kampanya7}
+
+		completion_reward = {
+			load_focus_tree = tur_apk
+			remove_ideas = TUR_coalition_government
+			add_political_power = 75
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			set_politics = {
+				ruling_party = conservative
+				elections_allowed = yes
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#fp
+	focus = {
+		id = fp
+		icon = umayyad_caliphate
+		x = 0
+		y = 2
+		cost = 8
+		relative_position_id = Traditionalists
+		mutually_exclusive = { focus = TUR_APK_kampanya6 }
+		available = { has_completed_focus = Traditionalists }
+		prerequisite = {focus = TUR_APK_kampanya2}
+		prerequisite = {focus = TUR_APK_kampanya3}
+		prerequisite = {focus = TUR_APK_kampanya4}
+		prerequisite = {focus = TUR_APK_kampanya5}
+		completion_reward = {
+			add_ideas = fazilet_movement
+			add_political_power = 35
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#fp2
+	focus = {
+		id = fp2
+		icon = generic_islamic_constitution
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = fp
+		prerequisite = {focus = fp}
+		completion_reward = {
+		swap_ideas = {
+				remove_idea = islamist_Movements
+				add_idea  = islamist_Movements_2
+			}
+			add_political_power =50
+			add_popularity = {
+				ideology = islamist
+				popularity = 0.05
+			}
+			fourth_estate_islamist_increase = yes
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#fp3
+	focus = {
+		id = fp3
+		icon = generic_islam
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = fp2
+		prerequisite = {focus = fp2}
+		completion_reward = {
+		load_focus_tree = tur_fp
+		remove_ideas = TUR_coalition_government
+		add_political_power = 75
+		add_popularity = {
+				ideology = islamist
+				popularity = 0.05
+			}
+			set_politics = {
+				ruling_party = islamist
+				elections_allowed = yes
+			}
+			}
+		ai_will_do = {
+			factor = 10
 		}
 	}
 

@@ -11,6 +11,8 @@ focus_tree = {
 	initial_show_position = {
 	focus = atas_legacy
 	}
+	
+	
 
 	#Ataturks legacy
 	focus = {
@@ -21,19 +23,522 @@ focus_tree = {
 		cost = 5
 
 		completion_reward = {
-
 			news_event = { id = tr_news.1 }
-			add_political_power = 120
+			add_political_power = 25
 			add_war_support = 0.05
-			add_stability = 0.03
-
-
+			add_stability = 0.02
 		}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 
+#sanayi1
+	focus = {
+		id = sanayi1
+		text = "Expand Eregli Mine"
+		icon = industry_steel
+		x = 10
+		y = 0
+		cost = 5
+
+		completion_reward = {
+		set_country_flag  = EconomicReform
+		347	= {
+				add_resource = {
+					type = steel
+					amount = 25
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi2
+	focus = {
+		id = sanayi2
+		text = "Investment Civilian Industry"
+		icon = TUR_civil
+		x = 1
+		y = 1
+		cost = 5
+	    relative_position_id = sanayi1
+		prerequisite = { focus = sanayi1 }
+		mutually_exclusive = { focus = sanayi3 }
+
+		completion_reward = {
+		add_political_power = -25
+			add_ideas = civilian_industry_project
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi3
+	focus = {
+		id = sanayi3
+		text = "Enlarge The MKE"
+		icon = MKE
+		x = -1
+		y = 1
+		cost = 5
+	    relative_position_id = sanayi1
+		prerequisite = { focus = sanayi1 }
+		mutually_exclusive = { focus = sanayi2 }
+
+		completion_reward = {
+		add_political_power = -25
+		add_ideas = military_industry_project
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi4
+	focus = {
+		id = sanayi4
+		text = "Improve The East"
+		icon = infrastructure
+		x = 0
+		y = 2
+		cost = 5
+	    relative_position_id = sanayi1
+		prerequisite = { focus = sanayi3 focus = sanayi2 }
+
+		completion_reward = {
+		add_ideas = infrastructure_project
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi5
+	focus = {
+		id = sanayi5
+		text ="Turkish Mining System"
+		icon = GFX_goal_Turkish_Mining_Companies
+		x = 0
+		y = 3
+		cost = 5
+	    relative_position_id = sanayi1
+		prerequisite = { focus = sanayi7  focus = sanayi8}
+
+		completion_reward = {
+	add_ideas = TUR_mining
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = excavation_tech
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi6
+	focus = {
+		id = sanayi6
+		text ="Investment in Petrol Ofisi"
+		icon = petrolofisi
+		x = 0
+		y = 4
+		cost = 5
+	    relative_position_id = sanayi1
+		prerequisite = { focus = sanayi5 }
+
+		completion_reward = {
+		add_ideas = oil_production_bonus
+			352 = {
+				add_resource = {
+					type = oil
+					amount = 25
+				}
+				}			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = synth_resources
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi7
+	focus = {
+		id = sanayi7
+		text ="Support Minor Company"
+		icon = subsidy_industry
+		x = 1
+		y = 1
+		cost = 5
+	    relative_position_id = sanayi2
+		prerequisite = { focus = sanayi2 }
+
+		completion_reward = {
+		swap_ideas = {
+				remove_idea = civilian_industry_project
+				add_idea  = civilian_industry_project2
+				}			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi8
+	focus = {
+		id = sanayi8
+		text ="Improve Military Factories"
+		icon = industry_military
+		x = -1
+		y = 1
+		cost = 5
+	    relative_position_id = sanayi3
+		prerequisite = { focus = sanayi3 }
+
+		completion_reward = {
+		swap_ideas = {
+				remove_idea = military_industry_project
+				add_idea  = military_industry_project2
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi9
+	focus = {
+		id = sanayi9
+		text ="Five Years Plan"
+		icon = GFX_support_turkish_companies
+		x = 0
+		y = 2
+		cost = 5
+	    relative_position_id = sanayi7
+		prerequisite = { focus = sanayi4 }
+		prerequisite = { focus = reform1 }
+
+		completion_reward = {
+		add_timed_idea = {
+				idea = TUR_five_year_plan
+				days = 1800
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#sanayi10
+	focus = {
+		id = sanayi10
+		text ="Automative Mines System"
+		icon = GFX_goal_continuous_non_factory_construct
+		x = 0
+		y = 4
+		cost = 5
+	    relative_position_id = sanayi2
+		prerequisite = { focus = sanayi6}
+		prerequisite = { focus = sanayi9}
+
+		completion_reward = {
+		add_ideas = GEN_automative_mines_idea
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.5
+				uses = 1
+				category = excavation_tech
+
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi11
+	focus = {
+		id = sanayi11
+		text ="Agrarian Reform"
+		icon = POL_farming_improvments
+		x = -6
+		y = 0
+		cost = 5
+	    relative_position_id = sanayi1
+	
+
+		completion_reward = {
+					add_ideas = LAT_agarian_reform
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi12
+	focus = {
+		id = sanayi12
+			text ="Welfare State"
+		icon = GFX_focus_TUR_supremacy_of_the_domestic_production
+		x = -1
+		y = 1
+		cost = 5
+	    relative_position_id = sanayi11
+		prerequisite = { focus = sanayi11 }
+		mutually_exclusive = { focus =  sanayi13 }
+
+		completion_reward = {
+			add_ideas = GER_welfare_state_idea
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi13
+	focus = {
+		id = sanayi13
+		text ="Develop Consumer Goods Industry"
+		icon = GFX_focus_TUR_believe_in_domestic_production
+		x = 1
+		y = 1
+		cost = 5
+	    relative_position_id = sanayi11
+		prerequisite = { focus = sanayi11 }
+		mutually_exclusive = { focus =  sanayi12 }
+
+		completion_reward = {
+			add_ideas = HUN_expanded_consumer_goods_industry
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#sanayi14
+	focus = {
+		id = sanayi14
+		text ="Tourism Industry"
+		icon = buy_fighter
+		x = 0
+		y = 2
+		cost = 7
+		relative_position_id = sanayi11
+		prerequisite = { focus = sanayi12 focus = sanayi13	}
+		completion_reward = {
+			add_ideas = ROM_tourism_industry
+			
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#sanayi15
+	focus = {
+		id = sanayi15
+		text ="Encourage Exports"
+		icon = GFX_goal_Trade_Deal
+		x = 1
+		y = 1
+		cost = 7
+		relative_position_id = sanayi13
+		prerequisite = {	focus = sanayi13 }
+		completion_reward = {
+			increase_trade_influence_by_2 = yes
+			add_political_power = 25
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#sanayi16
+	focus = {
+		id = sanayi16
+		text ="Expand Housing"
+		icon = GFX_goal_Invest_Industry
+		x = -1
+		y = 1
+		cost = 7
+		relative_position_id = sanayi12
+		prerequisite = {	focus = sanayi12 }
+		completion_reward = {
+			every_owned_state = {
+				if = {
+					limit = {
+						is_core_of = TUR
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		
+		#sanayi17
+	focus = {
+		id = sanayi17
+		text ="Advance Factory Technology"
+		icon = GFX_focus_generic_industry_3
+		x = 0
+		y = 1
+		cost = 7
+		relative_position_id = sanayi14
+		prerequisite = {	focus = sanayi16 focus = sanayi15}
+		completion_reward = {
+				add_ideas = GER_automation_of_factories_idea
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#sanayi18
+	focus = {
+		id = sanayi18
+		text ="TOKİ"
+		icon = GFX_support_turkish_companies
+		x = 0
+		y = 2
+		cost = 7
+		relative_position_id = sanayi14
+		prerequisite = {	focus = sanayi17}
+		completion_reward = {
+			unlock_decision_category_tooltip = TUR_toki
+			add_ideas = toki_working
+			set_country_flag = toki23
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#sanayi19
+	focus = {
+		id = sanayi19
+		text ="International Arms Trade"
+		icon = bag_of_money
+		x = 1
+		y = 1
+		cost = 7
+		relative_position_id = sanayi15
+		prerequisite = {focus = sanayi15}
+		prerequisite = {focus = sanayi8}
+		completion_reward = {
+			
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
 
 	#war on corruption
 	focus = {
@@ -52,7 +557,6 @@ focus_tree = {
 				add_idea = TUR_corruption_2
 				remove_idea = TUR_corruption
 			}
-			add_political_power = 50
 		}
 		ai_will_do = {
 			factor = 10
@@ -72,10 +576,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = war_corruption }
 		completion_reward = {
-
 			remove_ideas = TUR_corruption_2
-
-			add_political_power = 60
 		}
 		ai_will_do = {
 			factor = 10
@@ -94,7 +595,6 @@ focus_tree = {
 		}
 		prerequisite = { focus = war_corruption_2 }
 		completion_reward = {
-			add_political_power = 50
 			998 = {
 				add_building_construction = {
 					type = air_base
@@ -123,7 +623,6 @@ focus_tree = {
 		prerequisite = { focus = war_corruption }
 		completion_reward = {
 		country_event = olay.20
-        add_political_power = 50
 		}
 		ai_will_do = {
 			factor = 10
@@ -145,7 +644,6 @@ focus_tree = {
 		completion_reward = {
 			unlock_decision_category_tooltip = TUR_kabine
 			set_country_flag = Reforms
-
 			add_stability = 0.03
 			add_ideas= tur_administrative_reforms_1
 		}
@@ -169,7 +667,6 @@ focus_tree = {
 		prerequisite = { focus = war_corruption_2 }
 		completion_reward = {
 			country_event = olay.4
-			add_political_power = 60
 		}
 		ai_will_do = {
 			factor = 10
@@ -192,7 +689,6 @@ focus_tree = {
 			add_stability = 0.02
 			unlock_decision_category_tooltip = TUR_mafia
 			set_country_flag = Mafya
-
 		}
 		ai_will_do = {
 			factor = 10
@@ -227,7 +723,7 @@ focus_tree = {
 	focus = {
 		id = communism1
 		icon = Soviet_Turkey
-		x = 30
+		x = 20
 		y = 2
 		cost = 5
 		relative_position_id = guc
@@ -1830,7 +2326,7 @@ relative_position_id = propaganda8
 	focus = {
 		id = osmanempire
 		icon = ottoman_emblem
-		x = 55
+		x = 40
 		y = 2
 		cost = 5
 		relative_position_id = guc
@@ -2471,6 +2967,7 @@ relative_position_id = propaganda8
 		cost = 5
 		relative_position_id = osmanli1
 		prerequisite = { focus = osmanli3 focus = osmanli2  }
+		
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -2665,6 +3162,17 @@ relative_position_id = propaganda8
 		relative_position_id = osmanli4
 		prerequisite = { focus = osmanli4  }
 		prerequisite = { focus = osmanli8 focus = osmanli7   }
+		bypass = {
+			PER = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -2785,6 +3293,17 @@ relative_position_id = propaganda8
 		cost = 5
 		relative_position_id = osmanli8
 		prerequisite = { focus = osmanli11  }
+		bypass = {
+			UKR = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -2930,6 +3449,17 @@ relative_position_id = propaganda8
 		prerequisite = { focus = osmanli12  }
 		prerequisite = { focus = osmanli13 }
 		completion_reward = {
+		bypass = {
+			AUS = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = AUS
@@ -2986,6 +3516,17 @@ relative_position_id = propaganda8
 		prerequisite = { focus = osmanli17  }
 		prerequisite = { focus = osmanli18  }
 		completion_reward = {
+		bypass = {
+			SOV = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = SOV
@@ -3009,6 +3550,17 @@ relative_position_id = propaganda8
 		prerequisite = { focus = osmanli16 }
 		prerequisite = { focus = osmanli18  }
 		completion_reward = {
+		bypass = {
+			ITA = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = ITA
@@ -3029,6 +3581,17 @@ relative_position_id = propaganda8
 		prerequisite = { focus = osmanli20 }
 		prerequisite = { focus = osmanli19  }
 		completion_reward = {
+		bypass = {
+			ENG = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = ENG
@@ -3359,6 +3922,17 @@ relative_position_id = propaganda8
 		cost = 5
 		relative_position_id = roma1
 		prerequisite = { focus = roma8 }
+		bypass = {
+			ITA = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			set_cosmetic_tag = TUR_ROM
 			create_wargoal = {
@@ -3490,6 +4064,17 @@ relative_position_id = propaganda8
 		relative_position_id = roma3
 		prerequisite = { focus = roma3 }
 		completion_reward = {
+		bypass = {
+			ROM = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = ROM
@@ -3620,6 +4205,17 @@ relative_position_id = propaganda8
 		relative_position_id = selcuk2
 		prerequisite = { focus = selcuk2 }
 		completion_reward = {
+		bypass = {
+			PER = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = PER
@@ -3643,6 +4239,17 @@ relative_position_id = propaganda8
 		relative_position_id = selcuk4
 		prerequisite = { focus = selcuk4 }
 		completion_reward = {
+		bypass = {
+			IRQ = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = IRQ
@@ -3692,6 +4299,17 @@ relative_position_id = propaganda8
 		relative_position_id = selcuk6
 		prerequisite = { focus = selcuk6 focus = selcuk5 }
 		completion_reward = {
+		bypass = {
+			LEB = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = LEB
@@ -3715,6 +4333,17 @@ relative_position_id = propaganda8
 		relative_position_id = selcuk6
 		prerequisite = { focus = selcuk6 focus = selcuk5 }
 		completion_reward = {
+		bypass = {
+			JOR = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = JOR
@@ -3798,6 +4427,17 @@ relative_position_id = propaganda8
 		relative_position_id = selcuk4
 		prerequisite = { focus = selcuk4  }
 		completion_reward = {
+		bypass = {
+			AFG = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = AFG
@@ -3853,6 +4493,17 @@ relative_position_id = propaganda8
 		relative_position_id = selcuk11
 		prerequisite = { focus = selcuk11  }
 		completion_reward = {
+		bypass = {
+			PAK = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 			create_wargoal = {
 				type = annex_everything
 				target = PAK
@@ -3875,6 +4526,17 @@ relative_position_id = propaganda8
 		relative_position_id = selcuk8
 		prerequisite = { focus = selcuk7 }
 		prerequisite = { focus = selcuk8 }
+		bypass = {
+			TAJ = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -3898,7 +4560,19 @@ relative_position_id = propaganda8
 		relative_position_id = selcuk8
 		prerequisite = { focus = selcuk7 }
 		prerequisite = { focus = selcuk9 }
+		bypass = {
+			KYR = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
+		
 			create_wargoal = {
 				type = annex_everything
 				target = KYR
@@ -3922,7 +4596,19 @@ relative_position_id = propaganda8
 		prerequisite = { focus = selcuk13 }
 		prerequisite = { focus = selcuk14 }
 		prerequisite = { focus = selcuk15 }
+		bypass = {
+			RAJ = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
+		
 			create_wargoal = {
 				type = annex_everything
 				target = RAJ
@@ -3945,6 +4631,17 @@ relative_position_id = propaganda8
 		prerequisite = { focus = selcuk13 }
 		prerequisite = { focus = selcuk14 }
 		prerequisite = { focus = selcuk15 }
+		bypass = {
+			PRC = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -4082,7 +4779,7 @@ relative_position_id = propaganda8
 	focus = {
 		id = military_plot
 		icon = harbiye
-		x = 10
+		x = 5
 		y = 2
 		cost = 5
 		relative_position_id = guc
@@ -4808,7 +5505,17 @@ relative_position_id = military_plot
 		relative_position_id = secim2
 		prerequisite = { focus = secim20}
 		prerequisite = { focus = secim19}
-
+bypass = {
+			BUL = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -4834,7 +5541,17 @@ relative_position_id = military_plot
 		prerequisite = { focus = secim21}
 		prerequisite = { focus = secim22}
 
-
+bypass = {
+			SER = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 
 		completion_reward = {
@@ -5233,7 +5950,17 @@ relative_position_id = secim13
 		relative_position_id = ordu
 		prerequisite = { focus = ordu15}
 
-
+bypass = {
+			SYR = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 		completion_reward = {
 			TUR = {add_state_core = 677
@@ -5438,7 +6165,17 @@ relative_position_id = secim13
 		prerequisite = { focus = ordu26
 			focus = ordu20}
 
-
+bypass = {
+			PAK = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 
 		completion_reward = {
@@ -5461,7 +6198,17 @@ relative_position_id = secim13
 		relative_position_id = ordu
 		prerequisite = { focus = ordu23}
 
-
+bypass = {
+			AFG = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 		completion_reward = {
 			create_wargoal = {
@@ -5482,7 +6229,17 @@ relative_position_id = secim13
 		relative_position_id = ordu
 		prerequisite = { focus = ordu23}
 
-
+bypass = {
+			SAU = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 		completion_reward = {
 			create_wargoal = {
@@ -6266,68 +7023,17 @@ add_ideas = tur_greywolves
 			factor = 10
 		}
 	}
-		#mhp1
-	focus = {
-		id = mhp1
-		icon = GFX_focus_TUR_all_for_the_empire
-		x = -1
-		y = 1
-		cost = 5
-       	relative_position_id = sag5
-		prerequisite = { focus = sag5}
-		mutually_exclusive = { focus = bbp1 }
-
-		completion_reward = {
-swap_ideas = {
-				remove_idea = tur_greywolves
-				add_idea  = tur_greywolves_m1
-			}
-			add_stability = 0.02
-
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-		#mhp2
-	focus = {
-		id = mhp2
-		icon = mhp
-		x = -5
-		y = 1
-		cost = 5
-       	relative_position_id = mhp1
-		prerequisite = { focus = mhp1}
-
-
-		completion_reward = {
-			remove_ideas = TUR_coalition_government
-			add_political_power = 75
-			set_politics = {
-				ruling_party = nationalist
-				elections_allowed = yes
-			}
-			add_popularity = {
-				ideology = nationalist
-				popularity = 0.02
-			}
-
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
+		
 	
 	#bbp1
 	focus = {
 		id = bbp1
 		icon = turkish_authoritarianism
-		x = 1
-		y = 1
+		x = 2
+		y = 3
 		cost = 5
-       	relative_position_id = sag5
+       	relative_position_id = sag1
 		prerequisite = { focus = sag5}
-		mutually_exclusive = { focus = mhp1 }
 
 		completion_reward = {
 swap_ideas = {
@@ -6345,7 +7051,7 @@ swap_ideas = {
 	focus = {
 		id = bbp2
 		icon = GFX_focus_TUR_rise_of_fascism
-		x = 5
+		x = 0
 		y = 1
 		cost = 5
        	relative_position_id = bbp1
@@ -6727,7 +7433,17 @@ prerequisite = { focus =  anlasmit }
 		cost = 5
 		relative_position_id =  fasc_muhsin_5
 		prerequisite = { focus =  fasc_muhsin_5 }
-
+bypass = {
+			BUL = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 		completion_reward = {
 			create_wargoal = {
@@ -6876,7 +7592,17 @@ prerequisite = { focus =  anlasmit }
 		cost = 5
 		relative_position_id =  fasc_muhsin_9
 		prerequisite = { focus =  fasc_muhsin_9 }
-
+bypass = {
+			EGY = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -6901,7 +7627,17 @@ prerequisite = { focus =  anlasmit }
 		cost = 5
 		relative_position_id =  fasc_muhsin_9
 		prerequisite = { focus =  fasc_muhsin_9 }
-
+bypass = {
+			PER = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -7007,7 +7743,17 @@ prerequisite = { focus =  anlasmit }
 		cost = 5
 		relative_position_id =  fasc_muhsin_16
 		prerequisite = { focus =  fasc_muhsin_16}
-
+bypass = {
+			ISR = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 		completion_reward = {
 			create_wargoal = {
@@ -7029,7 +7775,17 @@ prerequisite = { focus =  anlasmit }
 		cost = 5
 		relative_position_id =  fasc_muhsin_16
 		prerequisite = { focus =  fasc_muhsin_17}
-
+bypass = {
+			SOV = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 		completion_reward = {
 			create_wargoal = {
@@ -7427,7 +8183,17 @@ prerequisite = { focus =  anlasmit }
 		relative_position_id =  fasc_ozdag
 		prerequisite = { focus =  ozdag7  }
 		prerequisite = { focus =  ozdag6  }
-
+bypass = {
+			GEO = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -7452,7 +8218,17 @@ prerequisite = { focus =  anlasmit }
 		prerequisite = { focus =  ozdag10  }
 		prerequisite = { focus =  ozdag11  }
 
-
+bypass = {
+			SER = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -7558,7 +8334,17 @@ prerequisite = { focus =  anlasmit }
 		prerequisite = { focus =  ozdag14 }
 		prerequisite = { focus =  ozdag18 }
 
-
+bypass = {
+			PRC = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 		completion_reward = {
 
@@ -7737,7 +8523,17 @@ prerequisite = { focus =  anlasmit }
 		relative_position_id =  ozdag15
 		prerequisite = { focus =  ozdag15}
 
-
+bypass = {
+			SOV = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 
 
 		completion_reward = {
@@ -7804,7 +8600,7 @@ prerequisite = { focus =  anlasmit }
 	focus = {
 		id = TUR_APK_kampanya1
 		icon = innovation_in_agriculture
-		x = -25
+		x = -13
 		y = 2
 		cost = 5
        	relative_position_id = election
@@ -9214,7 +10010,17 @@ prerequisite = { focus =  anlasmit }
 		relative_position_id = odenek
 		prerequisite = {focus = TUR_APK_avrupa5}
 		prerequisite = {focus = TUR_APK_avrupa6}
-
+bypass = {
+			PRC = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -9497,6 +10303,17 @@ prerequisite = { focus =  anlasmit }
 		cost = 5
 		relative_position_id = TUR_APK_hedef
 		prerequisite = {focus = TUR_APK_hedef}
+		bypass = {
+			BUL = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -9668,7 +10485,17 @@ prerequisite = { focus =  anlasmit }
 		prerequisite = {focus = TUR_APK_hedef5}
 		prerequisite = {focus = TUR_APK_hedef6}
 		prerequisite = {focus = TUR_APK_hedef7}
-
+bypass = {
+			USA = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -9692,7 +10519,17 @@ prerequisite = { focus =  anlasmit }
 		prerequisite = {focus = TUR_APK_hedef5}
 		prerequisite = {focus = TUR_APK_hedef6}
 		prerequisite = {focus = TUR_APK_hedef7}
-
+bypass = {
+			SOV = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 			create_wargoal = {
 				type = annex_everything
@@ -10289,6 +11126,17 @@ country_event = olay.25
 		relative_position_id = faziletp23
 		prerequisite = {focus = faziletp23}
 		prerequisite = {focus = faziletp21}
+		bypass = {
+			ISR = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 		create_wargoal = {
 				type = annex_everything
@@ -10311,6 +11159,17 @@ country_event = olay.25
 		relative_position_id = faziletp23
 		prerequisite = {focus = faziletp23}
 		prerequisite = {focus = faziletp21}
+		bypass = {
+			SOV = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 		create_wargoal = {
 				type = annex_everything
@@ -10340,6 +11199,17 @@ CHE = {
 		relative_position_id = faziletp23
 		prerequisite = {focus = faziletp23}
 		prerequisite = {focus = faziletp21}
+		bypass = {
+			GER = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 		create_wargoal = {
 				type = annex_everything
@@ -10454,7 +11324,7 @@ CHE = {
 	focus = {
 		id = demokrat1
 		icon = GFX_focus_TUR_fully_indepent_turkey
-		x = -45
+		x = -32
 		y = 2
 		cost = 5
        	relative_position_id = election
@@ -11651,7 +12521,7 @@ add_opinion_modifier = {
 	
 		focus = {
 		id = kemalistt1
-	    text = "Eurasian Security Treaty Organization"
+	    text = "Organization of Turkish States"
 		icon = global_community
 		x = 12
 		y = 1
@@ -11664,11 +12534,861 @@ mutually_exclusive = {
 			focus = balkan1
 		}
 		completion_reward = {
-create_faction = esto
+create_faction = org_turkish_states
 add_political_power = 55
+AZR = { country_event = olay.33}
+KAZ = { country_event = olay.33}
+KYR = { country_event = olay.33}
+
 							}
 	}
 	
+	focus = {
+		id = turanorg1
+	    text = "Invite Turkmenistan"
+		icon = alliance_teal
+		x = 3
+		y = 1
+		cost = 5
+relative_position_id =  kemalistt1
+prerequisite = { focus = kemalistt1}
+
+		completion_reward = {
+TMS = { country_event = olay.33}
+
+							}
+	}
+	
+	focus = {
+		id = turanorg2
+	    text = "Invite Uzbekistan"
+		icon = BLR_align_to_world
+		x = 2
+		y = 1
+		cost = 5
+relative_position_id =  turanorg1
+prerequisite = { focus = turanorg1}
+
+		completion_reward = {
+
+UZB = { country_event = olay.33}
+
+							}
+	}
+	
+	focus = {
+		id = turanorg3
+	    text = "Invite Northern Cyprus"
+		icon = align_to_northern_cyprus
+		x = 0
+		y = 1
+		cost = 5
+relative_position_id =  turanorg1
+prerequisite = { focus = turanorg1}
+
+		completion_reward = {
+
+NCY = { country_event = olay.33}
+
+							}
+	}
+	
+	focus = {
+		id = turanorg4
+	    text = "Invite Hungary"
+		icon = POL_good_times_with_hungary
+		x = 0
+		y = 2
+		cost = 5
+relative_position_id =  turanorg1
+prerequisite = { focus = turanorg2}
+prerequisite = { focus = turanorg3}
+
+		completion_reward = {
+
+HUN = { country_event = olay.33}
+
+							}
+	}
+	
+		focus = {
+		id = turanorg5
+	    text = "Invite Ukraine"
+		icon = align_to_ukraine
+		x = 1
+		y = 3
+		cost = 5
+relative_position_id =  turanorg1
+prerequisite = { focus = turanorg4}
+
+		completion_reward = {
+UKR = { country_event = olay.33}
+
+							}
+	}
+	
+	focus = {
+		id = turanorg6
+	    text = "Invite Finland"
+		icon = align_to_finland
+		x = -1
+		y = 3
+		cost = 5
+relative_position_id =  turanorg1
+prerequisite = { focus = turanorg4}
+
+		completion_reward = {
+FIN = { country_event = olay.33}
+
+							}
+	}
+	
+	focus = {
+		id = turanorg7
+	    text = "Invite Afghanistan"
+		icon = align_to_afghanistan
+		x = 0
+		y = 4
+		cost = 5
+relative_position_id =  turanorg1
+prerequisite = { focus = turanorg5}
+prerequisite = { focus = turanorg6}
+
+		completion_reward = {
+AFG = { country_event = olay.33}
+
+							}
+	}
+	
+	focus = {
+		id = turanorg8
+	    text = "International Organization of Turkic Culture"
+		icon = GFX_focus_TUR_turanist_propaganda
+		x = -2
+		y = 1
+		cost = 5
+relative_position_id =  kemalistt1
+prerequisite = { focus = kemalistt1}
+
+		completion_reward = {
+add_war_support = 0.15
+add_stability = 0.07
+							}
+	}
+	
+		focus = {
+		id = turanorg9
+	    text = "Parliamentary Assembly of Turkic States"
+		icon = GFX_focus_TUR_turanist_propaganda
+		x = 0
+		y = 1
+		cost = 5
+relative_position_id =  kemalistt1
+prerequisite = { focus = kemalistt1}
+
+		completion_reward = {
+add_political_power = 75
+add_command_power = 25
+							}
+	}
+	
+	focus = {
+		id = turanorg10
+	    text = "International Turkic Academy"
+		icon = turkic_union_deals
+		x = -4
+		y = 1
+		cost = 5
+relative_position_id =  kemalistt1
+prerequisite = { focus = kemalistt1}
+
+		completion_reward = {
+add_ideas = organization_turkic_states
+							}
+	}
+	
+	focus = {
+		id = turanorg11
+	    text = "Turkic TV"
+		icon = turanist_symbol
+		x = 1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg8
+prerequisite = { focus = turanorg8}
+prerequisite = { focus = turanorg9}
+
+		completion_reward = {
+swap_ideas = {
+				remove_idea = organization_turkic_states
+				add_idea  = organization_turkic_states_2
+			}
+							}
+	}
+	
+	
+	
+	focus = {
+		id = turanorg12
+	    text = "Turkish Business Council"
+		icon = POL_industrial_privatisation
+		x = 1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg9
+prerequisite = { focus = turanorg9}
+
+		completion_reward = {
+add_offsite_building = { type = industrial_complex level = 2 }
+add_offsite_building = { type = industrial_complex level = 2 }
+							}
+	}
+	
+	focus = {
+		id = turanorg13
+	    text = "Turkish Investment Fund"
+		icon = POL_fund_orlen
+		x = 1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg11
+prerequisite = { focus = turanorg11}
+prerequisite = { focus = turanorg12}
+
+		completion_reward = {
+random_owned_state = {
+				add_resource = { type = steel amount = 30 }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}	
+random_owned_state = {
+				add_resource = { type = oil amount = 25 }
+				add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}			}
+	}
+	
+	focus = {
+		id = turanorg14
+	    text = "Turkic Media"
+		icon = support_private_media
+		x = -1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg11
+prerequisite = { focus = turanorg11}
+
+		completion_reward = {
+add_stability = 0.05
+add_war_support = 0.1
+							}
+	}
+	
+	focus = {
+		id = turanorg15
+	    text = "Turkic Science Council"
+		icon = turkarastirma2
+		x = -1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg8
+prerequisite = { focus = turanorg8 focus = turanorg10}
+
+		completion_reward = {
+add_research_slot = 1
+							}
+	}
+	
+		focus = {
+		id = turanorg16
+	    text = "Acquisition of Nuclear Weapons"
+		icon = GFX_focus_TUR_nuclear_research_institute
+		x = 0
+		y = 2
+		cost = 20
+relative_position_id =  turanorg10
+prerequisite = { focus = turanorg10}
+	select_effect = {
+			add_timed_idea = {
+				idea = HUN_building_Nuclear_power_plant
+				days = 140
+			}
+		}
+
+		completion_reward = {
+
+			if = {
+				limit = { NOT = { has_tech = atomic_research } }
+				set_technology = { atomic_research = 1 }
+			}
+			else = {
+				add_tech_bonus = {
+					name = tech_bonus
+					bonus = 0.8
+					uses = 1
+					category = nuclear
+				}
+			}
+			add_offsite_building = { type = nuclear_reactor level = 1 }
+							}
+	}
+	
+	focus = {
+		id = turanorg17
+	    text = "Economic Investment in Turkic States"
+		icon = GFX_focus_TUR_industrialization_of_turkey
+		x = -1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg13
+prerequisite = { focus = turanorg13}
+prerequisite = { focus = turanorg14}
+
+		completion_reward = {
+random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+							}
+	}
+	
+	focus = {
+		id = turanorg18
+	    text = "Unite the Turkic States"
+		icon = GFX_focus_TUR_ottoman_to_turan
+		x = 0
+		y = 1
+		cost = 5
+relative_position_id =  turanorg17
+prerequisite = { focus = turanorg17}
+
+		completion_reward = {
+country_event = olay.14
+							}
+	}
+	
+	focus = {
+		id = turanorg19
+	    text = "Fate of Balkan Turks"
+		icon = ott_balkan
+		x = -4
+		y = 1
+		cost = 5
+relative_position_id =  turanorg18
+prerequisite = { focus = turanorg18}
+
+		completion_reward = {
+WTR = { add_state_core = 184 add_state_core = 731}
+GRE = { remove_state_core = 184 remove_state_core = 731 }
+GRE = {
+184 = {
+					start_resistance = yes
+					set_resistance = 20
+					set_garrison_strength = 1.0
+				}
+				731 = {
+					start_resistance = yes
+					set_resistance = 20
+					set_garrison_strength = 1.0
+				}
+				}
+TUR = { add_state_core = 211 }
+BUL = { remove_state_core = 211}
+	BUL = {
+211 = {
+					start_resistance = yes
+					set_resistance = 20
+					set_garrison_strength = 1.0
+				}}
+				}
+
+
+	}
+	
+	
+	focus = {
+		id = turanorg20
+	    text = "Expand the Federation"
+		icon = irredentism
+		x = 0
+		y = 2
+		cost = 5
+relative_position_id =  turanorg19
+prerequisite = { focus = turanorg21}
+prerequisite = { focus = turanorg22}
+
+
+		completion_reward = {
+annex_country = {
+				target = MAC
+				transfer_troops = yes
+			}
+annex_country = {
+				target = KOS
+				transfer_troops = yes
+			}
+every_state = {
+					limit = { is_core_of = MAC }
+					add_core_of = TUR
+				}
+every_state = {
+					limit = { is_core_of = KOS }
+					add_core_of = TUR
+				}				}
+	}
+	
+		focus = {
+		id = turanorg21
+	    text = "Liberate Western Thrace"
+		icon = attack_greece
+		x = 1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg19
+prerequisite = { focus = turanorg19}
+	bypass = {
+			GRE = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = GRE
+			}
+			}
+	}
+	
+	focus = {
+		id = turanorg22
+	    text = "Save Bulgarian Turks"
+		icon = attack_bulgaria
+		x = -1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg19
+prerequisite = { focus = turanorg19}
+	bypass = {
+			BUL = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+		completion_reward = {
+
+create_wargoal = {
+				type = annex_everything
+				target = BUL
+			}			}
+	}
+	
+	focus = {
+		id = turanorg23
+	    text = "Fate of Iranian Turks"
+		icon = azer_pers
+		x = 0
+		y = 1
+		cost = 5
+relative_position_id =  turanorg18
+prerequisite = { focus = turanorg18}
+
+		completion_reward = {
+TUR = { add_state_core = 1001 add_state_core = 419 add_state_core = 420 add_state_core = 416 }
+PER = { remove_state_core = 1001 remove_state_core = 419 remove_state_core = 420 remove_state_core = 416 }
+PER = {
+1001 = {
+					start_resistance = yes
+					set_resistance = 20
+					set_garrison_strength = 1.0
+				}
+				419 = {
+					start_resistance = yes
+					set_resistance = 20
+					set_garrison_strength = 1.0
+				}
+				420 = {
+					start_resistance = yes
+					set_resistance = 20
+					set_garrison_strength = 1.0
+				}
+				416 = {
+					start_resistance = yes
+					set_resistance = 20
+					set_garrison_strength = 1.0
+				}
+				}
+				}
+	}
+	focus = {
+		id = turanorg24
+	    text = "Save Azerbaijan"
+		icon = attack_iran
+		x = -1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg23
+prerequisite = { focus = turanorg23}
+	bypass = {
+			PER = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+		completion_reward = {
+
+create_wargoal = {
+				type = annex_everything
+				target = PER
+			}			}
+	}
+	
+	focus = {
+		id = turanorg25
+	    text = "Annex Tajik State"
+		icon = war
+		x = 1
+		y = 1
+		cost = 5
+relative_position_id =  turanorg23
+prerequisite = { focus = turanorg23}
+	bypass = {
+			TAJ = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+		completion_reward = {
+
+create_wargoal = {
+				type = annex_everything
+				target = TAJ
+			}			}
+	}
+	
+	focus = {
+		id = turanorg26
+	    text = "Batumi is Turkish!"
+		icon = attack_georgia
+		x = 0
+		y = 2
+		cost = 5
+relative_position_id =  turanorg23
+prerequisite = { focus = turanorg25}
+prerequisite = { focus = turanorg24}
+	bypass = {
+			GEO = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+
+		completion_reward = {
+		add_state_core = 1159
+create_wargoal = {
+				type = annex_everything
+				target = GEO
+			}			}
+	}
+	
+	focus = {
+		id = turanorg27
+	    text = "Establishment of Turkmeneli"
+		icon = GFX_focus_TUR_turanist_army
+		x = -2
+		y = 1
+		cost = 5
+relative_position_id =  turanorg18
+prerequisite = { focus = turanorg18}
+
+
+		completion_reward = {
+		if = {
+				limit = {
+				TRK = { 
+					controls_state = 815}
+				}
+			IRQ = {
+				country_event = olay.10
+			}
+			SYR = {
+				country_event = olay.11
+			}
+			}
+			else = {
+	country_event = olay.8
+	
+	IRQ = {
+				country_event = olay.10
+			}
+			SYR = {
+				country_event = olay.11
+			}
+						}
+			}
+	}
+	
+	focus = {
+		id = turanorg28
+	    text = "Cyprus Crisis"
+		icon = GFX_focus_TUR_cyprus_question
+		x = 0
+		y = 2
+		cost = 5
+relative_position_id =  turanorg27
+prerequisite = { focus = turanorg27}
+
+
+		completion_reward = {
+		add_state_core = 183
+		add_state_claim = 183
+			}
+	}
+	
+	focus = {
+		id = turanorg29
+	    text = "Save the Turks from the Russians"
+		icon = attack_russia
+		x = 1
+		y = 3
+		cost = 5
+relative_position_id =  turanorg27
+prerequisite = { focus = turanorg26}
+prerequisite = { focus = turanorg20}
+bypass = {
+			SOV = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = SOV
+			}
+			}
+	}
+	
+	focus = {
+		id = turanorg30
+	    text = "Resurrection of the Uyghur Turks"
+		icon = attack_china
+		x = -1
+		y = 3
+		cost = 5
+relative_position_id =  turanorg27
+prerequisite = { focus = turanorg26}
+prerequisite = { focus = turanorg20}
+bypass = {
+			PRC = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+
+		completion_reward = {
+		
+create_wargoal = {
+				type = annex_everything
+				target = PRC
+			}
+			PRC = {
+remove_state_core = 617
+remove_state_core = 618
+remove_state_core = 1229
+remove_state_core = 619
+remove_state_core = 287
+				617 = {
+					start_resistance = yes
+					set_resistance = 40
+					set_garrison_strength = 1.0
+				}
+				618 = {
+					start_resistance = yes
+					set_resistance = 40
+					set_garrison_strength = 1.0
+				}
+				1229 = {
+					start_resistance = yes
+					set_resistance = 40
+					set_garrison_strength = 1.0
+				}
+				619 = {
+					start_resistance = yes
+					set_resistance = 40
+					set_garrison_strength = 1.0
+				}
+				287 = {
+					start_resistance = yes
+					set_resistance = 40
+					set_garrison_strength = 1.0
+				}
+
+			}
+			}
+	}
+	
+		focus = {
+		id = turanorg31
+	    text = "Integrate the Armies"
+		icon = TUR_1923
+		x = 0
+		y = 2
+		cost = 5
+relative_position_id =  turanorg15
+prerequisite = { focus = turanorg15}
+
+
+		completion_reward = {
+add_ideas = tur_turanarmy
+			}
+	}
+	
+	focus = {
+		id = turanorg32
+	    text = "Save Karabakh from Occupation"
+		icon = attack_armenia
+		x = 2
+		y = 1
+		cost = 5
+relative_position_id =  turanorg18
+prerequisite = { focus = turanorg18}
+
+
+		completion_reward = {
+		add_state_core = 832
+create_wargoal = {
+				type = annex_everything
+				target = NGK
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ARM
+			}
+			hidden_effect = {
+				NGK = { add_ideas = yalnizlik }
+				ARM = { add_ideas = yalnizlik }
+	}			}
+	}
+	
+		focus = {
+		id = turanorg33
+	    text = "Military Breakthrough of the Organisation"
+		icon = fund_arms_organization
+		x = 0
+		y = 1
+		cost = 5
+relative_position_id =  turanorg7
+prerequisite = { focus = turanorg7}
+
+
+		completion_reward = {
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			every_country = {
+				limit = { is_in_faction_with = TUR
+				}
+				random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+	}}
+	}
 		focus = {
 		id = esto1
 	    text = "Eurasian Security Treaty Organization"
@@ -11686,6 +13406,8 @@ mutually_exclusive = {
 		completion_reward = {
 create_faction = esto
 add_political_power = 55
+AZR = { country_event = olay.33}
+
 							}
 	}
 	
@@ -11794,6 +13516,18 @@ every_country = {
 relative_position_id =  esto6
 prerequisite = { focus = esto6}
 
+	bypass = {
+			SYR = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+
 		completion_reward = {
 create_wargoal = {
 				type = annex_everything
@@ -11810,7 +13544,17 @@ create_wargoal = {
 		cost = 5
 relative_position_id =  esto6
 prerequisite = { focus = esto6}
-
+	bypass = {
+			IRQ = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 create_wargoal = {
 				type = annex_everything
@@ -11829,7 +13573,17 @@ create_wargoal = {
 relative_position_id =  esto6
 prerequisite = { focus = esto7}
 prerequisite = { focus = esto8}
-
+	bypass = {
+			KUW = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 create_wargoal = {
 				type = annex_everything
@@ -11931,7 +13685,17 @@ modify_building_resources = {
 		cost = 5
 relative_position_id =  esto13
 prerequisite = { focus = esto13}
-
+	bypass = {
+			SAU = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 create_wargoal = {
 				type = annex_everything
@@ -12075,7 +13839,17 @@ swap_ideas = {
 		cost = 5
 relative_position_id =  esto18
 prerequisite = { focus = esto19}
-
+	bypass = {
+			PER = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 	create_wargoal = {
 				type = puppet_wargoal_focus
@@ -12092,7 +13866,17 @@ prerequisite = { focus = esto19}
 		cost = 5
 relative_position_id =  esto18
 prerequisite = { focus = esto19}
-
+	bypass = {
+			PAK = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 	create_wargoal = {
 				type = puppet_wargoal_focus
@@ -12110,7 +13894,17 @@ prerequisite = { focus = esto19}
 		cost = 5
 relative_position_id =  esto21
 prerequisite = { focus = esto16 focus = esto21 focus = esto17}
-
+	bypass = {
+			PRC = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 	create_wargoal = {
 				type = puppet_wargoal_focus
@@ -13071,6 +14865,17 @@ focus = {
 relative_position_id =  balkan1
 prerequisite = { focus = balkan4}
 mutually_exclusive = { focus = balkan5}
+	bypass = {
+			YUG = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
 		completion_reward = {
 create_wargoal = {
 				type = annex_everything

@@ -1,6 +1,6 @@
 focus_tree = {
 	id = tr
-	continuous_focus_position = { x = 10 y = 200 }
+	continuous_focus_position = { x = 0 y = 0 }
 	country = {
 		factor = 0
 		modifier = {
@@ -9,7 +9,7 @@ focus_tree = {
 		}
 	}
 	initial_show_position = {
-	focus = atas_legacy
+	focus = TUR_2001_cris
 	}
 	
 	
@@ -23,6 +23,7 @@ focus_tree = {
 		cost = 5
 
 		completion_reward = {
+
 			news_event = { id = tr_news.1 }
 			add_political_power = 25
 			add_war_support = 0.05
@@ -537,9 +538,12 @@ focus_tree = {
 		y = 1
 		cost = 7
 		relative_position_id = sanayi15
-		prerequisite = {focus = sanayi15}
-		prerequisite = {focus = sanayi8}
+		prerequisite = {focus = sanayi21}
+				prerequisite = {focus = sanayi15 focus = sanayi8}
+
 		completion_reward = {
+		unlock_decision_tooltip = TUR_debt_arms_open
+			set_country_flag = arms_debt
 			
 		}
 		ai_will_do = {
@@ -1264,22 +1268,156 @@ relative_position_id = tsk21
 	#tsk29
 	focus = {
 		id = tsk29
-		text = "Special Forces Command"
-		icon = GFX_focus_TUR_army_of_the_misaki_milli
+		text =  "Funding to Automotive Industry"
+		icon = motorized
 		x = 1
 		y = 1
 		cost = 8
 relative_position_id = tsk23
 		prerequisite = { focus = tsk23}
-prerequisite = { focus = tsk16
+prerequisite = { focus = tsk16}
 		completion_reward = {
-			add_ideas =	ozelkuvvetler
+			add_ideas = USA_automotive_industry_funding
 			}
 		ai_will_do = {
 			factor = 10
 		}
 	}
 	
+		#tsk30
+	focus = {
+		id = tsk30
+		text = HUN_increase_wepons_production
+		icon = QBZ_95
+		x = -1
+		y = 1
+		cost = 8
+relative_position_id = tsk24
+		prerequisite = { focus = tsk24}
+		completion_reward = {
+			add_ideas = HUN_increased_wepons_production
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		#tsk31
+	focus = {
+		id = tsk31
+		text = "Rules the Waves"
+		icon = GFX_focus_TUR_excited_youngs_for_our_fleet
+		x = 1
+		y = 1
+		cost = 8
+relative_position_id = tsk13
+		prerequisite = { focus = tsk13}
+		prerequisite = { focus = tsk14}
+		completion_reward = {
+			add_ideas = ENG_rule_the_waves
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#tsk32
+	focus = {
+		id = tsk32
+		text = ENG_longerange_transports
+		icon = GFX_goal_generic_position_armies
+		x = 0
+		y = 2
+		cost = 8
+relative_position_id = tsk18
+		prerequisite = { focus = tsk18 focus = tsk19 focus = tsk20}
+		completion_reward = {
+			add_ideas = ENG_longrange_transports
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	#tsk33
+	focus = {
+		id = tsk33
+		text =  "Adaptation to Weather Conditions"
+		icon = defence
+		x = 0
+		y = 1
+		cost = 8
+relative_position_id = tsk27
+		prerequisite = { focus = tsk30 focus = tsk29 }
+		prerequisite = { focus = tsk27 }
+		completion_reward = {
+			add_ideas =	tur_weatherc
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#tsk34
+	focus = {
+		id = tsk34
+		text ="Jet Technology"
+		icon = skull
+		x = 1
+		y = 1
+		cost = 8
+relative_position_id = nato8
+		prerequisite = { focus = nato8 }
+		prerequisite = { focus = deprem4  }
+		completion_reward = {
+add_tech_bonus = {
+				name = jet_rocket_bonus
+				ahead_reduction = 1
+				uses = 2
+				category = jet_technology
+			}			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	#tsk35
+	focus = {
+		id = tsk35
+		text = HUN_wepons_for_the_3rd_world_war
+		icon = GFX_focus_TUR_nuclear_research_institute
+		x = 1
+		y = 1
+		cost = 8
+relative_position_id = nato9
+		prerequisite = { focus = nato9 }
+		prerequisite = { focus = tsk34  }
+select_effect = {
+			add_timed_idea = {
+				idea = TUR_building_Nuclear_power_plant
+				days = 140
+			}
+		}
+
+		completion_reward = {
+
+			if = {
+				limit = { NOT = { has_tech = atomic_research } }
+				set_technology = { atomic_research = 1 }
+			}
+			else = {
+				add_tech_bonus = {
+					name = tech_bonus
+					bonus = 0.8
+					uses = 1
+					category = nuclear
+				}
+			}
+			add_offsite_building = { type = nuclear_reactor level = 1 }
+							}
+		ai_will_do = {
+			factor = 10
+		}
+	}
 
 	#war on corruption
 	focus = {
@@ -3585,6 +3723,25 @@ relative_position_id = propaganda8
 		add_ideas = devsirme_system
 		}
 	}
+	
+	#ottocore
+	focus = {
+		id = ottocore
+		text = "Imperial Territories"
+		icon = fascist_moblization
+		x = 1
+		y = 1
+		cost = 14
+		relative_position_id = otto17
+		prerequisite = { focus = otto22}
+		prerequisite = { focus = otto17}
+		completion_reward = {
+				every_state = {
+					limit = { is_core_of = TUR }
+					add_core_of = TUR
+				}				
+		}
+	}
 
 	#otto23
 	focus = {
@@ -3726,19 +3883,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = LEB
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = SYR }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = IRQ }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = IRQ }
-					add_core_of = LEB
-					}		}
+			
 		}
 	}
 	#osmanli6
@@ -3764,13 +3909,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = ARM
 			}
-			hidden_effect = {
-				NGK = { add_ideas = yalnizlik }
-				ARM = { add_ideas = yalnizlik }
-				every_state = {
-					limit = { is_core_of = GEO }
-					add_core_of = TUR
-					}		}
+
 		}
 	}
 	#osmanli7
@@ -3808,31 +3947,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = KUW
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = SAU }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = JOR }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = BAR }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = QAT }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = UAE }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = UAE }
-					add_core_of = KUW
-					}		}
+		
 
 		}
 	}
@@ -3870,27 +3985,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = KOS
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = GRE }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = BUL }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = MAC }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = ALB }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = YUG }
-					add_core_of = TUR
-					}		}
+
 		}
 	}
 	#osmanli9
@@ -3919,12 +4014,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = PER
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = PER }
-					add_core_of = TUR
-				}				
-			}
+		
 		}
 	}
 
@@ -3975,16 +4065,6 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = MOL
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = ROM }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = MOL }
-					add_core_of = TUR
-				}		
-			}
 		}
 	}
 	#osmanli12
@@ -4009,20 +4089,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = SLV
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = BOS }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = CRO }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = SLV }
-					add_core_of = TUR
-				}		
-			}
+	
 		}
 	}
 	#osmanli13
@@ -4080,12 +4147,7 @@ relative_position_id = propaganda8
 				}
 				add_ideas = ottoman_eyaleti }
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = UKR }
-					add_core_of = TUR
-				}
-			}
+
 		}
 	}
 	#osmanli14
@@ -4106,16 +4168,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = LBA
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = EGY }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = LBA }
-					add_core_of = TUR
-				}
-			}
+	
 		}
 	}
 	#osmanli15
@@ -4136,16 +4189,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = ERI
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = SUD }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = ERI }
-					add_core_of = TUR
-				}
-			}
+
 		}
 	}
 	#osmanli16
@@ -4167,16 +4211,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = ALG
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = TUN }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = ALG }
-					add_core_of = TUR
-				}
-			}
+		
 		}
 	}
 	#osmanli17
@@ -4206,12 +4241,6 @@ relative_position_id = propaganda8
 				target = AUS
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = AUS }
-					add_core_of = TUR
-				}
-			}
 		}
 	}
 	#osmanli18
@@ -4271,12 +4300,6 @@ relative_position_id = propaganda8
 			create_wargoal = {
 				type = annex_everything
 				target = SOV
-			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = SOV }
-					add_core_of = TUR
-				}
 			}
 		}
 	}
@@ -4450,29 +4473,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = KOS
 			}
-			hidden_effect = {
 
-				every_state = {
-					limit = { is_core_of = BUL }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = ROM }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = ALB }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = SER }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = BOS }
-					add_core_of = TUR
-				}
-			}
 		}
 	}
 
@@ -4499,22 +4500,6 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = BOS
 			}
-
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = BOS }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = SLV }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = CRO}
-					add_core_of = TUR
-				}
-
-			}
 		}
 	}
 	#roma5
@@ -4534,17 +4519,6 @@ relative_position_id = propaganda8
 			create_wargoal = {
 				type = annex_everything
 				target = LEB
-			}
-
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = SYR }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = LEB }
-					add_core_of = TUR
-				}
 			}
 		}
 	}
@@ -4568,16 +4542,6 @@ relative_position_id = propaganda8
 				target = PAL
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = ISR }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = PAL }
-					add_core_of = TUR
-				}
-			}
 		}
 	}
 
@@ -4605,20 +4569,6 @@ relative_position_id = propaganda8
 				target = TUN
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = EGY }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = LBA }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = TUN }
-					add_core_of = TUR
-				}
-			}
 		}
 	}
 	#roma8
@@ -4640,17 +4590,6 @@ relative_position_id = propaganda8
 				target = ALG
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = MOR }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = ALG }
-					add_core_of = TUR
-				}
-
-			}
 		}
 	}
 
@@ -4681,12 +4620,7 @@ relative_position_id = propaganda8
 				target = ITA
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = ITA }
-					add_core_of = TUR
-				}
-			}
+
 		}
 	}
 	#roma10
@@ -4708,17 +4642,6 @@ relative_position_id = propaganda8
 				target = FRA
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = SPR }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = FRA }
-					add_core_of = TUR
-				}
-
-			}
 		}
 	}
 
@@ -4962,11 +4885,7 @@ relative_position_id = propaganda8
 				target = PER
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = PER }
-					add_core_of = TUR
-					}		}
+			
 		}
 	}
 
@@ -4996,11 +4915,6 @@ relative_position_id = propaganda8
 				target = IRQ
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = IRQ }
-					add_core_of = TUR
-					}		}
 		}
 	}
 
@@ -5022,11 +4936,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = KUR
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = SYR }
-					add_core_of = TUR
-					}		}
+		
 		}
 	}
 
@@ -5056,11 +4966,7 @@ relative_position_id = propaganda8
 				target = LEB
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = LEB }
-					add_core_of = TUR
-					}		}
+	
 		}
 	}
 
@@ -5090,11 +4996,7 @@ relative_position_id = propaganda8
 				target = JOR
 			}
 
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = JOR }
-					add_core_of = TUR
-					}		}
+			
 		}
 	}
 
@@ -5116,15 +5018,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = PAL
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = ISR }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = PAL }
-					add_core_of = TUR
-					}		}
+		
 		}
 	}
 
@@ -5146,15 +5040,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = UAE
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = OMA }
-					add_core_of = TUR
-				}
-				every_state = {
-					limit = { is_core_of = UAE }
-					add_core_of = TUR
-					}		}
+			
 		}
 	}
 
@@ -5318,11 +5204,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = KYR
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = KYR }
-					add_core_of = TUR
-					}		}
+		
 		}
 	}
 
@@ -5354,11 +5236,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = RAJ
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = RAJ }
-					add_core_of = TUR
-					}		}
+		
 		}
 	}
 	#selcuk17
@@ -5388,11 +5266,7 @@ relative_position_id = propaganda8
 				type = annex_everything
 				target = PRC
 			}
-			hidden_effect = {
-				every_state = {
-					limit = { is_core_of = PRC }
-					add_core_of = TUR
-					}		}
+		
 		}
 	}
 	
@@ -7954,9 +7828,6 @@ focus = {
 		prerequisite = { focus = TUR_fasc_kriz3}
 		completion_reward = {
 			add_ideas = mit
-
-
-
 		}
 		ai_will_do = {
 			factor = 10

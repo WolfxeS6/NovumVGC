@@ -18,7 +18,7 @@ focus_tree = {
 	focus = {
 		id = ARM_new_millennia
 		icon = construction2
-		x = 41
+		x = 40
 		y = 0
 		cost = 4
 
@@ -42,7 +42,7 @@ focus_tree = {
 	focus = {
 		id = ARM_continue_free_market
 		icon = GFX_goal_generic_positive_trade_relations
-		x = -2
+		x = -1
 		y = 1
 		cost = 6
 
@@ -71,49 +71,16 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ARM_protectionism
-		icon = GFX_goal_Isolationism
-		x = 2
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = ARM_new_millennia
-		}
-		relative_position_id = ARM_new_millennia
-		allow_branch = {
-			always = no
-		}
-
-
-		completion_reward = {
-			custom_effect_tooltip = ARM_corruption_tt
-			if = {
-				limit = {
-					has_idea = export_focus
-				}
-				swap_ideas = {
-					remove_idea = export_focus
-					add_idea = limited_exports
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
 		id = ARM_agricultural_reform
 		icon = agrarian_reform
-		x = 0
+		x = 4
 		y = 1
 		cost = 6
 
 		prerequisite = {
-			focus = ARM_protectionism
+			focus = ARM_continue_free_market
 		}
-		relative_position_id = ARM_protectionism
+		relative_position_id = ARM_continue_free_market
 
 
 		completion_reward = {
@@ -125,15 +92,96 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_infrastructure_boom
-		icon = agrarian_reform
+		icon = GFX_goal_Road_Construction
+		x = 0
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ARM_agricultural_reform
+		}
+		relative_position_id = ARM_agricultural_reform
+
+
+		completion_reward = {
+			230 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_earthquake_rebuilding
+		icon = GFX_focus_goal_ISR_settlement_crane
 		x = 2
 		y = 1
 		cost = 6
 
 		prerequisite = {
-			focus = ARM_protectionism
+			focus = ARM_agricultural_reform
+			#focus = ARM_protectionism
 		}
-		relative_position_id = ARM_protectionism
+		relative_position_id = ARM_agricultural_reform
+
+
+		completion_reward = {
+			230 = {
+				add_extra_state_shared_building_slots = 3
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_invest_in_mining #gold
+		icon = GFX_goal_Coal_Mine
+		x = 1
+		y = 1
+		cost = 6
+		available = {
+			OR = {
+				NGK = {
+					is_puppet_of = ARM
+					controls_state = 832
+				}
+				controls_state = 832
+			}
+		}
+		prerequisite = {
+			focus = ARM_infrastructure_boom
+			focus = ARM_earthquake_rebuilding
+		}
+		relative_position_id = ARM_infrastructure_boom
+
+
+		completion_reward = {
+			add_ideas = ARM_karabakh_mining
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_tourism
+		icon = GFX_goal_Coal_Mine
+		x = 3
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_infrastructure_boom
+			focus = ARM_earthquake_rebuilding
+		}
+		relative_position_id = ARM_infrastructure_boom
 
 
 		completion_reward = {
@@ -144,9 +192,156 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = ARM_invest_in_local_infra
+		icon = GFX_goal_Coal_Mine
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_invest_in_mining
+			focus = ARM_tourism
+		}
+		relative_position_id = ARM_invest_in_mining
+
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_mining_over_tourism
+		icon = GFX_goal_Coal_Mine
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_invest_in_mining
+		}
+		prerequisite = {
+			focus = ARM_invest_in_local_infra
+		}
+		
+		relative_position_id = ARM_invest_in_local_infra
+
+		mutually_exclusive = {
+			focus = ARM_tourism_over_mining
+		}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_tourism_over_mining
+		icon = GFX_goal_Coal_Mine
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_tourism
+		}
+		prerequisite = {
+			focus = ARM_invest_in_local_infra
+		}
+		
+		relative_position_id = ARM_invest_in_local_infra
+		mutually_exclusive = {
+			focus = ARM_mining_over_tourism
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_electric_privatisation
+		icon = GFX_goal_Hydropower
+		x = -1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ARM_infrastructure_boom
+		}
+		prerequisite = {
+			focus = ARM_mafia_backed_industry
+			focus = ARM_independent_industrial_base
+		}
+		relative_position_id = ARM_infrastructure_boom
+
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_themal_power #Yerevan thermal power plant new plant 2007
+		icon = GFX_goal_Civil_Industry
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_electric_privatisation
+		}
+		relative_position_id = ARM_electric_privatisation
+		mutually_exclusive = {
+			focus = ARM_nuclear
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = ARM_constructing_thermal_reactor
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_nuclear
+		icon = GFX_focus_TUR_nuclear_research_institute
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_electric_privatisation
+		}
+		relative_position_id = ARM_electric_privatisation
+		available = {
+			NOT = {
+				OR = {
+					has_completed_focus = ARM_velvet_revolution
+					has_completed_focus = ARM_vengence_of_the_old_guard
+				}
+				
+			}
+		}
+
+		mutually_exclusive = {
+			focus = ARM_themal_power
+		}
+		completion_reward = {
+			custom_effect_tooltip = ARM_constructing_nuclear_reactor
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
 		id = ARM_caucasus_institute
 		icon = GFX_focus_research2
-		x = 0
+		x = 1
 		y = 1
 		cost = 6
 
@@ -165,30 +360,6 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ARM_earthquake_rebuilding
-		icon = GFX_goal_Urban_Construction
-		x = 0
-		y = 2
-		cost = 6
-
-		prerequisite = {
-			focus = ARM_cut_red_tape
-			#focus = ARM_protectionism
-		}
-		relative_position_id = ARM_continue_free_market
-
-
-		completion_reward = {
-			230 = {
-				add_extra_state_shared_building_slots = 3
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
 		id = ARM_mafia_backed_industry
 		icon = GFX_goal_Rich_Businessmen
 		x = 1
@@ -196,9 +367,9 @@ focus_tree = {
 		cost = 4
 
 		prerequisite = {
-			focus = ARM_earthquake_rebuilding
+			focus = ARM_cut_red_tape
 		}
-		relative_position_id = ARM_earthquake_rebuilding
+		relative_position_id = ARM_cut_red_tape
 		mutually_exclusive = {
 			focus = ARM_independent_industrial_base
 		}
@@ -284,16 +455,75 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ARM_iranian_armenian_gas_pipeline
-		icon = GFX_goal_Oil_Excavation
-		x = 0
+		id = ARM_armenal_foil_mill_retrofit #2006 by RUSAL
+		icon = GFX_focus_generic_aluminum
+		x = -2
 		y = 1
 		cost = 4
 
 		prerequisite = {
-			focus = ARM_middle_eastern_trade_investments
+			focus = ARM_grand_tobacco
 		}
-		relative_position_id = ARM_middle_eastern_trade_investments
+		relative_position_id = ARM_grand_tobacco
+
+		completion_reward = {
+			230 = {
+				add_resource = {
+					type = aluminium
+					amount = 5
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_steel_factory #Charentsavan Kotaiks region steel
+		icon = GFX_focus_generic_steel
+		x = -4
+		y = 1
+		cost = 4
+
+		prerequisite = {
+			focus = ARM_grand_tobacco
+		}
+		relative_position_id = ARM_grand_tobacco
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = ARM_mafia_backed_industry
+				} 
+				custom_effect_tooltip = ARM_worsen_corruption_tt
+				add_to_variable = {ARM_resource_corruption = -0.03 }
+
+			}
+			230 = {
+				add_resource = {
+					type = steel
+					amount = 5
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_iranian_armenian_gas_pipeline
+		icon = GFX_goal_Oil_Excavation
+		x = 1
+		y = 1
+		cost = 4
+
+		prerequisite = {
+			focus = ARM_nuclear
+			focus = ARM_themal_power
+		}
+		relative_position_id = ARM_nuclear
 
 		completion_reward = {
 			#depends on relationship with russia
@@ -310,10 +540,34 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = ARM_end_subsidies
+		icon = GFX_goal_Oil_Excavation
+		x = 0
+		y = 1
+		cost = 4
+		available = {
+			not = {
+				has_completed_focus = ARM_counter_revolutionary_sentiment
+			}
+		}
+		prerequisite = {
+			focus = ARM_iranian_armenian_gas_pipeline
+		}
+		relative_position_id = ARM_iranian_armenian_gas_pipeline
+
+		completion_reward = {
+			add_stability = -0.05
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
 		id = ARM_independent_industrial_base
 		icon = GFX_goal_Overthrow_Bourgeosie
 		x = -1
-		y = 1
+		y = 2
 		cost = 15
 		available = {
 			custom_trigger_tooltip = {
@@ -322,9 +576,9 @@ focus_tree = {
 			}
 		}
 		prerequisite = {
-			focus = ARM_earthquake_rebuilding
+			focus = ARM_cut_red_tape
 		}
-		relative_position_id = ARM_earthquake_rebuilding
+		relative_position_id = ARM_continue_free_market
 		mutually_exclusive = {
 			focus = ARM_mafia_backed_industry
 		}
@@ -847,6 +1101,9 @@ focus_tree = {
 
 		completion_reward = {
 			remove_ideas = ARM_pheonix_reborn
+			AZR = {
+				annex_country = NGK
+			}
 		}
 
 		ai_will_do = {
@@ -1193,7 +1450,7 @@ focus_tree = {
 	focus = {
 		id = ARM_recovery_from_Parliment_shooting
 		icon = fascist_spy
-		x = 8
+		x = 10
 		y = 0
 		cost = 6
 
@@ -1283,6 +1540,42 @@ focus_tree = {
 					option = RANDOM
 				}
 			}
+		}
+	}
+	focus = {
+		id = ARM_support_kabbah
+		icon = GFX_focus_generic_support_the_left_right
+		x = -2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ARM_maintain_koch_coalition
+		}
+		relative_position_id = ARM_maintain_koch_coalition
+
+		completion_reward = {
+			NGK = {
+				add_equipment_to_stockpile = {
+					type = motorized_equipment
+					amount = 50
+					producer = SOV
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 300
+					producer = SOV
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment_1
+					amount = 30
+					producer = SOV
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
 		}
 	}
 	focus = {
@@ -1645,7 +1938,6 @@ focus_tree = {
 		relative_position_id = ARM_recovery_from_Parliment_shooting
 
 		completion_reward = {
-			add_stability = -0.1
 			country_event = ARM.2
 		}
 
@@ -2101,12 +2393,13 @@ focus_tree = {
 		}
 		relative_position_id = ARM_appeal_to_the_countryside
 		available = {
-			custom_trigger_tooltip = {tooltip = ARM_not_yet_here always = no }
+
 
 		}
 
 		completion_reward = {
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_political_power = 50
 		}
 
 		ai_will_do = {
@@ -2191,9 +2484,9 @@ focus_tree = {
 			focus = ARM_coalition_with_lesser_oligarchs
 		}
 		relative_position_id = ARM_coalition_with_lesser_oligarchs
-		allow_branch = {
-			always = no
-		}
+		#allow_branch = {
+		#	always = no
+		#}
 		completion_reward = {
 		}
 
@@ -2380,6 +2673,8 @@ focus_tree = {
 		relative_position_id = ARM_grass_roots_resistence
 
 		completion_reward = {
+			add_war_support = -0.02
+			add_political_power = -25
 		}
 
 		ai_will_do = {
@@ -2420,6 +2715,7 @@ focus_tree = {
 		relative_position_id = ARM_violet_revolution
 
 		completion_reward = {
+			#event to increase political support
 		}
 
 		ai_will_do = {
@@ -2483,6 +2779,7 @@ focus_tree = {
 			focus = ARM_vengence_of_the_old_guard
 		}
 		completion_reward = {
+			#event to increase relations with russia
 		}
 
 		ai_will_do = {
@@ -2522,6 +2819,15 @@ focus_tree = {
 		relative_position_id = ARM_stabalise_the_nation
 
 		completion_reward = {
+			add_stability = 0.05
+			230 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {

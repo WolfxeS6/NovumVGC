@@ -183,7 +183,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ISR_SinaiClaim_focus
-		icon = forceful_treaty
+		icon = GFX_focus_generic_the_suez
 		x = 2
 		y = 2
 		cost = 20
@@ -976,7 +976,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ISR_west_bank_intensify_settlements
-		icon = GFX_goal_City_Construction
+		icon = GFX_focus_goal_ISR_settlement_crane
 		y = 1
 		x = -1
 		cost = 5
@@ -1191,6 +1191,417 @@ focus_tree = {
 			factor = 15
 		}
 	}
+	###########Politics
+	focus = {
+		id = ISR_politics_start
+		icon = align_to_israel
+		y = 0
+		x = 25
+		cost = 5
+
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_left_wing
+		icon = GFX_goal_support_democracy
+		y = 1
+		x = -2
+		cost = 5
+
+		relative_position_id = ISR_politics_start
+		prerequisite = {focus = ISR_politics_start}
+		mutually_exclusive = {focus = ISR_right_wing}
+		completion_reward = {
+			fourth_estate_social_liberal_increase = yes
+			fourth_estate_social_democrat_increase = yes
+			add_ideas = idea_ISR_support_left
+			add_war_support = -0.02
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_support_of_kibbutz
+		icon = industry_democratic4
+		y = 1
+		x = -2
+		cost = 5
+
+		relative_position_id = ISR_left_wing
+		prerequisite = {focus = ISR_left_wing}
+		completion_reward = {
+			fourth_estate_democratic_socialist_increase = yes
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.1
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_israeli_healthcare
+		icon = GFX_goal_generic_intelligence_exchange
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_left_wing
+		prerequisite = {focus = ISR_left_wing}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_community_services
+		icon = GFX_focus_generic_concessions
+		y = 1
+		x = -1
+		cost = 5
+
+		relative_position_id = ISR_israeli_healthcare
+		prerequisite = {focus = ISR_israeli_healthcare}
+		prerequisite = {focus = ISR_support_of_kibbutz}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_negev_terraforming
+		icon = GFX_focus_generic_land_reclamation
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_israeli_healthcare
+		prerequisite = {focus = ISR_israeli_healthcare}
+		completion_reward = {
+			812 = {
+				set_state_category = state_level_5
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_russian_jews
+		icon = GFX_focus_generic_socialist_science
+		y = 1
+		x = -1
+		cost = 5
+
+		relative_position_id = ISR_support_of_kibbutz
+		prerequisite = {focus = ISR_support_of_kibbutz}
+		completion_reward = {
+			fourth_estate_democratic_socialist_increase = yes
+			fourth_estate_communist_increase = yes #
+			add_opinion_modifier = {
+				target = SOV
+				modifier = recent_actions_positive
+			}
+			SOV = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = recent_actions_positive
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_right_wing
+		icon = GFX_focus_generic_court
+		y = 1
+		x = 3
+		cost = 5
+
+		relative_position_id = ISR_politics_start
+		prerequisite = {focus = ISR_politics_start}
+		mutually_exclusive = {focus = ISR_left_wing}
+		completion_reward = {
+			fourth_estate_conservative_increase = yes
+			fourth_estate_reactionary_increase = yes
+			fourth_estate_islamist_increase = yes
+			add_ideas = idea_ISR_support_right
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_bibi
+		icon = GFX_goal_generic_demand_territory
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_right_wing
+		mutually_exclusive = {focus = ISR_rabbinical_support}
+		prerequisite = {focus = ISR_right_wing}
+		completion_reward = {
+			fourth_estate_conservative_increase = yes
+			fourth_estate_reactionary_increase = yes
+			add_ideas = idea_ISR_conservative_thought
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_realpolitik
+		icon = GFX_goal_generic_demand_territory
+		y = 2
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_bibi
+		prerequisite = {focus = ISR_bibi}
+		prerequisite = {focus = ISR_ultraorthadox_crackdown_weak focus = ISR_ultraorthadox_crackdown_strong}
+		completion_reward = {
+			add_ideas = idea_ISR_realpolitik
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_ultraorthadox_crackdown_strong
+		icon = GFX_goal_generic_forceful_treaty
+		y = 1
+		x = 2
+		cost = 5
+
+		relative_position_id = ISR_bibi
+		mutually_exclusive = {focus = ISR_ultraorthadox_crackdown_weak}
+		prerequisite = {focus = ISR_bibi}
+		completion_reward = {
+			add_stability = -0.05
+			fourth_estate_islamist_decrease = yes
+			add_ideas = idea_ISR_fighting_orthodox
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_revoke_compensation_for_orthadox
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_ultraorthadox_crackdown_strong
+		prerequisite = {focus = ISR_ultraorthadox_crackdown_strong}
+		completion_reward = {
+			add_ideas = idea_ISR_removed_compensation_orthodox
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_ultraorthadox_crackdown_weak
+		icon = GFX_goal_generic_national_unity
+		y = 1
+		x = -2
+		cost = 5
+
+		relative_position_id = ISR_bibi
+		mutually_exclusive = {focus = ISR_ultraorthadox_crackdown_strong}
+		prerequisite = {focus = ISR_bibi focus = ISR_israeli_healthcare}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_integration_program
+		icon = GFX_focus_generic_military_academy
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_ultraorthadox_crackdown_weak
+		prerequisite = {focus = ISR_ultraorthadox_crackdown_weak}
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_secular_society
+		icon = GFX_focus_research2
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_integration_program
+		prerequisite = {focus = ISR_integration_program}
+		completion_reward = {
+			add_ideas = idea_ISR_secular_society
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	
+	focus = {
+		id = ISR_rabbinical_support
+		icon = GFX_focus_goal_ISR_jewish_state
+		y = 1
+		x = 5
+		cost = 5
+		mutually_exclusive = {focus = ISR_bibi}
+		relative_position_id = ISR_right_wing
+		prerequisite = {focus = ISR_right_wing}
+		completion_reward = {
+			fourth_estate_islamist_increase = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_encourage_talmudic_studies
+		icon = dangerous_laws
+		y = 1
+		x = 0
+		cost = 5
+		relative_position_id = ISR_rabbinical_support
+		prerequisite = {focus = ISR_rabbinical_support}
+		completion_reward = {
+			add_ideas = idea_ISR_talmund_study
+			fourth_estate_islamist_increase = yes
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_religious_military
+		icon = dangerous_laws
+		y = 1
+		x = 1
+		cost = 10
+		relative_position_id = ISR_encourage_talmudic_studies
+		prerequisite = {focus = ISR_encourage_talmudic_studies}
+		completion_reward = {
+			add_ideas = idea_ISR_the_jew_state
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_jewish_law
+		icon = dangerous_laws
+		y = 1
+		x = -1
+		cost = 10
+		relative_position_id = ISR_encourage_talmudic_studies
+		prerequisite = {focus = ISR_encourage_talmudic_studies}
+		completion_reward = {
+			add_ideas = idea_ISR_jewish_law
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_rebuild_the_temple
+		icon = dangerous_laws
+		y = 1
+		x = 1
+		cost = 10
+		relative_position_id = ISR_jewish_law
+		prerequisite = {focus = ISR_jewish_law}
+		prerequisite = {focus = ISR_religious_military}
+		completion_reward = {
+			add_war_support = 0.1 #
+			add_timed_idea = {
+				idea = ISR_rebuilding_the_temple
+				days = 90
+			}
+			EGY = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = holy_war_trade
+				}
+			}
+			PAL = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = holy_war_trade
+				}
+			}
+			SYR = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = holy_war_trade
+				}
+			}
+			LEB = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = holy_war_trade
+				}
+			}
+			SAU = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = holy_war_trade
+				}
+			}
+			JOR = {
+				add_opinion_modifier = {
+					target = ISR
+					modifier = holy_war_trade
+				}
+			}
+
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+
 	focus = {
 		id = ISR_IDF_focus
 		icon = GFX_focus_goal_ISR_IDF
@@ -1327,36 +1738,6 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ISR_have_Better_Fighter_Planes_focus
-		icon = fighter
-		x = 34
-		y = 3
-		cost = 10
-
-		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
-		mutually_exclusive = { focus = ISR_have_Better_Drones_focus }
-
-		ai_will_do = {
-			factor = 10
-		}
-
-		available = {
-			OR = {
-				date > 2004.6.1
-				threat > 0.2
-			}
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = fighter_bonus
-				bonus = 0.5
-				uses = 2
-				category = light_fighter
-			}
-		}
-	}
-	focus = {
 		id = ISR_have_Better_Drones_focus
 		icon = bomber
 		x = 36
@@ -1364,7 +1745,6 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
-		mutually_exclusive = { focus = ISR_have_Better_Fighter_Planes_focus }
 
 		ai_will_do = {
 			factor = 10
@@ -1416,45 +1796,6 @@ focus_tree = {
 			add_timed_idea = {
 				idea = idea_ISR_drone_creating_efficiency
 				days = 730
-			}
-		}
-	}
-	focus = {
-		id = ISR_have_Futuristic_Fighter_Planes_focus
-		icon = fighter
-		x = 34
-		y = 4
-		cost = 10
-
-		prerequisite = { focus = ISR_have_Better_Fighter_Planes_focus }
-
-		ai_will_do = {
-			factor = 10
-		}
-
-		available = {
-			date > 2012.1.1
-			threat > 0.35
-		}
-
-		completion_reward = {
-			air_experience=150
-			add_tech_bonus = {
-				name = drone_bonus
-				bonus = 0.3
-				uses = 1
-				category = light_fighter
-			}
-			454 = {
-				add_building_construction = {
-					type = air_base
-					level = 2
-					instant_build = yes
-				}
-			}
-			add_timed_idea = {
-				idea = idea_ISR_fighter_creating_efficiency
-				days = 365
 			}
 		}
 	}

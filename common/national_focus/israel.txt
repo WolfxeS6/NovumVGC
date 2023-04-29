@@ -1125,8 +1125,8 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.1
 			add_timed_idea = {
-				add_idea = idea_SIA_fix_broken
-				days = 60
+				add_idea = ISR_rebuilding_our_land
+				days = 120
 			}
 		}
 
@@ -1259,6 +1259,8 @@ focus_tree = {
 		relative_position_id = ISR_left_wing
 		prerequisite = {focus = ISR_left_wing}
 		completion_reward = {
+			add_stability = 0.02
+			improve_welfare = yes
 		}
 
 		ai_will_do = {
@@ -1323,6 +1325,133 @@ focus_tree = {
 					modifier = recent_actions_positive
 				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_foreign_investments
+		icon = GFX_focus_spa_the_spanish_miracle
+		y = 1
+		x = 11
+		cost = 5
+
+		relative_position_id = ISR_politics_start
+		prerequisite = {focus = ISR_politics_start}
+		completion_reward = {
+			454 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			812 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_high_tech_industry
+		icon = GFX_goal_generic_production2
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_foreign_investments
+		prerequisite = {focus = ISR_foreign_investments}
+		completion_reward = {
+			1065 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_focus_on_tourism
+		icon = GFX_focus_generic_long_range_aircraft
+		y = 2
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_foreign_investments
+		prerequisite = {focus = ISR_foreign_investments}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_global_collaborations
+		icon = GFX_goal_generic_scientific_exchange
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_focus_on_tourism
+		prerequisite = {focus = ISR_focus_on_tourism}
+		prerequisite = {focus = ISR_high_tech_industry}
+		completion_reward = {
+			add_research_slot = 1
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_high_tech_military
+		icon = GFX_goal_generic_construct_mil_factory
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_high_tech_industry
+		prerequisite = {focus = ISR_high_tech_industry}
+		completion_reward = {
+			454 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_venture_capital
+		icon = GFX_focus_mex_privatisation
+		y = 1
+		x = -1
+		cost = 5
+
+		relative_position_id = ISR_foreign_investments
+		prerequisite = {focus = ISR_foreign_investments}
+		completion_reward = {
+			add_ideas = ISR_venture_capital_inflow
 		}
 
 		ai_will_do = {
@@ -1426,6 +1555,23 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = ISR_universal_conscription
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_revoke_compensation_for_orthadox
+		prerequisite = {focus = ISR_revoke_compensation_for_orthadox}
+		completion_reward = {
+			add_ideas = idea_ISR_universal_conscription
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
 		id = ISR_ultraorthadox_crackdown_weak
 		icon = GFX_goal_generic_national_unity
 		y = 1
@@ -1436,6 +1582,7 @@ focus_tree = {
 		mutually_exclusive = {focus = ISR_ultraorthadox_crackdown_strong}
 		prerequisite = {focus = ISR_bibi focus = ISR_israeli_healthcare}
 		completion_reward = {
+			add_ideas = ISR_working_with_rabbis
 		}
 
 		ai_will_do = {
@@ -1452,6 +1599,10 @@ focus_tree = {
 		relative_position_id = ISR_ultraorthadox_crackdown_weak
 		prerequisite = {focus = ISR_ultraorthadox_crackdown_weak}
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = ISR_working_with_rabbis
+				add_idea = ISR_orthadox_integration_program
+			}
 		}
 
 		ai_will_do = {
@@ -1512,7 +1663,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ISR_religious_military
-		icon = dangerous_laws
+		icon = GFX_goal_demand_sudetenland
 		y = 1
 		x = 1
 		cost = 10
@@ -1528,7 +1679,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ISR_jewish_law
-		icon = dangerous_laws
+		icon = GFX_goal_generic_forceful_treaty
 		y = 1
 		x = -1
 		cost = 10
@@ -1544,7 +1695,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ISR_rebuild_the_temple
-		icon = dangerous_laws
+		icon = GFX_goal_reichsautobahn
 		y = 1
 		x = 1
 		cost = 10
@@ -1633,7 +1784,7 @@ focus_tree = {
 	focus = {
 		id = ISR_invest_in_the_IAF_focus
 		icon = GFX_focus_goal_ISR_IAF
-		x = 37
+		x = 41
 		y = 1
 		cost = 10
 
@@ -1650,12 +1801,12 @@ focus_tree = {
 	focus = {
 		id = ISR_Israeli_Pilot_Training_focus
 		icon = airforce
-		x = 37
-		y = 2
+		x = 0
+		y = 1
 		cost = 12
 
 		prerequisite = { focus = ISR_invest_in_the_IAF_focus }
-
+		relative_position_id = ISR_invest_in_the_IAF_focus
 		ai_will_do = {
 			factor = 10
 		}
@@ -1667,12 +1818,12 @@ focus_tree = {
 	focus = {
 		id = ISR_expand_The_Israeli_Airbases_focus
 		icon = airforce
-		x = 38
-		y = 3
+		x = -1
+		y = 1
 		cost = 12
 
 		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
-
+		relative_position_id = ISR_Israeli_Pilot_Training_focus
 		ai_will_do = {
 			factor = 10
 		}
@@ -1697,12 +1848,12 @@ focus_tree = {
 	focus = {
 		id = ISR_build_Airbases_In_the_Negev_focus
 		icon = airforce
-		x = 38
-		y = 4
+		x = 0
+		y = 1
 		cost = 10
 
 		prerequisite = { focus = ISR_expand_The_Israeli_Airbases_focus }
-
+		relative_position_id = ISR_expand_The_Israeli_Airbases_focus
 		ai_will_do = {
 			factor = 10
 		}
@@ -1720,12 +1871,12 @@ focus_tree = {
 	focus = {
 		id = ISR_Israeli_Precise_Bombing_Assasinations
 		icon = fighter2
-		x = 40
-		y = 3
+		x = 1
+		y = 1
 		cost = 15
 
 		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
-
+		relative_position_id = ISR_Israeli_Pilot_Training_focus
 		available = {
 			date>2002.2.1
 		}
@@ -1748,12 +1899,12 @@ focus_tree = {
 	focus = {
 		id = ISR_have_Better_Drones_focus
 		icon = bomber
-		x = 36
-		y = 3
+		x = 0
+		y = 1
 		cost = 10
 
-		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
-
+		prerequisite = { focus = ISR_Israeli_Precise_Bombing_Assasinations }
+		relative_position_id = ISR_Israeli_Precise_Bombing_Assasinations
 		ai_will_do = {
 			factor = 10
 		}
@@ -1777,12 +1928,12 @@ focus_tree = {
 	focus = {
 		id = ISR_have_World_Leading_Drones_focus
 		icon = bomber
-		x = 36
-		y = 4
+		x = 0
+		y = 1
 		cost = 30
 
 		prerequisite = { focus = ISR_have_Better_Drones_focus }
-
+		relative_position_id = ISR_have_Better_Drones_focus
 		ai_will_do = {
 			factor = 10
 		}
@@ -1824,7 +1975,14 @@ focus_tree = {
 
 		completion_reward = {
 			navy_experience=30
-
+			1176 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 	}
 	focus= {
@@ -1920,66 +2078,6 @@ focus_tree = {
 
 		completion_reward = {
 			GER = { country_event = { id = israel.21 } }
-		}
-	}
-	focus = {
-		id = ISR_naval_Exercise_I_focus
-		icon = navy
-		cost = 10
-		x = 42
-		y = 3
-
-		prerequisite = { focus = ISR_prepare_For_Extanding_The_Navy_focus }
-
-		ai_will_do = {
-			factor = 10
-		}
-
-		completion_reward = {
-			navy_experience=50
-		}
-	}
-	focus = {
-		id = ISR_naval_Exercise_II_focus
-		icon = navy
-		cost = 10
-		x = 42
-		y = 4
-
-		prerequisite = { focus = ISR_naval_Exercise_I_focus }
-
-		ai_will_do = {
-			factor = 10
-		}
-
-		available = {
-			date > 2002.1.1
-		}
-
-		completion_reward = {
-			navy_experience=50
-		}
-	}
-	focus = {
-		id = ISR_naval_Exercise_III_focus
-		icon = navy
-		cost = 15
-		x = 42
-		y = 5
-
-		prerequisite = { focus = ISR_naval_Exercise_II_focus }
-
-		ai_will_do = {
-			factor = 15
-		}
-
-		available = {
-			date > 2004.1.1
-		}
-
-		completion_reward = {
-			navy_experience=50
-			add_ideas= idea_ISR_completed_naval_exercises
 		}
 	}
 	focus = {

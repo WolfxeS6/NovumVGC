@@ -14,10 +14,385 @@ focus_tree = {
 	default = no
 
 	shared_focus = GEN_focus_on_diplomacy
-	shared_focus = GEN_a_new_economy_for_a_new_millenium
 	shared_focus = GEN_modernize_the_airforce
 	shared_focus = GEN_modernize_the_navy
 	shared_focus = GEN_bolster_the_army
+
+	##############
+	###ECONOMY###
+	##############
+
+focus = {
+		id = AZR_ekonomi1
+		icon = destroy_society
+		text = GEN_a_new_economy_for_a_new_millenium
+		x = -10
+		y = 0
+		cost = 8
+
+		prerequisite = {
+		}
+		completion_reward = {
+		swap_ideas = {
+				remove_idea = AZR_post_soviet_economy
+				add_idea  = AZR_post_soviet_economy_2
+			}
+	add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.8
+			uses = 1
+			category = industry
+		}	
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi2
+		icon = infrastructure
+		text = "Progress in Transport"
+		x = -1
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi1
+		prerequisite = {focus = AZR_ekonomi1}
+		completion_reward = {
+add_ideas = bakanlik_ulastirma
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi3
+		text ="Agrarian Reform"
+		icon = POL_farming_improvments
+		x = 1
+		y = 1
+		cost = 5
+        relative_position_id =  AZR_ekonomi1
+		prerequisite = {focus = AZR_ekonomi1}
+		completion_reward = {
+					add_ideas = LAT_agarian_reform
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi4
+		text ="Five Years Plan"
+		icon = POL_subsidise_economy
+		x = 0
+		y = 2
+		cost = 8
+        relative_position_id =  AZR_ekonomi1
+		prerequisite = {focus = AZR_ekonomi2 focus = AZR_ekonomi3}
+		completion_reward = {
+add_timed_idea = {
+				idea = TUR_five_year_plan
+				days = 1800
+			}
+		remove_ideas = AZR_post_soviet_economy_2
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi5
+		text ="Develop The National Arms Industry"
+		icon = industry_military
+		x = -1
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi4
+		prerequisite = {focus = AZR_ekonomi4}
+		completion_reward = {
+add_ideas = HUN_developed_arms_industry
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi6
+		text ="Agreement With Petrol Ofisi"
+		icon = GFX_focus_TUR_petrol_ofisi
+		x = 2
+		y = 2
+		cost = 4
+        relative_position_id =  AZR_ekonomi4
+		prerequisite = {focus = AZR_ekonomi4}
+		mutually_exclusive = {focus = AZR_ekonomi7}
+		completion_reward = {
+			TUR = { increase_trade_influence_by_3 = yes }
+
+				add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = synth_resources
+			}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi7
+		text ="Agreement With GAZPROM"
+		icon = oil_trade
+		x = -2
+		y = 2
+		cost = 4
+        relative_position_id =  AZR_ekonomi4
+		prerequisite = {focus = AZR_ekonomi4}
+		mutually_exclusive = {focus = AZR_ekonomi6}
+		completion_reward = {
+			SOV = { increase_trade_influence_by_3 = yes }
+
+				add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = synth_resources
+			}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi8
+		text ="Resources of the Caspian Sea"
+		icon = GFX_focus_Oil_Rig_2
+		x = 1
+		y = 2
+		cost = 4
+        relative_position_id =  AZR_ekonomi5
+		prerequisite = {focus = AZR_ekonomi7 focus = AZR_ekonomi6}
+		completion_reward = {
+			229 = {
+				add_resource = {
+					type = oil
+					amount = 25
+				}
+				}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi9
+		text ="Support Minor Company"
+		icon = subsidy_industry
+		x = 1
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi4
+		prerequisite = {focus = AZR_ekonomi4}
+		completion_reward = {
+		add_ideas = civilian_industry_project
+random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi10
+		text = GEN_subside_our_farmers
+	icon = agriculture
+		x = 1
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi3
+		prerequisite = {focus = AZR_ekonomi3}
+		completion_reward = {
+			add_ideas = agricultural_subsidies
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi11
+		text = "Resource Trading"
+	    icon = GFX_goal_Trade_Deal
+		x = -1
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi2
+		prerequisite = {focus = AZR_ekonomi2}
+		completion_reward = {
+			add_ideas = HUN_expanded_consumer_goods_industry
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi12
+		text = "Smart Cities"
+	    icon = GFX_Smart_City_Plan
+		x = 0
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi8
+		prerequisite = {focus = AZR_ekonomi8}
+		completion_reward = {
+				add_ideas = scientific_advances
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi13
+		text = "University of Baku"
+	    icon = tech_sharing
+		x = 1
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi12
+		prerequisite = {focus = AZR_ekonomi12}
+		completion_reward = {
+			add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi14
+		text = "Space Exploration"
+	    icon = research
+		x = -1
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi12
+		prerequisite = {focus = AZR_ekonomi12}
+		completion_reward = {
+          swap_ideas = {
+				add_idea = scientific_advances2
+				remove_idea = scientific_advances
+			}
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi15
+		text = "Russian Investments"
+	    icon = align_to_russia
+		x = 0
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi7
+		prerequisite = {focus = AZR_ekonomi7}
+		completion_reward = {
+				SOV = { add_timed_idea = {
+				idea = AZR_helping
+				days = 1800
+			}}
+				
+       		unlock_decision_category_tooltip = AZR_russia_investments
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = AZR_ekonomi16
+		text = "Turkish Investments"
+	    icon = align_to_turkey
+		x = 0
+		y = 1
+		cost = 8
+        relative_position_id =  AZR_ekonomi6
+		prerequisite = {focus = AZR_ekonomi6}
+		completion_reward = {
+		TUR = { add_timed_idea = {
+				idea = AZR_helping
+				days = 1800
+			}}
+              unlock_decision_category_tooltip = AZR_turkey_investments
+			}
+		ai_will_do = {
+			factor = 10
+		}
+	}
 
 
 

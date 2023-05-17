@@ -13,7 +13,6 @@ focus_tree = {
 
 	default = no
 
-	shared_focus = GEN_focus_on_diplomacy
 	shared_focus = GEN_modernize_the_airforce
 	shared_focus = GEN_modernize_the_navy
 	shared_focus = GEN_bolster_the_army
@@ -393,7 +392,690 @@ random_owned_state = {
 			factor = 10
 		}
 	}
+	
+	##############
+	###POLITICS NEW###
+	##############
+	
+		focus = {
+		id = azr_gelecek
+		icon = demand_territory
+		text = "Our Future"
+		x = 5
+		y = 0
+		cost = 7
 
+		prerequisite = {
+		}
+
+
+		completion_reward = {
+			add_political_power = 75
+			add_stability = 0.05
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = aliyevdevam
+		icon = based_dictatorship
+		text = "House of Aliyev"
+		x = -2
+		y = 1
+		cost = 8
+		relative_position_id = azr_gelecek
+
+		prerequisite = {
+			focus = azr_gelecek
+		}
+		mutually_exclusive = {  focus = aliyevkarsi   }
+
+
+		completion_reward = {
+
+		}
+
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				add = -10
+			}
+		}
+	}
+	
+		focus = {
+		id = aliyev1
+		icon = yap_goal
+		text = "Yeni Azerbaycan Partiyası"
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = aliyevdevam
+
+		prerequisite = {
+			focus = aliyevdevam
+		}
+		mutually_exclusive = {   focus = komunist1   }
+
+
+		completion_reward = {
+
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.05
+			}
+			fourth_estate_reactionary_increase = yes
+			fourth_estate_conservative_decrease = yes
+			fourth_estate_nationalist_decrease = yes
+			fourth_estate_communist_decrease = yes
+		}
+
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				add = -10
+			}
+		}
+	}
+	
+	focus = {
+		id = elcibey1
+		icon = halk_goal
+		text = "Halk Cebhesi"
+		x = 5
+		y = 1
+		cost = 8
+		relative_position_id = azr_gelecek
+
+		prerequisite = {
+			focus = azr_gelecek
+		}
+		mutually_exclusive = {     }
+
+
+		completion_reward = {
+
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			fourth_estate_conservative_increase = yes 
+			fourth_estate_reactionary_decrease = yes
+			fourth_estate_nationalist_decrease = yes
+			fourth_estate_communist_decrease = yes
+		}
+
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				add = -10
+			}
+		}
+	}
+	
+	focus = {
+		id = komunist1
+		icon = communist_government
+		text = "Komunist Partiyası"
+		x = -5
+		y = 1
+		cost = 8
+		relative_position_id = aliyevdevam
+
+		prerequisite = {
+			focus = aliyevdevam
+		}
+		mutually_exclusive = { focus = aliyev1 }
+
+
+		completion_reward = {
+
+			add_popularity = {
+				ideology = communist
+				popularity = 0.05
+			}
+			add_timed_idea = {
+				idea = idea_focus_generic_path_of_equality
+				days = 120
+			}
+			fourth_estate_communist_increase = yes
+			fourth_estate_conservative_decrease = yes
+			fourth_estate_nationalist_decrease = yes
+			fourth_estate_reactionary_decrease = yes
+		}
+
+
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				add = -10
+			}
+		}
+	}
+	
+	#komunistpropaganda1
+	focus = {
+		id = komunist_propaganda1
+		text = "Propaganda Work with Young People"
+		icon = POL_commie_strike
+		x = -1
+		y = 1
+		cost = 3
+        relative_position_id = komunist1
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		prerequisite = { focus = komunist1 }
+		completion_reward = {
+			add_political_power = 30
+			add_popularity = {
+				ideology = communist
+				popularity = 0.05
+			}
+
+
+		}
+	}
+	
+		#komunist_propaganda2
+	focus = {
+		id = komunist_propaganda2
+		text = "Fight Fascism"
+		icon = POL_commie_destroy_facism
+		x = 1
+		y = 1
+		cost = 3
+		relative_position_id = komunist1
+
+		prerequisite = { focus = komunist1 }
+
+		completion_reward = {
+			add_political_power = 30
+		add_popularity = {
+				ideology = fascist
+				popularity = -0.03
+			}
+			add_popularity = {
+				ideology = communist
+				popularity = 0.03
+			}
+
+
+		}
+	}
+	
+	#komunist_sov1
+	focus = {
+		id = komunist_sov1
+		text = "Members of the KGB"
+		icon = Polish_russian_friendship
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = komunist1
+		prerequisite = { focus = komunist_propaganda1}
+		prerequisite = { focus = komunist_propaganda2 }
+		completion_reward = {
+			add_ideas = kgb_0
+		}
+	}
+	
+	#komunist_olddays1
+	focus = {
+		id = komunist_olddays1
+		text = "Aliyev Returns to Old Days"
+		icon = communism42
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = komunist_sov1
+		prerequisite = { focus = komunist_sov1}
+		completion_reward = {
+			create_country_leader = {
+					name = "Heydar Aliyev"
+					picture = "Heydar_Aliyev.dds"
+					ideology = leninist
+					traits = { eager_collaborator}
+				}
+				start_civil_war = {
+				ruling_party = communist
+				ideology = consevative
+				size = 0.2
+				states = { 877 878 }
+			}
+
+
+		}
+	}
+	
+	#komunist2
+	focus = {
+		id = komunist2
+		text = "Trials of Anti-Communists"
+		icon = GFX_Communist_Persecution
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = komunist_olddays1
+		prerequisite = { focus = komunist_olddays1}
+		completion_reward = {
+			add_stability = 0.03
+            add_political_power = 35
+
+		}
+	}
+	
+	#komunist3
+	focus = {
+		id = komunist3
+		text = "Communist Diplomacy"
+		icon = communism31
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = komunist_olddays1
+		prerequisite = { focus = komunist_olddays1}
+		completion_reward = {
+		add_popularity = {
+				ideology = communist
+				popularity = 0.03
+			}
+			add_country_leader_trait = veteran_communist
+every_country = {
+				limit = {
+					OR = {
+						has_government = market_liberal
+						has_idea = free_trade
+					}
+				}
+				add_opinion_modifier = {
+					target = AZR
+					modifier = communist_diplomacy
+				}
+			}
+			
+
+		}
+	}
+	
+	#komunist4
+	focus = {
+		id = komunist4
+		text = "Russian Friends"
+		icon = bhu_Glorify_Soviet_History
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = komunist_olddays1
+		prerequisite = { focus = komunist3}
+		prerequisite = { focus = komunist2}
+		completion_reward = {
+		swap_ideas = {
+				remove_idea = kgb_0
+				add_idea = kgb_1
+			}
+			
+
+		}
+	}
+	
+	#komunist5
+	focus = {
+		id = komunist5
+		text = "Education Reforms"
+		icon = socialist_education
+		x = 0
+		y = 3
+		cost = 5
+		relative_position_id = komunist_olddays1
+		prerequisite = { focus = komunist4}
+		completion_reward = {
+			add_research_slot = 1
+			add_ideas = BUL_socialist_education
+			
+
+		}
+	}
+	
+	#komunist6
+	focus = {
+		id = komunist6
+		text = "Communist Militias"
+		icon = Communal_Militias
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = komunist2
+		prerequisite = { focus = komunist2}
+		completion_reward = {
+			add_ideas = communist_militias
+			add_war_support = 0.04
+			
+
+		}
+	}
+	
+	#komunist7
+	focus = {
+		id = komunist7
+		icon = work_red
+		text = "Workers Rights"
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = komunist2
+		prerequisite = { focus = komunist2}
+		completion_reward = {
+			add_ideas = BUL_protect_workers_rights
+		}
+	}
+	
+	#komunist8
+	focus = {
+		id = komunist8
+		text = "Prison Workforce"
+		icon = GFX_focus_SOV_penal_battalions
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = komunist7
+		prerequisite = { focus = komunist7}
+		completion_reward = {
+         add_political_power = 35
+			add_ideas = FRA_prison_workforce_mobilized
+		}
+	}
+	
+	#komunist9
+	focus = {
+		id = komunist9
+		text = "Members of Chinese Army"
+		icon = communist_china2
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = komunist6
+		prerequisite = { focus = komunist6}
+		completion_reward = {
+         add_ideas = yardim_rus
+		}
+	}
+	
+	#komunist10
+	focus = {
+		id = komunist10
+		text = "Five Years Plan"
+		icon = communism17
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = komunist3
+		prerequisite = { focus = komunist3}
+		completion_reward = {
+add_timed_idea = {
+				idea = SOV_five_year_plan
+				days = 1825
+			}	
+			}
+	}
+	
+	#komunist11
+	focus = {
+		id = komunist11
+		text = "Price Control"
+		icon = money_communism
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = komunist3
+		prerequisite = { focus = komunist3}
+		completion_reward = {
+add_ideas = LAT_price_control_idea
+			}
+	}
+	
+	#komunist12
+	focus = {
+		id = komunist12
+		text = "Economic Revolutions"
+		icon = communism25
+		x = -3
+		y = 2
+		cost = 5
+		relative_position_id = komunist3
+		prerequisite = { focus = komunist10}
+		completion_reward = {
+add_ideas = FRA_socialist_industrial_association			
+}
+	}
+	
+	#komunist13
+	focus = {
+		id = komunist13
+		text = "Union Agreements"
+		icon = commie_internationalism
+		x = -1
+		y = 2
+		cost = 5
+		relative_position_id = komunist3
+		prerequisite = { focus = komunist11}
+		completion_reward = {
+add_ideas = UKR_idea_commie_a_h
+}
+	}
+	
+	#komunist14
+	focus = {
+		id = komunist14
+		text = "Raise Communist Industry"
+		icon = communism33
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = komunist13
+		prerequisite = { focus = komunist13}
+		prerequisite = { focus = komunist12}
+		completion_reward = {
+	random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			}
+	}
+	
+	#komunist15
+	focus = {
+		id = komunist15
+		text = "Protectors of the Regime"
+		icon = communism8
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = komunist13
+		prerequisite = { focus = komunist13}
+		prerequisite = { focus = komunist5}
+		completion_reward = {
+	swap_ideas = {
+				remove_idea = kgb_1
+				add_idea = kgb_2
+			}
+			}
+	}
+	
+	#komunist16
+	focus = {
+		id = komunist16
+		text = "Red Army"
+		icon = commie_modernise_army
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = komunist5
+		prerequisite = { focus = komunist9}
+		prerequisite = { focus = komunist5}
+		completion_reward = {
+	swap_ideas = {
+				remove_idea = yardim_rus
+				add_idea = yardim_rus1
+			}
+			}
+	}
+	
+	#komunist17
+	focus = {
+		id = komunist17
+		text = "Revolutionary Culture"
+		icon = communist_army
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = komunist9
+		prerequisite = { focus = komunist9}
+		prerequisite = { focus = komunist8}
+		completion_reward = {
+				add_ideas = LAT_revolutionary_culture
+
+			}
+	}
+	
+	#komunist18
+	focus = {
+		id = komunist18
+		text = "Revolutionary Culture"
+		icon = communism36
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = komunist16
+		prerequisite = { focus = komunist17}
+		prerequisite = { focus = komunist16}
+		completion_reward = {
+swap_ideas = {
+				remove_idea = yardim_rus1
+				add_idea = yardim_rus2
+			}
+			add_ideas = additional_recruits5
+			}
+	}
+	
+	#komunist19
+	focus = {
+		id = komunist19
+		text = "Aircraft Grant"
+		icon = Chinese_plane
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = komunist16
+		prerequisite = { focus = komunist15}
+		prerequisite = { focus = komunist16}
+		completion_reward = {
+		air_experience = 30
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount = 125
+				producer = PRC
+			}
+	}
+	}
+	
+	#komunist20
+	focus = {
+		id = komunist20
+		text = "National Arsenals"
+		icon = communism24
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = komunist15
+		prerequisite = { focus = komunist15}
+		prerequisite = { focus = komunist14}
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+	}
+	}
+	
+	#komunist21
+	focus = {
+		id = komunist21
+		text = "Red Guards"
+		icon = GFX_focus_SOV_the_glory_of_the_red_army_communism
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = komunist20
+		prerequisite = { focus = komunist19}
+		prerequisite = { focus = komunist20}
+		completion_reward = {
+					add_ideas = FRA_red_guards_idea
+
+	}
+	}
+	
+	#komunist22
+	focus = {
+		id = komunist22
+		text = "Will of the People"
+		icon = red_dragon
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = komunist20
+		prerequisite = { focus = komunist19}
+		prerequisite = { focus = komunist18}
+		completion_reward = {
+			add_ideas = idea_focus_generic_will_of_the_people
+
+	}
+	}
+	
 
 
 	##############
@@ -413,13 +1095,16 @@ random_owned_state = {
 
 
 		completion_reward = {
-			add_political_power = 150
+			add_political_power = 75
+			add_stability = 0.05
 		}
 
 		ai_will_do = {
 			factor = 10
 		}
 	}
+	
+	
 
 	focus = {
 		id = AZR__aliyev

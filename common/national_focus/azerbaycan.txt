@@ -25,7 +25,7 @@ focus = {
 		id = AZR_ekonomi1
 		icon = destroy_society
 		text = GEN_a_new_economy_for_a_new_millenium
-		x = -10
+		x = -15
 		y = 0
 		cost = 8
 
@@ -423,7 +423,7 @@ random_owned_state = {
 		id = aliyevdevam
 		icon = based_dictatorship
 		text = "House of Aliyev"
-		x = -2
+		x = -5
 		y = 1
 		cost = 8
 		relative_position_id = azr_gelecek
@@ -487,34 +487,168 @@ random_owned_state = {
 		id = yolsuzluk1
 		icon = economic_revivial
 		text = "The Corruption Problem"
-		x = 1
-		y = 1
+		x = -1
+		y = 2
 		cost = 8
 		relative_position_id = azr_gelecek
 
-		prerequisite = {
-			focus = azr_gelecek
-		}
-		mutually_exclusive = {     }
+		prerequisite = {focus = aliyevdevam	focus = aliyevkarsi	}
 
 
 		completion_reward = {
-
+unlock_decision_category_tooltip = AZR_corruptions
 		}
 
 
 		ai_will_do = {
 			factor = 10
-			modifier = {
-				add = -10
-			}
+		
 		}
 	}
 	
 	focus = {
-		id = elcibey1
+		id = yolsuzluk2
+		icon = militarize_the_economy
+		text = "Increase Military Budget"
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = yolsuzluk1
+
+		prerequisite = {focus = yolsuzluk1 }
+
+
+		completion_reward = {
+        random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = TUR_anadolu_savun
+				bonus = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		
+		}
+	}
+	
+	focus = {
+		id = isgaltopr1
+		icon = bhu_modernize_army
+		text = "Modernise the army"
+		x = 1
+		y = 2
+		cost = 8
+		relative_position_id = azr_gelecek
+		prerequisite = {focus = aliyevdevam	focus = aliyevkarsi	}
+		completion_reward = {
+		swap_ideas = {
+				remove_idea = AZR_isgal_topraklari
+				add_idea  = AZR_isgal_topraklari_2
+			}
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = isgaltopr2
+		icon = air_expert
+		text = "Caspian Exercises"
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = isgaltopr1
+		prerequisite = { focus = isgaltopr1 }
+		completion_reward = {
+		army_experience = 15
+		air_experience = 15
+		swap_ideas = {
+				remove_idea = AZR_isgal_topraklari_2
+				add_idea  = AZR_isgal_topraklari_3
+			}
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = isgaltopr3
+		icon = fund_arms_organization
+		text = "Prepare the Army for Battle"
+		x = -1
+		y = 2
+		cost = 5
+		relative_position_id = isgaltopr1
+		prerequisite = { focus = isgaltopr2}
+		completion_reward = {
+				remove_ideas = AZR_isgal_topraklari_3	
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+		focus = {
+		id = isgaltopr4
+		icon = treaty
+		text = "Announce To Everyone What Is Ours"
+		x = 1
+		y = 2
+		cost = 5
+		relative_position_id = isgaltopr1
+		prerequisite = { focus = isgaltopr2}
+		completion_reward = {
+add_state_core = 832
+add_state_core = 419
+add_state_core = 1001
+add_state_core = 1255
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = karabag1
+		icon = GFX_GER_Leopard_2
+		text = "Second Karabakh War"
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = isgaltopr4
+
+		prerequisite = {focus = isgaltopr4	}
+prerequisite = {focus = isgaltopr3	}
+		completion_reward = {
+		unlock_decision_category_tooltip = AZR_isgal
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi
 		icon = halk_goal
-		text = "Halk Cebhesi"
+		text = "Against Aliyev"
 		x = 5
 		y = 1
 		cost = 8
@@ -523,7 +657,7 @@ random_owned_state = {
 		prerequisite = {
 			focus = azr_gelecek
 		}
-		mutually_exclusive = {     }
+		mutually_exclusive = {  focus = aliyevdevam   }
 
 
 		completion_reward = {
@@ -1409,7 +1543,7 @@ PRC = { add_to_faction = AZR  }
 add_country_leader_trait = nationalist_symbol
 add_ideas = path_to_war	 }
 	}
-	}
+	
 	
 
 

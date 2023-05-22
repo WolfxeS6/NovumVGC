@@ -4235,6 +4235,13 @@ shared_focus = {
 	mutually_exclusive = {
 		focus = GEF_Path_of_Order
 	}
+	mutually_exclusive = {
+		focus = GEF_GEF_Religious_Fanaticism
+	}
+
+	prerequisite = {
+		focus = GEF_National_Strength
+	}
 
 	prerequisite = {
 		focus = GEF_National_Strength
@@ -4384,12 +4391,15 @@ shared_focus = {
 shared_focus = {
 	id = GEF_Path_of_Order
 	icon = GFX_goal_generic_demand_territory
-	x = 44
+	x = 42
 	y = 9
 	cost = @Time_35_days
 
 	mutually_exclusive = {
 		focus = GEF_Path_of_Equality
+	}
+	mutually_exclusive = {
+		focus = GEF_Religious_Fanaticism
 	}
 
 	prerequisite = {
@@ -4438,9 +4448,6 @@ shared_focus = {
 	}
 	mutually_exclusive = {
 		focus = GEF_Monarchism
-	}
-	mutually_exclusive = {
-		focus = GEF_Islamism
 	}
 
 	prerequisite = {
@@ -4618,9 +4625,6 @@ shared_focus = {
 	mutually_exclusive = {
 		focus = GEF_Monarchism
 	}
-	mutually_exclusive = {
-		focus = GEF_Islamism
-	}
 
 	prerequisite = {
 		focus = GEF_Path_of_Order
@@ -4697,9 +4701,6 @@ shared_focus = {
 	}
 	mutually_exclusive = {
 		focus = GEF_Nationalism
-	}
-	mutually_exclusive = {
-		focus = GEF_Islamism
 	}
 
 	prerequisite = {
@@ -4810,6 +4811,47 @@ shared_focus = {
 	}
 }
 
+############################
+###               	     ###
+### Religious Fanaticism ###
+###                      ###
+###########################
+
+shared_focus = {
+	id = GEF_Religious_Fanaticism
+	icon = GFX_goal_Azur_Lane_GFX_1
+	x = 53
+	y = 9
+	cost = @Time_70_days
+
+	mutually_exclusive = {
+		focus = GEF_Path_of_Equality
+	}
+	mutually_exclusive = {
+		focus = GEF_Path_of_Order
+	}
+
+	prerequisite = {
+		focus = GEF_National_Strength
+	}
+
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = GEF_Religious_Fanaticis
+			days = 730
+		}
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.05
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
 #################
 ### Islamism  ###
 #################
@@ -4817,22 +4859,16 @@ shared_focus = {
 shared_focus = {
 	id = GEF_Islamism
 	icon = align_to_pakistan
-	x = 51
+	x = 56
 	y = 10
 	cost = @Time_70_days
 
 	mutually_exclusive = {
-		focus = GEF_Fascism
-	}
-	mutually_exclusive = {
-		focus = GEF_Nationalism
-	}
-	mutually_exclusive = {
-		focus = GEF_Monarchism
+		focus = GEF_Christianism
 	}
 
 	prerequisite = {
-		focus = GEF_Path_of_Order
+		focus = GEF_Religious_Fanaticism
 	}
 
 
@@ -4849,30 +4885,9 @@ shared_focus = {
 	}
 }
 shared_focus = {
-	id = GEF_Establish_Shariah_Police
-	icon = military_mission2
-	x = 49
-	y = 11
-	cost = @Time_70_days
-
-	prerequisite = {
-		focus = GEF_Islamism
-	}
-
-
-	completion_reward = {
-		add_ideas = GEF_Shariah_Police
-		fourth_estate_islamist_increase = yes
-	}
-
-	ai_will_do = {
-		factor = 10
-	}
-}
-shared_focus = {
 	id = GEF_Shariah_Law_Code
 	icon = constitution
-	x = 51
+	x = 55
 	y = 11
 	cost = @Time_70_days
 
@@ -4889,6 +4904,7 @@ shared_focus = {
 			ideology = islamist
 			popularity = 0.10
 		}
+		add_ideas = GEF_Legalize_Child_Marriage
 	}
 
 	ai_will_do = {
@@ -4896,29 +4912,9 @@ shared_focus = {
 	}
 }
 shared_focus = {
-	id = GEF_Islamic_Militias
-	icon = GFX_goal_Defenders_Of_Islam
-	x = 49
-	y = 12
-	cost = @Time_70_days
-
-	prerequisite = {
-		focus = GEF_Establish_Shariah_Police
-	}
-
-
-	completion_reward = {
-		add_ideas = GEF_Muslim_Militia
-	}
-
-	ai_will_do = {
-		factor = 10
-	}
-}
-shared_focus = {
-	id = GEF_United_in_Religion
+	id = GEF_United_in_Religion_Islam
 	icon = GFX_focus_TUR_loosen_the_laws_on_secularism
-	x = 51
+	x = 55
 	y = 12
 	cost = @Time_70_days
 
@@ -4942,9 +4938,9 @@ shared_focus = {
 	}
 }
 shared_focus = {
-	id = GEF_Legalize_Child_Marriage
-	icon = GFX_goal_generic_forceful_treaty
-	x = 53
+	id = GEF_Establish_Shariah_Police
+	icon = military_mission2
+	x = 57
 	y = 11
 	cost = @Time_70_days
 
@@ -4954,8 +4950,212 @@ shared_focus = {
 
 
 	completion_reward = {
+		add_ideas = GEF_Shariah_Police
 		fourth_estate_islamist_increase = yes
-		add_ideas = GEF_Legalize_Child_Marriage
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = GEF_Islamic_Militias
+	icon = GFX_goal_Defenders_Of_Islam
+	x = 57
+	y = 12
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = GEF_Establish_Shariah_Police
+	}
+
+
+	completion_reward = {
+		add_ideas = GEF_Muslim_Militia
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+#####################
+### Christianity  ###
+#####################
+
+shared_focus = {
+	id = GEF_Christianization
+	icon = GFX_goal_Azur_Lane_GFX_1
+	x = 50
+	y = 10
+	cost = @Time_70_days
+
+	mutually_exclusive = {
+		focus = GEF_Islamism
+	}
+
+	prerequisite = {
+		focus = GEF_Religious_Fanaticism
+	}
+
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = GEF_Path_of_Jesus
+			days = 1095
+		}
+		fourth_estate_islamist_increase = yes
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = GEF_Christian_Family_Values
+	icon = GFX_goal_Azur_Lane_GFX_1
+	x = 49
+	y = 11
+	cost = @Time_70_days
+
+	mutually_exclusive = {
+		
+	}
+	mutually_exclusive = {
+		
+	}
+
+	prerequisite = {
+		focus = GEF_Christianization
+	}
+
+
+	completion_reward = {
+		fourth_estate_islamist_increase = yes
+		add_stability = -0.05
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.10
+		}
+		add_ideas = GEF_Family_Values
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = GEF_Code_of_Canon_Law
+	icon = GFX_goal_Azur_Lane_GFX_1
+	x = 51
+	y = 11
+	cost = @Time_70_days
+
+	################################################
+	###											 ###
+	### Need to read what's this law is first xD ###
+	###											 ###
+	################################################
+
+	mutually_exclusive = {
+		
+	}
+	mutually_exclusive = {
+		
+	}
+
+	prerequisite = {
+		focus = GEF_Christianization
+	}
+
+
+	completion_reward = {
+
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = GEF_Christian_Militias
+	icon = GFX_goal_Azur_Lane_GFX_1
+	x = 49
+	y = 12
+	cost = @Time_70_days
+
+	mutually_exclusive = {
+		
+	}
+	mutually_exclusive = {
+		
+	}
+
+	prerequisite = {
+		focus = GEF_Christian_Family_Values
+	}
+
+
+	completion_reward = {
+		add_ideas = GEF_Christian_Militias
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
+	id = GEF_United_in_Religion_Christian
+	icon = GFX_goal_Azur_Lane_GFX_1
+	x = 51
+	y = 12
+	cost = @Time_70_days
+
+	mutually_exclusive = {
+		
+	}
+	mutually_exclusive = {
+		
+	}
+
+	prerequisite = {
+		focus = GEF_Code_of_Canon_Law
+	}
+
+
+	completion_reward = {
+		fourth_estate_islamist_increase = yes
+		add_political_power = 75
+		add_stability = 0.10
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.15
+		}
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+
+###################
+### Shared path ###
+###################
+
+shared_focus = {
+	id = GEF_Restrict_Women_Roles
+	icon = GFX_goal_generic_forceful_treaty
+	x = 53
+	y = 11
+	cost = @Time_70_days
+
+	prerequisite = {
+		focus = GEF_Christianization
+		focus = GEF_Islamism
+	}
+
+
+	completion_reward = {
+		
 	}
 
 	ai_will_do = {
@@ -4966,17 +5166,12 @@ shared_focus = {
 	id = GEF_Ban_Gay_Marriage
 	icon = generic_LGBT_flag
 
-	######################################
-	### Can you put a Red Circle Cross ###
-	### on the gay flag pleace         ###
-	######################################
-
 	x = 53
 	y = 12
 	cost = @Time_70_days
 
 	prerequisite = {
-		focus = GEF_Legalize_Child_Marriage
+		focus = GEF_Restrict_Women_Roles
 	}
 
 
@@ -5143,22 +5338,46 @@ shared_focus = {
 	}
 }
 shared_focus = {
+	id = GEF_Holy_War
+	icon = GFX_goal_Azur_Lane_GFX_1
+	x = 50
+	y = 13
+	cost = @Time_70_days
+
+	##############################
+	###						   ###
+	### I thinking of ideas :> ###
+	###						   ###
+	##############################
+
+	prerequisite = {
+		focus = GEF_Christian_Militias
+	}
+	prerequisite = {
+		focus = GEF_United_in_Religion_Christian
+	}
+
+	completion_reward = {
+
+	}
+
+	ai_will_do = {
+		factor = 10
+	}
+}
+shared_focus = {
 	id = GEF_Jihad
 	icon = jihad
-	x = 51
+	x = 56
 	y = 13
 	cost = @Time_35_days
 
 	prerequisite = {
+		focus = GEF_United_in_Religion_Islam
+	}
+	prerequisite = {
 		focus = GEF_Islamic_Militias
 	}
-	prerequisite = {
-		focus = GEF_United_in_Religion
-	}
-	prerequisite = {
-		focus = GEF_Ban_Gay_Marriage
-	}
-
 
 	completion_reward = {
 		fourth_estate_islamist_increase = yes
@@ -5262,6 +5481,7 @@ shared_focus = {
 		focus = GEF_Will_of_the_People
 		focus = GEF_Unity_and_Nation
 		focus = GEF_The_Values_of_Old
+		focus = GEF_Holy_War
 		focus = GEF_Jihad
 	}
 

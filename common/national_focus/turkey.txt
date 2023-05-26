@@ -1374,11 +1374,15 @@ relative_position_id = atas_legacy
 		prerequisite = { focus = nato8 }
 		prerequisite = { focus = deprem4  }
 		completion_reward = {
+					if = {
+				limit = { NOT = { has_tech = atomic_research } }
+				set_technology = { atomic_research = 1 }
+			}
 add_tech_bonus = {
-				name = jet_rocket_bonus
-				ahead_reduction = 1
-				uses = 2
-				category = jet_technology
+				name = tech_bonus
+				bonus = 1
+				uses = 1
+				category = light_fighter
 			}			}
 		ai_will_do = {
 			factor = 10
@@ -1391,7 +1395,7 @@ add_tech_bonus = {
 		icon = GFX_focus_TUR_nuclear_research_institute
 		x = -1
 		y = 1
-		cost = 8
+		cost = 20
 relative_position_id = tsk34
 		prerequisite = { focus = nato9 }
 		prerequisite = { focus = tsk34  }
@@ -1403,21 +1407,9 @@ select_effect = {
 		}
 
 		completion_reward = {
-
-			if = {
-				limit = { NOT = { has_tech = atomic_research } }
-				set_technology = { atomic_research = 1 }
-			}
-			else = {
-				add_tech_bonus = {
-					name = tech_bonus
-					bonus = 0.8
-					uses = 1
-					category = nuclear
-				}
-			}
-			add_offsite_building = { type = nuclear_reactor level = 1 }
-							}
+				set_technology = { nuclear_reactor = 1 }
+				set_technology = { nukes = 1 }
+										}
 		ai_will_do = {
 			factor = 10
 		}
@@ -6708,8 +6700,6 @@ bypass = {
 		cost = 5
 		relative_position_id = ordu
 		prerequisite = { focus = ordu6}
-
-
 
 		completion_reward = {
 			random_owned_state = {

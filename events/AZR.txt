@@ -1,6 +1,120 @@
 add_namespace = AZR
 add_namespace = azr_border_conflict
 
+country_event = {	
+	id = azr.6
+	title = azr.6.t
+	desc =  azr.6.d
+	picture = GFX_report_event_political_deal
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {	
+		name =  azr.6.o1
+			AZR = {
+	annex_country = {
+				target = FROM
+				transfer_troops = yes
+			}				
+				}
+				every_state = {
+					limit = { is_core_of = FROM }
+					add_core_of = AZR
+				}
+		ai_chance = {
+			factor = 90
+			
+			
+		}
+	}
+	}
+
+country_event = {	#We receive an invitation to TURPAKT
+	id = azr.3
+	title =  azr.3.t
+	desc =  azr.3.d
+	picture = GFX_report_event_political_deal
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {	#We accept!
+		name =  azr.3.o1
+		
+		
+		AZR = { add_to_faction = FROM }
+		
+		hidden_effect = { AZR = { country_event = { id =  azr.4 } } }
+		
+		
+		ai_chance = {
+			factor = 90
+			
+			modifier = {
+				add = 70
+				has_democratic_form_of_government = yes
+			}
+			
+		}
+	}
+	
+	option = {	#We refuse
+		name =  azr.3.o2
+		add_political_power = 50
+		AZR = {
+			add_opinion_modifier = {
+				target = FROM
+				modifier = recent_actions_negative
+			}
+			
+			country_event = {
+				id = olay.31
+			}
+		}
+		
+		ai_chance = {
+			factor = 10
+			
+			modifier = {
+				add = 70
+				has_democratic_form_of_government = no
+			}
+		}
+	}
+}
+country_event = {	#They accept!
+	id =  azr.4
+	title =  azr.4.t
+	desc =  azr.4.d
+	picture = GFX_report_event_political_deal
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name =  azr.4.o1
+		add_to_faction = FROM
+	}
+}
+
+country_event = {	#They refuse!
+	id =  azr.5
+	title =  azr.5.t
+	desc =  azr.5.d
+	picture = GFX_report_event_political_deal
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name =  azr.5.o1
+		
+		effect_tooltip = {
+			add_opinion_modifier = {
+				target = FROM
+				modifier = recent_actions_negative
+			}
+		}
+	}
+}
+
 #Early Elections
 country_event = {
 	id = azr.2

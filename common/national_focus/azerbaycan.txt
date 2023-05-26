@@ -13,9 +13,10 @@ focus_tree = {
 
 	default = no
 
-	shared_focus = GEN_modernize_the_airforce
-	shared_focus = GEN_modernize_the_navy
-	shared_focus = GEN_bolster_the_army
+
+     shared_focus = GEF_Expand_The_Army_General_Staff
+	shared_focus = GEF_Naval_Dockyard_Effort 		
+	shared_focus = GEF_Expand_The_Airforce 			
 
 	##############
 	###ECONOMY###
@@ -25,7 +26,7 @@ focus = {
 		id = AZR_ekonomi1
 		icon = destroy_society
 		text = GEN_a_new_economy_for_a_new_millenium
-		x = -20
+		x = -5
 		y = 0
 		cost = 8
 
@@ -434,7 +435,7 @@ random_owned_state = {
 		id = azr_gelecek
 		icon = demand_territory
 		text = "Our Future"
-		x = 5
+		x = 22
 		y = 0
 		cost = 7
 
@@ -456,7 +457,7 @@ random_owned_state = {
 		id = aliyevdevam
 		icon = based_dictatorship
 		text = "House of Aliyev"
-		x = -7
+		x = -10
 		y = 1
 		cost = 8
 		relative_position_id = azr_gelecek
@@ -841,7 +842,7 @@ every_country = {
 	focus = {
 		id = aliyev13
 		text = "Strengthen the Judiciary"
-		icon = GFX_Communist_Persecution
+		icon = GFX_focus_generic_court
 		x = -1
 		y = 2
 		cost = 5
@@ -916,8 +917,7 @@ create_country_leader = {
 		}
 		mutually_exclusive = {focus = aliyev14}
 		completion_reward = {
-		add_country_leader_trait = umummilli_h
-			
+add_political_power = 125			
 		}
 		ai_will_do = {
 			factor = 10
@@ -933,7 +933,7 @@ create_country_leader = {
 		id = yolsuzluk1
 		icon = economic_revivial
 		text = "The Corruption Problem"
-		x = -1
+		x = -5
 		y = 2
 		cost = 8
 		relative_position_id = azr_gelecek
@@ -1022,7 +1022,7 @@ unlock_decision_category_tooltip = AZR_corruptions
 		id = isgaltopr1
 		icon = bhu_modernize_army
 		text = "Modernise the army"
-		x = 1
+		x = -3
 		y = 2
 		cost = 8
 		relative_position_id = azr_gelecek
@@ -1099,6 +1099,73 @@ add_state_core = 1255
 	}
 	
 	focus = {
+		id = isgaltopr5
+		icon = align_to_israel
+		text = "Israeli Support Against Iran"
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = isgaltopr4
+		prerequisite = { focus = isgaltopr4}
+		completion_reward = {
+add_equipment_to_stockpile = {
+				type = tac_bomber_equipment_1
+				amount = 200
+				producer = ISR
+			}
+			ISR = { increase_trade_influence_by_3 = yes }
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = isgaltopr6
+		icon = GFX_focus_TUR_konfederasyon
+		text = "Two Nations One State"
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = isgaltopr4
+		prerequisite = { focus = isgaltopr4}
+		completion_reward = {
+add_equipment_to_stockpile = {
+				type = tac_bomber_equipment_1
+				amount = 200
+				producer = TUR
+			}
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_2
+				amount =75
+				producer = TUR
+			}
+			TUR = { increase_trade_influence_by_3 = yes }
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = isgaltopr7
+		icon = align_to_turkey
+		text = "Invite Turkish Companies"
+		x = 0
+		y = 3
+		cost = 5
+		relative_position_id = isgaltopr4
+		prerequisite = { focus = isgaltopr6}
+		completion_reward = {
+		custom_effect_tooltip = invite_tr_companies_tt
+
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
 		id = karabag1
 		icon = GFX_GER_Leopard_2
 		text = "Second Karabakh War"
@@ -1118,10 +1185,30 @@ prerequisite = {focus = isgaltopr3	}
 	}
 	
 	focus = {
+		id = karabag2
+		icon = GFX_goal_Assault_Rifle_1
+		text = "Increase Military Spending"
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = karabag1
+
+		prerequisite = {focus = karabag1	}
+prerequisite = {focus = yolsuzluk3	}
+		completion_reward = {
+					add_ideas =	HUN_increased_wepons_production
+
+	}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
 		id = aliyevkarsi
-		icon = halk_goal
+		icon = colonial_crackdown
 		text = "Against Aliyev"
-		x = 5
+		x = 2
 		y = 1
 		cost = 8
 		relative_position_id = azr_gelecek
@@ -1133,23 +1220,1467 @@ prerequisite = {focus = isgaltopr3	}
 
 
 		completion_reward = {
-
-			add_popularity = {
-				ideology = conservative
-				popularity = 0.05
+swap_ideas = {
+				remove_idea = aliyev_dikta
+				add_idea = aliyev_against
 			}
-			fourth_estate_conservative_increase = yes 
+			fourth_estate_nationalist_increase = yes
+			fourth_estate_conservative_increase = yes
 			fourth_estate_reactionary_decrease = yes
-			fourth_estate_nationalist_decrease = yes
 			fourth_estate_communist_decrease = yes
 		}
 
 
 		ai_will_do = {
-			factor = 10
-			modifier = {
-				add = -10
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi2
+		icon = fascism13
+		text = "Remind the People of Aliyev's Soviet Duties"
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi
+
+		prerequisite = {
+			focus = aliyevkarsi
+		}
+
+		completion_reward = {
+add_popularity = {
+				ideology = reactionary
+				popularity = -0.05
 			}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.02
+			}
+
+			fourth_estate_reactionary_decrease = yes
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi3
+		icon = fascism12
+		text = "Treatment of Elchibey"
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi
+
+		prerequisite = {
+			focus = aliyevkarsi
+		}
+
+		completion_reward = {
+
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.03
+			}
+				create_country_leader = {
+					name = "Ebulfaz Elcibey"
+					picture = "Ebulfaz_Elcibey.dds"
+					ideology = pro_turkish_naitonalist
+					traits = { nationalist_symbol}
+				}
+				create_country_leader = {
+					name = "Ebulfaz Elcibey"
+					picture = "Ebulfaz_Elcibey.dds"
+					ideology = right_wing_conservative
+					traits = { nationalist_symbol}
+				}
+				
+
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi4
+		icon = halk_goal
+		text = "Elchibey Returns to Power"
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = aliyevkarsi
+		
+       available = { reactionary < 0.25 	}
+
+		prerequisite = {
+			focus = aliyevkarsi2 focus = aliyevkarsi3
+		}
+
+		completion_reward = {
+swap_ideas = {
+				remove_idea = aliyev_against
+				add_idea = aliyev_against_2
+			}
+		
+		set_politics = {
+				ruling_party = conservative
+				elections_allowed = yes
+			}
+
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = aliyevkarsi5
+		icon = university
+		text = "National Education System"
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi4
+		
+
+		prerequisite = {
+			focus = aliyevkarsi4
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_education_reform
+
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = aliyevkarsi6
+		icon = self_management
+		text = "Prioritising Health"
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi4
+		
+
+		prerequisite = {
+			focus = aliyevkarsi4
+		}
+
+		completion_reward = {
+			add_ideas = tur_healthcare_reform_idea
+
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi7
+		icon = GFX_focus_TUR_unite_the_azeri_diaspora
+		text = "Fully Independent Azerbaijan!"
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = aliyevkarsi4
+		
+
+		prerequisite = {
+			focus = aliyevkarsi4
+		}
+
+		completion_reward = {
+swap_ideas = {
+				remove_idea = aliyev_against_2
+				add_idea = aliyev_against_3
+			}
+			add_political_power = 75
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi8
+		icon = intelligence_exchange
+		text = "Bureaucratic Reform"
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi7
+		
+prerequisite = {
+			focus = aliyevkarsi6
+		}
+		prerequisite = {
+			focus = aliyevkarsi7
+		}
+
+		completion_reward = {
+			add_ideas = GER_national_bureaucratic_reform
+
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi9
+		icon = scientific_exchange
+		text = "Turkish Exchange Program"
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi7
+		
+prerequisite = {
+			focus = aliyevkarsi5
+		}
+		prerequisite = {
+			focus = aliyevkarsi7
+		}
+
+		completion_reward = {
+           add_ideas = turexchange
+			add_political_power = 25
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi10
+		icon = bhu_economic_control
+		text = "National Economic Reform"
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = aliyevkarsi7
+		
+
+		prerequisite = {
+			focus = aliyevkarsi7
+		}
+
+		completion_reward = {
+        add_ideas = GER_national_economic_reform
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi11
+		text = GEF_Corporatism
+	    icon = GFX_goal_Mobilization_of_Workers
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi8
+		
+		prerequisite = {
+			focus = aliyevkarsi8
+		}
+
+		completion_reward = {
+		add_ideas = GEF_Corporatism
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = aliyevkarsi12
+		icon = money
+		text = "Pay The Debts"
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi9
+		
+		prerequisite = {
+			focus = aliyevkarsi9
+		}
+
+		completion_reward = {
+add_timed_idea = {
+				idea = SOV_paid_some_debts
+				days = 200
+			}		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi13
+		icon = industry_military
+		text = "National Arsenals"
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi11
+		
+		prerequisite = {
+			focus = aliyevkarsi11
+		}
+		prerequisite = {
+			focus = aliyevkarsi10
+		}
+
+		completion_reward = {
+random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi14
+		text = "Contact With the Grey Wolves"
+		icon = ulkist2
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi11
+		
+		prerequisite = {
+			focus = aliyevkarsi12
+		}
+		prerequisite = {
+			focus = aliyevkarsi10
+		}
+
+		completion_reward = {
+add_ideas = tur_greywolves
+			add_war_support = 0.03
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = aliyevkarsi15
+		text = "Strengthen Your Connectivity"
+		icon = fascist_moblization
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = aliyevkarsi14
+		prerequisite = {
+			focus = aliyevkarsi14
+		}
+
+		completion_reward = {
+swap_ideas = {
+				remove_idea = tur_greywolves
+				add_idea  = tur_greywolves_m1
+			}		
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}		
+	focus = {
+		id = azr_genis1
+		text = "Paramilitarism"
+	    icon = wolf_packs
+		x = 0
+		y = 3
+		cost = 8
+		relative_position_id = karabag2
+		prerequisite = {
+			focus = aliyevkarsi14 focus = aliyevkarsi13 focus = aliyev15 focus = aliyev14
+		}
+
+		completion_reward = {
+		add_ideas = GEN_paramilizm
+	
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	focus = {
+		id = azr_kafkasb1
+		text = "Caucasus Union"
+	    icon = global_hegemony
+		x = 6
+		y = 1
+		cost = 5
+		relative_position_id = azr_genis1
+		prerequisite = {
+			focus = aliyevkarsi14 focus = aliyevkarsi13 focus = aliyev15 focus = aliyev14
+		}
+				mutually_exclusive = { focus =  azr_taraf }
+
+
+		completion_reward = {
+		create_faction = cau.uni
+		reverse_add_opinion_modifier = {
+				target = GEO
+				modifier = declaration_of_friendship
+			}
+		GEO = { country_event = azr.3}
+		add_political_power = 75
+	
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_kafkasb2
+		text = "Ensure Peace in the Caucasus"
+	    icon = peace
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = azr_kafkasb1
+		prerequisite = {
+			focus = azr_kafkasb1 
+		}
+
+		completion_reward = {
+				ABK = { country_event = azr.3}
+				reverse_add_opinion_modifier = {
+				target = ABK
+				modifier = declaration_of_friendship
+			}
+		SOS = { country_event = azr.3}
+		reverse_add_opinion_modifier = {
+				target = SOS
+				modifier = declaration_of_friendship
+			}
+
+		add_political_power = 25
+	
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_kafkasb3
+		text = "Develop the Caucasus"
+	    icon = GFX_goal_Arms_Industry
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = azr_kafkasb2
+		prerequisite = {
+			focus = azr_kafkasb2
+		}
+
+		completion_reward = {
+random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}	
+	every_country = {
+				limit = { is_in_faction_with = AZR
+				}
+				random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+	}
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_kafkasb4
+		text = "Peace with Armenia"
+	    icon = align_to_armenia
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = azr_kafkasb2
+		prerequisite = {
+			focus = azr_kafkasb2
+		}
+	mutually_exclusive = {focus = azr_kafkasb5}
+
+		completion_reward = {
+		reverse_add_opinion_modifier = {
+				target = ARM
+				modifier = declaration_of_friendship
+			}
+		ARM = { country_event = azr.3}
+	
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_kafkasb5
+		text = "Occupation of Armenia"
+	    icon = attack_armenia
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = azr_kafkasb2
+		prerequisite = {
+			focus = azr_kafkasb2
+		}
+	mutually_exclusive = {focus = azr_kafkasb4}
+
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = ARM
+			}
+			hidden_effect = {
+							ARM = { add_ideas = yalnizlik }	
+
+}
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = azr_kafkasb6
+		text = "Defense of the Caucasus"
+	    icon = fund_anti_air
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = azr_kafkasb1
+		prerequisite = {
+			focus = azr_kafkasb1
+		}
+
+		completion_reward = {
+random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+
+			}	
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_kafkasb7
+		text = "Russian Occupied Territories"
+	    icon = attack_russia
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = azr_kafkasb2
+		prerequisite = {
+			focus = azr_kafkasb6
+		}
+		prerequisite = {
+			focus = azr_kafkasb3 focus = azr_kafkasb4 	focus = azr_kafkasb5
+		}
+
+		completion_reward = {
+			add_state_core = 232
+	add_state_core = 828
+	add_state_core = 1158
+	add_state_core = 1157
+	add_state_core = 233
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_kafkasb8
+		text = "Unite the Allies"
+	    icon = GFX_goal_National_Unity
+		x = 2
+		y = 2
+		cost = 5
+		relative_position_id = azr_kafkasb2
+		
+		prerequisite = {
+			 focus = azr_kafkasb4 	focus = azr_kafkasb5
+		}
+
+		completion_reward = {
+			every_country = {
+				limit = { is_in_faction_with = AZR
+				}
+						country_event = azr.6
+}
+		set_cosmetic_tag = FORM_CAU
+
+			
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_kafkasb9
+		text = "Mobilise our Secret Troops"
+	    icon = GFX_goal_Military_Guard_2
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = azr_kafkasb7
+		
+		prerequisite = {
+			 focus = azr_kafkasb7 	
+		}
+	prerequisite = {
+			 focus = azr_kafkasb8
+		}
+		completion_reward = {
+		create_wargoal = {
+				type = annex_everything
+				target = SOV
+			}
+SOV = {
+				232 = {
+					remove_core_of = SOV
+				}
+				828 = {
+					remove_core_of = SOV
+				}
+				1158 = {
+					remove_core_of = SOV
+				}
+				1157 = {
+					remove_core_of = SOV
+				}
+				233 = {
+					remove_core_of = SOV
+				}
+				
+				232 = {
+					start_resistance = yes
+					set_resistance = 80
+					set_garrison_strength = 1.0
+				}
+				828 = {
+					start_resistance = yes
+					set_resistance = 80
+					set_garrison_strength = 1.0
+				}
+				1158 = {
+					start_resistance = yes
+					set_resistance = 80
+					set_garrison_strength = 1.0
+				}
+				1157 = {
+					start_resistance = yes
+					set_resistance = 80
+					set_garrison_strength = 1.0
+				}
+				233 = {
+					start_resistance = yes
+					set_resistance = 80
+					set_garrison_strength = 1.0
+				}
+			
+	}}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_taraf
+		text = "International Relations"
+	    icon = internationalism
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = azr_genis1
+		prerequisite = {
+			focus = aliyevkarsi14 focus = aliyevkarsi13 focus = aliyev15 focus = aliyev14
+		}
+						mutually_exclusive = { focus =  azr_kafkasb1 }
+
+
+		completion_reward = {
+		add_political_power = 75
+	
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_nato1
+		text = "North Atlantic Treaty Organization"
+	    icon = align_to_nato
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = azr_taraf
+		prerequisite = {
+			focus = azr_taraf 
+		}
+	available = {
+			USA = {
+				has_democratic_form_of_government = yes
+				is_faction_leader = yes
+			}
+		}
+mutually_exclusive = {	focus = azr_csto1}
+		completion_reward = {
+		add_command_power = 35
+every_country = {
+				limit = {
+					is_in_faction_with = USA
+				}
+add_opinion_modifier = {
+					target = AZR
+					modifier = declaration_of_friendship
+				}			}	
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_nato2
+		text = "Nato Grants"
+	    icon = GFX_USA_IFV
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = azr_nato1
+		prerequisite = {
+			focus = azr_nato1 
+		}
+	
+		completion_reward = {
+			add_ideas = USA_automotive_industry_funding
+
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_nato3
+		text = "Hosting European Companies"
+	    icon = GFX_goal_Europe_of_Nations
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = azr_nato1
+		prerequisite = {
+			focus = azr_nato1 
+		}
+	
+		completion_reward = {
+		add_offsite_building = { type = industrial_complex level = 1 }
+		add_offsite_building = { type = industrial_complex level = 1 }
+		add_offsite_building = { type = industrial_complex level = 1 }
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_nato4
+		text = "Remove the Barrier"
+	    icon = attack_armenia
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = azr_nato1
+		prerequisite = {
+			focus = azr_nato1 
+		}
+	
+		completion_reward = {
+create_wargoal = {
+				type = annex_everything
+				target = ARM
+			}
+				hidden_effect = {
+				ARM = { add_ideas = yalnizlik }
+	}
+
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_nato5
+		text = "Nato Grants II"
+	    icon = GFX_goal_Army_Logistics
+		x = -1
+		y = 1
+		cost = 10
+		relative_position_id = azr_nato2
+		prerequisite = {
+			focus = azr_nato2
+		}
+		prerequisite = {
+			focus = azr_nato3
+		}
+	
+		completion_reward = {
+add_equipment_to_stockpile = {
+				type = modern_tank_chassis_2
+				amount = 350
+				producer = USA
+			}
+			add_equipment_to_stockpile = {
+				type = light_mechanized_equipment_2
+				amount = 300
+				producer = USA
+			}
+
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_nato6
+		text = "Nato Membership"
+	    icon = nato2
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = azr_nato4
+		prerequisite = {
+			focus = azr_nato5
+		}
+		prerequisite = {
+			focus = azr_nato4
+		}
+	
+		completion_reward = {
+AZR = {
+				country_event = { id = nato.1 days = 1 }
+			}
+
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = azr_nato7
+		text = "Military Assistance"
+	    icon = american_military_agreement
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = azr_nato4
+		prerequisite = {
+			focus = azr_nato5
+		}
+		prerequisite = {
+			focus = azr_nato4
+		}
+	
+		completion_reward = {
+AZR = {
+				country_event = { id = usa.31 days = 2 }
+			}
+
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = azr_nato8
+		text = "American Aircraft Fleet"
+	    icon = GFX_USA_F-16
+		x = -1
+		y = 1
+		cost = 10
+		relative_position_id = azr_nato7
+		prerequisite = {
+			focus = azr_nato6
+		}
+		prerequisite = {
+			focus = azr_nato7
+		}
+	
+		completion_reward = {
+add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount = 250
+				producer = USA
+			}
+			add_equipment_to_stockpile = {
+				type = tac_bomber_equipment_1
+				amount = 150
+				producer = USA
+			}
+
+
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_csto1
+		text = "Collective Security Treaty Organization"
+	    icon = align_to_csto
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = azr_taraf
+		prerequisite = {
+			focus = azr_taraf 
+		}
+		available = {
+			SOV = {
+				has_democratic_form_of_government = yes
+				is_faction_leader = yes
+			}
+		}
+mutually_exclusive = {	focus = azr_nato1}
+
+		completion_reward = {
+		add_command_power = 35
+every_country = {
+				limit = {
+					is_in_faction_with = SOV
+				}
+add_opinion_modifier = {
+					target = AZR
+					modifier = declaration_of_friendship
+				}			}		
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_csto2
+		text = "Russian Economic Plan"
+	    icon = GFX_goal_Russia_Investment_Deal
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = azr_csto1
+		prerequisite = {
+			focus = azr_csto1
+		}
+		
+
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 1 }
+			add_offsite_building = { type = industrial_complex level = 1 }
+			add_offsite_building = { type = industrial_complex level = 1 }
+			add_offsite_building = { type = industrial_complex level = 1 }
+		
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_csto3
+		text = "Invite KGB"
+	    icon = GFX_goal_Russian_Air_Doctrine
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = azr_csto1
+		prerequisite = {
+			focus = azr_csto1
+		}
+		
+
+		completion_reward = {
+						add_ideas = yardim_rus_4
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = azr_csto4
+		text = "Join CSTO"
+	    icon = NVGC_Russia_Focus_Icon_Strengthen_the_CSTO
+		x =0
+		y = 2
+		cost = 5
+		relative_position_id = azr_csto1
+		prerequisite = {
+			focus = azr_csto2
+		}
+		prerequisite = {
+			focus = azr_csto3
+		}
+		
+
+		completion_reward = {
+		add_political_power = 35
+SOV={
+				add_to_faction = AZR
+			}	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = azr_csto5
+		text = "Russian Equipments"
+	    icon = GFX_goal_Army_Reform_1
+		x =1
+		y = 1
+		cost = 10
+		relative_position_id = azr_csto4
+		prerequisite = {
+			focus = azr_csto4
+		}
+
+		completion_reward = {
+	add_equipment_to_stockpile = {
+				type = infantry_equipment_2
+				amount = 2500
+				producer = SOV
+			}
+			add_equipment_to_stockpile = {
+					type = anti_air_equipment
+					amount = 500
+					producer = SOV
+
+				}
+				add_equipment_to_stockpile = {
+				type = light_mechanized_equipment_2
+				amount = 300
+				producer = SOV
+
+			}
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment
+					amount = 500
+					producer = SOV
+
+				}
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = azr_csto6
+		text = "Peace with Armenia"
+	    icon = align_to_armenia
+		x =-1
+		y = 1
+		cost = 10
+		relative_position_id = azr_csto4
+		prerequisite = {
+			focus = azr_csto4
+		}
+
+		completion_reward = {
+	add_political_power = 150
+	add_stability = 0.05
+	
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_csto7
+		text = "Secure the Russian Border"
+	    icon = attack_georgia
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = azr_csto4
+		prerequisite = {
+			focus = azr_csto6
+		}
+prerequisite = {
+			focus = azr_csto5
+		}
+		bypass = {
+			GEO = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = GEO
+			}
+
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_csto8
+		text = "Build the Armouries"
+	    icon = GFX_goal_Russia_Factory
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = azr_csto2
+		prerequisite = {
+			focus = azr_csto2
+		}
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_csto9
+		text = "Technology Sharing"
+	    icon = research
+		x = 0
+		y = 3
+		cost = 5
+		relative_position_id = azr_taraf3
+		prerequisite = {
+			focus = azr_csto7			focus = azr_nato8
+
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_taraf2
+		text = "Foreign Military Advisors"
+	    icon = paratroopers
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = azr_taraf
+		prerequisite = {
+			focus = azr_csto1 focus = azr_nato1
+		}
+	
+		completion_reward = {
+		add_ideas = HUN_foreign_military_advisors
+
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = azr_taraf3
+		text = "Develop Baku Airport"
+	    icon = GFX_USA_West_Coast_Air_Bases
+		x = 0
+		y = 3
+		cost = 5
+		relative_position_id = azr_taraf
+		prerequisite = {
+			focus = azr_taraf2 
+		}
+	
+		completion_reward = {
+229 = {
+				add_building_construction = {
+					type = air_base
+					instant_build = yes
+					level = 3
+				}
+			}
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = azr_taraf4
+		text = "Save Our Land"
+	    icon = attack_iran
+		x = 0
+		y = 4
+		cost = 5
+		relative_position_id = azr_taraf
+		prerequisite = {
+			focus = azr_taraf3 
+		}
+	
+bypass = {
+			PER = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+		completion_reward = {
+
+create_wargoal = {
+				type = annex_everything
+				target = PER
+			}			}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = karabag3
+		text = "The Road to Economic Independence"
+	    icon = GFX_goal_Invest_Industry
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = karabag2
+		prerequisite = {
+			focus = karabag2 
+		}
+
+		completion_reward = {
+every_owned_state = {
+				if = {
+					limit = {
+						is_core_of = AZR
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+			}	
+	}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	focus = {
+		id = karabag4
+		text = "The Age of Technology"
+	    icon = GFX_focus_TUR_nuclear_research_institute
+		x = -1
+		y = 1
+		cost = 10
+		relative_position_id = karabag3
+		select_effect = {
+			add_timed_idea = {
+				idea = TUR_building_Nuclear_power_plant
+				days = 140
+			}
+		}
+		prerequisite = {
+			focus = karabag3
+		}
+				prerequisite = { focus = isgaltopr7}
+
+
+		completion_reward = {
+			if = {
+				limit = { NOT = { has_tech = atomic_research } }
+				set_technology = { atomic_research = 1 }
+			}
+			else = {
+				add_tech_bonus = {
+					name = tech_bonus
+					bonus = 0.8
+					uses = 1
+					category = nuclear
+				}
+			}
+			add_offsite_building = { type = nuclear_reactor level = 1 }
+							}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		focus = {
+		id = karabag5
+		text = "The Age of Technology"
+	    icon = GFX_USA_Military_Research
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = karabag3
+	
+		prerequisite = {
+			focus = karabag3
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+							}
+		ai_will_do = {
+			factor = 0
 		}
 	}
 	
@@ -2156,2191 +3687,6 @@ add_ideas = path_to_war	 }
 	
 
 
-	##############
-	###POLITICS###
-	##############
-
-	focus = {
-		id = AZR_politics1
-		icon = demand_territory
-		text = "Our Future"
-		x = 40
-		y = 0
-		cost = 8
-
-		prerequisite = {
-		}
-
-
-		completion_reward = {
-			add_political_power = 75
-			add_stability = 0.05
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	
-	
-
-	focus = {
-		id = AZR__aliyev
-		icon = Heydar_Aliyev
-		relative_position_id = AZR_politics1
-		x = 5
-		y = 1
-		cost = 8
-
-		prerequisite = {
-			focus = AZR_politics1
-		}
-		mutually_exclusive = { focus = AZR_destroy_aliyev }
-
-
-		completion_reward = {
-
-			add_popularity = {
-				ideology = reactionary
-				popularity = 0.05
-			}
-			fourth_estate_reactionary_increase = yes
-			fourth_estate_conservative_decrease = yes
-			fourth_estate_nationalist_decrease = yes
-			fourth_estate_communist_decrease = yes
-		}
-
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				add = -10
-				OR = {
-					has_game_rule = {
-						rule = AZR_AI_BEHAVIOR
-						option = NATIONALIST
-					}
-					has_game_rule = {
-						rule = AZR_AI_BEHAVIOR
-						option = DEMOCRATIC_REFORM
-					}
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = AZR_destroy_aliyev
-		icon = ban_fascism
-		text = "Against Aliyev"
-		relative_position_id = AZR_politics1
-
-		x = -5
-		y = 1
-		cost = 8
-		mutually_exclusive = { focus = AZR__aliyev }
-
-		prerequisite = {
-			focus = AZR_politics1
-		}
-
-
-		completion_reward = {
-
-			add_popularity = {
-				ideology = reactionary
-				popularity = -0.1
-			}
-			fourth_estate_reactionary_decrease = yes
-			fourth_estate_conservative_increase = yes
-			fourth_estate_nationalist_increase = yes
-			fourth_estate_communist_increase = yes
-		}
-
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				add = -10
-				has_game_rule = {
-					rule = AZR_AI_BEHAVIOR
-					option = DEFAULT
-				}
-			}
-			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
-		}
-	}
-
-
-	focus = {
-		id = AZR_elcibey
-		icon = Ebulfaz_Elcibey
-		relative_position_id = AZR_destroy_aliyev
-		x = -16
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_destroy_aliyev
-		}
-
-		mutually_exclusive = { focus = AZR_isa  focus = AZR_com focus = AZR_fascist }
-
-		completion_reward = {
-			set_country_flag = elcibey
-			add_timed_idea = {
-				idea = idea_focus_generic_conservative_doctrine
-				days = 1095
-			}
-			fourth_estate_conservative_increase = yes
-			add_popularity = {
-				ideology = conservative
-				popularity = 0.1
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				add = -10
-				OR = {
-					has_game_rule = {
-						rule = AZR_AI_BEHAVIOR
-						option = NATIONALIST
-					}
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = AZR_isa
-		icon = nat_azr
-		relative_position_id = AZR_destroy_aliyev
-		x = -8
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_destroy_aliyev
-		}
-
-		mutually_exclusive = { focus = AZR_elcibey focus = AZR_com focus = AZR_fascist	}
-
-
-
-		completion_reward = {
-			set_country_flag = isa
-
-			add_timed_idea = {
-				idea = idea_focus_generic_nationalist_doctrine
-				days = 1095
-			}
-			fourth_estate_nationalist_increase = yes
-			add_popularity = {
-				ideology = nationalist
-				popularity = 0.1
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				add = -10
-				OR = {
-					has_game_rule = {
-						rule = AZR_AI_BEHAVIOR
-						option = DEMOCRATIC_REFORM
-					}
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = AZR_com
-		icon = communism
-		text = "Ramiz Ahmadov"
-		relative_position_id = AZR_destroy_aliyev
-		x = 2
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_destroy_aliyev
-		}
-
-		mutually_exclusive = { focus = AZR_elcibey focus = AZR_isa focus = AZR_fascist	}
-
-
-
-		completion_reward = {
-			set_country_flag = ramiz
-
-			add_timed_idea = {
-				idea = idea_focus_generic_marxist_doctrine
-				days = 1095
-			}
-			fourth_estate_communist_increase = yes
-			add_popularity = {
-				ideology = communist
-				popularity = 0.1
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				add = -10
-				OR = {
-					has_game_rule = {
-						rule = AZR_AI_BEHAVIOR
-						option = NATIONALIST
-					}
-					has_game_rule = {
-						rule = AZR_AI_BEHAVIOR
-						option = DEMOCRATIC_REFORM
-					}
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = AZR_fascist
-		icon = fascism
-		text = "Fazail Agamalı"
-		relative_position_id = AZR_destroy_aliyev
-		x = -3
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_destroy_aliyev
-		}
-
-		mutually_exclusive = { focus = AZR_elcibey focus = AZR_isa focus = AZR_com 	}
-
-
-
-		completion_reward = {
-			set_country_flag = agamali
-
-
-			add_timed_idea = {
-				idea = idea_focus_generic_neo_fascist_doctrine
-				days = 1095
-			}
-			fourth_estate_fascist_increase = yes
-			add_popularity = {
-				ideology = fascist
-				popularity = 0.1
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				add = -10
-				OR = {
-					has_game_rule = {
-						rule = AZR_AI_BEHAVIOR
-						option = NATIONALIST
-					}
-					has_game_rule = {
-						rule = AZR_AI_BEHAVIOR
-						option = DEMOCRATIC_REFORM
-					}
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = AZR_election
-		icon = elections
-		text = "Elections"
-		relative_position_id = AZR_destroy_aliyev
-		x = 0
-		y = 2
-		cost = 5
-
-		prerequisite = {
-			focus = AZR_elcibey focus = AZR_isa focus = AZR_com focus = AZR_fascist
-		}
-		mutually_exclusive = {  	}
-		completion_reward = {
-			country_event = azr.1 		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_karabagh
-		icon = war2
-		text = "Battle of Karabag"
-		relative_position_id = AZR_destroy_aliyev
-		x = -12
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_elcibey focus = AZR_isa  focus = AZR_fascist
-		}
-		mutually_exclusive = {  	}
-		completion_reward = {
-			AZR = {
-				declare_war_on = {
-					type = annex_everything
-					target =  NGK
-				}
-			}
-			ARM = { add_ideas = yalnizlik}
-			NGK = { add_ideas = yalnizlik}
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_armania
-		icon = war
-		text = "Battle of Armenia"
-		relative_position_id = AZR_destroy_aliyev
-		x = -12
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_karabagh
-		}
-		completion_reward = {
-			AZR = {
-				declare_war_on = {
-					type = annex_everything
-					target =  ARM
-				}
-			}
-			ARM = { add_ideas = yalnizlik}
-			NGK = { add_ideas = yalnizlik}
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_destek
-		icon = industry_civilian
-		text = "Subsidy"
-		relative_position_id = AZR_destroy_aliyev
-		x = -5
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_elcibey focus = AZR_isa  focus = AZR_fascist
-			focus = AZR_com
-		}
-		mutually_exclusive = {  	}
-		completion_reward = {
-			add_ideas = idea_focus_industrial_development_program
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-			}
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = AZR_com_government
-		icon = communism8
-		text = "Communist Government"
-		relative_position_id = AZR_com
-		x = 0
-		y = 1
-		cost = 8
-
-		available = {
-			has_government = communist
-		}
-
-		prerequisite = {
-			focus = AZR_com
-		}
-
-
-		completion_reward = {
-			add_political_power = 120
-			add_stability = 0.05
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = AZR_com2
-		icon = work_red
-		text = "Workers Rights"
-		relative_position_id = AZR_com_government
-		x = 1
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_com_government
-		}
-
-		completion_reward = {
-			add_ideas = BUL_protect_workers_rights
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_com2.1
-		icon = five_year_plan
-		text = "Five Year Plan"
-		relative_position_id = AZR_com_government
-		x = 1
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus =  AZR_com2
-		}
-
-		completion_reward = {
-			add_timed_idea = {
-				idea = SOV_five_year_plan
-				days = 1825
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_com2.2
-		icon = National_industry
-		text = "Socialist Industry"
-		relative_position_id = AZR_com_government
-		x = 1
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_com2.1
-		}
-
-		completion_reward = {
-			add_ideas = FRA_socialist_industrial_association
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_com3
-		icon = socialist_education
-		text = "Socialist Education"
-		relative_position_id = AZR_com_government
-		x = -1
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_com_government
-		}
-
-		completion_reward = {
-			add_research_slot = 1
-			add_ideas = BUL_socialist_education
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_com4
-		icon = lenin
-		text = "Communist Diplomacy"
-		relative_position_id = AZR_com_government
-		x = 3
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_com_government
-		}
-
-		completion_reward = {
-			add_country_leader_trait = veteran_communist
-
-			add_political_power = 250
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_com_sov
-		icon = align_to_russia
-		text = "Russian Aid"
-		relative_position_id = AZR_com_government
-		x = 3
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_com4
-		}
-
-		completion_reward = {
-			add_political_power = 50
-			SOV = { add_opinion_modifier = {
-
-					target = TUR
-
-					modifier = declaration_of_friendship
-
-				}
-
-				increase_trade_influence_by_2 = yes }
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_com_chi
-		icon = align_to_china
-		text = "Chinese Aids"
-		relative_position_id = AZR_com_government
-		x = 3
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_com_sov
-		}
-
-		completion_reward = {
-			add_political_power = 50
-			PRC = {
-				add_opinion_modifier = {
-
-					target = TUR
-
-					modifier = declaration_of_friendship
-
-				}
-				increase_trade_influence_by_2 = yes }
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-
-	focus = {
-		id = AZR_com3.1
-		icon = communism5
-		text = "Will Of The Peaople"
-		relative_position_id = AZR_com_government
-		x = -1
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_com3
-		}
-
-		completion_reward = {
-			add_ideas = idea_focus_generic_will_of_the_people
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_com3.2
-		icon = trade_deal
-		text = "Union Agreements"
-		relative_position_id = AZR_com_government
-		x = -1
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_com3.1
-		}
-
-		completion_reward = {
-			add_ideas = UKR_idea_commie_a_h
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_defensive
-		icon = defence
-		text = "Defence Strategy"
-		relative_position_id = AZR_com_government
-		x = 0
-		y = 4
-		cost = 10
-		mutually_exclusive = { focus = AZR_offensive }
-
-		prerequisite = {
-			focus = AZR_com3.2 focus = AZR_com2.2 focus = AZR_com_chi
-		}
-
-		completion_reward = {
-			add_ideas = defensive_military_strategy
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_offensive
-		icon = infantry_japan
-		text = "Offensive Strategy"
-		relative_position_id = AZR_com_government
-		x = 2
-		y = 4
-		cost = 10
-		mutually_exclusive = { focus = AZR_defensive }
-
-		prerequisite = {
-			focus = AZR_com3.2 focus = AZR_com2.2 focus = AZR_com_chi
-		}
-
-		completion_reward = {
-			add_ideas = UKR_atk
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_jets
-		icon = GFX_goal_generic_air_bomber
-		text = "Chinese Pilots"
-		relative_position_id = AZR_com_government
-		x = 1
-		y = 5
-		cost = 10
-
-
-		prerequisite = {
-			focus = AZR_offensive focus = AZR_defensive
-		}
-
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = fighter_equipment_3
-				amount = 50
-				producer = PRC
-			}
-			PRC = { increase_trade_influence_by_2 = yes }
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_rec
-		icon = communism11
-		text = "Revolution Guard"
-		relative_position_id = AZR_com_government
-		x = 1
-		y = 6
-		cost = 10
-
-
-		prerequisite = {
-			focus = AZR_jets
-		}
-
-		completion_reward = {
-			add_ideas = FRA_red_guards_idea
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_council
-		icon = alliance
-		text = "Join Turkic Council"
-		relative_position_id = AZR_destroy_aliyev
-		x = -8
-		y = 2
-		cost = 10
-
-		available = {
-			has_government = nationalist
-		}
-		prerequisite = {
-			focus = AZR_isa
-		}
-
-		completion_reward = {
-			add_political_power = 100
-
-			add_ideas = { turkish_council }
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_exchange
-		icon = scientific_exchange
-		text = "Turkish Exchange Program"
-		relative_position_id = AZR_destroy_aliyev
-		x = -9
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_council
-		}
-
-		completion_reward = {
-			add_political_power = 50
-
-			add_ideas = turexchange
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_unity
-		icon = demand_territory
-		text = "National Unity"
-		relative_position_id = AZR_destroy_aliyev
-		x = -7
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_council
-		}
-
-		completion_reward = {
-			add_political_power = 50
-
-			add_ideas = FRA_national_fellowship
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_fatherland
-		icon = GFX_focus_ger_reichskommisariats
-		text = "National Unity"
-		relative_position_id = AZR_destroy_aliyev
-		x = -8
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_unity  }
-		prerequisite = {focus = AZR_exchange
-		}
-
-		completion_reward = {
-			add_political_power = 50
-
-			add_ideas = idea_focus_generic_fatherland_unity
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_heritage
-		icon = war
-		text = "National Heritage"
-		relative_position_id = AZR_destroy_aliyev
-		x = -5
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_unity  focus = AZR_fascist3  }
-
-
-		completion_reward = {
-			add_war_support = 0.05
-			add_ideas = idea_focus_generic_national_heritage
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_heritage2
-		icon = drone
-		text = "Turkish Air"
-		relative_position_id = AZR_destroy_aliyev
-		x = -5
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_heritage  }
-
-
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = tac_bomber_equipment_1
-				amount = 150
-				producer = TUR
-			}
-			TUR = { increase_trade_influence_by_3 = yes }
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_nationalinds
-		icon = industry_military
-		text = "National Industry"
-		relative_position_id = AZR_destroy_aliyev
-		x = -9
-		y = 5
-		cost = 10
-
-
-		prerequisite = {focus = AZR_exchange
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				limit = {
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				limit = {
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				limit = {
-					free_building_slots = {
-						building = arms_factory
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_trade2
-		icon = trade_deal
-		text = "Trade Agreements"
-		relative_position_id = AZR_destroy_aliyev
-		x = -7
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_unity  }
-
-
-		completion_reward = {
-			every_country = {
-				limit = { has_government = nationalist }
-
-				increase_trade_influence_by_3 = yes
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_yerlisilah
-		icon = small_arms5
-		text = "Development Gun Production"
-		relative_position_id = AZR_destroy_aliyev
-		x = -8
-		y = 6
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_fatherland  }
-
-
-		completion_reward = {
-
-			add_ideas =	rifle_production_bonus
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_national_unityh
-		icon = national_unity_red
-		text = "National Unity"
-		relative_position_id = AZR_destroy_aliyev
-		x = -9
-		y = 7
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_yerlisilah  }
-
-		prerequisite = {
-			focus = AZR_nationalinds  }
-
-
-		completion_reward = {
-			add_stability = 0.1
-			add_political_power = 150		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_azr
-		icon = national_unity
-		text = "Nationalist Azerbaijan"
-		relative_position_id = AZR_destroy_aliyev
-		x = -8
-		y = 8
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_yerlisilah  }
-
-		prerequisite = {
-			focus = AZR_national_unityh  }
-		prerequisite = {
-			focus = AZR_national_ind  }
-
-
-		completion_reward = {
-			add_stability = 0.1
-			add_political_power = 300		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_national_ind
-		icon = military_sphere
-		text = "Improve Industry"
-		relative_position_id = AZR_destroy_aliyev
-		x = -7
-		y = 7
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_yerlisilah  }
-
-		prerequisite = {
-			focus = AZR_trade2  }
-
-
-		completion_reward = {
-			add_ideas = generic_tariffs	}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_fascist2
-		icon = fascism4
-		text = "Ultimate Nation"
-		relative_position_id = AZR_destroy_aliyev
-		x = -3
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_fascist
-		}
-
-		available = { has_government = fascist }
-
-
-		completion_reward = {
-			add_ideas = generic_the_ultimate_nation
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_fascist3
-		icon = fascism3
-		text = "Prepare of War"
-		relative_position_id = AZR_destroy_aliyev
-		x = -4
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_fascist2
-		}
-
-
-
-		completion_reward = {
-			add_ideas = generic_proud_not_confrom
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_fascist4
-		icon = license_production
-		text = "Develop Industry"
-		relative_position_id = AZR_destroy_aliyev
-		x = -2
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_fascist2
-		}
-
-
-
-		completion_reward = {
-			add_ideas = generic_tariffs
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_wargeorg
-		icon = war
-		text = "War!"
-		relative_position_id = AZR_destroy_aliyev
-		x = -3
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_fascist4
-		}
-
-		prerequisite = {
-			focus = AZR_fascist3
-		}
-
-
-
-		completion_reward = {
-			declare_war_on = {
-				target = GEO
-				type = annex_everything
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_wargeper
-		icon = attack_iran
-		text = "Save Our Brothers"
-		relative_position_id = AZR_destroy_aliyev
-		x = -3
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_wargeorg
-		}
-
-
-
-
-
-		completion_reward = {
-			declare_war_on = {
-				target = PER
-				type = annex_everything
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_paydebts
-		icon = money
-		text = "Pay The Debts"
-		relative_position_id = AZR_destroy_aliyev
-		x = -16
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_elcibey
-		}
-
-
-		completion_reward = {
-			add_timed_idea = {
-				idea = SOV_paid_some_debts
-				days = 200
-			}
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_factory
-		icon = consumer_goods
-		text = "Constructions"
-		relative_position_id = AZR_destroy_aliyev
-		x = -16
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_paydebts
-		}
-
-
-		completion_reward = {
-			add_ideas = generic_tariffs
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_health
-		icon = self_management
-		text = "Healthcare Reform"
-		relative_position_id = AZR_destroy_aliyev
-		x = -16
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_factory
-		}
-
-
-		completion_reward = {
-			add_ideas = tur_healthcare_reform_idea
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_recruitm
-		icon = infiltration
-		text = "New Army System"
-		relative_position_id = AZR_destroy_aliyev
-		x = -15
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_health
-		}
-		prerequisite = {
-			focus = AZR_exchangetur
-		}
-		prerequisite = {
-			focus = AZR_economic3
-		}
-
-
-		completion_reward = {
-			add_ideas = idea_focus_new_recruitment_strategies
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_ebulfezarmy
-		icon = skull2
-		text = "New Army System"
-		relative_position_id = AZR_destroy_aliyev
-		x = -17
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_health
-		}
-		prerequisite = {
-			focus = AZR_exchangetur
-		}
-		prerequisite = {
-			focus = AZR_economic3
-		}
-
-
-		completion_reward = {
-			add_ideas = USA_lightning_corps
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_ebulfezarmy2
-		icon = tank
-		text = "Tank Program"
-		relative_position_id = AZR_destroy_aliyev
-		x = -16
-		y = 6
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_ebulfezarmy
-		}
-		prerequisite = {
-			focus = AZR_recruitm
-		}
-
-
-
-		completion_reward = {
-			add_ideas = USA_improved_tanks1
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-
-	focus = {
-		id = AZR_economic
-		icon = construction
-		text = "Economic Reform"
-		relative_position_id = AZR_destroy_aliyev
-		x = -18
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_elcibey
-		}
-
-
-		completion_reward = {
-			add_ideas = GER_national_economic_reform
-
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_economic2
-		icon = industry_civilian
-		text = "Support Companies"
-		relative_position_id = AZR_destroy_aliyev
-		x = -18
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_economic
-		}
-
-
-		completion_reward = {
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_economic3
-		icon = oil_trade
-		text = "Support SOCAR"
-		relative_position_id = AZR_destroy_aliyev
-		x = -18
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_economic2
-		}
-
-
-		completion_reward = {
-			229 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = synthetic_refinery
-					level = 2
-					instant_build = yes
-				}
-			}
-			229 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = fuel_silo
-					level = 2
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_burokratik
-		icon = intelligence_exchange
-		text = "Bureaucratic Reform"
-		relative_position_id = AZR_destroy_aliyev
-		x = -14
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_elcibey
-		}
-
-
-		completion_reward = {
-			add_ideas = GER_national_bureaucratic_reform
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_egitim
-		icon = university
-		text = "Education Reform"
-		relative_position_id = AZR_destroy_aliyev
-		x = -14
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_burokratik
-		}
-
-
-		completion_reward = {
-			add_ideas = idea_tur_new_education_program
-			add_political_power = 50
-
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_exchangetur
-		icon = research
-		text = "Join Turkish Program"
-		relative_position_id = AZR_destroy_aliyev
-		x = -14
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_egitim
-		}
-
-
-		completion_reward = {
-			add_ideas = turexchange
-			add_political_power = 50
-
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_housealiyev
-		icon = house
-		text = "House Of Aliyev"
-		relative_position_id = AZR__aliyev
-		x = 0
-		y = 1
-		cost = 8
-
-		prerequisite = {
-			focus = AZR__aliyev
-		}
-
-
-		completion_reward = {
-
-			add_political_power = 100
-			add_stability = 0.05
-		}
-
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_housealiyev2
-		icon = infrastructure
-		text = "Infrastructure Effort"
-		relative_position_id = AZR__aliyev
-		x = 0
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_housealiyev
-		}
-
-
-		completion_reward = {
-			random_owned_state = {
-
-				add_building_construction = {
-
-					type = infrastructure
-
-					level = 2
-
-					instant_build = yes
-
-				}
-			}
-
-			random_owned_state = {
-
-				add_building_construction = {
-
-					type = infrastructure
-
-					level = 2
-
-					instant_build = yes
-
-				}
-			}
-			random_owned_state = {
-
-				add_building_construction = {
-
-					type = infrastructure
-
-					level = 2
-
-					instant_build = yes
-
-				}
-			}
-		}
-
-
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_housealiyev3
-		icon = industry_military
-		text = "Military Industry"
-		relative_position_id = AZR__aliyev
-		x = 0
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_housealiyev2
-		}
-
-
-		completion_reward = {
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
-
-			}
-		}
-
-
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_tradealiyev
-		icon = trade_deal
-		text = "Trade Agreements"
-		relative_position_id = AZR__aliyev
-		x = 2
-		y = 1
-		cost = 8
-
-		prerequisite = {
-			focus = AZR__aliyev
-		}
-		completion_reward = {
-			every_country = {
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = AZR
-					modifier = trade_mission
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_tradealiyev2
-		icon = industry_civilian
-		text = "Support Companies"
-		relative_position_id = AZR__aliyev
-		x = 2
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_tradealiyev
-		}
-		completion_reward = {
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_tradealiyev3
-		icon = production
-		text = "New Airbase"
-		relative_position_id = AZR__aliyev
-		x = 2
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_tradealiyev2
-		}
-		completion_reward = {
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = air_base
-					level = 5
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = air_base
-					level = 5
-					instant_build = yes
-				}
-			}
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_newlaws
-		icon = constitution
-		text = "New Constitution"
-		relative_position_id = AZR__aliyev
-		x = 4
-		y = 1
-		cost = 8
-
-		prerequisite = {
-			focus = AZR__aliyev
-		}
-		completion_reward = {
-			add_stability = 0.1
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_saglikreform
-		icon = self_management
-		text = "Healthcare Reform"
-		relative_position_id = AZR__aliyev
-		x = 4
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_newlaws
-		}
-		completion_reward = {
-			add_ideas = tur_healthcare_reform_idea
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_egitimreform
-		icon = university
-		text = "New University"
-		relative_position_id = AZR__aliyev
-		x = 4
-		y = 3
-		cost =10
-
-		prerequisite = {
-			focus = AZR_saglikreform
-		}
-		completion_reward = {
-			add_ideas = idea_focus_generic_reckless_progress
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_enu
-		icon = national_unity
-		text = "National Unity"
-		relative_position_id = AZR__aliyev
-		x = 1
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_egitimreform
-		}
-		prerequisite = {
-			focus = AZR_tradealiyev3
-		}
-		prerequisite = {
-			focus = AZR_housealiyev3
-		}
-
-		completion_reward = {
-			add_ideas = national_unity_bonus
-			add_political_power = 150
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_militar
-		icon = military_mission
-		text = "Military Reform"
-		relative_position_id = AZR__aliyev
-		x = 3
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_egitimreform
-		}
-		prerequisite = {
-			focus = AZR_tradealiyev3
-		}
-		prerequisite = {
-			focus = AZR_housealiyev3
-		}
-
-		completion_reward = {
-			add_ideas = military_planning_bonus
-			add_political_power = 50
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_militaryy
-		icon = army_doctrine
-		text = "Military Reform"
-		relative_position_id = AZR__aliyev
-		x = 2
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = AZR_militar focus = AZR_enu
-		}
-
-
-
-		completion_reward = {
-			add_ideas = army_morale_bonus
-			add_political_power = 50
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_turani
-		icon = meetingoftheturanempire
-		text = "Turan"
-		x = 0
-		y = 5
-		cost = 7
-		available = {  date > 2002.1.1
-			NOT = { has_government = communist}}
-
-		prerequisite = {
-			focus = AZR_armania
-		}
-		relative_position_id = AZR_armania
-		completion_reward = {
-			add_country_leader_trait = nationalist_symbol
-
-
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_turan2
-		icon = align_to_turkey
-		text = "Improve Relations Turkey"
-		x = -2
-		y =1
-		cost = 10
-		relative_position_id = AZR_turani
-
-		prerequisite = {
-			focus = AZR_turani
-		}
-
-
-		completion_reward = {
-			add_opinion_modifier = { target = TUR modifier = has_expressed_loyalty }
-			add_political_power = 150
-
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_turan7
-		icon = drone
-		text = "Turkish Drones"
-		x = 0
-		y =1
-		cost = 10
-		relative_position_id = AZR_turan2
-
-		prerequisite = {
-			focus = AZR_turan2
-		}
-
-
-		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = tac_bomber_equipment_1
-				amount = 150
-				producer = TUR
-			}
-			TUR = { increase_trade_influence_by_3 = yes }
-
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_turan4
-		icon = alliance
-		text = "First Step"
-		x = 0
-		y =1
-		cost = 10
-		relative_position_id = AZR_turani
-
-		prerequisite = {
-			focus = AZR_turani
-		}
-
-
-		completion_reward = {
-			add_political_power = 200
-			add_stability = 0.1
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_turan5
-		icon = alliance
-		text = "Congress"
-		x = 0
-		y = 1
-		cost = 10
-		relative_position_id = AZR_turan4
-
-		prerequisite = {
-			focus = AZR_turan4
-		}
-
-
-		completion_reward = {
-
-			add_political_power = 200
-
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_turan3
-		icon = asia
-		text = "Improve Relations Asian Turks"
-		x = -4
-		y =1
-		cost = 10
-		relative_position_id = AZR_turani
-
-		prerequisite = {
-			focus = AZR_turani
-		}
-
-
-		completion_reward = {
-			add_opinion_modifier = { target = TMS modifier = has_expressed_loyalty }
-			add_opinion_modifier = { target = KAZ modifier = has_expressed_loyalty }
-			add_opinion_modifier = { target = UZB modifier = has_expressed_loyalty }
-			add_political_power = 150
-
-
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-
-	focus = {
-		id = AZR_turan6
-		icon = army_logistics
-		text = "Army Exercise"
-		x = 0
-		y =1
-		cost = 10
-		relative_position_id = AZR_turan3
-
-		prerequisite = {
-			focus = AZR_turan3
-		}
-
-
-		completion_reward = {
-
-			army_experience = 100
-			air_experience =100
-
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = AZR_turan8
-		icon = research
-		text = "Turkish Scientists"
-		x = 0
-		y =1
-		cost = 10
-		relative_position_id = AZR_turan7
-
-		prerequisite = {
-			focus = AZR_turan6
-		}
-
-		prerequisite = {
-			focus = AZR_turan7
-		}
-		prerequisite = {
-			focus = AZR_turan5
-		}
-
-
-		completion_reward = {
-
-			add_research_slot = 1
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
 }
 
 

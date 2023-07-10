@@ -46,7 +46,7 @@ focus_tree = {
 	@world_revolution_tree_far_right = 27
 	@world_revolution_tree_far_far_right = 28
 
-	@path_of_justice_header = 35
+	@path_of_justice_header = 32
 	@legacy_of_the_kaiser_tree_left = 28
 	@legacy_of_the_kaiser_tree_center = 29
 	@legacy_of_the_kaiser_tree_right = 30
@@ -56,7 +56,7 @@ focus_tree = {
 
 	@foreign_policy_head_far_left = 42
 	@foreign_policy_head_left = 42
-	@foreign_policy_head_center = 47
+	@foreign_policy_head_center = 43
 	@foreign_policy_head_right = 44
 
 	@european_politics_very_far_left = 37
@@ -75,7 +75,7 @@ focus_tree = {
 	@intercontinental_politics_far_right = 50
 	@intercontinental_politics_very_far_right = 51
 
-	@military_head = 63
+	@military_head = 59
 
 	@army_tree_far_left = 53
 	@army_tree_left = 54
@@ -5227,7 +5227,10 @@ focus_tree = {
 		}
 	}
 	
-	### German Monarchy
+#########################################################################################################
+	### Monarchy of Germany (Phase 1) ###
+	#####################################
+
 	focus = {
 		id = GER_legacy_of_the_empire
 		x = -1
@@ -5239,6 +5242,10 @@ focus_tree = {
 			focus = GER_nationalism
 		}
 		
+		available = {
+			always = no
+		}
+
 		prerequisite = {
 			focus = GER_emphasize_justice
 		}
@@ -5248,7 +5255,7 @@ focus_tree = {
 				ideology = monarchist
 				popularity = 0.05
 			}
-			add_stability = -0.05
+			add_stability = -0.15
 			add_named_threat = {
 				name = threat_german_nationalism
 				threat = 0.5
@@ -5313,11 +5320,6 @@ focus_tree = {
 			factor = 30
 		}
 	}
-	
-#########################################################################################################
-	### Monarchy of Germany ###
-	###########################
-
 	focus = {
 		id = GER_return_of_the_kaiser
 		x = 0
@@ -5336,7 +5338,11 @@ focus_tree = {
 				ideology = monarchist
 				popularity = 0.15
 			}
-			add_political_power = -50
+			add_named_threat = {
+				name = threat_german_nationalism
+				threat = 0.5
+			}
+			add_political_power = -75
 
 			#############################################################
 			###														  ###
@@ -5354,14 +5360,15 @@ focus_tree = {
 		x = -1
 		y = 1
 		icon = GFX_GER_Prussian_Militarism
-		cost = @Time_70_days
+		cost = @Time_35_days
 		relative_position_id = GER_return_of_the_kaiser
+
 		prerequisite = {
 			focus = GER_return_of_the_kaiser
 		}
 
 		completion_reward = {
-			add_ideas = GER_Prussian_Militarism_Ideals
+			add_ideas = GER_Prussian_Militarism
 		}
 
 		ai_will_do = {
@@ -5373,14 +5380,17 @@ focus_tree = {
 		x = 1
 		y = 1
 		icon = GFX_GER_The_New_Kaiserreich
-		cost = @Time_70_days
+		cost = @Time_35_days
 		relative_position_id = GER_return_of_the_kaiser
+
 		prerequisite = {
 			focus = GER_return_of_the_kaiser
 		}
 
 		completion_reward = {
-			#add_political_power = 30
+			fourth_estate_monarchist_increase = yes
+			add_stability = 0.05
+			remove_ideas = idea_GER_german_legacy
 		}
 
 		ai_will_do = {
@@ -5394,6 +5404,7 @@ focus_tree = {
 		icon = GFX_focus_ger_revive_kaiserreich
 		cost = @Time_70_days
 		relative_position_id = GER_prussian_militarism
+
 		prerequisite = {
 			focus = GER_prussian_militarism
 		}
@@ -5402,7 +5413,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			#add_political_power = 30
+			add_ideas = GER_Revive_the_Kaiserreich
 		}
 
 		ai_will_do = {
@@ -5410,21 +5421,47 @@ focus_tree = {
 		}
 	}
 
-	### Stay With Europe
+#########################################################################################################
+	### Part 1 (Not killing everybody) ###
+	######################################
+
 	focus = {
-		id = GER_work_in_progress_1
+		id = GER_Soft_Power_Diplomacy
 		x = -1
 		y = 1
 		icon = GFX_goal_Azur_Lane_GFX_1
 		cost = @Time_70_days
 		relative_position_id = GER_the_new_kaiserreich
+		mutually_exclusive = {
+			focus = GER_Hard_Power_Diplomacy
+		}
 
 		prerequisite = {
 			focus = GER_the_new_kaiserreich
 		}
 
 		completion_reward = {
-			#add_political_power = 30
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Prepare_for_Diplomacy
+		x = -1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Soft_Power_Diplomacy
+
+		prerequisite = {
+			focus = GER_Soft_Power_Diplomacy
+		}
+
+		completion_reward = {
+			
 		}
 
 		ai_will_do = {
@@ -5432,26 +5469,638 @@ focus_tree = {
 		}
 	}
 
-	### On Our Own
+	# Belgium
 	focus = {
-		id = GER_work_in_progress_2
+		id = GER_Negotiates_with_Belgium
+		x = -1
+		y = 3
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_the_new_kaiserreich
+
+		prerequisite = {
+			focus = GER_Prepare_for_Diplomacy
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Trade_Deals_with_Belgium
+		x = 0
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Belgium
+
+		prerequisite = {
+			focus = GER_Negotiates_with_Belgium
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Request_Eupen-Malmedy
+		x = 0
+		y = 2
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Belgium
+
+		prerequisite = {
+			focus = GER_Trade_Deals_with_Belgium
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+	# Denmark
+	focus = {
+		id = GER_Negotiates_with_Denmark
+		x = -4
+		y = 3
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_the_new_kaiserreich
+
+		prerequisite = {
+			focus = GER_Prepare_for_Diplomacy
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_German_Investments_in_Denmark
+		x = -1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Denmark
+
+		prerequisite = {
+			focus = GER_Negotiates_with_Denmark
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Expand_Trade_Deals_with_Denmark
+		x = 1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Denmark
+
+		prerequisite = {
+			focus = GER_Negotiates_with_Denmark
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Request_Northern_Schleswig
+		x = 0
+		y = 2
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Denmark
+
+		prerequisite = {
+			focus = GER_German_Investments_in_Denmark
+		}
+		prerequisite = {
+			focus = GER_Expand_Trade_Deals_with_Denmark
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+	# Poland
+	focus = {
+		id = GER_Negotiates_with_Poland
+		x = -8
+		y = 3
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_the_new_kaiserreich
+
+		prerequisite = {
+			focus = GER_Prepare_for_Diplomacy
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_German_Investments_in_Poland
+		x = -1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Poland
+
+		prerequisite = {
+			focus = GER_Negotiates_with_Poland
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Negotiations_of_War_Reparations_for_Poland
+		x = 1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Poland
+
+		prerequisite = {
+			focus = GER_Negotiates_with_Poland
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Request_Eastern_Territories
+		x = 0
+		y = 2
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Poland
+
+		prerequisite = {
+			focus = GER_German_Investments_in_Poland
+		}
+		prerequisite = {
+			focus = GER_Negotiations_of_War_Reparations_for_Poland
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+	# Russia
+	focus = {
+		id = GER_Negotiates_with_Russia
+		x = -12
+		y = 3
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_the_new_kaiserreich
+
+		prerequisite = {
+			focus = GER_Prepare_for_Diplomacy
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Hydrocarbon_Trade_Deal_with_Russia
+		x = -1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Russia
+
+		prerequisite = {
+			focus = GER_Negotiates_with_Russia
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Technology_Transfer_with_Russia
+		x = 1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Russia
+
+		prerequisite = {
+			focus = GER_Negotiates_with_Russia
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Request_for_Konigsberg
+		x = 0
+		y = 2
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Negotiates_with_Russia
+
+		prerequisite = {
+			focus = GER_Hydrocarbon_Trade_Deal_with_Russia
+		}
+		prerequisite = {
+			focus = GER_Technology_Transfer_with_Russia
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+	focus = {
+		id = GER_Proclaim_the_Fourth_Reich_Monarchist_1
+		x = -4
+		y = 4
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Prepare_for_Diplomacy
+
+		prerequisite = {
+			focus = GER_Request_for_Konigsberg
+		}
+		prerequisite = {
+			focus = GER_Request_Eastern_Territories
+		}
+		prerequisite = {
+			focus = GER_Request_Northern_Schleswig
+		}
+		prerequisite = {
+			focus = GER_Request_Eupen-Malmedy
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+#########################################################################################################
+	### Part 1 (killing everybody) ###
+	##################################
+
+	focus = {
+		id = GER_Hard_Power_Diplomacy
 		x = 1
 		y = 1
 		icon = GFX_goal_Azur_Lane_GFX_1
 		cost = @Time_70_days
 		relative_position_id = GER_the_new_kaiserreich
+		mutually_exclusive = {
+			focus = GER_Soft_Power_Diplomacy
+		}
+
 		prerequisite = {
 			focus = GER_the_new_kaiserreich
 		}
 
 		completion_reward = {
-			#add_political_power = 30
+			
 		}
 
 		ai_will_do = {
 			factor = 30
 		}
 	}
+	focus = {
+		id = GER_Prepare_for_War
+		x = 1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Hard_Power_Diplomacy
+
+		prerequisite = {
+			focus = GER_Hard_Power_Diplomacy
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Demand_Northern_Schleswig
+		x = 0
+		y = 2
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Hard_Power_Diplomacy
+
+		prerequisite = {
+			focus = GER_Prepare_for_War
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Demand_Eupen-Malmedy
+		x = 2
+		y = 2
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Hard_Power_Diplomacy
+
+		prerequisite = {
+			focus = GER_Prepare_for_War
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Demand_Eastern_Territories
+		x = 1
+		y = 3
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Hard_Power_Diplomacy
+
+		prerequisite = {
+			focus = GER_Demand_Northern_Schleswig
+		}
+		prerequisite = {
+			focus = GER_Demand_Eupen-Malmedy
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Konigsberg_or_War
+		x = 0
+		y = 4
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Hard_Power_Diplomacy
+		mutually_exclusive = {
+			focus = GER_Konigsberg_for_Treaty
+		}
+
+		prerequisite = {
+			focus = GER_Demand_Eastern_Territories
+		}
+
+		completion_reward = {
+			
+			##################################################
+			###											   ###
+			### Gets a decision to demand Memel (Klaipėda) ###
+			###											   ###
+			##################################################
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Konigsberg_for_Treaty
+		x = 2
+		y = 4
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Hard_Power_Diplomacy
+		mutually_exclusive = {
+			focus = GER_Konigsberg_or_War
+		}
+
+		prerequisite = {
+			focus = GER_Demand_Eastern_Territories
+		}
+
+		completion_reward = {
+
+			##################################################
+			###											   ###
+			### Gets a decision to demand Memel (Klaipėda) ###
+			###											   ###
+			##################################################
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_Proclaim_the_Fourth_Reich_Monarchist_2
+		x = 1
+		y = 5
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Hard_Power_Diplomacy
+
+		prerequisite = {
+			focus = GER_Konigsberg_or_War
+			focus = GER_Konigsberg_for_Treaty
+		}
+
+		completion_reward = {
+			
+			##################################################
+			###											   ###
+			### Gets a decision to demand Memel (Klaipėda) ###
+			###											   ###
+			##################################################
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+#########################################################################################################
+	### Monarchy of Germany (Phase 2) ###
+	#####################################
+
+	### After restoring the German Empire the  ###
+	### player can now get their colonies back ###
+
+	focus = {
+		id = GER_German_Territorial_Ambitions
+		x = -2
+		y = 7
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_the_new_kaiserreich
+
+		prerequisite = {
+			focus = GER_Proclaim_the_Fourth_Reich_Monarchist_1
+			focus = GER_Proclaim_the_Fourth_Reich_Monarchist_2
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+	# German Colonies
+	focus = {
+		id = GER_Reclaim_Old_Colonies
+		x = -2
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_German_Territorial_Ambitions
+
+		prerequisite = {
+			focus = GER_German_Territorial_Ambitions
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_German_Colonies_in_Africa
+		x = -1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Reclaim_Old_Colonies
+
+		prerequisite = {
+			focus = GER_Reclaim_Old_Colonies
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	focus = {
+		id = GER_German_Colonies_in_the_Pacific
+		x = 1
+		y = 1
+		icon = GFX_goal_Azur_Lane_GFX_1
+		cost = @Time_70_days
+		relative_position_id = GER_Reclaim_Old_Colonies
+
+		prerequisite = {
+			focus = GER_Reclaim_Old_Colonies
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+	# 
 
 #########################################################################################################
 	### Fascist of Germany ###
@@ -5484,7 +6133,7 @@ focus_tree = {
 		icon = GFX_GER_German_Pride
 		x = 0
 		y = 1
-		cost = @Time_35_days
+		cost = @Time_50_days
 		prerequisite = {
 			focus = GER_restore_german_pride
 		}
@@ -5512,7 +6161,7 @@ focus_tree = {
 		icon = GFX_GER_Far-Right_Rallies
 		x = -1
 		y = 1
-		cost = @Time_35_days
+		cost = @Time_50_days
 		prerequisite = {
 			focus = GER_legacy_of_the_empire
 			focus = GER_nationalism
@@ -5634,7 +6283,7 @@ focus_tree = {
 		icon = GFX_goal_Abandon_the_EU
 		x = 0
 		y = 1
-		cost = @Time_35_days
+		cost = @Time_25_days
 		prerequisite = {
 			focus = GER_prioritise_germany
 		}
@@ -5689,7 +6338,7 @@ focus_tree = {
 	focus = {
 		id = GER_demand_election
 		icon = GFX_focus_eng_concessions_to_the_trade_unions
-		x = 0
+		x = -1
 		y = 1
 		cost = @Time_40_days
 		prerequisite = {
@@ -5716,7 +6365,7 @@ focus_tree = {
 	focus = {
 		id = GER_empower_the_president
 		icon = GFX_focus_generic_support_the_left_right
-		x = 0
+		x = 2
 		y = 1
 		cost = @Time_70_days
 		prerequisite = {
@@ -5752,7 +6401,7 @@ focus_tree = {
 	focus = {
 		id = GER_spread_propaganda
 		icon = GFX_focus_generic_fascist_propaganda
-		x = 2
+		x = 3
 		y = 1
 		cost = @Time_50_days
 		prerequisite = {
@@ -5910,7 +6559,7 @@ focus_tree = {
 	focus = {
 		id = GER_GroBraumwirtschaft
 		icon = GFX_goal_generic_construct_civilian
-		x = -2
+		x = -1
 		y = 1
 		cost = @Time_50_days
 		prerequisite = {
@@ -6016,7 +6665,7 @@ focus_tree = {
 	focus = {
 		id = GER_economic_rearmament
 		icon = GFX_focus_generic_industry_2
-		x = 0
+		x = 1
 		y = 1
 		cost = @Time_70_days
 		prerequisite = {
@@ -6050,7 +6699,7 @@ focus_tree = {
 		id = GER_war_economy
 		text = "War Fueled Economy"
 		icon = GFX_focus_generic_tank_production
-		x = 0
+		x = 1
 		y = 1
 		cost = @Time_70_days
 		prerequisite = {
@@ -6199,7 +6848,7 @@ focus_tree = {
 	focus = {
 		id = GER_strike_first_doctrine
 		icon = GFX_goal_generic_occupy_states_ongoing_war
-		x = 0
+		x = -1
 		y = 1
 		cost = @Time_70_days
 		prerequisite = {

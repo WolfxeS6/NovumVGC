@@ -988,12 +988,24 @@ relative_position_id = tsk3
 		prerequisite = { focus = tsk3}
 
 		completion_reward = {
+		if = {
+	limit = {
+		has_dlc = "By Blood Alone"
+	}
+		add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = medium_air
+			}}
+
+else_if = {
 	add_tech_bonus = {
 				name = tech_bonus
 				bonus = 0.8
 				uses = 2
 				category = light_fighter
-			}		}
+			}		}}
 		ai_will_do = {
 			factor = 10
 		}
@@ -1030,23 +1042,33 @@ relative_position_id = tsk3
 		cost = 8
 relative_position_id = tsk3
 		prerequisite = { focus = tsk3}
-		available = { has_tech = tactical_bomber1 }
+		available = { has_country_flag = produce_first_uav_decisions }
 
 		completion_reward = {
 		TUR_decrease_national_debt_by_2 = yes
-
 		set_country_flag = TUR_Baykartar
-		add_tech_bonus = {
-				name = bomber_bonus
-				bonus = 0.5
-				category = tactical_bomber
-			}
+		
+		if = {
+	limit = {
+		has_dlc = "By Blood Alone"
+	}
+
 		add_equipment_to_stockpile = {
-				type = tac_bomber_equipment_1
-				amount = 150
+				type = uav_plane_airframe_0
+				amount = 200
 				producer = TUR
 			}
 		}
+		
+		
+		else_if = {
+	
+		add_equipment_to_stockpile = {
+				type = tac_bomber_equipment_1
+				amount = 200
+				producer = TUR
+			}
+		}}
 		ai_will_do = {
 			factor = 10
 		}

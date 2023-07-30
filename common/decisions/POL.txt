@@ -10952,7 +10952,7 @@ POL_the_elections_cat = {
 				NOT = { has_government = social_democrat }
 			}
 		}
-		days_mission_timeout = 70
+		days_mission_timeout = 35
 
 		fire_only_once = no
 		is_good = no
@@ -10968,64 +10968,7 @@ POL_the_elections_cat = {
 		}
 
 		timeout_effect = {
-			if = {
-				limit = {
-					NOT = { has_country_flag = POL_sld_supported_flag }
-				}
-				random_list = {
-					60 = {
-						POL_increase_sld_popularity_1 = yes
-					}
-					40 = {
-
-					}
-				}
-			}
-			else_if = {
-				limit = {
-					NOT = { has_country_flag = POL_po_supported_flag }
-					has_country_flag = POL_po_active_flag
-				}
-				random_list = {
-					50 = {
-						POL_increase_po_popularity_1 = yes
-					}
-					20 = {
-						POL_increase_po_popularity_2 = yes
-					}
-					30 = {
-					}
-				}
-			}
-			else_if = {
-				limit = {
-					NOT = { has_country_flag = POL_pis_supported_flag }
-					has_country_flag = POL_pis_active_flag
-				}
-				random_list = {
-					50 = {
-						POL_increase_pis_popularity_1 = yes
-					}
-					20 = {
-						POL_increase_pis_popularity_2 = yes
-					}
-					30 = {
-					}
-				}
-			}
-			else_if = {
-				limit = {
-					NOT = { has_country_flag = POL_upr_supported_flag }
-				}
-				random_list = {
-					50 = {
-						POL_increase_pis_popularity_1 = yes
-					}
-					50 = {
-
-					}
-				}
-			}
+		POL_random_party_selector = yes
 		}
 	}
 
@@ -11393,6 +11336,44 @@ POL_national_debt_cat = {
 		}
 	}
 
+	POL_temporary_tax_hike = {
+
+		icon = GFX_decision_generic_fundraising
+
+		allowed = {
+			original_tag  = POL
+		}
+
+		available = {
+			NOT = {
+				has_government = market_liberal
+				has_idea = POL_Polish_national_debt_1
+			}
+		}
+
+
+		visible = {
+			NOT = { has_country_flag = POL_disabled_debt_stuff_flag }
+		}
+		fire_only_once = no
+
+		cost = 30
+		days_remove = 40
+		days_re_enable = 40
+
+		modifier = {
+		political_power_factor = -0.15
+		stability_factor = -0.15
+		}
+
+		remove_effect = {
+			POL_decrease_national_debt = yes
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
 	POL_pay_of_the_debt = {
 
 		icon = GFX_decision_gre_paying_ifc_debt
@@ -11414,12 +11395,12 @@ POL_national_debt_cat = {
 		}
 		fire_only_once = no
 
-		cost = 50
-		days_remove = 50
+		cost = 30
+		days_remove = 40
 		days_re_enable = 40
 
 		modifier = {
-			civilian_factory_use = 4
+			civilian_factory_use = 3
 		}
 
 		remove_effect = {

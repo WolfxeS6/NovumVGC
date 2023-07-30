@@ -273,6 +273,18 @@ POL_set_up_natmao_stuff = {
 	custom_effect_tooltip = POL_unlock_national_maoist_decisions
 }
 
+POL_decrease_upr_popularity_1 = {
+	add_to_variable = {
+		var = POL_popularity_of_UPR
+		value = -1
+	}
+	clamp_variable = { var = POL_popularity_of_UPR min = 0 max = 100 }
+	custom_effect_tooltip = POL_decrease_upr_popularity_1_tt
+	set_variable = { var = POL_decrease_random_other_popularity_var value = 1 }
+	set_country_flag = POL_dont_take_from_upr_flag
+	POL_roll_which_lose_popularity = yes
+}
+
 POL_increase_upr_popularity_1 = {
 	add_to_variable = {
 		var = POL_popularity_of_UPR
@@ -332,6 +344,17 @@ POL_increase_sld_popularity_1 = {
 	set_country_flag = POL_dont_take_from_sld_flag
 	POL_roll_which_lose_popularity = yes
 }
+
+POL_decrease_sld_popularity_1 = {
+	add_to_variable = {
+		var = POL_popularity_of_SLD
+		value = -1
+	}
+	clamp_variable = { var = POL_popularity_of_SLD min = 0 max = 100 }
+	custom_effect_tooltip = POL_decrease_sld_popularity_by_1_tt
+	set_variable = { var = POL_decrease_random_other_popularity_var value = 1 }
+	set_country_flag = POL_dont_take_from_sld_flag
+	}
 
 POL_decrease_sld_popularity_2 = {
 	add_to_variable = {
@@ -527,8 +550,182 @@ POL_increase_po_popularity_10 = { #used to get popularity to level in which they
 	POL_roll_which_lose_popularity = yes
 }
 
+POL_random_party_selector = {
+if = {
+limit = { NOT = { has_country_flag = POL_po_active_flag } } #only need to add one cuz both PiS and PO are created at the same time
+if = {
+limit = { has_country_flag = POL_sld_supported_flag }
+random_list = {
+					40 = {
+					POL_decrease_sld_popularity_2 = yes
+					}
+					10 = {
+                    POL_decrease_sld_popularity_5 = yes
+					}
+					50 = {
+                    POL_increase_upr_popularity_1 = yes
+					}
+				}
+}
+if = {
+limit = { has_country_flag = POL_upr_supported_flag }
+random_list = {
+					40 = {
+					POL_increase_sld_popularity_1 = yes
+					}
+					20 = {
+                    POL_decrease_sld_popularity_2 = yes
+					}
+					40 = {
+                    POL_decrease_upr_popularity_1 = yes
+					}
+				}
+}
+}
+else = {
+if = {
+limit = { has_country_flag = POL_sld_supported_flag }
+random_list = {
+					25 = {
+					POL_decrease_sld_popularity_1 = yes
+					}
+					25 = {
+                    POL_increase_pis_popularity_2 = yes
+					}
+					25 = {
+                    POL_increase_po_popularity_2 = yes
+					}
+					25 = {
+                    POL_increase_upr_popularity_1 = yes
+					}
+				}
+				}
+				
+else_if = {
+limit = { has_country_flag = POL_upr_supported_flag  }
+random_list = {
+					25 = {
+					POL_decrease_sld_popularity_1 = yes
+					}
+					25 = {
+                    POL_increase_pis_popularity_1 = yes
+					}
+					25 = {
+                    POL_increase_po_popularity_1 = yes
+					}
+					25 = {
+                    POL_decrease_upr_popularity_1 = yes
+					}
+				}
+				}
+else_if = {
+limit = { has_country_flag = POL_pis_supported_flag  }
+random_list = {
+					25 = {
+					POL_decrease_sld_popularity_1 = yes
+					}
+					25 = {
+                    
+					}
+					25 = {
+                    POL_increase_po_popularity_1 = yes
+					}
+					25 = {
+                    POL_decrease_upr_popularity_1 = yes
+					}
+				}
+				}
+				
+else_if = {
+limit = { has_country_flag = POL_po_supported_flag  }
+random_list = {
+					25 = {
+					POL_decrease_sld_popularity_1 = yes
+					}
+					25 = {
+                    POL_increase_pis_popularity_1 = yes
+					}
+					25 = {
+                    
+					}
+					25 = {
+                    POL_decrease_upr_popularity_1 = yes
+					}
+				}
+				}
+}
+}
+
 POL_roll_which_lose_popularity = {
 	hidden_effect = {
+		if = {
+		limit = { NOT = { has_country_flag = POL_po_active_flag } } #don't take/add PiS or PO popularity
+		random_list = {
+			33 = {
+				if = {
+					limit = {
+						OR = {
+							has_country_flag = POL_dont_take_from_upr_flag
+							check_variable = { POL_popularity_of_UPR < POL_decrease_random_other_popularity_var }
+						}
+					}
+					if = {
+						limit = {
+							NOT = { has_country_flag = POL_dont_take_from_upr_flag }
+						}
+						set_country_flag = POL_dont_take_from_upr_flag
+					}
+					#POL_roll_which_lose_popularity = yes #roll once more if 0 popularity
+					set_country_flag = POL_decrease_from_UPR_flag
+					POL_decrease_random_other_popularity_effect = yes
+				}
+				else = {
+					set_country_flag = POL_decrease_from_UPR_flag
+					POL_decrease_random_other_popularity_effect = yes
+				}
+			}
+			33 = {
+				if = {
+					limit = {
+						OR = {
+							check_variable = { POL_popularity_of_SLD < POL_decrease_random_other_popularity_var }
+							has_country_flag = POL_dont_take_from_sld_flag
+						}
+					}
+					if = {
+						limit = {
+							NOT = { has_country_flag = POL_dont_take_from_sld_flag }
+						}
+						set_country_flag = POL_dont_take_from_sld_flag
+					}
+					#POL_roll_which_lose_popularity = yes #roll once more if 0 popularity
+					set_country_flag = POL_decrease_from_SLD_flag
+					POL_decrease_random_other_popularity_effect = yes
+				}
+				else = {
+					set_country_flag = POL_decrease_from_SLD_flag
+					POL_decrease_random_other_popularity_effect = yes
+				}
+			}
+			34 = {
+				if = {
+					limit = {
+						OR = {
+							check_variable = { POL_popularity_of_other_parties < POL_decrease_random_other_popularity_var }
+						}
+					}
+					#POL_roll_which_lose_popularity = yes #roll once more if 0 popularity or not created yet
+					set_country_flag = POL_decrease_from_others_flag
+					POL_decrease_random_other_popularity_effect = yes
+				}
+				else = {
+					set_country_flag = POL_decrease_from_others_flag
+					POL_decrease_random_other_popularity_effect = yes
+				}
+			}
+		}
+		}
+		else = {
 		random_list = {
 			20 = {
 				if = {
@@ -641,10 +838,11 @@ POL_roll_which_lose_popularity = {
 				}
 			}
 		}
-		clr_country_flag = POL_dont_take_from_po_flag
-		clr_country_flag = POL_dont_take_from_pis_flag
-		clr_country_flag = POL_dont_take_from_sld_flag
-		clr_country_flag = POL_dont_take_from_upr_flag
+	  }
+	clr_country_flag = POL_dont_take_from_po_flag
+	clr_country_flag = POL_dont_take_from_pis_flag
+	clr_country_flag = POL_dont_take_from_sld_flag
+	clr_country_flag = POL_dont_take_from_upr_flag
 	}
 }
 POL_decrease_random_other_popularity_effect = {

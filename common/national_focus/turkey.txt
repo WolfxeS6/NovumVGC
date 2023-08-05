@@ -12,7 +12,614 @@ focus_tree = {
 	focus = TUR_2001_cris
 	}
 	
+	#dis_isleri1
+	focus = {
+		id = dis_isleri1
+		icon = GFX_amasya_protocol
+		text = "Foreign Affairs"
+		x = 25
+		y = 0
+		cost = 10
+		relative_position_id = atas_legacy
+
+		available = { has_completed_focus = atas_legacy }
+
+		completion_reward = {
+			add_political_power = 150
+			set_rule = { can_create_factions = yes }
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
 	
+	#dis_isleri_avrupa
+	focus = {
+		id = dis_isleri_avrupa
+		icon = europe
+		text = "Europe"
+		x = -8
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri1
+
+		prerequisite = { focus = dis_isleri1 }
+
+		completion_reward = {
+			add_political_power = 50
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#dis_isleri_avrupa1
+	focus = {
+		id = dis_isleri_avrupa_1
+		icon = GFX_Align_to_EU
+		text = "Strengthen relations with the EU"
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_avrupa
+	mutually_exclusive = {focus = dis_isleri_avrupa_2}
+		prerequisite = { focus = dis_isleri_avrupa }
+
+		completion_reward = {
+every_country = {
+				limit = {
+					has_idea = idea_eu_member
+				}
+				add_opinion_modifier = {
+					target = TUR
+					modifier = declaration_of_friendship
+				}
+			}		}		
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#dis_isleri_avrupa2
+	focus = {
+		id = dis_isleri_avrupa_2
+		icon = GFX_Align_to_Russia
+		text = "Contact with Russia"
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_avrupa
+	mutually_exclusive = {focus = dis_isleri_avrupa_1}
+
+		prerequisite = { focus = dis_isleri_avrupa }
+
+		completion_reward = {
+every_country = {
+				limit = {
+					is_in_faction_with = SOV
+				}
+				add_opinion_modifier = {
+					target = TUR
+					modifier = declaration_of_friendship
+				}
+			}		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#dis_isleri_avrupa3
+	focus = {
+		id = dis_isleri_avrupa_3
+		icon = GFX_goal_Russian_Natural_Gas
+		text = "Invite Russian Companies"
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_avrupa_2
+
+		prerequisite = { focus = dis_isleri_avrupa_2 }
+
+		completion_reward = {
+every_country = {
+				limit = {
+					is_in_faction_with = SOV
+				}
+				increase_trade_influence_by_2 = yes
+				add_opinion_modifier = {
+					target = TUR
+					modifier = long_term_trade_partner
+				}
+			}
+			344	= {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = fuel_silo
+					level = 2
+					instant_build = yes
+				}
+			}		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#dis_isleri_avrupa4
+	focus = {
+		id = dis_isleri_avrupa_4
+		icon = black_sea
+		text = "Black Sea Exercise"
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_avrupa_2
+
+		prerequisite = { focus = dis_isleri_avrupa_2 }
+
+		completion_reward = {
+		every_country = {
+				limit = {
+					is_in_faction_with = SOV
+				}
+			army_experience = 35
+			navy_experience = 35
+			air_experience = 35
+			}
+	
+			}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#dis_isleri_avrupa5
+	focus = {
+		id = dis_isleri_avrupa_5
+		icon = GFX_goal_Russian_Air_Doctrine
+		text = "Russian Air Defence Systems"
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = dis_isleri_avrupa_2
+
+		prerequisite = { focus = dis_isleri_avrupa_3 }
+prerequisite = { focus = dis_isleri_avrupa_4 }
+		completion_reward = {
+		add_equipment_to_stockpile = {
+				type = modern_tank_aa_equipment_1
+				amount = 850
+				producer = SOV
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#dis_isleri_avrupa6
+	focus = {
+		id = dis_isleri_avrupa_6
+		icon = EU_support_euro
+		text = "EU Investments"
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_avrupa_1
+
+		prerequisite = { focus = dis_isleri_avrupa_1 }
+
+		completion_reward = {
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#dis_isleri_avrupa7
+	focus = {
+		id = dis_isleri_avrupa_7
+		icon = GFX_goal_EU_Treaty
+		text = "IMF Agreement"
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_avrupa_1
+
+		prerequisite = { focus = dis_isleri_avrupa_1 }
+
+		completion_reward = {
+		every_country = {
+				limit = {
+					has_idea = idea_eu_member
+				}
+				increase_trade_influence_by_2 = yes
+				add_opinion_modifier = {
+					target = TUR
+					modifier = long_term_trade_partner
+				}
+			}
+				TUR_decrease_national_debt_by_2 = yes
+
+			
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#dis_isleri_avrupa8
+	focus = {
+		id = dis_isleri_avrupa_8
+		icon = GFX_GER_Tank_Production
+		text = "German Equipment"
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = dis_isleri_avrupa_1
+
+		prerequisite = { focus = dis_isleri_avrupa_6 }
+		prerequisite = { focus = dis_isleri_avrupa_7}
+
+		completion_reward = {
+add_equipment_to_stockpile = {
+				type = light_mechanized_equipment_1
+				amount = 2500
+				producer = GER
+			}
+			add_equipment_to_stockpile = {
+				type = modern_tank_chassis_2
+				amount = 750
+				producer = GER
+
+			}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#dis_isleri_avrupa9
+	focus = {
+		id = dis_isleri_avrupa_9
+		icon = GFX_USA_Military_Research
+		text = "Technology Sharing"
+		x = 2
+		y = 3
+		cost = 5
+		relative_position_id = dis_isleri_avrupa_1
+
+		prerequisite = { focus = dis_isleri_avrupa_8 focus = dis_isleri_avrupa_5}
+
+		completion_reward = {
+add_research_slot = 1
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+
+	
+	#dis_isleri_afrika_1
+	focus = {
+		id = dis_isleri_afrika_1
+		icon = north_africa
+		text = "New Trade Partners"
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri1
+
+		prerequisite = { focus = dis_isleri1 }
+
+		completion_reward = {
+	every_country = {
+				limit = {
+					has_idea = african_union_member
+				}
+				increase_trade_influence_by_3 = yes
+				add_opinion_modifier = {
+					target = TUR
+					modifier = long_term_trade_partner
+				}
+			}		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#dis_isleri_afrika_2
+	focus = {
+		id = dis_isleri_afrika_2
+		icon = GFX_goal_Oil_Rig_2
+		text = "Exclusive Economic Zone"
+		x =0
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_afrika_1
+
+		prerequisite = { focus = dis_isleri_afrika_1 }
+
+		completion_reward = {
+		342		= {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = fuel_silo
+					level = 1
+					instant_build = yes
+				}
+			}	
+	342 = {
+				add_resource = {
+					type = oil
+					amount = 15
+				}
+				}			}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+			#dis_isleri_afrika_3
+	focus = {
+		id = dis_isleri_afrika_3
+		icon = GFX_goal_Warship_Buidling
+		text = "Purchase of New Drillships"
+		x =0
+		y = 1
+		cost = 9
+		relative_position_id = dis_isleri_afrika_2
+
+		prerequisite = { focus = dis_isleri_afrika_2 }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 1.0
+				uses = 2
+				category = synth_resources
+			}	
+create_ship = { type = ship_hull_cruiser_2 equipment_variant = "Yavuz-class" creator = TUR name = "TCG Fatih " }
+		create_ship = { type = ship_hull_cruiser_2 equipment_variant = "Yavuz-class" creator = TUR name = "TCG Kanuni "}
+		create_ship = { type = ship_hull_cruiser_2 equipment_variant = "Yavuz-class" creator = TUR name = "TCG Yavuz " }
+
+			}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#dis_isleri_afrika_4
+	focus = {
+		id = dis_isleri_afrika_4
+		icon = levant_and_anatolia
+		text = "Dominance in the Eastern Mediterranean"
+		x =0
+		y = 1
+		cost = 8
+		relative_position_id = dis_isleri_afrika_3
+
+		prerequisite = { focus = dis_isleri_afrika_3 }
+
+		completion_reward = {
+			navy_experience = 75
+create_ship = { type = ship_hull_cruiser_2 equipment_variant = "Yavuz-class" creator = TUR name = "TCG Oruç Reis " }
+		create_ship = { type = ship_hull_cruiser_2 equipment_variant = "Yavuz-class" creator = TUR name = "TCG Barbaros Hayreddin "}
+
+			}
+		ai_will_do = {
+			factor = 7
+		}
+	}	
+		#dis_isleri_isr
+	focus = {
+		id = dis_isleri_isr
+		icon = align_to_israel
+		text = "Friendship with Israel"
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri1
+mutually_exclusive = {	focus = dis_isleri_arabs	}
+
+		prerequisite = { focus = dis_isleri1 }
+
+		completion_reward = {
+		add_political_power = 25
+ISR = {
+				add_opinion_modifier = {
+					target = TUR
+					modifier = declaration_of_friendship
+				}
+			}		}
+			
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#dis_isleri_isr_1
+	focus = {
+		id = dis_isleri_isr_1
+		icon = GFX_USA_F-16
+		text = "Aircraft Modernisations"
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_isr
+
+		prerequisite = { focus = dis_isleri_isr }
+
+		completion_reward = {
+			create_equipment_variant = {
+		name = "F-15C/D Eagle" 
+		type = medium_plane_airframe_1
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			fixed_auxiliary_weapon_slot_1 = aircraft_cannon_short_1
+			fixed_auxiliary_weapon_slot_2 = aircraft_cannon_medium_1
+			engine_type_slot = engine_2_2x
+			special_type_slot_1 = plane_targetting_system_1_medium
+			special_type_slot_2 = empty
+		}
+		icon = "GFX_F-15E_Strike_Eagle_medium"
+	}
+		add_equipment_to_stockpile = {
+				type = medium_plane_airframe_1
+				amount = 75
+				producer = ISR
+			}
+		}
+			
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#dis_isleri_arabs
+	focus = {
+		id = dis_isleri_arabs
+		icon = align_to_arab_league
+		text = "Forget the Past"
+		x = 4
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri1
+mutually_exclusive = {	focus = dis_isleri_isr	}
+		prerequisite = { focus = dis_isleri1 }
+
+		completion_reward = {
+		add_political_power = 25
+every_country = {
+				limit = {
+					has_idea = arab_league_member
+				}
+				add_opinion_modifier = {
+					target = TUR
+					modifier = declaration_of_friendship
+				}
+			}		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#dis_isleri_arabs_1
+	focus = {
+		id = dis_isleri_arabs_1
+		icon = oil_trade
+		text = "Cheaper Oil Agreement"
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_arabs
+		prerequisite = { focus = dis_isleri_arabs }
+
+		completion_reward = {
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = synthetic_refinery
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = synthetic_refinery
+				level = 1
+				instant_build = yes
+			}
+		}
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+		#dis_isleri_terror
+	focus = {
+		id = dis_isleri_terror
+		icon = POL_bomb_enemy_soldiers
+		text = "Anti-Terror Declaration"
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_arabs
+		prerequisite = { focus = dis_isleri_arabs focus = dis_isleri_isr }
+
+		completion_reward = {
+		add_political_power = 75
+		add_stability = 0.05
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	
+
+#dis_isleri_terror_2
+	focus = {
+		id = dis_isleri_terror_2
+		icon = GFX_goal_Army_Reform_2
+		text = "Operation Sun"
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_terror
+		prerequisite = { focus = dis_isleri_terror }
+
+		completion_reward = {
+		country_event =  olay.6
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	
+	#dis_isleri_terror_3
+	focus = {
+		id = dis_isleri_terror_3
+		icon = GFX_goal_Hard_Power_Diplomacy
+		text = "Cross-Border Plans"
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = dis_isleri_terror_2
+		prerequisite = { focus = dis_isleri_terror_2 }
+		available = { SYR = {has_civil_war = yes }}
+	bypass = {
+			SYR = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+		completion_reward = {
+		add_political_power = 50
+set_country_flag = operasyons_tr
+			unlock_decision_category_tooltip = TUR_operasyonlar
+
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
 
 	#Ataturks legacy
 	focus = {
@@ -23,7 +630,6 @@ focus_tree = {
 		cost = 5
 
 		completion_reward = {
-
 			news_event = { id = tr_news.1 }
 			add_political_power = 55
 			add_war_support = 0.05
@@ -641,7 +1247,7 @@ TUR_decrease_national_debt = yes
 		text = "Centrally Planned Economy"
 		icon = industry_communist
 		x = 3
-		y = 1
+		y = 2
 		cost = 5
 		relative_position_id = sanayi10
 		prerequisite = {focus = TUR_2001_cris}
@@ -662,7 +1268,7 @@ TUR_decrease_national_debt = yes
 		text = "A Free Market Economy"
 		icon = trade_deal
 		x = 5
-		y = 1
+		y = 2
 		cost = 5
 				
 		relative_position_id = sanayi10
@@ -679,10 +1285,11 @@ TUR_decrease_national_debt = yes
 		#tsk1
 	focus = {
 		id = tsk1
-		icon = GFX_tsk_harbiye
+		icon = GFX_goals_tsk_harbiye
 		x = -6
 		y = 0
 		cost = 10
+		available = { has_completed_focus = atas_legacy }
 
 		completion_reward = {
 		country_event = olay.35
@@ -6263,10 +6870,11 @@ bypass = {
 			focus = secim25}
 		completion_reward = {
 		TUR_decrease_national_debt_by_2 = yes
-			give_resource_rights = { receiver = LBA state = 907 }
-			give_resource_rights = { receiver = LBA state = 273 }
+	LBA = {
+            give_resource_rights = { receiver = TUR state = 907 }
+			give_resource_rights = { receiver = TUR state = 273 }}
 					hidden_effect = {
-			country_event = { id = mesele days = 30  }
+			country_event = { id = mesele.1 days = 30  }
 		}
 		}
 		ai_will_do = {
@@ -7120,12 +7728,13 @@ bypass = {
 	#ekonomibas1
 	focus = {
 		id = ekonomibas1
-		icon =  selfstur
+		icon = GFX_selfstur
 		x = 9
 		y = 0
 		cost = 5
 		relative_position_id = atas_legacy
 
+		available = { has_completed_focus = atas_legacy }
 
 		completion_reward = {
 		TUR_decrease_national_debt = yes
@@ -7207,11 +7816,12 @@ random_owned_state = {
 	#deprem1
 	focus = {
 		id = deprem1
-		icon =  turkeconmysubsidise
+		icon =  GFX_turkeconmysubsidise
 		x = 12
 		y = 0
-		cost = 2
+		cost = 4
 		relative_position_id = atas_legacy
+		available = { has_completed_focus = atas_legacy }
 
 
 		completion_reward = {
@@ -7234,7 +7844,7 @@ random_owned_state = {
 		icon = infrtur
 		x = 0
 		y = 1
-		cost = 2
+		cost = 4
 		relative_position_id = deprem1
 		prerequisite = { focus = deprem1 }
 
@@ -7263,7 +7873,7 @@ random_owned_state = {
 		icon = GFX_focus_TUR_common_destiny_for_all_turkey
 		x = 0
 		y = 2
-		cost = 2
+		cost = 4
 		relative_position_id = deprem1
 		prerequisite = { focus = deprem2 }
 
@@ -7379,7 +7989,7 @@ random_owned_state = {
 		icon = POL_support_nato
 		x =4
 		y = 0
-		cost = 1
+		cost = 3
 		relative_position_id = atas_legacy
 
 		completion_reward = {
@@ -7399,7 +8009,7 @@ random_owned_state = {
 		icon = SFOR
 		x = -1
 		y = 1
-		cost = 1
+		cost = 3
 		relative_position_id = nato1
 
 		prerequisite = { focus = nato1 }
@@ -7423,7 +8033,7 @@ random_owned_state = {
 		icon = KFOR
 		x = 1
 		y = 1
-		cost = 1
+		cost = 3
 		relative_position_id = nato1
 
 		prerequisite = { focus = nato1 }
@@ -7448,7 +8058,7 @@ random_owned_state = {
 		icon = ISAF
 		x = 0
 		y = 2
-		cost = 1
+		cost = 3
 		relative_position_id = nato1
 
 		prerequisite = { focus = nato5 }
@@ -8759,26 +9369,24 @@ prerequisite = { focus =  anlasmit }
 			army_experience = 75
 			air_experience = 75
 			navy_experience = 50
-			add_tech_bonus = {
-				name = TUR_anadolu_savun
-				bonus = 1
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 0.5
 				uses = 1
 				category = land_doctrine
 			}
-			add_tech_bonus = {
-				name = air_doc_bonus
-				bonus = 1
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 0.5
 				uses = 1
 				category = air_doctrine
-
 			}
-			add_tech_bonus = {
-				name = naval_doc_bonus
-				bonus = 1
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 0.5
 				uses = 1
 				category = naval_doctrine
 			}
-
 		}
 		ai_will_do = {
 			factor = 10

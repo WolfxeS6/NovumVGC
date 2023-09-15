@@ -72,7 +72,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_agricultural_reform
-		icon = agrarian_reform
+		icon = GFX_goal_Farm_Production
 		x = 4
 		y = 1
 		cost = 6
@@ -135,7 +135,7 @@ focus_tree = {
 
 		completion_reward = {
 			230 = {
-				add_extra_state_shared_building_slots = 3
+				add_extra_state_shared_building_slots = 2
 			}
 		}
 
@@ -145,7 +145,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_invest_in_mining #gold
-		icon = GFX_goal_Coal_Mine
+		icon = GFX_goal_Generic_Exploit_Mine
 		x = 1
 		y = 1
 		cost = 6
@@ -179,7 +179,6 @@ focus_tree = {
 		x = 3
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_infrastructure_boom
 			focus = ARM_earthquake_rebuilding
@@ -188,6 +187,7 @@ focus_tree = {
 
 
 		completion_reward = {
+			add_ideas = ARM_tourism_idea
 		}
 
 		ai_will_do = {
@@ -196,7 +196,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_invest_in_local_infra
-		icon = GFX_goal_Coal_Mine
+		icon = GFX_goal_Road_Construction
 		x = 1
 		y = 1
 		cost = 6
@@ -227,7 +227,6 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_invest_in_mining
 		}
@@ -241,6 +240,16 @@ focus_tree = {
 			focus = ARM_tourism_over_mining
 		}
 		completion_reward = {
+			230 = {
+				add_resource = {
+					type = steel
+					amount = 5
+				}
+			}
+			swap_ideas = {
+				remove_idea = ARM_tourism_idea
+				add_idea = ARM_tourism_idea_b1
+			}
 		}
 
 		ai_will_do = {
@@ -253,7 +262,6 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_tourism
 		}
@@ -267,6 +275,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = ARM_tourism_idea
+				add_idea = ARM_tourism_idea_2
+			}
 		}
 
 		ai_will_do = {
@@ -275,11 +287,10 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_electric_privatisation
-		icon = GFX_goal_Hydropower
+		icon = GFX_focus_generic_energy
 		x = -1
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_infrastructure_boom
 		}
@@ -291,6 +302,24 @@ focus_tree = {
 
 
 		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = ARM_independent_industrial_base
+					has_dynamic_modifier = {modifier = ARM_corruption_modifier}
+				}
+				add_political_power = -100
+				add_ideas = ARM_electric_privatisation_good
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = ARM_independent_industrial_base
+				}
+				add_ideas = ARM_electric_privatisation_good
+			}
+			else = {
+				add_political_power = 120
+				add_ideas = ARM_electric_privatisation_bad
+			}
 		}
 
 		ai_will_do = {
@@ -309,6 +338,11 @@ focus_tree = {
 		relative_position_id = ARM_electric_privatisation
 		mutually_exclusive = {
 			focus = ARM_nuclear
+			hidden_effect = {
+				country_event = ARM.7
+				days = 180
+				random_days = 10
+			}
 		}
 
 		completion_reward = {
@@ -344,6 +378,11 @@ focus_tree = {
 		}
 		completion_reward = {
 			custom_effect_tooltip = ARM_constructing_nuclear_reactor
+			hidden_effect = {
+				country_event = ARM.6
+				days = 360
+				random_days = 10
+			}
 		}
 
 		ai_will_do = {
@@ -553,7 +592,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_end_subsidies
-		icon = GFX_goal_Oil_Excavation
+		icon = GFX_goal_Invest_Industry
 		x = 0
 		y = 1
 		cost = 4
@@ -1364,9 +1403,6 @@ focus_tree = {
 		x = -4
 		y = 1
 		cost = 6
-		allow_branch = {
-			always = no
-		}
 		prerequisite = {
 			focus = ARM_russian_proud
 		}
@@ -1399,27 +1435,6 @@ focus_tree = {
 		}
 		bypass = {
 			has_idea = eeu_customs_union
-		}
-
-		relative_position_id = ARM_eeu_investments
-
-
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = ARM_central_asian_investments
-		icon = BLR_belarusian_soldier
-		x = -2
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = ARM_eeu_investments
 		}
 
 		relative_position_id = ARM_eeu_investments
@@ -1721,9 +1736,6 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6
-		bypass = {
-			always = yes
-		}
 		prerequisite = {
 			focus = ARM_thaw_turkish_relations
 		}
@@ -2396,7 +2408,6 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_appeal_to_the_countryside
 			focus = ARM_release_the_journalist
@@ -2573,6 +2584,7 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			show_ideas_tooltip = adviser_ter_petrosyan
 		}
 
 		ai_will_do = {
@@ -2665,6 +2677,7 @@ focus_tree = {
 		relative_position_id = ARM_grass_roots_resistence
 
 		completion_reward = {
+			add_ideas = ARM_general_strike
 		}
 
 		ai_will_do = {
@@ -2709,7 +2722,7 @@ focus_tree = {
 		relative_position_id = ARM_pay_off_security_forces
 
 		completion_reward = {
-			add_stability = -0.05
+			country_event = ARM.9
 		}
 
 		ai_will_do = {
@@ -2718,7 +2731,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_shaky_coalition
-		icon = GFX_goal_support_communism
+		icon = GFX_focus_generic_support_the_left_right
 		x = 0
 		y = 1
 		cost = 6
@@ -2728,7 +2741,7 @@ focus_tree = {
 		relative_position_id = ARM_violet_revolution
 
 		completion_reward = {
-			#event to increase political support
+			country_event = ARM.10
 		}
 
 		ai_will_do = {
@@ -2737,7 +2750,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_stabalise_the_nation
-		icon = GFX_goal_support_communism
+		icon = GFX_goal_generic_neutrality_focus
 		x = 0
 		y = 1
 		cost = 6
@@ -2759,10 +2772,13 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_counter_revolutionary_sentiment
-		icon = GFX_goal_support_communism
+		icon = GFX_goal_anti_comintern_pact
 		x = 7
 		y = 1
 		cost = 6
+		available = {
+			stability < 0.4
+		}
 		prerequisite = {
 			focus = ARM_shaky_coalition
 		}
@@ -2772,6 +2788,32 @@ focus_tree = {
 		relative_position_id = ARM_shaky_coalition
 
 		completion_reward = {
+			add_popularity = {
+				popularity = 0.1
+				ideology = nationalist
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_support_from_the_church
+		icon = GFX_focus_GRE_an_orthodox_state
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_counter_revolutionary_sentiment
+		}
+		relative_position_id = ARM_counter_revolutionary_sentiment
+
+		completion_reward = {
+			add_popularity = {
+				popularity = -0.05
+				ideology = communist
+			}
 		}
 
 		ai_will_do = {
@@ -2780,7 +2822,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_reasure_moscow
-		icon = GFX_goal_support_communism
+		icon = align_to_russia
 		x = 4
 		y = 1
 		cost = 6
@@ -2792,7 +2834,9 @@ focus_tree = {
 			focus = ARM_vengence_of_the_old_guard
 		}
 		completion_reward = {
-			#event to increase relations with russia
+			SOV = {
+				country_event =  ARM.8
+			}
 		}
 
 		ai_will_do = {
@@ -2801,7 +2845,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_vengence_of_the_old_guard
-		icon = GFX_goal_support_communism
+		icon = GFX_focus_generic_conspiracy
 		x = 2
 		y = 1
 		cost = 6
@@ -2811,9 +2855,47 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = ARM_reasure_moscow
 		}
+		bypass = {
+			NOT = {
+				OR = {
+					has_idea = adviser_samvel_aleksanian
+					has_idea = adviser_harutiun_pambukian
+					has_idea = adviser_hayrapetian_family
+					has_idea = adviser_mika_ltd
+				}
+			}
+		}
 		relative_position_id = ARM_stabalise_the_nation
 
 		completion_reward = {
+			if = {
+				limit = {
+					has_idea = adviser_samvel_aleksanian
+				}
+				remove_ideas = adviser_samvel_aleksanian
+				add_stability = -0.02
+			}
+			if = {
+				limit = {
+					has_idea = adviser_harutiun_pambukian
+				}
+				remove_ideas = adviser_harutiun_pambukian
+				add_stability = -0.02
+			}
+			if = {
+				limit = {
+					has_idea = adviser_hayrapetian_family
+				}
+				remove_ideas = adviser_hayrapetian_family
+				add_stability = -0.02
+			}
+			if = {
+				limit = {
+					has_idea = adviser_mika_ltd
+				}
+				remove_ideas = adviser_mika_ltd
+				add_stability = -0.02
+			}
 		}
 
 		ai_will_do = {
@@ -2822,7 +2904,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_invest_in_domestic_production
-		icon = GFX_goal_support_communism
+		icon = GFX_goal_Arms_Industry
 		x = 0
 		y = 1
 		cost = 6

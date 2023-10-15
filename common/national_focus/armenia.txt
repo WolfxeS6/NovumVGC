@@ -1629,6 +1629,14 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = ARM_sarksian_corruption_tt
 			set_country_flag =  ARM_sarksian_corruption_enabled
+			hidden_effect = {
+				set_power_balance = {
+					id = ARM_power_balance
+					left_side = ARM_mafia_faction # will keep the last set side if not specified
+					right_side = ARM_sark_faction # will keep the last set side if not specified
+					set_value = -0.4
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -2013,6 +2021,14 @@ focus_tree = {
 
 		completion_reward = {
 			country_event = ARM.2
+			hidden_effect = {
+				set_power_balance = {
+					id = ARM_power_balance
+					left_side = ARM_mafia_faction # will keep the last set side if not specified
+					right_side = ARM_mil_faction # will keep the last set side if not specified
+					set_value = -0.95
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -2070,8 +2086,7 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = 0.05
 			add_stability = -0.02
-			armenian_add_dem = yes
-			custom_effect_tooltip = ARM_add_dem_tt
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2159,7 +2174,12 @@ focus_tree = {
 			focus = ARM_secure_generals
 		}
 		relative_position_id = ARM_secure_generals
-
+		available = {
+			is_power_balance_in_range = {
+				id = ARM_power_balance
+				range > ARM_high_trust_range  
+			}
+		}
 		completion_reward = {
 			country_event = ARM.3
 		}
@@ -2184,8 +2204,7 @@ focus_tree = {
 			add_to_variable = {ARM_army_org_factor = 0.03 }
 			add_to_variable = {ARM_army_morale_factor = 0.01 }
 			add_to_variable = {ARM_army_defence_factor = 0.05 }
-			armenian_add_dem = yes
-			custom_effect_tooltip = ARM_add_dem_tt
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2209,12 +2228,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = ARM_military_agreement_control_tt
 			set_country_flag =  ARM_military_control_enabled
-			set_variable = { armenian_state_map^1 = 4 }
-			set_variable = { armenian_state_map^4 = 4 }
-			set_variable = { armenian_state_map^6 = 4 }
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
+			ARM_bop_medium_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2265,9 +2279,9 @@ focus_tree = {
 		}
 		relative_position_id = ARM_purge_the_clans
 		available = {
-			custom_trigger_tooltip = {
-				check_variable = { ARM_democratic_control > 9 }
-				tooltip = ARM_max_dem_control
+			is_power_balance_in_range = {
+				id = ARM_power_balance
+				range > ARM_very_high_trust_range  
 			}
 		}
 
@@ -2362,6 +2376,14 @@ focus_tree = {
 
 		completion_reward = {
 			add_stability = -0.05
+			hidden_effect = {
+				set_power_balance = {
+					id = ARM_power_balance
+					left_side = ARM_mafia_faction # will keep the last set side if not specified
+					right_side = ARM_dem_faction # will keep the last set side if not specified
+					set_value = -0.95
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -2497,8 +2519,7 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = -0.05
 			add_political_power = 20
-			armenian_add_dem = yes
-			custom_effect_tooltip = ARM_add_dem_tt
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2532,7 +2553,7 @@ focus_tree = {
 		icon = GFX_focus_generic_conspiracy
 		x = 1
 		y = 1
-		cost = 6
+		cost = 3
 		prerequisite = {
 			focus = ARM_ngo_support
 			focus = ARM_coalition_with_lesser_oligarchs
@@ -2540,8 +2561,7 @@ focus_tree = {
 		relative_position_id = ARM_ngo_support
 
 		completion_reward = {
-			armenian_add_dem = yes
-			custom_effect_tooltip = ARM_add_dem_tt
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2604,9 +2624,9 @@ focus_tree = {
 		}
 		relative_position_id = ARM_my_step
 		available = {
-			custom_trigger_tooltip = {
-				check_variable = { ARM_democratic_control > 4 }
-				tooltip = ARM_min_dem_control
+			is_power_balance_in_range = {
+				id = ARM_power_balance
+				range > ARM_dem_very_high_trust_range  
 			}
 		}
 
@@ -2810,6 +2830,12 @@ focus_tree = {
 		prerequisite = {
 			focus = ARM_attack_the_weakest_spots
 		}
+		available = {
+			is_power_balance_in_range = {
+				id = ARM_power_balance
+				range > ARM_dem_high_trust_range  
+			}
+		}
 		relative_position_id = ARM_grass_roots_resistence
 
 		completion_reward = {
@@ -2859,6 +2885,14 @@ focus_tree = {
 
 		completion_reward = {
 			country_event = ARM.9
+			hidden_effect = {
+				set_power_balance = {
+					id = ARM_power_balance
+					left_side = ARM_react_faction # will keep the last set side if not specified
+					right_side = ARM_dem_faction # will keep the last set side if not specified
+					set_value = 0.2
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -2913,7 +2947,10 @@ focus_tree = {
 		y = 1
 		cost = 6
 		available = {
-			has_stability < 0.4
+			is_power_balance_in_range = {
+				id = ARM_power_balance
+				range < ARM_low_trust_range  
+			}
 			NOT = {
 				has_completed_focus = ARM_european_cooperation
 			}

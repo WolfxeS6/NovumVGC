@@ -427,6 +427,8 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_to_variable = {ARM_research_speed_factor = -0.03 }
+			add_to_variable = {ARM_production_speed_industrial_complex_factor = -0.05 }
 		}
 
 		ai_will_do = {
@@ -1264,6 +1266,7 @@ focus_tree = {
 				modifier = aided_industry
 			}
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_to_variable = {ARM_production_speed_industrial_complex_factor = -0.1 }
 			ARM_worsen_corruption = yes
 			230 = {
 				add_extra_state_shared_building_slots = 1
@@ -1676,16 +1679,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 50
-			custom_effect_tooltip = ARM_secure_our_strength_tt
-			if = {
-				limit = {
-					has_completed_focus = ARM_sarksian_struggle
-				}
-				armenian_add_sark_control = yes
-			}
-			else = {
-				armenian_add_koch_control = yes
-			}
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -1887,12 +1881,13 @@ focus_tree = {
 	focus = {
 		id = ARM_internal_security
 		icon = GFX_DEN_Police
-		x = 1
+		x = -1
 		y = 1
 		cost = 6
 
 		prerequisite = {
 			focus = ARM_fiftyfifty
+			focus = ARM_russian_puppet
 		}
 		relative_position_id = ARM_fiftyfifty
 
@@ -2063,6 +2058,8 @@ focus_tree = {
 		completion_reward = {
 			add_political_power = 60
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_to_variable = {ARM_stability_factor = -0.03 }
+			add_to_variable = {ARM_army_morale_factor = -0.05 }
 		}
 
 		ai_will_do = {
@@ -2495,6 +2492,8 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_to_variable = {ARM_local_resources_factor = -0.05 }
+			add_to_variable = {ARM_political_power_gain = -0.05 }
 			add_political_power = 50
 		}
 
@@ -2655,6 +2654,8 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = ARM_worsen_corruption_tt
 			show_ideas_tooltip = adviser_ter_petrosyan
+			add_to_variable = {ARM_consumer_goods_factor = 0.01 }
+			add_to_variable = {ARM_political_power_gain = -0.05 }
 		}
 
 		ai_will_do = {
@@ -3062,7 +3063,20 @@ focus_tree = {
 			}
 		}
 		completion_reward = {
-			
+			832 = {
+				add_building_construction = {
+					type = bunker
+					province = 1467
+					level = 4
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 9715
+					level = 4
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -3103,7 +3117,17 @@ focus_tree = {
 		relative_position_id = ARM_seize_parliment
 
 		completion_reward = {
-			
+			1187 = { add_claim_by = ARM }
+			354 = { add_claim_by = ARM }
+			1185 = { add_claim_by = ARM }
+			999 = { add_claim_by = ARM }
+			create_wargoal = {
+				target = TUR
+				type = take_claimed_state
+				generator = {
+					1187 354 1185 999
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -3120,9 +3144,17 @@ focus_tree = {
 			focus = ARM_west_armenia
 		}
 		relative_position_id = ARM_west_armenia
-
+		available = {
+			owns_state = 1187
+			owns_state = 354
+			owns_state = 1185
+			owns_state = 999
+		}
 		completion_reward = {
-			
+			1187 = { add_core_of = ARM }
+			354 = { add_core_of = ARM }
+			1185 = { add_core_of = ARM }
+			999 = { add_core_of = ARM }
 		}
 
 		ai_will_do = {
@@ -3177,6 +3209,7 @@ focus_tree = {
 		relative_position_id = ARM_stabalise_the_nation
 
 		completion_reward = {
+			ARM_bop_low_decrease_effect = yes
 			if = {
 				limit = {
 					has_idea = adviser_samvel_aleksanian
@@ -3232,6 +3265,30 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_regrow_trust
+		icon = GFX_goal_generic_improve_relations
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_invest_in_domestic_production
+		}
+		prerequisite = {
+			focus = ARM_vengence_of_the_old_guard
+			focus = ARM_reasure_moscow
+		}
+		relative_position_id = ARM_invest_in_domestic_production
+
+		completion_reward = {
+			add_stability = 0.05
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {

@@ -1368,10 +1368,22 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = tac_bomber_equipment_1
-				amount = 25
-				producer = BUL
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = tac_bomber_equipment_1
+					amount = 25
+					producer = ROOT
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = uav_plane_airframe_0
+					amount = 25
+					producer = ROOT
+				}
 			}
 			add_offsite_building = { type = industrial_complex level = 1 }
 		}
@@ -1430,15 +1442,39 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_equipment_to_stockpile = { #this is balanced since in the other path u get lower production costs
-				type = fighter_equipment_3
-				amount = 60
-				producer = USA
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = fighter_equipment_3
+					amount = 60
+					producer = USA
+				}
 			}
-			add_equipment_to_stockpile = {
-				type = CAS_equipment_2
-				amount = 30
-				producer = USA
+			else = {
+				add_equipment_to_stockpile = {
+					type = medium_plane_airframe_1
+					amount = 60
+					producer = USA
+				}
+			}
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = CAS_equipment_2
+					amount = 30
+					producer = USA
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = small_plane_airframe_1
+					amount = 30
+					producer = USA
+				}
 			}
 			add_ideas = BUL_acquire_licenses
 		}

@@ -10,7 +10,8 @@ focus_tree = {
 			original_tag = ENG
 		}
 	}
-	continuous_focus_position = { x = 50 y = 1100 }
+	shared_focus = EURO_Shared_Focus
+	continuous_focus_position = { x = 50 y = 2300 }
 	@Economic_stim = 2
 	@State_control_econ = 2
 	@National_dev = 7
@@ -1304,9 +1305,10 @@ focus_tree = {
 	focus = {
 		id = ENG_expand_the_foreign_ministry
 		icon = GFX_ENG_Foreign_Office
-		x = @foreign_ministry_tree_center
+		x = 4
 		y = 1
 		cost = 6
+		relative_position_id = ENG_Political_Reform
 
 		prerequisite = {
 			focus = ENG_Political_Reform
@@ -1340,138 +1342,22 @@ focus_tree = {
 	# 		factor = 10
 	# 	}
 	# }
-	focus = {
-		id = ENG_go_with_europe
-		icon = GFX_Align_to_EU
-		x = @foreign_ministry_tree_far_left
-		y = 2
-		cost = 6
 
-		prerequisite = {
-			focus = ENG_expand_the_foreign_ministry
-		}
 
-		mutually_exclusive = {
-			focus = ENG_go_with_the_commonwealth
-		}
-		mutually_exclusive = {
-			focus = ENG_britain_first
-		}
+	
 
-		completion_reward = {
-			every_country = {
-				limit = {
-					OR = {
-						tag = ENG
-						tag = USA
-						has_idea = idea_eu_member
-						has_idea = commonwealth_of_nations_member
-						is_in_faction_with = ENG
-					}
-				}
-				news_event = news.55
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_go_with_the_commonwealth
-		icon = GFX_ENG_Commonwealth_of_Nations
-		x = @foreign_ministry_tree_center
-		y = 2
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_expand_the_foreign_ministry
-		}
-
-		mutually_exclusive = {
-			focus = ENG_go_with_europe
-		}
-		mutually_exclusive = {
-			focus = ENG_britain_first
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					OR = {
-						tag = ENG
-						tag = USA
-						has_idea = idea_eu_member
-						has_idea = commonwealth_of_nations_member
-						is_in_faction_with = ENG
-					}
-				}
-				news_event = news.56
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
-		}
-	}
-
-	focus = {
-		id = ENG_britain_first
-		icon = GFX_ENG_Flag
-		x = @foreign_ministry_tree_far_right
-		y = 2
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_expand_the_foreign_ministry
-		}
-
-		mutually_exclusive = {
-			focus = ENG_go_with_europe
-		}
-		mutually_exclusive = {
-			focus = ENG_go_with_the_commonwealth
-		}
-
-		completion_reward = {
-			add_political_power = 20
-			every_country = {
-				limit = {
-					OR = {
-						tag = ENG
-						tag = USA
-						has_idea = idea_eu_member
-						has_idea = commonwealth_of_nations_member
-						is_in_faction_with = ENG
-					}
-				}
-				news_event = news.57
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
-		}
-	}
 	focus = {
 		id = ENG_strengthen_NATO
 		icon = GFX_Align_to_NATO
-		x = @foreign_ministry_tree_far_left
-		y = 3
+		x = -1
+		y = 1
 		cost = 6
 
 		prerequisite = {
-			focus = ENG_go_with_europe
+			focus = ENG_investments_at_home
+			focus = ENG_workforce_deal_with_ireland
 		}
+		relative_position_id = ENG_investments_at_home
 
 		available = {
 			has_democratic_form_of_government = yes
@@ -1492,215 +1378,6 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = ENG_leave_NATO
-		icon = GFX_goal_Abandon_NATO
-		x = @foreign_ministry_tree_right
-		y = 3
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_go_with_the_commonwealth
-			focus = ENG_britain_first
-		}
-
-		bypass = {
-			OR = {
-				is_faction_leader = yes
-				is_in_faction = no
-			}
-		}
-
-		completion_reward = {
-			random_country = {
-				limit = {
-					is_in_faction_with = ENG
-					is_faction_leader = yes
-				}
-				remove_from_faction = ENG
-				news_event = news.58
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = ENG_EU_border_compromise
-		icon = GFX_Align_to_EU
-		x = @foreign_ministry_tree_far_left
-		y = 4
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_strengthen_NATO
-		}
-
-		completion_reward = {
-			country_event = britain.11
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_propose_the_CANZUK_alliance
-		icon = GFX_ENG_UAKUS
-		x = @foreign_ministry_tree_center
-		y = 4
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_go_with_the_commonwealth
-		}
-		prerequisite = {
-			focus = ENG_leave_NATO
-		}
-
-		available = {
-			has_democratic_form_of_government = yes
-			has_idea = commonwealth_of_nations_member
-			OR = {
-				is_faction_leader = yes
-				is_in_faction = no
-			}
-		}
-
-		completion_reward = {
-			if = {
-				limit = {
-					is_in_faction = no
-				}
-				create_faction = british_commonwealth
-			}
-			CAN = { country_event = britain.12 }
-			AST = { country_event = britain.12 }
-			NZL = { country_event = britain.12 }
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_the_british_alliance
-		icon = GFX_goal_tripartite_pact
-		x = @foreign_ministry_tree_far_right
-		y = 4
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_britain_first
-		}
-		prerequisite = {
-			focus = ENG_leave_NATO
-		}
-
-		completion_reward = {
-			create_faction = british_alliance
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = ENG_air_travel_agreements_with_europe
-		icon = GFX_goal_Trade_Deal
-		x = @foreign_ministry_tree_far_left
-		y = 5
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_EU_border_compromise
-		}
-
-		completion_reward = {
-			country_event = britain.14
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_invite_the_united_states
-		icon = GFX_Align_to_America
-		x = @foreign_ministry_tree_center
-		y = 5
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_propose_the_CANZUK_alliance
-		}
-
-		completion_reward = {
-			USA = { country_event = britain.15 }
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_diplomatic_sovereignity
-		icon = GFX_goal_generic_political_pressure
-		x = @foreign_ministry_tree_far_right
-		y = 5
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_the_british_alliance
-		}
-
-		completion_reward = {
-			add_ideas = ENG_diplomatic_sovereignity_idea
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = ENG_invite_the_commonwealth
-		icon = GFX_ENG_UK-Commonwealth
-		x = @foreign_ministry_tree_center
-		y = 6
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_invite_the_united_states
-		}
-
-		available = {
-			is_faction_leader = yes
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					NOT = { tag = USA }
-					NOT = { tag = ENG }
-					NOT = { tag = CAN }
-					NOT = { tag = NZL }
-					NOT = { tag = AST }
-					has_idea = commonwealth_of_nations_member
-					NOT = { is_in_faction_with = ENG }
-				}
-				country_event = britain.15
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 	###Future of UK
 	focus = {
 		id = ENG_the_future_of_britain
@@ -1720,8 +1397,9 @@ focus_tree = {
 	focus = {
 		id = ENG_democratic_tradition
 		icon = GFX_goal_support_democracy
-		x = @careful_tree_center
+		x = -7
 		y = 1
+		relative_position_id = ENG_the_future_of_britain
 		cost = 6
 
 		prerequisite = {
@@ -1833,86 +1511,17 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
-		id = ENG_europe_is_the_future
-		icon = GFX_Align_UK_EU
-		x = @europe_tree_center
-		y = 2
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_democratic_tradition
-		}
-
-		mutually_exclusive = {
-			focus = ENG_careful_cooperation
-		}
-		mutually_exclusive = {
-			focus = ENG_distance_from_europe
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			fourth_estate_social_democrat_increase = yes
-			fourth_estate_social_liberal_increase = yes
-			add_political_power = 25
-			add_popularity = {
-				popularity = 0.05
-				ideology = social_democrat
-			}
-		}
-
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ENG_ai_behavior
-					option = EUROPEAN_UNION
-				}
-			}
-			modifier = {
-				add = 5
-				has_game_rule = {
-					rule = ENG_ai_behavior
-					option = EUROPEAN_COOPERATION
-				}
-			}
-			modifier = {
-				add = 4
-				is_historical_focus_on = no
-				has_game_rule = {
-					rule = ENG_ai_behavior
-					option = DEFAULT
-				}
-			}
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ENG_ai_behavior
-					option = RANDOM
-				}
-			}
-		}
-	}
 
 	focus = {
 		id = ENG_careful_cooperation
 		icon = GFX_goal_molotov_ribbentrop_pact
-		x = @careful_tree_center
-		y = 2
+		x = -2
+		y = 1
 		cost = 6
+		relative_position_id = ENG_expand_the_foreign_ministry
 
 		prerequisite = {
-			focus = ENG_democratic_tradition
-		}
-
-		mutually_exclusive = {
-			focus = ENG_europe_is_the_future
+			focus = ENG_expand_the_foreign_ministry
 		}
 		mutually_exclusive = {
 			focus = ENG_distance_from_europe
@@ -1958,17 +1567,15 @@ focus_tree = {
 	focus = {
 		id = ENG_distance_from_europe
 		icon = GFX_ENG_Distance_from_Europe
-		x = @europhobia_tree_center
-		y = 2
+		x = 2
+		y = 1
 		cost = 6
+		relative_position_id = ENG_expand_the_foreign_ministry
 
 		prerequisite = {
-			focus = ENG_democratic_tradition
+			focus = ENG_expand_the_foreign_ministry
 		}
 
-		mutually_exclusive = {
-			focus = ENG_europe_is_the_future
-		}
 		mutually_exclusive = {
 			focus = ENG_careful_cooperation
 		}
@@ -2010,95 +1617,15 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
-		id = ENG_european_cooperation_1
-		icon = GFX_goal_EU_Business_Deal
-		x = @europe_tree_center
-		y = 3
-		cost = 6
 
-		prerequisite = {
-			focus = ENG_europe_is_the_future
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = ENG_special_treatment
 		icon = GFX_goal_generic_intelligence_exchange
-		x = @careful_tree_left
-		y = 3
+		x = -1
+		y = 1
 		cost = 6
+		relative_position_id = ENG_careful_cooperation
 
 		prerequisite = {
 			focus = ENG_careful_cooperation
@@ -2127,9 +1654,10 @@ focus_tree = {
 	focus = {
 		id = ENG_brexit_referendum
 		icon = GFX_ENG_Brexit
-		x = @brexit_focus
-		y = 3
+		x = 1
+		y = 1
 		cost = 6
+		relative_position_id = ENG_careful_cooperation
 
 		prerequisite = {
 			focus = ENG_careful_cooperation
@@ -2166,9 +1694,10 @@ focus_tree = {
 	focus = {
 		id = ENG_new_diplomatic_initiatives
 		icon = GFX_goal_generic_national_unity
-		x = @europhobia_tree_center
-		y = 3
+		x = 1
+		y = 1
 		cost = 6
+		relative_position_id = ENG_distance_from_europe
 
 		prerequisite = {
 			focus = ENG_distance_from_europe
@@ -2183,33 +1712,14 @@ focus_tree = {
 			factor = 10
 		}
 	}
-	
-	focus = {
-		id = ENG_european_logistics
-		icon = GFX_goal_EU_Government
-		x = @europe_tree_center
-		y = 4
-		cost = 15
-
-		prerequisite = {
-			focus = ENG_european_cooperation_1
-		}
-
-		completion_reward = {
-			add_ideas = ENG_european_logistics_idea
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = ENG_defy_remain
 		icon = GFX_goal_Abandon_the_EU
-		x = @brexit_focus_plus_one
-		y = 4
+		x = -1
+		y = 2
 		cost = 6
+		relative_position_id = ENG_distance_from_europe
 
 		prerequisite = {
 			focus = ENG_brexit_referendum
@@ -2243,9 +1753,10 @@ focus_tree = {
 	focus = {
 		id = ENG_investments_abroad_1
 		icon = GFX_ENG_Investments_1
-		x = @careful_tree_center
-		y = 4
+		x = 0
+		y = 2
 		cost = 6
+		relative_position_id = ENG_careful_cooperation
 
 		prerequisite = {
 			focus = ENG_careful_cooperation
@@ -2271,9 +1782,10 @@ focus_tree = {
 	focus = {
 		id = ENG_national_development_1
 		icon = GFX_focus_generic_industry_1
-		x = @europhobia_tree_right
-		y = 4
+		x = 4
+		y = 1
 		cost = 6
+		relative_position_id = ENG_distance_from_europe
 
 		prerequisite = {
 			focus = ENG_distance_from_europe
@@ -2288,164 +1800,15 @@ focus_tree = {
 		}
 	}
 
-	
-	focus = {
-		id = ENG_european_cooperation_2
-		icon = GFX_goal_generic_intelligence_exchange
-		x = @europe_tree_left
-		y = 5
-		cost = 6
 
-		prerequisite = {
-			focus = ENG_european_logistics
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ENG_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_EU_expansion_of_2004
-		icon = GFX_goal_EU_Treaty
-		x = @europe_tree_right
-		y = 5
-		cost = 25
-
-		prerequisite = {
-			focus = ENG_european_logistics
-		}
-
-		available = {
-			has_idea = idea_eu_member
-			has_offensive_war = no
-			has_democratic_form_of_government = yes
-		}
-
-		bypass = {
-			OR = {
-				has_global_flag = eu_expansion_of_2004_focus
-				AND = {
-					EST = { has_idea = idea_eu_member }
-					LAT = { has_idea = idea_eu_member }
-					LIT = { has_idea = idea_eu_member }
-					POL = { has_idea = idea_eu_member }
-					CZE = { has_idea = idea_eu_member }
-					SLO = { has_idea = idea_eu_member }
-					SLV = { has_idea = idea_eu_member }
-					HUN = { has_idea = idea_eu_member }
-					MLT = { has_idea = idea_eu_member }
-					CYP = { has_idea = idea_eu_member }
-				}
-			}
-		}
-
-		completion_reward = {
-			set_global_flag = eu_expansion_of_2004_focus
-			every_country = {
-				limit = {
-					OR = {
-						tag = EST
-						tag = LAT
-						tag = LIT
-						tag = POL
-						tag = CZE
-						tag = SLO
-						tag = SLV
-						tag = HUN
-						tag = MLT
-						tag = CYP
-					}
-					has_democratic_form_of_government = yes
-					NOT = { has_idea = idea_eu_member }
-					has_offensive_war = no
-				}
-				country_event = { id = european_union.5 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 5
-			modifier = {
-				date < 2004.1.1
-				factor = 0
-			}
-		}
-	}
 
 	focus = {
 		id = ENG_investments_at_home
 		icon = GFX_goal_Invest_Industry
-		x = @careful_tree_left
-		y = 5
+		x = -1
+		y = 1
 		cost = 6
+		relative_position_id = ENG_investments_abroad_1
 
 		prerequisite = {
 			focus = ENG_investments_abroad_1
@@ -2511,9 +1874,10 @@ focus_tree = {
 	focus = {
 		id = ENG_workforce_deal_with_ireland
 		icon = GFX_Align_UK-Ireland
-		x = @careful_tree_right
-		y = 5
+		x = 1
+		y = 1
 		cost = 6
+		relative_position_id = ENG_investments_abroad_1
 
 		prerequisite = {
 			focus = ENG_investments_abroad_1
@@ -2545,9 +1909,10 @@ focus_tree = {
 	focus = {
 		id = ENG_national_development_2
 		icon = GFX_focus_generic_industry_2
-		x = @europhobia_tree_center
-		y = 5
+		x = 0
+		y = 1
 		cost = 6
+		relative_position_id = ENG_national_development_1
 
 		prerequisite = {
 			focus = ENG_national_development_1
@@ -2563,40 +1928,14 @@ focus_tree = {
 		}
 	}
 
-	
-	focus = {
-		id = ENG_european_military_cooperation
-		icon = GFX_goal_EU_Army
-		x = @europe_tree_center
-		y = 6
-		cost = 15
-
-		prerequisite = {
-			focus = ENG_european_cooperation_2
-			focus = ENG_EU_expansion_of_2004
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					NOT = { tag = ENG }
-					has_idea = idea_eu_member
-				}
-				country_event = britain.16
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = ENG_investments_abroad_2
 		icon = GFX_ENG_Investments_2
-		x = @careful_tree_center
-		y = 6
+		x = 1
+		y = 1
 		cost = 6
+		relative_position_id = ENG_investments_at_home
 
 		prerequisite = {
 			focus = ENG_investments_at_home
@@ -2623,9 +1962,10 @@ focus_tree = {
 	focus = {
 		id = ENG_defensive_constructions
 		icon = GFX_goal_fortify_the_westwall
-		x = @europhobia_tree_left
-		y = 6
+		x = -1
+		y = 1
 		cost = 6
+		relative_position_id = ENG_national_development_2
 
 		prerequisite = {
 			focus = ENG_national_development_2
@@ -2643,9 +1983,10 @@ focus_tree = {
 	focus = {
 		id = ENG_industrial_development_program
 		icon = GFX_goal_generic_construct_civ_factory
-		x = @europhobia_tree_right
-		y = 6
+		x = 1
+		y = 1
 		cost = 6
+		relative_position_id = ENG_national_development_2
 
 		prerequisite = {
 			focus = ENG_national_development_2
@@ -2660,102 +2001,13 @@ focus_tree = {
 		}
 	}
 
-	
-	focus = {
-		id = ENG_european_cooperation_3
-		icon = GFX_goal_EU_Investment
-		x = @europe_tree_left
-		y = 7
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_european_cooperation_2
-		}
-		prerequisite = {
-			focus = ENG_european_military_cooperation
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					has_idea = idea_eu_member
-					NOT = { has_country_flag = ENG_european_cooperation_received }
-				}
-				country_event = european_union.6
-				set_country_flag = ENG_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_EU_expansion_of_2007
-		icon = GFX_goal_EU_Treaty
-		x = @europe_tree_right
-		y = 7
-		cost = 25
-
-		prerequisite = {
-			focus = ENG_european_military_cooperation
-		}
-		prerequisite = {
-			focus = ENG_EU_expansion_of_2004
-		}
-
-		available = {
-			has_idea = idea_eu_member
-			has_offensive_war = no
-			has_democratic_form_of_government = yes
-		}
-
-		bypass = {
-			OR = {
-				has_global_flag = eu_expansion_of_2007_focus
-				AND = {
-					ROM = { has_idea = idea_eu_member }
-					BUL = { has_idea = idea_eu_member }
-				}
-			}
-		}
-
-		completion_reward = {
-			set_global_flag = eu_expansion_of_2007_focus
-			every_country = {
-				limit = {
-					OR = {
-						tag = ROM
-						tag = BUL
-					}
-					has_democratic_form_of_government = yes
-					NOT = { has_idea = idea_eu_member }
-					has_offensive_war = no
-				}
-				country_event = { id = european_union.5 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				date < 2007.1.1
-				factor = 0
-			}
-		}
-	}
-
 	focus = {
 		id = ENG_develop_infrastructure
 		icon = GFX_goal_Road_Construction
-		x = @careful_tree_right
-		y = 7
+		x = 1
+		y = 1
 		cost = 6
+		relative_position_id = ENG_investments_abroad_2
 
 		prerequisite = {
 			focus = ENG_investments_abroad_2
@@ -2787,85 +2039,183 @@ focus_tree = {
 			factor = 10
 		}
 	}
-
 	focus = {
-		id = ENG_national_development_3
-		icon = GFX_focus_generic_industry_3
-		x = @europhobia_tree_center
-		y = 7
-		cost = 15
+		id = ENG_go_with_the_commonwealth
+		icon = GFX_ENG_Commonwealth_of_Nations
+		x = 0
+		y = 1
+		cost = 6
+		relative_position_id = ENG_new_diplomatic_initiatives
 
 		prerequisite = {
-			focus = ENG_defensive_constructions
-		}
-		prerequisite = {
-			focus = ENG_industrial_development_program
-		}
-		completion_reward = {
-			add_political_power = 50
-			add_war_support = 0.05
-			country_event = britain.9
+			focus = ENG_new_diplomatic_initiatives
 		}
 
-		ai_will_do = {
-			factor = 10
+		mutually_exclusive = {
+			focus = ENG_go_with_europe
 		}
-	}
-
-	
-	focus = {
-		id = ENG_EU_expansion_of_2013
-		icon = GFX_goal_EU_Treaty
-		x = @europe_tree_center
-		y = 8
-		cost = 25
-
-		prerequisite = {
-			focus = ENG_EU_expansion_of_2007
-		}
-
-		available = {
-			has_idea = idea_eu_member
-			has_offensive_war = no
-		}
-
-		bypass = {
-			OR = {
-				has_global_flag = eu_expansion_of_2013_focus
-				CRO = { has_idea = idea_eu_member }
-			}
+		mutually_exclusive = {
+			focus = ENG_britain_first
 		}
 
 		completion_reward = {
-			set_global_flag = eu_expansion_of_2013_focus
 			every_country = {
 				limit = {
 					OR = {
-						tag = CRO
+						tag = ENG
+						tag = USA
+						has_idea = idea_eu_member
+						has_idea = commonwealth_of_nations_member
+						is_in_faction_with = ENG
 					}
-					has_democratic_form_of_government = yes
-					NOT = { has_idea = idea_eu_member }
-					has_offensive_war = no
 				}
-				country_event = { id = european_union.5 }
+				news_event = news.56
 			}
 		}
 
 		ai_will_do = {
 			factor = 10
 			modifier = {
-				date < 2013.1.1
 				factor = 0
+				is_historical_focus_on = yes
 			}
+		}
+	}
+	
+	focus = {
+		id = ENG_leave_NATO
+		icon = GFX_goal_Abandon_NATO
+		x = 0
+		y = 1
+		cost = 6
+		relative_position_id = ENG_go_with_the_commonwealth
+		prerequisite = {
+			focus = ENG_go_with_the_commonwealth
+		}
+
+		bypass = {
+			OR = {
+				is_faction_leader = yes
+				is_in_faction = no
+			}
+		}
+
+		completion_reward = {
+			random_country = {
+				limit = {
+					is_in_faction_with = ENG
+					is_faction_leader = yes
+				}
+				remove_from_faction = ENG
+				news_event = news.58
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+
+	focus = {
+		id = ENG_propose_the_CANZUK_alliance
+		icon = GFX_ENG_UAKUS
+		x = 0
+		y = 1
+		cost = 6
+		relative_position_id = ENG_leave_NATO
+
+		prerequisite = {
+			focus = ENG_leave_NATO
+		}
+
+		available = {
+			has_democratic_form_of_government = yes
+			has_idea = commonwealth_of_nations_member
+			OR = {
+				is_faction_leader = yes
+				is_in_faction = no
+			}
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					is_in_faction = no
+				}
+				create_faction = british_commonwealth
+			}
+			CAN = { country_event = britain.12 }
+			AST = { country_event = britain.12 }
+			NZL = { country_event = britain.12 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = ENG_invite_the_united_states
+		icon = GFX_Align_to_America
+		x = 1
+		y = 1
+		cost = 6
+		relative_position_id = ENG_propose_the_CANZUK_alliance
+		prerequisite = {
+			focus = ENG_propose_the_CANZUK_alliance
+		}
+
+		completion_reward = {
+			USA = { country_event = britain.15 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = ENG_invite_the_commonwealth
+		icon = GFX_ENG_UK-Commonwealth
+		x = -1
+		y = 1
+		cost = 6
+		relative_position_id = ENG_propose_the_CANZUK_alliance
+		prerequisite = {
+			focus = ENG_propose_the_CANZUK_alliance
+		}
+		available = {
+			is_faction_leader = yes
+		}
+
+		completion_reward = {
+			every_country = {
+				limit = {
+					NOT = { tag = USA }
+					NOT = { tag = ENG }
+					NOT = { tag = CAN }
+					NOT = { tag = NZL }
+					NOT = { tag = AST }
+					has_idea = commonwealth_of_nations_member
+					NOT = { is_in_faction_with = ENG }
+				}
+				country_event = britain.15
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
 		}
 	}
 
 	focus = {
 		id = ENG_investments_abroad_3
 		icon = GFX_ENG_Investments_3
-		x = @careful_tree_center
-		y = 8
+		x = 0
+		y = 2
 		cost = 6
+		relative_position_id = ENG_investments_abroad_2
 
 		prerequisite = {
 			focus = ENG_investments_abroad_2
@@ -2893,259 +2243,6 @@ focus_tree = {
 		}
 	}
 
-	
-	focus = {
-		id = ENG_one_union
-		icon = GFX_goal_EU_Agreement
-		x = @europe_tree_left
-		y = 9
-		cost = 20
-
-		prerequisite = {
-			focus = ENG_EU_expansion_of_2013
-		}
-
-		available = {
-			NOT = { has_global_flag = the_path_towards_europe }
-			has_idea = idea_eu_member
-		}
-
-		mutually_exclusive = {
-			focus = ENG_union_of_nations
-		}
-
-		completion_reward = {
-			set_global_flag = the_path_towards_europe
-			add_political_power = 25
-		}
-
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ENG_ai_behavior
-					option = EUROPEAN_UNION
-				}
-			}
-			modifier = {
-				add = 5
-				has_game_rule = {
-					rule = ENG_ai_behavior
-					option = RANDOM
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = ENG_union_of_nations
-		icon = GFX_goal_Europe_of_Nations
-		x = @europe_tree_right
-		y = 9
-		cost = 20
-
-		prerequisite = {
-			focus = ENG_investments_abroad_3
-			focus = ENG_EU_expansion_of_2013
-		}
-
-		mutually_exclusive = {
-			focus = ENG_one_union
-		}
-
-		completion_reward = {
-			add_political_power = 75
-		}
-
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ENG_ai_behavior
-					option = EUROPEAN_COOPERATION
-				}
-			}
-			modifier = {
-				add = 10
-				is_historical_focus_on = no
-				has_game_rule = {
-					rule = ENG_ai_behavior
-					option = DEFAULT
-				}
-			}
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ENG_ai_behavior
-					option = RANDOM
-				}
-			}
-		}
-	}
-	focus = {
-		id = ENG_defensive_assistance
-		icon = GFX_goal_EU_Army
-		x = @europe_tree_center
-		y = 10
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_one_union
-			focus = ENG_union_of_nations
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					has_idea = idea_eu_member
-					NOT = { tag = ENG }
-				}
-				country_event = britain.21
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_prepare_unification_treaties
-		icon = GFX_Align_UK_EU
-		x = @europe_tree_left
-		y = 11
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_one_union
-		}
-		prerequisite = {
-			focus = ENG_defensive_assistance
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			add_political_power = 25
-			add_war_support = -0.05
-			news_event = news.64
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_european_cooperation_4
-		icon = GFX_goal_EU_Euro
-		x = @europe_tree_right
-		y = 11
-		cost = 15
-
-		prerequisite = {
-			focus = ENG_union_of_nations
-		}
-		prerequisite = {
-			focus = ENG_defensive_assistance
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					has_idea = idea_eu_member
-					not = { tag = ENG }
-					not = { tag = GER }
-					not = { tag = ITA }
-					not = { tag = FRA }
-				}
-				country_event = european_union.6
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = ENG_extra_research_slot_2
-		icon = GFX_goal_EU_Research_1
-		x = @careful_tree_left
-		y = 12
-		cost = 15
-
-		prerequisite = {
-			focus = ENG_european_cooperation_4
-		}
-
-		completion_reward = {
-			add_research_slot = 1
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_call_the_union
-		icon = GFX_goal_EU_Prepare_The_Union
-		x = @europe_tree_left
-		y = 13
-		cost = 15
-
-		prerequisite = {
-			focus = ENG_prepare_unification_treaties
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			country_event = european_union.3
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_european_cooperation_5
-		icon = GFX_goal_EU_Business_Deal
-		x = @europe_tree_right
-		y = 13
-		cost = 15
-
-		prerequisite = {
-			focus = ENG_european_cooperation_4
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					has_idea = idea_eu_member
-					not = { tag = ENG }
-				}
-				country_event = european_union.6
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 	focus = {
 		id = ENG_empower_the_government
 		icon = GFX_ENG_Empower_the_Government
@@ -6109,7 +5206,7 @@ focus_tree = {
 		id = ENG_conservative_legacy
 		icon = GFX_ENG_Conservative_Party
 
-		x = 17
+		x = -4
 		y = 1
 		relative_position_id = ENG_democratic_tradition
 		cost = 6
@@ -6144,7 +5241,7 @@ focus_tree = {
 		id = ENG_national_liberals
 		icon = GFX_goal_generic_improve_relations
 
-		x = -3
+		x = 3
 		y = 1
 		relative_position_id = ENG_conservative_legacy
 		cost = 6
@@ -6366,7 +5463,7 @@ focus_tree = {
 		id = ENG_labour
 		icon = GFX_ENG_Labour_Party
 
-		x = 8
+		x = 5
 		y = 1
 		relative_position_id = ENG_democratic_tradition
 		cost = 6
@@ -6395,7 +5492,7 @@ focus_tree = {
 		id = ENG_expand_cooperative_memberbase
 		icon = GFX_ENG_Co-operative_Party
 
-		x = -2
+		x = 2
 		y = 1
 		relative_position_id = ENG_labour
 		cost = 6
@@ -6435,7 +5532,7 @@ focus_tree = {
 		id = ENG_continue_with_new_labour
 		icon = GFX_ENG_New_Labour
 
-		x = 2
+		x = -2
 		y = 1
 		relative_position_id = ENG_labour
 		cost = 6
@@ -6883,7 +5980,7 @@ focus_tree = {
 		id = ENG_work_with_unions
 		icon = GFX_focus_eng_concessions_to_the_trade_unions
 
-		x = -2
+		x = 2
 		y = 1
 		relative_position_id = ENG_continue_with_new_labour
 		cost = 6
@@ -6909,7 +6006,7 @@ focus_tree = {
 		id = ENG_liberal_reawakening
 		icon = GFX_ENG_Liberal_Democrats
 
-		x = 13
+		x = 0
 		y = 1
 		relative_position_id = ENG_democratic_tradition
 		cost = 6
@@ -6942,7 +6039,7 @@ focus_tree = {
 		id = ENG_proportional_representation
 		icon = GFX_goal_generic_national_unity
 
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = ENG_liberal_reawakening
 		cost = 6
@@ -6996,7 +6093,7 @@ focus_tree = {
 		id = ENG_fair_politics
 		icon = GFX_focus_generic_court
 
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = ENG_free_universities
 		cost = 6

@@ -2139,47 +2139,19 @@ focus_tree = {
 	}
 
 	focus = {
-		id = BUL_fight_with_radicals
+		id = BUL_Deal_with_Islamic_radicals
 		icon = attack_pakistan
-		x = 0
-		y = 1
+		x = -16
+		y = 2
 		relative_position_id = BUL_political_reforms
 		cost = 8
-
-		mutually_exclusive = {
-			focus = BUL_islamic_radicalization
-		}
 
 		prerequisite = {
 			focus = BUL_political_reforms
 		}
 
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = BUL_islamic_minorties
-				add_idea = BUL_islamic_minorties_2
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUL_Deal_with_Islamic_radicals
-		icon = attack_pakistan
-		x = -16
-		y = 2
-		relative_position_id = BUL_fight_with_radicals
-		cost = 8
-
-		prerequisite = {
-			focus = BUL_fight_with_radicals
-		}
-
-		completion_reward = {
-			remove_ideas = BUL_islamic_minorties_2
+			remove_ideas = BUL_islamic_minorties
 		}
 
 		ai_will_do = {
@@ -2930,7 +2902,12 @@ focus_tree = {
 		}
 
 		available = {
-			NOT = { has_completed_focus = BUL_restore_the_Tsardom }
+			OR = {
+				has_completed_focus = BUL_Constitutional_monarchy
+				has_completed_focus = BUL_Liberalization
+				has_completed_focus = BUL_elect_Chamber_of_experts
+				has_completed_focus = BUL_elect_Bulgarian_socialist_party
+			}
 		}
 
 		prerequisite = {
@@ -4087,11 +4064,11 @@ focus_tree = {
 		icon = BUL_elections
 		x = 0
 		y = 1
-		relative_position_id = BUL_fight_with_radicals
+		relative_position_id = BUL_political_reforms
 		cost = 8
 
 		prerequisite = {
-			focus = BUL_fight_with_radicals
+			focus = BUL_political_reforms
 		}
 
 		completion_reward = {
@@ -5393,398 +5370,6 @@ focus_tree = {
 			swap_ideas = {
 				remove_idea = BUL_Bulgarian_militarizm
 				add_idea = BUL_Bulgarian_militarizm_2
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUL_islamic_radicalization
-		icon = align_to_pakistan
-		x = 10
-		y = 1
-		relative_position_id = BUL_political_reforms
-		cost = 8
-
-		mutually_exclusive = {
-			focus = BUL_fight_with_radicals
-		}
-
-		prerequisite = {
-			focus = BUL_political_reforms
-		}
-
-		completion_reward = {
-			#custom_effect_tooltip = available_political_advisor
-			#show_ideas_tooltip = idea_advisor_islamic_preacher #Unlocks Islamist preacher as political advaisor
-
-			swap_ideas = {
-				remove_idea = BUL_islamic_minorties
-				add_idea = BUL_islamic_minorties_radicalisation
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				factor = 0
-				is_historical_focus_on = yes
-			}
-		}
-	}
-	focus = {
-		id = BUL_promote_terrorist_acts
-		icon = major_alliance
-		x = 0
-		y = 1
-		relative_position_id = BUL_islamic_radicalization
-		cost = 8
-
-		prerequisite = {
-			focus = BUL_islamic_radicalization
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				add_manpower = -500
-			}
-			add_popularity = {
-				ideology = islamist
-				popularity = 0.15
-			}
-			random_owned_state = {
-				limit = {
-					is_fully_controlled_by = ROOT
-					industrial_complex > 0
-				}
-				damage_building = {
-					type = industrial_complex
-					damage = 0.6
-				}
-			}
-			random_owned_state = {
-				limit = {
-					is_fully_controlled_by = ROOT
-					arms_factory > 0
-				}
-				damage_building = {
-					type = arms_factory
-					damage = 0.6
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUL_consessions_to_Islamists
-		icon = concessions2
-		x = 2
-		y = 1
-		relative_position_id = BUL_islamic_radicalization
-		cost = 8
-
-		prerequisite = {
-			focus = BUL_islamic_radicalization
-		}
-
-		completion_reward = {
-			add_popularity = {
-				ideology = islamist
-				popularity = 0.1
-			}
-			swap_ideas = {
-				remove_idea = BUL_islamic_minorties_radicalisation
-				add_idea = BUL_islamic_minorties_radicalisation_2
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUL_Islamists_gouverment
-		icon = align_to_pakistan
-		x = -1
-		y = 1
-		relative_position_id = BUL_consessions_to_Islamists
-		cost = 8
-
-		available = {
-			has_government = islamist
-		}
-
-		prerequisite = {
-			focus = BUL_promote_terrorist_acts
-		}
-
-		prerequisite = {
-			focus = BUL_consessions_to_Islamists
-		}
-
-		completion_reward = {
-			add_popularity = {
-				ideology = islamist
-				popularity = 0.1
-			}
-			swap_ideas = {
-				remove_idea = BUL_islamic_minorties_radicalisation_2
-				add_idea = BUL_islamic_minorties_radicalisation_3
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUl_strenghten_Ajatollah
-		icon = scientific_exchange
-		x = 0
-		y = 1
-		relative_position_id = BUL_Islamists_gouverment
-		cost = 8
-
-		available = {
-			has_government = islamist
-		}
-
-		prerequisite = {
-			focus = BUL_Islamists_gouverment
-		}
-
-		completion_reward = {
-			add_research_slot = 1
-			add_ideas = BUl_strenghtend_Ajatollah
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUL_outlaw_not_wearing_Hijab
-		icon = islam_hijab
-		x = 2
-		y = 1
-		relative_position_id = BUL_Islamists_gouverment
-		cost = 8
-
-		available = {
-			has_government = islamist
-		}
-
-		prerequisite = {
-			focus = BUL_Islamists_gouverment
-		}
-
-		completion_reward = {
-			add_political_power = 100
-			add_stability = 0.1
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUL_Islamic_militias
-		icon = military_mission
-		x = 4
-		y = 1
-		relative_position_id = BUL_Islamists_gouverment
-		cost = 8
-
-		available = {
-			has_government = islamist
-		}
-
-		prerequisite = {
-			focus = BUL_Islamists_gouverment
-		}
-
-		completion_reward = {
-			add_ideas = BUL_Islamic_militias
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUL_clamp_down_on_other_religions
-		icon = military_sphere
-		x = 6
-		y = 1
-		relative_position_id = BUL_Islamists_gouverment
-		cost = 8
-
-		available = {
-			has_government = islamist
-		}
-
-		prerequisite = {
-			focus = BUL_Islamists_gouverment
-		}
-
-		completion_reward = {
-			add_stability = 0.2
-			every_owned_state = {
-				limit = {
-					is_controlled_by = ROOT
-				}
-				add_manpower = -30000
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUl_Jihad
-		text = generic_jihad
-		icon = align_to_pakistan
-		x = 0
-		y = 1
-		relative_position_id = BUl_strenghten_Ajatollah
-		cost = 8
-
-		available = {
-			has_government = islamist
-		}
-
-		prerequisite = {
-			focus = BUL_clamp_down_on_other_religions
-		}
-
-		prerequisite = {
-			focus = BUL_Islamic_militias
-		}
-
-		prerequisite = {
-			focus = BUL_outlaw_not_wearing_Hijab
-		}
-
-		prerequisite = {
-			focus = BUl_strenghten_Ajatollah
-		}
-
-		completion_reward = {
-			fourth_estate_islamist_increase = yes
-			add_ideas = idea_focus_generic_jihad
-			#Trigger the global news event.
-			news_event = news.2
-			#If the faction is not ideal, leave it.
-			if = {
-				limit = {
-					is_in_faction = yes
-					is_faction_leader = no
-					any_country = {
-						is_in_faction_with = ROOT
-						OR = {
-							NOT = { has_government = islamist }
-							islamist < 0.25
-						}
-					}
-				}
-				random_country = {
-					limit = {
-						is_in_faction_with = ROOT
-						is_faction_leader = yes
-					}
-					remove_from_faction = ROOT
-				}
-			}
-			#Everybody should hate them; except for Islamists of their confession
-			if = {
-				limit = {
-					OR = {
-						has_country_flag = sunni_islam
-						AND = {	#The rare case of Ibadi or Bug.
-							NOT = { has_country_flag = sunni_islam }
-							NOT = { has_country_flag = shia_islam }
-						}
-					}
-				}
-				every_country = {
-					limit = {
-						OR = {
-							has_country_flag = shia_islam
-							NOT = { has_government = islamist }
-						}
-					}
-					add_opinion_modifier = {
-						target = ROOT
-						modifier = terrorist_menace
-					}
-					add_opinion_modifier = {
-						target = ROOT
-						modifier = terrorist_menace_trade
-					}
-				}
-			}
-			if = {
-				limit = {
-					has_country_flag = shia_islam
-				}
-				every_country = {
-					limit = {
-						OR = {
-							has_country_flag = sunni_islam
-							NOT = { has_government = islamist }
-						}
-					}
-					add_opinion_modifier = {
-						target = ROOT
-						modifier = terrorist_menace
-					}
-					add_opinion_modifier = {
-						target = ROOT
-						modifier = terrorist_menace_trade
-					}
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = BUL_spread_the_word_of_Allah
-		icon = military_sphere
-		x = 0
-		y = 1
-		relative_position_id = BUl_Jihad
-		cost = 60
-
-		available = {
-			has_government = islamist
-		}
-
-		prerequisite = {
-			focus = BUl_Jihad
-		}
-
-		completion_reward = {
-			add_stability = 0.2
-			every_owned_state = {
-				add_core_of = BUL
 			}
 		}
 

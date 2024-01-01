@@ -1,0 +1,636 @@
+ add_namespace = haiti
+ add_namespace = haiti_news
+ add_namespace = election_HAI
+
+country_event = {  #2004 coup d'etat
+	id = haiti.1
+	title = haiti.1.t
+	desc = haiti.1.d
+	picture = GFX_report_event_haiti_coup
+	
+	trigger = {
+	    tag = HAI
+	    date > 2004.1.30
+		date < 2004.2.28
+        has_government = social_democrat
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Chief Justice of the Supreme Court Boniface Alexandre assumes
+		name = haiti.1.a
+        ai_chance = { factor = 100 }
+		swap_ideas= {
+			remove_idea = HAI_hardships 
+			add_idea = HAI_collapse 
+		}
+		set_politics = {
+			ruling_party = reactionary
+			last_election = "2001.11.26"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		BRA = {
+			country_event = { days = 63 id = haiti.2 }
+		}
+	}
+	option = {    #Rebel leader Guy Phillipe takes over
+		name = haiti.1.b
+		swap_ideas= {
+			remove_idea = HAI_hardships 
+			add_idea = HAI_collapse 
+		}
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = no
+		}
+		BRA = {
+			country_event = { days = 63 id = haiti.2 }
+		}
+	}
+	option = {    #Aristide holds his position
+		name = haiti.1.b
+		swap_ideas= {
+			remove_idea = HAI_hardships 
+			add_idea = HAI_collapse 
+		}
+		set_politics = {
+			ruling_party = root
+			last_election = "2001.11.26"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_ideas = HAI_gangs
+		add_stability = -0.1
+		add_political_power = -100
+		BRA = {
+			country_event = { days = 63 id = haiti.2 }
+		}
+	}
+}
+
+country_event = {  #MINUSTAH 
+	id = haiti.2
+	title = haiti.2.t
+	desc = haiti.2.d
+	picture = GFX_report_event_minustah
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Intervene
+		name = haiti.2.a
+        ai_chance = { factor = 100 }
+		add_ideas = BRA_MINUSTAH
+		news_event = HAI_news.1
+	}
+	option = {    #Intervene directly
+		name = haiti.2.b
+		declare_war_on= { 
+			target = HAI 
+			type = change_government 
+		}
+		news_event = HAI_news.1
+	}
+	option = {    #Let this be
+		name = haiti.2.b
+		add_popularity = { 
+			ideology = nationalist 
+			popularity = -0.1
+		}
+		add_political_power = 15
+		add_army_experience = -10
+		USA = {
+			country_event = { days = 15 id = haiti.2 }
+		}
+	}
+}
+
+country_event = {  #2010 Earthquake
+	id = haiti.3
+	title = haiti.3.t
+	desc = haiti.3.d
+	picture = GFX_report_event_HAI_earthquake
+	
+	trigger = {
+	    tag = HAI
+	    date > 2004.1.30
+		date < 2004.2.28
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {   
+		name = haiti.3.a
+		add_stability = -0.15
+		add_political_power = -500
+		318 = {
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+			damage_building = {
+				type = arms_factory
+				damage = 1
+			}
+			damage_building = {
+				type = industrial_complex
+				damage = 1
+			}
+		}
+	}
+}
+
+country_event = {  #Results of the 2015 elections questioned 
+	id = haiti.4
+	title = haiti.4.t
+	desc = haiti.4.d
+	picture = GFX_report_event_HAI_protests
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #Let's redo the entire thing
+		name = haiti.4.a
+        ai_chance = { factor = 100 }
+		hidden_effect = {
+			country_event = { days = 105 id = haiti.5 }
+		}
+	}
+	option = {    #We can't listen to those rumors
+		name = haiti.4.b
+		if = {
+			limit = {
+				has_country_flag = HAI_2015_jovenel_moise
+			}
+			promote_character = HAI_jovenel_moise
+			set_politics = {
+				ruling_party = social_liberal
+				elections_allowed = yes
+			}
+			set_party_name = { ideology = social_liberal long_name = HAI_social_liberal_PHTK_party_long name = HAI_social_liberal_PHTK_party }
+		}
+		else_if = {
+			limit = {
+				has_country_flag = HAI_2015_jude_celestin
+			}
+			add_country_leader_role = {
+				character = HAI_Jude_celestin
+				country_leader = {
+					ideology = conservative_liberalism
+				}
+				promote_leader = yes
+			}
+			set_party_name = { ideology = conservative long_name = HAI_conservative_party_LAPEH_long name = HAI_conservative_party_LAPEH }
+			set_politics = {
+				ruling_party = conservative
+				elections_allowed = yes
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = HAI_2015_jean_charles_moise
+			}
+			set_politics = {
+				ruling_party = democratic_socialist
+				elections_allowed = yes
+			}
+		}
+	}
+}
+
+country_event = {  #resignation of Michel Martelly
+	id = haiti.5
+	title = haiti.5.t
+	desc = haiti.5.d
+	picture = GFX_report_event_HAI_protests
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #He resigns
+		name = haiti.5.a
+        ai_chance = { factor = 100 }
+		promote_character = HAI_evans_paul
+		country_event = { days = 7 id = haiti.6 }
+	}
+	option = {    #Martelly resists 
+		name = haiti.5.b
+		set_politics = {
+			ruling_party = root
+			elections_allowed = yes
+		}
+	}
+	option = {    #The winner of the 2015 elections will assume  
+		name = haiti.5.c
+		if = {
+			limit = {
+				has_country_flag = HAI_2015_jovenel_moise
+			}
+			promote_character = HAI_jovenel_moise
+			set_politics = {
+				ruling_party = social_liberal
+				elections_allowed = yes
+			}
+			set_party_name = { ideology = social_liberal long_name = HAI_social_liberal_PHTK_party_long name = HAI_social_liberal_PHTK_party }
+		}
+		else_if = {
+			limit = {
+				has_country_flag = HAI_2015_jude_celestin
+			}
+			add_country_leader_role = {
+				character = HAI_Jude_celestin
+				country_leader = {
+					ideology = conservative_liberalism
+				}
+				promote_leader = yes
+			}
+			set_party_name = { ideology = conservative long_name = HAI_conservative_party_LAPEH_long name = HAI_conservative_party_LAPEH }
+			set_politics = {
+				ruling_party = conservative
+				elections_allowed = yes
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = HAI_2015_jean_charles_moise
+			}
+			set_politics = {
+				ruling_party = democratic_socialist
+				elections_allowed = yes
+			}
+		}
+	}
+}
+
+country_event = {  #Provisional Presidential elections
+	id = haiti.6
+	title = haiti.6.t
+	desc = haiti.6.d
+	picture = GFX_report_event_HAI_national_assembly
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {    #Jocelerme Privert
+		name = haiti.6.a
+		set_politics = {
+			ruling_party = progressive
+			elections_allowed = yes
+		}
+		promote_character = HAI_jocelerme_privert
+	}
+	option = {    #Edgard Leblanc
+		name = haiti.6.b
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		promote_character = HAI_edgard_leblanc
+	}
+	option = {    #The current president is confirmed
+		name = haiti.6.c
+        ai_chance = { factor = 100 }
+	}
+}
+
+country_event = {  #2016 election if 2015 was fraudulent
+	id = haiti.7
+	title = haiti.7.t
+	desc = haiti.7.d
+	picture = GFX_report_event_HAI_elections
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #	Jovenel Moise
+		name = election_HAI.4.a
+		ai_chance = { factor = 34 }
+		promote_character = HAI_jovenel_moise
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		set_party_name = { ideology = social_liberal long_name = HAI_social_liberal_PHTK_party_long name = HAI_social_liberal_PHTK_party }
+	}
+	option = {    #Jude Célestin
+		name = election_HAI.3.c
+		ai_chance = { factor = 33 }
+		add_country_leader_role = {
+			character = HAI_Jude_celestin
+			country_leader = {
+				ideology = conservative_liberalism
+			}
+			promote_leader = yes
+		}
+		set_party_name = { ideology = conservative long_name = HAI_conservative_party_LAPEH_long name = HAI_conservative_party_LAPEH }
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+	}
+	option = {    #Jean-Charles Moïse
+		name = election_HAI.4.b
+		promote_character = HAI_jean_charles_moise
+        ai_chance = { factor = 33 }
+		set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+	}
+	
+	option = {    #This elections are illegitimate!
+		name = election_HAI.2.de
+	}
+}
+
+country_event = {  #2000 election
+	id = election_HAI.1
+	title = election_HAI.1.t
+	desc = election_HAI.1.d
+	picture = GFX_report_event_HAI_elections
+	
+	trigger = {
+	    tag = HAI
+	    date > 2000.11.26
+		date < 2000.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = hai_election_2000 }
+	}
+	
+	immediate = {
+		set_country_flag = hai_election_2000
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Jean-Bertrand Aristide
+		name = election_HAI.1.a
+        ai_chance = { factor = 100 }
+		promote_character =  HAI_jean_bertrand_aristide
+		set_politics = {
+			ruling_party = social_democrat
+			last_election = "2000.11.26"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #This elections are illegitimate!
+		name = election_HAI.1.b
+	}
+}
+
+country_event = {  #2006 election
+	id = election_HAI.2
+	title = election_HAI.2.t
+	desc = election_HAI.1.d
+	picture = GFX_report_event_HAI_elections
+	
+	trigger = {
+	    tag = HAI
+	    date > 2006.2.7
+		date < 2006.3.7
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = hai_election_2004 }
+	}
+	
+	immediate = {
+		set_country_flag = hai_election_2004
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Rene Preval
+		name = election_HAI.2.a
+        ai_chance = { factor = 100 }
+		set_party_name = { ideology = progressive long_name = HAI_progressive_party_INITE_long name = HAI_progressive_party_INITE }
+		set_politics = {
+			ruling_party = progressive
+			last_election = "2006.11.10"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = progressive 
+			popularity = 0.15
+		}
+	}
+	option = {    #Leslie Manigat
+		name = election_HAI.2.b
+		set_politics = {
+			ruling_party = conservative
+			last_election = "2006.11.10"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+	}
+	option = {    #Charles Henri Baker
+		name = election_HAI.2.c
+		set_politics = {
+			ruling_party = market_liberal
+			last_election = "2006.11.10"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #None of these
+		name = election_HAI.2.de
+		set_politics = {
+			ruling_party = root
+			last_election = "2006.11.10"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+	}
+}
+
+country_event = {  #2010 election
+	id = haiti.3
+	title = haiti.3.t
+	desc = haiti.1.d
+	picture = GFX_report_event_HAI_elections
+	
+	trigger = {
+	    tag = HAI
+	    date > 2010.11.10
+		date < 2011.2.20
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = hai_election_2010 }
+	}
+	
+	immediate = {
+		set_country_flag = hai_election_2010
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Michel Martelly
+		name = election_HAI.3.a
+		ai_chance = { factor = 34 }
+		set_politics = {
+			ruling_party = social_liberal
+			last_election = "2011.11.20"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Mirlande Manigat
+		name = election_HAI.3.b
+		ai_chance = { factor = 33 }
+		promote_character = HAI_mirlande_manigat
+		set_politics = {
+			ruling_party = conservative
+			last_election = "2011.11.20"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+	}
+	option = {    #Jude Célestin
+		name = election_HAI.3.c
+		promote_character = HAI_jude_celestin
+        ai_chance = { factor = 33 }
+		set_politics = {
+			ruling_party = progressive
+			last_election = "2011.11.20"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = progressive 
+			popularity = 0.15
+		}
+	}
+	
+	option = {    #This elections are illegitimate!
+		name = election_HAI.2.de
+		set_politics = {
+			ruling_party = root
+			last_election = "2011.11.20"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+}
+
+country_event = {  #2015 election
+	id = election_HAI.4
+	title = election_HAI.4.t
+	desc = election_HAI.1.d
+	picture = GFX_report_event_HAI_elections
+	
+	trigger = {
+	    tag = HAI
+	    date > 2015.2.7
+		date < 2016.11.20
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = hai_election_2016 }
+	}
+	
+	immediate = {
+		set_country_flag = hai_election_2016
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #	Jovenel Moise
+		name = election_HAI.4.a
+		ai_chance = { factor = 34 }
+		country_event = { days = 3 id = haiti.4 }
+		set_country_flag = HAI_2015_jovenel_moise
+	}
+	option = {    #Jude Célestin
+		name = election_HAI.3.c
+		ai_chance = { factor = 33 }
+		country_event = { days = 3 id = haiti.4 }
+		set_country_flag = HAI_2015_jude_celestin
+	}
+	option = {    #Jean-Charles Moïse
+		name = election_HAI.4.b
+		country_event = { days = 3 id = haiti.4 }
+		set_country_flag = HAI_2015_jean_charles_moise
+	}
+	
+	option = {    #This elections are illegitimate!
+		name = election_HAI.4.b
+		country_event = { days = 3 id = haiti.4 }
+	}
+}
+
+news_event = {			#2004 Coup
+	id = haiti_news.1
+	title = haiti_news.1.t
+	desc = haiti_news.1.d
+	picture = GFX_news_HAI_coup
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = haiti_news.1.a
+	}
+}
+
+news_event = {			#MINUSTAH
+	id = haiti_news.2
+	title = haiti_news.2.t
+	desc = haiti_news.2.d
+	picture = GFX_news_minustah
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = haiti_news.2.a
+	}
+}
+
+news_event = {			#2010 Earthquake
+	id = haiti_news.3
+	title = haiti_news.3.t
+	desc = haiti_news.3.d
+	picture = GFX_news_HAI_earthquake
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = haiti_news.2.a
+	}
+}

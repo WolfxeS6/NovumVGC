@@ -1,0 +1,638 @@
+add_namespace = paraguay
+add_namespace = paraguay_news
+add_namespace = election_PAR
+
+country_event = {  #2000 coup attempt
+	id = paraguay.1
+	title = paraguay.1.t
+	desc = paraguay.1.d
+	picture = GFX_report_event_PAR_coup
+
+	trigger = {
+	    tag = PAR
+	    date > 2000.5.18
+		date < 2000.6.19
+		NOT = {
+			has_government = nationalist
+		}
+	}
+
+	mean_time_to_happen = { days = 7 }
+
+	fire_only_once = yes
+	
+	option = {    #Luis Ángel González Macchi maintains power
+		name = paraguay.1.a
+		ai_chance = {
+			base = 65
+			modifier = {
+				factor = 90
+				is_historical_focus_on = yes
+			}
+		}
+		remove_ideas = PAR_marzo_fallout
+	}
+	option = {    #The coup succedes
+		name = paraguay.1.b
+		ai_chance = { base = 35 }
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = no
+		}
+		add_country_leader_role = {
+			character = PAR_lino_ovideo
+			country_leader = {
+				ideology = autocrat
+				traits = { old_coupmaker }
+			}
+			promote_leader = yes
+		}
+		remove_ideas = PAR_marzo_fallout
+		swap_ideas= {
+			remove_idea = PAR_ANR_dominance
+			add_idea = PAR_ANR_dominance_nationalist
+		}
+		news_event = paraguay_news.1
+	}
+}
+
+country_event = {  #2002 economic crisis
+	id = paraguay.2
+	title = paraguay.2.t
+	desc = paraguay.2.d
+	picture = GFX_report_event_Gonzalez_Macchi
+	
+	trigger = {
+	    tag = PAR
+	    date > 2002.1.1
+		date < 2002.7.31
+	    has_government = reactionary
+	}
+
+	mean_time_to_happen = { days = 7 }
+
+	fire_only_once = yes
+	
+	option = {    #This isn't good
+		ai_chance = {
+			base = 70
+			modifier = {
+				factor = 90
+				is_historical_focus_on = yes
+			}
+		}
+		name = paraguay.2.a
+		swap_ideas= {
+			remove_idea = PAR_Stagnation
+			add_idea = PAR_Crisis
+		}
+	}
+	option = {    #González Macchi resigns
+		name = paraguay.2.a
+		ai_chance = { base = 30 }
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		remove_ideas = PAR_Stagnation
+		add_timed_idea = {
+		    idea = PAR_Crisis
+			days = 180
+		}
+	}
+}
+
+country_event = {  #Fernando Lugo Impeachment
+	id = paraguay.3
+	title = paraguay.3.t
+	desc = paraguay.3.d
+	picture = GFX_report_event_Fernando_Lugo
+	
+	trigger = {
+	    tag = PRU
+	    date > 2012.5.21
+		date < 2012.6.22
+        has_country_leader= { ruling_only = yes name = "Fernando Lugo" } 
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #The impeachment is approved
+		name = paraguay.3.a
+        ai_chance = {
+			base = 65
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = PAR_federico_franco
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		add_ideas = PAR_ANR_dominance
+		news_event = paraguay_news.3
+	}
+	option = {    #This is a coup! The impeachment process is denied
+		name = paraguay.3.b
+		ai_chance = { factor = 35 }
+		add_political_power = -50
+	}
+}
+
+country_event = {  #Death of Lino Ovideo
+	id = paraguay.4
+	title = paraguay.4.t
+	desc = paraguay.4.d
+	picture = GFX_report_event_Lino_Ovideo
+	
+	trigger = {
+	    tag = PAR
+	    date > 2013.2.2
+		date < 2013.3.2
+        has_democratic_form_of_government = yes
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = paraguay.4.a
+		promote_character = PAR_lino_cesar_oviedo_sanchez
+	}
+}
+
+country_event = {  #Paraguayan Insurgency 
+	id = paraguay.5
+	title = paraguay.5.t
+	desc = paraguay.5.d
+	picture = GFX_report_event_PAR_EPP
+	
+	trigger = {
+	    tag = PAR
+	    date > 2005.6.15
+		date < 2005.8.27
+        Not = {
+			has_government = communist
+		}
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = paraguay.5.a
+		promote_character = PAR_alcides_oviedo_britez
+		start_civil_war = {
+			ideology = communist
+			size = 0.35
+			states = { 1055 }
+        }
+        random_other_country = {
+			set_party_name = { ideology = communist long_name = PAR_communist_party_EPP_long name = PAR_communist_party_EPP }
+			limit = {
+				original_tag = PAR
+                has_government = communist
+            }
+			every_unit_leader = {
+				set_nationality = {
+					character = THIS
+					target_country = PAR		##The communist insurgency gets no generals
+				}
+			}
+           set_cosmetic_tag = PAR_EPP
+		   set_country_flag = PAR_insurgency
+        }
+		news_event = paraguay_news.4
+	}
+}
+
+country_event = {  #Communist Victory in the Paraguayan Insurgency 
+	id = paraguay.6
+	title = paraguay.6.t
+	desc = paraguay.6.d
+	picture = GFX_report_event_PAR_EPP
+	
+	trigger = {
+	    original_tag = PAR
+	    has_government = communist
+		has_country_flag = PAR_insurgency
+		has_civil_war = no
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = paraguay.6.a
+		set_cosmetic_tag = PAR_BLUE
+		PAR = {
+			every_character = {
+				set_nationality = {
+					target_country = ROOT
+					character = THIS
+				} 
+			}
+		}
+	}
+}
+
+country_event = {  #2003 Paraguay Elections
+	id = election_PAR.1
+	title = election_PAR.1.t
+	desc = election_PAR.1.d
+	picture = GFX_report_event_PAR_elections
+	
+	trigger = {
+	    tag = PAR
+	    date > 2003.1.1
+		date < 2003.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = PAR_election_2003 }
+	}
+	
+	immediate = {
+		set_country_flag = PAR_election_2003
+		hidden_effect = {
+			remove_ideas = PAR_Crisis
+			set_party_name = { ideology = nationalist long_name = PAR_nationalist_party_UNACE_long name = PAR_nationalist_party_UNACE_long }
+		}
+	}
+
+	is_triggered_only = yes	
+
+	option = {    #Nincador Duarte
+		name = election_PAR.1.a
+		ai_chance = { factor = 76 }
+		promote_character = PAR_nincador_duarte
+		set_politics = {
+			ruling_party = reactionary
+			last_election = "2003.4.27"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Julio César Franco
+		name = election_PAR.1.b
+		ai_chance = { factor = 12 }
+        set_politics = {
+			ruling_party = social_liberal
+			last_election = "2003.4.27"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #Pedro Fadul
+		name = election_PAR.1.c
+		ai_chance = { factor = 12 }
+        set_politics = {
+			ruling_party = conservative
+			last_election = "2003.4.27"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #None of these
+		name = election_PAR.1.de
+	}
+}
+
+country_event = {  #2008 Paraguay Elections
+	id = election_PAR.2
+	title = election_PAR.2.t
+	desc = election_PAR.1.d
+	picture = GFX_report_event_PAR_elections
+	
+	trigger = {
+	    tag = PAR
+	    date > 2008.1.1
+		date < 2008.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = PAR_election_2008 }
+	}
+	
+	immediate = {
+		set_country_flag = PAR_election_2008	
+	}
+
+	is_triggered_only = yes
+	
+	option = {    #Fernando Lugo
+		name = election_PAR.2.a
+		ai_chance = { factor = 75 }
+		set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2008.4.20"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #Blanca Ovelar
+		name = election_PAR.2.b
+		ai_chance = { factor = 10 }
+		promote_character = PAR_blanca_ovelar
+        set_politics = {
+			ruling_party = reactionary
+			last_election = "2008.4.20"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Lino Ovideo
+		name = election_PAR.2.c
+		ai_chance = { factor = 15 }
+        set_politics = {
+			ruling_party = nationalist
+			last_election = "2008.4.20"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = nationalist 
+			popularity = 0.15
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #Pedro Fadul
+		name = election_PAR.1.c
+        set_politics = {
+			ruling_party = conservative
+			last_election = "2008.4.20"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #None of these
+		name = election_PAR.1.de
+	}
+}
+
+country_event = {  #2013 Paraguay Elections
+	id = election_PAR.3
+	title = election_PAR.3.t
+	desc = election_PAR.1.d
+	picture = GFX_report_event_PAR_elections
+	
+	trigger = {
+	    tag = PAR
+	    date > 2013.1.1
+		date < 2013.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = PAR_election_2013 }
+	}
+	
+	immediate = {
+		set_country_flag = PAR_election_2013	
+	}
+
+	is_triggered_only = yes
+
+	option = {    #Horacio Cartes
+		name = election_PAR.3.a
+		ai_chance = { factor = 75 }
+		promote_character = PAR_horacio_cartes
+		set_politics = {
+			ruling_party = reactionary
+			last_election = "2013.4.21"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Efraín Alegre
+		name = election_PAR.3.b
+		ai_chance = { factor = 10 }
+		promote_character = PAR_efrain_alegre
+        set_politics = {
+			ruling_party = social_liberal
+			last_election = "2013.4.21"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #Mario Aníbal Ferreiro
+		name = election_PAR.3.b
+		ai_chance = { factor = 15 }
+        set_politics = {
+			ruling_party = social_democrat
+			last_election = "2013.4.21"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_democrat 
+			popularity = 0.15
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #None of these
+		name = election_PAR.1.de
+	}
+}
+
+country_event = {  #2018 Paraguay Elections
+	id = election_PAR.4
+	title = election_PAR.4.t
+	desc = election_PAR.1.d
+	picture = GFX_report_event_PAR_elections
+	
+	trigger = {
+	    tag = PAR
+	    date > 2018.1.1
+		date < 2018.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = PAR_election_2018 }
+	}
+	
+	immediate = {
+		set_country_flag = PAR_election_2018	
+	}
+
+	is_triggered_only = yes
+
+	option = {    #Mario Abdo Benítez
+		name = election_PAR.4.a
+		ai_chance = { factor = 100 }
+		promote_character = PAR_mario_abdo_benitez
+		set_politics = {
+			ruling_party = reactionary
+			last_election = "2018.4.22"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Efraín Alegre
+		name = election_PAR.3.b
+		promote_character = PAR_efrain_alegre
+        set_politics = {
+			ruling_party = social_liberal
+			last_election = "2018.4.22"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #Juan Bautista Ybañez
+		name = election_PAR.4.b
+		promote_character = PAR_juan_bautista_ybanez
+        set_politics = {
+			ruling_party = progressive
+			last_election = "2018.4.22"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = progressive 
+			popularity = 0.15
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #None of these
+		name = election_PAR.1.de
+	}
+}
+
+country_event = {  #2023 Paraguay Elections
+	id = election_PAR.5
+	title = election_PAR.5.t
+	desc = election_PAR.1.d
+	picture = GFX_report_event_PAR_elections
+	
+	trigger = {
+	    tag = PAR
+	    date > 2023.1.1
+		date < 2023.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = PAR_election_2023 }
+	}
+	
+	immediate = {
+		set_country_flag = PAR_election_2023	
+	}
+
+	is_triggered_only = yes
+
+	option = {    #Santiago Peña Palacios
+		name = election_PAR.5.a
+		ai_chance = { factor = 100 }
+		promote_character = PAR_santiago_pena
+		set_politics = {
+			ruling_party = reactionary
+			last_election = "2023.4.30"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Efraín Alegre
+		name = election_PAR.3.b
+		promote_character = PAR_efrain_alegre
+        set_politics = {
+			ruling_party = social_liberal
+			last_election = "2023.4.30"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #Paraguayo Cubas
+		name = election_PAR.5.b
+		promote_character = PAR_paraguayo_cubas
+        set_politics = {
+			ruling_party = nationalist
+			last_election = "2023.4.30"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = nationalist 
+			popularity = 0.15
+		}
+		set_party_name = { ideology = nationalist long_name = PAR_nationalist_party_PCN_long name = PAR_nationalist_party_PCN }
+		PAR_end_ANR_dominance = yes
+	}
+	option = {    #None of these
+		name = election_PAR.1.de
+	}
+}
+
+
+news_event = {			#2000 coup
+	id = paraguay_news.1
+	title = paraguay_news.1.t
+	desc = paraguay_news.1.d
+	picture = GFX_news_PAR_coup
+
+	is_triggered_only = yes
+
+	option = {
+		name = paraguay_news.1.a
+	}
+}
+
+news_event = {			#End of ANR domiance
+	id = paraguay_news.2
+	title = paraguay_news.2.t
+	desc = paraguay_news.2.d
+	picture = GFX_news_paraguay_elections
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = paraguay_news.2.a
+	}
+}
+
+news_event = {			#Lugo's Impeachment
+	id = paraguay_news.3
+	title = paraguay_news.3.t
+	desc = paraguay_news.3.d
+	picture = GFX_news_Lugo
+
+	is_triggered_only = yes
+
+	option = {
+		name = paraguay_news.3.a
+	}
+}
+
+news_event = {			#EPP
+	id = paraguay_news.4
+	title = paraguay_news.4.t
+	desc = paraguay_news.4.d
+	picture = GFX_news_EPP
+
+	is_triggered_only = yes
+
+	option = {
+		name = paraguay_news.4.a
+	}
+}

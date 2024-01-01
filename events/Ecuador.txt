@@ -1,0 +1,692 @@
+add_namespace = ecuador
+add_namespace = election_ECU 
+add_namespace = ecuador_news 
+
+country_event = {  #Coup
+	id = ecuador.1
+	title = ecuador.1.t
+	desc = ecuador.1.d
+	picture = GFX_report_event_ECU_coup
+	
+	trigger = {
+	    tag = ECU
+	    date > 2000.1.1
+		date < 2000.1.31
+        has_government = conservative
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+		option = {    #The army assumes
+		name = ecuador.1.a
+        set_politics = {
+			ruling_party = nationalist
+			elections_allowed = no
+		}
+		
+	}
+	option = {    #Lucio Gutiérrez assumes
+		name = ecuador.1.b
+        set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		} 
+		news_event = ecuador_news.1
+	}
+	option = {    #CONAIE assumes
+		name = ecuador.1.c
+        set_politics = {
+			ruling_party = progressive
+			elections_allowed = yes
+		}
+		set_party_name = { ideology = progressive long_name = PRU_progressive_party_CONAIE_long name = PRU_progressive_party_CONAIE }
+		news_event = ecuador_news.2
+	}
+	option = {    #Carlos Solórzano Constantine assumes
+		name = ecuador.1.de
+        add_stability = -0.1
+		add_political_power = -100
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		promote_character = ECU_carlos_solorzano_constantine
+		news_event = ecuador_news.3
+	}
+}
+
+country_event = {  #Coup part 2
+	id = ecuador.2
+	title = ecuador.2.t
+	desc = ecuador.2.d
+	picture = GFX_report_event_ECU_junta
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #The army instals Vice president Gustavo Noboa
+		name = ecuador.2.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		promote_character = ECU_gustavo_noboa
+		#news_event = ecuador_news.5
+	}
+	option = {    #The army retains Power
+		name = ecuador.2.b
+		add_political_power = -50
+		USA = {
+			send_embargo = ROOT
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = broke_off_diplomatic_relations
+			}
+		}
+		news_event = ecuador_news.4
+	}
+	option = {    #The army restores president Mahuad
+		name = ecuador.2.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		#news_event = ecuador_news.6
+	}
+}
+
+country_event = {  #Rebelión de los forajidos
+	id = ecuador.3
+	title = ecuador.3.t
+	desc = ecuador.3.d
+	picture = GFX_report_event_ECU_forajidos
+	
+	trigger = {
+	    tag = ECU
+	    date > 2005.3.13
+		date < 2005.4.20
+        has_country_leader= { ruling_only = yes name = "Lucio Gutiérrez" } 
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Alfredo Palacio assumes
+		name = ecuador.3.a
+        ai_chance = { factor = 80 }
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		promote_character =  ECU_alfredo_palacio
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = -0.1
+		}
+		add_popularity = { 
+			ideology = social_democrat 
+			popularity = 0.1
+		}
+	}
+	option = {    #Gutiérrez stands!
+		name = ecuador.3.b
+		ai_chance = { factor = 80 }
+		add_stability = -0.1
+		add_political_power = -150
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = -0.2
+		}
+	}
+}
+
+country_event = {  #2002 elections
+	id = election_ECU.1
+	title = election_ECU.1.t
+	desc = election_ECU.1.d
+	picture = GFX_report_event_ECU_elections
+	
+	trigger = {
+	    tag = ECU
+	    date > 2002.1.1
+		date < 2002.12.1
+		has_democratic_form_of_government = yes
+		not = { has_country_flag = ecu_election_2002 }
+	}
+
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = ecu_election_2002
+	}
+	
+	option = {    #Lucio Gutiérrez
+		name = election_ECU.1.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = social_liberal
+			last_election = "2002.10.20"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Álvaro Noboa
+		name = election_ECU.1.b
+        set_politics = {
+			ruling_party = market_liberal
+			last_election = "2002.10.20"
+			election_frequency = 48
+			elections_allowed = yes
+		} 
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Rodrigo Borja
+		name = election_ECU.1.c
+        set_politics = {
+			ruling_party = social_democrat
+			last_election = "2002.10.20"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		promote_character = ECU_rodrigo_boja
+		add_popularity = { 
+			ideology = social_democrat 
+			popularity = 0.15
+		}
+	}
+	option = {    #Neither
+		name = election_ECU.1.de
+	}
+}
+
+country_event = {  #2006 elections
+	id = election_ECU.2
+	title = election_ECU.2.t
+	desc = election_ECU.2.d
+	picture = GFX_report_event_ECU_elections
+	
+	trigger = {
+	    tag = ECU
+	    date > 2006.1.1
+		date < 2006.12.1
+		has_democratic_form_of_government = yes
+		not = { has_country_flag = ecu_election_2006 }
+	}
+
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = ecu_election_2006
+	}
+	
+	option = {    #Rafael Correa
+		name = election_ECU.2.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2006.4.26"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Álvaro Noboa
+		name = election_ECU.1.b
+        set_politics = {
+			ruling_party = market_liberal
+			last_election = "2006.4.26"
+			election_frequency = 48
+			elections_allowed = yes
+		} 
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Gilmar Guitiérrez
+		name = election_ECU.2.b
+        set_politics = {
+			ruling_party = social_liberal
+			last_election = "2006.4.26"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+		promote_character = ECU_gilmar_gutierrez
+	}
+	option = {    #Neither
+		name = election_ECU.1.de
+	}
+}
+
+country_event = {  #2009 (or 10) elections
+	id = election_ECU.3
+	title = election_ECU.3.t
+	desc = election_ECU.3.d
+	picture = GFX_report_event_ECU_elections
+	
+	trigger = {
+	    tag = ECU
+	    date > 2009.1.1
+		date < 2010.12.1
+		has_democratic_form_of_government = yes
+		not = { has_country_flag = ecu_election_2009 }
+	}
+	
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = ecu_election_2009
+	}
+	
+	option = {    #Rafael Correa
+		name = election_ECU.2.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2009.2.17"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Lucio Guitiérrez
+		name = election_ECU.1.a
+        set_politics = {
+			ruling_party = social_liberal
+			last_election = "2009.2.17"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Álvaro Noboa
+		name = election_ECU.1.b
+        set_politics = {
+			ruling_party = market_liberal
+			last_election = "2009.2.17"
+			election_frequency = 48
+			elections_allowed = yes
+		} 
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Neither
+		name = election_ECU.1.de
+	}
+}
+
+country_event = {  #2013 (or 14) elections
+	id = election_ECU.4
+	title = election_ECU.3.t
+	desc = election_ECU.3.d
+	picture = GFX_report_event_ECU_elections
+	
+	trigger = {
+	    tag = ECU
+	    date > 2013.1.1
+		date < 2014.12.1
+		has_democratic_form_of_government = yes
+		not = { has_country_flag = ecu_election_2013 }
+	}
+
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = ecu_election_2013
+	}
+	
+	option = {    #Rafael Correa
+		name = election_ECU.2.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2013.2.17"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Guillermo Lasso	
+		name = election_ECU.4.a
+        set_politics = {
+			ruling_party = conservative
+			last_election = "2013.2.17"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+		promote_character = ECU_guillermo_lasso
+		set_party_name = { ideology = conservative long_name = ECU_conservative_party_CREO_long name = ECU_conservative_party_CREO }
+	}
+	option = {    #Lucio Guitiérrez
+		name = election_ECU.1.a
+        set_politics = {
+			ruling_party = social_liberal
+			last_election = "2013.2.17"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Neither
+		name = election_ECU.1.de
+	}
+}
+
+country_event = {  #2017 (or 18) elections
+	id = election_ECU.5
+	title = election_ECU.3.t
+	desc = election_ECU.3.d
+	picture = GFX_report_event_ECU_elections
+	
+	trigger = {
+	    tag = ECU
+	    date > 2017.1.1
+		date < 2018.12.1
+		has_democratic_form_of_government = yes
+		not = { has_country_flag = ecu_election_2017 }
+	}
+
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = ecu_election_2017
+	}
+	
+	option = {    #Lenin Moreno
+		name = election_ECU.5.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2017.2.19"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+		promote_character = ECU_lenin_moreno
+	}
+	option = {    #Guillermo Lasso	
+		name = election_ECU.4.a
+        set_politics = {
+			ruling_party = conservative
+			last_election = "2017.2.19"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+		promote_character = ECU_guillermo_lasso
+		set_party_name = { ideology = conservative long_name = ECU_conservative_party_CREO_long name = ECU_conservative_party_CREO }
+	}
+	option = {    #Lucio Guitiérrez
+		name = election_ECU.1.a
+        set_politics = {
+			ruling_party = social_liberal
+			last_election = "2017.2.19"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Neither
+		name = election_ECU.1.de
+	}
+}
+
+country_event = {  #2021 (or 22) elections
+	id = election_ECU.6
+	title = election_ECU.3.t
+	desc = election_ECU.3.d
+	picture = GFX_report_event_ECU_elections
+	
+	trigger = {
+	    tag = ECU
+	    date > 2021.1.1
+		date < 2022.12.1
+		has_democratic_form_of_government = yes
+		not = { has_country_flag = ecu_election_2021 }
+	}
+	
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = ecu_election_2021
+	}
+	option = {    #Guillermo Lasso	
+		name = election_ECU.3.b
+        set_politics = {
+			ruling_party = conservative
+			last_election = "2021.2.7"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+		promote_character = ECU_guillermo_lasso
+		set_party_name = { ideology = conservative long_name = ECU_conservative_party_CREO_long name = ECU_conservative_party_CREO }
+	}
+	option = {    #Andrés Arauz
+		name = election_ECU.6.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2021.2.7"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+		promote_character = ECU_andrez_arauz
+		set_party_name = { ideology = democratic_socialist long_name = ECU_democratic_socialist_party_RC_long name = ECU_democratic_socialist_party_RC }
+	}
+	option = {    #Yaku Pérez
+		name = election_ECU.6.b
+        set_politics = {
+			ruling_party = progressive
+			last_election = "2021.2.7"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = progressive
+			popularity = 0.15
+		}
+		promote_character = ECU_yaku_perez
+	}
+	option = {    #Neither
+		name = election_ECU.1.de
+	}
+}
+
+country_event = {  #2023 extraordinary elections (otherwise 2025/6 elections)
+	id = election_ECU.7
+	title = election_ECU.3.t
+	desc = election_ECU.3.d
+	picture = GFX_report_event_ECU_elections
+	
+	trigger = {
+	    tag = ECU
+	    date > 2025.1.1
+		date < 2026.12.1
+		has_democratic_form_of_government = yes
+		not = { has_country_flag = ecu_election_2025 }
+	}
+	
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = ecu_election_2025
+	}
+	
+	option = {    #Luiza González
+		name = election_ECU.7.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+		promote_character = ECU_luiza_gonazlez
+		set_party_name = { ideology = democratic_socialist long_name = ECU_democratic_socialist_party_RC_long name = ECU_democratic_socialist_party_RC }
+	}
+	option = {    #Daniel Noboa
+		name = election_ECU.7.b
+        set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+		promote_character = ECU_daniel_noboa
+		set_party_name = { ideology = market_liberal long_name = ECU_market_liberal_party_ADN_long name = ECU_market_liberal_party_ADN }
+	}
+	option = {    #Neither
+		name = election_ECU.1.de
+	}
+}
+
+news_event = {			#2000 coup - Guitiérrez
+	id = ecuador_news.1
+	title = ecuador_news.1.t
+	desc = ecuador_news.1.d
+	picture = GFX_news_ecuador_coup
+
+	is_triggered_only = yes
+
+	option = {
+		name = ecuador_news.1.a
+	}
+}
+
+news_event = {			#2000 coup - Vargas
+	id = ecuador_news.2
+	title = ecuador_news.1.t
+	desc = ecuador_news.2.d
+	picture = GFX_news_ecuador_coup
+
+	is_triggered_only = yes
+
+	option = {
+		name = ecuador_news.1.a
+	}
+}
+
+news_event = {			#2000 coup - Constantine
+	id = ecuador_news.3
+	title = ecuador_news.1.t
+	desc = ecuador_news.3.d
+	picture = GFX_news_ecuador_coup
+
+	is_triggered_only = yes
+
+	option = {
+		name = ecuador_news.1.a
+	}
+}
+
+news_event = {			#2000 coup - Mendoza
+	id = ecuador_news.4
+	title = ecuador_news.1.t
+	desc = ecuador_news.4.d
+	picture = GFX_news_carlos_mendoza
+
+	is_triggered_only = yes
+
+	option = {
+		name = ecuador_news.1.a
+	}
+}
+
+news_event = {			#2000 coup - Noboa
+	id = ecuador_news.5
+	title = ecuador_news.1.t
+	desc = ecuador_news.5.d
+	picture = GFX_news_jamil_mahaud
+
+	is_triggered_only = yes
+
+	option = {
+		name = ecuador_news.1.a
+	}
+}
+
+news_event = {			#2000 coup - Mahuad
+	id = ecuador_news.6
+	title = ecuador_news.1.t
+	desc = ecuador_news.6.d
+	picture = GFX_news_jamil_mahaud
+
+	is_triggered_only = yes
+
+	option = {
+		name = ecuador_news.1.a
+	}
+}
+
+news_event = {			#Guitiérrez overthrown
+	id = ecuador_news.7
+	title = ecuador_news.7.t
+	desc = ecuador_news.7.d
+	picture = GFX_news_jamil_mahaud
+
+	is_triggered_only = yes
+
+	option = {
+		name = ecuador_news.7.a
+	}
+}

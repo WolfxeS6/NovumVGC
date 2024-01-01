@@ -1,0 +1,228 @@
+add_namespace = kosovo
+add_namespace = kosovo_news
+
+country_event = {			#Kosovar Civilian administration - Provisional Institutions of Self-Government
+	id = kosovo.1
+	title = kosovo.1.t
+	desc = kosovo.1.d
+	picture = GFX_report_event_kosovo
+	
+	trigger = {
+		tag = KOS
+		date > 2002.1.31
+		date < 2002.3.4
+	}
+
+	option = {
+		name = kosovo.1.a
+		ai_chance = {
+		    factor = 100
+	    }
+		set_politics = {	
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.2
+		}
+		promote_character = KOS_albin_kurti
+		set_party_name = { ideology = social_democrat long_name = KOS_social_democrat_party_LVV_long name = KOS_social_democrat_party_LVV }
+	}
+}
+
+country_event = {			#Death of Ibrahim Rugova
+	id = kosovo.2
+	title = kosovo.2.t
+	desc = kosovo.2.d
+	picture = GFX_report_event_ibrahim_rugova
+	
+	trigger = {
+		tag = KOS
+		date > 2005.1.9
+		date < 2005.1.29
+	}	
+
+	fire_only_once = yes
+
+	option = {
+		name = kosovo.2.a
+		promote_character = KOS_fatmir_sejdiu
+	}
+}
+
+country_event = {			#Kosovar Independence
+	id = kosovo.3
+	title = kosovo.3.t
+	desc = kosovo.3.d
+	picture = GFX_report_event_kosovo
+	
+	trigger = {
+		tag = KOS
+		date > 2008.2.17
+		date < 2008.4.15
+	}
+
+	option = {
+		name = kosovo.3.a
+		ai_chance = {
+		    factor = 100
+	    }
+		clr_cosmetic_tag = yes
+		news_event = kosovo_news.1
+	}
+	option = {
+		name = kosovo.3.b
+		ai_chance = {
+		    factor = 0
+	    }
+		ALB = {
+			change_tag_from = root
+			country_event = kosovo.4
+		}
+	}
+	option = {
+		name = kosovo.3.c
+		ai_chance = {
+		    factor = 0
+	    }
+		SER = {
+			change_tag_from = root
+			country_event = kosovo.4
+		}
+	}
+}
+
+country_event = {			#Albania - Annex Kosovo
+	id = kosovo.4
+	title = kosovo.4.t
+	desc = kosovo.4.d
+	picture = GFX_report_event_kosovo
+	
+	is_triggered_only = yes
+
+	option = {
+		name = kosovo.4.a
+		ai_chance = {
+		    factor = 50
+	    }
+		annex_country = {
+        	target = KOS
+       	   	transfer_troops = no
+		}
+		news_event = kosovo_news.2
+	}
+	option = {
+		name = kosovo.4.b
+		ai_chance = {
+		    factor = 50
+	    }
+		KOS = {
+			add_political_power = -50
+			add_stability = -0.1
+			clr_cosmetic_tag = yes
+			news_event = kosovo_news.4
+		}
+		SER = {
+			create_wargoal = {
+				type = annex_everything
+				target = KOS
+			}
+		}
+	}
+}
+
+country_event = {			#Serbia - Annex Kosovo
+	id = kosovo.5
+	title = kosovo.5.t
+	desc = kosovo.5.d
+	picture = GFX_report_event_kosovo
+	
+	is_triggered_only = yes
+
+	option = {
+		name = kosovo.5.a
+		ai_chance = {
+		    factor = 50
+	    }
+		annex_country = {
+        	target = KOS
+       	   	transfer_troops = no
+		}
+		news_event = kosovo_news.2
+	}
+	option = {
+		name = kosovo.5.b
+		ai_chance = {
+		    factor = 50
+	    }
+		KOS = {
+			add_political_power = -50
+			add_stability = -0.1
+			clr_cosmetic_tag = yes
+			news_event = kosovo_news.4
+		}
+		SER = {
+			create_wargoal = {
+				type = annex_everything
+				target = KOS
+			}
+		}
+	}
+}
+
+news_event = {			##Kosovar Independence
+	id = kosovo_news.1
+	title = kosovo_news.1.t
+	desc = kosovo_news.1.d
+	picture = GFX_news_kosovo_independence
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = kosovo_news.1.a
+	}
+}
+
+news_event = {			##Kosovo joins Albania
+	id = kosovo_news.2
+	title = kosovo_news.2.t
+	desc = kosovo_news.2.d
+	picture = GFX_news_kosovo_albania
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = kosovo_news.2.a
+	}
+}
+
+news_event = {			##Kosovo returns to Serbia
+	id = kosovo_news.3
+	title = kosovo_news.3.t
+	desc = kosovo_news.3.d
+	picture = GFX_news_kosovo_serbia
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = kosovo_news.3.a
+	}
+}
+
+news_event = {			##Albania refuses Kosovar integration
+	id = kosovo_news.4
+	title = kosovo_news.4.t
+	desc = kosovo_news.4.d
+	picture = GFX_news_kosovo_conflict
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = kosovo_news.4.a
+	}
+}

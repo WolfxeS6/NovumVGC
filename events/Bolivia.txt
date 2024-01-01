@@ -1,0 +1,890 @@
+add_namespace = bolivia
+add_namespace = election_BOL
+
+country_event = {  #Hugo Banzer's resignation
+	id = bolivia.1
+	title = bolivia.1.t
+	desc = bolivia.1.d
+	picture = GFX_report_event_bolivia_patriotic_accord
+	
+	trigger = {
+	    tag = BOL
+	    date > 2001.7.1
+		date < 2002.5.5
+        has_government = reactionary
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #resign - not going to give the option not to because Banzer dies before the end of his mandate either way, so 1 less event
+		name = bolivia.1.a
+        promote_character = BOL_jorge_quiroga
+			
+	}
+}
+
+country_event = {  #Cochabamba Water War
+	id = bolivia.2
+	title = bolivia.2.t
+	desc = bolivia.2.d
+	picture = GFX_report_event_bolivia_water_war
+	
+	trigger = {
+	    tag = BOL
+	    date > 2000.3.15
+		date < 2000.5.1
+        NOT = {
+			has_government = democratic_socialist
+			has_government = communist
+		}
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #revoke the privatization
+		name = bolivia.1.a
+        ai_chance = { factor = 80 }
+        remove_ideas = BOL_water_wars
+		add_manpower = -6
+	}
+	option = {    #crack down
+		name = bolivia.1.b
+        ai_chance = { factor = 20 }
+        add_manpower = -181
+		add_stability = -0.1
+		add_popularity = { 
+			ideology = root 
+			popularity = -0.15
+		}
+		remove_ideas = BOL_water_wars
+		add_timed_idea = {
+		    idea = BOL_water_wars
+			days = 120
+		}
+	}
+}
+
+country_event = {  #Bolivian gas conflict
+	id = bolivia.3
+	title = bolivia.3.t
+	desc = bolivia.3.d
+	picture = GFX_report_event_bolivia_gas_conflict
+	
+	trigger = {
+	    tag = BOL
+	    date > 2002.4.30
+		date < 2002.6.30
+        has_democratic_form_of_government = yes
+		is_subject = no
+		NOT = {
+			has_government = democratic_socialist
+		}
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Not good
+		name = bolivia.3.a
+		add_ideas = BOL_gas_war
+	}
+}
+
+country_event = {  #Lozadas' Resignation
+	id = bolivia.4
+	title = bolivia.4.t
+	desc = bolivia.4.d
+	picture = GFX_report_event_lozada_mesa
+	
+	trigger = {
+	    tag = BOL
+	    date > 2003.9.6
+		date < 2003.10.17
+		has_idea = BOL_gas_war
+		has_government = social_liberal
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #He resigns
+		name = bolivia.4.a
+        ai_chance = { factor = 100 }
+		promote_character = character = BOL_carlos_mesa
+	}
+	option = {    #crack down
+		name = bolivia.4.b
+        add_manpower = -60
+		add_stability = -0.1
+		add_political_power = -100
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = -0.1
+		}
+	}
+}
+
+country_event = {  #Mesa's Resignation
+	id = bolivia.5
+	title = bolivia.5.t
+	desc = bolivia.5.d
+	picture = GFX_report_event_lozada_mesa
+	
+	trigger = {
+	    tag = BOL
+	    date > 2003.5.16
+		date < 2003.6.9
+		has_country_leader= { ruling_only = yes name = "Carlos Mesa" }
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #He resigns, Eduardo Rodríguez Veltzé takes over
+		name = bolivia.5.a
+        ai_chance = {
+			base = 60
+			modifier = {
+				factor = 90
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = BOL_eduardo_rodriguez_veltze
+	}
+	option = {    #Hormando Vaca Díez takes over
+		name = bolivia.5.a
+        ai_chance = {
+			base = 20
+			modifier = {
+				factor = 5
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = BOL_hormando_vaca_diez
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+	}
+	option = {    #Mario Cossío takes over
+		name = bolivia.5.a
+        ai_chance = {
+			base = 20
+			modifier = {
+				factor = 5
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = BOL_mario_cossio
+	}
+	option = {    #nope
+		name = bolivia.5.b
+        swap_ideas= {
+			remove_idea = BOL_gas_war 
+			add_idea = BOL_gas_war2 
+		}
+	}
+}
+
+country_event = {  #Hold early elections?
+	id = bolivia.6
+	title = bolivia.6.t
+	desc = bolivia.6.d
+	#picture = GFX_report_event_bolivia
+	
+	trigger = {
+	    tag = BOL
+	    date > 2005.6.18
+		date < 2005.7.18
+        has_democratic_form_of_government = yes
+		OR = {
+			has_idea = BOL_gas_war
+			has_idea = BOL_gas_war2
+		}
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #yes
+		name = bolivia.6.a
+		country_event = { days = 120 id = election_BOL.2 }
+		remove_ideas = BOL_gas_war
+		remove_ideas = BOL_gas_war2
+		hidden_effect = {
+			set_politics = {	
+				ruling_party = root
+				last_election = "2005.12.18"
+				election_frequency = 60
+				elections_allowed = yes
+			}
+		}
+	}
+	option = {    #No
+		name = bolivia.6.b
+        start_civil_war = {
+			ideology = democratic_socialist
+			size = 0.6
+			states = { 
+				1069
+			}
+			set_cosmetic_tag = BOL_ALT
+        }
+	}
+}
+
+country_event = {  #2008 Bolivian political crisis
+	id = boliva.7
+	title = boliva.7.t
+	desc = boliva.7.d
+	picture = GFX_report_event_bolivia_2008
+	
+	trigger = {
+	    tag = BOL
+	    date > 2018.10.18
+		date < 2018.11.10
+        has_government = democratic_socialist
+		owns_state = 487
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Hold a constitutional referendum
+		name = boliva.7.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 100
+				is_subject = yes
+			}
+		}
+		country_event = { days = 97 id = bolivia.8 }
+		add_political_power = -50
+		add_stability = -0.1
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.05
+		}
+	}
+	option = {    #Federalize Bolivia
+		name = boliva.7.b
+        ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		set_cosmetic_tag = BOL_FED
+		487 = {
+			add_dynamic_modifier = { modifier = autonomous_state }
+		}
+	   	1086 = {
+			add_dynamic_modifier = { modifier = autonomous_state }
+		}
+	}
+	option = {    #Intervene in the rebellious provinces
+		name = boliva.7.b
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		487 = {
+			teleport_armies = {
+				limit = { tag = BOL }
+			}
+		}
+		1086 = {
+			teleport_armies = {
+				limit = { tag = BOL }
+			}
+		}
+		SCZ = {
+			transfer_state = 487
+			load_oob = SCZ_2000
+			declare_war_on = {
+			    target = BOL
+			    type = civil_war
+			}
+			country_event = { days = 1 id = bolivia.9 }
+		}
+	}
+}
+
+country_event = {  #constitutional referendum
+	id = boliva.8
+	title = boliva.8.t
+	desc = boliva.8.d
+	picture = GFX_report_event_bolivia
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #The Plurinational State of Bolivia
+		name = boliva.8.a
+        set_cosmetic_tag = BOL_PLURI
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.05
+		}
+	}
+	option = {    #The Federal Republic of Bolivia
+		name = boliva.8.b
+        set_cosmetic_tag = BOL_FED
+	}
+}
+
+country_event = {  #Why we fight? ##Event for Santa Cruz
+	id = boliva.9
+	title = boliva.9.t
+	desc = boliva.9.d
+	#picture = GFX_report_event_bolivia
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #for freedom!
+		name = boliva.9.a
+        ai_chance = { factor = 50 }
+        add_war_support = 0.1
+        add_political_power = 35
+	}
+	option = {    #for a federal bolivia!
+		name = boliva.9.b
+		ai_chance = { factor = 50 }
+		set_cosmetic_tag = BOL_FED
+		transfer_state = 1086
+		every_state = {
+			limit = {
+				is_core_of = BOL
+			}
+			add_core_of = root
+		}
+	}
+}
+
+country_event = {  #2019 Coup
+	id = boliva.10
+	title = boliva.10.t
+	desc = boliva.10.d
+	picture = GFX_report_event_bolivia
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #resign, Janine Alvez takes over
+		name = boliva.10.a
+        ai_chance = {
+			base = 60
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = BOL_janine_alvez
+		promote_character = BOL_luiz_arce
+		set_party_name = { ideology = conservative long_name = BOL_conservative_party_DEM_long name = BOL_conservative_party_DEM }
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.1
+		}
+		country_event = { days = 180 id = election_BOL.2 }
+	}
+	option = {    #The military takes over
+		name = boliva.10.b
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = BOL_luiz_arce
+		promote_character = BOL_williams_kaliman
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = no
+		}
+		add_popularity = { 
+			ideology = nationalist 
+			popularity = 0.1
+		}
+	}
+	option = {    #We will stand!
+		name = boliva.10.c
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = BOL_williams_kaliman
+		 start_civil_war = {
+			ideology = nationalist
+			size = 0.6
+			states = { 
+				487
+				1086
+			}
+			set_cosmetic_tag = BOL_ALT
+        }
+	}
+}
+
+country_event = {  #Hold early elections?
+	id = bolivia.11
+	title = bolivia.11.t
+	desc = bolivia.11.d
+	#picture = GFX_report_event_bolivia
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #yes
+		name = bolivia.11.a
+		country_event = { days = 150 id = bolivia.12 }
+	}
+	option = {    #No
+		name = bolivia.11.b
+		add_political_power = -100
+		add_popularity = { 
+			ideology = conservative 
+			popularity = -0.25
+		}
+	}
+}
+
+country_event = {  #2020 Bolivian Election
+	id = boliva.12
+	title = election_BOL.1.t
+	desc = election_BOL.1.d
+	#picture = GFX_report_event_bol_elections
+	
+	is_triggered_only = yes
+
+	option = {    #Luiz Arce
+	    ai_chance = {
+			base = 70
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		name = boliva.12.a
+        set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2020.10.18"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Carlos Mesa
+		name = boliva.12.b
+		ai_chance = {
+			base = 15
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		set_politics = {
+			ruling_party = social_liberal
+			last_election = "2020.10.18"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Luis Fernando Camacho
+		name = boliva.12.c
+		ai_chance = {
+			base = 15
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = BOL_luis_fernando_camacho
+        set_politics = {
+			ruling_party = reactionary
+			last_election = "2020.10.18"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = 0.15
+		}
+	}
+	option = {    #None of these
+		name = election_BOL.1.de
+	}
+}
+
+country_event = {  #2002 Bolivian Election
+	id = election_BOL.1
+	title = election_BOL.1.t
+	desc = election_BOL.1.d
+	#picture = GFX_report_event_bol_elections
+	
+	trigger = {
+	    tag = BOL
+	    date > 2002.4.30
+		date < 2002.6.30
+        has_democratic_form_of_government = yes
+		is_subject = no
+		not = { has_country_flag = bol_election_2002 }
+	}
+	
+	immediate = {
+		set_country_flag = bol_election_2002	
+		hidden_effect = {
+			promote_character = BOL_jorge_quiroga
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = {    #Gonzalo Sanchez Lozada
+		name = election_BOL.1.a
+		ai_chance = {
+			base = 70
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Evo Morales
+		name = election_BOL.1.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+        set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Manfred Reyes Villa
+		name = election_BOL.1.c
+		ai_chance = { factor = 0 }
+        set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+	}
+	option = {    #None of these
+		name = election_BOL.1.de
+	}
+}
+
+country_event = {  #2005 (or 7) Bolivian Election
+	id = election_BOL.2
+	title = election_BOL.1.t
+	desc = election_BOL.1.d
+	#picture = GFX_report_event_bol_elections
+	
+	trigger = {
+	    tag = BOL
+	    date > 2005.1.1		#Can be triggered historically in 2005
+		date < 2007.12.30
+        has_democratic_form_of_government = yes
+		is_subject = no
+		not = { has_country_flag = bol_election_2005 }
+	}
+	
+	immediate = {
+		set_country_flag = bol_election_2005
+		hidden_effect = {
+			set_party_name = { ideology = reactionary long_name = BOL_reactionary_party_PODEMOS_long name = BOL_reactionary_party_PODEMOS }
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {    #Evo Morales
+	    ai_chance = { factor = 100 }
+		name = election_BOL.1.b
+        set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Jorge Quiroga
+		name = election_BOL.2.a
+		set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = 0.15
+		}
+	}
+	option = {    #Samuel Doria
+		name = election_BOL.2.b
+        set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #None of these
+		name = election_BOL.1.de
+        
+	}
+}
+
+country_event = {  #2009 (or 12) Bolivian Election
+	id = election_BOL.3
+	title = election_BOL.1.t
+	desc = election_BOL.1.d
+	#picture = GFX_report_event_bol_elections
+	
+	trigger = {
+	    tag = BOL
+	    date > 2009.1.1
+		date < 2012.12.30
+        has_democratic_form_of_government = yes
+		is_subject = no
+		not = { has_country_flag = bol_election_2009 }
+	}
+	
+	immediate = {
+		set_country_flag = bol_election_2009	
+	}
+
+	is_triggered_only = yes
+
+	option = {    #Evo Morales
+	    ai_chance = { factor = 100 }
+		name = election_BOL.1.b
+        set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Manfred Reyes Villa
+		name = election_BOL.1.c
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+	}
+	option = {    #Samuel Doria
+		name = election_BOL.2.b
+        set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #None of these
+		name = election_BOL.1.de
+        
+	}
+}
+
+country_event = {  #2014 (or 17) Bolivian Election
+	id = election_BOL.4
+	title = election_BOL.1.t
+	desc = election_BOL.1.d
+	#picture = GFX_report_event_bol_elections
+	
+	trigger = {
+	    tag = BOL
+	    date > 2014.1.1
+		date < 2017.12.30
+        has_democratic_form_of_government = yes
+		is_subject = no
+		not = { has_country_flag = bol_election_2014 }
+	}
+	
+	immediate = {
+		set_country_flag = bol_election_2014	
+	}
+
+	is_triggered_only = yes
+
+	option = {    #Evo Morales
+	    ai_chance = { factor = 100 }
+		name = election_BOL.1.b
+        set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Samuel Doria
+		name = election_BOL.2.b
+        set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Jorge Quiroga
+		name = election_BOL.2.a
+		set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = 0.15
+		}
+	}
+	option = {    #None of these
+		name = election_BOL.1.de
+        
+	}
+}
+
+country_event = {  #2019 (or 22) Bolivian Election
+	id = election_BOL.5
+	title = election_BOL.5.t
+	desc = election_BOL.5.d
+	#picture = GFX_report_event_bol_elections
+	
+	trigger = {
+	    tag = BOL
+	    date > 2019.1.1
+		date < 2022.12.30
+        has_democratic_form_of_government = yes
+		is_subject = no
+		not = { has_country_flag = bol_election_2019 }
+	}
+	
+	immediate = {
+		set_country_flag = bol_election_2019	
+	}
+
+	is_triggered_only = yes
+
+	option = {    #Evo Morales
+	    ai_chance = { factor = 100 }
+		name = election_BOL.1.b
+		hidden_effect = {
+			if = {
+				limit = {
+					has_government = democratic_socialist
+				}
+				country_event = { days = 21 id = bolivia.11 }
+			}
+		}
+        set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Samuel Doria
+		name = election_BOL.2.b
+        set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Chi Hyun Chung
+		name = election_BOL.5.a
+		promote_character = BOL_chi_hyun_chung
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = yes
+		}
+		set_party_name = { ideology = nationalist long_name = BOL_nationalist_party_PDC_long name = BOL_nationalist_party_PDC }
+		add_popularity = { 
+			ideology = nationalist 
+			popularity = 0.15
+		}
+	}
+	option = {    #None of these
+		name = election_BOL.1.de
+	}
+}

@@ -1,0 +1,1312 @@
+ add_namespace = peru
+ add_namespace = peru_japan
+ add_namespace = peru_collapse
+ add_namespace = election_PRU
+
+country_event = {  #Vladi-videos scandal
+	id = peru.1
+	title = peru.1.t
+	desc = peru.1.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    tag = PRU
+	    date > 2000.9.14
+		date < 2000.10.14
+        has_government = reactionary
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Fire him
+		name = peru.1.a
+        ai_chance = { factor = 100 }
+		remove_ideas = PRU_SIN
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = -0.1
+		}
+		PRU_vladimiro_montesinos = {
+			remove_advisor_role = {
+				slot = political_advisor
+			}
+		}
+		country_event = { days = 68 id = peru.2 }
+	}
+	option = {    #His services are needed
+		name = peru.1.b
+		PRU_vladimiro_montesinos = {
+			remove_advisor_role = {
+				slot = political_advisor
+			}
+			add_advisor_role = {
+				activate = yes
+				advisor={
+					slot = political_advisor
+					idea_token = advisor_PRU_vladimiro_montesinos
+					ledger = civilian
+					allowed = {
+						original_tag = PRU
+						OR = {
+							has_government = reactionary
+							has_government = nationalist
+							has_government = fascist
+						}
+					}
+					traits = {
+						head_of_sin2
+					}
+					can_be_fired = no
+				}
+			}
+		}
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = -0.2
+		}
+		country_event = { days = 68 id = peru.2 }
+	}
+}
+
+country_event = {  #Fujimori's resignation
+	id = peru.2
+	title = peru.2.t
+	desc = peru.2.d
+	picture = GFX_report_event_peru
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Fax a resignation to Congress and call for new elections
+		name = peru.2.a
+        ai_chance = {
+			base = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		set_party_name = { ideology = reactionary long_name = PRU_reactionary_party_FP_long name = PRU_reactionary_party_FP }
+		remove_ideas = PRU_SIN2 
+		remove_ideas = PRU_plan_verde
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		JAP = {
+			country_event = { id = peru_japan.1 }
+		} 
+		news_event = { id = japan_news.15 days = 3 }
+		set_country_flag = PRU_2001_elections
+	}
+	option = {    #Return to the Country immediatly
+		name = peru.2.b
+		ai_chance = { factor = 50 }
+		country_event = { days = 3 id = peru.3 }
+	}
+}
+
+country_event = {  #Anti Fujimori protests
+	id = peru.3
+	title = peru.3.t
+	desc = peru.3.d
+	picture = GFX_report_event_peru
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #resign and call for new elections
+		name = peru.3.a
+        ai_chance = { factor = 40 }
+		set_party_name = { ideology = reactionary long_name = PRU_reactionary_party_FP_long name = PRU_reactionary_party_FP }
+		remove_ideas = PRU_SIN2 
+		remove_ideas = PRU_plan_verde
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		set_country_flag = PRU_2001_elections
+	}
+	option = {    #Call the military
+		name = peru.3.b
+		ai_chance = { factor = 60 }
+		country_event = { days = 3 id = peru.4 }
+	}
+}
+
+country_event = {  #the second fujimorazo
+	id = peru.4
+	title = peru.4.t
+	desc = peru.4.d
+	picture = GFX_report_event_peru
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    
+		name = peru.4.a
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = no
+		}
+		add_country_leader_role = {
+			character = PRU_alberto_fujimori
+			country_leader = {
+				ideology = autocrat
+				traits = { dictator }
+			}
+			promote_leader = yes
+		}
+		add_popularity = { 
+			ideology = nationalist 
+			popularity = 0.1
+		}
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = -0.1
+		}
+		if = {
+			limit = {
+				has_government = nationalist
+			}
+			country_event = { days = 6 id = peru_collapse.1 }
+		}
+	}
+}
+
+country_event = {  #2001 extraordinary Elections
+	id = peru.5
+	title = peru.5.t
+	desc = peru.5.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    original_tag = PRU
+	    date > 2001.4.9
+		date < 2001.6.3
+        has_democratic_form_of_government = yes
+	}
+
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Alejandro Toledo
+		ai_chance = {
+			base = 60
+			modifier = {
+				factor = 90
+				is_historical_focus_on = yes
+			}
+		}
+		name = election_PRU.1.b
+        set_politics = {
+			ruling_party = social_liberal
+			last_election = "2001.4.8"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Alan Garcia
+		name = election_PRU.2.a
+		ai_chance = { base = 20 }
+        set_politics = {
+			ruling_party = social_democrat
+			last_election = "2001.4.8"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Lourdes Flores
+		name = election_PRU.2.c
+		ai_chance = { base = 20 }
+        set_politics = {
+			ruling_party = conservative
+			last_election = "2001.4.8"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #None of these
+		name = election_PRU.1.de
+		set_politics = {
+			ruling_party = root
+			last_election = "2001.4.8"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+}
+
+country_event = {  #Sendero Luminoso returns 
+	id = peru.6
+	title = peru.6.t
+	desc = peru.6.d
+	picture = GFX_report_event_paraguay
+	
+	trigger = {
+	    tag = PRU
+	    date > 2001.8.8
+		date < 2003.6.3
+        has_war = no
+		not = {
+			has_government = communist
+		}
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = peru.6.a
+		add_ideas = shining_path_insurgency
+#		if = {
+#			limit = {
+#				has_government = nationalist
+#			}
+#			start_civil_war = {
+#				ideology = communist
+#				size = 0.5
+#				states = { 
+#					1221 494
+#				}
+#			}
+#			random_other_country = {
+#				limit = {
+#					original_tag = PRU
+#					has_government = communist
+#				}
+#				set_cosmetic_tag = PRU_SL
+#				recruit_character = PRU_camarada_jose
+#			}
+#		}
+#		else = {
+#			add_ideas = shining_path_insurgency
+#		}
+	}
+}
+
+country_event = {  #Andahuaylazo 
+	id = peru.7
+	title = peru.7.t
+	desc = peru.7.d
+	picture = GFX_report_event_paraguay
+	
+	trigger = {
+	    tag = PRU
+	    date > 2005.1.1
+		date < 2005.2.1
+        has_war = no
+		not = {
+			has_government = communist
+			has_government = fascist
+		}
+	}
+
+	fire_only_once = yes
+	
+	option = {		#Send the police
+		name = peru.7.a
+		ai_chance = { factor = 100 }
+		add_manpower = -6
+		add_popularity = { 
+			ideology = fascist
+			popularity = 0.03
+		}
+	}
+#	option = {		#The president resigns
+#		name = peru.7.a
+#		ai_chance = { factor = 0 }
+#		add_manpower = -6
+#		if = {
+#			limit = {
+#				has_government = social_liberal
+#			}
+#			promote_character = PRU_david_waisman
+#		} 
+#		start_civil_war = {
+#			ideology = fascist
+#			size = 0.15
+#			states = { 
+#				492
+#			}
+#		}
+#	}
+}
+
+country_event = {  #Allow Fujimori to run?
+	id = peru.8
+	title = peru.8.t
+	desc = peru.8.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    tag = PRU
+	    date > 2004.2.1
+		date < 2005.11.6
+        has_democratic_form_of_government = yes 
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #No
+		name = peru.8.a
+        ai_chance = { factor = 100 }
+		promote_character = PRU_martha_chavez_cossio
+		hidden_effect = {
+			country_event = { days = 670 id = peru.9 }
+		}
+	}
+	option = {    #Yes
+		name = peru.8.b
+	}
+}
+
+country_event = {  #Fujimori arrest
+	id = peru.9
+	title = peru.9.t
+	desc = peru.9.d
+	picture = GFX_report_event_peru
+	
+	is_triggered_only = yes
+
+#	fire_only_once = yes
+	
+	option = {    #Good riddance
+		name = peru.9.a
+        ai_chance = { factor = 100 }
+		add_popularity = { 
+			ideology = reactionary
+			popularity = -0.1
+		}
+	}
+	option = {    #Nah
+		name = peru.9.b
+	}
+}
+
+country_event = {  #APRA ideology switch
+	id = peru.10
+	title = peru.10.t
+	desc = peru.10.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    original_tag = PRU
+        has_government = social_democrat
+		has_country_leader = { ruling_only = yes name = "Alan García" }
+		NOT = { has_country_flag = PRU_conservative_APRA }
+	}
+
+	mean_time_to_happen = { days = 120 }
+
+	fire_only_once = yes
+	
+	option = {    #What a turn of events
+		name = peru.10.a
+		set_party_name = { ideology = conservative long_name = PRU_conservative_party_APRA_long name = PRU_conservative_party_APRA_long }
+		add_country_leader_role = {
+			character = PRU_alan_garcia
+			country_leader = {
+				ideology = right_wing_conservative
+			}
+			promote_leader = yes
+		}
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_democrat
+			popularity = -0.15
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.1
+		}
+		set_country_flag = PRU_conservative_APRA
+		promote_character = {
+			character = PRU_ollanta_humala
+			ideology = social_democrat_ideology
+		}
+		set_party_name = { ideology = social_democrat long_name = PRU_social_democrat_party_PNP_long name = PRU_social_democrat_party_PNP }
+	}
+}
+
+country_event = {  #Alan García's suicide
+	id = peru.11
+	title = peru.11.t
+	desc = peru.11.d
+	picture = GFX_report_event_paraguay
+	
+	trigger = {
+	    tag = PRU
+	    date > 2019.2.4
+		date < 2019.4.17
+	}
+
+	fire_only_once = yes
+	
+	option = {
+		name = peru.11.a
+		ai_chance = { factor = 100 }
+		if = {
+			limit = {
+				has_country_leader = { ruling_only = NO name = "Alan García" }
+				has_country_flag = PRU_conservative_APRA
+			}
+			promote_character = {
+				character = PRU_nidia_vilchez
+				ideology = right_wing_conservative
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_leader = { ruling_only = NO name = "Alan García" }
+			}
+			promote_character = {
+				character = PRU_nidia_vilchez
+				ideology = social_democrat_ideology
+			}
+		}
+	}
+}
+
+country_event = {  #PPK's 2 impeachments
+	id = peru.12
+	title = peru.12.t
+	desc = peru.12.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    tag = PRU
+	    date > 2017.12.15
+		date < 2018.3.21
+        has_country_leader= { ruling_only = yes name = "Pedro Pablo Kuczynski" } 
+		has_idea = PRU_obstructionist_congress
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Resign
+		name = peru.12.a
+        ai_chance = {
+			base = 70
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = PRU_martin_vizcarra
+	}
+	option = {    #The impeachment process is denied by congress
+		name = peru.12.b
+		ai_chance = { factor = 30 }
+		add_stability = -0.1
+		add_political_power = -100
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = -0.1
+		}
+	}
+}
+
+country_event = {  #Vizcarra's 2 impeachments ##What an incredbly stable country
+	id = peru.13
+	title = peru.13.t
+	desc = peru.13.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    tag = PRU
+	    date > 2020.9.11
+		date < 2020.11.15
+        has_country_leader= { ruling_only = yes name = "Martín Vizcarra" } 
+		has_idea = PRU_obstructionist_congress
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #The impeachment is aproved
+		name = peru.13.a
+        ai_chance = {
+			base = 50
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		add_stability = -0.1
+		promote_character = PRU_manuel_merino
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		hidden_effect = {
+			country_event = { days = 5 id = peru.13 }
+		}
+		
+	}
+	option = {    #This is a coup!
+		name = peru.13.a
+		ai_chance = { base = 50 }
+		add_stability = -0.1
+		add_political_power = -100
+	}
+}
+
+country_event = {  #Merino resigns
+	id = peru.14
+	title = peru.14.t
+	desc = peru.14.d
+	picture = GFX_report_event_peru
+	
+	is_triggered_only = yes
+
+
+	fire_only_once = yes
+	
+	option = {    #Ok
+		name = peru.14.a
+        ai_chance = {
+			base = 70
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		promote_character = PRU_francisco_sagasti
+	    set_party_name = { ideology = social_liberal long_name = PRU_social_liberal_morado_party_long name = PRU_social_liberal_morado_party }
+
+	}
+	option = {    #Merino will stand!
+		name = peru.14.b
+		ai_chance = { factor = 30 }
+		add_stability = -0.15
+		add_political_power = -150
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = -0.2
+		}
+	}
+}
+
+country_event = {  #Castillo's dumb coup attempt
+	id = peru.15
+	title = peru.15.t
+	desc = peru.15.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    tag = PRU
+	    date > 2020.9.11
+		date < 2020.12.15
+        has_country_leader= { ruling_only = yes name = "Pedro Castillo" } 
+		has_idea = PRU_obstructionist_congress
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Castillo is impeached and arrested
+		name = peru.15.a
+        ai_chance = { factor = 80 }
+		promote_character = {
+			character = PRU_dina_boluarte
+			ideology = constitutionalist
+		}
+		add_stability = -0.1
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+	}
+	option = {    #He somehow succeds
+		name = peru.15.b
+		ai_chance = { factor = 80 }
+		add_country_leader_role = {
+			character = PRU_pedro_castillo
+			country_leader = {
+				ideology = authoritarian_socialist
+			}
+			promote_leader = yes
+		}
+		add_stability = -0.1
+		add_political_power = -100
+	}
+}
+
+country_event = {	#Alberto Fujimori's exile	#Event for Japan
+	id = peru_japan.1
+	title = peru_japan.1.t
+	desc = peru_japan.1.desc
+	picture = GFX_report_event_JAP_fujimori_airplane
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = peru_japan.1.a
+		set_country_flag = JAP_fujimori_exile_flag
+	}
+}
+
+country_event = {  #Congress forms rival government
+	id = peru_collapse.1
+	title = peru_collapse.1.t
+	desc = peru_collapse.1.d
+	picture = GFX_report_event_peru
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			every_core_state = {
+				add_core_of = PRD
+			}
+			PRD = {
+				set_country_flag = PRU_civil_war
+				transfer_state= 490
+				transfer_state= 491
+			}
+			transfer_units_fraction = {
+				target = PRD
+				stockpile_ratio = 0.3
+				army_ratio = 0.3
+				navy_ratio = 0
+				air_ratio = 0.3
+			}
+			every_character = {
+				limit = {
+					has_character_flag = PRU_congress_loyalties
+				}
+				set_nationality = PRD
+			}
+			promote_character = PRU_francisco_sagasti
+			promote_character = PRU_martha_chavez_cossio
+			promote_character = PRU_lourdes_flores
+			promote_character = {
+				character = PRU_dina_boluarte
+				ideology = democratic_socialist_ideology
+			}
+			promote_character = {
+				character = PRU_alan_garcia
+				ideology = social_democrat_ideology
+			}
+			if = {
+				limit = {
+					date < 2006.1.1
+				}
+				promote_character = PRU_valentín_paniagua
+			}
+			else = {
+				promote_character = PRU_manuel_merino
+				set_nationality = {
+					target_country = PRD
+					character = PRU_keiko_fujimori
+				}
+				promote_character = PRU_keiko_fujimori
+			}
+		}
+    }
+	
+	option = {  
+		name = peru_collapse.1.a
+		PRD = {
+			declare_war_on = {
+			    target = PRU
+			    type = civil_war
+			}
+		}
+		country_event = { days = 1 id = peru_collapse.2 }
+	}
+}
+
+country_event = {  #Sendero Luminoso launches open rebellion
+	id = peru_collapse.2
+	title = peru_collapse.2.t
+	desc = peru_collapse.2.d
+	picture = GFX_report_event_peru
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			every_core_state = {
+				add_core_of = PRS
+			}
+			transfer_units_fraction = {
+				target = PRS
+				stockpile_ratio = 0.35
+				army_ratio = 0.35
+				navy_ratio = 0
+				air_ratio = 0.28
+			}
+			PRS = {
+				set_country_flag = PRU_civil_war
+				transfer_state= 494
+				transfer_state= 1221
+			}
+			every_character = {
+				limit = {
+					has_character_flag = PRU_sendero_luminoso_loyalties
+				}
+				set_nationality = PRS
+			}
+			promote_character = PRU_camarada_jose
+			promote_character = PRU_camarada_artemio
+			promote_character = PRU_santos_saavedra_vasquez
+			promote_character = PRU_antonio_cardenas
+		}
+    }
+	
+	option = {  
+		name = peru_collapse.2.a
+		PRS = {
+			declare_war_on = {
+			    target = PRU
+			    type = civil_war
+			}
+			declare_war_on = {
+			    target = PRD
+			    type = civil_war
+			}
+		}
+		country_event = { days = 1 id = peru_collapse.3 }
+	}
+}
+
+country_event = {  #Etnocacerist Uprising in the South
+	id = peru_collapse.3
+	title = peru_collapse.3.t
+	desc = peru_collapse.3.d
+	picture = GFX_report_event_peru
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			every_core_state = {
+				add_core_of = PRE
+			}
+			PRE = {
+				set_country_flag = PRU_civil_war
+				transfer_state= 492
+			}
+			transfer_units_fraction = {
+				target = PRE
+				stockpile_ratio = 0.24
+				army_ratio = 0.24
+				navy_ratio = 0.14
+				air_ratio = 0.21
+			}
+			every_character = {
+				limit = {
+					has_character_flag = PRU_etnocacerist_loyalties
+				}
+				set_nationality =  PRE
+			}
+			promote_character = PRU_antauro_humala
+			promote_character = PRU_ollanta_humala
+			promote_character = PRU_hilaria_supa_huaman
+		}
+    }
+	
+	option = {  
+		name = peru_collapse.3.a
+		PRE = {
+			declare_war_on = {
+			    target = PRU
+			    type = civil_war
+			}
+			declare_war_on = {
+			    target = PRD
+			    type = civil_war
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = PRS
+			}
+		}
+		set_global_flag = PRU_collapse
+	}
+}
+
+country_event = {  #2000 Peru Elections
+	id = election_PRU.1
+	title = election_PRU.1.t
+	desc = election_PRU.1.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    original_tag = PRU
+	    date > 2000.1.1
+		date < 2000.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = pru_election_2000 }
+	}
+	
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = pru_election_2000
+	}
+	
+	option = {    #Alberto Fujimori
+		name = election_PRU.1.a
+		ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+	}
+	option = {    #Alejandro Toledo
+		name = election_PRU.1.b
+        set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #None of these
+		name = election_PRU.1.de
+	}
+}
+
+country_event = {  #2006 Peruvian Elections
+	id = election_PRU.2
+	title = election_PRU.1.t
+	desc = election_PRU.1.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    original_tag = PRU
+	    date > 2005.1.1
+		date < 2006.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = pru_election_2006 }
+	}
+
+	is_triggered_only = yes
+	
+	immediate = {
+		set_country_flag = pru_election_2006
+	}
+
+	#fire_only_once = yes
+
+	option = {    #Alan García
+		name = election_PRU.2.a
+		ai_chance = { factor = 100 }
+        if = {
+			limit = {
+				has_country_flag = PRU_conservative_APRA
+			}
+			set_politics = {
+			    ruling_party = conservative
+				elections_allowed = yes
+			}
+			add_popularity = { 
+				ideology = conservative 
+				popularity = 0.15
+			}
+		}
+		else = {
+			set_politics = {
+			    ruling_party = social_democrat
+				elections_allowed = yes
+			}
+			add_popularity = { 
+				ideology = social_democrat 
+				popularity = 0.15
+			}
+		}
+	}
+	option = {    #Ollanta Humala
+		name = election_PRU.2.b
+		set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+	}
+	option = {    #Lourdes Flores
+		name = election_PRU.2.c
+        set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+	}
+	option = {    #Fujimorist candidate
+		name = election_PRU.2.de
+        set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = 0.15
+		}
+	}
+	option = {    #None of these
+		name = election_PRU.1.de
+	}
+}
+
+country_event = {  #2011 Peruvian Elections
+	id = election_PRU.3
+	title = election_PRU.1.t
+	desc = election_PRU.1.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    original_tag = PRU
+	    date > 2010.1.1
+		date < 2011.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = pru_election_2011 }
+	}
+	
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = pru_election_2011
+	}
+
+
+	option = {    #Ollanta Humala
+		name = election_PRU.2.b
+		set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+		add_ideas = PRU_obstructionist_congress
+	}
+	option = {    #Keiko Fujimori
+		name = election_PRU.3.a
+		promote_character = PRU_keiko_fujimori
+        set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = 0.15
+		}
+	}
+	option = {    #PPK
+		name = election_PRU.3.b
+		promote_character = {
+			character = PRU_pedro_pablo_kucziynki
+			ideology = fiscal_conservative
+		}
+		set_party_name = { ideology = conservative long_name = PRU_conservative_party_PPK_long name = PRU_conservative_party_PPK }
+        set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = conservative 
+			popularity = 0.15
+		}
+		add_ideas = PRU_obstructionist_congress
+	}
+#	option = {    #Alejandro Toledo
+#		name = election_PRU.3.de
+#        set_politics = {
+#			ruling_party = social_liberal
+#			elections_allowed = yes
+#		}
+#	}
+	option = {    #None of these
+		name = election_PRU.2.e
+	}
+}
+
+country_event = {  #2016 Peruvian Elections
+	id = election_PRU.4
+	title = election_PRU.1.t
+	desc = election_PRU.1.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    original_tag = PRU
+	    date > 2015.1.1
+		date < 2016.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = pru_election_2000 }
+	}
+	
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = pru_election_2000
+	}
+
+
+	option = {    #PPK
+		name = election_PRU.3.b
+		promote_character = {
+			character = PRU_pedro_pablo_kucziynki
+			ideology = liberalist
+		}
+		set_party_name = { ideology = social_liberal long_name = PRU_social_liberal_party_PPK_long name = PRU_social_liberal_party_PPK_long }
+        set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		promote_character = {
+			character = PRU_pedro_pablo_kucziynki
+			ideology = liberalist
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = 0.15
+		}
+		if = {
+            limit = {
+				NOT= {
+					has_idea = PRU_obstructionist_congress
+				}
+            }   
+            add_ideas = PRU_obstructionist_congress
+   		}
+	}
+	option = {    #Keiko Fujimori
+		name = election_PRU.3.a
+		promote_character = PRU_keiko_fujimori
+		set_party_name = { ideology = reactionary long_name = "Fuerza Popular" name = "FP" }	
+        set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = 0.15
+		}
+	}
+	option = {    #Alfredo Barnechea
+		name = election_PRU.4.a
+        set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		promote_character = PRU_alfredo_barnechea
+		add_popularity = { 
+			ideology = market_liberal 
+			popularity = 0.15
+		}
+	}
+	option = {    #Alan Garcia
+		name = election_PRU.2.a
+        if = {
+			limit = {
+				has_country_flag = PRU_conservative_APRA
+			}
+			set_politics = {
+			    ruling_party = conservative
+				elections_allowed = yes
+			}
+			add_popularity = { 
+				ideology = conservative 
+				popularity = 0.15
+			}
+		}
+		else = {
+			set_politics = {
+			    ruling_party = social_democrat
+				elections_allowed = yes
+			}
+			add_popularity = { 
+				ideology = social_democrat 
+				popularity = 0.15
+			}
+		}
+	}
+	option = {    #None of these
+		name = election_PRU.2.e
+	}
+}
+
+country_event = {  #2021 Peruvian Elections
+	id = election_PRU.5
+	title = election_PRU.1.t
+	desc = election_PRU.1.d
+	picture = GFX_report_event_peru
+	
+	trigger = {
+	    original_tag = PRU
+	    date > 2020.1.1
+		date < 2021.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = pru_election_2021 }
+	}
+	
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = pru_election_2021
+	}
+
+	option = {    #Pedro Castillo
+		name = election_PRU.5.a
+		promote_character = PRU_pedro_castillo
+		set_party_name = { ideology = democratic_socialist long_name = PRU_democratic_socialist_party_PL_long name = PRU_democratic_socialist_party_PL }
+        set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = democratic_socialist 
+			popularity = 0.15
+		}
+		if = {
+            limit = {
+				NOT= {
+					has_idea = PRU_obstructionist_congress
+				}
+            }   
+            add_ideas = PRU_obstructionist_congress
+   		}
+	}
+	option = {    #Keiko Fujimori
+		name = election_PRU.3.a
+		promote_character = PRU_keiko_fujimori
+        set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = 0.15
+		}
+	}
+	option = {    #Rafael López Aliaga 
+		name = election_PRU.5.b
+        set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+		promote_character = PRU_rafael_lopez_aliaga
+		add_popularity = { 
+			ideology = reactionary 
+			popularity = 0.15
+		}
+		set_party_name = { ideology = reactionary long_name = PRU_reactionary_party_RP_long name = PRU_reactionary_party_RP }
+	}
+#	option = {    #Yonhy Lescano
+#		name = election_PRU.5.c
+#		promote_character = PRU_yonhy_lescano
+#         set_politics = {
+#			ruling_party = market_liberal
+#			elections_allowed = yes
+#		}
+#	}
+	option = {    #None of these
+		name = election_PRU.2.e
+	}
+}
+
+#Alberto Fujimori overtrown
+news_event = {
+	id = peru_news.1
+	title = peru_news.1.t
+	desc = peru_news.1.desc
+	picture = GFX_news_event_alberto_fujimori_2
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = peru_news.1.a
+		trigger = {
+			original_tag = JAP
+		}
+	}
+	
+	option = {
+		name = peru_news.1.b
+		trigger = {
+			original_tag = PRU
+		}
+	}
+	
+	option = {
+		name = peru_news.1.c
+		trigger = {
+			NOT = { original_tag = JAP }
+			NOT = { original_tag = PRU }
+		}
+	}
+}
+
+#Alberto Fujimori's Arrest
+news_event = {
+	id = peru_news.1
+	title = peru_news.1.t
+	desc = peru_news.1.desc
+	picture = GFX_news_event_alberto_fujimori_2
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = peru_news.1.a
+		trigger = {
+			original_tag = JAP
+		}
+	}
+	
+	option = {
+		name = peru_news.1.b
+		trigger = {
+			original_tag = PRU
+		}
+	}
+	
+	option = {
+		name = peru_news.1.c
+		trigger = {
+			NOT = { original_tag = JAP }
+			NOT = { original_tag = PRU }
+		}
+	}
+}

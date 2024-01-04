@@ -70,6 +70,9 @@ shared_focus = {
 
 
 	available = {
+		is_subject = no
+		is_EU_member = yes
+        any_other_country = {is_EU_member = yes} # you cannot just do the EU on your own
 	}
 	ai_will_do = {
 		base = 1
@@ -251,6 +254,7 @@ joint_focus = {
 
 
 	completion_reward_joint_member = {
+		add_ideas = EURO_EMU_idea
 
 	}
 }
@@ -280,7 +284,7 @@ joint_focus = {
 
 
 	completion_reward_joint_member = {
-
+		add_ideas = EURO_erasmus_idea
 	}
 }
 joint_focus = {
@@ -309,7 +313,15 @@ joint_focus = {
 
 
 	completion_reward_joint_member = {
-
+		every_country = {
+			limit = {
+				capital_scope = {
+					is_on_continent = europe
+				}
+				is_EU_member = no
+			}
+			increase_trade_influence_by_2 = yes
+		}
 	}
 }
 joint_focus = {
@@ -420,17 +432,19 @@ joint_focus = {
 			}
 	}
 	completion_reward = {
-		every_country = {
-			limit = {
-				NOT = { tag = SPR }
-				NOT = { tag = POR }
-				NOT = { tag = CUB }
-				OR = {
-					has_country_flag = country_language_spanish
-					has_country_flag = country_language_portuguese
+		hidden_effect = {
+			every_country = {
+				limit = {
+					NOT = { tag = SPR }
+					NOT = { tag = POR }
+					NOT = { tag = CUB }
+					OR = {
+						has_country_flag = country_language_spanish
+						has_country_flag = country_language_portuguese
+					}
 				}
+				country_event = { id = spain.357 }
 			}
-			country_event = { id = spain.357 }
 		}
 	}
 }
@@ -517,6 +531,7 @@ joint_focus = {
 		is_subject = no
 		is_EU_member = yes
         any_other_country = {is_EU_member = yes} # you cannot just do the EU on your own
+		NOT = {tag = ENG} #UK is hella opposed to this, literally one of the reasons for brexit
 	}
 
 	search_filters = { FOCUS_FILTER_EUROPE }
@@ -527,6 +542,21 @@ joint_focus = {
 
 
 	completion_reward_joint_member = {
+	}
+	completion_reward = {
+		if = {
+			limit = {
+				ENG = {
+					is_EU_member = yes
+					NOT = {
+						has_completed_focus = ENG_a_new_path
+					}
+				}
+			}
+			hidden_effect = {
+				country_event = britain.27
+			}
+		}
 	}
 }
 joint_focus = {

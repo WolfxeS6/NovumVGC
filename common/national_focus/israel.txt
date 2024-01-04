@@ -49,7 +49,7 @@ focus_tree = {
 		cost = 10
 
 		ai_will_do = {
-			factor = 40
+			factor = 5
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -409,12 +409,6 @@ focus_tree = {
 				has_completed_focus = ISR_gaza_pullout
 				has_completed_focus = ISR_west_bank_pullout
 			}
-			NOT = {
-				OR = {
-					has_completed_focus = ISR_gaza_security_demands
-					has_completed_focus = ISR_west_bank_security_demands
-				}
-			}
 		}
 		prerequisite = { focus = ISR_diplomatic_focus }
 
@@ -472,7 +466,11 @@ focus_tree = {
 		cost = 10
 
 		ai_will_do = {
-			factor = 10
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 
 		prerequisite = { focus = ISR_peacefulCoexistence_focus }
@@ -496,7 +494,11 @@ focus_tree = {
 		cost = 10
 
 		ai_will_do = {
-			factor = 15
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 
 		prerequisite = { focus = ISR_two_state_solution }
@@ -608,7 +610,7 @@ focus_tree = {
 		cost = 10
 
 		ai_will_do = {
-			factor = 10
+			factor = 5
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -784,7 +786,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 15
+			factor = 25
 		}
 	}
 	focus = {
@@ -806,7 +808,11 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 15
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 	}
 	focus = {
@@ -972,7 +978,11 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 0
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 	}
 	focus = {
@@ -994,7 +1004,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 15
+			factor = 25
 		}
 	}
 	focus = {
@@ -1464,7 +1474,9 @@ focus_tree = {
 		prerequisite = {focus = ISR_industrial_innovation}
 	
 		completion_reward = {
-
+			RAJ = {
+				country_event = israel.36
+			}
 		}
 
 		ai_will_do = {
@@ -1703,6 +1715,10 @@ focus_tree = {
 			add_stability = -0.05
 			fourth_estate_islamist_decrease = yes
 			add_ideas = idea_ISR_fighting_orthodox
+			swap_ideas = {
+				remove_idea = ISR_orthadox_situation
+				add_idea = idea_ISR_fighting_orthodox
+			}
 		}
 
 		ai_will_do = {
@@ -1719,7 +1735,10 @@ focus_tree = {
 		relative_position_id = ISR_ultraorthadox_crackdown_strong
 		prerequisite = {focus = ISR_ultraorthadox_crackdown_strong}
 		completion_reward = {
-			add_ideas = idea_ISR_removed_compensation_orthodox
+			swap_ideas = {
+				remove_idea = idea_ISR_fighting_orthodox
+				add_idea = idea_ISR_removed_compensation_orthodox
+			}
 		}
 
 		ai_will_do = {
@@ -1736,7 +1755,11 @@ focus_tree = {
 		relative_position_id = ISR_revoke_compensation_for_orthadox
 		prerequisite = {focus = ISR_revoke_compensation_for_orthadox}
 		completion_reward = {
-			add_ideas = idea_ISR_universal_conscription
+			swap_ideas = {
+				remove_idea = idea_ISR_removed_compensation_orthodox
+				add_idea = idea_ISR_universal_conscription
+			}
+			country_event = israel.18
 		}
 
 		ai_will_do = {
@@ -1754,7 +1777,11 @@ focus_tree = {
 		mutually_exclusive = {focus = ISR_ultraorthadox_crackdown_strong}
 		prerequisite = {focus = ISR_bibi focus = ISR_israeli_healthcare}
 		completion_reward = {
-			add_ideas = ISR_working_with_rabbis
+			swap_ideas = {
+				remove_idea = ISR_orthadox_situation
+				add_idea = ISR_working_with_rabbis
+			}
+			
 		}
 
 		ai_will_do = {
@@ -1791,7 +1818,10 @@ focus_tree = {
 		relative_position_id = ISR_integration_program
 		prerequisite = {focus = ISR_integration_program}
 		completion_reward = {
-			add_ideas = idea_ISR_secular_society
+			swap_ideas = {
+				remove_idea = ISR_orthadox_integration_program
+				add_idea = idea_ISR_secular_society
+			}
 		}
 
 		ai_will_do = {
@@ -2073,7 +2103,7 @@ focus_tree = {
 				}
 				add_building_construction = {
 					type = anti_air_building
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -2087,10 +2117,11 @@ focus_tree = {
 				}
 				add_building_construction = {
 					type = anti_air_building
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
+			add_ideas = ISR_three_layers_idea
 		}
 	}
 	focus = {

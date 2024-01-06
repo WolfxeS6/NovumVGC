@@ -493,12 +493,6 @@ country_event = { #2004 sanctions
 	desc = syria.8.d
 	picture = GFX_report_event_political_deal
 	is_triggered_only = yes
-	trigger = {
-		original_tag = SYR
-		has_government = nationalist
-		date > 2004.5.11
-		date < 2004.8.22
-	}
 	fire_only_once = yes
 
 	option = {
@@ -636,6 +630,32 @@ country_event = { #UAR Annex Egypt
 		}
 	}
 }
+#Leaving or Staying in Lebanon
+country_event = {
+	id = syria.13
+	title = syria.13.t
+	desc = syria.13.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {	#leave
+		name = syria.13.o1
+		add_country_flag = left_lebanon
+		add_stability = 0.025
+		ai_chance = {
+			factor = 50
+		}
+	}
+	option = {	#stay
+		name = syria.13.o2
+		add_country_flag = stayed_in_lebanon
+		add_stability = 0.025
+		ai_chance = {
+			factor = 50
+		}
+	}
+}
 #Geneva Peace Conference
 country_event = {
 	id = syria.15
@@ -708,6 +728,7 @@ country_event = {
 			}
 			set_country_flag = SYR_Damascus_Spring
 			add_ideas = SYR_Damascus_Spring
+			news_event = syria_news.4
 		}
 	}
 
@@ -870,6 +891,7 @@ country_event = {
 			add_opinion_modifier = {
 				modifier = recent_actions_negative
 				target = PER
+				set_country_flag = SYR_Iran_rejected_Treaty
 			}
 		}
 		ai_chance = {
@@ -1219,18 +1241,24 @@ country_event = {
 			traits = {butcher_of_hama}
 	}
 	drop_cosmetic_tag = yes
-	add_relation_modifier = {
-		target = SAU
-		modifier = declaration_of_friendship
+		add_opinion_modifier = { 
+			target = SAU
+			modifier = has_expressed_loyalty 
+		}
+		SAU = { 
+			add_opinion_modifier = { 
+				target = SYR 
+				modifier = has_expressed_loyalty 
+		}
 	}
-	}
+}
 }
 #Protests against Rifaat
 country_event = {
 	id = syria.35
 	title = syria.35.t
 	desc = syria.35.d
-	picture = GFX_report_Death_of_Maher
+	picture = GFX_report_event_protests
 	trigger = {
 		original_tag = SYR
 		has_government = nationalist
@@ -1249,7 +1277,7 @@ country_event = {
 	id = syria.36
 	title = syria.36.t
 	desc = syria.36.d
-	picture = GFX_report_Death_of_Maher
+	picture = GFX_report_Day_of_Judgement
 	trigger = {
 		original_tag = SYR
 		has_government = nationalist
@@ -1262,6 +1290,141 @@ country_event = {
 		add_stability = -0.04
 		remove_ideas = SYR_Civil_Unrest
 		add_country_leader_trait = butcher_of_aleppo
+		add_ideas = SYR_sanctioned
+	}
+}
+#Saudi King Offer
+country_event = {
+	id = syria.37
+	title = syria.37.t
+	desc = syria.37.d
+	picture = GFX_report_Death_of_Maher
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	
+		name = syria.37.o1
+		SYR = {
+			country_event = syria.38
+		}
+	}
+
+	option = {
+		name = syria.37.o2
+		SYR = {
+			country_event = syria.39
+		}
+	}
+}
+#Saudi Arabia accepts
+country_event = {
+	id = syria.38
+	title = syria.38.t
+	desc = syria.38.d
+	picture = GFX_report_Death_of_Maher
+	trigger = {
+		original_tag = SYR
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	
+		name = syria.38.o1
+		add_ideas = SYR_King_Abdullah
+		add_country_flag = SYR_Abdullah
+		set_cosmetic_tag = SYR_RM
 	}
 }
 
+#Saudi Arabia refuses
+country_event = {
+	id = syria.39
+	title = syria.39.t
+	desc = syria.39.d
+	picture = GFX_report_Death_of_Maher
+	trigger = {
+		original_tag = SYR
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	
+		name = syria.39.o1
+
+		add_stability = -0.05
+		hidden_effect = {
+			country_event = {
+				id = syria.40 days = 5
+			}
+		}
+	}
+}
+country_event = {
+	id = syria.40
+	title = syria.40.t
+	desc = syria.40.d
+	picture = GFX_report_Death_of_Maher
+	trigger = {
+		original_tag = SYR
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	
+		name = syria.40.o1
+		add_ideas = SYR_King_Mired
+		add_country_flag = SYR_Mired
+		set_cosmetic_tag = SYR_RM
+	}
+}
+country_event = {
+	id = syria.41
+	title = syria.41.t
+	desc = syria.41.d
+	picture = GFX_report_Death_of_Maher
+	trigger = {
+		original_tag = SYR
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	
+		name = syria.41.o1
+		PAL = {
+				transfer_state = 810
+				transfer_state = 914
+				transfer_state = 1176
+				transfer_state = 812
+		}
+			SYR = {
+			transfer_state = 881
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+	option = {	
+		name = syria.41.o2
+		SYR = {
+			create_wargoal = {
+				target = ISR
+				type = annex_everything
+			}
+		}
+		EGY = {
+			create_wargoal = {
+				target = ISR
+				type = annex_everything
+			}
+		}
+		JOR = {
+			create_wargoal = {
+				target = ISR
+				type = annex_everything
+			}
+		}
+		ai_chance = {
+			factor = 95
+		}
+	}
+}

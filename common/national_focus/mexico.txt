@@ -1,0 +1,5845 @@
+focus_tree = {
+
+	id = national_focus_Mexico
+	
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = MEX
+		}
+
+	}
+	
+	default = no
+
+	@industrial_tree_very_far_left = -2
+	@industrial_tree_far_left = -1
+	@industrial_tree_left = 0
+	@industrial_tree_center = 1
+	@industrial_tree_right = 2
+	@industrial_tree_far_right = 3
+	@industrial_tree_very_far_right = 4
+	
+	@birth_rate_tree_left = 6
+	@birth_rate_tree_center = 7
+	@birth_rate_tree_right = 8
+	@birth_rate_tree_far_right = 9
+	
+	@political_tree_very_far_left = 10
+	@political_tree_far_left = 11
+	@political_tree_left = 12
+	@political_tree_center = 13
+	@political_tree_right = 14
+	@political_tree_far_right = 15
+	@political_tree_very_far_right = 16
+	@political_tree_incredibly_far_right = 21
+	
+	@a_new_beginning = 38
+	
+	@army_tree_left = 69
+	@army_tree_center = 70
+	@army_tree_right = 71
+	@navy_tree_left = 73
+	@navy_tree_center = 74
+	@navy_tree_right = 75
+	@navy_tree_dockyards = 77
+	@air_tree_left = 79
+	@air_tree_center = 80
+	@air_tree_right = 81
+	@air_tree_very_far_right = 83
+	
+		# Cost in Days
+	@Time_10_days = 1.5
+	@Time_15_days = 2.2
+	@Time_20_days = 2.9
+	@Time_25_days = 3.7
+	@Time_30_days = 4.4
+	@Time_35_days = 5
+	@Time_40_days = 5.8
+	@Time_45_days = 6.5
+	@Time_50_days = 7.2
+	@Time_55_days = 7.9
+	@Time_60_days = 8.6
+	@Time_65_days = 9.4
+	@Time_70_days = 10
+	@Time_75_days = 10.8
+	@Time_80_days = 11.5
+	@Time_85_days = 12.2
+	@Time_90_days = 12.9
+	@Time_95_days = 13.6
+	@Time_100_days = 14.4
+	@Time_110_days = 15.8
+	@Time_115_days = 16.5
+	@Time_120_days = 17.2
+	@Time_125_days = 17.9
+	@Time_130_days = 18.6
+	@Time_135_days = 19.3
+	@Time_140_days = 20
+	@Time_145_days = 20.8
+	@Time_150_days = 21.5
+	@Time_155_days = 22.2
+	@Time_160_days = 22.9
+	@Time_165_days = 23.6
+	@Time_170_days = 24.4
+	@Time_175_days = 25
+	
+	focus = {
+		id = generic_industrial_focus
+		icon = production
+		x = @industrial_tree_center
+		y = 0
+		cost = 10
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.35
+				uses = 2
+				category = industry
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+			
+			modifier = {
+				factor = 0
+				
+				NOT = { has_completed_focus = generic_individual_freedoms }
+				NOT = { has_completed_focus = generic_national_strength }
+			}
+		}
+	}
+	
+	focus = {
+		id = generic_political_focus
+		icon = demand_territory
+		x = @political_tree_center
+		y = 0
+		cost = 10
+		
+		completion_reward = {
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			factor = 10
+			
+			modifier = {
+				factor = 0
+				
+				NOT = { has_completed_focus = generic_individual_freedoms }
+				NOT = { has_completed_focus = generic_national_strength }
+			}
+		}
+	}
+	
+	focus = {
+		id = MEX_anb
+		icon = propaganda
+		x = @a_new_beginning
+		y = 0
+
+		cost = @Time_55_days
+	
+		completion_reward = {
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_democracy
+		icon = democracy
+		x = -5
+		y = 1
+
+		relative_position_id = MEX_anb
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_anb
+		}
+
+		mutually_exclusive = {
+			focus = MEX_auth
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_path_of_liberty
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_pan
+		icon = GFX_goal_Ideology_Conservative
+		x = -6
+		y = 1
+
+		relative_position_id = MEX_democracy
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_democracy
+		}
+
+		mutually_exclusive = {
+			focus = MEX_pri
+		}
+
+		mutually_exclusive = {
+			focus = MEX_prd
+		}
+
+		available = {
+			OR = {
+				has_government = conservative
+			}
+		}
+
+		completion_reward = {
+			fourth_estate_conservative_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_conservative_values
+		icon = GFX_goal_Family_Values_1
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_pan
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_pan
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_conservative_doctrine
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_usa
+		icon = GFX_goal_American_Defense_Pack
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_conservative_values
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_conservative_values
+		}
+
+		completion_reward = {
+			diplomatic_relation = {
+    		country = USA
+    		relation = non_aggression_pact
+    		active = yes
+			}
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	focus = {
+		id = MEX_capitalism
+		icon = money
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_pan
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_pan
+		}
+
+		completion_reward = {
+			add_building_construction = {
+    			type = industrial_complex
+    			level = 5
+    			instant_build = yes
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_business
+		icon = GFX_goal_Rich_Businessmen
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_capitalism
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_capitalism
+			focus = MEX_conservative_values
+		}
+
+		completion_reward = {
+			add_building_construction = {
+    			type = industrial_complex
+    			level = 3
+    			instant_build = yes
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_nafta
+		icon = GFX_goal_Trade_Deals_with_America
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_capitalism
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_capitalism
+		}
+
+		completion_reward = {
+			USA = {
+				increase_trade_influence_by_1 = yes
+			}
+			CAN = {
+				increase_trade_influence_by_1 = yes
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_pri
+		icon = GFX_goal_Ideology_Market_Liberal
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_democracy
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_democracy
+		}
+
+		mutually_exclusive = {
+			focus = MEX_pan
+		}
+
+		mutually_exclusive = {
+			focus = MEX_prd
+		}
+
+		available = {
+			OR = {
+				has_government = market_liberal
+			}
+		}
+
+		completion_reward = {
+			fourth_estate_market_liberal_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_promote_democracy
+		icon = democracy_destroys_communism
+		x = -2
+		y = 1
+
+		relative_position_id = MEX_pri
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_pri
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_capitalist_doctrine
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_anticorruption
+		icon = gunpoint_diplomacy
+		x = 2
+		y = 1
+
+		relative_position_id = MEX_pri
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_pri
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_political_pluralism
+		icon = political_pressure
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_pri
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_pri
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_path_of_liberty
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_decentralize_power
+		icon = align_people
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_anticorruption
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_promote_democracy
+		}
+
+		prerequisite = {
+			focus = MEX_anticorruption
+		}
+
+		prerequisite = {
+			focus = MEX_political_pluralism
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_economic_freedoms
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_civil_society
+		icon = united_nations
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_promote_democracy
+
+		cost = @Time_55_days
+
+		prerequisite = {
+			focus = MEX_political_pluralism
+		}
+
+		prerequisite = {
+			focus = MEX_anticorruption
+		}
+
+		prerequisite = {
+			focus = MEX_promote_democracy
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_prd
+		icon = GFX_goal_Ideology_Social_Democracy
+		x = 6
+		y = 1
+
+		relative_position_id = MEX_democracy
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_democracy
+		}
+
+		mutually_exclusive = {
+			focus = MEX_pan
+		}
+
+		mutually_exclusive = {
+			focus = MEX_pri
+		}
+
+		available = {
+			OR = {
+				has_government = social_democrat
+			}
+		}
+		
+		completion_reward = {
+			fourth_estate_social_democrat_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_socialist_principles
+		icon = democratic_socialist_ideology
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_prd
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_prd
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_social_democrat_doctrine
+		}
+		
+		ai_will_do = {
+			base = 10
+		}
+	}
+
+	focus = {
+		id = MEX_nationalize_industries
+		icon = GFX_goal_Industrial_Complex
+		x = -2
+		y = 1
+
+		relative_position_id = MEX_socialist_principles
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_socialist_principles
+		}
+
+		completion_reward = {
+			add_building_construction = {
+    			type = industrial_complex
+    			level = 5
+    			instant_build = yes
+			}
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_income_equality
+		icon = money_communism
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_socialist_principles
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_socialist_principles
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_welfare
+		icon = healthcare
+		x = 2
+		y = 1
+
+		relative_position_id = MEX_socialist_principles
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_socialist_principles
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_unions
+		icon = union_cooperation
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_income_equality
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_income_equality
+		}
+	
+		prerequisite = {
+			focus = MEX_nationalize_industries
+		}
+
+		prerequisite = {
+			focus = MEX_welfare
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support	= -0.1
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_economy_control
+		icon = GFX_goal_State_Controlled_Economy
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_income_equality
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_income_equality
+		}
+	
+		prerequisite = {
+			focus = MEX_nationalize_industries
+		}
+
+		prerequisite = {
+			focus = MEX_welfare
+		}
+
+		completion_reward = {
+			add_stability = -0.05
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_destroy_cartels
+		icon = destroy_oligarchs
+		x = 9
+		y = 2
+
+		relative_position_id = MEX_democracy
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_prd
+			focus = MEX_pri
+			focus = MEX_pan
+			focus = MEX_communist_party
+			focus = MEX_catholic_church
+			focus = MEX_fascist_party
+			focus = MEX_monarchist_party
+		}
+	
+		completion_reward = {
+			remove_ideas = MEX_cartel_presence
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_auth
+		icon = authoritarian_democrat
+		x = 10
+		y = 1
+
+		relative_position_id = MEX_anb
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_anb
+		}
+	
+		mutually_exclusive = {
+			focus = MEX_democracy
+		}
+
+		completion_reward = {
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+
+
+	focus = {
+		id = MEX_communist_party
+		icon = GFX_goal_support_communism
+		x = -3
+		y = 1
+
+		relative_position_id = MEX_auth
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_auth
+		}
+
+		mutually_exclusive = {
+			focus = MEX_catholic_church
+		}
+
+		mutually_exclusive = {
+			focus = MEX_fascist_party
+		}
+
+		mutually_exclusive = {
+			focus = MEX_monarchist_party
+		}
+
+		completion_reward = {
+			add_popularity = {
+    			ideology = communist
+    			popularity = 0.4
+			}
+			add_ideas = idea_focus_generic_marxist_doctrine
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_socialist_revolution
+		icon = GFX_focus_YUG_pan_slavic_congress
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_communist_party
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_communist_party
+		}
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = communist
+				elections_allowed = no
+			}
+			start_civil_war = {
+   				ideology = market_liberal
+    			states = {
+        			484 483 482 480 479 474 477 1098 1030
+    			}
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_nationalize_key_industries
+		icon = communism33
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_socialist_revolution
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_socialist_revolution
+		}
+
+		completion_reward = {
+			add_building_construction = {
+    			type = industrial_complex
+    			level = 3
+    			instant_build = yes
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_income_redistribution
+		icon = communist_fevour
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_socialist_revolution
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_socialist_revolution
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_state_control_economy
+		icon = GFX_goal_State_Controlled_Economy
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_nationalize_key_industries
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_nationalize_key_industries
+		}
+
+		prerequisite = {
+			focus = MEX_income_redistribution
+		}
+
+		completion_reward = {
+			add_building_construction = {
+    			type = industrial_complex
+    			level = 5
+    			instant_build = yes
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_stronger_labor_unions
+		icon = communist_people
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_nationalize_key_industries
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_nationalize_key_industries
+		}
+
+		prerequisite = {
+			focus = MEX_income_redistribution
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_social_welfare
+		icon = money_communism
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_income_redistribution
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_nationalize_key_industries
+		}
+
+		prerequisite = {
+			focus = MEX_income_redistribution
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_path_of_equality
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_revolution_americas
+		icon = north_america
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_stronger_labor_unions
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_state_control_economy
+			focus = MEX_stronger_labor_unions
+			focus = MEX_social_welfare
+		}
+
+		completion_reward = {
+			OR = {
+				has_government = communist
+			}
+			add_war_support = 0.1
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_revolution_central_america
+		icon = central_america
+		x = -2
+		y = 1
+
+		relative_position_id = MEX_revolution_americas
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_revolution_americas
+		}
+
+		completion_reward = {
+			OR = {
+				has_government = communist
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = GUA
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BLZ
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ELS
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = HON
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = NIC
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = COS
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = PAN
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_revolution_caribbean
+		icon = GFX_goal_Island_Nation
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_revolution_americas
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_revolution_americas
+		}
+
+		completion_reward = {
+			OR = {
+				has_government = communist
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = JAM
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BAH
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = HAI
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = DOM
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = SKN
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BAS
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = DMN
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = STL
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BRB
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = STV
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = GND
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_revolution_usa
+		icon = attack_america
+		x = 2
+		y = 1
+
+		relative_position_id = MEX_revolution_americas
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_revolution_americas
+		}
+
+		completion_reward = {
+			OR = {
+				has_government = communist
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = USA
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_revolution_south_america
+		icon = south_america
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_revolution_caribbean
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_revolution_central_america
+			focus = MEX_revolution_caribbean
+			focus = MEX_revolution_usa
+		}
+
+		completion_reward = {
+			OR = {
+				has_government = communist
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = TRI
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = COL
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = VEN
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = GYA
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = SUR
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ECU
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BRA
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = PRU
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = BOL
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = CHL
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ARG
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = PAR
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = URG
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_catholic_church
+		icon = GFX_goal_Christianization
+		x = 3
+		y = 1
+
+		relative_position_id = MEX_auth
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_auth
+		}
+
+		mutually_exclusive = {
+			focus = MEX_communist_party
+		}
+
+		mutually_exclusive = {
+			focus = MEX_fascist_party
+		}
+
+		mutually_exclusive = {
+			focus = MEX_monarchist_party
+		}
+
+		completion_reward = {
+			fourth_estate_islamist_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_catholic_uprising
+		icon = GFX_goal_Christian_Holy_War
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_catholic_church
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_catholic_church
+		}
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = islamist
+    			elections_allowed = no
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_catholic_society
+		icon = POL_spread_christian_propaganda
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_catholic_uprising
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_catholic_uprising
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_catholic_politics
+		icon = GFX_goal_Defenders_Of_Christianity
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_catholic_uprising
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_catholic_uprising
+		}
+
+		completion_reward = {
+			add_popularity = {
+    			ideology = islamist
+    			popularity = 0.1
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_catholic_values
+		icon = GFX_goal_Christian_Family_Values
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_catholic_society
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_catholic_society
+		}
+
+		prerequisite = {
+			focus = MEX_catholic_politics
+		}
+
+		completion_reward = {
+			fourth_estate_conservative_decrease = yes
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_market_liberal_decrease = yes			
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_anti_abortion
+		icon = GFX_goal_Anti-Birth_Control
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_catholic_society
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_catholic_society
+		}
+
+		prerequisite = {
+			focus = MEX_catholic_politics
+		}
+
+		completion_reward = {
+			add_stability = -0.05
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_catholic_education
+		icon = POL_christian_education
+		x = 3
+		y = 1
+
+		relative_position_id = MEX_catholic_society
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_catholic_society
+		}
+
+		prerequisite = {
+			focus = MEX_catholic_politics
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_fascist_party
+		icon = GFX_goal_support_fascism
+		x = 8
+		y = 1
+
+		relative_position_id = MEX_auth
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_auth
+		}
+
+		mutually_exclusive = {
+			focus = MEX_catholic_church
+		}
+
+		mutually_exclusive = {
+			focus = MEX_communist_party
+		}
+
+		mutually_exclusive = {
+			focus = MEX_monarchist_party
+		}
+
+		completion_reward = {
+			add_popularity = {
+    			ideology = fascist
+    			popularity = 0.4
+			}
+			add_ideas = idea_focus_generic_national_strength
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_fascist_war
+		icon = GFX_focus_generic_fascist_propaganda
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_fascist_party
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_fascist_party
+		}
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = fascist
+				elections_allowed = no
+			}
+			start_civil_war = {
+   				ideology = market_liberal
+    			states = {
+        			481 1096 475 476 485
+    			}
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_fascist_values
+		icon = GFX_goal_Family_Values_2
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_fascist_war
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_fascist_war
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_path_of_order
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_anti_secularism
+		icon = GFX_goal_United_in_Religion_Christian
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_fascist_values
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_fascist_values
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_national_heritage
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_fascist_education
+		icon = GFX_goal_Fascist_Education
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_fascist_values
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_fascist_values
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_strong_military
+		icon = GFX_goal_Military_Training
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_anti_secularism
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_anti_secularism
+		}
+
+		prerequisite = {
+			focus = MEX_fascist_education
+		}
+
+		completion_reward = {
+			army_experience = 25
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_increase_surveillance
+		icon = GFX_ENG_Surveillance
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_anti_secularism
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_anti_secularism
+		}
+
+		prerequisite = {
+			focus = MEX_fascist_education
+		}
+
+		completion_reward = {
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_fascist_propaganda
+		icon = POL_idk_some_german_nationalist_propaganda
+		x = 3
+		y = 1
+
+		relative_position_id = MEX_anti_secularism
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_anti_secularism
+		}
+
+		prerequisite = {
+			focus = MEX_fascist_education
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_neo_fascist_doctrine
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_march_south
+		icon = war_and_thunder
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_fascist_propaganda
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_strong_military
+			focus = MEX_increase_surveillance
+			focus = MEX_fascist_propaganda
+			focus = MEX_monarchist_identity
+			focus = MEX_monarchist_unity
+			focus = MEX_monarchist_symbolic
+		}
+
+		completion_reward = {
+			add_named_threat = {
+				threat = 2
+				name = threat_mexico_marching_southwards
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = GUA
+						is_core_of = HON
+						is_core_of = ELS
+						is_core_of = BLZ
+					}
+					NOT = {
+						is_core_of = ROOT
+					}
+				}
+				add_claim_by = ROOT
+			}
+            if = {
+            	limit = {
+            		GUA = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = GUA
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		HON = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = HON
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		ELS = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = ELS
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		BLZ = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = BLZ
+                    expire = 0
+                }
+            }
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_unify_centro
+		icon = central_america
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_march_south
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_march_south
+		}
+
+		completion_reward = {
+			add_named_threat = {
+				threat = 2
+				name = threat_mexico_unify_centroamerica
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = NIC
+						is_core_of = COS
+						is_core_of = PAN
+					}
+					NOT = {
+						is_core_of = ROOT
+					}
+				}
+				add_claim_by = ROOT
+			}
+            if = {
+            	limit = {
+            		NIC = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = NIC
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		COS = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = COS
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		PAN = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = PAN
+                    expire = 0
+                }
+            }
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_liberate_caribbean
+		icon = GFX_goal_Island_Nation
+		x = -2
+		y = 1
+
+		relative_position_id = MEX_unify_centro
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_unify_centro
+		}
+
+		completion_reward = {
+			add_named_threat = {
+				threat = 1
+				name = threat_mexico_pressure_the_caribbean
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = CUB
+						is_core_of = DOM
+						is_core_of = HAI
+						is_core_of = JAM
+						is_core_of = BAH
+						is_core_of = TRI
+						is_core_of = GND
+						is_core_of = BRB
+						is_core_of = STV
+						is_core_of = STL
+						is_core_of = DMN
+						is_core_of = BAS
+						is_core_of = SKN
+					}
+					NOT = {
+						is_core_of = ROOT
+					}
+				}
+				add_claim_by = ROOT
+			}
+            if = {
+            	limit = {
+            		CUB = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = CUB
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		DOM = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = DOM
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		HAI = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = HAI
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		BAH = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = BAH
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		BAS = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = BAS
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		JAM = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = JAM
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		PUE = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = PUE
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		CRC = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = CRC
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		TRI = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = TRI
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		GDL = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = GDL
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		GND = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = GND
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		BRB = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = BRB
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		STV = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = STV
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		STL = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = STL
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		DMN = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = DMN
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		SKN = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = SKN
+                    expire = 0
+                }
+            }
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_push_darien
+		icon = south_america
+		x = 4
+		y = 1
+
+		relative_position_id = MEX_unify_centro
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_unify_centro
+		}
+
+		completion_reward = {
+			add_named_threat = {
+				threat = 1
+				name = threat_mexico_push_south_of_the_darien_gap
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = COL
+						is_core_of = ECU
+						is_core_of = VEN
+					}
+					NOT = {
+						is_core_of = ROOT
+					}
+				}
+				add_claim_by = ROOT
+			}
+            if = {
+            	limit = {
+            		COL = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = COL
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		ECU = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = ECU
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		VEN = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = VEN
+                    expire = 0
+                }
+            } 
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_andean_offensive
+		icon = fascist_partisant_warfare
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_push_darien
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_push_darien
+		}
+
+		completion_reward = {
+			add_named_threat = {
+				threat = 2
+				name = threat_mexico_andean_offensive
+			}
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = PRU
+						is_core_of = BOL
+						is_core_of = PAR
+						is_core_of = URG
+						is_core_of = CHL
+						is_core_of = ARG						
+					}
+					NOT = {
+						is_core_of = ROOT
+					}
+				}
+				add_claim_by = ROOT
+			}
+            if = {
+            	limit = {
+            		ARG = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = ARG
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		CHL = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = CHL
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		URG = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = URG
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		PAR = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = PAR
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		BOL = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = BOL
+                    expire = 0
+                }
+            }
+            if = {
+            	limit = {
+            		PRU = {
+						exists = yes
+            			NOT = {
+            				OR = {
+            					is_in_faction_with = ROOT
+                            	is_subject_of = ROOT
+            				}
+            			}
+            		}
+            	}
+            	create_wargoal = {
+                    type = annex_everything
+                    target = PRU
+                    expire = 0
+                }
+            }
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_rescind_cession
+		icon = attack_america
+		x = 2
+		y = 1
+
+		relative_position_id = MEX_unify_centro
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_unify_centro
+		}
+
+		completion_reward = {
+			add_named_threat = {
+				threat = 5
+				name = threat_mexico_rescind_cession
+			}
+			if = {
+				limit = {
+					country_exists = USA
+				}
+				create_wargoal = {
+					type = take_state_focus
+					target = USA
+					expire = 0
+					generator = { 375 376 377 1092 1093 378 379 380 382 }
+				}
+			}
+			every_other_country = {
+				limit = {
+					NOT = { tag = USA }
+					original_tag = USA
+				}
+				ROOT = {
+					create_wargoal = {
+						type = take_state_focus
+						target = PREV
+						expire = 0
+						generator = { 375 376 377 1092 1093 378 379 380 382 }
+					}
+				}
+			}
+			
+			every_state = {
+				limit = {
+					OR = {
+						state = 375
+						state = 376
+						state = 377
+						state = 378
+						state = 379
+						state = 380
+						state = 382
+						state = 1092
+						state = 1093
+					}
+					NOT = {
+						is_core_of = ROOT
+					}
+					NOT = {
+						is_claimed_by = ROOT
+					}
+				}
+				add_claim_by = ROOT
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_redeem_aztlan
+		icon = position_armies
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_rescind_cession
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_rescind_cession
+		}
+
+		completion_reward = {
+			add_political_power = -300
+			every_state = {
+				limit = {
+					OR = {
+						state = 375
+						state = 376
+						state = 377
+						state = 378
+						state = 379
+						state = 380
+						state = 382
+						state = 1092
+						state = 1093
+					}
+				}
+				add_core_of = ROOT
+				hidden_effect = {
+					remove_claim_by = ROOT
+				}
+			}
+			if = {
+				limit = {
+					USA = {
+						is_subject_of = ROOT
+					}
+				}
+				annex_country = { target = USA }
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_monarchist_party
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		x = 14
+		y = 1
+
+		relative_position_id = MEX_auth
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_auth
+		}
+
+		mutually_exclusive = {
+			focus = MEX_catholic_church
+		}
+
+		mutually_exclusive = {
+			focus = MEX_communist_party
+		}
+
+		mutually_exclusive = {
+			focus = MEX_fascist_party
+		}
+
+		completion_reward = {
+			fourth_estate_monarchist_increase = yes
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_monarchist_coup
+		icon = GFX_focus_generic_monarchy_2
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_monarchist_party
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_monarchist_party
+		}
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = monarchist
+				elections_allowed = no
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_monarchist_i
+		icon = GFX_goal_Power_to_the_King
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_monarchist_coup
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_monarchist_coup
+		}
+
+		completion_reward = {
+			add_ideas = idea_focus_generic_royal_doctrine
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_monarchist_trad
+		icon = GFX_goal_Ideology_Monarchist
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_monarchist_i
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_monarchist_i
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_monarchist_religious
+		icon = GFX_focus_generic_support_the_left_right
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_monarchist_i
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_monarchist_i
+		}
+
+		completion_reward = {
+			add_political_power = 100
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_monarchist_identity
+		icon = GFX_focus_rom_royal_dictatorship
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_monarchist_trad
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_monarchist_trad
+		}
+
+		prerequisite = {
+			focus = MEX_monarchist_religious
+		}
+
+		completion_reward = {
+			add_manpower = 100000
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+	
+	focus = {
+		id = MEX_monarchist_unity
+		icon = GFX_focus_generic_home_defense
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_monarchist_trad
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_monarchist_trad
+		}
+
+		prerequisite = {
+			focus = MEX_monarchist_religious
+		}
+
+		completion_reward = {
+			add_war_support = 0.1
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = MEX_monarchist_symbolic
+		icon = GFX_goal_Hard_Power_Diplomacy
+		x = 3
+		y = 1
+
+		relative_position_id = MEX_monarchist_trad
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_monarchist_trad
+		}
+
+		prerequisite = {
+			focus = MEX_monarchist_religious
+		}
+
+		completion_reward = {
+			add_popularity = {
+    			ideology = monarchist
+    			popularity = 0.25
+			}
+		}
+		
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	focus = {
+		id = generic_army_focus
+		icon = infantry_allies
+		x = @army_tree_center
+		y = 0
+		cost = 10
+		
+		completion_reward = {
+			army_experience = 10
+		}
+		
+		ai_will_do = {
+			factor = 10
+			
+			modifier = {
+				factor = 0
+				
+				NOT = { has_completed_focus = generic_individual_freedoms }
+				NOT = { has_completed_focus = generic_national_strength }
+			}
+		}
+	}
+	
+	focus = {
+		id = generic_naval_focus
+		icon = navy
+		x = @navy_tree_center
+		y = 0
+		cost = 10
+
+		available = {
+			any_state = {
+				is_coastal = yes
+				is_owned_by = ROOT
+				is_controlled_by = ROOT
+			}
+		}
+		
+		completion_reward = {
+			navy_experience = 10
+		}
+		
+		ai_will_do = {
+			factor = 10
+			
+			modifier = {
+				factor = 0
+				
+				NOT = { has_completed_focus = generic_individual_freedoms }
+				NOT = { has_completed_focus = generic_national_strength }
+			}
+		}
+	}
+	
+	focus = {
+		id = generic_air_focus
+		icon = airforce
+		x = @air_tree_center
+		y = 0
+		cost = 10
+		
+		completion_reward = {
+			air_experience = 10
+		}
+		
+		ai_will_do = {
+			factor = 10
+			
+			modifier = {
+				factor = 0
+				
+				NOT = { has_completed_focus = generic_individual_freedoms }
+				NOT = { has_completed_focus = generic_national_strength }
+			}
+		}
+	}
+	
+	focus = {
+		id = generic_military_industry_1
+		icon = industry_military
+		x = @industrial_tree_very_far_left
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_industrial_focus
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_civilian_industry_1
+		icon = industry_civilian
+		x = @industrial_tree_left
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_industrial_focus
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_infrastructure_1
+		icon = infrastructure
+		x = @industrial_tree_right
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_industrial_focus
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_resource_focus
+		icon = construction2
+		x = @industrial_tree_very_far_right
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_industrial_focus
+		}
+		
+		completion_reward = {
+			add_political_power = 25
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_internal_politics
+		icon = improve_relations
+		x = @political_tree_very_far_left
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_political_focus
+		}
+		
+		completion_reward = {
+			add_political_power = 75
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_foreign_politics
+		icon = major_alliance
+		x = @political_tree_very_far_right
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_political_focus
+		}
+		
+		completion_reward = {
+			add_political_power = 75
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_army_training_1
+		icon = infantry_allies
+		x = @army_tree_left
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_army_focus
+		}
+		
+		completion_reward = {
+			army_experience = 10
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = generic_army_drones
+		icon = infantry_allies
+		x = -1
+		y = 1
+		cost = 10
+		relative_position_id = generic_army_training_1
+		prerequisite = {
+			focus = generic_army_training_1
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				ahead_reduction = 1
+				bonus = 1.0
+				category = drone_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_military_officer_schools
+		icon = army_officers
+		x = @army_tree_right
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_army_focus
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_army_officer_school
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_naval_training_1
+		icon = GFX_focus_naval_officer
+		x = @navy_tree_left
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_naval_focus
+		}
+		
+		completion_reward = {
+			navy_experience = 10
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_small_ship_program
+		icon = cruisers
+		x = @navy_tree_right
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_naval_focus
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 0.3
+				uses = 1
+				category = dd_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_dockyards_1
+		icon = naval_dockyards
+		x = @navy_tree_dockyards
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_naval_focus
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_fighter_production
+		icon = fighter
+		x = @air_tree_left
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_air_focus
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_fighter_focus
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_air_bases_1
+		icon = air_production
+		x = @air_tree_right
+		y = 1
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_air_focus
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_industrial_development
+		icon = construction
+		x = @industrial_tree_center
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_infrastructure_1
+			focus = generic_civilian_industry_1
+			focus = generic_military_industry_1
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_industrial_development_program
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_demographic_studies
+		icon = consumer_goods
+		x = @birth_rate_tree_center
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_internal_politics
+		}
+		
+		completion_reward = {
+			add_political_power = 25
+			add_stability = 0.02
+		}
+	}
+	
+	focus = {
+		id = generic_secure_national_unity
+		icon = national_unity
+		x = @birth_rate_tree_far_right
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_internal_politics
+		}
+		
+		completion_reward = {
+			add_war_support = 0.05
+			add_stability = 0.05
+			if = {
+				limit = { has_idea = ZIM_disgruntled_veterans }
+				remove_ideas = ZIM_disgruntled_veterans
+			}
+			if = {
+				limit = { has_idea = kurdish_separatism }
+				remove_ideas = kurdish_separatism
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_recruit_more_administrators
+		icon = intelligence_exchange
+		x = @political_tree_far_left
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_internal_politics
+		}
+		
+		completion_reward = {
+			add_political_power = 15
+			add_war_support = 0.05
+			ruling_party_support_p5 = yes
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_recruit_more_diplomats
+		icon = intelligence_exchange
+		x = @political_tree_far_right
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_foreign_politics
+		}
+		
+		completion_reward = {
+			add_political_power = 50
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_international_alliances
+		icon = alliance
+		x = @political_tree_incredibly_far_right
+		y = 2
+		cost = 11
+		
+		prerequisite = {
+			focus = generic_foreign_politics
+		}
+		
+		completion_reward = {
+		}
+		
+		ai_will_do = {
+			factor = 10
+			modifier = {
+				factor = 0
+				is_in_faction = yes
+			}
+		}
+	}
+
+	focus = {
+		id = MEX_stay_neutral
+		icon = volunteer_alliance
+		x = 0
+		y = 2
+
+		relative_position_id = generic_international_alliances
+
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_international_alliances
+		}
+
+		mutually_exclusive = {
+			focus = MEX_towards_west
+		}
+
+		mutually_exclusive = {
+			focus = MEX_towards_east
+		}
+		
+		completion_reward = {
+			set_rule = { can_create_factions = yes }
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_towards_west
+		icon = GFX_USA_Flag
+		x = -2
+		y = 2
+
+		relative_position_id = generic_international_alliances
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = generic_international_alliances
+		}
+
+		mutually_exclusive = {
+			focus = MEX_stay_neutral
+		}
+
+		mutually_exclusive = {
+			focus = MEX_towards_east
+		}
+
+		completion_reward = {
+			USA = { add_opinion_modifier = { target = MEX modifier = has_expressed_loyalty } }
+			MEX = { add_opinion_modifier = { target = USA modifier = has_expressed_loyalty } }
+			GER = { add_opinion_modifier = { target = MEX modifier = has_expressed_loyalty } }
+			MEX = { add_opinion_modifier = { target = GER modifier = has_expressed_loyalty } }
+			FRA = { add_opinion_modifier = { target = MEX modifier = has_expressed_loyalty } }
+			MEX = { add_opinion_modifier = { target = FRA modifier = has_expressed_loyalty } }
+			ENG = { add_opinion_modifier = { target = MEX modifier = has_expressed_loyalty } }
+			MEX = { add_opinion_modifier = { target = ENG modifier = has_expressed_loyalty } }
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_towards_east
+		icon = Russian_bear
+		x = 2
+		y = 2
+
+		relative_position_id = generic_international_alliances
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = generic_international_alliances
+		}
+
+		mutually_exclusive = {
+			focus = MEX_stay_neutral
+		}
+
+		mutually_exclusive = {
+			focus = MEX_towards_west
+		}
+
+		completion_reward = {
+			PRK = { add_opinion_modifier = { target = MEX modifier = has_expressed_loyalty } }
+			MEX = { add_opinion_modifier = { target = PRK modifier = has_expressed_loyalty } }
+			PRC = { add_opinion_modifier = { target = MEX modifier = has_expressed_loyalty } }
+			MEX = { add_opinion_modifier = { target = PRC modifier = has_expressed_loyalty } }
+			SOV = { add_opinion_modifier = { target = MEX modifier = has_expressed_loyalty } }
+			MEX = { add_opinion_modifier = { target = SOV modifier = has_expressed_loyalty } }
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_relations_bric
+		icon = GFX_goal_Economic_Freedom
+		x = 0
+		y = 1
+
+		relative_position_id = MEX_towards_east
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_towards_east
+		}
+
+		completion_reward = {
+			PRC = {
+				increase_trade_influence_by_1 = yes
+			}
+			SOV = {
+				increase_trade_influence_by_1 = yes
+			}
+			BRA = {
+				increase_trade_influence_by_1 = yes
+			}
+			RAJ = {
+				increase_trade_influence_by_1 = yes
+			}
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_join_shanghai
+		icon = GFX_Align_to_China
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_relations_bric
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_relations_bric
+		}
+
+		mutually_exclusive = {
+			focus = MEX_join_csto
+		}
+
+		bypass = {
+			is_in_faction_with = PRC
+		}
+
+		completion_reward = {
+            if = {
+                limit = {
+                    PRC = {
+                        is_faction_leader = yes
+                    }
+                }
+                PRC = {
+                    country_event = MEX.1
+                }
+            }
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_join_csto
+		icon = GFX_Align_to_Russia
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_relations_bric
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_relations_bric
+		}
+
+		mutually_exclusive = {
+			focus = MEX_join_shanghai
+		}
+
+		bypass = {
+			is_in_faction_with = SOV
+		}
+
+		completion_reward = {
+            if = {
+                limit = {
+                    SOV = {
+                        is_faction_leader = yes
+                    }
+                }
+                SOV = {
+                    country_event = MEX.2
+                }
+            }
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_trade_usa
+		icon = GFX_Align_to_America
+		x = -1
+		y = 1
+
+		relative_position_id = MEX_towards_west
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_towards_west
+		}
+
+		completion_reward = {
+			USA = {
+				increase_trade_influence_by_1 = yes
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_trade_eu
+		icon = GFX_Align_to_EU
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_towards_west
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_towards_west
+		}
+
+		completion_reward = {
+			POR = {
+				increase_trade_influence_by_1 = yes
+			}
+			SPR = {
+				increase_trade_influence_by_1 = yes
+			}
+			ENG = {
+				increase_trade_influence_by_1 = yes
+			}
+			FRA = {
+				increase_trade_influence_by_1 = yes
+			}
+			ITA = {
+				increase_trade_influence_by_1 = yes
+			}
+			GER = {
+				increase_trade_influence_by_1 = yes
+			}
+			IRE = {
+				increase_trade_influence_by_1 = yes
+			}
+			GRE = {
+				increase_trade_influence_by_1 = yes
+			}
+			FIN = {
+				increase_trade_influence_by_1 = yes
+			}
+			DEN = {
+				increase_trade_influence_by_1 = yes
+			}
+			SWE = {
+				increase_trade_influence_by_1 = yes
+			}
+			AUS = {
+				increase_trade_influence_by_1 = yes
+			}
+			LUX = {
+				increase_trade_influence_by_1 = yes
+			}
+			HOL = {
+				increase_trade_influence_by_1 = yes
+			}
+			BEL = {
+				increase_trade_influence_by_1 = yes
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = MEX_join_nato
+		icon = Generic_Support_NATO
+		x = 1
+		y = 1
+
+		relative_position_id = MEX_trade_usa
+
+		cost = @Time_55_days
+		
+		prerequisite = {
+			focus = MEX_trade_usa
+		}
+
+		prerequisite = {
+			focus = MEX_trade_eu
+		}
+
+		bypass = {
+			Can_do_Nato = no
+		}
+
+		completion_reward = {
+			if = {
+                limit = {
+                    any_country = {
+                        OR = {
+                            has_idea = NATO_member
+                            has_idea = NATO_member_2
+                            is_faction_leader = yes
+                        }
+                    }
+                }
+                any_country = {
+                    limit = {
+                        OR = {
+                            has_idea = NATO_member
+                            has_idea = NATO_member_2
+                            is_faction_leader = yes
+                        }
+                    }
+                    country_event = nato.4 
+                }    
+            }
+            else_if = {
+                limit = {
+                    USA = {
+                        is_faction_leader = yes
+                    }
+                }
+                USA = {
+                    Join_Nato_effect = yes
+                }
+            }
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	focus = {
+		id = generic_artillery_focus
+		icon = artillery
+		x = @army_tree_center
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_army_training_1
+			focus = generic_military_officer_schools
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = artillery_bonus
+				bonus = 0.25
+				uses = 3
+				category = artillery
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+#	focus = {
+#		id = generic_naval_bases_1
+#		icon = navy
+#		x = @navy_tree_left
+#		y = 2
+#		cost = 10
+#		
+#		prerequisite = {
+#			focus = generic_naval_training_1
+#		}
+#		
+#		completion_reward = {
+#			navy_experience = 10
+#		}
+#		
+#		ai_will_do = {
+#			factor = 10
+#		}
+#	}
+	
+	focus = {
+		id = generic_destroyer_program
+		icon = anti_submarine
+		x = @navy_tree_center
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_naval_training_1
+			focus = generic_small_ship_program
+			focus = generic_dockyards_1
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = cl_bonus
+				bonus = 0.3
+				uses = 1
+				category = cl_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_dockyards_2
+		icon = naval_dockyards
+		x = @navy_tree_dockyards
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_dockyards_1
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_bomber_production
+		icon = bomber
+		x = @air_tree_left
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_fighter_production
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_bomber_focus
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_air_training_1
+		icon = airforce
+		x = @air_tree_right
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_air_bases_1
+		}
+		
+		completion_reward = {
+			air_experience = 15
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_air_bases_2
+		icon = air_production
+		x = @air_tree_very_far_right
+		y = 2
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_air_bases_1
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_military_industry_2
+		icon = industry_military
+		x = @industrial_tree_very_far_left
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_industrial_development
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_civilian_industry_2
+		icon = industry_civilian
+		x = @industrial_tree_left
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_industrial_development
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_infrastructure_2
+		icon = infrastructure
+		x = @industrial_tree_right
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_industrial_development
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_traditional_values
+		icon = demand_territory2
+		x = @birth_rate_tree_left
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_demographic_studies
+		}
+		
+		available = {
+			NOT = { has_government = social_democrat }
+			NOT = { has_government = progressive }
+			NOT = { has_government = democratic_socialist }
+			NOT = { has_government = communist }
+		}
+		
+		mutually_exclusive = {
+			focus = generic_female_workforce
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_male_workforce
+			add_war_support = -0.05
+			if = {
+				limit = { has_democratic_form_of_government = yes }
+				add_popularity = {
+					ideology = conservative
+					popularity = 0.04
+				}
+				add_popularity = {
+					ideology = reactionary
+					popularity = 0.04
+				}
+			}
+			if = {
+				limit = { has_democratic_form_of_government = no }
+				add_popularity = {
+					ideology = fascist
+					popularity = 0.04
+				}
+				add_popularity = {
+					ideology = nationalist
+					popularity = 0.04
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_female_workforce
+		icon = national_unity
+		x = @birth_rate_tree_right
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_demographic_studies
+		}
+		prerequisite = {
+			focus = generic_secure_national_unity
+		}
+		
+		available = {
+			NOT = { has_government = islamist }
+		}
+		
+		mutually_exclusive = {
+			focus = generic_traditional_values
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_equal_workforce
+			if = {
+				limit = { has_democratic_form_of_government = yes }
+				add_popularity = {
+					ideology = progressive
+					popularity = 0.04
+				}
+				add_popularity = {
+					ideology = democratic_socialist
+					popularity = 0.04
+				}
+			}
+			if = {
+				limit = { has_democratic_form_of_government = no }
+				add_popularity = {
+					ideology = communist
+					popularity = 0.06
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_invest_in_public_service
+		icon = construction3
+		x = @political_tree_very_far_left
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_recruit_more_administrators
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_public_service_investment
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_education_reform
+		icon = construction2
+		x = @political_tree_left
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_recruit_more_administrators
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_education_reform
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_isolation
+		icon = neutrality
+		x = @political_tree_right
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_recruit_more_diplomats
+		}
+		
+		mutually_exclusive = {
+			focus = generic_intervention
+		}
+		
+		completion_reward = {
+			if = {
+				limit = { 
+					has_idea = neutrality_idea 
+				}
+				add_political_power = 100
+				add_war_support = 0.05
+			}
+			if = {
+				limit = { 
+					NOT = { has_idea = neutrality_idea }
+					NOT = { has_idea = austrian_neutrality }
+				}
+				add_ideas = neutrality_idea
+			}
+			if = {	#Pretty much specific to Austria.
+				limit = {
+					has_idea = austrian_neutrality
+				}
+				remove_ideas = austrian_neutrality
+				add_ideas = neutrality_idea
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_intervention
+		icon = forceful_treaty
+		x = @political_tree_very_far_right
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_recruit_more_diplomats
+		}
+		
+		mutually_exclusive = {
+			focus = generic_isolation
+		}
+		
+		completion_reward = {
+			if = {
+				limit = { 
+					NOT = { has_idea = neutrality_idea } 
+					NOT = { has_idea = austrian_neutrality } 
+				}
+				add_political_power = 25
+				army_experience = 10
+				navy_experience = 10
+				air_experience = 10
+			}
+			if = {
+				limit = { has_idea = austrian_neutrality }
+				remove_ideas = austrian_neutrality
+				add_political_power = -20
+			}
+			if = {
+				limit = { has_idea = neutrality_idea }
+				remove_ideas = neutrality_idea
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_army_training_2
+		icon = infantry_allies
+		x = @army_tree_left
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_army_training_1
+		}
+		
+		completion_reward = {
+			army_experience = 20
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_armor_focus
+		icon = tank
+		x = @army_tree_right
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_artillery_focus
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = tank_bonus
+				bonus = 0.25
+				uses = 2
+				category = armor
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_naval_training_2
+		icon = navy2
+		x = @navy_tree_left
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_naval_training_1
+		}
+		
+		completion_reward = {
+			navy_experience = 15
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_submarine_program
+		icon = submarines
+		x = @navy_tree_right
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_destroyer_program
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = ss_bonus
+				bonus = 0.3
+				uses = 1
+				category = ss_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_dockyards_3
+		icon = naval_dockyards
+		x = @navy_tree_dockyards
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_dockyards_2
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_air_force_military_school
+		icon = air_defense
+		x = @air_tree_center
+		y = 3
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_bomber_production
+			focus = generic_air_training_1
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_air_force_military_school
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_military_industry_3
+		icon = industry_military
+		x = @industrial_tree_very_far_left
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_military_industry_2
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_civilian_industry_3
+		icon = industry_civilian
+		x = @industrial_tree_left
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_civilian_industry_2
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_infrastructure_3
+		icon = infrastructure
+		x = @industrial_tree_right
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_infrastructure_2
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_steel_factories
+		icon = GFX_focus_generic_steel
+		x = @industrial_tree_very_far_right
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_resource_focus
+		}
+		
+		available = {
+			num_of_civilian_factories > 9
+		}
+		
+		completion_reward = {
+			if = {
+				limit = { 
+					num_of_civilian_factories < 20 
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 2 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 19
+					num_of_civilian_factories < 30
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 3 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 3 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 29
+					num_of_civilian_factories < 40
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 4 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 39
+					num_of_civilian_factories < 50
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 5 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 5 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 5 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 5 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 49
+					num_of_civilian_factories < 60
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 6 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 59
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = steel amount = 7 }
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_crackdown_on_contraceptives
+		icon = propaganda
+		x = @birth_rate_tree_left
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_traditional_values
+		}
+		
+		available = {
+			NOT = { has_idea = population_growth_explosion }
+		}
+		
+		completion_reward = {
+			increase_birth_rate = yes
+			add_war_support = -0.05
+		}
+	}
+	
+	focus = {
+		id = generic_birth_control_programs
+		icon = radar
+		x = @birth_rate_tree_right
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_female_workforce
+		}
+		
+		available = {
+			NOT = { has_idea = population_growth_decline }
+		}
+		
+		completion_reward = {
+			lower_birth_rate = yes
+			add_war_support = 0.05
+		}
+	}
+	
+	focus = {
+		id = generic_research_incentives
+		icon = research
+		x = @political_tree_very_far_left
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_invest_in_public_service
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_encouraged_private_research
+			add_ideas = idea_focus_generic_census_reform
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_expand_the_secret_services
+		icon = intelligence_exchange
+		x = @political_tree_left
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_education_reform
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_expanded_secret_services
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_destroy_foreign_influence
+		icon = destroy_establishment
+		x = @political_tree_right
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_isolation
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_destroyed_foreign_influence
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_volunteer_corps
+		icon = infantry_commonwealth
+		x = @political_tree_very_far_right
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_intervention
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_volunteer_corps
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_land_doctrine_1
+		icon = army_doctrine
+		x = @army_tree_center
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_army_training_2
+			focus = generic_armor_focus
+		}
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.3
+				uses = 1
+				category = land_doctrine
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_cruiser_program
+		icon = cruisers
+		x = @navy_tree_center
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_naval_training_2
+			focus = generic_submarine_program
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = ca_bonus
+				bonus = 0.3
+				uses = 1
+				category = ca_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_air_doctrine_1
+		icon = air_doctrine
+		x = @air_tree_left
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_air_force_military_school
+		}
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.25
+				uses = 2
+				category = air_doctrine
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_air_safety_reforms
+		icon = bombs
+		x = @air_tree_right
+		y = 4
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_air_force_military_school
+		}
+		
+		completion_reward = {
+			air_experience = 5
+			add_ideas = generic_air_force_safety_reforms
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_military_industry_4
+		icon = industry_military
+		x = @industrial_tree_very_far_left
+		y = 5
+		cost = 15
+		
+		prerequisite = {
+			focus = generic_military_industry_3
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_civilian_industry_4
+		icon = industry_civilian
+		x = @industrial_tree_left
+		y = 5
+		cost = 15
+		
+		prerequisite = {
+			focus = generic_civilian_industry_3
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_synthetic_oil
+		icon = oil_production
+		x = @industrial_tree_right
+		y = 5
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_steel_factories
+		}
+		
+		available = {
+			num_of_civilian_factories > 9
+		}
+		
+		completion_reward = {
+			if = {
+				limit = { 
+					num_of_civilian_factories < 20 
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 2 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 19
+					num_of_civilian_factories < 30
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 3 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 3 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 29
+					num_of_civilian_factories < 40
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 4 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 39
+					num_of_civilian_factories < 50
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 5 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 5 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 5 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 5 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 49
+					num_of_civilian_factories < 60
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 6 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 59
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = oil amount = 7 }
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_aluminium_factories
+		icon = GFX_focus_generic_aluminum
+		x = @industrial_tree_very_far_right
+		y = 5
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_steel_factories
+		}
+		
+		available = {
+			num_of_civilian_factories > 9
+		}
+		
+		completion_reward = {
+			if = {
+				limit = { 
+					num_of_civilian_factories < 20 
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 2 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 19
+					num_of_civilian_factories < 30
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 3 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 3 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 29
+					num_of_civilian_factories < 40
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 4 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 39
+					num_of_civilian_factories < 50
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 5 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 5 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 5 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 5 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 49
+					num_of_civilian_factories < 60
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 6 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 6 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 59
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 7 }
+				}
+				random_owned_state = { 
+					add_resource = { type = aluminium amount = 7 }
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_extra_research_slot
+		icon = research
+		x = @political_tree_far_left
+		y = 5
+		cost = 25
+		
+		prerequisite = {
+			focus = generic_research_incentives
+		}
+		prerequisite = {
+			focus = generic_expand_the_secret_services
+		}
+		
+		completion_reward = {
+			add_research_slot = 1
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_defensive_constructions
+		icon = defence
+		x = @political_tree_right
+		y = 5
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_destroy_foreign_influence
+		}
+		
+		completion_reward = {
+			add_ideas = ENG_defensive_constructions_idea
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_political_influence_abroad
+		icon = territorial_claims
+		x = @political_tree_very_far_right
+		y = 5
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_volunteer_corps
+		}
+		
+		completion_reward = {
+			if = {
+				limit = { has_government = islamist }
+				every_neighbor_country = {
+					add_popularity = { ideology = islamist popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = fascist }
+				every_neighbor_country = {
+					add_popularity = { ideology = fascist popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = nationalist }
+				every_neighbor_country = {
+					add_popularity = { ideology = nationalist popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = monarchist }
+				every_neighbor_country = {
+					add_popularity = { ideology = monarchist popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = reactionary }
+				every_neighbor_country = {
+					add_popularity = { ideology = reactionary popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = conservative }
+				every_neighbor_country = {
+					add_popularity = { ideology = conservative popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = market_liberal }
+				every_neighbor_country = {
+					add_popularity = { ideology = market_liberal popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = social_liberal }
+				every_neighbor_country = {
+					add_popularity = { ideology = social_liberal popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = social_democrat }
+				every_neighbor_country = {
+					add_popularity = { ideology = social_democrat popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = progressive }
+				every_neighbor_country = {
+					add_popularity = { ideology = progressive popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = democratic_socialist }
+				every_neighbor_country = {
+					add_popularity = { ideology = democratic_socialist popularity = 0.05 }
+				}	
+			}
+			if = {
+				limit = { has_government = communist }
+				every_neighbor_country = {
+					add_popularity = { ideology = communist popularity = 0.05 }
+				}	
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_army_training_3
+		icon = infantry_allies
+		x = @army_tree_left
+		y = 5
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_army_training_2
+		}
+		
+		completion_reward = {
+			army_experience = 25
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_recruitment_strategies
+		icon = infantry_japan
+		x = @army_tree_right
+		y = 5
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_land_doctrine_1
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_new_recruitment_strategies
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_naval_doctrine_focus
+		icon = naval_doctrine
+		x = @navy_tree_left
+		y = 5
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_cruiser_program
+		}
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = naval_doc_bonus
+				cost_reduction = 0.3
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_carrier_program
+		icon = carriers
+		x = @navy_tree_right
+		y = 5
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_cruiser_program
+		}
+		
+		completion_reward = {
+			add_tech_bonus = {
+				name = cv_bonus
+				bonus = 0.25
+				uses = 1
+				category = cv_tech
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_air_doctrine_2
+		icon = air_doctrine
+		x = @air_tree_left
+		y = 5
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_air_doctrine_1
+		}
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.3
+				uses = 2
+				category = air_doctrine
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_military_industry_5
+		icon = industry_military
+		x = @industrial_tree_very_far_left
+		y = 6
+		cost = 20
+		
+		prerequisite = {
+			focus = generic_military_industry_4
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = production_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = arms_factory
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_civilian_industry_5
+		icon = industry_civilian
+		x = @industrial_tree_left
+		y = 6
+		cost = 15
+		
+		prerequisite = {
+			focus = generic_civilian_industry_4
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size < 1
+						include_locked = yes
+					}					
+				}
+			}
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_synthetic_rubber
+		icon = GFX_focus_generic_rubber
+		x = @industrial_tree_right
+		y = 6
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_synthetic_oil
+		}
+		
+		available = {
+			num_of_civilian_factories > 14
+		}
+		
+		completion_reward = {
+			if = {
+				limit = { 
+					num_of_civilian_factories < 20 
+				}
+				random_owned_state = { 
+					add_resource = { type = rubber amount = 2 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 19
+					num_of_civilian_factories < 30
+				}
+				random_owned_state = { 
+					add_resource = { type = rubber amount = 3 }
+				}
+				random_owned_state = { 
+					add_resource = { type = rubber amount = 3 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 29
+				}
+				random_owned_state = { 
+					add_resource = { type = rubber amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = rubber amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = rubber amount = 4 }
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = generic_rare_metals
+		icon = production2
+		x = @industrial_tree_very_far_right
+		y = 6
+		cost = 10
+		
+		prerequisite = {
+			focus = generic_aluminium_factories
+		}
+		
+		available = {
+			num_of_civilian_factories > 14
+		}
+		
+		completion_reward = {
+			if = {
+				limit = { 
+					num_of_civilian_factories < 20 
+				}
+				random_owned_state = { 
+					add_resource = { type = chromium amount = 2 }
+					add_resource = { type = tungsten amount = 2 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 19
+					num_of_civilian_factories < 30
+				}
+				random_owned_state = { 
+					add_resource = { type = chromium amount = 3 }
+					add_resource = { type = tungsten amount = 3 }
+				}
+				random_owned_state = { 
+					add_resource = { type = chromium amount = 3 }
+					add_resource = { type = tungsten amount = 3 }
+				}
+			}
+			if = {
+				limit = { 
+					num_of_civilian_factories > 29
+				}
+				random_owned_state = { 
+					add_resource = { type = chromium amount = 4 }
+					add_resource = { type = tungsten amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = chromium amount = 4 }
+					add_resource = { type = tungsten amount = 4 }
+				}
+				random_owned_state = { 
+					add_resource = { type = chromium amount = 4 }
+					add_resource = { type = tungsten amount = 4 }
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}

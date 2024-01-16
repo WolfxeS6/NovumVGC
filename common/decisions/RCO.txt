@@ -1,101 +1,5 @@
 #Category only allowed for RCO
 
-RCO_ignite_cw_in_sng_category = {
-
-	# RCO_cw_in_ukr = {
-
-		# 	icon = generic_construction
-
-		# 	available = {
-			# 		has_completed_focus = RCO_new_international
-			# 		owns_state = 240
-			# 		owns_state = 260
-			# 		owns_state = 245
-			# 	}
-
-		# 	fire_only_once = yes
-
-		# 	cost = 40
-		# 	days_remove = 30
-
-		# 	ai_will_do = {
-			# 		factor = 5
-			# 	}
-
-		# 	visible = {
-			# 		has_completed_focus = RCO_new_international
-			# 	}
-
-		# 	remove_effect = {
-			# 		UCO = {
-				# 			transfer_state = 228
-				# 		}
-			# 	}
-		# }
-
-	# RCO_cw_in_bel = {
-
-		# 	icon = generic_construction
-
-		# 	available = {
-			# 	has_completed_focus = RCO_new_international
-			# 	owns_state = 242
-			# 	owns_state = 249
-			# 	}
-
-		# 	fire_only_once = yes
-
-		# 	cost = 40
-		# 	days_remove = 30
-
-		# 	ai_will_do = {
-			# 		factor = 5
-			# 	}
-
-		# 	visible = {
-			# 		has_completed_focus = RCO_new_international
-			# 	}
-
-		# 	remove_effect = {
-			#        BCO = {
-				# 					transfer_state = 227
-				# 					transfer_state = 228
-				# 				}
-			# 	}
-		# }
-
-	# RCO_cw_in_kaz = {
-
-		# 	icon = generic_construction
-
-		# 	available = {
-			# 		has_completed_focus = RCO_new_international
-			# 		has_war_with = KAZ
-			# 		owns_state = 217
-			# 		owns_state = 251
-			# 	}
-
-		# 	fire_only_once = yes
-
-		# 	cost = 40
-		# 	days_remove = 30
-
-		# 	ai_will_do = {
-			# 		factor = 5
-			# 	}
-
-		# 	visible = {
-			# 		has_completed_focus = RCO_new_international
-			# 	}
-
-		# 	remove_effect = {
-			# 		KCO = {
-				# 			transfer_state = 227
-				# 			transfer_state = 228
-				# 		}
-			# 	}
-		# }
-
 	# RCO_annex_ultimatum_kaz = {
 
 		# 	icon = generic_construction
@@ -428,6 +332,100 @@ RCO_soviet_decisions_category = {
 				mission = RCO_transport_collapse_mission
 				days = 90
 			}
+		}
+
+	}
+
+	RCO_ukraine1_decision = {
+
+		icon = decision_partymob
+
+		available = {
+			has_completed_focus = RCO_new_international
+		}
+
+		visible = {
+			original_tag = RCO
+			has_government = communist
+		}
+
+		cost = 20
+		days_remove = 10
+
+		fire_only_once = no
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RCO_ukraine1_TT
+			UKR = {
+				set_party_name = {
+    				ideology = communist
+    				long_name = UKR_communist_party_new_long
+    				name = UKR_communist_party_new
+}
+			}
+			UKR = {
+				add_popularity = {
+    			ideology = communist
+    				popularity = 0.15
+}
+			}
+			hidden_effect = {
+				set_global_flag = SOV_ukraine1_desicions
+			}
+		}
+
+	}
+
+	RCO_ukraine2_decision = {
+
+		icon = decision_partymob
+
+		available = {
+			has_completed_focus = RCO_new_international
+			has_global_flag = SOV_ukraine1_desicions
+		}
+
+		visible = {
+			original_tag = RCO
+			has_government = communist
+			has_global_flag = SOV_ukraine1_desicions
+		}
+
+		cost = 20
+		days_remove = 10
+
+		fire_only_once = no
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = RCO_ukraine1_TT
+			RCO = {
+				puppet = {
+    				target = UKR
+    				end_wars = no
+				}
+			}
+			UKR = {
+				load_focus_tree = UCO_Communist_Ukraine
+			}
+			UKR = {
+				start_civil_war = {
+    			ruling_party = communist
+   				 ideology = conservative
+    size = 0.8
+    states = {
+        137 196 200 984 259 225 193 1144 197 226 203 202 192 806 198 1086 201 199 93 91 1143 80 89 73
+    }
+}
+			}
+			
 		}
 
 	}

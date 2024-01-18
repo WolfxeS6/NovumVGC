@@ -2715,6 +2715,7 @@ focus_tree = {
 				popularity = 0.05
 			}
 			#remove the scottish idea
+			remove_all_scottish_costs = yes
 		}
 
 		ai_will_do = {
@@ -5945,7 +5946,20 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			
+			Scottish_devolution_increase = yes
+			custom_effect_tooltip = ENG_sco_Decrease_it_tt
+			add_to_variable = {
+				SCO_independence_support = -5
+			}
+			clamp_variable = { var = SCO_independence_support min = 0 max = 100 }
+			set_variable = {
+				var = SCO_independence_support_shown
+				value = SCO_independence_support
+			}
+			divide_variable = {
+				var = SCO_independence_support_shown
+				value = 164
+			}
 		}
 
 		ai_will_do = {
@@ -6442,6 +6456,45 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = ENG_drug_decrimed
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ENG_self_rule
+		icon = GFX_focus_generic_self_management
+
+		x = 2
+		y = 1
+		relative_position_id = ENG_community_integration_program
+		cost = 6
+		prerequisite = {
+			focus = ENG_community_integration_program
+		}
+		prerequisite = {
+			focus = ENG_green_energy
+		}
+
+		mutually_exclusive = {}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+			release_puppet = SCO
+			release_puppet = WAL
+			if = {
+				limit = {
+					has_dlc = "Together for Victory"
+				}
+				set_autonomy = { target = SCO autonomy_state = autonomy_state }
+				set_autonomy = { target = WAL autonomy_state = autonomy_state }
+			}
+			add_stability = 0.1
+			remove_all_scottish_costs = yes
 		}
 
 		ai_will_do = {

@@ -84,13 +84,19 @@ shared_focus = {
 
 	search_filters = { FOCUS_FILTER_EUROPE }
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		every_country = {
 			limit = { is_EU_member = yes }
 			add_opinion_modifier = {
 				target = ROOT
 				modifier = european_commitment
 			}
+		}
+		every_country = {
+			limit = {
+				is_EU_member = yes
+			}
+			increase_trade_influence_by_1 = yes
 		}
 	}
 	completion_reward_joint_member = {
@@ -99,6 +105,12 @@ shared_focus = {
 		fourth_estate_market_liberal_increase = yes
 		add_stability = 0.01
 		add_political_power = 10
+		every_country = {
+			limit = {
+				is_EU_member = yes
+			}
+			increase_trade_influence_by_1 = yes
+		}
 	}
 }
 
@@ -125,7 +137,7 @@ joint_focus = {
 	joint_trigger = {
   		is_EU_member = yes
 	}
-	completion_reward = {
+	completion_reward_joint_originator = {
 		random_country = {
 			limit = {
 				NOT = { tag = GER }
@@ -193,6 +205,10 @@ joint_focus = {
 	completion_reward_joint_member = {
 		add_ideas = GER_european_logistics
 	}
+	completion_reward_joint_originator = {
+		add_ideas = GER_european_logistics
+		add_political_power = 50
+	}
 }
 joint_focus = {
 	id = EURO_european_physical_euro
@@ -220,11 +236,16 @@ joint_focus = {
 	}
 
 
-	completion_reward_joint_member = {
-		swap_ideas = {
-            remove_idea = the_euro
-            add_idea = the_euro_2
-        }
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = the_euro
+			}
+			swap_ideas = {
+				remove_idea = the_euro
+				add_idea = the_euro_2
+			}
+		}
 	}
 }
 joint_focus = {
@@ -252,10 +273,12 @@ joint_focus = {
   		is_EU_member = yes
 	}
 
-
 	completion_reward_joint_member = {
 		add_ideas = EURO_EMU_idea
-
+		add_political_power = 70
+	}
+	completion_reward_joint_member = {
+		add_ideas = EURO_EMU_idea
 	}
 }
 joint_focus = {
@@ -283,8 +306,8 @@ joint_focus = {
 	}
 
 
-	completion_reward_joint_member = {
-		add_ideas = EURO_erasmus_idea
+	completion_reward  = {
+		add_ideas = EURO_erasmus
 	}
 }
 joint_focus = {
@@ -312,7 +335,7 @@ joint_focus = {
 	}
 
 
-	completion_reward_joint_member = {
+	completion_reward  = {
 		every_country = {
 			limit = {
 				capital_scope = {
@@ -411,7 +434,7 @@ joint_focus = {
 	}
 
 
-	completion_reward_joint_member = {
+	completion_reward = {
 		country_event = { id = spain.89 }
 			add_ideas = SPR_ue_mercosur_idea
 			every_country = {
@@ -431,7 +454,7 @@ joint_focus = {
 				}
 			}
 	}
-	completion_reward = {
+	completion_reward_joint_originator = {
 		hidden_effect = {
 			every_country = {
 				limit = {
@@ -476,7 +499,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		random_country = {
 			limit = {
 				NOT = { tag = GER }
@@ -542,8 +565,22 @@ joint_focus = {
 
 
 	completion_reward_joint_member = {
+		add_doctrine_cost_reduction = {
+			name = armydoctrine_bonus
+			cost_reduction = 0.3
+			uses = 2
+			category = land_doctrine
+		}
+
 	}
-	completion_reward = {
+	completion_reward_joint_originator = {
+		add_doctrine_cost_reduction = {
+			name = armydoctrine_bonus
+			cost_reduction = 0.4
+			uses = 2
+			category = land_doctrine
+		}
+		army_experience = 15
 		if = {
 			limit = {
 				ENG = {
@@ -584,7 +621,7 @@ joint_focus = {
 	}
 
 
-	completion_reward_joint_member = {
+	completion_reward_joint_originator = {
 		army_experience = 15
 		navy_experience = 30
 		air_experience = 30
@@ -756,7 +793,8 @@ joint_focus = {
 	}
 
 
-	completion_reward_joint_member = {
+	completion_reward = {
+		add_ideas = EURO_Frontex
 	}
 }
 joint_focus = {
@@ -783,8 +821,12 @@ joint_focus = {
   		is_EU_member = yes
 	}
 
-
-	completion_reward_joint_member = {
+	
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = EURO_Frontex
+			add_idea = EURO_Frontex_2
+		}
 	}
 }
 joint_focus = {
@@ -813,7 +855,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
         #allows investment decisions for relation
 	}
 }
@@ -843,7 +885,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
         #allows investment decisions for relation
 	}
 }
@@ -873,7 +915,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
         #allows investment decisions for relation
 	}
 }
@@ -904,7 +946,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
         #allows investment decisions for relation
 	}
 }
@@ -1007,7 +1049,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
         set_global_flag = eu_expansion_of_2004_focus
         every_country = {
             limit = {
@@ -1056,7 +1098,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 	}
 }
 joint_focus = {
@@ -1076,6 +1118,9 @@ joint_focus = {
 		is_subject = no
 		is_EU_member = yes
         is_EU_major = yes
+		hidden_trigger = {
+			is_ai = no
+		}
 	}
 
 	search_filters = { FOCUS_FILTER_EUROPE }
@@ -1085,7 +1130,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 	}
 }
 joint_focus = {
@@ -1112,7 +1157,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		add_tech_bonus = {
 			name = submarine_bonus
 			bonus = 0.4
@@ -1146,7 +1191,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		custom_effect_tooltip = EU_cooperation_reset_tt
 		every_country = {
 			limit = {
@@ -1181,6 +1226,17 @@ joint_focus = {
 
 
 	completion_reward = {
+		fourth_estate_conservative_increase = yes
+		fourth_estate_social_democrat_increase = yes
+		fourth_estate_social_liberal_increase = yes
+		add_stability = 0.01
+		add_political_power = 10
+		every_country = {
+			limit = {
+				is_EU_member = yes
+			}
+			increase_trade_influence_by_1 = yes
+		}
 	}
 }
 joint_focus = {
@@ -1209,7 +1265,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		add_political_power = 25
 		add_war_support = 0.02
 		add_stability = 0.02
@@ -1244,7 +1300,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 	}
 }
 joint_focus = {
@@ -1273,6 +1329,8 @@ joint_focus = {
 
 
 	completion_reward = {
+		add_stability = 0.05
+		add_political_power = 80
 	}
 }
 joint_focus = {
@@ -1332,7 +1390,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		add_political_power = 25
 		add_war_support = -0.05
 		news_event = news.64
@@ -1345,7 +1403,11 @@ joint_focus = {
 	prerequisite = { 
         focus = EURO_pan_european_propaganda 
     }
-	
+	bypass = {
+		ENG = {
+			is_EU_member = no
+		}
+	}
 	x = 2
 	y = 1
 	relative_position_id = EURO_pan_european_propaganda
@@ -1364,7 +1426,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 	}
 }
 joint_focus = {
@@ -1407,6 +1469,12 @@ joint_focus = {
 	prerequisite = { 
         focus = EURO_union_preparation 
     }
+	prerequisite = { 
+        focus = EURO_proyectos_vigilancia_masiva 
+    }
+	prerequisite = { 
+        focus = EURO_handle_special_relationships 
+    }
 	
 	x = 0
 	y = 1
@@ -1426,7 +1494,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		country_event = european_union.3
 	}
 }
@@ -1458,7 +1526,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		random_country = {
 			limit = {
 				NOT = { tag = GER }
@@ -1563,7 +1631,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		random_country = {
 			limit = {
 				NOT = { tag = GER }
@@ -1681,7 +1749,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
         set_global_flag = eu_expansion_of_2007_focus
         every_country = {
             limit = {
@@ -1733,7 +1801,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
         set_global_flag = eu_expansion_of_2013_focus
         every_country = {
             limit = {
@@ -1757,7 +1825,7 @@ joint_focus = {
     prerequisite = { focus = EURO_europe_of_nations }
 	
 	x = 0
-	y = 1
+	y = 2
 	relative_position_id = EURO_expansion_2013
 	cost = 3
 
@@ -1774,7 +1842,7 @@ joint_focus = {
 	}
 
 
-	completion_reward = {
+	completion_reward_joint_originator = {
 		every_country = {
             limit = {
                 OR = {

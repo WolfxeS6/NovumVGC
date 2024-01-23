@@ -1006,27 +1006,25 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SYR_The_Son
 		prerequisite = {
-			focus = SYR_Nasserist-Baathism
+			focus = SYR_Nasserism
 			focus = SYR_Progressive_Nasserism
 			focus = SYR_Assadist_Nasserism
 		}
 		prerequisite = {
-			#focus = SYR_The_Lion_of_North_Africa
+			
 			focus = SYR_Conquer_North_Africa
 		}
 		prerequisite = {
 			focus = SYR_The_Arabian_Dream
 		}
-		#prerequisite = {
-		#	focus = SYR_Free_North_Africa
-		#}
+		
 		ai_will_do = {
 			factor = 100
 			}
 		x = -11
 		y = 15
 		completion_reward = {
-			
+			add_country_leader_trait = uniter_of_arabs
 		 }
 	}
 	focus = {
@@ -1078,13 +1076,19 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Path_towards_a_united_arab_republic
 		}
+		bypass = {
+			has_idea = SYR_Reformist_Baathism
+		}
 		x = -7
 		y = 9
 		ai_will_do = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			swap_ideas = {
+				remove_idea = SYR_Neo_Baathism
+				add_idea = SYR_Neo_Baathism2
+			}
 		 }
 	}
 	focus = {
@@ -1102,7 +1106,13 @@ focus_tree = {
 			}
 		completion_reward = {
 			every_country = {
-				
+				limit = {
+					has_country_flag = country_language_arabic
+				}
+				add_opinion_modifier = {
+					target = SYR
+					modifier = has_expressed_loyalty
+				}
 			}
 		 }
 	}
@@ -1120,7 +1130,19 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			every_country = {
+				limit = {
+					has_country_flag = country_language_arabic
+				}
+				add_popularity = {
+					ideology = islamist
+					popularity = -0.05
+				}
+				add_popularity = {
+					ideology = nationalist
+					popularity = 0.05
+				}
+			}
 		 }
 	}
 	focus = {
@@ -1140,7 +1162,9 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			LEB = {
+				country_event = syria.14
+			}
 		 }
 	}
 	focus = {
@@ -1315,6 +1339,11 @@ focus_tree = {
 			}
 		completion_reward = {
 			set_cosmetic_tag = SYR_UAR
+			add_stability = 0.05
+			create_wargoal = {
+				target = PAL
+				type = annex_everything
+			}
 		 }
 	}
 	focus = {
@@ -1359,11 +1388,12 @@ focus_tree = {
 				target = KUW
 				type = annex_everything
 			}
+			 
 		 }
 	}
 	focus = {
 		id = SYR_Conquer_North_Africa
-		icon = SYR_UAR
+		icon = GFX_goal_generic_major_war
 		cost = 5
 		relative_position_id = SYR_The_Son
 		prerequisite = {
@@ -1396,6 +1426,14 @@ focus_tree = {
 				target = WES
 				type = annex_everything
 			}
+			create_wargoal = {
+				target = MAU
+				type = annex_everything
+			}
+			create_wargoal = {
+				target = SUD
+				type = annex_everything
+			}
 		 }
 	}
 	focus = {
@@ -1409,7 +1447,11 @@ focus_tree = {
 		x = -7
 		y = 10
 		completion_reward = {
-			
+			add_popularity = {
+				ideology = fascist
+				popularity = -0.05
+			}
+			add_stability = 0.05
 		 }
 	}
 	focus = {
@@ -1426,7 +1468,15 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			set_party_name = {
+				ideology = nationalist
+				long_name = "Nasserist Union Party"	
+				name = "NUP"
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.02
+			}
 		 }
 	}
 	focus = {
@@ -1446,11 +1496,11 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			add_ideas = SYR_Secular_State
 		 }
 	}
 	focus = {
-		id = SYR_Unity_Propaganda
+		id = SYR_A_Question_of_Leadership
 		icon = GFX_focus_focus_fra_revolution_utmost
 		cost = 5
 		relative_position_id = SYR_The_Son
@@ -1464,16 +1514,19 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			country_event = syria.42
 		 }
 	}
 	focus = {
-		id = SYR_Nasserist-Baathism
+		id = SYR_Nasserism
 		icon = GFX_focus_ger_great_red_menace
 		cost = 5
 		relative_position_id = SYR_The_Son
+		available = {
+			always = no
+		}
 		prerequisite = {
-			focus = SYR_Unity_Propaganda
+			focus = SYR_A_Question_of_Leadership
 		}
 		mutually_exclusive = {
 			focus = SYR_Progressive_Nasserism
@@ -1487,27 +1540,23 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			create_country_leader = {
-				name = "Abdullah Saloum Abdullah"
-				ideology = pannationalist
-				traits = {sharp_tongued_lawyer dictator}
-				picture = "Abdullah_Abdullah.dds"
-			}
+			
 		 }
 	}
 	focus = {
 		id = SYR_Progressive_Nasserism
-		icon = GFX_focus_ger_great_red_menace
+		icon = GFX_focus_POL_support_global_falangism
 		cost = 5
 		relative_position_id = SYR_The_Son
+		
 		prerequisite = {
-			focus = SYR_Unity_Propaganda
+			focus = SYR_A_Question_of_Leadership
 		}
 		available = {
-			has_completed_focus = SYR_Progressive_Baathism
+			always = no
 		}
 		mutually_exclusive = {
-			focus = SYR_Nasserist-Baathism
+			focus = SYR_Nasserism
 		}
 		mutually_exclusive = {
 			focus = SYR_Assadist_Nasserism
@@ -1523,17 +1572,18 @@ focus_tree = {
 	}
 	focus = {
 		id = SYR_Assadist_Nasserism
-		icon = GFX_focus_ger_great_red_menace
+		icon = GFX_focus_generic_military_dictatorship
 		cost = 5
 		relative_position_id = SYR_The_Son
+		
 		prerequisite = {
-			focus = SYR_Unity_Propaganda
+			focus = SYR_A_Question_of_Leadership
 		}
 		available = {
-			has_completed_focus = SYR_Progressive_Baathism
+			always = no
 		}
 		mutually_exclusive = {
-			focus = SYR_Nasserist-Baathism
+			focus = SYR_Nasserism
 		}
 		mutually_exclusive = {
 			focus = SYR_Progressive_Nasserism
@@ -1544,7 +1594,9 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			set_country_leader_portrait = {
+				portrait = "gfx/leaders/SYR/Bashar_Al_Assad3.dds"
+			}
 		 }
 	}
 	focus = {
@@ -1842,7 +1894,50 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			hidden_effect = {
+				division_template = {
+					name = "Eagles of the Whirlwind"
+					priority = 2
+					#division_names_group = ROOT_INF_01
+					regiments = {
+						motorized = { x = 0 y = 0 }
+						motorized = { x = 0 y = 1 }
+						motorized = { x = 0 y = 2 }
+
+						mechanized = { x = 1 y = 0 }
+						mechanized = { x = 1 y = 1 }
+						mechanized = { x = 1 y = 2 }
+
+						motorized = { x = 2 y = 0 }
+						motorized = { x = 2 y = 1 }
+						motorized = { x = 2 y = 2 }
+
+						support = {
+							engineer = { x = 0 y = 0 }
+							recon = { x = 0 y = 1 }
+						}
+					}
+				}
+
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"1. Eagles of the Whirlwind\" division_template = \"Eagles of the Whirlwind\" start_experience_factor = 0.2"
+						owner = ROOT
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"2. Eagles of the Whirlwind\" division_template = \"Eagles of the Whirlwind\" start_experience_factor = 0.2"
+						owner = ROOT
+					}
+				}
+			}
+			add_war_support = 0.03
+			custom_effect_tooltip = SSNP_Divisions_tt
 		 }
 	}
 	focus = {
@@ -2100,6 +2195,9 @@ focus_tree = {
 		icon = GFX_focus_NOR_the_lone_wolf_norway
 		cost = 5
 		relative_position_id = SYR_The_Son
+		available = {
+			has_country_flag = SYR_SSNPBaath_Unfinished
+		}
 		prerequisite = {
 			focus = SYR_Include_the_SSNP_in_the_Government
 		}
@@ -2600,11 +2698,12 @@ focus_tree = {
 			has_country_flag = SYR_Bushra_Al_Assad
 		}
 		mutually_exclusive = {
-			focus = SYR_The_Father
+			focus = SYR_The_Brother
 		}
 		mutually_exclusive = {
 			focus = SYR_The_Son
 		}
+
 		icon = SYR_The_Daughter
 		cost = 5
 		relative_position_id = SYR_Hafez_Rule_Uncontested
@@ -3668,7 +3767,9 @@ focus_tree = {
 		x = 20
 		y = 10
 		completion_reward = {
-			army_experience = 50
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_manpower = 10000
 		 }
 	}
 	focus = {
@@ -3958,6 +4059,72 @@ focus_tree = {
 				cost_reduction = 0.25
 				uses = 3
 				category = land_doctrine
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SYR_Expand_the_Marine_Corps
+		icon = GFX_goal_generic_amphibious_assault
+		cost = 10
+		prerequisite = {
+			focus = SYR_saa
+		}
+		prerequisite = {
+			focus = SYR_san
+		}
+		relative_position_id = SYR_saa
+		x = 3
+		y = 1
+		completion_reward = {
+			custom_effect_tooltip = SYR_Marines_tt
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = marine_tech
+			}
+			hidden_effect = {
+				division_template = {
+					name = "Syrian Marine Corps"
+					priority = 2
+					#division_names_group = SOV_INF_01
+					regiments = {
+						marine = { x = 0 y = 0 }
+						marine = { x = 0 y = 1 }
+						marine = { x = 0 y = 2 }
+
+						marine = { x = 1 y = 0 }
+						marine = { x = 1 y = 1 }
+						marine = { x = 1 y = 2 }
+
+						marine = { x = 2 y = 0 }
+						mot_artillery_brigade = { x = 2 y = 1 }
+						mot_artillery_brigade = { x = 2 y = 2 }
+					}
+					support = {
+						engineer = { x = 0 y = 0 }
+						recon = { x = 0 y = 1 }
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 219 }
+					create_unit = {
+						division = "name = \"Syrian Marine Corps 1.\" division_template = \"Syrian Marine Corps\" start_experience_factor = 1.0"
+						owner = SYR
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 219 }
+					create_unit = {
+						division = "name = \"Syrian Marine Corps 2.\" division_template = \"Syrian Marine Corps\" start_experience_factor = 1.0"
+						owner = SYR
+					}
+				}
 			}
 		}
 		ai_will_do = {
@@ -4336,6 +4503,9 @@ focus_tree = {
 		cost = 10
 		prerequisite = {
 			focus = SYR_incorporate_militias
+		}
+		available = {
+			has_civil_war = no
 		}
 		relative_position_id = SYR_our_biggest_challenge
 		x = 0

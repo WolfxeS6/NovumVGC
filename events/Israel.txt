@@ -64,7 +64,7 @@ country_event = {
 	id = israel.2
 	title = israel.2.t
 	desc = israel.2.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	fire_only_once = yes
 
@@ -138,7 +138,7 @@ country_event = {
 	id = israel.3
 	title = israel.3.t
 	desc = israel.3.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -180,7 +180,7 @@ country_event = {
 	id = israel.4
 	title = israel.4.t
 	desc = israel.4.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -223,7 +223,7 @@ country_event = {
 	id = israel.5
 	title = israel.5.t
 	desc = israel.5.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -325,7 +325,7 @@ country_event = {
 	id = israel.6
 	title = israel.6.t
 	desc = israel.6.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -453,7 +453,7 @@ country_event = {
 	id = israel.28
 	title = israel.28.t
 	desc = israel.28.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -509,7 +509,7 @@ country_event = {
 	id = israel.8
 	title = israel.8.t
 	desc = israel.8.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -651,7 +651,7 @@ country_event = {
 	id = israel.12
 	title = israel.12.t
 	desc = israel.12.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -697,7 +697,7 @@ country_event = {
 	id = israel.13
 	title = israel.13.t
 	desc = israel.13.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -714,6 +714,7 @@ country_event = {
 		}
 
 		ISR = { annex_country = { target = PAL } }
+		every_state = { limit = { is_core_of = PAL } add_core_of = ISR }
 		
 		news_event = {
 			id = news_ISR.17
@@ -724,7 +725,7 @@ country_event = {
 		name = israel.13.o2
 
 		ai_chance = {
-			factor = 50
+			factor = 1
 		}
 
 		news_event = {
@@ -740,7 +741,7 @@ country_event = {
 	id = israel.14
 	title = israel.14.t
 	desc = israel.14.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -792,7 +793,7 @@ country_event = {
 	id = israel.15
 	title = israel.15.t
 	desc = israel.15.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -808,7 +809,7 @@ country_event = {
 	id = israel.16
 	title = israel.16.t
 	desc = israel.16.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -857,7 +858,7 @@ country_event = {
 	id = israel.20
 	title = israel.20.t
 	desc = israel.20.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -933,7 +934,7 @@ country_event = { #Reutrn to 1947 borders
 	id = israel.22
 	title = israel.22.t
 	desc = israel.22.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	is_triggered_only = yes
 
@@ -974,22 +975,18 @@ country_event = { #palestinian rocket event
 	id = israel.23
 	title = israel.23.t
 	desc = israel.23.d
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	trigger = {
-
 		AND = {
 			tag = ISR
 			ISR = {
 				NOT = { has_completed_focus = ISR_respect_PAL_Sov_focus }
 			}
-
 			PAL = {
 				NOT = { has_country_flag = rocket_bases_out_of_action }
 			}
-
 		}
-
 	}
 	fire_only_once = yes
 	mean_time_to_happen = {
@@ -997,49 +994,51 @@ country_event = { #palestinian rocket event
 	}
 
 	immediate = {
-		random_list = {
-			33 = {
-				random_owned_controlled_state = {
-					prioritize = { 812 } #Negev
-
-					limit = {
-						industrial_complex > 0
+		hidden_effect = {
+			random_list = {
+				33 = {
+					random_owned_controlled_state = {
+						prioritize = { 812 } #Negev
+	
+						limit = {
+							industrial_complex > 0
+						}
+						damage_building = {
+							type = industrial_complex
+							damage = 0.8
+						}
+	
+						add_manpower = -20
 					}
-					damage_building = {
-						type = industrial_complex
-						damage = 0.8
-					}
-
-					add_manpower = -20
 				}
-			}
-
-			33 = {
-				random_owned_controlled_state = {
-					prioritize = { 812 } #Negev
-
-					limit = {
-						arms_factory > 0
+	
+				33 = {
+					random_owned_controlled_state = {
+						prioritize = { 812 } #Negev
+	
+						limit = {
+							arms_factory > 0
+						}
+						damage_building = {
+							type = arms_factory
+							damage = 0.8
+						}
+	
+						add_manpower = -20
 					}
-					damage_building = {
-						type = arms_factory
-						damage = 0.8
-					}
-
-					add_manpower = -20
 				}
-			}
-
-			33 = {
-				random_owned_controlled_state = {
-					prioritize = { 812 } #Negev
-
-					damage_building = {
-						type = infrastructure
-						damage = 0.3
+	
+				33 = {
+					random_owned_controlled_state = {
+						prioritize = { 812 } #Negev
+	
+						damage_building = {
+							type = infrastructure
+							damage = 0.3
+						}
+	
+						add_manpower = -200
 					}
-
-					add_manpower = -200
 				}
 			}
 		}
@@ -1130,7 +1129,7 @@ country_event = { #rockets hit
 	desc = israel.24.d
 
 	is_triggered_only = yes
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	option = {
 		name = israel.24.o1
@@ -1154,7 +1153,7 @@ country_event = { #rockets hit (lots killed)
 	desc = israel.27.d
 
 	is_triggered_only = yes
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	option = {
 		name = israel.27.o1
@@ -1196,7 +1195,7 @@ country_event = { #rockets miss
 	desc = israel.25.d
 
 	is_triggered_only = yes
-	picture = GFX_report_event_ISR_golan_negotiations
+	picture = GFX_report_event_golan_negotiations
 
 	option = {
 		name = israel.25.o1
@@ -1846,7 +1845,7 @@ news_event = {
 	id = news_ISR.14
 	title = news_ISR.14.t
 	desc = news_ISR.14.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	is_triggered_only = yes
 	major = yes
@@ -1870,7 +1869,7 @@ news_event = {
 	id = news_ISR.15
 	title = news_ISR.15.t
 	desc = news_ISR.15.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	is_triggered_only = yes
 	major = yes
@@ -1894,7 +1893,7 @@ news_event = {
 	id = news_ISR.16
 	title = news_ISR.16.t
 	desc = news_ISR.16.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	is_triggered_only = yes
 	major = yes
@@ -1918,7 +1917,7 @@ news_event = {
 	id = news_ISR.17
 	title = news_ISR.17.t
 	desc = news_ISR.17.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	is_triggered_only = yes
 	major = yes
@@ -1942,7 +1941,7 @@ news_event = {
 	id = news_ISR.18
 	title = news_ISR.18.t
 	desc = news_ISR.18.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	is_triggered_only = yes
 	major = yes
@@ -1966,7 +1965,7 @@ news_event = {
 	id = news_ISR.19
 	title = news_ISR.19.t
 	desc = news_ISR.19.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	is_triggered_only = yes
 	major = yes
@@ -1990,7 +1989,7 @@ news_event = {
 	id = news_ISR.20
 	title = news_ISR.20.t
 	desc = news_ISR.20.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	major = yes
 
@@ -2014,7 +2013,7 @@ news_event = {
 	id = news_ISR.23
 	title = news_ISR.23.t
 	desc = news_ISR.23.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	is_triggered_only = yes
 	major = yes
@@ -2038,7 +2037,7 @@ news_event = {
 	id = news_ISR.24
 	title = news_ISR.24.t
 	desc = news_ISR.24.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	is_triggered_only = yes
 	major = yes
@@ -2051,7 +2050,7 @@ news_event = {
 	id = news_ISR.100
 	title = news_ISR.100.t
 	desc = news_ISR.100.d
-	picture = GFX_report_event_ISR_golan_negotiations #placeholder
+	picture = GFX_report_event_golan_negotiations #placeholder
 
 	is_triggered_only = yes
 	major = yes

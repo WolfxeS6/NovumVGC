@@ -1,0 +1,4652 @@
+add_namespace = china
+add_namespace = pr_china
+add_namespace = pr_china_flavor
+add_namespace = pr_china_outer_worlds
+add_namespace = pr_china_diplomacy
+add_namespace = china_election
+add_namespace = pr_china_news
+
+#####################################################################
+#####################################################################
+#####################################################################
+#
+# PR China News
+#
+#####################################################################
+#####################################################################
+#####################################################################
+
+#17th Karmapa's Exile
+news_event = {
+	id = pr_china_news.1
+	title = pr_china_news.1.t
+	desc = pr_china_news.1.desc
+	picture = GFX_news_event_potala_palace
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.1.a
+		trigger = {
+			original_tag = PRC
+		}
+	}
+	
+	option = {
+		name = pr_china_news.1.b
+		trigger = {
+			original_tag = RAJ
+		}
+	}
+	
+	option = {
+		name = pr_china_news.1.c
+		trigger = {
+			NOT = { original_tag = PRC }
+			NOT = { original_tag = RAJ }
+		}
+	}
+}
+
+#China's Longest Night
+news_event = {
+	id = pr_china_news.2
+	title = pr_china_news.2.t
+	desc = pr_china_news.2.desc
+	picture = GFX_news_event_chinese_tanks_2
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.2.a
+		trigger = {
+			original_tag = PRC
+		}
+	}
+	
+	option = {
+		name = pr_china_news.2.b
+		trigger = {
+			NOT = { original_tag = PRC }
+		}
+	}
+}
+
+#China's Longest Night
+news_event = {
+	id = pr_china_news.3
+	title = pr_china_news.3.t
+	desc = pr_china_news.3.desc
+	picture = GFX_news_event_chinese_tanks_2
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.3.a
+		trigger = {
+			original_tag = PRC
+		}
+	}
+	
+	option = {
+		name = pr_china_news.3.b
+		trigger = {
+			NOT = { original_tag = PRC }
+		}
+	}
+}
+
+#[PRC.GetName]'s First Local Elections
+news_event = {
+	id = pr_china_news.4
+	title = pr_china_news.4.t
+	desc = pr_china_news.4.desc
+	picture = GFX_news_event_chinese_government_2
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.4.a
+		trigger = {
+			original_tag = PRC
+		}
+	}
+	
+	option = {
+		name = pr_china_news.4.b
+		trigger = {
+			NOT = { original_tag = PRC }
+		}
+	}
+}
+
+#End of the Factional Conflict in [PRC.GetName]
+news_event = {
+	id = pr_china_news.5
+	title = pr_china_news.5.t
+	desc = pr_china_news.5.desc
+	picture = GFX_news_event_chinese_government
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.5.a
+		trigger = {
+			original_tag = PRC
+		}
+	}
+	
+	option = {
+		name = pr_china_news.5.b
+		trigger = {
+			NOT = { original_tag = PRC }
+		}
+	}
+}
+
+#Second Chinese Civil War
+news_event = {
+	id = pr_china_news.6
+	title = pr_china_news.6.t
+	desc = pr_china_news.6.desc
+	picture = GFX_news_event_chinese_army_1
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.6.a
+		trigger = {
+			original_tag = PRC
+		}
+	}
+	
+	option = {
+		name = pr_china_news.6.b
+		trigger = {
+			NOT = { original_tag = PRC }
+		}
+	}
+}
+
+#Dragon Awakened from Sleep
+news_event = {
+	id = pr_china_news.7
+	title = pr_china_news.7.t
+	desc = pr_china_news.7.desc
+	picture = GFX_news_event_chinese_tanks_1
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.7.a
+		custom_effect_tooltip = PRC_china_dream_tt
+	}
+}
+
+#The Assassination of the Dalai Lama
+news_event = {
+	id = pr_china_news.8
+	title = pr_china_news.8.t
+	desc = pr_china_news.8.desc
+	picture = GFX_news_event_dalai_lama
+	
+	major = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			TIB = { 
+				remove_ideas = TIB_dalai_lama_idea 
+				kill_ideology_leader = monarchist
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_news.8.a
+		trigger = {
+			OR = {
+				is_in_faction_with = PRC
+				original_tag = PRC
+			}
+		}
+		if = {
+			limit = { original_tag = PRC }
+			add_stability = 0.05
+			every_owned_state = {
+				limit = {
+					has_resistance = yes
+					has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+				}
+				add_compliance = 10
+				add_resistance = 10
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_news.8.b
+		trigger = { 
+			NOT = { original_tag = PRC }
+			NOT = { is_in_faction_with = PRC }
+		}
+	}
+}
+
+#China-America War
+news_event = {
+	id = pr_china_news.9
+	title = pr_china_news.9.t
+	desc = pr_china_news.9.desc
+	picture = GFX_news_event_united_states_navy
+	
+	major = yes
+	is_triggered_only = yes
+	
+	immediate = {
+		set_global_flag = prc_america_china_war_sp
+		activate_superevent_music = yes
+	}
+	
+	option = {
+		name = pr_china_news.9.a
+		trigger = {
+			OR = {
+				is_in_faction_with = USA
+				original_tag = USA
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_news.9.b
+		trigger = {
+			OR = {
+				is_in_faction_with = PRC
+				original_tag = PRC
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_news.9.c
+		trigger = { 
+			NOT = { original_tag = USA }
+			NOT = { original_tag = PRC }
+			NOT = { is_in_faction_with = USA }
+			NOT = { is_in_faction_with = PRC }
+		}
+	}
+}
+
+#The Establishing OGAS Program
+news_event = {
+	id = pr_china_news.10
+	title = pr_china_news.10.t
+	desc = pr_china_news.10.desc
+	picture = GFX_news_event_ogas
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.10.a
+		trigger = {
+			original_tag = PRC
+		}
+	}
+	
+	option = {
+		name = pr_china_news.10.b
+		trigger = {
+			NOT = { original_tag = PRC }
+		}
+	}
+}
+
+#[ROOT.GetLeader] Challenging [USA.GetAdjective] Hegemon
+news_event = {
+	id = pr_china_news.11
+	title = pr_china_news.11.t
+	desc = pr_china_news.11.desc
+	picture = GFX_news_event_chinese_tanks_1
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.11.a
+	}
+}
+
+#The Assassination of the Dalai Lama
+news_event = {
+	id = pr_china_news.12
+	title = pr_china_news.12.t
+	desc = pr_china_news.12.d
+	picture = GFX_news_event_dalai_lama
+	
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_news.12.a
+		trigger = {
+			OR = {
+				is_in_faction_with = PRC
+				original_tag = PRC
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_news.12.b
+		trigger = { 
+			NOT = { original_tag = PRC }
+			NOT = { is_in_faction_with = PRC }
+		}
+	}
+}
+
+#Divided North Korea
+news_event = {
+	id = pr_china_news.13
+	title = pr_china_news.13.t
+	desc = pr_china_news.13.desc
+	picture = dprk_map
+	
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_news.13.a
+		trigger = {
+			OR = {
+				original_tag = KOR
+				original_tag = PRC
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_news.13.b
+		trigger = { 
+			NOT = { original_tag = PRC }
+			NOT = { original_tag = KOR }
+		}
+	}
+}
+
+#The Cross-Strait War
+news_event = {
+	id = pr_china_news.14
+	title = pr_china_news.14.t
+	desc = pr_china_news.14.desc
+	picture = GFX_news_event_united_states_navy
+	
+	major = yes
+	is_triggered_only = yes
+	
+	#immediate = {
+	#	set_global_flag = prc_america_china_war_sp
+	#}
+	
+	option = {
+		name = pr_china_news.14.a
+		trigger = {
+			OR = {
+				is_in_faction_with = CHI
+				original_tag = CHI
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_news.14.b
+		trigger = {
+			OR = {
+				is_in_faction_with = PRC
+				original_tag = PRC
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_news.14.c
+		trigger = { 
+			NOT = { original_tag = CHI }
+			NOT = { original_tag = PRC }
+			NOT = { is_in_faction_with = CHI }
+			NOT = { is_in_faction_with = PRC }
+		}
+	}
+}
+
+#[GetYear] Chinese Presidential Election
+news_event = {
+	id = pr_china_news.15
+	title = pr_china_news.15.t
+	desc = pr_china_news.15.desc
+	picture = GFX_news_event_chinese_government
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.15.a
+		trigger = {
+			original_tag = PRC
+		}
+	}
+	
+	option = {
+		name = pr_china_news.15.b
+		trigger = {
+			NOT = { original_tag = PRC }
+		}
+	}
+}
+
+#[GetYear] Chinese Presidential Election
+news_event = {
+	id = pr_china_news.16
+	title = pr_china_news.16.t
+	desc = {
+		text = pr_china_news.16.desc_1
+		trigger = {
+			FROM = {
+				has_country_leader = {
+					character = prc_li_peng
+					ruling_only = yes
+				}
+			}
+		}
+	}
+	desc = {
+		text = pr_china_news.16.desc_2
+		trigger = {
+			FROM = {
+				has_country_leader = {
+					character = prc_xi_jinping
+					ruling_only = yes
+				}
+			}
+		}
+	}
+	desc = {
+		text = pr_china_news.16.desc_3
+		trigger = {
+			FROM = {
+				has_country_leader = {
+					character = prc_Hu_Jintao
+					ruling_only = yes
+				}
+			}
+		}
+	}
+	desc = {
+		text = pr_china_news.16.desc_4
+		trigger = {
+			FROM = {
+				NOT = { 
+					has_country_leader = {
+						character = prc_li_peng
+						ruling_only = yes
+					} 
+				}
+				NOT = { 
+					has_country_leader = {
+						character = prc_xi_jinping
+						ruling_only = yes
+					} 
+				}
+				NOT = { 
+					has_country_leader = {
+						character = prc_Hu_Jintao
+						ruling_only = yes
+					} 
+				}
+			}
+		}
+	}
+	
+	picture = GFX_news_event_chinese_government
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.16.a
+		trigger = {
+			original_tag = PRC
+		}
+	}
+	
+	option = {
+		name = pr_china_news.16.b
+		trigger = {
+			NOT = { original_tag = PRC }
+		}
+	}
+}
+
+#indiscriminate mine operation
+news_event = {
+	id = pr_china_news.17
+	title = pr_china_news.17.t
+	desc = pr_china_news.17.desc
+	picture = GFX_news_event_united_states_navy
+	
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_news.17.a
+		trigger = {
+			original_tag = CHI
+		}
+		add_ideas = CHI_blockade_of_the_sea
+	}
+	
+	option = {
+		name = pr_china_news.17.b
+		trigger = {
+			original_tag = PRC
+		}
+		add_named_threat = { threat = 3 name = pr_china_news.17.t }
+	}
+	
+	option = {
+		name = pr_china_news.17.c
+		trigger = { 
+			NOT = { original_tag = CHI }
+			NOT = { original_tag = PRC }
+		}
+	}
+}
+
+#[From.GetName] joins the Chinese Alliance
+news_event = {
+	id = pr_china_news.18
+	title = pr_china_news.18.t
+	desc = pr_china_news.18.desc
+	picture = GFX_news_event_chinese_soldiers
+	
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_news.18.a
+		trigger = { original_tag = PRC }
+	}
+	
+	option = {
+		name = pr_china_news.18.b
+		trigger = { original_tag = USA }
+	}
+	
+	
+	option = {
+		name = pr_china_news.18.c
+		trigger = { 
+			NOT = { original_tag = PRC }
+			NOT = { original_tag = USA }
+		}
+	}
+}
+
+#The Great Downfall of the China
+news_event = {
+	id = pr_china_news.19
+	title = pr_china_news.19.t
+	desc = pr_china_news.19.desc
+	picture = GFX_news_event_chinese_government_2
+	
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_news.19.a
+		trigger = {
+			OR = {
+				any_allied_country = {
+					has_war_with = ROOT
+				}
+				has_war_with = ROOT
+			}
+		}
+	}
+	option = {
+		name = pr_china_news.19.b
+		trigger = {
+			OR = {
+				tag = ROOT
+				has_war_together_with = ROOT
+				is_in_faction_with = ROOT
+			}
+		}
+		
+		if = {
+			limit = { original_tag = PRC }			
+			add_timed_idea = {
+				idea = PRC_the_great_downfall
+				days = 1460
+			}
+			leave_faction = yes
+		}
+	}
+	option = {
+		name = pr_china_news.19.c
+		trigger = {
+			NOT = { has_war_together_with = ROOT }
+			NOT = { is_in_faction_with = ROOT }
+			NOT = { any_allied_country = { has_war_with = ROOT } }
+			NOT = { has_war_with = ROOT }
+			NOT = { tag = ROOT }
+		}
+	}
+}
+
+#The End of Hong Kong
+news_event = {
+	id = pr_china_news.20
+	title = pr_china_news.20.t
+	desc = pr_china_news.20.desc
+	picture = GFX_news_event_annexation_of_hong_kong
+	
+	is_triggered_only = yes
+	major = yes
+	
+	option = {
+		name = pr_china_news.20.a
+		trigger = {
+			OR = {
+				original_tag = PRC
+				original_tag = HKN
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_news.20.b
+		trigger = {
+			original_tag = ENG
+		}
+	}
+	
+	option = {
+		name = pr_china_news.20.c
+		trigger = {
+			NOT = { original_tag = PRC }
+			NOT = { original_tag = HKN }
+			NOT = { original_tag = ENG }
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.1
+	title = pr_china.1.t
+	desc = pr_china.1.desc
+	picture = GFX_report_event_chinese_flag
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.1.a
+		complete_national_focus = PRC_dorje_s_escape
+		
+		hidden_effect = {
+			RAJ = { country_event = { id = pr_china.2 } }
+			country_event = { id = pr_china.31 days = 60 random_days = 14 }
+			country_event = { id = pr_china.32 days = 32 random_days = 14 }
+			country_event = { id = pr_china.33 days = 80 random_days = 14 }
+			country_event = { id = pr_china.36 days = 114 random_days = 32 }
+			country_event = { id = pr_china.37 days = 170 random_days = 32 }
+		
+			news_event = {
+				id = pr_china_news.1
+				days = 1
+			}
+		}
+	}
+}
+country_event = {
+	id = pr_china.2
+	title = pr_china.1.t
+	desc = pr_china.1.desc
+	picture = GFX_report_event_chinese_flag
+	
+	immediate = {
+	}
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.2.a
+	}
+}
+
+country_event = {
+	id = pr_china.4
+	title = pr_china.4.t
+	desc = pr_china.4.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.4.a
+	}
+}
+
+country_event = {
+	id = pr_china.5
+	title = pr_china.5.t
+	desc = pr_china.5.desc
+	picture = GFX_report_event_PRC_WTO
+	
+	immediate = {
+	}
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.5.a
+		if = {
+			limit = { NOT = { has_idea = free_trade } }
+			add_ideas = free_trade
+		}
+		else = {
+			add_political_power = 150
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.6
+	title = pr_china.6.t
+	desc = pr_china.6.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.6.a
+		
+		hidden_effect = {
+			country_event = { id = pr_china.13 days = 3 }
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.7
+	title = pr_china.7.t
+	desc = pr_china.7.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.7.a
+		
+		hidden_effect = {
+			country_event = { id = pr_china.13 days = 3 }
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.8
+	title = pr_china.8.t
+	desc = pr_china.8.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = { 
+			news_event = {
+				id = pr_china_news.2
+			}
+			
+			remove_power_balance = {
+				id = PRC_coup_plan
+			}
+		}
+	}
+	
+	option = {	#
+		name = pr_china.8.a
+		set_politics = {
+			ruling_party = communist
+			elections_allowed = no
+		}
+
+		retire_ideology_leader = communist
+
+		hidden_effect = {
+			create_country_leader = {
+				name = prc_bo_xilai
+				desc = "POLITICS_bo_xilai_DESC"
+				picture = "bo_xilai.dds"
+				ideology = maoist
+				traits = { PRC_maoist_of_the_21st_century }
+			}
+			set_party_name = { 
+				ideology = communist
+				long_name = PRC_communist_leftist_long 
+				name = PRC_communist_leftist
+			}
+		}
+		
+		if = {
+			limit = { has_country_flag = PRC_revoution_co_op_generals } 
+			add_timed_idea = {
+				idea = PRC_corrupt_command
+				days = 720
+			}
+		}
+		else = {
+			every_unit_leader = {
+				limit = {
+					has_trait = trait_PRC_corruption_traits
+				}
+				remove_unit_leader = yes
+			}
+		}
+		
+		if = {
+			limit = { has_country_flag = PRC_revoution_co_op_capitalists } 
+			add_timed_idea = {
+				idea = PRC_with_capitalists
+				days = 720
+			}
+		}
+		
+		if = {
+			limit = { has_country_flag = PRC_revoution_co_op_other_opposition } 
+			add_timed_idea = {
+				idea = PRC_factional_conflict
+				days = 720
+			}
+		}
+
+		set_cosmetic_tag = PRC_leftist_communist
+		
+	}
+}
+
+country_event = {
+	id = pr_china.9
+	title = pr_china.9.t
+	desc = pr_china.9.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.9.a
+		PRC_BOP_chinese_coup_small_effect = yes
+	}
+}
+
+country_event = {
+	id = pr_china.10
+	title = pr_china.10.t
+	desc = pr_china.10.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.10.a
+		set_country_flag = prc_other_factions_purge_plan
+		PRC_BOP_chinese_coup_large_effect = yes
+		ai_chance = {
+			factor = 70
+		}
+	}
+	
+	option = {	#
+		name = pr_china.10.b
+		add_political_power = -25
+		ai_chance = {
+			factor = 30
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.11
+	title = pr_china.11.t
+	desc = pr_china.11.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.11.a
+		
+		set_power_balance = {
+			id = PRC_new_china_plan
+			left_side = PRC_new_china_plan_zero # will keep the last set side if not specified
+			right_side = PRC_new_china_plan_end # will keep the last set side if not specified
+			set_default = yes # whether or not to reset the power balance to the initial value, default = no
+		}
+		
+		hidden_effect = {
+			country_event = { id = pr_china.12 days = 7 }
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.12
+	title = pr_china.12.t
+	desc = pr_china.12.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.12.a
+		
+		add_power_balance_modifier = {
+			id = PRC_new_china_plan
+			modifier = PRC_democratic_activists_modifiers
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.13
+	title = pr_china.13.t
+	desc = pr_china.13.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.13.a
+		
+		set_power_balance = {
+			id = PRC_coup_plan
+			left_side = PRC_coup_plan_zero # will keep the last set side if not specified
+			right_side = PRC_coup_plan_end # will keep the last set side if not specified
+			set_default = yes # whether or not to reset the power balance to the initial value, default = no
+		}
+		
+		hidden_effect = {
+			country_event = { id = pr_china.14 days = 7 }
+		}
+	}
+}
+
+
+country_event = {
+	id = pr_china.14
+	title = pr_china.14.t
+	desc = pr_china.14.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.14.a
+		
+		add_power_balance_modifier = {
+			id = PRC_coup_plan
+			modifier = PRC_covert_operation_modifiers
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.15
+	title = pr_china.15.t
+	desc = pr_china.15.desc
+	picture = GFX_report_event_chinese_soldiers
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = { 
+			remove_power_balance = {
+				id = PRC_coup_plan
+			}
+		}
+	}
+	
+	option = {	#
+		name = pr_china.15.a
+		
+		set_politics = {
+			ruling_party = communist
+			elections_allowed = no
+		}
+
+		retire_ideology_leader = communist
+
+		hidden_effect = {
+			create_country_leader = {
+				name = prc_yan_mingfu
+				desc = "POLITICS_yan_mingfu_DESC"
+				picture = "yan_mingfu.dds"
+				ideology = socialism_with_ccp
+				traits = { PRC_social_democrat_trait }
+			}
+
+			set_cosmetic_tag = PRC_rightist_communist
+			set_party_name = { 
+				ideology = communist
+				long_name = PRC_communist_rightist_long 
+				name = PRC_communist_rightist
+			}
+		}
+		
+		if = {
+			limit = { has_country_flag = PRC_revoution_co_op_generals } 
+			add_timed_idea = {
+				idea = PRC_corrupt_command
+				days = 720
+			}
+		}
+		else = {
+			every_unit_leader = {
+				limit = {
+					has_trait = trait_PRC_corruption_traits
+				}
+				remove_unit_leader = yes
+			}
+		}
+		
+		if = {
+			limit = { has_country_flag = PRC_revoution_co_op_capitalists } 
+			add_timed_idea = {
+				idea = PRC_with_capitalists
+				days = 720
+			}
+		}
+		
+		if = {
+			limit = { has_country_flag = PRC_revoution_co_op_other_opposition } 
+			add_timed_idea = {
+				idea = PRC_factional_conflict
+				days = 720
+			}
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.16
+	title = pr_china.16.t
+	desc = pr_china.16.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.16.a
+		add_stability = 0.03
+		
+	}
+	
+	option = {	#
+		name = pr_china.16.b
+		add_political_power = 75
+	}
+}
+
+country_event = {
+	id = pr_china.17
+	title = pr_china.17.t
+	desc = pr_china.17.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.17.a
+		trigger = { has_completed_focus = PRC_large_amnesty }
+		add_political_power = -50
+		
+	}
+	
+	option = {	#
+		name = pr_china.17.b
+		hidden_effect = {
+			country_event = {
+				id = pr_china.18
+				days = 365
+				random_days = 50
+			}
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.18 #Death of Zhao Ziyang
+	title = pr_china.18.t
+	desc = pr_china.18.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.18.a
+		set_country_flag = prc_zhao_ziyang_dead
+	}
+}
+
+
+# Revolution
+
+country_event = {
+	id = pr_china.19
+	title = pr_china.19.t
+	desc = pr_china.19.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#
+		name = pr_china.19.a
+		set_country_flag = PRC_revoution_co_op_generals
+		PRC_BOP_chinese_coup_nomal_effect = yes
+	}
+	
+	option = {	#
+		name = pr_china.19.b
+	}
+}
+
+country_event = {
+	id = pr_china.20
+	title = pr_china.20.t
+	desc = pr_china.20.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#
+		name = pr_china.20.a
+		set_country_flag = PRC_revoution_co_op_capitalists
+		PRC_BOP_chinese_coup_nomal_effect = yes
+		
+	}
+	
+	option = {	#
+		name = pr_china.20.b
+	}
+}
+
+country_event = {
+	id = pr_china.21
+	title = pr_china.21.t
+	desc = pr_china.21.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#
+		name = pr_china.21.a
+		set_country_flag = PRC_revoution_co_op_other_opposition
+		PRC_BOP_chinese_coup_nomal_effect = yes
+		
+	}
+	
+	option = {	#
+		name = pr_china.21.b
+	}
+}
+
+country_event = {
+	id = pr_china.22
+	title = pr_china.22.t
+	desc = pr_china.22.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#
+		name = pr_china.22.a
+		set_country_flag = PRC_revoution_co_op_other_opposition
+		PRC_BOP_chinese_coup_nomal_effect = yes
+		
+	}
+	
+	option = {	#
+		name = pr_china.22.b
+	}
+}
+
+country_event = {
+	id = pr_china.23
+	title = pr_china.23.t
+	desc = pr_china.23.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = pr_china.23.a
+		PRC_BOP_chinese_coup_small_effect = yes
+	}
+}
+
+# The September 11 Attacks
+country_event = {
+	id = pr_china.24
+	title = pr_china.24.t
+	desc = pr_china.24.desc
+	picture = GFX_report_event_nine_eleven
+	
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 1
+	}
+	
+	trigger = {
+		original_tag = PRC
+		USA = { has_country_flag = usa_9_11 }
+		NOT = { has_war_with = USA }
+		date < 2005.01.01
+	}
+	
+	option = {
+		name = pr_china.24.a
+		add_timed_idea = { idea = PRC_september_11_attacks days = 730 }
+		
+		random_owned_controlled_state = {
+			prioritize = { 263 }
+			limit = {
+				is_core_of = ROOT
+				free_building_slots = { building = arms_factory size > 0 include_locked = yes }
+				impassable = no
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+				free_building_slots = { building = arms_factory size > 0 include_locked = yes }
+				impassable = no
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+				free_building_slots = { building = arms_factory size > 2 include_locked = yes }
+				impassable = no
+			}
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		
+		hidden_effect = {
+			country_event = { id = pr_china.29 days = 30 random_days = 14 }
+		}
+	}
+}
+
+# The Dragon Awakened
+country_event = {
+	id = pr_china.25
+	title = pr_china.25.t
+	desc = pr_china.25.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.25.a
+		
+		set_global_flag = PRC_world_plan
+		
+		hidden_effect = {
+			news_event = { id = pr_china_news.7 hours = 3 }
+		}
+		
+		random_owned_controlled_state = {
+			prioritize = { 263 }
+			limit = {
+				is_core_of = ROOT
+				free_building_slots = { building = arms_factory size > 0 include_locked = yes }
+				impassable = no
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+				free_building_slots = { building = arms_factory size > 0 include_locked = yes }
+				impassable = no
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+				free_building_slots = { building = arms_factory size > 2 include_locked = yes }
+				impassable = no
+			}
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		
+	}
+}
+
+country_event = {
+	id = pr_china.26
+	title = pr_china.26.t
+	desc = pr_china.26.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = pr_china.26.a
+		add_ideas = { PRC_the_golden_shield }
+	}
+}
+
+country_event = {
+	id = pr_china.27
+	title = pr_china.27.t
+	desc = pr_china.27.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = pr_china.27.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		set_country_flag = prc_bo_xilai_advisor_died
+		add_manpower = -1
+	}
+	
+	option = {
+		name = pr_china.27.b
+		ai_chance = {
+			factor = 50
+		}
+		set_country_flag = prc_bo_xilai_advisor_imprisoned
+		add_political_power = -25
+	}
+}
+
+country_event = {
+	id = pr_china.28
+	title = pr_china.28.t
+	desc = pr_china.28.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = pr_china.28.a
+		remove_power_balance = {
+			id = PRC_new_china_plan
+		} 
+	}
+}
+
+country_event = {
+	id = pr_china.29
+	title = pr_china.29.t
+	desc = pr_china.29.desc
+	picture = GFX_report_event_protests
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = pr_china.29.a
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_sik_separatism }
+			}
+			add_compliance = 5
+			add_resistance = -5
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.30
+	title = pr_china.30.t
+	desc = pr_china.30.desc
+	picture = GFX_report_event_america_and_afghanistan
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = pr_china.30.a
+			random_owned_controlled_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					is_core_of = ROOT
+					state_population_k > 500
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					is_core_of = ROOT
+					state_population_k > 500
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+	}
+}
+
+country_event = {
+	id = pr_china.31
+	title = pr_china.31.t
+	desc = pr_china.31.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.31.a
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_resistance = -5
+		}
+	}
+	
+	option = {
+		name = pr_china.31.b
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_compliance = 5
+			add_resistance = 5
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.32
+	title = pr_china.32.t
+	desc = pr_china.32.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.32.a
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_resistance_target = {
+				amount = 10
+				occupier = ROOT 
+				days = 365
+				tooltip = PRC_colonial_unrest_tt
+			}
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.33
+	title = pr_china.33.t
+	desc = pr_china.33.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.33.a
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_compliance = -5
+		}
+		hidden_effect = {
+			country_event = { id = pr_china.34 days = 70 random_days = 30 }
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.34
+	title = pr_china.34.t
+	desc = pr_china.34.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.34.a
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_compliance = 5
+		}
+		
+		hidden_effect = {
+			country_event = { id = pr_china.35 days = 14 random_days = 7 }
+		}
+	}
+	
+	option = {
+		name = pr_china.34.b
+		ai_chance = {
+			factor = 50
+		}
+		add_political_power = -50
+	}
+}
+
+country_event = {
+	id = pr_china.35
+	title = pr_china.35.t
+	desc = pr_china.35.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.35.a
+		add_manpower = -1
+	}
+}
+
+country_event = {
+	id = pr_china.36
+	title = pr_china.36.t
+	desc = pr_china.36.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.36.a
+		ai_chance = {
+			factor = 50
+		}
+		919 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		322 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		935 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_resistance = 5
+		}
+	}
+	
+	option = {
+		name = pr_china.36.b
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		add_political_power = 50
+	}
+}
+
+#https://en.wikipedia.org/wiki/Students_for_a_Free_Tibet
+country_event = {
+	id = pr_china.37
+	title = pr_china.37.t
+	desc = pr_china.37.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.37.a
+		add_political_power = -25
+	}
+}
+
+country_event = {
+	id = pr_china.38
+	title = pr_china.38.t
+	desc = pr_china.38.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.38.a
+		trigger = { 
+			NOT = { original_tag = USA }
+		}
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				original_tag = JAP
+			}
+			modifier = {
+				factor = 0
+				original_tag = ENG
+			}
+			modifier = {
+				factor = 0.25
+				is_major = yes
+			}
+		}
+		add_opinion_modifier = { target = FROM modifier = improve_relations_with_china }
+	}
+	
+	option = {
+		name = pr_china.38.b
+		ai_chance = {
+			factor = 50
+		}
+		add_war_support = 0.05
+	}
+}
+
+country_event = {
+	id = pr_china.39
+	title = pr_china.39.t
+	desc = pr_china.39.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.39.a
+	}
+}
+
+country_event = {
+	id = pr_china.40
+	title = pr_china.40.t
+	desc = pr_china.40.desc
+	picture = GFX_report_event_PRC_night_army_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.40.a
+		every_unit_leader = {
+			limit = {
+				has_trait = trait_PRC_corruption_traits
+			}
+			remove_unit_leader = yes
+		}
+		
+		random_army_leader = {			
+			limit = {
+				NOT = {	
+					has_trait = scavenger
+					has_trait = trait_PRC_corruption_traits
+				}
+			}
+			add_trait = {trait = scavenger }
+		}
+		
+		random_army_leader = {			
+			limit = {
+				NOT = {	
+					has_trait = scavenger
+					has_trait = trait_PRC_corruption_traits
+				}
+			}
+			add_trait = {trait = scavenger }
+		}
+		
+		random_army_leader = {			
+			limit = {
+				NOT = {	
+					has_trait = scavenger
+					has_trait = trait_PRC_corruption_traits
+				}
+			}
+			add_trait = {trait = scavenger }
+		}
+	}
+}
+
+
+# CPC Losing Its Influence
+country_event = {
+	id = pr_china.44
+	title = pr_china.44.t
+	desc = pr_china.44.desc
+	picture = GFX_report_event_computer
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = { set_country_flag = no_more_cpc }
+	}
+	
+	trigger = {
+		NOT = { has_country_flag = no_more_cpc }
+	}
+	
+	option = {
+		name = pr_china.44.a
+		
+			set_party_name = { 
+				ideology = conservative
+				long_name = PRC_conservative_democratic_party_long
+				name = PRC_conservative_democratic_party
+			}
+			set_party_name = { 
+				ideology = social_liberal
+				long_name = PRC_social_liberal_democratic_party_long
+				name = PRC_social_liberal_democratic_party
+			}
+			set_party_name = { 
+				ideology = reactionary
+				long_name = PRC_reactionary_democratic_party_long 
+				name = PRC_reactionary_democratic_party
+			}
+			set_party_name = { 
+				ideology = market_liberal
+				long_name = PRC_market_liberal_democratic_party_long 
+				name = PRC_market_liberal_democratic_party
+			}
+			set_party_name = { 
+				ideology = progressive
+				long_name = PRC_progressive_democratic_party_long
+				name = PRC_progressive_democratic_party
+			}
+	}
+}
+
+country_event = {
+	id = pr_china.46
+	title = pr_china.46.t
+	desc = pr_china.46.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.46.a
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 2
+				has_opinion = {
+					target = FROM
+					value > 20
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					target = FROM
+					value > 50
+				}
+			}
+			modifier = {
+				factor = 1.1
+				OR = {
+					has_government = conservative
+					has_government = reactionary
+				}
+			}
+			modifier = {
+				factor = 0
+				has_opinion = {
+					target = FROM
+					value < 0
+				}
+			}
+		}
+		
+		FROM = { country_event = { id = pr_china.47 days = 1 } }
+	}
+	
+	option = {
+		name = pr_china.46.b
+		ai_chance = {
+			factor = 75
+		}
+		
+		FROM = { country_event = { id = pr_china.48 days = 1 } }
+	}
+}
+
+country_event = {
+	id = pr_china.47
+	title = pr_china.47.t
+	desc = pr_china.47.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.47.a
+		set_global_flag = north_korea_divide
+		
+		ROOT = {
+			diplomatic_relation = {
+			    country = PRK
+			    relation = guarantee
+			    active = no
+			}
+		}
+		
+		create_wargoal = {
+			type = annex_everything
+			target = PRK
+		}
+		
+		complete_national_focus = PRC_north_korea_s_split_plan
+	}
+}
+
+country_event = {
+	id = pr_china.48
+	title = pr_china.48.t
+	desc = pr_china.48.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.48.a
+		#uncomplete_national_focus = PRC_north_korea_s_split_plan
+		set_country_flag = reject_nk_plan
+	}
+}
+
+country_event = {
+	id = pr_china.49
+	title = pr_china.49.t
+	desc = pr_china.49.desc
+	picture = GFX_report_event_chinese_soldiers
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.49.a
+		KOR = { country_event = { id = pr_china.50 } }
+		
+		947 = { 
+			transfer_state_to = KOR #Hwanghae
+		}
+		872 = { 
+			transfer_state_to = KOR #South Gangwon
+		}
+	}
+	
+	option = {
+		name = pr_china.49.b
+		KOR = { country_event = { id = pr_china.50 } }
+		
+		947 = { 
+			transfer_state_to = KOR #Hwanghae
+		}
+		872 = { 
+			transfer_state_to = KOR #South Gangwon
+		}
+		
+		PRK = {
+			transfer_state = 948
+			transfer_state = 949
+			transfer_state = 950 #Rason
+			transfer_state = 875
+			transfer_state = 873
+			transfer_state = 874
+			#set_cosmetic_tag = HOL_reichskommissariat
+		}
+		
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = { target = PRK autonomy_state = autonomy_tributary_state }
+		}
+		else = {
+			puppet = PRK
+		}
+	}
+	
+	option = {
+		name = pr_china.49.c
+		KOR = { country_event = { id = pr_china.50 } }
+		
+		947 = { 
+			transfer_state_to = KOR #Hwanghae
+		}
+		872 = { 
+			transfer_state_to = KOR #South Gangwon
+		}
+		
+		PRK = {
+			transfer_state = 948
+			transfer_state = 949
+			transfer_state = 875
+			transfer_state = 873
+			transfer_state = 874
+			#set_cosmetic_tag = HOL_reichskommissariat
+		}
+		
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = { target = PRK autonomy_state = autonomy_tributary_state }
+		}
+		else = {
+			puppet = PRK
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.50
+	title = pr_china.50.t
+	desc = pr_china.50.desc
+	picture = GFX_report_event_chinese_soldiers
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.50.a
+	}
+}
+
+#[FROM.GetName] Against our Independence
+country_event = {
+	id = pr_china.51
+	title = pr_china.51.t
+	desc = pr_china.51.desc
+	picture = GFX_report_event_chinese_soldiers
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.51.a
+		ai_chance = {
+			factor = 50
+		}
+		FROM = { country_event = { id = pr_china.52 } }
+	}
+	
+	option = {
+		name = pr_china.51.b
+		ai_chance = {
+			factor = 25
+			modifier = {
+				factor = 0
+				NOT = { has_government = communist }
+			}
+		}
+		FROM = { country_event = { id = pr_china.53 } }
+	}
+}
+
+country_event = {
+	id = pr_china.52
+	title = pr_china.52.t
+	desc = pr_china.52.desc
+	picture = GFX_report_event_chinese_soldiers
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.52.a
+	}
+}
+
+country_event = {
+	id = pr_china.53
+	title = pr_china.53.t
+	desc = pr_china.53.desc
+	picture = GFX_report_event_chinese_soldiers
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.53.a
+		annex_country = { target = CHI transfer_troops = yes }
+	}
+}
+
+country_event = {
+	id = pr_china.54
+	title = pr_china.54.t
+	desc = pr_china.54.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#
+		name = pr_china.54.a
+		
+	}
+	
+	option = {	#
+		name = pr_china.21.b
+	}
+}
+
+country_event = { #War Hero Mao Xinyu
+	id = pr_china.300
+	title = pr_china.300.t
+	desc = pr_china.300.desc
+	picture = GFX_report_event_chinese_soldiers
+	
+	fire_only_once = yes
+	
+	trigger = {
+		original_tag = PRC
+		prc_mao_xinyu = {
+			is_unit_leader = yes
+			skill > 5 #Level 6 over
+		}
+		NOT = { has_completed_focus = PRC_grand_compromise_in_congress }
+	}
+	
+	mean_time_to_happen = {
+		days = 1000
+	}
+
+	option = {
+		name = pr_china.300.a
+		
+		add_political_power = 100
+		
+		prc_mao_xinyu = {
+			add_country_leader_role = {
+				country_leader = {
+					desc = prc_mao_xinyu_leader_desc
+					ideology = maoist
+					traits = { PRC_maoist_of_the_21st_century }
+				}
+				promote_leader = yes
+			}
+		}
+		set_country_leader_description = { desc = prc_mao_xinyu_leader_desc }
+		
+		hidden_effect = {
+			if = {
+				limit = {
+					has_completed_focus = PRC_new_long_march
+				}
+				add_country_leader_trait = PRC_new_long_march_trait
+			}
+			if = {
+				limit = {
+					has_completed_focus = PRC_heir_to_maoism
+				}
+				add_country_leader_trait = PRC_heir_to_maoism_trait
+			}
+			if = {
+				limit = {
+					has_completed_focus = PRC_beginning_of_a_new_revolution
+				}
+				swap_ruler_traits = {
+					remove = PRC_maoist_of_the_21st_century
+					add = PRC_maoist_of_the_21st_century_improved
+				}	
+			}
+		}
+	}
+	
+	option = {	#
+		name = pr_china.300.b
+	}
+}
+
+#####################################################################
+#####################################################################
+#####################################################################
+#
+# PR China Civil War
+#
+#####################################################################
+#####################################################################
+#####################################################################
+
+
+country_event = {
+	id = pr_china.101
+	title = pr_china.101.t
+	desc = pr_china.101.desc
+	picture = GFX_report_event_PRC_night_army_2
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			605 = { set_state_flag = PRC_catholic_state_flag }
+			601 = { set_state_flag = PRC_catholic_state_flag }
+			325 = { set_state_flag = PRC_catholic_state_flag }
+			1242 = { set_state_flag = PRC_catholic_state_flag }
+			
+			613 = { set_state_flag = PRC_social_democrat_state_flag }
+			62 = { set_state_flag = PRC_social_democrat_state_flag }
+			
+			news_event = { id = pr_china_news.6 }
+		}
+	}
+	option = {	#
+		name = pr_china.101.a
+		
+		hidden_effect = {
+		
+				
+			create_dynamic_country = {
+				original_tag = THIS
+				#save_event_target_as = china_catholic_rebel
+				set_variable = { PRC.catholic_rebel = THIS }
+				ROOT = {
+					every_controlled_state = {
+						limit = {
+							has_state_flag = PRC_catholic_state_flag
+						}
+						var:PRC.catholic_rebel = {
+							transfer_state = PREV
+						}
+					}
+				}
+				set_politics = {
+					ruling_party = islamist
+					elections_allowed = no
+				}
+				set_popularities = {
+					islamist = 80
+					communist = 20
+				}
+				
+				set_cosmetic_tag = REC
+				
+				set_rule = { 
+					can_join_factions = no 
+					can_create_factions = no
+					can_not_declare_war = yes
+				}
+			}
+			clear_variable = PRC.catholic_rebel
+			
+			create_dynamic_country = {
+				original_tag = THIS
+				#save_event_target_as = china_social_democrat_rebel
+				set_variable = { PRC.social_democrat_rebel = THIS }
+				ROOT = {
+					every_controlled_state = {
+						limit = {
+							has_state_flag = PRC_social_democrat_state_flag
+						}
+						var:PRC.social_democrat_rebel = {
+							transfer_state = PREV
+						}
+					}
+				}
+				set_popularities = {
+					social_democrat = 80
+					communist = 20
+				}
+				set_politics = {
+					ruling_party = social_democrat
+					elections_allowed = no
+				}
+				
+				set_cosmetic_tag = REE
+				
+				set_rule = { 
+					can_join_factions = no 
+					can_create_factions = no
+					can_not_declare_war = yes
+				}
+			}
+			clear_variable = PRC.social_democrat_rebel	
+			
+			random_other_country = {
+				limit = {
+					original_tag = PRC
+					has_government = social_democrat
+				}
+				save_event_target_as = china_social_democrat_rebel
+				set_country_flag = PRC_social_democrat_china_flag
+			}
+			
+			random_other_country = {
+				limit = {
+					original_tag = PRC
+					has_government = islamist
+				}
+				save_event_target_as = china_catholic_rebel
+				set_country_flag = PRC_catholic_china_flag
+			}
+		
+			if = {
+				limit = {
+					WAS = {
+						is_puppet_of = ROOT
+					}
+				}
+				release_puppet = WAS
+			}
+			if = {
+				limit = {
+					HKN = {
+						is_puppet_of = ROOT
+					}
+				}
+				release_puppet = HKN
+			}
+			if = {
+				limit = {
+					MCU = {
+						is_puppet_of = ROOT
+					}
+				}
+				release_puppet = MCU
+			}
+			if = {
+				limit = {
+					TIB = {
+						is_puppet_of = ROOT
+					}
+				}
+				release_puppet = TIB
+			}
+			if = {
+				limit = {
+					SIK = {
+						is_puppet_of = ROOT
+					}
+				}
+				release_puppet = SIK
+			}
+			
+			event_target:china_social_democrat_rebel = {
+				every_unit_leader = {
+					set_nationality = PRC
+				}
+			}
+			
+			event_target:china_catholic_rebel = {
+				every_unit_leader = {
+					set_nationality = PRC
+				}
+			}
+		
+			random_country = {
+				limit = {
+					original_tag = PRC
+					has_government = communist
+				}
+				
+				PRC_joseph_zen = {
+					remove_any_country_role_from_character = yes
+					set_nationality = event_target:china_catholic_rebel	
+					add_field_marshal_role = {
+						traits = { politically_connected }
+						skill = 1
+						attack_skill = 1
+						defense_skill = 1
+						planning_skill = 1
+						logistics_skill = 1
+					}
+					add_country_leader_role = {
+						country_leader={
+							ideology=christian_theocracy
+							desc = "POLITICIAN_revolt_joseph_zen_DESC"
+							traits = { PRC_democratic_bishop }
+							expire="1.1.1.1"
+							id=-1
+						}
+						promote_leader = yes				
+					}
+				}
+				
+				PRC_zhao_ziyang = {
+					remove_any_country_role_from_character = yes
+					set_nationality = event_target:china_social_democrat_rebel	
+					add_field_marshal_role = {
+						traits = { politically_connected }
+						skill = 1
+						attack_skill = 1
+						defense_skill = 1
+						planning_skill = 1
+						logistics_skill = 1
+					}
+					add_country_leader_role = {
+						country_leader={
+							ideology=social_democrat_ideology
+							desc = "POLITICIAN_revolt_zhao_ziyang_DESC"
+							traits = { PRC_last_hope_of_democracy }
+							expire="1.1.1.1"
+							id=-1
+						}
+						promote_leader = yes				
+					}
+				}
+			}
+			
+			ROOT = {
+				transfer_units_fraction = {
+					target = event_target:china_social_democrat_rebel
+					size = 0.1
+					stockpile_ratio = 0.1
+					army_ratio = 0.1
+					navy_ratio = 0.1
+					air_ratio = 0.1
+				}
+				
+				declare_war_on = {
+					target = event_target:china_social_democrat_rebel
+					type = annex_everything
+				}
+				
+				transfer_units_fraction = {
+					target = event_target:china_catholic_rebel
+					size = 0.6
+					stockpile_ratio = 0.6
+					army_ratio = 0.5
+					navy_ratio = 0
+					air_ratio = 0.3
+				}
+				
+				declare_war_on = {
+					target = event_target:china_catholic_rebel
+					type = annex_everything
+				}
+			}
+			event_target:china_social_democrat_rebel = {
+				declare_war_on = {
+					target = event_target:china_catholic_rebel
+					type = annex_everything
+				}
+				
+				#set_country_leader_description = { desc = POLITICIAN_revolt_zhao_ziyang_DESC }
+			}
+			
+			
+			country_event = { id = pr_china.102 days = 3 random_days = 5 }
+			country_event = { id = pr_china.103 days = 3 random_days = 10 }
+			country_event = { id = pr_china.104 days = 5 random_days = 10 }
+			country_event = { id = pr_china.105 days = 7 random_days = 10 }
+			country_event = { id = pr_china.106 days = 14 random_days = 10 }
+			
+			country_event = { id = pr_china.110 days = 1 }
+		}
+	}
+}
+country_event = {
+	id = pr_china.102
+	title = pr_china.102.t
+	desc = pr_china.102.desc
+	picture = GFX_report_event_PRC_night_army_1
+	
+	immediate = {
+		hidden_effect = {
+			597 = { set_state_flag = PRC_nationalist_state_flag }
+			614 = { set_state_flag = PRC_nationalist_state_flag }
+			610 = { set_state_flag = PRC_nationalist_state_flag }
+			609 = { set_state_flag = PRC_nationalist_state_flag }
+			716 = { set_state_flag = PRC_nationalist_state_flag }
+			
+		}
+	}
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china.102.a
+		
+		create_dynamic_country = {
+			original_tag = THIS
+			save_event_target_as = china_nationalist_rebel
+			set_variable = { PRC.nationalist_rebel = THIS }
+			ROOT = {
+				every_controlled_state = {
+					limit = {
+						has_state_flag = PRC_nationalist_state_flag
+					}
+					var:PRC.nationalist_rebel = {
+						transfer_state = PREV
+					}
+				}
+			}
+			set_popularities = {
+				nationalist = 80
+				communist = 20
+			}
+			set_politics = {
+				ruling_party = nationalist
+				elections_allowed = no
+			}
+			
+			set_cosmetic_tag = RED
+			
+			set_rule = { 
+				can_join_factions = no 
+				can_create_factions = no
+				can_not_declare_war = yes
+			}
+		}
+		clear_variable = PRC.china_nationalist_rebel	
+		
+		random_other_country = {
+			limit = {
+				original_tag = PRC
+				has_government = nationalist
+			}
+			save_event_target_as = china_nationalist_rebel
+			set_country_flag = PRC_nationalist_china_flag
+		}
+		
+		hidden_effect = {
+			random_country = {
+				limit = {
+					original_tag = PRC
+					has_government = communist
+				}
+					
+				PRC_chi_haotian= {
+					set_nationality = event_target:china_nationalist_rebel	
+					remove_any_country_role_from_character = yes
+					add_country_leader_role = {
+						country_leader = {
+						#expire = "1965.1.1"
+						ideology = pannationalist
+						desc = "POLITICIAN_revolt_chi_haotian_DESC"
+						traits = {
+							dictator
+						}
+					}
+					promote_leader = yes
+					}
+				}
+			
+				ROOT = {
+					
+					transfer_units_fraction = {
+						target = event_target:china_nationalist_rebel
+						size = 0.5
+						stockpile_ratio = 0.5
+						army_ratio = 0.3
+						navy_ratio = 0.9
+						air_ratio = 0.5
+					}
+					
+					declare_war_on = {
+						target = event_target:china_nationalist_rebel
+						type = annex_everything
+					}
+				}
+				
+				event_target:china_nationalist_rebel = {
+					declare_war_on = {
+						target = event_target:china_catholic_rebel
+						type = annex_everything
+					}
+					declare_war_on = {
+						target = event_target:china_social_democrat_rebel
+						type = annex_everything
+					}
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = pr_china.103
+	title = pr_china.103.t
+	desc = pr_china.103.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			release = MEN
+				
+			event_target:china_nationalist_rebel = {
+				declare_war_on = {
+					target = MEN
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+	option = {	#
+		name = pr_china.103.b
+		declare_war_on = {
+			target = MEN
+			type = annex_everything
+		}
+		
+	}
+	
+	option = {	#
+		name = pr_china.103.a
+		
+	}
+}
+country_event = {
+	id = pr_china.104
+	title = pr_china.104.t
+	desc = pr_china.104.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			release = TIB
+				
+			event_target:china_nationalist_rebel = {
+				declare_war_on = {
+					target = TIB
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+	option = {	#
+		name = pr_china.104.a
+		declare_war_on = {
+			target = TIB
+			type = annex_everything
+		}
+		
+	}
+	
+	option = {	#
+		name = pr_china.104.b
+		
+	}
+}
+country_event = {
+	id = pr_china.105
+	title = pr_china.105.t
+	desc = pr_china.105.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			release = SIK
+				
+			event_target:china_nationalist_rebel = {
+				declare_war_on = {
+					target = SIK
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+	option = {	#
+		name = pr_china.105.a
+		declare_war_on = {
+			target = SIK
+			type = annex_everything
+		}
+		
+	}
+	
+	option = {	#
+		name = pr_china.105.b
+		
+	}
+}
+country_event = {
+	id = pr_china.106
+	title = pr_china.106.t
+	desc = pr_china.106.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			release = MAN
+				
+			event_target:china_nationalist_rebel = {
+				declare_war_on = {
+					target = MAN
+					type = annex_everything
+				}
+			}
+				
+			event_target:china_catholic_rebel = {
+				declare_war_on = {
+					target = MAN
+					type = annex_everything
+				}
+			}
+				
+			event_target:china_social_democrat_rebel = {
+				declare_war_on = {
+					target = MAN
+					type = annex_everything
+				}
+			}
+		}
+	}
+	
+	option = {	#
+		name = pr_china.106.a
+		declare_war_on = {
+			target = MAN
+			type = annex_everything
+		}
+		
+	}
+	
+	option = {	#
+		name = pr_china.105.b
+		
+	}
+}
+country_event = {
+	id = pr_china.110
+	title = pr_china.110.t
+	desc = pr_china.110.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	hidden = yes
+	
+	immediate = {
+		hidden_effect = {
+			event_target:china_catholic_rebel = {
+				PRC_joseph_zen = {
+					add_country_leader_role = {
+						country_leader={
+							ideology=christian_theocracy
+							desc = "POLITICIAN_revolt_joseph_zen_DESC"
+							expire="1.1.1.1"
+							id=-1
+						}
+						promote_leader = yes				
+					}
+				}
+			}
+			
+			event_target:china_social_democrat_rebel = {
+				PRC_zhao_ziyang = {
+					add_country_leader_role = {
+						country_leader={
+							ideology=social_democrat_ideology
+							desc = "POLITICIAN_revolt_zhao_ziyang_DESC"
+							expire="1.1.1.1"
+							id=-1
+						}
+						promote_leader = yes				
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = pr_china.999
+	title = pr_china.999.t
+	desc = pr_china.999.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china.999.a
+			every_state = {
+				limit = {
+					is_owned_by = ROOT
+					has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+				}
+				add_compliance = 100
+				add_resistance = -100
+			}
+			every_state = {
+				limit = {
+					is_owned_by = ROOT
+					has_dynamic_modifier = { modifier = dynamic_sik_separatism }
+				}
+				add_compliance = 100
+				add_resistance = -100
+			}
+	}
+}
+
+#####################################################################
+#####################################################################
+#####################################################################
+#
+# PR China Flavors
+#
+#####################################################################
+#####################################################################
+#####################################################################
+
+#Death of a Pro-democracy Activist in Exile
+country_event = {
+	id = pr_china_flavor.1
+	title = pr_china_flavor.1.t
+	desc = pr_china_flavor.1.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government = communist
+	}
+	
+	option = {	#
+		name = pr_china_flavor.1.a
+		add_political_power = -25
+	}
+	
+	option = {	#
+		name = pr_china_flavor.1.b
+		
+	    add_popularity = {
+	    	ideology = social_democrat
+	    	popularity = 0.01
+	    }
+	}
+}
+
+#https://zh.wikipedia.org/wiki/%E6%B1%9F%E6%B3%BD%E6%B0%91%E6%80%92%E6%96%A5%E9%A6%99%E6%B8%AF%E8%AE%B0%E8%80%85
+#The Xianxingzhe
+country_event = {
+	id = pr_china_flavor.3
+	title = pr_china_flavor.3.t
+	desc = pr_china_flavor.3.desc
+	picture = GFX_report_event_PRC_Xianxingzhe
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china_flavor.3.a
+		add_political_power = -1
+	}
+}
+
+#https://zh.wikipedia.org/wiki/%E4%B8%AD%E6%96%87%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91
+#The Creation of Chinese Wikipedia
+country_event = {
+	id = pr_china_flavor.4
+	title = pr_china_flavor.4.t
+	desc = pr_china_flavor.4.desc
+	picture = GFX_report_event_computer
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china_flavor.4.a
+		ai_chance = {
+			factor = 100
+		}
+		trigger = { 
+			OR = {
+				has_idea = civil_liberties_totalitarian
+				has_idea = civil_liberties_restricted
+			}
+		}
+	    add_popularity = {
+	    	ideology = communist
+	    	popularity = 0.02
+	    }
+	}
+	
+	option = {	#
+		name = pr_china_flavor.4.b
+		ai_chance = {
+			factor = 1
+		}
+		
+	    add_popularity = {
+	    	ideology = communist
+	    	popularity = -0.07
+	    }
+		add_political_power = 75
+	}
+}
+
+#The Genshin
+country_event = {
+	id = pr_china_flavor.5
+	title = pr_china_flavor.5.t
+	desc = pr_china_flavor.5.desc
+	picture = GFX_report_event_computer
+	
+	trigger = {
+		original_tag = PRC
+		date > 2016.1.1
+		has_completed_focus = PRC_game_making_business
+	}
+
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 188
+	}
+	
+	option = {	#
+		name = pr_china_flavor.5.a
+		add_political_power = 25
+		set_country_flag = PRC_HoYoverse_genshin_flag
+		mark_focus_tree_layout_dirty = yes
+	}
+}
+
+#TikTok
+country_event = {
+	id = pr_china_flavor.6
+	title = pr_china_flavor.6.t
+	desc = pr_china_flavor.6.desc
+	picture = GFX_report_event_computer
+	
+	trigger = {
+		original_tag = PRC
+		date > 2012.1.1
+		has_completed_focus = PRC_softpower
+	}
+
+	fire_only_once = yes
+	
+	mean_time_to_happen = {
+		days = 188
+	}
+	
+	option = {	#
+		name = pr_china_flavor.6.a
+		add_political_power = 100
+	}
+}
+
+#The Wandering Earth
+country_event = {
+	id = pr_china_flavor.7
+	title = pr_china_flavor.7.t
+	desc = pr_china_flavor.7.desc
+	picture = GFX_report_event_PRC_The_Wandering_Earth
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china_flavor.7.a
+		add_political_power = 25
+	}
+}
+
+country_event = { #2008 Melamine Scandal
+	id = pr_china_flavor.8
+	title = pr_china_flavor.8.t
+	desc = pr_china_flavor.8.d
+	picture = GFX_report_event_melamine_scandal
+	
+	is_triggered_only = yes
+	
+	option = {	
+		name = pr_china_flavor.8.a
+		
+		add_political_power = -25
+		add_stability = -0.02
+	}
+}
+
+#####################################################################
+#####################################################################
+#####################################################################
+#
+# PR China pr_china_outer_worlds
+#
+#####################################################################
+#####################################################################
+#####################################################################
+
+#Tibetans Resisting the Government
+country_event = {
+	id = pr_china_outer_worlds.1
+	title = pr_china_outer_worlds.1.t
+	desc = pr_china_outer_worlds.1.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china_outer_worlds.1.a
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_compliance = -5
+			add_resistance_target = {
+				amount = 15
+				occupier = ROOT 
+				days = 180 
+				tooltip = PRC_colonial_unrest_tt
+			}
+		}
+	}
+	
+	option = {	#
+		name = pr_china_outer_worlds.1.b
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_compliance = -8
+			add_resistance_target = {
+				amount = 10
+				occupier = ROOT 
+				days = 180 
+				tooltip = PRC_colonial_unrest_tt
+			}
+		}
+	}
+}
+
+#Confrontation with Tibetan Buddhism
+country_event = {
+	id = pr_china_outer_worlds.2
+	title = pr_china_outer_worlds.2.t
+	desc = pr_china_outer_worlds.2.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china_outer_worlds.2.a
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_resistance_target = {
+				amount = 5
+				occupier = ROOT 
+				days = 180 
+				tooltip = PRC_colonial_unrest_tt
+			}
+		}
+	}
+}
+
+#Ethnic Conflicts within Tibet
+country_event = {
+	id = pr_china_outer_worlds.3
+	title = pr_china_outer_worlds.3.t
+	desc = pr_china_outer_worlds.3.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china_outer_worlds.3.a
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_resistance_target = {
+				amount = 5
+				occupier = ROOT 
+				days = 180 
+				tooltip = PRC_colonial_unrest_tt
+			}
+		}
+	}
+}
+
+#Tibetans Resisting the Government
+country_event = {
+	id = pr_china_outer_worlds.4
+	title = pr_china_outer_worlds.4.t
+	desc = pr_china_outer_worlds.4.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china_outer_worlds.4.a
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_sik_separatism }
+			}
+			add_compliance = -5
+			add_resistance_target = {
+				amount = 15
+				occupier = ROOT 
+				days = 180 
+				tooltip = PRC_colonial_unrest_tt
+			}
+		}
+	}
+	
+	option = {	#
+		name = pr_china_outer_worlds.4.b
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_sik_separatism }
+			}
+			add_compliance = -8
+			add_resistance_target = {
+				amount = 10
+				occupier = ROOT 
+				days = 180 
+				tooltip = PRC_colonial_unrest_tt
+			}
+		}
+	}
+}
+
+#Confrontation with Tibetan Buddhism
+country_event = {
+	id = pr_china_outer_worlds.5
+	title = pr_china_outer_worlds.5.t
+	desc = pr_china_outer_worlds.5.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china_outer_worlds.5.a
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_sik_separatism }
+			}
+			add_resistance_target = {
+				amount = 5
+				occupier = ROOT 
+				days = 180 
+				tooltip = PRC_colonial_unrest_tt
+			}
+		}
+	}
+}
+
+#Ethnic Conflicts within Tibet
+country_event = {
+	id = pr_china_outer_worlds.6
+	title = pr_china_outer_worlds.6.t
+	desc = pr_china_outer_worlds.6.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	option = {	#
+		name = pr_china_outer_worlds.6.a
+		
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				has_dynamic_modifier = { modifier = dynamic_tib_separatism }
+			}
+			add_resistance_target = {
+				amount = 5
+				occupier = ROOT 
+				days = 180 
+				tooltip = PRC_colonial_unrest_tt
+			}
+		}
+	}
+}
+
+#####################################################################
+#####################################################################
+#####################################################################
+#
+# PR China Elections
+#
+#####################################################################
+#####################################################################
+#####################################################################
+
+country_event = {
+	id = china_election.1
+	title = china_election.1.t
+	desc = china_election.1.desc
+	picture = GFX_report_event_PRC_CCP_2
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		original_tag = PRC
+		NOT = { has_completed_focus = PRC_the_right_opposition }
+		NOT = { has_completed_focus = PRC_the_left_opposition }
+		has_government = communist
+	}
+	
+	option = {
+		name = china_election.1.a #Taizidang gained decisive influence
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				AND = {
+					is_historical_focus_on = yes
+					date < 2010.1.1
+				}
+			}
+			modifier = {
+				factor = 10
+				OR = {
+					KOR = { has_completed_focus = kor_lee_seok_ki_government }
+					JAP = { has_completed_focus = JAP_nationalist_diplomacy }
+					JAP = { has_completed_focus = JAP_the_time_for_revolution }
+					SOV = { has_government = communist }
+					SOV = { has_government = nationalist }
+					USA = { has_government = communist }
+					USA = { has_government = fascist }
+					USA = { has_government = nationalist }
+				}
+			}
+			modifier = {
+				factor = 4
+				has_global_flag = PRC_world_plan
+			}
+		}
+		
+		#retire_ideology_leader = communist
+		
+		hidden_effect = {
+			set_party_name = { 
+				ideology = communist
+				long_name = PRC_communist_taizidang_long
+				name = PRC_communist_taizidang
+			}
+		}
+		
+		if = {
+			limit = { 
+				has_country_leader = {
+					character = prc_li_peng
+					ruling_only = yes
+				}
+			}
+			hidden_effect = {
+				news_event = { id = pr_china_news.15 hours = 3 } #re-election
+			} 
+		}
+		else_if = {
+			limit = { 
+				has_country_leader = {
+					character = prc_xi_jinping
+					ruling_only = yes
+				}
+			}
+			hidden_effect = {
+				news_event = { id = pr_china_news.15 hours = 3 } #re-election
+			} 
+		}
+		else = {
+			hidden_effect = {
+				news_event = { id = pr_china_news.16 hours = 3 }
+			} 
+		}
+		
+		if = {
+			limit = { 
+				OR = {
+					date < 2010.1.1
+					has_country_leader = {
+						character = prc_li_peng
+						ruling_only = yes
+					}
+				}
+			}
+			prc_li_peng = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICIAN_li_peng_DESC"
+						ideology = socialism_with_ccp
+						traits = {
+							PRC_butcher_of_beijing
+							PRC_marxist_of_strong_conviction
+						}
+					}
+				}
+			}
+		}
+		else = {
+			prc_xi_jinping = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICIAN_prc_xi_jinping_DESC"
+						ideology = socialism_with_ccp
+						traits = {
+							PRC_tiger_hunt
+							PRC_red_emperor
+						}
+					}
+				}
+			}
+		}
+		
+		
+		hidden_effect = {
+			country_event = { id = china_election.100  }
+		}
+	}
+	
+	option = {
+		name = china_election.1.b #Tuanpai has succeeded in winning political consultation
+		#retire_ideology_leader = communist
+		ai_chance = {
+			factor = 50
+			modifier = {
+				factor = 0
+				AND = {
+					is_historical_focus_on = yes
+					date > 2010.1.1
+					has_country_leader = {
+						character = prc_Hu_Jintao
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		
+		hidden_effect = {
+			set_party_name = { 
+				ideology = communist
+				long_name = PRC_communist_tuanpai_long
+				name = PRC_communist_tuanpai
+			}
+		}
+		
+		if = {
+			limit = { 
+				has_country_leader = {
+					character = prc_Hu_Jintao
+					ruling_only = yes
+				}
+			}
+			hidden_effect = {
+				news_event = { id = pr_china_news.15 hours = 3 } #re-election
+			} 
+		}
+		else_if = {
+			limit = { 
+				has_country_leader = {
+					character = prc_li_keqiang
+					ruling_only = yes
+				}
+			}
+			hidden_effect = {
+				news_event = { id = pr_china_news.15 hours = 3 } #re-election
+			} 
+		}
+		else_if = {
+			limit = { 
+				has_country_leader = {
+					character = prc_hu_chunhua
+					ruling_only = yes
+				}
+			}
+			hidden_effect = {
+				news_event = { id = pr_china_news.15 hours = 3 } #re-election
+			} 
+		}
+		else = {
+			hidden_effect = {
+				news_event = { id = pr_china_news.16 hours = 3 }
+			} 
+		}
+		
+		if = {
+			limit = { 
+				OR = {
+					date < 2010.1.1
+					has_country_leader = {
+						character = prc_Hu_Jintao
+						ruling_only = yes
+					}
+				}
+			}
+			prc_Hu_Jintao = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICIAN_Hu_Jintao_DESC"
+						ideology = socialism_with_ccp
+						traits = {
+							dictator
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { 
+				OR = {
+					date < 2020.1.1
+					has_country_leader = {
+						character = prc_li_keqiang
+						ruling_only = yes
+					}
+				}
+			}
+			prc_li_keqiang = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICIAN_prc_li_keqiang_DESC"
+						ideology = socialism_with_ccp
+						traits = {
+							dictator
+						}
+					}
+				}
+			}
+		}
+		else = {
+			prc_hu_chunhua = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICIAN_prc_hu_chunhua_DESC"
+						ideology = socialism_with_ccp
+						traits = {
+							dictator
+						}
+					}
+				}
+			}
+		}
+		
+		hidden_effect = {
+			country_event = { id = china_election.100  }
+		}
+	}
+	
+	option = {
+		name = china_election.1.c #Confrontation between Tuanpai and Taizidang has stalled
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 5
+				has_country_leader = {
+					character = prc_zhang_dejiang
+					ruling_only = yes
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		
+		if = {
+			limit = { 
+				has_country_leader = {
+					character = prc_zhang_dejiang
+					ruling_only = yes
+				}
+			}
+			hidden_effect = {
+				news_event = { id = pr_china_news.15 hours = 3 } #re-election
+			} 
+		}
+		else = {
+			hidden_effect = {
+				news_event = { id = pr_china_news.16 hours = 3 }
+			} 
+			prc_zhang_dejiang = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						desc = "POLITICIAN_zhang_dejiang_DESC"
+						ideology = socialism_with_ccp
+						traits = {
+							PRC_juche_economist
+							PRC_experts_for_north_korea
+						}
+					}
+				}
+			}
+		}
+		
+		#retire_ideology_leader = communist
+		
+		hidden_effect = {
+			set_party_name = { 
+				ideology = communist
+				long_name = PRC_communist_shanghai_long
+				name = PRC_communist_shanghai
+			}
+		}
+		
+		
+		#create_country_leader = {
+		#	name = prc_zhang_dejiang
+		#	desc = "POLITICIAN_zhang_dejiang_DESC"
+		#	picture = "zhang_dejiang.dds"
+		#	ideology = socialism_with_ccp
+		#		
+		#	traits = {
+		#		PRC_juche_economist
+		#		PRC_experts_for_north_korea
+		#	}
+		#}
+		
+		hidden_effect = {
+			country_event = { id = china_election.100 }
+		}
+	} 
+}
+
+country_event = {
+	id = china_election.3
+	title = china_election.3.t
+	desc = china_election.3.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	
+	trigger = {
+		has_government = communist
+	}
+	
+	option = {	#
+		name = china_election.3.a
+		add_political_power = 10
+		
+		hidden_effect = {
+			country_event = { id = china_election.3 days = 1460 } #4 Years
+		}
+		
+	}
+}
+
+country_event = {
+	id = china_election.100
+	title = china_election.100.t
+	desc = china_election.100.desc
+	picture = GFX_report_event_PRC_CCP_1
+	
+	is_triggered_only = yes
+	hidden = yes
+	
+	immediate = {
+		if = {
+			limit = { has_completed_focus = PRC_great_commander }
+			add_country_leader_trait = PRC_great_commander_trait
+		}
+		if = {
+			limit = { has_completed_focus = PRC_architect_of_communism }
+			add_country_leader_trait = PRC_architect_of_communism_trait
+		}
+	}
+}
+
+#####################################################################
+#####################################################################
+#####################################################################
+#
+# PR China Diplomacy
+#
+#####################################################################
+#####################################################################
+#####################################################################
+
+country_event = {
+	id = pr_china_diplomacy.1
+	title = pr_china_diplomacy.1.t
+	desc = pr_china_diplomacy.1.desc
+	picture = PRC_CCP_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.1.a
+		ai_chance = {
+			base = 100
+			modifier = {
+				factor = 0
+				FROM = {
+					any_owned_state = { is_core_of = ROOT }
+				}
+			}
+		}
+		
+		FROM = { country_event = { id = pr_china_diplomacy.2 hours = 12 } }
+	}
+
+	option = {
+		name = pr_china_diplomacy.1.b
+		trigger = {
+			FROM = {
+				any_owned_state = { is_core_of = ROOT }
+			}
+		}
+		
+		ai_chance = {
+			base = 100
+		}
+		
+		FROM = { country_event = { id = pr_china_diplomacy.3 hours = 12 } }
+	}
+
+	option = {
+		name = pr_china_diplomacy.1.c
+		ai_chance = {
+			base = 0
+		}
+		
+		FROM = { country_event = { id = pr_china_diplomacy.6 hours = 12 } }
+	}
+}
+
+country_event = {
+	id = pr_china_diplomacy.2
+	title = pr_china_diplomacy.2.t
+	desc = pr_china_diplomacy.2.desc
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.2.a
+		FROM = {
+			every_owned_state = {
+				limit = { is_claimed_by = ROOT }
+				remove_claim_by = ROOT
+			}
+			set_country_flag = aliance_with_PR_China
+		}
+		add_to_faction = FROM
+	}
+}
+
+country_event = {
+	id = pr_china_diplomacy.3
+	title = pr_china_diplomacy.3.t
+	desc = pr_china_diplomacy.3.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.3.a
+		ai_chance = {
+			base = 100
+		}
+		
+		effect_tooltip = {
+			add_to_faction = FROM
+			every_owned_state = {
+				limit = { is_core_of = FROM }
+				transfer_state_to = FROM
+			}
+			FROM = {
+				every_core_state = {
+					remove_core_of = ROOT
+					remove_claim_by = ROOT
+				}
+			}
+		}
+		
+		FROM = { country_event = pr_china_diplomacy.4 }
+	}
+
+	option = {
+		name = pr_china_diplomacy.3.b
+		
+		ai_chance = {
+			base = 0
+		}
+		
+		#add_opinion_modifier = {
+		#	target = FROM
+		#	modifier = KR_hates_govt
+		#}
+		FROM = { country_event = pr_china_diplomacy.5 }
+	}
+}
+
+country_event = {
+	id = pr_china_diplomacy.4
+	title = pr_china_diplomacy.4.t
+	desc = pr_china_diplomacy.4.desc
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.4.a
+		FROM = {
+			add_to_faction = ROOT
+			every_owned_state = {
+				limit = { is_core_of = ROOT }
+				transfer_state_to = ROOT
+			}
+		}
+		
+		set_country_flag = aliance_with_PR_China
+		
+		every_core_state = {
+			remove_core_of = FROM
+			remove_claim_by = FROM
+		}
+	}
+}
+
+country_event = {
+	id = pr_china_diplomacy.5
+	title = pr_china_diplomacy.5.t
+	desc = pr_china_diplomacy.5.desc
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.5.a
+		#add_opinion_modifier = {
+		#	target = FROM
+		#	modifier = KR_hates_govt
+		#}
+	}
+}
+
+country_event = { #Country refuses
+	id = pr_china_diplomacy.6
+	title = pr_china_diplomacy.6.t
+	desc = pr_china_diplomacy.6.desc
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.6.a
+		#add_opinion_modifier = {
+		#	target = FROM
+		#	modifier = KR_disapproves_of_govt
+		#}
+	}
+}
+
+country_event = {
+	id = pr_china_diplomacy.7
+	title = pr_china_diplomacy.7.t
+	desc = pr_china_diplomacy.7.desc
+	
+	picture = GFX_report_event_ccp
+
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.7.a #We have no Choice
+		ai_chance = { 
+			factor = 20
+			modifier = {
+				factor = 0
+				is_in_faction = yes
+			}
+			modifier = {
+				factor = 0.1
+				original_tag = CHI #Taiwan is Never give up
+			}
+			modifier = {
+				factor = 0.8
+				strength_ratio = { tag = FROM ratio < 1.8 }
+			}
+		}
+		FROM = { country_event = { id = pr_china_diplomacy.8 } }
+	}
+	
+	option = {
+		name = pr_china_diplomacy.7.b #I'd rather fight than be enslaved
+		ai_chance = { factor = 80 }
+		FROM = { country_event = { id = pr_china_diplomacy.9 } }
+	}
+	
+}
+
+# [From.GetName] joins the Union
+country_event = {
+	id = pr_china_diplomacy.8
+	title = pr_china_diplomacy.8.t
+	desc = pr_china_diplomacy.8.desc
+	picture = GFX_report_event_protests
+
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.8.a
+		if = {
+			limit = {
+				has_dlc = "Together for Victory"
+			}
+			set_autonomy = {
+				target = FROM
+				autonomy_state = autonomy_one_country_two_systems
+			}
+		}
+		else = {
+			ROOT = {
+				puppet = FROM
+			}			
+		}
+
+	}
+	
+}
+
+# [From.GetName] rejects our offer
+country_event = {
+	id = pr_china_diplomacy.9
+	title = pr_china_diplomacy.9.t
+	desc = pr_china_diplomacy.9.desc
+	picture = GFX_report_event_protests
+
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.9.a
+		ai_chance = { factor = 100 
+			modifier = {
+				factor = 0
+					if = {
+						FROM = { tag = CHI }
+						}
+					}
+			}
+			declare_war_on = { 
+				target = FROM
+				type = annex_everything
+			}
+	}
+	
+	option = {
+		name = pr_china_diplomacy.9.b
+		ai_chance = { factor = 0 
+			modifier = {
+				factor = 100
+					if = {
+						FROM = { tag = CHI }
+						}
+			}
+		}
+		add_political_power = -25
+	}
+}
+
+country_event = {
+	id = pr_china_diplomacy.10
+	title = pr_china_diplomacy.10.t
+	desc = pr_china_diplomacy.10.desc
+	
+	picture = GFX_report_event_ccp
+
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.10.a #We have no Choice
+		ai_chance = { 
+			factor = 20
+			modifier = {
+				factor = 0
+				is_in_faction = yes
+			}
+			modifier = {
+				factor = 0.1
+				original_tag = CHI #Taiwan is Never give up
+			}
+			modifier = {
+				factor = 0.8
+				strength_ratio = { tag = FROM ratio < 1.8 }
+			}
+		}
+		FROM = { country_event = { id = pr_china_diplomacy.11 } }
+	}
+	
+	option = {
+		name = pr_china_diplomacy.7.b #I'd rather fight than be enslaved
+		trigger = { 
+			NOT = { is_puppet_of = FROM }
+		}
+		ai_chance = { factor = 80 }
+		FROM = { country_event = { id = pr_china_diplomacy.12 } }
+	}
+	
+}
+
+country_event = {
+	id = pr_china_diplomacy.11
+	title = pr_china_diplomacy.11.t
+	desc = pr_china_diplomacy.11.desc
+	picture = GFX_report_event_protests
+
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.11.a
+		if = {
+			limit = { 
+				FROM = { owns_state = 1241 } #Eastern Spratly Islands
+			}
+			ROOT = { transfer_state = 1241 } 
+		}
+		if = {
+			limit = { 
+				FROM = { owns_state = 1239 } #Southen Spratly Islands
+			}
+			ROOT = { transfer_state = 1239 } 
+		}
+		if = {
+			limit = { 
+				FROM = { owns_state = 1240 } #Western Spratly Islands
+			}
+			ROOT = { transfer_state = 1240 } 
+		}
+		if = {
+			limit = { 
+				FROM = { owns_state = 1238 } #Northen Spratly Islands
+			}
+			ROOT = { transfer_state = 1238 } 
+		}
+	}
+	
+}
+
+# [From.GetName] rejects our offer
+country_event = {
+	id = pr_china_diplomacy.12
+	title = pr_china_diplomacy.12.t
+	desc = pr_china_diplomacy.12.desc
+	picture = GFX_report_event_protests
+
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.9.a
+		ai_chance = { factor = 100 }
+			declare_war_on = { 
+				target = FROM
+				type = annex_everything
+			}
+	}
+	
+	option = {
+		name = pr_china_diplomacy.9.b
+		ai_chance = { factor = 0 }
+		add_political_power = -25
+	}
+}
+
+# [FROM.GetNameDefCap] wants a non-aggression treaty
+country_event = {
+	id = pr_china_diplomacy.16
+	title = pr_china_diplomacy.16.t
+	desc = pr_china_diplomacy.16.desc
+	picture = GFX_report_event_PRC_night_army_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.16.a #We need their help
+		
+		ai_chance = {
+			base = 10
+		}
+		
+		diplomatic_relation = {
+			country = FROM
+			relation = non_aggression_pact
+			active = yes
+		}
+		
+		FROM = {
+			hidden_effect = {
+				country_event = pr_china_diplomacy.17
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_diplomacy.16.b #No! We will never accept them.
+		
+		ai_chance = {
+			base = 0
+			modifier = {
+				has_completed_focus = JAP_chugakuha_win
+				add = 25
+			}
+		}
+		
+		FROM = {
+			hidden_effect = {
+				country_event = pr_china_diplomacy.18
+			}
+		}
+	}
+}
+
+# [FROM.GetNameDefCap]'s Approval
+country_event = {
+	id = pr_china_diplomacy.17
+	title = pr_china_diplomacy.17.t
+	desc = pr_china_diplomacy.17.desc
+	picture = GFX_report_event_JAP_National_Assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.17.a #Great News
+		
+		diplomatic_relation = {
+			country = FROM
+			relation = non_aggression_pact
+			active = yes
+		}
+	}
+}
+
+# [FROM.GetNameDefCap]'s Reject
+country_event = {
+	id = pr_china_diplomacy.18
+	title = pr_china_diplomacy.18.t
+	desc = pr_china_diplomacy.18.desc
+	picture = GFX_report_event_JAP_National_Assembly
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.18.a #Damn
+	}
+}
+
+#Purchase of [FROM.GetName]'s Kuznetsov-class
+country_event = {
+	id = pr_china_diplomacy.20
+	title = pr_china_diplomacy.20.t
+	desc = pr_china_diplomacy.20.desc
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.20.a
+		add_political_power = 75
+	}
+}
+
+# Purchase of [FROM.GetName]'s HMAS Melbourne
+country_event = {
+	id = pr_china_diplomacy.21
+	title = pr_china_diplomacy.21.t
+	desc = pr_china_diplomacy.21.desc
+	picture = GFX_report_event_PRC_night_army_1
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = pr_china_diplomacy.21.a
+		
+		ai_chance = {
+			base = 10
+		}
+		
+		add_political_power = 75
+		
+		FROM = {
+			hidden_effect = {
+				country_event = pr_china_diplomacy.22
+			}
+		}
+	}
+	
+	option = {
+		name = pr_china_diplomacy.21.b
+		
+		ai_chance = {
+			base = 8
+			modifier = {
+				is_in_faction_with = FROM
+				factor = 0
+			}
+		}
+		
+		FROM = {
+			hidden_effect = {
+				country_event = pr_china_diplomacy.23
+			}
+		}
+	}
+}
+
+#HMAS Melbourne
+country_event = {
+	id = pr_china_diplomacy.22
+	title = pr_china_diplomacy.22.t
+	desc = pr_china_diplomacy.22.desc
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.22.a
+		
+			if = {
+				limit = { has_dlc = "Man the Guns" }
+				if = {
+					limit = { NOT = { has_tech = early_ship_hull_carrier } }
+					set_technology = { 
+						early_ship_hull_carrier = 1
+					}
+				}
+				if = {
+					limit = { NOT = { has_tech = basic_ship_hull_carrier } }
+					set_technology = { 
+						basic_ship_hull_carrier = 1
+					}
+				}
+				
+				create_equipment_variant = {
+					name = "Majestic-class"
+					type = ship_hull_carrier_1
+					name_group = PRC_CV_HISTORICAL 
+					parent_version = 0
+					modules = {
+						fixed_ship_deck_slot_1 = ship_deck_space
+						fixed_ship_deck_slot_2 = ship_deck_space
+						fixed_ship_anti_air_slot = ship_anti_air_1
+						fixed_ship_radar_slot = ship_radar_1
+						fixed_ship_engine_slot = carrier_ship_engine_1
+						fixed_ship_secondaries_slot = ship_secondaries_1
+						#front_1_custom_slot = ship_deck_space
+					}
+				}
+				
+				add_equipment_production = {
+					equipment = {
+						type = ship_hull_carrier_1
+						creator = "PRC" 
+						version_name = "Majestic-class"
+					}
+					name = "HMAS Melbourne"
+					requested_factories = 1
+					progress = 0.9
+					amount = 1
+				}
+			}
+			else = {
+				add_tech_bonus = {
+					bonus = 2
+					uses = 1
+					category = cv_tech	
+				}
+			}
+	}
+}
+
+#Failed Contract
+country_event = {
+	id = pr_china_diplomacy.23
+	title = pr_china_diplomacy.23.t
+	desc = pr_china_diplomacy.23.desc
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.23.a
+	}
+}
+
+#The Nullification of the Sino-British Joint Declaration
+country_event = {
+	id = pr_china_diplomacy.27
+	title = pr_china_diplomacy.27.t
+	desc = pr_china_diplomacy.27.desc
+	picture = GFX_report_event_PRC_black_hong_kong
+
+	trigger = {
+		original_tag = PRC
+		HKN = { is_puppet_of = PRC }
+		NOT = { has_global_flag = end_hong_kong_conflict }
+		has_war_with = ENG
+	}
+	
+	mean_time_to_happen = {
+		days = 14
+	}
+	
+	fire_only_once = yes
+
+	option = {
+		name = pr_china_diplomacy.27.a
+		
+		hidden_effect = {			
+			random_other_country = {
+				limit = {
+					original_tag = HKN
+				}
+					
+				drop_cosmetic_tag = yes
+				remove_ideas = HKN_trampled_election_reform
+				remove_ideas = HKN_sino_british_joint_declaration
+				remove_ideas = HKN_british_influence
+				remove_ideas = HKN_chinese_influence
+				kill_country_leader = yes
+				
+						add_country_leader_role = { #
+							character = HKN_Legislative_Council
+							country_leader = {
+								ideology = constitutionalist 
+								desc="POLITICS_Legislative_Council_DESC"
+								traits={HKN_liberate_hong_kong}
+								expire="1.1.1.1"
+								id=-1
+							}
+							promote_leader = yes
+						}
+						
+						add_country_leader_role = { #
+							character = HKN_Legislative_Council
+							country_leader = {
+								ideology = market_liberal_ideology 
+								desc="POLITICS_Legislative_Council_DESC"
+								traits={HKN_liberate_hong_kong}
+								expire="1.1.1.1"
+								id=-1
+							}
+							promote_leader = yes
+						}
+						
+						add_country_leader_role = { #
+							character = HKN_Legislative_Council
+							country_leader = {
+								ideology = liberalist 
+								desc="POLITICS_Legislative_Council_DESC"
+								traits={HKN_liberate_hong_kong}
+								expire="1.1.1.1"
+								id=-1
+							}
+							promote_leader = yes
+						}
+						
+						add_country_leader_role = { #
+							character = HKN_Legislative_Council
+							country_leader = {
+								ideology = social_democrat_ideology 
+								desc="POLITICS_Legislative_Council_DESC"
+								traits={HKN_liberate_hong_kong}
+								expire="1.1.1.1"
+								id=-1
+							}
+							promote_leader = yes
+						}
+						
+						add_country_leader_role = { #
+							character = HKN_Legislative_Council
+							country_leader = {
+								ideology = progressive_ideology 
+								desc="POLITICS_Legislative_Council_DESC"
+								traits={HKN_liberate_hong_kong}
+								expire="1.1.1.1"
+								id=-1
+							}
+							promote_leader = yes
+						}
+						
+						add_country_leader_role = { #
+							character = HKN_Legislative_Council
+							country_leader = {
+								ideology = democratic_socialist_ideology 
+								desc="POLITICS_Legislative_Council_DESC"
+								traits={HKN_liberate_hong_kong}
+								expire="1.1.1.1"
+								id=-1
+							}
+							promote_leader = yes
+						}
+				
+					meta_effect = {
+						text = {
+							set_politics = {
+								ruling_party = social_liberal
+								last_election = "[CURRENT_DATE]"
+								election_frequency = 48
+								elections_allowed = yes
+							}
+						}
+						CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+					}
+					set_popularities = {
+						communist = 10
+						nationalist = 2
+						social_liberal = 88
+					}
+			}
+		}
+			
+		annex_country = { target = HKN transfer_troops = yes }
+		set_global_flag = end_hong_kong_conflict
+		
+		hidden_effect = {
+			ENG = { country_event = { id = pr_china_diplomacy.28 } }
+		}
+	}
+}
+
+#The Nullification of the Sino-British Joint Declaration
+country_event = {
+	id = pr_china_diplomacy.28
+	title = pr_china_diplomacy.28.t
+	desc = pr_china_diplomacy.28.desc
+	picture = GFX_report_event_PRC_black_hong_kong
+
+	is_triggered_only = yes
+
+	option = {
+		name = pr_china_diplomacy.28.a
+		
+		effect_tooltip = {
+			PRC = { annex_country = { target = HKN transfer_troops = yes } }
+		}
+		
+		hidden_effect = {
+			news_event = pr_china_news.20
+		}
+	}
+}
+
+###################################################
+#
+#
+#
+#
+###################################################
+
+add_namespace = moh_south_prchina
+
+# [PRC.GetLeader] invites us to Beijing
+country_event = {
+	id = moh_south_prchina.1
+	title = moh_south_prchina.1.t
+	desc = moh_south_prchina.1.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+	
+	option = {
+		name = moh_south_prchina.1.a #Send an ambassador to the conference room
+		ai_chance = { factor = 100 }
+		PRC = { country_event = { id = moh_south_prchina.2 days = 3 } }
+	}
+	
+	option = {
+		name = moh_south_prchina.1.b #We will remain neutral
+		ai_chance = { factor = 0 }
+		PRC = { country_event = { id = moh_south_prchina.9 } }
+	}
+}
+
+# Succeeding Secret Talks with [From.GetName]
+country_event = {
+	id = moh_south_prchina.2
+	title = moh_south_prchina.2.t
+	desc = moh_south_prchina.2.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+	
+	option = {
+		name = moh_south_prchina.2.a 
+		ai_chance = { factor = 100 }
+		FROM = { country_event = { id = moh_south_prchina.3 days = 4 } } #7 Days
+	}
+}
+
+# Our Proposal
+country_event = {
+	id = moh_south_prchina.3
+	title = moh_south_prchina.3.t
+	desc = moh_south_prchina.3.desc
+	picture = GFX_report_event_PRC_night_army_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = moh_south_prchina.3.a #We will form a military alliance with China
+		ai_chance = { factor = 60 
+			modifier = {
+				has_country_leader = {
+						name = "Hugo Chávez"
+						ruling_only = yes
+				}
+				add = 40
+			}
+			modifier = {
+				PRC = { surrender_progress > 0.1 } #If China shows signs of weakness...
+				add = -20
+			}
+			modifier = {
+				PRC = { surrender_progress > 0.3 }
+				add = -20
+			}
+			modifier = {
+				PRC = { surrender_progress > 0.5 } #They won't be allies of a defeated nation.
+				add = -20
+			}
+		}
+		add_ai_strategy = {
+			type = alliance
+			id = "PRC"
+			value = 200
+		}
+		PRC = { country_event = { id = moh_south_prchina.4 days = 3 } }
+	}
+	
+	option = {
+		name = moh_south_prchina.3.b #Dispatch of weapons and Unofficial volunteer troops
+		ai_chance = { factor = 20 }
+		add_ai_strategy = {
+			type = alliance
+			id = "PRC"
+			value = 50
+		}
+		add_manpower = -8000 
+		effect_tooltip = {
+			send_equipment = { target = PRC type = infantry_equipment amount = 500 }
+		}
+		add_ai_strategy = {
+    			type = support
+     			id = "PRC"			
+ 				value = 200
+    	}
+		add_ai_strategy = {
+    			type = send_volunteers_desire
+     			id = "PRC"			
+ 				value = 200
+    	}
+		PRC = { country_event = { id = moh_south_prchina.5 days = 3 } }
+	}
+	
+	option = {
+		name = moh_south_prchina.3.c #Dispatch of weapons
+		ai_chance = { factor = 10 }
+		effect_tooltip = {
+			send_equipment = { target = PRC type = infantry_equipment amount = 500 }
+		}
+		add_ai_strategy = {
+    			type = support
+     			id = "PRC"			
+ 				value = 200
+    	}
+		add_ai_strategy = {
+			type = alliance
+			id = "PRC"
+			value = 50
+		}
+		add_ai_strategy = {
+    			type = send_volunteers_desire
+     			id = "PRC"			
+ 				value = 50
+    	}
+		PRC = { country_event = { id = moh_south_prchina.6 days = 3 } }
+	}
+	
+	option = {
+		name = moh_south_prchina.3.d #Break down the talks
+		ai_chance = { factor = 0 
+			modifier = {
+				PRC = { surrender_progress > 0.1 } #
+				add = 20
+			}
+			modifier = {
+				PRC = { surrender_progress > 0.3 } 
+				add = 20
+			}
+			modifier = {
+				PRC = { surrender_progress > 0.5 } #They won't be allies of a defeated nation.
+				add = 20
+			}
+		}
+		PRC = { country_event = { id = moh_south_prchina.7 days = 3 } }
+	}
+}
+
+# [From.GetName] to ally with China
+country_event = {
+	id = moh_south_prchina.4
+	title = moh_south_prchina.4.t
+	desc = moh_south_prchina.4.d
+	picture = GFX_report_event_PRC_night_army_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = moh_south_prchina.4.a
+		add_to_faction = FROM
+		
+		add_ai_strategy = {
+			type = alliance
+			id = FROM
+			value = 200
+		}
+		FROM = { country_event = { id = moh_south_prchina.8 } }
+		news_event = { id = pr_china_news.18 }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+	}
+}
+
+# [From.GetName] Volunteer Troops and Weapon Support
+country_event = {
+	id = moh_south_prchina.5
+	title = moh_south_prchina.5.t
+	desc = moh_south_prchina.5.d
+	picture = GFX_report_event_PRC_night_army_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = moh_south_prchina.5.a
+		FROM = { send_equipment = { target = PRC type = infantry_equipment amount = 500 } }
+		add_manpower = 8000
+		FROM = { country_event = { id = moh_south_prchina.8 } }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+	}
+}
+
+# [From.GetName] Weapon Support
+country_event = {
+	id = moh_south_prchina.6
+	title = moh_south_prchina.6.t
+	desc = moh_south_prchina.6.d
+	picture = GFX_report_event_PRC_night_army_1
+
+	is_triggered_only = yes
+	
+	option = {
+		name = moh_south_prchina.6.a
+		FROM = { send_equipment = { target = PRC type = infantry_equipment amount = 500 } }
+		FROM = { country_event = { id = moh_south_prchina.8 } }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+	}
+}
+
+# Negotiations break down
+country_event = {
+	id = moh_south_prchina.7
+	title = moh_south_prchina.7.t
+	desc = moh_south_prchina.7.d
+	picture = GFX_report_event_PRC_CCP_3
+
+	is_triggered_only = yes
+	
+	option = {
+		name = moh_south_prchina.7.a
+		add_political_power = -50
+	}
+}
+
+# The end of the Beijing talks
+country_event = {
+	id = moh_south_prchina.8
+	title = moh_south_prchina.8.t
+	desc = moh_south_prchina.8.d
+	picture = GFX_report_event_PRC_CCP_3
+
+	is_triggered_only = yes
+	
+	option = {
+		name = moh_south_prchina.8.a
+			add_offsite_building = { type = industrial_complex level = 2 } #Thanks China!
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons	#Chinese Weapons Tech
+			}
+			add_war_support = 0.15
+			add_opinion_modifier = { target = PRC modifier = declaration_of_friendship }
+	}
+}
+
+# Negotiations break down
+country_event = {
+	id = moh_south_prchina.9
+	title = moh_south_prchina.9.t
+	desc = moh_south_prchina.9.d
+	picture = GFX_report_event_PRC_CCP_3
+
+	is_triggered_only = yes
+	
+	option = {
+		name = moh_south_prchina.9.a
+		#add_political_power = -50
+	}
+}

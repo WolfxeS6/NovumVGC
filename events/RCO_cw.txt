@@ -631,6 +631,100 @@ add_equipment_to_stockpile = {
 	}
 	}
 
+country_event = { #sov asks blr to join civil war
+	id = cw.13
+	title = cw.13.t
+	desc = cw.13.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { 
+		name = RCO_event_cw.13.a #blr will join if AI and they didnt go communist
+		trigger = {
+            BLR = {
+				NOT = {has_completed_focus = BLR_unite_the_communist_parties}
+			}
+        }
+		 ai_chance = {
+            base = 100       
+        }
+
+		SOV = { add_to_faction = BLR }
+		BLR = {
+			add_to_war = {
+    						targeted_alliance = SOV
+    						enemy = RCO
+    						hostility_reason = asked_to_join
+						}
+	}
+RCO = {
+country_event = {
+					id = cw.15
+				}
+	}
+	}
+	option = { 
+		name = RCO_event_cw.13.b #no
+		 ai_chance = {
+            base = 0       
+        }
+		add_war_support = -0.1
+	}
+	}
+
+country_event = { #rco asks blr to join civil war
+	id = cw.14
+	title = cw.14.t
+	desc = cw.14.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { 
+		name = RCO_event_cw.14.a #blr will join if AI 
+		 ai_chance = {
+            base = 100       
+        }
+
+		RCO = { add_to_faction = BLR }
+		RCO = {
+            	puppet = {
+                target = BLR
+                end_wars = no
+            	}
+        	}
+		BLR = {
+			add_to_war = {
+    						targeted_alliance = RCO
+    						enemy = SOV
+    						hostility_reason = asked_to_join
+						}
+	}
+	}
+	option = { 
+		name = RCO_event_cw.14.b #no
+		 ai_chance = {
+            base = 0       
+        }
+		add_war_support = -0.2
+		add_stability = -0.25
+	}
+	} 
+
+country_event = { #event for rco that belarus joined
+	id = cw.15
+	title = cw.15.t
+	desc = cw.15.d
+	picture = GFX_russian_soldiers_1
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = RCO_event_cw.15.a
+	}
+
+}
 
 ##### nmo chaos ends
 

@@ -158,6 +158,7 @@ RCO_soviet_decisions_category = {
 		visible = {
 			original_tag = RCO
 			has_government = communist
+			has_completed_focus = RCO_create_VCHK
 			has_active_mission = RCO_transport_collapse_mission
 		}
 
@@ -190,12 +191,13 @@ RCO_soviet_decisions_category = {
 		visible = {
 			original_tag = RCO
 			has_government = communist
+			has_completed_focus = RCO_new_international
 		}
 
 		cost = 20
 		days_remove = 10
 
-		fire_only_once = no
+		fire_only_once = yes
 
 		ai_will_do = {
 			factor = 100
@@ -223,6 +225,41 @@ RCO_soviet_decisions_category = {
 
 	}
 
+	RCO_belarus_ally_decision = {
+
+		icon = decision_partymob
+
+		available = {
+			has_completed_focus = RCO_new_international
+		}
+
+		visible = {
+			original_tag = RCO
+			has_government = communist
+			has_completed_focus = RCO_new_international
+			BLR = {
+				has_completed_focus = BLR_unite_the_communist_parties
+			}
+		}
+
+		cost = 15
+		days_remove = 1
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			BLR = {
+            country_event = {
+					id = cw.14
+				}
+			}
+		}
+	}
+
 	RCO_ukraine2_decision = {
 
 		icon = decision_partymob
@@ -230,6 +267,7 @@ RCO_soviet_decisions_category = {
 		available = {
 			has_completed_focus = RCO_new_international
 			has_global_flag = SOV_ukraine1_desicions
+			has_war_with = SOV
 		}
 
 		visible = {
@@ -248,35 +286,33 @@ RCO_soviet_decisions_category = {
 		}
 
 		complete_effect = {
-			custom_effect_tooltip = RCO_ukraine1_TT
-			UKR = {
-				set_capital = {state = 227}
+   			 custom_effect_tooltip = RCO_ukraine1_TT
+   			UKR = {
+       			 start_civil_war = {
+           		 ideology = communist
+           		 size = 0.2
+           		 states = {
+                227 228 221 
+            	}
+            set_country_flag = UKR_UCO_alias_trigger
+        	}
 			}
-			RCO = {
-				puppet = {
-    				target = UKR
-    				end_wars = no
-				}
-			}
-			UKR = {
-				load_focus_tree = UCO_Communist_Ukraine_focus
-			}
-			UKR = {
-				set_cosmetic_tag = UKR_UCO
-			}
-			UKR = {
-				start_civil_war = {
-    				ruling_party = communist
-   					 ideology = conservative
-    				size = 0.8
-    				states = {
-        			137 196 200 984 259 225 193 1144 197 226 203 202 192 806 198 1086 201 199 93 91 1143 80 89 73
-    				}
-				}
-			}
-			
+   		random_other_country = {
+        		limit = {
+           		 original_tag = UKR
+            	has_government = communist
+        		}
+        	set_capital = {state = 227}
+			set_cosmetic_tag = UKR_UCO
+       	 	load_focus_tree = UCO_Communist_Ukraine_focus
+       	 	RCO = {
+            	puppet = {
+                target = PREV
+                end_wars = no
+            	}
+        	}
+    	}
 		}
-
 	}
 
 	SOV_zhd_nationalise_small_zhds_decision = {
@@ -2123,4 +2159,43 @@ RCO_integrate_state_armenia = {
 			add_state_core = 137
 		}
 	}
+
+	RCO_integrate_state_belarus = {
+
+		icon = decision_ban_coalition
+
+		available = {
+			original_tag = RCO
+			has_completed_focus = RCO_strenghtern_government
+		}
+
+		fire_only_once = yes
+
+		cost = 150
+		days_remove = 30
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		visible = {
+			original_tag = RCO
+			controls_state = 206
+			206 = {
+				NOT = {is_core_of = ROOT}
+			}
+		}
+
+		remove_effect = {
+			add_state_core = 207
+			add_state_core = 241
+			add_state_core = 204
+			add_state_core = 95
+			add_state_core = 206
+			add_state_core = 194
+			add_state_core = 94
+			add_state_core = 808
+		}
+	}
+}
 }

@@ -1728,13 +1728,18 @@ country_event = {
 	}
 }
 country_event = {
-	id = election_GER.1 #german election
+	id = election_GER.1 #german election 2002
 	title = election_GER.1.t
 	desc = election_GER.1.d
 	picture = GFX_report_event_political_deal2
 	fire_only_once = yes
 	is_triggered_only = yes
-
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+		date > 2002.9.19
+		date < 2002.9.22
+	}
 	option = {
 		name = election_GER.1.o1 #GER_CDU_FDP_2002_Win
 		clr_country_flag = gc_elections
@@ -1742,6 +1747,11 @@ country_event = {
 		set_politics = {
 			ruling_party = conservative
 			elections_allowed = yes
+		}
+		create_country_leader = {
+			name = "Edmund Stoiber"
+			picture = "Edmund_Stoiber.dds"
+			ideology = christian_democrat
 		}
 		add_popularity = {
 			ideology = conservative
@@ -1804,4 +1814,89 @@ country_event = {
 	# 		}
 	# 	}
 	# }
+}
+
+
+country_event = {
+	id = election_GER.2 #german election historical 2005
+	title = election_GER.2.t
+	desc = election_GER.2.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = election_GER.2.o1 #GER_CDU_SPD_Coalition
+		set_country_flag = GER_CDU_SPD_2005_Win
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = election_GER.2.o2 #GER_sdpgune_2005
+		clr_country_flag = gc_elections
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.08
+		}
+		set_country_flag = GER_SPD_Gune_2005_Win
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+country_event = {
+	id = germany.63 #Vertrauensfrage
+	title = germany.63.t
+	desc = germany.63.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_government = social_democrat
+		date > 2005.7.18
+		date < 2005.7.21
+	}
+
+	option = {
+		name = germany.63.o1
+		hidden_effect = {
+			country_event = {
+				id = election_GER.2 days = 60
+			}
+		}
+		add_stability = -0.02
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.05
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
 }

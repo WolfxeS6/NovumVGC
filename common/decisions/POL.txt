@@ -6082,12 +6082,18 @@ POL_wilk_program_cat = {
 
 		available = {
 			NOT = { has_idea = POL_invested_in_tank_production }
+		    NOT = { has_country_flag = POL_wilk_project_finished }
 		}
 
 
 		visible = {
 			NOT = { has_country_flag = POL_wilk_project_finished }
 			has_completed_focus = POL_army_wilk_program
+			NOT = {
+			check_variable = {
+				POL_wilk_program_research_var = 100
+			}
+		}
 		}
 
 		fire_only_once = no
@@ -6109,6 +6115,7 @@ POL_wilk_program_cat = {
 				var = POL_wilk_program_research_var
 				value = 10
 			}
+			clamp_variable = { var = POL_wilk_program_research_var min = 0 max = 100 }
 		}
 
 		ai_will_do = {
@@ -6125,13 +6132,18 @@ POL_wilk_program_cat = {
 		}
 
 		available = {
-
+        NOT = { has_country_flag = POL_wilk_project_finished }
 		}
 
 
 		visible = {
 			NOT = { has_country_flag = POL_wilk_project_finished }
 			has_completed_focus = POL_army_wilk_program
+			NOT = {
+			check_variable = {
+				POL_wilk_program_research_var = 100
+			}
+		}
 		}
 
 		fire_only_once = no
@@ -6146,6 +6158,53 @@ POL_wilk_program_cat = {
 
 		remove_effect = {
 			custom_effect_tooltip = POL_wilk_research_increase
+			clamp_variable = { var = POL_wilk_program_research_var min = 0 max = 100 }
+			add_to_variable = {
+				var = POL_wilk_program_research_var
+				value = 10
+			}
+		}
+
+		ai_will_do = {
+			factor = 100
+		}
+	}
+	
+POL_finish_the_program_dec = {
+
+		icon = GFX_decision_generic_tank
+
+		allowed = {
+			tag = POL
+		}
+
+		available = {
+        NOT = { has_country_flag = POL_wilk_project_finished }
+		}
+
+
+		visible = {
+			NOT = { has_country_flag = POL_wilk_project_finished }
+			has_completed_focus = POL_army_wilk_program
+			check_variable = {
+				POL_wilk_program_research_var = 100
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 35
+		days_remove = 50
+
+		modifier = {
+			consumer_goods_factor = 0.05
+			research_speed_factor = 0.03
+		}
+
+		remove_effect = {
+			set_country_flag = POL_wilk_project_finished
+			custom_effect_tooltip = POL_wilk_research_increase
+			clamp_variable = { var = POL_wilk_program_research_var min = 0 max = 100 }
 			add_to_variable = {
 				var = POL_wilk_program_research_var
 				value = 10

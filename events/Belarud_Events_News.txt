@@ -109,6 +109,7 @@ country_event = {
 
 	option = {
 		name = Belarus_Events_News.5.o1
+		promote_character = BLR_Stanislav_Zas
 		BLR_increase_oligarhic_relations_by_2 = yes
 		ai_chance = {
 			factor = 100
@@ -185,6 +186,21 @@ country_event = {
 
 	option = {
 		name = Belarus_Events_News.8.o1
+		load_focus_tree = BLR_dem_phase_2
+		set_country_flag = BLR_conflict_with_lukashenka 
+		set_variable = { var = BLR_opposing_side_increase_in_power_var value = 10 }
+		
+		set_power_balance = {
+
+        id = BLR_power_balance
+
+        left_side = BLR_luka_side
+ 
+        right_side = BLR_democratic_side
+
+        set_value = 0.0
+
+}
 		if = {
 			limit = {
 				has_country_flag = BLR_social_democrat_major_flag
@@ -490,6 +506,115 @@ country_event = {
 
 		ai_chance = {
 			factor = 100
+		}
+	}
+}
+
+#Democratic power secured
+country_event = {
+	id = Belarus_Events_News.21
+	title = Belarus_Events_News.21.t
+	desc = Belarus_Events_News.21.d
+	picture = GFX_report_event_vladimir_putin_young
+	is_triggered_only = yes
+
+	option = {
+		name = Belarus_Events_News.21.o1
+		set_global_flag = BLR_democratic_path_global_fg
+		clr_country_flag = BLR_choosen_lib_path
+		load_focus_tree = BLR_dem_phase_2
+		remove_power_balance = {
+				id = BLR_power_balance
+			}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+
+#Belarus wants to join NATO
+country_event = {
+	id = Belarus_Events_News.22
+	title = Belarus_Events_News.22.t
+	desc = Belarus_Events_News.22.d
+	picture = GFX_report_event_national_development
+
+	is_triggered_only = yes
+
+	option = {
+		name = Belarus_Events_News.22.o1
+		USA = { add_to_faction = BLR }
+		BLR = { country_event = diplomatic_response.1 }
+		ai_chance = {
+			factor = 100
+		}
+	}
+
+	option = {
+		name = Belarus_Events_News.22.o2
+		add_political_power = -100
+		BLR = { country_event = diplomatic_response.2 }
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+#Belarus invites us to their alliance
+country_event = {
+	id = Belarus_Events_News.23
+	title = Belarus_Events_News.23.t
+	desc = Belarus_Events_News.23.d
+	picture = GFX_report_event_national_development
+
+	is_triggered_only = yes
+
+	option = {
+		name = Belarus_Events_News.2323.o1
+		ai_strategy = {
+		type = befriend
+		id = "BLR"
+		value = 1000
+	}
+	ai_strategy = {
+		type = alliance
+		id = "BLR"
+		value = 1000
+	}
+		BLR = { add_to_faction = ROOT }
+		BLR = { country_event = diplomatic_response.1 }
+		ai_chance = {
+			factor = 80
+		}
+	}
+
+	option = {
+		name = Belarus_Events_News.23.o2
+		add_political_power = -50
+		BLR = { country_event = diplomatic_response.2 }
+		ai_chance = {
+			factor = 20
+		}
+	}
+}
+
+#Belarus invites us to their alliance
+country_event = {
+	id = Belarus_Events_News.24
+	title = Belarus_Events_News.24.t
+	desc = Belarus_Events_News.24.d
+	picture = GFX_report_event_national_development
+
+	is_triggered_only = yes
+
+	option = {
+		name = Belarus_Events_News.24.o1
+		add_power_balance_value = {
+        id = BLR_power_balance
+        value = 0.100
+        }
+		ai_chance = {
+			factor = 80
 		}
 	}
 }

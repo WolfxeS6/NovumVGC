@@ -3525,6 +3525,17 @@ shared_focus = {
 			OR = {
 				tag = ICE
 				tag = ARM
+				tag = FRA
+			}
+			
+		}
+	}
+	offset = {
+		x = -16
+		y = 0
+		trigger = {
+			OR = {
+				tag = ITA
 			}
 			
 		}
@@ -3546,6 +3557,7 @@ shared_focus = {
 			OR = {
 				tag = SWE
 				tag = NOR
+				tag = SWI
 			}
 			
 		}
@@ -3957,7 +3969,7 @@ shared_focus = {
 
 shared_focus = {
 	id = GEN_hospitals_in_the_field
-	icon = industry_democratic3
+	icon = GFX_focus_generic_field_hostpital
 	x = -1
 	y = 1
 	relative_position_id = GEN_modernize_our_weponary
@@ -4168,12 +4180,12 @@ shared_focus = {
 }
 
 shared_focus = {
-	id = GEN_rocket_artillery_experiments
-	icon = rocketry
+	id = GEN_drone_warfare
+	icon = airforce
 	x = -1
 	y = 1
 	relative_position_id = GEN_destroy_their_tanks
-	cost = 7.2
+	cost = 5
 
 	prerequisite = {
 		focus = GEN_bring_out_the_big_guns
@@ -4181,6 +4193,31 @@ shared_focus = {
 
 	prerequisite = {
 		focus = GEN_destroy_their_tanks
+	}
+
+	available = {
+
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = tech_bonus
+			ahead_reduction = 1
+			bonus = 1.0
+			category = drone_tech
+		}
+	}
+}
+shared_focus = {
+	id = GEN_rocket_artillery_experiments
+	icon = rocketry
+	x = 0
+	y = 1
+	relative_position_id = GEN_drone_warfare
+	cost = 7.2
+
+	prerequisite = {
+		focus = GEN_drone_warfare
 	}
 
 	available = {
@@ -4205,28 +4242,43 @@ shared_focus = {
 	cost = 5
 
 	offset = {
-		x = -11
+		x = -14
 		y = 0
 		trigger = {
-			tag = ICE
+			OR = {
+				tag = ICE
+				tag = FRA
+			}
 		}
 	}
 	offset = {
-		x = -35
+		x = -37
 		y = 0
 		trigger = {
 			OR = {
 				tag = SWE
 				tag = NOR
+				tag = SWI
 			}
 			
+		}
+	}
+	offset = {
+		x = -18
+		y = 0
+		trigger = {
+			OR = {
+				tag = ITA
+			}	
 		}
 	}
 	offset = {
 		x = -25
 		y = 0
 		trigger = {
-			tag = FIN
+			OR = {
+				tag = FIN
+			}	
 		}
 	}
 	offset = {
@@ -4828,21 +4880,42 @@ shared_focus = {
 		}
 	}
 	offset = {
-		x = -35
+		x = -14
+		y = 0
+		trigger = {
+			OR = {
+				tag = FRA
+			}
+		}
+	}
+	offset = {
+		x = -37
 		y = 0
 		trigger = {
 			OR = {
 				tag = SWE
 				tag = NOR
+				tag = SWI
 			}
 			
+		}
+	}
+	offset = {
+		x = -18
+		y = 0
+		trigger = {
+			OR = {
+				tag = ITA
+			}
 		}
 	}
 	offset = {
 		x = -25
 		y = 0
 		trigger = {
-			tag = FIN
+			OR = {
+				tag = FIN
+			}
 		}
 	}
 	offset = {
@@ -4902,10 +4975,22 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		add_equipment_to_stockpile = {
-			type = fighter_equipment_2
-			amount = 35
-			producer = USA
+		if = {
+			limit = {
+				NOT = {has_dlc = "By Blood Alone"}
+			}
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount = 35
+				producer = USA
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = medium_plane_airframe_1
+				amount = 30
+				producer = USA
+			}
 		}
 	}
 }
@@ -4947,10 +5032,22 @@ shared_focus = {
 	}
 
 	completion_reward = {
-		add_equipment_to_stockpile = {
-			type = CAS_equipment_2
-			amount = 45
-			producer = SOV
+		if = {
+			limit = {
+				NOT = {has_dlc = "By Blood Alone"}
+			}
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_2
+				amount = 45
+				producer = SOV
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = small_plane_airframe_1
+				amount = 45
+				producer = SOV
+			}
 		}
 	}
 }

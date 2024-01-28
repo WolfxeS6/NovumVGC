@@ -4937,8 +4937,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			BHU_law_change_increase_state_security = yes
-			BHU_law_change_decrease_civil_liberties = yes
+			law_change_increase_state_security = yes
+			law_change_decrease_civil_liberties = yes
 		}
 
 		ai_will_do = {
@@ -6319,7 +6319,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			BHU_law_change_increase_state_security = yes
+			law_change_increase_state_security = yes
 		}
 
 		ai_will_do = {
@@ -6597,7 +6597,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_stability = 0.05
-			BHU_law_change_increase_welfare = yes
+			law_change_increase_welfare = yes
 		}
 
 		ai_will_do = {
@@ -6851,7 +6851,7 @@ focus_tree = {
 
 	focus = {
 		id = BHU_dominate_the_skies
-		icon = escort_fighters
+		icon = GFX_focus_usa_escort_fighters
 		x = 0
 		y = 1
 		relative_position_id = BHU_a_strong_air_force
@@ -6870,10 +6870,22 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = fighter_equipment_2
-				amount = 25
-				producer = BHU
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = fighter_equipment_2
+					amount = 25
+					producer = BHU
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = medium_plane_airframe_1
+					amount = 25
+					producer = BHU
+				}
 			}
 			swap_ideas = {
 				remove_idea = BHU_the_sky_is_bhutanese
@@ -6945,15 +6957,39 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = tac_bomber_equipment_1
-				amount = 15
-				producer = ROOT
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = tac_bomber_equipment_1
+					amount = 15
+					producer = ROOT
+				}
 			}
-			add_equipment_to_stockpile = {
-				type = CAS_equipment_2
-				amount = 25
-				producer = BHU
+			else = {
+				add_equipment_to_stockpile = {
+					type = uav_plane_airframe_0
+					amount = 15
+					producer = ROOT
+				}
+			}
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = CAS_equipment_2
+					amount = 25
+					producer = ROOT
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = small_plane_airframe_1
+					amount = 25
+					producer = ROOT
+				}
 			}
 		}
 
@@ -7153,10 +7189,22 @@ focus_tree = {
 				uses = 2
 				category = air_equipment
 			}
-			add_equipment_to_stockpile = {
-				type = fighter_equipment_3
-				amount = 15
-				producer = BHU
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = fighter_equipment_3
+					amount = 15
+					producer = ROOT
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = medium_plane_airframe_1
+					amount = 15
+					producer = ROOT
+				}
 			}
 		}
 

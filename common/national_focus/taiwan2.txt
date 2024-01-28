@@ -3512,7 +3512,7 @@
 
 		#search_filters = { FOCUS_FILTER_STABILITY }
 		completion_reward = {
-			BHU_law_change_increase_welfare = yes
+			law_change_increase_welfare = yes
 		}
 	}
 
@@ -3800,7 +3800,7 @@
 
 		#search_filters = { FOCUS_FILTER_STABILITY }
 		completion_reward = {
-			BHU_law_change_tax_increse = yes
+			law_change_tax_increase = yes
 		}
 	}
 
@@ -6337,7 +6337,9 @@
 		}
 
 		bypass = {
-
+			USA = {
+				is_faction_leader = no
+			}
 		}
 
 		cancel_if_invalid = yes
@@ -6349,16 +6351,16 @@
 		completion_reward = {
 		USA = { 
 		country_event = thundertaiwan.3 
-		ai_strategy = {
-		type = befriend
-		id = "CHI"
-		value = 1000
-	}
-	ai_strategy = {
-		type = alliance
-		id = "CHI"
-		value = 1000
-	}
+		add_ai_strategy = {
+			type = befriend
+			id = "CHI"
+			value = 1000
+		}
+		add_ai_strategy = {
+			type = alliance
+			id = "CHI"
+			value = 1000
+		}
 		}
 		}
 	}
@@ -8065,10 +8067,22 @@
 
 		#search_filters = { FOCUS_FILTER_STABILITY }
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = fighter_equipment_3
-				amount = 70
-				producer = USA
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = fighter_equipment_3
+					amount = 70
+					producer = USA
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = medium_plane_airframe_1
+					amount = 70
+					producer = USA
+				}
 			}
 			add_equipment_to_stockpile = {
 				type = motorized_equipment_1

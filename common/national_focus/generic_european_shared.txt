@@ -50,12 +50,13 @@ shared_focus = {
 	y = 0
 	cost = @Time_40_days
 	offset = {
-		x = 11
+		x = 20
 		y = 8
 		trigger = {
 			OR = {
 				tag = NOR
 				tag = SWE
+				tag = SWI
 			}
 			
 		}
@@ -66,6 +67,16 @@ shared_focus = {
 		trigger = {
 			OR = {
 				tag = FIN
+			}
+			
+		}
+	}
+	offset = {
+		x = 53
+		y = 6
+		trigger = {
+			OR = {
+				tag = SYR
 			}
 			
 		}
@@ -544,7 +555,19 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
+		factor = 1
+		modifier = {
+				add = 10
+			FROM = {
+				has_opinion = { target = USA value > 61 }
+			}
+		}
+		modifier = {
+			factor = 0
+			FROM = {
+				has_opinion = { target = USA value < -20 }
+			}
+		}
 	}
 }
 shared_focus = {
@@ -588,7 +611,19 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
+		factor = 1
+		modifier = {
+				add = 10
+			FROM = {
+				has_opinion = { target = JAP value > 61 }
+			}
+		}
+		modifier = {
+			factor = 0
+			FROM = {
+				has_opinion = { target = JAP value < -20 }
+			}
+		}
 	}
 }
 shared_focus = {
@@ -641,7 +676,7 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
+		factor = 4
 	}
 }
 shared_focus = {
@@ -685,7 +720,19 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
+		factor = 1
+		modifier = {
+				add = 10
+			FROM = {
+				has_opinion = { target = SOV value > 61 }
+			}
+		}
+		modifier = {
+			factor = 0
+			FROM = {
+				has_opinion = { target = SOV value < -20 }
+			}
+		}
 	}
 }
 shared_focus = {
@@ -729,7 +776,19 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
+		factor = 1
+		modifier = {
+			add = 10
+			FROM = {
+				has_opinion = { target = PRC value > 61 }
+			}
+		}
+		modifier = {
+			factor = 0
+			FROM = {
+				has_opinion = { target = PRC value < -20 }
+			}
+		}
 	}
 }
 
@@ -1895,6 +1954,12 @@ shared_focus = {
 			uses = 1
 			category = artillery
 		}
+		add_tech_bonus = {
+				name = tech_bonus
+				ahead_reduction = 1
+				bonus = 1.0
+				category = drone_tech
+		}
 	}
 
 	ai_will_do = {
@@ -2112,7 +2177,7 @@ shared_focus = {
 }
 shared_focus = {
 	id = GEF_Improve_our_Field_Hospitals
-	icon = GFX_goal_Field_Equipment
+	icon = GFX_focus_generic_field_hostpital
 	x = 36
 	y = 4
 	cost = 10
@@ -2128,12 +2193,8 @@ shared_focus = {
 			name = support_folder
 			bonus = 1
 			uses = 1
-			category = support_tech
+			category = hospital_tech
 		}
-		###########################################
-		### Change this to only Field Hospitals ###
-		###    Note: I don't know how to T~T    ###
-		###########################################
 	}
 
 	ai_will_do = {
@@ -2242,7 +2303,7 @@ shared_focus = {
 
 
 	completion_reward = {
-		add_ideas = GEF_Large_Standing_Army
+		law_change_tax_conscription_increase = yes
 	}
 
 	ai_will_do = {
@@ -2337,7 +2398,13 @@ shared_focus = {
 	prerequisite = {
 		focus = GEF_Regional_Sea_Dominance
 	}
-
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_owned_by = ROOT
+			is_controlled_by = ROOT
+		}
+	}
 
 	completion_reward = {
 		random_owned_state = {
@@ -2467,7 +2534,13 @@ shared_focus = {
 	prerequisite = {
 		focus = GEF_Total_Sea_Dominance
 	}
-
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_owned_by = ROOT
+			is_controlled_by = ROOT
+		}
+	}
 
 	completion_reward = {
 		random_owned_state = {
@@ -2497,7 +2570,13 @@ shared_focus = {
 	prerequisite = {
 		focus = GEF_Regional_Navel_Expansion_I
 	}
-
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_owned_by = ROOT
+			is_controlled_by = ROOT
+		}
+	}
 
 	completion_reward = {
 		random_owned_state = {
@@ -2567,7 +2646,13 @@ shared_focus = {
 	prerequisite = {
 		focus = GEF_Total_Navel_Expansion_I
 	}
-
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_owned_by = ROOT
+			is_controlled_by = ROOT
+		}
+	}
 
 	completion_reward = {
 		random_owned_state = {
@@ -2597,7 +2682,13 @@ shared_focus = {
 	prerequisite = {
 		focus = GEF_Regional_Navel_Expansion_II
 	}
-
+	available = {
+		any_state = {
+			is_coastal = yes
+			is_owned_by = ROOT
+			is_controlled_by = ROOT
+		}
+	}
 
 	completion_reward = {
 		random_owned_state = {
@@ -2899,7 +2990,6 @@ shared_focus = {
 	y = 0
 	cost = @Time_70_days
 
-
 	completion_reward = {
 		air_experience = 5
 		random_owned_state = {
@@ -2950,10 +3040,22 @@ shared_focus = {
 
 	completion_reward = {
 		air_experience = 10
-		add_equipment_to_stockpile = {
-			type = fighter_equipment_3
-			amount = 35
-			producer = USA
+		if = {
+			limit = {
+				NOT = {has_dlc = "By Blood Alone"}
+			}
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount = 35
+				producer = USA
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = medium_plane_airframe_1
+				amount = 30
+				producer = USA
+			}
 		}
 	}
 
@@ -3021,10 +3123,22 @@ shared_focus = {
 
 	completion_reward = {
 		air_experience = 10
-		add_equipment_to_stockpile = {
-			type = fighter_equipment_2
-			amount = 35
-			producer = SOV
+		if = {
+			limit = {
+				NOT = {has_dlc = "By Blood Alone"}
+			}
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_2
+				amount = 45
+				producer = SOV
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = medium_plane_airframe_1
+				amount = 30
+				producer = SOV
+			}
 		}
 	}
 
@@ -3095,10 +3209,22 @@ shared_focus = {
 
 	completion_reward = {
 		air_experience = 10
-		add_equipment_to_stockpile = {
-			type = fighter_equipment_2
-			amount = 55
-			producer = PRC
+		if = {
+			limit = {
+				NOT = {has_dlc = "By Blood Alone"}
+			}
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_2
+				amount = 45
+				producer = PRC
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = medium_plane_airframe_1
+				amount = 30
+				producer = PRC
+			}
 		}
 	}
 
@@ -3351,7 +3477,7 @@ shared_focus = {
 shared_focus = {
 	id = GEF_Political_Effect
 	icon = GFX_goal_generic_propaganda
-	x = 32
+	x = 40
 	y = 7
 	cost = @Time_45_days
 	offset = {
@@ -3395,16 +3521,160 @@ shared_focus = {
 
 
 	completion_reward = {
-		add_timed_idea = {
-			idea = GEF_Individual_Freedom
-			days = 365
+			add_timed_idea = {
+				idea = idea_focus_generic_individual_freedom
+				days = 365
+			}
+			if = {
+				limit = { has_democratic_form_of_government = yes }
+				add_stability = 0.03
+			}
+			if = {
+				limit = { has_democratic_form_of_government = no }
+				add_stability = -0.03
+			}
 		}
-		add_stability = 0.05
-	}
-
-	ai_will_do = {
-		factor = 10
-	}
+		
+		ai_will_do = {
+			factor = 0
+			
+			modifier = {
+				add = 150
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = FIVE_PERCENT
+				}
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = market_liberal
+					has_government = social_liberal
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 10
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = FIVE_PERCENT
+				}
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 0
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = FIVE_PERCENT
+				}
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 75
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = TEN_PERCENT
+				}
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = market_liberal
+					has_government = social_liberal
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 10
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = TEN_PERCENT
+				}
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 34
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = TWENTY_PERCENT
+				}
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = market_liberal
+					has_government = social_liberal
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 10
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = TWENTY_PERCENT
+				}
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 20
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = THIRTY_PERCENT
+				}
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = market_liberal
+					has_government = social_liberal
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 10
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = THIRTY_PERCENT
+				}
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+					has_government = communist
+				}
+			}
+		}
 }
 
 ###########################
@@ -3448,8 +3718,55 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 0
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				OR = {
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = islamist
+					has_government = nationalist
+					has_government = monarchist
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					has_government = fascist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = social_liberal
+					has_government = market_liberal
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+		}
 }
 
 #################
@@ -3484,8 +3801,33 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 3
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = democratic_socialist
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = democratic_socialist
+					has_government = communist
+					has_government = fascist
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Redistribution_of_Wealth
@@ -3573,8 +3915,29 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 3
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = social_democrat
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				has_government = social_democrat
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Strengthen_Unions
@@ -3657,8 +4020,32 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 3
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = progressive
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = progressive
+					has_government = nationalist
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Environmental_Policy
@@ -3739,8 +4126,54 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 0
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				OR = {
+					has_government = social_liberal
+					has_government = market_liberal
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = islamist
+					has_government = nationalist
+					has_government = monarchist
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = fascist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					has_government = social_liberal
+					has_government = market_liberal
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+		}
 }
 
 #########################
@@ -3772,8 +4205,32 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 3
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = social_liberal
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = social_liberal
+					has_government = nationalist
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Encourage_Immigration
@@ -3902,8 +4359,33 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 3
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = market_liberal
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = market_liberal
+					has_government = reactionary
+					has_government = conservative
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Economic_Freedom
@@ -3989,8 +4471,54 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 0
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					has_government = islamist
+					has_government = nationalist
+					has_government = monarchist
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = fascist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = social_liberal
+					has_government = market_liberal
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+		}
 }
 
 ####################
@@ -4022,8 +4550,32 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 3
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = conservative
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = conservative
+					has_government = market_liberal
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Family_Values
@@ -4103,7 +4655,7 @@ shared_focus = {
 }
 shared_focus = {
 	id = GEF_Market_Driven_Economy
-	icon = GFX_goal_Global_Trade
+	icon = GFX_goal_Cut_Taxes
 	x = 0
 	y = 1
 	cost = @Time_70_days
@@ -4151,8 +4703,33 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 3
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = reactionary
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = reactionary
+					has_government = market_liberal
+					has_government = nationalist
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Reduce_Government_Spending
@@ -4275,20 +4852,162 @@ shared_focus = {
 
 
 	completion_reward = {
-		add_timed_idea = {
-			idea = GEF_National_Strength
-			days = 365
+			add_timed_idea = {
+				idea = idea_focus_generic_national_strength
+				days = 365
+			}
+			if = {
+				limit = { has_democratic_form_of_government = no }
+				add_stability = 0.03
+			}
+			if = {
+				limit = { has_democratic_form_of_government = yes }
+				add_stability = -0.03
+			}
 		}
-		add_stability = -0.05
-	}
-
-	ai_will_do = {
-		factor = 10
-		modifier = {
+		
+		ai_will_do = {
 			factor = 0
-			is_historical_focus_on = yes
+			
+			modifier = {
+				add = 10
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = FIVE_PERCENT
+				}
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = market_liberal
+					has_government = social_liberal
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 0
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = FIVE_PERCENT
+				}
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = market_liberal
+					has_government = social_liberal
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 150
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = FIVE_PERCENT
+				}
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 10
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = TEN_PERCENT
+				}
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = market_liberal
+					has_government = social_liberal
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 75
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = TEN_PERCENT
+				}
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 10
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = TWENTY_PERCENT
+				}
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = market_liberal
+					has_government = social_liberal
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 34
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = TWENTY_PERCENT
+				}
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+					has_government = communist
+				}
+			}
+			modifier = {
+				add = 10
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = THIRTY_PERCENT
+				}
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = market_liberal
+					has_government = social_liberal
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 20
+				has_game_rule = {
+					rule = XXX_AI_BEHAVIOR
+					option = THIRTY_PERCENT
+				}
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+					has_government = communist
+				}
+			}
 		}
-	}
 }
 
 ############
@@ -4323,8 +5042,44 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 0
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = communist
+			}
+			modifier = {
+				add = 10
+				has_government = communist
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = islamist
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = reactionary
+					has_government = conservative
+					has_government = social_liberal
+					has_government = market_liberal
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Communist_Values
@@ -4497,8 +5252,48 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 0
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				OR = {
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+				}
+			}
+			modifier = {
+				add = 10
+				OR = {
+					has_government = fascist
+					has_government = nationalist
+					has_government = monarchist
+				}
+			}
+			modifier = {
+				add = 3
+				has_government = communist
+			}
+			modifier = {
+				add = 10
+				OR = {
+					has_government = islamist
+					has_government = reactionary
+					has_government = conservative
+					has_government = social_liberal
+					has_government = market_liberal
+				}
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = social_democrat
+					has_government = progressive
+					has_government = democratic_socialist
+				}
+			}
+		}
 }
 
 ###############
@@ -4534,8 +5329,33 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 3
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = fascist
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = fascist
+					has_government = reactionary
+					has_government = democratic_socialist
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Cult_of_Personality
@@ -4710,8 +5530,33 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 3
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = nationalist
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = nationalist
+					has_government = conservative
+					has_government = market_liberal
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Emergency_Powers
@@ -4787,8 +5632,39 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 0
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = monarchist
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = monarchist
+					monarchist > 0
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = monarchist
+					monarchist > 0.24
+				}
+			}
+			modifier = {
+				add = 3
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 shared_focus = {
 	id = GEF_Ensure_Support_for_the_Nobility
@@ -4918,8 +5794,39 @@ shared_focus = {
 	}
 
 	ai_will_do = {
-		factor = 10
-	}
+			factor = 0
+			
+			modifier = {
+				add = 5
+				is_historical_focus_on = yes
+				has_government = islamist
+			}
+			modifier = {
+				add = 3
+				OR = {
+					has_government = islamist
+					islamist > 0
+				}
+			}
+			modifier = {
+				add = 7
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_ORDER
+				}
+				OR = {
+					has_government = islamist
+					islamist > 0.24
+				}
+			}
+			modifier = {
+				add = 3
+				has_game_rule = {
+					rule = ZZZ_AI_BEHAVIOR
+					option = LOGIC_DISORDER
+				}
+			}
+		}
 }
 
 #################

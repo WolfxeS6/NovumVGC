@@ -51,10 +51,10 @@ country_event = {
 		hidden_effect = {
 			retire_ideology_leader = conservative
 		}
-		news_event = {
-			id = ENG_news.2
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.2
+		#	hours = 6
+		#}
 	}
 	option = {	#Tory libdem coalition
 		name = election_ENG.1.o2
@@ -89,10 +89,10 @@ country_event = {
 			SCO_independence_support = 10
 		}
 		recalculate_scottish_independence = yes
-		news_event = {
-			id = ENG_news.3
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
 	}
 }
 
@@ -100,18 +100,8 @@ country_event = {
 country_event = {
 	id = election_ENG.2
 	title = election_ENG.2.t
-	desc = {
-		text = election_ENG.2.d1
-		trigger = {
-			has_country_flag = ENG_bush_victory_2000
-		}
-	}
-	desc = {
-		text = election_ENG.2.d2
-		trigger = {
-			has_country_flag = ENG_gore_victory_2000
-		}
-	}
+	desc = election_ENG.2.d
+
 	picture = GFX_report_event_election
 
 	is_triggered_only = yes
@@ -158,10 +148,10 @@ country_event = {
 			SCO_independence_support = 10
 		}
 		recalculate_scottish_independence = yes
-		news_event = {
-			id = ENG_news.3
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
 	}
 
 	option = {	#Blair Landslide
@@ -185,10 +175,10 @@ country_event = {
 			retire_ideology_leader = conservative
 			retire_ideology_leader = social_liberal
 		}
-		news_event = {
-			id = ENG_news.2
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.2
+		#	hours = 6
+		#}
 	}
 	option = {	#Blair libdem coalition
 		name = election_ENG.2.o3
@@ -211,10 +201,80 @@ country_event = {
 		add_political_power = -15
 		set_country_flag = ENG_Lib_Dem_coalition
 		set_country_flag = ENG_labour_victory
-		news_event = {
-			id = ENG_news.2
-			hours = 6
+		#news_event = {
+		#	id = ENG_news.2
+		#	hours = 6
+		#}
+	}
+	
+	option = {	#Tory Lib dem
+		name = election_ENG.2.o4
+		ai_chance = {
+			factor = 60
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
+		hidden_effect = { country_event = ENG.25 }
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.1
+		}
+		hidden_effect = {
+		}
+		add_political_power = 15
+		set_country_flag = ENG_tory_election_victory
+		set_country_flag = ENG_Lib_Dem_coalition
+		custom_effect_tooltip = SCO_independence_plus_5_tt
+		add_to_variable = {
+			SCO_independence_support = 10
+		}
+		recalculate_scottish_independence = yes
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
+	}
+	option = {	#Clegg
+		name = election_ENG.3.o5
+		trigger = {
+			social_liberal > 0.3
+		}
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		hidden_effect = { country_event = ENG.25 }
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.15
+		}
+
+		set_country_flag = ENG_Lib_Dem_coalition
+		add_political_power = 15
+
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
 	}
 
 }
@@ -239,9 +299,36 @@ country_event = {
 			clr_country_flag = ENG_tory_election_victory
 			clr_country_flag = ENG_labour_victory
 			clr_country_flag = ENG_Lib_Dem_coalition
+			add_country_leader_role = {
+				character = ENG_david_cameron
+				country_leader = {
+						ideology = fiscal_conservative
+				}
+				promote_leader = yes
+			}
+			add_country_leader_role = {
+				character = ENG_nick_clegg
+				country_leader = {
+						ideology = moderate
+				}
+				promote_leader = yes
+			}
+			if = {
+				limit = {
+					ENG_gordan_brown = {
+						can_be_country_leader = no
+					}
+				}
+				add_country_leader_role = {
+					character = ENG_gordan_brown
+					country_leader = {
+							ideology = labor_ideology
+					}
+					promote_leader = yes
+				}
+			}
 		}
 	}
-
 	option = {	#Cameron-Clegg
 		name = election_ENG.3.o1
 		ai_chance = {
@@ -260,6 +347,7 @@ country_event = {
 			ideology = social_liberal
 			popularity = -0.10
 		}
+
 		set_country_flag = ENG_Lib_Dem_coalition
 		set_country_flag = ENG_tory_election_victory
 		add_political_power = 15
@@ -268,10 +356,10 @@ country_event = {
 			SCO_independence_support = 5
 		}
 		recalculate_scottish_independence = yes
-		news_event = {
-			id = ENG_news.3
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
 	}
 	option = {	#Cameron
 		name = election_ENG.3.o2
@@ -291,19 +379,17 @@ country_event = {
 			ideology = conservative
 			popularity = 0.10
 		}
-		hidden_effect = {
-			retire_ideology_leader = democratic_socialist
-		}
+
 		set_country_flag = ENG_tory_election_victory
 		custom_effect_tooltip = SCO_independence_plus_5_tt
 		add_to_variable = {
 			SCO_independence_support = 10
 		}
 		recalculate_scottish_independence = yes
-		news_event = {
-			id = ENG_news.3
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
 	}
 	option = {	#Gordan gets through it
 		name = election_ENG.3.o3
@@ -320,10 +406,10 @@ country_event = {
 		}
 		set_country_flag = ENG_labour_victory
 		add_political_power = 15
-		news_event = {
-			id = ENG_news.2
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.2
+		#	hours = 6
+		#}
 	}
 	option = {	#Brown Clegg coalition
 		name = election_ENG.3.o4
@@ -346,10 +432,41 @@ country_event = {
 		set_country_flag = ENG_labour_victory
 		add_political_power = -30
 
-		news_event = {
-			id = ENG_news.2
-			hours = 6
+		#news_event = {
+		#	id = ENG_news.2
+		#	hours = 6
+		#}
+	}
+	option = {	#Clegg
+		name = election_ENG.3.o5
+		trigger = {
+			social_liberal > 0.3
 		}
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		hidden_effect = { country_event = ENG.25 }
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.15
+		}
+
+		set_country_flag = ENG_Lib_Dem_coalition
+		add_political_power = 15
+
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
 	}
 }
 
@@ -372,6 +489,27 @@ country_event = {
 			clr_country_flag = ENG_tory_election_victory
 			clr_country_flag = ENG_labour_victory
 			clr_country_flag = ENG_Lib_Dem_coalition
+			clr_country_flag = british_elections_enabled
+		}
+		hidden_effect = {
+			add_timed_idea = {
+				idea = skip_election_event
+				days = 720
+			}
+		}
+		add_country_leader_role = {
+			character = ENG_david_cameron
+			country_leader = {
+					ideology = fiscal_conservative
+			}
+			promote_leader = yes
+		}
+		add_country_leader_role = {
+			character = ENG_ed_miliband
+			country_leader = {
+				ideology = labor_ideology
+			}
+			promote_leader = yes
 		}
 	}
 
@@ -399,13 +537,13 @@ country_event = {
 			SCO_independence_support = 5
 		}
 		recalculate_scottish_independence = yes
-		news_event = {
-			id = ENG_news.3
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
 	}
 	option = {	#Cameron Farage
-		name = election_ENG.4.o1
+		name = election_ENG.4.o2
 		ai_chance = {
 			factor = 40
 			modifier = {
@@ -428,13 +566,13 @@ country_event = {
 			SCO_independence_support = 10
 		}
 		recalculate_scottish_independence = yes
-		news_event = {
-			id = ENG_news.3
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
 	}
 	option = {	#Miliband Libdems
-		name = election_ENG.4.o2
+		name = election_ENG.4.o3
 		ai_chance = {
 			factor = 40
 			modifier = {
@@ -457,10 +595,10 @@ country_event = {
 		add_political_power = 15
 		set_country_flag = ENG_labour_victory
 		set_country_flag = ENG_Lib_Dem_coalition
-		news_event = {
-			id = ENG_news.2
-			hours = 6
-		}
+		#news_event = {
+		#	id = ENG_news.2
+		#	hours = 6
+		#}
 	}
 	option = {	#Miliband
 		name = election_ENG.4.o4
@@ -481,12 +619,40 @@ country_event = {
 		}
 		set_country_flag = ENG_labour_victory
 		add_political_power = 15
-		hidden_effect = {
-			retire_ideology_leader = conservative
+		#news_event = {
+		#	id = ENG_news.2
+		#	hours = 6
+		#}
+	}
+	option = {	#Clegg
+		name = election_ENG.4.o5
+		trigger = {
+			social_liberal > 0.3
 		}
-		news_event = {
-			id = ENG_news.2
-			hours = 6
+		ai_chance = {
+			factor = 40
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
+		hidden_effect = { country_event = ENG.25 }
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.15
+		}
+
+		set_country_flag = ENG_Lib_Dem_coalition
+		add_political_power = 15
+
+		#news_event = {
+		#	id = ENG_news.3
+		#	hours = 6
+		#}
 	}
 }

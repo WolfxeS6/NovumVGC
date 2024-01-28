@@ -9,7 +9,7 @@ focus_tree = {
 			original_tag = ITA
 		}
 	}
-
+	shared_focus = EURO_Shared_Focus
 	@diplomatic_focus_zero = 0
 	@diplomatic_focus_one = 1
 	@diplomatic_focus_two = 2
@@ -63,6 +63,11 @@ focus_tree = {
 	@military_focus_six = 44
 	@military_focus_seven = 45
 	@military_focus_eight = 46
+	##Shared focuses
+	continuous_focus_position = { x = 50 y = 2600 }
+	shared_focus = GEN_modernize_the_airforce
+	shared_focus = GEN_modernize_the_navy
+	shared_focus = GEN_bolster_the_army
 
 	##DIPLOMATIC FOCUS##
 
@@ -816,7 +821,7 @@ focus_tree = {
 			GER = {
 				AND = {
 					is_faction_leader = yes
-					has_completed_focus = GER_split_NATO
+					NOT = {has_idea = NATO_Member}
 				}
 			}
 		}
@@ -1858,7 +1863,7 @@ focus_tree = {
 		id = ITA_support_eni_arabia
 		icon = GFX_goal_generic_oil_refinery
 		x = @industry_focus_seven
-		y = 9
+		y = 8
 		cost = 10
 
 		prerequisite = {
@@ -1892,7 +1897,7 @@ focus_tree = {
 		id = ITA_arabian_black_gold
 		icon = GFX_focus_generic_stockpile_fuel
 		x = @ideology_focus_zero
-		y = 9
+		y = 8
 		cost = 10
 
 		prerequisite = {
@@ -2781,6 +2786,10 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ITA_strike_gaul
+			focus = ITA_invite_the_gauls
+		}
+		mutually_exclusive = {
+			focus = ITA_invite_africans
 		}
 
 		completion_reward = {
@@ -2988,6 +2997,9 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ITA_federation_of_romans
+		}
+		mutually_exclusive = {
+			focus = ITA_strike_gaul
 		}
 
 		completion_reward = {
@@ -3299,8 +3311,11 @@ focus_tree = {
 				}
 			}
 		}
-
+		mutually_exclusive = {
+			focus = ITA_retake_african_coast
+		}
 		prerequisite = {
+			focus = ITA_strike_gaul
 			focus = ITA_invite_the_gauls
 		}
 
@@ -3535,8 +3550,11 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ITA_divide_et_impera
+			focus = ITA_federation_of_romans
 		}
-
+		mutually_exclusive = {
+			focus = ITA_invite_the_gauls
+		}
 		bypass = {
 			AND = {
 				OR = {
@@ -3978,9 +3996,12 @@ focus_tree = {
 				}
 			}
 		}
-
+		mutually_exclusive = {
+			focus = ITA_invite_anatolians
+		}
 		prerequisite = {
 			focus = ITA_recover_balkans
+			focus = ITA_invite_balkan_countries
 		}
 
 		completion_reward = {
@@ -4146,8 +4167,11 @@ focus_tree = {
 				}
 			}
 		}
-
+		mutually_exclusive = {
+			focus = ITA_recover_anatolia
+		}
 		prerequisite = {
+			focus = ITA_recover_balkans
 			focus = ITA_invite_balkan_countries
 		}
 
@@ -4436,8 +4460,12 @@ focus_tree = {
 			}
 		}
 
+		mutually_exclusive = {
+			focus = ITA_invite_balkan_countries
+		}
 		prerequisite = {
 			focus = ITA_retake_african_coast
+			focus = ITA_invite_africans
 		}
 
 		completion_reward = {
@@ -4794,11 +4822,13 @@ focus_tree = {
 				}
 			}
 		}
-
 		prerequisite = {
+			focus = ITA_retake_african_coast
 			focus = ITA_invite_africans
 		}
-
+		mutually_exclusive = {
+			focus = ITA_recover_balkans
+		}
 		completion_reward = {
 			if = {
 				limit = {
@@ -5012,6 +5042,7 @@ focus_tree = {
 		prerequisite = {
 			focus = ITA_recover_anatolia
 			focus = ITA_invite_anatolians
+			focus = ITA_arabian_black_gold
 		}
 
 		completion_reward = {
@@ -5146,7 +5177,6 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ITA_our_savoie
-			focus = ITA_arabian_black_gold
 			focus = ITA_strike_germans_before_they_can
 		}
 
@@ -5161,9 +5191,10 @@ focus_tree = {
 	focus = {
 		id = ITA_what_we_are
 		icon = GFX_goal_support_democracy
-		x = @ideology_focus_thirteen
+		x = 3
 		y = 1
-		cost = 10
+		relative_position_id = ITA_ideology_focus
+		cost = 7
 
 		prerequisite = {
 			focus = ITA_ideology_focus
@@ -5230,801 +5261,15 @@ focus_tree = {
 	}
 
 	focus = {
-		id = ITA_with_europe
-		icon = GFX_goal_Align_Italy_EU
-		x = @ideology_focus_nine
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_what_we_are
-		}
-
-		mutually_exclusive = {
-			focus = ITA_without_europe
-		}
-
-		completion_reward = {
-			add_political_power = 100
-			every_country = {
-				limit = {
-					has_idea = idea_eu_member
-					NOT = { tag = ITA }
-				}
-				news_event = { id = news.93 }
-			}
-			fourth_estate_reactionary_decrease = yes
-		}
-
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				add = 10
-				OR = {
-					has_game_rule = {
-						rule = ITA_ai_behavior
-						option = EUROPEAN_COOPERATION
-					}
-					has_game_rule = {
-						rule = ITA_ai_behavior
-						option = EUROPEAN_UNION
-					}
-				}
-			}
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ITA_ai_behavior
-					option = DEFAULT
-				}
-			}
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ITA_ai_behavior
-					option = RANDOM
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_european_cooperation_1
-		icon = GFX_goal_EU_Business_Deal
-		x = @ideology_focus_nine
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_with_europe
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_european_logistics_ideology_tree
-		icon = GFX_goal_EU_Factories
-		x = @ideology_focus_eight
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_european_cooperation_1
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			add_ideas = ITA_european_logistics_ideology_focus
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_EU_expansion_of_2004
-		icon = GFX_goal_EU_Treaty
-		x = @ideology_focus_ten
-		y = 4
-		cost = 20
-
-		prerequisite = {
-			focus = ITA_european_cooperation_1
-		}
-
-		available = {
-			has_idea = idea_eu_member
-			has_offensive_war = no
-		}
-
-		bypass = {
-			OR = {
-				has_global_flag = eu_expansion_of_2004_focus
-				AND = {
-					EST = { has_idea = idea_eu_member }
-					LAT = { has_idea = idea_eu_member }
-					LIT = { has_idea = idea_eu_member }
-					POL = { has_idea = idea_eu_member }
-					CZE = { has_idea = idea_eu_member }
-					SLO = { has_idea = idea_eu_member }
-					SLV = { has_idea = idea_eu_member }
-					HUN = { has_idea = idea_eu_member }
-					MLT = { has_idea = idea_eu_member }
-					CYP = { has_idea = idea_eu_member }
-				}
-			}
-		}
-
-		completion_reward = {
-			set_global_flag = eu_expansion_of_2004_focus
-			every_country = {
-				limit = {
-					OR = {
-						tag = EST
-						tag = LAT
-						tag = LIT
-						tag = POL
-						tag = CZE
-						tag = SLO
-						tag = SLV
-						tag = HUN
-						tag = MLT
-						tag = CYP
-					}
-					has_democratic_form_of_government = yes
-					NOT = { has_idea = idea_eu_member }
-					has_offensive_war = no
-				}
-				country_event = { id = european_union.5 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				date < 2004.1.1
-				factor = 0
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_european_cooperation_2
-		icon = GFX_goal_EU_Business_Deal
-		x = @ideology_focus_eight
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_european_logistics_ideology_tree
-			focus = ITA_EU_expansion_of_2004
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_EU_expansion_of_2007
-		icon = GFX_goal_EU_Treaty
-		x = @ideology_focus_ten
-		y = 5
-		cost = 20
-
-		prerequisite = {
-			focus = ITA_EU_expansion_of_2004
-		}
-
-		available = {
-			has_idea = idea_eu_member
-			has_offensive_war = no
-		}
-
-		bypass = {
-			OR = {
-				has_global_flag = eu_expansion_of_2007_focus
-				AND = {
-					ROM = { has_idea = idea_eu_member }
-					BUL = { has_idea = idea_eu_member }
-				}
-			}
-		}
-
-		completion_reward = {
-			set_global_flag = eu_expansion_of_2007_focus
-			every_country = {
-				limit = {
-					OR = {
-						tag = ROM
-						tag = BUL
-					}
-					has_democratic_form_of_government = yes
-					NOT = { has_idea = idea_eu_member }
-					has_offensive_war = no
-				}
-				country_event = { id = european_union.5 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				date < 2007.1.1
-				factor = 0
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_eastern_investments
-		icon = GFX_goal_EU_Investment
-		x = @ideology_focus_eight
-		y = 6
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_european_cooperation_2
-		}
-
-		available = {
-			has_idea = idea_eu_member
-			AND = {
-				POL = { has_idea = idea_eu_member }
-				LIT = { has_idea = idea_eu_member }
-				LAT = { has_idea = idea_eu_member }
-				EST = { has_idea = idea_eu_member }
-				ROM = { has_idea = idea_eu_member }
-				BUL = { has_idea = idea_eu_member }
-			}
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					OR = {
-						tag = POL
-						tag = LIT
-						tag = EST
-						tag = LAT
-						tag = ROM
-						tag = BUL
-					}
-					has_idea = idea_eu_member
-				}
-				country_event = { id = italy.13 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_european_cooperation_3
-		icon = GFX_goal_EU_Business_Deal
-		x = @ideology_focus_ten
-		y = 6
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_EU_expansion_of_2007
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = ITA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_EU_expansion_of_2013
-		icon = GFX_goal_EU_Treaty
-		x = @ideology_focus_nine
-		y = 7
-		cost = 20
-
-		prerequisite = {
-			focus = ITA_EU_expansion_of_2007
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		bypass = {
-			OR = {
-				has_global_flag = eu_expansion_of_2013_focus
-				CRO = { has_idea = idea_eu_member }
-			}
-		}
-
-		completion_reward = {
-			set_global_flag = eu_expansion_of_2013_focus
-			every_country = {
-				limit = {
-					OR = {
-						tag = CRO
-					}
-					has_democratic_form_of_government = yes
-					NOT = { has_idea = idea_eu_member }
-					has_offensive_war = no
-				}
-				country_event = { id = european_union.5 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				date < 2013.1.1
-				factor = 0
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_union_of_nations
-		icon = GFX_goal_Europe_of_Nations
-		x = @ideology_focus_ten
-		y = 8
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_EU_expansion_of_2013
-		}
-
-		mutually_exclusive = {
-			focus = ITA_one_europe
-		}
-
-		completion_reward = {
-			add_war_support = 0.05
-			add_popularity = {
-				ideology = reactionary
-				popularity = 0.05
-			}
-		}
-
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ITA_ai_behavior
-					option = EUROPEAN_COOPERATION
-				}
-			}
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ITA_ai_behavior
-					option = DEFAULT
-				}
-			}
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ITA_ai_behavior
-					option = RANDOM
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_european_cooperation_4
-		icon = GFX_goal_EU_Business_Deal
-		x = @ideology_focus_ten
-		y = 9
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_union_of_nations
-		}
-
-		available = {
-			has_completed_focus = ITA_european_cooperation_3
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					has_idea = idea_eu_member
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_european_cooperation_5
-		icon = GFX_goal_EU_Business_Deal
-		x = @ideology_focus_ten
-		y = 10
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_european_cooperation_4
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					has_idea = idea_eu_member
-					NOT = { tag = ITA }
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = ITA_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_research_slot_2
-		icon = GFX_goal_EU_Research_1
-		x = @ideology_focus_twelve
-		y = 10
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_european_cooperation_4
-		}
-
-		completion_reward = {
-			add_research_slot = 1
-		}
-	}
-
-	focus = {
-		id = ITA_call_military_cooperation
-		icon = GFX_goal_EU_Army
-		x = @ideology_focus_ten
-		y = 11
-		cost = 15
-
-		prerequisite = {
-			focus = ITA_european_cooperation_5
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					NOT = { tag = ITA }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = italy.14 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_one_europe
-		icon = GFX_goal_EU_Agreement
-		x = @ideology_focus_eight
-		y = 8
-		cost = 20
-
-		prerequisite = {
-			focus = ITA_EU_expansion_of_2013
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		mutually_exclusive = {
-			focus = ITA_union_of_nations
-		}
-
-		completion_reward = {
-			add_political_power = 50
-		}
-
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = ITA_ai_behavior
-					option = EUROPEAN_UNION
-				}
-			}
-			modifier = {
-				add = 5
-				has_game_rule = {
-					rule = ITA_ai_behavior
-					option = RANDOM
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_european_speech
-		icon = GFX_goal_EU_Government
-		x = @ideology_focus_eight
-		y = 9
-		cost = 20
-
-		prerequisite = {
-			focus = ITA_one_europe
-		}
-
-		available = {
-			has_idea = idea_eu_member
-			NOT = { has_global_flag = the_path_towards_europe }
-		}
-
-		completion_reward = {
-			news_event = news.94
-			set_global_flag = the_path_towards_europe
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_prepare_the_union
-		icon = GFX_goal_EU_Prepare_The_Union
-		x = @ideology_focus_eight
-		y = 10
-		cost = 20
-
-		prerequisite = {
-			focus = ITA_european_speech
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					NOT = { original_tag = ITA }
-				}
-				news_event = news.95
-			}
-			add_political_power = 125
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ITA_unite_the_union
-		icon = GFX_goal_United_Europe
-		x = @ideology_focus_eight
-		y = 11
-		cost = 100
-
-		prerequisite = {
-			focus = ITA_prepare_the_union
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			country_event = { id = european_union.3 }
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
 		id = ITA_without_europe
 		icon = GFX_focus_generic_italy_propaganda
-		x = @ideology_focus_sixteen
-		y = 2
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_what_we_are
+		cost = 7
 
 		prerequisite = {
 			focus = ITA_what_we_are
-		}
-
-		mutually_exclusive = {
-			focus = ITA_with_europe
 		}
 
 		completion_reward = {
@@ -6064,9 +5309,10 @@ focus_tree = {
 	focus = {
 		id = ITA_new_parties
 		icon = GFX_ITA_Fratelli_dItalia
-		x = @ideology_focus_fourteen
-		y = 3
-		cost = 10
+		x = -2
+		y = 1
+		relative_position_id = ITA_without_europe
+		cost = 7
 
 		prerequisite = {
 			focus = ITA_without_europe
@@ -6164,9 +5410,9 @@ focus_tree = {
 	focus = {
 		id = ITA_old_parties
 		icon = GFX_ITA_Partito_Democratico
-		x = @ideology_focus_eighteen
-		y = 3
-		cost = 10
+		x = 3
+		y = 1
+		relative_position_id = ITA_without_europe
 
 		bypass = {
 		}
@@ -6275,17 +5521,16 @@ focus_tree = {
 	focus = {
 		id = ITA_anti_mafia_measures
 		icon = GFX_focus_generic_conspiracy
-		x = @ideology_focus_twelve
-		y = 5
-		cost = 20
-
+		x = -1
+		y = 2
+		relative_position_id = ITA_new_parties
+		cost = 15
 		bypass = {
 			NOT = { has_idea = ITA_mafia }
 		}
 
 		prerequisite = {
 			focus = ITA_new_parties
-			focus = ITA_european_cooperation_1
 		}
 
 		completion_reward = {
@@ -6303,9 +5548,10 @@ focus_tree = {
 	focus = {
 		id = ITA_anti_corruption_measures
 		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
-		x = @ideology_focus_twelve
-		y = 6
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_anti_mafia_measures
+		cost = 7
 
 		bypass = {
 			NOT = { has_idea = ITA_corruption }
@@ -6323,9 +5569,10 @@ focus_tree = {
 	focus = {
 		id = ITA_with_populism
 		icon = GFX_ITA_Many_Flags
-		x = @ideology_focus_fourteen
-		y = 4
-		cost = 10
+		x = 1
+		y = 1
+		relative_position_id = ITA_new_parties
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_new_parties
@@ -6343,9 +5590,10 @@ focus_tree = {
 	focus = {
 		id = ITA_restore_trust_in_system
 		icon = GFX_focus_generic_court
-		x = @ideology_focus_eighteen
-		y = 4
-		cost = 20
+		x = 0
+		y = 1
+		relative_position_id = ITA_old_parties
+		cost = 12
 
 		prerequisite = {
 			focus = ITA_old_parties
@@ -6377,9 +5625,10 @@ focus_tree = {
 	focus = {
 		id = ITA_italeave
 		icon = GFX_ITA_Italexit
-		x = @ideology_focus_sixteen
-		y = 6
-		cost = 10
+		x = 2
+		y = 1
+		relative_position_id = ITA_elections_now
+		cost = 8
 
 		bypass = {
 			NOT = { has_idea = idea_eu_member }
@@ -6398,9 +5647,10 @@ focus_tree = {
 	focus = {
 		id = ITA_elections_now
 		icon = GFX_ITA_Italian_Election
-		x = @ideology_focus_fourteen
-		y = 5
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_with_populism
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_with_populism
@@ -6414,9 +5664,10 @@ focus_tree = {
 	focus = {
 		id = ITA_political_reforms
 		icon = GFX_focus_generic_treaty
-		x = @ideology_focus_eighteen
-		y = 5
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_restore_trust_in_system
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_restore_trust_in_system
@@ -6431,9 +5682,10 @@ focus_tree = {
 	focus = {
 		id = ITA_trigger_article_50
 		icon = GFX_goal_Abandon_the_EU
-		x = @ideology_focus_sixteen
-		y = 7
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_italeave
+		cost = 8
 
 		available = {
 			custom_trigger_tooltip = {
@@ -6470,9 +5722,10 @@ focus_tree = {
 	focus = {
 		id = ITA_support_other_eurosceptics
 		icon = GFX_goal_tripartite_pact
-		x = @ideology_focus_fourteen
-		y = 6
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_elections_now
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_elections_now
@@ -6492,9 +5745,10 @@ focus_tree = {
 	focus = {
 		id = ITA_focus_on_exports
 		icon = GFX_goal_Export_Economy
-		x = @ideology_focus_eighteen
-		y = 6
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_political_reforms
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_political_reforms
@@ -6508,9 +5762,10 @@ focus_tree = {
 	focus = {
 		id = ITA_restore_the_currency
 		icon = GFX_focus_mex_privatisation
-		x = @ideology_focus_fourteen
-		y = 7
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_support_other_eurosceptics
+		cost = 8
 
 		available = {
 			has_idea = the_euro
@@ -6535,9 +5790,10 @@ focus_tree = {
 	focus = {
 		id = ITA_unemployment_issue
 		icon = GFX_focus_generic_court
-		x = @ideology_focus_eighteen
-		y = 7
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_focus_on_exports
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_focus_on_exports
@@ -6595,9 +5851,10 @@ focus_tree = {
 	focus = {
 		id = ITA_support_local_productions
 		icon = GFX_goal_Civilian_Economy
-		x = @ideology_focus_fourteen
-		y = 8
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_restore_the_currency
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_restore_the_currency
@@ -6640,9 +5897,10 @@ focus_tree = {
 	focus = {
 		id = ITA_national_research
 		icon = GFX_ITA_University_of_Rome
-		x = @ideology_focus_eighteen
-		y = 8
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_unemployment_issue
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_unemployment_issue
@@ -6656,9 +5914,10 @@ focus_tree = {
 	focus = {
 		id = ITA_global_investments
 		icon = GFX_focus_mex_privatisation
-		x = @ideology_focus_eighteen
-		y = 9
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_national_research
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_national_research
@@ -6679,9 +5938,10 @@ focus_tree = {
 	focus = {
 		id = ITA_italy_first
 		icon = GFX_ITA_Italy_First
-		x = @ideology_focus_fourteen
-		y = 9
-		cost = 10
+		x = 0
+		y = 1
+		relative_position_id = ITA_support_local_productions
+		cost = 8
 
 		prerequisite = {
 			focus = ITA_support_local_productions
@@ -6696,9 +5956,10 @@ focus_tree = {
 	focus = {
 		id = ITA_use_force
 		icon = GFX_goal_Restrict_Immigration
-		x = @ideology_focus_fiftheen
-		y = 10
-		cost = 10
+		x = 1
+		y = 1
+		relative_position_id = ITA_italy_first
+		cost = 8
 
 		available = {
 			has_idea = ITA_migrants_from_africa
@@ -6730,9 +5991,10 @@ focus_tree = {
 	focus = {
 		id = ITA_encourage_immigration
 		icon = GFX_goal_Immigration
-		x = @ideology_focus_seventeen
-		y = 10
-		cost = 10
+		x = -1
+		y = 1
+		relative_position_id = ITA_global_investments
+		cost = 8
 
 		available = {
 			has_idea = ITA_migrants_from_africa
@@ -6760,487 +6022,6 @@ focus_tree = {
 			modifier = {
 				factor = 10
 				is_historical_focus_on = yes
-			}
-		}
-	}
-
-	##MILITARY FOCUS##
-
-	focus = {
-		id = ITA_military_focus
-		icon = GFX_ITA_Armed_Forces #Illuminati
-		x = @military_focus_four
-		y = 0
-		cost = 10
-
-		completion_reward = {
-			army_experience = 5
-			navy_experience = 5
-			air_experience = 5
-		}
-	}
-
-	focus = {
-		id = ITA_army_focus
-		icon = GFX_ITA_Army
-		x = @military_focus_one
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_military_focus
-		}
-
-		completion_reward = {
-			army_experience = 10
-		}
-	}
-
-	focus = {
-		id = ITA_navy_focus
-		icon = GFX_ITA_Navy
-		x = @military_focus_four
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_military_focus
-		}
-
-		completion_reward = {
-			navy_experience = 10
-		}
-	}
-
-	focus = {
-		id = ITA_air_focus
-		icon = GFX_ITA_Airforce
-		x = @military_focus_eight
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_military_focus
-		}
-
-		completion_reward = {
-			air_experience = 10
-		}
-	}
-
-	focus = {
-		id = ITA_small_arms_program
-		icon = GFX_ITA_Gun_Icon_1
-		x = @military_focus_one
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_army_focus
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_tech
-				bonus = 0.3
-				uses = 2
-				category = infantry_weapons
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_destroyers_focus
-		icon = GFX_ITA_Destroyers
-		x = @military_focus_four
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_navy_focus
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = destroyer_bonus
-				bonus = 0.3
-				uses = 2
-				category = dd_tech
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_fighters_focus
-		icon = GFX_goal_Eurofighter_Typhoon
-		x = @military_focus_eight
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_air_focus
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = fighter_bonus
-				bonus = 0.3
-				uses = 2
-				category = light_fighter
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_tanks_focus
-		icon = GFX_ITA_C1_Ariete
-		x = @military_focus_zero
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_small_arms_program
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = tank_bonus
-				bonus = 0.3
-				uses = 2
-				category = armor
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_motorized_focus
-		icon = GFX_focus_generic_truck
-		x = @military_focus_two
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_small_arms_program
-		}
-
-		completion_reward = {
-			add_ideas = idea_focus_generic_motorized_focus
-		}
-	}
-
-	focus = {
-		id = ITA_submarines_focus
-		icon = GFX_goal_Generic_Submarine
-		x = @military_focus_four
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_destroyers_focus
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = submarine_bonus
-				bonus = 0.3
-				uses = 2
-				category = ss_tech
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_bombers_focus
-		icon = GFX_goal_B-52_Stratofortress
-		x = @military_focus_eight
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_fighters_focus
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = bomber_bonus
-				bonus = 0.3
-				uses = 2
-				category = heavy_air
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_artillery_focus
-		icon = GFX_ITA_Artillery_1
-		x = @military_focus_one
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_tanks_focus
-			focus = ITA_motorized_focus
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = tank_bonus
-				bonus = 0.3
-				uses = 2
-				category = artillery
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_naval_bases_focus
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = @military_focus_five
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_submarines_focus
-		}
-
-		mutually_exclusive = {
-			focus = ITA_air_bases_focus
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					is_coastal = yes
-				}
-				add_building_construction = {
-					type = naval_base
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					is_coastal = yes
-				}
-				add_building_construction = {
-					type = naval_base
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					is_coastal = yes
-				}
-				add_building_construction = {
-					type = naval_base
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_air_bases_focus
-		icon = GFX_goal_generic_air_production
-		x = @military_focus_seven
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_bombers_focus
-		}
-
-		mutually_exclusive = {
-			focus = ITA_naval_bases_focus
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = air_base
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = air_base
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = air_base
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = air_base
-					level = 1
-					instant_build = yes
-				}
-			}
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = air_base
-						size > 0
-						include_locked = yes
-					}
-				}
-				add_building_construction = {
-					type = air_base
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_quality_ideas
-		icon = GFX_goal_Military_Guard_1
-		x = @military_focus_zero
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_artillery_focus
-		}
-
-		mutually_exclusive = {
-			focus = ITA_quantity_ideas
-		}
-
-		completion_reward = {
-			add_ideas = ITA_quality_army
-		}
-	}
-
-	focus = {
-		id = ITA_quantity_ideas
-		icon = GFX_focus_generic_little_entente
-		x = @military_focus_two
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_artillery_focus
-		}
-
-		mutually_exclusive = {
-			focus = ITA_quality_ideas
-		}
-
-		completion_reward = {
-			add_ideas = ITA_quantity_army
-		}
-	}
-
-	focus = {
-		id = ITA_carriers_focus
-		icon = GFX_ITA_Aircraft_Carrier
-		x = @military_focus_four
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_submarines_focus
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = carrier_bonus
-				bonus = 0.3
-				uses = 2
-				category = cv_tech
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_frecce_tricolori
-		icon = GFX_ITA_Frecce_Tricolori
-		x = @military_focus_eight
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_bombers_focus
-		}
-
-		completion_reward = {
-			air_experience = 100
-		}
-	}
-
-	focus = {
-		id = ITA_land_doctrine
-		icon = GFX_goal_generic_army_doctrines
-		x = @military_focus_one
-		y = 6
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_quality_ideas
-			focus = ITA_quantity_ideas
-		}
-
-		completion_reward = {
-			army_experience = 25
-			add_doctrine_cost_reduction = {
-				name = land_doc_bonus
-				cost_reduction = 0.25
-				uses = 2
-				category = land_doctrine
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_naval_doctrine
-		icon = GFX_goal_generic_navy_doctrines_tactics
-		x = @military_focus_four
-		y = 6
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_carriers_focus
-		}
-
-		completion_reward = {
-			navy_experience = 25
-			add_doctrine_cost_reduction = {
-				name = naval_doc_bonus
-				cost_reduction = 0.3
-				uses = 3
-				category = naval_doctrine
-			}
-		}
-	}
-
-	focus = {
-		id = ITA_airforce_doctrine
-		icon = GFX_goal_generic_air_doctrine
-		x = @military_focus_eight
-		y = 6
-		cost = 10
-
-		prerequisite = {
-			focus = ITA_frecce_tricolori
-		}
-
-		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = air_doc_bonus
-				cost_reduction = 0.25
-				uses = 2
-				category = air_doctrine
 			}
 		}
 	}

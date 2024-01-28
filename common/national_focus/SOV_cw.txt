@@ -16,7 +16,7 @@ focus_tree = {
 
     focus = {
 		id = SOV_solving_initial_chaos
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Crack_Down_Rioters
+		icon = GFX_goal_generic_demand_territory
 		x = 17
 		y = 0
 		cost = 1
@@ -46,7 +46,7 @@ focus_tree = {
 
 	focus = {
 		id = SOV_counter_terrorist_operation
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Anti-Communist_Propaganda
+		icon = GFX_focus_generic_total_war
 		x = 17
 		y = 1
 		prerequisite = { focus = SOV_solving_initial_chaos }
@@ -73,34 +73,35 @@ focus_tree = {
 
 	focus = {
 		id = SOV_martial_law_in_army
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Mandatory_Conscription
+		icon = GFX_focus_generic_full_social_mobilization
 		x = 10
 		y = 2
 		prerequisite = { focus = SOV_counter_terrorist_operation }
-		cost = 1
+		cost = 3
 		ai_will_do = {
 			factor = 5
-		}
-		allow_branch = {
-			always = no
 		}
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+			custom_effect_tooltip = sov_army_conscription_increase_TT
+			add_to_variable = {
+				sov_army_conscription = 0.25
+			}
+			custom_effect_tooltip = sov_army_reinforce_rate_increase_TT
+			add_to_variable = {
+				sov_army_reinforce_rate = 0.1
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_arm_rights
-		icon = NVGC_Russia_Civil_War_Focus_Icon_To_Serve_Mother_Russia
+		icon = GFX_focus_arms_trade_deals
 		x = 7
 		y = 3
 		prerequisite = { focus = SOV_martial_law_in_army }
-		cost = 1
+		cost = 3
 		ai_will_do = {
 			factor = 5
 		}
@@ -119,11 +120,11 @@ focus_tree = {
 
 	focus = {
 		id = SOV_focus_on_kuzbass
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Military_Jingoism
+		icon = GFX_goal_generic_position_armies
 		x = 9
 		y = 3
-		prerequisite = { focus = SOV_focus_on_rco }
-		cost = 1
+		prerequisite = { focus = SOV_martial_law_in_army }
+		cost = 3
 		ai_will_do = {
 			factor = 5
 		}
@@ -137,18 +138,18 @@ focus_tree = {
 			custom_effect_tooltip = SOV_remove_unplloffens_inkuzbass_TT
 			hidden_effect = {
             570 = {remove_dynamic_modifier = { modifier = unplanned_offensive_kuz} }
-569 = {remove_dynamic_modifier = { modifier = unplanned_offensive_kuz} }
-}
+			569 = {remove_dynamic_modifier = { modifier = unplanned_offensive_kuz} }
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_focus_on_rco
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Military_Jingoism
+		icon = GFX_goal_generic_political_pressure
 		x = 11
 		y = 3
 		prerequisite = { focus = SOV_martial_law_in_army }
-		cost = 1
+		cost = 3
 		ai_will_do = {
 			factor = 5
 		}
@@ -160,22 +161,22 @@ focus_tree = {
 		
 		completion_reward = {
            add_timed_idea = {
-    idea = SOV_cw_focus_on_moscow
-    days = 90
-}
+				idea = SOV_cw_focus_on_moscow
+				days = 90
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_rosguard_expansion
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Enlist_Talented_Officers
+		icon = GFX_goal_generic_military_sphere
 		x = 10
 		y = 4
 		prerequisite = {
 		focus = SOV_focus_on_kuzbass
 		focus = SOV_focus_on_rco
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 5
 		}
@@ -183,22 +184,27 @@ focus_tree = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+
+			custom_effect_tooltip = sov_army_morale_increase_TT
+			add_to_variable = {
+				sov_army_morale = 0.075
+			}
+			custom_effect_tooltip = sov_army_reinforce_rate_increase_TT
+			add_to_variable = {
+				sov_army_reinforce_rate = 0.1
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_counter_partisan_squads
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Anti_Communist_Death_Squads
+		icon = GFX_goal_generic_secret_weapon
 		x = 9
 		y = 5
 		prerequisite = {
 		focus = SOV_rosguard_expansion
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 5
 		}
@@ -206,22 +212,26 @@ focus_tree = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+			custom_effect_tooltip = sov_army_attrition_increase_TT
+			add_to_variable = {
+				sov_army_attrition = -0.15
+			}
+			custom_effect_tooltip = sov_army_exp_loss_in_combat_increase_TT
+			add_to_variable = {
+				sov_army_exp_loss_in_combat = -0.1
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_shrafbats
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Rejoice_in_Death
+		icon = GFX_focus_SOV_penal_battalions
 		x = 11
 		y = 5
 		prerequisite = {
 		focus = SOV_rosguard_expansion
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 5
 		}
@@ -229,16 +239,14 @@ focus_tree = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+			add_political_power = 35
+			add_ideas = FRA_prison_workforce_mobilized
 		}
 	}
 
 	focus = {
 		id = SOV_solving_army_chaos
-		icon = NVGC_Russia_Focus_Icon_To_Serve_Russia
+		icon = GFX_goal_Unity_and_Nation
 		x = 10
 		y = 6
 		prerequisite = {
@@ -247,7 +255,7 @@ focus_tree = {
 		prerequisite = {
 		focus = SOV_shrafbats
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 5
 		}
@@ -255,50 +263,47 @@ focus_tree = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+            remove_dynamic_modifier = {
+				modifier = sov_civil_war_army
+			}
 		}
 	}
 
 	##### economy
 
 	
-focus = {
+	focus = {
 		id = SOV_adresing_oligarchs
-		icon = NVGC_Russia_Focus_Icon_Support_the_Oligarchy
+		icon = GFX_goal_Oligarchs_Deals
 		x = 13
 		y = 3
 		prerequisite = {
 		focus = SOV_counter_terrorist_operation
 		}
-		cost = 1
+		cost = 3
 		ai_will_do = {
 			factor = 5
 		}
-		allow_branch = {
-			always = no
-		}
+
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+            swap_ideas = {
+				remove_idea = SOV_corrupt_oligarchy
+				add_idea = SOV_subdued_oligarchs
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_initial_industry_revitalization
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Rebuilding_Mother_Russia
+		icon = GFX_focus_DEN_limited_regulations
 		x = 13
 		y = 4
 		prerequisite = {
 		focus = SOV_adresing_oligarchs
 		}
-		cost = 1
+		cost = 5
 		ai_will_do = {
 			factor = 5
 		}
@@ -306,16 +311,28 @@ focus = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+			custom_effect_tooltip = sov_economy_repair_speed_increase_TT
+			add_to_variable = {
+				sov_economy_repair_speed = 0.1
+			}
+			custom_effect_tooltip = sov_economy_CG_increase_TT
+			add_to_variable = {
+				sov_economy_CG = -0.1
+			}
+			custom_effect_tooltip = sov_economy_prod_growh_increase_TT
+			add_to_variable = {
+				sov_economy_prod_growh = 0.05
+			}
+			custom_effect_tooltip = sov_economy_prod_output_increase_TT
+			add_to_variable = {
+				sov_economy_prod_output = 0.05
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_orginizing_industry
-		icon = NVGC_Russia_Focus_Icon_Rebuild_Russias_Strength
+		icon = GFX_focus_generic_reorient_production
 		x = 13
 		y = 5
 		prerequisite = {
@@ -324,7 +341,7 @@ focus = {
 		prerequisite = {
 		focus = SOV_supress_strikes
 		}
-		cost = 1
+		cost = 5
 		ai_will_do = {
 			factor = 5
 		}
@@ -332,10 +349,18 @@ focus = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+			custom_effect_tooltip = sov_economy_resource_increase_TT
+			add_to_variable = {
+				sov_economy_resource = 0.3
+			}
+			custom_effect_tooltip = sov_economy_const_speed_increase_TT
+			add_to_variable = {
+				sov_economy_const_speed = 0.1
+			}
+			custom_effect_tooltip = sov_state_research_speed_increase_TT
+			add_to_variable = {
+				sov_state_research_speed = 0.2
+			}
 		}
 	}
 
@@ -343,38 +368,41 @@ focus = {
 
 	focus = {
 		id = SOV_the_enemy_within
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Red_Scare_in_Russia
+		icon = GFX_goal_Big_Brother_is_Watching_You
 		x = 17
 		y = 3
 		prerequisite = {
 		focus = SOV_counter_terrorist_operation
 		}
-		cost = 1
+		cost = 5
 		ai_will_do = {
 			factor = 5
 		}
-		allow_branch = {
-			always = no
-		}
+
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+            law_change_increase_state_security = yes
+			custom_effect_tooltip = sov_workmov_surrender_limit_increase_TT
+			add_to_variable = {
+				sov_workmov_surrender_limit = 0.1
+			}
+			custom_effect_tooltip = sov_workmov_war_support_increase_TT
+			add_to_variable = {
+				sov_workmov_war_support = 0.05
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_supress_strikes
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Crack_Down_Rioters
+		icon = GFX_focus_generic_workers
 		x = 15
 		y = 4
 		prerequisite = {
 		focus = SOV_the_enemy_within
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 5
 		}
@@ -382,22 +410,23 @@ focus = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+            custom_effect_tooltip = sov_workmov_war_support_increase_TT
+			add_to_variable = {
+				sov_workmov_war_support = 0.05
+			}
+           
 		}
 	}
 
 	focus = {
 		id = SOV_supress_local_soviets
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Establish_Siberian_Labor_Camps
+		icon = GFX_focus_spr_crush_the_revolution
 		x = 17
 		y = 4
 		prerequisite = {
 		focus = SOV_the_enemy_within
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 5
 		}
@@ -405,22 +434,45 @@ focus = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+            fourth_estate_communist_decrease= yes
+			fourth_estate_reactionary_increase = yes
+			fourth_estate_democratic_socialist_decrease= yes
+			custom_effect_tooltip = sov_workmov_pp_factor_increase_TT
+			add_to_variable = {
+				sov_workmov_pp_factor = 0.1
+			}
+			custom_effect_tooltip = sov_workmov_war_support_increase_TT
+			add_to_variable = {
+				sov_workmov_war_support = 0.05
+			}
+			custom_effect_tooltip = sov_state_stability_increase_TT
+			add_to_variable = {
+				sov_state_stability = 0.075
+			}
+			custom_effect_tooltip = sov_economy_max_poduction_capacity_increase_TT
+			add_to_variable = {
+				sov_economy_max_poduction_capacity = 0.15
+			}
+			custom_effect_tooltip = sov_state_research_speed_increase_TT
+			add_to_variable = {
+				sov_state_research_speed = 0.12
+			}
+			custom_effect_tooltip = sov_economy_resource_increase_TT
+			add_to_variable = {
+				sov_economy_resource = 0.2
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_disband_workers_unions
-		icon = NVGC_Russia_Civil_War_Focus_Icon_State-Sponsered_Trials
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
 		x = 19
 		y = 4
 		prerequisite = {
 		focus = SOV_the_enemy_within
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 5
 		}
@@ -428,22 +480,29 @@ focus = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+			custom_effect_tooltip = sov_workmov_surrender_limit_increase_TT
+			add_to_variable = {
+				sov_workmov_surrender_limit = 0.1
+			}
+			custom_effect_tooltip = sov_workmov_pp_factor_increase_TT
+			add_to_variable = {
+				sov_workmov_pp_factor = 0.05
+			}
+			add_to_variable = {
+				sov_workmov_army_compliance_in_enemy = -0.05
+			}
 		}
 	}
 
 	focus = {
 		id = SOV_orthodox_militia
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Eastern_Orthodoxy
+		icon = GFX_focus_GRE_an_orthodox_state
 		x = 17
 		y = 5
 		prerequisite = {
 		focus = SOV_supress_local_soviets
 		}
-		cost = 1
+		cost = 4
 		ai_will_do = {
 			factor = 5
 		}
@@ -451,186 +510,38 @@ focus = {
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
+            custom_effect_tooltip = RCO_spawmarmedrights_TT
+			hidden_effect = {
+				country_event = {
+					id = cw.10
+				}
+			}
 		}
 	}
 
 	### foreign policy 
 
 	focus = {
-		id = SOV_foreign_connections
-		icon = NVGC_Russia_Focus_Icon_Putin_In_Office
+		id = SOV_belarus_question
+		icon = align_to_belarus
 		x = 22
 		y = 3
 		prerequisite = {
 		focus = SOV_counter_terrorist_operation
 		}
-		cost = 1
+		cost = 3
 		ai_will_do = {
-			factor = 5
-		}
-		allow_branch = {
-			always = no
+			factor = 30
 		}
 
 		available_if_capitulated = no
 		
 		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-			}	
+			BLR = {
+            country_event = {
+					id = cw.13
+				}
+			}
 		}
 	}
-
-	focus = {
-		id = SOV_limited_support
-		icon = NVGC_Russia_Focus_Icon_Strengthen_the_Russian_Orthodox_Church
-		x = 21
-		y = 4
-		prerequisite = {
-		focus = SOV_foreign_connections
-		}
-		mutually_exclusive = {
-		focus = SOV_sell_russia
-		}
-		cost = 1
-		ai_will_do = {
-			factor = 5
-		}
-
-		available_if_capitulated = no
-		
-		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
-		}
-	}
-
-	focus = {
-		id = SOV_sell_russia
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Honor_the_White_Army
-		x = 23
-		y = 4
-		prerequisite = {
-		focus = SOV_foreign_connections
-		}
-		mutually_exclusive = {
-		focus = SOV_limited_support
-		}
-		cost = 1
-		ai_will_do = {
-			factor = 5
-		}
-
-		available_if_capitulated = no
-		
-		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
-		}
-	}
-
-	focus = {
-		id = SOV_belarus_question
-		icon = NVGC_Russia_Focus_Icon_Strengthen_the_CSTO
-		x = 22
-		y = 5
-		prerequisite = {
-		focus = SOV_limited_support
-		focus = SOV_sell_russia
-		}
-		cost = 1
-		ai_will_do = {
-			factor = 5
-		}
-
-		available_if_capitulated = no
-		
-		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
-		}
-	}
-
-	focus = {
-		id = SOV_treaty_with_japan
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Anti-Communist_Propaganda
-		x = 20
-		y = 6
-		prerequisite = {
-		focus = SOV_belarus_question
-		}
-		cost = 1
-		ai_will_do = {
-			factor = 5
-		}
-
-		available_if_capitulated = no
-		
-		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
-		}
-	}
-
-	focus = {
-		id = SOV_treaty_with_usa
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Request_American_Aid
-		x = 22
-		y = 6
-		prerequisite = {
-		focus = SOV_belarus_question
-		}
-		cost = 1
-		ai_will_do = {
-			factor = 5
-		}
-
-		available_if_capitulated = no
-		
-		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
-		}
-	}
-
-	focus = {
-		id = SOV_treaty_with_china
-		icon = NVGC_Russia_Civil_War_Focus_Icon_Seek_Chinese_Aid
-		x = 24
-		y = 6
-		prerequisite = {
-		focus = SOV_belarus_question
-		}
-		cost = 1
-		ai_will_do = {
-			factor = 5
-		}
-
-		available_if_capitulated = no
-		
-		completion_reward = {
-            declare_war_on = {
-    			target = RCO
-    			type = annex_everything
-}	
-		}
-	}
-
-
-
 }

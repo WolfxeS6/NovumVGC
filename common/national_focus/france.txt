@@ -10,7 +10,7 @@ focus_tree = {
 			original_tag = FRA
 		}
 	}
-
+	shared_focus = EURO_Shared_Focus
 	@economic_tree_very_far_left = 0
 	@economic_tree_far_left = 1
 	@economic_tree_left = 2
@@ -72,10 +72,13 @@ focus_tree = {
 	@air_force_tree_left = 50
 	@air_force_tree_center = 51
 	@air_force_tree_right = 52
+	shared_focus = GEN_modernize_the_airforce
+	shared_focus = GEN_modernize_the_navy
+	shared_focus = GEN_bolster_the_army
 
 	focus = {
 		id = FRA_the_french_economy
-		icon = GFX_goal_generic_construction2
+		icon = GFX_goal_Franch_Manufacturing
 		x = @economic_tree_center
 		y = 0
 		cost = 10
@@ -107,61 +110,6 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 50
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_reform_the_officer_school
-		icon = GFX_focus_RAJ_indian_gentlemen_offcers
-		x = @army_tree_center
-		y = 0
-		cost = 10
-
-		completion_reward = {
-			army_experience = 5
-			add_ideas = FRA_reformed_officer_school
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_renew_the_naval_presence
-		icon = GFX_goal_generic_occupy_states_coastal
-		x = @navy_tree_center
-		y = 0
-		cost = 10
-
-		completion_reward = {
-			add_political_power = -15
-			navy_experience = 10
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_new_fighter_programs
-		icon = fighter2
-		x = @air_force_tree_center
-		y = 0
-		cost = 10
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = fighter_bonus
-				bonus = 0.2
-				uses = 2
-				category = light_fighter
-			}
 		}
 
 		ai_will_do = {
@@ -274,7 +222,14 @@ focus_tree = {
 		x = @ideology_liberty_start
 		y = 1
 		cost = 10
-
+		available = {
+			hidden_trigger = {
+				NOT = {
+					is_ai = yes
+					is_historical_focus_on = yes
+				}
+			}
+		}
 		prerequisite = {
 			focus = FRA_our_future
 		}
@@ -339,6 +294,14 @@ focus_tree = {
 		x = @ideology_egality_start
 		y = 1
 		cost = 10
+		available = {
+			hidden_trigger = {
+				NOT = {
+					is_ai = yes
+					is_historical_focus_on = yes
+				}
+			}
+		}
 
 		prerequisite = {
 			focus = FRA_our_future
@@ -400,7 +363,14 @@ focus_tree = {
 		x = @ideology_fraternity_start
 		y = 1
 		cost = 10
-
+		available = {
+			hidden_trigger = {
+				NOT = {
+					is_ai = yes
+					is_historical_focus_on = yes
+				}
+			}
+		}
 		prerequisite = {
 			focus = FRA_our_future
 		}
@@ -457,117 +427,6 @@ focus_tree = {
 					option = RANDOM
 				}
 			}
-		}
-	}
-
-	focus = {
-		id = FRA_army_training_1
-		icon = french_army
-		x = @army_tree_left
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_reform_the_officer_school
-		}
-
-		completion_reward = {
-			army_experience = 10
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_small_arms_programs
-		icon = GFX_goal_generic_small_arms
-		x = @army_tree_right
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_reform_the_officer_school
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = infantry_tech
-				bonus = 0.25
-				uses = 2
-				category = infantry_weapons
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_naval_maneuvre_1
-		icon = french_navy
-		x = @navy_tree_center
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_renew_the_naval_presence
-		}
-
-		completion_reward = {
-			navy_experience = 10
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_new_bomber_programs
-		icon = bomber
-		x = @air_force_tree_left
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_new_fighter_programs
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = bomber_bonus
-				bonus = 0.25
-				uses = 2
-				category = heavy_air
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_air_force_officer_school
-		icon = GFX_focus_SOV_women_in_aviation
-		x = @air_force_tree_right
-		y = 1
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_new_fighter_programs
-		}
-
-		completion_reward = {
-			add_ideas = FRA_air_force_officer_school
-			air_experience = 5
-		}
-
-		ai_will_do = {
-			factor = 10
 		}
 	}
 
@@ -684,67 +543,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = FRA_the_european_dream
-		icon = align_to_europe
-		x = @ideology_europe_center
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_liberte
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		mutually_exclusive = {
-			focus = FRA_populist_agendas
-		}
-
-		completion_reward = {
-			fourth_estate_conservative_increase = yes
-			fourth_estate_social_democrat_increase = yes
-			fourth_estate_market_liberal_increase = yes
-			add_stability = 0.01
-			add_political_power = 10
-			every_country = {
-				limit = { has_idea = idea_eu_member }
-				add_opinion_modifier = {
-					target = FRA
-					modifier = european_commitment
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = FRA_ai_behavior
-					option = EUROPEAN_UNION
-				}
-			}
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = FRA_ai_behavior
-					option = DEFAULT
-				}
-			}
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = FRA_ai_behavior
-					option = RANDOM
-				}
-			}
-		}
-	}
-
-	focus = {
 		id = FRA_populist_agendas
 		icon = GFX_focus_generic_home_defense
 		x = @ideology_populism_head
@@ -753,10 +551,6 @@ focus_tree = {
 
 		prerequisite = {
 			focus = FRA_liberte
-		}
-
-		mutually_exclusive = {
-			focus = FRA_the_european_dream
 		}
 
 		completion_reward = {
@@ -929,63 +723,18 @@ focus_tree = {
 	}
 
 	focus = {
-		id = FRA_vehicle_construction_programs
-		icon = GFX_goal_generic_army_motorized
-		x = @army_tree_left
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_army_training_1
-		}
-
-		completion_reward = {
-			add_ideas = idea_focus_generic_motorized_focus
-			army_experience = 5
-			air_experience = 5
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_armor_programs
-		icon = GFX_FRA_Leclerc
-		x = @army_tree_right
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_army_training_1
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = tank_bonus
-				bonus = 0.3
-				uses = 1
-				category = armor
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
 		id = FRA_brest_arsenal
-		icon = GFX_goal_generic_build_navy
-		x = @navy_tree_left
+		icon = GFX_goal_Warship_Buidling
+		x = 0
 		y = 2
-		cost = 10
-
+		cost = 5
+		relative_position_id = FRA_naval_industry_1
 		prerequisite = {
-			focus = FRA_naval_maneuvre_1
+			focus = FRA_naval_industry_1
 		}
-
+		prerequisite = {
+			focus = FRA_armament_industry
+		}
 		completion_reward = {
 			14 = {
 				add_building_construction = {
@@ -996,64 +745,6 @@ focus_tree = {
 				}
 			}
 		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_french_destroyers
-		icon = GFX_goal_generic_navy_anti_submarine
-		x = @navy_tree_right
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_naval_maneuvre_1
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = destroyer_bonus
-				bonus = 0.2
-				uses = 3
-				category = dd_tech
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_restructure_the_air_force
-		icon = french_air_force
-		x = @air_force_tree_center
-		y = 2
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_new_bomber_programs
-		}
-
-		completion_reward = {
-			add_political_power = -25
-			air_experience = 10
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_naval_industry_2
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = @economic_tree_very_far_left
-		y = 3
-		cost = 10
 
 		prerequisite = {
 			focus = FRA_naval_industry_1
@@ -1201,126 +892,6 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = FRA_term_length_reform
-		icon = GFX_goal_generic_intelligence_exchange
-		x = @ideology_europe_far_left
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_the_european_dream
-		}
-
-		completion_reward = {
-			add_political_power = 10
-			add_ideas = FRA_administrative_reforms_1
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_european_cooperation_1
-		icon = GFX_goal_EU_Investment
-		x = @ideology_europe_center
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_the_european_dream
-		}
-
-		completion_reward = {
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_judicial_reforms
-		icon = GFX_focus_generic_court
-		x = @ideology_europe_far_right
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_the_european_dream
-		}
-
-		completion_reward = {
-			add_stability = 0.02
-			add_political_power = 20
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = FRA_le_pen_ambition
@@ -1589,174 +1160,10 @@ focus_tree = {
 		prerequisite = {
 			focus = FRA_national_fellowship
 		}
-		prerequisite = {
-			focus = FRA_vehicle_construction_programs
-		}
 
 		completion_reward = {
 			add_ideas = FRA_nationalist_militias
 			add_political_power = -50
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_army_training_2
-		icon = GFX_focus_generic_military_mission
-		x = @army_tree_left
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_vehicle_construction_programs
-		}
-
-		completion_reward = {
-			army_experience = 15
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_artillery_programs
-		icon = GFX_goal_generic_army_artillery
-		x = @army_tree_right
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_armor_programs
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = artillery_bonus
-				bonus = 0.25
-				uses = 2
-				category = artillery
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_strengthen_toulon
-		icon = GFX_goal_generic_construct_naval_dockyard
-		x = @navy_tree_left
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_brest_arsenal
-		}
-
-		completion_reward = {
-			navy_experience = 10
-			21 = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = dockyard
-					level = 2
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = coastal_bunker
-					province = 911
-					level = 5
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_french_heavy_ships
-		icon = GFX_goal_generic_navy_cruiser
-		x = @navy_tree_right
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_brest_arsenal
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = cruiser_bonus
-				bonus = 0.3
-				uses = 2
-				category = ca_tech
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_northern_air_bases
-		icon = GFX_goal_generic_air_production
-		x = @air_force_tree_left
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_restructure_the_air_force
-		}
-
-		completion_reward = {
-			every_owned_state = {
-				limit = {
-					OR = {
-						region = 19
-						region = 271
-					}
-				}
-				add_building_construction = {
-					type = air_base
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_air_doctrines
-		icon = air_doctrine
-		x = @air_force_tree_right
-		y = 3
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_restructure_the_air_force
-		}
-
-		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = air_doc_bonus
-				cost_reduction = 0.2
-				uses = 2
-				category = air_doctrine
-			}
 		}
 
 		ai_will_do = {
@@ -1877,113 +1284,6 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = FRA_legislative_reforms
-		icon = GFX_focus_generic_improve_the_administration
-		x = @ideology_europe_far_left
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_term_length_reform
-		}
-
-		completion_reward = {
-			add_political_power = 100
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_EU_expansion_of_2004
-		icon = GFX_goal_EU_Treaty
-		x = @ideology_europe_center
-		y = 4
-		cost = 20
-
-		prerequisite = {
-			focus = FRA_european_cooperation_1
-		}
-
-		available = {
-			has_idea = idea_eu_member
-			has_offensive_war = no
-		}
-
-		bypass = {
-			OR = {
-				has_global_flag = eu_expansion_of_2004_focus
-				AND = {
-					EST = { has_idea = idea_eu_member }
-					LAT = { has_idea = idea_eu_member }
-					LIT = { has_idea = idea_eu_member }
-					POL = { has_idea = idea_eu_member }
-					CZE = { has_idea = idea_eu_member }
-					SLO = { has_idea = idea_eu_member }
-					SLV = { has_idea = idea_eu_member }
-					HUN = { has_idea = idea_eu_member }
-					MLT = { has_idea = idea_eu_member }
-					CYP = { has_idea = idea_eu_member }
-				}
-			}
-		}
-
-		completion_reward = {
-			set_global_flag = eu_expansion_of_2004_focus
-			every_country = {
-				limit = {
-					OR = {
-						tag = EST
-						tag = LAT
-						tag = LIT
-						tag = POL
-						tag = CZE
-						tag = SLO
-						tag = SLV
-						tag = HUN
-						tag = MLT
-						tag = CYP
-					}
-					has_democratic_form_of_government = yes
-					NOT = { has_idea = idea_eu_member }
-					has_offensive_war = no
-				}
-				country_event = { id = european_union.5 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				date < 2004.1.1
-				factor = 0
-			}
-		}
-	}
-
-	focus = {
-		id = FRA_executive_reforms
-		icon = GFX_focus_generic_treaty
-		x = @ideology_europe_far_right
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_judicial_reforms
-		}
-
-		completion_reward = {
-			add_stability = 0.03
-			add_war_support = 0.05
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = FRA_frexit
@@ -2009,7 +1309,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_immigration_and_border_controls
-		icon = GFX_focus_RAJ_clamp_down_on_corruption
+		icon = GFX_goal_Restrict_Immigration
 		x = @ideology_right_wing_populism_center
 		y = 4
 		cost = 10
@@ -2234,38 +1534,17 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = FRA_recruitment_reforms
-		icon = GFX_goal_generic_position_armies
-		x = @army_tree_center
-		y = 4
-		cost = 10
 
-		prerequisite = {
-			focus = FRA_army_training_2
-		}
-		prerequisite = {
-			focus = FRA_artillery_programs
-		}
-
-		completion_reward = {
-			add_ideas = idea_focus_new_recruitment_strategies
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = FRA_colonial_bases
 		icon = GFX_goal_generic_build_navy
-		x = @navy_tree_left
-		y = 4
+		x = 0
+		y = 1
 		cost = 10
-
+		relative_position_id = FRA_naval_industry_3
 		prerequisite = {
-			focus = FRA_strengthen_toulon
+			focus = FRA_naval_industry_3
 		}
 
 		completion_reward = {
@@ -2299,72 +1578,17 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = FRA_french_aircraft_carriers
-		icon = GFX_goal_generic_navy_carrier
-		x = @navy_tree_right
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_french_heavy_ships
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = carrier_bonus
-				bonus = 0.25
-				uses = 3
-				category = cv_tech
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_southern_air_bases
-		icon = GFX_goal_generic_build_airforce
-		x = @air_force_tree_left
-		y = 4
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_northern_air_bases
-		}
-
-		completion_reward = {
-			every_owned_state = {
-				limit = {
-					OR = {
-						region = 20
-						region = 224
-					}
-				}
-				add_building_construction = {
-					type = air_base
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = FRA_colonial_air_bases
 		icon = GFX_goal_generic_build_airforce
-		x = @air_force_tree_right
-		y = 4
+		x = 0
+		y = 1
 		cost = 10
+		relative_position_id = FRA_colonial_infrastructure
 
 		prerequisite = {
-			focus = FRA_northern_air_bases
+			focus = FRA_colonial_infrastructure
 		}
 
 		completion_reward = {
@@ -2409,7 +1633,7 @@ focus_tree = {
 		cost = 10
 
 		prerequisite = {
-			focus = FRA_naval_industry_2
+			focus = FRA_brest_arsenal
 		}
 		prerequisite = {
 			focus = FRA_military_industry_3
@@ -2559,91 +1783,6 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_european_cooperation_2
-		icon = GFX_goal_EU_Business_Deal
-		x = @ideology_europe_center
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_legislative_reforms
-		}
-		prerequisite = {
-			focus = FRA_EU_expansion_of_2004
-		}
-		prerequisite = {
-			focus = FRA_executive_reforms
-		}
-
-		completion_reward = {
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
 			}
 		}
 
@@ -2827,97 +1966,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = FRA_army_training_3
-		icon = GFX_focus_chi_army_reform
-		x = @army_tree_left
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_recruitment_reforms
-		}
-
-		completion_reward = {
-			army_experience = 20
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_army_doctrines
-		icon = GFX_goal_generic_army_doctrines
-		x = @army_tree_right
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_recruitment_reforms
-		}
-
-		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = armydoctrine_bonus
-				cost_reduction = 0.5
-				uses = 1
-				category = land_doctrine
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_coastal_fort_construction
-		icon = GFX_focus_generic_coastal_fort
-		x = @navy_tree_left
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_colonial_bases
-		}
-
-		completion_reward = {
-			add_ideas = FRA_coastal_fort_idea
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_naval_doctrine
-		icon = GFX_goal_generic_navy_doctrines_tactics
-		x = @navy_tree_right
-		y = 5
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_french_aircraft_carriers
-		}
-
-		completion_reward = {
-			navy_experience = 10
-			add_tech_bonus = {
-				name = naval_doc_bonus
-				bonus = 0.35
-				uses = 1
-				category = naval_doctrine
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
 		id = FRA_industrial_research
 		icon = GFX_focus_research
 		x = @economic_tree_center
@@ -2942,76 +1990,7 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = FRA_EU_expansion_of_2007
-		icon = GFX_goal_EU_Treaty
-		x = @ideology_europe_left
-		y = 6
-		cost = 20
 
-		prerequisite = {
-			focus = FRA_european_cooperation_2
-		}
-
-		available = {
-			has_idea = idea_eu_member
-			has_offensive_war = no
-		}
-
-		bypass = {
-			OR = {
-				has_global_flag = eu_expansion_of_2007_focus
-				AND = {
-					ROM = { has_idea = idea_eu_member }
-					BUL = { has_idea = idea_eu_member }
-				}
-			}
-		}
-
-		completion_reward = {
-			set_global_flag = eu_expansion_of_2007_focus
-			every_country = {
-				limit = {
-					OR = {
-						tag = ROM
-						tag = BUL
-					}
-					has_democratic_form_of_government = yes
-					NOT = { has_idea = idea_eu_member }
-					has_offensive_war = no
-				}
-				country_event = { id = european_union.5 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				date < 2007.1.1
-				factor = 0
-			}
-		}
-	}
-
-	focus = {
-		id = FRA_continental_industrial_reforms
-		icon = GFX_goal_EU_Factories
-		x = @ideology_europe_right
-		y = 6
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_european_cooperation_2
-		}
-
-		completion_reward = {
-			add_ideas = FRA_continental_industrial_reforms_idea
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = FRA_the_father
@@ -3178,74 +2157,7 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = FRA_land_fort_constructions
-		icon = GFX_focus_SWI_fortify_border_with_france
-		x = @army_tree_center
-		y = 6
-		cost = 10
 
-		prerequisite = {
-			focus = FRA_recruitment_reforms
-		}
-
-		completion_reward = {
-			add_ideas = FRA_land_fort_idea
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_EU_expansion_of_2013
-		icon = GFX_goal_EU_Treaty
-		x = @ideology_europe_center
-		y = 7
-		cost = 20
-
-		prerequisite = {
-			focus = FRA_continental_industrial_reforms
-		}
-		prerequisite = {
-			focus = FRA_EU_expansion_of_2007
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		bypass = {
-			OR = {
-				has_global_flag = eu_expansion_of_2013_focus
-				CRO = { has_idea = idea_eu_member }
-			}
-		}
-
-		completion_reward = {
-			set_global_flag = eu_expansion_of_2013_focus
-			every_country = {
-				limit = {
-					OR = {
-						tag = CRO
-					}
-					has_democratic_form_of_government = yes
-					NOT = { has_idea = idea_eu_member }
-					has_offensive_war = no
-				}
-				country_event = { id = european_union.5 }
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-			modifier = {
-				date < 2013.1.1
-				factor = 0
-			}
-		}
-	}
 
 	focus = {
 		id = FRA_anti_semitic_propaganda
@@ -3313,7 +2225,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_civilized_outlook
-		icon = french_democracy
+		icon = GFX_goal_generic_neutrality_focus
 		x = @ideology_right_wing_populism_far_right
 		y = 7
 		cost = 10
@@ -3338,7 +2250,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_protect_the_working_class
-		icon = GFX_goal_generic_construction2
+		icon = GFX_goal_Workers_Rights
 		x = @ideology_left_wing_populism_far_left
 		y = 7
 		cost = 10
@@ -3470,84 +2382,6 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = FRA_european_cooperation_3
-		icon = GFX_goal_EU_Agreement
-		x = @ideology_europe_center
-		y = 8
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_EU_expansion_of_2013
-		}
-
-		completion_reward = {
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-			random_country = {
-				limit = {
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-					NOT = { has_country_flag = FRA_european_cooperation_received }
-					has_idea = idea_eu_member
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = FRA_fascistic_approach
@@ -3665,7 +2499,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_with_NATO
-		icon = align_to_nato
+		icon = GFX_Align_to_NATO
 		x = @ideology_left_wing_populism_left
 		y = 8
 		cost = 10
@@ -3702,7 +2536,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_with_the_francophonie
-		icon = align_to_france
+		icon = GFX_Align_to_France
 		x = @ideology_left_wing_populism_right
 		y = 8
 		cost = 10
@@ -3878,7 +2712,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_house_of_bourbon
-		icon = french_monarchy1
+		icon = GFX_FRA_French_Monarchy
 		x = @ideology_nationalism_right
 		y = 8
 		cost = 10
@@ -3900,98 +2734,6 @@ focus_tree = {
 			add_stability = 0.05
 			add_political_power = 125
 			add_war_support = 0.2
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_from_many_one
-		icon = GFX_goal_Europe_of_Nations
-		x = @ideology_europe_left
-		y = 9
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_european_cooperation_3
-		}
-
-		mutually_exclusive = {
-			focus = FRA_nations_of_greatness
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = { has_idea = idea_eu_member }
-				add_opinion_modifier = {
-					target = FRA
-					modifier = declaration_of_friendship
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 0
-
-			modifier = {
-				add = 10
-				has_game_rule = {
-					rule = FRA_ai_behavior
-					option = EUROPEAN_UNION
-				}
-			}
-			modifier = {
-				add = 3
-				is_historical_focus_on = no
-				has_game_rule = {
-					rule = FRA_ai_behavior
-					option = DEFAULT
-				}
-			}
-			modifier = {
-				add = 5
-				has_game_rule = {
-					rule = FRA_ai_behavior
-					option = RANDOM
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = FRA_nations_of_greatness
-		icon = align_to_france
-		x = @ideology_europe_right
-		y = 9
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_european_cooperation_3
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		mutually_exclusive = {
-			focus = FRA_from_many_one
-		}
-
-		completion_reward = {
-			add_political_power = 50
-			add_war_support = 0.03
-			add_stability = 0.03
-			every_country = {
-				limit = {
-					NOT = { tag = FRA }
-					has_idea = idea_eu_member
-				}
-				add_political_power = 25
-				add_war_support = 0.01
-				add_stability = 0.01
-			}
 		}
 
 		ai_will_do = {
@@ -4212,75 +2954,6 @@ focus_tree = {
 				elections_allowed = no
 			}
 			news_event = news.99
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_union_societies
-		icon = GFX_goal_generic_national_unity
-		x = @ideology_europe_far_left
-		y = 10
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_from_many_one
-		}
-
-		completion_reward = {
-			add_political_power = 10
-			add_stability = 0.01
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_european_brigades
-		icon = GFX_goal_EU_Army
-		x = @ideology_europe_center
-		y = 10
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_from_many_one
-			focus = FRA_nations_of_greatness
-		}
-
-		completion_reward = {
-			add_ideas = FRA_european_brigades_idea
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_european_cultural_union
-		icon = GFX_goal_United_Europe
-		x = @ideology_europe_far_right
-		y = 10
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_nations_of_greatness
-		}
-
-		completion_reward = {
-			add_stability = 0.05
-			every_country = {
-				limit = {
-					has_idea = idea_eu_member
-					NOT = { tag = FRA }
-				}
-				add_stability = 0.02
-			}
 		}
 
 		ai_will_do = {
@@ -4514,7 +3187,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_tradition_and_honor
-		icon = french_monarchy1
+		icon = GFX_goal_generic_major_war
 		x = @ideology_nationalism_right
 		y = 10
 		cost = 10
@@ -4529,56 +3202,6 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = FRA_imperial_honor
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_doctrine_of_union
-		icon = GFX_goal_EU_Agreement
-		x = @ideology_europe_left
-		y = 11
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_from_many_one
-		}
-
-		completion_reward = {
-			add_political_power = 100
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_european_cooperation_4
-		icon = GFX_goal_EU_Investment
-		x = @ideology_europe_right
-		y = 11
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_nations_of_greatness
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					has_idea = idea_eu_member
-					NOT = { tag = GER }
-					NOT = { tag = ENG }
-					NOT = { tag = FRA }
-					NOT = { tag = ITA }
-				}
-				country_event = { id = european_union.6 }
-				set_country_flag = FRA_european_cooperation_received
-			}
 		}
 
 		ai_will_do = {
@@ -4608,7 +3231,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_national_interests
-		icon = align_to_france
+		icon = GFX_Align_to_France
 		x = @ideology_right_wing_populism_right
 		y = 11
 		cost = 10
@@ -4839,88 +3462,6 @@ focus_tree = {
 			factor = 10
 		}
 	}
-
-	focus = {
-		id = FRA_union_preparation
-		icon = GFX_goal_EU_Government
-		x = @ideology_europe_left
-		y = 12
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_doctrine_of_union
-		}
-
-		completion_reward = {
-			add_political_power = 100
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_european_doctrine_academy
-		icon = GFX_goal_generic_army_doctrines
-		x = @ideology_europe_right
-		y = 12
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_european_cooperation_4
-		}
-
-		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = armydoctrine_bonus
-				cost_reduction = 0.4
-				uses = 1
-				category = land_doctrine
-			}
-			add_tech_bonus = {
-				name = naval_doc_bonus
-				bonus = 0.2
-				uses = 1
-				category = naval_doctrine
-			}
-			add_tech_bonus = {
-				name = air_doc_bonus
-				bonus = 0.2
-				uses = 1
-				category = air_doctrine
-			}
-			every_country = {
-				limit = {
-					NOT = { tag = FRA }
-					has_idea = idea_eu_member
-				}
-				add_doctrine_cost_reduction = {
-					name = armydoctrine_bonus
-					cost_reduction = 0.05
-					uses = 1
-					category = land_doctrine
-				}
-				add_doctrine_cost_reduction = {
-					name = armydoctrine_bonus
-					cost_reduction = 0.05
-					uses = 1
-					category = air_doctrine
-				}
-				add_doctrine_cost_reduction = {
-					name = armydoctrine_bonus
-					cost_reduction = 0.05
-					uses = 1
-					category = naval_doctrine
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
 	focus = {
 		id = FRA_glory_of_vichy
 		icon = GFX_focus_generic_vichy_france_triumphant_focus
@@ -4966,7 +3507,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_europe_awakens
-		icon = align_to_europe
+		icon = GFX_Align_to_EU
 		x = @ideology_left_wing_populism_left
 		y = 12
 		cost = 10
@@ -4995,7 +3536,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_the_francophonie_awakens
-		icon = align_to_france
+		icon = GFX_Align_to_France
 		x = @ideology_left_wing_populism_right
 		y = 12
 		cost = 10
@@ -5025,7 +3566,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_revolution_in_germany
-		icon = attack_germany
+		icon = GFX_Focus_Attack_Germany
 		x = @ideology_communism_very_far_left
 		y = 12
 		cost = 10
@@ -5235,52 +3776,6 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_pro_european_propaganda
-		icon = GFX_goal_generic_propaganda
-		x = @ideology_europe_far_left
-		y = 13
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_union_societies
-		}
-		prerequisite = {
-			focus = FRA_union_preparation
-		}
-
-		completion_reward = {
-			add_political_power = 100
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_european_officer_school
-		icon = GFX_focus_generic_military_mission
-		x = @ideology_europe_far_right
-		y = 13
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_european_cultural_union
-		}
-		prerequisite = {
-			focus = FRA_european_doctrine_academy
-		}
-
-		completion_reward = {
-			add_ideas = FRA_european_officer_school
 		}
 
 		ai_will_do = {
@@ -5631,59 +4126,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = FRA_unite_the_union
-		icon = GFX_goal_EU_Prepare_The_Union
-		x = @ideology_europe_left
-		y = 14
-		cost = 85
-
-		prerequisite = {
-			focus = FRA_union_preparation
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			country_event = { id = european_union.3 }
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = FRA_european_research_academy
-		icon = GFX_goal_EU_Research_1
-		x = @ideology_europe_right
-		y = 14
-		cost = 10
-
-		prerequisite = {
-			focus = FRA_european_doctrine_academy
-		}
-
-		available = {
-			has_idea = idea_eu_member
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					has_idea = idea_eu_member
-				}
-				add_ideas = FRA_european_research_project
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
 		id = FRA_the_rhine
 		icon = GFX_goal_generic_major_war
 		x = @ideology_right_wing_populism_far_left
@@ -5770,7 +4212,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_will_of_the_people
-		icon = red_dragon
+		icon = GFX_focus_YUG_pan_slavic_congress
 		x = @ideology_left_wing_populism_left
 		y = 14
 		cost = 10
@@ -5836,7 +4278,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_revolution_in_britain
-		icon = GFX_goal_Overthrow_Bourgeosie
+		icon = GFX_Focus_Attack_Britain
 		x = @ideology_communism_far_left
 		y = 14
 		cost = 10
@@ -5947,7 +4389,7 @@ focus_tree = {
 
 	focus = {
 		id = FRA_extra_research_slot_monarchist
-		icon = french_monarchy1
+		icon = GFX_focus_research2
 		x = @ideology_nationalism_right
 		y = 14
 		cost = 10

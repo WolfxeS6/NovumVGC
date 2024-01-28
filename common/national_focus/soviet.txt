@@ -4862,20 +4862,44 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_equipment_to_stockpile = {
-				type = CAS_equipment_2
-				amount = 50
-				producer = SOV
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = CAS_equipment_2
+					amount = 50
+					producer = SOV
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = small_plane_airframe_1
+					amount = 50
+					producer = SOV
+				}
 			}
 			add_equipment_to_stockpile = {
 				type = strat_bomber_equipment_2
 				amount = 50
 				producer = SOV
 			}
-			add_equipment_to_stockpile = {
-				type = fighter_equipment_3
-				amount = 100
-				producer = SOV
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = fighter_equipment_3
+					amount = 75
+					producer = SOV
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = medium_plane_airframe_1
+					amount = 75
+					producer = SOV
+				}
 			}
 			random_owned_state = {
 				prioritize = { 582 }
@@ -5213,30 +5237,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			if = {
-				limit = { has_idea = disarmed_nation }
-				add_ideas = volunteer_only
-			}
-			else_if = {
-				limit = { has_idea = volunteer_only }
-				add_ideas = limited_conscription
-			}
-			else_if = {
-				limit = { has_idea = limited_conscription }
-				add_ideas = extensive_conscription
-			}
-			else_if = {
-				limit = { has_idea = extensive_conscription }
-				add_ideas = service_by_requirement
-			}
-			else_if = {
-				limit = { has_idea = service_by_requirement }
-				add_ideas = all_adults_serve
-			}
-			else_if = {
-				limit = { has_idea = all_adults_serve }
-				add_ideas = scraping_the_barrel
-			}
+			law_change_tax_conscription_increase = yes
 		}
 
 		ai_will_do = {

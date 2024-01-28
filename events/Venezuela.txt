@@ -1,0 +1,544 @@
+add_namespace = venezuela
+add_namespace = venezuela_news
+add_namespace = election_VEN
+
+country_event = {  #2002 coup d'etat attempt
+	id = venezuela.1
+	title = venezuela.1.t
+	desc = venezuela.1.d
+	picture = GFX_report_event_VEN_coup
+	
+	trigger = {
+	    tag = VEN
+	    date > 2002.4.30
+		date < 2002.6.30
+        has_government = democratic_socialist
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #Hugo Chavez resists
+	    ai_chance = {
+			base = 60
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		name = venezuela.1.a
+	}
+	option = {    #The coup succedes, Carmona becomes president
+		name = venezuela.1.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+        set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes			#questionable
+		}
+		add_popularity = { ideology = reactionary popularity = 0.15 }
+	}
+	option = {    #The coup succedes, the army takes over
+		name = venezuela.1.c
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+        set_politics = {
+			ruling_party = nationalist
+			elections_allowed = no
+		}
+		add_popularity = { ideology = nationalist popularity = 0.15 }
+	}
+}
+
+country_event = {  #Death of Hugo Chavez (2013 Elections)
+	id = venezuela.2
+	title = venezuela.2.t
+	desc = venezuela.2.d
+	picture = GFX_report_event_VEN_Chavez_funeral
+	
+	trigger = {
+	    tag = VEN
+		date > 2013.7.1
+		date < 2013.5.5
+		has_government = democratic_socialist
+		NOT = {
+			has_country_flag = VEN_rip_chavez
+		}
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {  #Nicolas Maduro
+		name = venezuela.2.a
+        ai_chance = {
+			base = 60
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+        promote_character = VEN_nicolas_maduro
+		set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2013.4.14"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		set_country_flag = VEN_rip_chavez
+	}
+	option = {		#Henrique Capriles
+		name = venezuela.2.b
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+       	set_politics = {
+			ruling_party = market_liberal
+			last_election = "2013.4.14"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		add_popularity = { ideology = market_liberal popularity = 0.15 }
+		promote_character = VEN_nicolas_maduro
+		set_country_flag = VEN_rip_chavez
+	}
+}
+
+country_event = {  #Gauidó declares himself president
+	id = venezuela.3
+	title = venezuela.3.t
+	desc = venezuela.3.d
+	picture = GFX_report_event_venezuela
+	
+	trigger = {
+	    tag = ven
+	    date > 2019.1.23
+		date < 2019.2.13
+        has_government = democratic_socialist
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #lol lmao
+		name = venezuela.3.a
+        ai_chance = {
+			base = 80
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = VEN_juan_guaido
+        add_political_power = -200
+		add_stability = -0.1
+		add_ideas = VEN_presidential_crisis
+		set_country_flag = VEN_presidential_crisis
+        add_popularity = { ideology = progressive popularity = 0.2 }
+    }
+	option = {    #he deserves support
+	name = venezuela.3.a
+        ai_chance = {
+			base = 20
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		promote_character = VEN_juan_guaido
+        add_popularity = { ideology = progressive popularity = 0.25 }
+        set_politics = { ruling_party = progressive elections_allowed = yes }
+        set_cosmetic_tag = VEN_ALT
+		start_civil_war = {
+			ideology = democratic_socialist
+			size = 0.5
+			states = { 
+				307
+				#1132
+				1133
+				1134
+				1135
+			}
+			set_cosmetic_tag = VEN_PURPLE
+        }
+	}
+}
+
+country_event = {  #Operation Gideon
+	id = venezuela.4
+	title = venezuela.4.t
+	desc = venezuela.4.d
+	picture = GFX_report_event
+	
+	trigger = {
+	    tag = ven
+	    date > 2019.11.30
+		date < 2020.5.4
+        has_government = democratic_socialist
+	}
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #lol
+		name = venezuela.4.a
+        ai_chance = { factor = 100 }
+        add_political_power = 100
+        add_war_support = 0.1
+    }
+	option = {    #wouldn't it be wacky if...
+	name = venezuela.4.b
+        ai_chance = { factor = 0 }
+		promote_character = VEN_jordan_gordreau
+		add_country_leader_role = {
+			character = VEN_vladimir_padrino_lopez
+			country_leader = {
+				ideology = authoritarian_socialist
+			}
+			promote_leader = yes
+		}
+		set_party_name = { ideology = nationalist long_name = VEN_nationalist_party_SILVERCORP_long name = VEN_nationalist_party_SILVERCORP }
+		add_popularity = { ideology = nationalist popularity = 0.15 }
+		set_cosmetic_tag = VEN_USV
+        start_civil_war = {
+			ruling_party = nationalist
+			ideology = democratic_socialist
+			size = 0.9
+			states = { 
+				488
+				1132
+				1133
+				1134
+				1135
+			}
+			set_cosmetic_tag = VEN_PURPLE
+        }
+		if = {
+			limit = {
+				has_country_flag = VEN_presidential_crisis
+			}
+			country_event = { days = 14 id = venezuela.6 }
+		}
+	}
+}
+
+country_event = {  #Declare allegiance to Guaidó?
+	id = venezuela.5
+	title = venezuela.5.t
+	desc = venezuela.5.d
+	picture = GFX_report_event_VENivia
+	
+	is_triggered_only = yes
+
+	mean_time_to_happen = { days = 1 }
+
+	fire_only_once = yes
+	
+	option = {    #We fight for ourselves!
+		name = venezuela.5.a
+        ai_chance = { factor = 100 }
+        add_war_support = 0.1
+    }
+	option = {    #we need his support
+	name = venezuela.5.b
+        ai_chance = { factor = 0 }
+		set_politics = { ruling_party = progressive elections_allowed = yes }
+		add_popularity = { ideology = nationalist popularity = -0.15 }
+		add_popularity = { ideology = progressive popularity = 0.15 }
+		transfer_state = 488
+		transfer_state = 1134
+		random_other_country = {
+			limit = {
+				original_tag = VEN
+                has_government = democratic_socialist
+            }
+			488 = {
+                teleport_armies = {
+                    limit = { tag = THIS }
+                }
+            }
+			1134 = {
+                teleport_armies = {
+                    limit = { tag = THIS }
+                }
+            }
+           	transfer_units_fraction = {		#still a hard civil war, but more winnable
+				target = VEN
+				stockpile_ratio = 0.35
+				army_ratio = 0.35
+				navy_ratio = 0.35
+				air_ratio = 0.35
+			}
+        } 
+	}
+}
+
+#######################################################################
+### VENEZUELAN ELECTION EVENTS ARE CURRENTLY UNUSED AND HAVE NO LOC ###
+#######################################################################
+
+country_event = {  #2000 election
+	id = election_VEN.1
+	title = election_VEN.1.t
+	desc = election_VEN.1.d
+	
+	trigger = {
+	    tag = VEN
+	    date > 2000.1.1
+	    date < 2000.12.30
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = ven_election_2000 }
+	}
+	
+	immediate = {
+		set_country_flag = ven_election_2000	
+	}
+
+	is_triggered_only = yes
+	
+	option = {    #Hugo Chavez
+	    ai_chance = { factor = 100 }
+		name = election_VEN.1.a
+		set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+	}
+	option = {    #Francisco Arias Cárdenas
+		name = election_VEN.1.b
+       	set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+	}
+	option = {    #Someone Else
+		name = election_VEN.1.c
+	}
+}
+
+country_event = {  #2006 election
+	id = election_VEN.2
+	title = election_VEN.2.t
+	desc = election_VEN.2.d
+	
+	trigger = {
+	    tag = VEN
+	    date > 2006.1.1
+	    date < 2006.12.30
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = ven_election_2006 }
+	}
+	
+	immediate = {
+		set_country_flag = ven_election_2006	
+	}
+
+	is_triggered_only = yes
+	
+	option = {    #Hugo Chavez
+	    ai_chance = { factor = 100 }
+		name = election_VEN.1.a
+		set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+	}
+	option = {
+
+		name = election_VEN.2.a
+       	set_politics = {
+			ruling_party = progressive
+			elections_allowed = yes
+		}
+	}
+	option = {    #Someone Else
+		name = election_VEN.1.c
+	}
+}
+
+country_event = {  #2012 election
+	id = election_VEN.3
+	title = election_VEN.3.t
+	desc = election_VEN.3.d
+	
+	trigger = {
+	    tag = VEN
+	    date > 2012.1.1
+	    date < 2012.12.30
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = ven_election_2012 }
+	}
+	
+	immediate = {
+		set_country_flag = ven_election_2012	
+	}
+
+	is_triggered_only = yes
+	
+	option = {    #Hugo Chavez
+	    ai_chance = { factor = 100 }
+		name = election_VEN.1.a
+		set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+	}
+	option = {		#Henrique Capriles
+		name = election_VEN.3.a
+       	set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+	}
+	option = {    #Someone Else
+		name = election_VEN.1.c
+	}
+}
+
+news_event = {			#2002 failed
+	id = venezuela_news.1
+	title = venezuela_news.1.t
+	desc = venezuela_news.1.d
+	picture = GFX_news_venezuela_coup
+
+	is_triggered_only = yes
+
+	option = {
+		name = venezuela_news.1.a
+	}
+}
+
+news_event = {			#2002 coup successful
+	id = venezuela_news.2
+	title = venezuela_news.2.t
+	desc = venezuela_news.2.d
+	picture = GFX_news_venezuela_coup
+
+	is_triggered_only = yes
+
+	option = {
+		name = venezuela_news.2.a
+	}
+}
+
+news_event = {			#2002 coup military
+	id = venezuela_news.3
+	title = venezuela_news.3.t
+	desc = venezuela_news.3.d
+	picture = GFX_news_venezuela_coup
+
+	is_triggered_only = yes
+
+	option = {
+		name = venezuela_news.3.a
+	}
+}
+
+news_event = {			#death of Chávez - Maduro succession
+	id = venezuela_news.4
+	title = venezuela_news.4.t
+	desc = venezuela_news.4.d
+	picture = GFX_news_chavez
+
+	is_triggered_only = yes
+
+	option = {
+		name = venezuela_news.4.a
+	}
+}
+
+news_event = {			#death of Chávez - Capriles succession
+	id = venezuela_news.5
+	title = venezuela_news.4.t
+	desc = venezuela_news.5.d
+	picture = GFX_news_chavez
+
+	is_triggered_only = yes
+
+	option = {
+		name = venezuela_news.5.a
+	}
+}
+
+news_event = {			#Venezuelan presidential crisis
+	id = venezuela_news.6
+	title = venezuela_news.6.t
+	desc = venezuela_news.6.d
+	picture = GFX_news_maduro_guaido
+
+	is_triggered_only = yes
+
+	option = {
+		name = venezuela_news.6.a
+	}
+}
+
+news_event = {			#Venezuelan civil war
+	id = venezuela_news.7
+	title = venezuela_news.6.t
+	desc = venezuela_news.7.d
+	picture = GFX_news_maduro_guaido
+
+	is_triggered_only = yes
+
+	option = {
+		name = venezuela_news.7.a
+	}
+}
+
+news_event = {			#Operation Gideon
+	id = venezuela_news.8
+	title = venezuela_news.8.t
+	desc = venezuela_news.8.d
+	picture = GFX_news_gideon_fail
+
+	is_triggered_only = yes
+
+	option = {
+		name = venezuela_news.8.a
+	}
+	
+	option = {
+		name = venezuela_news.8.b
+		trigger = {
+			original_tag = USA
+		}
+	}
+}
+news_event = {			#Mercenaries kidnapp Maduro
+	id = venezuela_news.9
+	title = venezuela_news.9.t
+	desc = venezuela_news.9.d
+	picture = GFX_news_gideon
+
+	is_triggered_only = yes
+
+	option = {
+		name = venezuela_news.8.a
+	}
+	
+	option = {
+		name = venezuela_news.8.b
+		trigger = {
+			original_tag = USA
+		}
+	}
+}

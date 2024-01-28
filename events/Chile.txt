@@ -1,0 +1,557 @@
+ add_namespace = chile
+ add_namespace = election_CHL
+
+country_event = {  #Extradite Pinochet? - Event for Britain
+	id = chile.1
+	title = chile.1.t
+	desc = chile.1.d
+	picture = GFX_report_event_CHL_pinochet_arrest
+	
+	trigger = {
+	    tag = ENG
+	    date > 2000.1.25
+		date < 2000.3.1
+	}
+
+	fire_only_once = yes
+	
+	option = {    #No
+		name = chile.1.a
+		CHL = {
+			country_event = { days = 53 id = chile.3 }
+		}
+	}
+	option = {    #Yes
+		name = chile.1.b
+		SPR = {
+			country_event = { days = 53 id = chile.2 }
+		}
+	}
+}
+
+country_event = {  #Arrest Pinochet? - Event for Spain
+	id = chile.2
+	title = chile.2.t
+	desc = chile.2.d
+	picture = GFX_report_event_CHL_pinochet_arrest
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #Yes!
+		name = chile.2.a
+		CHL = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = interfered_with_our_sovereignty
+			}
+		}
+		add_political_power = -25
+	}
+	option = {    #That's none of our business
+		name = chile.1.a
+		CHL = {
+			country_event = { days = 23 id = chile.3 }
+		}
+	}
+}
+
+country_event = {  #Pinochet returns
+	id = chile.3
+	title = chile.3.t
+	desc = chile.3.d
+	picture = GFX_report_event_CHL_pinochet_arrest
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #Pass a constitutional amendment
+		name = chile.3.a
+		
+	}
+}
+
+country_event = {  #Court of Appeals lifts Pinochet's immunity
+	id = chile.4
+	title = chile.4.t
+	desc = chile.4.d
+	picture = GFX_report_event_CHL_pinochet_arrest
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #Indict him
+		name = chile.4.a
+		
+	}
+	option = {    #Denounce the decision
+		name = chile.4.b
+	}
+}
+
+country_event = {  #Supreme Courts rules that Pinochet has dementia
+	id = chile.5
+	title = chile.5.t
+	desc = chile.5.d
+	#picture = GFX_report_event_chile
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #There's nothing we can do
+		name = chile.5.a
+		set_country_flag = CHL_pinochet_dementia
+	}
+	option = {    #Denounce the decision
+		name = chile.4.b
+		
+	}
+}
+
+country_event = {  #Court of Appeals questions Pinochet's dementia
+	id = chile.6
+	title = chile.6.t
+	desc = chile.6.d
+	picture = GFX_report_event_CHL_pinochet_arrest
+	
+	trigger = {
+	    tag = CHL
+	    date > 2000.3.1
+		date < 2000.4.1
+		has_country_flag = CHL_pinochet_dementia
+	}
+
+	fire_only_once = yes
+	
+	option = {   	#Put him under house arrest
+		name = chile.6.a
+		ai_chance = { factor = 100 }
+	}
+	option = {    #condemn him
+		name = chile.6.b
+	}
+	option = {    #aquit him
+		name = chile.6.c
+	}
+}
+
+country_event = {  #Institutional Crisis
+	id = chile.7
+	title = chile.7.t
+	desc = chile.7.d
+	#picture = GFX_report_event_chile
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #An agreement is made
+		name = chile.7.a
+		
+	}
+	option = {    #The president resigns
+		name = chile.7.b
+
+	}
+}
+
+
+country_event = {  #Death of Gladys Marín
+	id = chile.8
+	title = chile.8.t
+	desc = chile.8.d
+	#picture = GFX_report_event_chile
+	
+	trigger = {
+	    tag = CHL
+	    date > 2006.3.6
+		date < 2006.4.6
+	}
+
+	mean_time_to_happen = { days = 7 }
+
+	fire_only_once = yes
+	
+	option = {   
+		name = chile.8.a
+		promote_character = CHL_guillermo_teillier
+	}
+}
+
+country_event = {  #Death of Pinochet
+	id = chile.9
+	title = chile.9.t
+	desc = chile.9.d
+	#picture = GFX_report_event_chile
+	
+	trigger = {
+	    tag = CHL
+	    date > 2006.3.6
+		date < 2006.4.6
+	}
+
+	mean_time_to_happen = { days = 7 }
+
+	fire_only_once = yes
+	
+	option = {   
+		name = chile.9.a
+		#promote_character = 
+	}
+}
+
+country_event = {  #The Military Threatens to Step in
+	id = chile.10
+	title = chile.10.t
+	desc = chile.10.d
+	#picture = GFX_report_event_chile
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	
+	option = {    #An agreement is made
+		name = chile.10.a
+		
+	}
+	option = {    #The president resigns
+		name = chile.10.b
+
+	}
+}
+
+country_event = {  #2000 election
+	id = election_CHL.1
+	title = election_CHL.1.t
+	desc = election_CHL.1.d
+	picture = GFX_report_event_chile
+	
+	trigger = {
+	    tag = CHL
+	    date > 2000.1.1
+		date < 2000.12.1
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = chl_election_2000 }
+	}
+	
+	immediate = {
+		set_country_flag = chl_election_2000	
+	}
+
+	is_triggered_only = yes
+	
+	option = {    #Ricardo Lagos
+		name = election_CHL.1.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = progressive
+			last_election = "2000.1.16"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Joaquín Lavín
+		name = election_CHL.1.b
+		set_politics = {
+			ruling_party = reactionary
+			last_election = "2000.1.16"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Gladys Marín
+		name = election_CHL.1.c
+		set_politics = {
+			ruling_party = communist	#Chile can elect a communist in the first month of the game, fucking based
+			last_election = "2000.1.16"
+			election_frequency = 60
+			elections_allowed = yes		#Elections continue under the democratically-elected PCCh
+		}
+		set_cosmetic_tag = CHL_nocomm	#Chile doesn't change name & flag if communists are democratically elected
+	}
+	option = {    #Other candidate
+		name = election_CHL.1.de
+	}
+}
+
+country_event = {  #2005 election
+	id = election_CHL.2
+	title = election_CHL.2.t
+	desc = election_CHL.1.d
+	picture = GFX_report_event_chile
+	
+	trigger = {
+	    tag = CHL
+	    date > 2005.1.1
+		date < 2005.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = chl_election_2005 }
+	}
+	
+	immediate = {
+		set_country_flag = chl_election_2005	
+	}
+
+	is_triggered_only = yes
+	
+	option = {    #Michelle Bachelet
+		name = election_CHL.2.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = social_democrat
+			last_election = "2005.1.15"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Sebastián Piñera
+		name = election_CHL.2.b
+		promote_character = CHL_sebastian_pinera
+		set_party_name = { ideology = conservative long_name = CHL_conservative_party_RN_long name = CHL_conservative_party_RN }
+		set_politics = {
+			ruling_party = conservative
+			last_election = "2005.1.15"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Joaquín Lavín
+		name = election_CHL.1.b
+		set_politics = {
+			ruling_party = reactionary
+			last_election = "2005.1.15"
+			election_frequency = 60
+			elections_allowed = yes
+		}
+	}
+	option = {    #Other candidate
+		name = election_CHL.1.de
+	}
+}
+
+country_event = {  #2010 election
+	id = election_CHL.3
+	title = election_CHL.3.t
+	desc = election_CHL.1.d
+	picture = GFX_report_event_chile
+	
+	trigger = {
+	    tag = CHL
+	    date > 2010.1.1
+		date < 2010.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = chl_election_2010 }
+	}
+	
+	immediate = {
+		set_country_flag = chl_election_2010	
+	}
+
+	is_triggered_only = yes
+
+	option = {    #	Sebastián Piñera
+		name = election_CHL.2.b
+		promote_character = CHL_sebastian_pinera
+		set_party_name = { ideology = conservative long_name = CHL_conservative_party_RN_long name = CHL_conservative_party_RN }
+		set_politics = {
+			ruling_party = conservative
+			last_election = "2005.1.15"
+			election_frequency = 46
+			elections_allowed = yes
+		}
+	}
+	option = {    #Eduardo Frei Ruiz-Tagle
+		name = election_CHL.3.a
+        ai_chance = { factor = 100 }
+		promote_character = CHL_eduardo_frei_ruiztagle
+		set_party_name = { ideology = conservative long_name = CHL_conservative_party_PDC_long name = CHL_conservative_party_PDC }
+		set_politics = {
+			ruling_party = conservative
+			last_election = "2005.1.15"
+			election_frequency = 46
+			elections_allowed = yes
+		}
+	}
+	option = {    #Marco Enríquez-Ominami
+		name = election_CHL.3.b
+		promote_character = CHL_marco_enriquez_ominami
+		set_party_name = { ideology = progressive long_name = CHL_progressive_party_PRO_long name = CHL_progressive_party_PRO }
+		set_politics = {
+			ruling_party = progressive
+			last_election = "2005.1.15"
+			election_frequency = 46
+			elections_allowed = yes
+		}
+	}
+	option = {    #Other candidate
+		name = election_CHL.1.de
+		set_politics = {
+			ruling_party = root
+			last_election = "2005.1.15"
+			election_frequency = 46
+			elections_allowed = yes
+		}
+	}
+}
+
+country_event = {  #2013 election
+	id = election_CHL.4
+	title = election_CHL.4.t
+	desc = election_CHL.1.d
+	picture = GFX_report_event_chile
+	
+	trigger = {
+	    tag = CHL
+	    date > 2013.1.1
+		date < 2013.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = chl_election_2013 }
+	}
+	
+	immediate = {
+		set_country_flag = chl_election_2013	
+	}
+
+	is_triggered_only = yes
+
+	option = {    #Michelle Bachelet
+		name = election_CHL.2.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = social_democrat
+			last_election = "2013.11.17"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+	}
+	option = {    #Evelyn Matthei
+		name = election_CHL.4.a
+        ai_chance = { factor = 100 }
+		promote_character = CHL_evelyn_matthei
+		set_politics = {
+			ruling_party = reactionary
+			last_election = "2013.11.17"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+	}
+	option = {    #Marco Enríquez-Ominami
+		name = election_CHL.3.b
+		promote_character = CHL_marco_enriquez_ominami
+		set_party_name = { ideology = progressive long_name = CHL_progressive_party_PRO_long name = CHL_progressive_party_PRO }
+		set_politics = {
+			ruling_party = progressive
+			last_election = "2013.11.17"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+	}
+	option = {    #Other candidate
+		name = election_CHL.1.de
+	}
+}
+
+country_event = {  #2017 election
+	id = election_CHL.5
+	title = election_CHL.5.t
+	desc = election_CHL.5.d
+	picture = GFX_report_event_chile
+	
+	trigger = {
+	    tag = CHL
+	    date > 2017.1.1
+		date < 2017.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = chl_election_2019 }
+	}
+	
+	immediate = {
+		set_country_flag = chl_election_2019	
+	}
+
+	is_triggered_only = yes
+	option = {    #	Sebastián Piñera
+		name = election_CHL.2.b
+		promote_character = CHL_sebastian_pinera
+		set_party_name = { ideology = conservative long_name = CHL_conservative_party_RN_long name = CHL_conservative_party_RN }
+		set_politics = {
+			ruling_party = conservative
+			last_election = "2017.11.19"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+	}
+	option = {    #Alejandro Guillier
+		name = election_CHL.5.a
+        ai_chance = { factor = 100 }
+		set_politics = {
+			ruling_party = social_liberal
+			last_election = "2017.11.19"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+	}
+	option = {    #Beatriz Sánchez
+		name = election_CHL.5.b
+		set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2017.11.19"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+	}
+	option = {    #Other candidate
+		name = election_CHL.1.de
+	}
+}
+
+country_event = {  #2021 election
+	id = election_CHL.6
+	title = election_CHL.6.t
+	desc = election_CHL.6.d
+	picture = GFX_report_event_chile
+	
+	trigger = {
+	    tag = CHL
+	    date > 2021.1.1
+		date < 2021.12.31
+        has_democratic_form_of_government = yes
+		not = { has_country_flag = chl_election_2019 }
+	}
+	
+	immediate = {
+		set_country_flag = chl_election_2019	
+	}
+
+	is_triggered_only = yes
+	option = {    #Gabriel Boric
+		name = election_CHL.6.a
+		promote_character = CHL_gabriel_boric
+		set_party_name = { ideology = democratic_socialist long_name = CHL_democratic_socialist_party_CS_long name = CHL_democratic_socialist_party_CS }
+		set_politics = {
+			ruling_party = democratic_socialist
+			last_election = "2021.11.21"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+	}
+	option = {    #José Antonio Kast
+		name = election_CHL.6.b
+        ai_chance = { factor = 100 }
+		promote_character = CHL_jose_antonio_kast
+		set_party_name = { ideology = reactionary long_name = CHL_reactionary_party_PLR_long name = CHL_reactionary_party_PLR }
+		set_politics = {
+			ruling_party = reactionary
+			last_election = "2021.11.21"
+			election_frequency = 48
+			elections_allowed = yes
+		}
+	}
+	option = {    #Other candidate
+		name = election_CHL.1.de
+	}
+}

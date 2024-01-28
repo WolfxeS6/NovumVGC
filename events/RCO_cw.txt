@@ -111,25 +111,61 @@ country_event = {
 			amount = 200
 			producer = RCO
 		}
-		add_equipment_to_stockpile = {
-			type = fighter_equipment_2
-			amount = 120
-			producer = RCO
+		if = {
+			limit = {
+				NOT = {has_dlc = "By Blood Alone"}
+			}
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_2
+				amount = 450
+				producer = SOV
+			}
 		}
-		add_equipment_to_stockpile = {
-			type = fighter_equipment_3
-			amount = 150
-			producer = RCO
+		else = {
+			add_equipment_to_stockpile = {
+				type = medium_plane_airframe_1
+				amount = 150
+				producer = SOV
+			}
+		}
+		if = {
+			limit = {
+				NOT = {has_dlc = "By Blood Alone"}
+			}
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_3
+				amount = 350
+				producer = SOV
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = medium_plane_airframe_2
+				amount = 150
+				producer = SOV
+			}
 		}
 		add_equipment_to_stockpile = {
 			type = cv_fighter_equipment_3
 			amount = 120
 			producer = RCO
 		}
-		add_equipment_to_stockpile = {
-			type = CAS_equipment_2
-			amount = 80
-			producer = RCO
+		if = {
+			limit = {
+				NOT = {has_dlc = "By Blood Alone"}
+			}
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_2
+				amount = 80
+				producer = SOV
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = small_plane_airframe_1
+				amount = 80
+				producer = SOV
+			}
 		}
 		hidden_effect = {
 			RCO = {
@@ -448,6 +484,244 @@ country_event = {
 	option = { # ok
 		name = RCO_event_cw.9.a
 		load_oob = "SOV_armed_rights"
+	}
+
+}
+country_event = { #change to orthadox
+	id = cw.10
+	title = cw.9.t
+	desc = cw.9.d
+	picture = GFX_russian_soldiers_1
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = RCO_event_cw.9.a
+		load_oob = "SOV_armed_rights"
+	}
+
+}
+######## delete militia
+country_event = { 
+	id = cw.11
+	title = cw.11.t
+	desc = cw.11.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # brigades
+		name = RCO_event_cw.11.a
+		delete_units = {
+    		division_template = "Motorized Militia Battalion"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Militia Batallion"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Militia Division"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Militia Batallion 2"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Militia Division 2"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Workers Militia Division"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Regular Motorized Division"
+    		disband = yes
+		}
+		hidden_effect = {
+			load_oob = "RCO_brigade_plan"
+			
+		}
+	}
+
+	option = { # divs
+		name = RCO_event_cw.11.b
+		delete_units = {
+    		division_template = "Motorized Militia Battalion"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Militia Batallion"
+    		disband = yes
+		}
+	delete_units = {
+    		division_template = "Regular Motorized Division"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Militia Division"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Militia Batallion 2"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Militia Division 2"
+    		disband = yes
+		}
+		delete_units = {
+    		division_template = "Workers Militia Division"
+    		disband = yes
+		}
+		hidden_effect = {
+			load_oob = "RCO_div_plan"
+			
+		}
+	}
+}
+
+country_event = { #ukrainian units
+	id = cw.12
+	title = cw.12.t
+	desc = cw.12.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { 
+		name = RCO_event_cw.12.a
+
+		hidden_effect = {
+			load_oob = "UCO_red_guard"
+			}
+add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 1500
+			producer = UKR
+		}
+		add_equipment_to_stockpile = {
+			type = train_equipment_1
+			amount = 30
+			producer = UKR
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_2
+			amount = 500
+			producer = UKR
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = 50
+			producer = UKR
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment_1
+			amount = 50
+			producer = UKR
+		}
+		add_equipment_to_stockpile = {
+			type = modern_tank_equipment_1
+			amount = 30
+			producer = UKR
+		}
+		add_political_power = 300
+	}
+	}
+
+country_event = { #sov asks blr to join civil war
+	id = cw.13
+	title = cw.13.t
+	desc = cw.13.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { 
+		name = RCO_event_cw.13.a #blr will join if AI and they didnt go communist
+		trigger = {
+            BLR = {
+				NOT = {has_completed_focus = BLR_unite_the_communist_parties}
+			}
+        }
+		 ai_chance = {
+            base = 100       
+        }
+
+		SOV = { add_to_faction = BLR }
+		BLR = {
+			add_to_war = {
+    						targeted_alliance = SOV
+    						enemy = RCO
+    						hostility_reason = asked_to_join
+						}
+	}
+RCO = {
+country_event = {
+					id = cw.15
+				}
+	}
+	}
+	option = { 
+		name = RCO_event_cw.13.b #no
+		 ai_chance = {
+            base = 0       
+        }
+		add_war_support = -0.1
+	}
+	}
+
+country_event = { #rco asks blr to join civil war
+	id = cw.14
+	title = cw.14.t
+	desc = cw.14.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { 
+		name = RCO_event_cw.14.a #blr will join if AI 
+		 ai_chance = {
+            base = 100       
+        }
+
+		RCO = { add_to_faction = BLR }
+		RCO = {
+            	puppet = {
+                target = BLR
+                end_wars = no
+            	}
+        	}
+		BLR = {
+			add_to_war = {
+    						targeted_alliance = RCO
+    						enemy = SOV
+    						hostility_reason = asked_to_join
+						}
+	}
+	}
+	option = { 
+		name = RCO_event_cw.14.b #no
+		 ai_chance = {
+            base = 0       
+        }
+		add_war_support = -0.2
+		add_stability = -0.25
+	}
+	} 
+
+country_event = { #event for rco that belarus joined
+	id = cw.15
+	title = cw.15.t
+	desc = cw.15.d
+	picture = GFX_russian_soldiers_1
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = RCO_event_cw.15.a
 	}
 
 }

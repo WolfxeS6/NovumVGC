@@ -49,7 +49,7 @@ focus_tree = {
 		cost = 10
 
 		ai_will_do = {
-			factor = 40
+			factor = 5
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -409,12 +409,6 @@ focus_tree = {
 				has_completed_focus = ISR_gaza_pullout
 				has_completed_focus = ISR_west_bank_pullout
 			}
-			NOT = {
-				OR = {
-					has_completed_focus = ISR_gaza_security_demands
-					has_completed_focus = ISR_west_bank_security_demands
-				}
-			}
 		}
 		prerequisite = { focus = ISR_diplomatic_focus }
 
@@ -472,7 +466,11 @@ focus_tree = {
 		cost = 10
 
 		ai_will_do = {
-			factor = 10
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 
 		prerequisite = { focus = ISR_peacefulCoexistence_focus }
@@ -496,7 +494,11 @@ focus_tree = {
 		cost = 10
 
 		ai_will_do = {
-			factor = 15
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 
 		prerequisite = { focus = ISR_two_state_solution }
@@ -608,7 +610,7 @@ focus_tree = {
 		cost = 10
 
 		ai_will_do = {
-			factor = 10
+			factor = 5
 			modifier = {
 				factor = 0
 				is_historical_focus_on = yes
@@ -784,7 +786,7 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 15
+			factor = 25
 		}
 	}
 	focus = {
@@ -802,11 +804,15 @@ focus_tree = {
 			811 = {
 				add_manpower = 6000
 			}
-			add_threat = 0.2
+			add_threat = 1
 		}
 
 		ai_will_do = {
-			factor = 15
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 	}
 	focus = {
@@ -972,7 +978,11 @@ focus_tree = {
 		}
 
 		ai_will_do = {
-			factor = 0
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
 		}
 	}
 	focus = {
@@ -981,7 +991,7 @@ focus_tree = {
 		y = 1
 		x = -1
 		cost = 5
-		available = {NOT = {has_government = social_democrat}}
+		#available = {NOT = {has_government = social_democrat}}
 		mutually_exclusive = {focus = ISR_west_bank_pullout}
 		relative_position_id = ISR_west_bank_dicussion
 		prerequisite = {focus = ISR_west_bank_dicussion}
@@ -990,11 +1000,11 @@ focus_tree = {
 			810 = {
 				add_manpower = 6000
 			}
-			add_threat = 0.2
+			add_threat = 1
 		}
 
 		ai_will_do = {
-			factor = 15
+			factor = 25
 		}
 	}
 	focus = {
@@ -1106,11 +1116,28 @@ focus_tree = {
 			add_stability = -0.05
 			add_war_support = -0.1
 			remove_ideas = ISR_palestine_unrest2
+			remove_ideas = idea_ISR_vanguard_of_judaism
 			hidden_effect = {
 				country_event = {
 					id = israel.33
 					days = 12
 				}
+			}
+			if = {
+				limit = {
+					PAL = {
+						is_puppet_of = ISR
+					}
+				}
+				annex_country = { target = PAL}
+			}
+			if = {
+				limit = {
+					HAM = {
+						is_puppet_of = ISR
+					}
+				}
+				annex_country = { target = HAM }
 			}
 		}
 
@@ -1136,6 +1163,7 @@ focus_tree = {
 				idea = ISR_rebuilding_our_land
 				days = 120
 			}
+			every_state = { limit = { is_core_of = PAL } add_core_of = ISR }
 		}
 
 		ai_will_do = {
@@ -1167,6 +1195,23 @@ focus_tree = {
 			}
 			add_stability = -0.1
 			add_war_support = -0.1
+			add_threat = 3
+			if = {
+				limit = {
+					PAL = {
+						is_puppet_of = ISR
+					}
+				}
+				annex_country = { target = PAL }
+			}
+			if = {
+				limit = {
+					HAM = {
+						is_puppet_of = ISR
+					}
+				}
+				annex_country = { target = HAM }
+			}
 		}
 
 		ai_will_do = {
@@ -1347,7 +1392,7 @@ focus_tree = {
 		id = ISR_foreign_investments
 		icon = GFX_goal_generic_intelligence_exchange
 		y = 1
-		x = 11
+		x = 13
 		cost = 5
 
 		relative_position_id = ISR_politics_start
@@ -1374,7 +1419,7 @@ focus_tree = {
 		id = ISR_high_tech_industry
 		icon = GFX_goal_generic_production2
 		y = 1
-		x = 1
+		x = 2
 		cost = 5
 
 		relative_position_id = ISR_foreign_investments
@@ -1397,8 +1442,8 @@ focus_tree = {
 	focus = {
 		id = ISR_focus_on_tourism
 		icon = GFX_focus_generic_long_range_aircraft
-		y = 2
-		x = 0
+		y = 1
+		x = -2
 		cost = 5
 
 		relative_position_id = ISR_foreign_investments
@@ -1415,7 +1460,7 @@ focus_tree = {
 		id = ISR_global_collaborations
 		icon = GFX_goal_generic_scientific_exchange
 		y = 1
-		x = 1
+		x = 2
 		cost = 5
 
 		relative_position_id = ISR_focus_on_tourism
@@ -1430,10 +1475,142 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = ISR_industrial_innovation
+		icon = GFX_goal_Generic_Civil_Industry_2
+		y = 1
+		x = -1
+		cost = 5
+
+		relative_position_id = ISR_global_collaborations
+		prerequisite = {focus = ISR_global_collaborations}
+	
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_indian_cooperation
+		icon = align_to_india
+		y = 1
+		x = -1
+		cost = 5
+
+		relative_position_id = ISR_industrial_innovation
+		prerequisite = {focus = ISR_industrial_innovation}
+	
+		completion_reward = {
+			RAJ = {
+				country_event = israel.36
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_improved_infra
+		icon = GFX_goal_Road_Construction
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_global_collaborations
+		prerequisite = {focus = ISR_global_collaborations}
+	
+		completion_reward = {
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_high_speed_rail
+		icon = GFX_goal_generic_construct_infrastructure
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_improved_infra
+		prerequisite = {focus = ISR_improved_infra}
+	
+		completion_reward = {
+			build_railway = {
+				level = 3
+				build_only_on_allied = yes
+				fallback = yes
+				path = { 13248 4206 13218 7176}
+				start_province  = 13248
+				target_province  = 7176
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_offshore_oil
+		icon = GFX_goal_Oil_Refinery
+		y = 1
+		x = -1
+		cost = 5
+
+		relative_position_id = ISR_improved_infra
+		prerequisite = {
+			focus = ISR_improved_infra
+			focus = ISR_industrial_innovation
+		}
+	
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 1
+				category = synth_resources
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
 		id = ISR_high_tech_military
 		icon = GFX_goal_generic_construct_mil_factory
 		y = 1
-		x = 1
+		x = 0
 		cost = 5
 
 		relative_position_id = ISR_high_tech_industry
@@ -1454,10 +1631,38 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ISR_venture_capital
-		icon = GFX_focus_mex_privatisation
+		id = ISR_fully_domestic_fighter
+		icon = plane_designs
 		y = 1
-		x = -1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_high_tech_military
+		prerequisite = {focus = ISR_high_tech_military}
+		prerequisite = {focus = ISR_focus_aircraft}
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				ahead_reduction = 1
+				bonus = 1.0
+				category = light_fighter
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 3
+				category = air_equipment
+			}
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_venture_capital
+		icon = POL_industrial_privatisation
+		y = 1
+		x = 0
 		cost = 5
 
 		relative_position_id = ISR_foreign_investments
@@ -1544,6 +1749,10 @@ focus_tree = {
 			add_stability = -0.05
 			fourth_estate_islamist_decrease = yes
 			add_ideas = idea_ISR_fighting_orthodox
+			swap_ideas = {
+				remove_idea = ISR_orthadox_situation
+				add_idea = idea_ISR_fighting_orthodox
+			}
 		}
 
 		ai_will_do = {
@@ -1560,7 +1769,10 @@ focus_tree = {
 		relative_position_id = ISR_ultraorthadox_crackdown_strong
 		prerequisite = {focus = ISR_ultraorthadox_crackdown_strong}
 		completion_reward = {
-			add_ideas = idea_ISR_removed_compensation_orthodox
+			swap_ideas = {
+				remove_idea = idea_ISR_fighting_orthodox
+				add_idea = idea_ISR_removed_compensation_orthodox
+			}
 		}
 
 		ai_will_do = {
@@ -1577,7 +1789,11 @@ focus_tree = {
 		relative_position_id = ISR_revoke_compensation_for_orthadox
 		prerequisite = {focus = ISR_revoke_compensation_for_orthadox}
 		completion_reward = {
-			add_ideas = idea_ISR_universal_conscription
+			swap_ideas = {
+				remove_idea = idea_ISR_removed_compensation_orthodox
+				add_idea = idea_ISR_universal_conscription
+			}
+			country_event = israel.18
 		}
 
 		ai_will_do = {
@@ -1595,7 +1811,11 @@ focus_tree = {
 		mutually_exclusive = {focus = ISR_ultraorthadox_crackdown_strong}
 		prerequisite = {focus = ISR_bibi focus = ISR_israeli_healthcare}
 		completion_reward = {
-			add_ideas = ISR_working_with_rabbis
+			swap_ideas = {
+				remove_idea = ISR_orthadox_situation
+				add_idea = ISR_working_with_rabbis
+			}
+			
 		}
 
 		ai_will_do = {
@@ -1632,7 +1852,10 @@ focus_tree = {
 		relative_position_id = ISR_integration_program
 		prerequisite = {focus = ISR_integration_program}
 		completion_reward = {
-			add_ideas = idea_ISR_secular_society
+			swap_ideas = {
+				remove_idea = ISR_orthadox_integration_program
+				add_idea = idea_ISR_secular_society
+			}
 		}
 
 		ai_will_do = {
@@ -1678,13 +1901,30 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ISR_encourage_talmudic_studies
-		icon = dangerous_laws
+		id = ISR_political_support_for_habad
+		icon = GFX_goal_generic_propaganda
 		y = 1
 		x = 0
 		cost = 5
 		relative_position_id = ISR_rabbinical_support
 		prerequisite = {focus = ISR_rabbinical_support}
+		completion_reward = {
+			fourth_estate_islamist_increase = yes
+			add_political_power = 80
+		}
+
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = ISR_encourage_talmudic_studies
+		icon = dangerous_laws
+		y = 1
+		x = 0
+		cost = 5
+		relative_position_id = ISR_political_support_for_habad
+		prerequisite = {focus = ISR_political_support_for_habad}
 		completion_reward = {
 			add_ideas = idea_ISR_talmund_study
 			fourth_estate_islamist_increase = yes
@@ -1796,7 +2036,7 @@ focus_tree = {
 		id = ISR_IDF_focus
 		icon = GFX_focus_goal_ISR_IDF
 		y = 0
-		x = 45
+		x = 49
 		cost = 5
 
 
@@ -1815,9 +2055,11 @@ focus_tree = {
 	focus = {
 		id = ISR_invest_in_the_IAF_focus
 		icon = GFX_focus_goal_ISR_IAF
-		x = 41
 		y = 1
-		cost = 10
+		x = -4
+		cost = 5
+
+		relative_position_id = ISR_IDF_focus
 
 		prerequisite = { focus = ISR_IDF_focus }
 
@@ -1832,7 +2074,7 @@ focus_tree = {
 	focus = {
 		id = ISR_Israeli_Pilot_Training_focus
 		icon = GFX_goal_expand_the_luftwaffe
-		x = 0
+		x = -2
 		y = 1
 		cost = 12
 
@@ -1847,14 +2089,123 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ISR_expand_The_Israeli_Airbases_focus
-		icon = GFX_goal_expand_the_luftwaffe
-		x = -1
+		id = ISR_arrow_defence
+		icon = GFX_focus_generic_air_defense
 		y = 1
-		cost = 12
-
+		x = 1
+		cost = 5
+		mutually_exclusive = {focus = ISR_focus_aircraft}
 		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
 		relative_position_id = ISR_Israeli_Pilot_Training_focus
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				ahead_reduction = 2
+				bonus = 1.0
+				category = cat_anti_air
+			}
+		}
+	}
+	focus = {
+		id = ISR_radar
+		icon = radar
+		y = 1
+		x = 1
+		cost = 5
+		prerequisite = { focus = ISR_arrow_defence }
+		relative_position_id = ISR_arrow_defence
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				ahead_reduction = 2
+				bonus = 1.0
+				category = radar_tech
+			}
+		}
+	}
+	focus = {
+		id = ISR_three_layer_defence
+		icon = GFX_focus_generic_air_defense
+		y = 1
+		x = 0
+		cost = 5
+		prerequisite = { focus = ISR_radar }
+		relative_position_id = ISR_radar
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = anti_air_building
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = anti_air_building
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_ideas = ISR_three_layers_idea
+		}
+	}
+	focus = {
+		id = ISR_focus_aircraft
+		icon = GFX_goal_generic_air_doctrine
+		y = 1
+		x = -1
+		cost = 5
+		mutually_exclusive = {focus = ISR_arrow_defence}
+		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
+		relative_position_id = ISR_Israeli_Pilot_Training_focus
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.4
+				uses = 3
+				category = air_doctrine
+			}
+		}
+	}
+	focus = {
+		id = ISR_expand_The_Israeli_Airbases_focus
+		icon = GFX_USA_West_Coast_Air_Bases
+		y = 1
+		x = 1
+		cost = 5
+
+		prerequisite = { focus = ISR_focus_aircraft focus = ISR_arrow_defence}
+		relative_position_id = ISR_focus_aircraft
 		ai_will_do = {
 			factor = 10
 		}
@@ -1878,7 +2229,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ISR_build_Airbases_In_the_Negev_focus
-		icon = GFX_goal_expand_the_luftwaffe
+		icon = GFX_USA_West_Coast_Air_Bases
 		x = 0
 		y = 1
 		cost = 10
@@ -1900,14 +2251,141 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ISR_Israeli_Precise_Bombing_Assasinations
-		icon = fighter2
+		id = ISR_have_Better_Drones_focus
+		icon = bomber
+		x = 3
+		y = 1
+		cost = 10
+
+		prerequisite = { focus = ISR_invest_in_the_IAF_focus }
+		prerequisite = { focus = ISR_invest_in_infantry_corps_focus }
+		relative_position_id = ISR_invest_in_the_IAF_focus
+		ai_will_do = {
+			factor = 10
+		}
+
+		available = {
+			OR = {
+				date > 2004.6.1
+				threat>0.2
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = drone_bonus
+				bonus = 0.45
+				uses = 2
+				category = drone_tech
+			}
+		}
+	}
+	focus = {
+		id = ISR_have_World_Leading_Drones_focus
+		icon = drone
+		x = 0
+		y = 1
+		cost = 10
+
+		prerequisite = { focus = ISR_have_Better_Drones_focus }
+		relative_position_id = ISR_have_Better_Drones_focus
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			air_experience = 35
+			add_tech_bonus = {
+				name = drone_bonus
+				bonus = 0.3
+				uses = 1
+				category = tactical_bomber
+			}
+			add_timed_idea = {
+				idea = idea_ISR_drone_creating_efficiency
+				days = 730
+			}
+		}
+	}
+	focus = {
+		id = ISR_drone_exports
+		icon = GFX_focus_arms_trade_deals
+		x = -1
+		y = 1
+		cost = 8
+
+		prerequisite = { focus = ISR_have_World_Leading_Drones_focus }
+		relative_position_id = ISR_have_World_Leading_Drones_focus
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_ideas = ISR_drone_export_industry
+		}
+	}
+	focus = {
+		id = ISR_western_air_defence_sales
+		icon = bomber
+		x = 0
+		y = 1
+		cost = 8
+		available = {
+			any_country = {
+				has_opinion = { target = ISR value > 70 }
+			}
+		}
+		prerequisite = { focus = ISR_drone_exports }
+		prerequisite = { focus = ISR_radar }
+		relative_position_id = ISR_drone_exports
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			every_country = {
+				limit = {
+					has_opinion = { target = ISR value > 70 }
+				}
+				add_tech_bonus = {
+					name = tech_bonus
+					ahead_reduction = 1
+					bonus = 1.0
+					category = cat_anti_air
+				}
+				ISR = {
+					add_political_power = 25
+				}
+			}
+		}
+	}
+	focus = {
+		id = ISR_drone_swarms
+		icon = bomber
 		x = 1
 		y = 1
-		cost = 15
+		cost = 8
 
-		prerequisite = { focus = ISR_Israeli_Pilot_Training_focus }
-		relative_position_id = ISR_Israeli_Pilot_Training_focus
+		prerequisite = { focus = ISR_have_World_Leading_Drones_focus }
+		relative_position_id = ISR_have_World_Leading_Drones_focus
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = drone_bonus
+				ahead_reduction = 1
+				bonus = 1.0
+				category = drone_tech
+			}
+		}
+	}
+	focus = {
+		id = ISR_Israeli_Precise_Bombing_Assasinations
+		icon = bombs
+		y = 1
+		x = 1
+		cost = 5
+
+		prerequisite = { focus = ISR_build_Airbases_In_the_Negev_focus }
+		relative_position_id = ISR_build_Airbases_In_the_Negev_focus
 		available = {
 			date>2002.2.1
 		}
@@ -1928,64 +2406,28 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = ISR_have_Better_Drones_focus
-		icon = bomber
-		x = 0
+		id = ISR_electronic_warfare
+		icon = GFX_focus_generic_energy
 		y = 1
-		cost = 10
+		x = -1
+		cost = 5
 
-		prerequisite = { focus = ISR_Israeli_Precise_Bombing_Assasinations }
-		relative_position_id = ISR_Israeli_Precise_Bombing_Assasinations
-		ai_will_do = {
-			factor = 10
-		}
-
+		prerequisite = { focus = ISR_build_Airbases_In_the_Negev_focus }
+		relative_position_id = ISR_build_Airbases_In_the_Negev_focus
 		available = {
-			OR = {
-				date > 2004.6.1
-				threat>0.2
-			}
+			date>2002.2.1
 		}
 
-		completion_reward = {
-			add_tech_bonus = {
-				name = drone_bonus
-				bonus = 0.25
-				uses = 2
-				category = tactical_bomber
-			}
-		}
-	}
-	focus = {
-		id = ISR_have_World_Leading_Drones_focus
-		icon = bomber
-		x = 0
-		y = 1
-		cost = 30
-
-		prerequisite = { focus = ISR_have_Better_Drones_focus }
-		relative_position_id = ISR_have_Better_Drones_focus
 		ai_will_do = {
-			factor = 10
+			factor = 15
 		}
+
 		completion_reward = {
-			air_experience=100
 			add_tech_bonus = {
-				name = drone_bonus
-				bonus = 0.3
-				uses = 1
-				category = tactical_bomber
-			}
-			454 = {
-				add_building_construction = {
-					type = air_base
-					level = 3
-					instant_build = yes
-				}
-			}
-			add_timed_idea = {
-				idea = idea_ISR_drone_creating_efficiency
-				days = 730
+				name = airDoctorine_bonus
+				bonus = 0.35
+				uses = 2
+				category = signal_company_tech
 			}
 		}
 	}
@@ -1994,13 +2436,11 @@ focus_tree = {
 	focus ={
 		id = ISR_Invest_In_The_Isreali_Navy_focus
 		icon = GFX_goal_generic_build_navy
-		x = 45
 		y = 1
-		cost = 10
+		x = 17
+		cost = 5
 
-		ai_will_do = {
-			factor = 10
-		}
+		relative_position_id = ISR_IDF_focus
 
 		prerequisite = { focus = ISR_IDF_focus }
 
@@ -2019,9 +2459,11 @@ focus_tree = {
 	focus= {
 		id = ISR_prepare_For_Extanding_The_Navy_focus
 		icon = GFX_goal_generic_build_navy
-		cost = 20
-		x = 45
-		y = 2
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_Invest_In_The_Isreali_Navy_focus
 		prerequisite = { focus = ISR_Invest_In_The_Isreali_Navy_focus }
 
 		ai_will_do = {
@@ -2042,9 +2484,12 @@ focus_tree = {
 	focus = {
 		id = ISR_expand_Israeli_Naval_Inf_focus
 		icon = GFX_goal_generic_amphibious_assault
-		cost = 10
-		x = 44
-		y = 3
+		y = 1
+		x = -1
+		cost = 5
+
+		relative_position_id = ISR_prepare_For_Extanding_The_Navy_focus
+
 		prerequisite = { focus = ISR_prepare_For_Extanding_The_Navy_focus }
 
 		ai_will_do = {
@@ -2069,9 +2514,11 @@ focus_tree = {
 	focus = {
 		id = ISR_shayetet13_focus
 		icon = GFX_goal_generic_axis_build_infantry
-		cost = 20
-		x = 46
-		y = 3
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_prepare_For_Extanding_The_Navy_focus
 
 		prerequisite = { focus = ISR_prepare_For_Extanding_The_Navy_focus }
 
@@ -2093,9 +2540,11 @@ focus_tree = {
 	focus = {
 		id = ISR_extand_The_GER_AGR_focus
 		icon = GFX_goal_generic_intelligence_exchange
-		cost = 15
-		x = 48
-		y = 3
+		y = 1
+		x = 3
+		cost = 5
+
+		relative_position_id = ISR_prepare_For_Extanding_The_Navy_focus
 
 		prerequisite = { focus = ISR_prepare_For_Extanding_The_Navy_focus }
 
@@ -2114,9 +2563,11 @@ focus_tree = {
 	focus = {
 		id = ISR_develop_Israeli_Ship_Building_focus
 		icon = GFX_goal_generic_construct_naval_dockyard
-		cost = 20
-		x = 44
-		y = 4
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_expand_Israeli_Naval_Inf_focus
 
 		prerequisite = { focus = ISR_expand_Israeli_Naval_Inf_focus  }
 
@@ -2143,9 +2594,11 @@ focus_tree = {
 	focus = {
 		id = ISR_learn_Naval_tech_focus
 		icon = GFX_goal_generic_navy_doctrines_tactics
-		cost = 10
-		x = 48
-		y = 4
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_extand_The_GER_AGR_focus
 
 		prerequisite = { focus = ISR_extand_The_GER_AGR_focus }
 
@@ -2164,9 +2617,12 @@ focus_tree = {
 	focus = {
 		id = ISR_ship_Building_Efficiency_focus
 		icon = GFX_goal_generic_navy_battleship
-		cost = 30
-		x = 44
-		y = 5
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_develop_Israeli_Ship_Building_focus
+
 
 		prerequisite = { focus = ISR_develop_Israeli_Ship_Building_focus }
 
@@ -2192,8 +2648,10 @@ focus_tree = {
 		id = ISR_invest_in_infantry_corps_focus
 		icon = GFX_focus_goal_ISR_army_corps
 		y = 1
-		x= 55
-		cost = 10
+		x = 8
+		cost = 5
+
+		relative_position_id = ISR_IDF_focus
 
 		ai_will_do = {
 			factor = 20
@@ -2205,29 +2663,16 @@ focus_tree = {
 			army_experience = 20
 		}
 	}
-	focus = {
-		id = ISR_support_Our_Sons_focus
-		icon = GFX_focus_goal_ISR_Support_Sons
-		y= 3
-		x= 50
-		cost = 15
-
-		ai_will_do = {
-			factor = 15
-		}
-
-		prerequisite = { focus = ISR_invest_in_infantry_corps_focus}
-
-		completion_reward = {
-			add_ideas = idea_ISR_supported_the_troops
-		}
-	}
+	
 	focus = {
 		id = ISR_tighten_jerusalem_defence_focus
 		icon = GFX_goal_generic_fortify_city
-		y=2
-		x= 52
-		cost = 10
+		y = 1
+		x = 5
+		cost = 5
+
+		relative_position_id = ISR_invest_in_infantry_corps_focus
+
 
 		ai_will_do = {
 			factor = 10
@@ -2263,9 +2708,14 @@ focus_tree = {
 	focus = {
 		id = ISR_tighten_Golan_defence_focus
 		icon = GFX_focus_generic_air_defense
-		y=3
-		x= 52
-		cost = 10
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_tighten_jerusalem_defence_focus
+		bypass = {
+			NOT = {881 = {is_controlled_by = ROOT}}
+		}
 
 		ai_will_do = {
 			factor = 10
@@ -2290,9 +2740,13 @@ focus_tree = {
 	focus = {
 		id = ISR_tighten_Negev_defence_focus
 		icon = GFX_focus_generic_air_defense
-		y=4
-		x= 52
-		cost = 20
+		y = 1
+		x = 0
+		cost = 5
+		bypass = {
+			NOT = {812 = {is_controlled_by = ROOT}}
+		}
+		relative_position_id = ISR_tighten_Golan_defence_focus
 
 		ai_will_do = {
 			factor = 10
@@ -2335,9 +2789,12 @@ focus_tree = {
 	focus = {
 		id = ISR_guard_the_skies_focus
 		icon = GFX_goal_generic_army_artillery
-		x = 51
-		y = 5
-		cost = 20
+		y = 1
+		x = -1
+		cost = 5
+
+		relative_position_id = ISR_tighten_Negev_defence_focus
+
 		ai_will_do = {
 			factor = 10
 		}
@@ -2350,7 +2807,7 @@ focus_tree = {
 				name = aa_tech
 				bonus = 0.5
 				uses = 1
-				category = artillery
+				category = cat_anti_air
 			}
 			add_timed_idea = {
 				idea = idea_ISR_AA_creating_efficiency
@@ -2361,9 +2818,11 @@ focus_tree = {
 	focus = {
 		id = ISR_guard_israeli_cities_sky_focus
 		icon = GFX_goal_generic_defence
-		x = 53
-		y = 5
-		cost = 16
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_tighten_Negev_defence_focus
 
 		prerequisite = { focus = ISR_tighten_Negev_defence_focus }
 		mutually_exclusive = { focus = ISR_guard_the_skies_focus }
@@ -2405,64 +2864,16 @@ focus_tree = {
 			}
 		}
 	}
-	focus = {
-		id = ISR_israeli_army_draft
-		icon = GFX_goal_generic_major_war
-		x = 58
-		y = 2
-		cost = 8
 
-		prerequisite = { focus = ISR_invest_in_infantry_corps_focus}
-
-		ai_will_do = {
-			factor = 10
-		}
-
-		available = {
-			OR = {
-				threat > 0.65
-				has_war = yes
-			}
-		}
-
-		bypass = {
-			OR = {
-
-				has_idea = all_adults_serve
-				has_idea = service_by_requirement
-				has_idea = scraping_the_barrel
-			}
-		}
-
-		completion_reward = {
-			if = {
-				limit = {
-					OR = {
-						has_idea = volunteer_only
-						has_idea = disarmed_nation
-						has_idea = extensive_conscription
-						has_idea = limited_conscription
-					}
-				}
-				add_ideas = service_by_requirement
-			}
-			if = {
-				limit = {
-					NOT = { has_idea = volunteer_only }
-					NOT = { has_idea = disarmed_nation }
-					NOT = { has_idea = extensive_conscription }
-					NOT = { has_idea = limited_conscription }
-				}
-				army_experience = 50
-			}
-		}
-	}
 	focus = {
 		id = ISR_army_Exercise_I_focus
-		icon = GFX_goal_generic_axis_build_infantry
-		cost = 10
-		x = 55
-		y = 3
+		icon = GFX_goal_generic_position_armies
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_obligatory_conscription_focus
+
 
 		prerequisite = {
 			focus = ISR_obligatory_conscription_focus
@@ -2479,9 +2890,12 @@ focus_tree = {
 	focus = {
 		id = ISR_army_Exercise_II_focus
 		icon = GFX_focus_chi_army_reform
-		cost = 10
-		x = 55
-		y = 4
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_army_Exercise_I_focus
+
 
 		prerequisite = { focus = ISR_army_Exercise_I_focus }
 
@@ -2494,15 +2908,47 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			army_experience=15
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+	focus = {
+		id = ISR_army_intelligence
+		icon = GFX_focus_chi_army_reform
+		y = 1
+		x = 2
+		cost = 5
+
+		relative_position_id = ISR_army_Exercise_I_focus
+
+
+		prerequisite = { focus = ISR_army_Exercise_I_focus }
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		available = {
+			date > 2001.1.1
+		}
+
+		completion_reward = {
+			
 		}
 	}
 	focus = {
 		id = ISR_army_Exercise_III_focus
 		icon = GFX_goal_generic_special_forces
-		cost = 15
-		x = 55
-		y = 5
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_army_Exercise_II_focus
+
 
 		prerequisite = { focus = ISR_army_Exercise_II_focus }
 
@@ -2528,9 +2974,12 @@ focus_tree = {
 	focus = {
 		id = ISR_obligatory_conscription_focus
 		icon = GFX_focus_generic_little_entente
-		x = 54
-		y = 2
-		cost = 20
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_invest_in_infantry_corps_focus
+
 
 		ai_will_do = {
 			factor = 10
@@ -2546,9 +2995,12 @@ focus_tree = {
 	focus = {
 		id = ISR_expert_army_conscription_focus
 		icon = GFX_focus_generic_military_mission
-		x = 56
-		y = 2
-		cost = 20
+		y = 1
+		x = 2
+		cost = 5
+
+		relative_position_id = ISR_invest_in_infantry_corps_focus
+
 
 		ai_will_do = {
 			factor = 10
@@ -2564,10 +3016,13 @@ focus_tree = {
 	focus = {
 		id = ISR_israeli_Army_Tactics_School_focus
 		icon = GFX_focus_generic_military_academy
-		x = 58
-		y = 3
-		cost = 10
-		prerequisite = { focus = ISR_israeli_army_draft }
+		y = 1
+		x = -3
+		cost = 5
+
+		relative_position_id = ISR_invest_in_infantry_corps_focus
+
+		prerequisite = { focus = ISR_invest_in_infantry_corps_focus}
 
 		ai_will_do = {
 			factor = 10
@@ -2585,9 +3040,11 @@ focus_tree = {
 	focus = {
 		id = ISR_infantry_focus_focus
 		icon = GFX_goal_generic_small_arms
-		x = 57
-		y = 4
-		cost = 15
+		y = 1
+		x = -3
+		cost = 5
+
+		relative_position_id = ISR_israeli_Army_Tactics_School_focus
 
 		prerequisite = { focus = ISR_israeli_Army_Tactics_School_focus  }
 
@@ -2609,11 +3066,136 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = ISR_artillery_focus
+		icon = GFX_goal_generic_army_artillery
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_infantry_focus_focus
+
+
+		ai_will_do = {
+			factor = 15
+		}
+
+		prerequisite = { focus = ISR_infantry_focus_focus}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = support_folder
+				bonus = 0.45
+				uses = 2
+				category = artillery
+			}
+		}
+	}
+	focus = {
+		id = ISR_support_Our_Sons_focus
+		icon = GFX_goal_Army_Logistics
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_artillery_focus
+
+
+		ai_will_do = {
+			factor = 15
+		}
+
+		prerequisite = { focus = ISR_artillery_focus}
+
+		completion_reward = {
+			add_ideas = idea_ISR_supported_the_troops
+		}
+	}
+	focus = {
+		id = ISR_field_hospitals
+		icon = GFX_focus_generic_field_hostpital
+		y = 1
+		x = 1
+		cost = 5
+
+		relative_position_id = ISR_support_Our_Sons_focus
+
+
+		ai_will_do = {
+			factor = 15
+		}
+
+		prerequisite = { focus = ISR_support_Our_Sons_focus}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = support_folder
+				bonus = 0.45
+				uses = 2
+				category = hospital_tech
+			}
+		}
+	}
+	focus = {
+		id = ISR_urban_warfare
+		icon = POL_watch_the_streets
+		y = 1
+		x = -1
+		cost = 5
+
+		relative_position_id = ISR_support_Our_Sons_focus
+
+
+		ai_will_do = {
+			factor = 15
+		}
+
+		prerequisite = { focus = ISR_support_Our_Sons_focus}
+
+		completion_reward = {
+			set_technology = { urban_warfare_secret_tech = 1 }
+			custom_effect_tooltip = POL_urban_warfare_tactics_tp
+		}
+	}
+	focus = {
 		id = ISR_mech_focus_focus
 		icon = GFX_goal_generic_army_motorized
-		x = 59
-		y = 4
-		cost = 15
+		y = 1
+		x = 2
+		cost = 5
+
+		relative_position_id = ISR_israeli_Army_Tactics_School_focus
+		mutually_exclusive = {
+			focus = ISR_light_mech_focus_focus
+		}
+		prerequisite = { focus = ISR_israeli_Army_Tactics_School_focus  }
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = cat_mechanized_equipment_tech_bonus
+				bonus = 0.25
+				uses = 2
+				category = cat_light_armor
+			}
+			add_timed_idea = {
+				idea = idea_ISR_mech_creating_efficiency
+				days = 200
+			}
+		}
+	}
+	focus = {
+		id = ISR_light_mech_focus_focus
+		icon = infantry_japan
+		y = 1
+		x = 0
+		cost = 5
+		mutually_exclusive = {
+			focus = ISR_mech_focus_focus
+		}
+		relative_position_id = ISR_israeli_Army_Tactics_School_focus
 
 		prerequisite = { focus = ISR_israeli_Army_Tactics_School_focus  }
 
@@ -2626,10 +3208,10 @@ focus_tree = {
 				name = cat_mechanized_equipment_tech_bonus
 				bonus = 0.25
 				uses = 2
-				category = cat_mechanized_equipment
+				category = cat_light_mechanized_equipment
 			}
 			add_timed_idea = {
-				idea = idea_ISR_mech_creating_efficiency
+				idea = idea_ISR_light_mech_creating_efficiency
 				days = 200
 			}
 		}
@@ -2637,13 +3219,17 @@ focus_tree = {
 	focus = {
 		id = ISR_israeli_armour_effort_focus
 		icon = GFX_focus_generic_army_tanks2
-		x = 58
-		y = 5
-		cost = 15
+		y = 1
+		x = 3
+		cost = 5
+
+		relative_position_id = ISR_infantry_focus_focus
 
 		prerequisite = {
 			focus = ISR_mech_focus_focus
+			focus = ISR_light_mech_focus_focus
 			focus = ISR_infantry_focus_focus
+
 		}
 
 		ai_will_do = {
@@ -2657,6 +3243,52 @@ focus_tree = {
 				uses = 3
 				category = armor
 			}
+		}
+	}
+	focus = {
+		id = ISR_modular_tanks
+		icon = tank_prototype
+		y = 1
+		x = 0
+		cost = 5
+
+		relative_position_id = ISR_israeli_armour_effort_focus
+
+		prerequisite = {
+			focus = ISR_israeli_armour_effort_focus
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_ideas = ISR_modular_tanks_idea
+		}
+	}
+	focus = {
+		id = ISR_iron_fist
+		icon = GFX_goal_generic_army_tanks
+		y = 1
+		x = 2
+		cost = 5
+
+		relative_position_id = ISR_israeli_armour_effort_focus
+
+		prerequisite = {
+			focus = ISR_israeli_armour_effort_focus
+		}
+		prerequisite = {
+			focus = ISR_mech_focus_focus
+			focus = ISR_light_mech_focus_focus
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_ideas = ISR_iron_fist_idea
 		}
 	}
 }

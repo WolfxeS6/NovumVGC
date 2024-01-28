@@ -1,0 +1,120 @@
+add_namespace = timor
+add_namespace = timor_news
+
+country_event = {			#East-Timor independence
+	id = timor.1
+	title = timor.1.t
+	desc = timor.1.d
+	#picture = GFX_report_event_timor
+	
+	trigger = {
+		tag = ETI
+		date > 2002.1.31
+		date < 2002.3.4
+	}
+	fire_only_once = yes
+	option = {
+		name = timor.1.a
+		ai_chance = {
+		    factor = 100
+	    }
+		retire_character = ETI_sergio_vieira_mello
+		set_party_name = { ideology = social_liberal long_name = ETI_social_liberal_party_PD_long name = ETI_social_liberal_party_PD }
+		set_politics = {	
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_popularity = { 
+			ideology = social_democrat 
+			popularity = 0.2
+		}
+		add_popularity = { 
+			ideology = social_liberal 
+			popularity = -0.2
+		}
+	}
+}
+
+country_event = {			#East-Timor declares independence ##Event for Indonesia
+	id = timor.2
+	title = timor.2.t
+	desc = timor.2.d
+	#picture = GFX_report_event_timor
+	
+	is_triggered_only = yes
+
+	option = {
+		name = timor.2.a
+		ai_chance = {
+			base = 85
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+		
+	}
+	option = {
+		name = timor.2.a
+		ai_chance = {
+			base = 15
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		declare_war_on= { 
+			target = ETI
+			type = annex_everything 
+		}
+	}
+}
+
+news_event = {			##East Timor Independence News event
+	id = timor_news.1
+	title = timor_news.1.t
+	desc = timor_news.1.d
+	picture = GFX_news_timor_independence
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		trigger ={
+			NOT = {
+				TAG = INS
+			}
+		}
+		name = timor_news.1.a
+	}
+	option = {
+		trigger ={
+			TAG = INS
+		}
+		name = timor_news.1.b
+	}
+}
+news_event = {			##East Timorese War
+	id = timor_news.2
+	title = timor_news.2.t
+	desc = timor_news.2.d
+	picture = GFX_news_timor_independence
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		trigger ={
+			NOT = {
+				TAG = INS
+			}
+		}
+		name = timor_news.2.a
+	}
+	option = {
+		trigger ={
+			TAG = INS
+		}
+		name = timor_news.2.b
+	}
+}

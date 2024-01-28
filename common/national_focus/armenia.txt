@@ -72,7 +72,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_agricultural_reform
-		icon = agrarian_reform
+		icon = GFX_goal_Farm_Production
 		x = 4
 		y = 1
 		cost = 6
@@ -135,7 +135,7 @@ focus_tree = {
 
 		completion_reward = {
 			230 = {
-				add_extra_state_shared_building_slots = 3
+				add_extra_state_shared_building_slots = 2
 			}
 		}
 
@@ -145,7 +145,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_invest_in_mining #gold
-		icon = GFX_goal_Coal_Mine
+		icon = GFX_goal_Generic_Exploit_Mine
 		x = 1
 		y = 1
 		cost = 6
@@ -179,7 +179,6 @@ focus_tree = {
 		x = 3
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_infrastructure_boom
 			focus = ARM_earthquake_rebuilding
@@ -188,6 +187,7 @@ focus_tree = {
 
 
 		completion_reward = {
+			add_ideas = ARM_tourism_idea
 		}
 
 		ai_will_do = {
@@ -196,7 +196,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_invest_in_local_infra
-		icon = GFX_goal_Coal_Mine
+		icon = GFX_DEN_Public_Transportation
 		x = 1
 		y = 1
 		cost = 6
@@ -227,7 +227,6 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_invest_in_mining
 		}
@@ -241,6 +240,16 @@ focus_tree = {
 			focus = ARM_tourism_over_mining
 		}
 		completion_reward = {
+			230 = {
+				add_resource = {
+					type = steel
+					amount = 5
+				}
+			}
+			swap_ideas = {
+				remove_idea = ARM_tourism_idea
+				add_idea = ARM_tourism_idea_b1
+			}
 		}
 
 		ai_will_do = {
@@ -253,7 +262,6 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_tourism
 		}
@@ -267,6 +275,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			swap_ideas = {
+				remove_idea = ARM_tourism_idea
+				add_idea = ARM_tourism_idea_2
+			}
 		}
 
 		ai_will_do = {
@@ -275,11 +287,10 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_electric_privatisation
-		icon = GFX_goal_Hydropower
+		icon = GFX_focus_generic_energy
 		x = -1
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_infrastructure_boom
 		}
@@ -291,6 +302,24 @@ focus_tree = {
 
 
 		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = ARM_independent_industrial_base
+					has_dynamic_modifier = {modifier = ARM_corruption_modifier}
+				}
+				add_political_power = -100
+				add_ideas = ARM_electric_privatisation_good
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = ARM_independent_industrial_base
+				}
+				add_ideas = ARM_electric_privatisation_good
+			}
+			else = {
+				add_political_power = 120
+				add_ideas = ARM_electric_privatisation_bad
+			}
 		}
 
 		ai_will_do = {
@@ -313,6 +342,13 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = ARM_constructing_thermal_reactor
+			hidden_effect = {
+				country_event = {
+					id = ARM.7
+					days = 180
+					random_days = 10
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -344,6 +380,13 @@ focus_tree = {
 		}
 		completion_reward = {
 			custom_effect_tooltip = ARM_constructing_nuclear_reactor
+			hidden_effect = {
+				country_event = {
+					id = ARM.6
+					days = 360
+					random_days = 10
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -388,6 +431,8 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_to_variable = {ARM_research_speed_factor = -0.03 }
+			add_to_variable = {ARM_production_speed_industrial_complex_factor = -0.05 }
 		}
 
 		ai_will_do = {
@@ -553,7 +598,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_end_subsidies
-		icon = GFX_goal_Oil_Excavation
+		icon = GFX_goal_Invest_Industry
 		x = 0
 		y = 1
 		cost = 4
@@ -665,7 +710,7 @@ focus_tree = {
 	#international
 	focus = {
 		id = ARM_beyond_our_borders
-		icon = construction2
+		icon = GFX_goal_Diplomacy
 		x = 30
 		y = 0
 		cost = 6
@@ -745,9 +790,6 @@ focus_tree = {
 		cost = 6
 		available = {
 			NOT = {
-				has_idea = ARM_corruption
-			}
-			NOT = {
 				has_dynamic_modifier = {modifier = ARM_corruption_modifier}
 			}
 		}
@@ -788,9 +830,7 @@ focus_tree = {
 		y = 1
 		cost = 6
 		bypass = {
-			NOT = {
-				has_idea = ARM_corruption
-			}
+			NOT = {has_dynamic_modifier = {modifier = ARM_corruption_modifier}}
 		}
 		prerequisite = {
 			focus = ARM_european_cooperation
@@ -1230,6 +1270,7 @@ focus_tree = {
 				modifier = aided_industry
 			}
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_to_variable = {ARM_production_speed_industrial_complex_factor = -0.1 }
 			ARM_worsen_corruption = yes
 			230 = {
 				add_extra_state_shared_building_slots = 1
@@ -1363,10 +1404,7 @@ focus_tree = {
 		icon = BLR_belarusian_soldier
 		x = -4
 		y = 1
-		cost = 6
-		allow_branch = {
-			always = no
-		}
+		cost = 8
 		prerequisite = {
 			focus = ARM_russian_proud
 		}
@@ -1378,6 +1416,14 @@ focus_tree = {
 
 
 		completion_reward = {
+			230 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1399,27 +1445,6 @@ focus_tree = {
 		}
 		bypass = {
 			has_idea = eeu_customs_union
-		}
-
-		relative_position_id = ARM_eeu_investments
-
-
-		completion_reward = {
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = ARM_central_asian_investments
-		icon = BLR_belarusian_soldier
-		x = -2
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = ARM_eeu_investments
 		}
 
 		relative_position_id = ARM_eeu_investments
@@ -1559,7 +1584,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_support_kabbah
-		icon = GFX_focus_generic_support_the_left_right
+		icon = GFX_focus_arms_trade_deals
 		x = -2
 		y = 1
 		cost = 6
@@ -1611,6 +1636,14 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = ARM_sarksian_corruption_tt
 			set_country_flag =  ARM_sarksian_corruption_enabled
+			hidden_effect = {
+				set_power_balance = {
+					id = ARM_power_balance
+					left_side = ARM_mafia_faction # will keep the last set side if not specified
+					right_side = ARM_sark_faction # will keep the last set side if not specified
+					set_value = -0.4
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1650,16 +1683,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 50
-			custom_effect_tooltip = ARM_secure_our_strength_tt
-			if = {
-				limit = {
-					has_completed_focus = ARM_sarksian_struggle
-				}
-				armenian_add_sark_control = yes
-			}
-			else = {
-				armenian_add_koch_control = yes
-			}
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -1721,9 +1745,6 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6
-		bypass = {
-			always = yes
-		}
 		prerequisite = {
 			focus = ARM_thaw_turkish_relations
 		}
@@ -1751,7 +1772,7 @@ focus_tree = {
 		relative_position_id = ARM_thaw_turkish_relations
 
 		completion_reward = {
-
+			custom_effect_tooltip = ARM_russian_agreements_tt
 		}
 
 		ai_will_do = {
@@ -1774,7 +1795,7 @@ focus_tree = {
 		relative_position_id = ARM_seek_agreement_from_moscow
 
 		completion_reward = {
-			add_to_variable = {ARM_consumer_goods_factor = 0.02 }
+			add_to_variable = {ARM_consumer_goods_expected_value = 0.02 }
 			add_political_power = 20
 			custom_effect_tooltip = ARM_worsen_corruption_tt
 		}
@@ -1811,7 +1832,9 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6
-
+		available = {
+			has_completed_focus = ARM_russian_economic_integration
+		}
 		prerequisite = {
 			focus = ARM_crush_the_coalition
 		}
@@ -1859,11 +1882,31 @@ focus_tree = {
 			factor = 10
 		}
 	}
+	focus = {
+		id = ARM_internal_security
+		icon = GFX_DEN_Police
+		x = -1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ARM_fiftyfifty
+			focus = ARM_russian_puppet
+		}
+		relative_position_id = ARM_fiftyfifty
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
 
 
 	focus = {
 		id = ARM_two_popes_one_mafia
-		icon = GFX_focus_generic_support_the_left_right
+		icon = GFX_focus_GRE_an_orthodox_state
 		x = 0
 		y = 2
 		cost = 6
@@ -1900,6 +1943,29 @@ focus_tree = {
 				remove_idea = ARM_diaspora
 				add_idea = ARM_diaspora_exploited
 			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_casinos
+		icon = GFX_focus_mex_privatisation
+		x = -2
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ARM_exploit_the_diaspora
+		}
+		relative_position_id = ARM_exploit_the_diaspora
+
+		completion_reward = {
+			add_political_power = 120
+			add_stability = 0.02
+			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_to_variable = {ARM_consumer_goods_expected_value = 0.02 }
 		}
 
 		ai_will_do = {
@@ -1954,6 +2020,14 @@ focus_tree = {
 
 		completion_reward = {
 			country_event = ARM.2
+			hidden_effect = {
+				set_power_balance = {
+					id = ARM_power_balance
+					left_side = ARM_mafia_faction # will keep the last set side if not specified
+					right_side = ARM_mil_faction # will keep the last set side if not specified
+					set_value = -0.95
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1988,6 +2062,8 @@ focus_tree = {
 		completion_reward = {
 			add_political_power = 60
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_to_variable = {ARM_stability_factor = -0.03 }
+			add_to_variable = {ARM_army_morale_factor = -0.05 }
 		}
 
 		ai_will_do = {
@@ -2011,8 +2087,7 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = 0.05
 			add_stability = -0.02
-			armenian_add_dem = yes
-			custom_effect_tooltip = ARM_add_dem_tt
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2057,6 +2132,7 @@ focus_tree = {
 		relative_position_id = ARM_contact_old_comrades
 
 		completion_reward = {
+			ARM_bop_medium_increase_effect = yes
 			add_war_support = 0.03
 			add_political_power = -100
 		}
@@ -2078,6 +2154,7 @@ focus_tree = {
 		relative_position_id = ARM_contact_old_comrades
 
 		completion_reward = {
+			ARM_bop_high_increase_effect = yes
 			add_war_support = 0.02
 			add_stability = -0.08
 
@@ -2100,7 +2177,19 @@ focus_tree = {
 			focus = ARM_secure_generals
 		}
 		relative_position_id = ARM_secure_generals
-
+		available = {
+			OR = {
+				is_power_balance_in_range = {
+					id = ARM_power_balance
+					range = ARM_high_mil_range  
+				}
+				is_power_balance_in_range = {
+					id = ARM_power_balance
+					range = ARM_very_high_mil_range  
+				}
+			}
+			
+		}
 		completion_reward = {
 			country_event = ARM.3
 		}
@@ -2125,8 +2214,7 @@ focus_tree = {
 			add_to_variable = {ARM_army_org_factor = 0.03 }
 			add_to_variable = {ARM_army_morale_factor = 0.01 }
 			add_to_variable = {ARM_army_defence_factor = 0.05 }
-			armenian_add_dem = yes
-			custom_effect_tooltip = ARM_add_dem_tt
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2150,12 +2238,7 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = ARM_military_agreement_control_tt
 			set_country_flag =  ARM_military_control_enabled
-			set_variable = { armenian_state_map^1 = 4 }
-			set_variable = { armenian_state_map^4 = 4 }
-			set_variable = { armenian_state_map^6 = 4 }
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
+			ARM_bop_medium_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2201,16 +2284,19 @@ focus_tree = {
 			focus = ARM_purge_the_clans
 			focus = ARM_agreement_with_the_clans
 		}
+		bypass = {
+			NOT = {has_dynamic_modifier = {modifier = ARM_corruption_modifier}}
+		}
 		relative_position_id = ARM_purge_the_clans
 		available = {
-			custom_trigger_tooltip = {
-				check_variable = { ARM_democratic_control > 9 }
-				tooltip = ARM_max_dem_control
+			is_power_balance_in_range = {
+				id = ARM_power_balance
+				range = ARM_very_high_mil_range  
 			}
 		}
 
 		completion_reward = {
-			remove_ideas = ARM_corruption
+			remove_dynamic_modifier = {modifier = ARM_corruption_modifier}
 			add_timed_idea = {
 				idea = ARM_corruption_fighting
 				days = 180
@@ -2300,6 +2386,14 @@ focus_tree = {
 
 		completion_reward = {
 			add_stability = -0.05
+			hidden_effect = {
+				set_power_balance = {
+					id = ARM_power_balance
+					left_side = ARM_mafia_faction # will keep the last set side if not specified
+					right_side = ARM_dem_faction # will keep the last set side if not specified
+					set_value = -0.95
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -2332,7 +2426,6 @@ focus_tree = {
 			fourth_estate_Market_liberal_increase = yes
 			fourth_estate_social_democrat_increase = yes
 			fourth_estate_social_liberal_increase = yes
-			custom_effect_tooltip = ARM_cleanse_districts
 		}
 
 		ai_will_do = {
@@ -2396,7 +2489,6 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 6
-		allow_branch = {always = no}
 		prerequisite = {
 			focus = ARM_appeal_to_the_countryside
 			focus = ARM_release_the_journalist
@@ -2412,6 +2504,8 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			add_to_variable = {ARM_local_resources_factor = -0.05 }
+			add_to_variable = {ARM_political_power_gain = -0.05 }
 			add_political_power = 50
 		}
 
@@ -2436,8 +2530,7 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = -0.05
 			add_political_power = 20
-			armenian_add_dem = yes
-			custom_effect_tooltip = ARM_add_dem_tt
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2471,7 +2564,7 @@ focus_tree = {
 		icon = GFX_focus_generic_conspiracy
 		x = 1
 		y = 1
-		cost = 6
+		cost = 3
 		prerequisite = {
 			focus = ARM_ngo_support
 			focus = ARM_coalition_with_lesser_oligarchs
@@ -2479,8 +2572,7 @@ focus_tree = {
 		relative_position_id = ARM_ngo_support
 
 		completion_reward = {
-			armenian_add_dem = yes
-			custom_effect_tooltip = ARM_add_dem_tt
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {
@@ -2543,9 +2635,11 @@ focus_tree = {
 		}
 		relative_position_id = ARM_my_step
 		available = {
-			custom_trigger_tooltip = {
-				check_variable = { ARM_democratic_control > 4 }
-				tooltip = ARM_min_dem_control
+			OR = {
+				is_power_balance_in_range = {
+					id = ARM_power_balance
+					range = ARM_dem_very_high_trust_range  
+				}
 			}
 		}
 
@@ -2573,6 +2667,9 @@ focus_tree = {
 
 		completion_reward = {
 			custom_effect_tooltip = ARM_worsen_corruption_tt
+			show_ideas_tooltip = adviser_ter_petrosyan
+			add_to_variable = {ARM_consumer_goods_expected_value = 0.01 }
+			add_to_variable = {ARM_political_power_gain = -0.05 }
 		}
 
 		ai_will_do = {
@@ -2631,7 +2728,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_reform_judicery
-		icon = GFX_goal_generic_national_unity
+		icon = GFX_focus_generic_court
 		x = -2
 		y = 1
 		cost = 6
@@ -2651,6 +2748,92 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = ARM_free_press
+		icon = GFX_goal_generic_national_unity
+		x = -2
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_clean_politics
+		}
+		relative_position_id = ARM_clean_politics
+
+		completion_reward = {
+			add_stability = -0.02
+			add_war_support = -0.02
+			add_popularity = {
+				popularity = 0.08
+				ideology = social_liberal
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_foreign_investment
+		icon = GFX_focus_mex_privatisation
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_reform_judicery
+		}
+		prerequisite = {
+			focus = ARM_invest_in_democracy
+		}
+		relative_position_id = ARM_reform_judicery
+
+		completion_reward = {
+			230 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_indian_arms
+		icon = align_to_india
+		x = 0
+		y = 2
+		cost = 6
+		prerequisite = {
+			focus = ARM_invest_in_democracy
+		}
+		relative_position_id = ARM_invest_in_democracy
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = light_mechanized_equipment_2
+				amount = 150
+				producer = RAJ
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_2
+				amount = 800
+				producer = RAJ
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment_2
+				amount = 120
+				producer = RAJ
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
 		id = ARM_general_strike
 		icon = GFX_focus_generic_support_the_left_right
 		x = -1
@@ -2662,9 +2845,23 @@ focus_tree = {
 		prerequisite = {
 			focus = ARM_attack_the_weakest_spots
 		}
+		available = {
+			OR = {
+				is_power_balance_in_range = {
+					id = ARM_power_balance
+					range = ARM_dem_high_trust_range  
+				}
+				is_power_balance_in_range = {
+					id = ARM_power_balance
+					range = ARM_dem_very_high_trust_range  
+				}
+			}
+			
+		}
 		relative_position_id = ARM_grass_roots_resistence
 
 		completion_reward = {
+			add_ideas = ARM_general_strike
 		}
 
 		ai_will_do = {
@@ -2709,7 +2906,15 @@ focus_tree = {
 		relative_position_id = ARM_pay_off_security_forces
 
 		completion_reward = {
-			add_stability = -0.05
+			country_event = ARM.9
+			hidden_effect = {
+				set_power_balance = {
+					id = ARM_power_balance
+					left_side = ARM_react_faction # will keep the last set side if not specified
+					right_side = ARM_dem_faction # will keep the last set side if not specified
+					set_value = 0.2
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -2718,7 +2923,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_shaky_coalition
-		icon = GFX_goal_support_communism
+		icon = GFX_focus_generic_support_the_left_right
 		x = 0
 		y = 1
 		cost = 6
@@ -2728,7 +2933,7 @@ focus_tree = {
 		relative_position_id = ARM_violet_revolution
 
 		completion_reward = {
-			#event to increase political support
+			country_event = ARM.10
 		}
 
 		ai_will_do = {
@@ -2737,7 +2942,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_stabalise_the_nation
-		icon = GFX_goal_support_communism
+		icon = GFX_goal_generic_neutrality_focus
 		x = 0
 		y = 1
 		cost = 6
@@ -2759,10 +2964,24 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_counter_revolutionary_sentiment
-		icon = GFX_goal_support_communism
+		icon = GFX_goal_anti_comintern_pact
 		x = 7
 		y = 1
 		cost = 6
+		available = {
+			OR = {
+				is_power_balance_in_range = {
+					id = ARM_power_balance
+					range = ARM_very_low_stab_range  
+				}
+			}
+			NOT = {
+				has_completed_focus = ARM_european_cooperation
+			}
+			NOT = {
+				has_completed_focus = ARM_negotiate_with_azeris
+			}
+		}
 		prerequisite = {
 			focus = ARM_shaky_coalition
 		}
@@ -2772,6 +2991,193 @@ focus_tree = {
 		relative_position_id = ARM_shaky_coalition
 
 		completion_reward = {
+			add_popularity = {
+				popularity = 0.1
+				ideology = nationalist
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_support_from_the_church
+		icon = GFX_focus_GRE_an_orthodox_state
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_counter_revolutionary_sentiment
+		}
+		relative_position_id = ARM_counter_revolutionary_sentiment
+
+		completion_reward = {
+			add_popularity = {
+				popularity = -0.05
+				ideology = communist
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_armenian_youth_federation
+		icon = GFX_focus_generic_manpower
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_counter_revolutionary_sentiment
+		}
+		relative_position_id = ARM_counter_revolutionary_sentiment
+
+		completion_reward = {
+			add_popularity = {
+				popularity = -0.05
+				ideology = communist
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_kabbah_investments
+		icon = GFX_focus_GRE_a_land_of_mountains
+		x = 3
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_counter_revolutionary_sentiment
+		}
+		relative_position_id = ARM_counter_revolutionary_sentiment
+		available = {
+			NGK = {
+				is_puppet_of = ARM
+			}
+		}
+		completion_reward = {
+			NGK = {
+				remove_ideas = ARM_militia_idea
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_modern_fortress
+		icon = GFX_goal_generic_fortify_city
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_kabbah_investments
+		}
+		relative_position_id = ARM_kabbah_investments
+		available = {
+			NGK = {
+				is_puppet_of = ARM
+			}
+		}
+		completion_reward = {
+			832 = {
+				add_building_construction = {
+					type = bunker
+					province = 1467
+					level = 4
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 9715
+					level = 4
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_seize_parliment
+		icon = GFX_focus_usa_voter_registration_act
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_armenian_youth_federation
+		}
+		prerequisite = {
+			focus = ARM_support_from_the_church
+		}
+		relative_position_id = ARM_armenian_youth_federation
+
+		completion_reward = {
+			country_event = ARM.11
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_west_armenia
+		icon = GFX_Focus_Attack_Turkey
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_seize_parliment
+		}
+		relative_position_id = ARM_seize_parliment
+
+		completion_reward = {
+			1187 = { add_claim_by = ARM }
+			354 = { add_claim_by = ARM }
+			1185 = { add_claim_by = ARM }
+			999 = { add_claim_by = ARM }
+			create_wargoal = {
+				target = TUR
+				type = take_claimed_state
+				generator = {
+					1187 354 1185 999
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_greater_armenia
+		icon = GFX_focus_Armenia_big_nation
+		x = 0
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_west_armenia
+		}
+		relative_position_id = ARM_west_armenia
+		available = {
+			owns_state = 1187
+			owns_state = 354
+			owns_state = 1185
+			owns_state = 999
+		}
+		completion_reward = {
+			1187 = { add_core_of = ARM }
+			354 = { add_core_of = ARM }
+			1185 = { add_core_of = ARM }
+			999 = { add_core_of = ARM }
 		}
 
 		ai_will_do = {
@@ -2780,7 +3186,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_reasure_moscow
-		icon = GFX_goal_support_communism
+		icon = align_to_russia
 		x = 4
 		y = 1
 		cost = 6
@@ -2792,7 +3198,9 @@ focus_tree = {
 			focus = ARM_vengence_of_the_old_guard
 		}
 		completion_reward = {
-			#event to increase relations with russia
+			SOV = {
+				country_event =  ARM.8
+			}
 		}
 
 		ai_will_do = {
@@ -2801,7 +3209,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_vengence_of_the_old_guard
-		icon = GFX_goal_support_communism
+		icon = GFX_focus_generic_conspiracy
 		x = 2
 		y = 1
 		cost = 6
@@ -2811,9 +3219,48 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = ARM_reasure_moscow
 		}
+		bypass = {
+			NOT = {
+				OR = {
+					has_idea = adviser_samvel_aleksanian
+					has_idea = adviser_harutiun_pambukian
+					has_idea = adviser_hayrapetian_family
+					has_idea = adviser_mika_ltd
+				}
+			}
+		}
 		relative_position_id = ARM_stabalise_the_nation
 
 		completion_reward = {
+			ARM_bop_low_decrease_effect = yes
+			if = {
+				limit = {
+					has_idea = adviser_samvel_aleksanian
+				}
+				remove_ideas = adviser_samvel_aleksanian
+				add_stability = -0.02
+			}
+			if = {
+				limit = {
+					has_idea = adviser_harutiun_pambukian
+				}
+				remove_ideas = adviser_harutiun_pambukian
+				add_stability = -0.02
+			}
+			if = {
+				limit = {
+					has_idea = adviser_hayrapetian_family
+				}
+				remove_ideas = adviser_hayrapetian_family
+				add_stability = -0.02
+			}
+			if = {
+				limit = {
+					has_idea = adviser_mika_ltd
+				}
+				remove_ideas = adviser_mika_ltd
+				add_stability = -0.02
+			}
 		}
 
 		ai_will_do = {
@@ -2822,7 +3269,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ARM_invest_in_domestic_production
-		icon = GFX_goal_support_communism
+		icon = GFX_goal_Arms_Industry
 		x = 0
 		y = 1
 		cost = 6
@@ -2834,13 +3281,37 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.05
 			230 = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ARM_regrow_trust
+		icon = GFX_goal_generic_improve_relations
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {
+			focus = ARM_invest_in_domestic_production
+		}
+		prerequisite = {
+			focus = ARM_vengence_of_the_old_guard
+			focus = ARM_reasure_moscow
+		}
+		relative_position_id = ARM_invest_in_domestic_production
+
+		completion_reward = {
+			add_stability = 0.05
+			ARM_bop_low_increase_effect = yes
 		}
 
 		ai_will_do = {

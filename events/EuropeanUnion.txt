@@ -644,3 +644,67 @@ country_event = {
 		ai_chance = { base = 20 }
 	}
 }
+
+#choosing union or not
+country_event = {
+	id = european_union.20
+	title = european_union.20.t
+	desc = european_union.20.d
+	picture = GFX_report_event_european_union
+
+	is_triggered_only = yes
+
+	option = {
+		name = european_union.20.o1
+		set_global_flag = Europe_decentralised
+		ai_chance = { base = 100 }
+	}
+
+	option = {
+		name = european_union.20.o2
+		if = {
+			limit = {
+				any_other_country = {
+					is_ai = no
+					is_EU_member = yes
+				}
+			}
+			every_other_country = {
+				limit = {
+					any_other_country = {
+						is_ai = no
+						is_EU_member = yes
+					}
+				}
+				country_event = european_union.21
+			}
+		}
+		else = {
+			set_global_flag = Europe_centralised
+		}
+		ai_chance = { base = 20 }
+	}
+}
+country_event = {
+	id = european_union.21
+	title = european_union.21.t
+	desc = european_union.21.d
+	picture = GFX_report_event_european_union
+
+	is_triggered_only = yes
+
+	option = {
+		name = european_union.21.o1
+		set_global_flag = Europe_decentralised
+		set_global_flag = Europe_centralise_veto
+		ai_chance = { base = 0 }
+		FROM = {country_event = { id = diplomatic_response.2 }}
+	}
+
+	option = {
+		name = european_union.21.o2
+		set_global_flag = Europe_centralised
+		ai_chance = { base = 20 }
+		FROM = {country_event = { id = diplomatic_response.1 }}
+	}
+}

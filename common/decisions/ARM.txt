@@ -1,26 +1,86 @@
-ARM_corruption_categories = {
-	ARM_corruption_des_1 = {
+ARM_power_balance_decision_category = {
+	DEBUG_ARM_set_max_bop = {
+		priority = -1
+		visible = {
+			is_debug = yes
+		}
+		complete_effect = {
+			set_power_balance = {
+				id = ARM_power_balance
+				set_value = 1
+			}
+		}
+	}
+
+	DEBUG_ARM_set_min_bop = {
+		priority = -2
+		visible = {
+			is_debug = yes
+		}
+		complete_effect = {
+			set_power_balance = {
+				id = ARM_power_balance
+				set_value = -1
+			}
+		}
+	}
+	ARM_military_prep = {
+		priority = -1
+		visible = {
+			has_completed_focus = ARM_secure_generals
+			NOT = {has_completed_focus = ARM_launch_the_coup}
+		}
+		available = {
+			NOT = {
+				OR = {
+					is_power_balance_in_range = {
+						id = ARM_power_balance
+						range = ARM_high_mil_range  
+					}
+					is_power_balance_in_range = {
+						id = ARM_power_balance
+						range = ARM_very_high_mil_range  
+					}
+				}
+			}
+		}
+		cost = 45
+		days_remove = 40
+		days_re_enable = 1
+		remove_effect = {
+			ARM_bop_medium_increase_effect = yes
+		}
+	}
+	ARM_corruption_military_fighting = {
+		name = ARM_corruption_des_1
 		icon = GFX_decision_onmap_recruit_operative
 
 		visible = {
-			has_completed_focus = ARM_release_the_journalist
+			has_country_flag = ARM_military_control_enabled
 			has_dynamic_modifier = {modifier = ARM_corruption_modifier}
-			check_variable = { ARM_democratic_control < 10 }
 		}
 		available = {
+			has_equipment = {
+    			infantry_equipment > 200
+			}
 		}
 		fire_only_once = no
-		cost = 25
+		cost = 15
 		days_remove = 60
 		days_re_enable = 14
 		modifier = {
-			consumer_goods_factor = 0.05
-			political_power_factor = -0.1
+			stability_weekly = -0.002
 		}
 		complete_effect = {
-			custom_effect_tooltip = ARM_add_dem_tt
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+				producer = ARM
+
+			}
+			custom_effect_tooltip = ARM_reduce_corruption_tt
 			hidden_effect = {
-				armenian_add_dem = yes
+				ARM_reduce_corruption = yes
 			}
 		}
 	}
@@ -41,7 +101,7 @@ ARM_corruption_categories = {
 		days_re_enable = 14
 
 		modifier = {
-			consumer_goods_factor = 0.02
+			consumer_goods_expected_value = 0.02
 			political_power_factor = -0.1
 			stability_factor = -0.04
 		}
@@ -64,7 +124,7 @@ ARM_corruption_categories = {
 
 			custom_trigger_tooltip = {
 				tooltip = ARM_corruption_low_tt
-				check_variable = {ARM_consumer_goods_factor < 0.01}
+				check_variable = {ARM_consumer_goods_expected_value < 0.01}
 				check_variable = {ARM_research_speed_factor > -0.01}
 				check_variable = {ARM_enemy_army_bonus_air_superiority_factor > -0.01}
 				check_variable = {ARM_political_power_gain > -0.01}
@@ -104,7 +164,7 @@ ARM_corruption_categories = {
 		days_re_enable = 14
 
 		modifier = {
-			consumer_goods_factor = 0.04
+			consumer_goods_expected_value = 0.04
 			political_power_factor = -0.1
 			stability_factor = -0.1
 		}
@@ -136,536 +196,6 @@ ARM_corruption_categories = {
 			}
 			else = {
 				add_stability = 0.1
-			}
-		}
-	}
-	ARM_corrupt_st1 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^0 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^0 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^0 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^0 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^0 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^0 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
-		}
-	}
-	ARM_corrupt_st2 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^1 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^1 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^1 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^1 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^1 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^1 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
-		}
-	}
-	ARM_corrupt_st3 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^2 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^2 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^2 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^2 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^2 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^2 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
-		}
-	}
-	ARM_corrupt_st4 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^3 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^3 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^3 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^3 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^3 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^3 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
-		}
-	}
-	ARM_corrupt_st5 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^4 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^4 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^4 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^4 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^4 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^4 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
-		}
-	}
-	ARM_corrupt_st6 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^5 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^5 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^5 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^5 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^5 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^5 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
-		}
-	}
-	ARM_corrupt_st7 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^6 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^6 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^6 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^6 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^6 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^6 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
-		}
-	}
-	ARM_corrupt_st8 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^7 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^7 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^7 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^7 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^7 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^7 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
-		}
-	}
-	ARM_corrupt_st9 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^8 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^8 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^8 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^8 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^8 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^8 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
-			}
-		}
-	}
-	ARM_corrupt_st10 = {
-		icon = GFX_decision_onmap_recruit_operative
-
-		visible = {
-			OR = {
-				AND = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-					check_variable = {
-						armenian_state_map^9 = 1
-					}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^9 = 2}}
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				AND = {
-					has_country_flag = ARM_koch_corruption_enabled
-					check_variable = {armenian_state_map^9 = 1}
-				}
-				AND = {
-					has_country_flag = ARM_crush_coalition
-					NOT = {check_variable = {armenian_state_map^9 = 3}}
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-			}
-		}
-		available = {
-		}
-		fire_only_once = no
-		cost = 75
-
-		complete_effect = {
-
-			if = {
-				limit = {
-					has_country_flag = ARM_koch_corruption_enabled
-				}
-				set_variable = { armenian_state_map^9 = 3 }
-				custom_effect_tooltip = ARM_corrupt_for_koch
-			}
-			if = {
-				limit = {
-					has_country_flag = ARM_sarksian_corruption_enabled
-				}
-				set_variable = { armenian_state_map^9 = 2 }
-				custom_effect_tooltip = ARM_corrupt_for_sark
-			}
-			hidden_effect = {
-				armenian_recalc_control = yes
 			}
 		}
 	}

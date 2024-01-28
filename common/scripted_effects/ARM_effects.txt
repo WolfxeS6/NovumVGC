@@ -1,90 +1,13 @@
-armenian_init_corruption = {
-	set_variable = { ARM_capital_control = 10 }
-	#set_variable = { ARM_military_control = 1 }
-	#set_variable = { ARM_democratic_control = 1 }
-	#set_variable = { ARM_sarksian_control = 1 }
-	#set_variable = { ARM_koch_control = 1 }
-	#set_variable = { ARM_independent_control = 1 }
-	clear_array = armenian_state_map
-	resize_array = {
-		array = armenian_state_map
-		size = 10
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 1
-		index = 0
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 1
-		index = 1
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 1
-		index = 2
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 3
-		index = 3
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 1
-		index = 4
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 2
-		index = 5
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 3
-		index = 6
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 3
-		index = 7
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 2
-		index = 8
-	}
-	add_to_array = {
-		array = armenian_state_map
-		value = 1
-		index = 9
-	}
-	armenian_recalc_control = yes
-}
-armenian_add_sark_control = {
-	for_each_loop = {
-		array = armenian_state_map
-		value = v
-		break = break
-		if = {
-			limit = {
-				NOT = {check_variable = { v = 2 }}
-			}
-			set_variable = { armenian_state_map^v = 2 }
-			set_temp_variable = { break = 1 }
-		}
-	}
-}
+
 ARM_worsen_corruption = {
 	hidden_effect = {
 		random_list = {
 			10 = {
 				modifier = {
 					factor = 0.5
-					check_variable = {ARM_consumer_goods_factor > 0.1}
+					check_variable = {ARM_consumer_goods_expected_value > 0.1}
 				}
-				add_to_variable = {ARM_consumer_goods_factor = 0.02 }
+				add_to_variable = {ARM_consumer_goods_expected_value = 0.02 }
 			}
 			10 = {
 				modifier = {
@@ -123,9 +46,9 @@ ARM_reduce_corruption = {
 			10 = {
 				modifier = {
 					factor = 0
-					check_variable = {ARM_consumer_goods_factor < 0.01}
+					check_variable = {ARM_consumer_goods_expected_value < 0.01}
 				}
-				add_to_variable = {ARM_consumer_goods_factor = -0.02 }
+				add_to_variable = {ARM_consumer_goods_expected_value = -0.02 }
 			}
 			10 = {
 				modifier = {
@@ -169,6 +92,7 @@ armenian_add_dem = {
 			}
 			set_variable = { armenian_state_map^v = 4 }
 			set_temp_variable = { break = 1 }
+			armenian_recalc_control = yes
 		}
 	}
 }
@@ -183,6 +107,7 @@ armenian_add_koch_control = {
 			}
 			set_variable = { armenian_state_map^v = 3 }
 			set_temp_variable = { break = 1 }
+			armenian_recalc_control = yes
 		}
 	}
 }

@@ -11,17 +11,6 @@ focus_tree = {
 
 	continuous_focus_position = { x = 900 y =  2800 }
 	shared_focus = GEF_Begin_Industrial_Build-up
-	offset = {
-        x = 11
-        y = 8
-        trigger = {
-            OR = {
-                tag = NOR
-                tag = SWE
-            }
-            
-        }
-    }
 
 
 	focus = {
@@ -1938,11 +1927,11 @@ focus_tree = {
 						motorized = { x = 2 y = 0 }
 						motorized = { x = 2 y = 1 }
 						motorized = { x = 2 y = 2 }
+					}
 
-						support = {
-							engineer = { x = 0 y = 0 }
-							recon = { x = 0 y = 1 }
-						}
+					support = {
+						engineer = { x = 0 y = 0 }
+						recon = { x = 0 y = 1 }
 					}
 				}
 
@@ -2023,7 +2012,9 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			show_ideas_tooltip = advisor_SYR_Assaad_Hardan
+			show_ideas_tooltip = advisor_SYR_Issam_Al_Mahayri
+			show_ideas_tooltip = advisor_SYR_Ali_Qansouh
 		 }
 	}
 	focus = {
@@ -2046,7 +2037,8 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-		
+			add_stability = 0.05
+			add_war_support = 0.05
 		 }
 	}
 	focus = {
@@ -2222,9 +2214,6 @@ focus_tree = {
 		icon = GFX_focus_NOR_the_lone_wolf_norway
 		cost = 5
 		relative_position_id = SYR_The_Son
-		available = {
-			has_country_flag = SYR_SSNPBaath_Unfinished
-		}
 		prerequisite = {
 			focus = SYR_Include_the_SSNP_in_the_Government
 		}
@@ -2237,11 +2226,16 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.35
+			}
+			add_stability = 0.05
+			add_war_support = 0.05
 		 }
 	}
 	focus = {
-		id = SYR_Restrict_some_more_Freedom
+		id = SYR_Unite_with_the_SSNP
 		icon = GFX_focus_generic_strike_at_democracy2
 		cost = 5
 		relative_position_id = SYR_The_Son
@@ -2254,7 +2248,13 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			set_party_name = {
+				ideology = nationalist
+				long_name = "SSN-Baath Party"	
+				name = "SSNP-Baath"
+			}
+			add_political_power = 100
+			add_stability = 0.02
 		 }
 	}
 	focus = {
@@ -2263,7 +2263,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SYR_The_Son
 		prerequisite = {
-			focus = SYR_Restrict_some_more_Freedom
+			focus = SYR_Unite_with_the_SSNP
 		}
 		x = 17
 		y = 12
@@ -2271,7 +2271,8 @@ focus_tree = {
 			factor = 100
 			}
 		completion_reward = {
-			
+			add_country_leader_trait = dictator
+			add_country_leader_trait = assad_dynasty
 		 }
 	}
 	focus = {
@@ -3899,7 +3900,7 @@ focus_tree = {
 			always = no
 		}
 		x = 75
-		y = y
+		y = 0
 		completion_reward = { }
 	}
 	focus = {
@@ -4538,15 +4539,19 @@ focus_tree = {
 		y = 5
 		completion_reward = {
 			every_state = {
-				limit = { owner = SYR
-						owner = KUS }
+				limit = { 
+					OR = {
+						is_owned_by = SYR
+						is_owned_by = KUS 
+					}
+				}
 				remove_province_modifier = {
 					static_modifiers = { unplanned_offensive }
 					province = {
 						all_provinces = yes
 					}
 				}
-				remove_country_flag = SPR_unplanned_offensive_flag
+				clr_country_flag = SPR_unplanned_offensive_flag
 			}
 		}
 	}

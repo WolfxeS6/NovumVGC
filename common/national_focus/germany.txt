@@ -139,71 +139,43 @@ focus_tree = {
 	@Time_500_days = 71.5
 
 ###################################################################################
-
-
-	### Ruhr Path 
 	focus = {
-		id = GER_revive_the_ruhr_area
-		icon = construction3
-		x = 0
-		y = 1
+		id = GER_ideology_focus
+		icon = GFX_focus_generic_home_defense
+		x = 18
+		y = 0
 		cost = @Time_50_days
-		relative_position_id = GER_simplify_zoning
-		prerequisite = {
-			focus = GER_simplify_zoning
+		offset = {
+			x = -15
+			y = 0
+			trigger = {
+				#has_global_flag = GER_testing1
+				has_completed_focus = GER_emphasize_justice
+			}
 		}
 		completion_reward = {
-			add_tech_bonus = {
-				name = industry_bonus
-				bonus = 0.50
-				uses = 1
-				category = industry
-			}
-			if = {
-				limit = {
-					57 = {
-						free_building_slots = {
-							building = industrial_complex
-							size > 1
-							include_locked = yes
-						}
-					}
-				}
-				57 = { add_extra_state_shared_building_slots = 2 }
-				57 = {
-					add_building_construction = {
-						type = industrial_complex
-						level = 2
-						instant_build = yes
-					}
-				}
-			}
-			if = {
-				limit = {
-					57 = {
-						free_building_slots = {
-							building = arms_factory
-							size > 0
-							include_locked = yes
-						}
-					}
-				}
-				57 = { add_extra_state_shared_building_slots = 1 }
-				57 = {
-					add_building_construction = {
-						type = arms_factory
-						level = 1
-						instant_build = yes
-					}
-				}
-			}
+			add_war_support = 0.02
+			add_political_power = 20
 		}
 
 		ai_will_do = {
 			factor = 10
 		}
 	}
-
+	focus = {
+		id = GER_support_Mittelstand
+		icon = GFX_focus_generic_industry_1
+		x = 0
+		y = 2
+		cost = @Time_50_days
+		prerequisite = {
+			focus = GER_ideology_focus
+		}
+		relative_position_id = GER_ideology_focus
+		completion_reward = {
+			add_ideas = GER_Mittelstand_idea
+		}
+	}
 	focus = {
 		id = GER_industrial_expansion
 		icon = GFX_goal_generic_construction2
@@ -294,20 +266,6 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = GER_expand_reweable_energy
-		icon = GFX_focus_generic_the_giant_wakes
-		x = -2
-		y = 1
-		cost = @Time_50_days
-		prerequisite = {
-			focus = GER_sdpgune_2002
-		}
-		relative_position_id = GER_sdpgune_2002
-		completion_reward = {
-			add_ideas = GER_renewable_investments
-		}
-	}
-	focus = {
 		id = GER_expand_steel_production
 		icon = GFX_focus_generic_steel
 		x = 2
@@ -330,20 +288,6 @@ focus_tree = {
 			51 = {
 				add_resource = { type = steel amount = 50 }
 			}
-		}
-	}
-	focus = {
-		id = GER_support_Mittelstand
-		icon = GFX_focus_generic_industry_1
-		x = 0
-		y = 2
-		cost = @Time_50_days
-		prerequisite = {
-			focus = GER_ideology_focus
-		}
-		relative_position_id = GER_ideology_focus
-		completion_reward = {
-			add_ideas = GER_Mittelstand_idea
 		}
 	}
 	focus = {
@@ -388,6 +332,68 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = GER_zoning_simplified
+		}
+	}
+	### Ruhr Path 
+	focus = {
+		id = GER_revive_the_ruhr_area
+		icon = construction3
+		x = 0
+		y = 1
+		cost = @Time_50_days
+		relative_position_id = GER_simplify_zoning
+		prerequisite = {
+			focus = GER_simplify_zoning
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.50
+				uses = 1
+				category = industry
+			}
+			if = {
+				limit = {
+					57 = {
+						free_building_slots = {
+							building = industrial_complex
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				57 = { add_extra_state_shared_building_slots = 2 }
+				57 = {
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					57 = {
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+				}
+				57 = { add_extra_state_shared_building_slots = 1 }
+				57 = {
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
 		}
 	}
 	focus = {
@@ -450,29 +456,6 @@ focus_tree = {
 		relative_position_id = GER_encourage_exports
 		completion_reward = {
 			add_ideas = GER_economic_juggernaut_in_europe_idea
-		}
-	}
-	focus = {
-		id = GER_ideology_focus
-		icon = GFX_focus_generic_home_defense
-		x = 18
-		y = 0
-		cost = @Time_50_days
-		offset = {
-			x = -15
-			y = 0
-			trigger = {
-				#has_global_flag = GER_testing1
-				has_completed_focus = GER_emphasize_justice
-			}
-		}
-		completion_reward = {
-			add_war_support = 0.02
-			add_political_power = 20
-		}
-
-		ai_will_do = {
-			factor = 10
 		}
 	}
 
@@ -1118,6 +1101,38 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = GER_citizen_insurance_reforms
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 0
+		y = 1
+		cost = @Time_50_days
+		relative_position_id = GER_spdlinke_2002
+		prerequisite = {
+			focus = GER_spdlinke_2002
+		}
+		completion_reward = {
+
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = GER_expand_reweable_energy
+		icon = GFX_focus_generic_the_giant_wakes
+		x = -2
+		y = 1
+		cost = @Time_50_days
+		prerequisite = {
+			focus = GER_sdpgune_2002
+		}
+		relative_position_id = GER_sdpgune_2002
+		completion_reward = {
+			add_ideas = GER_renewable_investments
+		}
+	}
+	focus = {
 		id = GER_strengthen_russian_relations
 		icon = GFX_Align_to_Russia
 		x = 3
@@ -1316,24 +1331,6 @@ focus_tree = {
 			focus = GER_reject_capitalism
 		}
 
-		completion_reward = {
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = GER_citizen_insurance_reforms
-		icon = GFX_goal_generic_intelligence_exchange
-		x = 0
-		y = 1
-		cost = @Time_50_days
-		relative_position_id = GER_spdlinke_2002
-		prerequisite = {
-			focus = GER_spdlinke_2002
-		}
 		completion_reward = {
 
 		}
@@ -4241,6 +4238,35 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = GER_nationalist_propaganda
+		icon = GFX_GER_Nationalist_Ideas
+		x = 2
+		y = 1
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = GER_nationalism
+		}
+		relative_position_id = GER_nationalism
+		completion_reward = {
+			#fourth_estate_reactionary_increase = yes
+			fourth_estate_fascist_increase = yes
+			fourth_estate_nationalist_increase = yes
+			#add_popularity = {
+			#	ideology = reactionary
+			#	popularity = 0.1
+			#}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.02
+			}
+		}
+	}
+	focus = {
 		id = GER_prioritise_germany
 		icon = GFX_GER_German_Pride
 		x = 0
@@ -4306,35 +4332,6 @@ focus_tree = {
 			fourth_estate_progressive_decrease = yes
 			add_war_support = 0.05
 			add_stability = -0.05
-		}
-	}
-	focus = {
-		id = GER_nationalist_propaganda
-		icon = GFX_GER_Nationalist_Ideas
-		x = 2
-		y = 1
-		cost = @Time_50_days
-
-		prerequisite = {
-			focus = GER_nationalism
-		}
-		relative_position_id = GER_nationalism
-		completion_reward = {
-			#fourth_estate_reactionary_increase = yes
-			fourth_estate_fascist_increase = yes
-			fourth_estate_nationalist_increase = yes
-			#add_popularity = {
-			#	ideology = reactionary
-			#	popularity = 0.1
-			#}
-			add_popularity = {
-				ideology = fascist
-				popularity = 0.05
-			}
-			add_popularity = {
-				ideology = nationalist
-				popularity = 0.02
-			}
 		}
 	}
 	focus = {

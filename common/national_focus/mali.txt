@@ -1,0 +1,1621 @@
+focus_tree = {
+	id = generic_african_focus_tree
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			
+			original_tag = MLI
+		}
+	}
+
+	continuous_focus_position = { x = 50 y = 3000 }
+
+	default = no
+
+	shared_focus = AFT_Light_Industry_Investment
+	shared_focus = AFT_Military_Reorganization
+
+	focus = {
+		id = MLI_for_africa_and_for_mali
+		icon = GFX_goal_generic_construction2
+		x = 20
+		y = 9
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_one_people
+		icon = MLI_side_with_the_people
+		prerequisite = { focus = MLI_for_africa_and_for_mali }
+		relative_position_id = MLI_for_africa_and_for_mali
+		x = -15
+		y = 1
+		cost = 5
+
+		completion_reward = {
+			fourth_estate_democratic_socialist_increase = yes
+			fourth_estate_communist_increase = yes
+			add_popularity = {
+			    ideology = communist
+			    popularity = 0.05
+			}
+			add_popularity = {
+			    ideology = democratic_socialist
+			    popularity = 0.05
+			}
+			add_war_support = 0.1
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_one_goal
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_for_africa_and_for_mali }
+		relative_position_id = MLI_for_africa_and_for_mali
+		x = 0
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_glorify_the_pmt
+		icon = GFX_goal_support_communism
+		prerequisite = { focus = MLI_one_people }
+		relative_position_id = MLI_one_people
+		x = -1
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			fourth_estate_communist_increase = yes
+			add_popularity = {
+			    ideology = communist
+			    popularity = 0.2
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_prosecute_oligarchs
+		icon = GFX_focus_rom_parties_end
+		prerequisite = { focus = MLI_one_people }
+		relative_position_id = MLI_one_people
+		x = 1
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_stability = -0.1
+			add_war_support = 0.05
+			add_political_power = -100
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_state_atheism
+		icon = communism12
+		prerequisite = { focus = MLI_glorify_the_pmt }
+		prerequisite = { focus = MLI_prosecute_oligarchs }
+		relative_position_id = MLI_one_people
+		x = 0
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = -50
+			add_popularity = {
+				ideology = islamist
+				popularity = -0.2
+			}
+			add_ideas = MLI_state_atheism
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_break_the_chains
+		icon = GFX_focus_SOV_penal_battalions
+		prerequisite = { focus = MLI_state_atheism }
+		relative_position_id = MLI_one_people
+		x = 0
+		y = 3
+		cost = 10
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communist
+				popularity = 0.05
+			}
+			set_politics = {
+				ruling_party = communist
+				elections_allowed = no
+			}
+			remove_ideas = african_union_member
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_secure_the_revolution
+		icon = communism8
+		prerequisite = { focus = MLI_break_the_chains }
+		relative_position_id = MLI_one_people
+		x = -2
+		y = 4
+		cost = 5
+
+		completion_reward = {
+			if = {
+				limit = {
+					and = {
+						has_dlc = "La Resistance"
+						has_intelligence_agency = no
+					}
+				}	
+				create_intelligence_agency = {
+					name = "Ministère de la Sécurité de l'État"
+					icon = GFX_intelligence_agency_logo_generic_9
+				}
+			}
+			add_ideas = GER_secured_the_revolution
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_liberate_the_workers
+		icon = GFX_focus_generic_workers_and_farmers_rise
+		prerequisite = { focus = MLI_break_the_chains }
+		relative_position_id = MLI_one_people
+		x = 2
+		y = 4
+		cost = 5
+
+		completion_reward = {
+			add_ideas = GEF_Liberated_Workers
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_work_with_the_UNTM
+		icon = GFX_focus_ICE_embrace_the_workers_revolution
+		prerequisite = { focus = MLI_break_the_chains }
+		relative_position_id = MLI_one_people
+		x = 0
+		y = 4
+		cost = 10
+
+		completion_reward = {
+			add_ideas = MLI_working_with_the_unions
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_cooperation_with_china
+		icon = align_to_china
+		prerequisite = { focus = MLI_work_with_the_UNTM }
+		relative_position_id = MLI_one_people
+		mutually_exclusive = {
+			focus = MLI_stay_true_to_marx
+		}
+		x = 1
+		y = 5
+		cost = 5
+
+		completion_reward = {
+			add_political_power = 50
+			add_opinion_modifier = {
+				target = PRC
+				modifier = pro_chinese_stance
+			}
+			PRC = {
+				add_opinion_modifier = {
+					target = MLI
+					modifier = pro_chinese_stance
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_stay_true_to_marx
+		icon = GFX_focus_eng_liberate_the_home_of_marx
+		prerequisite = { focus = MLI_work_with_the_UNTM }
+		relative_position_id = MLI_one_people
+		mutually_exclusive = {
+			focus = MLI_cooperation_with_china
+		}
+		x = -1
+		y = 5
+		cost = 5
+
+		completion_reward = {
+			add_country_leader_trait = POL_devoted_communist
+			add_opinion_modifier = {
+				target = PRC
+				modifier = declaration_of_hostility
+			}
+			PRC = {
+				add_opinion_modifier = {
+					target = MLI
+					modifier = declaration_of_hostility
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_technological_cooperation_with_china
+		icon = communist_china2
+		prerequisite = { focus = MLI_cooperation_with_china }
+		relative_position_id = MLI_one_people
+		
+		x = 2
+		y = 6
+		cost = 10
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = Industry
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_chinese_investments
+		icon = trade_with_china
+		prerequisite = { focus = MLI_cooperation_with_china }
+		relative_position_id = MLI_one_people
+		
+		x = 4
+		y = 6
+		cost = 10
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_join_the_shanghai_pact
+		icon = generic_flagbox_china
+		prerequisite = { focus = MLI_chinese_investments }
+		prerequisite = { focus = MLI_technological_cooperation_with_china }
+		relative_position_id = MLI_one_people
+		
+		x = 3
+		y = 7
+		cost = 10
+
+		completion_reward = {
+			PRC = {
+				country_event = mali.1
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_follow_the_chinese_model
+		icon = GFX_focus_prc_maoism
+		prerequisite = { focus = MLI_join_the_shanghai_pact }
+		relative_position_id = MLI_one_people
+		
+		x = 3
+		y = 8
+		cost = 10
+
+		completion_reward = {
+			add_ideas = MLI_following_the_chinese_model
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_mass_nationalization
+		icon = communism33
+		prerequisite = { focus = MLI_stay_true_to_marx }
+		relative_position_id = MLI_one_people
+		
+		x = -4
+		y = 6
+		cost = 10
+
+		completion_reward = {
+			add_political_power = -150
+			add_stability = -0.15
+			add_timed_idea = {
+				idea = MLI_nationalization_fallout
+				days = 120
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = MLI_collectivization
+		icon = communism35
+		prerequisite = { focus = MLI_stay_true_to_marx }
+		relative_position_id = MLI_one_people
+		
+		x = -2
+		y = 6
+		cost = 10
+
+		completion_reward = {
+			random_owned_state = {
+				add_manpower = -15000
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				add_manpower = -15000
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_state = {
+				add_manpower = -15000
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_purge_the_reactionaries
+		icon = anti_fascist_diplomacy
+		prerequisite = { focus = MLI_mass_nationalization }
+		prerequisite = { focus = MLI_collectivization }
+		relative_position_id = MLI_one_people
+		
+		x = -3
+		y = 7
+		cost = 10
+
+		completion_reward = {
+			fourth_estate_communist_increase = yes
+			add_popularity = {
+			    ideology = communist
+			    popularity = 0.1
+			}
+			add_ideas = FRA_persecution_of_enemies_of_communism
+			add_timed_idea = {
+				idea = MLI_purging_the_nation
+				days = 120
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_workers_paradise
+		icon = communism5
+		prerequisite = { focus = MLI_purge_the_reactionaries }
+		relative_position_id = MLI_one_people
+		
+		x = -3
+		y = 8
+		cost = 10
+
+		completion_reward = {
+			add_ideas = MLI_workers_paradise
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_prepare_for_the_long_struggle
+		icon = communism32
+		prerequisite = { 
+			focus = MLI_stay_true_to_marx 
+			focus = MLI_cooperation_with_china 
+		}
+		relative_position_id = MLI_one_people
+		
+		x = 0
+		y = 6
+		cost = 10
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_rally_the_workers
+		icon = communism23
+		prerequisite = { focus = MLI_prepare_for_the_long_struggle }
+		relative_position_id = MLI_one_people
+		x = 0
+		y = 7
+		cost = 10
+
+		completion_reward = {
+			add_ideas = MLI_worker_militias
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_african_liberation_army
+		icon = communism36
+		prerequisite = { focus = MLI_rally_the_workers }
+		relative_position_id = MLI_one_people
+		x = 0
+		y = 8
+		cost = 10
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = MLI_worker_militias
+				add_idea = MLI_african_liberation_army
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_march_on_the_grain_coast
+		icon = MLI_march_on_the_grain_coast
+		prerequisite = { 
+			focus = MLI_african_liberation_army 
+		}
+		relative_position_id = MLI_one_people
+		
+		x = 0
+		y = 9
+		cost = 10
+
+		completion_reward = {
+			create_wargoal = {
+				target = LIB
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = GNA
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = SIE
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = GNB
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = IVO
+				type = puppet_wargoal_focus
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = MLI_liberate_the_gold_coast
+		icon = MLI_liberate_the_gold_coast
+		prerequisite = { 
+			focus = MLI_african_liberation_army 
+		}
+		relative_position_id = MLI_one_people
+		
+		x = -2
+		y = 9
+		cost = 10
+
+		completion_reward = {
+			create_wargoal = {
+				target = VOL
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = GHA
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = NGR
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = TOG
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = GHA
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = DAH
+				type = puppet_wargoal_focus
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = MLI_liberate_west_africa
+		icon = MLI_liberate_west_africa
+		prerequisite = { 
+			focus = MLI_african_liberation_army 
+		}
+		relative_position_id = MLI_one_people
+		
+		x = 2
+		y = 9
+		cost = 10
+
+		completion_reward = {
+			create_wargoal = {
+				target = MAU
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = SEN
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = GAM
+				type = puppet_wargoal_focus
+			}
+			create_wargoal = {
+				target = WES
+				type = puppet_wargoal_focus
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_revolution_in_nigeria
+		icon = attack_nigeria
+		prerequisite = { 
+			focus = MLI_march_on_the_grain_coast 
+			focus = MLI_liberate_the_gold_coast 
+			focus = MLI_liberate_west_africa 
+		}
+		relative_position_id = MLI_one_people
+		
+		x = 0
+		y = 10
+		cost = 5
+
+		completion_reward = {
+			create_wargoal = {
+				target = NGA
+				type = puppet_wargoal_focus
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_permanent_african_revolution
+		icon = GFX_focus_ETH_african_union
+		prerequisite = { 
+			focus = MLI_revolution_in_nigeria
+		}
+		relative_position_id = MLI_one_people
+		x = 0
+		y = 11
+		cost = 10
+
+		completion_reward = {
+			add_ideas = MLI_spread_the_african_revolution
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	focus = {
+		id = MLI_2002_elections
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_one_goal }
+		relative_position_id = MLI_one_goal
+		x = 0
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_president_toure
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_2002_elections }
+		relative_position_id = MLI_one_goal
+		mutually_exclusive = {
+			focus = MLI_president_boubacar
+			focus = MLI_president_cisse
+		}
+		x = 0
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_president_cisse
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_2002_elections }
+		relative_position_id = MLI_one_goal
+		mutually_exclusive = {
+			focus = MLI_president_boubacar
+			focus = MLI_president_toure
+		}
+		x = -5
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_president_boubacar
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_2002_elections }
+		relative_position_id = MLI_one_goal
+		mutually_exclusive = {
+			focus = MLI_president_cisse
+			focus = MLI_president_toure
+		}
+		x = 5
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_multi_party_government
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_president_toure }
+		relative_position_id = MLI_president_toure
+		x = -1
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_grant_rights_to_the_tuareg
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_president_toure }
+		relative_position_id = MLI_president_toure
+		x = 1
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_create_a_medical_insurance_system
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_grant_rights_to_the_tuareg }
+		prerequisite = { focus = MLI_multi_party_government }
+		relative_position_id = MLI_president_toure
+		x = 0
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_develop_the_private_sector
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_grant_rights_to_the_tuareg }
+		prerequisite = { focus = MLI_multi_party_government }
+		relative_position_id = MLI_president_toure
+		x = -2
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_infrastructure_projects
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_grant_rights_to_the_tuareg }
+		prerequisite = { focus = MLI_multi_party_government }
+		relative_position_id = MLI_president_toure
+		x = 2
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_economic_freedoms
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_develop_the_private_sector }
+		prerequisite = { focus = MLI_create_a_medical_insurance_system }
+		relative_position_id = MLI_president_toure
+		x = -1
+		y = 3
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_expand_social_freedoms
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_infrastructure_projects }
+		prerequisite = { focus = MLI_create_a_medical_insurance_system }
+		relative_position_id = MLI_president_toure
+		x = 1
+		y = 3
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_a_modern_mali
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_economic_freedoms }
+		prerequisite = { focus = MLI_expand_social_freedoms }
+		relative_position_id = MLI_president_toure
+		x = 0
+		y = 4
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = MLI_democratic_reformism
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_president_cisse }
+		relative_position_id = MLI_president_cisse
+		x = -2
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_nationalize_basic_services
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_president_cisse }
+		relative_position_id = MLI_president_cisse
+		x = 0
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_strengthen_the_UNTM
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_president_cisse }
+		relative_position_id = MLI_president_cisse
+		x = 2
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_anti_corruption_efforts
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_democratic_reformism }
+		prerequisite = { focus = MLI_nationalize_basic_services }
+		prerequisite = { focus = MLI_strengthen_the_UNTM }
+		relative_position_id = MLI_president_cisse
+		x = 0
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_tax_the_wealthy
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_anti_corruption_efforts }
+		relative_position_id = MLI_president_cisse
+		x = -1
+		y = 3
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_rural_development
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_anti_corruption_efforts }
+		relative_position_id = MLI_president_cisse
+		x = 1
+		y = 3
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_a_free_mali
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_tax_the_wealthy }
+		prerequisite = { focus = MLI_rural_development }
+		relative_position_id = MLI_president_cisse
+		x = 0
+		y = 4
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_strengthen_malian_democracy
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_president_boubacar }
+		relative_position_id = MLI_president_boubacar
+		x = 0
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_poverty_counter_measures
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_strengthen_malian_democracy }
+		relative_position_id = MLI_president_boubacar
+		x = -1
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_renconciliation_efforts
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_strengthen_malian_democracy }
+		relative_position_id = MLI_president_boubacar
+		x = 1
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_create_a_safety_net
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_poverty_counter_measures }
+		prerequisite = { focus = MLI_renconciliation_efforts }
+		relative_position_id = MLI_president_boubacar
+		x = 2
+		y = 3
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_infrastructure_works
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_poverty_counter_measures }
+		prerequisite = { focus = MLI_renconciliation_efforts }
+		relative_position_id = MLI_president_boubacar
+		x = 0
+		y = 3
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_improve_our_transparency
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_poverty_counter_measures }
+		prerequisite = { focus = MLI_renconciliation_efforts }
+		relative_position_id = MLI_president_boubacar
+		x = -2
+		y = 3
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_a_fair_mali
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = MLI_poverty_counter_measures }
+		prerequisite = { focus = MLI_renconciliation_efforts }
+		relative_position_id = MLI_president_boubacar
+		x = 0
+		y = 4
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_dreams_of_west_african_unity
+		icon = GFX_goal_generic_construction2
+		prerequisite = { 
+			focus = MLI_a_fair_mali
+			focus = MLI_a_free_mali
+			focus = MLI_a_modern_mali
+		}
+		relative_position_id = MLI_one_goal
+		x = 0
+		y = 7
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_planning_the_federation
+		icon = GFX_goal_generic_construction2
+		prerequisite = { 
+			focus = MLI_dreams_of_west_african_unity
+		}
+		relative_position_id = MLI_dreams_of_west_african_unity
+		x = 0
+		y = 1
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_begin_the_economic_reforms
+		icon = GFX_goal_generic_construction2
+		prerequisite = { 
+			focus = MLI_planning_the_federation
+		}
+		relative_position_id = MLI_dreams_of_west_african_unity
+		x = -2
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_begin_the_judicial_reforms
+		icon = GFX_goal_generic_construction2
+		prerequisite = { 
+			focus = MLI_planning_the_federation
+		}
+		relative_position_id = MLI_dreams_of_west_african_unity
+		x = 0
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_begin_the_political_reforms
+		icon = GFX_goal_generic_construction2
+		prerequisite = { 
+			focus = MLI_planning_the_federation
+		}
+		relative_position_id = MLI_dreams_of_west_african_unity
+		x = 2
+		y = 2
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MLI_federalize_the_union
+		icon = GFX_goal_generic_construction2
+		prerequisite = { 
+			focus = MLI_begin_the_economic_reforms
+		}
+		prerequisite = { 
+			focus = MLI_begin_the_judicial_reforms
+		}
+		prerequisite = { 
+			focus = MLI_begin_the_political_reforms
+		}
+		relative_position_id = MLI_dreams_of_west_african_unity
+		x = 0
+		y = 3
+		cost = 10
+
+		completion_reward = {
+			add_political_power = 120
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+}

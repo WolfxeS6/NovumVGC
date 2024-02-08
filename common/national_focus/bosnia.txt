@@ -19,12 +19,238 @@ focus_tree = {
 	shared_focus = GEF_Naval_Dockyard_Effort
 	shared_focus = GEF_Expand_The_Army_General_Staff
 	shared_focus = EURO_Shared_Focus
+	
+	#Communist Tree
+	
+		focus = {
+		id = BOS_revive_communist_ideas
+		icon =  GFX_focus_por_workers_of_iberia
+		
+		x = 5
+		y = 0
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = {}
+		
+		mutually_exclusive = {}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+			add_political_power = 25
+	        		add_popularity = {
+				ideology = communist
+				popularity = 0.05
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}
+        focus = {
+		id = BOS_embrace_yugonostalgia
+		icon =  GFX_focus_bos_yugonostalgia
+		relative_position_id = BOS_revive_communist_ideas
+		
+		x = 1
+		y = 1
+		
+		cost = 7
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_revive_communist_ideas}
+		
+		mutually_exclusive = {}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+			add_stability = -0.05
+	        		add_popularity = {
+				ideology = communist
+				popularity = 0.1
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}
+
+focus = {
+		id = BOS_socialist_labor_unions
+		icon =  POL_commie_factories
+		relative_position_id = BOS_revive_communist_ideas
+		
+		x = -1
+		y = 1
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_revive_communist_ideas}
+		
+		mutually_exclusive = {}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+			    add_war_support = 0.05
+	        		add_popularity = {
+				ideology = communist
+				popularity = 0.05
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}
+
+focus = {
+		id = BOS_found_the_communist_party
+		icon =  GFX_focus_ITA_corpo_volontari_della_liberta
+		relative_position_id = BOS_embrace_yugonostalgia
+		
+		x = -1
+		y = 1
+		
+		cost = 10
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_embrace_yugonostalgia}
+		prerequisite = { focus = BOS_socialist_labor_unions}
+		
+		mutually_exclusive = {}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+			    add_stability = -0.1
+	        		add_popularity = {
+				ideology = communist
+				popularity = 0.15
+			}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}
+
+focus = {
+		id = BOS_criticize_nato_imperialists
+		icon =  GFX_goal_Abandon_NATO
+		relative_position_id = BOS_found_the_communist_party
+		
+		x = -5
+		y = 1
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_found_the_communist_party}
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = communist }
+		
+		available = {
+			threat > 0.10
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+			  add_war_support = 0.05
+			  USA = {
+					add_opinion_modifier = {
+						target = BOS
+						modifier = declaration_of_hostility
+					}
+				}
+				ENG = {
+					add_opinion_modifier = {
+						target = BOS
+						modifier = declaration_of_hostility
+					}
+				}
+				FRA = {
+					add_opinion_modifier = {
+						target = BOS
+						modifier = declaration_of_hostility
+					}
+				}
+				
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+}
+focus = {
+		id = BOS_join_china
+		icon = GFX_Align_to_China
+		relative_position_id = BOS_criticize_nato_imperialists
+		x = 1
+		y = 1
+		cost = 5
+
+		prerequisite = {
+			focus = BOS_criticize_nato_imperialists
+		}
+
+		bypass = {
+			is_in_faction_with = PRC
+		}
+
+		available = {
+			PRC =  {
+				is_faction_leader = yes
+			}
+		}
+		
+		available = { has_government = communist }
+
+		completion_reward = {
+			PRC = { country_event = bosnia.2 }
+		}
+	}
+	
+
+	
 	#Economic Tree
 	focus = {
 		id = BOS_bosnias_economic_future
 		icon = GFX_focus_generic_industry_3
 		
-		x = 10
+		x = 25
 		y = 0
 		
 		cost = 5
@@ -504,6 +730,158 @@ focus = {
 			factor = 10
 		}
 	}	
+	focus = {
+		id = BOS_cooperate_with_serbian_police
+		icon = GFX_goal_generic_national_unity
+		relative_position_id = BOS_stricter_borders
+		
+		x = 0
+		y = 1
+		
+		cost = 4
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_stricter_borders	}
+		
+
+		
+		
+		
+		bypass = {}
+		
+		completion_reward = {
+		        remove_ideas = {
+				BOS_strictened_border_controls
+			}
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.02
+			}
+			SER = {
+			add_opinion_modifier = { target = BOS modifier = recent_actions_positive }
+			}
+			}
+			
+		
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}	
+		focus = {
+		id = BOS_bosnian_language_integration_programme
+		icon = POL_celebrate_victory
+		relative_position_id = BOS_utilize_immigrant_labor
+		
+		x = 0
+		y = 1
+		
+		cost = 7
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_utilize_immigrant_labor	}
+		
+
+		
+		
+		
+		bypass = {}
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOS_utilizing_immigrant_labor
+				add_idea = BOS_integrated_immigrant_community
+			}
+			add_political_power = -25
+			}
+			
+		
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}	
+	focus = {
+		id = BOS_land_mine_removal
+		icon = GFX_goal_generic_construct_military
+		relative_position_id = BOS_bosnias_economic_future
+		
+		x = -3
+		y = 1
+		
+		cost = 20
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_bosnias_economic_future	}
+		
+		
+		
+		
+		bypass = {}
+		
+		completion_reward = {
+		
+			remove_ideas = {
+			    BOS_land_mine_problem
+			}
+			
+		
+		
+		
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+    focus = {
+		id = BOS_fund_bhrt
+		icon = propaganda
+		relative_position_id = BOS_bosnias_economic_future
+		
+		x = -1
+		y = 1
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_bosnias_economic_future	}
+		
+		
+		
+		
+		bypass = {}
+		
+		completion_reward = {
+		
+		    add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = electronics
+			}
+			add_stability = 0.03
+			add_war_support = 0.01
+		
+		
+
+	}
+	ai_will_do = {
+			factor = 10
+		}
+    }	
 }
 
 	

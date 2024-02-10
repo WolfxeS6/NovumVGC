@@ -17,13 +17,13 @@ focus_tree = {
 	continuous_focus_position = { x = 40 y = 2800 }
 	shared_focus = EURO_Shared_Focus
 	
-	#Communist Tree
+	#Democratic Tree
 	
-		focus = {
-		id = BOS_revive_communist_ideas
-		icon =  GFX_focus_por_workers_of_iberia
+	focus = {
+		id = BOS_keep_democratic_status_quo
+		icon =  BLR_liberalisation
 		
-		x = 5
+		x = 20
 		y = 0
 		
 		cost = 5
@@ -34,7 +34,101 @@ focus_tree = {
 		
 		prerequisite = {}
 		
-		mutually_exclusive = {}
+		mutually_exclusive = { focus = BOS_revive_communist_ideas}
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+		    add_stability = 0.05
+			add_political_power = 50
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = progressive
+				popularity = 0.01
+			}
+		
+	
+	}
+}
+    focus = {
+		id = BOS_three_member_presidency
+		icon = national_unity
+		relative_position_id = BOS_keep_democratic_status_quo
+		
+		x = 1
+		y = 1
+		
+		cost = 4
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_keep_democratic_status_quo }
+		
+		mutually_exclusive = { }
+		
+		available = {}
+		
+		bypass = {}
+		
+		completion_reward = {
+		   add_popularity = {
+				ideology = conservative
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.01
+			}
+			add_stability = -0.02
+			add_political_power = -25
+		
+		
+	
+	}
+}
+	
+	
+	#Communist Tree
+	
+		focus = {
+		id = BOS_revive_communist_ideas
+		icon =  GFX_focus_por_workers_of_iberia
+		
+		x = 30
+		y = 0
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = {}
+		
+		mutually_exclusive = { focus = BOS_keep_democratic_status_quo}
 		
 		available = {}
 		
@@ -195,6 +289,10 @@ focus = {
 						modifier = declaration_of_hostility
 					}
 				}
+				remove_ideas = {
+				BOS_sfor
+				
+			}
 				
 		
 	
@@ -261,6 +359,57 @@ focus = {
 		}
 	}
 focus = {
+		id = BOS_state_visit_vietnam
+		icon = GFX_Align_to_Vietnam
+		relative_position_id = BOS_military_exercises_in_bosnia
+		x = 1
+		y = 1
+		cost = 2
+
+		prerequisite = {
+			focus = BOS_military_exercises_in_bosnia
+		}
+
+		
+		available = { has_government = communist }
+
+		completion_reward = {
+			add_political_power = 25
+				VIN = {
+				add_opinion_modifier = {
+					target = BOS
+					modifier = has_expressed_loyalty
+				}
+			}
+		}
+	}
+focus = {
+		id = BOS_trade_with_north_korea
+		icon = GFX_goal_Trade_Deals_with_North_Korea
+		relative_position_id = BOS_military_exercises_in_bosnia
+		x = -1
+		y = 1
+		cost = 2
+
+		prerequisite = {
+			focus = BOS_military_exercises_in_bosnia
+		}
+
+		
+		available = { has_government = communist }
+
+		completion_reward = {
+			add_political_power = 25
+				PRK = {
+				increase_trade_influence_by_2 = yes
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = economic_mission
+				}
+			}
+			}
+		}
+focus = {
 		id = BOS_military_exercises_in_bosnia
 		icon = BLR_belarusian_soldier
 		relative_position_id = BOS_join_china
@@ -321,6 +470,13 @@ focus = {
 		completion_reward = {
 			  add_political_power = -100
 			  add_stability = -0.05
+			  		        remove_ideas = {
+				BOS_dayton_agreement
+				
+			}
+					        remove_ideas = {
+				BOS_one_country_three_peoples
+			}
 				
 		
 	
@@ -350,7 +506,9 @@ focus = {
 		bypass = {}
 		
 		completion_reward = {
-		
+		    country_event = {
+					id = bosnia.4 days = 1
+				}
 	
 	}
 }
@@ -362,7 +520,7 @@ focus = {
 		id = BOS_bosnias_economic_future
 		icon = GFX_focus_generic_industry_3
 		
-		x = 25
+		x = 60
 		y = 0
 		
 		cost = 5

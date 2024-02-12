@@ -860,7 +860,7 @@ shared_focus = {
 shared_focus = {
 	id = GEN_defend_our_nation
 	icon = defence
-	x = 2
+	x = 1
 	y = 1
 	relative_position_id = GEN_focus_on_diplomacy
 	cost = 10
@@ -880,7 +880,7 @@ shared_focus = {
 shared_focus = {
 	id = GEN_represent_our_nation
 	icon = national_greatness
-	x = 0
+	x = -1
 	y = 1
 	relative_position_id = GEN_focus_on_diplomacy
 	cost = 10
@@ -907,6 +907,10 @@ shared_focus = {
 
 	mutually_exclusive = {
 		focus = GEN_one_of_many
+	}
+
+	mutually_exclusive = {
+		focus = GEN_participate_in_UN_peacekeeping
 	}
 
 	mutually_exclusive = {
@@ -940,6 +944,10 @@ shared_focus = {
 
 	mutually_exclusive = {
 		focus = GEN_we_rule
+	}
+
+	mutually_exclusive = {
+		focus = GEN_participate_in_UN_peacekeeping
 	}
 
 	mutually_exclusive = {
@@ -1029,7 +1037,7 @@ shared_focus = {
 shared_focus = {
 	id = GEN_hire_more_diplomats
 	icon = propaganda
-	x = -2
+	x = -3
 	y = 1
 	relative_position_id = GEN_focus_on_diplomacy
 	cost = 10
@@ -1138,6 +1146,10 @@ shared_focus = {
 		focus = GEN_neutrality
 	}
 
+	mutually_exclusive = {
+		focus = GEN_participate_in_UN_peacekeeping
+	}
+
 	available = {
 		is_in_faction = yes
 		is_faction_leader = no
@@ -1211,6 +1223,106 @@ shared_focus = {
 
 	ai_will_do = {
 		factor = 10
+	}
+}
+
+shared_focus = {
+	id = GEN_prepare_material_aid
+	icon = small_arms
+	x = 3
+	y = 1
+	relative_position_id = GEN_focus_on_diplomacy
+	cost = 10
+
+	prerequisite = {
+		focus = GEN_focus_on_diplomacy
+	}
+
+	completion_reward = {
+		add_ideas = GEN_material_aid
+	}
+
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+shared_focus = {
+	id = GEN_participate_in_UN_peacekeeping
+	icon = align_to_united_nations
+	x = 3
+	y = 2
+	relative_position_id = GEN_focus_on_diplomacy
+	cost = 10
+
+	prerequisite = {
+		focus = GEN_prepare_material_aid
+	}
+
+	completion_reward = {
+		add_ideas = GEN_peacekeeping_efforts1
+		set_rule = {
+			can_send_volunteers = yes
+		}
+	}
+
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+shared_focus = {
+	id = GEN_interventionism
+	icon = GFX_goal_generic_political_pressure
+	x = 3
+	y = 3
+	relative_position_id = GEN_focus_on_diplomacy
+	cost = 10
+
+	prerequisite = {
+		focus = GEN_participate_in_UN_peacekeeping
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			add_idea = GEN_peacekeeping_efforts2
+			remove_idea = GEN_peacekeeping_efforts1
+		}
+		add_threat = 1
+		if = {
+			limit = {
+				has_idea = neutrality_idea
+			}
+			remove_ideas = neutrality_idea
+		}
+	}
+
+	ai_will_do = {
+		factor = 0
+	}
+}
+
+shared_focus = {
+	id = GEN_ensure_global_peace
+	icon = GFX_goal_support_democracy
+	x = 3
+	y = 4
+	relative_position_id = GEN_focus_on_diplomacy
+	cost = 10
+
+	prerequisite = {
+		focus = GEN_interventionism
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			add_idea = GEN_peacekeeping_efforts3
+			remove_idea = GEN_peacekeeping_efforts2
+		}
+	}
+
+	ai_will_do = {
+		factor = 0
 	}
 }
 

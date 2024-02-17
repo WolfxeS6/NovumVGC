@@ -1,0 +1,178 @@
+focus_tree = {
+	id = EST
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = EST
+		}
+	}
+	default = no
+
+	continuous_focus_position = { x = 900 y = 1600 }
+
+
+	focus = {
+		id = EST_remove_bronze_soldier
+		icon = EST_bronze_soldier
+		cost = 5
+		x = 2
+		y = 0
+
+		completion_reward = {
+			add_stability = -0.05
+			EST_bop_medium_decrease_effect = yes
+			effect_tooltip = {
+				SOV = {
+					add_opinion_modifier = {
+						target = EST
+						modifier = est_dishonored_memorials
+					}
+				}
+			}
+			hidden_effect = {
+				SOV = { country_event = estonia.2 }
+			}
+		}
+	}
+	focus = {
+		id = EST_expand_aviation_academy
+		icon = GFX_goal_generic_air_doctrine
+		cost = 5
+		x = 7
+		y = 0
+
+		mutually_exclusive = { focus = EST_expand_naval_academy }
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EST_expand_naval_academy
+		icon = GFX_focus_generic_naval_discipline
+		cost = 5
+		x = 9
+		y = 0
+
+		mutually_exclusive = { focus = EST_expand_aviation_academy }
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EST_edia
+		icon = GFX_goal_generic_defence
+		cost = 5
+		x = 8
+		y = 1
+
+		prerequisite = { focus = EST_expand_aviation_academy focus = EST_expand_naval_academy }
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EST_refurbish_paldiski
+		icon = GFX_goal_generic_navy_cruiser
+		cost = 5
+		x = 11
+		y = 1
+
+		prerequisite = { focus = EST_expand_naval_academy }
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EST_develop_aemari_air_base
+		icon = GFX_goal_generic_build_airforce
+		cost = 5
+		x = 5
+		y = 1
+
+		prerequisite = { focus = EST_expand_aviation_academy }
+
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = EST_invist_blrt
+		icon = GFX_goal_generic_construct_naval_dockyard
+		cost = 5
+		x = 10
+		y = 2
+
+		prerequisite = { focus = EST_expand_naval_academy }
+		prerequisite = { focus = EST_edia }
+
+		completion_reward = {
+			if = {
+				limit = { has_country_flag = noblessner_gone_flg }
+				13 = {
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
+				}
+			}
+			else = {
+				13 = {
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 1
+					
+				}
+			}
+			mio:EST_blrt_organization = {
+				add_mio_funds = 1500
+			}
+			
+		}
+	}
+	focus = {
+		id = EST_threod_systems
+		icon = GFX_focus_generic_aircraft_production
+		cost = 5
+		x = 6
+		y = 2
+
+		prerequisite = { focus = EST_expand_aviation_academy }
+		prerequisite = { focus = EST_edia }
+
+		completion_reward = {
+			
+			
+		}
+	}
+	focus = {
+		id = EST_encourage_small_arms
+		icon = GFX_goal_generic_construct_mil_factory
+		cost = 5
+		x = 8
+		y = 2
+
+		prerequisite = { focus = EST_edia }
+
+		completion_reward = {
+			custom_effect_tooltip = est_unlock_mio_tt
+			show_mio_tooltip = EST_nord_arms_organization
+			mio:EST_nord_arms_organization = {
+			add_mio_funds = 1500
+			}
+			13 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+
+}

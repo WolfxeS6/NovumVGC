@@ -3213,7 +3213,7 @@ focus_tree = {
 	focus = {
 		id = MEX_air
 		icon = airforce
-		x = 2
+		x = 5
 		y = 1
 
 		relative_position_id = MEX_armed_forces
@@ -3634,4 +3634,202 @@ focus_tree = {
 			factor = 10
 		}
 	}	
+
+	focus = {
+		id = MEX_fighter_production
+		icon = fighter
+		x = 1
+		y = 1
+
+		cost = @Time_55_days
+
+		relative_position_id = MEX_air
+		
+		prerequisite = {
+			focus = MEX_air
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_fighter_focus
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MEX_air_bases
+		icon = air_production
+		x = -1
+		y = 1
+
+		cost = @Time_55_days
+
+		relative_position_id = MEX_fighter_production
+
+		prerequisite = {
+			focus = MEX_fighter_production
+		}
+		
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = air_base
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = MEX_bomber_production
+		icon = bomber
+		x = 1
+		y = 1
+
+		cost = @Time_55_days
+
+		relative_position_id = MEX_fighter_production
+		
+		prerequisite = {
+			focus = MEX_fighter_production
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_generic_bomber_focus
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MEX_air_training
+		icon = airforce
+		x = -1
+		y = 1
+
+		cost = @Time_55_days
+
+		relative_position_id = MEX_bomber_production
+		
+		prerequisite = {
+			focus = MEX_bomber_production
+		}
+
+		prerequisite = {
+			focus = MEX_air_bases
+		}
+		
+		completion_reward = {
+			air_experience = 15
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MEX_air_force_military_school
+		icon = air_defense
+		x = 0
+		y = 1
+
+		cost = @Time_55_days
+
+		relative_position_id = MEX_air_training
+		
+		prerequisite = {
+			focus = MEX_air_training
+		}
+		
+		completion_reward = {
+			add_ideas = idea_focus_air_force_military_school
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MEX_air_doctrine
+		icon = air_doctrine
+		x = -2
+		y = 1
+
+		cost = @Time_55_days
+
+		relative_position_id = MEX_air_training
+		
+		prerequisite = {
+			focus = MEX_air_training
+		}
+		
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.25
+				uses = 2
+				category = air_doctrine
+			}
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = MEX_air_safety_reforms
+		icon = bombs
+		x = 2
+		y = 1
+
+		cost = @Time_55_days
+
+		relative_position_id = MEX_air_training
+		
+		prerequisite = {
+			focus = MEX_air_training
+		}
+		
+		completion_reward = {
+			air_experience = 5
+			add_ideas = generic_air_force_safety_reforms
+		}
+		
+		ai_will_do = {
+			factor = 10
+		}
+	}
 }

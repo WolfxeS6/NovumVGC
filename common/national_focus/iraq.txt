@@ -1,0 +1,325 @@
+focus_tree = {
+	id = iraq_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 20
+			original_tag = IRQ
+		}
+	}
+	#  POLITICAL FOCUS TREE HERE !!!!
+	continuous_focus_position = {
+		x = 0
+		y = 1400
+	}
+	focus = {
+		id = IRQ_gulf_war_end
+		icon = GFX_goal_Constitution
+		x = 5
+		y = 0
+		cost = 10
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = IRQ_Saddam
+		icon = based_dictatorship
+		relative_position_id = IRQ_gulf_war_end
+		X = 2
+		y = 1
+		cost = 10
+		completion_reward = {
+			add_political_power = 50
+		}
+		prerequisite = {
+			focus = IRQ_gulf_war_end
+		}
+		mutually_exclusive = {
+			focus = IRQ_Democratic
+		}
+	}
+	focus = {
+		id = IRQ_Democratic
+		icon = EU_elections_shine
+		cost = 10
+		relative_position_id = IRQ_gulf_war_end
+		X = -2
+		y = 1
+		prerequisite = {
+			focus = IRQ_gulf_war_end
+		}
+		mutually_exclusive = {
+			focus = IRQ_Saddam
+		}
+		completion_reward = {
+			add_stability = -0.1
+			add_popularity = {
+				ideology = Reactionary
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = Social_democrat
+				popularity = 0.05
+			}
+			fourth_estate_conservative_increase = yes
+			fourth_estate_reactionary_increase = yes
+			fourth_estate_social_democrat_increase = yes
+		}
+	}
+	# INVASION OF IRAQ
+	focus = {
+		id = IRQ_David_vs_Goliath
+		icon = GFX_focus_generic_strike_at_democracy1
+		x = 12
+		y = 0
+		available = {
+			has_defensive_war_with = USA
+		}
+		completion_reward = {
+			291 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = IRQ_Defend_Basrah
+		icon = GFX_goal_Bunker_shine
+		cost = 1
+		relative_position_id = IRQ_David_vs_Goliath
+		x = 0
+		y = 1
+		prerequisite = {
+			focus = IRQ_David_vs_Goliath
+		}
+		available = {
+			has_defensive_war_with = USA
+		}
+		completion_reward = {
+			1002 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 13314
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 15984
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 2089
+					instant_build = yes
+				}
+			}
+		}
+	}
+	# Remember to finish this
+	focus = {
+		id = IRQ_Contest_Air
+		icon = Bomber2_shine
+		cost = 2
+		relative_position_id = IRQ_Defend_Basrah
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = IRQ_Defend_Basrah
+		}
+		available = {
+			has_defensive_war_with = USA
+		}
+		mutually_exclusive = {
+			focus = IRQ_focus_ground
+		}
+		completion_reward = {
+			1045 = {
+				damage_building = {
+					type = air_base
+					damage = 10
+				}
+			}
+			add_timed_idea = {
+				idea = IRQ_Air
+				days = 70
+			}
+		}
+	}
+	focus = {
+		id = IRQ_focus_ground
+		icon = skull_fortification_shine	
+		cost = 2
+		relative_position_id = IRQ_Contest_Air
+		x = -2
+		prerequisite = {
+			focus = IRQ_Defend_Basrah
+		}
+		available = {
+			has_defensive_war_with = USA
+		}
+		mutually_exclusive = {
+			focus = IRQ_Contest_Air
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = IRQ_Ground
+				days = 70
+			}
+		}
+	}
+	focus = {
+		id = IRQ_What_Do
+		icon = GFX_USA_America_First
+		cost = x
+		relative_position_id = IRQ_David_vs_Goliath
+		y = 3
+		completion_reward = { }
+		prerequisite = {
+			focus = IRQ_focus_ground
+			focus = IRQ_Contest_Air
+		}
+	}
+	#Army branch starts here
+	focus = {
+		id = IRQ_Army
+		icon = GFX_focus_SOV_builder_of_the_red_army
+		cost = 10
+		x = -2
+		completion_reward = {
+			add_war_support = 0.1
+			add_command_power = 10
+			army_experience = 5
+			air_experience = 5
+		}
+	}
+	focus = {
+		id = IRQ_Grand
+		icon = GFX_focus_SOV_the_glory_of_the_red_army_alternative
+		cost = 10
+		relative_position_id = IRQ_Army
+		x = -2
+		y = 1
+		prerequisite = {
+			focus = IRQ_Army
+		}
+		mutually_exclusive = {
+			focus = IRQ_Mobile
+		}
+		completion_reward = {
+			army_experience = 5
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.20
+				category = cat_mass_assault
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.20
+				category = cat_grand_battle_plan
+			}
+		}
+	}
+	focus = {
+		id = IRQ_Mobile
+		icon = offensive_army_shine
+		cost = 10
+		relative_position_id = IRQ_Army
+		x = 2
+		y = 1
+		prerequisite = {
+			focus = IRQ_Army
+		}
+		mutually_exclusive = {
+			focus = IRQ_Grand
+		}
+		completion_reward = {
+			army_experience = 5
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.20
+				category = cat_mobile_warfare
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.20
+				category = cat_superior_firepower
+			}
+		}
+	}
+	focus = {
+		id = IRQ_Mobile2
+		icon = GFX_focus_generic_tankette
+		cost = 5
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = IRQ_Mobile
+		}
+		mutually_exclusive = {
+			focus = IRQ_MobileFire
+		}
+		relative_position_id = IRQ_Mobile
+		completion_reward = { 
+			add_ideas = IRQ_mobile2_idea
+		}
+	}
+	focus = {
+		id = IRQ_MobileFire
+		icon = GFX_goal_generic_army_artillery2
+		cost = 5
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = IRQ_Mobile
+		}
+		mutually_exclusive = {
+			focus = IRQ_Mobile2
+		}
+		relative_position_id = IRQ_Mobile
+		completion_reward = {
+			add_ideas = IRQ_mobilefire_idea
+		 }
+	}
+	focus = {
+		id = IRQ_GrandMass
+		icon = GFX_goal_fortify_the_westwall
+		cost = 5
+		relative_position_id = IRQ_Grand
+		y = 1
+		x = -1
+		prerequisite = {
+			focus = IRQ_Grand
+		}
+		mutually_exclusive = {
+			focus = IRQ_Mass2
+		}
+		completion_reward = { 
+			add_ideas = IRQ_grandmass_idea
+		}
+	}
+	focus = {
+		id = IRQ_Mass2
+		icon = GFX_focus_generic_full_social_mobilization
+		cost = 5
+		relative_position_id = IRQ_Grand
+		y = 1
+		x = 1
+		prerequisite = {
+			focus = IRQ_Grand
+		}
+		mutually_exclusive = {
+			focus = IRQ_GrandMass
+		}
+		completion_reward = {
+			add_ideas = IRQ_mass_idea
+		}
+	}
+}

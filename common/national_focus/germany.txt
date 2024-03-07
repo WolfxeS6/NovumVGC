@@ -345,7 +345,12 @@ focus_tree = {
 		relative_position_id = GER_reintegrate_the_east
 		completion_reward = {
 			64 = {
-
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
 			}
 		}
 	}
@@ -423,8 +428,9 @@ focus_tree = {
 		}
 		relative_position_id = GER_invest_in_brandenburg
 		completion_reward = {
+			add_ideas = GER_thur_uni
 			60 = {
-
+				add_extra_state_shared_building_slots = 1
 			}
 		}
 	}
@@ -441,7 +447,12 @@ focus_tree = {
 		relative_position_id = GER_invest_in_brandenburg
 		completion_reward = {
 			61 = {
-
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 	}
@@ -457,7 +468,17 @@ focus_tree = {
 		relative_position_id = GER_invest_in_brandenburg
 		completion_reward = {
 			65 = {
-
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
 			}
 		}
 	}
@@ -474,7 +495,12 @@ focus_tree = {
 		relative_position_id = GER_invest_in_brandenburg
 		completion_reward = {
 			68 = {
-
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
 			}
 		}
 	}
@@ -596,11 +622,11 @@ focus_tree = {
 		relative_position_id = GER_simplify_zoning
 		completion_reward = {
 			add_tech_bonus = {
-			name = tech_bonus
-			bonus = 0.8
-			uses = 2
-			category = tp_tech
-		}
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = tp_tech
+			}
 		}
 	}
 	### Ruhr Path 
@@ -797,13 +823,18 @@ focus_tree = {
 	focus = {
 		id = GER_emergency_plan
 		icon = GFX_goal_generic_military_sphere
-		x = -7
+		x = -9
 		y = 0
 		cost = @Time_35_days
 		relative_position_id = GER_military_reform
 
 		available = {
-			has_defensive_war = yes
+			OR = {
+				has_defensive_war = yes
+				threat > 0.4
+				surrender_progress > 0.1
+				has_democratic_form_of_government = no
+			}
 		}
 
 		completion_reward = {
@@ -956,7 +987,7 @@ focus_tree = {
 	focus = {
 		id = GER_navy_focus
 		icon = GFX_GER_Bundeswehr_Marine
-		x = -1
+		x = 0
 		y = 1
 		cost = @Time_35_days
 		relative_position_id = GER_military_reform
@@ -982,7 +1013,7 @@ focus_tree = {
 	focus = {
 		id = GER_air_force_focus
 		icon = GFX_GER_Bundeswehr_Luftwaffle
-		x = 3
+		x = 5
 		y = 1
 		cost = @Time_35_days
 		relative_position_id = GER_military_reform
@@ -1351,25 +1382,25 @@ focus_tree = {
 			factor = 10
 		}
 	}
-	focus = {
-		id = GER_support_war_in_iraq
-		icon = GFX_Align_to_America
-		x = -1
-		y = 1
-		cost = @Time_50_days
-		relative_position_id = GER_strengthen_american_relations
-		prerequisite = {
-			focus = GER_strengthen_american_relations
-		}
-		completion_reward = {
-			add_stability = -0.1
-			add_war_support = 0.075
-		}
+	# focus = {
+	# 	id = GER_support_war_in_iraq
+	# 	icon = GFX_Align_to_America
+	# 	x = -1
+	# 	y = 1
+	# 	cost = @Time_50_days
+	# 	relative_position_id = GER_strengthen_american_relations
+	# 	prerequisite = {
+	# 		focus = GER_strengthen_american_relations
+	# 	}
+	# 	completion_reward = {
+	# 		add_stability = -0.1
+	# 		add_war_support = 0.075
+	# 	}
 
-		ai_will_do = {
-			factor = 10
-		}
-	}
+	# 	ai_will_do = {
+	# 		factor = 10
+	# 	}
+	# }
 	focus = {
 		id = GER_families_first
 		icon = GFX_goal_Family_Values_2
@@ -1703,7 +1734,12 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
 		}
 
 		ai_will_do = {
@@ -1730,111 +1766,6 @@ focus_tree = {
 			swap_ideas = {
 				remove_idea = GER_moderate_unemployment
 				add_idea = GER_low_unemployment
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = GER_new_eastern_ports
-		icon = GFX_focus_POL_develop_polish_shipbuilding
-		x = -3
-		y = 1
-		cost = @Time_50_days
-		relative_position_id = GER_new_education_program
-
-		prerequisite = {
-			focus = GER_new_education_program
-		}
-
-		completion_reward = {
-			#321: Rostock
-			#3340: Stralsund
-			#11305: Lübeck
-			61 = {
-				add_building_construction = {
-					type = naval_base
-					province = 321
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = naval_base
-					province = 11305
-					level = 1
-					instant_build = yes
-				}
-			}
-			62 = {
-				add_building_construction = {
-					type = naval_base
-					province = 3340
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = GER_fund_eastern_infrastructure
-		icon = GFX_goal_Road_Construction
-		x = -4
-		y = 1
-		cost = @Time_50_days
-		relative_position_id = GER_new_education_program
-
-		prerequisite = {
-			focus = GER_new_education_program
-		}
-
-		completion_reward = {
-			60 = {	#Thuringia
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			61 = {	#Mecklenburg
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			62 = {	#Vorpommern
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			64 = {	#Brandenburg
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			65 = {	#Saxony
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-			68 = {	#Saxony Anhalt
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
 			}
 		}
 
@@ -1891,13 +1822,14 @@ focus_tree = {
 	focus = {
 		id = GER_army_program_1
 		icon = GFX_goal_Military_Guard_2
-		x = 0
+		x = 1
 		y = 1
 		cost = @Time_35_days
-		relative_position_id = GER_army_focus
+		relative_position_id = GER_end_conscription
 
 		prerequisite = {
-			focus = GER_army_focus
+			focus = GER_end_conscription
+			focus = GER_crackdown_on_conscripts
 		}
 
 		completion_reward = {
@@ -1918,8 +1850,8 @@ focus_tree = {
 
 	focus = {
 		id = GER_end_descrimination
-		icon = GFX_goal_Military_Guard_2
-		x = -2
+		icon = GFX_focus_SOV_womens_fascist_movement
+		x = -3
 		y = 1
 		cost = @Time_35_days
 		relative_position_id = GER_army_focus
@@ -1934,6 +1866,77 @@ focus_tree = {
 			add_stability = 0.02
 			add_war_support = 0.02
 			add_popularity = { ideology = progressive popularity = 0.01 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = GER_end_conscription
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		x = -1
+		y = 1
+		cost = @Time_35_days
+		relative_position_id = GER_army_focus
+		available = {
+			has_democratic_form_of_government = yes
+			OR = {
+				has_idea = extensive_conscription
+				has_idea = limited_conscription
+				has_idea = volunteer_only
+			}
+		}
+		prerequisite = {
+			focus = GER_army_focus
+		}
+
+		completion_reward = {
+			remove_ideas = GER_low_military_conscription
+			if = {
+				limit = {has_idea = limited_conscription}
+				swap_ideas = {
+					remove_idea = limited_conscription
+					add_idea = volunteer_only
+				}
+			}
+			if = {
+				limit = {has_idea = extensive_conscription}
+				swap_ideas = {
+					remove_idea = extensive_conscription
+					add_idea = volunteer_only
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = GER_crackdown_on_conscripts
+		icon = GFX_goal_generic_forceful_treaty
+		x = 1
+		y = 1
+		cost = @Time_35_days
+		relative_position_id = GER_army_focus
+
+		prerequisite = {
+			focus = GER_army_focus
+		}
+
+		completion_reward = {
+			if = {
+				limit = {has_democratic_form_of_government = yes}
+				swap_ideas = {
+					remove_idea = GER_low_military_conscription
+					add_idea = GER_low_military_conscription_2
+				}
+			}
+			else = {
+				remove_ideas = GER_low_military_conscription
+			}
 		}
 
 		ai_will_do = {
@@ -2034,49 +2037,6 @@ focus_tree = {
 				bonus = 0.4
 				uses = 2
 				category = heavy_air
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-
-	focus = {
-		id = GER_fund_eastern_industry
-		icon = GFX_goal_Invest_Industry
-		x = -3
-		y = 2
-		cost = @Time_50_days
-		relative_position_id = GER_new_education_program
-
-		prerequisite = {
-			focus = GER_fund_eastern_infrastructure
-			focus = GER_new_eastern_ports
-		}
-
-		completion_reward = {
-			random_owned_state = {
-				limit = {
-					region = 8
-					free_building_slots = {
-						building = industrial_complex
-						size > 1
-						include_locked = yes
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_building_construction = {
-					type = arms_factory
-					level = 1
-					instant_build = yes
-				}
 			}
 		}
 
@@ -2191,14 +2151,13 @@ focus_tree = {
 	focus = {
 		id = GER_fix_the_bundeswehr
 		icon = GFX_GER_Bundeswehr
-		x = -3
+		x = -4
 		y = 1
 		cost = @Time_50_days
 		relative_position_id = GER_army_program_1
 
 		prerequisite = {
 			focus = GER_emergency_plan
-			focus = GER_army_program_1
 		}
 
 		bypass = {
@@ -2210,6 +2169,10 @@ focus_tree = {
 		completion_reward = {
 			remove_ideas = GER_bundeswehr_shortcomings
 			army_experience = 10
+			add_timed_idea = {
+				idea = GER_bundeswehr_shortcomings_2
+				days = 365
+			}
 		}
 
 		ai_will_do = {
@@ -2231,7 +2194,33 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = idea_focus_generic_motorized_focus
+		}
 
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = GER_improve_precurement
+		icon = GFX_focus_generic_license_production
+		x = 2
+		y = 1
+		cost = @Time_35_days
+		relative_position_id = GER_army_program_1
+
+		prerequisite = {
+			focus = GER_army_program_1
+		}
+		prerequisite = {
+			focus = GER_naval_program_1
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = GER_bwb
+				add_idea = GER_bwb_2
+			}
 		}
 
 		ai_will_do = {
@@ -2756,9 +2745,9 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = @Time_50_days
-		relative_position_id = GER_fund_eastern_industry
+		relative_position_id = GER_digitalisation_drive
 		prerequisite = {
-			focus = GER_fund_eastern_industry
+			focus = GER_digitalisation_drive
 		}
 
 		available = {
@@ -2852,7 +2841,7 @@ focus_tree = {
 		icon = GFX_focus_generic_army_tanks2
 		x = -1
 		y = 1
-		cost = @Time_35_days
+		cost = @Time_70_days
 		relative_position_id = GER_army_program_2
 
 		prerequisite = {
@@ -2862,13 +2851,7 @@ focus_tree = {
 
 		completion_reward = {
 			army_experience = 15
-			add_doctrine_cost_reduction = {
-				name = armydoctrine_bonus
-				cost_reduction = 0.4
-				uses = 2
-				category = land_doctrine
-			}
-			remove_ideas = GER_poorly_funded_army
+			remove_ideas = GER_poorly_funded_military
 		}
 
 		ai_will_do = {
@@ -3250,7 +3233,7 @@ focus_tree = {
 		id = GER_establish_a_marine_corps
 		icon = GFX_goal_generic_amphibious_assault
 		x = -1
-		y = 1
+		y = 2
 		cost = @Time_35_days
 		relative_position_id = GER_naval_program_3
 
@@ -3288,7 +3271,6 @@ focus_tree = {
 				uses = 2
 				category = cv_tech
 			}
-			remove_ideas = GER_poorly_funded_navy
 		}
 
 		ai_will_do = {
@@ -3310,7 +3292,6 @@ focus_tree = {
 
 		completion_reward = {
 			air_experience = 35
-			remove_ideas = GER_poorly_funded_airforce
 		}
 
 		ai_will_do = {
@@ -4615,6 +4596,7 @@ focus_tree = {
 		}
 		relative_position_id = GER_restore_german_pride
 		completion_reward = {
+			remove_ideas = GER_high_unemployment
 			add_political_power = 50
 			every_country = {
 				limit = {

@@ -9,7 +9,7 @@ focus_tree = {
 	}
 	default = no
 
-	continuous_focus_position = { x = 900 y =  2800 }
+	continuous_focus_position = { x = 900 y =  2900 }
 	shared_focus = GEF_Begin_Industrial_Build-up
 
 
@@ -529,8 +529,8 @@ focus_tree = {
 			}
 		completion_reward = {
 			swap_ideas = {
-				remove_idea = SYR_sanctioned
-				add_idea = SYR_avoiding_sanctions
+				remove_idea = SYR_avoiding_sanctions
+				add_idea = SYR_avoiding_sanctions2
 			}
 		 }
 	}
@@ -1632,6 +1632,9 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = SYR_Another_1979
+		}
+		mutually_exclusive = {
+			focus = SYR_President_Rifaat
 		}
 		ai_will_do = {
 			factor = 100
@@ -5109,6 +5112,12 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SYR_Path_towards_a_united_arab_republic
 		}
+		mutually_exclusive = {
+			focus = SYR_The_greater_syrian_dream
+		}
+		mutually_exclusive = {
+			focus = SYR_Another_1979
+		}
 		ai_will_do = {
 			factor = 100
 			}
@@ -5173,11 +5182,10 @@ focus_tree = {
 		x = -2
 		y = 2
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
-			}
-			add_war_support = 0.05
+			JOR = {
+				country_event = syria.37
+			}		
+		
 			
 		 }
 	}
@@ -5254,10 +5262,11 @@ focus_tree = {
 		completion_reward = {
 			add_popularity = {
 				ideology = Monarchist
-				popularity = 0.1
+				popularity = 0.03
 			}
-			add_war_support = 0.05
-			
+			add_war_support = -0.05
+			add_stability = 0.05
+			add_country_leader_trait = peaceful_king_syria
 		 }
 	}
 	focus = {
@@ -5443,11 +5452,7 @@ focus_tree = {
 		x = -4
 		y = 8
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
-			}
-			add_war_support = 0.05
+			set_cosmetic_tag = SYR_CENTO
 			
 		 }
 	}
@@ -5542,10 +5547,11 @@ focus_tree = {
 		completion_reward = {
 			add_popularity = {
 				ideology = Monarchist
-				popularity = 0.1
+				popularity = 0.03
 			}
 			add_war_support = 0.05
-			
+			add_stability = -0.05
+			add_country_leader_trait = aggressive_king_syria
 		 }
 	}
 	focus = {
@@ -5562,12 +5568,14 @@ focus_tree = {
 		x = 4
 		y = 5
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			PER = {
+				add_stability = -0.05
+				add_war_support = -0.05
+				add_popularity = {
+					ideology = Monarchist
+					popularity = 0.05
+				}
 			}
-			add_war_support = 0.05
-			
 		 }
 	}
 	focus = {
@@ -5584,15 +5592,18 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SYR_The_Iranian_Civil_War
 		}
+		available = {
+			PER = {
+				has_government = monarchist
+			}
+		}
 		x = 3
 		y = 6
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			create_wargoal = {
+				target = PER
+				type = annex_everything
 			}
-			add_war_support = 0.05
-			
 		 }
 	}
 	focus = {
@@ -5605,6 +5616,12 @@ focus_tree = {
 		}
 		ai_will_do = {
 			factor = 100
+			}
+			available = {
+				PER = {
+					has_civil_war = no
+					has_government = monarchist
+				}
 			}
 		x = 3
 		y = 7
@@ -5631,15 +5648,33 @@ focus_tree = {
 		ai_will_do = {
 			factor = 100
 			}
+		available = {
+			PER = {
+				NOT = {
+					has_government = monarchist
+				}
+			}
+		}
 		x = 5
 		y = 6
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			declare_war_on = {
+				target = PER
+				type = annex_everything
 			}
-			add_war_support = 0.05
-			
+			PER = {
+				start_civil_war = {
+					ideology = monarchist
+					size = 0.25
+					states = {413 412 411 417}
+					capital = 413
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = syria.45 days = 2
+				}
+			}
 		 }
 	}
 	focus = {
@@ -5649,6 +5684,12 @@ focus_tree = {
 		relative_position_id = SYR_President_Rifaat
 		prerequisite = {
 			focus = SYR_The_Iranian_Civil_War
+		}
+		available = {
+			PER = {
+				has_civil_war = no
+				has_government = monarchist
+			}
 		}
 		ai_will_do = {
 			factor = 100
@@ -5673,18 +5714,28 @@ focus_tree = {
 			focus = SYR_Pacify_the_Rebels
 			focus = SYR_A_Royal_Marriage
 		}
+		available = {
+			controls_state = 266
+		}
 		ai_will_do = {
 			factor = 100
 			}
 		x = 4
 		y = 8
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			add_tech_bonus = {
+				name = GER_the_mannheim_project
+				bonus = 1.0
+				ahead_reduction = 5
+				technology = atomic_research
 			}
-			add_war_support = 0.05
-			
+			266 = {
+				add_building_construction = {
+					type = nuclear_reactor
+					level = 1
+					instant_build = yes
+				}
+			}
 		 }
 	}
 	focus = {
@@ -5701,12 +5752,10 @@ focus_tree = {
 		x = -1
 		y = 5
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			create_wargoal = {
+				target = IRQ
+				type = annex_everything
 			}
-			add_war_support = 0.05
-			
 		 }
 	}
 	focus = {
@@ -5723,12 +5772,14 @@ focus_tree = {
 		x = 1
 		y = 5
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			create_wargoal = {
+				target = ISR
+				type = annex_everything
 			}
-			add_war_support = 0.05
-			
+			create_wargoal = {
+				target = PAL
+				type = annex_everything
+			}
 		 }
 	}
 	focus = {
@@ -5748,12 +5799,10 @@ focus_tree = {
 		x = 0
 		y = 6
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			swap_ruler_traits = {
+				remove = aggressive_king_syria
+				add = aggressive_king_syria2
 			}
-			add_war_support = 0.05
-			
 		 }
 	}
 	focus = {
@@ -5770,15 +5819,18 @@ focus_tree = {
 		ai_will_do = {
 			factor = 100
 			}
+		available = {
+			JOR = {
+				has_government = monarchist
+			}
+		}
 		x = -1
 		y = 7
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			create_wargoal = {
+				target = JOR
+				type = annex_everything
 			}
-			add_war_support = 0.05
-			
 		 }
 	}
 	focus = {
@@ -5815,18 +5867,24 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SYR_Betray_the_Father
 		}
+		available = {
+			JOR = {
+				NOT = {
+					has_government = monarchist
+				}
+			}
+		}
 		ai_will_do = {
 			factor = 100
 			}
 		x = 1
 		y = 7
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			create_wargoal = {
+				target = JOR
+				type = annex_everything
 			}
-			add_war_support = 0.05
-			
+			add_stability = 0.02
 		 }
 	}
 	focus = {
@@ -5877,7 +5935,7 @@ focus_tree = {
 		 }
 	}
 	focus = {
-		id = SYR_Saveguard_Afghanistan
+		id = SYR_Safeguard_Afghanistan
 		icon = GFX_FIN_Gun_Icon_1
 		cost = 5
 		relative_position_id = SYR_President_Rifaat
@@ -5890,12 +5948,24 @@ focus_tree = {
 		x = 3
 		y = 10
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			if = {
+				AFG = {
+					exists = yes
+				}
+				create_wargoal = {
+					target = AFG
+					type = annex_everything
+				}
 			}
-			add_war_support = 0.05
-			
+			if = {
+				TAL = {
+					exists = yes
+				}
+				create_wargoal = {
+					target = TAL
+					type = annex_everything
+				}
+			}
 		 }
 	}
 	focus = {
@@ -5945,7 +6015,10 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SYR_Path_towards_a_united_arab_republic
 		}
-		x = -24
+		mutually_exclusive = {
+			focus = SYR_President_Rifaat
+		}
+		x = -20
 		y = 8
 		completion_reward = {
 			
@@ -5962,7 +6035,7 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SYR_Radicalism_Succeeds
 		}
-		x = -24
+		x = -20
 		y = 9
 		completion_reward = {
 			
@@ -5976,7 +6049,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Light_Sharia_Implementation
 		}
-		x = -20
+		x = -16
 		y = 10
 		completion_reward = {
 			
@@ -5990,7 +6063,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_End_the_Secular_State
 		}
-		x = -20
+		x = -16
 		y = 11
 		completion_reward = {
 			
@@ -6004,7 +6077,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Light_Sharia_Implementation
 		}
-		x = -22
+		x = -18
 		y = 10
 		completion_reward = {
 			
@@ -6021,7 +6094,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Free_the_Brotherhood
 		}
-		x = -23
+		x = -19
 		y = 11
 		completion_reward = {
 			
@@ -6035,7 +6108,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Light_Sharia_Implementation
 		}
-		x = -30
+		x = -26
 		y = 10
 		completion_reward = {
 			
@@ -6049,7 +6122,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Work_with_the_West
 		}
-		x = -29
+		x = -25
 		y = 11
 		completion_reward = {
 			
@@ -6063,7 +6136,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Work_with_the_West
 		}
-		x = -31
+		x = -27
 		y = 11
 		completion_reward = {
 			
@@ -6077,7 +6150,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Light_Sharia_Implementation
 		}
-		x = -26
+		x = -22
 		y = 10
 		completion_reward = {
 			
@@ -6091,7 +6164,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Free_the_Brotherhood
 		}
-		x = -25
+		x = -21
 		y = 11
 		completion_reward = {
 			
@@ -6105,7 +6178,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Free_the_Brotherhood
 		}
-		x = -27
+		x = -23
 		y = 11
 		completion_reward = {
 			
@@ -6128,7 +6201,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Islam_as_Culture
 		}
-		x = -24
+		x = -20
 		y = 12
 		completion_reward = {
 			
@@ -6142,7 +6215,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_A_New_Republic
 		}
-		x = -20
+		x = -16
 		y = 13
 		completion_reward = {
 			
@@ -6156,7 +6229,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Islamic_Economics
 		}
-		x = -21
+		x = -17
 		y = 14
 		completion_reward = {
 			
@@ -6170,7 +6243,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Islamic_Economics
 		}
-		x = -19
+		x = -15
 		y = 14
 		completion_reward = {
 			
@@ -6184,7 +6257,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_A_New_Republic
 		}
-		x = -23
+		x = -19
 		y = 13
 		completion_reward = {
 			
@@ -6198,7 +6271,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_A_New_Republic
 		}
-		x = -25
+		x = -21
 		y = 13
 		completion_reward = {
 			
@@ -6213,7 +6286,7 @@ focus_tree = {
 			focus = SYR_Arab_League_Reapproachment
 			focus = SYR_Clamp_down_on_Zionism
 		}
-		x = -24
+		x = -20
 		y = 14
 		completion_reward = {
 			
@@ -6233,7 +6306,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Path_towards_Economic_Autarky
 		}
-		x = -22
+		x = -18
 		y = 15
 		completion_reward = {
 			
@@ -6247,7 +6320,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_A_New_Republic
 		}
-		x = -28
+		x = -24
 		y = 13
 		completion_reward = {
 			
@@ -6261,7 +6334,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Support_over_Borders
 		}
-		x = -30
+		x = -26
 		y = 14
 		completion_reward = {
 			
@@ -6275,7 +6348,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Support_over_Borders
 		}
-		x = -28
+		x = -24
 		y = 14
 		completion_reward = {
 			
@@ -6289,7 +6362,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Support_over_Borders
 		}
-		x = -26
+		x = -22
 		y = 14
 		completion_reward = {
 			
@@ -6309,7 +6382,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_Brothers_in_Palestine
 		}
-		x = -28
+		x = -24
 		y = 15
 		completion_reward = {
 			
@@ -6326,7 +6399,7 @@ focus_tree = {
 		prerequisite = {
 			focus = SYR_A_Muslim_Republic
 		}
-		x = -25
+		x = -21
 		y = 16
 		completion_reward = {
 			

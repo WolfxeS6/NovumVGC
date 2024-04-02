@@ -1,0 +1,82 @@
+on_actions = {
+    on_startup = {
+        effect = {
+            every_country = {
+                limit = {
+                    OR = {
+                        tag = USA
+                        is_in_faction_with = USA
+                    }
+                }
+                set_country_flag = in_NATO
+                add_ideas = NATO_member
+            }
+        }
+    }
+    on_join_faction = {
+            effect = {
+                if = {
+                    limit = {
+                        NOT = {has_global_flag = DPTS_dismantle_factions}
+                        FROM = {has_country_flag = in_NATO}
+                    }
+                    set_country_flag = in_NATO
+                    add_ideas = NATO_member
+                    if = {
+                        limit = {
+                            threat > 0.6
+                        }
+                        swap_ideas = {
+                            remove_idea = NATO_member
+                            add_idea = NATO_member_2
+                        }
+                    }
+                }
+            }
+        }
+        on_weekly = {
+            effect = {
+                if = {
+                    limit = {
+                        NOT = {is_in_faction = yes}
+                        OR = {
+                            has_country_flag = in_NATO
+                            has_idea = NATO_member
+                            has_idea = NATO_member_2
+                        }
+                    }
+                    clr_country_flag = in_NATO
+                    remove_ideas =  NATO_member
+                    remove_ideas =  NATO_member_2
+                }
+            }
+        }
+        on_leave_faction = {
+            effect = {
+                clr_country_flag = in_NATO
+                remove_ideas =  NATO_member
+                remove_ideas =  NATO_member_2
+            }
+        }
+        on_declare_war = {
+            effect = {
+                if = {
+                    limit = { 
+                        FROM = { has_idea = NATO_member }
+                    }
+                    FROM = { country_event = nato.6 }
+                    if = {
+                        limit = {
+                            threat > 0.6
+                        }
+                        every_country = {
+                            swap_ideas = {
+                                remove_idea = NATO_member
+                                add_idea = NATO_member_2
+                            }
+                        }
+                    }
+                }
+            }
+        }
+}

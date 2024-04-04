@@ -1,0 +1,457 @@
+add_namespace = financial_crisis
+add_namespace = financial_crisis_response
+add_namespace = financial_crisis_news
+# Subprime US mortgage event 
+# New Century american real estate investment trust does chapter 11
+#[GER]  IKB Deutsche Industriebank bailout by KfW.
+# Hedge fund issues DJIA and Bear Stearns 
+#[ENG] Northern Rock receives british support
+# master liquidity enhancement conduit (it fails)
+
+# US economic stimulus Act 
+#Bear Stearns saved from a bankrupcy
+# US housing and economic recovery act of 2008
+
+# Lehman Brothers collapses, it's all over 
+
+# Washington Mutual bankrupt
+# US failed emergency Economic Stabilization Act of 2008 then did it
+
+# October 11 2008 IMF warn world financial crisis (Iceland issues begin)
+#[ENG] Bradford and Bingley
+#[ICE] 77% drop of stock market
+#[SWI] UBS AG and Credit swiss recue
+# 24 October 2008 Pound and Canadian dollar are mcfucked
+#[ENG] December 2008 purchase Natwest £20 billion
+
+news_event = { #5 May 2006
+	id = financial_crisis_news.1 #JPMorgan risk of housing downturn
+	title = financial_crisis_news.1.t
+	desc = financial_crisis_news.1.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	major = yes
+	fire_only_once = yes
+	immediate = {
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.2
+                days = 184
+                random_hours = 1
+            }
+		}
+	}
+
+	option = {	#Subprime US issues
+		name = financial_crisis_news.1.o1
+	}
+}
+news_event = { #5 November 2006
+	id = financial_crisis_news.2 #USB warning of imminent collapse
+	title = financial_crisis_news.2.t
+	desc = financial_crisis_news.2.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	major = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+            USA = {
+                country_event = {
+                    id = financial_crisis.1
+                    days = 178
+                }
+            }
+		}
+	}
+
+	option = {	#
+		name = financial_crisis_news.2.o1
+	}
+}
+country_event = {	#US hears New Century Collapses
+	id = financial_crisis.1
+	title = financial_crisis.1.t
+	desc = financial_crisis.1.d
+	picture = GFX_report_event_stock_market
+	
+	is_triggered_only = yes
+	immediate = {
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.4 
+                days = 130
+                random_hours = 1
+            }
+		}
+	}
+
+	option = {
+		name = financial_crisis.1.a
+        set_global_flag = USA_abandoned_new_century
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.3
+                days = 1
+                random_hours = 10
+            }
+        }
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+	option = {
+		name = financial_crisis.1.b
+        add_political_power = -80
+        add_stability = -0.02
+        set_global_flag = USA_saved_new_century
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.3
+                days = 1
+                random_hours = 1
+            }
+        }
+		ai_chance = {
+		    factor = 0
+	    }
+	}
+}
+news_event = { #2nd April 2007 New Century
+	id = financial_crisis_news.3 #
+	title = financial_crisis_news.3.t
+	desc = financial_crisis_news.3.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	major = yes
+	fire_only_once = yes
+
+	option = {	#
+		name = financial_crisis_news.3.o1
+	}
+}
+news_event = { #10 August 2007, hedge funds issues
+	id = financial_crisis_news.4 
+	title = financial_crisis_news.4.t
+	desc = financial_crisis_news.4.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	major = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+            ENG = {
+                country_event = {
+                    id = financial_crisis.2
+                    days = 35
+                }
+            }
+		}
+	}
+
+	option = {	#
+		name = financial_crisis_news.4.o1
+	}
+}
+country_event = {	#14 September 2007 UK Northern Rock
+	id = financial_crisis.2
+	title = financial_crisis.2.t
+	desc = financial_crisis.2.d
+	picture = GFX_report_event_stock_market
+	
+	is_triggered_only = yes
+
+	option = {
+		name = financial_crisis.2.a
+        set_global_flag = ENG_saved_northern_rock
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.5
+                days = 1
+                random_hours = 10
+            }
+        }
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+	# option = {
+	# 	name = financial_crisis.2.b
+    #     set_global_flag = ENG_abandoned_northern_rock
+    #     hidden_effect = {
+    #         news_event = {
+    #             id = financial_crisis_news.5
+    #             days = 1
+    #             random_hours = 1
+    #         }
+    #     }
+	# 	ai_chance = {
+	# 	    factor = 0
+	#     }
+	# }
+}
+news_event = { #Northern Rock
+	id = financial_crisis_news.5
+	title = financial_crisis_news.5.t
+	desc = financial_crisis_news.5.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	major = yes
+	fire_only_once = yes
+	immediate = {
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.6
+                days = 31
+                random_hours = 1
+            }
+			news_event = {
+                id = financial_crisis_news.10
+                days = 184
+                random_hours = 1
+            }
+			ENG = {
+				news_event = {
+					id = financial_crisis_news.8
+					days = 128
+					random_hours = 1
+				}
+			}
+        }
+    }
+
+	option = {	#
+		name = financial_crisis_news.5.o1
+	}
+}
+news_event = { #15 October 2007 Master Liquidity Enhancement Conduit
+	id = financial_crisis_news.6
+	title = financial_crisis_news.6.t
+	desc = financial_crisis_news.6.d
+	picture = GFX_news_event_us_dollars
+    # USA only
+	is_triggered_only = yes
+	fire_only_once = yes
+
+    immediate = {
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.7
+                days = 50
+                random_hours = 2
+            }
+        }
+    }
+
+	option = {	#
+		name = financial_crisis_news.6.o1
+	}
+}
+news_event = { #December 2007 Master Liquidity Enhancement Conduit failed
+	id = financial_crisis_news.7
+	title = financial_crisis_news.7.t
+	desc = financial_crisis_news.7.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = {	#
+		name = financial_crisis_news.7.o1
+	}
+}
+news_event = { #Jan 21 2008 FTSE 100 tumbles
+	id = financial_crisis_news.8
+	title = financial_crisis_news.8.t
+	desc = financial_crisis_news.8.d
+	picture = GFX_news_event_us_dollars
+    # UK only
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = {	#
+		name = financial_crisis_news.8.o1
+	}
+}
+
+news_event = { #17 march 2008 Bear stearns is saved 
+	id = financial_crisis_news.10
+	title = financial_crisis_news.10.t
+	desc = financial_crisis_news.10.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	fire_only_once = yes
+    major = yes
+
+	immediate = {
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.11
+                days = 182
+            }
+        }
+    }
+
+
+	option = {	#
+		name = financial_crisis_news.10.o1
+	}
+}
+news_event = { #15 September Bankruptcy of Lehman Brothers
+	id = financial_crisis_news.11
+	title = financial_crisis_news.11.t
+	desc = financial_crisis_news.11.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	fire_only_once = yes
+    major = yes
+
+    immediate = {
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.12
+                days = 10
+            }
+        }
+    }
+
+
+	option = {	#
+		name = financial_crisis_news.11.o1
+	}
+}
+
+news_event = { #25 September collapse of Washington Mutual
+	id = financial_crisis_news.12
+	title = financial_crisis_news.12.t
+	desc = financial_crisis_news.12.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	fire_only_once = yes
+    major = yes
+    
+    immediate = {
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.13
+                days = 16
+            }
+        }
+    }
+
+
+	option = {	#
+		name = financial_crisis_news.12.o1
+	}
+}
+
+news_event = { #October 11 IMF warns the end
+	id = financial_crisis_news.13
+	title = financial_crisis_news.13.t
+	desc = financial_crisis_news.13.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	fire_only_once = yes
+    major = yes
+
+    immediate = {
+        hidden_effect = {
+            set_global_flag = NVX_global_financial_crisis
+        }
+        hidden_effect = {
+            ENG = {
+                country_event = {
+                    id = financial_crisis.3
+                    days = 59
+                }
+            }
+            news_event = {
+                id = financial_crisis_news.14
+                days = 13
+            }
+        }
+    }
+
+
+	option = {	#
+		name = financial_crisis_news.13.o1
+	}
+}
+news_event = { #fall of the pound and global currencies
+	id = financial_crisis_news.14
+	title = financial_crisis_news.14.t
+	desc = financial_crisis_news.14.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	fire_only_once = yes
+    major = yes
+
+
+	option = {	#
+		name = financial_crisis_news.14.o1
+	}
+}
+country_event = {	#bailout RBS
+	id = financial_crisis.3
+	title = financial_crisis.3.t
+	desc = financial_crisis.3.d
+	picture = GFX_report_event_stock_market
+	
+	is_triggered_only = yes
+
+	option = {
+		name = financial_crisis.3.a
+        set_global_flag = ENG_saved_RBS
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.15
+                days = 1
+                random_hours = 10
+            }
+        }
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+	option = {
+		name = financial_crisis.3.b
+        set_global_flag = ENG_abandoned_RBS #This will lead to a schizo focus tree
+        hidden_effect = {
+            news_event = {
+                id = financial_crisis_news.15
+                days = 1
+                random_hours = 10
+            }
+        }
+		ai_chance = {
+		    factor = 0
+	    }
+	}
+}
+news_event = { #RBS is nationalised
+	id = financial_crisis_news.15
+	title = financial_crisis_news.15.t
+	desc = financial_crisis_news.15.d
+	picture = GFX_news_event_us_dollars
+
+	is_triggered_only = yes
+	fire_only_once = yes
+    major = yes
+
+
+	option = {	#
+		name = financial_crisis_news.15.o1
+	}
+}

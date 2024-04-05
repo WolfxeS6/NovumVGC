@@ -1001,7 +1001,9 @@ country_event = {
 
 	option = {
 		name = syria.23.o1
-		
+			LEB = {
+				set_country_flag = LEB_Rafiq_Hariri_Dead
+			}
 			remove_ideas = LEB_Rafiq_Hariri
 			hidden_effect = {
 				country_event = {
@@ -1607,5 +1609,65 @@ country_event = {
 			}
 			ROOT = {puppet = PREV}
 		  }
+	}
+}
+#CENTO UK-Guarantees
+country_event = {
+	id = syria.46
+	title = syria.46.t
+	desc = syria.46.d
+	picture = GFX_report_event_bulgaria
+
+	is_triggered_only = yes
+	option = {	#Accept
+		name = syria.46.o1
+		give_guarantee = SYR
+		SYR = {
+			give_guarantee = ENG
+		}
+		ai_chance = {
+			factor = 70
+		}
+	}
+	option = {	#Decline
+		name = syria.46.o2
+		SYR = {
+			country_event = diplomatic_response.2
+			add_political_power = -50
+		}
+		ai_chance = {
+			factor = 30
+		}
+	}
+}
+#CENTO Unification
+country_event = {
+	id = syria.47
+	title = syria.47.t
+	desc = syria.47.d
+	picture = GFX_report_event_bulgaria
+
+	is_triggered_only = yes
+	option = {	#Accept
+		name = syria.47.o1
+		FROM = { annex_country = { target = ROOT transfer_troops = yes } }
+		ai_chance = {
+			factor = 70
+		}
+	}
+	option = {	#Decline
+		name = syria.47.o2
+		SYR = {
+			country_event = diplomatic_response.2
+			add_political_power = -50
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+			}
+		}
+		
+		ai_chance = {
+			factor = 30
+		}
 	}
 }

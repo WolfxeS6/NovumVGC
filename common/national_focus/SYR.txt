@@ -2423,7 +2423,7 @@ focus_tree = {
 		cost = 3
 		relative_position_id = SYR_The_Son
 		available = {
-			has_country_flag = left_lebanon
+			has_country_flag = SYR_left_lebanon
 		}
 		prerequisite = {
 			focus = SYR_The_Status_Of_Lebanon
@@ -3747,6 +3747,9 @@ focus_tree = {
 		available = {
 			has_completed_focus = SYR_The_Hunger_for_Power
 		}
+		mutually_exclusive = {
+			focus = SYR_Army_of_Democracy
+		}
 		x = 19
 		y = 8
 		ai_will_do = {
@@ -3826,6 +3829,9 @@ focus_tree = {
 		}
 		available = {
 			has_completed_focus = SYR_Keep_the_Promise
+		}
+		mutually_exclusive = {
+			focus = SYR_Army_of_Syria
 		}
 		x = 21
 		y = 8
@@ -5200,6 +5206,9 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SYR_Mired_of_Syria
 		}
+		available = {
+			has_country_leader = SYR_Abdullah_II_flag
+		}
 		ai_will_do = {
 			factor = 100
 			}
@@ -5283,11 +5292,13 @@ focus_tree = {
 		x = -7
 		y = 5
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			every_country = {
+				limit = { is_in_faction_with = USA }
+					add_opinion_modifier = {
+						target = SYR
+						modifier = declaration_of_friendship
+					}
 			}
-			add_war_support = 0.05
 			
 		 }
 	}
@@ -5308,12 +5319,30 @@ focus_tree = {
 		x = -5
 		y = 5
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			TUR = {
+				add_popularity = {
+					ideology = Monarchist
+					popularity = 0.05
+				}
 			}
-			add_war_support = 0.05
-			
+			IRQ = {
+				add_popularity = {
+					ideology = Monarchist
+					popularity = 0.05
+				}
+			}
+			PAK = {
+				add_popularity = {
+					ideology = Monarchist
+					popularity = 0.05
+				}
+			}
+			PER = {
+				add_popularity = {
+					ideology = Monarchist
+					popularity = 0.05
+				}
+			}
 		 }
 	}
 	focus = {
@@ -5333,12 +5362,25 @@ focus_tree = {
 		x = -6
 		y = 6
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			create_faction = "Central Treaty Organisation"
+			PER = {
+				country_event = syria.28
+			}		
+			IRQ = {
+				country_event = syria.28
 			}
-			add_war_support = 0.05
-			
+			PAK = {
+				country_event = syria.28
+			}
+			IRQ = {
+				country_event = syria.28
+			}
+			TUR = {
+				country_event = syria.28
+			}		
+			ENG = {
+				country_event = syria.46
+			}	
 		 }
 	}
 	focus = {
@@ -5358,12 +5400,10 @@ focus_tree = {
 		x = -7
 		y = 7
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			every_country = {
+				limit = {is_in_faction_with = SYR}
+				add_ideas = SYR_CENTO_Military_Specifications
 			}
-			add_war_support = 0.05
-			
 		 }
 	}
 	focus = {
@@ -5380,12 +5420,10 @@ focus_tree = {
 		x = -5
 		y = 7
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			every_country = {
+				limit = {is_in_faction_with = SYR}
+				add_ideas = SYR_CENTO_Pound
 			}
-			add_war_support = 0.05
-			
 		 }
 	}
 	focus = {
@@ -5403,11 +5441,25 @@ focus_tree = {
 		y = 5
 		completion_reward = {
 			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+				ideology = conservative
+				popularity = -0.05
 			}
-			add_war_support = 0.05
-			
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = progressive
+				popularity = -0.05
+			}
 		 }
 	}
 	focus = {
@@ -5424,11 +5476,10 @@ focus_tree = {
 		x = -3
 		y = 6
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
+			swap_ruler_traits = {
+				remove = peaceful_king_syria
+				add = peaceful_king_syria2
 			}
-			add_war_support = 0.05
 			
 		 }
 	}
@@ -5437,6 +5488,9 @@ focus_tree = {
 		icon = GFX_focus_FIN_mustapaidat
 		cost = 5
 		relative_position_id = SYR_President_Rifaat
+		mutually_exclusive = {
+			focus = SYR_CENTO_Alliance
+		}
 		prerequisite = {
 			focus = SYR_Fiscal_Union
 		}
@@ -5453,7 +5507,47 @@ focus_tree = {
 		y = 8
 		completion_reward = {
 			set_cosmetic_tag = SYR_CENTO
-			
+			every_country = {
+				limit = {
+					is_in_faction_with = SYR
+					capital_scope = {
+						is_on_continent = middle_east
+					}	
+						NOT = {
+							original_tag = SYR
+							}
+						}
+				country_event = syria.47
+			}	
+		 }
+	}
+	focus = {
+		id = SYR_CENTO_Alliance
+		icon = GFX_focus_FIN_mustapaidat
+		cost = 5
+		relative_position_id = SYR_President_Rifaat
+		mutually_exclusive = {
+			focus = SYR_CENTO_Union
+		}
+		prerequisite = {
+			focus = SYR_King_of_Peace
+		}
+		prerequisite = {
+			focus = SYR_Fiscal_Union
+		}
+		prerequisite = {
+			focus = SYR_Unitary_Military_Training
+		}
+		ai_will_do = {
+			factor = 100
+			}
+		x = -2
+		y = 8
+		completion_reward = {
+			every_country = {
+				limit = {is_in_faction_with = SYR}
+				add_ideas = defensive_preparations3
+			}
 		 }
 	}
 	focus = {
@@ -5488,6 +5582,7 @@ focus_tree = {
 		relative_position_id = SYR_President_Rifaat
 		prerequisite = {
 			focus = SYR_CENTO_Union
+			focus = SYR_CENTO_Alliance
 		}
 		mutually_exclusive = {
 			focus = SYR_NATO_Membership_M
@@ -5498,11 +5593,7 @@ focus_tree = {
 		x = -3
 		y = 9
 		completion_reward = {
-			add_popularity = {
-				ideology = Monarchist
-				popularity = 0.1
-			}
-			add_war_support = 0.05
+			add_ideas = neutrality_idea
 			
 		 }
 	}
@@ -5516,6 +5607,9 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = SYR_King_of_Jordan_and_Syria
+		}
+		available = {
+			has_country_flag = SYR_Mired_flag
 		}
 		ai_will_do = {
 			factor = 100

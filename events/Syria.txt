@@ -543,7 +543,7 @@ country_event = { #UAR Annex Iraq
 			factor = 70
 			modifier = {
 				add = 30
-				is_in_faction = yes
+				is_puppet_of = SYR
 			}
 		}
 		SYR = {
@@ -696,9 +696,9 @@ country_event = {
 		SYR = {
 			create_wargoal = {
 				type = annex_everything
-				target = SYR
+				target = LEB
 			}
-			remove_puppet = LEB
+			end_puppet = LEB
 		}
 		ai_chance = {
 			factor = 30
@@ -1001,7 +1001,9 @@ country_event = {
 
 	option = {
 		name = syria.23.o1
-		
+			LEB = {
+				set_country_flag = LEB_Rafiq_Hariri_Dead
+			}
 			remove_ideas = LEB_Rafiq_Hariri
 			hidden_effect = {
 				country_event = {
@@ -1342,7 +1344,7 @@ country_event = {
 		add_ideas = SYR_sanctioned
 	}
 }
-#Saudi King Offer
+#Jordanian Visit
 country_event = {
 	id = syria.37
 	title = syria.37.t
@@ -1365,7 +1367,7 @@ country_event = {
 		}
 	}
 }
-#Saudi Arabia accepts
+#Abdullah II
 country_event = {
 	id = syria.38
 	title = syria.38.t
@@ -1379,13 +1381,31 @@ country_event = {
 
 	option = {	
 		name = syria.38.o1
-		add_ideas = SYR_King_Abdullah
-		set_country_flag = SYR_Abdullah
+		remove_ideas = SYR_Kingdom_without_a_King
+		set_country_flag = SYR_Abdullah_II_flag
+		annex_country = {
+			target = JOR
+			transfer_troops = no
+		}
 		set_cosmetic_tag = SYR_RM
+		add_country_leader_role = {
+			character = SYR_Abdullah_II
+			promote_leader = yes
+			country_leader = {
+				ideology = semi_constitutional_monarchist
+				expire = "1.1.1.1"
+				traits = { 
+					propaganda_expert
+				}
+			}
+		}
+		add_state_core = 455
+		add_state_core = 993
+		add_state_core = 1175
 	}
 }
 
-#Saudi Arabia refuses
+#Mired I
 country_event = {
 	id = syria.39
 	title = syria.39.t
@@ -1396,34 +1416,26 @@ country_event = {
 	}
 	is_triggered_only = yes
 	fire_only_once = yes
-
+	immediate = {
+		set_cosmetic_tag = SYR_Mired
+	}
+	
 	option = {	
 		name = syria.39.o1
-
-		add_stability = -0.05
-		hidden_effect = {
-			country_event = {
-				id = syria.40 days = 5
+		add_country_leader_role = {
+			character = SYR_Mired_I_real
+			promote_leader = yes
+			country_leader = {
+				ideology = semi_constitutional_monarchist
+				expire = "1.1.1.1"
+				traits = { 
+					propaganda_expert
+				}
 			}
 		}
-	}
-}
-country_event = {
-	id = syria.40
-	title = syria.40.t
-	desc = syria.40.d
-	picture = GFX_report_Death_of_Maher
-	trigger = {
-		original_tag = SYR
-	}
-	is_triggered_only = yes
-	fire_only_once = yes
+		add_stability = -0.05
+		set_country_flag = SYR_Mired_flag
 
-	option = {	
-		name = syria.40.o1
-		add_ideas = SYR_King_Mired
-		set_country_flag = SYR_Mired
-		set_cosmetic_tag = SYR_RM
 	}
 }
 country_event = {
@@ -1515,4 +1527,147 @@ country_event = {
 		complete_national_focus = SYR_Progressive_Nasserism
 	}
 }
+#Demanding the Kuwait Naval Base
+country_event = {
+	id = syria.43
+	title = syria.43.t
+	desc = syria.43.d
+	picture = GFX_report_Golan_Fight_Won
+	is_triggered_only = yes
+	fire_only_once = yes
 
+	option = {	
+		name = syria.43.o1
+	SYR = {
+		transfer_state = 1045
+		add_state_core = 1045
+	}
+	}
+	option = {	
+		name = syria.43.o2
+		SYR = {
+			create_wargoal = {
+				type = annex_everything
+				target = USA
+			}
+		}
+	}
+}
+#Demanding southern Turkey
+country_event = {
+	id = syria.44
+	title = syria.44.t
+	desc = syria.44.d
+	picture = GFX_report_Golan_Fight_Won
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	
+		name = syria.44.o1
+	SYR = {
+		transfer_state = 350
+		transfer_state = 352
+		transfer_state = 344
+		transfer_state = 345
+		transfer_state = 1186
+		transfer_state = 1189
+		transfer_state = 827
+		add_state_core = 350
+		add_state_core = 352
+		add_state_core = 344
+		add_state_core = 345
+		add_state_core = 1186
+		add_state_core = 1189
+		add_state_core = 827
+	}
+	}
+	option = {	
+		name = syria.44.o2
+		SYR = {
+			create_wargoal = {
+				type = annex_everything
+				target = TUR
+			}
+		}
+	}
+}
+country_event = {
+	id = syria.45
+	title = syria.45.t
+	desc = syria.45.d
+	picture = GFX_report_Death_of_Maher
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	
+		name = syria.45.o1
+		random_country = {
+			limit = {
+			  has_government = monarchist
+			  has_civil_war = yes
+			  has_full_control_of_state = 413
+			}
+			ROOT = {puppet = PREV}
+		  }
+	}
+}
+#CENTO UK-Guarantees
+country_event = {
+	id = syria.46
+	title = syria.46.t
+	desc = syria.46.d
+	picture = GFX_report_event_bulgaria
+
+	is_triggered_only = yes
+	option = {	#Accept
+		name = syria.46.o1
+		give_guarantee = SYR
+		SYR = {
+			give_guarantee = ENG
+		}
+		ai_chance = {
+			factor = 70
+		}
+	}
+	option = {	#Decline
+		name = syria.46.o2
+		SYR = {
+			country_event = diplomatic_response.2
+			add_political_power = -50
+		}
+		ai_chance = {
+			factor = 30
+		}
+	}
+}
+#CENTO Unification
+country_event = {
+	id = syria.47
+	title = syria.47.t
+	desc = syria.47.d
+	picture = GFX_report_event_bulgaria
+
+	is_triggered_only = yes
+	option = {	#Accept
+		name = syria.47.o1
+		FROM = { annex_country = { target = ROOT transfer_troops = yes } }
+		ai_chance = {
+			factor = 70
+		}
+	}
+	option = {	#Decline
+		name = syria.47.o2
+		SYR = {
+			country_event = diplomatic_response.2
+			add_political_power = -50
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+			}
+		}
+		
+		ai_chance = {
+			factor = 30
+		}
+	}
+}

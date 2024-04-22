@@ -334,8 +334,8 @@ joint_focus = {
 
 
 	completion_reward  = {
-		add_ideas = EURO_erasmus
 		add_to_tech_sharing_group = erasmus_sharing
+		unlock_decision_tooltip = eu_research_funding_decision
 	}
 }
 joint_focus = {
@@ -752,10 +752,45 @@ joint_focus = {
 
 	completion_reward = {
 		add_ideas = EURO_peacekeeping
+		unlock_decision_tooltip = eu_peacekeeping_in_macedonia_decision
+		unlock_decision_tooltip = eu_peacekeeping_in_bosnia_decision
 	}
 }
 joint_focus = {
-	id = EURO_european_joint_precurement
+	id = EURO_european_global_peace
+	
+	icon = GFX_goal_Increase_Military_Spending
+	
+	prerequisite = { focus = EURO_european_peacekeeping }
+
+	
+	x = -1
+	y = 1
+	relative_position_id = EURO_european_peacekeeping
+	cost = 5
+
+	available = {
+		is_subject = no
+		is_EU_member = yes
+        any_other_country = {is_EU_member = yes} # you cannot just do the EU on your own
+	}
+
+	ai_will_do = {
+		base = 1
+	}
+
+	search_filters = { FOCUS_FILTER_EUROPE }
+
+	joint_trigger = {
+  		is_EU_member = yes
+	}
+
+
+	completion_reward = {
+	}
+}
+joint_focus = {
+	id = EURO_european_security_strategy
 	
 	icon = GFX_goal_Increase_Military_Spending
 	
@@ -786,6 +821,73 @@ joint_focus = {
 
 	completion_reward = {
 		add_ideas = EURO_joint_precurements
+	}
+}
+joint_focus = {
+	id = EURO_european_joint_precurement
+	
+	icon = GFX_goal_Increase_Military_Spending
+	
+	prerequisite = { focus = EURO_european_security_strategy }
+	
+	x = 0
+	y = 1
+	relative_position_id = EURO_european_security_strategy
+	cost = 5
+
+	available = {
+		is_subject = no
+		is_EU_member = yes
+        any_other_country = {is_EU_member = yes} # you cannot just do the EU on your own
+	}
+
+	ai_will_do = {
+		base = 1
+	}
+
+	search_filters = { FOCUS_FILTER_EUROPE }
+
+	joint_trigger = {
+  		is_EU_member = yes
+	}
+
+
+	completion_reward = {
+		add_ideas = EURO_joint_precurements
+	}
+}
+joint_focus = {
+	id = EURO_define_defence_choices
+	
+	icon = GFX_goal_Increase_Military_Spending
+	
+	prerequisite = { focus = EURO_european_security_strategy }
+	
+	x = 2
+	y = 1
+	relative_position_id = EURO_european_security_strategy
+	cost = 5
+
+	available = {
+		has_completed_focus = EURO_executive_reforms
+		is_subject = no
+		is_EU_member = yes
+        any_other_country = {is_EU_member = yes} # you cannot just do the EU on your own
+	}
+
+	ai_will_do = {
+		base = 1
+	}
+
+	search_filters = { FOCUS_FILTER_EUROPE }
+
+	joint_trigger = {
+  		is_EU_member = yes
+	}
+
+
+	completion_reward = {
+		unlock_decision_tooltip = eu_mutual_defence_decision
 	}
 }
 joint_focus = {
@@ -1032,8 +1134,7 @@ joint_focus = {
 
 
 	completion_reward = {
-        #allows investment decisions for relation
-		add_stability = 0.05
+		unlock_decision_tooltip = eu_treat_of_nice_decision
 	}
 }
 joint_focus = {
@@ -1181,6 +1282,7 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
         set_global_flag = eu_expansion_of_2004_focus
+		set_global_flag = EU_expansion
         every_country = {
             limit = {
                 OR = {
@@ -1620,7 +1722,7 @@ joint_focus = {
 joint_focus = {
 	id = EURO_proyectos_vigilancia_masiva
 	
-	icon = GFX_Align_UK_EU
+	icon = GFX_ENG_Surveillance
 	prerequisite = { 
         focus = EURO_pan_european_propaganda 
     }
@@ -1928,6 +2030,11 @@ joint_focus = {
 		is_subject = no
 		is_EU_member = yes
         is_EU_major = yes
+
+		has_global_flag = {
+			flag = EU_expansion
+			days > 175
+		}
 	}
     bypass = {
 				AND = {
@@ -1961,7 +2068,8 @@ joint_focus = {
 
 	completion_reward_joint_originator = {
         set_global_flag = eu_expansion_of_2007_focus
-        every_country = {
+        clr_global_flag = EU_expansion
+		every_country = {
             limit = {
                 OR = {
                     tag = BUL
@@ -1973,6 +2081,7 @@ joint_focus = {
             }
             country_event = { id = european_union.5 }
         }
+		set_global_flag = EU_expansion
 	}
 }
 joint_focus = {
@@ -1991,6 +2100,10 @@ joint_focus = {
 		is_subject = no
 		is_EU_member = yes
         is_EU_major = yes
+		has_global_flag = {
+			flag = EU_expansion
+			days > 175
+		}
 	}
     bypass = {
 				AND = {
@@ -2016,6 +2129,7 @@ joint_focus = {
 
 
 	completion_reward_joint_originator = {
+		clr_global_flag = EU_expansion
         set_global_flag = eu_expansion_of_2013_focus
         every_country = {
             limit = {
@@ -2028,6 +2142,7 @@ joint_focus = {
             }
             country_event = { id = european_union.5 }
         }
+		set_global_flag = EU_expansion
 	}
 }
 joint_focus = {
@@ -2047,6 +2162,11 @@ joint_focus = {
 		is_subject = no
 		is_EU_member = yes
         is_EU_major = yes
+
+		has_global_flag = {
+			flag = EU_expansion
+			days > 365
+		}
 	}
 
 	ai_will_do = {

@@ -1,0 +1,249 @@
+init_eu_vars = {
+    set_variable = { Global.eu_industrial_capacity_factory = 0.15 }
+    set_variable = { Global.eu_production_factory_efficiency_gain_factor = 0.1 }
+    set_variable = { Global.eu_political_advisor_cost_factor =  -0.1 }
+    set_variable = { Global.eu_political_power_gain = -0.5}
+    set_variable = { Global.eu_war_support_factor = -0.05 }
+    set_variable = { Global.eu_justify_war_goal_time =  0.25}
+    set_variable = { Global.eu_ai_join_ally_desire_factor = -10 }
+    #set_variable = { eu_local_consumer_goods = 0.05 }
+    set_variable = { Global.eu_consumer_goods = 0 } #generic costs default to 0
+    eu_countries_stat_calc = yes
+    #set_variable = { Global. =  }
+    #set_variable = { Global. =  }
+}
+eu_countries_stat_calc = {
+    set_variable = { eu_local_consumer_goods = 0} 
+    set_variable = { eu_local_monthly_pop = 0} 
+    add_to_variable = { eu_local_monthly_pop = Global.eu_consumer_goods }
+    if = {
+        limit = {
+            has_idea = national_development_developed
+        }
+        add_to_variable = { eu_local_consumer_goods = 0.075 }
+        add_to_variable = { eu_local_monthly_pop = 0.1 }
+    }
+    else = {
+        add_to_variable = { eu_local_consumer_goods = -0.05 }
+        add_to_variable = { eu_local_monthly_pop = -0.1 }
+    }
+    if = {
+        limit = {
+            has_country_flag = eu_migrant_crisis_reduced
+        }
+        add_to_variable = { eu_local_monthly_pop = 0.2 }
+    }
+    else_if = {
+        limit = {
+            has_country_flag = eu_migrant_crisis
+        }
+        add_to_variable = { eu_local_monthly_pop = 0.5 }
+    }
+    if = {
+        limit = {
+            tag = ENG
+            has_completed_focus = ENG_special_treatment
+        }
+        add_to_variable = { eu_local_consumer_goods = -0.05 }
+    }
+    else_if = {
+        limit = {
+            tag = ENG
+        }
+        add_to_variable = { eu_local_consumer_goods = -0.025 }
+    }
+}
+eu_vote_initialisation = {
+    clear_array = global.eu_voting
+			resize_array = {
+				array = global.eu_voting
+				value = 0
+				size = 3 #yes #no #abstain
+			}
+			every_country = {
+				limit = {
+					is_EU_member = yes
+				}
+				set_country_flag = eu_not_voted_yet
+				activate_mission = eu_test_law_mission
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					hidden_effect = {
+						eu_ai_law_calc = yes
+					}
+				}
+			}
+}
+eu_ai_law_calc = {
+    random_list = {
+        0 = {
+            modifier = {
+                add = 10
+                has_government = reactionary
+            }
+            country_event = {
+                id = eu_voting_events.1
+                days = 35
+                random_hours = 12
+                random_days = 32
+            }
+        }
+        10 = {
+            modifier = {
+                factor = 2
+                has_government = reactionary
+            }
+            country_event = {
+                id = eu_voting_events.2
+                days = 35
+                random_hours = 12
+                random_days = 32
+            }
+        }
+        20 = {
+            country_event = {
+                id = eu_voting_events.3
+                days = 35
+                random_hours = 12
+                random_days = 32
+            }
+        }
+        20 = {
+            modifier = {
+                add = 100
+                has_opinion = {
+                    target = event_target:eu_vote_caller
+                    value > 10
+                }
+            }
+            country_event = {
+                id = eu_voting_events.4
+                days = 35
+                random_hours = 12
+                random_days = 32
+            }
+        }
+    }
+}
+law_completion_effects = {
+    if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 1
+            }
+        }
+        #eu_treat_of_nice_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 2
+            }
+        }
+        #eu_research_funding_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 3
+            }
+        }
+        #eu_industrial_subsidies_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 4
+            }
+        }
+        #eu_mutual_defence_decision
+        set_global_flag = eu_mutual_defence_agreed
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 5
+            }
+        }
+        #eu_invest_in_democracy_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 6
+            }
+        }
+        #eu_european_defence_integration_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 7
+            }
+        }
+        #eu_disaster_relief_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 8
+            }
+        }
+        #eu_cut_red_tape_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 9
+            }
+        }
+        #eu_aggricultural_subsidies_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 10
+            }
+        }
+        #eu_infrastructure_investments_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 11
+            }
+        }
+        #eu_ecb_banking_intervention_decision
+    }
+    else_if = {
+        limit = {
+            has_global_flag = {
+                flag = eu_voting_topic
+                value = 12
+            }
+        }
+        #eu_remilitarisation_decision
+    }
+}
+eu_member_count_enact = {
+    set_variable = {eu_member_count = 0}
+    every_country = {
+        limit = {
+            is_EU_member = yes
+        }
+        add_to_variable = {eu_member_count = 1}
+    }
+}

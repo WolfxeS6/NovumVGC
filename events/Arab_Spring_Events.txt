@@ -6,9 +6,6 @@ country_event = {	#Mohammed Bouazizi Self Immolation 17th of December 2010
 	desc = arab_spring.1.d
 	picture = GFX_report_arab_spring_tunisia1
 	trigger = {
-	    tag = TUN
-	    date > 2010.12.1
-		date < 2011.3.1
         has_government = reactionary
 	}
 	is_triggered_only = yes
@@ -204,9 +201,6 @@ country_event = {	#Algeria Protests
 	desc = arab_spring.7.d
 	picture = GFX_report_arab_spring_algeria1
 	trigger = {
-	    tag = ALG
-	    date > 2010.12.5
-		date < 2011.3.1
         has_government = democratic_socialist
 	}
 	is_triggered_only = yes
@@ -397,9 +391,6 @@ country_event = {	#Egyptian Protests
 	desc = arab_spring.14.d
 	picture = GFX_report_arab_spring_egypt1
 	trigger = {
-	    tag = EGY
-	    date > 2011.1.1
-		date < 2012.2.1
         has_government = nationalist
 	}
 	is_triggered_only = yes
@@ -429,9 +420,6 @@ country_event = {	#Kuwait Stateless Protests
 	desc = arab_spring.15.d
 	picture = GFX_report_arab_spring_kuwait1
 	trigger = {
-	    tag = KUW
-	    date > 2011.2.1
-		date < 2012.3.1
         has_government = monarchist
 	}
 	is_triggered_only = yes
@@ -598,6 +586,11 @@ country_event = {	#Egyptian 2012 Elections
 					expire = "1.1.1.1"
 				}
 			}
+			country_event = {
+                id = arab_spring.20
+                days = 150
+                random_hours = 10
+            }
         }
 		ai_chance = {
 		    factor = 100
@@ -716,6 +709,10 @@ country_event = {	#Egyptian 2012 Elections
 			ideology = islamist
 			popularity = 0.1
 		}
+		set_politics = {
+			ruling_party = islamist
+			elections_allowed = yes
+		}
 		set_party_name = {
 			ideology = islamist
 			long_name = "Independent and Al-Nour Party"	
@@ -731,6 +728,134 @@ country_event = {	#Egyptian 2012 Elections
 					ARAB_Islamic_Democrat
 					ARAB_Backed_by_the_Al_Nour
 				}
+			}
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Egyptian 2013 Protests
+	id = arab_spring.20
+	title = arab_spring.20.t
+	desc = arab_spring.20.d
+	picture = GFX_report_arab_spring_egypt3
+	
+	is_triggered_only = yes
+
+	option = {
+		name = arab_spring.20.o1
+		add_stability = -0.05
+		add_popularity = {
+			ideology = islamist
+			popularity = -0.1
+		}
+		add_country_leader_trait = ARAB_Unwanted_President
+		ai_chance = {
+		    factor = 100
+	    }
+		hidden_effect = {
+			country_event = {
+                id = arab_spring.21
+                days = 20
+                random_hours = 10
+            }
+        }
+		remove_country_leader_trait = ARAB_First_Democratic_President_Egypt
+	}
+}
+country_event = {	#Egyptian 2013 Coup
+	id = arab_spring.21
+	title = arab_spring.21.t
+	desc = arab_spring.21.d
+	picture = GFX_report_arab_spring_egypt3
+	
+	is_triggered_only = yes
+
+	option = {
+		name = arab_spring.21.o1
+		add_country_leader_role = {
+			character = EGY_Abdel_Fattah_Sisi
+			promote_leader = yes
+			country_leader = {
+				ideology = military_junta
+				expire = "1.1.1.1"
+				traits = {
+					military_theorist
+				}
+			}
+		}
+		add_popularity = {
+			ideology = islamist
+			popularity = -0.35
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.15
+		}
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = nationalist
+			long_name = "Supreme Council of the Armed Forces"	
+			name = "SCAF"
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+	option = {
+		name = arab_spring.21.o2
+		add_political_power = -40
+		hidden_effect = {
+			add_country_leader_role = {
+				character = EGY_Abdel_Fattah_Sisi
+				promote_leader = yes
+				country_leader = {
+					ideology = military_junta
+					expire = "1.1.1.1"
+					traits = {
+						military_theorist
+					}
+				}
+			}
+			set_party_name = {
+				ideology = nationalist
+				long_name = "Supreme Council of the Armed Forces"	
+				name = "SCAF"
+			}
+			country_event = {
+				id = arab_spring.22
+				days = 2
+				random_hours = 10
+			}
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Egyptian Civil War
+	id = arab_spring.22
+	title = arab_spring.22.t
+	desc = arab_spring.22.d
+	picture = GFX_report_arab_spring_egypt3
+	
+	is_triggered_only = yes
+
+	option = {
+		name = arab_spring.22.o1
+		add_stability = -0.05
+		start_civil_war = {
+			ideology = nationalist
+			size = 0.3
+			states = { 
+				552
+				1032
+				453
+				447
 			}
 		}
 		ai_chance = {

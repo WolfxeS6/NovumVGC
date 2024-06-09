@@ -1731,7 +1731,7 @@ country_event = {
 
 	is_triggered_only = yes
 	option = {	#Annex Iran
-		name = syria.49.o1
+		name = syria.50.o1
 		SYR = {
 			annex_country = {
 				target = ROOT
@@ -1741,5 +1741,456 @@ country_event = {
 		ai_chance = {
 			factor = 100
 		}
+	}
+}
+
+country_event = {
+	id = syria.51
+	title = syria.51.t
+	desc = syria.51.d
+	picture = GFX_report_Opposition_Leaders
+
+	is_triggered_only = yes
+	option = {	#Riad Seif
+		name = syria.51.o1
+		add_country_leader_role = {
+			character = SYR_Riad_Seif
+			promote_leader = yes
+			country_leader = {
+				ideology = centrist
+				expire = "1.1.1.1"
+			}
+		}
+		set_party_name = {
+			ideology = social_liberal
+			long_name = "Forum for National Dialogue"	
+			name = "FND"
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = -0.1
+		}
+		set_country_flag = SYR_Riad_Seif_Opposition
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {	#Moaz al-Khatib
+		name = syria.51.o2
+		add_country_leader_role = {
+			character = SYR_Moaz_Al_Khatib
+			promote_leader = yes
+			country_leader = {
+				ideology = islamic_democrat
+				expire = "1.1.1.1"
+			}
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = -0.1
+		}
+		hidden_effect = {
+			set_party_name = {
+				ideology = social_liberal
+				long_name = "Forum for National Dialogue"	
+				name = "FND"
+			}
+			add_country_leader_role = {
+				character = SYR_Riad_Seif
+				promote_leader = yes
+				country_leader = {
+					ideology = centrist
+					expire = "1.1.1.1"
+				}
+			}
+		}
+		set_country_flag = SYR_Moaz_Al_Khatib_Opposition
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {	#Riad al-Turk
+		name = syria.51.o3
+		set_country_flag = SYR_Riad_al_Turk_Opposition
+		ai_chance = {
+			factor = 100
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = -0.1
+		}
+		hidden_effect = {
+			set_party_name = {
+				ideology = social_liberal
+				long_name = "Forum for National Dialogue"	
+				name = "FND"
+			}
+			add_country_leader_role = {
+				character = SYR_Riad_Seif
+				promote_leader = yes
+				country_leader = {
+					ideology = centrist
+					expire = "1.1.1.1"
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = syria.52
+	title = syria.52.t
+	desc = syria.52.d
+	picture = GFX_report_event_syrian_civil_war2
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = syria.52.o1
+
+		hidden_effect = {
+			set_country_flag = SYR_civil_war_in_action
+			every_core_state = {
+				limit = {
+				  is_controlled_by = ROOT
+				}
+			   add_dynamic_modifier = { modifier = unplanned_offensive}
+			   set_state_flag = SPR_unplanned_offensive_flag
+			}
+			KUS = {
+				set_state_owner = 814
+				set_state_owner = 1003
+				set_state_owner = 1046
+				set_state_controller = 814
+				set_state_controller = 1003
+				set_state_controller = 1046
+				814 = {
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 1634
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 10882
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						instant_build = yes
+						province = 1549
+					}
+				}
+				set_politics = {
+					ruling_party = democratic_socialist
+					elections_allowed = yes
+				}
+				add_popularity = {
+					ideology = democratic_socialist
+					popularity = 0.35
+				}
+				add_state_core = 814
+				add_state_core = 1003
+				add_state_core = 1046
+				if = {
+					limit = { IRQ = { has_stability < 0.1 } }
+					set_state_owner = 815
+					set_state_controller = 815
+					815 = {
+						add_building_construction = {
+							type = bunker
+							level = 2
+							instant_build = yes
+							province = 10804
+						}
+						add_building_construction = {
+							type = bunker
+							level = 2
+							instant_build = yes
+							province = 10811
+						}
+						add_building_construction = {
+							type = bunker
+							level = 2
+							instant_build = yes
+							province = 3916
+						}
+						add_building_construction = {
+							type = bunker
+							level = 2
+							instant_build = yes
+							province = 6826
+						}
+					}
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_3
+					amount = 5000
+					producer = KUS
+				}
+				load_oob = "KUR_rebels1"
+				814 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		start_civil_war = {
+			ideology = nationalist
+			size = 0.8
+			states = {554 1005 1004 680}
+			capital = 554
+		}
+		hidden_effect = {
+			random_country = {
+				limit = {
+					original_tag = SYR
+					OR = {
+						has_government = social_liberal
+						has_government = social_democrat
+						has_government = conservative
+					}
+				}
+				add_ideas = SYR_No_Surrender_Civil_War
+				set_war_support = 0.7
+				load_oob = "syrian_civil_war_rebels"
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 5000
+					producer = SYR
+				}
+				add_corps_commander_role = {
+					Character = SYR_manaf_tlass
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				}
+				add_corps_commander_role = {
+					Character = SYR_ahmed_berri
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				}
+				add_corps_commander_role = {
+					Character = SYR_khaldoun_zaineddin
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				}
+				add_corps_commander_role = {
+					Character = SYR_hussein_harmoush
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				}
+				add_corps_commander_role = {
+					Character = SYR_salim_idris
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				}
+				add_field_marshal_role = {
+					character = SYR_riad_al_asaad
+					skill = 2
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				  }
+			}
+		}
+		hidden_effect = {
+			random_country = {
+				limit = {
+					has_full_control_of_state = 554
+					OR = {
+						has_government = nationalist
+					}
+				}
+				set_war_support = 0.1
+				load_oob = "SYR_Assad_Loyalists_Units"
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = 5000
+					producer = SYR
+				}
+				add_ideas = SYR_No_Surrender_Civil_War
+			}
+		}
+	}
+}
+#USA Support
+country_event = {
+	id = syria.53
+	title = syria.53.t
+	desc = syria.53.d
+	picture = GFX_report_Ask_for_American_Help
+	is_triggered_only = yes
+
+	option = {	##High Support
+		name = syria.53.o1
+		SYR = {
+			country_event = syria.54
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_2
+			amount = -2000
+			producer = USA
+		}
+	}
+	option = {  ##Medium Support
+		name = syria.53.o2
+		SYR = {
+			country_event = syria.55
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_2
+			amount = -1000
+			producer = USA
+		}
+	}
+	option = {  ##Small Support
+		name = syria.53.o3
+		SYR = {
+			country_event = syria.56
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_2
+			amount = -500
+			producer = USA
+		}
+	}
+	option = {  ##No Support
+		name = syria.53.o4
+		add_political_power = 40
+		SYR = {
+			country_event = syria.57
+		}
+	}
+}
+#USA Big Arms Shipments
+country_event = {
+	id = syria.54
+	title = syria.54.t
+	desc = syria.54.d
+	picture = GFX_report_American_Weapon_Shipments
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = syria.54.o1
+		SYR = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_2
+				amount = 2000
+				producer = USA
+			}
+		}
+	}
+}
+#USA Medium Arms Shipments
+country_event = {
+	id = syria.55
+	title = syria.55.t
+	desc = syria.55.d
+	picture = GFX_report_American_Weapon_Shipments
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = syria.55.o1
+		SYR = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_2
+				amount = 1000
+				producer = USA
+			}
+		}
+	}
+}
+#USA Low Arms Shipments
+country_event = {
+	id = syria.56
+	title = syria.56.t
+	desc = syria.56.d
+	picture = GFX_report_American_Weapon_Shipments
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = syria.56.o1
+		SYR = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_2
+				amount = 500
+				producer = USA
+			}
+		}
+	}
+}
+#No USA Support
+country_event = {
+	id = syria.57
+	title = syria.57.t
+	desc = syria.57.d
+	picture = GFX_report_Ask_for_American_Help
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {	##No Support
+		name = syria.57.o1
+		add_political_power = -20
+		add_stability = -0.02
+		add_war_support = -0.02
+	}
+}
+#Muslim Brotherhood Inclusion yes or no
+country_event = {
+	id = syria.58
+	title = syria.58.t
+	desc = syria.58.d
+	picture = GFX_report_Muslim_Brotherhood_Opposition
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = syria.58.o1
+		set_country_flag = SYR_Muslim_Brotherhood_in_Opposition
+		add_stability = -0.05
+		add_war_support = 0.075
+	}
+	option = {
+		name = syria.58.o2
+		add_stability = 0.075
+		add_war_support = 0.05
 	}
 }

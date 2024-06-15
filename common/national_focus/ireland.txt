@@ -10,6 +10,7 @@ focus_tree = {
 	default = no
 
 	continuous_focus_position = { x = 900 y = 2900 }
+	shared_focus = EURO_Shared_Focus
 
 	focus = {
 		id = IRE_politics
@@ -1804,9 +1805,11 @@ focus_tree = {
 		}
 
 		focus = {
-			id = IRE_merica
-			icon = GFX_focus_ireland_learn_from_brits
+			id = IRE_american_ground
+			icon = GFX_USA_Army
 			prerequisite = { focus = IRE_develop_ground_forces }
+			mutually_exclusive = { focus = IRE_russian_ground }
+			mutually_exclusive = { focus = IRE_british_ground }
 	
 			x = -4
 			y = 1
@@ -1817,10 +1820,69 @@ focus_tree = {
 			available = {}
 	
 			completion_reward = {
-				add_equipment_to_stockpile = {
-					type = strat_bomber_equipment_2
-					amount = 30
-					producer = SOV
+				USA = {
+					add_opinion_modifier = {
+					target = IRE
+					modifier = declaration_of_friendship
+					}
+				}
+			}
+
+			ai_will_do = {
+				factor = 10
+			}
+		}
+
+		focus = {
+			id = IRE_russian_ground
+			icon = russian_shield
+			prerequisite = { focus = IRE_develop_ground_forces }
+			mutually_exclusive = { focus = IRE_american_ground }
+			mutually_exclusive = { focus = IRE_british_ground }
+	
+			x = 0
+			y = 1
+			relative_position_id = IRE_develop_ground_forces
+
+			cost = 10
+
+			available = {}
+	
+			completion_reward = {
+				SOV = {
+					add_opinion_modifier = {
+					target = IRE
+					modifier = declaration_of_friendship
+					}
+				}
+			}
+
+			ai_will_do = {
+				factor = 10
+			}
+		}
+
+		focus = {
+			id = IRE_british_ground
+			icon = GFX_focus_eng_chiefs_of_staff_committee
+			prerequisite = { focus = IRE_develop_ground_forces }
+			mutually_exclusive = { focus = IRE_russian_ground }
+			mutually_exclusive = { focus = IRE_american_ground }
+	
+			x = 4
+			y = 1
+			relative_position_id = IRE_develop_ground_forces
+
+			cost = 10
+
+			available = {}
+	
+			completion_reward = {
+				ENG = {
+					add_opinion_modifier = {
+					target = IRE
+					modifier = declaration_of_friendship
+					}
 				}
 			}
 

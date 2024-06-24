@@ -1179,11 +1179,11 @@ focus_tree = {
 		focus = {
 			id = IRE_village_hall_car_bomb
 			icon = GFX_focus_ireland_village_hall
-			prerequisite = { focus = IRE_car_bombing }
+			prerequisite = { focus = IRE_buy_guns }
 	
 			x = 0
 			y = 1
-			relative_position_id = IRE_car_bombing
+			relative_position_id = IRE_buy_guns
 
 			cost = 5
 
@@ -1208,12 +1208,11 @@ focus_tree = {
 		focus = {
 			id = IRE_car_bombing
 			icon = GFX_focus_ireland_car_bombing
-			prerequisite = { focus = IRE_buy_guns }
 			prerequisite = { focus = IRE_recruit_IRA }
 	
-			x = -1
+			x = 0
 			y = 1
-			relative_position_id = IRE_buy_guns
+			relative_position_id = IRE_recruit_IRA
 
 			cost = 5
 
@@ -1239,8 +1238,9 @@ focus_tree = {
 			id = IRE_online_propaganda
 			icon = GFX_focus_ireland_recruit_ira
 			prerequisite = { focus = IRE_village_hall_car_bomb }
+			prerequisite = { focus = IRE_car_bombing}
 	
-			x = 0
+			x = -1
 			y = 1
 			relative_position_id = IRE_village_hall_car_bomb
 
@@ -2424,6 +2424,7 @@ focus_tree = {
 				}
 				hidden_effect = {
 					news_event= Ireland_news.8
+					add_ideas = IRE_militia_ran_country
 				}
 			}
 	
@@ -2483,9 +2484,8 @@ focus_tree = {
 			id = IRE_war_on_drugs
 			icon = GFX_focus_ireland_war_on_drugs
 			prerequisite = { focus = IRE_deport_unionists }
-			prerequisite = { focus = IRE_kill_protestants}
 	
-			x = 1
+			x = 0
 			y = 1
 			relative_position_id = IRE_deport_unionists
 
@@ -2509,12 +2509,12 @@ focus_tree = {
 
 		focus = {
 			id = IRE_rearm
-			icon = small_arms5
-			prerequisite = { focus = IRE_war_on_drugs}
+			icon = POL_nazi_army
+			prerequisite = { focus = IRE_kill_protestants }
 	
 			x = 0
 			y = 1
-			relative_position_id = IRE_war_on_drugs
+			relative_position_id = IRE_kill_protestants
 
 			cost = 5
 
@@ -2535,6 +2535,237 @@ focus_tree = {
 	
 			ai_will_do = {
 				factor = 10
+			}
+		}
+
+		focus = {
+			id = IRE_better_education
+			icon = EU_education1
+			prerequisite = { focus = IRE_bring_NHS }
+			
+			x = -1
+			y = 1
+			relative_position_id = IRE_bring_NHS
+			
+			cost = 5
+			
+			available = {
+			}
+			
+			completion_reward = {
+				add_tech_bonus = {
+					name = industry_bonus
+					bonus = 0.5
+					uses = 1
+					category = industry
+				}
+			}
+				
+			ai_will_do = {
+				factor = 5
+			}
+		}
+
+		focus = {
+			id = IRE_promote_going_green
+			icon = GFX_goal_Green_World
+			prerequisite = { focus = IRE_bring_NHS }
+			
+			x = 1
+			y = 1
+			relative_position_id = IRE_bring_NHS
+			
+			cost = 5
+			
+			available = {
+			}
+			
+			completion_reward = {
+				add_ideas = IRE_promote_green_households
+				113 = {
+					add_extra_state_shared_building_slots = 1
+					add_manpower = 5000
+				}
+				134 = {
+					add_extra_state_shared_building_slots = 1
+					add_manpower = 5000
+				}
+			}
+			
+				
+			ai_will_do = {
+				factor = 5
+			}
+		}
+
+		focus = {
+			id = IRE_tech_jobs
+			icon = GFX_goal_High_Tech_Factory
+			prerequisite = { focus = IRE_better_education }
+			prerequisite = { focus = IRE_promote_going_green }
+			
+			x = -1
+			y = 1
+			relative_position_id = IRE_promote_going_green
+			
+			cost = 5
+			
+			available = {
+			}
+			
+			completion_reward = {
+				add_research_slot = 1
+			}
+				
+			ai_will_do = {
+				factor = 5
+			}
+		}
+
+		focus = {
+			id = IRE_renewable_energy
+			icon = POL_renweble_energy
+			prerequisite = { focus = IRE_oppress_unionist }
+			
+			x = 0
+			y = 1
+			relative_position_id = IRE_oppress_unionist
+			
+			cost = 5
+			
+			available = {
+			}
+			
+			completion_reward = {
+				random_owned_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = recycling_center
+						level = 1
+						instant_build = yes
+					}
+				}
+				random_owned_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = recycling_center
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+				
+			ai_will_do = {
+				factor = 5
+			}
+		}
+
+		focus = {
+			id = IRE_nuclear_help
+			icon = GFX_focus_wonderweapons
+			prerequisite = { focus = IRE_joint_exercises }
+			
+			x = 0
+			y = 3
+			relative_position_id = IRE_joint_exercises
+			
+			cost = 5
+			
+			available = {
+				owns_state = 119
+			}
+			
+			completion_reward = {
+				if = {
+					limit = { NOT = { has_tech = atomic_research } }
+					set_technology = { atomic_research = 1 }
+				}
+				else = {
+					add_tech_bonus = {
+						name = tech_bonus
+						bonus = 3.0
+						uses = 1
+						category = nuclear
+					}
+				}
+			}
+				
+			ai_will_do = {
+				factor = 5
+			}
+		}
+
+		focus = {
+			id = IRE_illegal_fishing
+			icon = GFX_goal_Trade_Ships
+			prerequisite = { focus = IRE_renewable_energy }
+			
+			x = 0
+			y = 1
+			relative_position_id = IRE_renewable_energy
+			
+			cost = 5
+			
+			available = {
+			}
+			
+			completion_reward = {
+				add_political_power = 50
+			}
+				
+			ai_will_do = {
+				factor = 5
+			}
+		}
+
+		focus = {
+			id = IRE_acts_of_terror
+			icon = POL_bomb_enemy_soldiers
+			prerequisite = { focus = IRE_rearm }
+			prerequisite = { focus = IRE_war_on_drugs }
+			
+			x = -1
+			y = 1
+			relative_position_id = IRE_rearm
+			
+			cost = 10
+			
+			available = {
+			}
+			
+			completion_reward = {
+				add_political_power = 50
+			}
+				
+			ai_will_do = {
+				factor = 5
+			}
+		}
+
+		focus = {
+			id = IRE_revenge
+			icon = GFX_focus_ireland_revenge
+			prerequisite = { focus = IRE_acts_of_terror }
+			
+			x = 0
+			y = 1
+			relative_position_id = IRE_acts_of_terror
+			
+			cost = 10
+			
+			available = {
+			}
+			
+			completion_reward = {
+				create_wargoal = {
+    				target = ENG
+   					type = take_claimed_state
+    				generator = { 119 }
+				}
+			}
+				
+			ai_will_do = {
+				factor = 5
 			}
 		}
 	}

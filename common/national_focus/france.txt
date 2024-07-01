@@ -81,7 +81,7 @@ focus_tree = {
 		icon = GFX_goal_Franch_Manufacturing
 		x = @economic_tree_center
 		y = 0
-		cost = 10
+		cost = 8
 
 		completion_reward = {
 			if = {
@@ -106,7 +106,7 @@ focus_tree = {
 		icon = neutrality
 		x = @ideology_start
 		y = 0
-		cost = 10
+		cost = 8
 
 		completion_reward = {
 			add_political_power = 50
@@ -122,7 +122,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_naval_dockyard
 		x = @economic_tree_very_far_left
 		y = 1
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_the_french_economy
@@ -156,7 +156,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_mil_factory
 		x = @economic_tree_left
 		y = 1
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_the_french_economy
@@ -190,7 +190,7 @@ focus_tree = {
 		icon = GFX_focus_generic_the_giant_wakes
 		x = @economic_tree_far_right
 		y = 1
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_the_french_economy
@@ -219,17 +219,9 @@ focus_tree = {
 	focus = {
 		id = FRA_liberte
 		icon = GFX_FRA_Liberte
-		x = @ideology_liberty_start
+		x = @ideology_populism_head
 		y = 1
-		cost = 10
-		available = {
-			hidden_trigger = {
-				NOT = {
-					is_ai = yes
-					is_historical_focus_on = yes
-				}
-			}
-		}
+		cost = 8
 		prerequisite = {
 			focus = FRA_our_future
 		}
@@ -239,6 +231,9 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = FRA_fraternite
+		}
+		mutually_exclusive = {
+			focus = FRA_solidarite
 		}
 
 		completion_reward = {
@@ -293,15 +288,7 @@ focus_tree = {
 		icon = french_communism
 		x = @ideology_egality_start
 		y = 1
-		cost = 10
-		available = {
-			hidden_trigger = {
-				NOT = {
-					is_ai = yes
-					is_historical_focus_on = yes
-				}
-			}
-		}
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_our_future
@@ -312,6 +299,9 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = FRA_fraternite
+		}
+		mutually_exclusive = {
+			focus = FRA_solidarite
 		}
 
 		completion_reward = {
@@ -362,15 +352,7 @@ focus_tree = {
 		icon = align_to_france
 		x = @ideology_fraternity_start
 		y = 1
-		cost = 10
-		available = {
-			hidden_trigger = {
-				NOT = {
-					is_ai = yes
-					is_historical_focus_on = yes
-				}
-			}
-		}
+		cost = 8
 		prerequisite = {
 			focus = FRA_our_future
 		}
@@ -380,6 +362,9 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = FRA_egalite
+		}
+		mutually_exclusive = {
+			focus = FRA_solidarite
 		}
 
 		completion_reward = {
@@ -431,11 +416,471 @@ focus_tree = {
 	}
 
 	focus = {
+		id = FRA_solidarite
+		icon = GFX_focus_spr_torchbearers_of_tomorrow
+		x = 18
+		y = 1
+		cost = 8
+
+		prerequisite = {
+			focus = FRA_our_future
+		}
+
+		relative_position_id = FRA_our_future
+		mutually_exclusive = {
+			focus = FRA_liberte
+		}
+		mutually_exclusive = {
+			focus = FRA_egalite
+		}
+		mutually_exclusive = {
+			focus = FRA_fraternite
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			fourth_estate_social_democrat_increase = yes
+			fourth_estate_social_liberal_increase = yes
+		}
+
+		ai_will_do = {
+			factor = 0
+
+			modifier = {
+				add = 10
+				has_game_rule = {
+					rule = FRA_ai_behavior
+					option = MONARCHIST
+				}
+			}
+			modifier = {
+				add = 10
+				is_historical_focus_on = no
+				has_game_rule = {
+					rule = FRA_ai_behavior
+					option = DEFAULT
+				}
+			}
+			modifier = {
+				add = 10
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = FRA_ai_behavior
+					option = DEFAULT
+				}
+			}
+			modifier = {
+				add = 20
+				has_game_rule = {
+					rule = FRA_ai_behavior
+					option = RANDOM
+				}
+			}
+		}
+	}
+	focus = {
+		id = FRA_35hour_week
+		icon = GFX_focus_DEN_limited_regulations
+		x = -2
+		y = 1
+		cost = 8
+		relative_position_id = FRA_solidarite
+		prerequisite = {
+			focus = FRA_solidarite
+		}
+
+		completion_reward = {
+			add_ideas = FRA_reasonable_workweek
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_rural_development_plan
+		icon = GFX_goal_generic_construction
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = FRA_35hour_week
+		prerequisite = {
+			focus = FRA_35hour_week
+		}
+
+		completion_reward = {
+			32 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			27 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			18 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			979 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_focus_on_unemployment
+		icon = GFX_focus_generic_full_employment
+		x = 2
+		y = 1
+		cost = 8
+		relative_position_id = FRA_rural_development_plan
+		prerequisite = {
+			focus = FRA_rural_development_plan
+		}
+		prerequisite = {
+			focus = FRA_constitutional_referendum
+		}
+
+		completion_reward = {
+			fourth_estate_conservative_increase = yes 
+			fourth_estate_market_liberal_increase = yes 
+			fourth_estate_social_democrat_increase = yes
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_cne #Contrat nouvelle embauche
+		icon = GFX_goal_generic_forceful_treaty
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_focus_on_unemployment
+		prerequisite = {
+			focus = FRA_focus_on_unemployment
+		}
+
+		mutually_exclusive = {
+			focus = FRA_greater_subsidies
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_rigid_labour_laws
+				add_idea = FRA_strong_labour_laws
+			}
+			swap_ideas = {
+				remove_idea = FRA_high_unemployment
+				add_idea = FRA_moderate_unemployment
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_greater_subsidies
+		icon = GFX_focus_ETH_adopt_the_lira
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_focus_on_unemployment
+		prerequisite = {
+			focus = FRA_focus_on_unemployment
+		}
+		mutually_exclusive = {
+			focus = FRA_cne
+		}
+		completion_reward = {
+			add_political_power = -120
+			swap_ideas = {
+				remove_idea = FRA_high_unemployment
+				add_idea = FRA_moderate_unemployment
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	focus = {
+		id = FRA_rsa #Revenu de solidarité active
+		icon = GFX_goal_generic_consumer_goods
+		x = 2
+		y = 1
+		cost = 8
+		relative_position_id = FRA_cne
+		prerequisite = {
+			focus = FRA_greater_subsidies
+			focus = FRA_cne
+		}
+
+
+		completion_reward = {
+			remove_ideas = FRA_moderate_unemployment
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_combat_nationalists
+		icon = GFX_focus_spr_the_anti_fascist_workers_revolution
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_cne
+		prerequisite = {
+			focus = FRA_greater_subsidies
+			focus = FRA_cne
+		}
+
+
+		completion_reward = {
+			fourth_estate_fascist_decrease = yes 
+			fourth_estate_reactionary_decrease = yes 
+			add_stability = 0.05
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_oversee_old_empire
+		icon = GFX_focus_fra_devalue_the_franc
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_combat_nationalists
+		prerequisite = {
+			focus = FRA_careful_NATOcooperation
+		}
+		prerequisite = {
+			focus = FRA_combat_nationalists
+		}
+
+
+		completion_reward = {
+			every_country = {
+				limit = { has_country_flag = country_language_french }
+				add_opinion_modifier = {
+					target = FRA
+					modifier = declaration_of_friendship
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_european_spirit
+		icon = align_to_europe
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_combat_nationalists
+		prerequisite = {
+			focus = FRA_combat_nationalists
+		}
+
+
+		completion_reward = {
+			every_country = {
+				limit = {
+					capital_scope = { is_on_continent = europe }
+				}
+				add_opinion_modifier = {
+					target = FRA
+					modifier = declaration_of_friendship
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_education_excellence
+		icon = GFX_focus_generic_university_3
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_european_spirit
+		prerequisite = {
+			focus = FRA_european_spirit
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_support_aquitaine_wine
+		icon = GFX_focus_generic_land_reclamation
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_european_spirit
+		prerequisite = {
+			focus = FRA_european_spirit
+		}
+
+		completion_reward = {
+			19 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_careful_NATOcooperation
+		icon = align_to_nato
+		x = -3
+		y = 1
+		cost = 8
+		relative_position_id = FRA_cne
+		prerequisite = {
+			focus = FRA_greater_subsidies
+			focus = FRA_cne
+		}
+
+
+		completion_reward = {
+			add_ideas = FRA_strategic_autonomy_idea
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_strategic_autonomy
+		icon = GFX_goal_generic_position_armies
+		x = -1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_careful_NATOcooperation
+		prerequisite = {
+			focus = FRA_careful_NATOcooperation
+		}
+
+
+		completion_reward = {
+			add_ideas = FRA_strategic_autonomy_idea
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_semi_privatise_EDF
+		icon = GFX_focus_generic_energy
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = FRA_rural_development_plan
+		prerequisite = {
+			focus = FRA_rural_development_plan
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = FRA_privatisation
+				days = 720
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_constitutional_referendum
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_solidarite
+		prerequisite = {
+			focus = FRA_solidarite
+		}
+
+		completion_reward = {
+			add_political_power = 100 # turn into an event
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = FRA_decrentalisation
+		icon = GFX_focus_generic_self_management
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_constitutional_referendum
+		prerequisite = {
+			focus = FRA_constitutional_referendum
+		}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = FRA_corsican_dialogue
+		icon = GFX_goal_generic_major_alliance
+		x = 1
+		y = 1
+		cost = 8
+		relative_position_id = FRA_decrentalisation
+		prerequisite = {
+			focus = FRA_decrentalisation
+		}
+
+		completion_reward = {
+			add_political_power = 100
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	focus = {
 		id = FRA_armament_industry
 		icon = GFX_goal_generic_production2
 		x = @economic_tree_far_left
 		y = 2
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_naval_industry_1
@@ -460,7 +905,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_civ_factory
 		x = @economic_tree_right
 		y = 2
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_civilian_buildup
@@ -511,7 +956,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_civ_factory
 		x = @economic_tree_very_far_right
 		y = 2
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_civilian_buildup
@@ -547,7 +992,7 @@ focus_tree = {
 		icon = GFX_focus_generic_home_defense
 		x = @ideology_populism_head
 		y = 2
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_liberte
@@ -596,7 +1041,7 @@ focus_tree = {
 		icon = GFX_focus_generic_anti_fascist_diplomacy
 		x = @ideology_communism_left
 		y = 2
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_egalite
@@ -634,7 +1079,7 @@ focus_tree = {
 		icon = GFX_focus_generic_strike_at_democracy3
 		x = @ideology_communism_right
 		y = 2
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_egalite
@@ -647,6 +1092,10 @@ focus_tree = {
 		completion_reward = {
 			add_stability = 0.01
 			add_political_power = 30
+			swap_ideas = {
+				remove_idea = FRA_rigid_labour_laws
+				add_idea = FRA_state_capitalism
+			}
 			every_country = {
 				limit = {
 					OR = {
@@ -671,7 +1120,7 @@ focus_tree = {
 		icon = GFX_goal_generic_radar
 		x = @ideology_nationalism_left
 		y = 2
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_fraternite
@@ -707,7 +1156,7 @@ focus_tree = {
 		icon = GFX_goal_tfv_saf_support_ossebrandwag
 		x = @ideology_nationalism_right
 		y = 2
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_fraternite
@@ -781,7 +1230,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_mil_factory
 		x = @economic_tree_left
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_military_industry_1
@@ -818,7 +1267,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_civ_factory
 		x = @economic_tree_right
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_northern_industry
@@ -848,7 +1297,7 @@ focus_tree = {
 		icon = GFX_goal_Road_Construction
 		x = @economic_tree_very_far_right
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_northern_industry
@@ -898,7 +1347,7 @@ focus_tree = {
 		icon = GFX_goal_molotov_ribbentrop_pact
 		x = @ideology_right_wing_populism_center
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_populist_agendas
@@ -954,7 +1403,7 @@ focus_tree = {
 		icon = GFX_goal_generic_alliance
 		x = @ideology_left_wing_populism_center
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_populist_agendas
@@ -1003,7 +1452,7 @@ focus_tree = {
 		icon = GFX_focus_por_workers_of_iberia
 		x = @ideology_communism_left
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_fight_fascism
@@ -1028,7 +1477,7 @@ focus_tree = {
 		icon = GFX_focus_YUG_pan_slavic_congress
 		x = @ideology_communism_right
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_fight_capitalism
@@ -1049,7 +1498,7 @@ focus_tree = {
 		icon = GFX_focus_generic_soviet_politics
 		x = @ideology_communism_very_far_right
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_fight_capitalism
@@ -1071,7 +1520,7 @@ focus_tree = {
 		icon = GFX_goal_generic_fortify_city
 		x = @ideology_nationalism_very_far_left
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_immigration_restrictions
@@ -1096,7 +1545,7 @@ focus_tree = {
 		icon = GFX_goal_generic_propaganda
 		x = @ideology_nationalism_left
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_immigration_restrictions
@@ -1133,7 +1582,7 @@ focus_tree = {
 		icon = GFX_goal_generic_forceful_treaty
 		x = @ideology_nationalism_right
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_national_fellowship
@@ -1155,7 +1604,7 @@ focus_tree = {
 		icon = GFX_focus_fra_milice
 		x = @ideology_nationalism_very_far_right
 		y = 3
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_national_fellowship
@@ -1240,7 +1689,7 @@ focus_tree = {
 		icon = GFX_goal_Road_Construction
 		x = @economic_tree_very_far_right
 		y = 4
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_northern_infrastructure
@@ -1290,7 +1739,7 @@ focus_tree = {
 		icon = GFX_goal_Abandon_the_EU
 		x = @ideology_right_wing_populism_far_left
 		y = 4
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_le_pen_ambition
@@ -1312,7 +1761,7 @@ focus_tree = {
 		icon = GFX_goal_Restrict_Immigration
 		x = @ideology_right_wing_populism_center
 		y = 4
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_le_pen_ambition
@@ -1333,7 +1782,7 @@ focus_tree = {
 		icon = GFX_goal_anti_comintern_pact
 		x = @ideology_right_wing_populism_far_right
 		y = 4
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_le_pen_ambition
@@ -1358,7 +1807,7 @@ focus_tree = {
 		icon = GFX_goal_support_communism
 		x = @ideology_left_wing_populism_far_left
 		y = 4
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_strengthen_the_gauche
@@ -1379,7 +1828,7 @@ focus_tree = {
 		icon = GFX_focus_generic_soviet_politics
 		x = @ideology_left_wing_populism_center
 		y = 4
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_strengthen_the_gauche
@@ -1404,7 +1853,7 @@ focus_tree = {
 		icon = GFX_goal_generic_forceful_treaty
 		x = @ideology_left_wing_populism_far_right
 		y = 4
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_strengthen_the_gauche
@@ -1445,7 +1894,7 @@ focus_tree = {
 		icon = GFX_focus_generic_self_management
 		x = @ideology_communism_far_left
 		y = 4
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_political_truth
@@ -1539,7 +1988,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_naval_dockyard
 		x = @economic_tree_very_far_left
 		y = 5
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_brest_arsenal
@@ -1575,7 +2024,7 @@ focus_tree = {
 		icon = GFX_goal_generic_build_navy
 		x = 0
 		y = 1
-		cost = 10
+		cost = 8
 		relative_position_id = FRA_naval_industry_3
 		prerequisite = {
 			focus = FRA_naval_industry_3
@@ -1617,7 +2066,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_mil_factory
 		x = @economic_tree_left
 		y = 5
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_military_industry_3
@@ -1655,7 +2104,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_civ_factory
 		x = @economic_tree_right
 		y = 5
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_western_industry
@@ -1685,7 +2134,7 @@ focus_tree = {
 		icon = GFX_goal_Road_Construction
 		x = @economic_tree_very_far_right
 		y = 5
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_southern_infrastructure
@@ -1745,7 +2194,7 @@ focus_tree = {
 		icon = GFX_goal_generic_build_airforce
 		x = 0
 		y = 1
-		cost = 10
+		cost = 8
 		relative_position_id = FRA_colonial_infrastructure
 
 		prerequisite = {
@@ -1791,7 +2240,7 @@ focus_tree = {
 		icon = GFX_goal_generic_forceful_treaty
 		x = @ideology_right_wing_populism_center
 		y = 5
-		cost = 10
+		cost = 8
 
 		available = {
 			reactionary > 0.25
@@ -1825,7 +2274,7 @@ focus_tree = {
 		icon = GFX_goal_Overthrow_Bourgeosie
 		x = @ideology_left_wing_populism_center
 		y = 5
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_redistribution_of_wealth
@@ -1858,7 +2307,7 @@ focus_tree = {
 		icon = GFX_focus_focus_fra_fascist_threat
 		x = @ideology_communism_very_far_left
 		y = 5
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_ministry_of_truth
@@ -1893,7 +2342,7 @@ focus_tree = {
 		icon = GFX_focus_generic_strike_at_democracy2
 		x = @ideology_communism_left
 		y = 5
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_ministry_of_truth
@@ -1939,7 +2388,7 @@ focus_tree = {
 		icon = GFX_goal_Abandon_the_EU
 		x = @ideology_between_c_and_n
 		y = 5
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_popular_republic
@@ -1965,7 +2414,7 @@ focus_tree = {
 		icon = GFX_focus_research
 		x = @economic_tree_center
 		y = 6
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_naval_industry_3
@@ -1992,7 +2441,7 @@ focus_tree = {
 		icon = GFX_FRA_Jean-Marie_Le_Pen
 		x = @ideology_right_wing_populism_left
 		y = 6
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_empower_the_front_national
@@ -2051,7 +2500,7 @@ focus_tree = {
 		icon = GFX_FRA_Marine_Le_Pen
 		x = @ideology_right_wing_populism_right
 		y = 6
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_empower_the_front_national
@@ -2084,14 +2533,17 @@ focus_tree = {
 		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
 		x = @ideology_left_wing_populism_left
 		y = 6
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_weaken_the_wealthy
 		}
 
 		completion_reward = {
-			add_stability = 0.02
+			swap_ideas = {
+				remove_idea = FRA_rigid_labour_laws
+				add_idea = FRA_state_capitalism
+			}
 		}
 
 		ai_will_do = {
@@ -2104,7 +2556,7 @@ focus_tree = {
 		icon = GFX_focus_renounce_the_treaty_of_trianon
 		x = @ideology_left_wing_populism_right
 		y = 6
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_weaken_the_wealthy
@@ -2124,7 +2576,7 @@ focus_tree = {
 		icon = GFX_goal_Abandon_NATO
 		x = @ideology_between_c_and_n
 		y = 6
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_abandon_europe
@@ -2159,7 +2611,7 @@ focus_tree = {
 		icon = GFX_goal_generic_propaganda
 		x = @ideology_right_wing_populism_far_left
 		y = 7
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_the_father
@@ -2201,7 +2653,7 @@ focus_tree = {
 		icon = GFX_focus_SOV_merge_plants
 		x = @ideology_right_wing_populism_center
 		y = 7
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_the_father
@@ -2209,8 +2661,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 50
-			add_stability = 0.03
+			swap_ideas = {
+				remove_idea = FRA_rigid_labour_laws
+				add_idea = FRA_state_capitalism
+			}
 		}
 
 		ai_will_do = {
@@ -2223,7 +2677,7 @@ focus_tree = {
 		icon = GFX_goal_generic_neutrality_focus
 		x = @ideology_right_wing_populism_far_right
 		y = 7
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_the_daughter
@@ -2248,7 +2702,7 @@ focus_tree = {
 		icon = GFX_goal_Workers_Rights
 		x = @ideology_left_wing_populism_far_left
 		y = 7
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_new_regulations
@@ -2269,7 +2723,7 @@ focus_tree = {
 		icon = GFX_goal_Abandon_the_EU
 		x = @ideology_left_wing_populism_center
 		y = 7
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_new_regulations
@@ -2293,7 +2747,7 @@ focus_tree = {
 		icon = GFX_goal_generic_demand_territory
 		x = @ideology_left_wing_populism_far_right
 		y = 7
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_new_laws
@@ -2320,7 +2774,7 @@ focus_tree = {
 		icon = GFX_focus_focus_fra_liberte_egalite_solidarite
 		x = @ideology_communism_center
 		y = 7
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_popular_republic
@@ -2359,7 +2813,7 @@ focus_tree = {
 		icon = GFX_focus_generic_monarchy_1
 		x = @ideology_nationalism_center
 		y = 7
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_reverse_the_fraternity_movement
@@ -2383,7 +2837,7 @@ focus_tree = {
 		icon = GFX_focus_generic_fascist_propaganda
 		x = @ideology_right_wing_populism_far_left
 		y = 8
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_anti_semitic_propaganda
@@ -2435,7 +2889,7 @@ focus_tree = {
 		icon = GFX_goal_support_democracy
 		x = @ideology_right_wing_populism_center
 		y = 8
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_anti_semitic_propaganda
@@ -2477,7 +2931,7 @@ focus_tree = {
 		icon = GFX_goal_generic_demand_territory
 		x = @ideology_right_wing_populism_far_right
 		y = 8
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_civilized_outlook
@@ -2497,7 +2951,7 @@ focus_tree = {
 		icon = GFX_Align_to_NATO
 		x = @ideology_left_wing_populism_left
 		y = 8
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_quit_the_EU
@@ -2534,7 +2988,7 @@ focus_tree = {
 		icon = GFX_Align_to_France
 		x = @ideology_left_wing_populism_right
 		y = 8
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_quit_the_EU
@@ -2564,7 +3018,7 @@ focus_tree = {
 		icon = GFX_focus_SOV_penal_battalions
 		x = @ideology_communism_far_left
 		y = 8
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_rise_of_the_reds
@@ -2584,7 +3038,7 @@ focus_tree = {
 		icon = GFX_focus_generic_soviet_politics
 		x = @ideology_communism_center
 		y = 8
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_rise_of_the_reds
@@ -2608,7 +3062,7 @@ focus_tree = {
 		icon = GFX_focus_SOV_military_purge
 		x = @ideology_communism_far_right
 		y = 8
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_rise_of_the_reds
@@ -2628,7 +3082,7 @@ focus_tree = {
 		icon = french_monarchy2
 		x = @ideology_nationalism_left
 		y = 8
-		cost = 10
+		cost = 8
 
 		mutually_exclusive = {
 			focus = FRA_house_of_Rochefort
@@ -2669,7 +3123,7 @@ focus_tree = {
 		x = -3
 		y = 1
 		relative_position_id = FRA_royal_reconstruction
-		cost = 10
+		cost = 8
 
 		available = {
 			HUN = { has_completed_focus = HUN_elect_a_Rochefort }
@@ -2710,7 +3164,7 @@ focus_tree = {
 		icon = GFX_FRA_French_Monarchy
 		x = @ideology_nationalism_right
 		y = 8
-		cost = 10
+		cost = 8
 
 		mutually_exclusive = {
 			focus = FRA_house_of_Rochefort
@@ -2741,7 +3195,7 @@ focus_tree = {
 		icon = GFX_goal_tripartite_pact
 		x = @ideology_right_wing_populism_far_left
 		y = 9
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_fascistic_approach
@@ -2770,7 +3224,7 @@ focus_tree = {
 		icon = GFX_focus_generic_support_the_left_right
 		x = @ideology_right_wing_populism_right
 		y = 9
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_democratic_approach
@@ -2793,7 +3247,7 @@ focus_tree = {
 		icon = GFX_goal_generic_war_with_comintern
 		x = @ideology_left_wing_populism_left
 		y = 9
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_with_NATO
@@ -2827,7 +3281,7 @@ focus_tree = {
 		icon = GFX_goal_generic_alliance
 		x = @ideology_left_wing_populism_right
 		y = 9
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_with_the_francophonie
@@ -2865,7 +3319,7 @@ focus_tree = {
 		icon = GFX_goal_Forced_Labour
 		x = @ideology_communism_far_left
 		y = 9
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_establish_gulags
@@ -2887,7 +3341,7 @@ focus_tree = {
 		icon = GFX_focus_generic_strike_at_democracy2
 		x = @ideology_communism_center
 		y = 9
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_one_party_state
@@ -2907,7 +3361,7 @@ focus_tree = {
 		icon = GFX_focus_SOV_builder_of_the_red_army
 		x = @ideology_communism_far_right
 		y = 9
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_red_militias
@@ -2927,7 +3381,7 @@ focus_tree = {
 		icon = monarchy2
 		x = @ideology_nationalism_center
 		y = 9
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_house_of_Rochefort
@@ -2961,7 +3415,7 @@ focus_tree = {
 		icon = GFX_focus_SWI_fortify_border_with_france
 		x = @ideology_right_wing_populism_far_left
 		y = 10
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_the_french_alliance
@@ -3035,7 +3489,7 @@ focus_tree = {
 		icon = GFX_goal_generic_fortify_city
 		x = @ideology_right_wing_populism_center
 		y = 10
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_protect_french_democracy
@@ -3058,7 +3512,7 @@ focus_tree = {
 		icon = GFX_goal_generic_military_sphere
 		x = @ideology_right_wing_populism_far_right
 		y = 10
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_protect_french_democracy
@@ -3081,7 +3535,7 @@ focus_tree = {
 		icon = GFX_goal_France_Factory
 		x = @ideology_left_wing_populism_center
 		y = 10
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_socialism_in_NATO
@@ -3105,7 +3559,7 @@ focus_tree = {
 		icon = GFX_focus_fra_loyalty_trotzky
 		x = @ideology_communism_left
 		y = 10
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_persecute_our_enemies
@@ -3134,7 +3588,7 @@ focus_tree = {
 		icon = GFX_focus_SOV_stalins_cult_of_personality
 		x = @ideology_communism_right
 		y = 10
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_persecute_our_enemies
@@ -3162,7 +3616,7 @@ focus_tree = {
 		icon = GFX_focus_focus_fra_third_empire
 		x = @ideology_nationalism_left
 		y = 10
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_house_of_bonaparte
@@ -3185,7 +3639,7 @@ focus_tree = {
 		icon = GFX_goal_generic_major_war
 		x = @ideology_nationalism_right
 		y = 10
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_house_of_bourbon
@@ -3197,6 +3651,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_ideas = FRA_imperial_honor
+			remove_ideas = FRA_rigid_labour_laws
 		}
 
 		ai_will_do = {
@@ -3209,7 +3664,7 @@ focus_tree = {
 		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
 		x = @ideology_right_wing_populism_far_left
 		y = 11
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_heirs_of_maginot
@@ -3229,7 +3684,7 @@ focus_tree = {
 		icon = GFX_Align_to_France
 		x = @ideology_right_wing_populism_right
 		y = 11
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_border_protection
@@ -3252,7 +3707,7 @@ focus_tree = {
 		icon = GFX_focus_ETH_callout_to_the_world
 		x = @ideology_left_wing_populism_center
 		y = 11
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_french_economic_area
@@ -3300,7 +3755,7 @@ focus_tree = {
 		icon = GFX_focus_focus_fra_revolution_utmost
 		x = @ideology_communism_far_left
 		y = 11
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_permanent_revolution
@@ -3346,7 +3801,7 @@ focus_tree = {
 		icon = GFX_goal_generic_soviet_construction
 		x = @ideology_communism_right
 		y = 11
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_stalinism
@@ -3366,7 +3821,7 @@ focus_tree = {
 		icon = GFX_focus_research
 		x = @ideology_communism_very_far_right
 		y = 11
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_stalinism
@@ -3386,7 +3841,7 @@ focus_tree = {
 		icon = GFX_goal_generic_army_doctrines
 		x = @ideology_nationalism_left
 		y = 11
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_ambition_and_spirit
@@ -3406,7 +3861,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_civ_factory
 		x = @ideology_nationalism_right
 		y = 11
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_tradition_and_honor
@@ -3462,7 +3917,7 @@ focus_tree = {
 		icon = GFX_focus_generic_vichy_france_triumphant_focus
 		x = @ideology_right_wing_populism_left
 		y = 12
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_racial_societies
@@ -3485,7 +3940,7 @@ focus_tree = {
 		icon = GFX_goal_generic_positive_trade_relations
 		x = @ideology_right_wing_populism_right
 		y = 12
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_national_interests
@@ -3505,7 +3960,7 @@ focus_tree = {
 		icon = GFX_Align_to_EU
 		x = @ideology_left_wing_populism_left
 		y = 12
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_socialist_awakening
@@ -3534,7 +3989,7 @@ focus_tree = {
 		icon = GFX_Align_to_France
 		x = @ideology_left_wing_populism_right
 		y = 12
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_socialist_awakening
@@ -3564,7 +4019,7 @@ focus_tree = {
 		icon = GFX_Focus_Attack_Germany
 		x = @ideology_communism_very_far_left
 		y = 12
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = GER
 
@@ -3605,7 +4060,7 @@ focus_tree = {
 		icon = GFX_focus_attack_italy
 		x = @ideology_communism_left
 		y = 12
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = ITA
 
@@ -3646,7 +4101,7 @@ focus_tree = {
 		icon = GFX_goal_Planned_Industry
 		x = @ideology_communism_right
 		y = 12
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_socialist_industrial_league
@@ -3693,7 +4148,7 @@ focus_tree = {
 		icon = GFX_goal_generic_dangerous_deal
 		x = @ideology_nationalism_left
 		y = 12
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = AND
 		will_lead_to_war_with = MOC
@@ -3736,7 +4191,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_mil_factory
 		x = @ideology_nationalism_right
 		y = 12
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_royal_industry
@@ -3783,7 +4238,7 @@ focus_tree = {
 		icon = GFX_focus_generic_africa_liberation
 		x = @ideology_right_wing_populism_far_left
 		y = 13
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = AND
 		will_lead_to_war_with = MOC
@@ -3841,7 +4296,7 @@ focus_tree = {
 		icon = GFX_focus_hol_war_on_pacifism
 		x = @ideology_right_wing_populism_center
 		y = 13
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_glory_of_vichy
@@ -3862,7 +4317,7 @@ focus_tree = {
 		icon = GFX_focus_fra_le_deluge
 		x = @ideology_right_wing_populism_far_right
 		y = 13
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_imperial_trade_league
@@ -3903,7 +4358,7 @@ focus_tree = {
 		icon = GFX_goal_support_communism
 		x = @ideology_left_wing_populism_center
 		y = 13
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_socialist_awakening
@@ -3923,7 +4378,7 @@ focus_tree = {
 		icon = GFX_focus_attack_switzerland
 		x = @ideology_communism_very_far_left
 		y = 13
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = SWI
 		will_lead_to_war_with = AUS
@@ -3990,7 +4445,7 @@ focus_tree = {
 		icon = GFX_focus_spr_no_pasaran
 		x = @ideology_communism_left
 		y = 13
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = SPR
 
@@ -4031,7 +4486,7 @@ focus_tree = {
 		icon = GFX_focus_generic_socialist_science
 		x = @ideology_communism_far_right
 		y = 13
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_new_factories
@@ -4054,7 +4509,7 @@ focus_tree = {
 		icon = GFX_focus_attack_switzerland
 		x = @ideology_nationalism_left
 		y = 13
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_dwarf_state_border_corrections
@@ -4078,7 +4533,7 @@ focus_tree = {
 		icon = GFX_goal_generic_construct_naval_dockyard
 		x = @ideology_nationalism_right
 		y = 13
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_royal_factories
@@ -4125,7 +4580,7 @@ focus_tree = {
 		icon = GFX_goal_generic_major_war
 		x = @ideology_right_wing_populism_far_left
 		y = 14
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = HOL
 		will_lead_to_war_with = BEL
@@ -4184,7 +4639,7 @@ focus_tree = {
 		icon = french_democracy
 		x = @ideology_right_wing_populism_right
 		y = 14
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_embrace_militarism
@@ -4210,7 +4665,7 @@ focus_tree = {
 		icon = GFX_focus_YUG_pan_slavic_congress
 		x = @ideology_left_wing_populism_left
 		y = 14
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_communist_reality_debate
@@ -4238,7 +4693,7 @@ focus_tree = {
 		icon = GFX_focus_generic_join_comintern
 		x = @ideology_left_wing_populism_right
 		y = 14
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_communist_reality_debate
@@ -4276,7 +4731,7 @@ focus_tree = {
 		icon = GFX_Focus_Attack_Britain
 		x = @ideology_communism_far_left
 		y = 14
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = ENG
 
@@ -4308,7 +4763,7 @@ focus_tree = {
 		icon = GFX_focus_research2
 		x = @ideology_communism_far_right
 		y = 14
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_research_revolution
@@ -4328,7 +4783,7 @@ focus_tree = {
 		icon = GFX_focus_focus_fra_border
 		x = @ideology_nationalism_left
 		y = 14
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = GER
 		will_lead_to_war_with = HOL
@@ -4387,7 +4842,7 @@ focus_tree = {
 		icon = GFX_focus_research2
 		x = @ideology_nationalism_right
 		y = 14
-		cost = 10
+		cost = 8
 
 		prerequisite = {
 			focus = FRA_royal_dockyards

@@ -5,7 +5,7 @@ focus_tree = {
 		focus = SOV_grozny_offensive
 	}
 
-	continuous_focus_position = { x = 50 y = 1200 }
+	continuous_focus_position = { x = 450 y = 2200 }
 	country = {
 		factor = 0
 
@@ -14,7 +14,8 @@ focus_tree = {
 			original_tag = SOV
 		}
 	}
-
+	#POL_even_more_conscripts
+	#idea SOV_modern_supply_lines
 	@industry_tree_super_far_left = 0
 	@industry_tree_far_left = 1
 	@industry_tree_left = 2
@@ -66,7 +67,7 @@ focus_tree = {
 	focus = {
 		id = SOV_grozny_offensive
 		icon = attack_chechnya
-		x = 18
+		x = 35
 		y = 0
 		cost = 10
 
@@ -137,6 +138,11 @@ focus_tree = {
 				add_manpower = -90000
 			}
 			add_state_core = 828
+			828 = {
+				add_dynamic_modifier = {
+					modifier = CHE_resistance
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -2284,7 +2290,7 @@ focus_tree = {
 
 	focus = {
 		id = SOV_end_the_rivalry
-		icon = Russia_x_USA
+		icon = align_to_America
 		x = 2
 		y = 1
 		relative_position_id = SOV_russia_on_the_world_stage
@@ -2601,7 +2607,7 @@ focus_tree = {
 	focus = {
 		id = SOV_Putin_stands_victorius
 		icon = putin
-		x = -10
+		x = -9
 		y = 1
 		cost = 5
 		relative_position_id = SOV_core_chechnya
@@ -3682,7 +3688,7 @@ focus_tree = {
 
 	focus = {
 		id = SOV_friends_in_Bulgaria
-		icon = for_BUL
+		icon = GFX_focus_generic_befriend_bulgaria
 		x = 0
 		y = 1
 		cost = 10
@@ -3746,82 +3752,12 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SOV_restore_the_order_in_Bealurus
-		icon = war
-		x = -2
-		y = 1
-		cost = 10
-		relative_position_id = SOV_strenghten_CSTO_ties
-
-		mutually_exclusive = {
-			focus = SOV_align_Bealurus
-		}
-
-		available = {
-			NOT = { is_in_faction_with = BLR }
-			OR = {
-				has_government = reactionary
-				has_government = nationalist
-			}
-			is_faction_leader = yes
-		}
-
-		prerequisite = {
-			focus = SOV_strenghten_CSTO_ties
-		}
-
-		completion_reward = {
-			create_wargoal = {
-				target = BLR
-				type = topple_government
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_align_Bealurus
-		icon = align_to_belarus
-		x = 0
-		y = 1
-		cost = 8
-		relative_position_id = SOV_strenghten_CSTO_ties
-
-		mutually_exclusive = {
-			focus = SOV_restore_the_order_in_Bealurus
-		}
-
-		available = {
-			OR = {
-				has_government = reactionary
-				has_government = nationalist
-			}
-			is_faction_leader = yes
-		}
-
-		prerequisite = {
-			focus = SOV_strenghten_CSTO_ties
-		}
-
-		completion_reward = {
-			BLR = { add_opinion_modifier = { target = SOV modifier = has_expressed_loyalty } }
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
 		id = SOV_united_military_traning
 		icon = BLR_belarusian_soldier
 		x = -2
 		y = 1
 		cost = 10
-		relative_position_id = SOV_align_Bealurus
+		relative_position_id = SOV_strenghten_CSTO_ties
 
 
 		available = {
@@ -3833,8 +3769,7 @@ focus_tree = {
 		}
 
 		prerequisite = {
-			focus = SOV_restore_the_order_in_Bealurus
-			focus = SOV_align_Bealurus
+			focus = SOV_strenghten_CSTO_ties
 		}
 
 		completion_reward = {
@@ -3863,7 +3798,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 20
-		relative_position_id = SOV_align_Bealurus
+		relative_position_id = SOV_strenghten_CSTO_ties
 
 
 		available = {
@@ -3875,8 +3810,7 @@ focus_tree = {
 		}
 
 		prerequisite = {
-			focus = SOV_restore_the_order_in_Bealurus
-			focus = SOV_align_Bealurus
+			focus = SOV_strenghten_CSTO_ties
 		}
 
 		completion_reward = {
@@ -3912,12 +3846,81 @@ focus_tree = {
 			factor = 10
 		}
 	}
+	focus = {
+		id = SOV_restore_the_order_in_Bealurus
+		icon = war
+		x = -2
+		y = 1
+		cost = 10
+		relative_position_id = SOV_invest_in_other_members
+
+		mutually_exclusive = {
+			focus = SOV_align_Bealurus
+		}
+
+		available = {
+			NOT = { is_in_faction_with = BLR }
+			OR = {
+				has_government = reactionary
+				has_government = nationalist
+			}
+			is_faction_leader = yes
+		}
+
+		prerequisite = {
+			focus = SOV_invest_in_other_members
+		}
+
+		completion_reward = {
+			create_wargoal = {
+				target = BLR
+				type = topple_government
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_align_Bealurus
+		icon = align_to_belarus
+		x = 0
+		y = 1
+		cost = 8
+		relative_position_id = SOV_invest_in_other_members
+
+		mutually_exclusive = {
+			focus = SOV_restore_the_order_in_Bealurus
+		}
+
+		available = {
+			OR = {
+				has_government = reactionary
+				has_government = nationalist
+			}
+			is_faction_leader = yes
+		}
+
+		prerequisite = {
+			focus = SOV_invest_in_other_members
+		}
+
+		completion_reward = {
+			BLR = { add_opinion_modifier = { target = SOV modifier = has_expressed_loyalty } }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
 
 	focus = {
 		id = SOV_greater_union_state
 		icon = align_to_csto
-		x = 0
-		y = 1
+		x = -1
+		y = 2
 		cost = 50
 		relative_position_id = SOV_invest_in_other_members
 
@@ -3935,11 +3938,11 @@ focus_tree = {
 		}
 
 		prerequisite = {
-			focus = SOV_united_military_traning
+			focus = SOV_restore_the_order_in_Bealurus
 		}
 
 		prerequisite = {
-			focus = SOV_invest_in_other_members
+			focus = SOV_align_Bealurus
 		}
 
 		completion_reward = {
@@ -3959,10 +3962,10 @@ focus_tree = {
 	focus = {
 		id = SOV_strengthen_CSTO
 		icon = align_to_csto
-		x = -2
-		y = 1
+		x = -1
+		y = 2
 		cost = 20
-		relative_position_id = SOV_invest_in_other_members
+		relative_position_id = SOV_united_military_traning
 
 		mutually_exclusive = {
 			focus = SOV_greater_union_state
@@ -3980,9 +3983,6 @@ focus_tree = {
 			focus = SOV_united_military_traning
 		}
 
-		prerequisite = {
-			focus = SOV_invest_in_other_members
-		}
 
 		completion_reward = {
 			add_stability = 0.1
@@ -4938,7 +4938,7 @@ focus_tree = {
 	focus = {
 		id = SOV_Russian_armed_forces
 		icon = russian_shield
-		x = -25
+		x = -24
 		y = 1
 		relative_position_id = SOV_core_chechnya
 		cost = 8
@@ -4993,59 +4993,121 @@ focus_tree = {
 		prerequisite = { focus = SOV_Russian_armed_forces }
 
 		completion_reward = {
-			army_experience = 35
+			army_experience = 10
 		}
 
 		ai_will_do = {
 			factor = 10
 		}
 	}
-
 	focus = {
-		id = SOV_new_tactics
-		text = POL_new_tactics
-		icon = army_doctrine
-		x = 1
+		id = SOV_focus_west
+		icon = GFX_goal_generic_position_armies
+		x = -2
 		y = 1
+		cost = 5
 		relative_position_id = SOV_modernize_army
-		cost = 8
 
-		prerequisite = {
-			focus = SOV_modernize_army
-		}
+		prerequisite = { focus = SOV_modernize_army }
 
 		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = armydoctrine_bonus
-				cost_reduction = 0.5
-				uses = 2
-				category = land_doctrine
-			}
+			army_experience = 10
 		}
 
 		ai_will_do = {
-			factor = 1
+			factor = 10
 		}
 	}
-
 	focus = {
-		id = SOV_t_90
-		icon = t90
+		id = SOV_strategic_missile_force
+		icon = GFX_focus_rocketry
 		x = -1
 		y = 1
-		relative_position_id = SOV_new_tactics
-		cost = 8
+		cost = 5
+		relative_position_id = SOV_focus_west
 
-		prerequisite = {
-			focus = SOV_new_tactics
-		}
+		prerequisite = { focus = SOV_focus_west }
 
 		completion_reward = {
-			add_tech_bonus = {
-				name = tank_bonus
-				bonus = 0.8
-				uses = 2
-				category = armor
+			army_experience = 10
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_armour_upgrades
+		icon = GFX_goal_generic_army_tanks
+		x = -2
+		y = 2
+		cost = 5
+		relative_position_id = SOV_focus_west
+
+		prerequisite = { focus = SOV_focus_west }
+
+		completion_reward = {
+			add_ideas = SOV_equipment_modernisation
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_focus_east
+		icon = GFX_goal_generic_improve_relations
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = SOV_modernize_army
+
+		prerequisite = { focus = SOV_modernize_army }
+
+		completion_reward = {
+			army_experience = 10
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_reinvigorate_the_fsb
+		icon = GFX_focus_generic_national_security
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = SOV_focus_east
+
+		prerequisite = { focus = SOV_focus_east }
+
+		completion_reward = {
+			army_experience = 10
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_incorporate_kadyrovtsy
+		icon = GFX_goal_generic_political_pressure
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = SOV_focus_east
+
+		prerequisite = { focus = SOV_focus_east }
+
+		completion_reward = {
+			828 = {
+				remove_dynamic_modifier = {
+					modifier = CHE_resistance
+				}
 			}
 		}
 
@@ -5053,67 +5115,90 @@ focus_tree = {
 			factor = 10
 		}
 	}
-
 	focus = {
-		id = SOV_modernize_the_supply_lines
-		icon = army_logistics
-		x = 0
-		y = 1
-		relative_position_id = SOV_t_90
-		cost = 10
-
-		prerequisite = {
-			focus = SOV_t_90
-		}
-
-		completion_reward = {
-			add_ideas = SOV_modern_supply_lines
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_motorize_the_army
-		icon = GFX_focus_generic_truck
+		id = SOV_soviet_bases
+		icon = GFX_goal_generic_defence
 		x = 1
 		y = 1
-		relative_position_id = SOV_new_tactics
-		cost = 10
+		cost = 5
+		relative_position_id = SOV_incorporate_kadyrovtsy
 
-		prerequisite = {
-			focus = SOV_new_tactics
-		}
+		prerequisite = { focus = SOV_incorporate_kadyrovtsy }
+
+		prerequisite = { focus = SOV_reinvigorate_the_fsb }
 
 		completion_reward = {
-			add_ideas = idea_focus_generic_motorized_focus
 		}
 
 		ai_will_do = {
 			factor = 10
 		}
 	}
-
 	focus = {
-		id = SOV_BMP_2
-		icon = motorized
+		id = SOV_joint_anti_terror_training
+		icon = GFX_goal_generic_military_deal
 		x = 0
 		y = 1
-		relative_position_id = SOV_motorize_the_army
-		cost = 8
+		cost = 5
+		relative_position_id = SOV_soviet_bases
 
-		prerequisite = {
-			focus = SOV_motorize_the_army
+		prerequisite = { focus = SOV_soviet_bases }
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_focus_arms_exports
+		icon = GFX_focus_generic_combined_arms
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = SOV_soviet_bases
+
+		prerequisite = { focus = SOV_soviet_bases }
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_caspian_sea_boundaries_resolution
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = SOV_joint_anti_terror_training
+
+		prerequisite = { 
+			focus = SOV_focus_arms_exports 
+			focus = SOV_joint_anti_terror_training 
 		}
 
 		completion_reward = {
-			add_tech_bonus = {
-				name = land_doc_bonus
-				bonus = 0.8
-				uses = 2
-				category = cat_mechanized_equipment
+			if = {
+				limit = {
+					AZR = {
+						exists = yes
+					}
+				}
+				AZR = { add_opinion_modifier = { target = SOV modifier = trade_influence_1 } }
+				add_opinion_modifier = { target = AZR modifier = trade_influence_1 }
+			}
+			if = {
+				limit = {
+					KAZ = {
+						exists = yes
+					}
+				}
+				KAZ = { add_opinion_modifier = { target = SOV modifier = trade_influence_1 } }
+				add_opinion_modifier = { target = KAZ modifier = trade_influence_1 }
 			}
 		}
 
@@ -5121,25 +5206,50 @@ focus_tree = {
 			factor = 10
 		}
 	}
-
 	focus = {
-		id = SOV_conscription_programs
-		icon = POL_even_more_conscripts
+		id = SOV_chinese_border_mediation
+		icon = GFX_goal_generic_more_territorial_claims
 		x = 1
 		y = 1
-		relative_position_id = SOV_modernize_the_supply_lines
-		cost = 8
+		cost = 5
+		relative_position_id = SOV_caspian_sea_boundaries_resolution
 
-		prerequisite = {
-			focus = SOV_modernize_the_supply_lines
-		}
-
-		prerequisite = {
-			focus = SOV_BMP_2
+		mutually_exclusive = {focus = SOV_secure_eastern_border}
+		prerequisite = { 
+			focus = SOV_caspian_sea_boundaries_resolution 
 		}
 
 		completion_reward = {
-			law_change_tax_conscription_increase = yes
+			if = {
+				limit = {
+					PRC = {
+						exists = yes
+					}
+				}
+				PRC = { add_opinion_modifier = { target = SOV modifier = trade_influence_1 } }
+				add_opinion_modifier = { target = PRC modifier = trade_influence_1 }
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_secure_eastern_border
+		icon = GFX_goal_generic_construct_military
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = SOV_caspian_sea_boundaries_resolution
+
+		mutually_exclusive = {focus = SOV_chinese_border_mediation}
+
+		prerequisite = { 
+			focus = SOV_caspian_sea_boundaries_resolution 
+		}
+
+		completion_reward = {
 		}
 
 		ai_will_do = {
@@ -5148,46 +5258,22 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SOV_Tver_Suworow_Military_School
-		icon = GFX_focus_generic_military_academy
+		id = SOV_ivanov_reforms
+		icon = GFX_goal_generic_air_doctrine
 		x = -3
 		y = 1
-		relative_position_id = SOV_conscription_programs
-		cost = 10
+		cost = 5
+		relative_position_id = SOV_focus_east
 
-		prerequisite = {
-			focus = SOV_conscription_programs
-			focus = SOV_winter_our_best_allie
-		}
-
-
-		completion_reward = {
-			add_research_slot = 1
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_war_games
-		icon = army_doctrine
-		x = -4
-		y = 1
-		relative_position_id = SOV_modernize_army
-		cost = 8
-
-		prerequisite = {
-			focus = SOV_modernize_army
+		prerequisite = { 
+			focus = SOV_focus_east 
+			focus = SOV_focus_west
 		}
 
 		completion_reward = {
-			add_doctrine_cost_reduction = {
-				name = armydoctrine_bonus
-				cost_reduction = 0.5
-				uses = 2
-				category = land_doctrine
+			swap_ideas = {
+				remove_idea = SOV_military_atrophy
+				add_idea = SOV_military_atrophy_2
 			}
 		}
 
@@ -5197,23 +5283,25 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SOV_2S31_Wena
-		icon = artillery2
+		id = SOV_toward_volunteer_force
+		icon = GFX_focus_chi_army_reform
 		x = -1
 		y = 1
-		relative_position_id = SOV_war_games
-		cost = 8
+		cost = 5
+		relative_position_id = SOV_ivanov_reforms
 
-		prerequisite = {
-			focus = SOV_war_games
+		prerequisite = { 
+			focus = SOV_ivanov_reforms 
+		}
+
+		mutually_exclusive = {
+			focus = SOV_restore_soviet_doctrine
 		}
 
 		completion_reward = {
-			add_tech_bonus = {
-				name = tech_bonus
-				bonus = 0.8
-				uses = 2
-				category = artillery
+			swap_ideas = {
+				remove_idea = SOV_military_atrophy_2
+				add_idea = SOV_military_atrophy_v3
 			}
 		}
 
@@ -5223,49 +5311,25 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SOV_TL_2195
-		icon = small_arms3
-		x = 0
-		y = 1
-		relative_position_id = SOV_2S31_Wena
-		cost = 8
-
-		prerequisite = {
-			focus = SOV_2S31_Wena
-		}
-
-		completion_reward = {
-			add_tech_bonus = {
-				name = tech_bonus
-				bonus = 0.8
-				uses = 2
-				category = support_tech
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_VKS_sniper_rifle
-		icon = GFX_focus_ETH_freedom_at_gunpoint
+		id = SOV_restore_soviet_doctrine
+		icon = GFX_focus_renounce_the_treaty_of_trianon
 		x = 1
 		y = 1
-		relative_position_id = SOV_war_games
-		cost = 8
+		cost = 5
+		relative_position_id = SOV_ivanov_reforms
 
-		prerequisite = {
-			focus = SOV_war_games
+		prerequisite = { 
+			focus = SOV_ivanov_reforms 
+		}
+
+		mutually_exclusive = {
+			focus = SOV_toward_volunteer_force
 		}
 
 		completion_reward = {
-			add_tech_bonus = {
-				name = tech_bonus
-				bonus = 0.8
-				uses = 2
-				category = infantry_weapons
+			swap_ideas = {
+				remove_idea = SOV_military_atrophy_2
+				add_idea = SOV_military_atrophy_c3
 			}
 		}
 
@@ -5275,44 +5339,231 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SOV_expand_Specnaz
-		icon = special_forces
-		x = 0
+		id = SOV_fund_reforms_fully
+		icon = GFX_focus_generic_reorient_production
+		x = 1
 		y = 1
-		relative_position_id = SOV_VKS_sniper_rifle
-		cost = 10
+		cost = 5
+		relative_position_id = SOV_toward_volunteer_force
 
-		prerequisite = {
-			focus = SOV_VKS_sniper_rifle
+		prerequisite = { 
+			focus = SOV_restore_soviet_doctrine
+			focus = SOV_toward_volunteer_force 
 		}
 
 		completion_reward = {
-			add_ideas = Specnaz
+			if = {
+				limit = {
+					has_idea = SOV_military_atrophy_c3
+				}
+				swap_ideas = {
+					remove_idea = SOV_military_atrophy_c3
+					add_idea = SOV_military_atrophy_c4
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = SOV_military_atrophy_v3
+					add_idea = SOV_military_atrophy_v4
+				}
+			}
+			
 		}
 
 		ai_will_do = {
 			factor = 10
 		}
 	}
-
 	focus = {
-		id = SOV_winter_our_best_allie
-		icon = special_forces
-		x = -1
+		id = SOV_volunteer_reserve
+		icon = GFX_focus_generic_limited_social_mobilization
+		x = -2
 		y = 1
-		relative_position_id = SOV_expand_Specnaz
-		cost = 10
+		cost = 5
+		relative_position_id = SOV_fund_reforms_fully
 
-		prerequisite = {
-			focus = SOV_expand_Specnaz
+		prerequisite = { 
+			focus = SOV_fund_reforms_fully
 		}
-
-		prerequisite = {
-			focus = SOV_TL_2195
+		prerequisite = { 
+			focus = SOV_toward_volunteer_force 
 		}
 
 		completion_reward = {
-			add_ideas = SOV_winter_our_best_allie
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_integrate_fsb_into_formations
+		icon = GFX_focus_generic_infiltration
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = SOV_fund_reforms_fully
+
+		prerequisite = { 
+			focus = SOV_restore_soviet_doctrine
+		}
+		prerequisite = { 
+			focus = SOV_joint_anti_terror_training
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_incorporate_airland_battle
+		icon = GFX_focus_generic_tank_air_support
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = SOV_volunteer_reserve
+
+		available = {
+			NOT = {
+				has_idea = mobilization_service_time_corrupt
+			}
+		}
+
+		prerequisite = { 
+			focus = SOV_volunteer_reserve
+		}
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_centralise_officer_training
+		icon = GFX_focus_generic_university_1
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = SOV_fund_reforms_fully
+
+		prerequisite = { 
+			focus = SOV_fund_reforms_fully
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = SOV_military_atrophy_c4
+				}
+				swap_ideas = {
+					remove_idea = SOV_military_atrophy_c4
+					add_idea = SOV_military_atrophy_c5
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = SOV_military_atrophy_v4
+					add_idea = SOV_military_atrophy_v5
+				}
+			}
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_advanced_recon
+		icon = drone
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = SOV_volunteer_reserve
+
+		prerequisite = { 
+			focus = SOV_volunteer_reserve
+		}
+		prerequisite = { 
+			focus = SOV_centralise_officer_training
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.6
+				uses = 1
+				category = recon_tech
+			}
+			add_tech_bonus = {
+				name = CAN_destroyer_effort
+				bonus = 1.0
+				ahead_reduction = 4
+				uses = 1
+				category = drone_tech
+			}
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_unparalleled_military_engineers
+		icon = GFX_goal_generic_construction2
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = SOV_centralise_officer_training
+
+		prerequisite = { 
+			focus = SOV_centralise_officer_training
+		}
+
+		completion_reward = {
+			add_ideas = SOV_engineers
+			add_tech_bonus = {
+				name = CAN_destroyer_effort
+				bonus = 1.0
+				ahead_reduction = 2
+				uses = 1
+				category = engineers_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SOV_our_greatest_weakness
+		icon = GFX_focus_SOV_the_road_of_life
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = SOV_incorporate_airland_battle
+
+		prerequisite = { 
+			focus = SOV_advanced_recon
+			focus = SOV_incorporate_airland_battle
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.4
+				uses = 2
+				category = logistics_tech
+			}
 		}
 
 		ai_will_do = {
@@ -5323,7 +5574,7 @@ focus_tree = {
 	focus = {
 		id = SOV_airforce_modernization
 		icon = airforce
-		x = 7
+		x = 8
 		y = 1
 		cost = 5
 		relative_position_id = SOV_Russian_armed_forces
@@ -5579,7 +5830,7 @@ focus_tree = {
 	focus = {
 		id = SOV_modernize_our_navy
 		icon = navy2
-		x = 0
+		x = 1
 		y = 1
 		cost = 5
 		relative_position_id = SOV_Russian_armed_forces

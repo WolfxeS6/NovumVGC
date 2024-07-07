@@ -721,9 +721,168 @@ country_event = { #event for rco that belarus joined
 	is_triggered_only = yes
 
 	option = { # ok
-		name = RCO_event_cw.15.a
+		name = cw.15.a
 	}
 
+}
+
+country_event = { #what to do with kazahstan after cw
+	id = cw.16
+	title = cw.16.t
+	desc = cw.16.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { 
+		name = cw.16.a #we need all of kazahstan - send ultimatum to kaz
+		 ai_chance = {
+            base = 60       
+        }
+
+		KAZ =  { country_event = cw.18 }
+	}
+	option = { 
+		name = cw.16.b #we need part of kazahstan
+		 ai_chance = {
+            base = 40       
+        }
+		KAZ =  { country_event = cw.20 }
+	}
+
+	option = { 
+		name = cw.16.c #leave kazahstan alone
+		 ai_chance = {
+            base = 0       
+        }
+		add_political_power = 150
+		add_stability = 0.1
+	}
+	} 
+
+	country_event = { #event for ai to get pp
+	id = cw.17
+	title = cw.17.t
+	desc = cw.17.d
+	picture = GFX_petersburg_dockers
+
+	is_triggered_only = yes
+
+	option = { 
+		name = cw.17.a
+		add_political_power = 1000
+	}
+}
+
+country_event = { #kaz ultimatum for annexation
+	id = cw.18
+		title = cw.18.t
+		desc = cw.18.d
+		picture = GFX_report_event_japanese_transport_soldiers
+
+		is_triggered_only = yes
+
+		option = { # russia annexes kaz
+				name =  cw.18.a
+				RCO = {
+					annex_country = {
+			 				target = KAZ
+								transfer_troops = yes
+							}
+					}
+			}
+
+		option = { # decline request
+				name =  cw.18.b
+				RCO = {
+					create_wargoal = {
+								type = annex_everything
+								target = KAZ
+							}
+							country_event = cw.19 #event to inform rco
+			 		}
+		 	}
+	 }
+
+	country_event = { #event for rco in case kaz declines annexation ultimatum
+	id = cw.19
+	title = cw.19.t
+	desc = cw.19.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # declare war on kaz
+		name =  cw.19.a
+		declare_war_on = {
+                             target = KAZ
+                             type = annex_everything
+                            }
+	}
+}
+
+country_event = {
+	id = cw.20 #event for kaz if they want to accept rco proposal
+		title = cw.20.t
+		desc = cw.20.d
+		picture = GFX_report_event_japanese_transport_soldiers
+
+		is_triggered_only = yes
+
+		option = { # accept
+				name =  cw.20.a
+				RCO = {	
+					transfer_state = 406
+					transfer_state = 407
+					transfer_state = 583
+					transfer_state = 997
+					transfer_state = 588
+					}
+			}
+
+		option = { # decline request
+				name =  cw.20.b
+				RCO = {
+					create_wargoal = {
+								type = annex_everything
+								target = KAZ
+							}
+							country_event = cw.19 #event to inform rco
+			 		}
+		 	}
+	 }
+
+country_event = {
+	id = RCO_event_taj_ultimatum.1
+	title = RCO_event_taj_ultimatum.1.t
+	desc = RCO_event_taj_ultimatum.1.d
+	picture = GFX_report_event_japanese_transport_soldiers
+
+	is_triggered_only = yes
+
+	option = { # russia annexes taj
+		name =  RCO_event_taj_ultimatum.1.a
+		RCO = {
+			annex_country = {
+				target = TAJ
+				transfer_troops = yes
+			}
+		}
+	}
+
+	option = { # decline request
+		name =  RCO_event_taj_ultimatum.1.b
+		RCO = {
+			create_wargoal = {
+				type = annex_everything
+				target = TAJ
+			}
+			declare_war_on = {
+				target = TAJ
+				type = annex_everything
+			}
+		}
+	}
 }
 
 ##### nmo chaos ends

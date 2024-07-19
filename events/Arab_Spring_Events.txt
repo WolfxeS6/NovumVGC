@@ -970,7 +970,7 @@ country_event = {	#Bahrain 2011 Protests
 	id = arab_spring.26
 	title = arab_spring.26.t
 	desc = arab_spring.26.d
-	picture = GFX_report_arab_spring_jordan1
+	picture = GFX_report_arab_spring_bahrain1
 	trigger = {
         has_government = monarchist
 	}
@@ -980,11 +980,13 @@ country_event = {	#Bahrain 2011 Protests
 		name = arab_spring.26.o1
 		add_stability = -0.02
 		hidden_effect = {
-			country_event = {
-                id = arab_spring.27
-                days = 20
-                random_hours = 10
-            }
+			SAU = {
+				country_event = {
+					id = arab_spring.27
+					days = 20
+					random_hours = 10
+				}
+			}
         }
 		add_popularity = {
 			ideology = monarchist
@@ -999,25 +1001,88 @@ country_event = {	#GCC Send Troops yes or no
 	id = arab_spring.27
 	title = arab_spring.27.t
 	desc = arab_spring.27.d
-	picture = GFX_report_arab_spring_jordan1
+	picture = GFX_report_arab_spring_bahrain2
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = arab_spring.27.o1
+		add_stability = -0.02
+		BAR = {
+			country_event = {
+				id = arab_spring.28
+				days = 2
+				random_hours = 10
+			}
+		}
+		add_manpower = -1500
+		add_stability = -0.05
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+	option = { #No
+		name = arab_spring.27.o2
+		add_stability = 0.05
+
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#GCC Troops Arrive Bahrain
+	id = arab_spring.28
+	title = arab_spring.28.t
+	desc = arab_spring.28.d
+	picture = GFX_report_arab_spring_bahrain3
 	trigger = {
         has_government = monarchist
 	}
 	is_triggered_only = yes
 
-	option = {
-		name = arab_spring.27.o1
+	option = { #Yes
+		name = arab_spring.28.o1
 		add_stability = -0.02
-		hidden_effect = {
-			country_event = {
-                id = arab_spring.27
-                days = 20
-                random_hours = 10
-            }
-        }
+		SAU = {
+			puppet = {
+				target = BAR
+				end_wars = no
+			}
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Protests intensify and storm the Palace
+	id = arab_spring.29
+	title = arab_spring.29.t
+	desc = arab_spring.29.d
+	picture = GFX_report_arab_spring_bahrain4
+	trigger = {
+        has_government = monarchist
+	}
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = arab_spring.29.o1
 		add_popularity = {
 			ideology = monarchist
-			popularity = -0.01
+			popularity = -0.25
+		}
+		add_country_leader_role = {
+			character = BAR_Ali_Salman
+			promote_leader = yes
+			country_leader = {
+				ideology = islamic_republican 
+				expire = "1.1.1.1"
+				traits = {
+					ARAB_Islamist_Figurehead
+				}
+			}
+		}
+		set_politics = {
+			ruling_party = islamist
+			elections_allowed = yes
 		}
 		ai_chance = {
 		    factor = 100

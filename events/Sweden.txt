@@ -1,0 +1,749 @@
+add_namespace = reworked_sweden
+
+#Sweden wants Åland
+country_event = {
+	id = reworked_sweden.1
+	title = reworked_sweden.1.t
+	desc = reworked_sweden.1.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.1.o1 #Accept
+		SWE = { set_state_owner = 145 set_state_controller = 145 }
+		SWE = { country_event = { id = reworked_sweden.2 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 20
+			modifier = {
+				has_opinion = { target = SWE value < 0 }
+				factor = 0
+			}
+		}
+	}
+	
+	option = {
+		name = reworked_sweden.1.o2 #Accept if Sweden pays
+		SWE = { country_event = { id = reworked_sweden.3 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 20 
+			modifier = {
+				has_opinion = { target = SWE value < -70 }
+				factor = 0
+			}
+			modifier = {
+				has_opinion = { target = SWE value > 70 }
+				factor = 0
+			}
+		}
+	}
+	
+	option = {
+		name = reworked_sweden.1.o3 #Accept if NAP
+		SWE = { country_event = { id = reworked_sweden.4 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 20 
+			modifier = {
+				has_opinion = { target = SWE value < -70 }
+				factor = 0
+			}
+			modifier = {
+				has_opinion = { target = SWE value > 70 }
+				factor = 0
+			}
+		}
+	}
+	
+	option = {
+		name = reworked_sweden.1.o4 #Accept if Åland remains demilitarized
+		SWE = { country_event = { id = reworked_sweden.5 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 20 
+			modifier = {
+				has_opinion = { target = SWE value < -70 }
+				factor = 0
+			}
+			modifier = {
+				has_opinion = { target = SWE value > 70 }
+				factor = 0
+			}
+		}
+	}
+	
+	option = {
+		name = reworked_sweden.1.o5 #Refuse
+		SWE = { country_event = { id = reworked_sweden.6 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 20
+			modifier = {
+				has_opinion = { target = SWE value > 20 }
+				factor = 0
+			}
+		}
+	}
+}
+
+#Finland accepts
+country_event = {
+	id = reworked_sweden.2
+	title = reworked_sweden.2.t
+	desc = reworked_sweden.2.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.2.o1 #Accept
+		add_state_core = 145
+		145 = { set_demilitarized_zone = no }
+		
+		ai_chance = { 
+			factor = 100
+		}
+	}
+}
+
+#Finland wants money
+country_event = {
+	id = reworked_sweden.3
+	title = reworked_sweden.3.t
+	desc = reworked_sweden.3.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.3.o1 #Accept
+		SWE = { set_state_owner = 145 set_state_controller = 145 add_state_core = 145 }
+		145 = { set_demilitarized_zone = no }
+		SWE = { add_timed_idea = {
+		 idea = SWE_payment_for_aland
+		 days = 180 } }
+		FIN = { add_timed_idea = {
+		 idea = SWE_sold_aland
+		 days = 180 } }
+		FIN = { country_event = { id = reworked_sweden.7 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 60
+		}
+	}
+	
+	option = {
+		name = reworked_sweden.3.o2 #Refuse
+		FIN = { country_event = { id = reworked_sweden.8 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 40
+		}
+	}
+	
+}
+
+#Finland wants NAP
+country_event = {
+	id = reworked_sweden.4
+	title = reworked_sweden.4.t
+	desc = reworked_sweden.4.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.4.o1 #Accept
+		SWE = { set_state_owner = 145 set_state_controller = 145 add_state_core = 145 }
+		145 = { set_demilitarized_zone = no }
+		SWE = { diplomatic_relation = {
+    country = FIN
+    relation = non_aggression_pact
+    active = yes } }
+		FIN = { diplomatic_relation = {
+    country = SWE
+    relation = non_aggression_pact
+    active = yes } }
+		FIN = { country_event = { id = reworked_sweden.7 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 90
+		}
+	}
+	
+	option = {
+		name = reworked_sweden.4.o2 #Refuse
+		FIN = { country_event = { id = reworked_sweden.8 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 10
+		}
+	}
+	
+}
+
+#Finland wants Åland demilitarized
+country_event = {
+	id = reworked_sweden.5
+	title = reworked_sweden.5.t
+	desc = reworked_sweden.5.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.5.o1 #Accept
+		SWE = { set_state_owner = 145 set_state_controller = 145 add_state_core = 145 }
+		145 = { set_demilitarized_zone = yes }
+		FIN = { country_event = { id = reworked_sweden.7 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 90
+		}
+	}
+	
+	option = {
+		name = reworked_sweden.5.o2 #Refuse
+		FIN = { country_event = { id = reworked_sweden.8 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 10
+		}
+	}
+	
+}
+
+#Finland refuses
+country_event = {
+	id = reworked_sweden.6
+	title = reworked_sweden.6.t
+	desc = reworked_sweden.6.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.6.o1 #Accept
+		
+		
+		ai_chance = { 
+			factor = 100
+		}
+	}
+}
+
+#Sweden accepts compromise
+country_event = {
+	id = reworked_sweden.7
+	title = reworked_sweden.7.t
+	desc = reworked_sweden.7.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.7.o1 #Accept
+		
+		
+		ai_chance = { 
+			factor = 100
+		}
+	}
+}
+
+#Sweden rejects compromise
+country_event = {
+	id = reworked_sweden.8
+	title = reworked_sweden.8.t
+	desc = reworked_sweden.8.d
+	picture = GFX_report_event_finnish_letter
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.8.o1 #Accept
+		
+		
+		ai_chance = { 
+			factor = 100
+		}
+	}
+}
+
+#Invitation to Nordic Shield
+country_event = {
+	id = reworked_sweden.9
+	title = reworked_sweden.9.t
+	desc = reworked_sweden.9.d
+	
+	is_triggered_only = yes
+	
+	option = { # Join the alliance
+		name = reworked_sweden.9.o1
+		ai_chance = { factor = 70 }
+		SWE = { add_to_faction = ROOT }
+		add_ai_strategy = {
+                            type = alliance
+                            id = SWE
+                            value = 200
+                        }
+						SWE = { country_event = { id = reworked_sweden.10 } }
+	}
+	option = { # Do not join the alliance
+		name = reworked_sweden.9.o2
+		ai_chance = { factor = 30 }
+    reverse_add_opinion_modifier = {
+    target = SWE
+    modifier = medium_decrease }
+	SWE = { country_event = { id = reworked_sweden.11 } }
+}
+}
+
+#Country joins Sweden faction
+country_event = {
+	id = reworked_sweden.10
+	title = reworked_sweden.10.t
+	desc = reworked_sweden.10.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.10.o1
+		ai_chance = { factor = 100 }	
+}
+}
+
+#Country does not join Sweden faction
+country_event = {
+	id = reworked_sweden.11
+	title = reworked_sweden.11.t
+	desc = reworked_sweden.11.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.11.o1
+		ai_chance = { factor = 100 }	
+}
+}
+
+#Sweden-Norway
+country_event = {
+	id = reworked_sweden.12
+	title = reworked_sweden.12.t
+	desc = reworked_sweden.12.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.12.o1 #Submit
+		SWE = { country_event = { id = reworked_sweden.13 hours = 2 } }
+		SWE = { change_tag_from = NOR }
+		
+		ai_chance = { 
+			factor = 35
+			modifier = {
+				has_opinion = { target = SWE value < 0 }
+				factor = 0
+			}
+		}
+	}
+	
+	option = {
+		name = reworked_sweden.12.o2 #Compromise for puppet
+		SWE = { country_event = { id = reworked_sweden.14 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 35 
+			modifier = {
+				has_opinion = { target = SWE value < -70 }
+				factor = 0
+			}
+			modifier = {
+				has_opinion = { target = SWE value > 70 }
+				factor = 0
+			}
+		}
+	}
+	
+	option = {
+		name = reworked_sweden.12.o3 #Refuse
+		SWE = { country_event = { id = reworked_sweden.15 hours = 2 } }
+		
+		ai_chance = { 
+			factor = 30
+			modifier = {
+				has_opinion = { target = SWE value > 20 }
+				factor = 0
+			}
+		}
+	}
+}
+
+#Norway submits
+country_event = {
+	id = reworked_sweden.13
+	title = reworked_sweden.13.t
+	desc = reworked_sweden.13.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.13.o1
+		ai_chance = { factor = 100 }
+		annex_country = {
+    target = NOR
+    transfer_troops = yes }
+}
+}
+
+#Norway asks for compromise
+country_event = {
+	id = reworked_sweden.14
+	title = reworked_sweden.14.t
+	desc = reworked_sweden.14.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.14.o1
+		ai_chance = { factor = 50 }
+		SWE = { puppet = NOR
+		set_autonomy = {
+    target = NOR
+    autonomy_state = autonomy_dominion
+    end_wars = no
+    end_civil_wars = no } }
+}
+	
+	option = { #refuse
+		name = reworked_sweden.14.o2
+		ai_chance = { factor = 50 }
+		create_wargoal = { type = annex_everything target = NOR }
+		add_ideas = SWE_upset_soldiers
+		NOR = { add_ideas = SWE_fight_against_tyranny }
+}
+}
+
+#Norway refuses
+country_event = {
+	id = reworked_sweden.15
+	title = reworked_sweden.15.t
+	desc = reworked_sweden.15.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.15.o1
+		ai_chance = { factor = 100 }
+		create_wargoal = { type = annex_everything target = NOR }
+}
+}
+
+#Deciding Danish obligations
+country_event = {
+	id = reworked_sweden.16
+	title = reworked_sweden.16.t
+	desc = reworked_sweden.16.d
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = reworked_sweden.16.o1 #Denmark becomes dominion
+		DEN = { country_event = { id = reworked_sweden.17 hours = 2 } }
+		
+		ai_chance = { factor = 30 }
+	}
+	
+	option = {
+		name = reworked_sweden.16.o2 #Denmark becomes colony
+		DEN = { country_event = { id = reworked_sweden.18 hours = 2 } }
+		
+		ai_chance = { factor = 35 }
+	}
+	
+	option = {
+		name = reworked_sweden.16.o3 #Denmark becomes puppet
+		DEN = { country_event = { id = reworked_sweden.19 hours = 2 } }
+		
+		ai_chance = { factor = 35 }
+	}
+}
+
+#Sweden offers low obligations
+country_event = {
+	id = reworked_sweden.17
+	title = reworked_sweden.17.t
+	desc = reworked_sweden.17.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.17.o1
+		ai_chance = { factor = 80 }
+		SWE = { puppet = DEN
+		set_autonomy = {
+    target = DEN
+    autonomy_state = autonomy_dominion
+    end_wars = no
+    end_civil_wars = no } }
+	SWE = { country_event = { id = reworked_sweden.20 hours = 2 } }
+}
+	
+	option = { #refuse
+		name = reworked_sweden.17.o2
+		ai_chance = { factor = 20 }
+		SWE = { create_wargoal = { type = puppet_wargoal_focus target = DEN } }
+		SWE = { country_event = { id = reworked_sweden.21 hours = 2 } }
+		
+}
+}
+
+#Sweden offers normal obligations
+country_event = {
+	id = reworked_sweden.18
+	title = reworked_sweden.18.t
+	desc = reworked_sweden.18.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.18.o1
+		ai_chance = { factor = 50 }
+		SWE = { puppet = DEN
+		set_autonomy = {
+    target = DEN
+    autonomy_state = autonomy_colony
+    end_wars = no
+    end_civil_wars = no } }
+	SWE = { country_event = { id = reworked_sweden.20 hours = 2 } }
+}
+	
+	option = { #refuse
+		name = reworked_sweden.18.o2
+		ai_chance = { factor = 50 }
+		SWE = { create_wargoal = { type = puppet_wargoal_focus target = DEN } }
+		SWE = { country_event = { id = reworked_sweden.21 hours = 2 } }
+		
+}
+}
+
+#Sweden offers high obligations
+country_event = {
+	id = reworked_sweden.19
+	title = reworked_sweden.19.t
+	desc = reworked_sweden.19.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.19.o1
+		ai_chance = { factor = 30 }
+		SWE = { puppet = DEN
+		set_autonomy = {
+    target = DEN
+    autonomy_state = autonomy_puppet
+    end_wars = no
+    end_civil_wars = no } }
+	SWE = { country_event = { id = reworked_sweden.20 hours = 2 } }
+}
+	
+	option = { #refuse
+		name = reworked_sweden.19.o2
+		ai_chance = { factor = 70 }
+		SWE = { create_wargoal = { type = puppet_wargoal_focus target = DEN } }
+		SWE = { country_event = { id = reworked_sweden.21 hours = 2 } }
+
+}
+}
+
+#Denmark submits
+country_event = {
+	id = reworked_sweden.20
+	title = reworked_sweden.20.t
+	desc = reworked_sweden.20.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.20.o1
+		ai_chance = { factor = 100 }
+		
+}
+}
+
+#Denmark Rejects
+country_event = {
+	id = reworked_sweden.21
+	title = reworked_sweden.21.t
+	desc = reworked_sweden.21.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.21.o1
+		ai_chance = { factor = 100 }
+		
+}
+}
+
+#Sweden demands Åland
+country_event = {
+	id = reworked_sweden.22
+	title = reworked_sweden.22.t
+	desc = reworked_sweden.22.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.22.o1
+		ai_chance = { factor = 50 }
+		SWE = { set_state_owner = 145 set_state_controller = 145 }
+	SWE = { country_event = { id = reworked_sweden.23 hours = 2 } }
+}
+	
+	option = { #refuse
+		name = reworked_sweden.22.o2
+		ai_chance = { factor = 50 }
+		SWE = { create_wargoal = { type = take_state_focus generator = { 145 } target = FIN } }
+		SWE = { country_event = { id = reworked_sweden.24 hours = 2 } }
+
+}
+}
+
+#Finland gives up Åland
+country_event = {
+	id = reworked_sweden.23
+	title = reworked_sweden.23.t
+	desc = reworked_sweden.23.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.23.o1
+		ai_chance = { factor = 100 }
+		
+}
+}
+
+#Finland Rejects
+country_event = {
+	id = reworked_sweden.24
+	title = reworked_sweden.24.t
+	desc = reworked_sweden.24.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.24.o1
+		ai_chance = { factor = 100 }
+		
+}
+}
+
+#Rightoid retaliation
+country_event = {
+	id = reworked_sweden.25
+	title = reworked_sweden.25.t
+	desc = reworked_sweden.25.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.25.o1
+		ai_chance = { factor = 100 }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_ideas = SWE_rightoid_retaliation
+}
+}
+
+#Rightoid retaliation 2
+country_event = {
+	id = reworked_sweden.26
+	title = reworked_sweden.26.t
+	desc = reworked_sweden.26.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.26.o1
+		ai_chance = { factor = 100 }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_ideas = SWE_rightoid_retaliation_economy
+}
+}
+
+#Rightoid retaliation 3
+country_event = {
+	id = reworked_sweden.27
+	title = reworked_sweden.27.t
+	desc = reworked_sweden.27.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.27.o1
+		ai_chance = { factor = 100 }
+		add_stability = -0.05
+		add_war_support = -0.05
+		add_ideas = SWE_rightoid_retaliation_army
+}
+}
+
+#Who leads commie Sweden?
+country_event = {
+	id = reworked_sweden.28
+	title = reworked_sweden.28.t
+	desc = reworked_sweden.28.d
+	
+	is_triggered_only = yes
+	
+	option = { #DemSocs
+		name = reworked_sweden.28.o1
+		ai_chance = { factor = 50 }
+		add_popularity = {
+		 ideology = democratic_socialist
+		 popularity = 0.1
+		}
+		set_politics = {	
+	ruling_party = democratic_socialist
+	last_election = "1998.9.20"
+	election_frequency = 48
+	elections_allowed = yes
+}
+}
+	option = { #Tankies
+		name = reworked_sweden.28.o2
+		ai_chance = { factor = 50 }
+		add_popularity = {
+		 ideology = communist
+		 popularity = 0.1
+		}
+		set_politics = {	
+	ruling_party = communist
+	last_election = "1998.9.20"
+	election_frequency = 48
+	elections_allowed = no
+}
+}
+}
+
+#Civil war
+country_event = {
+	id = reworked_sweden.29
+	title = reworked_sweden.29.t
+	desc = reworked_sweden.29.d
+	
+	is_triggered_only = yes
+	
+	option = { #Accept
+		name = reworked_sweden.29.o1
+		ai_chance = { factor = 100 }
+		start_civil_war = {
+		 ideology = nationalist }
+}
+}

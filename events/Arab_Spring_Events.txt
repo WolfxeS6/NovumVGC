@@ -6,9 +6,6 @@ country_event = {	#Mohammed Bouazizi Self Immolation 17th of December 2010
 	desc = arab_spring.1.d
 	picture = GFX_report_arab_spring_tunisia1
 	trigger = {
-	    tag = TUN
-	    date > 2010.12.1
-		date < 2011.3.1
         has_government = reactionary
 	}
 	is_triggered_only = yes
@@ -149,6 +146,11 @@ country_event = {	#Ben Ali flees country
 			}
 			
 		}
+		news_event = {
+			id = arab_spring_news.2
+			days = 1
+			random_hours = 10
+		}
 		ai_chance = {
 		    factor = 100
 	    }
@@ -204,9 +206,6 @@ country_event = {	#Algeria Protests
 	desc = arab_spring.7.d
 	picture = GFX_report_arab_spring_algeria1
 	trigger = {
-	    tag = ALG
-	    date > 2010.12.5
-		date < 2011.3.1
         has_government = democratic_socialist
 	}
 	is_triggered_only = yes
@@ -318,9 +317,6 @@ country_event = {	#Oman 2011 Protests
 	desc = arab_spring.11.d
 	picture = GFX_report_arab_spring_oman1
 	trigger = {
-	    tag = ALG
-	    date > 2011.1.1
-		date < 2012.2.1
         has_government = monarchist
 	}
 	is_triggered_only = yes
@@ -397,9 +393,6 @@ country_event = {	#Egyptian Protests
 	desc = arab_spring.14.d
 	picture = GFX_report_arab_spring_egypt1
 	trigger = {
-	    tag = EGY
-	    date > 2011.1.1
-		date < 2012.2.1
         has_government = nationalist
 	}
 	is_triggered_only = yes
@@ -429,9 +422,6 @@ country_event = {	#Kuwait Stateless Protests
 	desc = arab_spring.15.d
 	picture = GFX_report_arab_spring_kuwait1
 	trigger = {
-	    tag = KUW
-	    date > 2011.2.1
-		date < 2012.3.1
         has_government = monarchist
 	}
 	is_triggered_only = yes
@@ -598,6 +588,11 @@ country_event = {	#Egyptian 2012 Elections
 					expire = "1.1.1.1"
 				}
 			}
+			country_event = {
+                id = arab_spring.20
+                days = 150
+                random_hours = 10
+            }
         }
 		ai_chance = {
 		    factor = 100
@@ -716,6 +711,10 @@ country_event = {	#Egyptian 2012 Elections
 			ideology = islamist
 			popularity = 0.1
 		}
+		set_politics = {
+			ruling_party = islamist
+			elections_allowed = yes
+		}
 		set_party_name = {
 			ideology = islamist
 			long_name = "Independent and Al-Nour Party"	
@@ -732,6 +731,358 @@ country_event = {	#Egyptian 2012 Elections
 					ARAB_Backed_by_the_Al_Nour
 				}
 			}
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Egyptian 2013 Protests
+	id = arab_spring.20
+	title = arab_spring.20.t
+	desc = arab_spring.20.d
+	picture = GFX_report_arab_spring_egypt5
+	
+	is_triggered_only = yes
+
+	option = {
+		name = arab_spring.20.o1
+		add_stability = -0.05
+		add_popularity = {
+			ideology = islamist
+			popularity = -0.1
+		}
+		add_country_leader_trait = ARAB_Unwanted_President
+		ai_chance = {
+		    factor = 100
+	    }
+		hidden_effect = {
+			country_event = {
+                id = arab_spring.21
+                days = 6
+                random_hours = 10
+            }
+        }
+		remove_country_leader_trait = ARAB_First_Democratic_President_Egypt
+	}
+}
+country_event = {	#Egyptian 2013 Coup
+	id = arab_spring.21
+	title = arab_spring.21.t
+	desc = arab_spring.21.d
+	picture = GFX_report_arab_spring_egypt6
+	
+	is_triggered_only = yes
+
+	option = {
+		name = arab_spring.21.o1
+		add_country_leader_role = {
+			character = EGY_Abdel_Fattah_Sisi
+			promote_leader = yes
+			country_leader = {
+				ideology = military_junta
+				expire = "1.1.1.1"
+				traits = {
+					military_theorist
+				}
+			}
+		}
+		add_popularity = {
+			ideology = islamist
+			popularity = -0.35
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.15
+		}
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = nationalist
+			long_name = "Supreme Council of the Armed Forces"	
+			name = "SCAF"
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+	option = {
+		name = arab_spring.21.o2
+		add_political_power = -40
+		hidden_effect = {
+			add_country_leader_role = {
+				character = EGY_Abdel_Fattah_Sisi
+				promote_leader = yes
+				country_leader = {
+					ideology = military_junta
+					expire = "1.1.1.1"
+					traits = {
+						military_theorist
+					}
+				}
+			}
+			set_party_name = {
+				ideology = nationalist
+				long_name = "Supreme Council of the Armed Forces"	
+				name = "SCAF"
+			}
+			country_event = {
+				id = arab_spring.22
+				days = 2
+				random_hours = 10
+			}
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Egyptian Civil War
+	id = arab_spring.22
+	title = arab_spring.22.t
+	desc = arab_spring.22.d
+	picture = GFX_report_arab_spring_egypt3
+	
+	is_triggered_only = yes
+
+	option = {
+		name = arab_spring.22.o1
+		add_stability = -0.05
+		start_civil_war = {
+			ideology = nationalist
+			size = 0.3
+			states = { 
+				552
+				1032
+				453
+				447
+			}
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Jordan 2011 Protests
+	id = arab_spring.23
+	title = arab_spring.23.t
+	desc = arab_spring.23.d
+	picture = GFX_report_arab_spring_jordan1
+	trigger = {
+        has_government = monarchist
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = arab_spring.23.o1
+		add_stability = -0.02
+		hidden_effect = {
+			country_event = {
+                id = arab_spring.24
+                days = 20
+                random_hours = 10
+            }
+        }
+		add_popularity = {
+			ideology = monarchist
+			popularity = -0.01
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Jordan Protests continue
+	id = arab_spring.24
+	title = arab_spring.24.t
+	desc = arab_spring.24.d
+	picture = GFX_report_arab_spring_jordan2
+	is_triggered_only = yes
+
+	option = { #Reforms happen + Prime Minister removed
+		name = arab_spring.24.o1
+		add_stability = 0.03
+		add_popularity = {
+			ideology = monarchist
+			popularity = 0.01
+		}
+		add_political_power = -200
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.02
+		}
+		add_war_support = -0.05
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+	option = {#islamic Action Front gains traction
+		name = arab_spring.24.o2
+		add_stability = -0.06
+		hidden_effect = {
+			country_event = {
+                id = arab_spring.25
+                days = 10
+                random_hours = 10
+            }
+        }
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.05
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Jordanian Civil War
+	id = arab_spring.25
+	title = arab_spring.25.t
+	desc = arab_spring.25.d
+	picture = GFX_report_arab_spring_jordan3
+	trigger = {
+        has_government = monarchist
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = arab_spring.25.o1
+		add_stability = -0.08
+		start_civil_war = {
+			ideology = islamist
+			size = 0.3
+			states = { 
+				1175
+			}
+		}
+		add_popularity = {
+			ideology = monarchist
+			popularity = -0.04
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Bahrain 2011 Protests
+	id = arab_spring.26
+	title = arab_spring.26.t
+	desc = arab_spring.26.d
+	picture = GFX_report_arab_spring_bahrain1
+	trigger = {
+        has_government = monarchist
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = arab_spring.26.o1
+		add_stability = -0.02
+		hidden_effect = {
+			SAU = {
+				country_event = {
+					id = arab_spring.27
+					days = 20
+					random_hours = 10
+				}
+			}
+        }
+		add_popularity = {
+			ideology = monarchist
+			popularity = -0.01
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#GCC Send Troops yes or no
+	id = arab_spring.27
+	title = arab_spring.27.t
+	desc = arab_spring.27.d
+	picture = GFX_report_arab_spring_bahrain2
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = arab_spring.27.o1
+		add_stability = -0.02
+		BAR = {
+			country_event = {
+				id = arab_spring.28
+				days = 2
+				random_hours = 10
+			}
+		}
+		add_manpower = -1500
+		add_stability = -0.05
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+	option = { #No
+		name = arab_spring.27.o2
+		add_stability = 0.05
+
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#GCC Troops Arrive Bahrain
+	id = arab_spring.28
+	title = arab_spring.28.t
+	desc = arab_spring.28.d
+	picture = GFX_report_arab_spring_bahrain3
+	trigger = {
+        has_government = monarchist
+	}
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = arab_spring.28.o1
+		add_stability = -0.02
+		SAU = {
+			puppet = {
+				target = BAR
+				end_wars = no
+			}
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+country_event = {	#Protests intensify and storm the Palace
+	id = arab_spring.29
+	title = arab_spring.29.t
+	desc = arab_spring.29.d
+	picture = GFX_report_arab_spring_bahrain4
+	trigger = {
+        has_government = monarchist
+	}
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = arab_spring.29.o1
+		add_popularity = {
+			ideology = monarchist
+			popularity = -0.25
+		}
+		add_country_leader_role = {
+			character = BAR_Ali_Salman
+			promote_leader = yes
+			country_leader = {
+				ideology = islamic_republican 
+				expire = "1.1.1.1"
+				traits = {
+					ARAB_Islamist_Figurehead
+				}
+			}
+		}
+		set_politics = {
+			ruling_party = islamist
+			elections_allowed = yes
 		}
 		ai_chance = {
 		    factor = 100

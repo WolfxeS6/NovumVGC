@@ -22,3 +22,116 @@ country_event = {			#End of the civil war
 		add_stability = 0.03
 	}
 }
+
+country_event = {			#2001 November floods
+	id = algeria.2
+	title = algeria.2.t
+	desc = algeria.2.d
+	picture = GFX_report_event_flooding
+
+	immediate = {
+		hidden_effect = {
+			459 = {
+				damage_building = {
+					type = infrastructure
+					damage = 4
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 3
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+				add_manpower = -751
+			}
+			982 = {
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			1115 = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+	
+	trigger = {
+		tag = ALG
+		date > 2001.10.25
+		date < 2002.3.1
+	}
+	fire_only_once = yes
+	option = {
+		name = algeria.2.o1
+		add_stability = -0.03
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+}
+
+news_event = {			#2001-2002 Black Spring event 1
+	id = algeria.news.1
+	title = algeria.news.1.t
+	desc = algeria.news.1.d
+	picture = GFX_news_event_blackspring
+	
+	trigger = {
+		tag = ALG
+		date > 2001.2.20
+		date < 2001.5.1
+	}
+	fire_only_once = yes
+	option = {
+		name = algeria.news.1.o1
+		ai_chance = {
+		    factor = 100
+	    }
+		hidden_effect = {
+			country_event = {
+                id = algeria.3
+                days = 20
+                random_hours = 10
+            }
+		}
+	}
+}
+country_event = {
+	id = algeria.3 #Black Spring event 2
+	title = algeria.3.t
+	desc = algeria.3.d
+	picture = GFX_report_event_angry_mob
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+	option = {
+		name = algeria.3.o1 #historical
+		add_timed_idea = {
+			idea = ALG_berber_unrest
+			days = 720
+		}
+		ai_chance = {
+		    factor = 100
+	    }
+	}
+	option = {
+		name = algeria.3.o2
+		add_popularity = { ideology = reactionary popularity = -0.1 }
+		add_war_support = -0.075
+		add_political_power = -50
+		ai_chance = {
+		    factor = 0
+	    }
+	}
+}

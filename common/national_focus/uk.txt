@@ -1322,8 +1322,8 @@ focus_tree = {
 			fourth_estate_conservative_increase = yes
 			add_political_power = 25
 			add_popularity = {
-				popularity = 0.05
-				ideology = conservative
+				popularity = -0.05
+				ideology = reactionary
 			}
 		}
 
@@ -1369,6 +1369,16 @@ focus_tree = {
 
 		mutually_exclusive = {
 			focus = ENG_careful_cooperation
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_government = social_liberal
+					has_government = democratic_socialist
+					has_government = social_democrat
+				}
+			}
 		}
 
 		completion_reward = {
@@ -1500,8 +1510,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_war_support = 0.05
 			add_political_power = 25
+			add_timed_idea = {
+				idea = ENG_new_diplomacy
+				days = 960
+			}
 		}
 
 		ai_will_do = {
@@ -1847,12 +1860,10 @@ focus_tree = {
 		prerequisite = {
 			focus = ENG_new_diplomatic_initiatives
 		}
-		mutually_exclusive = {
-			focus = ENG_trans_atlantic_free_trade
-		}
 
 		completion_reward = {
-
+			add_war_support = 0.025
+			add_war_support = 0.05
 		}
 
 		ai_will_do = {
@@ -2353,12 +2364,15 @@ focus_tree = {
 	focus = {
 		id = ENG_total_state_control
 		icon = GFX_goal_Big_Brother_is_Watching_You
-		x = 0
+		x = 1
 		y = 1
 		cost = 6
 
 		prerequisite = {
 			focus = ENG_opposition_crackdown
+		}
+		prerequisite = {
+			focus = ENG_jingoism
 		}
 		relative_position_id = ENG_opposition_crackdown
 
@@ -4802,6 +4816,7 @@ focus_tree = {
 		prerequisite = {
 			focus = ENG_national_liberals
 			focus = ENG_proportional_representation
+			focus = ENG_alternative_vote
 		}
 
 		mutually_exclusive = {}
@@ -5300,6 +5315,9 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ENG_protect_green_belt
+		}
+		available = {
+			date > 2009.1.1.1
 		}
 		relative_position_id = ENG_protect_green_belt
 
@@ -5919,6 +5937,7 @@ focus_tree = {
 		prerequisite = {
 			focus = ENG_continue_with_new_labour
 			focus = ENG_proportional_representation
+			focus = ENG_alternative_vote
 		}
 
 		available = {}
@@ -6483,14 +6502,47 @@ focus_tree = {
 			focus = ENG_liberal_reawakening
 		}
 
-		mutually_exclusive = {}
+		mutually_exclusive = {
+			focus = ENG_alternative_vote
+		}
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {}
+
+		completion_reward = {
+			add_ideas = ENG_proportional_rep_idea
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ENG_alternative_vote
+		icon = GFX_goal_generic_national_unity
+
+		x = 3
+		y = 1
+		relative_position_id = ENG_liberal_reawakening
+		cost = 4
+
+		prerequisite = {
+			focus = ENG_liberal_reawakening
+		}
+
+		mutually_exclusive = {
+			focus = ENG_proportional_representation
+		}
 
 		available = {}
 
 		bypass = {}
 
 		completion_reward = {
-			add_ideas = ENG_proportional_rep_idea
+			add_ideas = ENG_alternative_rep_idea
 		}
 
 		ai_will_do = {
@@ -6508,6 +6560,7 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ENG_proportional_representation
+			focus = ENG_alternative_vote
 		}
 
 		mutually_exclusive = {}

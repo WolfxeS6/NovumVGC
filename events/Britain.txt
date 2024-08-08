@@ -1092,9 +1092,11 @@ country_event = {
 
 	option = {
 		name = britain.36.o1 # To the streets
+		complete_national_focus = ENG_take_to_the_streets
 	}
 	option = {
-		name = britain.36.o1 # Crackdown
+		name = britain.36.o2 # Crackdown
+		complete_national_focus = ENG_law_and_order
 	}
 }
 country_event = {
@@ -1110,5 +1112,102 @@ country_event = {
 	option = {
 		name = britain.37.o1 #
 		remove_ideas = ENG_chaos_in_the_streets
+	}
+}
+country_event = {
+	id = britain.38 ## KOR partnership
+	title = britain.38.t
+	desc = britain.38.d
+	picture = GFX_report_event_british_flag
+
+	fire_only_once = yes 
+	is_triggered_only = yes
+
+
+	option = {
+		name = britain.38.o1 #
+		ENG = {
+			add_opinion_modifier = {
+				target = KOR
+				modifier = aided_industry
+			}
+		}
+		add_opinion_modifier = {
+			target = ENG
+			modifier = aided_industry
+		}
+		random_owned_state = {
+			limit = {
+				free_building_slots = {
+					building = arms_factory
+					size > 0
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		ENG = {
+				random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		hidden_effect = {
+			ENG = {
+				country_event = diplomatic_response.1
+			}
+		}
+	}
+	option = {
+		name = britain.38.o2 #
+		ENG = {
+			add_opinion_modifier = {
+				target = KOR
+				modifier = rejected_trade
+			}
+		}
+		hidden_effect = {
+			ENG = {
+				country_event = diplomatic_response.2
+			}
+		}
+	}
+}
+country_event = {
+	id = britain.39 ## Social Justice
+	title = britain.39.t
+	desc = britain.39.d
+	picture = GFX_report_event_british_flag
+
+	fire_only_once = yes 
+	is_triggered_only = yes
+
+
+	option = {
+		name = britain.39.o1 #compensate the underprivs
+		add_timed_idea = {
+			idea = ENG_social_justice_compensation
+			days = 730
+		}
+	}
+	option = {
+		name = britain.39.o2 #Just be nice
+		add_stability = 0.05
 	}
 }

@@ -1809,7 +1809,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			add_stability = -0.075
+			USA = {
+				add_opinion_modifier = {
+					target = ENG
+					modifier = british_trade_deals
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1907,7 +1913,18 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			CHI = {
+				add_opinion_modifier = {
+					target = ENG
+					modifier = declaration_of_friendship
+				}
+			}
+			PRC = {
+				add_opinion_modifier = {
+					target = ENG
+					modifier = against_china
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1921,13 +1938,20 @@ focus_tree = {
 		y = 1
 		cost = 6
 		relative_position_id = ENG_japanese_joint_training
-
+		bypass = {
+			OR = {
+				NOT = { country_exists = KOR}
+				has_war_with = KOR
+			}
+		}
 		prerequisite = {
 			focus = ENG_japanese_joint_training
 		}
 
 		completion_reward = {
-
+			KOR = {
+				country_event = britain.38
+			}
 		}
 
 		ai_will_do = {
@@ -1973,7 +1997,15 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			every_country = {
+				limit = {
+					has_idea = idea_asean_member
+				}
+				add_opinion_modifier = {
+					target = ENG
+					modifier = british_trade_deals
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1993,8 +2025,25 @@ focus_tree = {
 			focus = ENG_asean_partnership
 		}
 
-		completion_reward = {
+		available = {
+			NOT = {has_with_with = PRC}
+		}
 
+		completion_reward = {
+			add_opinion_modifier = {
+				target = ENG
+				modifier = british_trade_deals
+			}
+			if = {
+				limit = {
+					check_variable = { var = ENG.ENG_hong_kong_influence_value value = 1 compare = greater_than_or_equals }
+				}
+				set_variable = {
+					var = ENG.ENG_hong_kong_influence_value
+					value = 0
+					tooltip = ENG_revert_hong_kong_influence_tt
+				}
+			}
 		}
 
 		ai_will_do = {

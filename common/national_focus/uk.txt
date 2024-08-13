@@ -1049,6 +1049,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_stability = -0.03
+			add_political_power = 50
 		}
 
 		ai_will_do = {
@@ -1070,6 +1072,28 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			if = {
+				limit = { has_dlc = "La Resistance" }
+				if = {
+					limit = { has_intelligence_agency = no }
+					create_intelligence_agency = {
+						name = "MI6"
+						icon = GFX_intelligence_agency_logo_ENG
+					}
+				}
+				else_if = {
+					limit = {
+						NOT = { has_done_agency_upgrade = upgrade_army_department }
+					}
+					upgrade_intelligence_agency = upgrade_army_department
+				}
+				else = {
+					add_political_power = 50
+				}
+			}
+			else = {
+				add_war_support = 0.04
+			}
 		}
 
 		ai_will_do = {
@@ -1660,9 +1684,12 @@ focus_tree = {
 	focus = {
 		id = ENG_strengthen_NATO
 		icon = GFX_Align_to_NATO
-		x = -1
+		x = 1
 		y = 1
 		cost = 6
+		mutually_exclusive = {
+			focus = ENG_propose_the_CANZUK_alliance
+		}
 
 		prerequisite = {
 			focus = ENG_investments_at_home
@@ -1728,7 +1755,7 @@ focus_tree = {
 	focus = {
 		id = ENG_investments_abroad_2
 		icon = GFX_ENG_Investments_2
-		x = 1
+		x = -1
 		y = 1
 		cost = 6
 		relative_position_id = ENG_investments_at_home
@@ -1965,7 +1992,9 @@ focus_tree = {
 		y = 1
 		cost = 6
 		relative_position_id = ENG_recognise_taiwan
-
+		allow_branch = {
+			always = no
+		}
 		prerequisite = {
 			focus = ENG_recognise_taiwan
 		}
@@ -2064,7 +2093,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			every_country = {
+				limit = {
+					has_idea = idea_asean_member
+					has_opinion = { target = ENG value > -20 }
+				}
+				country_event = britain.40
+			}
 		}
 
 		ai_will_do = {
@@ -2083,6 +2118,9 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ENG_go_with_the_commonwealth
+		}
+		mutually_exclusive = {
+			focus = ENG_strengthen_NATO
 		}
 
 		available = {

@@ -5029,7 +5029,12 @@ focus_tree = {
 		prerequisite = { focus = SOV_focus_west }
 
 		completion_reward = {
-			army_experience = 10
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 1
+				uses = 1
+				category = radar
+			}
 		}
 
 		ai_will_do = {
@@ -5085,7 +5090,12 @@ focus_tree = {
 		prerequisite = { focus = SOV_focus_east }
 
 		completion_reward = {
-			army_experience = 10
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = military_police_tech
+			}
 		}
 
 		ai_will_do = {
@@ -5109,6 +5119,28 @@ focus_tree = {
 					modifier = CHE_resistance
 				}
 			}
+			division_template = {
+					name = "Infantry Division"
+					priority = 2
+					regiments = {
+						motorized = { x = 0 y = 0 }
+						motorized = { x = 0 y = 1 }
+						motorized = { x = 0 y = 2 }
+						motorized = { x = 1 y = 0 }
+						motorized = { x = 1 y = 1 }
+						motorized = { x = 1 y = 2 }
+						mechanized = { x = 2 y = 0 }
+						mechanized = { x = 2 y = 1 }
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 828 }
+					create_unit = {
+						division = "name = \"141st Special Motorized Regiment\" division_template = \"Infantry Division\" start_experience_factor = 0.3"
+						owner = SOV
+					}
+				}
 		}
 
 		ai_will_do = {
@@ -5128,6 +5160,7 @@ focus_tree = {
 		prerequisite = { focus = SOV_reinvigorate_the_fsb }
 
 		completion_reward = {
+			add_ideas = SOV_foreign_involvements
 		}
 
 		ai_will_do = {
@@ -5145,6 +5178,13 @@ focus_tree = {
 		prerequisite = { focus = SOV_soviet_bases }
 
 		completion_reward = {
+			add_ideas = SOV_anti_terror_training
+			every_country = {
+				limit = {
+					is_in_faction_with = SOV
+				}
+				add_ideas = SOV_anti_terror_training
+			}
 		}
 
 		ai_will_do = {
@@ -5390,7 +5430,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			
+			add_ideas = volunteer_only
+			add_ideas = SOV_volunteer_reserve_idea
 		}
 
 		ai_will_do = {

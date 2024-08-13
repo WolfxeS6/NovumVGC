@@ -2439,6 +2439,7 @@ focus_tree = {
 				ideology = fascist
 				popularity = 0.05
 			}
+			add_stability = -0.1
 			#add_ideas = ENG_multiethnic_army
 			add_political_power = 80
 		}
@@ -2469,6 +2470,39 @@ focus_tree = {
 				popularity = 0.05
 			}
 			add_ideas = ENG_modern_slavery
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ENG_complete_failure
+		icon = GFX_goal_Big_Brother_is_Watching_You
+		x = -1
+		y = 1
+		cost = 6
+
+		available = {
+			OR = {
+				has_stability < 0.6
+				fascism < 0.25
+			}
+		}
+
+		prerequisite = {
+			focus = ENG_opposition_crackdown
+		}
+		mutually_exclusive = {
+			focus = ENG_total_state_control
+		}
+		relative_position_id = ENG_opposition_crackdown
+
+		completion_reward = {
+			custom_effect_tooltip = ENG_complete_failure_tt
+			hidden_effect = {
+				country_event = financial_crisis.4
+			}
 		}
 
 		ai_will_do = {
@@ -5396,6 +5430,8 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 6
+
+		allow_branch = {always = no}
 
 		prerequisite = {
 			focus = ENG_protect_green_belt

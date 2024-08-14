@@ -805,7 +805,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			add_ideas = ENG_mi5_start
+			law_change_increase_state_security = yes
 		}
 
 		ai_will_do = {
@@ -853,7 +853,18 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			add_ideas = ENG_mi5_start_off
+			every_country = {
+				limit = {
+					OR = {
+						tag = ENG
+						tag = CAN
+						tag = USA
+						tag = AST
+						tag = NZL
+					}
+				}
+				add_ideas = ENG_five_eyes
+			}
 		}
 
 		ai_will_do = {
@@ -868,7 +879,9 @@ focus_tree = {
 		y = 1
 		cost = 6
 		relative_position_id = ENG_reaffirm_five_eyes
-
+		allow_branch = {
+			always = no
+		}
 		prerequisite = {
 			focus = ENG_combat_terrorism_financing
 		}
@@ -928,10 +941,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = ENG_mi5_start
-				add_idea = ENG_mi5_start_def
-			}
+			add_ideas = ENG_mi5_start_def
 		}
 
 		ai_will_do = {
@@ -960,20 +970,9 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			if = {
-				limit = {
-					has_idea = ENG_mi5_start_off
-				}
-				swap_ideas = {
-					remove_idea = ENG_mi5_start_off
-					add_idea = ENG_mi5_start_off2
-				}
-			}
-			else = {
-				swap_ideas = {
-					remove_idea = ENG_mi5_start_def
-					add_idea = ENG_mi5_start_def2
-				}
+			swap_ideas = {
+				remove_idea = ENG_mi5_start_def
+				add_idea = ENG_mi5_start_def2
 			}
 		}
 
@@ -2068,13 +2067,15 @@ focus_tree = {
 		}
 
 		available = {
-			NOT = {has_with_with = PRC}
+			NOT = {has_war_with = PRC}
 		}
 
 		completion_reward = {
-			add_opinion_modifier = {
-				target = ENG
-				modifier = british_trade_deals
+			PRC = {
+				add_opinion_modifier = {
+					target = ENG
+					modifier = british_trade_deals
+				}
 			}
 			if = {
 				limit = {
@@ -2475,6 +2476,7 @@ focus_tree = {
 		prerequisite = {
 			focus = ENG_jingoism
 		}
+		mutually_exclusive = {focus = ENG_complete_failure}
 		relative_position_id = ENG_opposition_crackdown
 
 		completion_reward = {
@@ -2491,7 +2493,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_complete_failure
-		icon = GFX_goal_Big_Brother_is_Watching_You
+		icon = GFX_focus_generic_anti_fascist_diplomacy
 		x = -1
 		y = 1
 		cost = 6
@@ -2499,7 +2501,7 @@ focus_tree = {
 		available = {
 			OR = {
 				has_stability < 0.6
-				fascism < 0.25
+				fascist < 0.25
 			}
 		}
 
@@ -2601,7 +2603,7 @@ focus_tree = {
 
 	focus = {
 		id = ENG_england_above_all_others
-		icon = GFX_goal_tfv_saf_support_ossebrandwag
+		icon = GFX_focus_ENG_england_flag
 		x = -1
 		y = 1
 		cost = 6
@@ -5129,7 +5131,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_tighten_immigration
-		icon = GFX_focus_generic_court
+		icon = GFX_focus_prc_infiltration
 
 		x = -2
 		y = 1
@@ -5163,6 +5165,8 @@ focus_tree = {
 		relative_position_id = ENG_tighten_immigration
 		cost = 6
 
+		allow_branch = {always = no}
+
 		prerequisite = {
 			focus = ENG_tighten_immigration
 		}
@@ -5183,7 +5187,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_anti-benefit_fraud
-		icon = GFX_focus_generic_court
+		icon = GFX_focus_ENG_snooper_force
 
 		x = 0
 		y = 1
@@ -5201,7 +5205,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			
+			add_ideas = ENG_snooper_force
 		}
 
 		ai_will_do = {
@@ -5250,6 +5254,7 @@ focus_tree = {
 
 		completion_reward = {
 			fourth_estate_market_liberal_increase = yes
+			add_stability = 0.05
 		}
 
 		ai_will_do = {
@@ -5361,7 +5366,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			
+			add_stability = 0.075
 		}
 
 		ai_will_do = {
@@ -5370,7 +5375,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_care_savings_protection
-		icon = GFX_ENG_Levelling_Up_Policy
+		icon = GFX_focus_SWE_form_rfsu
 		x = 1
 		y = 1
 		cost = 6
@@ -5391,7 +5396,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_protect_green_belt
-		icon = GFX_ENG_Levelling_Up_Policy
+		icon = GFX_focus_SWE_beneath_sticks_and_stone
 		x = -2
 		y = 1
 		cost = 6
@@ -5746,6 +5751,9 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ENG_break_the_banks
+		}
+		available = {
+			always = no
 		}
 		relative_position_id = ENG_break_the_banks
 		completion_reward = {
@@ -6147,6 +6155,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
+			add_stability = 0.05
 		}
 
 		ai_will_do = {
@@ -6171,6 +6180,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
+			law_change_tax_increase = yes
 		}
 
 		ai_will_do = {
@@ -6653,7 +6663,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_alternative_vote
-		icon = GFX_goal_generic_national_unity
+		icon = GFX_goal_generic_forceful_treaty
 
 		x = 3
 		y = 1
@@ -6710,7 +6720,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_civic_protections
-		icon = GFX_focus_generic_court
+		icon = GFX_goal_generic_defence
 
 		x = -1
 		y = 1

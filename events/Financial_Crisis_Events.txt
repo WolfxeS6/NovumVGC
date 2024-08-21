@@ -31,6 +31,9 @@ news_event = { #5 May 2006
 	picture = GFX_news_event_us_dollars
 
 	is_triggered_only = yes
+	trigger = {
+		date < 2012.09.15
+	}
 	major = yes
 	fire_only_once = yes
 	immediate = {
@@ -368,6 +371,14 @@ news_event = { #October 11 IMF warns the end
     immediate = {
         hidden_effect = {
             set_global_flag = NVX_global_financial_crisis
+			if = {
+				limit = {
+					OR = {
+						has_idea = national_development_developed
+					}
+				}
+				add_to_variable = { NVX_ECO_health = -50 }
+			}
         }
         hidden_effect = {
             ENG = {
@@ -413,13 +424,20 @@ country_event = {	#bailout RBS
 
 	trigger = {
 		NOT = {
-			has_completed_focus = ENG_break_the_banks
+			OR = {
+				has_completed_focus = ENG_break_the_banks
+				has_completed_focus = ENG_a_new_path
+			}
 		}
 	}
 
 	option = {
 		name = financial_crisis.3.a
         set_global_flag = ENG_saved_RBS
+		swap_ideas = {
+			remove_idea = ENG_financial_hub
+			add_idea = ENG_financial_hub_2
+		}
         hidden_effect = {
             news_event = {
                 id = financial_crisis_news.15
@@ -433,6 +451,7 @@ country_event = {	#bailout RBS
 	}
 	option = {
 		name = financial_crisis.3.b
+		custom_effect_tooltip = ENG_complete_failure_tt
         set_global_flag = ENG_abandoned_RBS #This will lead to a schizo focus tree
         hidden_effect = {
             news_event = {
@@ -486,7 +505,21 @@ news_event = { #RBS collapses
 country_event = {	#UK catastrophy
 	id = financial_crisis.4
 	title = financial_crisis.4.t
-	desc = financial_crisis.4.d
+
+	desc = {
+		text = financial_crisis.4.d1
+		trigger = {
+			NOT = {
+				has_completed_focus = ENG_complete_failure
+			}
+		}
+	}
+	desc = {
+		text = financial_crisis.4.d2
+		trigger = {
+			has_completed_focus = ENG_complete_failure
+		}
+	}
 	picture = GFX_report_event_stock_market
 	
 	is_triggered_only = yes
@@ -494,6 +527,8 @@ country_event = {	#UK catastrophy
 	option = {
 		name = financial_crisis.4.a
         load_focus_tree = united_kingdom_focus_alternative
+		add_ideas = ENG_economic_collapse
+		set_country_flag = NVX_disabled_generics
 		ai_chance = {
 		    factor = 1
 	    }

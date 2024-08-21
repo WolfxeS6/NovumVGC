@@ -761,6 +761,9 @@ country_event = {
 			has_government = nationalist
 			date > 2000.6.20
 			date < 2000.7.1
+			NOT = {
+				has_country_flag = SYR_Democratic_Path
+			}
 		}
 	
 		option = {
@@ -953,7 +956,7 @@ country_event = {
 		}
 	}
 }
-#The Manifest of the 99
+#The Statement of the 99
 country_event = {
 	id = syria.22
 	title = syria.22.t
@@ -970,22 +973,14 @@ country_event = {
 		add_stability = 0.01
 		add_popularity = {
 			ideology = social_democrat
-			popularity = 0.03
+			popularity = 0.01
 		}
 		add_popularity = {
 			ideology = conservative
-			popularity = 0.03
+			popularity = 0.01
 		}
-	}
-	option = {
-		name = syria.22.o2
-		trigger = {
-			original_tag = SYR
-		}
-		add_stability = -0.04
-		add_popularity = {
-			ideology = nationalist
-			popularity = 0.03
+		country_event = {
+			id = syria.59 days = 30
 		}
 	}
 }
@@ -1959,6 +1954,9 @@ country_event = {
 			size = 0.8
 			states = {554 1005 1004 680}
 			capital = 554
+			keep_unit_leaders = { }
+			keep_political_leader = yes
+			keep_political_party_members = yes
 		}
 		hidden_effect = {
 			random_country = {
@@ -2044,6 +2042,11 @@ country_event = {
 					producer = SYR
 				}
 				add_ideas = SYR_No_Surrender_Civil_War
+			}
+			SOV = {
+				country_event = {
+					id = syria.60 days = 60
+				}
 			}
 		}
 	}
@@ -2192,5 +2195,307 @@ country_event = {
 		name = syria.58.o2
 		add_stability = 0.075
 		add_war_support = 0.05
+	}
+}
+#The Statement of the 1000
+country_event = {
+	id = syria.59
+	title = syria.59.t
+	desc = syria.59.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = syria.59.o1
+		trigger = {
+			original_tag = SYR
+		}
+		add_stability = -0.025
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.03
+		}
+	}
+}
+#Russian Occupation of Latakia
+country_event = {
+	id = syria.60
+	title = syria.60.t
+	desc = syria.60.d
+	picture = GFX_report_event_political_deal
+	trigger = {
+		original_tag = SOV
+		SYR = {
+			has_civil_war = yes
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = syria.60.o1
+		SOV = {
+			transfer_state = 1004
+		}
+	}
+	option = {
+		name = syria.60.o2
+		add_stability = 0.01
+	}
+}
+#Civil War End
+country_event = {
+	id = syria.61
+	title = syria.61.t
+	desc = syria.61.d
+	picture = GFX_report_event_political_deal
+	trigger = {
+		original_tag = SYR
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = syria.61.o1
+		add_stability = 0.15
+		every_state = {
+			limit = { 
+				OR = {
+					is_owned_by = SYR
+					is_owned_by = KUS 
+				}
+			}
+			remove_province_modifier = {
+				static_modifiers = { unplanned_offensive }
+				province = {
+					all_provinces = yes
+				}
+			}
+			clr_state_flag = SPR_unplanned_offensive_flag
+		}
+		delete_unit_template_and_units = {
+			division_template = "Militia Regiment"
+			disband = yes #will refund equipment and manpower
+		}
+	}
+}
+country_event = { #Bashar Marriage
+	id = syria.62
+	title = syria.62.t
+	desc = syria.62.d
+	picture = GFX_report_syria_asma_bashar_marriage
+	trigger = {
+		original_tag = SYR
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = syria.62.o1
+		add_stability = 0.025
+		set_country_flag = SYR_Bashar_Asma_Marriage
+		ENG = {
+			add_opinion_modifier = {
+				target = SYR
+				modifier = medium_increase 
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = SYR
+				modifier = small_increase 
+			}
+		}
+	}
+}
+
+country_event = { #Anisa complains about Assef
+	id = syria.63
+	title = syria.63.t
+	desc = syria.63.d
+	picture = GFX_report_syria_asma_bashar_marriage
+	trigger = {
+		tag = SYR
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = syria.63.o1
+		add_timed_idea = {
+			idea = SYR_Anisa_Family_Troubles1
+			days = 30
+		}
+		hidden_effect = {
+			country_event = { 
+				id = syria.68 days = 60 
+				random_days = 60 
+			}
+		}
+	}
+}
+
+country_event = { #Anisa complains about Asma
+	id = syria.64
+	title = syria.64.t
+	desc = syria.64.d
+	picture = GFX_report_syria_asma_bashar_marriage
+	trigger = {
+		tag = SYR
+		has_country_flag = SYR_Bashar_Asma_Marriage
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = syria.64.o1
+		add_timed_idea = {
+			idea = SYR_Anisa_Family_Troubles2
+			days = 30
+		}
+		hidden_effect = {
+			country_event = { 
+				id = syria.68 days = 60 
+				random_days = 60 
+			}
+		}
+	}
+}
+
+country_event = { #Anisa critises government
+	id = syria.65
+	title = syria.65.t
+	desc = syria.65.d
+	picture = GFX_report_syria_asma_bashar_marriage
+	trigger = {
+		tag = SYR
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = syria.65.o1
+		add_popularity = {
+			ideology = nationalist
+			popularity = -0.05
+		}
+		add_stability = -0.05
+		hidden_effect = {
+			country_event = { 
+				id = syria.68 days = 60 
+				random_days = 60 
+			}
+		}
+	}
+}
+
+country_event = { #Anisa critises Military
+	id = syria.66
+	title = syria.66.t
+	desc = syria.66.d
+	picture = GFX_report_syria_asma_bashar_marriage
+	trigger = {
+		tag = SYR
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = syria.66.o1
+		add_command_power = -15
+		army_experience = -15
+		navy_experience = -15
+		air_experience = -15
+		hidden_effect = {
+			country_event = { 
+				id = syria.68 days = 60 
+				random_days = 60 
+			}
+		}
+	}
+}
+
+country_event = { #Anisa uses Economy for Corruption
+	id = syria.67
+	title = syria.67.t
+	desc = syria.67.d
+	picture = GFX_report_syria_asma_bashar_marriage
+	trigger = {
+		tag = SYR
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = syria.67.o1
+		add_timed_idea = {
+			idea = SYR_Family_Corruption
+			days = 30
+		}
+		hidden_effect = {
+			country_event = { 
+				id = syria.68 days = 60 
+				random_days = 60 
+			}
+		}
+	}
+}
+
+country_event = {
+	id = syria.68
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = nationalist
+		is_ai = no
+		SYR_advisor_Anisa_Makhlouf = {
+			is_hired_as_advisor = yes
+		}
+	}
+	
+	hidden = yes
+
+	immediate = {
+		random_list = {
+			15 = { # Assef Issue
+				modifier = {
+					factor = 0
+					has_war = no
+				}
+				country_event = { id = syria.63}
+			}
+			10 = { # Asma Issue
+				modifier = {
+					factor = 0
+					has_war = no
+				}
+				country_event = { id = syria.64 }
+			}
+			15 = { # Government critised
+				modifier = {
+					factor = 0
+					has_war = no
+				}
+				country_event = { id = syria.65 }
+			}
+			25 = { # Army critised
+				modifier = {
+					factor = 0
+					has_war = no
+				}
+				country_event = { id = syria.66 }
+			}
+			10 = { # Anisa Corruption
+				modifier = {
+					factor = 0
+					has_war = no
+				}
+				country_event = { id = syria.67 }
+			}
+			10 = {
+				modifier = {
+					factor = 0
+				}
+				country_event = { id = syria.68 days = 60 random_days = 60 }
+			}
+		}
 	}
 }

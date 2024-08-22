@@ -805,7 +805,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			add_ideas = ENG_mi5_start
+			law_change_increase_state_security = yes
 		}
 
 		ai_will_do = {
@@ -853,7 +853,18 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			add_ideas = ENG_mi5_start_off
+			every_country = {
+				limit = {
+					OR = {
+						tag = ENG
+						tag = CAN
+						tag = USA
+						tag = AST
+						tag = NZL
+					}
+				}
+				add_ideas = ENG_five_eyes
+			}
 		}
 
 		ai_will_do = {
@@ -868,7 +879,9 @@ focus_tree = {
 		y = 1
 		cost = 6
 		relative_position_id = ENG_reaffirm_five_eyes
-
+		allow_branch = {
+			always = no
+		}
 		prerequisite = {
 			focus = ENG_combat_terrorism_financing
 		}
@@ -928,10 +941,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = ENG_mi5_start
-				add_idea = ENG_mi5_start_def
-			}
+			add_ideas = ENG_mi5_start_def
 		}
 
 		ai_will_do = {
@@ -960,20 +970,9 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			if = {
-				limit = {
-					has_idea = ENG_mi5_start_off
-				}
-				swap_ideas = {
-					remove_idea = ENG_mi5_start_off
-					add_idea = ENG_mi5_start_off2
-				}
-			}
-			else = {
-				swap_ideas = {
-					remove_idea = ENG_mi5_start_def
-					add_idea = ENG_mi5_start_def2
-				}
+			swap_ideas = {
+				remove_idea = ENG_mi5_start_def
+				add_idea = ENG_mi5_start_def2
 			}
 		}
 
@@ -1049,6 +1048,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_stability = -0.03
+			add_political_power = 50
 		}
 
 		ai_will_do = {
@@ -1070,6 +1071,28 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			if = {
+				limit = { has_dlc = "La Resistance" }
+				if = {
+					limit = { has_intelligence_agency = no }
+					create_intelligence_agency = {
+						name = "MI6"
+						icon = GFX_intelligence_agency_logo_ENG
+					}
+				}
+				else_if = {
+					limit = {
+						NOT = { has_done_agency_upgrade = upgrade_army_department }
+					}
+					upgrade_intelligence_agency = upgrade_army_department
+				}
+				else = {
+					add_political_power = 50
+				}
+			}
+			else = {
+				add_war_support = 0.04
+			}
 		}
 
 		ai_will_do = {
@@ -1322,8 +1345,8 @@ focus_tree = {
 			fourth_estate_conservative_increase = yes
 			add_political_power = 25
 			add_popularity = {
-				popularity = 0.05
-				ideology = conservative
+				popularity = -0.05
+				ideology = reactionary
 			}
 		}
 
@@ -1369,6 +1392,16 @@ focus_tree = {
 
 		mutually_exclusive = {
 			focus = ENG_careful_cooperation
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_government = social_liberal
+					has_government = democratic_socialist
+					has_government = social_democrat
+				}
+			}
 		}
 
 		completion_reward = {
@@ -1500,8 +1533,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_war_support = 0.05
 			add_political_power = 25
+			add_timed_idea = {
+				idea = ENG_new_diplomacy
+				days = 960
+			}
 		}
 
 		ai_will_do = {
@@ -1647,9 +1683,12 @@ focus_tree = {
 	focus = {
 		id = ENG_strengthen_NATO
 		icon = GFX_Align_to_NATO
-		x = -1
+		x = 1
 		y = 1
 		cost = 6
+		mutually_exclusive = {
+			focus = ENG_propose_the_CANZUK_alliance
+		}
 
 		prerequisite = {
 			focus = ENG_investments_at_home
@@ -1715,7 +1754,7 @@ focus_tree = {
 	focus = {
 		id = ENG_investments_abroad_2
 		icon = GFX_ENG_Investments_2
-		x = 1
+		x = -1
 		y = 1
 		cost = 6
 		relative_position_id = ENG_investments_at_home
@@ -1796,7 +1835,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			add_stability = -0.075
+			USA = {
+				add_opinion_modifier = {
+					target = ENG
+					modifier = british_trade_deals
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1847,12 +1892,10 @@ focus_tree = {
 		prerequisite = {
 			focus = ENG_new_diplomatic_initiatives
 		}
-		mutually_exclusive = {
-			focus = ENG_trans_atlantic_free_trade
-		}
 
 		completion_reward = {
-
+			add_war_support = 0.025
+			add_war_support = 0.05
 		}
 
 		ai_will_do = {
@@ -1867,6 +1910,12 @@ focus_tree = {
 		y = 1
 		cost = 6
 		relative_position_id = ENG_focus_on_asia
+		bypass = {
+			OR = {
+				NOT = {country_exists = JAP}
+				has_war_with = JAP
+			}
+		}
 
 		prerequisite = {
 			focus = ENG_focus_on_asia
@@ -1876,7 +1925,14 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			army_experience = 25
+			navy_experience = 40
+			air_experience = 10
+			JAP = {
+				army_experience = 25
+				navy_experience = 40
+				air_experience = 10
+			}
 		}
 
 		ai_will_do = {
@@ -1896,7 +1952,18 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			CHI = {
+				add_opinion_modifier = {
+					target = ENG
+					modifier = declaration_of_friendship
+				}
+			}
+			PRC = {
+				add_opinion_modifier = {
+					target = ENG
+					modifier = against_china
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1910,13 +1977,20 @@ focus_tree = {
 		y = 1
 		cost = 6
 		relative_position_id = ENG_japanese_joint_training
-
+		bypass = {
+			OR = {
+				NOT = { country_exists = KOR}
+				has_war_with = KOR
+			}
+		}
 		prerequisite = {
 			focus = ENG_japanese_joint_training
 		}
 
 		completion_reward = {
-
+			KOR = {
+				country_event = britain.38
+			}
 		}
 
 		ai_will_do = {
@@ -1930,7 +2004,9 @@ focus_tree = {
 		y = 1
 		cost = 6
 		relative_position_id = ENG_recognise_taiwan
-
+		allow_branch = {
+			always = no
+		}
 		prerequisite = {
 			focus = ENG_recognise_taiwan
 		}
@@ -1962,7 +2038,15 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			every_country = {
+				limit = {
+					has_idea = idea_asean_member
+				}
+				add_opinion_modifier = {
+					target = ENG
+					modifier = british_trade_deals
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -1982,8 +2066,27 @@ focus_tree = {
 			focus = ENG_asean_partnership
 		}
 
-		completion_reward = {
+		available = {
+			NOT = {has_war_with = PRC}
+		}
 
+		completion_reward = {
+			PRC = {
+				add_opinion_modifier = {
+					target = ENG
+					modifier = british_trade_deals
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { var = ENG.ENG_hong_kong_influence_value value = 1 compare = greater_than_or_equals }
+				}
+				set_variable = {
+					var = ENG.ENG_hong_kong_influence_value
+					value = 0
+					tooltip = ENG_revert_hong_kong_influence_tt
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -2004,7 +2107,13 @@ focus_tree = {
 		}
 
 		completion_reward = {
-
+			every_country = {
+				limit = {
+					has_idea = idea_asean_member
+					has_opinion = { target = ENG value > -20 }
+				}
+				country_event = britain.40
+			}
 		}
 
 		ai_will_do = {
@@ -2023,6 +2132,9 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ENG_go_with_the_commonwealth
+		}
+		mutually_exclusive = {
+			focus = ENG_strengthen_NATO
 		}
 
 		available = {
@@ -2341,6 +2453,7 @@ focus_tree = {
 				ideology = fascist
 				popularity = 0.05
 			}
+			add_stability = -0.1
 			#add_ideas = ENG_multiethnic_army
 			add_political_power = 80
 		}
@@ -2353,13 +2466,17 @@ focus_tree = {
 	focus = {
 		id = ENG_total_state_control
 		icon = GFX_goal_Big_Brother_is_Watching_You
-		x = 0
+		x = 1
 		y = 1
 		cost = 6
 
 		prerequisite = {
 			focus = ENG_opposition_crackdown
 		}
+		prerequisite = {
+			focus = ENG_jingoism
+		}
+		mutually_exclusive = {focus = ENG_complete_failure}
 		relative_position_id = ENG_opposition_crackdown
 
 		completion_reward = {
@@ -2368,6 +2485,39 @@ focus_tree = {
 				popularity = 0.05
 			}
 			add_ideas = ENG_modern_slavery
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ENG_complete_failure
+		icon = GFX_focus_generic_anti_fascist_diplomacy
+		x = -1
+		y = 1
+		cost = 6
+
+		available = {
+			OR = {
+				has_stability < 0.6
+				fascist < 0.25
+			}
+		}
+
+		prerequisite = {
+			focus = ENG_opposition_crackdown
+		}
+		mutually_exclusive = {
+			focus = ENG_total_state_control
+		}
+		relative_position_id = ENG_opposition_crackdown
+
+		completion_reward = {
+			custom_effect_tooltip = ENG_complete_failure_tt
+			hidden_effect = {
+				country_event = financial_crisis.4
+			}
 		}
 
 		ai_will_do = {
@@ -2453,7 +2603,7 @@ focus_tree = {
 
 	focus = {
 		id = ENG_england_above_all_others
-		icon = GFX_goal_tfv_saf_support_ossebrandwag
+		icon = GFX_focus_ENG_england_flag
 		x = -1
 		y = 1
 		cost = 6
@@ -2464,9 +2614,6 @@ focus_tree = {
 		relative_position_id = ENG_enforced_family_values
 		mutually_exclusive = {
 			focus =ENG_british_britian
-		}
-		mutually_exclusive = {
-			focus =ENG_british_commonwealth_together
 		}
 		completion_reward = {
 			add_popularity = {
@@ -4802,6 +4949,7 @@ focus_tree = {
 		prerequisite = {
 			focus = ENG_national_liberals
 			focus = ENG_proportional_representation
+			focus = ENG_alternative_vote
 		}
 
 		mutually_exclusive = {}
@@ -4983,7 +5131,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_tighten_immigration
-		icon = GFX_focus_generic_court
+		icon = GFX_focus_prc_infiltration
 
 		x = -2
 		y = 1
@@ -5017,6 +5165,8 @@ focus_tree = {
 		relative_position_id = ENG_tighten_immigration
 		cost = 6
 
+		allow_branch = {always = no}
+
 		prerequisite = {
 			focus = ENG_tighten_immigration
 		}
@@ -5037,7 +5187,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_anti-benefit_fraud
-		icon = GFX_focus_generic_court
+		icon = GFX_focus_ENG_snooper_force
 
 		x = 0
 		y = 1
@@ -5055,7 +5205,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			
+			add_ideas = ENG_snooper_force
 		}
 
 		ai_will_do = {
@@ -5104,6 +5254,7 @@ focus_tree = {
 
 		completion_reward = {
 			fourth_estate_market_liberal_increase = yes
+			add_stability = 0.05
 		}
 
 		ai_will_do = {
@@ -5215,7 +5366,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			
+			add_stability = 0.075
 		}
 
 		ai_will_do = {
@@ -5224,7 +5375,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_care_savings_protection
-		icon = GFX_ENG_Levelling_Up_Policy
+		icon = GFX_focus_SWE_form_rfsu
 		x = 1
 		y = 1
 		cost = 6
@@ -5245,7 +5396,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_protect_green_belt
-		icon = GFX_ENG_Levelling_Up_Policy
+		icon = GFX_focus_SWE_beneath_sticks_and_stone
 		x = -2
 		y = 1
 		cost = 6
@@ -5298,8 +5449,13 @@ focus_tree = {
 		y = 2
 		cost = 6
 
+		allow_branch = {always = no}
+
 		prerequisite = {
 			focus = ENG_protect_green_belt
+		}
+		available = {
+			date > 2009.1.1.1
 		}
 		relative_position_id = ENG_protect_green_belt
 
@@ -5596,6 +5752,9 @@ focus_tree = {
 		prerequisite = {
 			focus = ENG_break_the_banks
 		}
+		available = {
+			always = no
+		}
 		relative_position_id = ENG_break_the_banks
 		completion_reward = {
 			#ENG_trade_unions_integrated
@@ -5749,56 +5908,6 @@ focus_tree = {
 	}
 
 	focus = {
-		id = ENG_reavaluate_world_affairs
-		icon = GFX_goal_generic_neutrality_focus
-		x = -1
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_peaceful_world
-		}
-
-		mutually_exclusive = {
-			focus = ENG_justice_always
-		}
-
-		relative_position_id = ENG_peaceful_world
-		completion_reward = {
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = ENG_justice_always
-		icon = GFX_focus_ETH_peacekeeping_forces
-		x = 1
-		y = 1
-		cost = 6
-
-		prerequisite = {
-			focus = ENG_peaceful_world
-		}
-
-		mutually_exclusive = {
-			focus = ENG_reavaluate_world_affairs
-		}
-
-		relative_position_id = ENG_peaceful_world
-		completion_reward = {
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
 		id = ENG_fully_disband_the_empire
 		icon = GFX_focus_eng_decolonization
 		x = 0
@@ -5850,6 +5959,54 @@ focus_tree = {
 		completion_reward = {
 			add_war_support = -0.1
 			add_threat = -5
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ENG_justice_always
+		icon = GFX_focus_ETH_peacekeeping_forces
+		x = 1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ENG_peaceful_world
+		}
+
+		mutually_exclusive = {
+			focus = ENG_reavaluate_world_affairs
+		}
+
+		relative_position_id = ENG_peaceful_world
+		completion_reward = {
+
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ENG_reavaluate_world_affairs
+		icon = GFX_goal_generic_neutrality_focus
+		x = -1
+		y = 1
+		cost = 6
+
+		prerequisite = {
+			focus = ENG_peaceful_world
+		}
+
+		mutually_exclusive = {
+			focus = ENG_justice_always
+		}
+
+		relative_position_id = ENG_peaceful_world
+		completion_reward = {
+
 		}
 
 		ai_will_do = {
@@ -5919,6 +6076,7 @@ focus_tree = {
 		prerequisite = {
 			focus = ENG_continue_with_new_labour
 			focus = ENG_proportional_representation
+			focus = ENG_alternative_vote
 		}
 
 		available = {}
@@ -5997,6 +6155,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
+			add_stability = 0.05
 		}
 
 		ai_will_do = {
@@ -6021,6 +6180,7 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
+			law_change_tax_increase = yes
 		}
 
 		ai_will_do = {
@@ -6483,14 +6643,47 @@ focus_tree = {
 			focus = ENG_liberal_reawakening
 		}
 
-		mutually_exclusive = {}
+		mutually_exclusive = {
+			focus = ENG_alternative_vote
+		}
+
+		available = {
+			has_government = social_liberal
+		}
+
+		bypass = {}
+
+		completion_reward = {
+			add_ideas = ENG_proportional_rep_idea
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = ENG_alternative_vote
+		icon = GFX_goal_generic_forceful_treaty
+
+		x = 3
+		y = 1
+		relative_position_id = ENG_liberal_reawakening
+		cost = 4
+
+		prerequisite = {
+			focus = ENG_liberal_reawakening
+		}
+
+		mutually_exclusive = {
+			focus = ENG_proportional_representation
+		}
 
 		available = {}
 
 		bypass = {}
 
 		completion_reward = {
-			add_ideas = ENG_proportional_rep_idea
+			add_ideas = ENG_alternative_rep_idea
 		}
 
 		ai_will_do = {
@@ -6508,6 +6701,7 @@ focus_tree = {
 
 		prerequisite = {
 			focus = ENG_proportional_representation
+			focus = ENG_alternative_vote
 		}
 
 		mutually_exclusive = {}
@@ -6526,7 +6720,7 @@ focus_tree = {
 	}
 	focus = {
 		id = ENG_civic_protections
-		icon = GFX_focus_generic_court
+		icon = GFX_goal_generic_defence
 
 		x = -1
 		y = 1

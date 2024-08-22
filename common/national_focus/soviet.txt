@@ -2606,7 +2606,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SOV_Putin_stands_victorius
-		icon = putin
+		icon = GFX_focus_goal_sov_putin_president_focus
 		x = -9
 		y = 1
 		cost = 5
@@ -4984,7 +4984,7 @@ focus_tree = {
 
 	focus = {
 		id = SOV_modernize_army
-		icon = GFX_focus_generic_combined_arms
+		icon = GFX_focus_goal_sov_army_modernization
 		x = -7
 		y = 1
 		cost = 5
@@ -5029,7 +5029,7 @@ focus_tree = {
 		prerequisite = { focus = SOV_focus_west }
 
 		completion_reward = {
-			army_experience = 10
+			add_ideas = SOV_strategic_missile_force
 		}
 
 		ai_will_do = {
@@ -5076,7 +5076,7 @@ focus_tree = {
 	}
 	focus = {
 		id = SOV_reinvigorate_the_fsb
-		icon = GFX_focus_generic_national_security
+		icon = GFX_focus_goal_sov_fsb_focus
 		x = 1
 		y = 1
 		cost = 5
@@ -5085,7 +5085,12 @@ focus_tree = {
 		prerequisite = { focus = SOV_focus_east }
 
 		completion_reward = {
-			army_experience = 10
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = military_police_tech
+			}
 		}
 
 		ai_will_do = {
@@ -5095,7 +5100,7 @@ focus_tree = {
 
 	focus = {
 		id = SOV_incorporate_kadyrovtsy
-		icon = GFX_goal_generic_political_pressure
+		icon = GFX_focus_goal_sov_chechens_focus
 		x = -1
 		y = 1
 		cost = 5
@@ -5109,6 +5114,28 @@ focus_tree = {
 					modifier = CHE_resistance
 				}
 			}
+			division_template = {
+					name = "Infantry Division"
+					priority = 2
+					regiments = {
+						motorized = { x = 0 y = 0 }
+						motorized = { x = 0 y = 1 }
+						motorized = { x = 0 y = 2 }
+						motorized = { x = 1 y = 0 }
+						motorized = { x = 1 y = 1 }
+						motorized = { x = 1 y = 2 }
+						mechanized = { x = 2 y = 0 }
+						mechanized = { x = 2 y = 1 }
+					}
+				}
+				random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					prioritize = { 828 }
+					create_unit = {
+						division = "name = \"141st Special Motorized Regiment\" division_template = \"Infantry Division\" start_experience_factor = 0.3"
+						owner = SOV
+					}
+				}
 		}
 
 		ai_will_do = {
@@ -5128,6 +5155,7 @@ focus_tree = {
 		prerequisite = { focus = SOV_reinvigorate_the_fsb }
 
 		completion_reward = {
+			add_ideas = SOV_foreign_involvements
 		}
 
 		ai_will_do = {
@@ -5145,6 +5173,13 @@ focus_tree = {
 		prerequisite = { focus = SOV_soviet_bases }
 
 		completion_reward = {
+			add_ideas = SOV_anti_terror_training
+			every_country = {
+				limit = {
+					is_in_faction_with = SOV
+				}
+				add_ideas = SOV_anti_terror_training
+			}
 		}
 
 		ai_will_do = {
@@ -5158,7 +5193,7 @@ focus_tree = {
 		y = 1
 		cost = 5
 		relative_position_id = SOV_soviet_bases
-
+		available = {always = no}
 		prerequisite = { focus = SOV_soviet_bases }
 
 		completion_reward = {
@@ -5242,7 +5277,7 @@ focus_tree = {
 		y = 1
 		cost = 5
 		relative_position_id = SOV_caspian_sea_boundaries_resolution
-
+		available = {always = no}
 		mutually_exclusive = {focus = SOV_chinese_border_mediation}
 
 		prerequisite = { 
@@ -5284,7 +5319,7 @@ focus_tree = {
 
 	focus = {
 		id = SOV_toward_volunteer_force
-		icon = GFX_focus_chi_army_reform
+		icon = GFX_focus_goal_sov_professional_army_focus
 		x = -1
 		y = 1
 		cost = 5
@@ -5390,7 +5425,8 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			
+			add_ideas = volunteer_only
+			add_ideas = SOV_volunteer_reserve_idea
 		}
 
 		ai_will_do = {
@@ -5439,7 +5475,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.4
+				uses = 3
+				category = land_doctrine
+			}
 		}
 
 		ai_will_do = {

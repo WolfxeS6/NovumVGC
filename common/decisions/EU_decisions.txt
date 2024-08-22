@@ -32,6 +32,38 @@ international_organisations = {
 	}
 }
 european_union_decisions = {
+	join_the_euro = {
+		visible = {
+			is_EU_member = yes
+			NOT = {has_idea = the_euro}
+		}
+
+		available = {
+			any_other_country = {
+				has_idea = the_euro
+			}
+		}
+		icon = democracy
+
+		cost = 100
+		fire_only_once = yes
+
+		days_re_enable = 2000
+
+		complete_effect = {
+			add_ideas = the_euro
+			if = {
+				limit = {
+					tag = ENG
+				}
+				add_stability = -0.075
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
 	leave_the_EU = {
 		visible = {
 			is_EU_member = yes
@@ -67,7 +99,7 @@ european_union_decisions = {
 	}
 	eu_base_decision = {
 		visible = {
-			is_EU_member = yes
+			is_debug = yes
 		}
 		available = {
 			always = no
@@ -118,6 +150,7 @@ european_union_decisions = {
 		}
 		visible = {
 			NOT = {has_global_flag = eu_research_funding_decision_flag}
+			NOT = {has_decision = eu_research_funding_mission}
 			has_completed_focus = EURO_european_erasmus
 		}
 		icon = GFX_decision_generic_research
@@ -147,6 +180,7 @@ european_union_decisions = {
 		}
 		visible = {
 			NOT = {has_global_flag = eu_industrial_subsidies_decision_flag}
+			NOT = {has_decision = eu_industrial_subsidies_mission}
 		}
 		icon = GFX_decision_generic_factory
 		cost = 50
@@ -201,6 +235,7 @@ european_union_decisions = {
 		}
 		visible = {
 			NOT = {has_global_flag = eu_invest_in_democracy_decision_flag}
+			NOT = {has_decision = eu_invest_in_democracy_mission}
 		}
 		icon = GFX_decision_eng_propaganda_campaigns
 		cost = 50
@@ -229,6 +264,8 @@ european_union_decisions = {
 		}
 		visible = {
 			NOT = {has_global_flag = eu_european_defence_integration_decision_flag}
+			NOT = {has_decision = eu_defence_integration_mission}
+			has_completed_focus = EURO_european_security_strategy
 		}
 		icon = GFX_decision_hol_draw_up_staff_plans
 		cost = 50
@@ -286,6 +323,7 @@ european_union_decisions = {
 		}
 		visible = {
 			NOT = {has_global_flag = eu_cut_red_tape_decision_flag}
+			NOT = {has_decision = eu_cut_red_tape_mission}
 		}
 		icon = GFX_decision_generic_break_treaty
 		cost = 50
@@ -314,6 +352,7 @@ european_union_decisions = {
 		}
 		visible = {
 			NOT = {has_global_flag = eu_aggricultural_subsidies_decision_flag}
+			NOT = {has_decision = eu_agricultural_subs_mission}
 		}
 		icon = GFX_decision_POL_looming_peasants_strike
 		cost = 50
@@ -342,6 +381,7 @@ european_union_decisions = {
 		}
 		visible = {
 			NOT = {has_global_flag = eu_infrastructure_investments_decision_flag}
+			NOT = {has_decision = eu_infra_building_mission}
 		}
 		icon = GFX_decision_generic_electricity
 		cost = 50
@@ -399,6 +439,7 @@ european_union_decisions = {
 		}
 		visible = {
 			NOT = {has_global_flag = eu_remilitarisation_decision_flag}
+			has_completed_focus = EURO_european_joint_precurement
 		}
 		icon = GFX_decision_generic_industry
 		cost = 50
@@ -428,6 +469,7 @@ european_union_decisions = {
 		visible = {
 			NOT = {has_global_flag = eu_peacekeeping_in_bosnia_decision_flag}
 			has_completed_focus = EURO_european_peacekeeping
+			always = no
 		}
 		icon = GFX_decision_generic_industry
 		cost = 50
@@ -456,6 +498,7 @@ european_union_decisions = {
 		visible = {
 			NOT = {has_global_flag = eu_peacekeeping_in_macedonia_decision_flag}
 			has_completed_focus = EURO_european_peacekeeping
+			always = no
 		}
 		icon = GFX_decision_generic_industry
 		cost = 50
@@ -563,9 +606,9 @@ european_union_decisions = {
 		icon = democracy
 
 		cost = 10
-		fire_only_once = yes
+		fire_only_once = no
 
-		days_re_enable = 1
+		days_re_enable = 10
 
 		complete_effect = {
 			add_days_mission_timeout = {
@@ -589,9 +632,9 @@ european_union_decisions = {
 		icon = democracy
 
 		cost = 1
-		fire_only_once = yes
+		fire_only_once = no
 
-		days_re_enable = 1
+		days_re_enable = 10
 
 		complete_effect = {
 			add_to_variable = { var = global.eu_voting^0 value = 1 tooltip = eu_voted_yes_tt}
@@ -613,9 +656,9 @@ european_union_decisions = {
 		icon = democracy
 
 		cost = 1
-		fire_only_once = yes
+		fire_only_once = no
 
-		days_re_enable = 1
+		days_re_enable = 10
 
 		complete_effect = {
 			add_to_variable = { var = global.eu_voting^1 value = 1 tooltip = eu_voted_no_tt}
@@ -637,9 +680,9 @@ european_union_decisions = {
 		icon = democracy
 
 		cost = 1
-		fire_only_once = yes
+		fire_only_once = no
 
-		days_re_enable = 1
+		days_re_enable = 10
 
 		complete_effect = {
 			add_to_variable = { var = global.eu_voting^2 value = 1 tooltip = eu_voted_abstain_tt}
@@ -649,5 +692,196 @@ european_union_decisions = {
 		ai_will_do = {
 			base = 0
 		}
+	}
+	#### EU missions
+	eu_research_funding_mission = {
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		visible = {
+			always = no
+		}
+
+		icon = GFX_decision_generic_research
+
+		is_good = yes
+
+		days_remove = 180
+
+		modifier = {
+            research_speed_factor = 0.06
+			consumer_goods_expected_value = 0.05
+        }
+	}
+	eu_industrial_subsidies_mission = {
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		visible = {
+			always = no
+		}
+
+		icon = GFX_decision_generic_research
+
+		is_good = yes
+
+		days_remove = 180
+
+		modifier = {
+			production_factory_start_efficiency_factor = 0.05 
+			line_change_production_efficiency_factor = 0.15
+			production_factory_efficiency_gain_factor = 0.04
+			consumer_goods_expected_value = 0.05
+        }
+	}
+	eu_invest_in_democracy_mission = {
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		visible = {
+			always = no
+		}
+
+		icon = GFX_decision_generic_research
+
+		is_good = yes
+
+		days_remove = 180
+
+		modifier = {
+			nationalist_drift = -0.1
+			communist_drift = -0.075
+			fascist_drift = -0.1
+			islamist_drift = -0.1
+			reactionary_drift = -0.05
+			monarchist_drift = -0.1
+			drift_defence_factor = -0.3
+			consumer_goods_expected_value = 0.05
+        }
+	}
+	eu_defence_integration_mission = {
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		visible = {
+			always = no
+		}
+
+		icon = GFX_decision_generic_research
+
+		is_good = yes
+
+		days_remove = 180
+
+		modifier = {
+			static_anti_air_damage_factor = 0.15
+			production_speed_arms_factory_factor = 0.1
+			experience_gain_army = 0.05
+			experience_gain_navy = 0.05
+			experience_gain_air = 0.1
+			consumer_goods_expected_value = 0.05
+        }
+	}
+	eu_cut_red_tape_mission = {
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		visible = {
+			always = no
+		}
+
+		icon = GFX_decision_generic_research
+
+		is_good = yes
+
+		days_remove = 180
+
+		modifier = {
+			production_speed_buildings_factor = 0.15 
+			fuel_gain_factor = 0.2
+			stability_factor = -0.05
+        }
+	}
+	eu_agricultural_subs_mission = {
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		visible = {
+			always = no
+		}
+
+		icon = GFX_decision_generic_research
+
+		is_good = yes
+
+		days_remove = 180
+
+		modifier = {
+			conservative_drift = 0.03
+			reactionary_drift = 0.02
+			stability_factor = 0.05
+			political_power_factor = 0.05
+			consumer_goods_expected_value = 0.05
+        }
+	}
+	eu_infra_building_mission = {
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		visible = {
+			always = no
+		}
+
+		icon = GFX_decision_generic_research
+
+		is_good = yes
+
+		days_remove = 180
+
+		modifier = {
+			production_speed_naval_base_factor = 0.15
+			production_speed_infrastructure_factor = 0.15
+			production_speed_air_base_factor = 0.15
+			production_speed_rail_way_factor = 0.1
+			production_speed_supply_node_factor = 0.15
+			consumer_goods_expected_value = 0.05
+        }
+	}
+	eu_remilitarisation_mission = {
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		visible = {
+			always = no
+		}
+
+		icon = GFX_decision_generic_research
+
+		is_good = yes
+
+		days_remove = 180
+
+		modifier = {
+			production_speed_arms_factory_factor = 0.15
+			industrial_capacity_factory = 0.1
+			conversion_cost_civ_to_mil_factor = -0.2
+			consumer_goods_expected_value = 0.05
+        }
 	}
 }

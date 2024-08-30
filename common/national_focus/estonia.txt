@@ -11,6 +11,8 @@ focus_tree = {
 
 	continuous_focus_position = { x = 900 y = 1600 }
 
+	shared_focus = LLE_baltic_tiger
+
 ###################
 ##### POLITICS ####
 ##################
@@ -20,7 +22,7 @@ focus_tree = {
 		icon = EST_bronze_soldier
 		cost = 5
 		x = 2
-		y = 0
+		y = 5
 
 		completion_reward = {
 			add_stability = -0.05
@@ -36,6 +38,48 @@ focus_tree = {
 			hidden_effect = {
 				SOV = { country_event = estonia.2 }
 			}
+		}
+	}
+
+	focus = {
+		id = EST_counterintelligence_measures
+		icon = GFX_goal_generic_intelligence_exchange
+		cost = 5
+		x = 2
+		y = 4
+
+		completion_reward = {
+			IF = {
+				limit = {
+					has_dlc = "La Resistance"
+					has_intelligence_agency = no
+				}
+				create_intelligence_agency = { 
+					name = "Kaitsepolitseiamet"
+					icon = GFX_intelligence_agency_logo_est
+				}
+				upgrade_intelligence_agency = upgrade_passive_defense 
+			}
+			else_if = {
+				limit = {
+					has_dlc = "La Resistance"
+					has_intelligence_agency = yes
+				}
+				upgrade_intelligence_agency = upgrade_passive_defense
+				gain_random_agency_upgrade = yes
+			}
+			add_advisor_role = {
+				character = EST_aleksander_toots
+				advisor = {
+					slot = political_advisor
+					cost = 50
+					idea_token = EST_aleksander_toots
+					traits = {
+						head_of_intelligence
+					}
+				}
+			}
+			EST_bop_very_low_decrease_effect = yes
 		}
 	}
 
@@ -58,6 +102,114 @@ focus_tree = {
 			completion_reward = {
 				remove_ideas = EST_eea_idea
 				custom_effect_tooltip = est_privatisation_tt
+			}
+		}
+
+		focus = {
+			id = EST_develop_tallinn
+			icon = GFX_focus_EST_tallinn
+			cost = 5
+			x = 17
+			y = 1
+
+			available = {
+			}
+
+			mutually_exclusive = { focus = EST_develop_countryside }
+
+			completion_reward = {
+				13 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
+				}
+			}
+		}
+		focus = {
+			id = EST_develop_countryside
+			icon = GFX_focus_generic_farmland
+			cost = 5
+			x = 19
+			y = 1
+
+			available = {
+			}
+
+			mutually_exclusive = { focus = EST_develop_tallinn }
+
+			completion_reward = {
+				840 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 1
+				}
+				191 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 1
+				}
+			}
+		}
+		focus = {
+			id = EST_move_capital
+			icon = GFX_goal_generic_construct_civilian
+			cost = 5
+			x = 21
+			y = 2
+
+			available = {
+			}
+
+			prerequisite = { focus = EST_develop_countryside }
+
+			completion_reward = {
+				add_stability = -0.05
+				13 = {
+					remove_building = {
+						type = industrial_complex
+						level = 1
+					}
+					add_manpower = -15000
+				}
+				191 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 1
+					add_manpower = 15000
+				}
+				set_capital = {state = 191 }
 			}
 		}
 
@@ -221,7 +373,7 @@ focus_tree = {
 	}
 	focus = {
 		id = EST_encourage_small_arms
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_generic_reorient_production
 		cost = 5
 		x = 8
 		y = 2
@@ -245,6 +397,36 @@ focus_tree = {
 		}
 	}
 
+	focus = {
+		id = EST_defence_industrial_park
+		icon = GFX_goal_generic_construct_mil_factory
+		cost = 10
+		x = 8
+		y = 3
+
+		prerequisite = { focus = EST_encourage_small_arms }
+
+		available = {
+			threat > 0.15
+		}
+
+		completion_reward = {
+			13 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
 ##############
 #### SETO ####
 ##############
@@ -253,8 +435,8 @@ focus_tree = {
 		id = EST_revive_seto_culture
 		icon = GFX_goal_generic_construct_mil_factory
 		cost = 5
-		x = 25
-		y = 2
+		x = 8
+		y = 8
 
 		completion_reward = {
 		}

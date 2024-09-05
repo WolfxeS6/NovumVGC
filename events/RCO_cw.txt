@@ -245,6 +245,7 @@ country_event = {
 			load_oob = "RCO_mobile_infantry_small"
 			load_oob = "RCO_armoured_units_small"
 			load_oob = "RCO_red_elite_small"
+			add_threat = 35
 		}
 	}
 }
@@ -704,6 +705,7 @@ country_event = { #rco asks blr to join civil war
         }
 
 		RCO = { add_to_faction = BLR }
+		add_threat = 5
 		RCO = {
             	puppet = {
                 target = BLR
@@ -924,6 +926,21 @@ country_event = {
 				idea = RCO_firstoffensive
 				days = 80
 			}
+			add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 20000
+			producer = RCO
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment_1
+			amount = 1000
+			producer = RCO
+		}
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment_1
+			amount = 1000
+			producer = RCO
+		}
 	}
 
 }
@@ -1089,84 +1106,83 @@ country_event = { #pol decides what to do next
 			 					}
 							}
 
-	#option = { # push east
-	#name =  cw.25.b
-#
-#	ai_chance = {
-    #        base = 50       
-    #    }
+	option = { # push east
+	name =  cw.25.b
 
-	#trigger = {
-	#	RCO = {
-    #            exists = yes
-   #         }
-	#}
+	ai_chance = {
+          base = 50       
+      }
 
-	#add_political_power = -100
-	#leave_faction = yes
-	#add_stability = -0.25
-	#add_war_support = -0.3
-	#add_timed_idea = {
-	#			idea = GER_low_military_conscription
-	#			days = 120
-	#		}
-	#		add_timed_idea = {
-	#			idea = neutrality_idea
-	#			days = 600
-	#		}
-	#		POL = {
-	#			create_wargoal = {
-    #			type = take_state_focus
-    #			target = RCO
-    #			generator = { 95 206 204 194 }
-    #			expire = 90
-#}
-			#}
-			#declare_war_on = {
-    		#target = RCO
-    		#type = take_state_focus
-#}
-	#}
+	trigger = {
+		RCO = {
+               exists = yes
+           }
+	}
+
+	add_political_power = -100
+	add_threat = 5
+	leave_faction = yes
+	add_stability = -0.25
+	add_war_support = -0.3
+	activate_mission = POL_capture_east_russia_mission
+	add_timed_idea = {
+				idea = GER_low_military_conscription
+				days = 120
+			}
+			add_timed_idea = {
+				idea = RCO_firstoffensive 
+				days = 80
+			}
+			POL = {
+				create_wargoal = {
+    			type = take_state_focus
+    			target = RCO
+    			generator = { 95 206 204 194 }
+    			expire = 90
+}
+			}
+			declare_war_on = {
+    		target = RCO
+    		type = take_state_focus
+}
+hidden_effect = {
+	RCO = { activate_mission = RCO_pol_capture_east_russia_mission }
+	}
+	If = {
+		limit = { is_ai = yes }
+		load_oob = "POL_reservists"
+	}
+}
 }
 
-#country_event = { #pol can demand peace
-	#id = cw.26
-	#title = cw.26.t
-	#desc = cw.26.d
-	#picture = GFX_russian_soldiers_1
-#
-	#trigger = {
-    #	tag = POL
-		#has_war_with = RCO
-		#POL = {
-		#		controls_state = 242
-		#		controls_state = 241
-		#		controls_state = 1144
-		#		controls_state = 226
-		#		controls_state = 196
-		#	}
-	#}
+country_event = { #pol can demand peace
+	id = cw.26
+	title = cw.26.t
+	desc = cw.26.d
+	picture = GFX_russian_soldiers_1
 
-	#option = { # send peace demands
-	#name =  cw.26.a
-	#ai_chance = {
-   #         base = 100       
-   #     }
-	#RCO = {
-	#	country_event = {
-	#				id = cw.27
-	#			}
-	#}
-	#}
-	#option = { # we dont negotiate
-	#name =  cw.26.b
-	#ai_chance = {
-    #        base = 0       
-    #    }
-	#add_stability = -0.25
-	#add_war_support = -0.3
-	#}
-#}
+	trigger = {
+    	tag = POL
+		has_war_with = RCO
+		POL = {
+				controls_state = 242
+				controls_state = 241
+				controls_state = 1144
+			}
+	}
+
+	option = { # send peace demands
+	name =  cw.26.a
+	add_political_power = 250
+	add_stability = 0.4
+	add_war_support = 0.4
+	RCO = {
+		country_event = {
+					id = cw.42
+				}
+	}
+	}
+}
 
 country_event = {
 	id = cw.27
@@ -1191,6 +1207,21 @@ country_event = {
 				idea = RCO_secondoffensive
 				days = 80
 			}
+			add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 20000
+			producer = RCO
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment_1
+			amount = 1000
+			producer = RCO
+		}
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment_1
+			amount = 1000
+			producer = RCO
+		}
 	}
 
 }
@@ -1369,6 +1400,7 @@ country_event = {
 	title = cw.30.t
 	desc = cw.30.d
 	picture = GFX_event_chechen_militia
+	fire_only_once = yes
 
 	trigger = {
     	tag = SOV
@@ -1381,6 +1413,7 @@ country_event = {
 
 	option = { 
 		name = cw.30.a #ok
+		add_threat = 10
 		hidden_effect = {
 			set_global_flag = chechnya_rose_up
 			CHE = {
@@ -1402,6 +1435,10 @@ country_event = {
 
 		option = { 
 		name = cw.30.b #play as them
+		ai_chance = {
+            base = 100       
+        }
+		add_threat = 10
 		CHE = {
 				change_tag_from = SOV
 				inherit_technology = SOV
@@ -1800,6 +1837,102 @@ country_event = {
 			set_state_controller = 237
 			set_state_owner = 236
 			set_state_controller = 236
+		}
+}
+}
+
+#pol failed to capture sov
+country_event = {
+	id = cw.40
+	title = cw.40.t
+	desc = cw.40.d
+	picture = GFX_event_chechen_militia3
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.40.a
+		add_political_power = -50
+	add_stability = -0.1
+	add_war_support = -0.1
+	white_peace = RCO
+	white_peace = UCO
+	RCO = {
+			country_event = {
+            id = cw.41
+            }
+	}
+}
+}
+
+#pol failed to capture sov, event for rco
+country_event = {
+	id = cw.41
+	title = cw.41.t
+	desc = cw.41.d
+	picture = GFX_event_chechen_militia3
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.41.a
+		add_political_power = 150
+	add_stability = 0.05
+	add_war_support = 0.05
+}
+}
+
+#rco needs to peace pol
+country_event = {
+	id = cw.42
+	title = cw.42.t
+	desc = cw.42.d
+	picture = GFX_event_chechen_militia3
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.42.a
+		add_political_power = -50
+	add_stability = -0.1
+	add_war_support = -0.1
+	white_peace = POL
+	POL = {
+			set_state_owner = 95
+			set_state_controller = 95
+			set_state_owner = 206
+			set_state_controller = 206
+			set_state_owner = 204
+			set_state_controller = 204
+			set_state_owner = 194
+			set_state_controller = 194
+			set_state_owner = 201
+			set_state_controller = 201
+			set_state_owner = 202
+			set_state_controller = 202
+			set_state_owner = 199
+			set_state_controller = 199
+			set_state_owner = 80
+			set_state_controller = 80
+			set_state_owner = 1143
+			set_state_controller = 1143
+			set_state_owner = 1086
+			set_state_controller = 1086
+			set_state_owner = 198
+			set_state_controller = 198
+			set_state_owner = 192
+			set_state_controller = 192
+			set_state_owner = 806
+			set_state_controller = 806
+			set_state_owner = 203
+			set_state_controller = 203
+			set_state_owner = 226
+			set_state_controller = 226
+			set_state_owner = 197
+			set_state_controller = 197
 		}
 }
 }

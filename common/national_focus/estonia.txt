@@ -131,6 +131,67 @@ focus_tree = {
 					}
 					add_extra_state_shared_building_slots = 2
 				}
+				EST_bop_medium_decrease_effect = yes
+			}
+		}
+		focus = {
+			id = EST_modernize_port
+			icon = GFX_focus_POL_develop_polish_shipbuilding
+			cost = 5
+			x = 17
+			y = 2
+
+			available = {
+			}
+
+			prerequisite = {
+				focus = EST_develop_tallinn
+			}
+
+			completion_reward = {
+				13 = {
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = naval_base
+						province = 3152
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+		focus = {
+			id = EST_uelemiste_city
+			icon = GFX_goal_generic_construct_civ_factory
+			cost = 5
+			x = 15
+			y = 2
+
+			available = {
+			}
+
+			prerequisite = {
+				focus = EST_develop_tallinn
+			}
+
+			completion_reward = {
+				13 = {
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
+				}
+				add_tech_bonus = {
+					bonus = 0.5
+					uses = 1
+					category = industry
+				}
 			}
 		}
 		focus = {
@@ -172,6 +233,37 @@ focus_tree = {
 					}
 					add_extra_state_shared_building_slots = 1
 				}
+				EST_bop_medium_increase_effect = yes
+			}
+		}
+		
+		focus = {
+			id = EST_develop_saaremaa
+			icon = EST_develop_saaremaa
+			cost = 5
+			x = 19
+			y = 2
+
+			available = {
+				has_war = no
+			}
+
+			prerequisite = { focus = EST_develop_countryside }
+
+			completion_reward = {
+				if = {
+					limit = { NOT = { has_country_flag = EST_second_develop_saameraa } }
+					13 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				add_offsite_building = { type = industrial_complex level = 2 }
+				custom_effect_tooltip = EST_saameraa_tt
+				set_country_flag = EST_tourism_improved
 			}
 		}
 		focus = {
@@ -218,6 +310,118 @@ focus_tree = {
 ##############
 
 	focus = {
+		id = EST_integrate_naiskodukaitse
+		icon = EST_naiskodukaitse
+		cost = 5
+		x = 5
+		y = 0
+
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			swap_ideas = {
+				remove_idea = EST_kaitseliit
+				add_idea = EST_kaitseliit_1
+			}
+			add_corps_commander_role = {
+				Character = EST_Airi_Tooming
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			add_corps_commander_role = {
+				Character = EST_dagmar_mattiisen
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+		}
+	}
+	focus = {
+		id = EST_support_command
+		icon = GFX_focus_generic_truck
+		cost = 5
+		x = 3
+		y = 1
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = 250
+				variant_name = "MAN KAT1"
+			}
+			add_tech_bonus = {
+				name = EST_motorized_logistics
+				bonus = 0.5
+				uses = 2
+				category = hospital_tech
+				category = logistics_tech
+			}
+		}
+	}
+	focus = {
+		id = EST_open_Kkskpoluegoon
+		icon = estonia_training
+		cost = 5
+		x = 4
+		y = 2
+
+		completion_reward = {
+			army_experience = 15
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			13 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_Kevadtorm
+		icon = GFX_focus_NORDIC_com_selector_army
+		cost = 10
+		x = 4
+		y = 3
+
+		prerequisite = { focus = EST_open_Kkskpoluegoon }
+
+		completion_reward = {
+			add_political_power = 50
+			add_war_support = 0.05
+			army_experience = 5
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			random_unit_leader = { gain_xp = 25 }
+			random_unit_leader = { gain_xp = 25 }
+		}
+	}
+	focus = {
+		id = EST_defense_investment_center
+		icon = GFX_focus_generic_combined_arms
+		cost = 5
+		x = 3
+		y = 0
+
+		completion_reward = {
+			every_military_industrial_organization = {
+				add_mio_funds = 500
+			}
+		}
+	}
+	focus = {
 		id = EST_expand_aviation_academy
 		icon = GFX_goal_generic_air_doctrine
 		cost = 5
@@ -246,11 +450,23 @@ focus_tree = {
 
 		completion_reward = {
 			navy_experience = 10
+			add_advisor_role = {
+				character = EST_tarmo_kouts
+				advisor = {
+					slot = navy_chief
+					cost = 50
+					idea_token = EST_tarmo_kouts
+					traits = {
+						navy_chief_reform_1
+					}
+				}
+			}
 			add_doctrine_cost_reduction = {
 				cost_reduction = 0.5
 				uses = 1
 				category = naval_doctrine
 			}
+			### possible: add leader skill
 		}
 	}
 	focus = {
@@ -433,10 +649,13 @@ focus_tree = {
 
 	focus = {
 		id = EST_revive_seto_culture
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_CHL_mapuche_reconcilliation_campaigns_export
 		cost = 5
-		x = 8
-		y = 8
+		x = 4
+		y = 1
+		relative_position_id = EST_move_capital
+
+		prerequisite = { focus = EST_move_capital }
 
 		completion_reward = {
 		}
@@ -444,7 +663,7 @@ focus_tree = {
 
 	focus = {
 		id = EST_establish_seto_congress
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_ETH_re-convene_the_parliament
 		cost = 5
 		x = -1
 		y = 1
@@ -458,7 +677,7 @@ focus_tree = {
 
 	focus = {
 		id = EST_elderly_council
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_BUL_form_a_regency_council
 		cost = 5
 		x = -1
 		y = 2
@@ -472,7 +691,7 @@ focus_tree = {
 
 	focus = {
 		id = EST_foster_seto_leelo
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_ARG_establish_the_free_association
 		cost = 5
 		x = 1
 		y = 1
@@ -486,7 +705,7 @@ focus_tree = {
 
 	focus = {
 		id = EST_boost_setomaa
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_goal_generic_propaganda
 		cost = 5
 		x = 1
 		y = 2
@@ -500,7 +719,7 @@ focus_tree = {
 
 	focus = {
 		id = EST_elect_ülebtsootska
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_hun_elect_a_king
 		cost = 5
 		x = 0
 		y = 3
@@ -515,7 +734,7 @@ focus_tree = {
 
 	focus = {
 		id = EST_proclaim_setomaa_kingdom
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_BRA_constitutional_monarchy
 		cost = 5
 		x = 0
 		y = 4
@@ -529,7 +748,7 @@ focus_tree = {
 
 	focus = {
 		id = EST_retake_pskovo_pechersky_monastery
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_SOV_third_rome
 		cost = 5
 		x = 0
 		y = 5
@@ -543,7 +762,7 @@ focus_tree = {
 
 	focus = {
 		id = EST_king_peko
-		icon = GFX_goal_generic_construct_mil_factory
+		icon = GFX_focus_ETH_the-italo_ethiopian_empire
 		cost = 5
 		x = 0
 		y = 6

@@ -1987,10 +1987,13 @@ country_event = {
 		add_equipment_to_stockpile = {
 			type = support_equipment_1
 			amount = 50
-			producer = CHE
+			producer = USA
 		}
 		give_resource_rights = { receiver = USA state = 644 }
 		give_resource_rights = { receiver = USA state = 574 }
+		hidden_effect = {
+		USA = { set_country_flag = USA_supported_sov }
+		}
 	}
 }
 
@@ -2019,6 +2022,274 @@ country_event = {
 	}
 }
 
+#sov us help arrived
+country_event = {
+	id = cw.46
+	title = cw.46.t
+	desc = cw.46.d
+	picture = GFX_event_usa_rifles
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { 
+		name = cw.46.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 1500
+			producer = USA
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = 50
+			producer = USA
+		}
+}
+}
+
+#prc sov asks for agreement
+country_event = {
+	id = cw.47
+	title = cw.47.t
+	desc = cw.47.d
+	picture = GFX_russian_soldiers_1
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { 
+		name = cw.47.a # agree
+		add_timed_idea = {
+    			idea = PRC_russian_trade_concessions_cw
+   				 days = 365
+			}
+			add_political_power = -150
+			PRC = {
+				add_opinion_modifier = {
+					target = RCO
+					modifier = loyal_to_our_enemy
+				}
+			}
+			RCO = {
+				add_opinion_modifier = {
+					target = PRC
+					modifier = loyal_to_our_enemy
+				}
+			}
+			hidden_effect = {
+				set_global_flag = prc_helped_sov_in_russian_cw
+			}
+}
+option = { 
+		name = cw.47.b # disagree
+		ai_chance = {
+        base = 100      
+    }
+		add_political_power = 150
+			SOV = {
+				add_opinion_modifier = {
+					target = PRC
+					modifier = loyal_to_our_enemy
+				}
+			}
+			hidden_effect = {
+				set_global_flag = prc_helped_rco_in_russian_cw
+			}
+}
+}
+
+#jap sov asks for agreement
+country_event = {
+	id = cw.48
+	title = cw.48.t
+	desc = cw.48.d
+	picture = GFX_russian_soldiers_1
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { 
+		name = cw.48.a # agree
+		ai_chance = {
+        base = 50      
+    }
+		JAP = {
+			set_state_owner = 951
+			set_state_controller = 951
+			set_state_owner = 555
+			set_state_controller = 555
+		}
+			RCO = {
+				add_opinion_modifier = {
+					target = JAP
+					modifier = loyal_to_our_enemy
+				}
+			}
+			hidden_effect = {
+				set_global_flag = jap_helped_sov_in_russian_cw
+			}
+			add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = -1500
+			producer = JAP
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = -50
+			producer = JAP
+		}
+		SOV = {
+			country_event = { id = cw.49 }
+		}
+		add_ideas = GEN_peacekeeping_efforts2
+		set_rule = { can_send_volunteers = yes }
+}
+option = { 
+		name = cw.48.b # ask more
+		ai_chance = {
+        base = 50      
+    }
+			SOV = {
+			country_event = { id = cw.50 }
+		}
+}
+option = { 
+		name = cw.48.c # disagree
+		add_stability = 0.1
+			SOV = {
+				add_opinion_modifier = {
+					target = JAP
+					modifier = loyal_to_our_enemy
+				}
+			}
+}
+}
+
+#sov jap help arrived
+country_event = {
+	id = cw.49
+	title = cw.49.t
+	desc = cw.49.d
+	picture = GFX_event_usa_rifles
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { 
+		name = cw.49.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 1500
+			producer = JAP
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = 50
+			producer = JAP
+		}
+}
+}
+
+#sov jap wants more
+country_event = {
+	id = cw.50
+	title = cw.50.t
+	desc = cw.50.d
+	picture = GFX_event_usa_rifles
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.50.a
+		ai_chance = {
+        base = 100     
+    }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 1500
+			producer = JAP
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = 50
+			producer = JAP
+		}
+		JAP = {
+			country_event = { id = cw.51 }
+		}
+		add_stability = -0.05
+		add_war_support = -0.1
+}
+
+option = { # no
+		name = cw.50.b
+		JAP = {
+			country_event = { id = cw.52 }
+		}
+		add_stability = 0.1
+		add_war_support = 0.1
+}
+}
+
+#jap sov disagrees
+country_event = {
+	id = cw.52
+	title = cw.52.t
+	desc = cw.52.d
+	picture = GFX_event_usa_rifles
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.52.a
+		add_stability = -0.1
+		SOV = {
+				add_opinion_modifier = {
+					target = JAP
+					modifier = loyal_to_our_enemy
+				}
+			}
+	}
+}
+
+#jap sov agrees
+country_event = {
+	id = cw.51
+	title = cw.51.t
+	desc = cw.51.d
+	picture = GFX_event_usa_rifles
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.51.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = -1500
+			producer = JAP
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = -50
+			producer = JAP
+		}
+		JAP = {
+			set_state_owner = 951
+			set_state_controller = 951
+			set_state_owner = 555
+			set_state_controller = 555
+			set_state_owner = 537
+			set_state_controller = 537
+			set_state_owner = 655
+			set_state_controller = 655
+		}
+		add_ideas = GEN_peacekeeping_efforts2
+		set_rule = { can_send_volunteers = yes }
+	}
+}
 ##### nmo chaos ends
 
 country_event = {

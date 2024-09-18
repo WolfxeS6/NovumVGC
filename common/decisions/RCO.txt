@@ -3050,3 +3050,534 @@ CHE_decisions_category = {
 		}
 	}
 	}
+
+	RCO_USA_interactions_category = {
+
+		USA_send_instr_to_media_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		cost = 50
+		days_remove = 20
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			set_country_flag = USA_sent_instr_to_media
+		}
+	}
+
+	USA_incr_censorship_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			has_country_flag = USA_sent_instr_to_media
+		}
+
+		cost = 80
+		days_remove = 20
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			set_country_flag = USA_incr_cens
+		}
+	}
+
+	USA_new_witch_hunt_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			has_country_flag = USA_incr_cens
+		}
+
+		cost = 110
+		days_remove = 20
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			set_country_flag = USA_new_witch_hunt
+		}
+	}
+
+	USA_anticommunist_propaganda_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_public_opinion_level > 6
+			}
+		}
+
+		cost = 30
+		days_remove = 5
+
+		fire_only_once = no
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = -5
+			}
+		}
+	}
+
+## + level of involvment dec
+
+	USA_increase_involvment_level_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 0
+			}
+			country_exists = SOV
+		}
+
+		cost = 30
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+			add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = 10
+			}
+		}
+	}
+
+	USA_seize_russian_oil_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 1
+			}
+			country_exists = SOV
+		}
+
+		cost = 50
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+			give_resource_rights = { receiver = USA state = 581 }
+			give_resource_rights = { receiver = USA state = 579 }
+			give_resource_rights = { receiver = USA state = 577 }
+		}
+	}
+
+	USA_benefit_from_chechen_oilconquest_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 0
+			}
+			country_exists = CHE
+			CHE = { num_of_controlled_states > 2 }
+		}
+
+		cost = 50
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+			add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = 5
+			}
+		}
+	}
+
+	USA_send_mercenaries_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 0
+			}
+			country_exists = SOV
+		}
+
+		cost = 80
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+			add_ideas = GEN_peacekeeping_efforts1
+		set_rule = { can_send_volunteers = yes }
+		set_country_flag = USA_sent_mercs
+		add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = 5
+			}
+		}
+	}
+
+	USA_american_contingent_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 3
+			}
+			country_exists = SOV
+			has_country_flag = USA_sent_mercs
+		}
+
+		cost = 120
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+			swap_ideas = {
+			add_idea = GEN_peacekeeping_efforts2
+			remove_idea = GEN_peacekeeping_efforts1
+		}
+		add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = 25
+			}
+		}
+	}
+
+	USA_seize_russian_assets_abroad_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 0
+			}
+			country_exists = SOV
+			SOV = { surrender_progress > 0.8 }
+		}
+
+		cost = 20
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+		}
+	}
+
+	USA_sell_weapons_sov_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			country_exists = SOV
+			NOT = { has_idea = USA_sold_weapons }
+		}
+
+		cost = 20
+		days_remove = 50
+
+		fire_only_once = no
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_timed_idea = {
+    			idea = USA_sold_weapons
+   				 days = 30
+			}
+			add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = 5
+			}
+			add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = -1500
+			producer = USA
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment_1
+			amount = -50
+			producer = CHE
+		}
+		SOV = {
+			country_event = { id = cw.46 }
+		}
+		}
+	}
+
+	USA_push_for_increased_nato_production_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 0
+			}
+			country_exists = RCO
+		}
+
+		cost = 40
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+			add_timed_idea = {
+    			idea = USA_increased_nato_production
+   				 days = 150
+			}
+			complete_national_focus = USA_international_diplomacy
+			complete_national_focus = USA_reaffirm_nato
+			complete_national_focus = USA_diplomacy_europe
+			set_country_flag = usa_increased_nato_prod_cw
+			add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = 8
+			}
+		}
+	}
+
+	USA_initiate_nato_expansion_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 0
+			}
+			country_exists = RCO
+			has_country_flag = usa_increased_nato_prod_cw
+		}
+
+		cost = 50
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+			complete_national_focus = USA_2004_nato_expansion
+			set_country_flag = usa_nato2004exp_cw
+			add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = 8
+			}
+		}
+	}
+
+	USA_push_for_increased_nato_production2_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 0
+			}
+			country_exists = RCO
+			has_country_flag = usa_nato2004exp_cw
+		}
+
+		cost = 70
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+			add_timed_idea = {
+    			idea = USA_increased_nato_production2
+   				 days = 150
+			}
+			set_country_flag = usa_increased_nato_prod2_cw
+			add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = 10
+			}
+		}
+	}
+
+	USA_initiate_nato_expansion2_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO_involvement_level > 0
+			}
+			country_exists = RCO
+			has_country_flag = usa_increased_nato_prod2_cw
+		}
+
+		cost = 50
+		days_remove = 5
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			factor = 100
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO_involvement_level
+    			value = 1
+			}
+			complete_national_focus = USA_2009_nato_expansion
+			set_country_flag = usa_nato2009exp_cw
+			add_to_variable = {
+    			var = RCO_public_opinion_level
+    			value = 15
+			}
+		}
+	}
+	}

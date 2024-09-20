@@ -3063,7 +3063,7 @@ CHE_decisions_category = {
 			original_tag = USA
 			has_global_flag = usa_intervened_in_russian_cw
 			check_variable = {
-    			RCO_public_opinion_level > 30
+    			RCO.RCO_public_opinion_level > 30
 			}
 		}
 
@@ -3078,9 +3078,10 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = -20
 			}
+			custom_effect_tooltip = RCO_usa_po_decrease_20_tt
 			set_country_flag = USA_sent_instr_to_media
 		}
 	}
@@ -3095,7 +3096,7 @@ CHE_decisions_category = {
 			original_tag = USA
 			has_country_flag = USA_sent_instr_to_media
 			check_variable = {
-    			RCO_public_opinion_level > 30
+    			RCO.RCO_public_opinion_level > 30
 			}
 		}
 
@@ -3111,9 +3112,10 @@ CHE_decisions_category = {
 		complete_effect = {
 			set_country_flag = USA_incr_cens
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = -20
 			}
+			custom_effect_tooltip = RCO_usa_po_decrease_20_tt
 		}
 	}
 
@@ -3127,7 +3129,7 @@ CHE_decisions_category = {
 			original_tag = USA
 			has_country_flag = USA_incr_cens
 			check_variable = {
-    			RCO_public_opinion_level > 30
+    			RCO.RCO_public_opinion_level > 30
 			}
 		}
 
@@ -3143,9 +3145,80 @@ CHE_decisions_category = {
 		complete_effect = {
 			set_country_flag = USA_new_witch_hunt
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = -20
 			}
+			custom_effect_tooltip = RCO_usa_po_decrease_20_tt
+		}
+	}
+
+	USA_make_concessions_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO.RCO_public_opinion_level > 30
+			}
+			check_variable = {
+    			RCO.RCO_involvement_level > 3
+			}
+		}
+
+		cost = 40
+		days_remove = 90
+
+		fire_only_once = no
+
+		ai_will_do = {
+			factor = 40
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO.RCO_public_opinion_level
+    			value = -30
+			}
+			add_to_variable = {
+    			var = RCO.RCO_involvement_level
+    			value = -2
+			}
+			custom_effect_tooltip = RCO_usa_po_decrease_30_tt
+			custom_effect_tooltip = RCO_usa_inv_decrease_2_tt
+		}
+	}
+
+	USA_abandon_russia_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO.RCO_public_opinion_level > 30
+			}
+		}
+
+		cost = 10
+		days_remove = 5
+
+		fire_only_once = no
+
+		ai_will_do = {
+    		base = 0
+    			modifier = {
+        			add = 150
+        			has_stability < 0.3
+    			}
+		}
+
+		complete_effect = {
+			clr_global_flag = my_flag
 		}
 	}
 
@@ -3158,7 +3231,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_public_opinion_level > 16
+    			RCO.RCO_public_opinion_level > 6
 			}
 		}
 
@@ -3173,9 +3246,10 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = -5
 			}
+			custom_effect_tooltip = RCO_usa_po_decrease_5_tt
 		}
 	}
 
@@ -3190,7 +3264,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 0
+    			RCO.RCO_involvement_level > 0
 			}
 			country_exists = SOV
 		}
@@ -3206,13 +3280,15 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = 10
 			}
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
+			custom_effect_tooltip = RCO_usa_po_increase_10_tt
 		}
 	}
 
@@ -3225,7 +3301,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 1
+    			RCO.RCO_involvement_level > 1
 			}
 			country_exists = SOV
 		}
@@ -3241,12 +3317,13 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
 			give_resource_rights = { receiver = USA state = 581 }
 			give_resource_rights = { receiver = USA state = 579 }
 			give_resource_rights = { receiver = USA state = 577 }
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
 		}
 	}
 
@@ -3259,7 +3336,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 0
+    			RCO.RCO_involvement_level > 0
 			}
 			country_exists = CHE
 			CHE = { num_of_controlled_states > 2 }
@@ -3276,13 +3353,15 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = 5
 			}
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
+			custom_effect_tooltip = RCO_usa_po_increase_5_tt
 		}
 	}
 
@@ -3295,7 +3374,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 0
+    			RCO.RCO_involvement_level > 0
 			}
 			country_exists = SOV
 		}
@@ -3311,16 +3390,18 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
 			add_ideas = GEN_peacekeeping_efforts1
 		set_rule = { can_send_volunteers = yes }
 		set_country_flag = USA_sent_mercs
 		add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = 5
 			}
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
+			custom_effect_tooltip = RCO_usa_po_increase_5_tt
 		}
 	}
 
@@ -3333,7 +3414,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 3
+    			RCO.RCO_involvement_level > 3
 			}
 			country_exists = SOV
 			has_country_flag = USA_sent_mercs
@@ -3350,7 +3431,7 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
 			swap_ideas = {
@@ -3358,9 +3439,11 @@ CHE_decisions_category = {
 			remove_idea = GEN_peacekeeping_efforts1
 		}
 		add_to_variable = {
-    			var = RCO_public_opinion_level
-    			value = 25
+    			var = RCO.RCO_public_opinion_level
+    			value = 15
 			}
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
+			custom_effect_tooltip = RCO_usa_po_increase_15_tt
 		}
 	}
 
@@ -3373,7 +3456,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 0
+    			RCO.RCO_involvement_level > 0
 			}
 			country_exists = SOV
 			SOV = { surrender_progress > 0.8 }
@@ -3390,9 +3473,10 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
 		}
 	}
 
@@ -3423,7 +3507,7 @@ CHE_decisions_category = {
    				 days = 30
 			}
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = 5
 			}
 			add_equipment_to_stockpile = {
@@ -3451,7 +3535,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 0
+    			RCO.RCO_involvement_level > 0
 			}
 			country_exists = RCO
 		}
@@ -3467,7 +3551,7 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
 			add_timed_idea = {
@@ -3479,9 +3563,11 @@ CHE_decisions_category = {
 			complete_national_focus = USA_diplomacy_europe
 			set_country_flag = usa_increased_nato_prod_cw
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = 8
 			}
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
+			custom_effect_tooltip = RCO_usa_po_increase_8_tt
 		}
 	}
 
@@ -3494,7 +3580,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 0
+    			RCO.RCO_involvement_level > 0
 			}
 			country_exists = RCO
 			has_country_flag = usa_increased_nato_prod_cw
@@ -3511,15 +3597,17 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
 			complete_national_focus = USA_2004_nato_expansion
 			set_country_flag = usa_nato2004exp_cw
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = 8
 			}
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
+			custom_effect_tooltip = RCO_usa_po_increase_8_tt
 		}
 	}
 
@@ -3532,7 +3620,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 0
+    			RCO.RCO_involvement_level > 0
 			}
 			country_exists = RCO
 			has_country_flag = usa_nato2004exp_cw
@@ -3549,7 +3637,7 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
 			add_timed_idea = {
@@ -3558,9 +3646,11 @@ CHE_decisions_category = {
 			}
 			set_country_flag = usa_increased_nato_prod2_cw
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = 10
 			}
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
+			custom_effect_tooltip = RCO_usa_po_increase_10_tt
 		}
 	}
 
@@ -3573,7 +3663,7 @@ CHE_decisions_category = {
 		visible = {
 			original_tag = USA
 			check_variable = {
-    			RCO_involvement_level > 0
+    			RCO.RCO_involvement_level > 0
 			}
 			country_exists = RCO
 			has_country_flag = usa_increased_nato_prod2_cw
@@ -3590,15 +3680,17 @@ CHE_decisions_category = {
 
 		complete_effect = {
 			add_to_variable = {
-    			var = RCO_involvement_level
+    			var = RCO.RCO_involvement_level
     			value = 1
 			}
 			complete_national_focus = USA_2009_nato_expansion
 			set_country_flag = usa_nato2009exp_cw
 			add_to_variable = {
-    			var = RCO_public_opinion_level
+    			var = RCO.RCO_public_opinion_level
     			value = 15
 			}
+			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
+			custom_effect_tooltip = RCO_usa_po_increase_15_tt
 		}
 	}
 	}

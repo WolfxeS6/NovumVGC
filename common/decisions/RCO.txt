@@ -3152,6 +3152,76 @@ CHE_decisions_category = {
 		}
 	}
 
+	USA_make_concessions_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO.RCO_public_opinion_level > 30
+			}
+			check_variable = {
+    			RCO.RCO_involvement_level > 3
+			}
+		}
+
+		cost = 40
+		days_remove = 90
+
+		fire_only_once = no
+
+		ai_will_do = {
+			factor = 40
+		}
+
+		complete_effect = {
+			add_to_variable = {
+    			var = RCO.RCO_public_opinion_level
+    			value = -30
+			}
+			add_to_variable = {
+    			var = RCO.RCO_involvement_level
+    			value = -2
+			}
+			custom_effect_tooltip = RCO_usa_po_decrease_30_tt
+			custom_effect_tooltip = RCO_usa_inv_decrease_2_tt
+		}
+	}
+
+	USA_abandon_russia_decision = {
+
+		available = {
+			has_global_flag = usa_intervened_in_russian_cw
+		}
+
+		visible = {
+			original_tag = USA
+			check_variable = {
+    			RCO.RCO_public_opinion_level > 30
+			}
+		}
+
+		cost = 10
+		days_remove = 5
+
+		fire_only_once = no
+
+		ai_will_do = {
+    		base = 0
+    			modifier = {
+        			add = 150
+        			has_stability < 0.3
+    			}
+		}
+
+		complete_effect = {
+			clr_global_flag = my_flag
+		}
+	}
+
 	USA_anticommunist_propaganda_decision = {
 
 		available = {

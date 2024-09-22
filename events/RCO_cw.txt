@@ -1,6 +1,7 @@
 add_namespace = cw
 add_namespace = cw_nmo
 add_namespace = cw_smo
+add_namespace = RCO_event_taj_ultimatum
 ###########################
 # Russian civil war events
 ###########################
@@ -78,11 +79,6 @@ country_event = {
 		}
 		add_equipment_to_stockpile = {
 			type = artillery_equipment_1
-			amount = 300
-			producer = RCO
-		}
-		add_equipment_to_stockpile = {
-			type = rocket_artillery_equipment_1
 			amount = 300
 			producer = RCO
 		}
@@ -613,8 +609,8 @@ country_event = { #ukrainian units
 
 		hidden_effect = {
 			load_oob = "UCO_red_guard"
-			}
-add_equipment_to_stockpile = {
+		}
+		add_equipment_to_stockpile = {
 			type = infantry_equipment_1
 			amount = 1500
 			producer = UKR
@@ -1167,26 +1163,18 @@ country_event = { #pol can demand peace
 	desc = cw.26.d
 	picture = GFX_russian_soldiers_1
 
-	trigger = {
-    	tag = POL
-		has_war_with = RCO
-		POL = {
-				controls_state = 242
-				controls_state = 241
-				controls_state = 1144
-			}
-	}
+	is_triggered_only = yes
 
 	option = { # send peace demands
 	name =  cw.26.a
 	add_political_power = 250
-	add_stability = 0.4
-	add_war_support = 0.4
+	add_stability = 0.05
+	add_war_support = 0.15
 	RCO = {
 		country_event = {
-					id = cw.42
-				}
-	}
+				id = cw.42
+			}
+		}
 	}
 }
 
@@ -1197,15 +1185,7 @@ country_event = {
 	picture = GFX_russian_soldiers_1
 	fire_only_once = yes
 
-	trigger = {
-    	tag = RCO
-		is_ai = yes
-		has_war_with = SOV
-		war_length_with = {
-    			tag = SOV
-    			months > 30
-		}
-	}
+	is_triggered_only = yes
 
 	option = { # ok
 		name = RCO_event_cw.27.a
@@ -1240,12 +1220,7 @@ country_event = {
 	picture = GFX_event_chechen_militia
 	fire_only_once = yes
 
-	trigger = {
-    	tag = RCO
-		is_ai = yes
-		has_war_with = SOV
-		surrender_progress > 0.3
-	}
+	is_triggered_only = yes
 
 	option = { # ok
 		name = cw.28.a
@@ -1408,16 +1383,9 @@ country_event = {
 	picture = GFX_event_chechen_militia
 	fire_only_once = yes
 
-	trigger = {
-    	tag = SOV
-		has_war_with = RCO
-		war_length_with = {
-    			tag = RCO
-    			months > 2
-		}
-	}
+	is_triggered_only = yes
 
-	option = { 
+	option = {
 		name = cw.30.a #ok
 		add_threat = 10
 		hidden_effect = {
@@ -1426,55 +1394,55 @@ country_event = {
 				load_focus_tree = CHE_cw_focus
 			}
 		}
-			end_puppet = CHE
-			CHE = {
-				add_ideas = {
-    				CHE_radicalbutweak_state
-   					CHE_drug_traffic
-					CHE_unorganized_army
-				}		
-				add_popularity = {
-    					ideology = fundamentalist
-    					popularity = 0.7
-				}
-				set_politics = { ruling_party = fundamentalist }
+		end_puppet = CHE
+		CHE = {
+			add_ideas = {
+    			CHE_radicalbutweak_state
+   				CHE_drug_traffic
+				CHE_unorganized_army
+			}		
+			add_popularity = {
+    				ideology = islamist
+    				popularity = 0.7
+			}
+			set_politics = { ruling_party = islamist }
 			leave_faction = yes
 			white_peace = RCO
-			}
 		}
+	}
 
-		option = { 
+	option = { 
 		name = cw.30.b #play as them
 		ai_chance = {
             base = 100       
         }
 		add_threat = 10
 		CHE = {
-				change_tag_from = SOV
-			}
+			change_tag_from = SOV
+		}
 		hidden_effect = {
 			set_global_flag = chechnya_rose_up
 			CHE = {
 				load_focus_tree = CHE_cw_focus
 			}
 		}
-			end_puppet = CHE
-			CHE = {
-				add_ideas = {
-    				CHE_radicalbutweak_state
-   					CHE_drug_traffic
-					CHE_unorganized_army
-				}
-				add_popularity = {
-    					ideology = fundamentalist
-    					popularity = 0.7
-				}
-				set_politics = { ruling_party = fundamentalist }
-				leave_faction = yes
-				white_peace = RCO
+		end_puppet = CHE
+		CHE = {
+			add_ideas = {
+    			CHE_radicalbutweak_state
+   				CHE_drug_traffic
+				CHE_unorganized_army
 			}
+			add_popularity = {
+    				ideology = islamist
+    				popularity = 0.7
+			}
+			set_politics = { ruling_party = islamist }
+			leave_faction = yes
+			white_peace = RCO
 		}
 	}
+}
 
 	#usa decides if they want to support che
 country_event = {
@@ -1772,29 +1740,24 @@ country_event = {
 	picture = GFX_event_chechen_militia3
 	fire_only_once = yes
 
-	trigger = {
-    	tag = CHE
-		has_war_with = RCO
-		controls_state = 217
-		controls_state = 218
-	}
+	is_triggered_only = yes
 
 	option = { # we won
 		name = cw.37.a
 		SOV = {
 			country_event = {
-            id = cw.38
+            	id = cw.38
             }
+		}
 		RCO = {
 			country_event = {
-            id = cw.38
+            	id = cw.38
             }
 			add_political_power = 150
-		add_stability = 0.1
-		add_war_support = 0.1
+			add_stability = 0.1
+			add_war_support = 0.1
 		}
 	}
-}
 }
 
 #sov and rco needs to peace che
@@ -1810,15 +1773,15 @@ country_event = {
 	option = { # ok
 		name = cw.38.a
 		add_political_power = -50
-	add_stability = -0.1
-	add_war_support = -0.1
-	white_peace = CHE
-	CHE = {
+		add_stability = -0.1
+		add_war_support = -0.1
+		white_peace = CHE
+		CHE = {
 			country_event = {
             id = cw.39
             }
+		}
 	}
-}
 }
 
 #che won
@@ -1833,7 +1796,7 @@ country_event = {
 
 	option = { # ok
 		name = cw.39.a
-	CHE = {
+		CHE = {
 			set_state_owner = 232
 			set_state_controller = 232
 			set_state_owner = 235
@@ -1853,7 +1816,7 @@ country_event = {
 			set_state_owner = 236
 			set_state_controller = 236
 		}
-}
+	}
 }
 
 #pol failed to capture sov
@@ -1869,16 +1832,16 @@ country_event = {
 	option = { # ok
 		name = cw.40.a
 		add_political_power = -50
-	add_stability = -0.1
-	add_war_support = -0.1
-	white_peace = RCO
-	white_peace = UCO
-	RCO = {
+		add_stability = -0.1
+		add_war_support = -0.1
+		white_peace = RCO
+		white_peace = UCO
+		RCO = {
 			country_event = {
             id = cw.41
             }
+		}
 	}
-}
 }
 
 #pol failed to capture sov, event for rco
@@ -1894,9 +1857,9 @@ country_event = {
 	option = { # ok
 		name = cw.41.a
 		add_political_power = 150
-	add_stability = 0.05
-	add_war_support = 0.05
-}
+		add_stability = 0.05
+		add_war_support = 0.05
+	}
 }
 
 #rco needs to peace pol
@@ -1912,10 +1875,10 @@ country_event = {
 	option = { # ok
 		name = cw.42.a
 		add_political_power = -50
-	add_stability = -0.1
-	add_war_support = -0.1
-	white_peace = POL
-	POL = {
+		add_stability = -0.1
+		add_war_support = -0.1
+		white_peace = POL
+		POL = {
 			set_state_owner = 95
 			set_state_controller = 95
 			set_state_owner = 206
@@ -1949,7 +1912,7 @@ country_event = {
 			set_state_owner = 197
 			set_state_controller = 197
 		}
-}
+	}
 }
 
 #usa thinks about supporting sov initially in cw
@@ -2007,7 +1970,7 @@ country_event = {
 		give_resource_rights = { receiver = USA state = 644 }
 		give_resource_rights = { receiver = USA state = 574 }
 		hidden_effect = {
-		USA = { set_country_flag = USA_supported_sov }
+			USA = { set_country_flag = USA_supported_sov }
 		}
 	}
 }
@@ -2025,16 +1988,16 @@ country_event = {
 	option = { # yes
 		name = cw.44.a
 		ai_chance = {
-        base = 100      
-    }
+        	base = 100      
+    	}
 		custom_effect_tooltip = usa_wants_to_intervene_TT
 		hidden_effect = {
-				set_global_flag = usa_intervened_in_russian_cw
-			}
-			add_timed_idea = {
-   				 idea = USA_sov_pp_idea
-   				 days = 365
-			}
+			set_global_flag = usa_intervened_in_russian_cw
+		}
+		add_timed_idea = {
+   			idea = USA_sov_pp_idea
+   			days = 365
+		}
 	}
 
 	option = { # no
@@ -2065,7 +2028,7 @@ country_event = {
 			amount = 50
 			producer = USA
 		}
-}
+	}
 }
 
 #prc sov asks for agreement
@@ -2081,49 +2044,49 @@ country_event = {
 	option = { 
 		name = cw.47.a # agree
 		add_timed_idea = {
-    			idea = PRC_russian_trade_concessions_cw
-   				 days = 365
+    		idea = PRC_russian_trade_concessions_cw
+   			days = 365
+		}
+		add_relation_rule_override = {
+   			target = RCO
+    		usage_desc = PRC_vol_rule_description
+    		trigger = PRC_intervened_in_cw
+    		can_send_volunteers = no
+		}
+		add_political_power = -150
+		PRC = {
+			add_opinion_modifier = {
+				target = RCO
+				modifier = loyal_to_our_enemy
 			}
-			add_relation_rule_override = {
-   				target = RCO
-    			usage_desc = PRC_vol_rule_description
-    			trigger = { has_global_flag = prc_helped_sov_in_russian_cw }
-    			can_send_volunteers = no
+		}
+		RCO = {
+			add_opinion_modifier = {
+				target = PRC
+				modifier = loyal_to_our_enemy
 			}
-			add_political_power = -150
-			PRC = {
-				add_opinion_modifier = {
-					target = RCO
-					modifier = loyal_to_our_enemy
-				}
-			}
-			RCO = {
-				add_opinion_modifier = {
-					target = PRC
-					modifier = loyal_to_our_enemy
-				}
-			}
-			hidden_effect = {
-				set_global_flag = prc_helped_sov_in_russian_cw
-			}
-}
-option = { 
+		}
+		hidden_effect = {
+			set_global_flag = prc_helped_sov_in_russian_cw
+		}
+	}
+	option = { 
 		name = cw.47.b # disagree
 		ai_chance = {
-        base = 100      
-    }
+        	base = 100      
+    	}
 		add_political_power = 150
-			SOV = {
-				add_opinion_modifier = {
-					target = PRC
-					modifier = loyal_to_our_enemy
-				}
+		SOV = {
+			add_opinion_modifier = {
+				target = PRC
+				modifier = loyal_to_our_enemy
 			}
-			SOV = { country_event = { id = cw.54 } }
-			hidden_effect = {
-				set_global_flag = prc_helped_rco_in_russian_cw
-			}
-}
+		}
+		SOV = { country_event = { id = cw.54 } }
+		hidden_effect = {
+			set_global_flag = prc_helped_rco_in_russian_cw
+		}
+	}
 }
 
 #jap sov asks for agreement
@@ -2139,24 +2102,24 @@ country_event = {
 	option = { 
 		name = cw.48.a # agree
 		ai_chance = {
-        base = 50      
-    }
+        	base = 50      
+    	}
 		JAP = {
 			set_state_owner = 951
 			set_state_controller = 951
 			set_state_owner = 555
 			set_state_controller = 555
 		}
-			RCO = {
-				add_opinion_modifier = {
-					target = JAP
-					modifier = loyal_to_our_enemy
-				}
+		RCO = {
+			add_opinion_modifier = {
+				target = JAP
+				modifier = loyal_to_our_enemy
 			}
-			hidden_effect = {
-				set_global_flag = jap_helped_sov_in_russian_cw
-			}
-			add_equipment_to_stockpile = {
+		}
+		hidden_effect = {
+			set_global_flag = jap_helped_sov_in_russian_cw
+		}
+		add_equipment_to_stockpile = {
 			type = infantry_equipment_1
 			amount = -1500
 			producer = JAP
@@ -2171,8 +2134,8 @@ country_event = {
 		}
 		add_ideas = GEN_peacekeeping_efforts2
 		set_rule = { can_send_volunteers = yes }
-}
-option = { 
+	}
+	option = { 
 		name = cw.48.b # ask more
 		ai_chance = {
         base = 50      
@@ -2180,17 +2143,17 @@ option = {
 			SOV = {
 			country_event = { id = cw.50 }
 		}
-}
-option = { 
+	}
+	option = { 
 		name = cw.48.c # disagree
 		add_stability = 0.1
-			SOV = {
-				add_opinion_modifier = {
-					target = JAP
-					modifier = loyal_to_our_enemy
-				}
+		SOV = {
+			add_opinion_modifier = {
+				target = JAP
+				modifier = loyal_to_our_enemy
 			}
-}
+		}
+	}
 }
 
 #sov jap help arrived
@@ -2215,7 +2178,7 @@ country_event = {
 			amount = 50
 			producer = JAP
 		}
-}
+	}
 }
 
 #sov jap wants more
@@ -2231,8 +2194,8 @@ country_event = {
 	option = { # ok
 		name = cw.50.a
 		ai_chance = {
-        base = 100     
-    }
+        	base = 100     
+    	}
 		add_equipment_to_stockpile = {
 			type = infantry_equipment_1
 			amount = 1500
@@ -2248,16 +2211,16 @@ country_event = {
 		}
 		add_stability = -0.05
 		add_war_support = -0.1
-}
+	}
 
-option = { # no
+	option = { # no
 		name = cw.50.b
 		JAP = {
 			country_event = { id = cw.52 }
 		}
 		add_stability = 0.1
 		add_war_support = 0.1
-}
+	}
 }
 
 #jap sov disagrees
@@ -2327,26 +2290,17 @@ country_event = {
 	picture = GFX_event_chechen_militia2
 	fire_only_once = yes
 
-	trigger = {
-    	tag = USA
-		has_country_flag = USA_helped_chechens
-		has_country_flag = usa_9_11
-		has_global_flag = usa_intervened_in_russian_cw
-	}
-
-	mean_time_to_happen = {
-    days = 30
-	}
+	is_triggered_only = yes
 
 	option = { # ok
 	name = cw.53.a
 		add_political_power = -50
 		add_stability = -0.05
 		add_to_variable = {
-    			var = RCO_public_opinion_level
-    			value = 15
-			}
-}
+    		var = RCO.RCO_public_opinion_level
+    		value = 15
+		}
+	}
 }
 
 #sov prc disagrees
@@ -2362,11 +2316,11 @@ country_event = {
 	option = { # ok
 		name = cw.54.a
 		PRC = {
-				add_opinion_modifier = {
-					target = SOV
-					modifier = loyal_to_our_enemy
-				}
+			add_opinion_modifier = {
+				target = SOV
+				modifier = loyal_to_our_enemy
 			}
+		}
 	}
 }
 
@@ -2378,19 +2332,15 @@ country_event = {
 	picture = GFX_event_red_btr
 	fire_only_once = yes
 
-	trigger = {
-    	tag = UKR
-		UCO = { controls_state = 227 }
-		is_ai = no
-	}
+	is_triggered_only = yes
 
 	option = { # against rco
-	name = cw.55.a
+		name = cw.55.a
 		SOV = { add_to_faction = UKR }
 	}
 
 	option = { # for rco
-	name = cw.55.b
+		name = cw.55.b
 		SOV = { add_to_faction = UKR }
 		UCO = { change_tag_from = UKR }
 	}

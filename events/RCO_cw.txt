@@ -1152,6 +1152,7 @@ country_event = { #pol decides what to do next
 }
 hidden_effect = {
 	RCO = { activate_mission = RCO_pol_capture_east_russia_mission }
+	set_global_flag = POL_attacked_rco_in_cw
 	}
 	If = {
 		limit = { is_ai = yes }
@@ -1862,6 +1863,7 @@ country_event = {
 		add_political_power = 150
 		add_stability = 0.05
 		add_war_support = 0.05
+		clr_global_flag = POL_attacked_rco_in_cw
 	}
 }
 
@@ -1915,6 +1917,7 @@ country_event = {
 			set_state_owner = 197
 			set_state_controller = 197
 		}
+		clr_global_flag = POL_attacked_rco_in_cw
 	}
 }
 
@@ -2364,6 +2367,60 @@ country_event = {
 	name = cw.56.a
 		add_stability = -0.3
 		add_war_support = -0.4
+	}
+}
+
+#rco won against pol
+country_event = {
+	id = cw.57
+	title = cw.57.t
+	desc = cw.57.d
+	picture = GFX_event_red_btr
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+	name = cw.57.a
+		add_political_power = 150
+		add_stability = 0.1
+		add_war_support = 0.1
+		white_peace = POL
+		UCO = { white_peace = POL }
+		POL = {
+			country_event = { id = cw.58 }
+		}
+	}
+}
+
+#POL rco won the war
+country_event = {
+	id = cw.58
+	title = cw.58.t
+	desc = cw.58.d
+	picture = GFX_event_red_btr
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+	name = cw.58.a
+		add_political_power = -150
+		add_stability = -0.3
+		add_war_support = -0.3
+		white_peace = RCO
+		white_peace = UCO
+		RCO = {
+			transfer_state = 808
+			transfer_state = 94
+		}
+		UCO = {
+			transfer_state = 93
+			transfer_state = 91
+			transfer_state = 89
+			transfer_state = 73
+		}
+		clr_global_flag = POL_attacked_rco_in_cw
 	}
 }
 

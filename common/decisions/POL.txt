@@ -45,6 +45,7 @@ POL_russian_civil_war = {
 		remove_effect = {
 				transfer_state = 741
 				set_province_name = { id = 6332 name = "Krolewiec"}
+				add_threat = 10
 				hidden_effect = {
 				news_event = {
 					id = news.820
@@ -86,13 +87,14 @@ POL_russian_civil_war = {
 		fire_only_once = yes
 		days_remove = 50
 
-		cost = 40
+		cost = 20
 
 		ai_will_do = {
-			factor = 150
+			factor = 300
 		}
 
 		remove_effect = {
+			add_threat = 3
 			hidden_effect = {
 				news_event = {
 					id = news.833
@@ -122,6 +124,61 @@ POL_russian_civil_war = {
 		}
 	}
 
+	POL_cleanse_communist_elements_in_belarus_decision = {
+
+		icon = decision_ban_coalition
+
+		available = {
+			original_tag = POL
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_remove = 30
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		visible = {
+			original_tag = POL
+			controls_state = 808
+		}
+
+		remove_effect = {
+			808 = { add_compliance = 30 }
+			94 = { add_compliance = 30 }
+		}
+	}
+
+	POL_cleanse_communist_elements_in_kaliningrad_decision = {
+
+		icon = decision_ban_coalition
+
+		available = {
+			original_tag = POL
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+		days_remove = 30
+
+		ai_will_do = {
+			factor = 50
+		}
+
+		visible = {
+			original_tag = POL
+			controls_state = 741
+		}
+
+		remove_effect = {
+			741 = { add_compliance = 30 }
+		}
+	}
+
 POL_attack_western_ukraine = {
 
 		icon = decision_generic_assassination
@@ -145,7 +202,6 @@ POL_attack_western_ukraine = {
 }
 		visible = {
 			original_tag = POL
-			has_global_flag = ukraine_is_communist
 			NOT = {
 				has_government = communist 
 			}
@@ -163,9 +219,10 @@ POL_attack_western_ukraine = {
 			factor = 150
 		}
 
-		cost = 60
+		cost = 20
 
 		remove_effect = {
+			add_threat = 3
 				start_border_war = {
     change_state_after_war = yes
     attacker = {
@@ -233,6 +290,49 @@ POL_attack_western_ukraine = {
 		remove_effect = {
 				country_event = {
 				id = cw.25
+			}
+		}
+	}
+
+	POL_capture_east_russia_mission = {
+
+		allowed = { original_tag = POL }
+
+		icon = decision_create_national_guard
+
+		cancel_trigger = {
+        has_war = no
+    }
+
+	available = { #FAIL
+            always = no
+        }
+
+	activation = {
+			tag = POL
+			has_war_with = RCO
+			RCO = {
+			NOT = { has_completed_focus = RCO_against_forces_and_traditions}
+			}
+		}
+
+	highlight_states = {
+    highlight_state_targets = {
+        state = 242
+        state = 241
+		state = 1144
+    }
+    highlight_color_while_active = 3
+    highlight_color_before_active = 2
+}
+
+		is_good = no
+
+		days_mission_timeout = 250
+
+		timeout_effect = {
+			country_event = {
+				id = cw.40
 			}
 		}
 	}

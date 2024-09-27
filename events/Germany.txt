@@ -1,0 +1,3185 @@
+﻿add_namespace = germany
+add_namespace = election_GER
+
+#The NATO Split
+country_event = {
+	id = germany.1
+	title = germany.1.t
+	desc = germany.1.d
+	picture = GFX_report_event_german_flag
+
+	is_triggered_only = yes
+
+	option = {	#Lets do it.
+		name = germany.1.o1
+
+		random_country = {
+			limit = {
+				is_faction_leader = yes
+				is_in_faction_with = GER
+			}
+			remove_from_faction = GER
+		}
+		create_faction = german_alliance
+		every_country = {
+			limit = {
+				is_in_faction_with = USA
+				any_owned_state = { is_on_continent = europe }
+				NOT = { tag = ENG }
+				NOT = { tag = SCO }
+				NOT = { tag = USA }
+			}
+			country_event = germany.2
+		}
+	}
+}
+
+#Invitation to the Berlin Alliance
+country_event = {
+	id = germany.2
+	title = germany.2.t
+	desc = germany.2.d
+	picture = GFX_report_event_german_flag
+
+	is_triggered_only = yes
+
+	option = {	#Sure.
+		name = germany.2.o1
+
+		GER = { add_to_faction = ROOT }
+		set_country_flag = seeks_german_alliance
+		GER = { country_event = diplomatic_response.1 }
+
+		ai_chance = {
+			factor = 65
+		}
+	}
+
+	option = {	#No way.
+		name = germany.2.o2
+
+		GER = { country_event = diplomatic_response.2 }
+
+		ai_chance = {
+			factor = 35
+		}
+	}
+}
+
+#Germany demands subjugation!
+country_event = {
+	id = germany.3
+	title = germany.3.t
+	desc = germany.3.d
+	picture = GFX_report_event_german_flag
+
+	is_triggered_only = yes
+
+	option = { #We submit.
+		name = germany.3.o1
+		GER = { puppet = ROOT }
+		GER = {
+			add_named_threat = {
+				threat = 1
+				name = threat_puppeteer
+			}
+		}
+		GER = {
+			country_event = diplomatic_response.1
+		}
+		ai_chance = {
+			factor = 75
+		}
+	}
+
+	option = { #Never!
+		add_political_power = 5
+		GER = { country_event = diplomatic_response.2 }
+		ai_chance = {
+			factor = 25
+		}
+	}
+}
+
+#CDU Donation Crisis
+country_event = {
+	id = germany.4
+	title = germany.4.t
+	desc = germany.4.d
+	picture = GFX_report_event_helmut_kohl
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_democratic_form_of_government = yes
+	}
+
+	option = {	#This will hurt the CDU.
+		name = germany.4.o1
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.02
+		}
+		ai_chance = {
+			factor = 80
+		}
+	}
+
+	option = {	#Kohl totally should run again
+		name = germany.4.o2
+		fourth_estate_conservative_decrease = yes
+
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.06
+		}
+
+		set_country_flag = helmut_kohl_returns_to_politics
+		create_country_leader = {
+			name = "Helmut Kohl"
+			picture = "Helmut_Kohl.dds"
+			ideology = fiscal_conservative
+		}
+
+		hidden_effect = {
+			news_event = germany_news.3
+			random_list = {
+				65 = {
+					news_event = germany.5
+				}
+				35 = {}
+			}
+		}
+
+		ai_chance = {
+			factor = 20
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+
+#Kohl Event Chain: Angela Merkel resigns from politics.
+news_event = {
+	id = germany.5
+	title = germany.5.t
+	desc = germany.5.d
+	picture = GFX_news_event_angela_merkel
+
+	is_triggered_only = yes
+
+	option = {	#She was so promising.
+		name = germany.5.o1
+	}
+}
+
+
+#Krater von Wattenscheid
+country_event = {
+	id = germany.7
+	title = germany.7.t
+	desc = germany.7.d
+	picture = GFX_report_event_mining
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.7.o1
+		add_political_power = -5
+	}
+
+	option = {
+		name = germany.7.o2
+		add_political_power = -50
+		add_stability = 0.01
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.01
+		}
+	}
+}
+
+#N24
+country_event = {
+	id = germany.8
+	title = germany.8.t
+	desc = germany.8.d
+	picture = GFX_report_event_computer
+
+	is_triggered_only = yes
+
+	option = {	#Excellent
+		name = germany.8.o1
+		add_political_power = 3
+		add_popularity = { ideology = social_democrat popularity = 0.01 }
+		add_popularity = { ideology = market_liberal popularity = 0.01 }
+		add_popularity = { ideology = conservative popularity = 0.01 }
+	}
+}
+
+#Klaus-Peter Sabotta
+country_event = {
+	id = germany.9
+	title = germany.9.t
+	desc = germany.9.d
+	picture = GFX_report_event_jury
+
+	is_triggered_only = yes
+
+	option = {	#Good decision.
+		name = germany.9.o1
+		add_political_power = 5
+	}
+
+	option = {	#Workers in violent struggle for their rights is a good thing.
+		name = germany.9.o2
+		fourth_estate_communist_increase = yes
+		add_stability = -0.01
+		add_political_power = -25
+	}
+}
+
+#Expo 2000
+country_event = {
+	id = germany.10
+	title = germany.10.t
+	desc = germany.10.d
+	picture = GFX_report_event_computer
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.10.o1
+		add_political_power = 10
+		add_stability = 0.01
+	}
+}
+
+#Golzheim synagogue attack
+country_event = {
+	id = germany.11
+	title = germany.11.t
+	desc = germany.11.d
+	picture = GFX_report_event_terrorist_attack
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.11.o1
+		add_political_power = -20
+	}
+
+	option = {
+		name = germany.11.o2
+		fourth_estate_fascist_increase = yes
+	}
+}
+
+#Borussia Dortmund joins the stock market
+country_event = {
+	id = germany.12
+	title = germany.12.t
+	desc = germany.12.d
+	picture = GFX_report_event_stock_market
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.12.o1
+		add_political_power = 1
+	}
+}
+
+#10 years of German Unity
+country_event = {
+	id = germany.13
+	title = germany.13.t
+	desc = germany.13.d
+	picture = GFX_report_event_german_flag
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.13.o1
+		add_stability = 0.02
+		add_political_power = 30
+		add_stability = 0.01
+	}
+}
+
+#Do you prefer English or German names?
+country_event = {
+	id = germany.14
+	title = germany.14.t
+	desc = germany.14.d
+	picture = GFX_report_event_german_flag
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = GER
+		always = no
+	}
+
+	option = {	#English
+		name = germany.14.o1
+		ai_chance = { factor = 0 }
+	}
+
+	option = {	#German
+		name = germany.14.o2
+		ai_chance = { factor = 100 }
+		#State Names
+		62 = { set_state_name = "Vorpommern" }
+		68 = { set_state_name = "Sachsen-Anhalt" }
+		51 = { set_state_name = "Nordrhein" }
+		57 = { set_state_name = "Westfalen" }
+		55 = { set_state_name = "Hessen" }
+		60 = { set_state_name = "Thüringen" }
+		65 = { set_state_name = "Sachsen" }
+		42 = { set_state_name = "Rheinland-Pfalz" }
+		50 = { set_state_name = "Baden-Württemberg" }
+		54 = { set_state_name = "Franken" }
+		53 = { set_state_name = "Niederbayern" }
+		52 = { set_state_name = "Oberbayern" }
+		#Province Names
+		set_province_name = { id = 587 name = "Köln" }
+		set_province_name = { id = 11544 name = "Nürnberg" }
+		set_province_name = { id = 692 name = "München" }
+	}
+}
+
+#SPD Leadership Contest 2017
+country_event = {
+	id = germany.15
+	title = germany.15.t
+	desc = germany.15.d
+	picture = GFX_report_event_german_flag
+
+	is_triggered_only = yes
+
+	trigger = {
+		NOT = { has_government = fascist }
+		NOT = { has_government = communist }
+		NOT = { has_government = nationalist }
+		NOT = { has_government = islamist }
+		NOT = { has_government = social_democrat }
+	}
+
+	option = {	#Martin Schulz
+		name = germany.15.o1
+		create_country_leader = {
+			name = "Martin Schulz"
+			picture = "Martin_Schulz.dds"
+			ideology = social_democrat_ideology
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+	}
+}
+
+#Presidential Election of 2017
+country_event = {
+	id = germany.16
+	title = germany.16.t
+	desc = germany.16.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_democratic_form_of_government = yes
+	}
+
+	option = {	#Steinmeier
+		name = germany.16.o1
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+		add_political_power = 10
+		ai_chance = { factor = 100 }
+	}
+
+	option = {	#Butterwegge
+		name = germany.16.o2
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.02
+		}
+		add_political_power = -10
+		ai_chance = { factor = 0 }
+	}
+
+	option = {	#Glaser
+		name = germany.16.o3
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.02
+		}
+		add_political_power = -10
+		ai_chance = { factor = 0 }
+	}
+
+	option = {	#Hold
+		name = germany.16.o4
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.02
+		}
+		add_political_power = -10
+		ai_chance = { factor = 0 }
+	}
+
+	option = {	#Sonneborn
+		name = germany.16.o5
+		random_list = {
+			25 = { add_popularity = { ideology = social_democrat popularity = 0.02 } }
+			25 = { add_popularity = { ideology = reactionary popularity = 0.02 } }
+			25 = { add_popularity = { ideology = conservative popularity = 0.02 } }
+			25 = { add_popularity = { ideology = democratic_socialist popularity = 0.02 } }
+		}
+		add_political_power = -25
+		ai_chance = { factor = 0 }
+	}
+}
+
+#Germany Demands the West
+country_event = {
+	id = germany.17
+	title = germany.17.t
+	desc = germany.17.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.17.o1
+		add_political_power = -1
+		add_stability = -0.10
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 742
+			transfer_state = 743
+			transfer_state = 66
+			transfer_state = 85
+			transfer_state = 86
+			transfer_state = 67
+			transfer_state = 63
+			transfer_state = 5
+		}
+	}
+
+	option = {
+		name = germany.17.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.20}
+		}
+	}
+}
+
+#Germany Demands Kaliningrad
+country_event = {
+	id = germany.18
+	title = germany.18.t
+	desc = germany.18.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.18.o1
+		add_political_power = -1
+		add_stability = -0.10
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 741
+		}
+	}
+
+	option = {
+		name = germany.18.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.21}
+		}
+	}
+}
+
+#Germany Demands Klaipeda
+country_event = {
+	id = germany.19
+	title = germany.19.t
+	desc = germany.19.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.19.o1
+		add_political_power = -1
+		add_stability = -0.10
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 188
+		}
+	}
+
+	option = {
+		name = germany.19.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.22}
+		}
+	}
+}
+
+
+#Poland refuses
+country_event = {
+	id = germany.20
+	title = germany.20.t
+	desc = germany.20.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.20.o1
+		declare_war_on = { target = POL type = take_core_state }
+	}
+	option = {
+		name = germany.20.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Russia refuses
+country_event = {
+	id = germany.21
+	title = germany.21.t
+	desc = germany.21.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.21.o1
+		declare_war_on = { target = SOV type = take_core_state }
+	}
+	option = {
+		name = germany.21.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Lithuania refuses
+country_event = {
+	id = germany.22
+	title = germany.22.t
+	desc = germany.22.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.22.o1
+		declare_war_on = { target = LIT type = take_core_state }
+	}
+	option = {
+		name = germany.22.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Coup d'etat
+country_event = {
+	id = germany.23
+	title = germany.23.t
+	desc = germany.23.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.23.o1
+		ai_chance = {
+			factor = 99
+		}
+		GER = { annex_country = { target = AUS transfer_troops = yes }
+		}
+	}
+	option = {
+		name = germany.23.o2
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.24}
+		}
+	}
+}
+
+#Coup failed
+country_event = {
+	id = germany.24
+	title = germany.24.t
+	desc = germany.24.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.24.o1
+		ai_chance = {
+			factor = 95
+		}
+		declare_war_on = { target = AUS type = annex_everything }
+	}
+	option = {
+		name = germany.24.o2
+		ai_chance = {
+			factor = 5
+		}
+		add_political_power = -5
+	}
+}
+
+#Germany Demands Alsace-Lorraine
+country_event = {
+	id = germany.25
+	title = germany.25.t
+	desc = germany.25.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.25.o1
+		add_political_power = -1
+		add_stability = -0.10
+		28 = { set_state_name = "Elsass-Lothringen" }
+		set_province_name = { id = 9503 name = "Strassburg" }
+		set_province_name = { id = 678 name = "Mülhausen" }
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 28
+		}
+	}
+
+	option = {
+		name = germany.25.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.26}
+		}
+	}
+}
+
+#France refuses
+country_event = {
+	id = germany.26
+	title = germany.26.t
+	desc = germany.26.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.26.o1
+		declare_war_on = { target = FRA type = take_core_state }
+	}
+	option = {
+		name = germany.26.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Germany Demands Eupen-Malmedy
+country_event = {
+	id = germany.27
+	title = germany.27.t
+	desc = germany.27.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.27.o1
+		add_political_power = -1
+		add_stability = -0.10
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 839
+		}
+	}
+
+	option = {
+		name = germany.27.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.28}
+		}
+	}
+}
+
+#Belgium refuses
+country_event = {
+	id = germany.28
+	title = germany.28.t
+	desc = germany.28.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.28.o1
+		declare_war_on = { target = BEL type = take_core_state }
+	}
+	option = {
+		name = germany.28.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Germany Demands the Sudetenland
+country_event = {
+	id = germany.29
+	title = germany.29.t
+	desc = germany.29.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.29.o1
+		add_political_power = -1
+		add_stability = -0.10
+		set_province_name = { id = 11432 name = "Aussig" }
+		set_province_name = { id = 11401 name = "Reichenberg" }
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 69
+		}
+	}
+
+	option = {
+		name = germany.29.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.30}
+		}
+	}
+}
+
+#Czechia refuses
+country_event = {
+	id = germany.30
+	title = germany.30.t
+	desc = germany.30.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.30.o1
+		declare_war_on = { target = CZE type = take_core_state }
+	}
+	option = {
+		name = germany.30.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Germany Demands Northern Schleswig
+country_event = {
+	id = germany.31
+	title = germany.31.t
+	desc = germany.31.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.31.o1
+		add_political_power = -1
+		add_stability = -0.10
+		800 = { set_state_name = "Nordschleswig" }
+		set_province_name = { id = 11251 name = "Apenrade" }
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 800
+		}
+	}
+
+	option = {
+		name = germany.31.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.32}
+		}
+	}
+}
+
+#Denmark refuses
+country_event = {
+	id = germany.32
+	title = germany.32.t
+	desc = germany.32.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.32.o1
+		declare_war_on = { target = DEN type = take_core_state }
+	}
+	option = {
+		name = germany.32.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#The End of Czechia
+country_event = {
+	id = germany.33
+	title = germany.33.t
+	desc = germany.33.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.33.o1
+		ai_chance = {
+			factor = 99
+		}
+		GER = { annex_country = { target = CZE transfer_troops = yes }
+		}
+	}
+	option = {
+		name = germany.33.o2
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.33}
+		}
+	}
+}
+
+#Czech resistance
+country_event = {
+	id = germany.34
+	title = germany.34.t
+	desc = germany.34.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.34.o1
+		declare_war_on = { target = CZE type = annex_everything }
+	}
+	option = {
+		name = germany.34.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Germany Demands South Tyrol
+country_event = {
+	id = germany.35
+	title = germany.35.t
+	desc = germany.35.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.35.o1
+		add_political_power = -1
+		add_stability = -0.10
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 39
+		}
+	}
+
+	option = {
+		name = germany.35.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.36}
+		}
+	}
+}
+
+#Italy Refuses
+country_event = {
+	id = germany.36
+	title = germany.36.t
+	desc = germany.36.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.36.o1
+		add_state_claim = 39
+		declare_war_on = { target = ITA type = take_claimed_state }
+	}
+	option = {
+		name = germany.36.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#The New Axis
+country_event = {
+	id = germany.37
+	title = germany.37.t
+	desc = germany.37.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.37.o1
+		ai_chance = {
+			factor = 99
+		}
+		set_politics = {
+			ruling_party = fascist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.6
+		}
+		add_ideas = fascist_influence_10
+		if = {
+			limit = { tag = ITA }
+			set_cosmetic_tag = ITA_Mussolinisfascism
+		}
+		GER = { add_to_faction = ROOT }
+	}
+	option = {
+		name = germany.37.o2
+		ai_chance = {
+			factor = 1
+		}
+		add_political_power = -1
+	}
+}
+
+#Germany Demands Our Annexation
+country_event = {
+	id = germany.38
+	title = germany.38.t
+	desc = germany.38.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.38.o1
+		ai_chance = {
+			factor = 99
+		}
+		GER = { annex_country = { target = SLV transfer_troops = yes }
+		}
+	}
+	option = {
+		name = germany.38.o2
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.39}
+		}
+	}
+}
+
+#Slovenia Refuses
+country_event = {
+	id = germany.39
+	title = germany.39.t
+	desc = germany.39.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.39.o1
+		declare_war_on = { target = SLV type = annex_everything }
+	}
+	option = {
+		name = germany.39.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Hitler Not Found
+country_event = {
+	id = germany.40
+	title = germany.40.t
+	desc = germany.40.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.40.o1
+		add_political_power = -5
+	}
+}
+
+#Nazi Leadership Found
+country_event = {
+	id = germany.41
+	title = germany.41.t
+	desc = germany.41.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.41.o1
+		create_country_leader = {
+			name = "Heinrich Himmler"
+			picture = "Heinrich_Himmler.dds"
+			ideology = national_socialist
+		}
+	}
+	option = {
+		name = germany.41.o2
+		create_country_leader = {
+			name = "Joseph Goebbels"
+			picture = "Joseph_Goebbels.dds"
+			ideology = national_socialist
+		}
+	}
+	option = {
+		name = germany.41.o3
+		create_country_leader = {
+			name = "Hermann Göring"
+			picture = "Hermann_Goring.dds"
+			ideology = national_socialist
+		}
+	}
+	option = {
+		name = germany.41.o4
+		create_country_leader = {
+			name = "Wilhelm Keitel"
+			picture = "Wilhelm_Keitel.dds"
+			ideology = national_socialist
+		}
+	}
+	option = {
+		name = germany.41.o5
+		create_country_leader = {
+			name = "Adolf Eichmann"
+			picture = "Adolf_Eichmann.dds"
+			ideology = national_socialist
+		}
+	}
+}
+
+#Adolf Hitler Found
+country_event = {
+	id = germany.42
+	title = germany.42.t
+	desc = germany.42.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.42.o1
+		create_country_leader = {
+			name = "Adolf Hitler"
+			picture = "Adolf_Hitler.dds"
+			ideology = national_socialist
+		}
+	}
+}
+
+#Nazi Secret Weapons Found
+country_event = {
+	id = germany.43
+	title = germany.43.t
+	desc = germany.43.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.43.o1
+		create_country_leader = {
+			name = "Adolf Hitler"
+			picture = "Adolf_Hitler.dds"
+			ideology = national_socialist
+		}
+		add_tech_bonus = {
+			name = infantry_bonus
+			bonus = 0.5
+			uses = 5
+			category = infantry_weapons
+		}
+		add_tech_bonus = {
+			name = artillery_bonus
+			bonus = 0.5
+			uses = 5
+			category = artillery
+		}
+		add_tech_bonus = {
+			name = armor_bonus
+			bonus = 0.5
+			uses = 5
+			category = armor
+		}
+
+	}
+}
+
+#Germany Demands Our Annexation
+country_event = {
+	id = germany.44
+	title = germany.44.t
+	desc = germany.44.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.44.o1
+		ai_chance = {
+			factor = 99
+		}
+		GER = { annex_country = { target = LUX transfer_troops = yes }
+		}
+	}
+	option = {
+		name = germany.44.o2
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.45}
+		}
+	}
+}
+
+#Luxembourg Refuses
+country_event = {
+	id = germany.45
+	title = germany.45.t
+	desc = germany.45.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.45.o1
+		declare_war_on = { target = LUX type = annex_everything }
+	}
+	option = {
+		name = germany.45.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Germany Demands Istria - Italy
+country_event = {
+	id = germany.46
+	title = germany.46.t
+	desc = germany.46.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.46.o1
+		add_political_power = -1
+		add_stability = -0.10
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 786
+		}
+	}
+
+	option = {
+		name = germany.46.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.48}
+		}
+	}
+}
+
+#Germany Demands Istria - Croatia
+country_event = {
+	id = germany.47
+	title = germany.47.t
+	desc = germany.47.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.47.o1
+		add_political_power = -1
+		add_stability = -0.10
+		ai_chance = {
+			factor = 99
+		}
+		GER = {
+			transfer_state = 736
+		}
+	}
+
+	option = {
+		name = germany.35.o2
+		add_stability = 0.05
+		ai_chance = {
+			factor = 1
+		}
+		GER = {
+			country_event = {days = 1 id = germany.49}
+		}
+	}
+}
+
+#Italy Refuses - Istria
+country_event = {
+	id = germany.48
+	title = germany.48.t
+	desc = germany.48.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.48.o1
+		add_state_claim = 786
+		declare_war_on = { target = ITA type = take_claimed_state }
+	}
+	option = {
+		name = germany.48.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Croatia Refuses
+country_event = {
+	id = germany.49
+	title = germany.49.t
+	desc = germany.49.d
+	picture = GFX_report_event_political_deal2
+
+	is_triggered_only = yes
+
+	option = {
+		name = germany.49.o1
+		add_state_claim = 736
+		declare_war_on = { target = ITA type = take_claimed_state }
+	}
+	option = {
+		name = germany.49.o2
+		add_political_power = -5
+		add_stability = -0.10
+	}
+}
+
+#Kaiser Returns
+country_event = {
+	id = germany.50
+	title = germany.50.t
+	desc = germany.50.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.50.o1
+		add_popularity = {
+			ideology = monarchist
+			popularity = 0.15
+		}
+		set_politics = {
+			ruling_party = monarchist
+			elections_allowed = no
+		}
+	}
+}
+#Trade offer generic
+country_event = {
+	id = germany.51
+	title = germany.51.t
+	desc = germany.51.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.51.o1 #sure
+		add_ideas = {
+			GER_targetted_trade_deal
+		}
+		GER = {
+			add_opinion_modifier = {
+				target = PREV
+				modifier = GER_accepted_trade
+			}
+			country_event = germany.52
+		}
+		ai_chance = {
+			factor = 65
+		}
+	}
+	option = {
+		name = germany.51.o2 #nah
+		GER = {
+			country_event = germany.53
+		}
+		ai_chance = {
+			factor = 15
+		}
+	}
+}
+#yes to trade
+country_event = {
+	id = germany.52
+	title = germany.52.t
+	desc = germany.52.d
+	picture = GFX_report_event_political_deal2
+	is_triggered_only = yes
+
+	option = {
+		name = germany.52.o1
+	}
+}
+#no to trade
+country_event = {
+	id = germany.53
+	title = germany.53.t
+	desc = germany.53.d
+	picture = GFX_report_event_political_deal2
+	is_triggered_only = yes
+
+	option = {
+		name = germany.53.o1
+	}
+}
+#monarchist nordstream expansion 
+country_event = {
+	id = germany.54
+	title = germany.54.t
+	desc = germany.54.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.54.o1
+		give_resource_rights = {
+			receiver = GER
+			state = 580
+			resources = { oil }
+		}
+		give_resource_rights = {
+			receiver = GER
+			state = 578
+			resources = { oil }
+		}
+		add_ideas = {
+			GER_sov_investment
+		}
+		GER = {
+			country_event = germany.52
+		}
+		ai_chance = {
+			factor = 95
+		}
+	}
+	option = {
+		name = germany.54.o2
+		GER = {
+			country_event = germany.53
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+country_event = {
+	id = germany.55
+	title = germany.55.t
+	desc = germany.55.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.55.o1
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.35
+			uses = 2
+			category = industry
+		}
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.35
+			uses = 2
+			category = electronics
+		}
+		add_tech_bonus = {
+			name = armor_bonus
+			bonus = 0.5
+			uses = 1
+			category = armor
+		}
+		GER = {
+			country_event = germany.56
+		}
+		ai_chance = {
+			factor = 95
+		}
+	}
+	option = {
+		name = germany.55.o2
+		GER = {
+			country_event = germany.53
+		}
+		ai_chance = {
+			factor = 5
+		}
+	}
+}
+country_event = {
+	id = germany.56
+	title = germany.56.t
+	desc = germany.56.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.56.o1
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.35
+			uses = 2
+			category = excavation_tech
+		}
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.35
+			uses = 2
+			category = synth_resources
+		}
+		add_tech_bonus = {
+			name = armor_bonus
+			bonus = 0.5
+			uses = 1
+			category = artillery
+		}
+	}
+}
+country_event = {
+	id = germany.57
+	title = germany.57.t
+	desc = germany.57.d
+	picture = GFX_report_event_political_deal2
+	is_triggered_only = yes
+
+	option = {
+		name = germany.57.o1
+		set_cosmetic_tag = GER_MONARCHY
+	}
+}
+country_event = {
+	id = germany.58
+	title = germany.58.t
+	desc = germany.58.d
+	picture = GFX_report_event_political_deal2
+	is_triggered_only = yes
+
+	option = {
+		name = germany.58.o1
+		if = {
+			limit = {
+				tag = DEN
+			}
+			GER = {
+				transfer_state = 800
+			}
+		}
+		else_if = {
+			limit = {
+				tag = BEL
+			}
+			GER = {
+				transfer_state = 839
+			}
+		}
+		else_if = {
+			limit = {
+				tag = POL
+			}
+			GER = {
+				transfer_state = 743
+				transfer_state = 85
+				transfer_state = 67
+				transfer_state = 742
+				transfer_state = 63
+				transfer_state = 66
+				transfer_state = 86
+				transfer_state = 5
+			}
+		}
+		else_if = {
+			limit = {
+				tag = SOV
+			}
+			GER = {
+				transfer_state = 741
+			}
+		}
+		GER = {
+			country_event = germany.59
+		}
+		ai_chance = {
+			base = 45
+			modifier = {
+				factor = 5
+				GER = {
+					has_completed_focus = GER_Soft_Power_Diplomacy
+				}
+			}
+		}
+	}
+	option = {
+		name = germany.58.o2
+		GER = {
+			country_event = germany.60
+		}
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+country_event = {
+	id = germany.59
+	title = germany.59.t
+	desc = germany.59.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.59.o1
+	}
+}
+country_event = {
+	id = germany.60
+	title = germany.60.t
+	desc = germany.60.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.60.o1
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+		}
+	}
+}
+
+country_event = {
+	id = germany.61 #german investments
+	title = germany.61.t
+	desc = germany.61.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.61.o1
+		add_tech_bonus = {
+			name = industry_bonus
+			bonus = 0.4
+			uses = 2
+			category = Industry
+		}
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = germany.62 #german reperations
+	title = germany.62.t
+	desc = germany.62.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.62.o1
+		add_stability = 0.05
+		add_timed_idea = {
+			idea = GER_reperations
+			days = 730 # 2 years
+		}
+		hidden_effect = {
+			GER = {
+				add_timed_idea = {
+					idea = GER_reperations_giving
+					days = 730 # 2 years
+				}
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {
+		name = germany.62.o2
+		add_war_support = 0.05
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+country_event = {
+	id = election_GER.1 #german election 2002
+	title = election_GER.1.t
+	desc = election_GER.1.d
+	picture = GFX_report_2002_election_germany
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+		date > 2002.9.1
+		date < 2002.9.30
+	}
+	option = {
+		name = election_GER.1.o1 #GER_CDU_FDP_2002_Win
+		set_country_flag = GER_CDU_FDP_2002_Win
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_country_leader_role = {
+			character = GER_Edmund_Stoiber
+			promote_leader = yes
+			country_leader = {
+				ideology = christian_democrat
+				expire = "1.1.1.1"
+				traits = { 
+					christian_conservative_GER
+					strong_immigration_enemy_GER
+				}
+			}
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		hidden_effect = {
+			country_event = {
+				id = germany.66 days = 2
+			}
+			country_event = {
+				id = germany.68 days = 3
+			}
+			country_event = {
+				id = germany.69 days = 4
+			}
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = election_GER.1.o2 #GER_sdpgune_2002
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.08
+		}
+		hidden_effect = {
+			country_event = {
+				id = germany.65 days = 2
+			}
+			country_event = {
+				id = germany.68 days = 4
+			}
+			country_event = {
+				id = germany.69 days = 6
+			}
+		}
+		set_country_flag = GER_SPD_Gune_2002_Win
+		ai_chance = {
+			factor = 10
+		}
+	}
+	# option = {
+	# 	name = election_GER.1.o3 #GER_SPD_Linke_2002_Win
+	# 	clr_country_flag = gc_elections
+	# 	set_country_flag = GER_SPD_Linke_2002_Win
+	# 	add_stability = -0.02
+	# 	add_popularity = {
+	# 		ideology = social_democrat
+	# 		popularity = 0.05
+	# 	}
+	# 	add_popularity = {
+	# 		ideology = democratic_socialist
+	# 		popularity = 0.15
+	# 	}
+	# 	ai_chance = {
+	# 		factor = 10
+	# 		modifier = {
+	# 			factor = 0
+	# 			is_historical_focus_on = yes
+	# 		}
+	# 	}
+	# }
+}
+country_event = {
+	id = germany.65 #Edmund Stoiber out, Merkel in
+	title = germany.65.t
+	desc = germany.65.d
+	picture = GFX_report_cdu_merkel_2002
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.65.o1
+		add_country_leader_role = {
+			character = GER_Angela_Merkel
+			promote_leader = yes
+			country_leader = {
+				ideology = christian_democrat
+				expire = "1.1.1.1"
+				traits = { 
+					mutti_merkel_GER
+					friend_of_america
+				}
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+country_event = {
+	id = germany.66 #Gerhardt out, Westerwelle in
+	title = germany.66.t
+	desc = germany.66.d
+	picture = GFX_report_fdp_westerwelle_2002
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.66.o1
+		add_country_leader_role = {
+			character = GER_Guido_Westerwelle
+			promote_leader = yes
+			country_leader = {
+				ideology = libertarian
+				expire = "1.1.1.1"
+				traits = { 
+					first_homosexual_chancellor_GER
+					Hartz_IV_Enemy_GER
+					friend_of_america
+				}
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+country_event = {
+	id = germany.67 #Schröder out, Steinmeier in
+	title = germany.67.t
+	desc = germany.67.d
+	picture = GFX_report_spd_steinmeier_2009
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.67.o1
+		add_country_leader_role = {
+			character = GER_Frank_Walter_Steinmeier
+			promote_leader = yes
+			country_leader = {
+				ideology = social_democrat_ideology
+				expire = "1.1.1.1"
+				traits = { 
+					tax_reform_supporter_GER
+					agenda_2010_supporter_GER
+				}
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+country_event = {
+	id = germany.68 #Fischer out, Göring-Eckardt in
+	title = germany.68.t
+	desc = germany.68.d
+	picture = GFX_report_grune_goring-eckardt_2005
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = germany.68.o1
+		add_country_leader_role = {
+			character = GER_Katrin_Goring_Eckardt
+			promote_leader = yes
+			country_leader = {
+				ideology = green
+				expire = "1.1.1.1"
+				traits = { 
+					environmentalist_GER
+					agenda_2010_supporter_Gruene_GER
+				}
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+country_event = {
+	id = germany.69 #Bisky Out Zimmer in
+	title = germany.69.t
+	desc = germany.69.d
+	picture = GFX_report_pds-linke_lafontaine_2002
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+	}
+	option = {
+		name = germany.69.o1
+		add_country_leader_role = {
+			character = GER_Oskar_Lafontaine
+			promote_leader = yes
+			country_leader = {
+				ideology = christian_socialist
+				expire = "1.1.1.1"
+				traits = { 
+					Christian_Socialist_GER
+					former_SPD_member_GER
+					pacifist_GER
+					friend_of_russia
+				}
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+country_event = {
+	id = germany.70 #Merkel against Stoiber
+	title = germany.70.t
+	desc = germany.70.d
+	picture = GFX_report_cdu_merkel_2002
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+	}
+	option = {
+		name = germany.70.o1
+		set_country_flag = GER_Stoiber_2002
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.70.o2
+		set_country_flag = GER_Merkel_2002
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.03
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = election_GER.2 #german election historical 2005
+	title = election_GER.2.t
+	desc = election_GER.2.d
+	picture = GFX_report_2005_election_germany
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+		date > 2005.9.1
+		date < 2005.9.30
+	}
+
+	option = {
+		name = election_GER.2.o1 #GER_CDU_SPD_Coalition
+		set_country_flag = GER_CDU_SPD_2005_Win
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		add_country_leader_role = {
+			character = GER_Angela_Merkel
+			promote_leader = yes
+			country_leader = {
+				ideology = christian_democrat
+				expire = "1.1.1.1"
+				traits = { 
+					mutti_merkel_GER
+				}
+			}
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = election_GER.2.o2 #GER_sdpgune_2005
+		clr_country_flag = gc_elections
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.08
+		}
+		set_country_flag = GER_SPD_Gune_2005_Win
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = {
+		name = election_GER.2.o3 #GER_cdurepublikaner_2005
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.08
+		}
+		add_country_leader_role = {
+			character = GER_Angela_Merkel
+			promote_leader = yes
+			country_leader = {
+				ideology = christian_democrat
+				expire = "1.1.1.1"
+				traits = { 
+					mutti_merkel_GER
+				}
+			}
+		}
+		set_country_flag = GER_CDU_REP_2005_Win
+		ai_chance = {
+			factor = 10
+		}
+	}
+}
+
+country_event = {
+	id = germany.63 #Vertrauensfrage SPD-Grüne
+	title = germany.63.t
+	desc = germany.63.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		OR = {
+			has_government = social_democrat
+			has_government = progressive
+		}
+		date > 2005.7.1
+		date < 2005.9.1
+	}
+
+	option = {
+		name = germany.63.o1
+		hidden_effect = {
+			country_event = {
+				id = election_GER.2 days = 60
+			}
+		}
+		add_stability = -0.02
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.05
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+country_event = {
+	id = germany.64 #Vertrauensfrage CDU-FDP
+	title = germany.64.t
+	desc = germany.64.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		OR = {
+			has_government = conservative
+			has_government = market_liberal
+			has_government = social_liberal
+		}
+		date > 2005.7.1
+		date < 2005.9.1
+	}
+
+	option = {
+		name = germany.64.o1
+		hidden_effect = {
+			country_event = {
+				id = election_GER.2 days = 60
+			}
+		}
+		add_stability = -0.02
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.05
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+}
+country_event = {
+	id = election_GER.3 #german election historical 2009
+	title = election_GER.3.t
+	desc = election_GER.3.d
+	picture = GFX_report_2009_election_germany
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+	}
+	option = {
+		name = election_GER.3.o1 #GER_CDU_FDP_Coalition
+		set_country_flag = GER_CDU_FDP_2009_Win
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = election_GER.3.o2 #GER_sdpgune_2009
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.08
+		}
+		set_country_flag = GER_SPD_Gune_2009_Win
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = election_GER.4 #german election historical 2013
+	title = election_GER.4.t
+	desc = election_GER.4.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+	}
+	option = {
+		name = election_GER.4.o1 #GER_CDU_SPD_Coalition_2013
+		set_country_flag = GER_CDU_SPD_2013_Win
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = election_GER.4.o2 #GER_sdpgunelinke_2013
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.08
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.04
+		}
+		set_country_flag = GER_SPD_Gune_Linke_2013_Win
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = election_GER.5 #german election historical 2017
+	title = election_GER.5.t
+	desc = election_GER.5.d
+	picture = GFX_report_event_political_deal2
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+	}
+	option = {
+		name = election_GER.5.o1 #GER_CDU_SPD_Coalition 2017
+		set_country_flag = GER_CDU_SPD_2017_Win
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = election_GER.5.o2 #GER_sdpgunelinke_2017
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.08
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.04
+		}
+		set_country_flag = GER_SPD_Gune_Linke_2017_Win
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = election_GER.5.o3 #GER_CDU_AfD_2017
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.08
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.1
+		}
+		set_country_flag = GER_CDU_AfD_2017_Win
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.71 #Merger of NPD and DVU
+	title = germany.71.t
+	desc = germany.71.d
+	picture = GFX_report_DVU_NPD_Merger_2011
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = nationalist
+			has_government = fascist
+		}
+	}
+	option = {
+		name = germany.71.o1 #Its bound to fail
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.005
+		}
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.01
+		}
+		set_party_name = {
+			ideology = nationalist
+			long_name = "NPD - Die Volksunion"	
+			name = "NDP-DVU"
+		}
+		set_party_name = {
+			ideology = fascist
+			long_name = "NPD - Die Volksunion"	
+			name = "NDP-DVU"
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.71.o2 #They rally the right
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.05
+		}
+		set_party_name = {
+			ideology = nationalist
+			long_name = "NPD - Die Volksunion"	
+			name = "NDP-DVU"
+		}
+		set_party_name = {
+			ideology = fascist
+			long_name = "NPD - Die Volksunion"	
+			name = "NDP-DVU"
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.72 #Merger of PDS and WASG
+	title = germany.72.t
+	desc = germany.72.d
+	picture = GFX_report_PDS_WASG_Merger_2007
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = democratic_socialist
+		}
+	}
+	option = {
+		name = germany.72.o1 #It kind of works
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.03
+		}
+		set_party_name = {
+			ideology = democratic_socialist
+			long_name = GER_democratic_socialist_party_DieLinke_long
+			name = GER_democratic_socialist_party_DieLinke
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.72.o2 #They will fail
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.01
+		}
+		set_party_name = {
+			ideology = democratic_socialist
+			long_name = GER_democratic_socialist_party_DieLinke_long
+			name = GER_democratic_socialist_party_DieLinke
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.73 #WASG gets founded
+	title = germany.73.t
+	desc = germany.73.d
+	picture = GFX_report_WASG_Founding_2004
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = democratic_socialist
+		}
+	}
+	option = {
+		name = germany.73.o1 #It kind of works
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.02
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+
+country_event = {
+	id = germany.74 #Federal Presidental Election 2004
+	title = germany.74.t
+	desc = germany.74.d
+	picture = GFX_report_Presidential_Election_Germany_2004
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+		}
+	}
+	option = {
+		name = germany.74.o1 #Horst Köhler
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.01
+		}
+		add_stability = 0.03
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.74.o2 #Gesine Schwan
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		add_stability = 0.03
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.75 #Federal Presidental Election 2009
+	title = germany.75.t
+	desc = germany.75.d
+	picture = GFX_report_Presidential_Election_Germany_2009
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+		}
+	}
+	option = {
+		name = germany.75.o1 #Horst Köhler
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.01
+		}
+		add_stability = 0.03
+		hidden_effect = {
+			country_event = {
+				id = germany.78 days = 373
+			}
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.75.o2 #Gesine Schwan
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		add_stability = 0.03
+		hidden_effect = {
+			country_event = {
+				id = germany.76 days = 1827
+			}
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.75.o3 #Peter Sodann
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.01
+		}
+		add_stability = 0.03
+		hidden_effect = {
+			country_event = {
+				id = germany.76 days = 1827
+			}
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.75.o4 #Frank Rennicke
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.01
+		}
+		set_country_flag = GER_Frank_Rennicke
+		add_stability = -0.1
+		hidden_effect = {
+			country_event = {
+				id = germany.79 days = 30
+			}
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.76 #Federal Presidental Election 2010
+	title = germany.76.t
+	desc = germany.76.d
+	picture = GFX_report_Presidential_Election_Germany_2010
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+			has_country_flag = GER_Frank_Rennicke
+		}
+	}
+	option = {
+		name = germany.76.o1 #Christian Wulff
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.01
+		}
+		add_stability = 0.03
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.76.o2 #Joachim Gauck
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
+		}
+		add_stability = 0.03
+		ai_chance = {
+			factor = 2
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.76.o3 #Luc Jochimsen
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.01
+		}
+		add_stability = 0.03
+		ai_chance = {
+			factor = 2
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.76.o4 #Frank Rennicke
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.01
+		}
+		set_country_flag = GER_Frank_Rennicke
+		add_stability = -0.1
+		hidden_effect = {
+			country_event = {
+				id = germany.79 days = 30
+			}
+		}
+		add_stability = -0.1
+		ai_chance = {
+			factor = 2
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.77 #Deutschlandpakt
+	title = germany.77.t
+	desc = germany.77.d
+	picture = GFX_report_Deutschlandpakt_2005
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+		}
+	}
+	option = {
+		name = germany.77.o1 #It kind of works
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.002
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.002
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.78 #Resignation of Horst Köhler
+	title = germany.78.t
+	desc = germany.78.d
+	picture = GFX_report_Resignation_Koehler_2010
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+		}
+	}
+	option = {
+		name = germany.78.o1 #Farewell
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.01
+		}
+		hidden_effect = {
+			country_event = {
+				id = germany.76 days = 31
+			}
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.79 #Antifa Protests
+	title = germany.79.t
+	desc = germany.79.d
+	picture = GFX_report_Antifa_Protests
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+		}
+	}
+	option = {
+		name = germany.79.o1 #Unsettling
+		add_stability = -0.05
+		add_popularity = {
+			ideology = communist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.03
+		}
+		hidden_effect = {
+			country_event = {
+				id = germany.80 days = 31
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.80 #Antifa raids Bundeswehr weaponry
+	title = germany.80.t
+	desc = germany.80.d
+	picture = GFX_report_Weaponry_Raided
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+		}
+	}
+	option = {
+		name = germany.80.o1 #Dangerous
+		add_stability = -0.1
+		add_popularity = {
+			ideology = communist
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.01
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_2
+			amount = -4000
+			producer = GER
+		}
+		hidden_effect = {
+			country_event = {
+				id = germany.81 days = 31
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.81 #Antifa Revolts
+	title = germany.81.t
+	desc = germany.81.d
+	picture = GFX_report_Antifa_Revolt
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+		}
+	}
+	option = {
+		name = germany.81.o1 #Uh Oh
+		add_stability = -0.1
+		AFA = {
+			add_state_core = 888
+			add_state_core = 57
+			add_state_core = 51
+			add_state_core = 42
+			set_state_controller = 888
+			set_state_controller = 57
+			set_state_controller = 51
+			set_state_controller = 42
+			set_state_owner = 888
+			set_state_owner = 57
+			set_state_owner = 51
+			set_state_owner = 42
+			declare_war_on = {
+				target = GER
+				type = annex_everything
+			}
+			hidden_effect = {
+			add_country_leader_role = {
+				character = AFA_Anarchist_Council
+				promote_leader = yes
+				country_leader = {
+					ideology = anarcho_syndycalist
+					expire = "1.1.1.1"
+					traits = { 
+						divided_interests
+					}
+				}
+			}
+			recruit_character = AFA_Anarchist_Council
+			load_oob = "AFA"
+		}
+		}
+	}
+}
+country_event = {
+	id = germany.82 #Die PARTEI gets founded
+	title = germany.82.t
+	desc = germany.82.d
+	picture = GFX_report_Die_PARTEI_Founding
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+		}
+	}
+	option = {
+		name = germany.82.o1 #Replace Tierschutzpartei
+		set_party_name = {
+			ideology = social_liberal
+			long_name = GER_social_liberal_party_PARTEI_long
+			name = GER_social_liberal_party_PARTEI
+		}
+		add_country_leader_role = {
+			character = GER_Martin_Sonneborn
+			promote_leader = yes
+			country_leader = {
+				ideology = centrist
+				expire = "1.1.1.1"
+				traits = { 
+					divided_interests
+					liberal_journalist
+				}
+			}
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.01
+		}
+	}
+	option = {
+		name = germany.82.o2 #Dead Party
+		add_political_power = 10
+	}
+}
+country_event = {
+	id = germany.83 #Die Piraten gets founded
+	title = germany.83.t
+	desc = germany.83.d
+	picture = GFX_report_Piraten_Founding
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_government = fascist
+			has_government = nationalist
+			has_government = communist
+			has_government = monarchist
+			has_government = islamist
+		}
+	}
+	option = {
+		name = germany.83.o1 #Replace Social Liberal Party
+		set_party_name = {
+			ideology = social_liberal
+			long_name = GER_social_liberal_party_Piraten_long
+			name = GER_social_liberal_party_Piraten
+		}
+		add_country_leader_role = {
+			character = GER_Christof_Leng
+			promote_leader = yes
+			country_leader = {
+				ideology = liberalist
+				expire = "1.1.1.1"
+				traits = { 
+					Internet_and_Informatic_Genius_GER
+				}
+			}
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.02
+		}
+	}
+	option = {
+		name = germany.83.o2 #Dead Party
+		add_political_power = 10
+	}
+}
+country_event = {
+	id = germany.84 #Kanzlerfrage SPD 2017
+	title = germany.84.t
+	desc = germany.84.d
+	picture = GFX_report_spd_schulz_2017
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+	}
+	option = {
+		name = germany.84.o1
+		add_country_leader_role = {
+			character = GER_Martin_Schulz
+			promote_leader = yes
+			country_leader = {
+				ideology = social_democrat_ideology
+				expire = "1.1.1.1"
+				traits = { 
+					European_Fanatic_GER
+					Seeheimer_Kreis_Member_GER
+				}
+			}
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.84.o2
+		add_country_leader_role = {
+			character = GER_Sigmar_Gabriel
+			promote_leader = yes
+			country_leader = {
+				ideology = social_democrat_ideology
+				expire = "1.1.1.1"
+				traits = { 
+					Economic_Expert2_GER
+					Seeheimer_Kreis_Member_GER
+				}
+			}
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}
+country_event = {
+	id = germany.85 #BSW founding
+	title = germany.85.t
+	desc = germany.85.d
+	picture = GFX_report_BSW_founding
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+		has_democratic_form_of_government = yes
+	}
+	option = { #Bündnis Sahra Wagenknecht works
+		name = germany.85.o1
+		add_country_leader_role = {
+			character = GER_Sahra_Wagenknecht
+			promote_leader = yes
+			country_leader = {
+				ideology = left_wing_nationalism
+				expire = "1.1.1.1"
+				traits = { 
+					Hardcore_Pacifist_GER
+					Socialist_Conservative_GER
+				}
+			}
+		}
+		set_party_name = {
+			ideology = democratic_socialist
+			long_name = GER_democratic_socialist_party_BSW_long
+			name = GER_democratic_socialist_party_BSW
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.04
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = { #Wagenknecht fails
+		name = germany.85.o2
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = -0.01
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+}

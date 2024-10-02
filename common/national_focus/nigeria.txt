@@ -665,11 +665,157 @@ focus_tree = {
 	}
 
 	focus = {
+		id = NGA_begin_insurgencies
+		icon = NGA_begin_insurgencies
+		x = 22
+		y = 6
+		prerequisite = { focus = NGA_declare_jihad }
+		
+		
+		cost = 5
+
+		ai_will_do = {
+			factor = 24
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            add_political_power = 30
+        }
+	}
+
+	focus = {
+		id = NGA_raid_governmental_buildings
+		icon = NGA_raid_governmental_buildings
+		x = 19
+		y = 7
+		prerequisite = { focus = NGA_begin_insurgencies }
+		
+		
+		cost = 5
+
+		ai_will_do = {
+			factor = 24
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            add_political_power = 30
+        }
+	}
+
+	focus = {
+		id = NGA_construct_sleeper_cells
+		icon = NGA_construct_sleeper_cells
+		x = 21
+		y = 7
+		prerequisite = { focus = NGA_begin_insurgencies }
+		
+		
+		cost = 5
+
+		ai_will_do = {
+			factor = 24
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            add_political_power = 30
+        }
+	}
+
+	focus = {
+		id = NGA_clashes_with_the_nigerian_army
+		icon = NGA_clashes_with_the_nigerian_army
+		x = 23
+		y = 7
+		prerequisite = { focus = NGA_begin_insurgencies }
+		
+		
+		cost = 5
+
+		ai_will_do = {
+			factor = 24
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            add_political_power = 30
+        }
+	}
+
+	focus = {
+		id = NGA_construct_media_centers
+		icon = NGA_construct_media_centers
+		x = 25
+		y = 7
+		prerequisite = { focus = NGA_begin_insurgencies }
+		
+		
+		cost = 5
+
+		ai_will_do = {
+			factor = 24
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            add_political_power = 30
+        }
+	}
+
+	focus = {
+		id = NGA_baqiya_wa_tatamadad
+		icon = NGA_baqiya_wa_tatamadad
+		x = 22
+		y = 8
+		prerequisite = { focus = NGA_construct_media_centers }
+		prerequisite = { focus = NGA_construct_sleeper_cells }
+		prerequisite = { focus = NGA_clashes_with_the_nigerian_army }
+		prerequisite = { focus = NGA_raid_governmental_buildings }
+		
+		cost = 5
+
+		ai_will_do = {
+			factor = 24
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            add_political_power = 30
+        }
+	}
+	
+	focus = {
 		id = NGA_pledge_alliagence_to_the_islamic_state
 		icon = NGA_pledge_alliagence_to_the_islamic_state
 		x = 24
-		y = 6
-		prerequisite = { focus = NGA_declare_jihad }
+		y = 9
+		prerequisite = { focus = NGA_baqiya_wa_tatamadad }
 		mutually_exclusive = { focus =  NGA_pledge_alliagence_to_al_qaeda }
 		
 		cost = 5
@@ -695,8 +841,8 @@ focus_tree = {
 		id = NGA_pledge_alliagence_to_al_qaeda
 		icon = NGA_pledge_alliagence_to_al_qaeda
 		x = 20
-		y = 6
-		prerequisite = { focus = NGA_declare_jihad }
+		y = 9
+		prerequisite = { focus = NGA_baqiya_wa_tatamadad }
 		mutually_exclusive = { focus =  NGA_pledge_alliagence_to_the_islamic_state }
 		
 		cost = 5
@@ -711,7 +857,12 @@ focus_tree = {
 		
 
 		completion_reward = {
-            add_political_power = 30
+			set_cosmetic_tag = ALQ_AED
+			retire_country_leader = yes
+			set_politics = {
+				ruling_party = islamist
+				elections_allowed = no
+			}
         }
 	}
 
@@ -719,7 +870,7 @@ focus_tree = {
 		id = NGA_path_of_boko_haram
 		icon = NGA_path_of_boko_haram
 		x = 23
-		y = 7
+		y = 10
 		prerequisite = { focus = NGA_pledge_alliagence_to_the_islamic_state }
 		mutually_exclusive = { focus =  NGA_path_of_islamic_state_western_africa_province }
 		
@@ -736,15 +887,18 @@ focus_tree = {
 
 		completion_reward = {
 			set_cosmetic_tag = BKO_HRM
-			country_event = news.500
-        }
-	}
+			promote_character = {
+				character = NGA_abubakar_shekau
+				ideology=islamic_authoritarian
+			}
+		}
+    }
 
 	focus = {
 		id = NGA_path_of_islamic_state_western_africa_province
 		icon = NGA_path_of_islamic_state_western_africa_province
 		x = 25
-		y = 7
+		y = 10
 		prerequisite = { focus = NGA_pledge_alliagence_to_the_islamic_state }
 		mutually_exclusive = { focus =  NGA_path_of_boko_haram }
 		
@@ -769,4 +923,3 @@ focus_tree = {
 		}
     }
 }
-

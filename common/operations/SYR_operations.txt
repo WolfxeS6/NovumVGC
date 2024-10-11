@@ -1,0 +1,86 @@
+assassinate_rafic_hariri_plan = { 
+	icon = GFX_historical_heavy_water
+	map_icon = GFX_historical_heavy_water_small
+	name = assassinate_rafic_hariri_plan
+	desc = assassinate_rafic_hariri_plan_desc
+	days = 60
+
+	allowed = {
+		original_tag = SYR
+	}
+	
+	available = { 
+	NOT = { 
+		LEB = {
+			OR = {
+				has_government = fascist
+			} 
+			OR = {
+				has_government = islamist
+			} 
+	}
+	}
+		country_exists = SYR
+		country_exists = LEB
+		SYR = { is_subject = no }
+		LEB = { is_subject = no }
+	}
+	
+	visible = {
+		original_tag = SYR
+		network_national_coverage = {
+			target = LEB
+			value > 0
+		}
+		FROM = {
+			tag = LEB
+		}
+		has_country_flag = SYR_Hariri_Talk
+	}
+
+	operatives = 1
+
+	# Integer [0-100] - Every operation has a hard requirement of network strength in the target country
+	
+	network_strength = 35
+
+	equipment = {
+		support_equipment = 200
+	}
+
+	on_start = {  # SCOPE_OPERATION
+		
+	}
+
+	outcome_modifiers = { operation_outcome }
+	cost_modifiers = { operation_cost }
+	risk_modifiers = { operation_risk }
+
+	outcome_potential = {
+		custom_effect_tooltip = assassinate_rafic_hariri_plan_outcome_tt
+	}
+	
+	risk_chance = 0.25
+	experience = 5
+	
+	# outcome is an effect that runs when the operation has completed
+	outcome_execute = { # SCOPE_OPERATION
+		LEB = {
+			country_event = syria.23
+		}
+	}
+	
+	# This is where all the separate phases are defined
+	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+	
+	phases = { #infiltration 
+		finding_a_volunteer_syria = { base = 100 }
+	}
+	phases = { 
+		assassination_preparation_syria = { base = 100 }
+	}
+	phases = { 
+		assassination_execution_syria = { base = 100 }
+	}
+}
+

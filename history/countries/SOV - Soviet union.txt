@@ -462,18 +462,8 @@ create_equipment_variant = { name = "Tu-22" type = strat_bomber_equipment_1 upgr
 create_equipment_variant = { name = "Tu-22M3" type = strat_bomber_equipment_1 upgrades = { plane_bomb_upgrade = 2 plane_engine_upgrade = 5 plane_reliability_upgrade = 4 } obsolete = yes }
 
 add_ideas = {
-	SOV_depopulation
 	idea_united_nations_security_council_member
 	limited_conscription
-	SOV_corrupt_oligarchy
-	SOV_deindustrialisation
-	SOV_utechka_mozgov
-	SOV_low_industrial_organisation
-	SOV_expluatate_nation
-	SOV_military_atrophy
-	SOV_soviet_stockpiles
-	SOV_uncivilized_popitical_system
-	mobilization_service_time_corrupt
 }
 
 set_politics = {	
@@ -567,6 +557,78 @@ recruit_character = SOV_viktor_chirkov
 recruit_character = SOV_vladimir_vysotskiy
 recruit_character = SOV_andrey_shatrov
 recruit_character = SOV_mikhail_popov
+
+#New dynamic ideas 
+
+## List : 
+## 1 - economy
+## 2 - army
+## 3 - fsb 
+
+#1
+set_variable = { sov_economy_pp_gain_factor = -0.3 } #-0 (+02)
+set_variable = { sov_economy_CG = 0.25 } #0 ( +01 ) (мигранты -01 -- +005)
+set_variable = { sov_economy_civ_cons_spd = -0.4 } #-02
+set_variable = { sov_economy_prodout = -0.1 } #005 (+005)
+set_variable = { sov_economy_prodcap = -0.2 } #-015 (+015)
+set_variable = { sov_economy_resspeed = -0.1 } #05 (7)
+set_variable = { sov_economy_min_exp = 0.3 } #0 (-01)
+set_variable = { sov_economy_pop = -0.35 } # -01 (+01)
+set_variable = { sov_economy_mil_cons_spd = 0 } #01 (015)
+set_variable = { sov_economy_const_slots = 0 } # 02
+set_variable = { sov_def_war_stab_fct = 0 } #-04 (-02)
+set_variable = { sov_off_war_stab_fct = 0 } #-04 (-02)
+set_variable = { sov_nat_drift = 0 } #
+set_variable = { sov_economy_conv_spd = 0 } # 0 стаба 70 (+10 мигранты)-(+10) # воен 70 (+30)
+
+add_dynamic_modifier = {
+	modifier = sovrus_economy
+}
+
+
+#2
+set_variable = { sov_army_exgain = -0.15 } #-005
+set_variable = { sov_army_tr_time = 0.2 } #+00
+set_variable = { sov_army_reinf_rate = -0.02 } #+001
+set_variable = { sov_army_attacking_spd = -0.3 } #005 (-005)
+set_variable = { sov_army_land_dctr_cost = 0.9 } #00
+set_variable = { sov_army_air_eff = -0.3 } # +005
+set_variable = { sov_army_air_exp = -0.3 } # +005
+set_variable = { sov_army_supply_cons = 0.3 } # 0
+set_variable = { sov_army_winter_attr = 0.2 } #-01
+set_variable = { sov_army_coord_bonus = -0.3 } # 01
+set_variable = { sov_army_org = -0.1 } # 0
+set_variable = { sov_army_recon = -0.35 } #-005
+set_variable = { sov_army_art_attack = 0.1 } #025
+set_variable = { sov_army_art_def = 0.1 } # 025
+set_variable = { sov_army_mech_attack = 0 } # 005
+set_variable = { sov_army_mech_def = 0 } #005
+set_variable = { sov_army_specs_cap = 0 } # 015 ( +015 )
+set_variable = { sov_army_specs_tr_time = 0 } # -005
+set_variable = { sov_army_specs_attack = 0 } # 01 ( +005 )
+set_variable = { sov_army_ground_attack_fct = 0 } # 01
+set_variable = { sov_army_exp_loss_in_combat = 0 } # -01
+set_variable = { sov_army_conscription = 0 } # 003
+set_variable = { sov_cas_dam_reduction = 0 } # 02
+set_variable = { sov_mob_speed_fct = 0 } # 03
+
+add_dynamic_modifier = {
+	modifier = sovrus_army
+}
+
+#3
+
+set_variable = { sov_fsb_civ_int = 30 } #01 (-20)
+set_variable = { sov_fsb_army_int = 30 } #01
+set_variable = { sov_fsb_navy_int = 30 } # 01
+set_variable = { sov_fsb_int_gain_fct = -0.3 } # 01
+set_variable = { sov_fsb_unt_from_cmbt = 0 } # 0
+set_variable = { sov_fsb_countrdef = 0 } # 03
+set_variable = { sov_fsb_op_slots = 0 } # 0
+
+add_dynamic_modifier = {
+	modifier = sovrus_fsb
+}
 
 2000.8.12 = { set_country_flag = sov_kursk_sinking }
 
@@ -897,3 +959,8 @@ if = {
 		variant_name = "Su-25"
 	}
 }
+	add_equipment_to_stockpile = {
+			type = motorized_rocket_equipment_1 
+			amount = 720
+			producer = SOV
+		}

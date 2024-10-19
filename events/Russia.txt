@@ -1,4 +1,5 @@
 ﻿add_namespace = russia
+add_namespace = russ
 
 #Kursk Submarine Disaster
 country_event = {
@@ -689,5 +690,426 @@ country_event = {
 				factor = 0
 			}
 		}
+	}
+}
+
+## russian guides
+
+country_event = {
+	id = russ.1
+	title = russ.1.t
+	desc = russ.1.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = russ.1.a
+		ai_chance = {
+			base = 100
+		}
+		hidden_effect = {
+		249 = { add_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+		651 = { add_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+		237 = { add_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+		}
+	}
+}
+
+## migrant question
+
+country_event = {
+	id = russ.2
+	title = russ.2.t
+	desc = russ.2.desc
+	picture = GFX_event_sov_migrants
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # allow all migrants
+		name = russ.2.a
+		ai_chance = {
+			base = 30
+		}
+		custom_effect_tooltip = RCO_CG_decrease_10_TT
+		add_stability = -0.15
+		add_to_variable = { sov_economy_CG = -0.1 }
+	}
+
+	option = { # visa
+		name = russ.2.b
+		ai_chance = {
+			base = 40
+		}
+		custom_effect_tooltip = RCO_CG_decrease_5_TT
+		add_to_variable = { sov_economy_CG = -0.05 }
+	}
+
+	option = { # hard control
+		name = russ.2.c
+		ai_chance = {
+			base = 30
+		}
+		custom_effect_tooltip = RCO_CG_increase_5_TT
+		add_stability = 0.1
+		custom_effect_tooltip = RCO_maxprod_increase_15_TT
+		add_to_variable = { sov_economy_CG = 0.05 }
+		add_to_variable = { sov_economy_prodcap = 0.15 }
+	}
+}
+
+## new conctitution
+
+country_event = {
+	id = russ.3
+	title = russ.3.t
+	desc = russ.3.desc
+	picture = GFX_event_sov_constitution
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # reactionary
+		name = russ.3.a
+		complete_national_focus = SOV_keep_system
+	}
+
+	option = { # nationalist
+		name = russ.3.b
+		set_politics = { 
+			ruling_party = nationalist
+			long_name = SOV_putin_nationalist_party_long
+    		name = SOV_putin_nationalist_party_short
+	 	}
+		complete_national_focus = SOV_drift_to_nationalism
+	}
+}
+
+## propose non agression pact
+
+country_event = {
+	id = russ.4
+	title = russ.4.t
+	desc = russ.4.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.4.a
+		SOV = {
+					diplomatic_relation = {
+    				country = ROOT
+    				relation = non_aggression_pact
+   					active = yes
+					}
+			}
+			ROOT = {
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = SOV
+				}
+		}
+	}
+
+	option = { # no
+		name = russ.4.b
+		SOV = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = loyal_to_our_enemy
+				}
+			}
+	}
+}
+
+## propose mutal defence pact
+
+country_event = {
+	id = russ.5
+	title = russ.5.t
+	desc = russ.5.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.5.a
+		SOV = {
+					diplomatic_relation = {
+    				country = ROOT
+    				relation = guarantee
+   					active = yes
+					}
+			}
+			ROOT = {
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = SOV
+				}
+		}
+		ROOT = {
+					diplomatic_relation = {
+    				country = SOV
+    				relation = guarantee
+   					active = yes
+					}
+			}
+			SOV = {
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = ROOT
+				}
+		}
+	}
+
+	option = { # no
+		name = russ.5.b
+		SOV = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = loyal_to_our_enemy
+				}
+			}
+	}
+}
+
+## help prk
+
+country_event = {
+	id = russ.6
+	title = russ.6.t
+	desc = russ.6.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.6.a
+		SOV = {
+					diplomatic_relation = {
+    				country = ROOT
+    				relation = non_aggression_pact
+   					active = yes
+					}
+			}
+			ROOT = {
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = SOV
+				}
+		}
+		ROOT = { 
+			add_stability = 0.2
+			add_timed_idea = {
+    		idea = SOV_recent_help_idea
+    		days = 180
+			}
+			send_equipment = {
+    			equipment = infantry_equipment_1
+    			amount = 2000
+    			target = SOV
+			}
+			send_equipment = {
+    			equipment = artillery_equipment_1
+    			amount = 500
+    			target = SOV
+			}  		
+		}
+		SOV = { country_event = russ.7 }
+	}
+
+	option = { # no
+		name = russ.6.b
+		SOV = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = loyal_to_our_enemy
+				}
+			}
+	}
+}
+
+## prk provided us with weapons
+
+country_event = {
+	id = russ.7
+	title = russ.7.t
+	desc = russ.7.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.7.a
+	}
+}
+
+## subjigation ultimatum
+
+country_event = {
+	id = russ.8
+	title = russ.8.t
+	desc = russ.8.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.8.a
+		ai_chance = {
+			base = 60
+		}
+		SOV = { puppet = ROOT }
+	}
+
+	option = { # no
+		name = russ.8.b
+		ai_chance = {
+			base = 40
+		}
+		SOV = {
+				create_wargoal = {
+    				type = puppet_wargoal_focus
+    				target = ROOT
+				}
+			}
+	}
+}
+
+## invitation to csto
+
+country_event = {
+	id = russ.9
+	title = russ.9.t
+	desc = russ.9.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.9.a
+		ai_chance = {
+			base = 60
+		}
+		SOV = { add_to_faction = ROOT }
+	}
+
+	option = { # no
+		name = russ.9.b
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+## unification proposal
+
+country_event = {
+	id = russ.10
+	title = russ.10.t
+	desc = russ.10.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.10.a
+		ai_chance = {
+			base = 100
+		}
+		SOV = { 
+				annex_country = {
+    			target = ROOT
+    			transfer_troops = yes
+				} 
+		}
+	}
+
+	option = { # no
+		name = russ.10.b
+		FROM = { country_event = russ.11 }
+	}
+}
+
+## they dont want unification
+
+country_event = {
+	id = russ.11
+	title = russ.11.t
+	desc = russ.11.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # attack them
+		name = russ.11.a
+		complete_national_focus = SOV_blocade_belarus
+	}
+
+	option = { # doesnt matter
+		name = russ.11.b
+	}
+}
+
+## invitation to csto for ukr
+
+country_event = {
+	id = russ.12
+	title = russ.12.t
+	desc = russ.12.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.12.a
+		ai_chance = {
+			base = 60
+		}
+		SOV = { add_to_faction = ROOT }
+	}
+
+	option = { # no
+		name = russ.12.b
+		ai_chance = {
+			base = 40
+		}
+		SOV = { country_event = russ.13 }
+	}
+}
+
+## ukr doesnt want to join csto
+
+country_event = {
+	id = russ.13
+	title = russ.13.t
+	desc = russ.13.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # russian spring
+		name = russ.13.a
+		UKR = { country_event = { id = russia.10 } }
+		unlock_national_focus = SOV_novorossiya
 	}
 }

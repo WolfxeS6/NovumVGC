@@ -713,6 +713,74 @@ country_event = {
 		249 = { add_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
 		651 = { add_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
 		237 = { add_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+		remove_ideas = {
+    		SOV_fsb_fake_idea
+    		SOV_economy_fake_idea
+			SOV_army_fake_idea
+		}
+set_variable = { sov_economy_pp_gain_factor = -0.3 } #-0 (+02)
+set_variable = { sov_economy_CG = 0.25 } #0 ( +01 ) (мигранты -01 -- +005)
+set_variable = { sov_economy_civ_cons_spd = -0.4 } #-02
+set_variable = { sov_economy_prodout = -0.1 } #005 (+005)
+set_variable = { sov_economy_prodcap = -0.2 } #-015 (+015)
+set_variable = { sov_economy_resspeed = -0.1 } #05 (7)
+set_variable = { sov_economy_min_exp = 0.3 } #0 (-01)
+set_variable = { sov_economy_pop = -0.35 } # -01 (+01)
+set_variable = { sov_economy_mil_cons_spd = 0 } #01 (015)
+set_variable = { sov_economy_const_slots = 0 } # 02
+set_variable = { sov_def_war_stab_fct = 0 } #-04 (-02)
+set_variable = { sov_off_war_stab_fct = 0 } #-04 (-02)
+set_variable = { sov_nat_drift = 0 } #
+set_variable = { sov_economy_conv_spd = 0 } # 0 стаба 70 (+10 мигранты)-(+10) # воен 70 (+30)
+
+add_dynamic_modifier = {
+	modifier = sovrus_economy
+}
+
+
+#2
+set_variable = { sov_army_exgain = -0.15 } #-005
+set_variable = { sov_army_tr_time = 0.2 } #+00
+set_variable = { sov_army_reinf_rate = -0.02 } #+001
+set_variable = { sov_army_attacking_spd = -0.3 } #005 (-005)
+set_variable = { sov_army_land_dctr_cost = 0.9 } #00
+set_variable = { sov_army_air_eff = -0.3 } # +005
+set_variable = { sov_army_air_exp = -0.3 } # +005
+set_variable = { sov_army_supply_cons = 0.3 } # 0
+set_variable = { sov_army_winter_attr = 0.2 } #-01
+set_variable = { sov_army_coord_bonus = -0.3 } # 01
+set_variable = { sov_army_org = -0.1 } # 0
+set_variable = { sov_army_recon = -0.35 } #-005
+set_variable = { sov_army_art_attack = 0.1 } #025
+set_variable = { sov_army_art_def = 0.1 } # 025
+set_variable = { sov_army_mech_attack = 0 } # 005
+set_variable = { sov_army_mech_def = 0 } #005
+set_variable = { sov_army_specs_cap = 0 } # 015 ( +015 )
+set_variable = { sov_army_specs_tr_time = 0 } # -005
+set_variable = { sov_army_specs_attack = 0 } # 01 ( +005 )
+set_variable = { sov_army_ground_attack_fct = 0 } # 01
+set_variable = { sov_army_exp_loss_in_combat = 0 } # -01
+set_variable = { sov_army_conscription = 0 } # 003
+set_variable = { sov_cas_dam_reduction = 0 } # 02
+set_variable = { sov_mob_speed_fct = 0 } # 03
+
+add_dynamic_modifier = {
+	modifier = sovrus_army
+}
+
+#3
+
+set_variable = { sov_fsb_civ_int = 30 } #01 (-20)
+set_variable = { sov_fsb_army_int = 30 } #01
+set_variable = { sov_fsb_navy_int = 30 } # 01
+set_variable = { sov_fsb_int_gain_fct = -0.3 } # 01
+set_variable = { sov_fsb_unt_from_cmbt = 0 } # 0
+set_variable = { sov_fsb_countrdef = 0 } # 03
+set_variable = { sov_fsb_op_slots = 0 } # 0
+
+add_dynamic_modifier = {
+	modifier = sovrus_fsb
+}
 		}
 	}
 }
@@ -802,27 +870,27 @@ country_event = {
 		name = russ.4.a
 		SOV = {
 					diplomatic_relation = {
-    				country = ROOT
+    				country = PREV
     				relation = non_aggression_pact
    					active = yes
 					}
 			}
-			ROOT = {
 				add_opinion_modifier = {
 					modifier = declaration_of_friendship
 					target = SOV
 				}
-		}
+		SOV = { country_event = { id = russ.15 } }
 	}
 
 	option = { # no
 		name = russ.4.b
 		SOV = {
 				add_opinion_modifier = {
-					target = ROOT
+					target = PREV
 					modifier = loyal_to_our_enemy
 				}
 			}
+			SOV = { country_event = { id = russ.14 } }
 	}
 }
 
@@ -841,40 +909,38 @@ country_event = {
 		name = russ.5.a
 		SOV = {
 					diplomatic_relation = {
-    				country = ROOT
+    				country = PREV
     				relation = guarantee
    					active = yes
 					}
 			}
-			ROOT = {
 				add_opinion_modifier = {
 					modifier = declaration_of_friendship
 					target = SOV
 				}
-		}
-		ROOT = {
 					diplomatic_relation = {
     				country = SOV
     				relation = guarantee
    					active = yes
 					}
-			}
 			SOV = {
 				add_opinion_modifier = {
 					modifier = declaration_of_friendship
-					target = ROOT
+					target = PREV
 				}
 		}
+		SOV = { country_event = { id = russ.15 } }
 	}
 
 	option = { # no
 		name = russ.5.b
 		SOV = {
 				add_opinion_modifier = {
-					target = ROOT
+					target = PREV
 					modifier = loyal_to_our_enemy
 				}
 			}
+			SOV = { country_event = { id = russ.14 } }
 	}
 }
 
@@ -893,18 +959,15 @@ country_event = {
 		name = russ.6.a
 		SOV = {
 					diplomatic_relation = {
-    				country = ROOT
+    				country = PREV
     				relation = non_aggression_pact
    					active = yes
 					}
 			}
-			ROOT = {
 				add_opinion_modifier = {
 					modifier = declaration_of_friendship
 					target = SOV
 				}
-		}
-		ROOT = { 
 			add_stability = 0.2
 			add_timed_idea = {
     		idea = SOV_recent_help_idea
@@ -920,18 +983,18 @@ country_event = {
     			amount = 500
     			target = SOV
 			}  		
-		}
-		SOV = { country_event = russ.7 }
+		SOV = { country_event = { id = russ.7 } }
 	}
 
 	option = { # no
 		name = russ.6.b
 		SOV = {
 				add_opinion_modifier = {
-					target = ROOT
+					target = PREV
 					modifier = loyal_to_our_enemy
 				}
 			}
+			SOV = { country_event = { id = russ.14 } }
 	}
 }
 
@@ -968,7 +1031,8 @@ country_event = {
 		ai_chance = {
 			base = 60
 		}
-		SOV = { puppet = ROOT }
+		SOV = { puppet = PREV }
+		SOV = { country_event = { id = russ.15 } }
 	}
 
 	option = { # no
@@ -979,9 +1043,10 @@ country_event = {
 		SOV = {
 				create_wargoal = {
     				type = puppet_wargoal_focus
-    				target = ROOT
+    				target = PREV
 				}
 			}
+			SOV = { country_event = { id = russ.14 } }
 	}
 }
 
@@ -1002,7 +1067,8 @@ country_event = {
 		ai_chance = {
 			base = 60
 		}
-		SOV = { add_to_faction = ROOT }
+		SOV = { add_to_faction = PREV }
+		SOV = { country_event = { id = russ.15 } }
 	}
 
 	option = { # no
@@ -1010,6 +1076,7 @@ country_event = {
 		ai_chance = {
 			base = 40
 		}
+		SOV = { country_event = { id = russ.14 } }
 	}
 }
 
@@ -1111,5 +1178,139 @@ country_event = {
 		name = russ.13.a
 		UKR = { country_event = { id = russia.10 } }
 		unlock_national_focus = SOV_novorossiya
+	}
+}
+
+## somebody refused smth
+
+country_event = {
+	id = russ.14
+	title = russ.14.t
+	desc = russ.14.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # russian spring
+		name = russ.14.a
+	}
+}
+
+## somebody accepted smth
+
+country_event = {
+	id = russ.15
+	title = russ.15.t
+	desc = russ.15.desc
+	picture = GFX_event_sov_initial
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # russian spring
+		name = russ.15.a
+	}
+}
+
+## otkazniki problem
+
+country_event = {
+	id = russ.16
+	title = russ.16.t
+	desc = russ.16.desc
+	picture = GFX_event_tired_soldiers
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.16.a
+
+		custom_effect_tooltip = RKKA_exp_loss_in_combat_increase_20_TT
+		custom_effect_tooltip = RKKA_conscprct_decrease_4_TT
+		add_to_variable = { sov_army_exp_loss_in_combat = 0.2 }
+		add_to_variable = { sov_army_conscription = -0.04 }
+	}
+}
+
+## svr inspection
+
+country_event = {
+	id = russ.17
+	title = russ.17.t
+	desc = russ.17.desc
+	picture = GFX_event_otkazniki
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.17.a
+
+		custom_effect_tooltip = SOV_razvedka_wait_TT
+	}
+}
+
+## svr inspection 2
+
+country_event = {
+	id = russ.18
+	title = russ.18.t
+	desc = russ.18.desc
+	picture = GFX_event_otkazniki_3
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.18.a
+
+		custom_effect_tooltip = RKKA_recon_increase_10_TT
+		add_to_variable = { sov_army_recon = 0.1 }
+	}
+}
+
+## mo inspection
+
+country_event = {
+	id = russ.19
+	title = russ.19.t
+	desc = russ.19.desc
+	picture = GFX_event_otkazniki_2
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.19.a
+
+		custom_effect_tooltip = SOV_mo_wait_TT
+	}
+}
+
+## mo inspection 2
+
+country_event = {
+	id = russ.20
+	title = russ.20.t
+	desc = russ.20.desc
+	picture = GFX_evemt_otkazniki_4
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = russ.20.a
+
+		custom_effect_tooltip = RKKA_supplcons_decrease_10_TT
+		add_to_variable = { sov_army_supply_cons = -0.1 }
 	}
 }

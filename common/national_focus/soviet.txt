@@ -96,6 +96,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SOV_core_chechnya
 
+		allow_branch = { has_country_flag = 	 }
 
 		mutually_exclusive = {
 			focus = SOV_Putin_stands_victorius
@@ -1542,6 +1543,10 @@ focus_tree = {
 
 		ai_will_do = { base = 10 }
 
+		available = {
+			has_war = yes
+		}
+
 		prerequisite = { 
 			focus = SOV_all_roads_lead_to_Moscow 
 			focus = SOV_Improve_Siberian_infrastructure
@@ -1970,6 +1975,7 @@ focus_tree = {
 		prerequisite = { focus = SOV_modernize_vvs_structure }
 
 		completion_reward = {
+			custom_effect_tooltip = sov_new_vdv_tech_TT
 			custom_effect_tooltip = RKKA_specattack_increase_5_TT
 			custom_effect_tooltip = RKKA_speccap_increase_5_TT
 			custom_effect_tooltip = RKKA_spectrainingtime_decrease_5_TT
@@ -1982,6 +1988,7 @@ focus_tree = {
 			add_to_variable = { sov_army_specs_cap = 0.05 }
 			add_to_variable = { sov_army_specs_tr_time = -0.05 }
 			add_to_variable = { sov_army_specs_attack = 0.05 }
+			hidden_effect = { set_technology = { soviet_vdv_tech = 1 } }
 		}
 	}
 
@@ -2495,12 +2502,12 @@ focus_tree = {
 			custom_effect_tooltip = FSB_armyinttoothers_decrease_20_TT
 			custom_effect_tooltip = FSB_navyinttoothers_decrease_20_TT
 			custom_effect_tooltip = FSB_networkgainfct_increase_20_TT
-			custom_effect_tooltip = RKKA_recon_increase_10_TT
-			add_to_variable = { sov_army_recon = 0.1 }
+			custom_effect_tooltip = SOV_razvedka_wait_TT
 			add_to_variable = { sov_fsb_civ_int = -20 }
 			add_to_variable = { sov_fsb_army_int = -20 }
 			add_to_variable = { sov_fsb_navy_int = -20 }
 			add_to_variable = { sov_fsb_int_gain_fct = 0.2 }
+			hidden_effect = { set_country_flag = sov_inspection_in_svr_flag }
 		}
 	}
 
@@ -2519,9 +2526,9 @@ focus_tree = {
 		completion_reward = {
 			add_political_power = -100
 			custom_effect_tooltip = RKKA_landdoctrcost_decrease_25_TT
-			custom_effect_tooltip = RKKA_supplcons_decrease_10_TT
+			custom_effect_tooltip = SOV_mo_wait_TT
 			add_to_variable = { sov_army_land_dctr_cost = -0.25 }
-			add_to_variable = { sov_army_supply_cons = -0.1 }
+			hidden_effect = { set_country_flag = sov_inspection_in_svr_flag }
 		}
 	}
 
@@ -3360,6 +3367,8 @@ focus = {
 		prerequisite = { focus = SOV_develop_research }
 
 		completion_reward = {
+			custom_effect_tooltip = SOV_civ_const_spd_increase_10_TT
+			add_to_variable = { sov_economy_civ_cons_spd = 0.1 }
 			random_owned_state = {
 				limit = {
 					free_building_slots = {
@@ -3522,6 +3531,8 @@ focus = {
 
 		completion_reward = {
 			custom_effect_tooltip = SOV_minexport_decrease_10_TT
+			custom_effect_tooltip = SOV_civ_const_spd_increase_10_TT
+			add_to_variable = { sov_economy_civ_cons_spd = 0.1 }
 			add_to_variable = { sov_economy_min_exp = -0.1 }
 		}
 	}
@@ -3599,7 +3610,7 @@ focus = {
 		mutually_exclusive = { focus = SOV_china_non_agression }
 
 		completion_reward = {
-			RAJ = {country_event = russ.4 }
+			RAJ = { country_event = { id = russ.4 } }
 		}
 	}
 
@@ -3616,7 +3627,7 @@ focus = {
 		prerequisite = { focus = SOV_india_non_agression }
 
 		completion_reward = {
-			RAJ = {country_event = russ.5 }
+			RAJ = { country_event = { id = russ.5 } }
 		}
 	}
 
@@ -3633,7 +3644,7 @@ focus = {
 		prerequisite = { focus = SOV_asian_theatre }
 
 		completion_reward = {
-			PRK = {country_event = russ.6 }
+			PRK = { country_event = { id = russ.6 } }
 		}
 	}
 
@@ -3652,7 +3663,7 @@ focus = {
 		mutually_exclusive = { focus = SOV_india_non_agression }
 
 		completion_reward = {
-			PRC = {country_event = russ.4 }
+			PRC = { country_event = { id = russ.4 } }
 		}
 	}
 
@@ -3669,7 +3680,7 @@ focus = {
 		prerequisite = { focus = SOV_china_non_agression }
 
 		completion_reward = {
-			PRC = {country_event = russ.5 }
+			PRC = { country_event = { id = russ.5 } }
 		}
 	}
 
@@ -3697,7 +3708,7 @@ focus = {
 		prerequisite = { focus = SOV_asian_theatre }
 
 		completion_reward = {
-			KAZ = { country_event = russ.8 }
+			KAZ = { country_event = { id = russ.8 } }
 		}
 	}
 
@@ -3736,25 +3747,25 @@ focus = {
 			limit = {
 				TAJ = { NOT = { is_in_faction_with = SOV } }
 			}
-			TAJ = { country_event = russ.8 }
+			TAJ = { country_event = { id = russ.8 } }
 			}
 			if = {
 			limit = {
 				UZB = { NOT = { is_in_faction_with = SOV } }
 			}
-			UZB = { country_event = russ.8 }
+			UZB = { country_event = { id = russ.8 } }
 			}
 			if = {
 			limit = {
 				TMS = { NOT = { is_in_faction_with = SOV } }
 			}
-			TMS = { country_event = russ.8 }
+			TMS = { country_event = { id = russ.8 } }
 			}
 			if = {
 			limit = {
 				KYR = { NOT = { is_in_faction_with = SOV } }
 			}
-			KYR = { country_event = russ.8 }
+			KYR = { country_event = { id = russ.8 } }
 			}
 		}
 	}
@@ -3939,7 +3950,7 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		available = {
-            BLR = { NOT = { has_completed_focus = BLR_steady_as_she_goes } }
+            BLR = { NOT = { ruling_party = reactionary } }
 		}
 
 		prerequisite = { focus = SOV_belarus_question1 }
@@ -3998,7 +4009,7 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		available = {
-            BLR = { has_completed_focus = BLR_steady_as_she_goes } 
+            BLR = { ruling_party = reactionary } 
 		}
 
 		prerequisite = { focus = SOV_belarus_question1 }

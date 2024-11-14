@@ -1,0 +1,684 @@
+focus_tree = {
+
+	id = novorossia_focus
+
+	continuous_focus_position = { x = 450 y = 2200 }
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 20
+			original_tag = NOV
+		}
+	}
+	
+	focus = {
+		id = NOV_improve_discipline
+		icon = GFX_focus_goal_sov_novoross_army_focus
+		x = 10
+		y = 0
+		cost = 3
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_org_increase_10_TT
+			custom_effect_tooltip = RKKA_reinforce_rate_increase_1_TT
+			add_war_support = 0.1
+			add_to_variable = { dnr_army_reinf_rate = 0.01 }
+			add_to_variable = { dnr_army_org = 0.1 }
+			hidden_effect = {
+				add_state_claim = 73
+					add_state_claim = 89
+					add_state_claim = 80
+					add_state_claim = 1143
+					add_state_claim = 91
+					add_state_claim = 93
+					add_state_claim = 199
+					add_state_claim = 201
+					add_state_claim = 78
+					add_state_claim = 1325
+					add_state_claim = 806
+					add_state_claim = 857
+					add_state_claim = 192
+					add_state_claim = 198
+					add_state_claim = 202
+					add_state_claim = 1086
+					add_state_claim = 203
+					add_state_claim = 197
+					add_state_claim = 196
+					add_state_claim = 226
+					add_state_claim = 200
+					add_state_claim = 984
+					add_state_claim = 227
+					add_state_claim = 228
+					add_state_claim = 221
+					add_state_claim = 259
+					add_state_claim = 225
+					add_state_claim = 193
+					add_state_claim = 1144
+			}
+		}
+	}
+
+	focus = {
+		id = NOV_mobilize_miners
+		icon = GFX_focus_goal_sov_army_mobilisation_focus
+		x = -1
+		y = 1
+		cost = 3
+		relative_position_id = NOV_improve_discipline
+
+		prerequisite = {
+			focus = NOV_improve_discipline
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_workmilitia_TT
+			add_ideas = {
+				limited_conscription
+			}
+			hidden_effect = { load_oob = "NOV_workers_militia" }
+		}
+	}
+
+	focus = {
+		id = NOV_accept_volunteers
+		icon = GFX_focus_goal_sov_new_uniform_focus
+		x = -1
+		y = 2
+		cost = 3
+		relative_position_id = NOV_improve_discipline
+
+		prerequisite = {
+			focus = NOV_mobilize_miners
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			custom_effect_tooltip = NOV_rusvols_TT
+			custom_effect_tooltip = RKKA_exp_loss_in_combat_decrease_10_TT
+			add_to_variable = { dnr_army_exp_loss_in_combat = -0.1 }
+			hidden_effect =  { load_oob = "NOV_rusvols" }
+		}
+	}
+
+	focus = {
+		id = NOV_state_vertical
+		icon = GFX_focus_goal_sov_nov_admin_focus
+		x = 1
+		y = 1
+		cost = 3
+		relative_position_id = NOV_improve_discipline
+
+		prerequisite = {
+			focus = NOV_improve_discipline
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.2
+			227 = {
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = NOV_build_forts
+		icon = construction2
+		x = 1
+		y = 2
+		cost = 3
+		relative_position_id = NOV_improve_discipline
+
+		prerequisite = {
+			focus = NOV_state_vertical
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			227 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 4
+						province = 6420
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 6474
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 15409
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 4
+						province = 3479
+						instant_build = yes
+					}
+				}
+			}
+			228 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 4
+						province = 6519
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 9461
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = NOV_ask_russia_for_help
+		icon = GFX_focus_goal_sov_export_weapons_focus
+		x = 0
+		y = 3
+		cost = 5
+		relative_position_id = NOV_improve_discipline
+
+		prerequisite = {
+			focus = NOV_build_forts
+		}
+		prerequisite = {
+			focus = NOV_accept_volunteers
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_recon_increase_10_TT
+			add_to_variable = { dnr_army_recon = 0.1 }
+			add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 4000
+			producer = SOV
+			}
+			add_equipment_to_stockpile = {
+			type = artillery_equipment_1
+			amount = 250
+			producer = SOV
+			}
+		}
+	}
+
+	focus = {
+		id = NOV_russian_intervention
+		icon = GFX_focus_goal_sov_svo_focus
+		x = 20
+		y = 0
+		cost = 1
+
+		ai_will_do = { factor = 10 }
+
+		available = {
+			SOV = { 
+				has_completed_focus = SOV_svo
+				has_war_with = UKR
+			}
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.2
+			add_war_support = 0.2
+		}
+	}
+
+	focus = {
+		id = NOV_army_reforms
+		icon = GFX_focus_goal_sov_novoross_army_focus
+		x = 6
+		y = 1
+		cost = 5
+		relative_position_id = NOV_russian_intervention
+
+		prerequisite = {
+			focus = NOV_russian_intervention
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_org_increase_10_TT
+			custom_effect_tooltip = RKKA_reinforce_rate_increase_1_TT
+			custom_effect_tooltip = RKKA_recon_increase_10_TT
+			add_to_variable = { dnr_army_reinf_rate = 0.01 }
+			add_to_variable = { dnr_army_org = 0.1 }
+			add_to_variable = { dnr_army_recon = 0.1 }
+		}
+	}
+
+	focus = {
+		id = NOV_profissional_units
+		icon = GFX_focus_goal_sov_professional_army_focus
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = NOV_army_reforms
+
+		prerequisite = {
+			focus = NOV_army_reforms
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_org_increase_10_TT
+			custom_effect_tooltip = RKKA_reinforce_rate_increase_1_TT
+			custom_effect_tooltip = RKKA_exp_loss_in_combat_decrease_10_TT
+			add_to_variable = { dnr_army_exp_loss_in_combat = -0.1 }
+			add_to_variable = { dnr_army_reinf_rate = 0.01 }
+			add_to_variable = { dnr_army_org = 0.1 }
+		}
+	}
+
+	focus = {
+		id = NOV_russian_experience
+		icon = GFX_focus_goal_sov_spetsnaz1_focus
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = NOV_army_reforms
+
+		prerequisite = {
+			focus = NOV_army_reforms
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_org_increase_5_TT
+			custom_effect_tooltip = RKKA_landdoctrcost_decrease_60_TT
+			add_to_variable = { dnr_army_org = 0.05 }
+			add_to_variable = { dnr_army_land_dctr_cost = -0.6 }
+		}
+	}
+
+	focus = {
+		id = NOV_russian_weapons
+		icon = GFX_focus_goal_sov_ak12_focus
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = NOV_army_reforms
+
+		prerequisite = {
+			focus = NOV_army_reforms
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_recon_increase_10_TT
+			add_to_variable = { dnr_army_recon = 0.1 }
+			add_equipment_to_stockpile = {
+			type = infantry_equipment_2
+			amount = 4500
+			producer = SOV
+			}
+			add_equipment_to_stockpile = {
+			type = artillery_equipment_2
+			amount = 500
+			producer = SOV
+			}
+			add_equipment_to_stockpile = {
+			type = motorized_rocket_equipment_1 
+			amount = 400
+			producer = SOV
+		}
+		}
+	}
+
+	focus = {
+		id = NOV_tank_forces
+		icon = GFX_focus_goal_sov_t90_focus
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = NOV_army_reforms
+
+		prerequisite = {
+			focus = NOV_profissional_units
+		}
+
+		prerequisite = {
+			focus = NOV_russian_experience
+		}
+
+		prerequisite = {
+			focus = NOV_russian_weapons
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_mechattack_increase_10_TT
+			custom_effect_tooltip = RKKA_attackingspeed_increase_40_TT
+			add_to_variable = { sov_dnr_army_mech_attack = 0.1 }
+			add_to_variable = { dnr_army_attacking_spd = 0.4 }
+		}
+	}
+
+	focus = {
+		id = NOV_rebuild_economy
+		icon = GFX_focus_goal_sov_nom_economy_focus
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = NOV_russian_intervention
+
+		prerequisite = {
+			focus = NOV_russian_intervention
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+				227 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+				228 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+
+	focus = {
+		id = NOV_rebuild_azovstal
+		icon = production2
+		x = -2
+		y = 2
+		cost = 5
+		relative_position_id = NOV_russian_intervention
+
+		prerequisite = {
+			focus = NOV_rebuild_economy
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			227 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+		}
+	}
+
+	focus = {
+		id = NOV_mil_production
+		icon = GFX_focus_goal_sov_military_industry_focus
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = NOV_russian_intervention
+
+		prerequisite = {
+			focus = NOV_rebuild_economy
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = NOV_new_mines
+		icon = construction2
+		x = 2
+		y = 2
+		cost = 5
+		relative_position_id = NOV_russian_intervention
+
+		prerequisite = {
+			focus = NOV_rebuild_economy
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			227 = {
+				add_resource = {
+					type = steel
+					amount = 30
+				}
+			}
+			228 = {
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = NOV_develop_industry
+		icon = GFX_focus_goal_sov_nom_zavods_focus
+		x = 0
+		y = 3
+		cost = 5
+		relative_position_id = NOV_russian_intervention
+
+		prerequisite = {
+			focus = NOV_rebuild_azovstal
+		}
+		prerequisite = {
+			focus = NOV_mil_production
+		}
+		prerequisite = {
+			focus = NOV_new_mines
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+focus = {
+		id = NOV_integrate_kharkov
+		icon = GFX_focus_goal_sov_nom_propaganda_focus
+		x = -5
+		y = 1
+		cost = 5
+		relative_position_id = NOV_russian_intervention
+
+		prerequisite = {
+			focus = NOV_russian_intervention
+		}
+
+		available = {
+			has_full_control_of_state = 221
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			add_state_core = 221
+		}
+	}
+
+	focus = {
+		id = NOV_southern_novoross
+		icon = GFX_focus_goal_sov_nov_southern_focus
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = NOV_integrate_kharkov
+
+		prerequisite = {
+			focus = NOV_integrate_kharkov
+		}
+
+		available = {
+			has_full_control_of_state = 984
+			has_full_control_of_state = 200
+			has_full_control_of_state = 196
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			add_state_core = 984
+			add_state_core = 200
+			add_state_core = 196
+		}
+	}
+
+	focus = {
+		id = NOV_sumschina
+		icon = GFX_focus_goal_sov_nov_southern_focus
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = NOV_integrate_kharkov
+
+		prerequisite = {
+			focus = NOV_integrate_kharkov
+		}
+
+		available = {
+			has_full_control_of_state = 225
+			has_full_control_of_state = 259
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			add_state_core = 225
+			add_state_core = 259
+		}
+	}
+
+	focus = {
+		id = NOV_right_bank_novorossia
+		icon = GFX_focus_goal_sov_nov_admin_focus
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = NOV_integrate_kharkov
+
+		prerequisite = {
+			focus = NOV_southern_novoross
+		}
+		prerequisite = {
+			focus = NOV_sumschina
+		}
+
+		available = {
+			has_full_control_of_state = 226
+			has_full_control_of_state = 203
+			has_full_control_of_state = 192
+			has_full_control_of_state = 806
+		}
+
+		ai_will_do = { factor = 10 }
+
+		completion_reward = {
+			add_state_core = 226
+			add_state_core = 203
+			add_state_core = 192
+			add_state_core = 806
+		}
+	}
+
+
+}

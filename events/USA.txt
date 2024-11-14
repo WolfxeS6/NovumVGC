@@ -265,30 +265,31 @@ country_event = {
 	}
 }
 
+
 #Alaska Airlines Flight 261
-country_event = {
+news_event = {
 	id = usa.9
 	title = usa.9.t
 	desc = usa.9.d
-	picture = GFX_report_event_plane_crash
-
+	picture = GFX_news_event_plane_crash
+	
 	is_triggered_only = yes
-
+	
 	option = {
 		name = usa.9.o1
-		add_political_power = -20
+		add_political_power = -10
 	}
 }
 
 #End of the Peanuts
-country_event = {
+news_event = {
 	id = usa.10
 	title = usa.10.t
 	desc = usa.10.d
-	picture = GFX_report_event_comic_artist
-
+	picture = GFX_news_event_peanuts_ends
+	
 	is_triggered_only = yes
-
+	
 	option = {
 		name = usa.10.o1
 		add_political_power = 5
@@ -1878,19 +1879,57 @@ country_event = {
 }
 
 #Shepherdstown Peace Talks
-country_event = {
+news_event = {
 	id = usa.52
 	title = usa.52.t
-	desc = usa.52.d
-	picture = GFX_report_event_political_deal
-
+	desc = {
+		text = usa.52.d1
+		trigger = {
+			tag = USA
+		}
+	}
+	desc = {
+		text = usa.52.d2
+		trigger = {
+			tag = SYR
+		}
+	}
+	desc = {
+		text = usa.52.d3
+		trigger = {
+			tag = ISR
+		}
+	}
+	picture = GFX_news_event_Shepherdstown_peace
+	
 	is_triggered_only = yes
-
+	
 	option = {
+		trigger = {
+			tag = USA
+		}
 		name = usa.52.o1
 		add_political_power = 5
-		SYR = { country_event = usa.53 }
-		ISR = { country_event = usa.54 }
+	}
+	option = {
+		trigger = {
+			tag = SYR
+		}
+		name = usa.52.o1
+		add_opinion_modifier = {
+			target = ISR
+			modifier = peace_talks
+		}
+	}
+	option = {
+		trigger = {
+			tag = ISR
+		}
+		name = usa.52.o1
+		add_opinion_modifier = {
+			target = SYR
+			modifier = peace_talks
+		}
 	}
 }
 
@@ -1931,26 +1970,20 @@ country_event = {
 }
 
 #Datapoint files for Chapter 11 bankruptcy
-country_event = {
+news_event = {
 	id = usa.55
 	title = usa.55.t
 	desc = usa.55.d
 	picture = GFX_report_event_computer
-
+	
 	is_triggered_only = yes
-
+	
 	option = {
 		name = usa.55.o1
 		add_political_power = -10
 	}
-
-	option = {
-		name = usa.55.o2
-		trigger = { has_democratic_form_of_government = no }
-		add_political_power = -100
-		add_stability = 0.01
-	}
 }
+
 
 #Republican National Convention 2000
 country_event = {

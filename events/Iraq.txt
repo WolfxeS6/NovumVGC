@@ -1,103 +1,96 @@
 add_namespace = IRQ_flavor
-
 #Iraq held
 country_event = {
 	id = IRQ_flavor.1
 	title = IRQ_flavor.1.t
-	desc =  IRQ_flavor.1.d
+	desc = IRQ_flavor.1.d
 	picture = GFX_report_event_iraqi_army
-
 	is_triggered_only = yes
 	fire_only_once = yes
-	
 	trigger = {
-	has_war_with = USA	
-	tag = IRQ
+		has_war_with = USA
+		tag = IRQ
 	}
-
 	immediate = {
 	}
-
-
 	option = {
 		name = IRQ_flavor.1.o1
-		ai_chance = { factor = 80 }
+		ai_chance = {
+			factor = 80
+		}
 		news_event = {
-		id = fne.5
-		hours = 6
-		}		
+			id = fne.5
+			hours = 6
+		}
 		add_war_support = 0.05
 		add_stability = 0.03
-					
-			291 = {
+		291 = {
 			add_building_construction = {
-			type = bunker
-			level = 2
-			instant_build = yes
-			province = {
-				all_provinces = yes
+				type = bunker
+				level = 2
+				instant_build = yes
+				province = {
+					all_provinces = yes
 				}
 			}
-			}
-			675 = {
+		}
+		675 = {
 			add_building_construction = {
-			type = bunker
-			level = 2
-			instant_build = yes
-			province = 13308
-			}
+				type = bunker
+				level = 2
+				instant_build = yes
+				province = 13308
 			}
 		}
-		
-		option = {
+	}
+	option = {
 		name = IRQ_flavor.1.o2
-		ai_chance = { factor = 20 }
-		trigger = { 
-		controls_state  = 676
+		ai_chance = {
+			factor = 20
 		}
-		
-		set_capital = {state = 676}
+		trigger = {
+			controls_state = 676
+		}
+		set_capital = {
+			state = 676
+		}
 		add_political_power = -25
 		add_stability = -0.05
-			676 = {
+		676 = {
 			add_building_construction = {
-			type = bunker
-			level = 2
-			instant_build = yes
-			province = 10106
+				type = bunker
+				level = 2
+				instant_build = yes
+				province = 10106
 			}
 		}
-
-		}
+	}
 }
 
 #Iraqi collapse
 country_event = {
 	id = IRQ_flavor.2
 	title = IRQ_flavor.2.t
-	desc =  IRQ_flavor.2.d
+	desc = IRQ_flavor.2.d
 	picture = GFX_report_event_highway_of_death_iraq2
-
 	is_triggered_only = yes
 	fire_only_once = yes
-	
 	trigger = {
-	has_war_with = USA	
-	tag = IRQ
-	#surrender_progress < 0.5
+		has_war_with = USA
+		tag = IRQ
+		#surrender_progress < 0.5
 	}
-
 	immediate = {
 	}
-
-
 	option = {
-		name = IRQ_flavor.2.o1	
-		ai_chance = { factor = 30 }
+		name = IRQ_flavor.2.o1
+		ai_chance = {
+			factor = 30
+		}
 		USA = {
 			country_event = {
 				id = USA_flavor_6
-			}	
+			}
 		}
 		white_peace = {
 			tag = USA
@@ -107,7 +100,9 @@ country_event = {
 	}
 	option = {
 		name = IRQ_flavor.2.o2
-		ai_chance = { factor = 70 }
+		ai_chance = {
+			factor = 70
+		}
 		hidden_effect = {
 			news_event = {
 				id = fne.6
@@ -115,116 +110,105 @@ country_event = {
 			}
 		}
 	}
-}
-#Iraqi invasion of Kuwait
-country_event = {
-	id = IRQ_flavor.3
-	title = IRQ_flavor.3.t
-	desc =  IRQ_flavor.3.d
-	picture = GFX_report_event_Iraqi_T-72
-
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	trigger = {
-	has_war_with = USA	
-	tag = IRQ
+	#Iraqi invasion of Kuwait
+	country_event = {
+		id = IRQ_flavor.3
+		title = IRQ_flavor.3.t
+		desc = IRQ_flavor.3.d
+		picture = GFX_report_event_Iraqi_T-72
+		is_triggered_only = yes
+		fire_only_once = yes
+		trigger = {
+			has_war_with = USA
+			tag = IRQ
+		}
+		immediate = {
+		}
+		option = {
+			name = IRQ_flavor.3.o1
+			declare_war_on = {
+				target = KUW
+				type = annex_everything
+			}
+		}
 	}
-
-	immediate = {
+	#Iraqi invasion of Kuwait success
+	country_event = {
+		id = IRQ_flavor.4
+		title = IRQ_flavor.4.t
+		desc = IRQ_flavor.4.d
+		picture = GFX_report_event_iraqi_army
+		is_triggered_only = yes
+		fire_only_once = yes
+		trigger = {
+			has_war_with = USA
+			tag = IRQ
+			controls_state = 656
+			controls_state = 1045
+		}
+		option = {
+			name = IRQ_flavor.4.o1
+			USA = {
+				country_event = {
+					id = USA_flavor.7
+				}
+			}
+		}
 	}
-
-
-	option = {
-		name = IRQ_flavor.3.o1	
-		declare_war_on = {
-		target = KUW
-		type = annex_everything
+	#Iraqi war plan 2
+	country_event = {
+		id = IRQ_flavor.5
+		title = IRQ_flavor.5.t
+		desc = IRQ_flavor.5.d
+		picture = GFX_report_event_iraqi_army2
+		is_triggered_only = yes
+		fire_only_once = yes
+		trigger = {
+			tag = IRQ
+		}
+		option = {
+			name = IRQ_flavor.5.o1
+			ai_chance = {
+				factor = 75
+			}
+			add_ideas = irq_def
+			country_event = {
+				id = IRQ_flavor.1
+			}
+		}
+		option = {
+			name = IRQ_flavor.5.o2
+			ai_chance = {
+				factor = 25
+			}
+			add_ideas = irq_off
+			country_event = {
+				id = IRQ_flavor.1
+			}
 		}
 	}
 }
 
-#Iraqi invasion of Kuwait success
-country_event = {
-	id = IRQ_flavor.4
-	title = IRQ_flavor.4.t
-	desc =  IRQ_flavor.4.d
-	picture = GFX_report_event_iraqi_army
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	trigger = {
-	has_war_with = USA
-	tag = IRQ
-	controls_state  = 656
-	controls_state  = 1045
-	}
-
-
-
-	option = {
-		name = IRQ_flavor.4.o1
-		USA = {
-		country_event = {
-		id = USA_flavor.7
-		}
-		}
-	}
-		
-}
-
-#Iraqi war plan 2
-country_event = {
-	id = IRQ_flavor.5
-	title = IRQ_flavor.5.t
-	desc =  IRQ_flavor.5.d
-	picture = GFX_report_event_iraqi_army2
-	is_triggered_only = yes
-	fire_only_once = yes
-
-	trigger = {
-		tag = IRQ
-	}
-	option = {
-		name = IRQ_flavor.5.o1
-		ai_chance = { factor = 75 }
-		add_ideas = irq_def
-		country_event = {
-		id = IRQ_flavor.1
-		}
-	}
-	option = {
-		name = IRQ_flavor.5.o2
-		ai_chance = { factor = 25 }
-		add_ideas = irq_off
-		country_event = {
-			id = IRQ_flavor.1
-		}
-	}
-		
-}
 #Shock and Awe
 country_event = {
 	id = IRQ_flavor.9
 	title = IRQ_flavor.9.t
-	desc =  IRQ_flavor.9.d
+	desc = IRQ_flavor.9.d
 	picture = GFX_report_event_F16_Iraq
-	
 	is_triggered_only = yes
 	fire_only_once = yes
-	
 	immediate = {
-	add_timed_idea = {
-		idea = shock_and_awe_IRQ_idea
-		days = 14
+		add_timed_idea = {
+			idea = shock_and_awe_IRQ_idea
+			days = 14
 		}
 	}
-
 	option = {
 		name = IRQ_flavor.9.o1
-		add_war_support = -0.025	
-	}			
+		add_war_support = -0.025
+	}
 }
+
 #################################################################################
 # Iraq Kuwait Decision
 #################################################################################
@@ -249,5 +233,3 @@ country_event = {
 		set_global_flag = IRQ_attrition_flag
 	}
 }
-
-

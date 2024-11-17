@@ -181,7 +181,7 @@ country_event = {
 	}
 }
 
-# Etonia Railways Fiasko
+# Estonia Railways Fiasko
 country_event = {
 	id = nvv_estonia.7
 	title = nvv_estonia.7.t
@@ -199,5 +199,150 @@ country_event = {
 			ideology = conservative
 			popularity = -0.03
 		}
+	}
+}
+
+# Navy Reforms
+country_event = {
+	id = nvv_estonia.8
+	title = nvv_estonia.8.t
+	desc = nvv_estonia.8.d
+	picture = GFX_report_event_estonia_navy_1
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = { country_event = { id = nvv_estonia.9 days = 180 } }
+	}
+	
+	option = {	#Frauenhof Class
+		name = nvv_estonia.8.a
+		remove_ideas = estonia_unfounded_navy
+		destroy_ships = {
+			type = destroyer
+			count = 3
+		}
+		add_resource = {
+			type = steel
+			amount = 1
+			state = 13
+		}
+		set_country_flag = EST_event_8_a
+	}
+	option = {	#Kondor I Class
+		name = nvv_estonia.8.b
+		remove_ideas = estonia_unfounded_navy
+		destroy_ships = {
+			type = light_cruiser
+			count = 2
+		}
+		add_resource = {
+			type = steel
+			amount = 1
+			state = 13
+		}
+		set_country_flag = EST_event_8_a
+	}
+	option = {	#reform through investment
+		name = nvv_estonia.8.c
+		add_manpower = -1000
+		add_timed_idea = {
+			idea = EST_navy_expansion_program
+			days = 180
+		}
+		set_country_flag = EST_event_8_b
+		custom_effect_tooltip = EST_event_8_idea_tt
+	}
+}
+
+# Hidden event to remove modifier
+country_event = {
+	id = nvv_estonia.9
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	hidden = yes
+	
+	option = {	#Frauenhof Class
+		if = {
+			limit = { has_country_flag = EST_event_8_a }
+			add_resource = {
+				type = steel
+				amount = -1
+				state = 13
+			}
+		}
+		if = {
+			limit = { has_country_flag = EST_event_8_b }
+			remove_ideas = estonia_unfounded_navy
+		}
+	}
+}
+
+# Purchase Aircraft
+country_event = {
+	id = nvv_estonia.10
+	title = nvv_estonia.10.t
+	desc = nvv_estonia.10.d
+	picture = GFX_report_event_estonia_air_force
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {	#Sweden
+		name = nvv_estonia.10.a
+		SWE = { country_event = nvv_estonia.11 }
+	}
+	option = {	#Eurofighter
+		name = nvv_estonia.10.b
+		ENG = { country_event = nvv_estonia.11 }
+	}
+	option = {	#F16
+		name = nvv_estonia.10.c
+		USA = { country_event = nvv_estonia.11 }
+	}
+}
+
+# Purchase Aircraft - Reaction
+country_event = {
+	id = nvv_estonia.11
+	title = nvv_estonia.11.t
+	desc = nvv_estonia.11.d
+	picture = GFX_report_event_estonia_air_force
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {	#Yes
+		name = nvv_estonia.11.a
+		send_equipment = {
+			equipment = small_plane_airframe
+			amount = 50
+			target = EST
+		}
+	}
+	option = {	#No
+		name = nvv_estonia.11.b
+		ENG = { country_event = nvv_estonia.12 }
+	}
+}
+
+# Purchase Aircraft - Result
+country_event = {
+	id = nvv_estonia.12
+	title = nvv_estonia.12.t
+	desc = nvv_estonia.12.d
+	picture = GFX_report_event_estonia_air_force
+	
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = nvv_estonia.12.a
 	}
 }

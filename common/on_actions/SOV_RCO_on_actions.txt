@@ -69,12 +69,13 @@ on_actions = {
                 }
         }
     }
-    On_daily_SOV = {
+    on_daily_SOV = {
             effect = {
             if = {
                 limit = {
                     ROOT  = {
                         original_tag = SOV
+                        RCO = { exists = no }
                         longest_war_length > 2
                     }
                 }
@@ -82,6 +83,18 @@ on_actions = {
                     country_event = { id = russ.16 } #nothing as this doesn't make sense
                 }
             }
+            if = {
+            	limit = { has_war_with = RCO}
+            	if = {
+					limit = {
+						war_length_with = {
+							tag = RCO
+							months > 2
+						}
+					}
+					country_event = cw.30
+				}
+        	}
         }
     }
 }

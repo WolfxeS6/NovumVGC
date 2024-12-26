@@ -241,7 +241,7 @@ country_event = {
 			load_oob = "RCO_mobile_infantry_small"
 			load_oob = "RCO_armoured_units_small"
 			load_oob = "RCO_red_elite_small"
-			add_threat = 35
+			add_threat = 10
 		}
 	}
 }
@@ -367,17 +367,15 @@ country_event = {
 	id = cw.7
 	title = cw.7.t
 	desc = cw.7.d
-	picture = GFX_russian_soldiers_5
+	picture = GFX_event_russian_cw_map
 
 	is_triggered_only = yes
 
 	option = { # ok
+	name = cw.7.a
 
-		SOV = {
-			#country_event = RCO_event_cw.7
-			#1
-		}
-		SOV = {
+			remove_dynamic_modifier = { modifier = sovrus_army }
+			remove_dynamic_modifier = { modifier = sovrus_economy }
 			remove_ideas = SOV_workers_movement_5
 			remove_ideas = SOV_workers_movement_1
 			remove_ideas = SOV_workers_movement_2
@@ -385,11 +383,10 @@ country_event = {
 			remove_ideas = SOV_workers_movement_4
 			remove_ideas = SOV_zug_political_instability_2
 			remove_ideas = SOV_zug_crisis_4
-		}
-
-		SOV = {
+			remove_ideas = SOV_zug_crisis_3
 
 			set_variable = { sov_state_stability = -0.3 }
+			set_variable = { sov_state_war_support_weekly = -0.005 }
 			set_variable = { sov_state_pp_factor = -0.15 }
 			set_variable = { sov_state_pop_growh = -0.5 }
 			set_variable = { sov_state_war_support = -0.2 }
@@ -406,6 +403,29 @@ country_event = {
 			add_dynamic_modifier = {
 				modifier = sov_civil_war_state
 			}
+
+			set_variable = { sov_army_morale = -0.2 } #+0.5 (05 в вов)
+			set_variable = { sov_army_org = -0.2 } #+91 (30)
+			set_variable = { sov_army_offense = 0 } #
+			set_variable = { sov_army_defence = 0 } #
+			set_variable = { sov_army_conscription = -0.4 } #+0.05
+			set_variable = { sov_army_attrition = 0.25 } #+0.01
+			set_variable = { sov_army_reinforce_rate = -0.2 } #+085 (50)
+			set_variable = { sov_army_exp_loss_in_combat = 0.3 } #+0.05
+
+			add_dynamic_modifier = {
+				modifier = sov_civil_war_army
+			}
+
+			set_variable = { sov_workmov_pp_factor = -0.3 } #
+			set_variable = { sov_workmov_surrender_limit = -0.4 } #
+			set_variable = { sov_workmov_war_support = -0.2 } # -0.5
+			set_variable = { sov_workmov_army_compliance_in_enemy = 0.2 } # 0.5
+
+			add_dynamic_modifier = {
+				modifier = sov_workers_movement
+			}
+
 			ARM = { leave_faction = yes }
 			KYR = { leave_faction = yes }
 			TAJ = { leave_faction = yes }
@@ -445,69 +465,8 @@ country_event = {
 					modifier = loyal_to_our_enemy
 				}
 			}
-
-		}
-
-
-		#2
-
-		SOV = {
-
-			set_variable = { sov_army_morale = -0.2 } #+0.5 (05 в вов)
-			set_variable = { sov_army_org = -0.2 } #+91 (30)
-			set_variable = { sov_army_conscription = -0.4 } #+0.05
-			set_variable = { sov_army_attrition = 0.25 } #+0.01
-			set_variable = { sov_army_reinforce_rate = -0.2 } #+085 (50)
-			set_variable = { sov_army_exp_loss_in_combat = 0.3 } #+0.05
-
-			add_dynamic_modifier = {
-				modifier = sov_civil_war_army
-			}
-
-			#3
-
-			set_variable = { sov_workmov_pp_factor = -0.3 } #
-			set_variable = { sov_workmov_surrender_limit = -0.4 } #
-			set_variable = { sov_workmov_war_support = -0.2 } # -0.5
-			set_variable = { sov_workmov_army_compliance_in_enemy = 0.2 } # 0.5
-
-			add_dynamic_modifier = {
-				modifier = sov_workers_movement
-			}
 		}
 	}
-
-}
-
-##### kuzbass sovrepublic
-
-country_event = {
-	id = cw.8
-	title = cw.8.t
-	desc = cw.8.d
-	picture = GFX_reds_fight_with_police_russia_1993
-
-	is_triggered_only = yes
-
-	option = { # ok
-		name = RCO_event_cw.8.a
-		# KUZ = {
-			# 			 set_state_owner = 569
-			# set_state_controller = 569
-
-			# 			}
-		# 	RCO = {
-			# 		puppet = KUZ
-			# 		}
-		# SOV = {
-			# 	remove_state_core = 569
-			# 	remove_state_core = 570
-			# 	remove_state_core = 40
-			# 	remove_state_core = 568
-			# }
-	}
-
-}
 
 country_event = {
 	id = cw.9
@@ -850,6 +809,7 @@ country_event = { #kaz ultimatum for annexation
 			 				target = KAZ
 								transfer_troops = yes
 							}
+							country_event = { id = cw.63 }
 					}
 			}
 
@@ -898,6 +858,7 @@ country_event = {
 					transfer_state = 583
 					transfer_state = 997
 					transfer_state = 588
+					country_event = { id = cw.63 }
 					}
 			}
 
@@ -912,39 +873,6 @@ country_event = {
 			 		}
 		 	}
 	 }
-
-country_event = {
-	id = RCO_event_taj_ultimatum.1
-	title = RCO_event_taj_ultimatum.1.t
-	desc = RCO_event_taj_ultimatum.1.d
-	picture = GFX_report_event_japanese_transport_soldiers
-
-	is_triggered_only = yes
-
-	option = { # russia annexes taj
-		name =  RCO_event_taj_ultimatum.1.a
-		RCO = {
-			annex_country = {
-				target = TAJ
-				transfer_troops = yes
-			}
-		}
-	}
-
-	option = { # decline request
-		name =  RCO_event_taj_ultimatum.1.b
-		RCO = {
-			create_wargoal = {
-				type = annex_everything
-				target = TAJ
-			}
-			declare_war_on = {
-				target = TAJ
-				type = annex_everything
-			}
-		}
-	}
-}
 
 country_event = {
 	id = cw.21
@@ -1165,6 +1093,9 @@ country_event = { #pol decides what to do next
 	add_political_power = -100
 	add_threat = 10
 	leave_faction = yes
+	set_rule = {
+   		can_join_factions = no
+	}
 	add_stability = -0.25
 	add_war_support = -0.3
 	activate_mission = POL_capture_east_russia_mission
@@ -1429,6 +1360,7 @@ country_event = {
 
 	immediate = {
 		hidden_effect = {
+		news_event = news.838
 		add_threat = 10
         set_global_flag = chechnya_rose_up
 		CHE = { load_focus_tree = CHE_cw_focus }
@@ -1724,6 +1656,10 @@ country_event = {
 			set_state_owner = 233
 			set_state_controller = 233
 		}
+		news_event = {
+					id = news.835
+					days = 1
+		}
 	}
 }
 
@@ -1857,6 +1793,9 @@ country_event = {
 		add_war_support = -0.1
 		white_peace = RCO
 		white_peace = UCO
+		set_rule = {
+   		can_join_factions = yes
+	}
 		RCO = {
 			country_event = {
             id = cw.41
@@ -1901,6 +1840,9 @@ country_event = {
 		add_war_support = -0.1
 		white_peace = POL
 		POL = {
+			set_rule = {
+				can_join_factions = yes
+			}
 			set_state_owner = 95
 			set_state_controller = 95
 			set_state_owner = 206
@@ -2403,6 +2345,9 @@ country_event = {
 		add_stability = 0.1
 		add_war_support = 0.1
 		white_peace = POL
+		set_rule = {
+   		can_join_factions = yes
+	}
 		UCO = { white_peace = POL }
 		POL = {
 			country_event = { id = cw.58 }
@@ -2427,6 +2372,9 @@ country_event = {
 		add_war_support = -0.3
 		white_peace = RCO
 		white_peace = UCO
+		set_rule = {
+   		can_join_factions = yes
+	}
 		RCO = {
 			transfer_state = 808
 			transfer_state = 94
@@ -2453,8 +2401,12 @@ country_event = {
 		option = { # russia annexes
 				name =  cw.59.a
 				ai_chance = {
-        	base = 100     
-    	}
+        			base = 0  
+					modifier = { 
+						is_in_faction = yes 
+						factor = 1 
+					}   
+    			}
 				RCO = {
 					annex_country = {
 			 				target = PREV
@@ -2470,326 +2422,853 @@ country_event = {
 								type = annex_everything
 								target = PREV
 							}
-							country_event = { id = cw.60 } #event to inform rco
+							country_event = { id = cw.64 } #event to inform rco
 			 		}
 		 	}
 	 }
 
-#rco in case ult is declined
+#country can embargo rco
 country_event = {
-	id = cw.60
-	title = cw.60.t
-	desc = cw.60.d
+	id = cw.61
+	title = cw.61.t
+	desc = cw.61.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # embargo
+	name = cw.61.a
+	ai_chance = {
+			base = 50
+		}
+		send_embargo = RCO
+	}
+
+	option = { # not to embargo
+	name = cw.61.b
+	ai_chance = {
+			base = 50
+		}
+		add_stability = -0.05
+		add_popularity = {
+    				ideology = communist
+    				popularity = 0.1
+				}
+				add_timed_idea = {
+    			idea = SOV_beneficial_trade_idea
+    			days = 60
+				}
+
+	}
+}
+
+## help prk
+
+country_event = {
+	id = cw.62
+	title = cw.62.t
+	desc = cw.62.d
 	picture = GFX_event_red_btr
 	fire_only_once = yes
 
 	is_triggered_only = yes
 
 	option = { # ok
-	name = cw.60.a
-		create_wargoal = {
-								type = annex_everything
-								target = FROM
-							}
+		name = cw.62.a
+		ai_chance = {
+			base = 80
+		}
+		RCO = {
+					diplomatic_relation = {
+    				country = PREV
+    				relation = non_aggression_pact
+   					active = yes
+					}
+			}
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = RCO
+				}
+			add_stability = 0.2
+			add_timed_idea = {
+    		idea = SOV_recent_help_idea
+    		days = 180
+			}
+			RCO = { 
+				add_to_faction = PRK 
+				country_event = { id = cw.63 }
+			}  		
+	}
+
+	option = { # no
+		name = cw.62.b
+		ai_chance = {
+			base = 20
+		}
+		RCO = {
+				add_opinion_modifier = {
+					target = PREV
+					modifier = loyal_to_our_enemy
+				}
+			}
+			RCO = { country_event = { id = cw.64 } }
 	}
 }
 
-##### nmo chaos ends
+## somebody accepted smth
 
 country_event = {
-	id = cw_nmo.1
-	title = cw_nmo.1.t
-	desc = cw_nmo.1.d
-	picture = GFX_reds_fight_with_police_russia_1993
+	id = cw.63
+	title = cw.63.t
+	desc = cw.63.d
+	picture = GFX_event_sov_sov
+
 
 	is_triggered_only = yes
 
 	option = { # ok
-		name = cw_nmo.1.a
-		NMO = {
-			load_oob = "NMO"
-		}
-		NMO = {
-			add_state_core = 214
-			add_state_core = 213
-		}
-		NMO = {
-			set_popularities = {
-				nationalist = 2
-				reactionary = 43
-				conservative = 3
-				social_liberal = 5
-				social_democrat = 15
-				progressive = 0
-				democratic_socialist = 0
-				communist = 32
-			}
-		}
-		NMO = {
-			add_equipment_to_stockpile = {
-				type = infantry_equipment_1
-				amount = 2000
-				producer = SOV
-			}
-			add_equipment_to_stockpile = {
-				type = support_equipment_1
-				amount = 150
-				producer = SOV
-			}
-			add_equipment_to_stockpile = {
-				type = motorized_equipment_1
-				amount = 200
-				producer = SOV
-			}
-
-			add_equipment_to_stockpile = {
-				type = artillery_equipment_1
-				amount = 80
-				producer = SOV
-			}
-
-		}
-
+		name = cw.63.a
 	}
 }
 
-#### nmo contact finland
+## somebody refused smth
 
 country_event = {
-	id = cw_nmo.2
-	title = cw_nmo.2.t
-	desc = cw_nmo.2.d
-	picture = GFX_event_nmo_finland_1
+	id = cw.64
+	title = cw.64.t
+	desc = cw.64.d
+	picture = GFX_event_sov_failure
 
-	is_triggered_only = yes
-
-	# Agree
-	option = {
-		name = cw_nmo.2.a
-		set_global_flag = NMO_contacted_finland_accepted
-		FIN = {
-			send_equipment = {
-				equipment = infantry_equipment
-				amount = 5000
-				target = NMO
-			}
-
-			send_equipment = {
-				equipment = support_equipment
-				amount = 500
-				target = NMO
-			}
-
-			send_equipment = {
-				equipment = artillery_equipment
-				amount = 150
-				target = NMO
-			}
-		}
-		FIN = {
-			set_state_owner = 147
-			set_state_controller = 147
-			set_state_owner = 722
-			set_state_controller = 722
-		}
-	}
-
-	# no
-	option = {
-		name = cw_nmo.2.b
-	}
-}
-
-###### SMO
-
-country_event = {
-	id = cw_smo.1
-	title = cw_smo.1.t
-	desc = cw_smo.1.d
-	picture = GFX_russian_soldiers_1
 
 	is_triggered_only = yes
 
 	option = { # ok
-		name = cw_smo.1.a
-		SMO = {
-			load_oob = "SMO"
-		}
-		SMO = {
-			add_state_core = 217
-			add_state_core = 245
-			add_state_core = 236
-			add_state_core = 234
-			add_state_core = 238
-			add_state_core = 235
-			add_state_core = 237
+		name = cw.64.a
+	}
+}
 
+## propose mutal defence pact
+
+country_event = {
+	id = cw.65
+	title = cw.65.t
+	desc = cw.65.d
+	picture = GFX_event_sov_sov
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.65.a
+		ai_chance = {
+			base = 80
 		}
-		SMO = {
-			set_popularities = {
-				nationalist = 2
-				reactionary = 43
-				conservative = 3
-				social_liberal = 5
-				social_democrat = 15
-				progressive = 0
-				democratic_socialist = 0
-				communist = 32
+		RCO = {
+					diplomatic_relation = {
+    				country = PREV
+    				relation = guarantee
+   					active = yes
+					}
+			}
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = RCO
+				}
+					diplomatic_relation = {
+    				country = RCO
+    				relation = guarantee
+   					active = yes
+					}
+			RCO = {
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = PREV
+				}
+		}
+		RCO = { country_event = { id = cw.63 } }
+	}
+
+	option = { # no
+		name = cw.65.b
+		ai_chance = {
+			base = 20
+		}
+		RCO = {
+				add_opinion_modifier = {
+					target = PREV
+					modifier = loyal_to_our_enemy
+				}
+			}
+			RCO = { country_event = { id = cw.64 } }
+	}
+}
+
+## rco asks jap to return lands
+
+country_event = {
+	id = cw.66
+	title = cw.66.t
+	desc = cw.66.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.66.a
+		ai_chance = {
+			base = 30
+		}
+		RCO = { 
+		country_event = { id = cw.63 }
+		set_state_owner = 655
+		set_state_controller = 655
+		set_state_owner = 537
+		set_state_controller = 537
+		set_state_owner = 555
+		set_state_controller = 555
+		set_state_owner = 951
+		set_state_controller = 951
+		 }
+	}
+
+	option = { # no
+		name = cw.66.b
+		ai_chance = {
+			base = 70
+		}
+		RCO = {
+				add_opinion_modifier = {
+					target = PREV
+					modifier = loyal_to_our_enemy
+				}
+				create_wargoal = {
+    				type = puppet_wargoal_focus
+    				target = PREV
+				}
+			country_event = { id = cw.64 } 
+		}
+	}
+}
+
+## subjigation ultimatum
+
+country_event = {
+	id = cw.67
+	title = cw.67.t
+	desc = cw.67.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.67.a
+		ai_chance = {
+			base = 50
+			modifier = { 
+						is_in_faction = no 
+						factor = 20 
+					} 
+		}
+		RCO = { puppet = PREV }
+		RCO = { country_event = { id = cw.63 } }
+	}
+
+	option = { # no
+		name = cw.67.b
+		ai_chance = {
+			base = 50
+			modifier = { 
+						is_in_faction = yes 
+						factor = 50 
+					} 
+		}
+		RCO = {
+				create_wargoal = {
+    				type = puppet_wargoal_focus
+    				target = PREV
+				}
+			}
+			RCO = { country_event = { id = cw.64 } }
+	}
+}
+
+## ask germany for kaliningrad
+
+country_event = {
+	id = cw.68
+	title = cw.68.t
+	desc = cw.68.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.68.a
+		ai_chance = {
+			base = 10 
+		}
+		RCO = { 
+			set_state_owner = 741
+			set_state_controller = 741
+			}
+		RCO = { country_event = { id = cw.63 } }
+	}
+
+	option = { # no
+		name = cw.68.b
+		ai_chance = {
+			base = 90
+		}
+		RCO = {
+				create_wargoal = {
+           			target = PREV
+            		type = take_state_focus
+            		generator = { 123 }
+			}
+			country_event = { id = cw.64 } 
+		}
+	}
+}
+
+## ask poland for territories
+
+country_event = {
+	id = cw.69
+	title = cw.69.t
+	desc = cw.69.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.69.a
+		ai_chance = {
+			base = 10 
+		}
+		if = {
+			limit = {
+				POL = { controls = 808 }
+			}
+			RCO = { 
+				set_state_owner = 808
+				set_state_controller = 808 
 			}
 		}
-		SMO = {
-			add_equipment_to_stockpile = {
+		if = {
+			limit = {
+				POL = { controls = 741 }
+			}
+			RCO = { 
+				set_state_owner = 741
+				set_state_controller = 741 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 94 }
+			}
+			RCO = { 
+				set_state_owner = 94
+				set_state_controller = 94 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 206 }
+			}
+			RCO = { 
+				set_state_owner = 206
+				set_state_controller = 206 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 95 }
+			}
+			RCO = { 
+				set_state_owner = 95
+				set_state_controller = 95 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 204 }
+			}
+			RCO = { 
+				set_state_owner = 204
+				set_state_controller = 204 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 194 }
+			}
+			RCO = { 
+				set_state_owner = 194
+				set_state_controller = 194 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 93 }
+			}
+			RCO = { 
+				set_state_owner = 93
+				set_state_controller = 93 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 201 }
+			}
+			RCO = { 
+				set_state_owner = 201
+				set_state_controller = 201 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 202 }
+			}
+			RCO = { 
+				set_state_owner = 202
+				set_state_controller = 202 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 91 }
+			}
+			RCO = { 
+				set_state_owner = 91
+				set_state_controller = 91 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 199 }
+			}
+			RCO = { 
+				set_state_owner = 199
+				set_state_controller = 199 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 1086 }
+			}
+			RCO = { 
+				set_state_owner = 1086
+				set_state_controller = 1086 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 203 }
+			}
+			RCO = { 
+				set_state_owner = 203
+				set_state_controller = 203 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 226 }
+			}
+			RCO = { 
+				set_state_owner = 226
+				set_state_controller = 226 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 89 }
+			}
+			RCO = { 
+				set_state_owner = 89
+				set_state_controller = 89 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 80 }
+			}
+			RCO = { 
+				set_state_owner = 80
+				set_state_controller = 80 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 1143 }
+			}
+			RCO = { 
+				set_state_owner = 1143
+				set_state_controller = 1143 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 198 }
+			}
+			RCO = { 
+				set_state_owner = 198
+				set_state_controller = 198 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 192 }
+			}
+			RCO = { 
+				set_state_owner = 192
+				set_state_controller = 192 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 806 }
+			}
+			RCO = { 
+				set_state_owner = 806
+				set_state_controller = 806 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 197 }
+			}
+			RCO = { 
+				set_state_owner = 197
+				set_state_controller = 197 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 196 }
+			}
+			RCO = { 
+				set_state_owner = 196
+				set_state_controller = 196 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 137 }
+			}
+			RCO = { 
+				set_state_owner = 137
+				set_state_controller = 137 
+			}
+		}
+		if = {
+			limit = {
+				POL = { controls = 200 }
+			}
+			RCO = { 
+				set_state_owner = 200
+				set_state_controller = 200 
+			}
+		}
+		RCO = { country_event = { id = cw.63 } }
+	}
+
+	option = { # no
+		name = cw.69.b
+		ai_chance = {
+			base = 90
+		}
+		RCO = {
+				create_wargoal = {
+    				type = puppet_wargoal_focus
+    				target = PREV
+				}
+			country_event = { id = cw.64 } 
+		}
+	}
+}
+
+## ask smbd to remove embargo
+
+country_event = {
+	id = cw.70
+	title = cw.70.t
+	desc = cw.70.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.70.a
+		ai_chance = {
+			base = 50 
+		}
+		break_embargo = RCO
+		add_timed_idea = {
+    			idea = SOV_beneficial_trade_idea
+    			days = 60
+				}
+		RCO = { 
+			custom_effect_tooltip = SOV_tradeopinion_increase_10_TT
+			add_to_variable = { rco_trade_opinion = 0.1 }
+			country_event = { id = cw.63 } 
+		}
+	}
+
+	option = { # no
+		name = cw.70.b
+		ai_chance = {
+			base = 50
+		}
+		add_political_power = 25
+	}
+}
+
+## event for usa that russian cw ended
+
+country_event = {
+	id = cw.71
+	title = cw.71.t
+	desc = cw.71.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.71.a
+		add_timed_idea = {
+    			idea = SOV_beneficial_trade_idea
+    			days = 60
+		}
+		remove_all_usa_cw_pb_ideas = yes
+		remove_all_usa_cw_ideas = yes
+	}
+}
+
+## shebarshin
+
+country_event = {
+	id = cw.72
+	title = cw.72.t
+	desc = cw.72.d
+	picture = GFX_event_sov_new_kgb
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.72.a
+		activate_advisor = RCO_leonid_shebarshin
+	}
+}
+
+## tarrorist attack
+
+country_event = {
+	id = cw.73
+	title = cw.73.t
+	desc = cw.73.d
+	picture = GFX_rco_terract_event
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.73.a
+		add_stability = -0.1
+		add_war_support = -0.1
+		if = {
+			limit = {
+				NOT = { is_ai = yes }
+			}
+			activate_mission = RCO_terrorist_attack_mission
+			}
+	}
+}
+
+## interbrigade kndr
+
+country_event = {
+	id = cw.74
+	title = cw.74.t
+	desc = cw.74.d
+	picture = GFX_event_kndr_soldiers
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.74.a
+		195 = {
+			create_unit = {
+						division = "name = \"Interbrigade 'Kim Chong Un'\" division_template = \"Interbrigade\" start_experience_factor = 0.6 start_equipment_factor = 1"
+						owner = ROOT
+					}
+			create_unit = {
+						division = "name = \"Interbrigade 'Kim Ir Sen'\" division_template = \"Interbrigade\" start_experience_factor = 0.6 start_equipment_factor = 1"
+						owner = ROOT
+					}
+			}
+	}
+}
+
+## interbrigade china
+
+country_event = {
+	id = cw.75
+	title = cw.75.t
+	desc = cw.75.d
+	picture = GFX_event_rco_vols2
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.75.a
+		195 = {
+			create_unit = {
+						division = "name = \"Interbrigade 'Mao Zedong'\" division_template = \"Interbrigade\" start_experience_factor = 0.6 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Interbrigade 'Hua Gofen'\" division_template = \"Interbrigade\" start_experience_factor = 0.6 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Interbrigade 'Hu Yaoban'\" division_template = \"Interbrigade\" start_experience_factor = 0.6 start_equipment_factor = 1"
+						owner = ROOT
+					}
+			}
+	}
+}
+
+## china event for vols
+
+country_event = {
+	id = cw.76
+	title = cw.76.t
+	desc = cw.76.d
+	picture = GFX_event_rco_vols2
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.76.a
+		ai_chance = {
+			base = 100
+		}
+		add_war_support = 0.05
+		army_experience = 30
+		add_equipment_to_stockpile = {
 				type = infantry_equipment_1
-				amount = 2000
-				producer = SOV
+				amount = -500
+				producer = PRC
 			}
 			add_equipment_to_stockpile = {
 				type = support_equipment_1
-				amount = 150
-				producer = SOV
+				amount = -200
+				producer = PRC
 			}
 			add_equipment_to_stockpile = {
-				type = motorized_equipment_1
-				amount = 200
-				producer = SOV
+				type = light_mechanized_equipment_1
+				amount = -150
+				producer = PRC
 			}
+			RCO = { country_event = { id = cw.75 } }
+	}
 
+	option = { # no
+		name = cw.76.b
+		add_war_support = -0.05
+	}
+}
+
+## prk event for vols
+
+country_event = {
+	id = cw.77
+	title = cw.77.t
+	desc = cw.77.d
+	picture = GFX_event_kndr_soldiers
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.77.a
+		ai_chance = {
+			base = 100
+		}
+		add_war_support = 0.05
+		army_experience = 30
+		add_equipment_to_stockpile = {
+				type = infantry_equipment_1
+				amount = -500
+				producer = PRK
+			}
 			add_equipment_to_stockpile = {
-				type = artillery_equipment_1
-				amount = 80
-				producer = SOV
+				type = support_equipment_1
+				amount = -200
+				producer = PRK
 			}
-
-		}
-
-	}
-}
-
-
-
-country_event = {
-	id = cw_smo.2
-	title = cw_smo.2.t
-	desc = cw_smo.2.d
-	picture = GFX_russian_soldiers_2
-
-	is_triggered_only = yes
-
-	option = { # military administration
-		name = cw_smo.2.a
-
-		add_political_power = 150
-
-	}
-
-	option = { # cossacks
-		name = cw_smo.2.b
-
-		trigger = {
-			has_global_flag = SMO_cossack_available
-		}
-		SMO_Vasiliy_Bondarev =  {
-			promote_character = yes
-		}
-
-	}
-
-	option = { # lebed
-		name = cw_smo.2.c
-
-		trigger = {
-			has_global_flag = SMO_lebed_available
-		}
-		SMO_Alexander_Lebed  =  {
-			promote_character = yes
-		}
-
-	}
-}
-
-
-country_event = {
-	id = cw_smo.3
-	title = cw_smo.3.t
-	desc = cw_smo.3.d
-	picture = GFX_reds_fight_with_police_russia_1993
-
-	is_triggered_only = yes
-
-	option = { # rostovsovrep
-		name = cw_smo.3.a
-
-		# ROS = {
-			# 			 set_state_owner = 217
-			# set_state_controller = 217
-
-			# 			}
-		# 			ROS = { load_focus_tree = ROS_focus }
-		# 	RCO = {
-			# 		puppet = ROS
-			# 		}
-
-
-	}
-}
-
-## what to do with chechnya
-
-country_event = {
-	id = cw_smo.5
-	title = cw_smo.5.t
-	desc = cw_smo.5.d
-	picture = GFX_russian_soldiers_2
-
-	is_triggered_only = yes
-
-	option = { # attack
-		name = cw_smo.5.a
-
-		SMO = {
-			declare_war_on = {
-				target = CHE
-				type = annex_everything
+			add_equipment_to_stockpile = {
+				type = light_mechanized_equipment_1
+				amount = -150
+				producer = PRK
 			}
-		}
-
-
+			RCO = { country_event = { id = cw.74 } }
 	}
-	# option = { # make agreement
-		# 	name = cw_smo.5.b
 
-		# 	CHE = {
-			# 		country_event = {
-				# 			id = cw_smo.6
-				# 		}
-			# 	}
-
-
-		# }
+	option = { # no
+		name = cw.77.b
+		add_war_support = -0.05
+	}
 }
 
-# country_event = {
-	# 	id = cw_smo.4
-	# 	title = cw_smo.4.t
-	# 	desc = cw_smo.4.d
-	# 	picture = GFX_russian_soldiers_2
+## goblin
 
-	# 	is_triggered_only = yes
+country_event = {
+	id = cw.78
+	title = cw.78.t
+	desc = cw.78.d
+	picture = GFX_event_sov_goblin
 
-	# 	option = { # rostovsovrep
-		# 		name = cw_smo.4.a
+	is_triggered_only = yes
 
-		# 		CHE = {
-			# 			set_state_owner = 217
-			# 			set_state_controller = 217
+	option = { # ok
+		name = cw.78.a
+		if = {
+			limit = {
+				RCO_Dmitry_Goblin_Puchkov = { is_advisor = yes }
+			}
+			add_political_power = 150
+			}
+			if = {
+			limit = {
+				NOT = { RCO_Dmitry_Goblin_Puchkov = { is_advisor = yes } }
+			}
+			activate_advisor = RCO_Dmitry_Goblin_Puchkov
+			}
+	}
+}
 
-			# 		}
-		# 		CHE = { load_focus_tree = CHE_focus }
+## khozraschet
 
-		# 	}
-	# }
+country_event = {
+	id = cw.79
+	title = cw.79.t
+	desc = cw.79.d
+	picture = GFX_event_soviet_industry
 
+	is_triggered_only = yes
 
+	option = { # ok
+		name = cw.79.a
+		add_political_power = 50
+	}
+
+	option = { # ok
+		name = cw.79.b
+		add_political_power = -50
+		add_stability = 0.05
+		custom_effect_tooltip = RCO_prodoutput_increase_5_TT
+		add_to_variable = { rco_economy_prod_output = 0.05 }
+	}
+}
 
 ########## White oficier
 ########## Communist subbotniks

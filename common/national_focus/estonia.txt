@@ -21,7 +21,7 @@ focus_tree = {
 		id = EST_reapproach_russias
 		icon = EST_bronze_soldier
 		cost = 5
-		x = 9
+		x = 7
 		y = 9
 
 		completion_reward = {
@@ -60,6 +60,288 @@ focus_tree = {
 				news_event = estonia_news.1
 			}
 			add_ideas = est_nordic_ambitions
+		}
+	}
+
+	focus = {
+		id = EST_nordic_investment
+		icon = GFX_focus_NORDIC_com_civilian
+		cost = 5
+		x = 3
+		y = 1
+		relative_position_id = EST_improve_nordic_relations
+
+		prerequisite = {
+			focus = EST_improve_nordic_relations
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = EST_nordic_investment_tt
+			if = {
+				limit = {
+					FIN = {
+						has_opinion = {
+   							target = EST
+    						value > 75
+						}
+					}
+				}
+				EST = {
+					random_owned_controlled_state  = {
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					DEN = {
+						has_opinion = {
+   							target = EST
+    						value > 75
+						}
+					}
+				}
+				EST = {
+					random_owned_controlled_state  = {
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					SWE = {
+						has_opinion = {
+   							target = EST
+    						value > 75
+						}
+					}
+				}
+				EST = {
+					random_owned_controlled_state  = {
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOR = {
+						has_opinion = {
+   							target = EST
+    						value > 75
+						}
+					}
+				}
+				EST = {
+					random_owned_controlled_state  = {
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = EST_nordic_military_cooperation
+		icon = GFX_focus_NORDIC_mon_army
+		cost = 5
+		x = 3
+		y = 2
+		relative_position_id = EST_improve_nordic_relations
+
+		prerequisite = {
+			focus = EST_nordic_investment
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = EST_nordic_culture
+		icon = GFX_focus_NORDIC_mon_form_alliance
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = EST_improve_nordic_relations
+
+		prerequisite = {
+			focus = EST_improve_nordic_relations
+		}
+
+		mutually_exclusive = {
+			focus = EST_baltic_culture
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = EST_baltic_culture
+		icon = GFX_focus_generic_baltic_entente
+		cost = 5
+		x = 10
+		y = 9
+
+		mutually_exclusive = {
+			focus = EST_nordic_culture
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = EST_join_nordic_council
+		icon = GFX_focus_NORDIC_dem_form_alliance
+		cost = 5
+		x = 1
+		y = 2
+		relative_position_id = EST_improve_nordic_relations
+
+		prerequisite = {
+			focus = EST_nordic_culture
+		}
+
+		available = {
+			NOR = {
+				has_opinion = {
+   					target = EST
+    				value > 99
+				}
+			}
+			SWE = {
+				has_opinion = {
+   					target = EST
+    				value > 99
+				}
+			}
+			FIN = {
+				has_opinion = {
+   					target = EST
+    				value > 99
+				}
+			}
+			DEN = {
+				has_opinion = {
+   					target = EST
+    				value > 99
+				}
+			}
+		}
+
+		mutually_exclusive = {
+			focus = EST_finish_defence_pact
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.1
+		}
+	}
+
+	focus = {
+		id = EST_uus_pohjamaa
+		icon = GFX_focus_generic_nordic_territory
+		cost = 5
+		x = 1
+		y = 3
+		relative_position_id = EST_improve_nordic_relations
+
+		prerequisite = {
+			focus = EST_join_nordic_council
+		}
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = EST_finish_defence_pact
+		icon = GFX_focus_invite_finland
+		cost = 5
+		x = -1
+		y = 2
+		relative_position_id = EST_improve_nordic_relations
+
+		prerequisite = {
+			focus = EST_nordic_culture
+		}
+
+		mutually_exclusive = {
+			focus = EST_join_nordic_council
+		}
+
+		available = {
+			FIN = {
+				has_opinion = {
+   					target = EST
+    				value > 99
+				}
+			}
+		}
+
+		completion_reward = {
+			add_war_support = 0.1
+			custom_effect_tooltip = EST_if_FIN_accepts_tt
+			effect_tooltip = {
+				give_guarantee = FIN
+				FIN = {
+					give_guarantee = EST
+				}
+			}
+			FIN = country_event = nvv_estonia.13
+		}
+	}
+
+	focus = {
+		id = EST_blockade_plan
+		icon = GFX_focus_FIN_coastal_defense
+		cost = 5
+		x = -1
+		y = 3
+		relative_position_id = EST_improve_nordic_relations
+
+		prerequisite = {
+			focus = EST_finish_defence_pact
+		}
+
+		mutually_exclusive = {
+			focus = EST_join_nordic_council
+		}
+
+		available = {
+			FIN = {
+				has_opinion = {
+   					target = EST
+    				value > 99
+				}
+			}
+		}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.1
 		}
 	}
 

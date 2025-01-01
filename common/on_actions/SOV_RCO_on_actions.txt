@@ -1,51 +1,101 @@
 on_actions = {
-# ROOT is capitulated country, FROM is winner
-on_capitulation = {
-effect = {
-if = {
-limit = {
-ROOT  = {
-original_tag = SOV
-has_war_with = RCO
-}
-}
-RCO = {
-white_peace = {
-        tag = SOV
-        message = rco_wins_cw_peace_tt
+	on_startup = {
+		effect = {
+            every_country = {
+                if = {
+                    limit = {
+                        tag = SOV
+                    }
+                    country_event = { id = russ.1 }
+                }
+            }
+        }
     }
-    annex_country = {
-    target = SOV
-    transfer_troops = no
-}
-}
-}
-}
-}
-}
-
-on_actions = {
-# ROOT is capitulated country, FROM is winner
-on_capitulation = {
-effect = {
-if = {
-limit = {
-ROOT  = {
-original_tag = BLR
-has_war_with = RCO
-}
-}
-RCO = {
-white_peace = {
-        tag = BLR
-        message = rco_annexes_blr_in_cw_tt
+    on_capitulation = {
+        effect = {
+            if = {
+                limit = {
+                    ROOT = {
+                        original_tag = SOV
+                        has_war_with = RCO
+                    } 
+                }
+                RCO = {
+                    white_peace = {
+                        tag = SOV
+                        message = rco_wins_cw_peace_tt
+                    }
+                    annex_country = {
+                        target = SOV
+                        transfer_troops = no
+                    }
+                }
+            }
+            else_if = {
+                limit = {
+                    ROOT  = {
+                        original_tag = BLR
+                        has_war_with = RCO
+                    }
+                }
+                RCO = {
+                    white_peace = {
+                        tag = BLR
+                        message = rco_annexes_blr_in_cw_tt
+                    }
+                    annex_country = {
+                        target = BLR
+                        transfer_troops = no
+                    }
+                }
+            }
+            else_if = {
+                    limit = {
+                        ROOT  = {
+                            original_tag = CHE
+                            has_war_with = SOV
+                            NOT = {has_global_flag = SOV_CHE_Defeat}
+                        }
+                    }
+                    SOV = {
+                        white_peace = {
+                          tag = CHE
+                          message = sov_on_che_war_tt
+                        }
+                        puppet = CHE
+                    }
+                    CHE = { load_focus_tree = CHE_base_focus }
+                    set_global_flag = SOV_CHE_Defeat
+                }
+        }
     }
-    annex_country = {
-    target = BLR
-    transfer_troops = no
-}
-}
-}
-}
-}
-}
+    on_daily_SOV = {
+            effect = {
+            if = {
+                limit = {
+                    ROOT  = {
+                        original_tag = SOV
+                        RCO = { exists = no }
+                        longest_war_length > 2
+                    }
+                }
+                SOV = {
+                    country_event = { id = russ.16 } 
+                }
+            }
+            if = {
+            	limit = {
+                    ROOT = {
+                        original_tag = SOV
+                        has_war_with = RCO
+                        war_length_with = {
+                                tag = RCO
+                                months > 2
+                            }
+                        }
+                }
+					country_event = cw.30
+				}
+        	}
+        }
+    }

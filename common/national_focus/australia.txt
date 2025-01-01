@@ -1,0 +1,1689 @@
+focus_tree = {
+	id = modern_australia
+	country = {
+		factor = 0
+		#modifier = {
+		#	add = 10
+		#	tag = AST
+		#}
+	}
+	
+
+	### STARTING FOCUS ###
+	continuous_focus_position = { x = 1000 y = 1300 }
+	
+	focus = {
+		id = AST_crossroads
+		icon = GFX_focus_generic_self_management
+		x = 25
+		y = 0
+		cost = 5
+		ai_will_do = {
+			factor = 100
+		}
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.05
+		}
+	}
+
+	### DEMOCRATIC PATH ###
+
+	focus = {
+		id = AST_political_discourse
+		icon = GFX_focus_generic_diplomatic_treaty
+		prerequisite = { focus = AST_crossroads }
+		x = 10
+		y = 1
+		cost = 5
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = AST_preserve_democracy
+		icon = GFX_goal_support_democracy
+		prerequisite = { focus = AST_political_discourse }
+		mutually_exclusive = { focus = AST_workers_revolution focus = AST_nationalist_surge }
+		x = 2
+		y = 2
+		cost = 5
+		completion_reward = {
+			add_popularity = { ideology = democratic popularity = 0.15 }
+			add_political_power = 50
+		}
+	}
+
+	# Labor Path
+	focus = {
+		id = AST_labor_government
+		icon = GFX_focus_generic_workers_and_farmers_rise
+		prerequisite = { focus = AST_preserve_democracy }
+		mutually_exclusive = { focus = AST_liberal_government }
+		x = 0
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_ideas = labor_reforms
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = AST_strengthen_unions
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		prerequisite = { focus = AST_labor_government }
+		x = -1
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = strong_unions
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = AST_public_works
+		icon = GFX_focus_generic_industry_1
+		prerequisite = { focus = AST_labor_government }
+		x = 1
+		y = 4
+		cost = 5
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_state_industry
+		icon = GFX_focus_generic_industry_3
+		prerequisite = { focus = AST_strengthen_unions focus = AST_public_works }
+		x = 0
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = state_industry
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	# Liberal Path
+	focus = {
+		id = AST_liberal_government
+		icon = GFX_focus_ARG_defense_and_democracy
+		prerequisite = { focus = AST_preserve_democracy }
+		mutually_exclusive = { focus = AST_labor_government }
+		x = 4
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_ideas = liberal_reforms
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = AST_deregulation
+		icon = GFX_focus_generic_treaty
+		prerequisite = { focus = AST_liberal_government }
+		x = 3
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = deregulated_economy
+			add_stability = -0.05
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = AST_foreign_investment
+		icon = GFX_focus_generic_american_investments
+		prerequisite = { focus = AST_liberal_government }
+		x = 5
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = foreign_investments
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = AST_private_sector
+		icon = GFX_focus_generic_industry_2
+		prerequisite = { focus = AST_deregulation focus = AST_foreign_investment }
+		x = 4
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = privatized_industry
+			add_political_power = 50
+		}
+	}
+
+	# Shared Democratic Path
+	focus = {
+		id = AST_constitutional_reform
+		icon = GFX_focus_generic_constitution
+		prerequisite = { focus = AST_state_industry focus = AST_private_sector }
+		x = 2
+		y = 6
+		cost = 5
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.10
+		}
+	}
+
+	focus = {
+		id = AST_republican_path
+		icon = GFX_focus_generic_democratic_drift
+		prerequisite = { focus = AST_constitutional_reform }
+		mutually_exclusive = { focus = AST_monarchy_path }
+		x = 1
+		y = 7
+		cost = 5
+		completion_reward = {
+			add_ideas = australian_republic
+			add_stability = -0.10
+			add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = AST_monarchy_path
+		icon = GFX_focus_generic_royal_crown
+		prerequisite = { focus = AST_constitutional_reform }
+		mutually_exclusive = { focus = AST_republican_path }
+		x = 3
+		y = 7
+		cost = 5
+		completion_reward = {
+			add_ideas = constitutional_monarchy
+			add_stability = 0.15
+		}
+	}
+
+	### COMMUNIST PATH ###
+
+	focus = {
+		id = AST_socialist_resurgence
+		icon = GFX_focus_prc_agrarian_socialism
+		prerequisite = { focus = AST_political_discourse }
+		mutually_exclusive = { focus = AST_preserve_democracy focus = AST_nationalist_surge }
+		x = 10
+		y = 2
+		cost = 5
+		completion_reward = {
+			add_popularity = { ideology = communism popularity = 0.15 }
+			add_political_power = 50
+		}
+	}
+
+	# Modern Social Democratic Path
+	focus = {
+		id = AST_democratic_socialism
+		icon = GFX_focus_generic_socialist_constitution
+		prerequisite = { focus = AST_socialist_resurgence }
+		mutually_exclusive = { focus = AST_revolutionary_socialism }
+		x = 8
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_ideas = modern_social_democracy
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = AST_green_new_deal
+		icon = GFX_focus_generic_industry_1
+		prerequisite = { focus = AST_democratic_socialism }
+		x = 7
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = green_economy
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = AST_social_housing
+		icon = GFX_focus_generic_low_cost_housing
+		prerequisite = { focus = AST_democratic_socialism }
+		x = 9
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = housing_program
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = AST_universal_basic_income
+		icon = GFX_focus_generic_social_welfare
+		prerequisite = { focus = AST_social_housing }
+		x = 9
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = ubi_program
+			add_stability = 0.10
+			add_political_power = -50
+		}
+	}
+
+	focus = {
+		id = AST_climate_action
+		icon = GFX_focus_generic_industry_1
+		prerequisite = { focus = AST_green_new_deal }
+		x = 7
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = green_revolution
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = AST_social_democracy_triumph
+		icon = GFX_focus_generic_socialist_constitution
+		prerequisite = { focus = AST_climate_action focus = AST_universal_basic_income }
+		x = 8
+		y = 6
+		cost = 5
+		completion_reward = {
+			add_ideas = modern_socialism
+			add_stability = 0.15
+			add_political_power = 100
+		}
+	}
+
+	# Revolutionary Socialist Path
+	focus = {
+		id = AST_revolutionary_socialism
+		icon = GFX_focus_SWE_socialist_reforms
+		prerequisite = { focus = AST_socialist_resurgence }
+		mutually_exclusive = { focus = AST_democratic_socialism }
+		x = 12
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_ideas = revolutionary_movement
+			add_political_power = -50
+		}
+	}
+
+	focus = {
+		id = AST_seize_resources
+		icon = GFX_focus_generic_industry_3
+		prerequisite = { focus = AST_revolutionary_socialism }
+		x = 11
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = nationalized_resources
+			add_stability = -0.10
+		}
+	}
+
+	focus = {
+		id = AST_workers_councils
+		icon = GFX_focus_generic_socialist_science
+		prerequisite = { focus = AST_revolutionary_socialism }
+		x = 13
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = workplace_democracy
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = AST_anticapitalist_economy
+		icon = GFX_focus_generic_industry_3
+		prerequisite = { focus = AST_seize_resources }
+		x = 11
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = planned_economy
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = AST_international_revolution
+		icon = GFX_focus_generic_strike_at_democracy
+		prerequisite = { focus = AST_workers_councils }
+		x = 13
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = world_revolution
+			add_war_support = 0.10
+		}
+	}
+
+	focus = {
+		id = AST_peoples_republic
+		icon = GFX_focus_generic_support_communism
+		prerequisite = { focus = AST_anticapitalist_economy focus = AST_international_revolution }
+		x = 12
+		y = 6
+		cost = 5
+		completion_reward = {
+			add_ideas = socialist_state
+			add_stability = 0.10
+			add_war_support = 0.15
+		}
+	}
+	### FASCIST PATH ###
+
+	focus = {
+		id = AST_nationalist_surge
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		prerequisite = { focus = AST_political_discourse }
+		mutually_exclusive = { focus = AST_preserve_democracy focus = AST_socialist_resurgence }
+		x = 18
+		y = 2
+		cost = 5
+		completion_reward = {
+			add_popularity = { ideology = fascist popularity = 0.15 }
+			add_political_power = 50
+		}
+	}
+
+	# Authoritarian Conservative Path
+	focus = {
+		id = AST_traditional_values
+		icon = GFX_focus_generic_monarchy_1
+		prerequisite = { focus = AST_nationalist_surge }
+		mutually_exclusive = { focus = AST_alt_right_movement }
+		x = 16
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_ideas = conservative_values
+			add_stability = 0.10
+		}
+	}
+
+	focus = {
+		id = AST_border_security
+		icon = GFX_focus_generic_coastal_fort
+		prerequisite = { focus = AST_traditional_values }
+		x = 15
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = strict_immigration
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = AST_military_investment
+		icon = GFX_focus_generic_military_mission
+		prerequisite = { focus = AST_traditional_values }
+		x = 17
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = military_modernization
+			army_experience = 50
+		}
+	}
+
+	focus = {
+		id = AST_surveillance_state
+		icon = GFX_focus_generic_military_academy
+		prerequisite = { focus = AST_border_security }
+		x = 15
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = total_surveillance
+			add_stability = 0.10
+		}
+	}
+
+	focus = {
+		id = AST_military_industrial_complex
+		icon = GFX_focus_generic_industry_2
+		prerequisite = { focus = AST_military_investment }
+		x = 17
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = military_industry
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_secure_nation
+		icon = GFX_goal_generic_fortify_city
+		prerequisite = { focus = AST_surveillance_state focus = AST_military_industrial_complex }
+		x = 16
+		y = 6
+		cost = 5
+		completion_reward = {
+			add_ideas = fortress_australia
+			add_war_support = 0.15
+		}
+	}
+
+	# Right-Wing Populist Path
+	focus = {
+		id = AST_alt_right_movement
+		icon = GFX_goal_support_fascism
+		prerequisite = { focus = AST_nationalist_surge }
+		mutually_exclusive = { focus = AST_traditional_values }
+		x = 20
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_ideas = populist_movement
+			add_war_support = 0.10
+		}
+	}
+
+	focus = {
+		id = AST_anti_globalization
+		icon = GFX_focus_generic_support_the_left_right
+		prerequisite = { focus = AST_alt_right_movement }
+		x = 19
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = economic_nationalism
+			add_stability = -0.05
+		}
+	}
+
+	focus = {
+		id = AST_cyber_warfare
+		icon = GFX_focus_generic_military_academy
+		prerequisite = { focus = AST_alt_right_movement }
+		x = 21
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_ideas = cyber_capabilities
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = AST_information_warfare
+		icon = GFX_focus_generic_military_academy
+		prerequisite = { focus = AST_cyber_warfare }
+		x = 21
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = cyber_warfare
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = AST_economic_autarky
+		icon = GFX_focus_generic_industry_1
+		prerequisite = { focus = AST_anti_globalization }
+		x = 19
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = autarky
+			add_stability = -0.05
+			add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = AST_regional_hegemony
+		icon = GFX_focus_generic_strike_at_democracy2
+		prerequisite = { focus = AST_information_warfare focus = AST_economic_autarky }
+		x = 20
+		y = 6
+		cost = 5
+		completion_reward = {
+			add_ideas = regional_power
+			add_war_support = 0.15
+		}
+	}
+
+	# Shared Fascist Endgame
+	focus = {
+		id = AST_new_order
+		icon = GFX_focus_FIN_national_fanatism
+		prerequisite = { focus = AST_secure_nation focus = AST_regional_hegemony }
+		x = 18
+		y = 7
+		cost = 5
+		completion_reward = {
+			add_ideas = nationalist_triumph
+			add_stability = 0.15
+			add_war_support = 0.15
+		}
+	}
+
+	### MILITARY BRANCH - MAIN ###
+	
+	focus = {
+		id = AST_armed_forces
+		prerequisite = { focus = AST_crossroads }
+		x = 29
+		y = 1
+		cost = 5
+		completion_reward = {
+			army_experience = 25
+			navy_experience = 25
+			air_experience = 25
+		}
+	}
+
+	### MILITARY BRANCH - ARMY ###
+	
+	focus = {
+		id = AST_army_command
+		prerequisite = { focus = AST_armed_forces }
+		x = 24
+		y = 2
+		cost = 5
+		completion_reward = {
+			army_experience = 50
+			add_tech_bonus = {
+				name = land_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = AST_infantry_focus
+		prerequisite = { focus = AST_army_command }
+		x = 23
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_weapons_bonus
+				bonus = 0.5
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = AST_armor_focus
+		prerequisite = { focus = AST_army_command }
+		x = 25
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 0.5
+				uses = 2
+				category = armor
+			}
+		}
+	}
+
+	focus = {
+		id = AST_special_forces
+		prerequisite = { focus = AST_infantry_focus }
+		x = 22
+		y = 4.8
+		cost = 5
+		completion_reward = {
+			add_ideas = special_forces_expansion
+			army_experience = 25
+			add_tech_bonus = {
+				name = special_forces_bonus
+				bonus = 0.5
+				uses = 2
+				technology = paratroopers
+				technology = marines
+				technology = mountain_infantry
+			}
+		}
+	}
+
+	focus = {
+		id = AST_mechanized_forces
+		prerequisite = { focus = AST_armor_focus }
+		prerequisite = { focus = AST_infantry_focus }
+		x = 24
+		y = 4
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = mechanized_bonus
+				bonus = 0.5
+				uses = 2
+				category = motorized_equipment
+				category = mechanized_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = AST_battle_tanks
+		prerequisite = { focus = AST_mechanized_forces }
+		x = 24
+		y = 5.6
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 0.5
+				uses = 2
+				category = armor
+			}
+		}
+	}
+
+	focus = {
+		id = AST_sasr_program
+		prerequisite = { focus = AST_special_forces }
+		x = 22
+		y = 6.5
+		cost = 5
+		completion_reward = {
+			add_ideas = sasr_elite_forces
+			army_experience = 50
+		}
+	}
+
+	focus = {
+		id = AST_commandos
+		prerequisite = { focus = AST_sasr_program }
+		x = 21
+		y = 8
+		cost = 5
+		completion_reward = {
+			add_ideas = elite_commandos
+		}
+	}
+
+	focus = {
+		id = AST_modern_infantry
+		prerequisite = { focus = AST_sasr_program }
+		x = 23
+		y = 8
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_weapons_bonus
+				bonus = 0.5
+				uses = 2
+				category = infantry_weapons
+				category = support_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AST_elite_forces
+		prerequisite = { focus = AST_commandos }
+		prerequisite = { focus = AST_modern_infantry }
+		x = 22
+		y = 9.5
+		cost = 5
+		completion_reward = {
+			add_ideas = elite_military
+			army_experience = 100
+		}
+	}
+
+	focus = {
+		id = AST_armored_spearhead
+		prerequisite = { focus = AST_battle_tanks }
+		x = 24
+		y = 7
+		cost = 5
+		completion_reward = {
+			add_ideas = armored_spearhead_doctrine
+			add_tech_bonus = {
+				name = mechanized_bonus
+				bonus = 0.5
+				uses = 2
+				category = cat_mechanized_equipment
+			}
+		}
+	}
+
+	### MILITARY BRANCH - NAVY ###
+
+	focus = {
+		id = AST_naval_command
+		prerequisite = { focus = AST_armed_forces }
+		x = 29
+		y = 2
+		cost = 5
+		completion_reward = {
+			navy_experience = 50
+			add_tech_bonus = {
+				name = naval_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = AST_surface_fleet
+		prerequisite = { focus = AST_naval_command }
+		x = 27
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = naval_bonus
+				bonus = 0.5
+				uses = 2
+				category = naval_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = AST_helicopter_carrier
+		prerequisite = { focus = AST_surface_fleet }
+		x = 27
+		y = 4.7
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = helicopter_carrier
+				bonus = 0.5
+				uses = 1
+				category = naval_equipment
+			}
+		 }
+	}
+
+	focus = {
+		id = AST_submarine_force
+		prerequisite = { focus = AST_naval_command }
+		x = 31
+		y = 3
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = submarine_bonus
+				bonus = 0.5
+				uses = 2
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AST_carrier_program
+		prerequisite = { focus = AST_naval_command }
+		x = 29
+		y = 3.5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = carrier_bonus
+				bonus = 0.5
+				uses = 2
+				category = carrier_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AST_collins_class
+		prerequisite = { focus = AST_submarine_force }
+		x = 31
+		y = 4.7
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = sub_bonus
+				bonus = 0.5
+				uses = 2
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AST_naval_air_power
+		prerequisite = { focus = AST_carrier_program }
+		x = 29
+		y = 6
+		cost = 5
+		completion_reward = {
+			navy_experience = 50
+			add_tech_bonus = {
+				name = carrier_air_bonus
+				bonus = 0.5
+				uses = 2
+				category = naval_air
+			}
+		}
+	}
+
+	focus = {
+		id = AST_advanced_submarines
+		prerequisite = { focus = AST_collins_class }
+		x = 31
+		y = 6
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = submarine_bonus
+				bonus = 0.5
+				uses = 2
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AST_amphibious_forces
+		prerequisite = { focus = AST_helicopter_carrier }
+		x = 27
+		y = 6
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = amphibious_bonus
+				bonus = 0.5
+				uses = 2
+				category = marines
+				category = naval_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = AST_naval_dominance
+		prerequisite = { focus = AST_naval_air_power }
+		prerequisite = { focus = AST_advanced_submarines }
+		prerequisite = { focus = AST_amphibious_forces }
+		x = 27
+		y = 8
+		cost = 5
+		completion_reward = {
+			add_ideas = naval_supremacy
+			navy_experience = 100
+		}
+	}
+
+	### MILITARY BRANCH - AIR FORCE ###
+
+	focus = {
+		id = AST_air_command
+		prerequisite = { focus = AST_armed_forces }
+		x = 34
+		y = 2
+		cost = 5
+		completion_reward = {
+			air_experience = 50
+			add_tech_bonus = {
+				name = air_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = AST_fighter_command
+		prerequisite = { focus = AST_air_command }
+		x = 33
+		y = 3.5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 0.5
+				uses = 2
+				category = light_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = AST_bomber_command
+		prerequisite = { focus = AST_air_command }
+		x = 35
+		y = 3.5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 0.5
+				uses = 2
+				category = tactical_bomber
+			}
+		}
+	}
+
+	focus = {
+		id = AST_interceptor_focus
+		prerequisite = { focus = AST_fighter_command }
+		x = 33
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = interceptor_bonus
+				bonus = 0.5
+				uses = 2
+				category = light_fighter
+				category = cat_heavy_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = AST_strategic_bombing
+		prerequisite = { focus = AST_bomber_command }
+		x = 35
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = strategic_bomber_bonus
+				bonus = 0.5
+				uses = 2
+				category = strategic_bomber
+			}
+		}
+	}
+
+	focus = {
+		id = AST_air_supremacy
+		prerequisite = { focus = AST_interceptor_focus }
+		prerequisite = { focus = AST_strategic_bombing }
+		x = 34
+		y = 6.5
+		cost = 5
+		completion_reward = {
+			air_experience = 50
+			add_ideas = air_supremacy_focus
+		}
+	}
+
+	focus = {
+		id = AST_jet_program
+		prerequisite = { focus = AST_air_supremacy }
+		x = 33
+		y = 8
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = jet_bonus
+				bonus = 0.5
+				uses = 2
+				category = jet_technology
+			}
+		}
+	}
+
+	focus = {
+		id = AST_radar_network
+		prerequisite = { focus = AST_air_supremacy }
+		x = 35
+		y = 8
+		cost = 5
+		completion_reward = {
+			add_ideas = advanced_radar
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = radar_station
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_air_force_elite
+		prerequisite = { focus = AST_jet_program }
+		prerequisite = { focus = AST_radar_network }
+		x = 34
+		y = 10
+		cost = 5
+		completion_reward = {
+			add_ideas = elite_air_force
+			air_experience = 100
+		}
+	}
+
+	### ECONOMIC BRANCH - MAIN ###
+
+	focus = {
+		id = AST_economic_development
+		prerequisite = { focus = AST_crossroads }
+		x = 44
+		y = 1
+		cost = 5
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+		}
+	}
+
+	### ECONOMIC BRANCH - INDUSTRY ###
+	
+	focus = {
+		id = AST_industrial_development
+		prerequisite = { focus = AST_economic_development }
+		x = 39
+		y = 2
+		cost = 5
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_civilian_industry
+		prerequisite = { focus = AST_industrial_development }
+		x = 37
+		y = 3
+		cost = 5
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_military_industry
+		prerequisite = { focus = AST_industrial_development }
+		x = 41
+		y = 3
+		cost = 5
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_modern_factories
+		prerequisite = { focus = AST_civilian_industry }
+		x = 37
+		y = 4.2
+		cost = 5
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_military_complex
+		prerequisite = { focus = AST_military_industry }
+		x = 41
+		y = 4.2
+		cost = 5
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_industrial_revolution
+		prerequisite = { focus = AST_modern_factories }
+		prerequisite = { focus = AST_military_complex }
+		x = 39
+		y = 5.5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+				category = electronics
+			}
+			add_ideas = industrial_might
+		}
+	}
+
+	### ECONOMIC BRANCH - RESOURCES ###
+
+	focus = {
+		id = AST_resource_exploitation
+		prerequisite = { focus = AST_economic_development }
+		x = 44
+		y = 2
+		cost = 5
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_resource = {
+					type = steel
+					amount = 8
+				}
+			}
+			random_owned_controlled_state = {
+				add_resource = {
+					type = aluminium
+					amount = 8
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_mining_focus
+		prerequisite = { focus = AST_resource_exploitation }
+		x = 43
+		y = 3.5
+		cost = 5
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_resource = {
+					type = steel
+					amount = 12
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_agriculture_focus
+		prerequisite = { focus = AST_resource_exploitation }
+		x = 45
+		y = 3.5
+		cost = 5
+		completion_reward = {
+			add_ideas = agricultural_development
+		}
+	}
+
+	focus = {
+		id = AST_uranium_mining
+		prerequisite = { focus = AST_mining_focus }
+		x = 43
+		y = 5
+		cost = 5
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_resource = {
+					type = chromium
+					amount = 12
+				}
+			}
+			add_tech_bonus = {
+				name = nuclear_bonus
+				bonus = 0.5
+				uses = 1
+				category = nuclear
+			}
+		}
+	}
+
+	focus = {
+		id = AST_wool_industry
+		prerequisite = { focus = AST_agriculture_focus }
+		x = 45
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_ideas = wool_exports
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = AST_resource_empire
+		prerequisite = { focus = AST_uranium_mining }
+		prerequisite = { focus = AST_wool_industry }
+		x = 44
+		y = 6.5
+		cost = 5
+		completion_reward = {
+			add_ideas = resource_exploitation
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 8
+				}
+			}
+			random_owned_controlled_state = {
+				add_resource = {
+					type = rubber
+					amount = 8
+				}
+			}
+		}
+	}
+
+	### ECONOMIC BRANCH - ADVANCED DEVELOPMENT ###
+
+	focus = {
+		id = AST_industrial_might
+		prerequisite = { focus = AST_industrial_revolution }
+		x = 39
+		y = 8
+		cost = 5
+		completion_reward = {
+			add_ideas = industrial_giant
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_military_contractors
+		prerequisite = { focus = AST_industrial_revolution }
+		x = 37
+		y = 7
+		cost = 5
+		completion_reward = {
+			add_ideas = military_contractors
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_synthetic_resources
+		prerequisite = { focus = AST_industrial_revolution }
+		x = 41
+		y = 7
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = synth_resources
+				bonus = 0.5
+				uses = 2
+				category = synth_resources
+			}
+		}
+	}
+
+	focus = {
+		id = AST_industrial_superpower
+		prerequisite = { focus = AST_industrial_might }
+		x = 40
+		y = 9.5
+		cost = 5
+		completion_reward = {
+			add_ideas = industrial_superpower
+			add_research_slot = 1
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 5
+			}
+		}
+	}
+
+	focus = {
+		id = AST_outback_development
+		prerequisite = { focus = AST_industrial_superpower }
+		x = 40
+		y = 11
+		cost = 5
+		completion_reward = {
+			add_ideas = outback_infrastructure
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 5
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AST_green_revolution
+		prerequisite = { focus = AST_industrial_might }
+		x = 38
+		y = 9.5
+		cost = 5
+		completion_reward = {
+			add_ideas = green_technology
+			add_tech_bonus = {
+				name = green_bonus
+				bonus = 0.5
+				uses = 2
+				category = industry
+			}
+		}
+	}
+
+	focus = {
+		id = AST_smart_cities
+		prerequisite = { focus = AST_green_revolution }
+		x = 38
+		y = 11
+		cost = 5
+		completion_reward = {
+			add_ideas = smart_infrastructure
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	### RESEARCH BRANCH - MAIN ###
+	
+	focus = {
+		id = AST_research_direction
+		prerequisite = { focus = AST_economic_development }
+		x = 49
+		y = 2
+		cost = 5
+		completion_reward = {
+			add_research_slot = 1
+			add_tech_bonus = {
+				name = research_bonus
+				bonus = 0.5
+				uses = 2
+				category = electronics
+			}
+		}
+	}
+
+	focus = {
+		id = AST_military_research
+		prerequisite = { focus = AST_research_direction }
+		x = 48
+		y = 3.5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = military_research_bonus
+				bonus = 0.5
+				uses = 2
+				category = military_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AST_atomic_research
+		prerequisite = { focus = AST_research_direction }
+		x = 50
+		y = 3.5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = nuclear_bonus
+				bonus = 0.5
+				uses = 1
+				category = nuclear
+			}
+		}
+	}
+
+	focus = {
+		id = AST_nuclear_program
+		prerequisite = { focus = AST_atomic_research }
+		x = 48
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = nuclear_bonus
+				bonus = 0.5
+				uses = 2
+				category = nuclear
+			}
+			add_ideas = nuclear_research
+		}
+	}
+
+	focus = {
+		id = AST_electronics_research
+		prerequisite = { focus = AST_military_research }
+		x = 50
+		y = 5
+		cost = 5
+		completion_reward = {
+			add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 0.5
+				uses = 2
+				category = electronics
+			}
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = AST_research_dominance
+		prerequisite = { focus = AST_nuclear_program }
+		prerequisite = { focus = AST_electronics_research }
+		x = 49
+		y = 6.5
+		cost = 5
+		completion_reward = {
+			add_ideas = research_excellence
+			add_tech_bonus = {
+				name = hidden_bonus
+				bonus = 0.5
+				uses = 3
+				category = industry
+				category = electronics
+				category = nuclear
+			}
+		}
+	}
+
+	focus = {
+		id = AST_quantum_computing
+		prerequisite = { focus = AST_technological_supremacy }
+		x = 47
+		y = 10
+		cost = 5
+		completion_reward = {
+			add_research_slot = 1
+			add_tech_bonus = {
+				name = quantum_bonus
+				bonus = 0.5
+				uses = 2
+				category = electronics
+				category = computing_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AST_aerospace_program
+		prerequisite = { focus = AST_technological_supremacy }
+		x = 51
+		y = 10
+		cost = 5
+		completion_reward = {
+			add_ideas = aerospace_program
+			add_tech_bonus = {
+				name = aerospace_bonus
+				bonus = 0.5
+				uses = 2
+				category = rocketry
+				category = air_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = AST_advanced_computing
+		prerequisite = { focus = AST_research_dominance }
+		x = 48
+		y = 7.8
+		cost = 5
+		completion_reward = {
+			add_research_slot = 1
+			add_tech_bonus = {
+				name = computing_bonus
+				bonus = 0.5
+				uses = 2
+				category = computing_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AST_space_program
+		prerequisite = { focus = AST_research_dominance }
+		x = 50
+		y = 7.8
+		cost = 5
+		completion_reward = {
+			add_ideas = space_program
+			add_tech_bonus = {
+				name = rocket_bonus
+				bonus = 0.5
+				uses = 2
+				category = rocketry
+			}
+		}
+	}
+
+	focus = {
+		id = AST_technological_supremacy
+		prerequisite = { focus = AST_advanced_computing }
+		prerequisite = { focus = AST_space_program }
+		x = 49
+		y = 9
+		cost = 5
+		completion_reward = {
+			add_ideas = technological_supremacy
+			add_research_slot = 1
+			add_tech_bonus = {
+				name = secret_bonus
+				bonus = 0.5
+				uses = 4
+				category = industry
+				category = electronics
+				category = nuclear
+				category = rocketry
+			}
+		}
+	}
+
+	focus = {
+		id = AST_future_warfare
+		prerequisite = { focus = AST_quantum_computing }
+		prerequisite = { focus = AST_aerospace_program }
+		x = 49
+		y = 11.5
+		cost = 5
+		completion_reward = {
+			add_ideas = future_warfare
+			add_tech_bonus = {
+				name = future_bonus
+				bonus = 0.5
+				uses = 4
+				category = electronics
+				category = rocketry
+				category = nuclear
+				category = computing_tech
+			}
+		}
+	}
+}	

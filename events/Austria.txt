@@ -18,7 +18,6 @@ country_event = {
 			popularity = -0.05
 			ideology = social_democrat
 		}
-		retire_ideology_leader = social_democrat
 		set_politics = {
 			ruling_party = conservative
 			elections_allowed = yes
@@ -31,14 +30,20 @@ country_event = {
 			popularity = 0.025
 			ideology = reactionary
 		}
-		add_country_leader_role = {
-			character = AUS_Alfred_Gusenbauer
-			promote_leader = yes
-			country_leader = {
-				ideology = social_democrat_ideology
-				expire = "1.1.1.1"
-				traits = { 
-					Staunch_Workers_Rights_Activist_Austria
+		set_country_flag = AUS_ÖVP_FPÖ_Coalition
+		hidden_effect = {
+			country_event = {
+				id = austria.3 days = 3
+			}
+			add_country_leader_role = {
+				character = AUS_Alfred_Gusenbauer
+				promote_leader = yes
+				country_leader = {
+					ideology = social_democrat_ideology
+					expire = "1.1.1.1"
+					traits = { 
+						Staunch_Workers_Rights_Activist_Austria
+					}
 				}
 			}
 		}
@@ -58,6 +63,11 @@ country_event = {
 		add_popularity = {
 			popularity = 0.05
 			ideology = reactionary
+		}
+		add_country_leader_trait = Compromiser_Austria
+		add_timed_idea = {
+			idea = AUS_Unpopular_Government
+			days = 450 
 		}
 	}
 }
@@ -86,5 +96,415 @@ country_event = {
 			long_name = AUS_nationalist_party_BZO_long
 			name = AUS_nationalist_party_BZO
 		}
+		add_country_leader_role = {
+			character = AUS_Jorg_Haider
+			promote_leader = yes
+			country_leader = {
+				ideology = national_democrat  
+				expire = "1.1.1.1"
+				traits = { 
+					Populist_Demagogue_BZO_Austria
+					Provocateur_BZO_Austria
+				}
+			}
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.06
+		}
+	}
+}
+#Thursday Demonstrations
+country_event = {
+	id = austria.3
+	title = austria.3.t
+	desc =  austria.3.d
+	picture = GFX_report_austria_thursday_demonstrations
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			has_government = conservative
+		}
+	}
+
+	option = { #Unfortunate
+		name = austria.3.o1
+		add_timed_idea = {
+			idea = AUS_Donnerstagsdemonstrationen
+			days = 450 
+		}
+	}
+}
+#Knittelfeld Putsch
+country_event = {
+	id = austria.4
+	title = austria.4.t
+	desc =  austria.4.d
+	picture = GFX_report_austria_knittelfeld_conference
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			has_government = conservative
+			has_country_flag = AUS_ÖVP_FPÖ_Coalition
+		}
+	}
+
+	option = { #New FPÖ Leader, New Elections - Historical
+		name = austria.4.o1
+		add_country_leader_role = {
+			character = AUS_Herbert_Haupt
+			promote_leader = yes
+			country_leader = {
+				ideology = counter_progressive_democrat 
+				expire = "1.1.1.1"
+				traits = { 
+					Political_Placeholder_Austria
+				}
+			}
+		}
+		add_popularity = {
+			ideology = reactionary
+			popularity = -0.169
+		}
+		add_political_power = -50
+	}
+
+	option = { #Jörg Haider Leader, New Elections
+		name = austria.4.o2
+		add_popularity = {
+			ideology = reactionary
+			popularity = -0.19
+		}
+		add_political_power = -200
+		add_country_leader_role = {
+			character = AUS_Jorg_Haider
+			promote_leader = yes
+			country_leader = {
+				ideology = authoritarian_democrat 
+				expire = "1.1.1.1"
+				traits = { 
+					Populist_Demagogue_Austria
+					Provocateur_Austria
+				}
+			}
+		}
+	}
+
+	option = { #No New Leader, No New Elections
+		name = austria.4.o3
+		add_popularity = {
+			ideology = reactionary
+			popularity = -0.10
+		}
+		add_political_power = -150
+	}
+}
+#Nationalratswahl 2002
+country_event = {
+	id = austria.5
+	title = austria.5.t
+	desc =  austria.5.d
+	picture = GFX_report_austria_nationalratswahl_2002
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			has_government = conservative
+		}
+		has_country_flag = AUS_ÖVP_FPÖ_Coalition
+	}
+
+	option = { #ÖVP-FPÖ
+		name = austria.5.o1
+		
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.05
+		}
+		add_political_power = 50
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_country_leader_trait = {
+			ideology = conservative
+			trait = FPO_Coalition_Austria
+		}
+	}
+
+	option = { #ÖVP-SPÖ
+		name = austria.5.o2
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		add_political_power = 50
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_country_leader_trait = {
+			ideology = conservative
+			trait = SPO_Coalition_Austria
+		}
+	}
+
+	option = { #FPÖ-ÖVP
+		name = austria.5.o3
+		trigger = {
+			reactionary > 15
+		}
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.05
+		}
+		add_political_power = 25
+		set_politics = {
+			ruling_party = reactionary
+			elections_allowed = yes
+		}
+		add_country_leader_trait = {
+			ideology = reactionary
+			trait = OVP_Coalition_Austria
+		}
+	}
+
+	option = { #Grüne-ÖVP
+		name = austria.5.o4
+		trigger = {
+			progressive > 15
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.05
+		}
+		add_political_power = 25
+		set_politics = {
+			ruling_party = progressive
+			elections_allowed = yes
+		}
+		add_country_leader_trait = {
+			ideology = conservative
+			trait = OVP_Coalition_Austria
+		}
+	}
+	option = { #SPÖ-ÖVP
+		name = austria.5.o5
+		trigger = {
+			social_democrat > 15
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.05
+		}
+		add_political_power = 25
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_country_leader_trait = {
+			ideology = social_democrat
+			trait = OVP_Coalition_Austria
+		}
+	}
+	option = { #LIF-ÖVP
+		name = austria.5.o6
+		trigger = {
+			market_liberal > 15
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.05
+		}
+		add_political_power = 25
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		add_country_leader_trait = {
+			ideology = market_liberal
+			trait = OVP_Coalition_Austria
+		}
+	}
+	option = { #SPÖ-Grüne
+		trigger = {
+			social_democrat > 15
+			progressive > 5
+		}
+		name = austria.5.o8
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.05
+		}
+		add_political_power = 25
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_country_leader_trait = {
+			ideology = social_democrat
+			trait = Grune_Coalition_Austria
+		}
+	}
+	option = { #ÖVP-Grüne
+		trigger = {
+			conservative > 15
+			progressive > 5
+		}
+		name = austria.5.o8
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.05
+		}
+		add_political_power = 25
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_country_leader_trait = {
+			ideology = conservative
+			trait = Grune_Coalition_Austria
+		}
+	}
+	option = { #SLP-SPÖ
+		trigger = {
+			democratic_socialist > 15
+			social_democrat > 5
+		}
+		name = austria.5.o8
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		add_political_power = 25
+		set_politics = {
+			ruling_party = democratic_socialist
+			elections_allowed = yes
+		}
+		add_country_leader_trait = {
+			ideology = democratic_socialist
+			trait = SPO_Coalition_Austria
+		}
+	}
+}
+#Jörg Haider Saddam Hussein visit
+country_event = {
+	id = austria.6
+	title = austria.6.t
+	desc =  austria.6.d
+	picture = GFX_report_austria_haider_hussein
+
+	is_triggered_only = yes
+
+	trigger = {
+		IRQ = {
+			has_government = nationalist
+		}
+		AUS = {
+			has_democratic_form_of_government = yes
+		}
+	}
+
+	option = { #Unfortunate
+		name = austria.6.o1
+		add_popularity = {
+			ideology = reactionary
+			popularity = -0.025
+		}
+	}
+}
+#Jörg Haider Gaddafi visit
+country_event = {
+	id = austria.7
+	title = austria.7.t
+	desc =  austria.7.d
+	picture = GFX_report_austria_haider_gaddafi
+
+	is_triggered_only = yes
+
+	trigger = {
+		LBA = {
+			has_government = nationalist
+		}
+		AUS = {
+			has_democratic_form_of_government = yes
+		}
+	}
+
+	option = { #Unfortunate
+		name = austria.7.o1
+		add_popularity = {
+			ideology = reactionary
+			popularity = -0.025
+		}
+	}
+}
+#Jörg Haider Death
+country_event = {
+	id = austria.8
+	title = austria.8.t
+	desc =  austria.8.d
+	picture = GFX_report_austria_haider_death
+
+	is_triggered_only = yes
+
+	trigger = {
+		AUS = {
+			has_democratic_form_of_government = yes
+		}
+	}
+
+	option = { #Rest in Peace
+		name = austria.8.o1
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.025
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = -0.05
+		}
+		add_stability = -0.02
 	}
 }

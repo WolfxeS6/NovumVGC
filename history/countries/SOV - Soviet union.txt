@@ -28,6 +28,21 @@ set_country_flag = unique_tank_manufacturer
 set_country_flag = unique_naval_manufacturer
 set_country_flag = unique_aircraft_manufacturer
 set_country_flag = NVX_ai_expansion_bypass
+set_country_flag = unique_political_advisor_nomal
+set_country_flag = unique_political_advisor_party_boost
+
+
+complete_special_project = sp:sp_rockets_experimental_rockets
+complete_special_project = sp:sp_rockets_ballistic_missile
+complete_special_project = sp:sp_rockets_medium_range_ballistic_missile
+complete_special_project = sp:sp_rockets_long_range_ballistic_missile
+complete_special_project = sp:sp_nuclear_reactor
+complete_special_project = sp:sp_commercial_nuclear_reactor
+complete_special_project = sp:sp_nuclear_bomb
+complete_special_project = sp:sp_thermo_nuclear_bomb
+complete_special_project = sp:sp_nuclear_warheads
+
+
 if = {
 	limit = {
 		NOT = {has_dlc = "By Blood Alone"}
@@ -129,12 +144,13 @@ if = {
 	set_technology = {
 	main_battle_tank1 = 1
 	main_battle_tank2 = 1
-	#main_battle_tank3 = 1
+	main_battle_tank3 = 1
 	light_tank1 = 1
 	mechanised_infantry1 = 1
+	nonsnb_technicality_tech = 1
 	light_mechanized_infantry1 = 1
 	light_mechanized_infantry2 = 1
-	#mechanised_infantry2 = 1
+	mechanised_infantry2 = 1
 	}
 	create_equipment_variant = { name = "T-62" type = modern_tank_equipment_1 upgrades = { tank_armor_upgrade = 3 tank_gun_upgrade = 1 tank_reliability_upgrade = 1 tank_engine_upgrade = 3 } obsolete = yes }
 	create_equipment_variant = { name = "T-64" type = modern_tank_equipment_1 upgrades = { tank_armor_upgrade = 5 tank_gun_upgrade = 3 tank_reliability_upgrade = 3 tank_engine_upgrade = 5 } obsolete = yes }
@@ -148,9 +164,9 @@ if = {
 	set_technology = {
 		IFV_chassis_80s = 1
 		IFV_chassis = 1
+		technicality_tech = 1
 		light_mechanized_infantry1 = 1
 		light_mechanized_infantry2 = 1
-		IFV_chassis_00s = 1
 		main_battle_tank_chassis = 1
 		main_battle_tank_chassis_80s = 1
 		#main_battle_tank_chassis_00s = 1
@@ -290,26 +306,23 @@ if = {
 	}
 	create_equipment_variant = {
 		name = "PT-76"
-		type = light_tank_destroyer_chassis_1
+		type = light_tank_destroyer_chassis_0
 		parent_version = 0
 		modules = {
-			main_armament_slot = tank_auto_cannon
+			main_armament_slot = tank_ifv_medium_cannon
 			special_type_slot_1 = ergo_ifv_old
-			#turret_type_slot = tank_light_one_man_tank_turret
 			suspension_type_slot = tank_torsion_bar_suspension
-			armor_type_slot = tank_riveted_armor
+			armor_type_slot = tank_welded_armor
 			engine_type_slot = tank_diesel_engine
-			#special_type_slot_1 = tank_radio_1
 			optics_slot = tank_optics_1
 			special_type_slot_4 = main_ammo_bay
-			#atgm_slot = empty
 		}
 		upgrades = {
 			tank_nsb_armor_upgrade = 1
 			tank_nsb_engine_upgrade = 1
 		}
 		obsolete = no
-		icon = "GFX_SOV_mechanised_infantry1_medium"
+		icon = "GFX_SOV_light_tank1_medium"
 	}
 }
 set_technology = {
@@ -343,7 +356,7 @@ set_technology = {
 	#main_battle_tank2 = 1
 	#main_battle_tank3 = 1
 	#light_tank1 = 1
-	#mechanised_infantry1 = 1
+	
 	#mechanised_infantry2 = 1
 	#light_mechanized_infantry1 = 1
 	#light_mechanized_infantry2 = 1
@@ -362,7 +375,7 @@ set_technology = {
 	 
 	sp_artillery1 = 1
 	
-	## Air ##
+	# ## Air ##
 	# CAS1 = 1
 	# CAS2 = 1
 	# cv_CAS1 = 1
@@ -388,12 +401,9 @@ set_technology = {
 	electronic_mechanical_engineering = 1
 	radio = 1
 	atomic_research = 1
-	nuclear_reactor = 1
-	nukes = 1
+	
+	
 	experimental_rockets = 1
-	rocket_engines = 1
-	improved_rocket_engines = 1
-	advanced_rocket_engines = 1
 	
 	## Industry ##
 	basic_machine_tools = 1
@@ -427,30 +437,34 @@ if = {
 	set_technology = {
 		early_ship_hull_light = 1
 		basic_ship_hull_light = 1
+		early_ship_hull_patrol_boat = 1
 		early_ship_hull_cruiser = 1
 		basic_ship_hull_cruiser = 1
 		early_ship_hull_heavy = 1
 		basic_ship_hull_heavy = 1
-		ship_hull_super_heavy1 = 1
+		
 		early_ship_hull_carrier = 1
 		early_ship_hull_submarine = 1
 		basic_ship_hull_submarine = 1
+		ship_hull_fleet_carrier = 1
+		basic_ship_hull_fleet_carrier = 1
+		early_ship_hull_ballistic_submarine = 1
 		smoke_generator = 1
 		sonar = 1
 		basic_depth_charges = 1
 		improved_airplane_launcher = 1
 		basic_cruiser_armor_scheme = 1
-		basic_heavy_armor_scheme = 1
+		
 		basic_torpedo = 1
 		basic_battery = 1
 		basic_light_battery = 1
-		basic_medium_battery = 1
+		
 		basic_heavy_battery = 1
 		basic_secondary_battery = 1
+		basic_nuclear_reactors = 1
 		mtg_transport = 1
 		basic_naval_mines = 1
-		submarine_mine_laying = 1
-		basic_nuclear_reactors = 1
+		
 	}
 }
 
@@ -462,17 +476,11 @@ create_equipment_variant = { name = "Tu-22" type = strat_bomber_equipment_1 upgr
 create_equipment_variant = { name = "Tu-22M3" type = strat_bomber_equipment_1 upgrades = { plane_bomb_upgrade = 2 plane_engine_upgrade = 5 plane_reliability_upgrade = 4 } obsolete = yes }
 
 add_ideas = {
-	SOV_depopulation
 	idea_united_nations_security_council_member
 	limited_conscription
-	SOV_corrupt_oligarchy
-	SOV_deindustrialisation
-	SOV_utechka_mozgov
-	SOV_low_industrial_organisation
-	SOV_expluatate_nation
-	SOV_military_atrophy
-	SOV_soviet_stockpiles
-	mobilization_service_time_corrupt
+	SOV_fsb_fake_idea
+    SOV_economy_fake_idea
+	SOV_army_fake_idea
 }
 
 set_politics = {	
@@ -529,7 +537,6 @@ recruit_character = SOV_alexei_navalny
 recruit_character = SOV_mikhail_kasyanov
 recruit_character = SOV_gennady_semigin
 recruit_character = SOV_sergei_mironov
-recruit_character = SOV_vladimir_zhirinovsky
 recruit_character = SOV_andrey_savelyev
 recruit_character = SOV_igor_sergeyev
 recruit_character = SOV_valery_gerasimov
@@ -566,6 +573,37 @@ recruit_character = SOV_viktor_chirkov
 recruit_character = SOV_vladimir_vysotskiy
 recruit_character = SOV_andrey_shatrov
 recruit_character = SOV_mikhail_popov
+#new ones
+recruit_character = SOV_Aleksandr_Bastrykin
+recruit_character = SOV_Viktor_Zolotov
+recruit_character = SOV_Andrey_Belousov
+recruit_character = SOV_Yuri_Borisov
+recruit_character = SOV_Aleksandr_Bortnikov
+recruit_character = SOV_Patriarch_Kirill
+recruit_character = SOV_Elvira_Nabiulina
+recruit_character = SOV_Dmitry_Peskov
+recruit_character = SOV_Ksenia_Sobchak
+recruit_character = SOV_Vyacheslav_Volodin
+recruit_character = SOV_Vladimir_Zhirinovskiy
+recruit_character = SOV_vladimir_zhirinovsky
+recruit_character = SOV_Alexander_Lapin
+recruit_character = SOV_Gennadiy_Krasnikov
+recruit_character = SOV_Alexander_Zelin
+recruit_character = SOV_Anatoliy_Kornukov
+recruit_character = SOV_Sergey_Kobyilash
+recruit_character = SOV_Pavel_Deneykin
+recruit_character = SOV_Andrey_Alekseev
+recruit_character = SOV_Pavel_Popov
+recruit_character = SOV_Dmitry_Bylgakov
+activate_advisor = igor_sergeyev
+
+#New dynamic ideas 
+
+## List : 
+## 1 - economy
+## 2 - army
+## 3 - fsb 
+
 
 2000.8.12 = { set_country_flag = sov_kursk_sinking }
 
@@ -896,3 +934,8 @@ if = {
 		variant_name = "Su-25"
 	}
 }
+	add_equipment_to_stockpile = {
+			type = motorized_rocket_equipment_1 
+			amount = 720
+			producer = SOV
+		}

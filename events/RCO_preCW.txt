@@ -10,6 +10,7 @@ country_event = {
 	title = precw.1.t
 	desc = precw.1.d
 	picture = GFX_CPRF_meeting_in_Petetsrburg
+	fire_only_once = yes
 
 	is_triggered_only = yes
 
@@ -40,41 +41,16 @@ country_event = {
 			ideology = reactionary
 			popularity = 0.25
 		}
-		add_stability = -0.15
-		add_political_power = -20
 		set_politics = {
 			ruling_party = reactionary
 			elections_allowed = yes
 		}
-		set_global_flag = russia_reactionary_nofocus
-		hidden_effect = {
-			SOV = {
-				country_event = { days = 15 id = precw.2 }
+		hidden_effect = { 
+				country_event = {
+    				id = precw.2
+    				days = 15
+				} 
 			}
-		}
-	}
-	option = { # Zuga stays in power
-		name = precw.1.b
-		ai_chance = {
-
-			factor = 10
-			modifier = {
-				factor = 50
-				has_game_rule = {
-					rule = SOV_AI_BEHAVIOR
-					option = SOV_USSR
-				}
-			}
-			modifier = {
-				factor = 0
-				has_game_rule = {
-					rule = SOV_AI_BEHAVIOR
-					option = SOV_RESTORATION_USSR
-				}
-			}
-		}
-
-		add_ideas = SOV_zug_idea_political_instability
 	}
 }
 
@@ -84,18 +60,20 @@ country_event = {
 	title = pprecw.1.t
 	desc = pprecw.1.d
 	picture = GFX_russian_ruined_industry
+	fire_only_once = yes
 
 	is_triggered_only = yes
 
 	option = { # ok
 		name = pprecw.1.a
 		ai_chance = { factor = 75 }
-		add_political_power = -20
-		hidden_effect = {
-			SOV = {
-				country_event = { days = 20 id = precw.1 }
+		add_ideas = SOV_zug_crisis
+		hidden_effect = { 
+				country_event = {
+    				id = precw.1
+    				days = 15
+				} 
 			}
-		}
 	}
 }
 
@@ -105,21 +83,23 @@ country_event = {
 	title = precw.2.t
 	desc = precw.2.d
 	picture = GFX_communist_meeting_in_moscow
+	fire_only_once = yes
 
 	is_triggered_only = yes
 
 	option = { #Ok
 		name = precw.2.a
-		add_political_power = -10
+		add_political_power = 30
 		swap_ideas = {
 			remove_idea = SOV_zug_crisis
 			add_idea = SOV_zug_crisis_2
 		}
-		hidden_effect = {
-			SOV = {
-				country_event = { days = 20 id = precw.3 }
+		hidden_effect = { 
+				country_event = {
+    				id = precw.3
+    				days = 15
+				} 
 			}
-		}
 	}
 }
 
@@ -129,21 +109,23 @@ country_event = {
 	title = precw.3.t
 	desc = precw.3.d
 	picture = GFX_russian_police_working
+	fire_only_once = yes
 
 	is_triggered_only = yes
 
 	option = { #Ok
 		name = precw.3.a
-		add_political_power = -10
+		add_political_power = 10
 		swap_ideas = {
 			remove_idea = SOV_zug_crisis_2
 			add_idea = SOV_zug_crisis_3
 		}
-		hidden_effect = {
-			SOV = {
-				country_event = { days = 15 id = precw.4 }
+		hidden_effect = { 
+				country_event = {
+    				id = precw.4
+    				days = 15
+				} 
 			}
-		}
 	}
 }
 
@@ -153,6 +135,7 @@ country_event = {
 	title = precw.4.t
 	desc = precw.4.d
 	picture = GFX_russian_communist_coalition_congress
+	fire_only_once = yes
 
 	is_triggered_only = yes
 
@@ -184,12 +167,13 @@ country_event = {
 	title = precw.8.t
 	desc = precw.8.d
 	picture = GFX_petersburg_dockers
+	fire_only_once = yes
 
 	is_triggered_only = yes
 
 	option = { # Destroy it at any cost
 		name = precw.8.a
-		add_political_power = 25
+		add_political_power = 35
 		swap_ideas = {
 			remove_idea = SOV_zug_crisis_3
 			add_idea = SOV_zug_crisis_4
@@ -203,13 +187,14 @@ country_event = {
 	title = precw.5.t
 	desc = precw.5.d
 	picture = GFX_moscow_communist_march_1993
+	fire_only_once = yes
 
 	is_triggered_only = yes
 
 	option = { #Ok
 
 		name = precw.5.a
-		add_political_power = 1
+		add_political_power = 20
 	}
 }
 
@@ -229,7 +214,7 @@ country_event = {
 		}
 
 		name = precw.6.a
-		add_political_power = 1
+		add_political_power = 10
 		hidden_effect = {
 			SOV = {
 				country_event = { days = 10 id = precweasy.7 }
@@ -276,7 +261,7 @@ country_event = {
 
 	option = { # SOVIET REVOLUTION
 		name = precweasy.7.a
-		add_political_power = -10
+		custom_effect_tooltip = RCO_play_rco_TT
 		hidden_effect = {
 			set_global_flag = second_october
 			SOV = { delete_unit = {
@@ -395,6 +380,138 @@ country_event = {
 			}
 			RCO = {
 				change_tag_from = SOV
+				inherit_technology = SOV
+			}
+			set_province_name = {
+				id = 3151
+				name = "Leningrad"
+			}
+		}
+	}
+
+	option = { # SOVIET REVOLUTION
+		name = precweasy.7.b
+		ai_chance = {
+            base = 100       
+        }
+		custom_effect_tooltip = RCO_play_sov_TT
+		hidden_effect = {
+			set_global_flag = second_october
+			SOV = { delete_unit = {
+					disband = no #will refund equipment and manpower
+				}
+				set_equipment_fraction = 1
+			}
+			SOV = {
+				transfer_units_fraction= {
+					target = OMA
+					size = 1
+					stockpile_ratio = 0
+					army_ratio = 0
+					navy_ratio = 0
+					air_ratio = 1
+				}
+			}
+			SOV = {
+				load_focus_tree = SOV_cw_focus
+			}
+			SOV = {
+				remove_ideas = {
+					SOV_depopulation
+					idea_united_nations_security_council_member
+					SOV_corrupt_oligarchy
+					SOV_deindustrialisation
+					SOV_utechka_mozgov
+					SOV_low_industrial_organisation
+					SOV_expluatate_nation
+					SOV_military_atrophy
+					SOV_soviet_stockpiles
+				}
+			}
+			BLR = { leave_faction = yes }
+			ARM = { leave_faction = yes }
+			KYR = { leave_faction = yes }
+			TAJ = { leave_faction = yes }
+			RCO = {
+				set_state_owner = 195
+				set_state_controller = 195
+				set_state_owner = 146
+				set_state_controller = 146
+				set_state_owner = 216
+				set_state_controller = 216
+				set_state_owner = 244
+				set_state_controller = 244
+				set_state_owner = 208
+				set_state_controller = 208
+				set_state_owner = 263
+				set_state_controller = 263
+				set_state_owner = 209
+				set_state_controller = 209
+				set_state_owner = 904
+				set_state_controller = 904
+				set_state_owner = 210
+				set_state_controller = 210
+				set_state_owner = 246
+				set_state_controller = 246
+				set_state_owner = 247
+				set_state_controller = 247
+				set_state_owner = 248
+				set_state_controller = 248
+				set_state_owner = 264
+				set_state_controller = 264
+				set_state_owner = 253
+				set_state_controller = 253
+				set_state_owner = 219
+				set_state_controller = 219
+				set_state_owner = 242
+				set_state_controller = 242
+				set_state_owner = 243
+				set_state_controller = 243
+				set_state_owner = 224
+				set_state_controller = 224
+				set_state_owner = 205
+				set_state_controller = 205
+				set_state_owner = 223
+				set_state_controller = 223
+				set_state_owner = 254
+				set_state_controller = 254
+				set_state_owner = 252
+				set_state_controller = 252
+				set_state_owner = 220
+				set_state_controller = 220
+				set_state_owner = 222
+				set_state_controller = 222
+				set_state_owner = 258
+				set_state_controller = 258
+				set_state_owner = 257
+				set_state_controller = 257
+				set_state_owner = 255
+				set_state_controller = 255
+				set_state_owner = 250
+				set_state_controller = 250
+				set_state_owner = 239
+				set_state_controller = 239
+				set_state_owner = 260
+				set_state_controller = 260
+				set_state_owner = 240
+				set_state_controller = 240
+				set_state_owner = 903
+				set_state_controller = 903
+				set_state_owner = 569
+				set_state_controller = 569
+				set_state_owner = 570
+				set_state_controller = 570
+			}
+			every_state = {
+				limit = {
+					is_claimed_by = SOV
+					NOT = {
+						is_core_of = SOV
+					}
+				}
+				remove_claim_by = SOV
+			}
+			RCO = {
 				inherit_technology = SOV
 			}
 			set_province_name = {
@@ -561,17 +678,17 @@ news_event = {
 	}
 }
 
-#Limonov
+#chechens made peace and joined sov
 news_event = {
 	id = news.835
 	title = news.835.t
 	desc = news.835.d
-	picture = GFX_event_news_nazbol_miting
+	picture = GFX_event_news_chechens_meeting
 
 	is_triggered_only = yes
 	major = yes
 
-	option = {	#New hope for the mankind
+	option = {	#ok
 		name = news.835.a
 	}
 }
@@ -619,12 +736,12 @@ news_event = {
 	}
 }
 
-#independent cossacks
+#chechens rose news
 news_event = {
 	id = news.838
 	title = news.838.t
 	desc = news.838.d
-	picture = GFX_events_news_independent_cossacks
+	picture = GFX_event_news_chechen_rise
 
 	is_triggered_only = yes
 	major = yes

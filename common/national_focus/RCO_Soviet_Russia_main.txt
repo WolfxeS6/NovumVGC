@@ -403,12 +403,36 @@ focus_tree = {
 	}
 
 	focus = {
-		id = RCO_new_drones
-		icon = GFX_focus_goal_RCO_total_khoz
+		id = RCO_air_res_fac
+		icon = GFX_focus_goal_RCO_soviet_mobilization
 		x = 3
 		y = 2
 		cost = 4
 		prerequisite = { focus = RCO_new_fighters}
+		relative_position_id = RCO_in_the_skies
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			 random_owned_controlled_state = {
+                        limit = {
+                            can_construct_building = air_facility
+                        }
+                        construct_building_in_random_province = {
+                            air_facility = 1
+                        }
+                    }
+		}
+	}
+
+	focus = {
+		id = RCO_new_drones
+		icon = GFX_focus_goal_RCO_total_khoz
+		x = 3
+		y = 3
+		cost = 4
+		prerequisite = { focus = RCO_air_res_fac}
 		relative_position_id = RCO_in_the_skies
 		ai_will_do = {
 			factor = 5
@@ -641,6 +665,24 @@ focus_tree = {
 	}
 
 	focus = {
+		id = RCO_wagner_interbrigade
+		icon = GFX_focus_goal_RCO_relieable_economy
+		x = 2
+		y = 2
+		cost = 4
+		prerequisite = { focus = RCO_analise_cw_experience}
+		relative_position_id = RCO_on_the_land
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_vol_fct_increase_40_TT
+			add_to_variable = { rco_vols_factor = 0.4 }
+		}
+	}
+
+	focus = {
 		id = RCO_weapons_development
 		icon = GFX_focus_goal_RCO_weapons_development
 		x = 0
@@ -726,7 +768,7 @@ focus_tree = {
 		y = 2
 		cost = 5
 		relative_position_id = RCO_on_the_land
-		prerequisite = { focus = RCO_build_defensive_lines}
+		prerequisite = { focus = RCO_land_research_fac}
 		prerequisite = { focus = RCO_analise_cw_experience}
 		prerequisite = { focus = RCO_weapons_development}
 		ai_will_do = {
@@ -830,13 +872,49 @@ focus_tree = {
 	}
 
 	focus = {
+		id = RCO_land_research_fac
+		icon = GFX_focus_goal_RCO_great_war
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = RCO_on_the_land
+		prerequisite = { focus = RCO_on_the_land}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+                    limit = { 
+                        400 = {
+                            is_fully_controlled_by = ROOT
+                            air_facility < 1
+                            land_facility < 1
+                            naval_facility < 1
+                            nuclear_facility < 1
+                        }
+                    }
+
+                    400 = {
+                        add_building_construction = {
+                            type = land_facility
+                            level = 1
+                            instant_build = yes
+                            province = 6124 
+                        }
+                    }
+                }
+		}
+	}
+
+	focus = {
 		id = RCO_build_defensive_lines
 		icon = GFX_focus_goal_RCO_build_defensive_lines
 		x = -2
-		y = 1
-		cost = 4
+		y = 2
+		cost = 6
 		relative_position_id = RCO_on_the_land
-		prerequisite = { focus = RCO_on_the_land }
+		prerequisite = { focus = RCO_land_research_fac }
 		ai_will_do = {
 			factor = 5
 		}
@@ -1056,10 +1134,10 @@ focus_tree = {
 				id = cw.79
 			}
 			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 4
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 4
 					instant_build = yes
 				}
 			}
@@ -1110,26 +1188,26 @@ focus_tree = {
 				category = industry
 			}
 			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 3
 					instant_build = yes
 				}
 			}
 			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 3
 					instant_build = yes
 				}
 			}
 			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 3
 					instant_build = yes
 				}
 			}
@@ -1154,18 +1232,18 @@ focus_tree = {
 				rco_state_pop_growh = 0.1
 			}
 			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 4
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 4
 					instant_build = yes
 				}
 			}
 			random_owned_controlled_state = {
-				add_extra_state_shared_building_slots = 2
+				add_extra_state_shared_building_slots = 4
 				add_building_construction = {
 					type = industrial_complex
-					level = 2
+					level = 4
 					instant_build = yes
 				}
 			}
@@ -1476,6 +1554,7 @@ focus_tree = {
 			add_to_variable = {
 				rco_state_pp_factor = 0.05
 			}
+			country_event = { id = cw.82 }
 		}
 	}
 
@@ -1523,6 +1602,9 @@ focus_tree = {
 			custom_effect_tooltip = RCO_people_stateideologydefense_increase_10_TT
 			custom_effect_tooltip = RCO_state_stab_increase_10_TT
 			custom_effect_tooltip = RCO_warsupport_increase_10_TT
+			country_event = {
+				id = cw.80
+			}
 			add_to_variable = {
 				rco_state_ideology_defence = 0.1
 			}
@@ -1669,6 +1751,10 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 100
+			custom_effect_tooltip = SOV_justonus_decrease_90_TT
+			add_to_variable = {
+				rco_justification_on_us_time_factor = -0.9
+			}
 		}
 	}
 

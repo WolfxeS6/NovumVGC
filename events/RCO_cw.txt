@@ -1113,22 +1113,30 @@ country_event = { #pol decides what to do next
     			target = RCO
     			generator = { 95 206 204 194 }
     			expire = 90
-}
+				}
 			}
 			declare_war_on = {
     		target = RCO
     		type = take_state_focus
-}
-hidden_effect = {
-	RCO = { activate_mission = RCO_pol_capture_east_russia_mission }
-	set_global_flag = POL_attacked_rco_in_cw
+			}
+			declare_war_on = {
+    		target = UCO
+    		type = take_state_focus
+			}
+			hidden_effect = {
+				RCO = { activate_mission = RCO_pol_capture_east_russia_mission }
+				set_global_flag = POL_attacked_rco_in_cw
+				If = {
+					limit = { is_ai = yes }
+					load_oob = "POL_reservists"
+				}
+				news_event = {
+					id = news.842
+					days = 1
+				}
+			}
 	}
-	If = {
-		limit = { is_ai = yes }
-		load_oob = "POL_reservists"
 	}
-}
-}
 
 country_event = { #pol can demand peace
 	id = cw.26
@@ -2401,22 +2409,26 @@ country_event = {
 		option = { # russia annexes
 				name =  cw.59.a
 				ai_chance = {
-        			base = 0  
-					modifier = { 
-						is_in_faction = yes 
-						factor = 1 
-					}   
-    			}
+        			base = 50
+				}
 				RCO = {
 					annex_country = {
 			 				target = PREV
 								transfer_troops = yes
 							}
+							country_event = { id = cw.63 } #event to inform rco
 					}
 			}
 
 		option = { # decline request
 				name =  cw.59.b
+				ai_chance = {
+        			base = 30  
+					modifier = { 
+						is_in_faction = yes 
+						add = 150
+					}   
+    			}
 				RCO = {
 					create_wargoal = {
 								type = annex_everything
@@ -2662,11 +2674,7 @@ country_event = {
 	option = { # ok
 		name = cw.67.a
 		ai_chance = {
-			base = 50
-			modifier = { 
-						is_in_faction = no 
-						factor = 20 
-					} 
+			base = 100
 		}
 		RCO = { puppet = PREV }
 		RCO = { country_event = { id = cw.63 } }
@@ -2675,12 +2683,12 @@ country_event = {
 	option = { # no
 		name = cw.67.b
 		ai_chance = {
-			base = 50
-			modifier = { 
+        			base = 0  
+					modifier = { 
 						is_in_faction = yes 
-						factor = 50 
-					} 
-		}
+						add = 150
+					}   
+    			}
 		RCO = {
 				create_wargoal = {
     				type = puppet_wargoal_focus
@@ -3041,6 +3049,30 @@ country_event = {
 		}
 		remove_all_usa_cw_pb_ideas = yes
 		remove_all_usa_cw_ideas = yes
+		hidden_effect = {
+			remove_ideas = {
+				USA_RCO_cw_cost_9
+				USA_RCO_cw_cost_8
+				USA_RCO_cw_cost_7
+				USA_RCO_cw_cost_6
+				USA_RCO_cw_cost_5
+				USA_RCO_cw_cost_4
+				USA_RCO_cw_cost_3
+				USA_RCO_cw_cost_2
+				USA_RCO_cw_cost_1
+				USA_RCO_cw_cost
+				USA_RCO_cw_pb_cost_9
+				USA_RCO_cw_pb_cost_8
+				USA_RCO_cw_pb_cost_7
+				USA_RCO_cw_pb_cost_6
+				USA_RCO_cw_pb_cost_5
+				USA_RCO_cw_pb_cost_4
+				USA_RCO_cw_pb_cost_3
+				USA_RCO_cw_pb_cost_2
+				USA_RCO_cw_pb_cost_1
+				USA_RCO_cw_pb_cost
+			}
+		}
 	}
 }
 
@@ -3231,18 +3263,7 @@ country_event = {
 
 	option = { # ok
 		name = cw.78.a
-		if = {
-			limit = {
-				RCO_Dmitry_Goblin_Puchkov = { is_advisor = yes }
-			}
-			add_political_power = 150
-			}
-			if = {
-			limit = {
-				NOT = { RCO_Dmitry_Goblin_Puchkov = { is_advisor = yes } }
-			}
 			activate_advisor = RCO_Dmitry_Goblin_Puchkov
-			}
 	}
 }
 
@@ -3267,6 +3288,152 @@ country_event = {
 		add_stability = 0.05
 		custom_effect_tooltip = RCO_prodoutput_increase_5_TT
 		add_to_variable = { rco_economy_prod_output = 0.05 }
+	}
+}
+
+## bobkov
+
+country_event = {
+	id = cw.80
+	title = cw.80.t
+	desc = cw.80.d
+	picture = GFX_event_rco_kgb_2
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.80.a
+		add_political_power = 50
+	}
+
+	option = { # ok
+		name = cw.80.b
+		activate_advisor = RCO_filipp_bobkov
+	}
+}
+
+## generals desert sov
+
+country_event = {
+	id = cw.81
+	title = cw.81.t
+	desc = cw.81.d
+	picture = GFX_event_rco_tank
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.81.a
+		add_corps_commander_role = {
+			Character = RCO_valeriy_gerasimov
+			skill = 2
+			traits={ old_guard }
+			attack_skill = 2
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 2
+		}
+		add_corps_commander_role = {
+			Character = RCO_aleksandr_dvornikov
+			skill = 3
+			traits = {
+				ranger
+				bearer_of_artillery
+			}
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 3
+		}
+		add_advisor_role = {
+			character = RCO_aleksandr_dvornikov
+			advisor = {
+				slot = high_command
+				cost = 150
+				idea_token = RCO_aleksandr_dvornikov
+				traits = {
+					army_artillery_2
+				}
+			}
+		}
+		add_corps_commander_role = {
+			Character = RCO_pavel_popov
+			skill = 2
+			traits={ panzer_leader }
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 2
+		}
+		add_corps_commander_role = {
+			Character = RCO_vadim_pankov
+			skill = 3
+			traits = {
+				commando
+			}
+			attack_skill = 2
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 5
+		}
+		add_corps_commander_role = {
+			Character = RCO_ivan_popov
+			skill = 3
+			traits = {
+				fortress_buster
+			}
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 2
+		}
+		SOV = {
+			retire_character = SOV_valery_gerasimov
+			retire_character = SOV_vadim_pankov
+			retire_character = SOV_pavel_popov
+			retire_character = SOV_aleksandr_dvornikov
+		}
+	}
+}
+
+## army_purge
+
+country_event = {
+	id = cw.82
+	title = cw.82.t
+	desc = cw.82.d
+	picture = GFX_event_rco_tank_2
+
+	is_triggered_only = yes
+
+	option = { # purge
+		name = cw.82.a
+		add_timed_idea = {
+				idea = RCO_army_purge_idea
+				days = 365
+			}
+			custom_effect_tooltip = RKKA_org_increase_5_TT
+			custom_effect_tooltip = RKKA_breakthrough_increase_5_TT
+			custom_effect_tooltip = RKKA_winterattr_decrease_20_TT
+			add_to_variable = {
+				RKKA_org = 0.05
+			}
+			add_to_variable = {
+				rco_army_breakthrg_fct = 0.05
+			}
+			add_to_variable = {
+				rco_army_winter_attr = -0.2
+			}
+			retire_character = RCO_sergei_surovikin
+			retire_character = RCO_matvei_petrov
+			retire_character = RCO_kirill_badalin
+			retire_character = RCO_valeriy_gerasimov
+			retire_character = RCO_fyodor_muhin
+	}
+
+	option = { # purge
+		name = cw.82.b
+		add_political_power = -150
 	}
 }
 

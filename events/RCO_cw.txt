@@ -1813,6 +1813,14 @@ country_event = {
 		add_war_support = -0.1
 		white_peace = RCO
 		white_peace = UCO
+		remove_wargoal = {
+			type = all
+			target = RCO
+		}
+		remove_wargoal = {
+			type = all
+			target = UCO
+		}
 		set_rule = {
    		can_join_factions = yes
 	}
@@ -1840,6 +1848,16 @@ country_event = {
 		add_stability = 0.05
 		add_war_support = 0.05
 		clr_global_flag = POL_attacked_rco_in_cw
+		POL = {
+			remove_wargoal = {
+			type = all
+			target = RCO
+		}
+		remove_wargoal = {
+			type = all
+			target = UCO
+		}
+		}
 	}
 }
 
@@ -1863,6 +1881,14 @@ country_event = {
 			set_rule = {
 				can_join_factions = yes
 			}
+			remove_wargoal = {
+			type = all
+			target = RCO
+		}
+		remove_wargoal = {
+			type = all
+			target = UCO
+		}
 			set_state_owner = 95
 			set_state_controller = 95
 			set_state_owner = 206
@@ -2371,6 +2397,14 @@ country_event = {
 		UCO = { white_peace = POL }
 		POL = {
 			country_event = { id = cw.58 }
+			remove_wargoal = {
+			type = all
+			target = RCO
+		}
+		remove_wargoal = {
+			type = all
+			target = UCO
+		}
 		}
 	}
 }
@@ -2406,6 +2440,16 @@ country_event = {
 			transfer_state = 73
 		}
 		clr_global_flag = POL_attacked_rco_in_cw
+		POL = {
+			remove_wargoal = {
+			type = all
+			target = RCO
+		}
+		remove_wargoal = {
+			type = all
+			target = UCO
+		}
+		}
 	}
 }
 
@@ -3446,6 +3490,192 @@ country_event = {
 	option = { # purge
 		name = cw.82.b
 		add_political_power = -150
+	}
+}
+
+## deciding leadership
+
+country_event = {
+	id = cw.83
+	title = cw.83.t
+	desc = cw.83.d
+	picture = GFX_russian_communist_coalition_congress
+
+	is_triggered_only = yes
+
+	option = { # anpilov
+		name = cw.83.a
+		promote_character = RCO_Alexander_Kazenov
+		set_country_flag = rco_army_allowed
+	}
+
+	option = { # popov
+		name = cw.83.b
+		promote_character = RCO_Mikhail_Popov
+		set_country_flag = rco_army_allowed
+	}
+
+	option = { # nazbols
+		name = cw.83.c
+		custom_effect_tooltip = RCO_nazbols_come_to_power_TT
+		set_country_flag = rco_army_allowed
+		set_country_flag = russia_nazbols
+		activate_advisor = RCO_sergei_surovikin
+		mark_focus_tree_layout_dirty = yes
+		hidden_effect = {
+				country_event = {
+				id = cw.85
+				days = 20
+			}
+			}
+	}
+}
+
+## deciding leadership nazbols
+
+country_event = {
+	id = cw.84
+	title = cw.84.t
+	desc = cw.84.d
+	picture = GFX_event_rco_nazbols
+
+	is_triggered_only = yes
+
+	option = { # limonov
+		name = cw.84.a
+		promote_character = RCO_Eduard_Limonov
+	}
+
+	option = { # surovikin
+		name = cw.84.b
+		promote_character = RCO_sergei_surovikin
+	}
+}
+
+## deteriorating economy
+
+country_event = {
+	id = cw.85
+	title = cw.85.t
+	desc = cw.85.d 
+	picture = GFX_russian_ruined_industry
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.85.a
+		set_country_flag = rco_deteriorating_ec_flag
+		activate_mission = RCO_naz_deteriorating_economy_mission
+		custom_effect_tooltip = RCO_prodoutput_increase_5_TT
+		custom_effect_tooltip = RCO_prodgrowh_increase_10_TT
+		custom_effect_tooltip = RCO_maxprod_increase_5_TT
+		add_to_variable = { rco_economy_max_poduction_capacity = 0.05 }
+		add_to_variable = { rco_economy_prod_output = 0.05 }
+		add_to_variable = { rco_economy_prod_growh = 0.1 }
+	}
+}
+
+## gulag
+
+country_event = {
+	id = cw.86
+	title = cw.86.t
+	desc = cw.86.d
+	picture = GFX_event_soviet_industry
+
+	is_triggered_only = yes
+
+	option = { # ok
+		name = cw.86.a
+		custom_effect_tooltip = RCO_unlockgulag_TT
+	}
+}
+
+## military science
+
+country_event = {
+	id = cw.87
+	title = cw.87.t
+	desc = cw.87.d
+	picture = GFX_event_rco_tank_2
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_research_slot = 1
+	}
+
+	option = { # invest in tanks
+		name = cw.87.a
+		add_tech_bonus = {
+			name = tech_bonus
+			bonus = 1
+			uses = 1
+			category = cat_light_mechanized_equipment
+		}
+		add_tech_bonus = {
+			name = tech_bonus
+			bonus = 1
+			uses = 1
+			category = armor
+		}
+	}
+
+	option = { # invest in small arms
+		name = cw.87.b
+		add_tech_bonus = {
+			name = tech_bonus
+			bonus = 0.8
+			uses = 4
+			category = infantry_weapons
+		}
+	}
+
+	option = { # invest in air
+		name = cw.87.c
+		add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 3
+				uses = 1
+				category = light_fighter
+			}
+	}
+}
+
+## additional army bonuses nazbol 
+
+country_event = {
+	id = cw.88
+	title = cw.88.t
+	desc = cw.88.d
+	picture = GFX_event_red_btr
+
+	is_triggered_only = yes
+
+	option = { # armour
+		name = cw.88.a
+		custom_effect_tooltip = RKKA_mechattack_increase_7_TT
+		custom_effect_tooltip = RKKA_mechdef2_increase_10_TT
+		add_to_variable = { RKKA_army_tank_attack = 0.07 }
+		add_to_variable = { RKKA_army_mech_def = 0.1}
+	}
+
+	option = { # artillery
+		name = cw.88.b
+		custom_effect_tooltip = RKKA_artyattack_increase_15_TT
+		custom_effect_tooltip = RKKA_artydef_increase_15_TT
+		add_to_variable = { RKKA_army_art_attack = 0.15 }
+		add_to_variable = { RKKA_army_art_def = 0.15 }
+	}
+
+	option = { # specops
+		name = cw.88.c
+		custom_effect_tooltip = RKKA_speccap_increase_20_TT
+		custom_effect_tooltip = RKKA_specattack_increase_15_TT
+		custom_effect_tooltip = sov_new_vdv_tech_TT
+		hidden_effect = { set_technology = { soviet_vdv_tech = 1 } }
+		add_to_variable = { RKKA_army_specs_cap = 0.2 }
+		add_to_variable = { RKKA_army_specs_attack = 0.15 }
 	}
 }
 

@@ -1,0 +1,2935 @@
+#       #     #     ####    #       #    #      ####    ######  ####
+#     #    #   #   #   #    #     #    # #     #   #     #     #   #
+#   #     #   #   ####      #   #    #   #    ####      #      #
+# #      #   #   #   #      # #    #######   #   #     # #     #
+#         #     #    #      #    #       #  #    #    #  ####
+
+#####     #    #      ####   ####  #   #   ####  #       #  #####  #  #
+#    #  #   #  #      #   #  #     #   #   #      #     #     #    # #
+#####   #   #  #       #     #     #####   ####    #   #      #    ##
+#    #  #   #  #    #    #   #     #   #   #        # #       #    # #
+#####     #    ####  ####    ####  #   #   ####      #      #####  #  #
+
+
+
+focus_tree = {
+	id = RCO_focus_main
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = RCO
+		}
+	}
+
+	default = no
+
+	continuous_focus_position = { x = 5 y = 1500}
+
+	#################### CW PART ENDED
+
+	focus = {
+		id = RCO_army_development
+		icon = GFX_focus_goal_RCO_army_improvment
+		x = -15
+		y = 0
+		cost = 4
+		relative_position_id = RCO_new_constitution
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_org_increase_5_TT
+			custom_effect_tooltip = RKKA_morale_increase_5_TT
+			custom_effect_tooltip = RKKA_min_train_level_increase_19_TT
+			add_to_variable = {
+				RKKA_org = 0.05
+			}
+			add_to_variable = {
+				RKKA_morale = 0.05
+			}
+			add_to_variable = {
+				RKKA_min_train_level = 0.19
+			}
+			army_experience = 30
+			air_experience = 10
+			navy_experience = 10
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+				random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			}
+		}
+
+	######## NAVY
+
+	focus = {
+		id = RCO_and_in_the_sea
+		icon = GFX_focus_goal_RCO_and_in_the_sea
+		x = -6
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_army_development}
+		relative_position_id = RCO_army_development
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			navy_experience = 50
+			add_tech_bonus = {
+				name = naval_doc_bonus
+				bonus = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_submarine_programms
+		icon = GFX_focus_goal_RCO_submarines_development
+		x = -1
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_and_in_the_sea}
+		mutually_exclusive = { focus = RCO_carriers_programms }
+		relative_position_id = RCO_and_in_the_sea
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = sub_bonus
+				bonus = 0.4
+				uses = 2
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_submarine_innovative
+		icon = submarines
+		x = -1
+		y = 2
+		cost = 4
+		prerequisite = { focus = RCO_submarine_programms}
+		relative_position_id = RCO_and_in_the_sea
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = sub_bonus
+				bonus = 3
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_carriers_programms
+		icon = GFX_focus_goal_RCO_partizan_tacticks
+		x = 1
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_and_in_the_sea}
+		mutually_exclusive = { focus = RCO_submarine_programms }
+		relative_position_id = RCO_and_in_the_sea
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = submarine_bonus
+				bonus = 0.6
+				category = cv_tech
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_escort_ships
+		icon = battleships
+		x = 1
+		y = 2
+		cost = 4
+		prerequisite = { focus = RCO_carriers_programms}
+		relative_position_id = RCO_and_in_the_sea
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = destroyer_bonus
+				bonus = 0.5
+				uses = 2
+				category = dd_tech
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_naval_doctrines
+		icon = GFX_focus_goal_RCO_naval_doctrine_development
+		x = 0
+		y = 3
+		cost = 4
+		prerequisite = { 
+			focus = RCO_submarine_innovative
+			focus = RCO_escort_ships
+			}
+		relative_position_id = RCO_and_in_the_sea
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 3
+				category = naval_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_dockyards
+		icon = GFX_focus_goal_RCO_new_dockyards
+		x = -3
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_and_in_the_sea}
+		relative_position_id = RCO_and_in_the_sea
+		ai_will_do = {
+			factor = 5
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_dockyards2
+		icon = GFX_focus_goal_RCO_new_dockyards_2
+		x = -3
+		y = 2
+		cost = 4
+		prerequisite = { focus = RCO_new_dockyards}
+		relative_position_id = RCO_and_in_the_sea
+		ai_will_do = {
+			factor = 5
+		}
+
+		bypass = {
+			custom_trigger_tooltip = {
+				tooltip = construction_effort_tt
+				all_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size < 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = dockyard
+					level = 4
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = dockyard
+					level = 4
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = dockyard
+					level = 4
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	######## AIR
+
+	focus = {
+		id = RCO_in_the_skies
+		icon = GFX_focus_goal_RCO_in_the_skies
+		x = 6
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_army_development}
+		relative_position_id = RCO_army_development
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			air_experience = 50
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.25
+				uses = 2
+				category = air_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_fighters
+		icon = GFX_focus_goal_RCO_Fighter_focus
+		x = 3
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_army_development}
+		relative_position_id = RCO_in_the_skies
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 2
+				uses = 1
+				category = light_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_drones
+		icon = GFX_focus_goal_RCO_total_khoz
+		x = 3
+		y = 2
+		cost = 4
+		prerequisite = { focus = RCO_new_fighters}
+		relative_position_id = RCO_in_the_skies
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_groundattack_increase_5_TT
+			add_to_variable = { RKKA_army_ground_attack_fct = 0.05 }
+			add_tech_bonus = {
+			name = tech_bonus
+			bonus = 2.0
+			uses = 2
+			category = drone_tech
+		}
+		add_tech_bonus = {
+			name = tech_bonus
+			bonus = 2
+			uses = 1
+			category = tactical_bomber
+		}
+		}
+	}
+
+	focus = {
+		id = RCO_restore_soviet_bombers
+		icon = GFX_focus_goal_RCO_vechicles_industry_development
+		x = -1
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_in_the_skies}
+		mutually_exclusive = { focus = RCO_fighter_focus }
+		relative_position_id = RCO_in_the_skies
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_strat_bomb_fct_increase_15_TT
+			add_to_variable = { RKKA_strat_bombing_eff = 0.15 }
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 0.5
+				category = cat_strategic_bomber
+			}
+			if = {
+				limit = {
+						has_dlc = "By Blood Alone"
+				}
+				create_equipment_variant = {
+					name = "Tu-160" 
+					type = large_plane_airframe_1
+					modules = {
+						fixed_main_weapon_slot = large_bomb_bay
+						fixed_auxiliary_weapon_slot_1 = large_bomb_bay
+						fixed_auxiliary_weapon_slot_2 = large_bomb_bay
+						engine_type_slot = engine_1_4x
+						special_type_slot_1 = empty
+						special_type_slot_3 = armor_stealth_2_medium
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {has_dlc = "By Blood Alone"}
+				}
+				add_equipment_to_stockpile = {
+					type = strat_bomber_equipment_1
+					amount = 200
+					producer = RCO
+				}
+			}
+			if = {
+				limit = {
+					has_dlc = "By Blood Alone"
+				}
+				add_equipment_to_stockpile = {
+					type = large_plane_airframe_1
+					amount = 200
+					producer = SOV
+					variant_name = "Tu-160"
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_air_doctrines
+		icon = GFX_focus_goal_sov_vvs_focus
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = RCO_in_the_skies
+
+		prerequisite = {
+			focus = RCO_restore_soviet_bombers
+			focus = RCO_fighter_focus
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	focus = {
+		id = RCO_fighter_focus
+		icon = GFX_focus_goal_RCO_improve_armour_tactics
+		x = 1
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_in_the_skies}
+		mutually_exclusive = { focus = RCO_restore_soviet_bombers }
+		relative_position_id = RCO_in_the_skies
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_ideas = RCO_fighter_focus_idea
+		}
+	}
+
+	focus = {
+		id = RCO_academy_of_pilots
+		icon = GFX_focus_goal_RCO_develop_pilot_trainings
+		x = 1
+		y = 3
+		cost = 4
+		prerequisite = { focus = RCO_new_air_doctrines}
+		mutually_exclusive = { focus = RCO_standard_air_training }
+		relative_position_id = RCO_in_the_skies
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_ace_generation_fct_increase_15_TT
+			custom_effect_tooltip = RKKA_airefficiency_increase_7_TT
+			add_to_variable = { RKKA_ace_generation_fct = 0.15 }
+			add_to_variable = { RKKA_army_air_eff = 0.07 }
+		}
+	}
+
+	focus = {
+		id = RCO_standard_air_training
+		icon = GFX_focus_goal_RCO_develop_air_doctrines
+		x = -1
+		y = 3
+		cost = 4
+		prerequisite = { focus = RCO_new_air_doctrines}
+		mutually_exclusive = { focus = RCO_academy_of_pilots }
+		relative_position_id = RCO_in_the_skies
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+						has_idea = RCO_fighter_focus_idea
+				}
+				swap_ideas = {
+					remove_idea = RCO_fighter_focus_idea
+					add_idea = RCO_fighter2_focus_idea
+				}
+			}
+			else = {
+				add_ideas = RCO_fighter_focus_idea
+			}
+		}
+	}
+
+	######## LAND ARMY
+
+	focus = {
+		id = RCO_on_the_land
+		icon = GFX_focus_goal_RCO_on_the_land
+		x = 0
+		y = 1
+		cost = 4
+		relative_position_id = RCO_army_development
+		prerequisite = { focus = RCO_army_development}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			army_experience = 30
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			custom_effect_tooltip = RKKA_attackingspeed_increase_5_TT
+			custom_effect_tooltip = RKKA_coordination_increase_5_TT
+			add_to_variable = { RKKA_army_attacking_spd = 0.05 }
+			add_to_variable = { RKKA_army_coord_bonus = 0.05 }
+		}
+	}
+
+	focus = {
+		id = RCO_analise_cw_experience
+		icon = GFX_focus_goal_RCO_analise_cw_experience
+		x = 2
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_on_the_land}
+		relative_position_id = RCO_on_the_land
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 0.25
+				uses = 3
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_weapons_development
+		icon = GFX_focus_goal_RCO_weapons_development
+		x = 0
+		y = 1
+		cost = 4
+		prerequisite = { focus = RCO_on_the_land}
+		relative_position_id = RCO_on_the_land
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_weapons_bonus
+				bonus = 1.0
+				uses = 3
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = UKR_army_support_def
+				bonus = 1
+				uses = 1
+				technology = tech_recon
+				technology = tech_recon2
+				technology = tech_recon3
+				technology = tech_recon4
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_politruks_instead_comissars
+		icon = GFX_focus_goal_RCO_vsevobuch
+		x = -3
+		y = 3
+		cost = 5
+		relative_position_id = RCO_on_the_land
+		prerequisite = { focus = RCO_partisan_warfare_tactics}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_morale_increase_10_TT
+			custom_effect_tooltip = RKKA_traintime_decrease_15_TT
+			add_to_variable = {
+				RKKA_morale = 0.1
+			}
+			add_to_variable = {
+				RKKA_army_tr_time = -0.15
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_improve_logistics
+		icon = GFX_focus_goal_RCO_improve_supply
+		x = 3
+		y = 3
+		cost = 5
+		relative_position_id = RCO_on_the_land
+		prerequisite = { focus = RCO_partisan_warfare_tactics}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_supplcons_decrease_15_TT
+			custom_effect_tooltip = RKKA_attrition_decrease_15_TT
+			add_to_variable = {
+				RKKA_attrition = -0.15
+			}
+			add_to_variable = {
+				RKKA_army_supply_cons = -0.15
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_partisan_warfare_tactics
+		icon = GFX_focus_goal_RCO_politruks
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = RCO_on_the_land
+		prerequisite = { focus = RCO_build_defensive_lines}
+		prerequisite = { focus = RCO_analise_cw_experience}
+		prerequisite = { focus = RCO_weapons_development}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = rco_new_width_TT
+			custom_effect_tooltip = RKKA_org_increase_10_TT
+			custom_effect_tooltip = RKKA_brigsize_increase_1_TT
+			custom_effect_tooltip = RKKA_damage_to_enemy_garrison_increase_20_TT
+			custom_effect_tooltip = RKKA_compliance_in_enemy_increase_15_TT
+			custom_effect_tooltip = RKKA_exp_loss_in_combat_decrease_10_TT
+			add_to_variable = {
+				RKKA_exp_loss_in_combat = -0.1
+			}
+			add_to_variable = {
+				RKKA_additional_size_bonus = 1
+			}
+			add_to_variable = {
+				RKKA_org = 0.1
+			}
+			add_to_variable = {
+				RKKA_damage_to_enemy_garrison = 0.2
+			}
+			add_to_variable = {
+				RKKA_compliance_in_enemy = 0.15
+			}
+			hidden_effect = { set_technology = { soviet_rco_width_tech = 1 } }
+		}
+	}
+
+	focus = {
+		id = RCO_develop_motostrelki
+		icon = GFX_focus_goal_RCO_organize_military_industry
+		x = -1
+		y = 3
+		cost = 5
+		relative_position_id = RCO_on_the_land
+		prerequisite = { focus = RCO_partisan_warfare_tactics}
+		mutually_exclusive = { focus = RCO_develop_artillery }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_mechattack2_increase_10_TT
+			custom_effect_tooltip = RKKA_mechdef2_increase_5_TT
+			add_to_variable = {
+				RKKA_army_mech_def = 0.05
+			}
+			add_to_variable = {
+				RKKA_army_mech_attack = 0.1
+			}
+			add_tech_bonus = {
+				name = UKR_army_armour_atk
+				bonus = 1
+				uses = 2
+				category = cat_mechanized_equipment
+			}
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 2
+				uses = 1
+				category = armor
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_develop_artillery
+		icon = GFX_focus_goal_RCO_rco_artillery
+		x = 1
+		y = 3
+		cost = 5
+		relative_position_id = RCO_on_the_land
+		prerequisite = { focus = RCO_partisan_warfare_tactics}
+		mutually_exclusive = { focus = RCO_develop_motostrelki }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = rco_new_arty_width_TT
+			custom_effect_tooltip = RKKA_artyattack_increase_15_TT
+			custom_effect_tooltip = RKKA_artydef_increase_15_TT
+			add_to_variable = {
+				RKKA_army_art_attack = 0.15
+			}
+			add_to_variable = {
+				RKKA_army_art_def = 0.15
+			}
+			add_tech_bonus = {
+				name = special_forces_bonus
+				bonus = 0.5
+				uses = 2
+				category = artillery
+			}
+			hidden_effect = { set_technology = { rco_artillery_tech = 1 } }
+		}
+	}
+
+	focus = {
+		id = RCO_build_defensive_lines
+		icon = GFX_focus_goal_RCO_build_defensive_lines
+		x = -2
+		y = 1
+		cost = 4
+		relative_position_id = RCO_on_the_land
+		prerequisite = { focus = RCO_on_the_land }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = UKR_army_support_def_c
+				bonus = 0.5
+				ahead_reduction = 1
+				uses = 2
+				technology = tech_engineers
+				technology = tech_engineers2
+				technology = tech_engineers3
+				technology = tech_engineers4
+
+			}
+			195 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 4
+						province = 3151
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 149
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 9150
+						instant_build = yes
+					}
+				}
+			}
+			209 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 11202
+						instant_build = yes
+					}
+				}
+			}
+			263 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 117
+						instant_build = yes
+					}
+				}
+			}
+			242 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 306
+						instant_build = yes
+					}
+				}
+			}
+			224 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 3335
+						instant_build = yes
+					}
+				}
+			}
+			222 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 2
+						province = 9355
+						instant_build = yes
+					}
+				}
+			}
+			219 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 6380
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 301
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 6414
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 3391
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_armored_forces
+		icon = GFX_focus_goal_RCO_new_armoured_forces
+		x = 0
+		y = 4
+		cost = 5
+		relative_position_id = RCO_on_the_land
+		prerequisite = { 
+			focus = RCO_develop_motostrelki
+			focus = RCO_develop_artillery
+			}
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_mechattack_increase_5_TT
+			custom_effect_tooltip = RKKA_mechdef_increase_5_TT
+			add_to_variable = {
+				RKKA_army_tank_attack = 0.05
+			}
+			add_to_variable = {
+				RKKA_army_tank_def = 0.05
+			}
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 0.5
+				uses = 3
+				category = armor
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	######### ECONOMY
+
+	focus = {
+		id = RCO_cancel_war_communism
+		icon = GFX_focus_goal_RCO_cancel_war_communism
+		x = 8
+		y = 0
+		cost = 4
+		relative_position_id = RCO_new_constitution
+
+
+		ai_will_do = { factor = 5 }
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_prodgrowh_increase_5_TT
+			custom_effect_tooltip = RCO_people_increase_cw_5_TT
+			add_to_variable = {
+				rco_economy_prod_growh = 0.05
+			}
+			add_to_variable = {
+				rco_state_pop_growh = 0.05
+			}
+			add_to_variable = { NVX_ECO_health = 70 tooltip = additional_economic_health_2 }
+		}
+	}
+
+	focus = {
+		id = RCO_reorganise_VSNH
+		icon = GFX_focus_goal_RCO_reform_UNCH
+		x = -3
+		y = 1
+		cost = 4
+		relative_position_id = RCO_cancel_war_communism
+
+		prerequisite = { focus = RCO_cancel_war_communism}
+
+		ai_will_do = { factor = 5 }
+
+		completion_reward = {
+			add_political_power = -50
+			custom_effect_tooltip = RCO_sovetniki_decrease_20_TT
+			custom_effect_tooltip = RCO_research_increase_10_TT
+			custom_effect_tooltip = RCO_constslots_increase_cw_10_TT
+			add_to_variable = {
+				rco_state_trade_law_cost_factor = -0.2
+			}
+			add_to_variable = {
+				rco_state_economy_cost_factor = -0.2
+			}
+			add_to_variable = {
+				rco_state_research_speed = 0.1
+			}
+			add_to_variable = {
+				rco_economy_const_slots = 0.1
+			}
+			country_event = {
+				id = cw.79
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_create_trusts_and_syndicates
+		icon = GFX_focus_goal_RCO_create_syndicates
+		x = -1
+		y = 1
+		cost = 4
+		relative_position_id = RCO_cancel_war_communism
+		prerequisite = { focus = RCO_cancel_war_communism}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_CG_decrease_10_TT
+			custom_effect_tooltip = RCO_constspeed_increase_10_TT
+			add_to_variable = {
+				rco_economy_CG = -0.1
+			}
+			add_to_variable = {
+				rco_economy_const_speed = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_industrial_investments
+		icon = GFX_focus_goal_RCO_prioritize_industry_development
+		x = 1
+		y = 1
+		cost = 4
+		relative_position_id = RCO_cancel_war_communism
+		prerequisite = { focus = RCO_cancel_war_communism}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.9
+				uses = 5
+				category = industry
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_develop_agroindustry
+		icon = GFX_focus_goal_RCO_develop_agroindustry
+		x = 1
+		y = 2
+		cost = 4
+		relative_position_id = RCO_cancel_war_communism
+
+		prerequisite = { focus = RCO_industrial_investments}
+
+		ai_will_do = { factor = 5 }
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_people_increase_cw_10_TT
+			add_to_variable = {
+				rco_state_pop_growh = 0.1
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_mass_production
+		icon = GFX_focus_goal_RCO_mass_production
+		x = 3
+		y = 2
+		cost = 4
+		relative_position_id = RCO_cancel_war_communism
+
+		prerequisite = { focus = RCO_encourage_shock_work}
+
+		ai_will_do = { factor = 5 }
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_prodoutput_increase_10_TT
+			custom_effect_tooltip = RCO_maxprod_increase_10_TT
+			add_to_variable = {
+				rco_economy_max_poduction_capacity = 0.1
+			}
+			add_to_variable = {
+				rco_economy_prod_output = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_GOSPLAN
+		icon = GFX_focus_goal_RCO_VSNH
+		x = -1
+		y = 2
+		cost = 4
+		relative_position_id = RCO_cancel_war_communism
+		prerequisite = { focus = RCO_create_trusts_and_syndicates}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+			custom_effect_tooltip = RCO_prodoutput_increase_10_TT
+			custom_effect_tooltip = RCO_CG_decrease_15_TT
+			custom_effect_tooltip = RCO_research_increase_10_TT
+			add_to_variable = {
+				rco_economy_const_speed = 0.1
+			}
+			add_to_variable = {
+				rco_economy_CG = -0.15
+			}
+			add_to_variable = {
+				rco_state_research_speed = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_reorient_to_labour_economy
+		icon = GFX_focus_goal_RCO_reorient_to_labour_economy
+		x = -3
+		y = 2
+		cost = 4
+		relative_position_id = RCO_cancel_war_communism
+
+		prerequisite = { focus = RCO_reorganise_VSNH}
+
+		ai_will_do = { factor = 5 }
+
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_prodoutput_increase_10_TT
+			custom_effect_tooltip = RCO_constspeed_increase_5_TT
+			add_to_variable = {
+				rco_economy_prod_output = 0.1
+			}
+			add_to_variable = {
+				rco_economy_const_speed = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_great_works_plan
+		icon = GFX_focus_goal_RCO_communist_subbotniks
+		x = 0
+		y = 3
+		cost = 4
+		relative_position_id = RCO_cancel_war_communism
+
+		prerequisite = { focus = RCO_reorient_to_labour_economy}
+		prerequisite = { focus = RCO_GOSPLAN}
+		prerequisite = { focus = RCO_develop_agroindustry}
+		prerequisite = { focus = RCO_mass_production}
+
+		ai_will_do = { factor = 5 }
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_unlockgreatworksplan_TT
+			custom_effect_tooltip = RCO_CG_decrease_5_TT
+			custom_effect_tooltip = RCO_maxprod_increase_5_TT
+			add_to_variable = {
+				rco_economy_CG = -0.05
+			}
+			add_to_variable = {
+				rco_economy_max_poduction_capacity = 0.05
+			}
+			add_to_variable = { NVX_ECO_health = 70 tooltip = additional_economic_health_2 }
+		}
+	}
+
+	focus = {
+		id = RCO_focus_on_civilian
+		icon = GFX_focus_goal_RCO_price_reduction_system
+		x = -1
+		y = 1
+		cost = 4
+		relative_position_id = RCO_great_works_plan
+
+		prerequisite = { focus = RCO_great_works_plan }
+		mutually_exclusive = { focus = RCO_focus_on_military }
+
+		ai_will_do = { factor = 5 }
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_civ_const_spd_increase_10_TT
+			add_to_variable = {
+				rco_economy_civ_spd = 0.1
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_focus_on_military
+		icon = GFX_focus_goal_RCO_strong_rear
+		x = 1
+		y = 1
+		cost = 4
+		relative_position_id = RCO_great_works_plan
+
+		prerequisite = { focus = RCO_great_works_plan }
+		mutually_exclusive = { focus = RCO_focus_on_civilian }
+
+		ai_will_do = { factor = 5 }
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_milconscpd_increase_15_TT
+			add_to_variable = {
+				rco_economy_mil_spd = 0.15
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = arms_factory
+					level = 4
+					instant_build = yes
+				}
+			}
+		}
+	}
+	
+
+	focus = {
+		id = RCO_encourage_shock_work
+		icon = GFX_focus_goal_RCO_encourage_shock_work
+		x = 3
+		y = 1
+		cost = 4
+		relative_position_id = RCO_cancel_war_communism
+		prerequisite = { focus = RCO_cancel_war_communism }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_constspeed_increase_15_TT
+			custom_effect_tooltip = RCO_resource_increase_10_TT
+			custom_effect_tooltip = RCO_maxprod_increase_10_TT
+			add_to_variable = {
+				rco_labour_max_poduction_capacity = 0.1
+			}
+			add_to_variable = {
+				rco_labour_const_speed = 0.15
+			}
+			add_to_variable = {
+				rco_economy_resource = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_encouragesocialistrealism
+		icon = GFX_focus_goal_RCO_encourage_socialist_realism
+		x = 0
+		y = 1
+		cost = 4
+		relative_position_id = RCO_new_constitution
+		prerequisite = { focus = RCO_new_constitution }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_pp_increase_10_TT
+			custom_effect_tooltip = RCO_people_stateideologydefense_increase_10_TT
+			custom_effect_tooltip = RCO_commdrift_increase_3_TT
+			add_to_variable = {
+				rco_state_pp_factor = 0.1
+			}
+			add_to_variable = {
+				rco_state_ideology_defence = 0.1
+			}
+			add_to_variable = {
+				rco_comm_drift = 0.03
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_soviet_state_militia
+		icon = GFX_focus_goal_RCO_new_soviet_militia
+		x = -2
+		y = 1
+		cost = 4
+		relative_position_id = RCO_new_constitution
+		prerequisite = { focus = RCO_new_constitution }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			remove_mission = RCO_terrorist_attack_mission
+			custom_effect_tooltip = RCO_state_stab_increase_15_TT
+			custom_effect_tooltip = RCO_people_increase_cw_10_TT
+			add_to_variable = {
+				rco_state_stability = 0.15
+			}
+			add_to_variable = {
+				rco_state_pop_growh = 0.10
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_fight_nationalism
+		icon = GFX_focus_goal_RCO_fight_nationalismn
+		x = -2
+		y = 3
+		cost = 4
+		relative_position_id = RCO_new_constitution
+		prerequisite = { focus = RCO_VCHK_reorganisation }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			remove_mission = RCO_nationalist_activity_mission
+			custom_effect_tooltip = RCO_core_caucasus_and_tatrstan_TT
+			custom_effect_tooltip = RCO_people_stateideologydefense_increase_10_TT
+			custom_effect_tooltip = RCO_pp_increase_5_TT
+			add_to_variable = {
+				rco_state_ideology_defence = 0.1
+			}
+			add_to_variable = {
+				rco_state_pp_factor = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_purge_political_opponents
+		icon = GFX_focus_goal_RCO_party_party_of_society
+		x = 2
+		y = 2
+		cost = 4
+		relative_position_id = RCO_new_constitution
+
+		prerequisite = { focus = RCO_state_of_proletarian_dictatorship }
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_people_stateideologydefense_increase_10_TT
+			custom_effect_tooltip = RCO_pp_increase_5_TT
+			add_to_variable = {
+				rco_state_ideology_defence = 0.1
+			}
+			add_to_variable = {
+				rco_state_pp_factor = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_return_party_maximum
+		icon = GFX_focus_goal_RCO_strengthern_party_maximum
+		x = 2
+		y = 3
+		cost = 4
+		relative_position_id = RCO_new_constitution
+		prerequisite = { focus = RCO_purge_political_opponents }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip =	RCO_state_stab_increase_5_TT
+			custom_effect_tooltip =	RCO_commdrift_increase_3_TT
+			custom_effect_tooltip = RCO_prodgrowh_increase_5_TT
+			add_to_variable = {
+				rco_economy_prod_growh = 0.05
+			}
+			add_to_variable = {
+				rco_state_stability = 0.05
+			}
+			add_to_variable = {
+				rco_comm_drift = 0.03
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_VCHK_reorganisation
+		icon = GFX_focus_goal_RCO_rabkrin_power
+		x = -2
+		y = 2
+		cost = 4
+		relative_position_id = RCO_new_constitution
+		prerequisite = { focus = RCO_soviet_state_militia }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_people_stateideologydefense_increase_10_TT
+			custom_effect_tooltip = RCO_state_stab_increase_10_TT
+			custom_effect_tooltip = RCO_warsupport_increase_10_TT
+			add_to_variable = {
+				rco_state_ideology_defence = 0.1
+			}
+			add_to_variable = {
+				rco_state_stability = 0.1
+			}
+			add_to_variable = {
+				rco_state_war_support = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_state_of_proletarian_dictatorship
+		icon = GFX_focus_goal_RCO_systemize_fabric_comitees
+		x = 2
+		y = 1
+		cost = 4
+		relative_position_id = RCO_new_constitution
+		prerequisite = { focus = RCO_new_constitution }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip =	RCO_warsupport_increase_10_TT
+			add_to_variable = {
+				rco_state_war_support = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_soviet_cinema
+		icon = GFX_focus_goal_RCO_new_soviet_cinema
+		x = 0
+		y = 2
+		cost = 4
+		relative_position_id = RCO_new_constitution
+
+		prerequisite = { focus = RCO_encouragesocialistrealism }
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_research_increase_5_TT
+			add_to_variable = {
+				rco_state_research_speed = 0.05
+			}
+			add_political_power = 150
+			country_event = {
+				id = cw.78
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_encourage_education
+		icon = GFX_focus_goal_RCO_education_priority
+		x = 0
+		y = 3
+		cost = 4
+		relative_position_id = RCO_new_constitution
+
+		prerequisite = { focus = RCO_new_soviet_cinema }
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+			custom_effect_tooltip =	RCO_research_increase_15_TT
+			add_to_variable = {
+				rco_state_research_speed = 0.15
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_secure_soviet_proletarian_democracy
+		icon = GFX_focus_goal_RCO_create_office_soviets
+		x = 0
+		y = 4
+		cost = 4
+		relative_position_id = RCO_new_constitution
+
+		prerequisite = { focus = RCO_fight_nationalism }
+		prerequisite = { focus = RCO_encourage_education }
+		prerequisite = { focus = RCO_return_party_maximum }
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_state_stab_increase_10_TT
+			add_to_variable = {
+				rco_state_stability = 0.1
+			}
+			hidden_effect = { 
+			249 = { remove_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+			651 = { remove_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+			237 = { remove_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+			 }
+		}
+	}
+
+	focus = {
+		id = RCO_new_constitution
+		icon = GFX_focus_goal_RCO_ucf_question
+		x = 25
+		y = 0
+		cost = 4
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			promote_character = RCO_Mikhail_Popov
+			custom_effect_tooltip = RCO_sovetniki_decrease_20_TT
+			add_to_variable = {
+				rco_state_political_adv_factor = -0.2
+			}
+		}
+	}
+
+	########################### POPOV
+
+##### USSR RESTORED FINAL PART
+
+	focus = {
+		id = RCO_ussr_restored
+		icon = GFX_focus_goal_RCO_ussr_restored
+		x = 0
+		y = 8
+		cost = 4
+		relative_position_id = RCO_new_constitution
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = RCO_eastern_direction
+		icon = GFX_focus_goal_sov_asia_focus
+		x = 8
+		y = 1
+		cost = 1
+		relative_position_id = RCO_ussr_restored
+		prerequisite = { focus = RCO_ussr_restored}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_political_power = 25
+			RAJ = {
+				add_opinion_modifier = {
+					target = RCO
+					modifier = declaration_of_friendship
+				}
+			}
+			PRC = {
+				add_opinion_modifier = {
+					target = RCO
+					modifier = declaration_of_friendship
+				}
+			}
+			PRK = {
+				add_opinion_modifier = {
+					target = RCO
+					modifier = declaration_of_friendship
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_contact_north_korea
+		icon = align_to_north_korea
+		x = -1
+		y = 1
+		cost = 4
+		relative_position_id = RCO_eastern_direction
+		prerequisite = { focus = RCO_eastern_direction }
+		bypass = {
+			 OR = {
+				PRK = { is_in_faction_with = RCO }
+			 	PRK = { exists = no }
+			 }
+		}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			PRK = { country_event = { id = cw.62 } }
+		}
+	}
+
+	focus = {
+		id = RCO_mutal_defence_china
+		icon = GFX_focus_goal_sov_prc_focus
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = RCO_eastern_direction
+		prerequisite = { focus = RCO_eastern_direction }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			PRC = { country_event = { id = cw.65 } }
+		}
+	}
+
+	focus = {
+		id = RCO_japanese_question
+		icon = GFX_focus_goal_RCO_create_gosplan
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = RCO_eastern_direction
+		prerequisite = { focus = RCO_eastern_direction }
+		bypass = {
+			 controls_state = 951
+		}
+		will_lead_to_war_with = JAP
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			JAP = { country_event = { id = cw.66} }
+		}
+	}
+
+	focus = {
+		id = RCO_southern_direction
+		icon = GFX_focus_goal_sov_centralasia_focus
+		x = 3
+		y = 1
+		cost = 1
+		relative_position_id = RCO_ussr_restored
+		prerequisite = { focus = RCO_ussr_restored}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_political_power = 25
+			if = {
+			limit = {
+					any_neighbor_country = { tag = CHE }
+			}
+			CHE = { country_event = { id = cw.59 } }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_kazah_question
+		icon = GFX_focus_goal_RCO_lenins_economic_policy
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = RCO_southern_direction
+		prerequisite = { focus = RCO_southern_direction }
+		will_lead_to_war_with = KAZ
+		bypass = {
+			 OR = {
+				KAZ = { is_in_faction_with = RCO }
+			 	controls_state = 805
+			 }
+		}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				KAZ = { NOT = { is_in_faction_with = RCO } }
+			}
+			KAZ = { country_event = { id = cw.59 } }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_subdue_middle_asia
+		icon = GFX_focus_goal_RCO_lenins_state_policy
+		x = 2
+		y = 2
+		cost = 5
+		available = {
+			num_of_factories > 120
+			 OR = {
+                controls_state = 805
+                KAZ = { is_in_faction_with = RCO }
+            }
+			has_war = no
+		}
+		relative_position_id = RCO_southern_direction
+		prerequisite = { focus = RCO_kazah_question }
+		will_lead_to_war_with = UZB
+		will_lead_to_war_with = TMS
+		will_lead_to_war_with = KYR
+		will_lead_to_war_with = TAJ
+		bypass = {
+			UZB = { is_in_faction_with = RCO }
+			TMS = { is_in_faction_with = RCO }
+			KYR = { is_in_faction_with = RCO }
+			TAJ = { is_in_faction_with = RCO }
+		}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				TAJ = { NOT = { is_in_faction_with = RCO } }
+			}
+			TAJ = { country_event = { id = cw.59 } }
+			}
+			if = {
+			limit = {
+				UZB = { NOT = { is_in_faction_with = RCO } }
+			}
+			UZB = { country_event = { id = cw.59 } }
+			}
+			if = {
+			limit = {
+				TMS = { NOT = { is_in_faction_with = RCO } }
+			}
+			TMS = { country_event = { id = cw.59 } }
+			}
+			if = {
+			limit = {
+				KYR = { NOT = { is_in_faction_with = RCO } }
+			}
+			KYR = { country_event = { id = cw.59 } }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_southern_thrust
+		icon = GFX_focus_goal_RCO_surrounded_by_glory
+		x = 0
+		y = 3
+		cost = 5
+		relative_position_id = RCO_southern_direction
+		prerequisite = { focus = RCO_return_to_caucasus }
+		prerequisite = { focus = RCO_subdue_middle_asia }
+		will_lead_to_war_with = PER
+		bypass = {
+			PER = { is_in_faction_with = RCO }
+		}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				PER = { NOT = { is_in_faction_with = RCO } }
+			}
+			PER = { country_event = { id = cw.67 } }
+			}
+
+			if = {
+			limit = {
+				AFG = { 
+					NOT = { is_in_faction_with = RCO } 
+					exists = yes
+					}
+			}
+			AFG = { country_event = { id = cw.67 } }
+			}
+
+			if = {
+			limit = {
+				TAL = { 
+					NOT = { is_in_faction_with = RCO } 
+					exists = yes
+					}
+			}
+			TAL = { country_event = { id = cw.67 } }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_return_abhazia
+		icon = GFX_focus_goal_RCO_complete_great_works_plan
+		x = -2
+		y = 1
+		cost = 4
+		relative_position_id = RCO_southern_direction
+		prerequisite = { focus = RCO_southern_direction }
+		will_lead_to_war_with = ABK
+		will_lead_to_war_with = SOS
+		bypass = {
+			NOT = { country_exists = ABK }
+			NOT = { country_exists = SOS }
+		}
+		available = {
+                controls_state = 828
+		}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				SOS = { NOT = { is_in_faction_with = RCO } }
+			}
+			SOS = { country_event = { id = cw.59 } }
+			}
+			if = {
+			limit = {
+				ABK = { NOT = { is_in_faction_with = RCO } }
+			}
+			ABK = { country_event = { id = cw.59 } }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_prepare_southern_infra
+		icon = GFX_focus_goal_RCO_organize_transport
+		x = 0
+		y = 1
+		cost = 3
+		relative_position_id = RCO_southern_direction
+		prerequisite = { focus = RCO_southern_direction }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			233 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			1157 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			1158 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			828 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			232 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_return_to_caucasus
+		icon = GFX_focus_goal_sov_caucas_focus
+		x = -1
+		y = 2
+		cost = 4
+		relative_position_id = RCO_southern_direction
+		prerequisite = { focus = RCO_return_abhazia }
+		prerequisite = { focus = RCO_prepare_southern_infra }
+		will_lead_to_war_with = GEO
+		will_lead_to_war_with = AZR
+		will_lead_to_war_with = NGK
+		will_lead_to_war_with = ARM
+		available = {
+			num_of_factories > 120
+			has_war = no
+		}
+		bypass = {
+			RCO = { is_in_faction_with = GEO }
+			RCO = { is_in_faction_with = AZR }
+			RCO = { is_in_faction_with = NGK }
+			RCO = { is_in_faction_with = ARM }
+		}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				GEO = { NOT = { is_in_faction_with = RCO } }
+			}
+			GEO = { country_event = { id = cw.59 } }
+			}
+			if = {
+			limit = {
+				AZR = { NOT = { is_in_faction_with = RCO } }
+			}
+			AZR = { country_event = { id = cw.59 } }
+			}
+			if = {
+			limit = {
+				NGK = { NOT = { is_in_faction_with = RCO } }
+			}
+			NGK = { country_event = { id = cw.59 } }
+			}
+			if = {
+			limit = {
+				ARM = { NOT = { is_in_faction_with = RCO } }
+			}
+			ARM = { country_event = { id = cw.59 } }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_prepare_march_west
+		icon = GFX_focus_goal_RCO_weaken_capitalist_production
+		x = -3
+		y = 1
+		cost = 1
+		relative_position_id = RCO_ussr_restored
+		prerequisite = { focus = RCO_ussr_restored}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_political_power = 25
+			210 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_influence_baltic
+		icon = GFX_focus_goal_RCO_secure_proletarian_democracy
+		x = -2
+		y = 1
+		cost = 4
+		relative_position_id = RCO_prepare_march_west
+		prerequisite = { focus = RCO_prepare_march_west }
+		mutually_exclusive = { focus = RCO_attack_baltic }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			EST = {
+				fourth_estate_communist_increase = yes
+				fourth_estate_democratic_socialist_increase = yes
+				fourth_estate_conservative_decrease = yes
+				fourth_estate_social_democrat_decrease = yes
+				add_timed_idea = {
+					idea = idea_focus_generic_path_of_equality
+					days = 365
+				}
+			}
+			LAT = {
+				fourth_estate_communist_increase = yes
+				fourth_estate_democratic_socialist_increase = yes
+				fourth_estate_conservative_decrease = yes
+				fourth_estate_social_democrat_decrease = yes
+				add_timed_idea = {
+					idea = idea_focus_generic_path_of_equality
+					days = 365
+				}
+			}
+			LIT = {
+				fourth_estate_communist_increase = yes
+				fourth_estate_democratic_socialist_increase = yes
+				fourth_estate_conservative_decrease = yes
+				fourth_estate_social_democrat_decrease = yes
+				add_timed_idea = {
+					idea = idea_focus_generic_path_of_equality
+					days = 365
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_attack_baltic
+		icon = GFX_focus_goal_sov_baltic_focus
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = RCO_prepare_march_west
+		prerequisite = { focus = RCO_prepare_march_west }
+		mutually_exclusive = { focus = RCO_influence_baltic }
+		available = {
+			num_of_factories > 120
+			has_war = no
+		}
+		will_lead_to_war_with = EST
+		will_lead_to_war_with = LAT
+		will_lead_to_war_with = LIT
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				EST = { NOT = { is_in_faction_with = RCO } }
+			}
+			EST = { country_event = { id = cw.59 } }
+			}
+			if = {
+			limit = {
+				LAT = { NOT = { is_in_faction_with = RCO } }
+			}
+			LAT = { country_event = { id = cw.59 } }
+			}
+			if = {
+			limit = {
+				LIT = { NOT = { is_in_faction_with = RCO } }
+			}
+			LIT = { country_event = { id = cw.59 } }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_ultimatum_to_moldova
+		icon = GFX_focus_goal_RCO_economy_of_prol_dictatorship
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = RCO_prepare_march_west
+		prerequisite = { focus = RCO_prepare_march_west }
+		will_lead_to_war_with = MOL
+		available = {
+			num_of_factories > 120
+			 OR = {
+                controls_state = 192
+                UKR = { is_in_faction_with = RCO }
+            }
+			has_war = no
+		}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				MOL = { NOT = { is_in_faction_with = RCO } }
+			}
+			MOL = { country_event = { id = cw.59 } }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_demand_rightful_territory
+		icon = GFX_focus_goal_RCO_state_of_prol_dictatorship
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = RCO_prepare_march_west
+		prerequisite = { focus = RCO_ultimatum_to_moldova }
+		prerequisite = { 
+			focus = RCO_attack_baltic 
+			focus = RCO_influence_baltic 
+			}
+			will_lead_to_war_with = POL
+			bypass = {
+				controls_state = 73
+				controls_state = 89
+				controls_state = 91
+				controls_state = 808
+				controls_state = 741
+			}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				GER = {controls_state = 741 }
+			}
+			GER = { country_event = { id = cw.68 } }
+			}
+			if = {
+			limit = {
+				OR = {
+					POL = {controls_state = 741 }
+					POL = {controls_state = 93 }
+				}
+			}
+			POL = { country_event = { id = cw.69 } }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_restore_trade
+		icon = GFX_goal_Soft_Power_Diplomacy
+		x = -9
+		y = 1
+		cost = 3
+		relative_position_id = RCO_ussr_restored
+		prerequisite = { focus = RCO_ussr_restored}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_tradeopinion_increase_10_TT
+			add_to_variable = { rco_trade_opinion = 0.1 }
+		}
+	}
+
+	focus = {
+		id = RCO_trade_with_india
+		icon = trade_with_india
+		x = -2
+		y = 1
+		cost = 4
+		relative_position_id = RCO_restore_trade
+		prerequisite = { focus = RCO_restore_trade}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				is_embargoed_by = RAJ
+			}
+			RAJ = { country_event = { id = cw.70 } }
+			}
+			if = {
+			limit = {
+				NOT = { is_embargoed_by = RAJ }
+			}
+			custom_effect_tooltip = SOV_tradeopinion_increase_10_TT
+			add_to_variable = { rco_trade_opinion = 0.1 }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_trade_with_china
+		icon = GFX_goal_Trade_Deals_with_China
+		x = 0
+		y = 1
+		cost = 4
+		relative_position_id = RCO_restore_trade
+		prerequisite = { focus = RCO_restore_trade}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_tradeopinion_increase_10_TT
+			add_to_variable = { rco_trade_opinion = 0.1 }
+		}
+	}
+
+	focus = {
+		id = RCO_trade_with_europe
+		icon = GFX_goal_Trade_Deals_with_EU
+		x = 2
+		y = 1
+		cost = 4
+		relative_position_id = RCO_restore_trade
+		prerequisite = { focus = RCO_restore_trade}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				is_embargoed_by = GER
+			}
+			GER = { country_event = { id = cw.70 } }
+			}
+			if = {
+			limit = {
+				NOT = { is_embargoed_by = GER }
+			}
+			custom_effect_tooltip = SOV_tradeopinion_increase_10_TT
+			add_to_variable = { rco_trade_opinion = 0.1 }
+			}
+
+			if = {
+			limit = {
+				is_embargoed_by = FRA
+			}
+			FRA = { country_event = { id = cw.70 } }
+			}
+			if = {
+			limit = {
+				NOT = { is_embargoed_by = FRA }
+			}
+			custom_effect_tooltip = SOV_tradeopinion_increase_10_TT
+			add_to_variable = { rco_trade_opinion = 0.1 }
+			}
+
+			if = {
+			limit = {
+				is_embargoed_by = ENG
+			}
+			ENG = { country_event = { id = cw.70 } }
+			}
+			if = {
+			limit = {
+				NOT = { is_embargoed_by = ENG }
+			}
+			custom_effect_tooltip = SOV_tradeopinion_increase_10_TT
+			add_to_variable = { rco_trade_opinion = 0.1 }
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_new_genue_conference
+		icon = trade_deal
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = RCO_restore_trade
+		prerequisite = { focus = RCO_trade_with_india}
+		prerequisite = { focus = RCO_trade_with_china}
+		prerequisite = { focus = RCO_trade_with_europe}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			if = {
+			limit = {
+				NOT = { is_embargoed_by = USA }
+			}
+			custom_effect_tooltip = SOV_tradeopinion_increase_10_TT
+			add_to_variable = { rco_trade_opinion = 0.1 }
+			}
+			custom_effect_tooltip = SOV_tradeopinion_increase_10_TT
+			custom_effect_tooltip = SOV_factperres_increase_2_TT
+			every_country = {
+				limit = {
+				is_embargoing = RCO
+				}
+				country_event = { id = cw.70 }
+			}
+			add_to_variable = { rco_factories_per_resource = 2 }
+			add_to_variable = { rco_trade_opinion = 0.1 }
+		}
+	}
+
+	focus = {
+		id = RCO_autarky
+		icon = GFX_focus_goal_RCO_war_communism
+		x = -1
+		y = 3
+		cost = 6
+		relative_position_id = RCO_restore_trade
+		prerequisite = { focus = RCO_new_genue_conference}
+		mutually_exclusive = { focus = RCO_prioritize_trade }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_minexport_decrease_20_TT
+			add_to_variable = {
+				rco_min_export = -0.2
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_prioritize_trade
+		icon = GFX_focus_generic_concessions
+		x = 1
+		y = 3
+		cost = 6
+		relative_position_id = RCO_restore_trade
+		prerequisite = { focus = RCO_new_genue_conference}
+		mutually_exclusive = { focus = RCO_autarky }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_tradeopinion_increase_20_TT
+			custom_effect_tooltip = SOV_factperres_increase_2_TT
+			add_to_variable = { rco_factories_per_resource = 2 }
+			add_to_variable = { rco_trade_opinion = 0.2 }
+		}
+	}
+
+	focus = {
+		id = RCO_embarace_five_year_system
+		icon = GFX_focus_goal_RCO_five_year_plans_system
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = RCO_great_works_plan
+		prerequisite = { 
+			focus = RCO_focus_on_civilian
+			focus = RCO_focus_on_military
+			}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_constspeed_increase_5_TT
+			custom_effect_tooltip = RCO_resource_increase_10_TT
+			add_to_variable = {
+				rco_economy_const_speed = 0.05
+			}
+			add_to_variable = {
+				rco_economy_resource = 0.1
+			}
+		}
+	}
+
+
+	focus = {
+		id = RCO_total_khozraschyot
+		icon = GFX_focus_goal_RCO_systemize_fabric_comitees
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = RCO_embarace_five_year_system
+		prerequisite = { focus = RCO_embarace_five_year_system}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_prodoutput_increase_15_TT
+			add_to_variable = {
+				rco_economy_prod_output = 0.15
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_improve_worker_designer_cooperation
+		icon = GFX_focus_goal_RCO_improve_worker_designer_cooperation
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = RCO_embarace_five_year_system
+		prerequisite = { focus = RCO_embarace_five_year_system}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+			custom_effect_tooltip = RCO_maxprod_increase_10_TT
+			add_to_variable = {
+				rco_labour_max_poduction_capacity = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_great_patriotic_war
+		icon = GFX_focus_goal_RCO_install_comissars
+		relative_position_id = RCO_new_constitution
+		available = {
+			has_war_with_major = yes
+			has_civil_war = no
+		}
+		x = 16
+		y = 0
+		cost = 6
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_political_power = 500
+		}
+	}
+
+	focus = {
+		id = RCO_soviet_mobilization
+		icon = GFX_focus_goal_RCO_propaganda_in_fabrics
+		x = 2
+		y = 1
+		cost = 10
+		available = {
+			has_war_with_major = yes
+			has_civil_war = no
+		}
+		relative_position_id = RCO_great_patriotic_war
+		prerequisite = { focus = RCO_great_patriotic_war}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_conscription_increase_10_TT
+			custom_effect_tooltip = RKKA_min_train_level_decrease_20_TT
+			custom_effect_tooltip = RCO_people_stateideologydefense_increase_50_TT
+			add_to_variable = {
+				rco_state_ideology_defence = 0.5
+			}
+			add_to_variable = {
+				RKKA_conscription = 0.1
+			}
+			add_to_variable = {
+				RKKA_min_train_level = -0.2
+			}
+			add_timed_idea = {
+				idea = RCO_workers_mobilization
+				days = 30
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_dhuhsotniks
+		icon = GFX_focus_goal_RCO_factory_arsenals
+		x = 1
+		y = 2
+		cost = 10
+		available = {
+			has_war_with_major = yes
+			has_civil_war = no
+		}
+		relative_position_id = RCO_great_patriotic_war
+		prerequisite = { focus = RCO_soviet_mobilization}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_prodoutput_increase_10_TT
+			custom_effect_tooltip = RCO_resource_increase_10_TT
+			add_to_variable = {
+				rco_economy_prod_output = 0.1
+			}
+			add_to_variable = {
+				rco_economy_resource = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_tyasyachniks
+		icon = GFX_focus_goal_RCO_dvuhsotniks
+		x = 1
+		y = 3
+		cost = 10
+		available = {
+			has_war_with_major = yes
+			has_civil_war = no
+		}
+		relative_position_id = RCO_great_patriotic_war
+		prerequisite = { focus = RCO_dhuhsotniks}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_prodoutput_increase_10_TT
+			custom_effect_tooltip = RCO_resource_increase_5_TT
+			add_to_variable = {
+				rco_economy_prod_output = 0.1
+			}
+			add_to_variable = {
+				rco_economy_resource = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_emergency_industry_conversation
+		icon = GFX_focus_goal_RCO_industry_conversation
+		x = 3
+		y = 2
+		cost = 10
+		available = {
+			has_war_with_major = yes
+			has_civil_war = no
+		}
+		relative_position_id = RCO_great_patriotic_war
+		prerequisite = { focus = RCO_soviet_mobilization}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = RCO_factory_convers
+				days = 720
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_motherland_isin_danger
+		icon = GFX_focus_goal_RCO_motherland_isin_danger
+		x = -2
+		y = 1
+		available = {
+			surrender_progress > 0.15
+		}
+		cost = 4
+		relative_position_id = RCO_great_patriotic_war
+		prerequisite = { focus = RCO_great_patriotic_war}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = RCO_firstoffensive
+				days = 40
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_never_again
+		icon = GFX_focus_goal_RCO_organize_government_apparatus
+		x = -2
+		y = 2
+		available = {
+			surrender_progress > 0.3
+		}
+		cost = 4
+		relative_position_id = RCO_great_patriotic_war
+		prerequisite = { focus = RCO_motherland_isin_danger}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = RCO_secondoffensive
+				days = 50
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_ourlastoffensive
+		icon = GFX_focus_goal_RCO_new_red_army
+		x = -2
+		y = 3
+		available = {
+			surrender_progress > 0.5
+		}
+		relative_position_id = RCO_great_patriotic_war
+		cost = 4
+		prerequisite = { focus = RCO_never_again}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = RCO_thirdoffensive
+				days = 60
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_scientific_shock_work
+		icon = GFX_focus_goal_RCO_scientific_shock_work
+		x = 2
+		y = 4
+		cost = 10
+		available = {
+			has_war_with_major = yes
+			has_civil_war = no
+		}
+		relative_position_id = RCO_great_patriotic_war
+		prerequisite = { focus = RCO_tyasyachniks}
+		prerequisite = { focus = RCO_siberian_resource_scravenging}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			add_research_slot = 1
+			add_tech_bonus = {
+				name = tank_bonus
+				bonus = 0.9
+				uses = 3
+				category = armor
+			}
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 3
+				category = infantry_weapons
+			}
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.8
+				uses = 2
+				category = light_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_siberian_resource_scravenging
+		icon = GFX_focus_goal_RCO_siberian_res
+		x = 3
+		y = 3
+		available = {
+			controls_state = 566
+			controls_state = 576
+			controls_state = 215
+			controls_state = 262
+		}
+		cost = 10
+		available = {
+			has_war_with_major = yes
+			has_civil_war = no
+		}
+		relative_position_id = RCO_great_patriotic_war
+		prerequisite = { focus = RCO_emergency_industry_conversation}
+		ai_will_do = {
+			factor = 10
+		}
+
+		completion_reward = {
+			566 = {
+				add_resource = {
+					type = Aluminium
+					amount = 121
+				}
+			}
+			576 = {
+				add_resource = {
+					type = oil
+					amount = 62
+				}
+			}
+			214 = {
+				add_resource = {
+					type = steel
+					amount = 45
+				}
+			}
+			262 = {
+				add_resource = {
+					type = chromium
+					amount = 102
+				}
+			}
+			581 = {
+				add_resource = {
+					type = tungsten
+					amount = 136
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_better_work_more_free_time
+		icon = GFX_focus_goal_RCO_more_free_time
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = RCO_secure_soviet_proletarian_democracy
+		prerequisite = { focus = RCO_secure_soviet_proletarian_democracy }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_research_increase_10_TT
+			custom_effect_tooltip = RCO_prodgrowh_increase_5_TT
+			add_to_variable = {
+				rco_state_research_speed = 0.10
+			}
+			add_to_variable = {
+				rco_economy_prod_growh = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_social_programms
+		icon = GFX_focus_goal_RCO_social_programs
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = RCO_secure_soviet_proletarian_democracy
+		prerequisite = { focus = RCO_secure_soviet_proletarian_democracy }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_people_increase_cw_10_TT
+			custom_effect_tooltip = RCO_state_stab_increase_10_TT
+			custom_effect_tooltip = RCO_warsupport_increase_20_TT
+			add_to_variable = {
+				rco_state_pop_growh = 0.1
+			}
+			add_to_variable = {
+				rco_state_stability = 0.1
+			}
+			add_to_variable = {
+				rco_state_war_support = 0.2
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_everyone_must_be_beurocrat
+		icon = GFX_focus_goal_RCO_everyone_beurocrat
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = RCO_secure_soviet_proletarian_democracy
+		prerequisite = { focus = RCO_secure_soviet_proletarian_democracy }
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_sovetniki_decrease_20_TT
+			custom_effect_tooltip = RCO_state_stab_increase_10_TT
+			add_to_variable = {
+				rco_state_stability = 0.1
+			}
+			add_to_variable = {
+				rco_state_political_adv_factor = -0.2
+			}
+			add_to_variable = {
+				rco_state_economy_cost_factor = -0.2
+			}
+			add_to_variable = {
+				rco_state_trade_law_cost_factor = -0.2
+			}
+		}
+	}
+
+	focus = {
+		id = RCO_first_steps_to_abolishing_money
+		icon = GFX_focus_goal_RCO_abolish_money
+		x = 0
+		y = 2
+		cost = 8
+		relative_position_id = RCO_secure_soviet_proletarian_democracy
+		prerequisite = { focus = RCO_better_work_more_free_time}
+		prerequisite = { focus = RCO_social_programms}
+		prerequisite = { focus = RCO_everyone_must_be_beurocrat}
+		ai_will_do = {
+			factor = 5
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = RCO_CG_decrease_5_TT
+			custom_effect_tooltip = RCO_maxprod_increase_10_TT
+			add_to_variable = {
+				rco_economy_CG = -0.05
+			}
+			add_to_variable = {
+				rco_economy_max_poduction_capacity = 0.1
+			}
+		}
+	}
+
+}

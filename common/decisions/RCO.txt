@@ -38,6 +38,67 @@ RCO_soviet_decisions_category = {
 		}
 	}
 
+	RCO_terrorist_attack_mission = {
+
+		allowed = { original_tag = RCO }
+
+		available = {
+			hidden_trigger = { always = no }
+			NOT = { has_completed_focus = RCO_soviet_state_militia }
+		}
+
+		activation = {
+			tag = RCO
+			has_country_flag = rco_no_flag
+		}
+
+		icon = decision_mil_orgs
+
+		cancel_if_not_visible = no
+
+		is_good = no
+
+		days_mission_timeout = 50
+
+		timeout_effect = {
+			RCO = { country_event = cw.73 }
+		}
+	}
+
+	RCO_nationalist_activity_mission = {
+
+		allowed = { original_tag = RCO }
+
+		available = {
+			hidden_trigger = { always = no }
+			NOT = { has_completed_focus = RCO_fight_nationalism }
+		}
+
+		activation = {
+			tag = RCO
+			has_completed_focus = RCO_against_forces_and_traditions
+			NOT = { has_completed_focus = RCO_fight_nationalism }
+			NOT = { is_ai = yes }
+		}
+
+		icon = decision_nazbol_actions
+
+		fire_only_once = yes
+
+		cancel_if_not_visible = no
+
+		is_good = no
+
+		days_mission_timeout = 90
+
+		timeout_effect = {
+			add_stability = -0.1
+			249 = { add_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+			651 = { add_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+			237 = { add_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+		}
+	}
+
 	RCO_hunger_risk_mission = {
 
 		allowed = { original_tag = RCO }
@@ -233,7 +294,7 @@ RCO_soviet_decisions_category = {
 		fire_only_once = yes
 
 		ai_will_do = {
-			factor = 150
+			factor = 100000
 		}
 
 		complete_effect = {
@@ -257,151 +318,6 @@ RCO_soviet_decisions_category = {
 			}
 		}
 
-	}
-
-	RCO_ult_uzb_decision = {
-
-		available = {
-			original_tag = RCO
-			num_of_factories > 90
-			controls_state = 805	
-			has_war = no
-		}
-
-		visible = {
-			original_tag = RCO
-			country_exists = UZB
-			has_completed_focus = RCO_against_forces_and_traditions
-		}
-
-		cost = 50
-		days_remove = 10
-
-		fire_only_once = yes
-
-		ai_will_do = {
-			factor = 150
-		}
-
-		complete_effect = {
-			UZB = { country_event = cw.59 }
-		}
-	}
-
-	RCO_ult_kyr_decision = {
-
-		available = {
-			original_tag = RCO
-			num_of_factories > 90
-			controls_state = 805
-			has_war = no
-		}
-
-		visible = {
-			original_tag = RCO
-			country_exists = KYR
-			has_completed_focus = RCO_against_forces_and_traditions
-		}
-
-		cost = 50
-		days_remove = 10
-
-		fire_only_once = yes
-
-		ai_will_do = {
-			factor = 150
-		}
-
-		complete_effect = {
-			KYR = { country_event = cw.59 }
-		}
-	}
-
-	RCO_ult_taj_decision = {
-
-		available = {
-			original_tag = RCO
-			num_of_factories > 90
-			controls_state = 822
-			has_war = no
-		}
-
-		visible = {
-			original_tag = RCO
-			country_exists = TAJ
-			has_completed_focus = RCO_against_forces_and_traditions
-		}
-
-		cost = 50
-		days_remove = 10
-
-		fire_only_once = yes
-
-		ai_will_do = {
-			factor = 150
-		}
-
-		complete_effect = {
-			TAJ = { country_event = cw.59 }
-		}
-	}
-
-	RCO_ult_tur_decision = {
-
-		available = {
-			original_tag = RCO
-			num_of_factories > 90
-			controls_state = 822
-			has_war = no
-		}
-
-		visible = {
-			original_tag = RCO
-			country_exists = TMS
-			has_completed_focus = RCO_against_forces_and_traditions
-		}
-
-		cost = 50
-		days_remove = 10
-
-		fire_only_once = yes
-
-		ai_will_do = {
-			factor = 150
-		}
-
-		complete_effect = {
-			TMS = { country_event = cw.59 }
-		}
-	}
-
-	RCO_ult_chech_decision = {
-
-		available = {
-			original_tag = RCO
-			num_of_factories > 90
-			controls_state = 217
-			has_war = no
-		}
-
-		visible = {
-			original_tag = RCO
-			country_exists = CHE
-			has_completed_focus = RCO_against_forces_and_traditions
-		}
-
-		cost = 50
-		days_remove = 10
-
-		fire_only_once = yes
-
-		ai_will_do = {
-			factor = 150
-		}
-
-		complete_effect = {
-			TMS = { country_event = cw.59 }
-		}
 	}
 
 	RCO_belarus_ally_decision = {
@@ -465,7 +381,7 @@ RCO_soviet_decisions_category = {
 		fire_only_once = yes
 
 		ai_will_do = {
-			factor = 150
+			factor = 100000
 		}
 
 		complete_effect = {
@@ -563,7 +479,10 @@ RCO_soviet_decisions_category = {
 	SOV_ask_uco_to_join_decision = {
 
 		available = {
+			OR = {
 			has_completed_focus = RCO_against_forces_and_traditions
+			has_completed_focus = RCO_new_constitution
+			}
 			UCO = {
 				controls_state = 227
 			}
@@ -571,7 +490,10 @@ RCO_soviet_decisions_category = {
 
 		visible = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_against_forces_and_traditions
+			has_completed_focus = RCO_new_constitution
+			}
 			UCO = {
 				controls_state = 227
 			}
@@ -586,7 +508,7 @@ RCO_soviet_decisions_category = {
 		fire_only_once = yes
 
 		ai_will_do = {
-			factor = 100
+			factor = 10000
 		}
 
 		complete_effect = {
@@ -603,7 +525,10 @@ RCO_soviet_decisions_category = {
 	SOV_ask_tra_to_join_decision = {
 
 		available = {
+			OR = {
 			has_completed_focus = RCO_against_forces_and_traditions
+			has_completed_focus = RCO_new_constitution
+			}
 			RCO = {
 				controls_state = 192
 			}
@@ -612,10 +537,19 @@ RCO_soviet_decisions_category = {
 			 }
 		}
 
+		highlight_states = {
+			highlight_state_targets = {
+			state = 857
+		}
+		}
+
 		visible = {
 			original_tag = RCO
 			has_government = communist
+			OR = {
 			has_completed_focus = RCO_against_forces_and_traditions
+			has_completed_focus = RCO_new_constitution
+			}
 			TRA = { 
 				exists = yes
 			 }
@@ -676,7 +610,10 @@ RCO_soviet_decisions_category = {
 	SOV_city_renaming_decision = {
 
 		available = {
+			OR = {
 			has_completed_focus = RCO_against_forces_and_traditions
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		visible = {
@@ -704,62 +641,6 @@ RCO_soviet_decisions_category = {
 
 	## interbrigades
 
-	RCO_chineese_interbrigade_decision = {
-
-		icon = decision_create_national_guard
-
-		available = {
-			has_completed_focus = RCO_international_brigades
-		}
-
-		visible = {
-			original_tag = RCO
-			has_war_with = SOV
-			has_completed_focus = RCO_international_brigades
-		}
-
-		cost = 5
-		days_remove = 20
-
-		fire_only_once = yes
-
-		ai_will_do = {
-			factor = 100
-		}
-
-		complete_effect = {
-			load_oob = "RCO_chineese_interbrigades"
-		}
-	}
-
-	RCO_korean_interbrigade_decision = {
-
-		icon = decision_create_national_guard
-
-		available = {
-			has_completed_focus = RCO_international_brigades
-		}
-
-		visible = {
-			original_tag = RCO
-			has_war_with = SOV
-			has_completed_focus = RCO_international_brigades
-		}
-
-		cost = 5
-		days_remove = 20
-
-		fire_only_once = yes
-
-		ai_will_do = {
-			factor = 100
-		}
-
-		complete_effect = {
-			load_oob = "RCO_korean_interbrigades"
-		}
-	}
-
 	RCO_chineese_landlease_decision = {
 
 		icon = decision_create_national_guard
@@ -780,7 +661,7 @@ RCO_soviet_decisions_category = {
 		fire_only_once = yes
 
 		ai_will_do = {
-			factor = 100
+			factor = 10000
 		}
 
 		complete_effect = {
@@ -810,12 +691,25 @@ RCO_soviet_decisions_category = {
 			40 = { is_owned_and_controlled_by = ROOT }
 			578 = { is_owned_and_controlled_by = ROOT }
 		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 572
+			state = 403
+			state = 577
+			state = 571
+			state = 570
+			state = 40
+			state = 578
+		}
+		}
+
 		visible = {
 				has_completed_focus = RCO_great_works_plan
 		}
 		fire_only_once = yes
 		cost = 90
-		days_remove = 360
+		days_remove = 120
 		ai_will_do = {
 			factor = 15
 		}
@@ -922,6 +816,13 @@ RCO_soviet_decisions_category = {
 			213 = { is_owned_and_controlled_by = ROOT }
 		}
 
+		highlight_states = {
+			highlight_state_targets = {
+			state = 215
+			state = 213
+		}
+		}
+
 		visible = {
 			original_tag = RCO
 			has_completed_focus = RCO_great_works_plan
@@ -931,7 +832,7 @@ RCO_soviet_decisions_category = {
 		cost = 90
 		days_remove = 150
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 		modifier = {
 			civilian_factory_use = 8
@@ -963,7 +864,16 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 904
+		}
 		}
 
 		fire_only_once = yes
@@ -972,7 +882,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -994,7 +904,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1003,7 +916,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 146
+		}
 		}
 
 		visible = {
@@ -1026,7 +945,16 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 216
+		}
 		}
 
 		fire_only_once = yes
@@ -1035,7 +963,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1058,7 +986,16 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 215
+		}
 		}
 
 		fire_only_once = yes
@@ -1067,7 +1004,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1089,7 +1026,16 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 213
+		}
 		}
 
 		fire_only_once = yes
@@ -1098,7 +1044,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1122,7 +1068,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1131,7 +1080,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 903
+		}
 		}
 
 		visible = {
@@ -1154,7 +1109,16 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 351
+		}
 		}
 
 		fire_only_once = yes
@@ -1163,7 +1127,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1185,7 +1149,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1194,7 +1161,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 264
+		}
 		}
 
 		visible = {
@@ -1217,7 +1190,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1226,7 +1202,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 214
+		}
 		}
 
 		visible = {
@@ -1252,7 +1234,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1261,7 +1246,25 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 407
+			state = 406
+			state = 402
+			state = 804
+			state = 583
+			state = 1087
+			state = 404
+			state = 805
+			state = 589
+			state = 588
+			state = 997
+			state = 583
+			state = 590
+		}
 		}
 
 		visible = {
@@ -1286,6 +1289,7 @@ RCO_integrate_territories_category = {
 			add_state_core = 588
 			add_state_core = 997
 			add_state_core = 583
+			add_state_core = 590
 		}
 	}
 
@@ -1295,7 +1299,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1304,7 +1311,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1313,6 +1320,12 @@ RCO_integrate_territories_category = {
 			400 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 400
+		}
 		}
 
 		remove_effect = {
@@ -1326,7 +1339,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1335,7 +1351,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1357,7 +1373,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1366,7 +1385,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 398
+		}
 		}
 
 		visible = {
@@ -1388,7 +1413,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1397,7 +1425,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 256
+		}
 		}
 
 		visible = {
@@ -1419,7 +1453,7 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
-			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_fight_nationalism
 		}
 
 		fire_only_once = yes
@@ -1428,7 +1462,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1439,9 +1473,18 @@ RCO_integrate_territories_category = {
 			}
 		}
 
+		highlight_states = {
+			highlight_state_targets = {
+			state = 249
+			state = 1330
+			state = 1331
+		}
+		}
+
 		remove_effect = {
 			add_state_core = 249
 			add_state_core = 1330
+			add_state_core = 1331
 		}
 	}
 
@@ -1451,7 +1494,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1460,7 +1506,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 651
+		}
 		}
 
 		visible = {
@@ -1482,7 +1534,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1491,7 +1546,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 255
+		}
 		}
 
 		visible = {
@@ -1514,7 +1575,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1523,7 +1587,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 250
+		}
 		}
 
 		visible = {
@@ -1546,7 +1616,16 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 251
+		}
 		}
 
 		fire_only_once = yes
@@ -1555,7 +1634,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1577,7 +1656,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1586,7 +1668,13 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 652
+		}
 		}
 
 		visible = {
@@ -1608,7 +1696,16 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 257
+		}
 		}
 
 		fire_only_once = yes
@@ -1617,7 +1714,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1640,7 +1737,16 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 239
+		}
 		}
 
 		fire_only_once = yes
@@ -1649,7 +1755,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1672,7 +1778,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1681,7 +1790,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1690,6 +1799,12 @@ RCO_integrate_territories_category = {
 			401 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 401
+		}
 		}
 
 		remove_effect = {
@@ -1703,7 +1818,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1712,7 +1830,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1722,6 +1840,12 @@ RCO_integrate_territories_category = {
 			260 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 260
+		}
 		}
 
 		remove_effect = {
@@ -1735,7 +1859,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1744,7 +1871,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1753,6 +1880,12 @@ RCO_integrate_territories_category = {
 			217 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 217
+		}
 		}
 
 		remove_effect = {
@@ -1766,7 +1899,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1775,7 +1911,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1785,6 +1921,12 @@ RCO_integrate_territories_category = {
 			240 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 240
+		}
 		}
 
 		remove_effect = {
@@ -1798,7 +1940,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1807,7 +1952,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1816,6 +1961,12 @@ RCO_integrate_territories_category = {
 			245 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 245
+		}
 		}
 
 		remove_effect = {
@@ -1829,7 +1980,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1838,7 +1992,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1848,6 +2002,12 @@ RCO_integrate_territories_category = {
 			218 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 218
+		}
 		}
 
 		remove_effect = {
@@ -1861,7 +2021,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1870,7 +2033,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1880,6 +2043,12 @@ RCO_integrate_territories_category = {
 			234 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 234
+		}
 		}
 
 		remove_effect = {
@@ -1893,7 +2062,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1902,7 +2074,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1912,6 +2084,12 @@ RCO_integrate_territories_category = {
 			238 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 238
+		}
 		}
 
 		remove_effect = {
@@ -1925,7 +2103,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1934,7 +2115,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1944,6 +2125,12 @@ RCO_integrate_territories_category = {
 			237 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 237
+		}
 		}
 
 		remove_effect = {
@@ -1957,7 +2144,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1966,7 +2156,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -1976,6 +2166,12 @@ RCO_integrate_territories_category = {
 			236 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 236
+		}
 		}
 
 		remove_effect = {
@@ -1989,7 +2185,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -1998,7 +2197,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2008,6 +2207,12 @@ RCO_integrate_territories_category = {
 			235 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 235
+		}
 		}
 
 		remove_effect = {
@@ -2021,7 +2226,7 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
-			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_fight_nationalism
 		}
 
 		fire_only_once = yes
@@ -2030,7 +2235,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2039,6 +2244,16 @@ RCO_integrate_territories_category = {
 			828 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 828
+			state = 233
+			state = 232
+			state = 1158
+			state = 1157
+		}
 		}
 
 		remove_effect = {
@@ -2056,7 +2271,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -2065,7 +2283,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2074,6 +2292,17 @@ RCO_integrate_territories_category = {
 			653 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 653
+			state = 582
+			state = 572
+			state = 403
+			state = 577
+			state = 571
+		}
 		}
 
 		remove_effect = {
@@ -2092,7 +2321,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -2101,7 +2333,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2110,6 +2342,22 @@ RCO_integrate_territories_category = {
 			570 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 570
+			state = 578
+			state = 580
+			state = 40
+			state = 569
+			state = 654
+			state = 1085
+			state = 329
+			state = 568
+			state = 576
+			state = 567
+		}
 		}
 
 		remove_effect = {
@@ -2134,7 +2382,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -2143,7 +2394,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2152,6 +2403,27 @@ RCO_integrate_territories_category = {
 			564 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 564
+			state = 1084
+			state = 563
+			state = 574
+			state = 644
+			state = 561
+			state = 562
+			state = 637
+			state = 560
+			state = 657
+			state = 409
+			state = 408
+			state = 655
+			state = 537
+			state = 555
+			state = 951
+		}
 		}
 
 		remove_effect = {
@@ -2167,6 +2439,12 @@ RCO_integrate_territories_category = {
 			add_state_core = 657
 			add_state_core = 409
 			add_state_core = 408
+			add_state_core = 655
+			add_state_core = 537
+			add_state_core = 555
+			add_state_core = 951
+			add_state_core = 1324 
+			add_state_core = 1279
 		}
 	}
 
@@ -2176,7 +2454,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -2185,7 +2466,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2194,6 +2475,15 @@ RCO_integrate_territories_category = {
 			229 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 229
+			state = 878
+			state = 877
+			state = 790
+		}
 		}
 
 		remove_effect = {
@@ -2210,7 +2500,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -2219,7 +2512,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2228,6 +2521,12 @@ RCO_integrate_territories_category = {
 			796 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 796
+		}
 		}
 
 		remove_effect = {
@@ -2241,7 +2540,10 @@ RCO_integrate_territories_category = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -2250,7 +2552,7 @@ RCO_integrate_territories_category = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2259,6 +2561,15 @@ RCO_integrate_territories_category = {
 			231 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 231
+			state = 797
+			state = 992
+			state = 1159
+		}
 		}
 
 		remove_effect = {
@@ -2275,7 +2586,10 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -2284,7 +2598,7 @@ RCO_integrate_state_armenia = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2293,6 +2607,12 @@ RCO_integrate_state_armenia = {
 			230 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 230
+		}
 		}
 
 		remove_effect = {
@@ -2307,7 +2627,10 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -2316,7 +2639,7 @@ RCO_integrate_state_armenia = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2325,6 +2648,12 @@ RCO_integrate_state_armenia = {
 			832 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 832
+		}
 		}
 
 		remove_effect = {
@@ -2338,16 +2667,19 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
 
-		cost = 150
+		cost = 100
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2356,6 +2688,15 @@ RCO_integrate_state_armenia = {
 			823 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 823
+			state = 585
+			state = 821
+			state = 587
+		}
 		}
 
 		remove_effect = {
@@ -2372,16 +2713,19 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
 
-		cost = 150
+		cost = 100
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2390,6 +2734,16 @@ RCO_integrate_state_armenia = {
 			799 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 799
+			state = 584
+			state = 801
+			state = 802
+			state = 803
+		}
 		}
 
 		remove_effect = {
@@ -2407,16 +2761,19 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
 
-		cost = 150
+		cost = 100
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2425,6 +2782,13 @@ RCO_integrate_state_armenia = {
 			586 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 586
+			state = 822
+		}
 		}
 
 		remove_effect = {
@@ -2439,16 +2803,19 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
 
-		cost = 150
+		cost = 100
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2457,6 +2824,13 @@ RCO_integrate_state_armenia = {
 			405 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 405
+			state = 732
+		}
 		}
 
 		remove_effect = {
@@ -2472,16 +2846,19 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
 
-		cost = 50
+		cost = 40
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2490,6 +2867,13 @@ RCO_integrate_state_armenia = {
 			227 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 227
+			state = 228
+		}
 		}
 
 		remove_effect = {
@@ -2504,16 +2888,19 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
 
-		cost = 100
+		cost = 70
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2524,6 +2911,18 @@ RCO_integrate_state_armenia = {
 			}
 		}
 
+		highlight_states = {
+			highlight_state_targets = {
+			state = 259
+			state = 193
+			state = 225
+			state = 984
+			state = 200
+			state = 196
+			state = 221
+		}
+		}
+
 		remove_effect = {
 			add_state_core = 259
 			add_state_core = 193
@@ -2531,6 +2930,7 @@ RCO_integrate_state_armenia = {
 			add_state_core = 984
 			add_state_core = 200
 			add_state_core = 196
+			add_state_core = 221
 		}
 	}
 
@@ -2540,12 +2940,15 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
 
-		cost = 100
+		cost = 80
 		days_remove = 30
 
 		ai_will_do = {
@@ -2558,6 +2961,22 @@ RCO_integrate_state_armenia = {
 			202 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+			state = 202
+			state = 1144
+			state = 203
+			state = 226
+			state = 197
+			state = 192
+			state = 806
+			state = 198
+			state = 1086
+			state = 201
+			state = 199
+			state = 1143
+		}
 		}
 
 		remove_effect = {
@@ -2582,16 +3001,19 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
 
-		cost = 70
+		cost = 50
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2600,6 +3022,16 @@ RCO_integrate_state_armenia = {
 			91 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 80
+			state = 89
+			state = 73
+			state = 91
+			state = 93
+		}
 		}
 
 		remove_effect = {
@@ -2617,7 +3049,10 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
@@ -2626,7 +3061,7 @@ RCO_integrate_state_armenia = {
 		days_remove = 30
 
 		ai_will_do = {
-			factor = 50
+			factor = 10000
 		}
 
 		visible = {
@@ -2635,6 +3070,12 @@ RCO_integrate_state_armenia = {
 			137 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 137
+		}
 		}
 
 		remove_effect = {
@@ -2648,12 +3089,15 @@ RCO_integrate_state_armenia = {
 
 		available = {
 			original_tag = RCO
+			OR = {
 			has_completed_focus = RCO_strenghtern_government
+			has_completed_focus = RCO_new_constitution
+			}
 		}
 
 		fire_only_once = yes
 
-		cost = 150
+		cost = 100
 		days_remove = 30
 
 		ai_will_do = {
@@ -2666,6 +3110,19 @@ RCO_integrate_state_armenia = {
 			206 = {
 				NOT = {is_core_of = ROOT}
 			}
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+			state = 207
+			state = 241
+			state = 204
+			state = 95
+			state = 206
+			state = 194
+			state = 94
+			state = 808
+		}
 		}
 
 		remove_effect = {
@@ -3849,6 +4306,44 @@ CHE_decisions_category = {
 			}
 			custom_effect_tooltip = RCO_usa_inv_increase_1_tt
 			custom_effect_tooltip = RCO_usa_po_increase_15_tt
+		}
+	}
+	}
+
+	SOV_civilwar_decisions_category = {
+
+	SOV_deteriorating_army_mission = {
+
+		allowed = { original_tag = SOV }
+
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		activation = {
+			tag = SOV
+			has_war_with = RCO
+		}
+
+		icon = decision_strike
+
+		fire_only_once = no
+
+		cancel_if_not_visible = no
+
+		is_good = no
+
+		days_mission_timeout = 10
+
+		timeout_effect = {
+			custom_effect_tooltip = RKKA_attack_decrease_3_TT
+			custom_effect_tooltip = RKKA_defence_decrease_3_TT
+			add_to_variable = {
+				sov_army_offense = -0.02
+			}
+			add_to_variable = {
+				sov_army_defence = -0.02
+			}
 		}
 	}
 	}

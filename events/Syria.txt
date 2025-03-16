@@ -1959,7 +1959,7 @@ country_event = {
 					defense_skill = 1
 					planning_skill = 1
 					logistics_skill = 1
-				  }
+				}
 			}
 		}
 		hidden_effect = {
@@ -1968,6 +1968,15 @@ country_event = {
 					has_full_control_of_state = 554
 					OR = {
 						has_government = nationalist
+					}
+				}
+				recruit_character = SYR_Syrian_Government
+				add_country_leader_role = {
+					character = SYR_Syrian_Government
+					promote_leader = yes
+					country_leader = {
+						ideology = military_junta
+						expire = "1.1.1.1"
 					}
 				}
 				set_war_support = 0.1
@@ -1984,10 +1993,44 @@ country_event = {
 					id = syria.60 days = 60
 				}
 			}
-			remove_ideas = LEB_Syrian_Exploitation_Syria
-			LEB = {
-				remove_ideas = LEB_Syrian_Exploitation_Lebanon
+			every_country = {
+				limit = {
+					has_dynamic_modifier = {
+						modifier = eu_member_modifier
+						scope = {
+							every_country = {
+								limit = {
+									capital_scope = {
+										region = europe
+									}
+								}
+							}
+						}
+					}
+				}
+				country_event = {
+					id = syria.89 days = 7
+				}
 			}
+			TUR = {
+				country_event = {
+					id = syria.90 days = 7
+				}
+			}
+			add_ideas = SYR_Refugee_Crisis_Syria
+			every_country = {
+				limit = {
+					has_full_control_of_state = 554
+				}
+				add_ideas = SYR_Refugee_Crisis_Syria
+			}
+		}
+		remove_ideas = LEB_Syrian_Exploitation_Syria
+		LEB = {
+			remove_ideas = LEB_Syrian_Exploitation_Lebanon
+		}
+		ai_chance = {
+			factor = 100
 		}
 	}
 }
@@ -2216,6 +2259,22 @@ country_event = {
 			}
 			clr_state_flag = SPR_unplanned_offensive_flag
 		}
+		every_country = {
+			limit = {
+				has_dynamic_modifier = {
+					modifier = eu_member_modifier
+				}
+				capital_scope = {
+					region = europe
+				}
+			}
+			remove_ideas = SYR_Refugee_Crisis_Europe
+		}
+		TUR = {
+			remove_ideas = SYR_Refugee_Crisis_Turkey
+		}
+		remove_ideas = SYR_Refugee_Crisis_Syria
+		add_ideas = SYR_Missing_Workforces
 		delete_unit_template_and_units = {
 			division_template = "Militia Regiment"
 			disband = yes #will refund equipment and manpower
@@ -2768,7 +2827,7 @@ country_event = { #Purge Old Officials
 	id = syria.86
 	title = syria.86.t
 	desc = syria.86.d
-	picture = GFX_report_syria_Awak_Defected
+	picture = GFX_report_syria_Makhlouf_Trial
 	is_triggered_only = yes
 
 	option = { #Sentence Makhlouf and redistribute their assets
@@ -2810,7 +2869,7 @@ country_event = { #Security Guarantees (UK, France and US)
 	id = syria.87
 	title = syria.87.t
 	desc = syria.87.d
-	picture = GFX_report_syria_Awak_Defected
+	picture = GFX_report_syria_Free_Syria_Guarantees
 	is_triggered_only = yes
 
 	option = { #Guarantee
@@ -2837,11 +2896,11 @@ country_event = { #Security Guarantees (UK, France and US)
 		}
 	}
 }
-country_event = { #Security Guarantees (UK, France and US)
+country_event = { #Security Guarantees (Turkey)
 	id = syria.88
 	title = syria.88.t
 	desc = syria.88.d
-	picture = GFX_report_syria_Awak_Defected
+	picture = GFX_report_syria_Free_Syria_Guarantees
 	is_triggered_only = yes
 
 	option = { #Guarantee
@@ -2869,6 +2928,103 @@ country_event = { #Security Guarantees (UK, France and US)
 				modifier = refused_help
 			}
 		}
+		ai_chance = {
+			factor = 33
+		}
+	}
+}
+country_event = { #Refugee Crisis (Europe)
+	id = syria.89
+	title = syria.89.t
+	desc = syria.89.d
+	picture = GFX_report_syria_Refugee_Crisis_Europe
+	is_triggered_only = yes
+
+	option = {
+		name = syria.89.o1
+		add_ideas = SYR_Refugee_Crisis_Europe
+	}
+}
+
+country_event = { #Refugee Crisis (Turkey)
+	id = syria.90
+	title = syria.90.t
+	desc = syria.90.d
+	picture = GFX_report_syria_Refugee_Crisis_Turkey
+	is_triggered_only = yes
+
+	option = {
+		name = syria.90.o1
+		add_ideas = SYR_Refugee_Crisis_Europe
+	}
+}
+country_event = { #Purge Old Officials 2
+	id = syria.91
+	title = syria.91.t
+	desc = syria.91.d
+	picture = GFX_report_syria_Tlass_Trial
+	is_triggered_only = yes
+
+	option = { #Sentence Tlass to life in prison
+		name = syria.91.o1
+		add_stability = 0.05
+		army_experience = -20
+		ai_chance = {
+			factor = 33
+		}
+	}
+	option = { #Exile Tlass
+		name = syria.91.o2
+		add_stability = 0.025
+		army_experience = -10
+		ai_chance = {
+			factor = 33
+		}
+	}
+	option = { #Maybe he can still be of use...
+		name = syria.91.o3
+		add_stability = -0.05
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.05
+		}
+		set_country_flag = SYR_Tlass_in_Opposition
+		ai_chance = {
+			factor = 33
+		}
+	}
+}
+country_event = { #Purge Old Officials 3
+	id = syria.92
+	title = syria.92.t
+	desc = syria.92.d
+	picture = GFX_report_syria_Khaddam_Trial
+	is_triggered_only = yes
+
+	option = { #Sentence Khaddam to death
+		name = syria.92.o1
+		add_stability = 0.05
+		army_experience = -20
+		ai_chance = {
+			factor = 33
+		}
+	}
+	option = { #Exile Khaddam
+		name = syria.92.o2
+		add_stability = 0.025
+		army_experience = -10
+		ai_chance = {
+			factor = 33
+		}
+	}
+	option = { #Maybe he can still be of use...
+		name = syria.92.o3
+		add_stability = -0.05
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.05
+		}
+		set_country_flag = SYR_Khaddam_in_Opposition
 		ai_chance = {
 			factor = 33
 		}

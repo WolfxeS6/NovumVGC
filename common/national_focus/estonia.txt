@@ -495,6 +495,12 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.5
+				uses = 2
+				category = electronics
+			}
 		}
 	}
 
@@ -599,6 +605,12 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_tech_bonus = {
+				name = tech_bonus
+				bonus = 0.25
+				uses = 1
+				category = electronics
+			}
 		}
 	}
 
@@ -807,6 +819,85 @@ focus_tree = {
 	}
 
 	focus = {
+		id = EST_estonian_cell_as
+		icon = GFX_focus_EST_estonia_cell_as
+		cost = 5
+		x = 5
+		y = 2
+
+		relative_position_id = EST_dissolve_eea
+
+		available = {
+		}
+
+		prerequisite = {
+			focus = EST_modernize_narva_power_plant
+		}
+
+		completion_reward = {
+			840 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.25
+				uses = 2
+				category = industry
+			}
+		}
+	}
+
+	focus = {
+		id = EST_narva_magnet_factory
+		icon = GFX_focus_generic_steel
+		cost = 5
+		x = 7
+		y = 2
+
+		relative_position_id = EST_dissolve_eea
+
+		available = {
+		}
+
+		prerequisite = {
+			focus = EST_modernize_narva_power_plant
+		}
+
+		completion_reward = {
+			840 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_tech_bonus = {
+				name = industry_bonus
+				bonus = 0.25
+				uses = 1
+				category = industry
+			}
+			add_tech_bonus = {
+				name = electronics
+				bonus = 0.25
+				uses = 1
+				category = electronics
+			}
+			add_resource = {
+				type = steel
+				amount = 3
+				state = 840
+			}
+		}
+	}
+
+	focus = {
 		id = EST_narva_wind_farm
 		icon = GFX_focus_generic_hydroelectric_energy
 		cost = 10
@@ -822,6 +913,10 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			840 = {
+				add_extra_state_shared_building_slots = 1
+				set_state_category = state_level_4
+			}
 		}
 	}
 
@@ -1045,10 +1140,36 @@ focus_tree = {
 ##############
 
 	focus = {
+		id = EST_rebuild_tapa_base
+		icon = GFX_goal_generic_construct_civilian
+		cost = 10
+		x = 22
+		y = 7
+
+		completion_reward = {
+			remove_ideas = EST_maavagi_idea
+		}
+	}
+	
+	focus = {
+		id = EST_national_defence_development_plan
+		icon = GFX_focus_SOV_mobilization_plan
+		cost = 10
+		x = 20
+		y = 12
+
+		completion_reward = {
+			add_war_support = 0.05
+			country_event = nvv_estonia.14
+			custom_effect_tooltip = EST_nddp_tt
+		}
+	}
+
+	focus = {
 		id = EST_integrate_naiskodukaitse
 		icon = EST_naiskodukaitse
 		cost = 5
-		x = 5
+		x = 26
 		y = 10
 
 		completion_reward = {
@@ -1080,7 +1201,7 @@ focus_tree = {
 		id = EST_support_command
 		icon = GFX_focus_generic_truck
 		cost = 5
-		x = 1
+		x = 22
 		y = 9
 
 		completion_reward = {
@@ -1099,11 +1220,84 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = EST_request_foreign_support
+		icon = GFX_focus_invite_finland
+		cost = 5
+		x = 18 
+		y = 9
+
+		prerequisite = {
+			focus = EST_improve_nordic_relations
+		}
+
+		available = {
+			FIN = {
+				has_opinion = {
+					target = EST
+					value > 49
+				}
+			}
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = EST_if_FIN_accepts_tt
+			effect_tooltip = {
+				army_experience = 15
+				add_tech_bonus = {
+					name = EST_motorized_logistics
+					bonus = 0.5
+					uses = 1
+					category = logistics_tech
+				}
+				add_tech_bonus = {
+					name = EST_engineer_bonus
+					bonus = 0.5
+					uses = 1
+					category = engineers_tech
+				}
+				add_tech_bonus = {
+					name = EST_engineer_bonus
+					bonus = 0.5
+					uses = 1
+					category = signal_company_tech
+				}
+				add_opinion_modifier = {
+					target = FIN
+					modifier = estonia_finish_military_assistance
+				}
+				add_timed_idea = {
+					idea = estonia_finish_military_assistance_idea
+					days = 365
+				}
+			}
+			FIN = {
+				country_event = nvv_estonia.15
+			}
+		}
+	}
+	focus = {
+		id = EST_engineer_school
+		icon = GFX_goal_generic_position_armies
+		cost = 5
+		x = 22
+		y = 11
+
+		prerequisite = {
+			focus = EST_support_command
+		}
+		prerequisite = {
+			focus = EST_request_foreign_support
+		}
+
+		completion_reward = {
+		}
+	}
+	focus = {
 		id = EST_open_Kkskpoluegoon
 		icon = estonia_training
 		cost = 5
-		x = 5
-		y = 9
+		x = 26
+		y = 12
 
 		completion_reward = {
 			army_experience = 15
@@ -1125,8 +1319,8 @@ focus_tree = {
 		id = EST_Kevadtorm
 		icon = GFX_focus_NORDIC_com_selector_army
 		cost = 10
-		x = 4
-		y = 8
+		x = 26
+		y = 14
 
 		prerequisite = { focus = EST_open_Kkskpoluegoon }
 
@@ -1147,12 +1341,25 @@ focus_tree = {
 		id = EST_defense_investment_center
 		icon = GFX_focus_generic_combined_arms
 		cost = 5
-		x = 3
+		x = 24
 		y = 10
 
 		completion_reward = {
 			every_military_industrial_organization = {
 				add_mio_funds = 500
+			}
+			effect_tooltip = {
+				add_advisor_role = {
+					character = EST_Indrek_Sirp
+					advisor = {
+						slot = political_advisor
+						cost = 100
+						idea_token = EST_Indrek_Sirp
+						traits = {
+							defence_policy_advisor
+						}
+					}
+				}
 			}
 		}
 	}
@@ -1664,6 +1871,7 @@ focus_tree = {
 				uses = 1
 				category = naval_doctrine
 			}
+			random_navy_leader = { gain_xp = 15 }
 		}
 	}
 
@@ -1901,10 +2109,10 @@ focus_tree = {
 		icon = GFX_focus_CHL_mapuche_reconcilliation_campaigns_export
 		cost = 5
 		x = 0
-		y = 10
+		y = 2
 		relative_position_id = EST_move_capital
 
-		#prerequisite = { focus = EST_move_capital }
+		prerequisite = { focus = EST_move_capital }
 
 		allow_branch = {
 			IF = {

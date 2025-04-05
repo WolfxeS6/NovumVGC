@@ -367,7 +367,180 @@ country_event = {
 	}
 }
 
+# National Defence Development Plan
+country_event = {
+	id = nvv_estonia.14
+	title = nvv_estonia.14.t
+	desc = nvv_estonia.14.d
+	picture = GFX_report_event_estonian_army_soldiers_marching
+	
+	is_triggered_only = yes
 
+	immediate = { 
+		hidden_effect = {
+			remove_ideas = {
+				EST_rkak_1
+				EST_rkak_2
+				EST_rkak_3
+			}
+		}
+	 }
+	
+	option = {
+		name = nvv_estonia.14.a
+		add_ideas = EST_rkak_1
+		hidden_effect = {
+			country_event = {
+				id = nvv_estonia.14 days = 1460
+			}
+		}
+	}
+	option = {
+		name = nvv_estonia.14.b
+		add_ideas = EST_rkak_2
+		hidden_effect = {
+			country_event = {
+				id = nvv_estonia.14 days = 1460
+			}
+		}
+	}
+	option = {
+		name = nvv_estonia.14.c
+		add_ideas = EST_rkak_3
+		hidden_effect = {
+			country_event = {
+				id = nvv_estonia.14 days = 1460
+			}
+		}
+	}
+}
+
+# Estonia Requests Military Assistance
+country_event = {
+	id = nvv_estonia.15
+	title = nvv_estonia.15.t
+	desc = nvv_estonia.15.d
+	picture = GFX_report_event_estonian_army_soldiers_marching
+	
+	is_triggered_only = yes
+
+	immediate = {
+	 }
+	
+	option = {		#yes
+		name = nvv_estonia.15.a
+		army_experience = 10
+		add_political_power = 25
+		custom_effect_tooltip = FIN_estonia_military_assistance_tt
+		effect_tooltip = {
+			army_experience = 15
+			add_tech_bonus = {
+				name = EST_motorized_logistics
+				bonus = 0.5
+				uses = 1
+				category = logistics_tech
+			}
+			add_tech_bonus = {
+				name = EST_engineer_bonus
+				bonus = 0.5
+				uses = 1
+				category = engineers_tech
+			}
+			add_tech_bonus = {
+				name = EST_engineer_bonus
+				bonus = 0.5
+				uses = 1
+				category = signal_company_tech
+			}
+			add_opinion_modifier = {
+				target = FIN
+				modifier = estonia_finish_military_assistance
+			}
+			add_timed_idea = {
+				idea = estonia_finish_military_assistance_idea
+				days = 365
+			}
+		}
+		EST = { country_event = { id = nvv_estonia.16 days = 3 } }
+	}
+	option = {	#no
+		name = nvv_estonia.15.b
+		effect_tooltip = {
+			EST = {
+				add_opinion_modifier = {
+					target = FIN
+					modifier = estonia_declined_finish_military_assistance
+				}
+			}
+		}
+		EST = { country_event = { id = nvv_estonia.17 days = 3 } }
+	}
+}
+
+# Finland Gives Military Assistance
+country_event = {
+	id = nvv_estonia.16
+	title = nvv_estonia.16.t
+	desc = nvv_estonia.16.d
+	picture = GFX_report_event_estonian_army_soldiers_marching
+	
+	is_triggered_only = yes
+
+	immediate = {
+	}
+	
+	option = {
+		name = nvv_estonia.16.a
+		army_experience = 15
+		add_tech_bonus = {
+			name = EST_motorized_logistics
+			bonus = 0.5
+			uses = 1
+			category = logistics_tech
+		}
+		add_tech_bonus = {
+			name = EST_engineer_bonus
+			bonus = 0.5
+			uses = 1
+			category = engineers_tech
+		}
+		add_tech_bonus = {
+			name = EST_engineer_bonus
+			bonus = 0.5
+			uses = 1
+			category = signal_company_tech
+		}
+		add_opinion_modifier = {
+			target = FIN
+			modifier = estonia_finish_military_assistance
+		}
+		add_timed_idea = {
+			idea = estonia_finish_military_assistance_idea
+			days = 365
+		}
+	}
+}
+
+# Finland Declines Military Assistance
+country_event = {
+	id = nvv_estonia.17
+	title = nvv_estonia.17.t
+	desc = nvv_estonia.17.d
+	picture = GFX_report_event_estonian_army_soldiers_marching
+	
+	is_triggered_only = yes
+
+	immediate = {
+	}
+	
+	option = {
+		name = nvv_estonia.17.a
+		add_opinion_modifier = {
+			target = FIN
+			modifier = estonia_declined_finish_military_assistance
+		}
+	}
+}
 
 
 # Estonian Nordic Ambitions
@@ -383,14 +556,9 @@ country_event = {
 	
 	option = {
 		name = estonia_news.1.a
-		effect_tooltip = {
-			every_country = {
-				limit = { is_nordic = yes }
-				add_opinion_modifier = {
-						target = EST
-						modifier = estonia_nordic_ambitions
-				}
-			}
+		add_opinion_modifier = {
+			target = FIN
+			modifier = estonia_declined_finish_military_assistance
 		}
 	}
 }

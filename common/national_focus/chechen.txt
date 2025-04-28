@@ -1,0 +1,351 @@
+focus_tree = {
+	id = chechen_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = CHE
+		}
+	}
+	
+	initial_show_position = {
+		focus = CHE_national_resistance
+	}
+	continuous_focus_position = { x =200 y = 1600 }
+
+	default = no
+
+	focus = {
+		id = CHE_national_resistance
+		icon = GFX_focus_ETH_freedom_at_gunpoint
+		x = 3
+		y = 0
+		cost = 5
+
+		prerequisite = {
+		}
+
+		mutually_exclusive = { focus = CHE_rise_of_kadyrov }
+
+		completion_reward = {
+			add_war_support = 0.1
+			add_ideas = CHE_will_to_survive
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	focus = {
+		id = CHE_fortify_grozny
+		icon = GFX_goal_generic_fortify_city
+		x = -1
+		y = 1
+		cost = 5
+
+		relative_position_id = CHE_national_resistance
+
+		prerequisite = {
+			focus = CHE_national_resistance
+		}
+
+		bypass = {
+			is_subject = yes
+		}
+
+		mutually_exclusive = { focus = CHE_fortify_countryside }
+
+		completion_reward = {
+			828 = {
+				add_building_construction = {
+					type = bunker
+					province = 3672
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_fortify_countryside
+		icon = GFX_focus_generic_mountain_fortification
+		x = 1
+		y = 1
+		cost = 5
+
+		relative_position_id = CHE_national_resistance
+
+		prerequisite = {
+			focus = CHE_national_resistance
+		}
+
+		bypass = {
+			is_subject = yes
+		}
+
+		mutually_exclusive = { focus = CHE_fortify_grozny }
+
+		completion_reward = {
+			828 = {
+				add_building_construction = {
+					type = bunker
+					province = 11632
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 683
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 666
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 13470
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 670
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					province = 1455
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_retreat_mountains
+		icon = GFX_focus_AFG_mountain_training
+		x = -2
+		y = 2
+		cost = 2
+
+		relative_position_id = CHE_national_resistance
+
+		prerequisite = {
+			focus = CHE_national_resistance
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		mutually_exclusive = {  }
+
+		completion_reward = {
+			add_war_support = 0.05
+			add_stability = -0.1
+			add_offsite_building = { type = arms_factory level = 1 }
+			custom_effect_tooltip = CHE_retreat_mountains_tt
+			custom_effect_tooltip = CHE_retreat_mountains_fail_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_struggle_continues
+		icon = GFX_focus_generic_spur_communist_revolutions
+		x = -1
+		y = 3
+		cost = 5
+
+		relative_position_id = CHE_national_resistance
+
+		prerequisite = {
+			focus = CHE_fortify_countryside
+			focus = CHE_fortify_grozny
+		}
+		prerequisite = {
+			focus = CHE_retreat_mountains
+		}
+
+		available = {
+			has_war = no
+			is_subject = yes
+		}
+
+		mutually_exclusive = {  }
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_independence_archieved
+		icon = GFX_focus_generic_diplomatic_treaty
+		x = 1
+		y = 3
+		cost = 5
+
+		relative_position_id = CHE_national_resistance
+
+		available = {
+			has_war = no
+			is_subject = no
+			date > 2000.04.01
+		}
+
+		prerequisite = {
+			focus = CHE_fortify_countryside
+			focus = CHE_fortify_grozny
+		}
+
+		mutually_exclusive = {  }
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_election_maschadow
+		icon = GFX_focus_AUS_follow_the_jansa_plan
+		x = -2
+		y = 2
+		cost = 5
+
+		relative_position_id = CHE_independence_archieved
+
+		prerequisite = {
+			focus = CHE_independence_archieved
+		}
+
+		mutually_exclusive = { focus = CHE_election_bassajew }
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_election_bassajew
+		icon = GFX_focus_AUS_follow_the_jansa_plan
+		x = 2
+		y = 2
+		cost = 5
+
+		relative_position_id = CHE_independence_archieved
+
+		prerequisite = {
+			focus = CHE_independence_archieved
+		}
+
+		mutually_exclusive = { focus = CHE_election_maschadow }
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	###############
+	### KADYROV ###
+	###############
+
+	focus = {
+		id = CHE_rise_of_kadyrov
+		icon = GFX_focus_akhmad_kadyrov_bust
+		x = 8
+		y = 0
+		cost = 5
+
+		prerequisite = {
+		}
+
+		mutually_exclusive = { focus = CHE_national_resistance }
+
+		completion_reward = {
+			add_stability = -0.2
+			custom_effect_tooltip = CHE_kadyrov_tt
+			SOV = { country_event = chechnya.1 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_request_russian_caucasus
+		icon = GFX_focus_SMB_a_land_of_mountains
+		x = 7
+		y = 2
+		cost = 10
+
+		available = {
+			SOV = {
+				controls_state = 1158
+				controls_state = 1157
+				controls_state = 233
+			}
+		}
+
+		mutually_exclusive = { focus = CHE_national_resistance }
+
+		completion_reward = {
+			custom_effect_tooltip = if_they_accept_newline_tt
+			effect_tooltip = {
+				transfer_state = 1158
+				transfer_state = 1157
+				transfer_state = 233
+				set_cosmetic_tag = CHE_SOV_northern_caucasus
+			}
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+}

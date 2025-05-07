@@ -471,6 +471,8 @@ set_variable = { sov_economy_CG = 0.25 } #0 ( +01 ) (мигранты -01 -- +00
 set_variable = { sov_economy_civ_cons_spd = -0.4 } #-02
 set_variable = { sov_economy_prodout = -0.1 } #005 (+005)
 set_variable = { sov_economy_prodcap = -0.2 } #-015 (+015)
+set_variable = { sov_economy_prodretention_fct = 0 } #-015 (+015)
+set_variable = { sov_economy_prodgrowth_fct = 0 } #-015 (+015)
 set_variable = { sov_economy_resspeed = -0.1 } #05 (7)
 set_variable = { sov_economy_min_exp = 0.3 } #0 (-01)
 set_variable = { sov_economy_pop = -0.35 } # -01 (+01)
@@ -590,11 +592,17 @@ country_event = {
 
 	option = { # reactionary
 		name = russ.3.a
+		ai_chance = {
+			base = 30
+		}
 		complete_national_focus = SOV_keep_system
 	}
 
 	option = { # nationalist
 		name = russ.3.b
+		ai_chance = {
+			base = 70
+		}
 		set_politics = { 
 			ruling_party = nationalist
 			long_name = SOV_putin_nationalist_party_long
@@ -1172,5 +1180,73 @@ country_event = {
 
 	option = { # ok
 		name = russ.22.a
+	}
+}
+
+## yavl question of oligarchs
+
+country_event = {
+	id = russ.23
+	title = russ.23.t
+	desc = russ.23.desc
+	picture = GFX_event_russian_oligarchs
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # risk
+		name = russ.23.a
+
+		random_list = {
+            40 = { # 40% chance
+				custom_effect_tooltip = RCO_maxprod_increase_5_TT
+				custom_effect_tooltip = RCO_CG_decrease_5_TT
+				add_to_variable = { sov_economy_CG = -0.05 }
+				add_to_variable = { sov_economy_prodcap = 0.05 }
+            }
+            35 = { # 35% chance
+                add_political_power = -150
+                add_stability = -0.1
+            }
+            25 = { # 25% chance
+                add_political_power = 150
+                add_stability = 0.15
+				custom_effect_tooltip = RCO_maxprod_increase_10_TT
+				custom_effect_tooltip = RCO_CG_decrease_10_TT
+				add_to_variable = { sov_economy_CG = -0.1 }
+				add_to_variable = { sov_economy_prodcap = 0.1 }
+            }
+        }
+	}
+
+	option = { # submit
+		name = russ.23.b
+
+		add_political_power = -50
+        add_stability = 0.05
+		custom_effect_tooltip = RCO_maxprod_increase_5_TT
+		add_to_variable = { sov_economy_prodcap = 0.05 }
+	}
+}
+
+## defence of moscow
+
+country_event = {
+	id = russ.24
+	title = russ.24.t
+	desc = russ.24.desc
+	picture = GFX_event_defence_of_moscow
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # risk
+		name = russ.24.a
+
+		219 = { #Moscow
+				add_dynamic_modifier = { modifier = sov_defend_region scope = SOV }
+			}
 	}
 }

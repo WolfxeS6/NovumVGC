@@ -54,10 +54,11 @@ focus_tree = {
 				ideology = social_democrat
 				popularity = 0.03
 			}
+			set_country_flag = SAF_oilgate_flag
 		}
 		
 		ai_will_do = {
-			factor = 5
+			factor = 40
 		}
 	}
 	
@@ -181,11 +182,11 @@ focus_tree = {
 				ideology = social_democrat
 				popularity = 0.05
 			}
-			#Flavour event?
+			country_event = { id = southafrica.1 days = 202 }
 		}
 		
 		ai_will_do = {
-			factor = 5
+			factor = 25
 		}
 	}
 	
@@ -249,9 +250,7 @@ focus_tree = {
 			fourth_estate_conservative_increase = yes
 			fourth_estate_market_liberal_increase = yes
 			fourth_estate_social_liberal_increase = yes
-			#add_ideas = SAF_oilgate_scandal 
-            #GETS EVENT: The Oilgate Scandal- Flavour, set MTTH to 1?
-				#event gives NAT IDEA: The Oilgate Scandal
+			country_event = { id = southafrica.1 hours = 16 }
         }
 		
 		ai_will_do = {
@@ -472,12 +471,16 @@ focus_tree = {
 	focus = {
 		id = SAF_brics
 		icon = align_to_brazil
-		x = -1
-		y = 2
+		x = 0
+		y = 3
 		cost = 10
 		
 		relative_position_id = SAF_found_ibsa
 		prerequisite = { focus = SAF_found_ibsa }
+		
+		available = {
+			date > 2005.4.1
+		}
 
 		completion_reward = {
 			SOV = {
@@ -519,9 +522,9 @@ focus_tree = {
 		cost = 10
 	
 		
-		relative_position_id = SAF_brics
-		prerequisite = { focus = SAF_brics }
-		prerequisite = { focus = SAF_oilgate_coverup }
+		relative_position_id = SAF_found_ibsa
+		prerequisite = { focus = SAF_found_ibsa }
+		prerequisite = { focus = SAF_oil_for_food }
 		
 		available = {
 			threat > 0.25
@@ -542,13 +545,14 @@ focus_tree = {
 	focus = {
 		id = SAF_brics_invest
 		icon = align_to_south_africa
-		x = 0
+		x = -2
 		y = 1
 		cost = 10
 	
 		
 		relative_position_id = SAF_brics
 		prerequisite = { focus = SAF_brics }
+		prerequisite = { focus = SAF_oilgate_coverup }
 		
 
 		completion_reward = { 
@@ -579,6 +583,28 @@ focus_tree = {
 			}
 			
 			RAJ = {
+				random_owned_state = {
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					province = 0  # `province` will be replaced by the random state selected
+					}
+				}
+			
+			}
+			
+			PRC = {
+				random_owned_state = {
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					province = 0  # `province` will be replaced by the random state selected
+					}
+				}
+			
+			}
+			
+			SOV = {
 				random_owned_state = {
 					add_building_construction = {
 					type = industrial_complex
@@ -1934,6 +1960,7 @@ focus_tree = {
 				ideology = fascist
 				popularity = -0.15
 			}
+			set_country_flag = SAF_flag_vf
 		}
 		
 		
@@ -2052,6 +2079,7 @@ focus_tree = {
 				ideology = nationalist
 				popularity = 0.03
 			}
+			set_country_flag = SAF_vf_nat
 			
 		}
 		
@@ -2292,7 +2320,7 @@ focus_tree = {
 		
 
 		completion_reward = {
-			set_party_name = { ideology = nationalist long_name = SAF_nationalist_party_rw2_long name = SAF_nationalist_party_bantu_rw2 }
+			set_party_name = { ideology = nationalist long_name = SAF_nationalist_party_rw2_long name = SAF_nationalist_party_rw2 }
 			fourth_estate_reactionary_decrease = yes
 			add_popularity = {
 				ideology = reactionary

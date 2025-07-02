@@ -1,0 +1,3107 @@
+
+focus_tree = {
+	id = south_african_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = SAF
+		}
+	}
+	
+	default = no
+	shared_focus = GEN_a_new_economy_for_a_new_millenium
+	shared_focus = GEN_modernize_the_airforce
+	shared_focus = GEN_modernize_the_navy
+	shared_focus = GEN_bolster_the_army
+
+#####HEADLINE THREE#####
+	
+	focus = {
+		id = SAF_cont_mandela_legacy
+		icon = GFX_focus_GER_liberate_exploited_colonial_workers
+		x = 27
+		y = 8
+		
+		mutually_exclusive = { focus =  SAF_pan_africanism focus = SAF_demo_backslide }
+		cost = 10
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_conservative_increase = yes
+			fourth_estate_social_democrat_increase = yes
+			fourth_estate_market_liberal_increase = yes
+			fourth_estate_social_liberal_increase = yes
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.03
+			}
+			set_country_flag = SAF_oilgate_flag
+		}
+		
+		ai_will_do = {
+			factor = 40
+		}
+	}
+	
+	focus = {
+		id = SAF_pan_africanism
+		icon = africa3
+		x = 40
+		y = 8
+		
+		mutually_exclusive = { focus =  SAF_cont_mandela_legacy focus = SAF_demo_backslide}
+		cost = 10
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_democratic_socialist_increase = yes
+			fourth_estate_nationalist_increase = yes
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.10
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.15
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 24
+		}
+	}
+	
+	focus = {
+		id = SAF_demo_backslide
+		icon = fascist_partisant_warfare
+		x = 55
+		y = 8
+		
+		mutually_exclusive = { focus =  SAF_pan_africanism focus = SAF_cont_mandela_legacy}
+		cost = 10
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_conservative_decrease = yes
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_market_liberal_decrease = yes
+			fourth_estate_social_liberal_decrease = yes
+			fourth_estate_nationalist_increase = yes
+			add_popularity = {
+				ideology = conservative
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = monarchist
+				popularity = 0.05
+			}
+		}
+		
+		ai_will_do = {
+			factor = 24
+		}
+	}
+
+#####ANC AND OILGATE: HISTORICAL ROUTE#####
+	
+	focus = {
+		id = SAF_party_of_mandela
+		icon = GFX_focus_CHL_union_of_hispanic_republics
+		
+		x = -2
+		y = 1
+		relative_position_id = SAF_cont_mandela_legacy
+		
+		prerequisite = { focus = SAF_cont_mandela_legacy }
+		mutually_exclusive = { focus = SAF_withdraw_the_oilgate_gags }
+		available = { has_government = social_democrat }
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_social_democrat_increase = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			country_event = { id = southafrica.1 days = 202 }
+		}
+		
+		ai_will_do = {
+			factor = 25
+		}
+	}
+	
+	focus = {
+		id = SAF_restrict_press
+		icon = media_censorship
+		
+		x = -2
+		y = 1
+		relative_position_id = SAF_party_of_mandela
+		
+		prerequisite = { focus = SAF_party_of_mandela }
+		#mutually_exclusive = { focus = SAF_withdraw_the_oilgate_gags }
+		available = {
+			NOT = { has_idea = civil_liberties_free }
+		}
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            add_stability = -0.05
+			#GETS IDEA: State Corruption
+			#Sets flag to delay Oilgate scandal event mtth to 2003, else 2001?
+				#GETS EVENT: The Oilgate Scandal- Flavour
+					#event gives NAT IDEA: The Oilgate Scandal
+			
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_withdraw_the_oilgate_gags
+		icon = GFX_focus_generic_national_security
+		
+		x = 2
+		y = 1
+		relative_position_id = SAF_cont_mandela_legacy
+		
+		prerequisite = { focus = SAF_cont_mandela_legacy }
+		mutually_exclusive = { focus = SAF_party_of_mandela }
+		available = {
+			NOT = { has_idea = civil_liberties_restricted }
+			NOT = { has_idea = civil_liberties_totalitarian }
+		}
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_conservative_increase = yes
+			fourth_estate_market_liberal_increase = yes
+			fourth_estate_social_liberal_increase = yes
+			country_event = { id = southafrica.1 hours = 16 }
+        }
+		
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	
+	
+	focus = {
+		id = SAF_protests
+		icon = GFX_focus_PER_stage_mass_protests
+		
+		x = 2
+		y = 1
+		relative_position_id = SAF_withdraw_the_oilgate_gags
+		
+		prerequisite = {focus = SAF_withdraw_the_oilgate_gags }
+		cost = 5
+		
+		available = {
+			has_idea = SAF_oilgate_scandal
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			add_stability = -0.1
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.25
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+            #NAT IDEA: The Oilgate Scandal removed
+			#NAT IDEA: Widespread Protests, maybe use existing one?
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	
+	
+	
+	focus = {
+		id = SAF_imvume
+		icon = GFX_focus_PER_increase_oil_sales
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_restrict_press
+		
+		prerequisite = { focus = SAF_restrict_press }
+		
+		cost = 4
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			#MODIFIES IDEA: State Corruption
+            random_owned_state = {
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+		
+			}
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+		focus = {
+		id = SAF_oil_for_food
+		icon = GFX_focus_IRQ_nationalize_the_anglo_iraqi_oil_company
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_restrict_press
+		
+		prerequisite = { focus = SAF_restrict_press }
+		
+		cost = 4
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			IRQ = {
+				increase_trade_influence_by_3 = yes
+			}
+        }
+		
+		ai_will_do = {  
+		}
+	}
+	
+	focus = {
+		id = SAF_lucrative_corruption
+		icon = technocracy_champagne
+		
+		x = 0
+		y = 2
+		relative_position_id = SAF_restrict_press
+		
+		prerequisite = { focus = SAF_imvume }
+		prerequisite = { focus = SAF_oil_for_food }
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_social_democrat_increase = yes
+			#if = {
+			#	limit = {
+			#		NOT = { has_idea = SAF_oilgate_scandal }
+			#	}
+			#	hidden_effect = {
+			#		country_event = { id = southafrica.1 hours = 1 }
+			#	}
+			#}
+ 
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	
+	focus = {
+		id = SAF_oilgate_coverup
+		icon = crisis
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_lucrative_corruption
+		
+		prerequisite = { focus = SAF_lucrative_corruption }
+		available = {
+			NOT = { has_idea = civil_liberties_limited }
+			NOT = { has_idea = civil_liberties_free }
+			has_idea = SAF_oilgate_scandal
+		}
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			remove_ideas = SAF_oilgate_scandal
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+
+#### IBSA/BRICS AND FOREIGN POLICY ####
+	focus = {
+		id = SAF_found_ibsa
+		icon = in_the_world_stage
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_party_of_mandela
+		
+		prerequisite = { focus = SAF_party_of_mandela focus = SAF_withdraw_the_oilgate_gags }
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            add_political_power = 100
+			#RAJ, BRA get event inviting
+				#NAT IDEA: IBSA Member
+        }
+		
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	
+	focus = {
+		id = SAF_brics
+		icon = align_to_brazil
+		x = 0
+		y = 3
+		cost = 10
+		
+		relative_position_id = SAF_found_ibsa
+		prerequisite = { focus = SAF_found_ibsa }
+		
+		available = {
+			date > 2005.4.1
+		}
+
+		completion_reward = {
+			SOV = {
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = SAF
+				}
+			}
+			RAJ = {
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = SAF
+				}
+			}
+			PRC = {
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = SAF
+				}
+			}
+			BRA = {
+				add_opinion_modifier = {
+					modifier = declaration_of_friendship
+					target = SAF
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	
+	focus = {
+		id = SAF_formalise_defence
+		icon = align_to_india
+		x = -1
+		y = 2
+		cost = 10
+	
+		
+		relative_position_id = SAF_found_ibsa
+		prerequisite = { focus = SAF_found_ibsa }
+		prerequisite = { focus = SAF_oil_for_food }
+		
+		available = {
+			threat > 0.25
+		}
+
+		completion_reward = {
+			create_faction = defence_dialogue_forum
+			RAJ = {}	#EVENT FOR INV
+			BRA = {}	#EVENT FOR INV
+		}
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+		
+	
+	focus = {
+		id = SAF_brics_invest
+		icon = align_to_south_africa
+		x = -2
+		y = 1
+		cost = 10
+	
+		
+		relative_position_id = SAF_brics
+		prerequisite = { focus = SAF_brics }
+		prerequisite = { focus = SAF_oilgate_coverup }
+		
+
+		completion_reward = { 
+			random_owned_state = {
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+				type = industrial_complex
+				level = 1
+				}
+			}
+			
+			BRA = {
+				random_owned_state = {
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					}
+				}
+			
+			}
+			
+			RAJ = {
+				random_owned_state = {
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					}
+				}
+			
+			}
+			
+			PRC = {
+				random_owned_state = {
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					}
+				}
+			
+			}
+			
+			SOV = {
+				random_owned_state = {
+					add_building_construction = {
+					type = industrial_complex
+					level = 1
+					}
+				}
+			
+			}
+			
+		}
+		
+		ai_will_do = {
+			factor = 3
+		}
+	}
+	
+	
+#### HIV/AIDS CRISIS ####
+	focus = {
+		id = SAF_found_sanac
+		icon = GFX_goal_Universal_Healthcare
+		
+		x = 3
+		y = 1
+		relative_position_id = SAF_party_of_mandela
+		
+		prerequisite = { focus = SAF_party_of_mandela focus = SAF_withdraw_the_oilgate_gags }
+		cost = 5
+		
+		available = {
+			has_idea = SAF_hiv_aids_crisis
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis
+				add_idea = SAF_hiv_aids_crisis_2
+			}
+			
+        }
+		
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	
+	focus = {
+		id = SAF_defy_pharma
+		icon = renounce_treaty2
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_found_sanac
+		
+		prerequisite = { focus = SAF_found_sanac }
+		cost = 5
+		
+		available = {
+		date > 2001.4.1
+		has_idea = SAF_hiv_aids_crisis_2
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis_2
+				add_idea = SAF_hiv_aids_crisis_3
+			}
+			
+        }
+		
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	
+	focus = {
+		id = SAF_right_to_care
+		icon = GFX_USA_Healthcare
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_defy_pharma
+		
+		prerequisite = { focus = SAF_defy_pharma }
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+		available = {
+			has_idea = SAF_hiv_aids_crisis_3
+		}
+
+		completion_reward = {
+            swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis_3
+				add_idea = SAF_hiv_aids_crisis_4
+			}
+        }
+		
+		ai_will_do = {
+			factor = 30
+		}
+	}
+
+	focus = {
+		id = SAF_nevirapine
+		icon = CHI_medical_reform
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_right_to_care
+		
+		prerequisite = { focus = SAF_right_to_care }
+		cost = 5
+		
+		available = {
+			OR = {
+				NOT = {
+					has_country_leader = {
+						name = "Thabo Mbeki"
+						ideology = social_democrat
+					}
+				}
+				date > 2002.1.1
+			}
+			has_idea = SAF_hiv_aids_crisis_4
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            remove_ideas = SAF_hiv_aids_crisis_4
+			
+        }
+		
+		ai_will_do = {
+			factor = 30
+		}
+	}
+	
+####SNAP ELEC RESULTS ####
+	
+	focus = {
+		id = SAF_keep_left
+		icon = leftism
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_protests
+		mutually_exclusive = { focus = SAF_turn_right }
+		prerequisite = {focus = SAF_protests }
+		cost = 5
+		
+		
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_social_liberal_increase = yes
+			fourth_estate_progressive_increase = yes
+			add_popularity = {
+				ideology = progressive
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.1
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = -0.05
+			}
+            #NAT IDEA: The Oilgate Scandal removed
+			#NAT IDEA: Widespread Protests, maybe use existing one?
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_turn_right
+		icon = GFX_goal_Family_Values_1
+		mutually_exclusive = { focus = SAF_keep_left }
+		x = 1
+		y = 1
+		relative_position_id = SAF_protests
+		
+		prerequisite = {focus = SAF_protests }
+		cost = 5
+		
+		
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_market_liberal_increase = yes
+			fourth_estate_conservative_increase = yes
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.1
+			}
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_snap_election
+		icon = cooler_elections
+		
+		x = 0
+		y = 3
+		relative_position_id = SAF_protests
+		
+		prerequisite = {focus = SAF_keep_left focus = SAF_turn_right }
+		cost = 5
+		
+		available = {
+			social_democrat <0.30
+		}
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            add_political_power = 50
+			country_event = { id = election.2 }
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	
+####UNEMPLOYMENT CRISIS (THNX ROMANIA)####
+
+	focus = {
+			id = SAF_combating_unemployment
+			icon = construction2
+			x = -1
+			y = 1
+			relative_position_id = SAF_nevirapine
+			cost = 7.2
+			
+			prerequisite = { focus = SAF_found_ibsa }
+			prerequisite = { focus = SAF_nevirapine focus = SAF_snap_election }
+			
+			
+			completion_reward = {
+				add_stability = 0.05
+				add_tech_bonus = {
+					name = industry_bonus
+					bonus = 1.0
+					uses = 1
+					category = industry
+				}
+				swap_ideas = {
+					remove_idea = ROM_unemployment_crisis
+					add_idea = ROM_unemployment_crisis_2
+				}
+			}
+			ai_will_do = {
+				factor = 10
+			}
+		}
+	
+	focus = {
+		id = SAF_creating_new_jobs
+		icon = industry_communist
+		x = 0
+		y = 1
+		relative_position_id = SAF_combating_unemployment
+		cost = 7.2
+
+		prerequisite = {
+			focus = SAF_combating_unemployment
+		}
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			swap_ideas = {
+				remove_idea = ROM_unemployment_crisis_2
+				add_idea = ROM_unemployment_crisis_3
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = SAF_establish_a_military_industrial_complex
+		icon = military_fort
+		x = -2
+		y = 1
+		relative_position_id = SAF_combating_unemployment
+		cost = 7.2
+
+		prerequisite = {
+			focus = SAF_combating_unemployment
+		}
+
+		completion_reward = {
+			army_experience = 25
+			add_offsite_building = { type = arms_factory level = 2 }
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = SAF_nw_mining_inf 
+		icon = infrastructure
+		x = 2
+		y = 1
+		relative_position_id = SAF_combating_unemployment
+		cost = 7.2
+
+		prerequisite = {
+			focus = SAF_combating_unemployment
+		}
+
+		completion_reward = {
+			1070 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+			}
+			1071 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	focus = {
+		id = SAF_mixed_market_mining
+		icon = GFX_focus_generic_resource_extraction
+		x = 1
+		y = 1
+		relative_position_id = SAF_creating_new_jobs
+		cost = 7.2
+
+		prerequisite = {
+			focus = SAF_creating_new_jobs
+		}
+		
+		prerequisite = {
+			focus = SAF_nw_mining_inf
+		}
+		
+		mutually_exclusive = { focus = SAF_international_mining_cos }
+		
+		available = {
+			NOT = {	has_government = market_liberal}
+		}
+		
+		completion_reward = {
+			1070 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			1071 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			
+			275 = {
+				add_building_construction = {
+					type = recycling_center
+					level = 1
+					instant_build = yes
+				}
+			}
+			
+			1073 = {
+				add_building_construction = {
+					type = recycling_center
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	
+	focus = {
+		id = SAF_international_mining_cos
+		icon = GFX_focus_generic_road_investment
+		x = 2
+		y = 1
+		relative_position_id = SAF_nw_mining_inf
+		cost = 7.2
+
+		prerequisite = {
+			focus = SAF_nw_mining_inf
+		}
+		
+		prerequisite = {
+			focus = SAF_snap_election
+		}
+		mutually_exclusive = { focus = SAF_mixed_market_mining }
+		available = {
+			has_government = market_liberal
+		}
+		
+		
+		completion_reward = {
+			1070 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			1071 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+#####PAC: SOC/NAT PATH#####
+	focus = {
+		id = SAF_convene_congress
+		icon = align_to_africa
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_pan_africanism
+		
+		prerequisite = { focus = SAF_pan_africanism }
+		
+		cost = 5
+		
+		available = {
+			social_democrat < 0.45
+			
+		}
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes		
+
+		completion_reward = {
+            set_party_name = { ideology = nationalist long_name = SAF_nationalist_party_bantu_AC_long name = SAF_nationalist_party_bantu_AC }
+			fourth_estate_democratic_socialist_increase = yes
+			fourth_estate_nationalist_increase = yes
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.10
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.15
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_africa_for_africans
+		icon = GFX_focus_ETH_african_union
+		
+		x = 2
+		y = 1
+		relative_position_id = SAF_convene_congress
+		
+		prerequisite = { focus = SAF_convene_congress }
+		mutually_exclusive = { focus = SAF_multi_africa }
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            fourth_estate_democratic_socialist_decrease = yes
+			fourth_estate_nationalist_increase = yes
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.15
+			}
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_multi_africa
+		icon = GFX_goal_generic_national_unity 
+		
+		x = -2
+		y = 1
+		relative_position_id = SAF_convene_congress
+		
+		prerequisite = { focus = SAF_convene_congress }
+		mutually_exclusive = { focus = SAF_africa_for_africans }
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            fourth_estate_democratic_socialist_increase = yes
+			fourth_estate_nationalist_decrease = yes
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = -0.1
+			}
+        }
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	
+	focus = {
+		id = SAF_aapc_in_power
+		icon = africa2
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_africa_for_africans
+		
+		prerequisite = { focus = SAF_africa_for_africans }
+		available = { has_government = nationalist }
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_nationalist_increase = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.15
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_pac_ascendant
+		icon = GFX_focus_generic_social_democracy
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_multi_africa
+		
+		prerequisite = { focus = SAF_multi_africa }
+		available = { has_government = democratic_socialist }
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_democratic_socialist_increase = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.15
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_azania
+		icon = GFX_GER_Communist_Propaganda
+		
+		x = 0
+		y = 2
+		relative_position_id = SAF_convene_congress
+		
+		prerequisite = { focus = SAF_multi_africa focus = SAF_africa_for_africans }
+		available = { 
+			OR = {
+			has_government = nationalist 
+			has_government = democratic_socialist
+			}
+		}
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			set_cosmetic_tag = AZA			
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_pac_ascendant
+		icon = GFX_focus_generic_social_democracy
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_multi_africa
+		
+		prerequisite = { focus = SAF_multi_africa }
+		available = { has_government = democratic_socialist }
+		
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_social_democrat_decrease = yes
+			fourth_estate_democratic_socialist_increase = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.15
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_ubuntu
+		icon = placeholder
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_azania
+		
+		prerequisite = { focus = SAF_azania }
+	
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			add_ideas = SAF_ubuntu_idea 		
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_social_programs
+		icon = GFX_goal_Basic_Appreniship
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_pac_ascendant
+		
+		prerequisite = { focus = SAF_pac_ascendant }
+		
+		available = {
+			has_idea = welfare_basic_subsidies
+		}
+	
+		cost = 5
+		
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = welfare_basic_subsidies
+				add_idea = welfare_modest_assistance
+			}
+		    swap_ideas = {
+				remove_idea = ROM_unemployment_crisis
+				add_idea = ROM_unemployment_crisis_2
+			}
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis
+				add_idea = SAF_hiv_aids_crisis_2
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_social_medicine
+		icon = GFX_goal_Universal_Healthcare
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_social_programs
+		
+		prerequisite = { focus = SAF_social_programs }
+	
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis_2
+				add_idea = SAF_hiv_aids_crisis_3
+			}
+			add_ideas = SAF_social_med
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	
+	focus = {
+		id = SAF_work_programs
+		icon = GFX_goal_Migrant_Worker
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_social_programs
+		
+		prerequisite = { focus = SAF_social_programs }
+	
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ROM_unemployment_crisis_2
+				add_idea = ROM_unemployment_crisis_3
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_crusade_against_poverty
+		icon = GFX_goal_Money_Reserves 
+		
+		x = 0
+		y = 2
+		relative_position_id = SAF_social_programs
+		
+		prerequisite = { focus = SAF_work_programs }
+		prerequisite = { focus = SAF_social_medicine }
+		
+		available = {
+			has_idea = welfare_modest_assistance
+		}
+	
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis_3
+				add_idea = SAF_hiv_aids_crisis_4
+			}
+			swap_ideas = {
+				remove_idea = welfare_modest_assistance
+				add_idea = welfare_considerable_assistance
+			}
+			remove_ideas = ROM_unemployment_crisis_3
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_civil_liberalization 
+		icon = GFX_goal_Constitution
+		
+		x = -3
+		y = 1
+		relative_position_id = SAF_pac_ascendant
+		
+		prerequisite = { focus = SAF_pac_ascendant}
+		
+		
+		available = {
+			has_idea = civil_liberties_limited
+		}
+	
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = civil_liberties_limited
+				add_idea = civil_liberties_free
+			}
+		}	
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+		
+	focus = {
+		id = SAF_socialism_triumph
+		icon = GFX_goal_Workers_Rights
+		
+		x = 0
+		y = 3
+		relative_position_id = SAF_civil_liberalization
+		
+		available = { has_idea = national_development_developed }
+		
+		prerequisite = { focus = SAF_civil_liberalization}
+		prerequisite = { focus = SAF_crusade_against_poverty}
+
+	
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			remove_ideas = SAF_hiv_aids_crisis_4
+			add_ideas = SAF_socialism
+		}	
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_liberate_the_nation
+		icon = GFX_focus_ETH_freedom_at_gunpoint
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_aapc_in_power
+		
+		prerequisite = { focus = SAF_aapc_in_power}
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis
+				add_idea = SAF_hiv_aids_crisis_2
+			}			
+		}	
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_sterilization_and_contraception
+		icon = a
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_liberate_the_nation
+		
+		prerequisite = { focus = SAF_liberate_the_nation }
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis_2
+				add_idea = SAF_hiv_aids_crisis_3
+			}
+			add_ideas = SAF_contracept
+		}	
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+	focus = {
+		id = SAF_international_ubuntu_community
+		icon = GFX_focus_ETH_callout_to_the_world
+		
+		x = 3
+		y = 1
+		relative_position_id = SAF_aapc_in_power
+		
+		prerequisite = { focus = SAF_aapc_in_power }
+		
+		available = {
+			has_idea = SAF_ubuntu_idea
+		}
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAF_ubuntu_idea
+				add_idea = SAF_military_ubuntu
+			}
+			
+		}	
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+	focus = {
+		id = SAF_integrate_the_enclaves
+		icon = commie_artillery
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_international_ubuntu_community
+		
+		prerequisite = { focus = SAF_international_ubuntu_community }
+		
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SWZ
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LES
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+	focus = {
+		id = SAF_reclaim_namibia
+		icon = GFX_focus_generic_total_war
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_international_ubuntu_community
+		
+		prerequisite = { focus = SAF_international_ubuntu_community }
+		
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = NMB
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+	focus = {
+		id = SAF_cross_the_ngotwane_river
+		icon = ak_47
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_reclaim_namibia
+		
+		prerequisite = { focus = SAF_reclaim_namibia }
+		prerequisite = { focus = SAF_integrate_the_enclaves }
+		
+	
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = BOT
+			}
+			add_named_threat = {
+            threat = 5
+            name = SAF_cross_the_ngotwane_river
+        }
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+	focus = {
+		id = SAF_army_impressment
+		icon = defence_focus
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_sterilization_and_contraception
+		
+		prerequisite = { focus = SAF_sterilization_and_contraception }
+		prerequisite = { focus = SAF_international_ubuntu_community }
+		
+		
+	
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = volunteer_only
+				add_idea = extensive_conscription
+			}
+			swap_ideas = {
+				remove_idea = ROM_unemployment_crisis
+				add_idea = ROM_unemployment_crisis_3
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+	focus = {
+		id = SAF_improve_healthcare
+		icon = CHI_medical_reform
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_sterilization_and_contraception
+		
+		prerequisite = { focus = SAF_sterilization_and_contraception }
+
+		
+	
+		cost = 5
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis_3
+				add_idea = SAF_hiv_aids_crisis_4
+			}
+			swap_ideas = {
+				remove_idea = SAF_contracept
+				add_idea = SAF_contra_2
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+	focus = {
+		id = SAF_reclaim_mutapa
+		icon = african_expedition
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_army_impressment
+		
+		prerequisite = { focus = SAF_improve_healthcare }
+		prerequisite = { focus = SAF_army_impressment }
+		prerequisite = { focus = SAF_cross_the_ngotwane_river }	
+	
+		cost = 8
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = MZB
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ZIM
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ZAM
+			}
+			
+			add_threat = 8.0
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+####RIGHTWING PATHS####
+
+	focus = {
+		id = SAF_electoralism
+		icon = cooler_elections
+		
+		x = -5
+		y = 1
+		relative_position_id = SAF_demo_backslide
+		
+		prerequisite = { focus = SAF_demo_backslide }
+		mutually_exclusive =  { focus = SAF_political_violence }
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            set_party_name = { ideology = nationalist long_name = SAF_nationalist_party_rw_long name = SAF_nationalist_party_rw }
+			fourth_estate_reactionary_increase = yes
+			fourth_estate_nationalist_increase = yes
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.10
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = -0.15
+			}
+			set_country_flag = SAF_flag_vf
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+	
+	
+	focus = {
+		id = SAF_political_violence
+		icon = guilotine_for_sinners
+		
+		x = 5
+		y = 1
+		relative_position_id = SAF_demo_backslide
+		
+		prerequisite = { focus = SAF_demo_backslide }
+		mutually_exclusive = { focus = SAF_electoralism }
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            set_party_name = { ideology = fascist long_name = SAF_fascist_party_rw_long name = SAF_fascist_party_rw }
+			
+			fourth_estate_fascist_increase = yes
+			fourth_estate_nationalist_decrease = yes
+			fourth_estate_social_democrat_decrease = yes
+			add_stability = -0.1
+			add_popularity = {
+				ideology = nationalist
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.15
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+####VF+ PATH####
+
+	focus = {
+		id = SAF_afrikaner_political_autonomy
+		icon = GFX_focus_RAJ_give_me_blood_and_i_will_grant_you_freedom
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_electoralism
+		
+		prerequisite = { focus = SAF_electoralism }
+		
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            fourth_estate_reactionary_increase = yes
+			fourth_estate_nationalist_increase = yes
+			fourth_estate_social_democrat_decrease = yes
+			
+			add_ideas = { SAF_autonomy }
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+		focus = {
+		id = SAF_eschew_socialism
+		icon = GFX_focus_GER_end_european_communism
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_electoralism
+		
+		prerequisite = { focus = SAF_electoralism }
+		
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            fourth_estate_reactionary_increase = yes
+			fourth_estate_nationalist_increase = yes
+			fourth_estate_social_democrat_decrease = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.07
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.03
+			}
+			set_country_flag = SAF_vf_nat
+			
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+
+	
+	focus = {
+		id = SAF_moderate_our_position
+		icon = GFX_focus_BRA_cafe_com_leite_politics
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_afrikaner_political_autonomy
+		
+		prerequisite = { focus = SAF_afrikaner_political_autonomy }
+		prerequisite = { focus = SAF_eschew_socialism }
+		
+		mutually_exclusive = { focus = SAF_afrikaner_nationalism }
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            fourth_estate_reactionary_increase = yes
+			fourth_estate_nationalist_decrease = yes
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = -0.05
+			}
+			
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_afrikaner_nationalism
+		icon = GFX_goal_generic_political_pressure
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_eschew_socialism
+		
+		prerequisite = { focus = SAF_afrikaner_political_autonomy }
+		prerequisite = { focus = SAF_eschew_socialism }
+		
+		mutually_exclusive = { focus = SAF_moderate_our_position }
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            fourth_estate_reactionary_decrease = yes
+			fourth_estate_nationalist_increase = yes
+			add_popularity = {
+				ideology = reactionary
+				popularity = -0.08
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.08
+			}
+			
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_meritocracy
+		icon = GFX_goal_generic_intelligence_exchange
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_moderate_our_position
+		
+		prerequisite = { focus = SAF_moderate_our_position }
+
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            swap_ideas = {
+				remove_idea = ROM_unemployment_crisis
+				add_idea = ROM_unemployment_crisis_2
+			
+			}
+			
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_vf_government
+		icon = government
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_afrikaner_nationalism
+		
+		prerequisite = { focus = SAF_moderate_our_position  focus = SAF_afrikaner_nationalism }
+		
+		available = {
+			OR = {
+				has_government = reactionary
+				has_government = nationalist
+			}
+		}
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+            fourth_estate_reactionary_increase = yes
+			fourth_estate_nationalist_increase = yes
+			
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_incorporate_anglophone_whites
+		icon = GFX_focus_eng_unite_the_anglosphere
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_meritocracy
+		
+		prerequisite = { focus = SAF_meritocracy }
+		prerequisite = { focus = SAF_vf_government }
+		
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_reactionary_increase = yes
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_elevate_afrikaans
+		icon = media_censorship
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_afrikaner_nationalism
+		
+		prerequisite = { focus = SAF_afrikaner_nationalism }
+		
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			fourth_estate_nationalist_increase = yes
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.02
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_break_from_vf
+		icon = GFX_focus_GER_total_control_over_domestic_affairs
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_elevate_afrikaans
+		
+		prerequisite = { focus = SAF_elevate_afrikaans }
+		prerequisite = { focus = SAF_vf_government }
+		
+		
+		cost = 6
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			set_party_name = { ideology = nationalist long_name = SAF_nationalist_party_rw2_long name = SAF_nationalist_party_rw2 }
+			fourth_estate_reactionary_decrease = yes
+			add_popularity = {
+				ideology = reactionary
+				popularity = 0.08
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = -0.06
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_national_revitalization
+		icon = infrastructure
+		x = -1
+		y = 1
+		relative_position_id = SAF_incorporate_anglophone_whites
+		cost = 7.2
+
+		prerequisite = {
+			focus = SAF_incorporate_anglophone_whites
+		}
+		
+		
+		completion_reward = {
+			1070 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			1071 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			
+			275 = {
+				add_building_construction = {
+					type = recycling_center
+					level = 1
+					instant_build = yes
+				}
+			}
+			
+			1073 = {
+				add_building_construction = {
+					type = recycling_center
+					level = 1
+					instant_build = yes
+				}
+			}
+			swap_ideas = {
+				remove_idea = ROM_unemployment_crisis_2
+				add_idea = ROM_unemployment_crisis_3
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = SAF_establish_a_national_church
+		icon = jesus
+		x = 1
+		y = 1
+		relative_position_id = SAF_incorporate_anglophone_whites
+		cost = 5
+
+		prerequisite = {
+			focus = SAF_incorporate_anglophone_whites focus = SAF_break_from_vf
+		}
+		
+		
+		completion_reward = {
+			add_ideas = SAF_nat_church
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = SAF_national_service
+		icon = a
+		x = 0
+		y = 1
+		relative_position_id = SAF_national_revitalization
+		cost = 5
+
+		prerequisite = {
+			focus = SAF_national_revitalization
+		}
+		
+		
+		completion_reward = {
+			remove_ideas = ROM_unemployment_crisis_3
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis
+				add_idea = SAF_hiv_aids_crisis_2
+			}
+			swap_ideas = {
+				remove_idea = volunteer_only
+				add_idea = limited_conscription
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = SAF_mandatory_health_screening
+		icon = GFX_goal_Universal_Healthcare
+		x = 0
+		y = 1
+		relative_position_id = SAF_national_revitalization
+		cost = 5
+
+		prerequisite = {
+			focus = SAF_national_revitalization
+		}
+		
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis_2
+				add_idea = SAF_hiv_aids_crisis_4
+			}
+			swap_ideas = {
+				remove_idea = civil_liberties_limited
+				add_idea = civil_liberties_restricted
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = SAF_military_build_up
+		icon = GFX_goal_continuous_armor_production
+		x = 1
+		y = 1
+		relative_position_id = SAF_elevate_afrikaans
+		cost = 5
+
+		prerequisite = {
+			focus = SAF_elevate_afrikaans
+		}
+		
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ROM_unemployment_crisis
+				add_idea = ROM_unemployment_crisis_2
+			}
+			swap_ideas = {
+				remove_idea = volunteer_only
+				add_idea = limited_conscription
+			}
+			1073 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = SAF_military_police
+		icon = red_police_force
+		x = -1
+		y = 1
+		relative_position_id = SAF_military_build_up
+		cost = 5
+
+		prerequisite = {
+			focus = SAF_military_build_up }
+		prerequisite = {
+			focus = SAF_break_from_vf
+		}
+		
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = public_safety_local_law_enforcement
+				add_idea = public_safety_central_law_office
+			}
+			275 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = SAF_increase_surveillance
+		icon = red_secret_police
+		x = 1
+		y = 1
+		relative_position_id = SAF_military_build_up
+		cost = 5
+
+		prerequisite = {
+			focus = SAF_military_build_up }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = civil_liberties_limited
+				add_idea = civil_liberties_restricted
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	 
+	focus = {
+		id = SAF_hiv_discrimination
+		icon = authoritarian_democrat
+		x = 0
+		y = 1
+		relative_position_id = SAF_increase_surveillance
+		cost = 5
+
+		prerequisite = {
+			focus = SAF_military_build_up }
+		
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SAF_hiv_aids_crisis
+				add_idea = SAF_hiv_aids_crisis_3
+			}
+			add_stability = -0.1
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+	focus = {
+		id = SAF_reincorporate_south_west_africa
+		icon = defence_focus
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_military_police
+		
+		prerequisite = { focus = SAF_military_police }
+		
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = NMB
+			}
+			add_named_threat = {
+            threat = 2
+            name = SAF_reincorporate_south_west_africa
+        }
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+####FASCIST PATH####
+
+	focus = {
+		id = SAF_train_the_volkstaat_divisions
+		icon = fascist_partisant_warfare
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_political_violence
+		
+		prerequisite = { focus = SAF_political_violence }
+		
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			add_ideas = { SAF_paramilitary_training }
+			fourth_estate_fascist_increase = yes
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_great_march_for_a_new_apartheid
+		icon = fascist_mass_mobilization
+		fascist_public_works
+		x = 0
+		y = 1
+		relative_position_id = SAF_train_the_volkstaat_divisions
+		
+		prerequisite = { focus = SAF_train_the_volkstaat_divisions }
+		
+		available = { fascist > 0.4 }
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			add_stability = -0.1
+			fourth_estate_fascist_increase = yes
+			set_politics = {
+				ruling_party = fascist
+				elections_allowed = no
+			}
+			set_cosmetic_tag = BOE	
+			set_country_flag = SAF_flag_unresolved_march
+			hidden_effect = {
+				country_event = { id = southafrica.2 days = 140 }
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_god_volk_vaderland
+		icon = POL_catholic_government
+		
+		x = 3
+		y = 1
+		relative_position_id = SAF_establish_the_bantustans
+		
+		prerequisite = { focus = SAF_establish_the_bantustans focus = SAF_empower_the_paramilitaries }
+
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			add_stability = 0.15
+			add_war_support = 0.1
+			fourth_estate_fascist_increase = yes
+			add_ideas = SAF_volkstaadt
+			
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+
+####DIVIDED PATH ####
+	
+	focus = {
+		id = SAF_boerestaat_ideology
+		icon = fascist_public_works
+		
+		x = -3
+		y = 1
+		relative_position_id = SAF_great_march_for_a_new_apartheid
+		
+		prerequisite = { focus = SAF_great_march_for_a_new_apartheid }
+		mutually_exclusive = { focus = SAF_domination_once_more }
+		
+		available = { has_government = fascist }
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			remove_state_core = 719
+			remove_state_core = 1072
+			remove_state_core = 985
+			remove_state_core = 987
+			add_stability = 0.15
+			SWZ = { transfer_state = 719 transfer_state = 1072 }
+			LES = { transfer_state = 985 }
+			
+			clr_country_flag = SAF_flag_unresolved_march
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_race_laws
+		icon = people_work_act
+		
+		x = -2
+		y = 1
+		relative_position_id = SAF_boerestaat_ideology
+		
+		prerequisite = { focus = SAF_boerestaat_ideology }
+		
+		available = { has_government = fascist }
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			add_ideas = SAF_race_laws
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_white_migrants_only
+		icon = passport
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_boerestaat_ideology
+		
+		prerequisite = { focus = SAF_boerestaat_ideology }
+	
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			add_stability = 0.05
+			swap_ideas = {
+				remove_idea = immigration_policy_strict_regulations
+				add_idea = immigration_policy_closed_country
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_resettle_cape_town
+		icon = seize_foreign_assets
+		
+		x = 2
+		y = 1
+		relative_position_id = SAF_boerestaat_ideology
+		
+		prerequisite = { focus = SAF_boerestaat_ideology }
+	
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			681 = { 
+				add_manpower = -25000 
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_establish_the_bantustans
+		icon = africa3
+		
+		x = 0
+		y = 1
+		relative_position_id = SAF_white_migrants_only
+		
+		prerequisite = { focus = SAF_white_migrants_only }
+		prerequisite = { focus = SAF_resettle_cape_town }
+		prerequisite = { focus = SAF_race_laws }
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SWZ
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = LES
+			}
+		}
+		
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+
+####UNITED PATH####
+
+	focus = {
+		id = SAF_domination_once_more
+		icon = offensive_army
+		
+		x = 3
+		y = 1
+		relative_position_id = SAF_great_march_for_a_new_apartheid
+		
+		prerequisite = { focus = SAF_great_march_for_a_new_apartheid }
+		
+		available = { has_government = fascist }
+		mutually_exclusive = { focus = SAF_boerestaat_ideology }
+		
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			remove_state_core = 719
+			remove_state_core = 1072
+			remove_state_core = 985
+			remove_state_core = 987
+		}
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_afrikaner_calvinism
+		icon = POL_wake_up_son_its_time_for_crusade
+		
+		x = -1
+		y = 1
+		relative_position_id = SAF_domination_once_more
+		
+		prerequisite = { focus = SAF_domination_once_more }
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			add_ideas = SAF_nat_church
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_voluntary_deportation_program
+		icon = align_people
+		
+		x = 1
+		y = 1
+		relative_position_id = SAF_domination_once_more
+		
+		prerequisite = { focus = SAF_domination_once_more }
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			random_owned_state = { add_manpower = -50000
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			random_owned_state = { add_manpower = -25000
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				}
+			}		
+			random_owned_state = { add_manpower = -25000
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+				}
+			}	
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_empower_the_paramilitaries
+		icon = fascist_partisant_warfare
+		
+		x = 0
+		y = 2
+		relative_position_id = SAF_domination_once_more
+		
+		prerequisite = { focus = SAF_afrikaner_calvinism }
+		prerequisite = { focus = SAF_voluntary_deportation_program }
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+		
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = public_safety_local_law_enforcement
+				add_idea = public_safety_secret_police
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}
+	
+	focus = {
+		id = SAF_reclaim_the_union
+		icon = GFX_focus_ger_reichskommisariats
+		
+		x = 2
+		y = 2
+		relative_position_id = SAF_afrikaner_calvinism
+		
+		prerequisite = { focus = SAF_empower_the_paramilitaries }
+	
+		cost = 3
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = yes
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = NMB
+			}
+		}
+		
+		ai_will_do = {
+			factor = 5
+		}
+	}	
+
+}
+####HIDDEN####
+	#focus = {
+	#	id = SAF_king
+	#	icon = GFX_goal_generic_national_unity 
+	#	
+	#	x = -5
+	#	y = -1 
+	#	relative_position_id = SAF_demo_backslide
+	#	
+	#	available = {
+	#		has_government = monarchist
+	#	}	
+	#	
+	#	visible = {
+	#		has_government = monarchist
+	#	}
+	#	
+	#	cost = 5
+#
+	#	cancel_if_invalid = yes
+	#	continue_if_invalid = no
+	#	available_if_capitulated = yes
+	#	
+#
+	#	completion_reward = {
+	#		set_party_leader = {
+	#			ideology = monarchist
+	#			character = SAF_mswati_iii
+	#		}
+    #	     set_politics = {
+	#			ruling_party = monarchist
+	#			elections_allowed = no
+	#			}
+    #   }
+	#	
+	#	ai_will_do = {
+	#		factor = 5
+	#	}
+	# }
+	
+	
+#}

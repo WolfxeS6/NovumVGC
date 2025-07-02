@@ -1,0 +1,76 @@
+add_namespace = southafrica
+
+#ANC Oilgate Event
+country_event = {
+	id = southafrica.1
+	title = southafrica.1.t
+	desc = southafrica.1.d
+	picture = GFX_protest
+	
+	is_triggered_only = yes
+	
+	 immediate = {
+        add_ideas = SAF_oilgate_scandal
+    }
+	
+	  option = {
+        name = southafrica.1.o1								 #We must investigate this matter
+        ai_chance = { factor = 100 }
+        # Effects of choosing this option
+        add_political_power = -50
+        add_stability = -0.05
+        add_war_support = -0.05
+    }
+}
+
+country_event = {
+	id = southafrica.2
+	title = southafrica.2.t
+	desc = southafrica.2.d
+	picture = GFX
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = southafrica.2.o1
+		ai_chance = { factor = 10 }
+		
+		start_civil_war = {
+			ideology = social_democrat
+			size = 0.75
+		}
+	}
+	
+	option = {
+		name = southafrica.2.o2
+		ai_chance = { factor = 50 }
+		
+		trigger = { NOT = {has_country_flag = SAF_flag_unresolved_march } }
+		
+		add_stability = -0.1
+		add_manpower = -40000
+		
+	}
+	
+	option = {
+		name = southafrica.2.o3
+		ai_chance = { factor = 150 }
+		
+		trigger = { NOT = {has_country_flag = SAF_flag_unresolved_march } monarchist > 0.07 }
+		
+		set_politics = {
+				ruling_party = monarchist
+				elections_allowed = no
+			}
+		set_cosmetic_tag = SAF
+		add_popularity = {
+			ideology = monarchist
+			popularity = 0.30
+		}
+		start_civil_war = {
+			ideology = fascist
+			size = 0.3
+			capital = 681
+		}
+	}
+}

@@ -120,6 +120,11 @@ country_event = {
 			ideology = conservative
 			popularity = -0.02
 		}
+		hidden_effect = {
+			country_event = {
+				id = germany.88 days = 29
+			}
+		}
 		ai_chance = {
 			factor = 80
 		}
@@ -134,11 +139,19 @@ country_event = {
 			popularity = -0.06
 		}
 
-		set_country_flag = helmut_kohl_returns_to_politics
-		create_country_leader = {
-			name = "Helmut Kohl"
-			picture = "Helmut_Kohl.dds"
-			ideology = fiscal_conservative
+		set_country_flag = GER_Helmut_Kohl_CDU_Leader
+		add_country_leader_role = {
+			character = GER_Helmut_Kohl
+			promote_leader = yes
+			country_leader = {
+				ideology = christian_democrat
+				expire = "1.1.1.1"
+				traits = { 
+					architect_of_reunification_GER
+					CDU_donation_scandal_GER
+					friend_of_america
+				}
+			}
 		}
 
 		hidden_effect = {
@@ -1737,25 +1750,66 @@ country_event = {
 	trigger = {
 		original_tag = GER
 		has_democratic_form_of_government = yes
-		date > 2002.9.1
-		date < 2002.9.30
 	}
 	option = {
 		name = election_GER.1.o1 #GER_CDU_FDP_2002_Win
 		set_country_flag = GER_CDU_FDP_2002_Win
+		trigger = {
+			conservative_marketliberal_majority = yes
+		}
 		set_politics = {
 			ruling_party = conservative
 			elections_allowed = yes
 		}
-		add_country_leader_role = {
-			character = GER_Edmund_Stoiber
-			promote_leader = yes
-			country_leader = {
-				ideology = christian_democrat
-				expire = "1.1.1.1"
-				traits = { 
-					christian_conservative_GER
-					strong_immigration_enemy_GER
+		if = {
+			limit = {
+				has_country_flag = GER_Stoiber_2002
+			}
+			add_country_leader_role = {
+				character = GER_Edmund_Stoiber
+				promote_leader = yes
+				country_leader = {
+					ideology = christian_democrat
+					expire = "1.1.1.1"
+					traits = { 
+						christian_conservative_GER
+						strong_immigration_enemy_GER
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = GER_Merkel_2002
+			}
+			add_country_leader_role = {
+				character = GER_Angela_Merkel
+				promote_leader = yes
+				country_leader = {
+					ideology = christian_democrat
+					expire = "1.1.1.1"
+					traits = { 
+						mutti_merkel_GER
+						friend_of_america
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = GER_Helmut_Kohl_2002
+			}
+			add_country_leader_role = {
+				character = GER_Helmut_Kohl
+				promote_leader = yes
+				country_leader = {
+					ideology = christian_democrat
+					expire = "1.1.1.1"
+					traits = { 
+						architect_of_reunification_GER
+						CDU_donation_scandal_GER
+						friend_of_america
+					}
 				}
 			}
 		}
@@ -1765,15 +1819,14 @@ country_event = {
 		}
 		add_popularity = {
 			ideology = market_liberal
-			popularity = 0.1
-		}
-		add_popularity = {
-			ideology = social_liberal
 			popularity = 0.05
 		}
 		hidden_effect = {
-			
+			country_event = {
+				id = germany.64 days = 1014
+			}
 		}
+		country_event = germany.65
 		ai_chance = {
 			factor = 10
 			modifier = {
@@ -1784,6 +1837,9 @@ country_event = {
 	}
 	option = {
 		name = election_GER.1.o2 #GER_sdpgune_2002
+		trigger = {
+			progressive_socialdemocrat_majority = yes
+		}
 		set_politics = {
 			ruling_party = social_democrat
 			elections_allowed = yes
@@ -1796,172 +1852,140 @@ country_event = {
 			ideology = progressive
 			popularity = 0.08
 		}
+		country_event = germany.65
+		set_country_flag = GER_SPD_Gune_2002_Win
 		hidden_effect = {
 			country_event = {
-				id = germany.65 days = 2
+				id = germany.63 days = 1014
 			}
 		}
+		ai_chance = {
+			factor = 10
+		}
+	}
+	option = {
+		name = election_GER.1.o3 #SPD Minority Government
+		trigger = {
+			progressive_socialdemocrat_majority = no
+			conservative_marketliberal_majority = no
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		add_stability = -0.05
 		set_country_flag = GER_SPD_Gune_2002_Win
 		ai_chance = {
 			factor = 10
 		}
 	}
-	# option = {
-	# 	name = election_GER.1.o3 #GER_SPD_Linke_2002_Win
-	# 	clr_country_flag = gc_elections
-	# 	set_country_flag = GER_SPD_Linke_2002_Win
-	# 	add_stability = -0.02
-	# 	add_popularity = {
-	# 		ideology = social_democrat
-	# 		popularity = 0.05
-	# 	}
-	# 	add_popularity = {
-	# 		ideology = democratic_socialist
-	# 		popularity = 0.15
-	# 	}
-	# 	ai_chance = {
-	# 		factor = 10
-	# 		modifier = {
-	# 			factor = 0
-	# 			is_historical_focus_on = yes
-	# 		}
-	# 	}
-	# }
+	option = {
+		name = election_GER.1.o4 #CDU Minority Government
+		trigger = {
+			progressive_socialdemocrat_majority = no
+			conservative_marketliberal_majority = no
+		}
+		set_politics = {
+			ruling_party = conservative
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.05
+		}
+		add_stability = -0.05
+		set_country_flag = GER_CDU_FDP_2002_Win
+		ai_chance = {
+			factor = 10
+		}
+	}
 }
 country_event = {
-	id = germany.65 #Edmund Stoiber out, Merkel in
+	id = germany.65 #Leader of the Coalition 2002
 	title = germany.65.t
 	desc = germany.65.d
-	picture = GFX_report_cdu_merkel_2002
+	picture = GFX_report_Chancellor_Question_2002
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	option = {
 		name = germany.65.o1
-		add_country_leader_role = {
-			character = GER_Angela_Merkel
-			promote_leader = yes
-			country_leader = {
-				ideology = christian_democrat
-				expire = "1.1.1.1"
-				traits = { 
-					mutti_merkel_GER
-					friend_of_america
-				}
-			}
+		trigger = {
+			has_country_flag = GER_CDU_FDP_2002_Win
 		}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.025
+			}
+			add_stability = 0.05
+		
 		ai_chance = {
 			factor = 100
 		}
-	}
-}
-country_event = {
-	id = germany.66 #Gerhardt out, Westerwelle in
-	title = germany.66.t
-	desc = germany.66.d
-	picture = GFX_report_fdp_westerwelle_2002
-	fire_only_once = yes
-	is_triggered_only = yes
-
-	option = {
-		name = germany.66.o1
-		add_country_leader_role = {
-			character = GER_Guido_Westerwelle
-			promote_leader = yes
-			country_leader = {
-				ideology = libertarian
-				expire = "1.1.1.1"
-				traits = { 
-					first_homosexual_chancellor_GER
-					Hartz_IV_Enemy_GER
-					friend_of_america
-				}
-			}
-		}
-		ai_chance = {
-			factor = 100
-		}
-	}
-}
-country_event = {
-	id = germany.67 #Schröder out, Steinmeier in
-	title = germany.67.t
-	desc = germany.67.d
-	picture = GFX_report_spd_steinmeier_2009
-	fire_only_once = yes
-	is_triggered_only = yes
-
-	option = {
-		name = germany.67.o1
-		add_country_leader_role = {
-			character = GER_Frank_Walter_Steinmeier
-			promote_leader = yes
-			country_leader = {
-				ideology = social_democrat_ideology
-				expire = "1.1.1.1"
-				traits = { 
-					tax_reform_supporter_GER
-					agenda_2010_supporter_GER
-				}
-			}
-		}
-		ai_chance = {
-			factor = 100
-		}
-	}
-}
-country_event = {
-	id = germany.68 #Fischer out, Göring-Eckardt in
-	title = germany.68.t
-	desc = germany.68.d
-	picture = GFX_report_grune_goring-eckardt_2005
-	fire_only_once = yes
-	is_triggered_only = yes
-
-	option = {
-		name = germany.68.o1
-		add_country_leader_role = {
-			character = GER_Katrin_Goring_Eckardt
-			promote_leader = yes
-			country_leader = {
-				ideology = green
-				expire = "1.1.1.1"
-				traits = { 
-					environmentalist_GER
-					agenda_2010_supporter_Gruene_GER
-				}
-			}
-		}
-		ai_chance = {
-			factor = 100
-		}
-	}
-}
-country_event = {
-	id = germany.69 #Bisky Out Zimmer in
-	title = germany.69.t
-	desc = germany.69.d
-	picture = GFX_report_pds-linke_lafontaine_2002
-	fire_only_once = yes
-	is_triggered_only = yes
-	trigger = {
-		original_tag = GER
-		has_democratic_form_of_government = yes
 	}
 	option = {
-		name = germany.69.o1
-		add_country_leader_role = {
-			character = GER_Oskar_Lafontaine
-			promote_leader = yes
-			country_leader = {
-				ideology = christian_socialist
-				expire = "1.1.1.1"
-				traits = { 
-					Christian_Socialist_GER
-					former_SPD_member_GER
-					pacifist_GER
-					friend_of_russia
+		name = germany.65.o2
+		trigger = {
+			has_country_flag = GER_CDU_FDP_2002_Win
+		}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.025
+			}
+			add_stability = 0.05
+			add_country_leader_role = {
+				character = GER_Guido_Westerwelle
+				promote_leader = yes
+				country_leader = {
+					ideology = libertarian
+					expire = "1.1.1.1"
+					traits = { 
+						first_homosexual_chancellor_GER
+						Hartz_IV_Enemy_GER
+						friend_of_america
+					}
 				}
+			}
+			set_politics = {
+				ruling_party = market_liberal
+				elections_allowed = yes
+			}
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {
+		name = germany.65.o3
+		trigger = {
+			has_country_flag = GER_SPD_Gune_2002_Win
+		}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.025
+			}
+			add_stability = 0.05
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {
+		name = germany.65.o4
+		if = {
+			limit = {
+				has_country_flag = GER_SPD_Gune_2002_Win
+			}
+			add_popularity = {
+				ideology = progressive
+				popularity = 0.025
+			}
+			add_stability = 0.05
+			set_politics = {
+				ruling_party = progressive
+				elections_allowed = yes
 			}
 		}
 		ai_chance = {
@@ -1970,7 +1994,7 @@ country_event = {
 	}
 }
 country_event = {
-	id = germany.70 #Merkel against Stoiber
+	id = germany.70 #Merkel against Stoiber (against Kohl against Schäuble)
 	title = germany.70.t
 	desc = germany.70.d
 	picture = GFX_report_cdu_merkel_2002
@@ -2006,6 +2030,42 @@ country_event = {
 			}
 		}
 	}
+	option = {
+		name = germany.70.o3
+		trigger = {
+			has_country_flag = GER_Schauble_CDU_Leader
+		}
+		set_country_flag = GER_Schauble_2002
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.02
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	option = {
+		name = germany.70.o4
+		trigger = {
+			has_country_flag = GER_Helmut_Kohl_CDU_Leader
+		}
+		set_country_flag = GER_Kohl_2002
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.05
+		}
+		ai_chance = {
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
 }
 country_event = {
 	id = election_GER.2 #german election historical 2005
@@ -2024,6 +2084,9 @@ country_event = {
 	option = {
 		name = election_GER.2.o1 #GER_CDU_SPD_Coalition
 		set_country_flag = GER_CDU_SPD_2005_Win
+		trigger = {
+			conservative_socialdemocrat_majority = yes
+		}
 		set_politics = {
 			ruling_party = conservative
 			elections_allowed = yes
@@ -2057,7 +2120,9 @@ country_event = {
 	}
 	option = {
 		name = election_GER.2.o2 #GER_sdpgune_2005
-		clr_country_flag = gc_elections
+		trigger = {
+			progressive_socialdemocrat_majority = yes
+		}
 		set_politics = {
 			ruling_party = social_democrat
 			elections_allowed = yes
@@ -2082,6 +2147,9 @@ country_event = {
 
 	option = {
 		name = election_GER.2.o3 #GER_cdurepublikaner_2005
+		trigger = {
+			conservative_reactionary_majority = yes
+		}
 		set_politics = {
 			ruling_party = conservative
 			elections_allowed = yes
@@ -2125,6 +2193,9 @@ country_event = {
 			has_government = social_democrat
 			has_government = progressive
 		}
+		NOT = {
+			has_country_flag = GER_Crushed_Opposition
+		}
 	}
 
 	option = {
@@ -2156,10 +2227,7 @@ country_event = {
 		OR = {
 			has_government = conservative
 			has_government = market_liberal
-			has_government = social_liberal
 		}
-		date > 2005.7.1
-		date < 2005.9.1
 	}
 
 	option = {
@@ -2193,6 +2261,9 @@ country_event = {
 	option = {
 		name = election_GER.3.o1 #GER_CDU_FDP_Coalition
 		set_country_flag = GER_CDU_FDP_2009_Win
+		trigger = {
+			conservative_marketliberal_majority = yes
+		}
 		set_politics = {
 			ruling_party = conservative
 			elections_allowed = yes
@@ -2203,10 +2274,6 @@ country_event = {
 		}
 		add_popularity = {
 			ideology = market_liberal
-			popularity = 0.1
-		}
-		add_popularity = {
-			ideology = social_liberal
 			popularity = 0.05
 		}
 		ai_chance = {
@@ -2219,6 +2286,9 @@ country_event = {
 	}
 	option = {
 		name = election_GER.3.o2 #GER_sdpgune_2009
+		trigger = {
+			progressive_socialdemocrat_majority = yes
+		}
 		set_politics = {
 			ruling_party = social_democrat
 			elections_allowed = yes
@@ -2255,6 +2325,9 @@ country_event = {
 	option = {
 		name = election_GER.4.o1 #GER_CDU_SPD_Coalition_2013
 		set_country_flag = GER_CDU_SPD_2013_Win
+		trigger = {
+			conservative_socialdemocrat_majority = yes
+		}
 		set_politics = {
 			ruling_party = conservative
 			elections_allowed = yes
@@ -2277,6 +2350,9 @@ country_event = {
 	}
 	option = {
 		name = election_GER.4.o2 #GER_sdpgunelinke_2013
+		trigger = {
+			socialdemocrat_progressive_socialist_majority = yes
+		}
 		set_politics = {
 			ruling_party = social_democrat
 			elections_allowed = yes
@@ -2316,6 +2392,9 @@ country_event = {
 	}
 	option = {
 		name = election_GER.5.o1 #GER_CDU_SPD_Coalition 2017
+		trigger = {
+			conservative_socialdemocrat_majority = yes
+		}
 		set_country_flag = GER_CDU_SPD_2017_Win
 		set_politics = {
 			ruling_party = conservative
@@ -2339,6 +2418,9 @@ country_event = {
 	}
 	option = {
 		name = election_GER.5.o2 #GER_sdpgunelinke_2017
+		trigger = {
+			socialdemocrat_progressive_socialist_majority = yes
+		}
 		set_politics = {
 			ruling_party = social_democrat
 			elections_allowed = yes
@@ -2366,6 +2448,9 @@ country_event = {
 	}
 	option = {
 		name = election_GER.5.o3 #GER_CDU_AfD_2017
+		trigger = {
+			conservative_reactionary_majority = yes
+		}
 		set_politics = {
 			ruling_party = conservative
 			elections_allowed = yes
@@ -3243,6 +3328,168 @@ country_event = {
 					Occultist_GER
 				}
 			}
+		}
+	}
+}
+#Egon Krenz Prison Sentence
+country_event = {
+	id = germany.87 
+	title = germany.87.t
+	desc = germany.87.d
+	picture = GFX_report_Egon_Krenz_Prison
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Farewell
+		name = germany.87.o1
+		add_stability = 0.025
+		add_popularity = {
+			ideology = communist
+			popularity = -0.03
+		}
+	}
+	option = { #He is clearly innocent!
+		name = germany.87.o2
+		add_stability = -0.05
+		set_country_flag = GER_Egon_Krenz_Innocent
+	}
+}
+#Schäubles Involvement in the CDU Donation Scandal
+country_event = {
+	id = germany.88 
+	title = germany.88.t
+	desc = germany.88.d
+	picture = GFX_report_Schauble_Donation_Scandal_Aftermath
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #He should step down...
+		name = germany.88.o1
+		add_stability = 0.025
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.03
+		}
+		add_country_leader_role = {
+			character = GER_angela_merkel
+			promote_leader = yes
+			country_leader = {
+				ideology = christian_democrat
+				expire = "1.1.1.1"
+				traits = { 
+					mutti_merkel_GER
+				}
+			}
+		}
+	}
+	option = { #He is clearly innocent, Schäuble will continue!
+		name = germany.88.o2
+		add_stability = -0.05
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.03
+		}
+		set_country_flag = GER_Schauble_CDU_Leader
+	}
+}
+#End of the Donation Crisis
+country_event = {
+	id = germany.89
+	title = germany.89.t
+	desc = germany.89.d
+	picture = GFX_report_Donation_Affair_End
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #This hurt the CDU...
+		name = germany.89.o1
+		add_stability = 0.025
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.01
+		}
+		add_political_power = 25
+	}
+}
+#Saarbrücken Donation Affair
+country_event = {
+	id = germany.90
+	title = germany.90.t
+	desc = germany.90.d
+	picture = GFX_report_Saarbrucken_Donation_Affair
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Goodbye Klimmt
+		name = germany.90.o1
+		add_stability = -0.025
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.01
+		}
+		set_country_flag = GER_Saarbrücken_Finance_Affair
+		add_political_power = -25
+	}
+}
+#BSE Crisis
+country_event = {
+	id = germany.91
+	title = germany.91.t
+	desc = germany.91.d
+	picture = GFX_report_BSE_Crisis
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Goodbye
+		name = germany.91.o1
+		add_stability = -0.025
+		add_popularity = {
+			ideology = progressive
+			popularity = -0.01
+		}
+		set_country_flag = GER_BSE_Crisis
+		add_political_power = -25
+	}
+}
+#CDU Backlash
+country_event = {
+	id = germany.92
+	title = germany.92.t
+	desc = germany.92.d
+	picture = GFX_report_CDU_Protest
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Ignore them
+		name = germany.92.o1
+		add_stability = 0.025
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+	}
+	option = { #Maybe they have a point
+		name = germany.92.o2
+		add_stability = -0.025
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.05
 		}
 	}
 }

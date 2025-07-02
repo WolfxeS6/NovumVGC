@@ -25,6 +25,9 @@ focus_tree = {
 		will_lead_to_war_with = CHE
 
 		ai_will_do = { factor = 10 }
+		search_filters = { 
+			FOCUS_FILTER_ANNEXATION 
+			}
 
 		available = {
 			NOT = { is_in_faction_with = CHE }
@@ -42,6 +45,17 @@ focus_tree = {
 				threat = 1
 				name = threat_SOV_second_chechen_war
 			}
+			hidden_effect = {
+				if = {
+					limit = { is_ai = no }
+					set_technology = { rocket_artillery = 1 }
+					add_equipment_to_stockpile = {
+					type = motorized_rocket_equipment_1 
+					amount = 720
+					producer = SOV
+				}	
+			}
+		}
 		}
 
 		bypass = {
@@ -66,6 +80,9 @@ focus_tree = {
 		}
 
 		ai_will_do = { factor = 10 }
+		search_filters = { 
+			FOCUS_FILTER_ANNEXATION 
+			}
 
 		bypass = {
 			CHE = {
@@ -93,7 +110,7 @@ focus_tree = {
 		icon = yavlinsky
 		x = 0
 		y = 1
-		cost = 10
+		cost = 35
 		relative_position_id = SOV_core_chechnya
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -111,14 +128,16 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.15
 			add_popularity = {
 				ideology = social_liberal
-				popularity = 0.15
+				popularity = 0.25
 			}
 		}
 
 		ai_will_do = {
-			base = 8
+			base = 10
 		}
 	}
 
@@ -127,7 +146,7 @@ focus_tree = {
 		icon = propaganda
 		x = -3
 		y = 1
-		cost = 11
+		cost = 6
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -163,7 +182,7 @@ focus_tree = {
 		icon = BLR_liberalisation
 		x = -1
 		y = 1
-		cost = 11
+		cost = 6
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -225,10 +244,10 @@ focus_tree = {
 
 	focus = {
 		id = SOV_seize_oligarchic_properties
-		icon = seize_property
+		icon = GFX_focus_goal_sov_oligarchs_focus
 		x = 1
 		y = 1
-		cost = 13
+		cost = 6
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -242,9 +261,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = -150
-			custom_effect_tooltip = RCO_maxprod_increase_10_TT
-			add_to_variable = { sov_economy_prodcap = 0.1 }
+			SOV = { country_event = russ.23 }
 			random_owned_state = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
@@ -273,7 +290,7 @@ focus_tree = {
 		icon = putin
 		x = 3
 		y = 1
-		cost = 10
+		cost = 6
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -302,7 +319,7 @@ focus_tree = {
 		icon = concessions
 		x = 2
 		y = 2
-		cost = 20
+		cost = 7
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -331,10 +348,10 @@ focus_tree = {
 
 	focus = {
 		id = SOV_new_military
-		icon = army_doctrine
+		icon = GFX_focus_goal_sov_democratic_soldier_focus
 		x = 0
 		y = 2
-		cost = 13
+		cost = 7
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -352,15 +369,17 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_political_power = 50
 			add_stability = 0.05
 			add_popularity = {
 				ideology = social_liberal
 				popularity = 0.05
 			}
 			add_manpower = -70000
+			custom_effect_tooltip = RKKA_speccap_increase_5_TT
+			add_to_variable = { sov_army_specs_tr_time = -0.05 }
+			custom_effect_tooltip = RKKA_spectrainingtime_decrease_5_TT
+			add_to_variable = { sov_army_specs_cap = 0.05 }
 		}
-
 		ai_will_do = {
 			factor = 10
 		}
@@ -368,10 +387,10 @@ focus_tree = {
 
 	focus = {
 		id = SOV_civilize_the_Russian_political_system
-		icon = self_management
+		icon = GFX_Align_UK_EU
 		x = 4
 		y = 2
-		cost = 11
+		cost = 7
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -390,6 +409,34 @@ focus_tree = {
 			custom_effect_tooltip = RCO_maxprod_increase_5_TT
 			add_to_variable = { sov_economy_prodcap = 0.05 }
 			add_to_variable = { sov_economy_pp_gain_factor = 0.05 }
+			custom_effect_tooltip = RCO_research_increase_5_TT
+			add_to_variable = { sov_economy_resspeed = 0.05 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_support_new_generation
+		icon = GFX_focus_goal_sov_patriotic_youth_focus
+		x = 4
+		y = 3
+		cost = 7
+		relative_position_id = SOV_Yavlinski_stands_victorius
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		available = { has_government = social_liberal }
+
+		prerequisite = { focus = SOV_civilize_the_Russian_political_system }
+
+
+		completion_reward = {
+			add_research_slot = 1
+			custom_effect_tooltip = RCO_people_increase_cw_20_TT
+			add_to_variable = { sov_economy_pop = 0.2 }
 		}
 
 		ai_will_do = {
@@ -402,7 +449,7 @@ focus_tree = {
 		icon = POL_protect_small_buisness
 		x = -4
 		y = 2
-		cost = 11
+		cost = 7
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -417,8 +464,38 @@ focus_tree = {
 
 
 		completion_reward = {
-			add_stability = 0.15
-			add_offsite_building = { type = industrial_complex level = 3 }
+			custom_effect_tooltip = SOV_prodretention_increase_10_TT
+			add_to_variable = { sov_economy_prodretention_fct = 0.1 }
+			add_offsite_building = { type = industrial_complex level = 8 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_support_civilian_economy
+		icon = GFX_focus_goal_sov_tax_focus
+		x = -4
+		y = 3
+		cost = 6
+		relative_position_id = SOV_Yavlinski_stands_victorius
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		available = { has_government = social_liberal }
+
+		prerequisite = { focus = SOV_free_the_media }
+
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_civ_const_spd_increase_20_TT
+			custom_effect_tooltip = RCO_prodgrowh_increase_5_TT
+			add_to_variable = { sov_economy_prodgrowth_fct = 0.05 }
+			custom_effect_tooltip = SOV_milconscpd_decrease_10_TT
+			add_to_variable = { sov_economy_civ_cons_spd = 0.2 }
+			add_to_variable = { sov_economy_mil_cons_spd = -0.1 }
 		}
 
 		ai_will_do = {
@@ -431,7 +508,7 @@ focus_tree = {
 		icon = in_the_world_stage
 		x = 0
 		y = 3
-		cost = 13
+		cost = 5
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -455,7 +532,7 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 100
-			add_stability = 0.15
+			add_country_leader_trait = appeaser
 		}
 
 		ai_will_do = {
@@ -679,6 +756,9 @@ focus_tree = {
 		}
 
 		ai_will_do = { base = 10 }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		prerequisite = { focus = SOV_core_chechnya }
 
@@ -695,6 +775,9 @@ focus_tree = {
 		y = 1
 		cost = 7
 		relative_position_id = SOV_economy1
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		prerequisite = {
 			focus = SOV_economy1
@@ -721,6 +804,9 @@ focus_tree = {
 		prerequisite = {
 			focus = SOV_industrial_support_fund
 		}
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 			random_owned_state = {
@@ -786,6 +872,9 @@ focus_tree = {
 		relative_position_id = SOV_economy1
 
 		prerequisite = { focus = SOV_economy1 }
+		search_filters = { 
+			FOCUS_FILTER_NAVY_XP 
+			}
 
 		completion_reward = {
 			navy_experience = 35
@@ -938,6 +1027,9 @@ focus_tree = {
 		prerequisite = {
 			focus = SOV_modernized_Tupolev_Tu_22M
 		}
+		search_filters = { 
+			FOCUS_FILTER_NAVY_XP 
+			}
 
 		completion_reward = {
 			navy_experience = 50
@@ -1148,6 +1240,9 @@ focus_tree = {
 		relative_position_id = SOV_economy1
 
 		ai_will_do = { base = 10 }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		prerequisite = { focus = SOV_improve_old_factories }
 
@@ -1199,6 +1294,9 @@ focus_tree = {
 		relative_position_id = SOV_economy1
 
 		ai_will_do = { base = 10 }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		prerequisite = { focus = SOV_economy1 }
 
@@ -1219,6 +1317,9 @@ focus_tree = {
 		prerequisite = {
 			focus = SOV_tax_reform
 		}
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		available = {
 			NOT = {
@@ -1251,6 +1352,9 @@ focus_tree = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_devalue_ruble }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 		custom_effect_tooltip = RCO_CG_decrease_5_TT
@@ -1272,6 +1376,9 @@ focus_tree = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_economy1 }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 		custom_effect_tooltip = SOV_civ_const_spd_increase_10_TT
@@ -1305,6 +1412,9 @@ focus_tree = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_control_main_industry }
+		search_filters = { 
+			FOCUS_FILTER_RESEARCH 
+			}
 
 		completion_reward = {
 		custom_effect_tooltip = RCO_research_increase_5_TT
@@ -1324,6 +1434,9 @@ focus_tree = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_invest_in_science }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 		custom_effect_tooltip = RCO_constslots_increase_cw_20_TT
@@ -1342,6 +1455,9 @@ focus_tree = {
 		available = {
 			has_full_control_of_state = 219
 		}
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		mutually_exclusive = {
 			focus = SOV_Improve_Siberian_infrastructure
@@ -1383,6 +1499,9 @@ focus_tree = {
 		mutually_exclusive = {
 			focus = SOV_all_roads_lead_to_Moscow
 		}
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		available = {
 			has_full_control_of_state = 653
@@ -1567,6 +1686,9 @@ focus_tree = {
 		available = {
 			has_war = yes
 		}
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		prerequisite = { 
 			focus = SOV_all_roads_lead_to_Moscow 
@@ -1616,6 +1738,9 @@ focus_tree = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_economy1 }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 		custom_effect_tooltip = RCO_constslots_increase_cw_10_TT
@@ -1634,6 +1759,9 @@ focus_tree = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_reform_soil }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 		custom_effect_tooltip = RCO_CG_decrease_5_TT
@@ -1654,6 +1782,9 @@ focus_tree = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_stimulate_sh }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 		custom_effect_tooltip = SOV_civ_const_spd_increase_10_TT
@@ -1674,6 +1805,9 @@ focus_tree = {
 		prerequisite = {
 			focus = SOV_economy1
 		}
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = SOV_minexport_decrease_5_TT
@@ -1704,6 +1838,9 @@ focus_tree = {
 		y = 2
 		cost = 5
 		relative_position_id = SOV_economy1
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		prerequisite = {
 			focus = SOV_OOO_ZRTO_MOLOT
@@ -1768,6 +1905,9 @@ focus_tree = {
 		prerequisite = {
 			focus = SOV_expand_MMK
 		}
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 			add_tech_bonus = {
@@ -1790,6 +1930,9 @@ focus_tree = {
 		y = 4
 		cost = 7
 		relative_position_id = SOV_economy1
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		prerequisite = {
 			focus = SOV_expand_Mir_mine
@@ -1844,7 +1987,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SOV_core_chechnya
 
-		ai_will_do = { factor = 5 }
+		ai_will_do = { factor = 10 }
 
 		available = {
 			NOT = {
@@ -1855,6 +1998,11 @@ focus_tree = {
 		prerequisite = {
 			focus = SOV_core_chechnya
 		}
+		search_filters = { 
+			FOCUS_FILTER_ARMY_XP 
+			FOCUS_FILTER_NAVY_XP
+			FOCUS_FILTER_AIR_XP
+			}
 
 		completion_reward = {
 			air_experience = 15
@@ -1889,7 +2037,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SOV_Russian_armed_forces
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_Russian_armed_forces }
 
@@ -1911,7 +2059,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SOV_Russian_armed_forces
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_create_voentorg }
 
@@ -1933,7 +2081,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SOV_Russian_armed_forces
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_Russian_armed_forces }
 
@@ -1953,7 +2101,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SOV_Russian_armed_forces
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_mixed_army_system }
 
@@ -1971,7 +2119,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SOV_Russian_armed_forces
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_Russian_armed_forces }
 
@@ -1991,7 +2139,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SOV_Russian_armed_forces
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_modernize_vvs_structure }
 
@@ -2021,7 +2169,7 @@ focus_tree = {
 		cost = 6
 		relative_position_id = SOV_Russian_armed_forces
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_reform_military_education_system }
 		prerequisite = { focus = SOV_one_year_conscription }
@@ -2062,7 +2210,7 @@ focus_tree = {
 		cost = 5
 		relative_position_id = SOV_new_army_oblik
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_new_army_oblik }
 
@@ -2085,7 +2233,7 @@ focus_tree = {
 		cost = 6
 		relative_position_id = SOV_new_army_oblik
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_develop_fighters }
 
@@ -2112,7 +2260,7 @@ focus_tree = {
 		cost = 7
 		relative_position_id = SOV_new_army_oblik
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_develop_new_air_doctrines }
 
@@ -2150,7 +2298,7 @@ focus_tree = {
 		cost = 8
 		relative_position_id = SOV_new_army_oblik
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_drone_experiments }
 
@@ -2442,7 +2590,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_war_army_focus
 		x = 0
 		y = 3
-		cost = 8
+		cost = 7
 		relative_position_id = SOV_new_army_oblik
 
 		ai_will_do = { base = 5 }
@@ -2516,6 +2664,9 @@ focus_tree = {
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			}
 
 		prerequisite = { focus = SOV_military_time_army }
 
@@ -2544,12 +2695,15 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_investigate_mo_focus
 		x = -2
 		y = 2
-		cost = 10
+		cost = 7
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
 
 		prerequisite = { focus = SOV_inspection_in_svr }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			}
 
 		completion_reward = {
 			add_political_power = -100
@@ -2614,7 +2768,7 @@ focus_tree = {
 		cost = 6
 		relative_position_id = SOV_military_time_army
 
-		ai_will_do = { base = 5 }
+		ai_will_do = { base = 15 }
 
 		prerequisite = { focus = SOV_military_time_army }
 
@@ -2636,6 +2790,374 @@ focus_tree = {
 		}
 			hidden_effect = { set_technology = { HUN_light_infantry_tech = 1 } }
 		}
+	}
+
+	focus = {
+		id = SOV_raise_terroborona
+		icon = GFX_focus_goal_sov_raise_reserves_focus
+		x = 4
+		y = 2
+		cost = 6
+		relative_position_id = SOV_military_time_army
+
+		available = { 
+			controls_state = 219
+			surrender_progress > 0.1 
+			}
+
+		ai_will_do = { base = 20 }
+
+		prerequisite = { focus = SOV_imrove_spetsnaz_again }
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 25000
+			producer = SOV
+		}
+			hidden_effect = {
+				hidden_effect = {
+					division_template = {
+						name = "Mobilized Infantry"
+						priority = 0
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 2 y = 1 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							field_hospital = { x = 0 y = 1 }
+							mot_recon = { x = 0 y = 2 }
+							anti_tank = { x = 0 y = 3 }
+							mot_recon = { x = 1 y = 0 }
+						}
+					}
+					219 = {
+						# 30 Spawn ins
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+					}
+				}
+			}
+			custom_effect_tooltip = SOV_teroborona_units_TT
+
+			hidden_effect = {
+				if = {
+			limit = { is_ai = yes }
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_2
+				amount = 80000
+				producer = SOV
+			}
+			add_equipment_to_stockpile = {
+				type = light_mechanized_equipment_1
+				amount = 20000
+				producer = SOV
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment_1
+				amount = 5000
+				producer = SOV
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment_1
+				amount = 5000
+				producer = SOV
+			}
+			219 = {
+						# 50 Spawn ins
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+						create_unit = { division = "division_template = \"Mobilized Infantry\" start_experience_factor = 0.20 start_manpower_factor = 0.7 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+					}
+			}
+			}
+	}
+	}
+
+	focus = {
+		id = SOV_defend_moscow
+		icon = GFX_focus_goal_sov_defmoscow_focus
+		x = 4
+		y = 3
+		cost = 5
+		relative_position_id = SOV_military_time_army
+
+		available = { 
+			controls_state = 219
+			}
+
+		ai_will_do = { base = 20 }
+
+		prerequisite = { focus = SOV_raise_terroborona }
+
+		completion_reward = {
+			country_event = { id = russ.24 }
+			219 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 6380
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 3391
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 6414
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 301
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 6290
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 9282
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 11282
+						instant_build = yes
+					}
+				}
+			}
+	}
+	}
+
+	focus = {
+		id = SOV_defend_volgograd
+		icon = GFX_focus_goal_sov_defvolgograd_focus
+		x = 6
+		y = 3
+		cost = 5
+		relative_position_id = SOV_military_time_army
+
+		available = { 
+			controls_state = 217
+			}
+
+		ai_will_do = { base = 20 }
+
+		prerequisite = { focus = SOV_raise_terroborona }
+
+		completion_reward = {
+			217 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 3529
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 9474
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 6527
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 9504
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 3582
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 3
+						province = 9436
+						instant_build = yes
+					}
+				}
+			}
+			217 = { 
+				add_dynamic_modifier = { modifier = sov_defend_region scope = SOV }
+			}
+	}
+	}
+
+	focus = {
+		id = SOV_defend_spb
+		icon = GFX_focus_goal_sov_defspb_focus
+		x = 2
+		y = 3
+		cost = 5
+		relative_position_id = SOV_military_time_army
+
+		available = { 
+			controls_state = 195
+			}
+
+		ai_will_do = { base = 20 }
+
+		prerequisite = { focus = SOV_raise_terroborona }
+
+		completion_reward = {
+			195 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 3151
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 149
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 3060
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = bunker
+						level = 5
+						province = 9150
+						instant_build = yes
+					}
+				}
+			}
+			195 = { 
+				add_dynamic_modifier = { modifier = sov_defend_region scope = SOV }
+			}
+	}
+	}
+
+	focus = {
+		id = SOV_nospeback
+		icon = GFX_focus_goal_sov_nostepback_focus
+		x = 0
+		y = 3
+		cost = 5
+		relative_position_id = SOV_military_time_army
+
+		available = { 
+			surrender_progress > 0.15
+			}
+
+		ai_will_do = { base = 25 }
+
+		prerequisite = { focus = SOV_raise_terroborona }
+
+		completion_reward = {
+			add_country_leader_trait = great_war_hero
+	}
 	}
 	
 
@@ -2692,6 +3214,9 @@ focus_tree = {
 		}
 
 		prerequisite = { focus = SOV_military_time_army }
+		search_filters = { 
+			FOCUS_FILTER_MANPOWER 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = RKKA_exp_loss_in_combat_decrease_15_TT
@@ -2712,6 +3237,9 @@ focus_tree = {
 		available = {
 			has_war = yes
 		}
+		search_filters = { 
+			FOCUS_FILTER_MANPOWER 
+			}
 
 		prerequisite = { focus = SOV_recruit_volounteers }
 
@@ -2777,13 +3305,9 @@ focus_tree = {
 				has_global_flag = russia_reactionary_nofocus
 			}
 		}
-
-		bypass = {
-			NOT = {
-				has_global_flag = russia_reactionary_nofocus
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
 			}
-			has_completed_focus = SOV_Zyuganov_stands_victorius
-		}
 
 		completion_reward = {
 			add_political_power = 30
@@ -2813,6 +3337,10 @@ focus_tree = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_antiextrenist_thetoric }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			FOCUS_FILTER_STABILITY
+			}
 
 		completion_reward = {
 			add_political_power = 50
@@ -2840,13 +3368,9 @@ focus = {
 				has_global_flag = russia_reactionary_nofocus
 			}
 		}
-
-		bypass = {
-			NOT = {
-				has_global_flag = russia_reactionary_nofocus
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
 			}
-			has_completed_focus = SOV_Zyuganov_stands_victorius
-		}
 
 		completion_reward = {
 			custom_effect_tooltip = RCO_pp_increase_5_TT
@@ -2868,6 +3392,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_fight_separatism }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = RCO_pp_increase_5_TT
@@ -2886,6 +3413,10 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_Putin_stands_victorius }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			FOCUS_FILTER_INDUSTRY
+			}
 
 		completion_reward = {
 			add_political_power = 60
@@ -2912,6 +3443,10 @@ focus = {
         	has_political_power > 150
 			}
 		}
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			FOCUS_FILTER_INDUSTRY
+			}
 
 		prerequisite = { focus = SOV_Putin_stands_victorius }
 
@@ -2938,6 +3473,10 @@ focus = {
 
 		prerequisite = { focus = SOV_beurocracy_optimization }
 		prerequisite = { focus = SOV_subdue_oligarchs }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			FOCUS_FILTER_STABILITY
+			}
 
 		completion_reward = {
 			add_stability = 0.15
@@ -2957,6 +3496,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_state_service_reform }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			}
 
 		completion_reward = {
 			add_stability = 0.05
@@ -2977,6 +3519,10 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_state_smi_propaganda }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			FOCUS_FILTER_STABILITY
+			}
 
 		completion_reward = {
 			add_political_power = 50
@@ -2998,6 +3544,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_state_service_reform }
+		search_filters = { 
+			FOCUS_FILTER_STABILITY
+			}
 
 		completion_reward = {
 			add_stability = 0.1
@@ -3063,6 +3612,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_healthcare_programms }
+		search_filters = { 
+			FOCUS_FILTER_RESEARCH 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = RCO_research_increase_5_TT
@@ -3098,6 +3650,10 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_migrants_question }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			FOCUS_FILTER_STABILITY
+			}
 
 		completion_reward = {
 			add_political_power = 50
@@ -3125,6 +3681,9 @@ focus = {
         has_political_power > 300
 			}
 		}
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			}
 
 		prerequisite = { focus = SOV_regulate_internet }
 		prerequisite = { focus = SOV_promote_law_enforcement }
@@ -3145,7 +3704,7 @@ focus = {
 		cost = 5
 		relative_position_id = SOV_new_constitution
 
-		ai_will_do = { base = 10 }
+		ai_will_do = { base = 15 }
 
 		prerequisite = { focus = SOV_new_constitution }
 
@@ -3156,6 +3715,7 @@ focus = {
 				ideology = nationalist
 				popularity = 0.7
 			}
+			add_country_leader_trait = nationalist_symbol
 		}
 	}
 
@@ -3170,6 +3730,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_drift_to_nationalism }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = RCO_prodoutput_increase_5_TT
@@ -3188,6 +3751,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_weapon_export }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = SOV_milconscpd_increase_10_TT
@@ -3206,6 +3772,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_vpk_focus }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = SOV_milconscpd_increase_5_TT
@@ -3241,6 +3810,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_drift_to_nationalism }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 			add_war_support = 0.1
@@ -3285,13 +3857,16 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_society_militarization }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			}
 
 		completion_reward = {
-			add_war_support = 0.1
-			add_political_power = 100
+			add_war_support = 0.05
+			add_political_power = 50
 			custom_effect_tooltip = RCO_pp_increase_10_TT
 			custom_effect_tooltip = SOV_natdrift_increase_5_TT
-			add_to_variable = { sov_nat_drift = 0.05 }
+			add_to_variable = { sov_nat_drift = 0.07 }
 			add_to_variable = { sov_economy_pp_gain_factor = 0.1 }
 		}
 	}
@@ -3307,6 +3882,10 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_crush_opposition }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			FOCUS_FILTER_INDUSTRY
+			}
 
 		completion_reward = {
 			add_war_support = 0.1
@@ -3350,6 +3929,7 @@ focus = {
 				ideology = reactionary
 				popularity = 0.3
 			}
+			add_country_leader_trait = technocrat
 		}
 	}
 
@@ -3364,6 +3944,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_keep_system }
+		search_filters = { 
+			FOCUS_FILTER_STABILITY 
+			}
 
 		completion_reward = {
 			add_stability = 0.1
@@ -3381,12 +3964,15 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_peace_with_past }
+		search_filters = { 
+			FOCUS_FILTER_RESEARCH 
+			}
 
 		completion_reward = {
 			add_research_slot = 1
 			custom_effect_tooltip = RCO_research_increase_7_TT
 			custom_effect_tooltip = SOV_technocrat_available_TT
-			add_to_variable = { sov_economy_resspeed = 0.7 }
+			add_to_variable = { sov_economy_resspeed = 0.07 }
 		}
 	}
 
@@ -3401,6 +3987,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_develop_research }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = SOV_civ_const_spd_increase_10_TT
@@ -3467,6 +4056,9 @@ focus = {
 			focus = SOV_keep_system 
 			focus = SOV_drift_to_nationalism 
 			}
+			search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = RCO_pp_increase_5_TT
@@ -3487,6 +4079,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_patriotic_youth }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			}
 
 		completion_reward = {
 			add_political_power = 50
@@ -3505,6 +4100,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_support_church }
+		search_filters = { 
+			FOCUS_FILTER_MANPOWER 
+			}
 
 		completion_reward = {
 			custom_effect_tooltip = RKKA_conscprct_increase_1_TT
@@ -3525,6 +4123,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_keep_system }
+		search_filters = { 
+			FOCUS_FILTER_STABILITY 
+			}
 
 		completion_reward = {
 			add_stability = 0.1
@@ -3544,6 +4145,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_increase_social_security }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}	
 
 		completion_reward = {
 		add_stability = 0.1
@@ -3563,6 +4167,9 @@ focus = {
 		relative_position_id = SOV_new_constitution
 
 		ai_will_do = { base = 10 }
+		search_filters = { 
+			FOCUS_FILTER_INDUSTRY 
+			}
 
 		prerequisite = { focus = SOV_progressive_tax }
 
@@ -3732,6 +4339,9 @@ focus = {
 		relative_position_id = SOV_asian_theatre
 
 		ai_will_do = { base = 10 }
+		search_filters = { 
+			FOCUS_FILTER_ANNEXATION 
+			}
 
 		bypass = {
 			KAZ = { is_in_faction_with = SOV }
@@ -3819,6 +4429,9 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_new_geopolitical_reality }
+		search_filters = { 
+			FOCUS_FILTER_POLITICAL 
+			}
 
 		completion_reward = {
 			add_political_power = 50
@@ -3944,6 +4557,10 @@ focus = {
 
 		mutually_exclusive = { focus = SOV_csto_coordination }
 
+		search_filters = { 
+			FOCUS_FILTER_ANNEXATION 
+			}
+
 		completion_reward = {
 			every_country = {
 				limit = {
@@ -4031,6 +4648,10 @@ focus = {
 
 		prerequisite = { focus = SOV_blocade_belarus }
 
+		search_filters = { 
+			FOCUS_FILTER_ANNEXATION 
+			}
+
 		completion_reward = {
 			BLR = { country_event = russ.8 }
 		}
@@ -4082,6 +4703,10 @@ focus = {
 		ai_will_do = { base = 10 }
 
 		prerequisite = { focus = SOV_promote_union_state }
+
+		search_filters = { 
+			FOCUS_FILTER_ANNEXATION 
+			}
 
 		completion_reward = {
 			BLR = { country_event = russ.10 }
@@ -4238,6 +4863,10 @@ focus = {
 			}
 		}
 
+		search_filters = { 
+			FOCUS_FILTER_ANNEXATION 
+			}
+
 		completion_reward = {
 			UKR = { country_event = { id = russia.7 } }
 		}
@@ -4256,7 +4885,11 @@ focus = {
 		relative_position_id = SOV_ukraine_question
 		will_lead_to_war_with = UKR
 
-		ai_will_do = { base = 10 }
+		ai_will_do = { base = 20 }
+
+		search_filters = { 
+			FOCUS_FILTER_ANNEXATION 
+			}
 
 		prerequisite = { focus = SOV_the_crimean_question }
 

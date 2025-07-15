@@ -1,0 +1,788 @@
+focus_tree = {
+	id = New_Zealand_focus
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 20
+			original_tag = NZL
+		}
+	}
+	
+	default = no
+	continuous_focus_position = { x = 50 y = 2700 }
+	reset_on_civilwar = no
+
+	# Day Cost in Time
+	@Time_10_days = 1.5
+	@Time_15_days = 2.2
+	@Time_20_days = 2.9
+	@Time_21_days = 3.06
+	@Time_25_days = 3.7
+	@Time_30_days = 4.4
+	@Time_35_days = 5
+	@Time_40_days = 5.8
+	@Time_45_days = 6.5
+	@Time_50_days = 7.2
+	@Time_55_days = 7.9
+	@Time_60_days = 8.6
+	@Time_65_days = 9.4
+	@Time_70_days = 10
+	@Time_75_days = 10.8
+	@Time_80_days = 11.5
+	@Time_85_days = 12.2
+	@Time_90_days = 12.9
+	@Time_95_days = 13.6
+	@Time_100_days = 14.4
+
+    initial_show_position = {
+        x = 10
+        y = 0
+    }
+
+	# Politics
+
+	focus = {
+		id = nzl_millenium
+		icon = GFX_focus_generic_home_defense
+		x = 10
+		y = 0
+		cost = @Time_15_days
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = nzl_waitangi_2000
+		icon = GFX_goal_generic_propaganda
+		x = 10
+		y = 1
+		cost = @Time_21_days
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			add_war_support = 0.05
+			add_manpower = 5000
+		}
+		prerequisite = {
+			focus = nzl_millenium
+		}
+	}
+
+	# Politics - Labour
+
+	focus = {
+		id = nzl_clark_government
+		icon = GFX_goal_support_democracy
+		x = 14
+		y = 2
+		cost = @Time_35_days
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 10
+				is_historical_focus_on = yes
+			}
+		}
+		completion_reward = {
+			add_stability = 0.08
+			add_political_power = 30
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.01
+			}
+		}
+		prerequisite = {
+			focus = nzl_waitangi_2000
+		}
+		mutually_exclusive = {
+			focus = nzl_in_opposition
+		}
+		available = {
+			has_government = social_democrat
+		}
+	}
+	focus = {
+		id = nzl_public_health_act
+		icon = GFX_SOV_autonomous_soviet_republics_ccp_2d_sov_compatibility
+		cost = @Time_50_days
+		x = 14
+		y = 3
+		completion_reward = { 
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = progressive
+				popularity = 0.03
+			}
+			add_ideas = nzl_public_health
+			country_event = {id = nz.2 days = 60}
+		}
+		prerequisite = {
+			focus = nzl_clark_government
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = nzl_social_housing_program
+		icon = GFX_focus_SWE_hygienic_housing
+		cost = @Time_50_days
+		x = 12
+		y = 4
+		completion_reward = { 
+			723 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			284 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		prerequisite = {
+			focus = nzl_public_health_act
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = nzl_advance_maori_rights
+		icon = GFX_SOV_the_rightful_heir_to_the_empire_ccp_2d_sov_compatibility
+		cost = @Time_60_days
+		x = 14
+		y = 4
+		completion_reward = {
+			add_ideas = nzl_treaty_partnership
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Maori Volunteer\" division_template = \"maori_volunteer_unit\" start_experience_factor = 0.5 start_equipment_factor = 1 start_manpower_factor = 1"
+					
+					owner = NZL
+					count = 3
+					prioritize_location = 4543
+				}
+			}
+		 	hidden_effect = {
+				load_oob = NZ_Maori_Volunteer
+		 	}
+		 }
+		prerequisite = {
+			focus = nzl_public_health_act
+		}
+		ai_will_do = {
+			factor = 8
+		}
+	}
+	focus = {
+		id = nzl_strengthen_workers_rights
+		icon = GFX_focus_ICE_embrace_the_workers_revolution
+		cost = @Time_50_days
+		x = 16
+		y = 4
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 80
+			add_ideas = nzl_strong_workers_rights
+		 }
+		prerequisite = {
+			focus = nzl_public_health_act
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	focus = {
+		id = nzl_continue_labour_dominance
+		icon = GFX_SOV_organize_uprisings_in_the_country_ccp_2d_sov_compatibility
+		cost = @Time_50_days
+		x = 13
+		y = 5
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 25
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			fourth_estate_democratic_socialist_decrease = yes
+			fourth_estate_reactionary_decrease = yes
+		}
+		prerequisite = {
+			focus = nzl_advance_maori_rights
+		}
+		prerequisite = {
+			focus = nzl_social_housing_program
+		}
+		prerequisite = {
+			focus = nzl_strengthen_workers_rights
+		}
+		ai_will_do = {
+			base = 10
+		}
+		mutually_exclusive = {
+			focus = nzl_leftward_shift
+		}
+	}
+	focus = {
+		id = nzl_invest_public_healthcare
+		icon = GFX_focus_ARG_banco_central_de_la_republica_argentina
+		cost = @Time_35_days
+		x = 14
+		y = 6
+		completion_reward = { 
+			add_ideas = nzl_public_health_investment
+		}
+		prerequisite = {
+			focus = nzl_continue_labour_dominance
+		}
+	}
+	focus = {
+		id = nzl_education_investment
+		icon = GFX_focus_research
+		cost = @Time_40_days
+		x = 12
+		y = 6
+		completion_reward = { 
+			add_ideas = nzl_education_investment
+			add_tech_bonus = {
+				name = electronic_boost
+				bonus = 0.25
+				uses = 2
+				category = electronics
+			}
+		}
+		prerequisite = {
+			focus = nzl_continue_labour_dominance
+		}
+	}
+
+	# Socialist Path
+	focus = {
+		id = nzl_leftward_shift
+		icon = GFX_focus_prc_agrarian_socialism
+		cost = @Time_40_days
+		x = 18
+		y = 5
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = communist
+				popularity = 0.02
+			}
+			add_stability = -0.05
+			fourth_estate_democratic_socialist_increase = yes
+		}
+		prerequisite = {
+			focus = nzl_advance_maori_rights
+		}
+		prerequisite = {
+			focus = nzl_social_housing_program
+		}
+		prerequisite = {
+			focus = nzl_strengthen_workers_rights
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_historical_focus_on = no
+				add = 10
+			}
+		}
+		mutually_exclusive = {
+			focus = nzl_continue_labour_dominance
+		}
+	}
+
+	# Politics - Opposition
+	focus = {
+		id = nzl_in_opposition
+		icon = GFX_SOV_left_opposition_coup_ccp_2d_sov_compatibility
+		cost = @Time_40_days
+		x = 6
+		y = 2
+		prerequisite = {
+			focus = nzl_waitangi_2000
+		}
+		mutually_exclusive = {
+			focus = nzl_clark_government
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.08
+			}
+			add_stability = -0.1
+		}
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+	}
+	}
+	# Politics - National Party
+	focus = {
+		id = nzl_natural_opposition_party
+		icon = GFX_SOV_consolidate_power_ccp_2d_sov_compatibility
+		cost = @Time_20_days
+		x = 6
+		y = 3
+		completion_reward = { 
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.05
+			}
+			add_political_power = 60
+			fourth_estate_conservative_increase = yes
+		}
+		prerequisite = {
+			focus = nzl_in_opposition
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		mutually_exclusive = {
+			focus = nzl_radical_opposition
+		}
+	}
+
+	# Politics - Radical
+	focus = {
+		id = nzl_radical_opposition
+		icon = GFX_SOV_carry_revolution_east_ccp_2d_sov_compatibility
+		cost = @Time_35_days
+		x = 0
+		y = 3
+		completion_reward = { 
+			add_popularity = {
+				ideology = conservative
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.08
+			}
+		}
+		prerequisite = {
+			focus = nzl_in_opposition
+		}
+		ai_will_do = {
+			factor = 8
+		}
+		mutually_exclusive = {
+			focus = nzl_natural_opposition_party
+		}
+
+	}
+	focus = {
+		id = nzl_emphasise_right
+		icon = GFX_goal_support_fascism
+		cost = @Time_50_days
+		x = 2
+		y = 4
+		completion_reward = { 
+			add_stability = -0.2
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.025
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = -0.05
+			}
+			fourth_estate_fascist_increase = yes
+			fourth_estate_nationalist_increase = yes
+			fourth_estate_reactionary_increase = yes
+		}
+		prerequisite = {
+			focus = nzl_radical_opposition
+		}
+		mutually_exclusive = {
+			focus = nzl_a_left_future
+		}
+		ai_will_do = {
+			base = 8
+		}
+	}
+	focus = {
+		id = nzl_a_left_future
+		icon = GFX_goal_support_communism
+		cost = @Time_50_days
+		x = -2
+		y = 4
+		completion_reward = { 
+			add_stability = -0.2
+			add_popularity = {
+				ideology = communist
+				popularity = 0.075
+			}
+			add_popularity = {
+				ideology = reactionary
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = -0.05
+			}
+			fourth_estate_communist_increase = yes
+		}
+		prerequisite = {
+			focus = nzl_radical_opposition
+		}
+		mutually_exclusive = {
+			focus = nzl_emphasise_right
+		}
+		ai_will_do = {
+			base = 8
+		}
+	}
+
+	# Industry/Economy
+	focus = {
+		id = nzl_aotearoas_economy
+		icon = GFX_focus_generic_industry_1
+		x = 30
+		y = 0
+		cost = @Time_60_days
+		ai_will_do = {
+			factor = 10
+		}
+		completion_reward = {
+			723 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			284 = {
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+	focus = {
+		id = nzl_found_fonterra
+		icon = GFX_focus_ARG_capitalize_the_beef_industry
+		x = 29
+		y = 1
+		cost = @Time_50_days
+		ai_will_do = {
+			factor = 15
+		}
+		completion_reward = {
+			284 = {
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 1
+			}
+			unlock_decision_category_tooltip = nzl_dairy_export
+		}
+		prerequisite = {
+			focus = nzl_aotearoas_economy
+		}
+	}
+	focus = {
+		id = nzl_increase_forestry
+		icon = GFX_focus_CHL_expand_the_forestry
+		x = 31
+		y = 1
+		cost = @Time_35_days
+		ai_will_do = {
+			factor = 8
+		}
+		completion_reward = {
+			add_ideas = nzl_forestry
+		}
+		prerequisite = {
+			focus = nzl_aotearoas_economy
+		}
+	}
+	focus = {
+		id = nzl_develop_south_island
+		icon = GFX_SOV_heavy_industry_ccp_2d_sov_compatibility
+		cost = @Time_45_days
+		x = 30
+		y = 2
+		completion_reward = {
+			723 = {
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
+			}
+		 }
+		prerequisite = {
+			focus = nzl_increase_forestry
+		}
+		prerequisite = {
+			focus = nzl_found_fonterra
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = nzl_agriculture_focus
+		icon = GFX_focus_generic_farmland
+		cost = @Time_50_days
+		x = 31
+		y = 3
+		completion_reward = { 
+			add_ideas = nzl_agriculture 
+		}
+		prerequisite = {
+			focus = nzl_develop_south_island
+		}
+		mutually_exclusive = {
+			focus = nzl_modernize_industry
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	focus = {
+		id = nzl_modernize_industry
+		icon = GFX_focus_CHL_enlarge_the_textile_industries
+		cost = @Time_50_days
+		x = 29
+		y = 3
+		completion_reward = { 
+			add_timed_idea = {
+				idea = nzl_begin_modern_industry
+				days = 90
+			}
+		}
+		prerequisite = {
+			focus = nzl_develop_south_island
+		}
+		mutually_exclusive = {
+			focus = nzl_agriculture_focus
+		}
+		ai_will_do = {
+			factor = 15
+		}
+	}
+
+# Military
+	focus = {
+		id = nzl_defence_spending
+		icon = GFX_SOV_barrier_troops_ccp_2d_sov_compatibility
+		cost = @Time_55_days
+		x = 22
+		y = 0
+		completion_reward = { 
+			army_experience = 25
+			air_experience = 15
+			navy_experience = 15
+
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = nzl_airforce_funding
+		icon = GFX_focus_NORDIC_dem_selector_airforce
+		cost = @Time_40_days
+		x = 20
+		y = 1
+		completion_reward = { 
+			air_experience = 30
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		prerequisite = {
+			focus = nzl_defence_spending
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	focus = {
+		id = nzl_military_funding
+		icon = GFX_focus_NORDIC_dem_army
+		cost = @Time_40_days
+		x = 22
+		y = 1
+		completion_reward = { 
+			army_experience = 30
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		prerequisite = {
+			focus = nzl_defence_spending
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+	focus = {
+		id = nzl_navy_funding
+		icon = GFX_focus_NORDIC_dem_navy
+		cost = @Time_40_days
+		x = 24
+		y = 1
+		completion_reward = { 
+			navy_experience = 30
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		prerequisite = {
+			focus = nzl_defence_spending
+		}
+		ai_will_do = {
+			factor = 7
+		}
+	}
+
+	# East-Timor Influence/Expansion
+	focus = {
+		id = nzl_help_in_timor
+		icon = GFX_focus_chi_army_reform
+		cost = @Time_40_days
+		ai_will_do = {
+			factor = 5
+		}
+		x = 26
+		y = 1
+		completion_reward = { 
+			add_manpower = -2000
+			ETI = {
+				add_manpower = 2000
+				add_opinion_modifier = {
+					target = NZL
+					modifier = help_occupation
+				}
+			}
+		}
+		available = {
+			ETI = {
+				exists = yes
+			}
+		}
+		prerequisite = {
+			focus = nzl_defence_spending 
+		}
+	}
+	focus = {
+		id = nzl_align_timor
+		icon = GFX_SOV_aristocratic_investments_ccp_2d_sov_compatibility
+		cost = @Time_65_days
+		x = 26
+		y = 2
+		completion_reward = {
+			add_political_power = -80
+			add_stability = -0.05
+			ETI = {
+				add_political_power = 50
+				add_opinion_modifier = {
+					target = NZL
+					modifer = increased_help
+				}
+			}
+		}
+		available = {
+			ETI = {
+				exists = yes
+			}
+		}
+		prerequisite = {
+			focus = nzl_help_in_timor
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 5
+				is_historical_focus_on = no
+			}
+		}
+	}
+	focus = {
+		id = nzl_request_transitional_authority
+		icon = GFX_focus_PER_limit_foreign_influence
+		cost = @Time_60_days
+		x = 26
+		y = 3
+		prerequisite = {
+			focus = nzl_align_timor
+		}
+		completion_reward = { 
+			country_event = { id = nz.8 }
+		}
+		available = {
+			ETI = {
+				exists = yes
+			}
+		}
+		ai_will_do = {
+			factor = 0
+			modifier = {
+				add = 5
+				is_historical_focus_on = no
+			}
+		}
+	}
+	
+}

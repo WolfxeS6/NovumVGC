@@ -171,6 +171,9 @@ focus_tree = {
 		x = 14
 		y = 4
 		completion_reward = {
+			hidden_effect = {
+				load_oob = NZ_Maori_Volunteer
+		 	}
 			add_ideas = nzl_treaty_partnership
 			capital_scope = {
 				create_unit = {
@@ -181,10 +184,7 @@ focus_tree = {
 					prioritize_location = 4543
 				}
 			}
-		 	hidden_effect = {
-				load_oob = NZ_Maori_Volunteer
-		 	}
-		 }
+		}
 		prerequisite = {
 			focus = nzl_public_health_act
 		}
@@ -274,13 +274,40 @@ focus_tree = {
 			focus = nzl_continue_labour_dominance
 		}
 	}
+	focus = {
+		id = nzl_adult_literacy_programmes
+		icon = GFX_focus_AUS_womens_education_initiative
+		cost = @Time_40_days
+		x = 12
+		y = 7
+		prerequisite = {
+			focus = nzl_education_investment
+		}
+		completion_reward = { 
+			add_ideas = nzl_literacy_programme
+			add_stability = 0.025
+		}
+	}
+	focus = {
+		id = nzl_expand_district_health_boards
+		icon = GFX_SOV_reformalize_the_role_of_the_patriarchate_ccp_2d_sov_compatibility
+		cost = @Time_35_days
+		x = 14
+		y = 7
+		prerequisite = {
+			focus = nzl_invest_public_healthcare
+		}
+		completion_reward = { 
+			add_ideas = nzl_expanded_district_health_boards
+		}
+	}
 
 	# Socialist Path
 	focus = {
 		id = nzl_leftward_shift
 		icon = GFX_focus_prc_agrarian_socialism
 		cost = @Time_40_days
-		x = 18
+		x = 19
 		y = 5
 		completion_reward = {
 			add_popularity = {
@@ -314,6 +341,23 @@ focus_tree = {
 			focus = nzl_continue_labour_dominance
 		}
 	}
+	focus = {
+		id = nzl_nationalize_essential_industry
+		icon = GFX_focus_generic_modernize_industry
+		cost = @Time_30_days
+		x = 17
+		y = 6
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic_socialist
+				popularity = 0.04
+			}
+			add_ideas = nzl_nationalized_industries
+		}
+		prerequisite = {
+			focus = nzl_leftward_shift
+		}
+	}
 
 	# Politics - Opposition
 	focus = {
@@ -331,7 +375,7 @@ focus_tree = {
 		completion_reward = {
 			add_popularity = {
 				ideology = social_democrat
-				popularity = -0.08
+				popularity = -0.03
 			}
 			add_stability = -0.1
 		}
@@ -347,13 +391,13 @@ focus_tree = {
 	focus = {
 		id = nzl_natural_opposition_party
 		icon = GFX_SOV_consolidate_power_ccp_2d_sov_compatibility
-		cost = @Time_20_days
+		cost = @Time_25_days
 		x = 6
 		y = 3
 		completion_reward = { 
 			add_popularity = {
 				ideology = conservative
-				popularity = 0.05
+				popularity = 0.035
 			}
 			add_political_power = 60
 			fourth_estate_conservative_increase = yes
@@ -366,6 +410,43 @@ focus_tree = {
 		}
 		mutually_exclusive = {
 			focus = nzl_radical_opposition
+		}
+	}
+	focus = {
+		id = nzl_attack_labour
+		icon = GFX_SOV_depoliticize_the_military_ccp_2d_sov_compatibility
+		cost = @Time_35_days
+		x = 6
+		y = 4
+		completion_reward = { 
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.03
+			}
+			add_stability = -0.08
+		}
+		prerequisite = {
+			focus = nzl_natural_opposition_party
+		}
+	}
+	focus = {
+		id = nzl_backed_by_big_business
+		icon = GFX_focus_AFG_a_modern_economy
+		cost = @Time_40_days
+		x = 4
+		y = 4
+		completion_reward = {
+			add_timed_idea = {
+				idea = nzl_national_opposition_growing
+				days = 60
+			}
+			add_popularity = {
+				ideology = conservative
+				popularity = 0.025
+			}
+		}
+		prerequisite = {
+			focus = nzl_natural_opposition_party
 		}
 	}
 
@@ -397,6 +478,7 @@ focus_tree = {
 		}
 
 	}
+	# Far-Right
 	focus = {
 		id = nzl_emphasise_right
 		icon = GFX_goal_support_fascism
@@ -429,14 +511,43 @@ focus_tree = {
 			focus = nzl_radical_opposition
 		}
 		mutually_exclusive = {
-			focus = nzl_a_left_future
+			focus = nzl_a_communist_aotearoa
 		}
 		ai_will_do = {
 			base = 8
 		}
 	}
+
+	# Right & Communist Stuff
 	focus = {
-		id = nzl_a_left_future
+		id = nzl_break_the_status_quo
+		icon = GFX_SOV_return_of_the_rocor_ccp_2d_sov_compatibility
+		cost = @Time_40_days
+		x = 0
+		y = 5
+		completion_reward = { 
+			add_popularity = {
+				ideology = conservative
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_political_power = -100
+		}
+		available = {
+			has_political_power > 100
+		}
+		prerequisite = {
+			focus = nzl_a_communist_aotearoa
+			focus = nzl_emphasise_right
+		}
+	}
+
+	# Communist
+	focus = {
+		id = nzl_a_communist_aotearoa
 		icon = GFX_goal_support_communism
 		cost = @Time_50_days
 		x = -2
@@ -471,6 +582,23 @@ focus_tree = {
 			base = 8
 		}
 	}
+	focus = {
+		id = nzl_communist_workers_strikes
+		icon = GFX_focus_GER_strike_at_the_rising_sun
+		cost = @Time_35_days
+		x = -2
+		y = 5
+		completion_reward = {
+			add_stability = -0.15
+			add_timed_idea = {
+				idea = NZL_workers_strikes
+				days = 60
+			}
+		}
+		prerequisite = {
+			focus = nzl_a_communist_aotearoa
+		}
+	}
 
 	# Industry/Economy
 	focus = {
@@ -489,6 +617,9 @@ focus_tree = {
 			284 = {
 				add_extra_state_shared_building_slots = 2
 			}
+		}
+		available = {
+			has_completed_focus = nzl_waitangi_2000
 		}
 	}
 	focus = {
@@ -622,6 +753,9 @@ focus_tree = {
 		}
 		ai_will_do = {
 			factor = 10
+		}
+		available = {
+			has_completed_focus = nzl_waitangi_2000
 		}
 	}
 	focus = {

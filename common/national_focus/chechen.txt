@@ -206,6 +206,7 @@ focus_tree = {
 		mutually_exclusive = {  }
 
 		completion_reward = {
+			unlock_decision_category_tooltip = CHE_resistance_against_russia
 		}
 
 		ai_will_do = {
@@ -215,7 +216,7 @@ focus_tree = {
 
 	focus = {
 		id = CHE_independence_archieved
-		icon = GFX_focus_generic_diplomatic_treaty
+		icon = GFX_focus_RAJ_give_me_blood_and_i_will_grant_you_freedom
 		x = 1
 		y = 3
 		cost = 5
@@ -236,6 +237,36 @@ focus_tree = {
 		mutually_exclusive = {  }
 
 		completion_reward = {
+			add_stability = 0.15
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_national_elections
+		icon = GFX_focus_generic_election
+		x = 0
+		y = 1
+		cost = 5
+
+		relative_position_id = CHE_independence_archieved
+
+		available = {
+			has_war = no
+			is_subject = no
+			date > 2003.01.01
+		}
+
+		prerequisite = {
+			focus = CHE_independence_archieved
+		}
+
+		mutually_exclusive = {  }
+
+		completion_reward = {
 		}
 
 		ai_will_do = {
@@ -247,13 +278,13 @@ focus_tree = {
 		id = CHE_election_maschadow
 		icon = GFX_focus_AUS_follow_the_jansa_plan
 		x = -2
-		y = 2
+		y = 1
 		cost = 5
 
-		relative_position_id = CHE_independence_archieved
+		relative_position_id = CHE_national_elections
 
 		prerequisite = {
-			focus = CHE_independence_archieved
+			focus = CHE_national_elections
 		}
 
 		mutually_exclusive = { focus = CHE_election_bassajew }
@@ -270,13 +301,13 @@ focus_tree = {
 		id = CHE_election_bassajew
 		icon = GFX_focus_AUS_follow_the_jansa_plan
 		x = 2
-		y = 2
+		y = 1
 		cost = 5
 
-		relative_position_id = CHE_independence_archieved
+		relative_position_id = CHE_national_elections
 
 		prerequisite = {
-			focus = CHE_independence_archieved
+			focus = CHE_national_elections
 		}
 
 		mutually_exclusive = { focus = CHE_election_maschadow }
@@ -306,9 +337,105 @@ focus_tree = {
 		mutually_exclusive = { focus = CHE_national_resistance }
 
 		completion_reward = {
-			add_stability = -0.2
+			add_stability = -0.1
 			custom_effect_tooltip = CHE_kadyrov_tt
 			SOV = { country_event = chechnya.1 }
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_ministry_of_internal_affairs
+		icon = GFX_focus_generic_soviet_politics
+		x = 1
+		y = 2
+		cost = 5
+		relative_position_id = CHE_rise_of_kadyrov
+
+		available = {
+		}
+
+		prerequisite = {
+			focus = CHE_chechen_constitution
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_omon
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		x = 1
+		y = 3
+		cost = 5
+		relative_position_id = CHE_rise_of_kadyrov
+
+		available = {
+			has_war = no
+			date > 2000.04.01
+		}
+
+		prerequisite = {
+			focus = CHE_ministry_of_internal_affairs
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_kadyrowzy
+		icon = GFX_focus_eng_special_air_service
+		x = 1
+		y = 4
+		cost = 5
+		relative_position_id = CHE_rise_of_kadyrov
+
+		available = {
+			has_war = no
+			date > 2000.04.01
+		}
+
+		prerequisite = {
+			focus = CHE_omon
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = CHE_chechen_constitution
+		icon = GFX_goal_generic_forceful_treaty
+		x = 8
+		y = 1
+		cost = 10
+
+		available = {
+			has_war = no
+			date > 2000.04.01
+		}
+
+		prerequisite = {
+		}
+
+		completion_reward = {
 		}
 
 		ai_will_do = {
@@ -331,8 +458,6 @@ focus_tree = {
 			}
 		}
 
-		mutually_exclusive = { focus = CHE_national_resistance }
-
 		completion_reward = {
 			custom_effect_tooltip = if_they_accept_newline_tt
 			effect_tooltip = {
@@ -345,6 +470,627 @@ focus_tree = {
 
 		ai_will_do = {
 			factor = 0
+		}
+	}
+
+	#################
+	#### ECONOMY ####
+	#################
+
+	focus = {
+		id = CHE_post_war_reconstruction
+		icon = GFX_focus_generic_low_cost_housing
+		x = 16
+		y = 0
+		cost = 10
+
+		available = {
+			has_war = no
+			date > 2000.04.01
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_general_building_plan
+		icon = GFX_goal_generic_construction2
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = CHE_post_war_reconstruction
+
+		available = {
+			has_war = no
+			date > 2000.04.01
+		}
+
+		prerequisite = {
+			focus = CHE_post_war_reconstruction
+		}
+
+		completion_reward = {
+			828 = {
+				add_extra_state_shared_building_slots = 2
+				set_state_category = city
+			}
+			add_timed_idea = {
+				idea = CHE_general_building_plan
+				days = 365
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_university
+		icon = GFX_focus_research2
+		x = 3
+		y = 2
+		cost = 5
+		relative_position_id = CHE_post_war_reconstruction
+
+		available = {
+		}
+
+		prerequisite = {
+			focus = CHE_general_building_plan
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_invite_foreign_experts
+		icon = GFX_focus_generic_industrialists
+		x = -5
+		y = 1
+		cost = 5
+		relative_position_id = CHE_post_war_reconstruction
+
+		available = {
+		}
+
+		prerequisite = {
+			focus = CHE_post_war_reconstruction
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_revive_chechen_industry
+		icon = GFX_focus_generic_modernize_industry
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = CHE_post_war_reconstruction
+
+		available = {
+			has_war = no
+			date > 2000.04.01
+		}
+
+		prerequisite = {
+			focus = CHE_post_war_reconstruction
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = ARG_tech_initiative_bonus
+				bonus = 0.5
+				uses = 1
+				category = cat_production
+			}
+			add_tech_bonus = {
+				name = ARG_tech_initiative_bonus
+				bonus = 0.5
+				uses = 1
+				category = construction_tech
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_heavy_industries
+		icon = GFX_goal_generic_construct_mil_factory
+		x = -4
+		y = 2
+		cost = 5
+		relative_position_id = CHE_post_war_reconstruction
+
+		available = {
+		}
+
+		prerequisite = {
+			focus = CHE_invite_foreign_experts
+		}
+		prerequisite = {
+			focus = CHE_revive_chechen_industry
+		}
+
+		mutually_exclusive = {
+			focus = CHE_light_industries
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_light_industries
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = CHE_post_war_reconstruction
+
+		available = {
+		}
+
+		prerequisite = {
+			focus = CHE_revive_chechen_industry
+		}
+		prerequisite = {
+			focus = CHE_general_building_plan
+		}
+
+		mutually_exclusive = {
+			focus = CHE_heavy_industries
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_red_hammer
+		icon = GFX_focus_generic_tank_production
+		x = -5
+		y = 3
+		cost = 10
+		relative_position_id = CHE_post_war_reconstruction
+
+		prerequisite = {
+			focus = CHE_heavy_industries
+		}
+
+		available = {
+		}
+
+		completion_reward = {
+			828 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			add_tech_bonus = {
+				name = SWI_fighting_for_the_hills
+				bonus = 0.5
+				uses = 1
+				category = infantry_tech  
+			} 
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 0.5
+				uses = 1
+				category = armor
+			}
+			add_tech_bonus = {
+				name = mechanized_bonus
+				bonus = 0.5
+				uses = 1
+				category = motorized_equipment
+				category = mechanized_equipment
+			}
+			unlock_military_industrial_organization_tooltip = mio:CHE_krasny_molot_organization
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_green_city
+		icon = GFX_focus_CHL_expand_the_forestry
+		x = 5
+		y = 2
+		cost = 10
+		relative_position_id = CHE_post_war_reconstruction
+
+		prerequisite = {
+			focus = CHE_general_building_plan
+		}
+
+		available = {
+			NOT = {
+				has_idea = CHE_general_building_plan
+			}
+		}
+
+		completion_reward = {
+			828 = {
+				add_extra_state_shared_building_slots = 2
+				set_state_category = large_city
+			}
+			add_stability = 0.05
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_invite_rosneft
+		icon = GFX_focus_rosneft_oil_russia
+		x = -1
+		y = 3
+		cost = 10
+		relative_position_id = CHE_post_war_reconstruction
+
+		prerequisite = {
+			focus = CHE_light_industries
+			focus = CHE_heavy_industries
+		}
+
+		available = {
+			OR = {
+				is_subject_of = SOV
+				is_in_faction_with = SOV
+				has_opinion = {
+					target = SOV
+					value > 50
+				}
+			}
+		}
+
+		mutually_exclusive = {
+			focus = CHE_develop_grozny_oil_field
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = CHE_unlock_rosneft_tt
+			show_ideas_tooltip = CHE_rosneft
+			add_tech_bonus = {
+				name = AUS_pulverfabrik_skodawerke_bonus
+				bonus = 0.5
+				uses = 2
+				technology  = fuel_silos
+				technology  = fuel_refining
+				technology  = fuel_refining2
+				technology  = fuel_refining3
+				technology  = fuel_refining4
+				technology  = fuel_refining5
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+			if = {
+				limit = {
+					is_subject_of = SOV
+				}
+				add_autonomy_score = {
+					value = 10
+					localization = EXAMPLE
+				}
+			}
+			set_country_flag = SOV_second_moscow_trial_flag #Used to unlock the next purge focus
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_autarkic_agriculture
+		icon = GFX_focus_generic_farmland
+		x = 1
+		y = 3
+		cost = 10
+		relative_position_id = CHE_post_war_reconstruction
+
+		prerequisite = {
+			focus = CHE_light_industries
+		}
+
+		available = {
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_develop_grozny_oil_field
+		icon = GFX_focus_PER_nationalize_oil_fields
+		x = -3
+		y = 3
+		cost = 10
+		relative_position_id = CHE_post_war_reconstruction
+
+		prerequisite = {
+			focus = CHE_heavy_industries
+			focus = CHE_light_industries
+		}
+
+		available = {
+		}
+
+		mutually_exclusive = {
+			focus = CHE_invite_rosneft
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_state_oil_university
+		icon = GFX_focus_PER_invite_oil_nations
+		x = -2
+		y = 4
+		cost = 10
+		relative_position_id = CHE_post_war_reconstruction
+
+		prerequisite = {
+			focus = CHE_invite_rosneft
+			focus = CHE_develop_grozny_oil_field
+		}
+
+		available = {
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_incorporate_chechenneftekhimprom
+		icon = GFX_focus_rosneft_oil_russia
+		x = -1
+		y = 5
+		cost = 10
+		relative_position_id = CHE_post_war_reconstruction
+
+		prerequisite = {
+			focus = CHE_invite_rosneft
+		}
+
+		available = {
+			has_country_flag = {
+				flag = SOV_second_moscow_trial_flag
+				days > 1095
+			}
+			custom_trigger_tooltip = {
+				tooltip = SOV_last_purge_focus_days_military_tt
+				has_country_flag = {
+					flag = SOV_second_moscow_trial_flag
+					days > 1095
+				}
+			}
+		}
+
+		mutually_exclusive = {
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_restore_railway
+		icon = GFX_focus_generic_railroad
+		x = 6
+		y = 1
+		cost = 10
+		relative_position_id = CHE_post_war_reconstruction
+
+		prerequisite = {
+			focus = CHE_post_war_reconstruction
+		}
+
+		available = {
+		}
+
+		mutually_exclusive = {
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+###################
+#### AIR FORCE ####
+###################
+
+	focus = {
+		id = CHE_reopen_grozny_airport
+		icon = GFX_focus_generic_air_bases
+		x = 30
+		y = 0
+		cost = 10
+
+		available = {
+			has_war = no
+			date > 2000.04.01
+		}
+
+		mutually_exclusive = {
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_revice_chechen_air_force
+		icon = GFX_focus_PER_establish_airforce
+		x = -1
+		y = 1
+		cost = 10
+		relative_position_id = CHE_reopen_grozny_airport
+
+		available = {
+			is_subject = no
+			date > 2000.04.01
+		
+		}
+
+		prerequisite = {
+			focus = CHE_reopen_grozny_airport
+		}
+
+		mutually_exclusive = {
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_improvized_airfields
+		icon = GFX_focus_generic_improve_roads
+		x = -1
+		y = 2
+		cost = 10
+		relative_position_id = CHE_reopen_grozny_airport
+
+		available = {
+		
+		}
+
+		prerequisite = {
+			focus = CHE_revice_chechen_air_force
+		}
+
+		mutually_exclusive = {
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+######################
+#### ARMED FORCES ####
+######################
+
+	focus = {
+		id = CHE_armed_forces
+		icon = GFX_focus_IRQ_royal_iraqi_army
+		x = 26
+		y = 0
+		cost = 10
+
+		available = {
+			date > 2000.04.01
+			is_subject = no
+		}
+
+		mutually_exclusive = {
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	focus = {
+		id = CHE_national_guard
+		icon = GFX_focus_ITA_blackshirts
+		x = 0
+		y = 1
+		cost = 10
+		relative_position_id = CHE_armed_forces
+
+		available = {
+		}
+
+		prerequisite = {
+			focus = CHE_armed_forces
+		}
+
+		mutually_exclusive = {
+		}
+
+		completion_reward = {
+		}
+
+		ai_will_do = {
+			factor = 1
 		}
 	}
 

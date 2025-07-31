@@ -45,6 +45,16 @@ focus_tree = {
 				threat = 1
 				name = threat_SOV_second_chechen_war
 			}
+			SOV_vladimir_shamanov={
+				add_corps_commander_role = {
+					skill = 1
+					attack_skill = 3
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+					traits = { harsh_leader reckless media_personality }
+				}
+			}
 			hidden_effect = {
 				if = {
 					limit = { is_ai = no }
@@ -55,7 +65,13 @@ focus_tree = {
 					producer = SOV
 				}	
 			}
+			CHE = {
+				country_event = {
+					id = chechnya.7 days = 10
+				}
+			}
 		}
+		custom_effect_tooltip = SOV_failing_to_take_grozny_tt
 		}
 
 		bypass = {
@@ -70,13 +86,18 @@ focus_tree = {
 	focus = {
 		id = SOV_core_chechnya
 		icon = GFX_focus_goal_battle_in_chechnia_focus
-		x = 0
+		x = -1
 		y = 1
 		cost = 3
 		relative_position_id = SOV_grozny_offensive
 
 		available = {
-			has_full_control_of_state = 828
+			OR = {
+				has_full_control_of_state = 828
+				CHE = {
+					is_subject_of = ROOT
+				}
+			}
 		}
 
 		ai_will_do = { factor = 10 }
@@ -85,10 +106,71 @@ focus_tree = {
 			}
 
 		bypass = {
-			CHE = {
-				exists = yes
-				NOT = {has_war_with = SOV}
+		}
+
+		prerequisite = {
+			focus = SOV_grozny_offensive
+		}
+
+		mutually_exclusive = {
+			focus = SOV_chechnyan_fiasco
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+			set_country_flag = chechnyan_terrorists_defeated
+			if = {
+				limit = { has_country_flag = CHE_russia_accepted_subjugation_flg }
+				828 = {
+					remove_building = {
+						type = arms_factory
+						level = 3
+					}
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+				custom_effect_tooltip = SOV_appease_chechnya_1_tooltip
 			}
+			else = {
+				custom_effect_tooltip = SOV_appease_chechnya_tooltip
+			}
+			CHE = {
+				country_event = chechnya.4
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_chechnyan_fiasco
+		icon = GFX_focus_goal_battle_in_chechnia_focus
+		x = 1
+		y = 1
+		cost = 3
+		relative_position_id = SOV_grozny_offensive
+
+		available = {
+			NOT = {
+				OR = {
+					has_full_control_of_state = 828
+					CHE = {
+						is_subject_of = ROOT
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 0 }
+		search_filters = { 
+			}
+
+		bypass = {
+		}
+
+		mutually_exclusive = {
+			focus = SOV_core_chechnya
 		}
 
 		prerequisite = {
@@ -96,12 +178,9 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			custom_effect_tooltip = SOV_appease_chechnya_tooltip
-			set_country_flag = chechnyan_terrorists_defeated
-			828 = {
-				add_manpower = -90000
-			}
-			add_state_core = 828
+			add_stability = -0.1
+			add_war_support = -0.2
+			custom_effect_tooltip = SOV_failed_chechnyan_offense_tooltip
 		}
 	}
 
@@ -2905,7 +2984,7 @@ focus_tree = {
 	focus = {
 		id = SOV_Putin_stands_victorius
 		icon = GFX_focus_goal_sov_putin_focus
-		x = 0
+		x = 1
 		y = 1
 		cost = 3
 		relative_position_id = SOV_core_chechnya

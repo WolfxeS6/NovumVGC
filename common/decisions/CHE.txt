@@ -1,0 +1,267 @@
+CHE_resistance_against_russia = {
+	CHE_recall_lyalya_nasukhanova = {
+		
+		available = {
+			NOT = { has_country_flag CHE_lyalya_nasukhanova_dead_flg}
+		}
+
+		visible = {
+			NOT = { has_country_flag CHE_lyalya_nasukhanova_dead_flg}
+		}
+		
+		icon = GFX_decision_SWE_set_air_budget
+		
+		cost = 25
+		fire_only_once = yes
+		
+		ai_will_do = {
+			base = 0
+		}
+
+		complete_effect = {
+			air_experience = 10
+			add_advisor_role = {
+				character = CHE_lyalya_nasukhanova
+				activate = no
+				advisor = {
+					slot = air_chief
+					cost = 50
+					idea_token = CHE_lyalya_nasukhanova
+					traits = {
+						air_chief_reform_1
+					}
+				}
+			}
+		}
+	}
+	CHE_raid_achmat_jurt = {
+		visible = {
+			has_completed_focus = CHE_resistance_against_russia
+		}
+		
+		available = {
+		}
+		
+		icon = GFX_decision_generic_prepare_civil_war
+		
+		cost = 100
+		fire_only_once = no
+		days_remove = 14
+		
+		remove_effect = {
+			custom_effect_tooltip = CHE_strenght_later_tt
+		}
+		
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	#### CHECHEN LOYALIST DECISIONS ####
+
+	CHE_entry_insurgency_decision = {
+
+		visible = {
+			date > 2000.3.1
+			has_country_flag = CHE_resistance_start_flg
+			NOT = { has_war_with = SOV }
+		}
+		
+		available = {
+		}
+		
+		icon = GFX_decision_generic_prepare_civil_war
+
+		fire_only_once = yes
+		days_remove = 60
+		
+		remove_effect = {
+			activate_decision = CHE_planning_next_operation
+			country_event = chechnya.5
+			set_country_flag = CHE_resistance_resumed_flg
+		}
+		
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+
+	CHE_planning_next_operation = {
+
+		visible = {
+			has_country_flag = CHE_resistance_resumed_flg
+		}
+		
+		available = {
+			
+		}
+		
+		icon = GFX_decision_generic_prepare_civil_war
+
+		fire_only_once = no
+		days_remove = 30
+		
+		remove_effect = {
+			custom_effect_tooltip = CHE_planning_phase_tt
+			hidden_effect = {
+				CHE_random_insurgent_event_effect = yes
+			}
+		}
+		
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+	CHE_request_SOV_small_arms_1 = {
+
+		visible = {
+			is_subject_of = SOV
+		}
+		
+		available = {
+			
+		}
+		
+		icon = GFX_decision_generic_prepare_civil_war
+
+		fire_only_once = no
+		days_remove = 30
+		days_re_enable = 60
+		cost = 25
+		
+		remove_effect = {
+			add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 100
+			producer = SOV
+		}
+		}
+		
+		ai_will_do = {
+			base = 2
+		}
+	}
+
+}
+
+CHE_russian_puppet = {
+
+	CHE_debug_small_increase_trust = {
+
+		visible = {
+			is_ai = no
+			is_debug = yes
+			NOT = { has_global_flag = show_debug_decisions_flag }
+		}
+		
+		available = {
+		}
+		
+		icon = GFX_decision_generic_prepare_civil_war
+
+		fire_only_once = no
+
+		complete_effect = {
+			add_to_variable = {
+				var = CHE_russian_trust_var
+				value = 10
+				tooltip = CHE_add_100_from_trust_var_tt
+			}
+			CHE_trust_calibrate = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	CHE_debug_medium_increase_trust = {
+
+		visible = {
+			is_ai = no
+			is_debug = yes
+			NOT = { has_global_flag = show_debug_decisions_flag }
+		}
+		
+		available = {
+		}
+		
+		icon = GFX_decision_generic_prepare_civil_war
+
+		fire_only_once = no
+
+		complete_effect = {
+			add_to_variable = {
+				var = CHE_russian_trust_var
+				value = 25
+				tooltip = CHE_add_100_from_trust_var_tt
+			}
+			CHE_trust_calibrate = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	CHE_debug_small_decrease_trust = {
+
+		visible = {
+			is_ai = no
+			is_debug = yes
+			NOT = { has_global_flag = show_debug_decisions_flag }
+		}
+		
+		available = {
+		}
+		
+		icon = GFX_decision_generic_prepare_civil_war
+
+		fire_only_once = no
+
+		complete_effect = {
+			subtract_from_variable = {
+				var = CHE_russian_trust_var
+				value = 10
+				tooltip = CHE_sub_100_from_trust_var_tt
+			}
+			CHE_trust_calibrate = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	CHE_debug_medium_decrease_trust = {
+
+		visible = {
+			is_ai = no
+			is_debug = yes
+			NOT = { has_global_flag = show_debug_decisions_flag }
+		}
+		
+		available = {
+		}
+		
+		icon = GFX_decision_generic_prepare_civil_war
+
+		fire_only_once = no
+
+		complete_effect = {
+			subtract_from_variable = {
+				var = CHE_russian_trust_var
+				value = 25
+				tooltip = CHE_sub_100_from_trust_var_tt
+			}
+			CHE_trust_calibrate = yes
+		}
+		
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+}

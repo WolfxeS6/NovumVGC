@@ -10,16 +10,35 @@ country_event = {
 	is_triggered_only = yes
 
 	option = {	#yes
+		name = chechnya.1.a
+		add_manpower = 10000
+		add_ideas = SOV_chechenization
 		custom_effect_tooltip = CHE_kadyrov_as_puppet_tt
 		CHE = {
 			country_event = { id = chechnya.2 days = 2 }
 		}
+		set_country_flag = CHE_russia_accepted_subjugation_flg
+		ai_chance = {
+		    factor = 10
+	    }
 	}
 
 	option = {	#no
+		name = chechnya.1.b
 		CHE = {
 			country_event = { id = chechnya.3 days = 2 }
 		}
+		effect_tooltip = {
+			CHE = {
+				add_opinion_modifier = {
+					target = SOV
+					modifier = CHE_declined_cooperation
+				}
+			}
+		}
+		ai_chance = {
+		    factor = 0
+	    }
 	}
 }
 
@@ -33,6 +52,9 @@ country_event = {
 	is_triggered_only = yes
 
 	option = {
+		name = chechnya.2.a
+		custom_effect_tooltip = CHE_moscow_accepted_proposal_tt
+		unlock_decision_category_tooltip  = CHE_russian_puppet
 	}
 }
 
@@ -46,5 +68,132 @@ country_event = {
 	is_triggered_only = yes
 
 	option = {
+		name = chechnya.3.a
+		add_political_power = -50
+		add_opinion_modifier = {
+			target = SOV
+			modifier = CHE_declined_cooperation
+		}
+		unlock_national_focus = CHE_national_resistance
+	}
+}
+
+# Putin Stands Victorious - Focus Event
+country_event = {
+	id = chechnya.4
+	title = chechnya.4.t
+	desc =  chechnya.4.d
+	picture = GFX_report_destroyed_grozny
+
+	is_triggered_only = yes
+
+	option = {
+		name = chechnya.4.a
+		add_war_support = -0.1
+		828 = {
+			add_manpower = 15000
+		}
+		effect_tooltip = {
+			828 = {
+				remove_building = {
+					type = arms_factory
+					level = 3
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+# Chechen Insurgency Continues
+country_event = {
+	id = chechnya.5
+	title = chechnya.5.t
+	desc =  chechnya.5.d
+	picture = GFX_report_chechen_insurgency
+
+	is_triggered_only = yes
+
+	option = {
+		name = chechnya.5.a
+		add_stability = -0.05
+	}
+}
+
+# 2nd Chechen War won
+country_event = {
+	id = chechnya.6
+	title = chechnya.6.t
+	desc =  chechnya.6.d
+	picture = GFX_report_chechen_putin_won
+
+	is_triggered_only = yes
+
+	option = {
+		name = chechnya.6.a
+		add_stability = 0.05
+	}
+}
+
+# Lyalya Nasukhanova dead
+country_event = {
+	id = chechnya.7
+	title = chechnya.7.t
+	desc =  chechnya.7.d
+	picture = GFX_report_lyalya_nasukhanova
+
+	is_triggered_only = yes
+
+	option = {
+		name = chechnya.7.a
+		add_stability = -0.01
+		set_country_flag = CHE_lyalya_nasukhanova_dead_flg
+	}
+}
+
+############################
+#### CHECHEN INSURGENCY ####
+############################
+
+# Chechen Insurgency Continues
+country_event = {
+	id = chechnya.100
+	title = chechnya.100.t
+	desc =  chechnya.100.d
+	picture = GFX_report_chechen_insurgency
+
+	is_triggered_only = yes
+
+	option = {
+		name = chechnya.100.a
+		trigger = {
+			original_tag = CHE
+		}
+		add_manpower = -3
+		add_stability = -0.01
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -20
+			producer = CHE
+		}
+		activate_decision = CHE_planning_next_operation
+	}
+	option = {
+		name = chechnya.100.b
+		trigger = {
+			original_tag = SOV
+		}
+		add_manpower = -6
+		add_stability = -0.01
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -60
+			producer = SOV
+		}
+		activate_decision = CHE_planning_next_operation
 	}
 }

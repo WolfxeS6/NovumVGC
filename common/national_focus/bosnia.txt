@@ -540,6 +540,10 @@ focus_tree = {
 				ideology = fascist
 				popularity = -0.02
 			}
+			set_temp_variable = { TEMP_INF_SERB_PEOPLE = -0.05 }
+			BOS_update_serb_influence = yes
+			set_temp_variable = { TEMP_LOY_SERB_PEOPLE = -0.1 }
+			BOS_update_serb_loyalty = yes
 		}
 	}
 
@@ -909,6 +913,8 @@ focus_tree = {
 				popularity = 0.02
 			}
 			add_war_support = 0.05
+			set_temp_variable = { TEMP_LOY_BOSNIAK_PEOPLE = 0.05 }
+			BOS_update_bosniak_loyalty = yes
 		}
 	}
 
@@ -966,6 +972,8 @@ focus_tree = {
 				popularity = 0.02
 			}
 			add_political_power = 25
+			set_temp_variable = { TEMP_INF_BOSNIAK_PEOPLE = 0.05 }
+			BOS_update_bosniak_influence = yes
 		}
 	}
 	
@@ -1039,6 +1047,7 @@ focus_tree = {
 		prerequisite = { focus = BOS_revive_communist_ideas}
 		
 		completion_reward = {
+		    custom_effect_tooltip = BOS_socialist_labor_unions_tt
 			add_war_support = 0.05
 	        add_popularity = {
 				ideology = communist
@@ -1078,7 +1087,7 @@ focus_tree = {
 		icon =  GFX_goal_Abandon_NATO
 		relative_position_id = BOS_found_the_communist_party
 		
-		x = -5
+		x = -3
 		y = 1
 		
 		cost = 5
@@ -1094,7 +1103,7 @@ focus_tree = {
 		available = { has_government = communist }
 		
 		available = {
-			threat > 0.10
+			threat > 0.05
 		}
 		
 		bypass = {}
@@ -1270,7 +1279,7 @@ focus_tree = {
 		icon =  POL_commie_gay
 		relative_position_id = BOS_found_the_communist_party
 		
-		x = -3
+		x = -1
 		y = 1
 		
 		cost = 10
@@ -1293,6 +1302,7 @@ focus_tree = {
 			add_stability = -0.05
 			remove_ideas = BOS_dayton_agreement
 			remove_ideas = BOS_one_country_three_peoples
+			clr_country_flag = BOS_influence_mechanic
 		}
 	}
 
@@ -1330,7 +1340,7 @@ focus_tree = {
 		icon =  GFX_focus_spr_class_war
 		relative_position_id = BOS_found_the_communist_party
 		
-		x = -1
+		x = 1
 		y = 1
 		
 		cost = 8
@@ -1426,7 +1436,7 @@ focus_tree = {
 		icon =  communist_people
 		relative_position_id = BOS_found_the_communist_party
 		
-		x = 1
+		x = 3
 		y = 1
 		
 		cost = 7
@@ -1526,13 +1536,13 @@ focus_tree = {
 			}
 		}
 	}
-
+	
 	focus = {
-		id = BOS_invest_in_the_future
-		icon = industry_democratic3
-		relative_position_id = BOS_take_the_west
+		id = BOS_the_greater_yugoslav_idea
+		icon =  GFX_focus_SOV_builder_of_the_red_army
+		relative_position_id = BOS_reunite_the_east
 		
-		x = 1
+		x = -1
 		y = 1
 		
 		cost = 7
@@ -1541,10 +1551,57 @@ focus_tree = {
 		continue_if_invalid = no
 		available_if_capitulated = no
 		
-		prerequisite = { focus = BOS_take_the_west}
 		prerequisite = { focus = BOS_reunite_the_east}
+		prerequisite = { focus = BOS_take_the_west}
+		
+		mutually_exclusive = {}
+		
+		available = { has_government = communist }
 		available = {
-			NOT = { country_exists = MON }
+			NOT = { country_exists = SER }
+			NOT = { country_exists = CRO }
+		}
+		
+		bypass = {}
+		
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = BUL
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ALB
+			}
+			every_state = {
+					limit = { is_core_of = ALB }
+					add_core_of = BOS
+				}
+	         every_state = {
+					limit = { is_core_of = BUL }
+					add_core_of = BOS
+				}
+		}
+	}
+
+	focus = {
+		id = BOS_invest_in_the_future
+		icon = industry_democratic3
+		relative_position_id = BOS_the_greater_yugoslav_idea
+		
+		x = -2
+		y = 1
+		
+		cost = 7
+
+		cancel_if_invalid = yes
+		continue_if_invalid = no
+		available_if_capitulated = no
+		
+		prerequisite = { focus = BOS_the_greater_yugoslav_idea }
+		prerequisite = { focus = BOS_arsenal_of_socialism }
+		prerequisite = { focus = BOS_remake_the_pioneers}
+		available = {
 			NOT = { country_exists = SER }
 			NOT = { country_exists = CRO }
 		}
@@ -1608,7 +1665,7 @@ focus_tree = {
 		icon =  PER_pers3
 		relative_position_id = BOS_islamic_awakening
 		
-		x = 3
+		x = 0
 		y = 1
 		
 		cost = 4
@@ -1627,6 +1684,7 @@ focus_tree = {
 		available = {}
 		
 		completion_reward = {
+		    custom_effect_tooltip = BOS_jusuf_barcic_tt
 			add_stability = -0.05
 	        add_popularity = {
 				ideology = islamist
@@ -1637,7 +1695,7 @@ focus_tree = {
 
     focus = {
 		id = BOS_teach_them_the_sunnah
-		icon =  PER_pers3
+		icon =  GFX_goal_Ideology_Islamism
 		relative_position_id = BOS_rise_of_jusuf_barcic
 		
 		x = 1
@@ -1669,7 +1727,7 @@ focus_tree = {
 
 	focus = {
 		id = BOS_the_way_of_the_salaf
-		icon =  PER_pers3
+		icon = GFX_goal_Jihad_1
 		relative_position_id = BOS_rise_of_jusuf_barcic
 		
 		x = -1
@@ -1701,7 +1759,7 @@ focus_tree = {
 
 	focus = {
 		id = BOS_expose_the_austro_hungarian_entity
-		icon =  PER_pers3
+		icon =  GFX_goal_Shariah_Law_Code
 		relative_position_id = BOS_teach_them_the_sunnah
 		
 		x = -1
@@ -1726,7 +1784,7 @@ focus_tree = {
 			add_political_power = -50
 	        		add_popularity = {
 				ideology = islamist
-				popularity = 0.05
+				popularity = 0.08
 			}
 		}
 	}
@@ -1735,7 +1793,7 @@ focus_tree = {
 	#Economic Tree
 	focus = {
 		id = BOS_bosnias_economic_future
-		icon = GFX_focus_generic_industry_3
+		icon = GFX_focus_bos_economic_future
 		
 		x = 45
 		y = 0
@@ -2074,6 +2132,8 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
+			set_temp_variable = { TEMP_LOY_BOSNIAK_PEOPLE = -0.05 }
+			BOS_update_bosniak_loyalty = yes
 		}
 	}
 	focus = {
@@ -2206,6 +2266,8 @@ focus_tree = {
 			SER = {
 				add_opinion_modifier = { target = BOS modifier = recent_actions_positive }
 			}
+			set_temp_variable = { TEMP_LOY_SERB_PEOPLE = 0.05 }
+			BOS_update_serb_loyalty = yes
 		}
 
 		ai_will_do = {
@@ -2269,7 +2331,7 @@ focus_tree = {
 	
     focus = {
 		id = BOS_fund_bhrt
-		icon = propaganda
+		icon = GFX_focus_bos_bhrt
 		relative_position_id = BOS_bosnias_economic_future
 		
 		x = -3
@@ -2334,7 +2396,7 @@ focus_tree = {
 		x = 5
 		y = 1
 		
-		cost = 5
+		cost = 3
 
 		cancel_if_invalid = yes
 		continue_if_invalid = no
@@ -2347,16 +2409,10 @@ focus_tree = {
 		completion_reward = {
 		    
 			air_experience = 10
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = air_base
-						size > 1
-					}
-				}
+			1277 = {
 				add_building_construction = {
 					type = air_base
-					level = 2
+					level = 1
 					instant_build = yes
 				}
 			}
@@ -2474,7 +2530,7 @@ focus_tree = {
 		x = 3
 		y = 1
 		
-		cost = 10
+		cost = 8
 
 		cancel_if_invalid = yes
 		continue_if_invalid = no
@@ -2649,7 +2705,8 @@ focus_tree = {
 			1277 = { 
 				add_extra_state_shared_building_slots = 1 
 			}
-			add_political_power = 25
+			set_temp_variable = { TEMP_LOY_CROAT_PEOPLE = 0.05 }
+			BOS_update_croat_loyalty = yes
 		}
     }
 	
@@ -2693,7 +2750,8 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-
+            set_temp_variable = { TEMP_LOY_SERB_PEOPLE = 0.05 }
+			BOS_update_serb_loyalty = yes
 			add_stability = 0.03
 		}
     }

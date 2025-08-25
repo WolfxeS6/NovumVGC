@@ -1,0 +1,64 @@
+BOS_Influence_System = {
+    BOS_influence_debug_add_10_mil = {
+		# Usage example for modifying influence and loyalty variables
+		# One has to first choose how much influence/loyalty change he wants by defining a temporary variable in the decimal format (0.1 = 10) and then fire the associated scripted effect.
+		
+		available = {
+			check_variable = { INF_BOSNIAK_PEOPLE > 0.5		tooltip = BOSNIAK_PEOPLE_MORE_THAN_50INF }
+			check_variable = { INF_BOSNIAK_PEOPLE > 0.5		tooltip = BOSNIAK_PEOPLE_MORE_THAN_50LOY }
+		}
+		# Full list of checkable variables - INF for Influence and LOY for Loyalty
+		# You will have to define a tooltip loc for the checks that you make, located in BOS_l_english.yml
+		# 	INF_BOSNIAK_PEOPLE		LOY_BOSNIAK_PEOPLE
+        # 	INF_SERB_PEOPLE		    LOY_SERB_PEOPLE
+		# 	INF_CROAT_PEOPLE		LOY_CROAT_PEOPLE
+		
+		
+		name = "(DEBUG) - Example Decision"
+		visible = { is_debug = yes }
+		complete_effect = {
+			# -- BOSNIAK VARS --
+			set_temp_variable = { TEMP_INF_BOSNIAK_PEOPLE = 0.1 }
+			BOS_update_bosniak_influence = yes
+			set_temp_variable = { TEMP_LOY_BOSNIAK_PEOPLE = 0.1 }
+			BOS_update_bosniak_loyalty = yes
+			
+			# -- SERBS VARS --
+			set_temp_variable = { TEMP_INF_SERB_PEOPLE = 0.1 }
+			BOS_update_serb_influence = yes
+			set_temp_variable = { TEMP_LOY_SERB_PEOPLE = 0.1 }
+			BOS_update_serb_loyalty = yes
+			
+			# -- CROATS VARS --
+			set_temp_variable = { TEMP_INF_CROAT = 0.1 }
+			BOS_update_croat_influence = yes
+			set_temp_variable = { TEMP_LOY_CROAT = 0.1 }
+			BOS_update_croat_loyalty = yes
+    }
+}
+    BOS_appease_bosniaks = {	
+		name = "Appease Bosniaks"
+		cost = 50
+		complete_effect = {
+			set_temp_variable = { TEMP_LOY_BOSNIAK_PEOPLE = 0.05 }
+			BOS_update_bosniak_loyalty = yes
+    }
+}
+	BOS_appease_serbs = {	
+		name = "Appease Serbs"
+		cost = 50
+		complete_effect = {
+			set_temp_variable = { TEMP_LOY_SERB_PEOPLE = 0.05 }
+			BOS_update_serb_loyalty = yes
+    }
+}
+	BOS_appease_croats = {	
+		name = "Appease Croats"
+		cost = 50
+		complete_effect = {
+			set_temp_variable = { TEMP_LOY_CROAT_PEOPLE = 0.05 }
+			BOS_update_croat_loyalty = yes
+    }
+}
+}
+}

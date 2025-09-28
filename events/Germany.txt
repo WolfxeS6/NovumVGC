@@ -1822,11 +1822,6 @@ country_event = {
 			ideology = market_liberal
 			popularity = 0.05
 		}
-		hidden_effect = {
-			country_event = {
-				id = germany.64 days = 1014
-			}
-		}
 		country_event = germany.65
 		ai_chance = {
 			factor = 10
@@ -1925,95 +1920,6 @@ country_event = {
 	}
 }
 country_event = {
-	id = germany.65 #Leader of the Coalition 2002
-	title = germany.65.t
-	desc = germany.65.d
-	picture = GFX_report_Chancellor_Question_2002
-	fire_only_once = yes
-	is_triggered_only = yes
-
-	option = {
-		name = germany.65.o1
-		trigger = {
-			has_country_flag = GER_CDU_FDP_2002_Win
-		}
-			add_popularity = {
-				ideology = conservative
-				popularity = 0.025
-			}
-			add_stability = 0.05
-		
-		ai_chance = {
-			factor = 100
-		}
-	}
-	option = {
-		name = germany.65.o2
-		trigger = {
-			has_country_flag = GER_CDU_FDP_2002_Win
-		}
-			add_popularity = {
-				ideology = market_liberal
-				popularity = 0.025
-			}
-			add_stability = 0.05
-			add_country_leader_role = {
-				character = GER_Guido_Westerwelle
-				promote_leader = yes
-				country_leader = {
-					ideology = libertarian
-					expire = "1.1.1.1"
-					traits = { 
-						first_homosexual_chancellor_GER
-						Hartz_IV_Enemy_GER
-						friend_of_america
-					}
-				}
-			}
-			set_politics = {
-				ruling_party = market_liberal
-				elections_allowed = yes
-			}
-		ai_chance = {
-			factor = 100
-		}
-	}
-	option = {
-		name = germany.65.o3
-		trigger = {
-			has_country_flag = GER_SPD_Gune_2002_Win
-		}
-			add_popularity = {
-				ideology = social_democrat
-				popularity = 0.025
-			}
-			add_stability = 0.05
-		ai_chance = {
-			factor = 100
-		}
-	}
-	option = {
-		name = germany.65.o4
-		if = {
-			limit = {
-				has_country_flag = GER_SPD_Gune_2002_Win
-			}
-			add_popularity = {
-				ideology = progressive
-				popularity = 0.025
-			}
-			add_stability = 0.05
-			set_politics = {
-				ruling_party = progressive
-				elections_allowed = yes
-			}
-		}
-		ai_chance = {
-			factor = 100
-		}
-	}
-}
-country_event = {
 	id = germany.70 #Merkel against Stoiber (against Kohl against Schäuble)
 	title = germany.70.t
 	desc = germany.70.d
@@ -2097,13 +2003,12 @@ country_event = {
 	trigger = {
 		original_tag = GER
 		has_democratic_form_of_government = yes
-		date > 2005.9.1
-		date < 2005.9.30
 	}
 
 	option = {
 		name = election_GER.2.o1 #GER_CDU_SPD_Coalition
 		set_country_flag = GER_CDU_SPD_2005_Win
+		set_country_flag = GER_Snap_Election_Called
 		trigger = {
 			conservative_socialdemocrat_majority = yes
 		}
@@ -2156,6 +2061,7 @@ country_event = {
 			popularity = 0.08
 		}
 		set_country_flag = GER_SPD_Gune_2005_Win
+		set_country_flag = GER_Snap_Election_Called
 		ai_chance = {
 			factor = 5
 			modifier = {
@@ -2194,6 +2100,7 @@ country_event = {
 			}
 		}
 		set_country_flag = GER_CDU_REP_2005_Win
+		set_country_flag = GER_Snap_Election_Called
 		ai_chance = {
 			factor = 10
 		}
@@ -3602,7 +3509,26 @@ country_event = {
 		complete_national_focus = GER_Only_Defensive_Operations
 	}
 }
-
+#Luftsicherheitsgesetz Bundesverfassungsgericht Ruling
+country_event = {
+	id = germany.96
+	title = germany.96.t
+	desc = germany.96.d
+	picture = GFX_report_Air_Safety_Law_Ruling
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Rejected
+		name = germany.96.o1
+		add_stability = 0.025
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.02
+		}
+	}
+}
 ##### Landtags Elections #####
 #North Rhine-Westphalia 2000
 country_event = {
@@ -3753,6 +3679,45 @@ country_event = {
 		add_popularity = {
 			ideology = progressive
 			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
+		}
+	}
+}
+#Schleswig-Holstein 2000
+country_event = {
+	id = election_landtag_GER.5
+	title = election_landtag_GER.5.t
+	desc = election_landtag_GER.5.d
+	picture = GFX_report_SH_2000
+
+	is_triggered_only = yes
+
+	option = {	#SPD is victorious!
+		name = election_landtag_GER.5.o1
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+	}
+	option = {	#CDU is victorious!
+		name = election_landtag_GER.5.o2
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.02
+		}
+	}
+	option = {	#SPD and CDU lose popularity!
+		name = election_landtag_GER.5.o3
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.01
 		}
 		add_popularity = {
 			ideology = market_liberal

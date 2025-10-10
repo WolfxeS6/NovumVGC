@@ -2010,7 +2010,10 @@ country_event = {
 		set_country_flag = GER_CDU_SPD_2005_Win
 		set_country_flag = GER_Snap_Election_Called
 		trigger = {
-			conservative_socialdemocrat_majority = yes
+			OR = {
+				has_country_flag = GER_CDU_SPD_2005_Win_Guaranteed
+				conservative_socialdemocrat_majority = yes
+			}
 		}
 		set_politics = {
 			ruling_party = conservative
@@ -2047,6 +2050,9 @@ country_event = {
 		name = election_GER.2.o2 #GER_sdpgune_2005
 		trigger = {
 			progressive_socialdemocrat_majority = yes
+			NOT = {
+				has_country_flag = GER_CDU_SPD_2005_Win_Guaranteed
+			}
 		}
 		set_politics = {
 			ruling_party = social_democrat
@@ -2075,6 +2081,9 @@ country_event = {
 		name = election_GER.2.o3 #GER_cdurepublikaner_2005
 		trigger = {
 			conservative_reactionary_majority = yes
+			NOT = {
+				has_country_flag = GER_CDU_SPD_2005_Win_Guaranteed
+			}
 		}
 		set_politics = {
 			ruling_party = conservative
@@ -3526,6 +3535,306 @@ country_event = {
 		add_popularity = {
 			ideology = conservative
 			popularity = -0.02
+		}
+	}
+}
+#Schröder leaves Politics
+country_event = {
+	id = germany.97
+	title = germany.97.t
+	desc = germany.97.d
+	picture = GFX_report_Schroder_Leaves
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Schröder is gone
+		name = germany.97.o1
+		add_stability = 0.025
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.02
+		}
+		set_country_flag = GER_Schroder_Advisor
+	}
+}
+#München Security Conference 2007 Smaller Country Effect
+country_event = {
+	id = germany.98
+	title = germany.98.t
+	desc = germany.98.d
+	picture = GFX_report_Munich_Security_Conference_2007
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Pro-Russian Statement
+		name = germany.98.o1
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_proximity   
+				}
+			}
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_distance   
+				}
+			}
+	}
+	option = { #Pro-American Statement
+		name = germany.98.o2
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_proximity   
+				}
+			}
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_distance   
+				}
+			}
+	}
+	option = { #Balanced Statement
+		name = germany.98.o3
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = drama   
+				}
+			}
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = drama   
+				}
+			}
+	}
+}
+#München Security Conference 2007 Bigger Country Effect
+country_event = {
+	id = germany.99
+	title = germany.99.t
+	desc = germany.99.d
+	picture = GFX_report_Munich_Security_Conference_2007
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Pro-Russian Statement
+		name = germany.99.o1
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_proximity   
+				}
+			}
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_hostility    
+				}
+			}
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.03
+		}
+	}
+	option = { #Pro-American Statement
+		name = germany.99.o2
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_proximity   
+				}
+			}
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_hostility    
+				}
+			}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.03
+		}
+	}
+	option = { #Divert Focus towards Iran
+		name = germany.99.o3
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = drama   
+				}
+			}
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = drama   
+				}
+			}
+		PER = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_hostility   
+				}
+			}
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.02
+		}
+	}
+}
+#How to tackle Iran Issue
+country_event = {
+	id = germany.100
+	title = germany.100.t
+	desc = germany.100.d
+	picture = GFX_report_Iran_Nuclear_Talks
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Push them to Denuclearise
+		name = germany.100.o1
+		PER = {
+			country_event = germany.101
+	}
+	}
+	option = { #Agree on non-military nuclear usage
+		name = germany.100.o2
+		PER = {
+			country_event = germany.102
+		}
+	}
+	option = { #War with Iran
+		name = germany.100.o3
+		add_war_support = 0.1
+		create_wargoal = {
+				target = PER
+				type = annex_everything
+			}
+	}
+}
+
+country_event = {
+	id = germany.101
+	title = germany.101.t
+	desc = germany.101.d
+	picture = GFX_report_Iran_Nuclear_Talks
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Yes to Denuclearisation
+		name = germany.101.o1
+		GER = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = diplomatic_proximity
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = diplomatic_proximity
+			}
+		}
+		add_stability = 0.05
+	}
+	option = { #No to Denuclearisation
+		name = germany.101.o2
+		GER = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = declaration_of_hostility
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = declaration_of_hostility
+			}
+		}
+		random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build =yes
+				}
+		}
+		add_war_support = 0.05
+	}
+}
+country_event = {
+	id = germany.102
+	title = germany.102.t
+	desc = germany.102.d
+	picture = GFX_report_Iran_Nuclear_Talks
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Yes to non-military nuclear usage
+		name = germany.102.o1
+		GER = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = diplomatic_proximity
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = diplomatic_proximity
+			}
+		}
+		add_stability = 0.02
+		add_popularity = {
+			ideology = islamist
+			popularity = -0.05
+		}
+	}
+	option = { #No to non-military nuclear usage
+		name = germany.102.o2
+		GER = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = declaration_of_hostility
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = declaration_of_hostility
+			}
+		}
+		random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build =yes
+				}
+		}
+		add_war_support = 0.05
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.03
 		}
 	}
 }

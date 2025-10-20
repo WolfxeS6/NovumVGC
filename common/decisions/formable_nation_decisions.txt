@@ -700,4 +700,269 @@ formable_nation_decisions = {
 				base = 200
 			}
 		}
+
+	form_united_central_america = {
+
+		icon = generic_form_nation
+
+		allowed = {
+			OR = {
+				original_tag = GUA
+				original_tag = ELS
+				original_tag = HON
+				original_tag = NIC
+				original_tag = COS
+				original_tag = BLZ
+			}
+		}
+
+		available = {
+			#Guatemala
+			OR = {
+				AND = {
+					controls_state = 313
+					controls_state = 909
+					controls_state = 1216
+				}
+				GUA = {
+					is_subject_of = ROOT
+				}	
+			}	
+
+			#El Salvador
+			OR = {
+				controls_state = 314
+				ELS = {
+					is_subject_of = ROOT
+				}	
+			}	
+
+			#Honduras
+			OR = {
+				AND = {
+					controls_state = 312
+					controls_state = 1215
+				}
+				HON = {
+					is_subject_of = ROOT
+				}	
+			}	
+
+			#Nicaragua
+			OR = {
+				AND = {
+					controls_state = 317
+					controls_state = 1214
+					controls_state = 1328
+				}
+				NIC = {
+					is_subject_of = ROOT
+				}	
+			}
+
+			#Costa Rica
+			OR = {
+				controls_state = 316
+				COS = {
+					is_subject_of = ROOT
+				}	
+			}
+		}
+
+		visible = {
+			OR = {
+				original_tag = GUA
+				original_tag = ELS
+				original_tag = HON
+				original_tag = NIC
+				original_tag = COS
+				original_tag = BLZ
+			}
+			NOT = { has_global_flag = form_united_central_america_flag }
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = USC_UNIFIED
+			set_global_flag = form_united_central_america_flag
+
+			if = {
+				limit = {
+					GUA = {
+						is_subject_of = ROOT
+					}
+				}
+				annex_country = {
+					target = GUA
+					transfer_troops = yes
+				}
+			}
+			313 = { add_core_of = ROOT }
+			909 = { add_core_of = ROOT }
+			1216 = { add_core_of = ROOT }
+
+			if = {
+				limit = {
+					ELS = {
+						is_subject_of = ROOT
+					}
+				}
+				annex_country = {
+					target = ELS
+					transfer_troops = yes
+				}
+			}
+			314 = { add_core_of = ROOT }
+
+			if = {
+				limit = {
+					HON = {
+						is_subject_of = ROOT
+					}
+				}
+				annex_country = {
+					target = HON
+					transfer_troops = yes
+				}
+			}
+			312 = { add_core_of = ROOT }
+			1215 = { add_core_of = ROOT }
+
+			if = {
+				limit = {
+					NIC = {
+						is_subject_of = ROOT
+					}
+				}
+				annex_country = {
+					target = NIC
+					transfer_troops = yes
+				}
+			}
+			317 = { add_core_of = ROOT }
+			1214 = { add_core_of = ROOT }
+			1328 = { add_core_of = ROOT }
+
+			if = {
+				limit = {
+					COS = {
+						is_subject_of = ROOT
+					}
+				}
+				annex_country = {
+					target = COS
+					transfer_troops = yes
+				}
+			}
+			316 = { add_core_of = ROOT }
+
+			if = {
+				limit = {
+					BLZ = {
+						is_subject_of = ROOT
+					}
+				}
+				annex_country = {
+					target = BLZ
+					transfer_troops = yes
+				}
+			}
+			311 = { add_core_of = ROOT }
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
 	}
+
+	integrate_northern_gran_colombia = {
+
+		icon = GFX_decision_eng_trade_unions_support
+
+		allowed = {
+			OR = {
+				original_tag = GUA
+				original_tag = ELS
+				original_tag = HON
+				original_tag = NIC
+				original_tag = COS
+				original_tag = BLZ
+			}
+		}
+
+		available = {
+			controls_state = 304
+			controls_state = 685
+			controls_state = 889
+		}
+
+		visible = {
+			OR = {
+				original_tag = GUA
+				original_tag = ELS
+				original_tag = HON
+				original_tag = NIC
+				original_tag = COS
+			}
+			has_global_flag = form_united_central_america_flag
+			NOT = { has_global_flag = integrated_panama_flag }
+		}
+
+		complete_effect = {
+			304 = { add_core_of = ROOT }
+			685 = { add_core_of = ROOT }
+			889 = { add_core_of = ROOT }
+			hidden_effect = {
+				set_global_flag = integrated_panama_flag
+			}
+		}
+
+		ai_will_do = {
+			factor = 500
+		}
+	}
+
+	integrate_yucatan = {
+
+		icon = GFX_decision_eng_trade_unions_support
+
+		allowed = {
+			OR = {
+				original_tag = GUA
+				original_tag = ELS
+				original_tag = HON
+				original_tag = NIC
+				original_tag = COS
+				original_tag = BLZ
+			}
+		}
+
+		available = {
+			controls_state = 474
+			controls_state = 475
+		}
+
+		visible = {
+			OR = {
+				original_tag = GUA
+				original_tag = ELS
+				original_tag = HON
+				original_tag = NIC
+				original_tag = COS
+			}
+			has_global_flag = form_united_central_america_flag
+			NOT = { has_global_flag = integrated_yucatan_flag }
+		}
+
+		complete_effect = {
+			474 = { add_core_of = ROOT }
+			475 = { add_claim_by = ROOT }
+			hidden_effect = {
+				set_global_flag = integrated_yucatan_flag
+			}
+		}
+
+		ai_will_do = {
+			factor = 500
+		}
+	}
+}

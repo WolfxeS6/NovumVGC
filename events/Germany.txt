@@ -1,5 +1,6 @@
 ﻿add_namespace = germany
 add_namespace = election_GER
+add_namespace = election_landtag_GER
 
 #The NATO Split
 country_event = {
@@ -1821,11 +1822,6 @@ country_event = {
 			ideology = market_liberal
 			popularity = 0.05
 		}
-		hidden_effect = {
-			country_event = {
-				id = germany.64 days = 1014
-			}
-		}
 		country_event = germany.65
 		ai_chance = {
 			factor = 10
@@ -1903,93 +1899,23 @@ country_event = {
 			factor = 10
 		}
 	}
-}
-country_event = {
-	id = germany.65 #Leader of the Coalition 2002
-	title = germany.65.t
-	desc = germany.65.d
-	picture = GFX_report_Chancellor_Question_2002
-	fire_only_once = yes
-	is_triggered_only = yes
-
 	option = {
-		name = germany.65.o1
+		name = election_GER.1.o5 #SPD-PDS Coalition
 		trigger = {
-			has_country_flag = GER_CDU_FDP_2002_Win
+			socialdemocrat_socialist_majority = yes
 		}
-			add_popularity = {
-				ideology = conservative
-				popularity = 0.025
-			}
-			add_stability = 0.05
-		
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.05
+		}
+		add_stability = -0.05
+		set_country_flag = GER_SPD_PDS_2002_Win
 		ai_chance = {
-			factor = 100
-		}
-	}
-	option = {
-		name = germany.65.o2
-		trigger = {
-			has_country_flag = GER_CDU_FDP_2002_Win
-		}
-			add_popularity = {
-				ideology = market_liberal
-				popularity = 0.025
-			}
-			add_stability = 0.05
-			add_country_leader_role = {
-				character = GER_Guido_Westerwelle
-				promote_leader = yes
-				country_leader = {
-					ideology = libertarian
-					expire = "1.1.1.1"
-					traits = { 
-						first_homosexual_chancellor_GER
-						Hartz_IV_Enemy_GER
-						friend_of_america
-					}
-				}
-			}
-			set_politics = {
-				ruling_party = market_liberal
-				elections_allowed = yes
-			}
-		ai_chance = {
-			factor = 100
-		}
-	}
-	option = {
-		name = germany.65.o3
-		trigger = {
-			has_country_flag = GER_SPD_Gune_2002_Win
-		}
-			add_popularity = {
-				ideology = social_democrat
-				popularity = 0.025
-			}
-			add_stability = 0.05
-		ai_chance = {
-			factor = 100
-		}
-	}
-	option = {
-		name = germany.65.o4
-		if = {
-			limit = {
-				has_country_flag = GER_SPD_Gune_2002_Win
-			}
-			add_popularity = {
-				ideology = progressive
-				popularity = 0.025
-			}
-			add_stability = 0.05
-			set_politics = {
-				ruling_party = progressive
-				elections_allowed = yes
-			}
-		}
-		ai_chance = {
-			factor = 100
+			factor = 10
 		}
 	}
 }
@@ -2077,15 +2003,17 @@ country_event = {
 	trigger = {
 		original_tag = GER
 		has_democratic_form_of_government = yes
-		date > 2005.9.1
-		date < 2005.9.30
 	}
 
 	option = {
 		name = election_GER.2.o1 #GER_CDU_SPD_Coalition
 		set_country_flag = GER_CDU_SPD_2005_Win
+		set_country_flag = GER_Snap_Election_Called
 		trigger = {
-			conservative_socialdemocrat_majority = yes
+			OR = {
+				has_country_flag = GER_CDU_SPD_2005_Win_Guaranteed
+				conservative_socialdemocrat_majority = yes
+			}
 		}
 		set_politics = {
 			ruling_party = conservative
@@ -2122,6 +2050,9 @@ country_event = {
 		name = election_GER.2.o2 #GER_sdpgune_2005
 		trigger = {
 			progressive_socialdemocrat_majority = yes
+			NOT = {
+				has_country_flag = GER_CDU_SPD_2005_Win_Guaranteed
+			}
 		}
 		set_politics = {
 			ruling_party = social_democrat
@@ -2136,6 +2067,7 @@ country_event = {
 			popularity = 0.08
 		}
 		set_country_flag = GER_SPD_Gune_2005_Win
+		set_country_flag = GER_Snap_Election_Called
 		ai_chance = {
 			factor = 5
 			modifier = {
@@ -2149,6 +2081,9 @@ country_event = {
 		name = election_GER.2.o3 #GER_cdurepublikaner_2005
 		trigger = {
 			conservative_reactionary_majority = yes
+			NOT = {
+				has_country_flag = GER_CDU_SPD_2005_Win_Guaranteed
+			}
 		}
 		set_politics = {
 			ruling_party = conservative
@@ -2174,6 +2109,7 @@ country_event = {
 			}
 		}
 		set_country_flag = GER_CDU_REP_2005_Win
+		set_country_flag = GER_Snap_Election_Called
 		ai_chance = {
 			factor = 10
 		}
@@ -3490,6 +3426,611 @@ country_event = {
 		add_popularity = {
 			ideology = conservative
 			popularity = 0.05
+		}
+	}
+}
+#Bundeswehr Coup
+country_event = {
+	id = germany.93
+	title = germany.93.t
+	desc = germany.93.d
+	picture = GFX_report_Bundeswehr_Coup
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Ignore them
+		name = germany.93.o1
+		add_stability = -0.2
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.4
+		}
+		set_party_name = {
+			ideology = nationalist
+			long_name = "Kommittee der Offiziere der Bundeswehr"	
+			name = "Bundeswehr"
+		}
+		add_country_leader_role = {
+			character = GER_Harald_Kujat
+			promote_leader = yes
+			country_leader = {
+				ideology = military_junta
+				expire = "1.1.1.1"
+				traits = { 
+					Inspector_General_of_the_Bundeswehr_GER
+				}
+			}
+		}
+	}
+}
+#Schröder Resigns
+country_event = {
+	id = germany.94
+	title = germany.94.t
+	desc = germany.94.d
+	picture = GFX_report_Schroder_Resigns
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Ignore them
+		name = germany.94.o1
+		add_country_leader_role = {
+			character = GER_Heidemarie_Wieczorek_Zeul
+			promote_leader = yes
+			country_leader = {
+				ideology = social_democrat_ideology
+				expire = "1.1.1.1"
+				traits = { 
+					Parliamentary_Left_Member_GER
+				}
+			}
+		}
+	}
+}
+#NATO Debate
+country_event = {
+	id = germany.95
+	title = germany.95.t
+	desc = germany.95.d
+	picture = GFX_report_Question_Of_Alliance
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #No to NATO
+		name = germany.95.o1
+		leave_faction = yes
+		complete_national_focus = GER_No_to_NATO
+		add_political_power = 50
+		add_stability = 0.05
+		add_war_support = -0.075
+	}
+	option = { #Defensive Alliance
+		name = germany.95.o2
+		add_political_power = -25
+		add_stability = 0.025
+		army_experience = 25
+		complete_national_focus = GER_Only_Defensive_Operations
+	}
+}
+#Luftsicherheitsgesetz Bundesverfassungsgericht Ruling
+country_event = {
+	id = germany.96
+	title = germany.96.t
+	desc = germany.96.d
+	picture = GFX_report_Air_Safety_Law_Ruling
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Rejected
+		name = germany.96.o1
+		add_stability = 0.025
+		add_popularity = {
+			ideology = conservative
+			popularity = -0.02
+		}
+	}
+}
+#Schröder leaves Politics
+country_event = {
+	id = germany.97
+	title = germany.97.t
+	desc = germany.97.d
+	picture = GFX_report_Schroder_Leaves
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Schröder is gone
+		name = germany.97.o1
+		add_stability = 0.025
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.02
+		}
+		set_country_flag = GER_Schroder_Advisor
+	}
+}
+#München Security Conference 2007 Smaller Country Effect
+country_event = {
+	id = germany.98
+	title = germany.98.t
+	desc = germany.98.d
+	picture = GFX_report_Munich_Security_Conference_2007
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Pro-Russian Statement
+		name = germany.98.o1
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_proximity   
+				}
+			}
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_distance   
+				}
+			}
+	}
+	option = { #Pro-American Statement
+		name = germany.98.o2
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_proximity   
+				}
+			}
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_distance   
+				}
+			}
+	}
+	option = { #Balanced Statement
+		name = germany.98.o3
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = drama   
+				}
+			}
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = drama   
+				}
+			}
+	}
+}
+#München Security Conference 2007 Bigger Country Effect
+country_event = {
+	id = germany.99
+	title = germany.99.t
+	desc = germany.99.d
+	picture = GFX_report_Munich_Security_Conference_2007
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Pro-Russian Statement
+		name = germany.99.o1
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_proximity   
+				}
+			}
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_hostility    
+				}
+			}
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.03
+		}
+	}
+	option = { #Pro-American Statement
+		name = germany.99.o2
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = diplomatic_proximity   
+				}
+			}
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_hostility    
+				}
+			}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.03
+		}
+	}
+	option = { #Divert Focus towards Iran
+		name = germany.99.o3
+		SOV = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = drama   
+				}
+			}
+		USA = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = drama   
+				}
+			}
+		PER = {
+				add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_hostility   
+				}
+			}
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.02
+		}
+	}
+}
+#How to tackle Iran Issue
+country_event = {
+	id = germany.100
+	title = germany.100.t
+	desc = germany.100.d
+	picture = GFX_report_Iran_Nuclear_Talks
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Push them to Denuclearise
+		name = germany.100.o1
+		PER = {
+			country_event = germany.101
+	}
+	}
+	option = { #Agree on non-military nuclear usage
+		name = germany.100.o2
+		PER = {
+			country_event = germany.102
+		}
+	}
+	option = { #War with Iran
+		name = germany.100.o3
+		add_war_support = 0.1
+		create_wargoal = {
+				target = PER
+				type = annex_everything
+			}
+	}
+}
+
+country_event = {
+	id = germany.101
+	title = germany.101.t
+	desc = germany.101.d
+	picture = GFX_report_Iran_Nuclear_Talks
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Yes to Denuclearisation
+		name = germany.101.o1
+		GER = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = diplomatic_proximity
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = diplomatic_proximity
+			}
+		}
+		add_stability = 0.05
+	}
+	option = { #No to Denuclearisation
+		name = germany.101.o2
+		GER = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = declaration_of_hostility
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = declaration_of_hostility
+			}
+		}
+		random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build =yes
+				}
+		}
+		add_war_support = 0.05
+	}
+}
+country_event = {
+	id = germany.102
+	title = germany.102.t
+	desc = germany.102.d
+	picture = GFX_report_Iran_Nuclear_Talks
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Yes to non-military nuclear usage
+		name = germany.102.o1
+		GER = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = diplomatic_proximity
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = diplomatic_proximity
+			}
+		}
+		add_stability = 0.02
+		add_popularity = {
+			ideology = islamist
+			popularity = -0.05
+		}
+	}
+	option = { #No to non-military nuclear usage
+		name = germany.102.o2
+		GER = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = declaration_of_hostility
+			}
+		}
+		USA = {
+			add_opinion_modifier = {
+				target = PER
+				modifier = declaration_of_hostility
+			}
+		}
+		random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build =yes
+				}
+		}
+		add_war_support = 0.05
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.03
+		}
+	}
+}
+##### Landtags Elections #####
+#North Rhine-Westphalia 2000
+country_event = {
+	id = election_landtag_GER.1
+	title = election_landtag_GER.1.t
+	desc = election_landtag_GER.1.d
+	picture = GFX_report_NRW_2000
+
+	is_triggered_only = yes
+
+	option = {	#SPD is victorious!
+		name = election_landtag_GER.1.o1
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+	}
+	option = {	#CDU is victorious!
+		name = election_landtag_GER.1.o2
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.03
+		}
+	}
+	option = {	#SPD and CDU lose popularity!
+		name = election_landtag_GER.1.o3
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.04
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.03
+		}
+	}
+}
+#Rhineland Palatinate 2001
+country_event = {
+	id = election_landtag_GER.2
+	title = election_landtag_GER.2.t
+	desc = election_landtag_GER.2.d
+	picture = GFX_report_RLP_2001
+
+	is_triggered_only = yes
+
+	option = {	#SPD is victorious!
+		name = election_landtag_GER.2.o1
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+	}
+	option = {	#CDU is victorious!
+		name = election_landtag_GER.2.o2
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.03
+		}
+	}
+	option = {	#SPD and CDU lose popularity!
+		name = election_landtag_GER.2.o3
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = democratic_socialist
+			popularity = 0.01
+		}
+	}
+}
+#Baden-Wurttemberg 2001
+country_event = {
+	id = election_landtag_GER.3
+	title = election_landtag_GER.3.t
+	desc = election_landtag_GER.3.d
+	picture = GFX_report_BW_2001
+
+	is_triggered_only = yes
+
+	option = {	#CDU is victorious!
+		name = election_landtag_GER.3.o1
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.03
+		}
+	}
+	option = {	#SPD is victorious!
+		name = election_landtag_GER.3.o2
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+	}
+	option = {	#SPD and CDU lose popularity!
+		name = election_landtag_GER.3.o3
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.01
+		}
+	}
+}
+#Hamburg 2001
+country_event = {
+	id = election_landtag_GER.4
+	title = election_landtag_GER.4.t
+	desc = election_landtag_GER.4.d
+	picture = GFX_report_HH_2001
+
+	is_triggered_only = yes
+
+	option = {	#SPD is victorious!
+		name = election_landtag_GER.4.o1
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+	}
+	option = {	#CDU is victorious!
+		name = election_landtag_GER.4.o2
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.03
+		}
+	}
+	option = {	#SPD and CDU lose popularity!
+		name = election_landtag_GER.4.o3
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
+		}
+	}
+}
+#Schleswig-Holstein 2000
+country_event = {
+	id = election_landtag_GER.5
+	title = election_landtag_GER.5.t
+	desc = election_landtag_GER.5.d
+	picture = GFX_report_SH_2000
+
+	is_triggered_only = yes
+
+	option = {	#SPD is victorious!
+		name = election_landtag_GER.5.o1
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+	}
+	option = {	#CDU is victorious!
+		name = election_landtag_GER.5.o2
+		add_popularity = {
+			ideology = conservative
+			popularity = 0.02
+		}
+	}
+	option = {	#SPD and CDU lose popularity!
+		name = election_landtag_GER.5.o3
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = progressive
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
 		}
 	}
 }

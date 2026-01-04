@@ -1,0 +1,136 @@
+focus_tree = {
+	id = SOV_wagner_cw_focus
+
+    country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = SOV
+		}
+	}
+	
+	default = no
+
+    continuous_focus_position = { x = 60 y = 7000 }
+
+    focus = {
+		id = SOV_control_the_kremlin
+		icon = GFX_focus_goal_sov_wagner_control_kremlin_focus
+		x = 5
+		y = 0
+		cost = 1
+		ai_will_do = {
+			factor = 5
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            add_popularity = {
+				ideology = fascist
+				popularity = 0.15
+			}
+			add_political_power = 50
+			hidden_effect = {
+			news_event = {
+					days = 4
+					id = russia_wagner_news.1
+				}
+				news_event = {
+					days = 10
+					id = russia_wagner_news.2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_wagner_attack_chechens
+		icon = GFX_focus_goal_sov_wagner_attack_che_focus
+		x = -1
+		y = 1
+		prerequisite = { focus = SOV_control_the_kremlin }
+		cost = 3
+		relative_position_id = SOV_control_the_kremlin
+
+		ai_will_do = {
+			factor = 15
+		}
+
+		will_lead_to_war_with = CHE
+		
+		completion_reward = {
+            declare_war_on = {
+    			target = CHE
+    			type = annex_everything
+			}	
+			
+		}
+	}
+	
+focus = {
+		id = SOV_stabilize_regions
+		icon = GFX_focus_goal_sov_wag_stabilize_regions_focus_focus
+		x = 1
+		y = 1
+		prerequisite = { focus = SOV_control_the_kremlin }
+		cost = 3
+		relative_position_id = SOV_control_the_kremlin
+
+		ai_will_do = {
+			factor = 5
+		}
+		
+		completion_reward = {
+            if = {
+			limit = {
+				controls_state = 249
+			}
+			add_stability = 0.05
+			add_political_power = 50
+			}
+			if = {
+			limit = {
+				NOT = { controls_state = 249 }
+			}
+			remove_ideas = SOV_wagner_bad_state
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_arrest_opposition
+		icon = GFX_focus_goal_sov_wag_arrest_opposition_focus
+		x = 0
+		y = 2
+		prerequisite = { focus = SOV_wagner_attack_chechens }
+		prerequisite = { focus = SOV_stabilize_regions }
+		cost = 3
+		relative_position_id = SOV_control_the_kremlin
+
+		ai_will_do = {
+			factor = 5
+		}
+		
+		completion_reward = {
+             if = {
+			limit = {
+				controls_state = 195
+			}
+			add_stability = 0.05
+			add_political_power = 50
+			}
+			if = {
+			limit = {
+				NOT = { controls_state = 195 }
+			}
+			remove_ideas = communist_partisans
+			}
+			load_focus_tree = SOV_wagner_main_focus
+		}
+	}
+
+
+
+}

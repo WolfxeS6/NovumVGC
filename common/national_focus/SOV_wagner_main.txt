@@ -1,0 +1,2191 @@
+focus_tree = {
+	id = SOV_wagner_main_focus
+
+    country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = SOV
+		}
+	}
+	
+	default = no
+
+    continuous_focus_position = { x = 60 y = 7000 }
+
+    focus = {
+		id = SOV_wag_control_mod
+		icon = GFX_focus_goal_sov_wagner_control_mod_focus
+		x = 5
+		y = 1
+		cost = 2
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+			custom_effect_tooltip = RKKA_mil_adv_cost_decrease_75_TT
+			add_to_variable = { sov_army_adv_cost_fct = -0.75 }
+            remove_ideas = SOV_wagner_bad_army
+			news_event = {
+					days = 2
+					id = russia_wagner_news.8
+				}
+				hidden_effect = { 
+				country_event = {
+    				id = russ.29
+    				days = 20
+				} 
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_wag_foreign_legion
+		icon = GFX_focus_goal_sov_wagner_foreign_legion_focus
+		x = -1
+		y = 1
+		prerequisite = { focus = SOV_wag_control_mod }
+		cost = 4
+		relative_position_id = SOV_wag_control_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			custom_effect_tooltip = RCO_vol_fct_increase_40_TT
+			add_to_variable = { sov_vols_factor = 0.4 }
+			custom_effect_tooltip = RCO_people_increase_cw_10_TT
+			add_to_variable = { sov_economy_pop = 0.1 }
+			custom_effect_tooltip = SOV_spawnwagner_TT
+			hidden_effect = {
+				219 = { create_unit = { division = "division_template = \"Wagner Assault Unit\" start_experience_factor = 0.70 start_manpower_factor = 1 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV } }
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_wag_assymetric_warfare
+		icon = GFX_focus_goal_sov_wagner_assymetric_warfare_focus
+		x = 1
+		y = 1
+		prerequisite = { focus = SOV_wag_control_mod }
+		cost = 4
+		relative_position_id = SOV_wag_control_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			custom_effect_tooltip = RKKA_airefficiency_increase_10_TT
+			custom_effect_tooltip = RKKA_airexpfactor_increase_10_TT
+			add_tech_bonus = {
+			name = tech_bonus
+			bonus = 2.0
+			uses = 1
+			category = recon_tech
+		}
+		add_tech_bonus = {
+			name = tech_bonus
+			bonus = 2.0
+			uses = 2
+			category = drone_tech
+		}
+		add_tech_bonus = {
+			name = tech_bonus
+			bonus = 2
+			uses = 1
+			category = tactical_bomber
+		}
+			add_to_variable = { sov_army_air_eff = 0.1 }
+			add_to_variable = { sov_army_air_exp = 0.1 }
+		}
+		}
+
+	focus = {
+		id = SOV_wag_military_industrial_revival
+		icon = GFX_focus_goal_sov_wagner_mil_ind_revival_focus
+		x = 0
+		y = 2
+		prerequisite = { focus = SOV_wag_foreign_legion }
+		prerequisite = { focus = SOV_wag_assymetric_warfare }
+		cost = 4
+		relative_position_id = SOV_wag_control_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			custom_effect_tooltip = WAG_military_buildup_TT
+			add_timed_idea = {
+    			idea = SOV_military_buildup
+    			days = 365
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_wag_unite_wagner_and_mod
+		icon = GFX_focus_goal_sov_wagner_integrate_in_mod_focus
+		x = 2
+		y = 1
+		prerequisite = { focus = SOV_wag_military_industrial_revival }
+		cost = 4
+		relative_position_id = SOV_wag_military_industrial_revival
+
+		mutually_exclusive = {
+			focus = SOV_wag_continue_wagner_legacy
+		}
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_combined_arms_doctrine
+		icon = GFX_focus_goal_sov_nostepback_focus
+		x = -1
+		y = 2
+		prerequisite = { focus = SOV_wag_armored_warfare_initiative }
+		cost = 4
+		relative_position_id = SOV_wag_unite_wagner_and_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_armored_warfare_initiative
+		icon = GFX_focus_goal_sov_t90_focus
+		x = -1
+		y = 1
+		prerequisite = { focus = SOV_wag_unite_wagner_and_mod }
+		cost = 4
+		relative_position_id = SOV_wag_unite_wagner_and_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_aerospace_modernization
+		icon = GFX_focus_goal_sov_vvs_focus
+		x = 1
+		y = 1
+		prerequisite = { focus = SOV_wag_unite_wagner_and_mod }
+		cost = 4
+		relative_position_id = SOV_wag_unite_wagner_and_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_artillery_corps_expansion
+		icon = GFX_focus_goal_sov_arta_focus
+		x = 1
+		y = 2
+		prerequisite = { focus = SOV_wag_aerospace_modernization }
+		cost = 4
+		relative_position_id = SOV_wag_unite_wagner_and_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_grand_army
+		icon = GFX_focus_goal_sov_war_army_focus
+		x = 0
+		y = 3
+		prerequisite = { focus = SOV_wag_combined_arms_doctrine }
+		prerequisite = { focus = SOV_wag_artillery_corps_expansion }
+		cost = 4
+		relative_position_id = SOV_wag_unite_wagner_and_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_commander_in_chief
+		icon = GFX_focus_goal_sov_wag_commander_focus
+		x = 0
+		y = 5
+		prerequisite = { 
+			focus = SOV_wag_best_orchestra 
+			focus = SOV_wag_grand_army 
+			}
+		cost = 4
+		relative_position_id = SOV_wag_military_industrial_revival
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_create_aerospace
+		icon = GFX_focus_goal_sov_vks_focus
+		x = 6
+		y = 1
+		prerequisite = { focus = SOV_wag_military_industrial_revival }
+		cost = 4
+		relative_position_id = SOV_wag_military_industrial_revival
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_vdv
+		icon = GFX_focus_goal_sov_vdv_focus
+		x = 0
+		y = 2
+		prerequisite = { focus = SOV_wag_create_aerospace }
+		cost = 4
+		relative_position_id = SOV_wag_create_aerospace
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_air_facility
+		icon = GFX_focus_goal_yak_fighter_focus
+		x = 0
+		y = 4
+		prerequisite = { focus = SOV_wag_vdv }
+		cost = 4
+		relative_position_id = SOV_wag_create_aerospace
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_strategic_aviation
+		icon = GFX_focus_goal_sov_far_aviation_focus
+		x = 1
+		y = 1
+		prerequisite = { focus = SOV_wag_create_aerospace }
+		cost = 4
+		relative_position_id = SOV_wag_create_aerospace
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_air_defence
+		icon = GFX_focus_goal_sov_air_missile_defence_focus
+		x = 1
+		y = 3
+		prerequisite = { focus = SOV_wag_strategic_aviation }
+		cost = 4
+		relative_position_id = SOV_wag_create_aerospace
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_dev_new_fighters
+		icon = GFX_focus_goal_sov_su34_focus
+		x = -1
+		y = 1
+		prerequisite = { focus = SOV_wag_create_aerospace }
+		cost = 4
+		relative_position_id = SOV_wag_create_aerospace
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_drone_experiments
+		icon = GFX_focus_goal_sov_drones_focus
+		x = -1
+		y = 3
+		prerequisite = { focus = SOV_wag_dev_new_fighters }
+		cost = 4
+		relative_position_id = SOV_wag_create_aerospace
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_reorganize_fleet
+		icon = GFX_focus_goal_sov_navy1_focus
+		x = -6
+		y = 1
+		prerequisite = { focus = SOV_wag_military_industrial_revival }
+		cost = 4
+		relative_position_id = SOV_wag_military_industrial_revival
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_marines
+		icon = GFX_focus_goal_sov_wag_marines_focus
+		x = 0
+		y = 2
+		prerequisite = { focus = SOV_wag_reorganize_fleet }
+		cost = 4
+		relative_position_id = SOV_wag_reorganize_fleet
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_naval_facility
+		icon = GFX_focus_goal_sov_fleet_focus
+		x = 0
+		y = 4
+		prerequisite = { focus = SOV_wag_marines }
+		cost = 4
+		relative_position_id = SOV_wag_reorganize_fleet
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_pacific_fleet_docks
+		icon = GFX_focus_goal_focus_rus_oceangoing
+		x = 1
+		y = 1
+		prerequisite = { focus = SOV_wag_reorganize_fleet }
+		cost = 4
+		relative_position_id = SOV_wag_reorganize_fleet
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_modernize_vladivostok_infra
+		icon = GFX_focus_goal_sov_port_focus
+		x = 1
+		y = 3
+		prerequisite = { focus = SOV_wag_pacific_fleet_docks }
+		cost = 4
+		relative_position_id = SOV_wag_reorganize_fleet
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_northern_fleet_docks
+		icon = GFX_focus_goal_sov_northwest_focus
+		x = -1
+		y = 1
+		prerequisite = { focus = SOV_wag_reorganize_fleet }
+		cost = 4
+		relative_position_id = SOV_wag_reorganize_fleet
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_expand_naval_intel
+		icon = GFX_focus_goal_sov_navy2_focus
+		x = -1
+		y = 3
+		prerequisite = { focus = SOV_wag_northern_fleet_docks }
+		cost = 4
+		relative_position_id = SOV_wag_reorganize_fleet
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_continue_wagner_legacy
+		icon = GFX_focus_goal_sov_wagner_legacy_focus
+		x = -2
+		y = 1
+		prerequisite = { focus = SOV_wag_military_industrial_revival }
+		cost = 4
+		relative_position_id = SOV_wag_military_industrial_revival
+
+		mutually_exclusive = {
+			focus = SOV_wag_unite_wagner_and_mod
+		}
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_wagner_officers
+		icon = GFX_focus_goal_sov_wagner_officer_focus
+		x = 1
+		y = 1
+		prerequisite = { focus = SOV_wag_continue_wagner_legacy }
+		cost = 4
+		relative_position_id = SOV_wag_continue_wagner_legacy
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_psychological_ops
+		icon = GFX_focus_goal_sov_wagner_psychops_wagner
+		x = 1
+		y = 2
+		prerequisite = { focus = SOV_wag_wagner_officers }
+		cost = 4
+		relative_position_id = SOV_wag_continue_wagner_legacy
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_elite_wagner_corps
+		icon = GFX_focus_goal_sov_wagner_elite_corps_focus
+		x = -1
+		y = 1
+		prerequisite = { focus = SOV_wag_continue_wagner_legacy }
+		cost = 4
+		relative_position_id = SOV_wag_continue_wagner_legacy
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_decentralized_logistics
+		icon = GFX_focus_goal_sov_wagner_logistics_focus
+		x = -1
+		y = 2
+		prerequisite = { focus = SOV_wag_elite_wagner_corps }
+		cost = 4
+		relative_position_id = SOV_wag_continue_wagner_legacy
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_best_orchestra
+		icon = GFX_focus_goal_sov_wagner_best_orchestra_focus
+		x = 0
+		y = 3
+		prerequisite = { focus = SOV_wag_decentralized_logistics }
+		prerequisite = { focus = SOV_wag_psychological_ops }
+		cost = 4
+		relative_position_id = SOV_wag_continue_wagner_legacy
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			
+		}
+	}
+
+	focus = {
+		id = SOV_wag_new_mil_academies
+		icon = GFX_focus_goal_sov_wagner_new_academies_focus
+		x = 3
+		y = 1
+		prerequisite = { focus = SOV_wag_control_mod }
+		cost = 4
+		relative_position_id = SOV_wag_control_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+		custom_effect_tooltip = sov_new_arty_width_TT
+		army_experience = 30
+		air_experience = 15	
+			custom_effect_tooltip = RKKA_landdoctrcost_decrease_25_TT
+			custom_effect_tooltip = RKKA_coordination_increase_10_TT
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 1
+				uses = 1
+				category = land_doctrine
+			}
+			add_to_variable = { sov_army_land_dctr_cost = -0.25 }
+			add_to_variable = { sov_army_coord_bonus = 0.1 }
+			hidden_effect = { set_technology = { soviet_artillery_tech = 1 } }
+			hidden_effect = {
+				if = {
+			limit = { is_ai = yes }
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_2
+				amount = 120000
+				producer = SOV
+			}
+		}
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_wag_ranger_tactics
+		icon = GFX_focus_goal_sov_wagner_ranger_tactics_focus
+		x = -1
+		y = 1
+		prerequisite = { focus = SOV_wag_new_mil_academies }
+		cost = 4
+		relative_position_id = SOV_wag_new_mil_academies
+
+		mutually_exclusive = {
+			focus = SOV_wag_urban_tactics
+		}
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			custom_effect_tooltip = SOV_wagner_forest_tech_TT
+			hidden_effect = { set_technology = { forest_warfare_secret_tech = 1 } }
+			random_army_leader = { add_unit_leader_trait = ranger }
+			random_army_leader = { add_unit_leader_trait = ranger }
+			random_army_leader = { add_unit_leader_trait = ranger }
+			random_army_leader = { add_unit_leader_trait = ranger }
+			random_army_leader = { add_unit_leader_trait = ranger }
+		}
+	}
+
+	focus = {
+		id = SOV_wag_urban_tactics
+		icon = GFX_focus_goal_sov_wagner_urban_combat_focus
+		x = 1
+		y = 1
+		prerequisite = { focus = SOV_wag_new_mil_academies }
+		cost = 4
+		relative_position_id = SOV_wag_new_mil_academies
+
+		mutually_exclusive = {
+			focus = SOV_wag_ranger_tactics
+		}
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			custom_effect_tooltip = SOV_wagner_urban_two_tech_TT
+			hidden_effect = { set_technology = { urban_warfare_secret_tech = 1 } }
+			random_army_leader = { add_unit_leader_trait = urban_assault_specialist }
+			random_army_leader = { add_unit_leader_trait = urban_assault_specialist }
+			random_army_leader = { add_unit_leader_trait = urban_assault_specialist }
+			random_army_leader = { add_unit_leader_trait = urban_assault_specialist }
+			random_army_leader = { add_unit_leader_trait = urban_assault_specialist }
+		}
+	}
+	
+	focus = {
+		id = SOV_wag_restore_mil_disc
+		icon = GFX_focus_goal_sov_wagner_restore_disc_focus
+		x = -3
+		y = 1
+		prerequisite = { focus = SOV_wag_control_mod }
+		cost = 4
+		relative_position_id = SOV_wag_control_mod
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			custom_effect_tooltip = RKKA_org_increase_10_TT
+			add_to_variable = { sov_army_org = 0.1 }
+			country_event = {
+    				id = russ.30
+    				days = 2
+				}
+		}
+	}
+
+	focus = {
+		id = SOV_wag_penal_battalions
+		icon = GFX_focus_goal_sov_wagner_penal_focus
+		x = -1
+		y = 1
+		prerequisite = { focus = SOV_wag_restore_mil_disc }
+		cost = 4
+		relative_position_id = SOV_wag_restore_mil_disc
+
+		mutually_exclusive = {
+			focus = SOV_wag_promote_young_officers
+		}
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			custom_effect_tooltip = RKKA_traintime_decrease_10_TT
+			add_to_variable = { sov_army_tr_time = -0.1 }
+			custom_effect_tooltip = SOV_spawnwagner_TT
+			custom_effect_tooltip = SOV_spawnwagner_TT
+			hidden_effect = {
+			219 = { create_unit = { division = "division_template = \"Wagner Assault Unit\" start_experience_factor = 0.70 start_manpower_factor = 1 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV } }
+			219 = { create_unit = { division = "division_template = \"Wagner Assault Unit\" start_experience_factor = 0.70 start_manpower_factor = 1 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV } }
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_wag_promote_young_officers
+		icon = GFX_focus_goal_sov_wagner_young_officers_focus
+		x = 1
+		y = 1
+		prerequisite = { focus = SOV_wag_restore_mil_disc }
+		cost = 4
+		relative_position_id = SOV_wag_restore_mil_disc
+
+		mutually_exclusive = {
+			focus = SOV_wag_penal_battalions
+		}
+
+		ai_will_do = { factor = 5 }
+		
+		completion_reward = {
+			custom_effect_tooltip = RKKA_expgain_increase_5_TT
+			custom_effect_tooltip = RKKA_landdoctrcost_decrease_15_TT
+			add_to_variable = { sov_army_land_dctr_cost = -0.15 }
+			add_to_variable = { sov_army_exgain = 0.05 }
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	#########################################################
+
+	focus = {
+		id = SOV_wag_dissolve_csto
+		icon = GFX_focus_goal_sov_fall_csto_focus
+		x = 40
+		y = 1
+		cost = 2
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_asian_theater
+		icon = asia
+		x = 6
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_dissolve_csto }
+		relative_position_id = SOV_wag_dissolve_csto
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_pacify_northern_caucasus
+		icon = GFX_focus_goal_battle_in_chechnia_focus
+		x = -5
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_asian_theater }
+		relative_position_id = SOV_wag_asian_theater
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_partnership_with_china
+		icon = align_to_china
+		x = 3
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_asian_theater }
+		relative_position_id = SOV_wag_asian_theater
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_help_nk
+		icon = align_to_north_korea
+		x = 3
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_partnership_with_china }	
+		relative_position_id = SOV_wag_partnership_with_china
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_united_mil_effort
+		icon = BLR_belarusian_soldier
+		x = 0
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_help_nk }
+		relative_position_id = SOV_wag_help_nk
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_mongolia_issue
+		icon = GFX_focus_goal_sov_attack_mongolia_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_strenrthern_far_east_defence 
+			focus = SOV_wag_trade_partnership 
+			}
+		relative_position_id = SOV_wag_partnership_with_china
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_deepen_economic_cooperation
+		icon = GFX_focus_goal_sov_prc_focus
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_mongolia_issue }
+		relative_position_id = SOV_wag_mongolia_issue
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_vostok_exersice
+		icon = GFX_focus_goal_sov_china_mil_focus
+		x = 1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_mongolia_issue }
+		relative_position_id = SOV_wag_mongolia_issue
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_strenrthern_far_east_defence
+		icon = GFX_focus_goal_sov_wagner_integrated_focus
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_partnership_with_china }
+		relative_position_id = SOV_wag_partnership_with_china
+		mutually_exclusive = {
+			focus = SOV_wag_trade_partnership
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_trade_partnership
+		icon = GFX_goal_Trade_Deals_with_China
+		x = 1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_partnership_with_china }
+		relative_position_id = SOV_wag_partnership_with_china
+		mutually_exclusive = {
+			focus = SOV_wag_strenrthern_far_east_defence
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_georgian_issue
+		icon = GFX_focus_goal_sov_2008_focus
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_pacify_northern_caucasus }
+		relative_position_id = SOV_wag_pacify_northern_caucasus
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_kazahstan_question
+		icon = GFX_focus_goal_sov_attack_kazakhstan_focus
+		x = 0
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_asian_theater }
+		relative_position_id = SOV_wag_asian_theater
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_secure_central_asia
+		icon = GFX_focus_goal_sov_asia2_focus
+		x = 0
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_kazahstan_question }
+		relative_position_id = SOV_wag_kazahstan_question
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_turkmen_governorate
+		icon = GFX_focus_goal_sov_governorates_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_secure_central_asia }
+		relative_position_id = SOV_wag_kazahstan_question
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_increase_cotton_production
+		icon = GFX_focus_goal_sov_sh_focus
+		x = 0
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_turkmen_governorate }
+		relative_position_id = SOV_wag_kazahstan_question
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_ally_armenia_against_azers
+		icon = GFX_focus_goal_sov_armenia_focus
+		x = 1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_pacify_northern_caucasus }
+		relative_position_id = SOV_wag_pacify_northern_caucasus
+		mutually_exclusive = {
+			focus = SOV_wag_thrust_to_baku
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_thrust_to_baku
+		icon = GFX_focus_goal_sov_attack_azerbaijan_focus
+		x = 3
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_pacify_northern_caucasus }
+		relative_position_id = SOV_wag_pacify_northern_caucasus
+		mutually_exclusive = {
+			focus = SOV_wag_ally_armenia_against_azers
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_caucasian_governorate
+		icon = GFX_focus_goal_sov_governorates_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_georgian_issue }
+		prerequisite = { 
+			focus = SOV_wag_ally_armenia_against_azers 
+			focus = SOV_wag_thrust_to_baku
+			}
+		relative_position_id = SOV_wag_pacify_northern_caucasus
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_restore_petrochemical_industry
+		icon = GFX_focus_goal_sov_gazprom_focus
+		x = 0
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_caucasian_governorate }
+		relative_position_id = SOV_wag_pacify_northern_caucasus
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_iran_question
+		icon = GFX_focus_goal_sov_iran_focus
+		x = 3
+		y = 4
+		cost = 2
+		prerequisite = { focus = SOV_wag_restore_petrochemical_industry }
+		prerequisite = { focus = SOV_wag_increase_cotton_production }
+		relative_position_id = SOV_wag_pacify_northern_caucasus
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_strike_iran
+		icon = GFX_focus_goal_sov_attack_iran_focus
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_iran_question }
+		relative_position_id = SOV_wag_iran_question
+		mutually_exclusive = {
+			focus = SOV_wag_befriend_iran
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_befriend_iran
+		icon = GFX_Align_to_Iran
+		x = 1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_iran_question }
+		relative_position_id = SOV_wag_iran_question
+		mutually_exclusive = {
+			focus = SOV_wag_strike_iran
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_expand_eastern_trade
+		icon = GFX_focus_goal_sov_corporate_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_strike_iran 
+			focus = SOV_wag_befriend_iran 
+			}
+		relative_position_id = SOV_wag_iran_question
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_ally_iraq
+		icon = GFX_focus_goal_sov_iraq_focus
+		x = -1
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_expand_eastern_trade }
+		relative_position_id = SOV_wag_iran_question
+		mutually_exclusive = {
+			focus = SOV_wag_finance_iraqi_guerillas
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_finance_iraqi_guerillas
+		icon = GFX_focus_goal_sov_iraq_guerillas_focus
+		x = 1
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_expand_eastern_trade }
+		relative_position_id = SOV_wag_iran_question
+		mutually_exclusive = {
+			focus = SOV_wag_ally_iraq
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_syrian_deal
+		icon = GFX_focus_TUR_support_the_golden_square
+		x = 0
+		y = 4
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_ally_iraq 
+			focus = SOV_wag_finance_iraqi_guerillas 
+			}
+		relative_position_id = SOV_wag_iran_question
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_european_theater
+		icon = europe
+		x = -5
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_dissolve_csto }
+		relative_position_id = SOV_wag_dissolve_csto
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_press_on_ukraine
+		icon = GFX_focus_goal_sov_destabilization_ukraine_focus
+		x = 2
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_european_theater }
+		relative_position_id = SOV_wag_european_theater
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_unvite_ukr_to_csto
+		icon = GFX_focus_goal_sov_ukr_friend_focus
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_press_on_ukraine }
+		relative_position_id = SOV_wag_press_on_ukraine
+		mutually_exclusive = {
+			focus = SOV_wag_russian_spring
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_russian_spring
+		icon = GFX_focus_goal_sov_novoross_focus
+		x = 1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_press_on_ukraine }
+		relative_position_id = SOV_wag_press_on_ukraine
+		mutually_exclusive = {
+			focus = SOV_wag_unvite_ukr_to_csto
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_ukr_reunification
+		icon = GFX_focus_goal_sov_nice_ukr_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_unvite_ukr_to_csto 
+			focus = SOV_wag_russian_spring
+			}
+		relative_position_id = SOV_wag_press_on_ukraine
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_contact_belarus
+		icon = GFX_focus_goal_sov_align_to_belarus_focus
+		x = -2
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_european_theater }
+		relative_position_id = SOV_wag_european_theater
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_union_state
+		icon = GFX_focus_goal_sov_align_to_union_state_focus
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_contact_belarus }
+		relative_position_id = SOV_wag_contact_belarus
+		mutually_exclusive = {
+			focus = SOV_wag_blr_protests
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_blr_protests
+		icon = POL_attack_belarus
+		x = 1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_contact_belarus }
+		relative_position_id = SOV_wag_contact_belarus
+		mutually_exclusive = {
+			focus = SOV_wag_union_state
+		}
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_blr_reunification
+		icon = GFX_focus_goal_sov_unionstate_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_union_state 
+			focus = SOV_wag_blr_protests
+			}
+		relative_position_id = SOV_wag_contact_belarus
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_three_sisters
+		icon = GFX_focus_goal_sov_drigt_tonaz_focus
+		x = 0
+		y = 4
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_ukr_reunification 
+			}
+		prerequisite = { 
+			focus = SOV_wag_blr_reunification 
+			}
+		relative_position_id = SOV_wag_european_theater
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_unite_economies
+		icon = GFX_focus_goal_sov_sovereign_economic_focus
+		x = 0
+		y = 1
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_three_sisters 
+			}
+		relative_position_id = SOV_wag_three_sisters
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_attack_baltic
+		icon = GFX_focus_goal_sov_baltic_focus
+		x = 1
+		y = 1
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_unite_economies 
+			}
+		relative_position_id = SOV_wag_unite_economies
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_attack_finland
+		icon = GFX_focus_goal_sov_finland_focus
+		x = 3
+		y = 1
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_unite_economies 
+			}
+		relative_position_id = SOV_wag_unite_economies
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_attack_poland
+		icon = GFX_focus_goal_sov_get_poland_focus
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_unite_economies 
+			}
+		relative_position_id = SOV_wag_unite_economies
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_attack_moldova
+		icon = GFX_focus_goal_sov_moldova_focus
+		x = -3
+		y = 1
+		cost = 2
+		prerequisite = { 
+			focus = SOV_wag_unite_economies 
+			}
+		relative_position_id = SOV_wag_unite_economies
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_our_sphere_of_influence
+		icon = GFX_focus_goal_sov_geopol_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_attack_baltic }
+		prerequisite = { focus = SOV_wag_attack_finland }
+		prerequisite = { focus = SOV_wag_attack_poland }
+		prerequisite = { focus = SOV_wag_attack_moldova }
+		relative_position_id = SOV_wag_unite_economies
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_consolidate_power
+		icon = GFX_focus_goal_sov_wag_power_focus
+		x = 19
+		y = 1
+		cost = 2
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_control_internal_affairs
+		icon = GFX_focus_goal_sov_wag_police_focus
+		x = -4
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_consolidate_power }
+		relative_position_id = SOV_wag_consolidate_power
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_expell_foreign_influence
+		icon = GFX_focus_goal_sov_wag_antiusa_focus
+		x = 0
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_control_internal_affairs }
+		relative_position_id = SOV_wag_control_internal_affairs
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_expand_rosguards
+		icon = GFX_focus_goal_sov_wag_rosguard_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_expell_foreign_influence }
+		relative_position_id = SOV_wag_control_internal_affairs
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_promote_intelligence
+		icon = GFX_focus_goal_sov_wag_fsb_focus
+		x = 0
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_expand_rosguards }
+		relative_position_id = SOV_wag_control_internal_affairs
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_digital_iron_curtain
+		icon = GFX_focus_goal_sov_wag_iron_curtain_focus
+		x = 0
+		y = 4
+		cost = 2
+		prerequisite = { focus = SOV_wag_promote_intelligence }
+		relative_position_id = SOV_wag_control_internal_affairs
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_economic_reforms
+		icon = GFX_focus_goal_sov_wag_economy_focus
+		x = 7
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_consolidate_power }
+		relative_position_id = SOV_wag_consolidate_power 
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_corporate_economy
+		icon = GFX_focus_goal_sov_corporate_focus
+		x = 2
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_economic_reforms }
+		relative_position_id = SOV_wag_economic_reforms 
+		mutually_exclusive = {
+			focus = SOV_wag_command_economy
+		}
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_privatization
+		icon = GFX_focus_goal_sov_tax_focus
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_corporate_economy }
+		relative_position_id = SOV_wag_corporate_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_free_market
+		icon = GFX_focus_goal_sov_businessman_focus
+		x = -1
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_privatization }
+		relative_position_id = SOV_wag_corporate_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_resource_extraction
+		icon = GFX_focus_generic_aluminum
+		x = -1
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_free_market }
+		relative_position_id = SOV_wag_corporate_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_oligarch_consortium
+		icon = GFX_focus_goal_sov_oligarchs_focus
+		x = 1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_corporate_economy }
+		relative_position_id = SOV_wag_corporate_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_free_economic_zones
+		icon = GFX_focus_goal_sov_money_focus
+		x = 1
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_oligarch_consortium }
+		relative_position_id = SOV_wag_corporate_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_consumer_goods
+		icon = GFX_focus_goal_sov_consumerism_focus
+		x = 1
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_free_economic_zones }
+		relative_position_id = SOV_wag_corporate_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_command_economy
+		icon = GFX_focus_goal_sov_ind1_focus
+		x = -2
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_economic_reforms }
+		relative_position_id = SOV_wag_economic_reforms 
+		mutually_exclusive = {
+			focus = SOV_wag_corporate_economy
+		}
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_rearnament_plan
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_command_economy }
+		relative_position_id = SOV_wag_command_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_state_arnament_complexes
+		icon = GFX_focus_goal_sov_military_industry_focus
+		x = 1
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_rearnament_plan }
+		relative_position_id = SOV_wag_command_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_worker_militarization
+		icon = GFX_focus_goal_sov_labour_focus
+		x = 1
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_state_arnament_complexes }
+		relative_position_id = SOV_wag_command_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_nationalize_industries
+		icon = GFX_focus_goal_sov_wag_planned_focus
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_command_economy }
+		relative_position_id = SOV_wag_command_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_concentrated_agriculture
+		icon = GFX_focus_goal_sov_mechanized_agriculture_focus
+		x = -1
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_nationalize_industries }
+		relative_position_id = SOV_wag_command_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_central_planning
+		icon = GFX_focus_goal_sov_planning_focus
+		x = -1
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_concentrated_agriculture }
+		relative_position_id = SOV_wag_command_economy 
+
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_first
+		icon = GFX_focus_goal_sov_first_focus
+		x = 2
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_consolidate_power }
+		relative_position_id = SOV_wag_consolidate_power
+		mutually_exclusive = {
+			focus = SOV_wag_nineth
+		}
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_ethnic_laws
+		icon = GFX_focus_goal_sov_wag_nati_focus
+		x = 0
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_first }
+		relative_position_id = SOV_wag_first
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_wagnerian_identity
+		icon = GFX_focus_goal_sov_wag_christianity_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_ethnic_laws }
+		relative_position_id = SOV_wag_first
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_russia_above_all
+		icon = GFX_focus_goal_sov_wag_empire_focus
+		x = 0
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_wagnerian_identity }
+		relative_position_id = SOV_wag_first
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_technocratic_modernization
+		icon = GFX_focus_goal_sov_vozhdism_focus
+		x = 0
+		y = 5
+		cost = 2
+		prerequisite = { focus = SOV_wag_open_new_universities }
+		prerequisite = { 
+			focus = SOV_wag_controlled_democracy 
+			focus = SOV_wag_russia_above_all
+			}
+		relative_position_id = SOV_wag_consolidate_power
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_nineth
+		icon = GFX_focus_goal_sov_prigozhin_focus
+		x = -2
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_consolidate_power }
+		relative_position_id = SOV_wag_consolidate_power
+		mutually_exclusive = {
+			focus = SOV_wag_first
+		}
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_traditional_values
+		icon = GFX_focus_goal_sov_russian_culture_focus
+		x = 0
+		y = 1
+		cost = 2
+		prerequisite = { focus = SOV_wag_nineth }
+		relative_position_id = SOV_wag_nineth
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_rework_legislative
+		icon = GFX_focus_goal_sov_constitution_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_traditional_values }
+		relative_position_id = SOV_wag_nineth
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+
+	focus = {
+		id = SOV_wag_controlled_democracy
+		icon = GFX_focus_goal_sov_wag_duma_focus
+		x = 0
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_rework_legislative }
+		relative_position_id = SOV_wag_nineth
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_neoimperial_propaganda
+		icon = GFX_focus_goal_sov_imperial_russia_focus
+		x = 0
+		y = 2
+		cost = 2
+		prerequisite = { focus = SOV_wag_consolidate_power }
+		prerequisite = { 
+			focus = SOV_wag_nineth 
+			focus = SOV_wag_first
+			}
+		relative_position_id = SOV_wag_consolidate_power
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_cult_of_persnoality
+		icon = GFX_focus_goal_sov_wagner_prigozhin_focus
+		x = 0
+		y = 3
+		cost = 2
+		prerequisite = { focus = SOV_wag_neoimperial_propaganda }
+		relative_position_id = SOV_wag_consolidate_power
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+	focus = {
+		id = SOV_wag_open_new_universities
+		icon = GFX_focus_goal_sov_military_kafedra_focus
+		x = 0
+		y = 4
+		cost = 2
+		prerequisite = { focus = SOV_wag_cult_of_persnoality }
+		relative_position_id = SOV_wag_consolidate_power
+
+		ai_will_do = { factor = 5 }
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+            
+		}
+	}
+
+
+
+}

@@ -20,7 +20,7 @@ focus_tree = {
 		icon = attack_chechnya
 		x = 27
 		y = 0
-		cost = 10
+		cost = 8
 
 		will_lead_to_war_with = CHE
 
@@ -72,24 +72,23 @@ focus_tree = {
 		icon = GFX_focus_goal_battle_in_chechnia_focus
 		x = 0
 		y = 1
-		cost = 3
+		cost = 5
 		relative_position_id = SOV_grozny_offensive
 
 		available = {
-			has_full_control_of_state = 828
+			OR = {
+					SOV = { controls_state = 828 }
+					any_other_country = {
+						is_in_faction_with = SOV
+						controls_state = 828
+					}
+				}
 		}
 
 		ai_will_do = { factor = 10 }
 		search_filters = { 
 			FOCUS_FILTER_ANNEXATION 
 			}
-
-		bypass = {
-			CHE = {
-				exists = yes
-				NOT = {has_war_with = SOV}
-			}
-		}
 
 		prerequisite = {
 			focus = SOV_grozny_offensive
@@ -211,17 +210,25 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SOV_a_new_dawn_for_Russia
-		icon = GFX_focus_russia_flags_dem
+		id = SOV_siberian_silicon_valley
+		icon = GFX_focus_goal_sov_central_siberia_focus
 		x = -2
 		y = 2
-		cost = 11
+		cost = 8
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
 
 		available = {
 			has_government = social_liberal
+				controls_state = 653
+				controls_state = 572 
+				controls_state = 403 
+				controls_state = 571 
+				controls_state = 570 
+				controls_state = 569 
+				controls_state = 568
+				controls_state = 1085
 		}
 
 		prerequisite = {
@@ -233,8 +240,110 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.1
-			add_war_support = -0.1
+			653 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+			}
+			572 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+			}
+			403 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+			}
+			571 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+			}
+			570 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+			}
+			569 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+			}
+			568 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+			}
+			1085 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+			}	
 		}
 
 		ai_will_do = {
@@ -445,6 +554,30 @@ focus_tree = {
 	}
 
 	focus = {
+		id = SOV_green_energy
+		icon = subsidy_industry
+		x = 4
+		y = 4
+		cost = 7
+		relative_position_id = SOV_Yavlinski_stands_victorius
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		available = { has_government = social_liberal }
+
+		prerequisite = { focus = SOV_support_new_generation }
+
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
 		id = SOV_support_small_buisness
 		icon = POL_protect_small_buisness
 		x = -4
@@ -486,7 +619,7 @@ focus_tree = {
 
 		available = { has_government = social_liberal }
 
-		prerequisite = { focus = SOV_free_the_media }
+		prerequisite = { focus = SOV_support_small_buisness }
 
 
 		completion_reward = {
@@ -504,11 +637,35 @@ focus_tree = {
 	}
 
 	focus = {
-		id = SOV_russia_on_the_world_stage
-		icon = in_the_world_stage
+		id = SOV_defence_of_democracy
+		icon = GFX_focus_goal_sov_military_industry_focus
+		x = -4
+		y = 4
+		cost = 6
+		relative_position_id = SOV_Yavlinski_stands_victorius
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		available = { has_government = social_liberal }
+
+		prerequisite = { focus = SOV_support_civilian_economy }
+
+
+		completion_reward = {
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_a_new_dawn_for_Russia
+		icon = GFX_focus_russia_flags_dem
 		x = 0
 		y = 3
-		cost = 5
+		cost = 11
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
@@ -518,7 +675,7 @@ focus_tree = {
 		}
 
 		prerequisite = {
-			focus = SOV_a_new_dawn_for_Russia
+			focus = SOV_siberian_silicon_valley
 		}
 
 		prerequisite = {
@@ -542,7 +699,7 @@ focus_tree = {
 
 	focus = {
 		id = SOV_end_the_rivalry
-		icon = GFX_Align_to_America
+		icon = GFX_focus_goal_sov_democratic_csto_focus
 		x = -1
 		y = 4
 		cost = 10
@@ -551,7 +708,7 @@ focus_tree = {
 		allow_branch = { has_country_flag = russia_yavlinski }
 
 		prerequisite = {
-			focus = SOV_russia_on_the_world_stage
+			focus = SOV_a_new_dawn_for_Russia
 		}
 
 		available = {
@@ -560,11 +717,7 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			add_stability = 0.1
-			custom_effect_tooltip = RCO_research_increase_5_TT
-			add_to_variable = { sov_economy_resspeed = 0.05 }
-			USA = { add_opinion_modifier = { target = SOV modifier = has_expressed_loyalty } }
-			SOV = { add_opinion_modifier = { target = USA modifier = has_expressed_loyalty } }
+			
 		}
 
 		ai_will_do = {
@@ -575,15 +728,15 @@ focus_tree = {
 	focus = {
 		id = SOV_merge_our_factions
 		icon = POL_support_nato
-		x = -1
-		y = 5
+		x = 0
+		y = 7
 		cost = 20
 		relative_position_id = SOV_Yavlinski_stands_victorius
 
 		allow_branch = { has_country_flag = russia_yavlinski }
 
 		prerequisite = {
-			focus = SOV_end_the_rivalry
+			focus = SOV_European_crusade
 		}
 
 		available = {
@@ -610,7 +763,7 @@ focus_tree = {
 	focus = {
 		id = SOV_Topple_authoritarians
 		icon = ban_fascism
-		x = -3
+		x = 0
 		y = 5
 		cost = 30
 		relative_position_id = SOV_Yavlinski_stands_victorius
@@ -619,6 +772,9 @@ focus_tree = {
 
 		prerequisite = {
 			focus = SOV_end_the_rivalry
+		}
+		prerequisite = {
+			focus = SOV_EU_membership
 		}
 
 		completion_reward = {
@@ -641,6 +797,160 @@ focus_tree = {
 	}
 
 	focus = {
+		id = SOV_fight_islamic_terrorism
+		icon = political_pressure_dark_green
+		x = 2
+		y = 6
+		cost = 30
+		relative_position_id = SOV_Yavlinski_stands_victorius
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		prerequisite = {
+			focus = SOV_Topple_authoritarians
+		}
+
+		completion_reward = {
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_iran_question
+		icon = attack_iran
+		x = 2
+		y = 7
+		cost = 30
+		relative_position_id = SOV_Yavlinski_stands_victorius
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		prerequisite = {
+			focus = SOV_fight_islamic_terrorism
+		}
+
+		completion_reward = {
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_fight_taliban
+		icon = attack_pakistan
+		x = 4
+		y = 7
+		cost = 30
+		relative_position_id = SOV_Yavlinski_stands_victorius
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		prerequisite = {
+			focus = SOV_fight_islamic_terrorism
+		}
+
+		completion_reward = {
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_European_crusade
+		icon = GFX_focus_usa_focus_on_europe
+		x = 0
+		y = 6
+		cost = 30
+		relative_position_id = SOV_Yavlinski_stands_victorius
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		prerequisite = {
+			focus = SOV_Topple_authoritarians
+		}
+
+		completion_reward = {
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_Eastern_communist_threat
+		icon = GFX_focus_goal_RCO_create_gosplan
+		x = -2
+		y = 6
+		cost = 30
+		relative_position_id = SOV_Yavlinski_stands_victorius
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		prerequisite = {
+			focus = SOV_Topple_authoritarians
+		}
+
+		completion_reward = {
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_crush_nk
+		icon = kor_easter_egg_research
+		x = 0
+		y = 1
+		cost = 30
+		relative_position_id = SOV_Eastern_communist_threat
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		prerequisite = {
+			focus = SOV_Eastern_communist_threat
+		}
+
+		completion_reward = {
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = SOV_crush_prc
+		icon = GFX_Focus_Attack_China
+		x = -2
+		y = 1
+		cost = 30
+		relative_position_id = SOV_Eastern_communist_threat
+
+		allow_branch = { has_country_flag = russia_yavlinski }
+
+		prerequisite = {
+			focus = SOV_Eastern_communist_threat
+		}
+
+		completion_reward = {
+			
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
 		id = SOV_EU_membership
 		icon = align_to_europe
 		x = 1
@@ -651,7 +961,7 @@ focus_tree = {
 		allow_branch = { has_country_flag = russia_yavlinski }
 
 		prerequisite = {
-			focus = SOV_russia_on_the_world_stage
+			focus = SOV_a_new_dawn_for_Russia
 		}
 
 		bypass = {
@@ -671,74 +981,6 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = SOV_EU_trade
-		icon = trade_with_europe
-		x = 1
-		y = 5
-		cost = 10
-		relative_position_id = SOV_Yavlinski_stands_victorius
-
-		allow_branch = { has_country_flag = russia_yavlinski }
-
-		prerequisite = {
-			focus = SOV_EU_membership
-		}
-
-		available = {
-			has_government = social_liberal
-			is_EU_member = yes
-		}
-
-		completion_reward = {
-			every_country = {
-				limit = {
-					is_EU_member = yes
-					NOT = { has_war_with = SOV }
-				}
-				increase_trade_influence_by_2 = yes
-				add_opinion_modifier = {
-					target = SOV
-					modifier = trade_mission
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = SOV_scientific_exhange
-		icon = tech_sharing
-		x = 3
-		y = 5
-		cost = 10
-		relative_position_id = SOV_Yavlinski_stands_victorius
-
-		allow_branch = { has_country_flag = russia_yavlinski }
-
-		prerequisite = {
-			focus = SOV_EU_membership
-		}
-
-		available = {
-			has_government = social_liberal
-			is_EU_member = yes
-		}
-
-		completion_reward = {
-			custom_effect_tooltip = RCO_research_increase_5_TT
-			custom_effect_tooltip = RCO_maxprod_increase_5_TT
-			add_to_variable = { sov_economy_prodcap = 0.05 }
-			add_to_variable = { sov_economy_resspeed = 0.05 }
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
 	##################### economy
 
 	focus = {
@@ -753,6 +995,7 @@ focus_tree = {
 			NOT = {
 				has_country_flag = russia_reactionary_nofocus
 			}
+			NOT = { has_country_flag = sov_flag_wagner_power }
 		}
 
 		ai_will_do = { base = 10 }
@@ -1993,6 +2236,7 @@ focus_tree = {
 			NOT = {
 				has_country_flag = russia_reactionary_nofocus
 			}
+			NOT = { has_country_flag = sov_flag_wagner_power }
 		}
 
 		prerequisite = {
@@ -2175,6 +2419,11 @@ focus_tree = {
 		prerequisite = { focus = SOV_one_year_conscription }
 		prerequisite = { focus = SOV_reform_vdv }
 
+		search_filters = { 
+			FOCUS_FILTER_ARMY_XP 
+			FOCUS_FILTER_AIR_XP
+			}
+
 		completion_reward = {
 			custom_effect_tooltip = sov_new_arty_width_TT
 			activate_advisor = SOV_sergey_shoygu
@@ -2199,7 +2448,17 @@ focus_tree = {
 			add_to_variable = { sov_army_land_dctr_cost = -0.25 }
 			add_to_variable = { sov_army_coord_bonus = 0.1 }
 			hidden_effect = { set_technology = { soviet_artillery_tech = 1 } }
+			hidden_effect = {
+				if = {
+			limit = { is_ai = yes }
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_2
+				amount = 120000
+				producer = SOV
+			}
 		}
+			}
+	}
 	}
 
 	focus = {
@@ -2355,14 +2614,14 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = RKKA_mechattack_increase_5_TT
 			custom_effect_tooltip = RKKA_mechdef_increase_5_TT
+			add_to_variable = { sov_army_mech_attack = 0.05 }
+			add_to_variable = { sov_army_mech_def = 0.05 }
 			add_tech_bonus = {
 			name = tech_bonus
 			bonus = 0.9
 			uses = 2
 			category = cat_mechanized_equipment
 		}
-		add_to_variable = { sov_army_mech_attack = 0.05 }
-		add_to_variable = { sov_army_mech_def = 0.05 }
 		}
 	}
 
@@ -2590,7 +2849,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_war_army_focus
 		x = 0
 		y = 3
-		cost = 7
+		cost = 4
 		relative_position_id = SOV_new_army_oblik
 
 		ai_will_do = { base = 5 }
@@ -2608,8 +2867,8 @@ focus_tree = {
 		completion_reward = {
 			custom_effect_tooltip = RKKA_landdoctrcost_decrease_25_TT
 			custom_effect_tooltip = RKKA_traintime_decrease_10_TT
-			add_to_variable = { sov_army_land_dctr_cost = -0.25 }
 			add_to_variable = { sov_army_tr_time = -0.1 }
+			add_to_variable = { sov_army_land_dctr_cost = -0.25 }
 		}
 	}
 
@@ -2618,7 +2877,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_army_mobilisation_focus
 		x = -4
 		y = 1
-		cost = 6
+		cost = 5
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -2639,7 +2898,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_povestka_focus
 		x = -4
 		y = 2
-		cost = 10
+		cost = 5
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -2660,7 +2919,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_investigate_svr_focus
 		x = -2
 		y = 1
-		cost = 7
+		cost = 5
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -2695,7 +2954,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_investigate_mo_focus
 		x = -2
 		y = 2
-		cost = 7
+		cost = 6
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -2726,7 +2985,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_reb_focus
 		x = 6
 		y = 1
-		cost = 7
+		cost = 5
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -2747,7 +3006,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_dronejam_focus
 		x = 6
 		y = 2
-		cost = 8
+		cost = 5
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -2765,7 +3024,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_spetsnaz2_focus
 		x = 4
 		y = 1
-		cost = 6
+		cost = 4
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 15 }
@@ -2797,12 +3056,15 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_raise_reserves_focus
 		x = 4
 		y = 2
-		cost = 6
+		cost = 3
 		relative_position_id = SOV_military_time_army
 
 		available = { 
 			controls_state = 219
+			OR = {
 			surrender_progress > 0.1 
+			casualties > 400000
+			}
 			}
 
 		ai_will_do = { base = 20 }
@@ -2819,6 +3081,7 @@ focus_tree = {
 				hidden_effect = {
 					division_template = {
 						name = "Mobilized Infantry"
+						division_names_group = RUSSIAN_INFB_01
 						priority = 0
 						regiments = {
 							infantry = { x = 0 y = 0 }
@@ -2960,7 +3223,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_defmoscow_focus
 		x = 4
 		y = 3
-		cost = 5
+		cost = 3
 		relative_position_id = SOV_military_time_army
 
 		available = { 
@@ -3028,7 +3291,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_defvolgograd_focus
 		x = 6
 		y = 3
-		cost = 5
+		cost = 3
 		relative_position_id = SOV_military_time_army
 
 		available = { 
@@ -3092,7 +3355,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_defspb_focus
 		x = 2
 		y = 3
-		cost = 5
+		cost = 3
 		relative_position_id = SOV_military_time_army
 
 		available = { 
@@ -3144,7 +3407,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_nostepback_focus
 		x = 0
 		y = 3
-		cost = 5
+		cost = 3
 		relative_position_id = SOV_military_time_army
 
 		available = { 
@@ -3166,7 +3429,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_ustav_focus
 		x = 2
 		y = 1
-		cost = 6
+		cost = 4
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -3184,7 +3447,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_arta_focus
 		x = 2
 		y = 2
-		cost = 8
+		cost = 5
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -3204,7 +3467,7 @@ focus_tree = {
 		icon = GFX_focus_goal_RCO_politruks
 		x = 0
 		y = 1
-		cost = 6
+		cost = 4
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -3229,7 +3492,7 @@ focus_tree = {
 		icon = GFX_focus_goal_sov_foreign_vols_focus
 		x = 0
 		y = 2
-		cost = 6
+		cost = 5
 		relative_position_id = SOV_military_time_army
 
 		ai_will_do = { base = 5 }
@@ -3249,6 +3512,211 @@ focus_tree = {
 		}
 	}
 
+	############ WAGNER
+
+	focus = {
+		id = SOV_create_wagner
+		icon = GFX_focus_goal_sov_create_wagner_focus
+		x = -7
+		y = 0
+		cost = 5
+		relative_position_id = SOV_Putin_stands_victorius
+
+		allow_branch = { NOT = { has_government = social_liberal } }
+
+		ai_will_do = { base = 10 }
+
+		search_filters = { 
+			FOCUS_FILTER_ARMY_XP 
+			}
+
+			available = {
+			has_government = reactionary
+			NOT = { has_country_flag = sov_flag_wagner_mod }
+		}
+
+		prerequisite = { focus = SOV_core_chechnya }
+
+		completion_reward = {
+			army_experience = 25
+					division_template = {
+					name = "Wagner Assault Unit"
+					is_locked = yes
+					division_names_group = RUSSIAN_WAGINF_01
+					priority = 2
+					regiments = {
+						wagner_assault_inf = { x = 0 y = 0 }
+						wagner_assault_inf = { x = 0 y = 1 }
+						wagner_assault_inf = { x = 0 y = 2 }
+						wagner_assault_inf = { x = 0 y = 3 }
+						wagner_assault_inf = { x = 1 y = 0 }
+						wagner_assault_inf = { x = 1 y = 1 }
+						wagner_assault_inf = { x = 1 y = 2 }
+						wagner_assault_inf = { x = 1 y = 3 }
+						wagner_assault_inf = { x = 2 y = 0 }
+						wagner_assault_inf = { x = 2 y = 1 }
+						wagner_assault_inf = { x = 2 y = 2 }
+						wagner_assault_inf = { x = 2 y = 3 }
+					}
+					support = {
+						artillery = { x = 0 y = 0 }
+						anti_air = { x = 0 y = 1 }
+						engineer = { x = 0 y = 2 }
+						anti_tank = { x = 0 y = 3 }
+						motorized_rocket_artillery = { x = 1 y = 0 }
+						signal_company = { x = 1 y = 1 }
+						recon = { x = 1 y = 2 }
+					}
+				}
+			custom_effect_tooltip = SOV_createwagnertemplate_TT
+			custom_effect_tooltip = SOV_spawnwagner_TT
+			hidden_effect = {
+			219 = { create_unit = { division = "division_template = \"Wagner Assault Unit\" start_experience_factor = 0.70 start_manpower_factor = 1 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV } }
+			}
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_wagner_urban_warfare_training
+		icon = GFX_focus_goal_sov_wagner_soldier_focus_focus
+		x = -2
+		y = 1
+		cost = 5
+		relative_position_id = SOV_create_wagner
+
+		ai_will_do = { base = 10 }
+
+		prerequisite = { focus = SOV_create_wagner }
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_wagner_urban_one_tech_TT
+			custom_effect_tooltip = SOV_spawnwagner_TT
+			hidden_effect = {
+				219 = { create_unit = { division = "division_template = \"Wagner Assault Unit\" start_experience_factor = 0.70 start_manpower_factor = 1 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV } }
+			}
+			hidden_effect = { set_technology = { wagner_urban_one_tech = 1 } }
+		}
+	}
+
+	focus = {
+		id = SOV_wagner_veteran_recruiting
+		icon = GFX_focus_goal_sov_wagner_logistics_focus_focus
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = SOV_create_wagner
+
+		ai_will_do = { base = 10 }
+
+		prerequisite = { focus = SOV_create_wagner }
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_wagner_veteran_tech_TT
+			custom_effect_tooltip = SOV_spawnwagner_TT
+			hidden_effect = {
+				219 = { create_unit = { division = "division_template = \"Wagner Assault Unit\" start_experience_factor = 0.70 start_manpower_factor = 1 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV } }
+			}
+			hidden_effect = { set_technology = { wagner_veteran_tech = 1 } }
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_wagner_armoured_units
+		icon = GFX_focus_goal_sov_wagner_tanks_focus_focus
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = SOV_create_wagner
+
+		ai_will_do = { base = 10 }
+
+		prerequisite = { focus = SOV_create_wagner }
+
+		completion_reward = {
+			custom_effect_tooltip = SOV_wagner_armour_tech_TT
+			custom_effect_tooltip = SOV_spawnwagner_TT
+			hidden_effect = {
+				219 = { create_unit = { division = "division_template = \"Wagner Assault Unit\" start_experience_factor = 0.70 start_manpower_factor = 1 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV } }
+			}
+			hidden_effect = { set_technology = { wagner_armoured_tech = 1 } }
+		}
+	}
+
+	focus = {
+		id = SOV_the_power_behind_the_throne
+		icon = GFX_focus_goal_sov_wagner_prigozhin_focus
+		x = -1
+		y = 2
+		cost = 6
+		relative_position_id = SOV_create_wagner
+
+		ai_will_do = { base = 10 }
+
+		mutually_exclusive = {
+			focus = SOV_integrate_wagner
+		}
+
+		available = {
+			has_government = reactionary
+			has_country_flag = sov_flag_wagner_power
+		}
+
+		prerequisite = { focus = SOV_wagner_urban_warfare_training }
+		prerequisite = { focus = SOV_wagner_veteran_recruiting }
+		prerequisite = { focus = SOV_wagner_armoured_units }
+
+		completion_reward = {
+			set_power_balance = {
+				id = SOV_wagner_bop
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_integrate_wagner
+		icon = GFX_focus_goal_sov_wagner_integrated_focus
+		x = 1
+		y = 2
+		cost = 6
+		relative_position_id = SOV_create_wagner
+
+		ai_will_do = { base = 10 }
+
+		mutually_exclusive = {
+			focus = SOV_the_power_behind_the_throne
+		}
+
+		available = {
+			has_government = reactionary
+			has_country_flag = sov_flag_wagner_integrate
+		}
+
+		prerequisite = { focus = SOV_wagner_urban_warfare_training }
+		prerequisite = { focus = SOV_wagner_veteran_recruiting }
+		prerequisite = { focus = SOV_wagner_armoured_units }
+
+		completion_reward = {
+			custom_effect_tooltip = RKKA_expgain_increase_5_TT
+			add_to_variable = { sov_army_exgain = 0.05 }
+			custom_effect_tooltip = RKKA_exp_loss_in_combat_decrease_15_TT
+			add_to_variable = { sov_army_exp_loss_in_combat = -0.15 }
+			add_doctrine_cost_reduction = {
+				name = armydoctrine_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
 	#################################POLITICAL
 	focus = {
 		id = SOV_Putin_stands_victorius
@@ -3265,6 +3733,7 @@ focus_tree = {
 			NOT = {
 				has_country_flag = russia_reactionary_nofocus
 			}
+			NOT = { has_country_flag = sov_flag_wagner_power }
 		}
 
 		prerequisite = {
@@ -4551,7 +5020,7 @@ focus = {
 		cost = 20
 		relative_position_id = SOV_csto_question
 
-		ai_will_do = { base = 15 }
+		ai_will_do = { base = 20 }
 
 		prerequisite = { focus = SOV_csto_training }
 
@@ -4566,6 +5035,7 @@ focus = {
 				limit = {
 					is_in_faction_with = SOV
 					NOT = { tag = SOV }
+					NOT = { tag = NOV }
 				}
 				country_event = { id = SOV_focus_event.3 }
 			}
@@ -4580,7 +5050,7 @@ focus = {
 		cost = 5
 		relative_position_id = SOV_new_geopolitical_reality
 
-		ai_will_do = { base = 10 }
+		ai_will_do = { base = 15 }
 
 		prerequisite = { focus = SOV_new_geopolitical_reality }
 
@@ -4644,7 +5114,7 @@ focus = {
 		relative_position_id = SOV_belarus_question1
 		will_lead_to_war_with = BLR
 
-		ai_will_do = { base = 10 }
+		ai_will_do = { base = 20 }
 
 		prerequisite = { focus = SOV_blocade_belarus }
 
@@ -4665,7 +5135,7 @@ focus = {
 		cost = 10
 		relative_position_id = SOV_belarus_question1
 
-		ai_will_do = { base = 10 }
+		ai_will_do = { base = 20 }
 
 		available = {
             BLR = { has_government = reactionary } 
@@ -4700,7 +5170,7 @@ focus = {
 		cost = 10
 		relative_position_id = SOV_belarus_question1
 
-		ai_will_do = { base = 10 }
+		ai_will_do = { base = 20 }
 
 		prerequisite = { focus = SOV_promote_union_state }
 
@@ -4963,6 +5433,11 @@ focus = {
 
 		completion_reward = {
 			country_event = { id = russ.21 }
+			if = {
+			limit = {
+				NOV = { is_in_faction_with = SOV } 
+			}
+			country_event = { id = russ.25 } }
 			custom_effect_tooltip = SOV_new_focus_unlocked_superpower_TT
 			custom_effect_tooltip = SOV_cored_postussr_superpower_TT
 			hidden_effect = { set_country_flag = russia_restored_glory }

@@ -514,6 +514,8 @@ set_variable = { sov_army_conscription = 0 } # 003
 set_variable = { sov_cas_dam_reduction = 0 } # 02
 set_variable = { sov_mob_speed_fct = 0 } # 03
 set_variable = { sov_army_adv_cost_fct = 0.75 } # 0
+set_variable = { sov_vols_factor = 0 } # 0
+set_variable = { sov_army_breakthrg_fct = 0 } # 0
 
 add_dynamic_modifier = {
 	modifier = sovrus_army
@@ -783,9 +785,22 @@ country_event = {
 
 	option = { # ok
 		name = russ.8.a
-		ai_chance = {
-			base = 60
-		}
+		ai_chance = { # AI decision logic
+            base = 0 # Start at 0%
+            
+            # Always add 50% chance if Russia exists
+            modifier = {
+                add = 50
+                exists = SOV
+            }
+            
+            # Additional 50% if Russia is human-controlled
+            modifier = {
+                add = 50
+                SOV = { is_ai = yes }
+            }
+        }
+
 		SOV = { puppet = PREV }
 		SOV = { country_event = { id = russ.15 } }
 	}
@@ -1248,5 +1263,277 @@ country_event = {
 		219 = { #Moscow
 				add_dynamic_modifier = { modifier = sov_defend_region scope = SOV }
 			}
+	}
+}
+
+## annexing novorossia after national reunification
+
+country_event = {
+	id = russ.25
+	title = russ.25.t
+	desc = russ.25.desc
+	picture = GFX_event_sov_novorossia
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # annex
+		name = russ.25.a
+		ai_chance = {
+			base = 100
+		}
+		annex_country = {
+			target = NOV
+			transfer_troops = yes
+		}
+	}
+
+	option = { # let them be
+		name = russ.25.b
+		custom_effect_tooltip = SOV_novwillexist_TT
+	}
+}
+
+## wagner center
+
+country_event = {
+	id = russ.26
+	title = russ.26.t
+	desc = russ.26.desc
+	picture = GFX_event_sov_wagner_center
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # power balance
+		name = russ.26.a
+		ai_chance = {
+			base = 50
+		}
+		add_power_balance_value = {
+				id = SOV_wagner_bop
+				value = -0.1
+				tooltip_side = SOV_wagner_bop_left_side
+			}
+	}
+
+	option = { # new unit
+		name = russ.26.b
+		custom_effect_tooltip = SOV_spawnwagner_TT
+		ai_chance = {
+			base = 50
+		}
+			hidden_effect = {
+			219 = { create_unit = { division = "division_template = \"Wagner Assault Unit\" start_experience_factor = 0.70 start_manpower_factor = 1 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV } }
+			}
+	}
+}
+
+## wagner takes power
+
+country_event = {
+	id = russ.27
+	title = russ.27.t
+	desc = russ.27.desc
+	picture = GFX_event_sov_wagner_in_rostov
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+		SOV = {
+		set_politics = {
+			ruling_party = fascist
+			elections_allowed = no
+			long_name = SOV_wagner_party_long
+			name = SOV_wagner_party
+		}
+		remove_power_balance = {
+			id = SOV_wagner_bop
+		}
+		promote_character = SOV_Sovet_komandirov
+		set_cosmetic_tag = SOVWAG
+		add_popularity = {
+				ideology = fascist
+				popularity = 0.25
+			}
+		load_focus_tree = SOV_wagner_cw_focus
+		}
+		news_event = {
+			days = 6
+			id = russia_news.5
+		}
+		add_threat = 10
+		set_global_flag = chechnya_rose_up
+		CHE = { load_focus_tree = CHE_cw_wagner_focus }
+		end_puppet = CHE
+		CHE = {
+			add_ideas = {
+    			CHE_radicalbutweak_state
+   				CHE_drug_traffic
+				CHE_unorganized_army
+			}		
+			add_popularity = {
+    				ideology = islamist
+    				popularity = 0.7
+			}
+			set_politics = { ruling_party = islamist }
+			leave_faction = yes
+		}
+		}
+	}
+
+	option = { # play as wagner
+		name = russ.27.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = SOV_playwagner_TT
+	}
+
+	option = { # play as chechens
+		name = russ.27.b
+		ai_chance = {
+			base = 0
+		}
+		custom_effect_tooltip = SOV_playchecens_TT
+		CHE = {
+			change_tag_from = SOV
+		}
+	}
+}
+
+## do we want wagner or not
+
+country_event = {
+	id = russ.28
+	title = russ.28.t
+	desc = russ.28.desc
+	picture = GFX_event_sov_wagnerearly
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # prigozhin is very capable
+		name = russ.28.a
+
+		set_country_flag = sov_flag_wagner_power
+		custom_effect_tooltip = sov_wagner_power_TT
+		custom_effect_tooltip = RCO_pp_increase_20_TT
+		add_to_variable = { sov_economy_pp_gain_factor = 0.2 }
+		add_popularity = {
+				ideology = nationalist
+				popularity = 0.05
+			}
+	}
+
+	option = { # keep him under control
+		name = russ.28.b
+
+		set_country_flag = sov_flag_wagner_integrate
+		custom_effect_tooltip = sov_wagner_integrate_TT
+		
+	}
+
+	option = { # improve mod instead
+		name = russ.28.c
+
+		set_country_flag = sov_flag_wagner_mod
+		custom_effect_tooltip = RKKA_attackingspeed_increase_5_TT
+		add_to_variable = { sov_army_attacking_spd = 0.05 }
+		custom_effect_tooltip = RKKA_mechattack_increase_5_TT
+		custom_effect_tooltip = RKKA_mechdef_increase_5_TT
+		add_to_variable = { sov_army_mech_attack = 0.05 }
+		add_to_variable = { sov_army_mech_def = 0.05 }
+		random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+	}
+}
+
+## army chief wagner
+
+country_event = {
+	id = russ.29
+	title = russ.29.t
+	desc = russ.29.desc
+	picture = GFX_evemt_otkazniki_4
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # dyumin
+		name = russ.29.a
+
+		activate_advisor = SOV_Alexey_Dyumin
+	}
+
+	option = { # shoigu
+		name = russ.29.b
+
+		activate_advisor = SOV_sergey_shoygu
+		
+	}
+
+	option = { # gerasimov
+		name = russ.29.c
+
+		activate_advisor = SOV_valery_gerasimov
+	}
+}
+
+## wagner army purge
+
+country_event = {
+	id = russ.30
+	title = russ.30.t
+	desc = russ.30.desc
+	picture = GFX_event_otkazniki_2
+	fire_only_once = yes
+
+
+	is_triggered_only = yes
+
+	option = { # purge
+		name = russ.30.a
+
+		add_timed_idea = {
+				idea = RCO_army_purge_idea
+				days = 365
+			}
+			custom_effect_tooltip = RKKA_org_increase_5_TT
+			custom_effect_tooltip = RKKA_breakthrough_increase_5_TT
+			custom_effect_tooltip = RKKA_winterattr_decrease_20_TT
+			add_to_variable = {
+				sov_army_org = 0.05
+			}
+			add_to_variable = {
+				sov_army_breakthrg_fct = 0.05
+			}
+			add_to_variable = {
+				sov_army_winter_attr = -0.2
+			}
+			retire_character = SOV_igor_sergeyev
+			retire_character = SOV_pavel_grachev
+			retire_character = SOV_andrey_kartapolov
+			retire_character = SOV_igor_sergun
+			retire_character = SOV_vladimir_shamanov
+	}
+
+	option = { # not
+		name = russ.30.b
+
+		add_political_power = -150
+		
 	}
 }

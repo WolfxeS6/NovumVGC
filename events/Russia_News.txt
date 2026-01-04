@@ -1,4 +1,5 @@
 ﻿add_namespace = russia_news
+add_namespace = russia_wagner_news
 
 #Putin elected President
 news_event = {
@@ -63,6 +64,311 @@ news_event = {
 	option = {
 		name = russia_news.4.o2
 		trigger = { NOT = { original_tag = SOV } }
+	}
+}
+
+#wagner takes power
+news_event = {
+	id = russia_news.5
+	title = russia_news.5.t
+	desc = russia_news.5.d
+	picture = GFX_event_news_wagner_rise
+
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = russia_news.5.a
+	}
+}
+
+#wagner chaos for russia
+news_event = {
+	id = russia_wagner_news.1
+	title = russia_wagner_news.1.t
+	desc = russia_wagner_news.1.d
+	picture = GFX_events_news_wagchaos
+
+	is_triggered_only = yes
+
+	option = {
+		name = russia_wagner_news.1.a
+
+		add_ideas = SOV_wagner_bad_army
+		add_ideas = SOV_wagner_bad_state
+		CHE = {
+			set_state_owner = 232
+			set_state_controller = 232
+			set_state_owner = 235
+			set_state_controller = 235
+			set_state_owner = 1158
+			set_state_controller = 1158
+			set_state_owner = 1157
+			set_state_controller = 1157
+			set_state_owner = 233
+			set_state_controller = 233
+		}
+		hidden_effect = {
+			news_event = {
+					days = 10
+					id = russia_wagner_news.5
+				}
+		}
+	}
+}
+
+#wagner regional instability
+news_event = {
+	id = russia_wagner_news.2
+	title = russia_wagner_news.2.t
+	desc = russia_wagner_news.2.d
+	picture = GFX_event_news_instability
+
+	is_triggered_only = yes
+
+	option = {
+		name = russia_wagner_news.2.a
+
+		random_list = {
+    		50 = {
+				news_event = {
+					days = 2
+					id = russia_wagner_news.3
+				}
+			}
+			50 = {
+				news_event = {
+					days = 2
+					id = russia_wagner_news.4
+				}
+			}
+	}
+}
+}
+
+#bad try
+news_event = {
+	id = russia_wagner_news.3
+	title = russia_wagner_news.3.t
+	desc = russia_wagner_news.3.d
+	picture = GFX_event_news_instability2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russia_wagner_news.3.a
+
+			custom_effect_tooltip = SOV_wag_rebellion_TT
+			add_political_power = -50
+			add_stability = -0.1
+			add_war_support = -0.1
+			hidden_effect = {
+				249 = { remove_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+				651 = { remove_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+				237 = { remove_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+       			 start_civil_war = {
+           		 ideology = nationalist
+           		 size = 0
+					states = { 249 651 }
+        		}
+				random_other_country = {
+					limit = {
+						original_tag = SOV
+						has_government = nationalist
+					}
+					remove_ideas = {
+						SOV_wagner_bad_army
+						SOV_wagner_bad_state
+					}
+					set_politics = {
+						ruling_party = nationalist
+						elections_allowed = no
+						long_name = SOV_separatist_nationalist_party_long
+						name = SOV_separatist_nationalist_party_short
+					}
+					promote_character = SOV_tatrstan_nationalists
+					set_capital = {state = 651}
+					set_country_flag = SOV_WEP_alias_trigger
+					set_cosmetic_tag = SOV_WEP
+					load_focus_tree = SOV_WEP_focus
+				}
+			}
+	}
+}
+
+#good try
+news_event = {
+	id = russia_wagner_news.4
+	title = russia_wagner_news.4.t
+	desc = russia_wagner_news.4.d
+	picture = GFX_event_news_instability2
+
+	is_triggered_only = yes
+
+	option = {
+		name = russia_wagner_news.4.a
+
+			add_political_power = 50
+			add_stability = 0.05
+			remove_ideas = SOV_wagner_bad_state
+				249 = { remove_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+				651 = { remove_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+				237 = { remove_dynamic_modifier = { modifier = Separatist_sentiments_modiefer } }
+	}
+}
+
+#wagner unrest in spb
+news_event = {
+	id = russia_wagner_news.5
+	title = russia_wagner_news.5.t
+	desc = russia_wagner_news.5.d
+	picture = GFX_news_reds_fight_with_police_russia_1993
+
+	is_triggered_only = yes
+
+	option = {
+		name = russia_wagner_news.5.a
+
+		add_ideas = communist_partisans
+		random_list = {
+    		50 = {
+				news_event = {
+					days = 6
+					id = russia_wagner_news.6
+				}
+			}
+			50 = {
+				news_event = {
+					days = 6
+					id = russia_wagner_news.7
+				}
+			}
+	}
+}
+}
+
+#wagner revolt in spb
+news_event = {
+	id = russia_wagner_news.6
+	title = russia_wagner_news.6.t
+	desc = russia_wagner_news.6.d
+	picture = GFX_news_soviet_power_russia
+
+	is_triggered_only = yes
+
+	option = {
+		name = russia_wagner_news.6.a
+
+			custom_effect_tooltip = SOV_wag_commrebellion_TT
+			add_political_power = -50
+			add_stability = -0.05
+			add_war_support = -0.05
+			hidden_effect = {
+			
+			RCO = {
+				set_state_owner = 195
+				set_state_controller = 195
+			}
+			RCO = {
+				inherit_technology = SOV
+				load_focus_tree = SOV_WCO_focus
+				remove_dynamic_modifier = { modifier = red_army }
+				remove_dynamic_modifier = { modifier = rco_state }
+				remove_dynamic_modifier = { modifier = rco_foreign_policy }
+				remove_dynamic_modifier = { modifier = rco_communist_labour }
+				remove_dynamic_modifier = { modifier = rco_economy }
+			}
+			}
+	}
+}
+
+#good try spb
+news_event = {
+	id = russia_wagner_news.7
+	title = russia_wagner_news.7.t
+	desc = russia_wagner_news.7.d
+	picture = GFX_news_wagspb
+
+	is_triggered_only = yes
+
+	option = {
+		name = russia_wagner_news.7.a
+
+			add_political_power = 50
+			add_stability = 0.05
+			remove_ideas = communist_partisans
+	}
+}
+
+#wagner commanders
+news_event = {
+	id = russia_wagner_news.8
+	title = russia_wagner_news.8.t
+	desc = russia_wagner_news.8.d
+	picture = GFX_news_event_wagner_commanders
+
+	is_triggered_only = yes
+
+	option = {
+		name = russia_wagner_news.8.a
+
+			add_corps_commander_role = {
+				Character = SOV_cap
+				traits={ urban_assault_specialist }
+				skill = 3
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 2
+				logistics_skill = 2
+			}
+			add_corps_commander_role = {
+				Character = SOV_rusich
+				traits={ urban_assault_specialist }
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 3
+			}
+			add_corps_commander_role = {
+				Character = SOV_radimir
+				traits={ urban_assault_specialist }
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 3
+				logistics_skill = 3
+			}
+			add_corps_commander_role = {
+				Character = SOV_alexander_kuznetsov
+				traits={ trickster urban_assault_specialist }
+				skill = 4
+				attack_skill = 4
+				defense_skill = 4
+				planning_skill = 3
+				logistics_skill = 4
+			}
+			add_corps_commander_role = {
+				Character = SOV_Alexey_Dyumin
+				traits={ career_officer skilled_staffer }
+				skill = 3
+				attack_skill = 2
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 4
+			}
+			add_advisor_role = {
+				character = SOV_Alexey_Dyumin
+				activate = no
+				advisor = {
+					slot = army_chief
+					cost = 150
+					idea_token = SOV_Alexey_Dyumin_army_chief
+					traits = {
+						army_chief_offensive_3
+					}
+				}
+			}
 	}
 }
 

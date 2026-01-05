@@ -155,8 +155,11 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
-		}
+		custom_effect_tooltip = SOV_wag_unite_wagner_and_mod_TT
+		add_to_variable = { sov_army_land_dctr_cost = -0.50 }  # Major doctrine cost reduction
+		add_to_variable = { sov_army_coord_bonus = 0.20 }      # Strong coordination boost
+		add_to_variable = { sov_army_reinf_rate = 0.03 }        # Counteracts reinforce debuff
+	}
 	}
 
 	focus = {
@@ -171,8 +174,24 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_combined_arms_TT
+		add_to_variable = { sov_army_org = 0.15 }              # Strong organization boost
+		add_to_variable = { sov_army_coord_bonus = 0.15 }      # Stacking coordination
+		add_to_variable = { sov_army_attacking_spd = 0.25 }     # Major speed recovery
+		add_doctrine_cost_reduction = {
+			name = combined_arms_bonus
+			cost_reduction = 2
+			uses = 3
+			category = land_doctrine
 		}
+		# Research bonuses for conventional warfare
+		add_research_bonus = {
+			name = combined_arms_research
+			bonus = 0.2
+			uses = 2
+			categories = { land_doctrine }
+		}
+	}
 	}
 
 	focus = {
@@ -187,8 +206,32 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_armored_initiative_TT
+		add_tech_bonus = {
+			name = armor_tech_bonus
+			bonus = 2.0
+			uses = 3
+			category = armor_tech
 		}
+		add_to_variable = { sov_army_mech_attack = 0.25 }          # Strong armor buffs
+		add_to_variable = { sov_army_mech_def = 0.20 }
+		add_to_variable = { sov_army_breakthrg_fct = 0.15 }
+		# Factory construction for tank production
+		random_owned_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
 	}
 
 	focus = {
@@ -203,8 +246,27 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_aerospace_TT
+		add_to_variable = { sov_army_air_eff = 0.25 }          # Major air efficiency recovery
+		add_to_variable = { sov_army_air_exp = 0.30 }       # Air experience gain
+		air_experience = 30
+		add_tech_bonus = {
+			name = air_tech_bonus
+			bonus = 2.0
+			uses = 3
+			category = fighter_tech
 		}
+		add_tech_bonus = {
+			name = cas_tech_bonus
+			bonus = 1.8
+			uses = 2
+			category = cas_tech
+		}
+		# Air base construction
+		random_owned_state = {
+			add_air_base = 3
+		}
+	}
 	}
 
 	focus = {
@@ -219,8 +281,28 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_artillery_expansion_TT
+		# Enhanced artillery focus (builds on existing artillery buffs)
+		add_to_variable = { sov_army_art_attack = 0.35 }      # Stack with initial +10%
+		add_to_variable = { sov_army_art_def = 0.25 }
+		add_to_variable = { sov_army_ground_attack_fct = 0.30 }
+		add_to_variable = { sov_army_supply_cons = -0.15 }   # Some supply improvement
+		# Artillery factories
+		random_owned_state = {
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+				location = this
+			}
 		}
+		add_tech_bonus = {
+			name = artillery_tech_bonus
+			bonus = 2.5
+			uses = 2
+			category = artillery_tech
+		}
+	}
 	}
 
 	focus = {
@@ -236,8 +318,35 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_grand_army_TT
+		# Capstone for conventional path - broad military improvements
+		add_to_variable = { sov_army_exgain = 0.15 }           # Experience recovery
+		add_to_variable = { sov_army_org = 0.10 }              # Additional organization
+		add_to_variable = { sov_army_reinf_rate = 0.04 }        # More reinforce rate
+		add_to_variable = { sov_army_land_dctr_cost = -0.25 }  # Additional doctrine cost reduction
+		# National spirit for conventional military
+		add_timed_idea = {
+			idea = SOV_grand_conventional_army
+			days = 1095
 		}
+		# Bonus: Free military divisions
+		hidden_effect = {
+			random_owned_state = {
+				create_unit = {
+					division = "division_template = \"Motorized Infantry Division\" start_experience_factor = 0.60"
+					owner = SOV
+					location = this
+				}
+			}
+			random_owned_state = {
+				create_unit = {
+					division = "division_template = \"Mechanized Division\" start_experience_factor = 0.65"
+					owner = SOV
+					location = this
+				}
+			}
+		}
+	}
 	}
 
 	focus = {
@@ -271,7 +380,15 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_create_aerospace_TT
+			add_to_variable = { sov_army_air_exp = 0.15 }
+			add_to_variable = { sov_army_air_eff = 0.10 }
+			random_owned_state = {
+				add_air_base = 3
+			}
+			random_owned_state = {
+				add_air_base = 2
+			}
 		}
 	}
 
@@ -287,7 +404,17 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_vdv_TT
+			air_experience = 25
+			add_tech_bonus = {
+				name = airborne_tech_bonus
+				bonus = 2.0
+				uses = 2
+				category = airborne_tech
+			}
+			hidden_effect = {
+				219 = { create_unit = { division = "division_template = \"VDV Airborne Division\" start_experience_factor = 0.80" owner = SOV } }
+			}
 		}
 	}
 
@@ -303,7 +430,17 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_air_facility_TT
+			random_owned_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+					location = this
+				}
+			}
+			add_to_variable = { sov_army_air_eff = 0.10 }
+			air_experience = 50
 		}
 	}
 
@@ -319,7 +456,20 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_strategic_aviation_TT
+			air_experience = 35
+			add_tech_bonus = {
+				name = strategic_bomber_bonus
+				bonus = 2.0
+				uses = 2
+				category = strategic_bomber
+			}
+			add_tech_bonus = {
+				name = air_doctrine_bonus
+				bonus = 1.5
+				uses = 2
+				category = air_doctrine
+			}
 		}
 	}
 
@@ -335,7 +485,28 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_air_defence_TT
+			air_experience = 25
+			add_tech_bonus = {
+				name = aa_tech_bonus
+				bonus = 2.0
+				uses = 2
+				category = aa_tech
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 3
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
 		}
 	}
 
@@ -351,7 +522,15 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_dev_new_fighters_TT
+			add_tech_bonus = {
+				name = fighter_tech_bonus
+				bonus = 2.5
+				uses = 2
+				category = fighter_tech
+			}
+			add_to_variable = { sov_army_air_eff = 0.15 }
+			hidden_effect = { set_technology = { improved_fighter_design = 1 } }
 		}
 	}
 
@@ -367,7 +546,20 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_drone_experiments_TT
+			add_to_variable = { sov_army_recon = 0.25 }  # Counteracts recon debuff
+			add_tech_bonus = {
+				name = drone_tech_bonus
+				bonus = 3.0
+				uses = 3
+				category = drone_tech
+			}
+			add_tech_bonus = {
+				name = cas_tech_bonus
+				bonus = 1.5
+				uses = 2
+				category = cas_tech
+			}
 		}
 	}
 
@@ -383,7 +575,18 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_reorganize_fleet_TT
+			navy_experience = 50
+			add_tech_bonus = {
+				name = naval_doctrine_bonus
+				bonus = 0.8
+				uses = 2
+				category = naval_doctrine
+			}
+			country_event = {
+				id = wagner_mil.2  # Event: Naval Doctrine Choice
+				days = 2
+			}
 		}
 	}
 
@@ -399,7 +602,17 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_marines_TT
+			navy_experience = 25
+			add_tech_bonus = {
+				name = marine_tech_bonus
+				bonus = 2.0
+				uses = 2
+				category = marine_tech
+			}
+			hidden_effect = {
+				219 = { create_unit = { division = "division_template = \"Naval Infantry Division\" start_experience_factor = 0.75" owner = SOV } }
+			}
 		}
 	}
 
@@ -415,7 +628,24 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_naval_facility_TT
+			random_owned_state = {
+				limit = { is_coastal = yes }
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = { is_coastal = yes }
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			navy_experience = 25
 		}
 	}
 
@@ -431,7 +661,27 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_pacific_fleet_TT
+			state = {  # Vladivostok area
+				id = 133
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			navy_experience = 20
+			add_tech_bonus = {
+				name = naval_range_bonus
+				bonus = 1.5
+				uses = 2
+				category = naval_tech
+			}
 		}
 	}
 
@@ -447,7 +697,21 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_vladivostok_infra_TT
+			state = {
+				id = 133
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = { sov_army_supply_cons = -0.10 }
 		}
 	}
 
@@ -463,7 +727,27 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_northern_fleet_TT
+			state = {  # Murmansk area
+				id = 117
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			navy_experience = 20
+			add_tech_bonus = {
+				name = submarine_tech_bonus
+				bonus = 2.0
+				uses = 3
+				category = submarine_tech
+			}
 		}
 	}
 
@@ -479,7 +763,20 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+			custom_effect_tooltip = SOV_wag_naval_intel_TT
+			navy_experience = 30
+			add_tech_bonus = {
+				name = naval_tech_bonus
+				bonus = 2.0
+				uses = 3
+				category = naval_tech
+			}
+			add_tech_bonus = {
+				name = naval_doctrine_intel_bonus
+				bonus = 1.5
+				uses = 2
+				category = naval_doctrine
+			}
 		}
 	}
 
@@ -499,8 +796,32 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_continue_legacy_TT
+		# Focus on Wagner's asymmetric warfare strengths
+		add_to_variable = { sov_army_exgain = 0.20 }           # Superior experience gain
+		add_to_variable = { sov_army_specs_attack = 0.30 } # Elite unit bonuses
+		add_to_variable = { sov_army_winter_attr = -0.25 }     # Major winter advantage
+		add_to_variable = { sov_army_supply_cons = -0.15 }            # General attrition reduction
+		add_timed_idea = {
+			idea = SOV_wagner_asymmetric_doctrine
+			days = 730
 		}
+		# Instant elite units
+		hidden_effect = {
+			219 = { 
+				create_unit = { 
+					division = "division_template = \"Wagner Elite Division\" start_experience_factor = 0.95" 
+					owner = SOV 
+				} 
+			}
+			219 = { 
+				create_unit = { 
+					division = "division_template = \"Wagner Special Forces\" start_experience_factor = 0.90" 
+					owner = SOV 
+				} 
+			}
+		}
+	}
 	}
 
 	focus = {
@@ -515,8 +836,28 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_wagner_officers_TT
+		# Superior officer corps and experience
+		add_to_variable = { sov_army_exgain = 0.25 }           # Very high experience gain
+		add_to_variable = { sov_leader_exp_gain = 0.35 }       # Rapid leader development
+		add_to_variable = { sov_army_specs_cap = 0.15 }    # Increased special forces cap
+		# Multiple leader improvements
+		random_army_leader = {
+			add_skill_level = 2
 		}
+		random_army_leader = {
+			add_skill_level = 1
+		}
+		random_army_leader = {
+			add_trait = winter_specialist
+		}
+		random_army_leader = {
+			add_trait = hill_fighter
+		}
+		random_army_leader = {
+			add_trait = forest_expert
+		}
+	}
 	}
 
 	focus = {
@@ -531,8 +872,24 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_psychological_ops_TT
+		# Strong psychological warfare effects
+		add_to_variable = { sov_enemy_org = -0.20 }            # Significant enemy penalty
+		add_to_variable = { sov_enemy_morale = -0.15 }         # Enemy morale reduction
+		add_to_variable = { sov_war_support = 0.15 }
+		add_to_variable = { sov_stability = 0.08 }
+		add_tech_bonus = {
+			name = psyops_tech_bonus
+			bonus = 3.0
+			uses = 3
+			category = infantry_tech
 		}
+		# Event for choosing psyops specialization
+		country_event = {
+			id = wagner_mil.3
+			days = 2
+		}
+	}
 	}
 
 	focus = {
@@ -547,8 +904,41 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_elite_corps_TT
+		# Elite unit focus - quality over quantity
+		add_to_variable = { sov_army_specs_attack = 0.35 } # Very strong elite units
+		add_to_variable = { sov_army_breakthrg_fct = 0.25 }
+		add_to_variable = { sov_army_org = 0.08 }              # Modest org boost
+		# Multiple elite divisions
+		hidden_effect = {
+			random_owned_state = {
+				create_unit = {
+					division = "division_template = \"Wagner Elite Division\" start_experience_factor = 0.85"
+					owner = SOV
+					location = this
+				}
+			}
+			random_owned_state = {
+				create_unit = {
+					division = "division_template = \"Wagner Elite Division\" start_experience_factor = 0.85"
+					owner = SOV
+					location = this
+				}
+			}
+			random_owned_state = {
+				create_unit = {
+					division = "division_template = \"Wagner Elite Division\" start_experience_factor = 0.85"
+					owner = SOV
+					location = this
+				}
+			}
 		}
+		# Special forces equipment bonus
+		add_equipment_to_stockpile = {
+			type = special_forces_equipment_1
+			amount = 5000
+		}
+	}
 	}
 
 	focus = {
@@ -563,8 +953,31 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_decentralized_logistics_TT
+		# Superior logistics and supply management
+		add_to_variable = { sov_army_supply_cons = -0.35 }   # Major supply reduction
+		add_to_variable = { sov_army_reinf_rate = 0.05 }        # Good reinforce rate
+		add_to_variable = { sov_organization_loss_when_moving = -0.20 } # Better movement
+		add_timed_idea = {
+			idea = SOV_wagner_superior_logistics
+			days = 730
 		}
+		# Supply infrastructure
+		random_owned_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			add_building_construction = {
+				type = supply_node
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
 	}
 
 	focus = {
@@ -580,8 +993,33 @@ focus_tree = {
 		ai_will_do = { factor = 5 }
 		
 		completion_reward = {
-			
+		custom_effect_tooltip = SOV_wag_best_orchestra_TT
+		# Capstone for Wagner path - ultimate asymmetric warfare
+		add_to_variable = { sov_army_exgain = 0.15 }           # Final experience boost
+		add_to_variable = { sov_army_specs_attack = 0.20 } # Additional elite bonuses
+		add_to_variable = { sov_army_winter_attr = -0.15 }     # Stacking winter bonus
+		add_to_variable = { sov_army_supply_cons = -0.15 }   # Stacking supply bonus
+		add_to_variable = { sov_enemy_org = -0.10 }            # Additional psyops
+		# National spirit for Wagner doctrine
+		add_timed_idea = {
+			idea = SOV_wagner_final_doctrine
+			days = 1095
 		}
+		# Final elite unit reward
+		hidden_effect = {
+			random_owned_state = {
+				create_unit = {
+					division = "division_template = \"Wagner Command Division\" start_experience_factor = 1.0"
+					owner = SOV
+					location = this
+				}
+			}
+		}
+		news_event = {
+			id = wagner_news.15
+			days = 2
+		}
+	}
 	}
 
 	focus = {

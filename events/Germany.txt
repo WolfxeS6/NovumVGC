@@ -1,6 +1,7 @@
 ﻿add_namespace = germany
 add_namespace = election_GER
 add_namespace = election_landtag_GER
+add_namespace = election_KP_GER
 
 #The NATO Split
 country_event = {
@@ -2008,6 +2009,7 @@ country_event = {
 	option = {
 		name = election_GER.2.o1 #GER_CDU_SPD_Coalition
 		set_country_flag = GER_CDU_SPD_2005_Win
+		set_global_flag = GER_CDU_SPD_2005_Win
 		set_country_flag = GER_Snap_Election_Called
 		trigger = {
 			OR = {
@@ -2038,6 +2040,7 @@ country_event = {
 				}
 			}
 		}
+		mark_focus_tree_layout_dirty = yes
 		ai_chance = {
 			factor = 10
 			modifier = {
@@ -3838,6 +3841,288 @@ country_event = {
 		}
 	}
 }
+#Einheitsfront
+country_event = {
+	id = germany.103
+	title = germany.103.t
+	desc = germany.103.d
+	picture = GFX_report_Einheitsfront
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Einheitsfront
+		name = germany.103.o1
+			set_party_name = {
+        		ideology = communist
+        		long_name = GER_Communist_Party_EF_long
+        		name = GER_Communist_Party_EF
+    		}
+	}
+}
+#The Uprising
+country_event = {
+	id = germany.104
+	title = germany.104.t
+	desc = germany.104.d
+	picture = GFX_report_EF_Coup
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Risen from Ruins
+		name = germany.104.o1
+			set_party_name = {
+        		ideology = communist
+        		long_name = GER_Communist_Party_KP_long
+        		name = GER_Communist_Party_KP
+    		}
+			add_country_leader_role = {
+			character = GER_Sahra_Wagenknecht
+			promote_leader = yes
+			country_leader = {
+				ideology = stalinist
+				expire = "1.1.1.1"
+				traits = { 
+					Hardcore_Pacifist_GER
+					friend_of_russia
+				}
+			}
+		}
+		set_politics = {
+			ruling_party = communist
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = 0.20
+		}
+		remove_ideas = GER_Generalstreik_idea
+		hidden_effect = {
+			add_ideas = GER_Bavarian_Seperatism_idea
+		}
+	}
+}
+#Bayern War (Germany)
+country_event = {
+	id = germany.105
+	title = germany.105.t
+	desc = germany.105.d
+	picture = GFX_report_Bayern_Uprising
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Risen from Ruins
+		name = germany.105.o1
+		release = BAY
+		BAY = {
+			load_oob = "BAY_Resistance_AI"
+			add_country_leader_role = {
+			character = BAY_Kersten_Lahl
+			promote_leader = yes
+			country_leader = {
+				ideology = military_junta
+				expire = "1.1.1.1"
+				traits = { 
+					Fighter_For_Democracy_BAY
+				}
+			}
+		}
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.30
+		}
+		}
+		declare_war_on = {
+			target = BAY
+			type = annex_everything
+		}
+		activate_mission = GER_Bayern_Independence_War
+	}
+}
+#Bayern War (Bayern)
+country_event = {
+	id = germany.106
+	title = germany.106.t
+	desc = germany.106.d
+	picture = GFX_report_Bayern_Uprising
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Risen from Ruins
+		name = germany.106.o1
+		release = BAY
+		BAY = {
+			load_oob = "BAY_Resistance_Player"
+			add_country_leader_role = {
+			character = BAY_Kersten_Lahl
+			promote_leader = yes
+			country_leader = {
+				ideology = military_junta
+				expire = "1.1.1.1"
+				traits = { 
+					Fighter_For_Democracy_BAY
+				}
+			}
+		}
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.30
+		}
+		}
+		GER = {
+			declare_war_on = {
+			target = BAY
+			type = annex_everything
+		}
+		}
+		BAY = { change_tag_from = GER }
+		activate_mission = GER_Bayern_Independence_War
+	}
+}
+
+#Internationalist Purge
+country_event = {
+	id = germany.107
+	title = germany.107.t
+	desc = germany.107.d
+	picture = GFX_report_Internationalist_Purge
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Purge them
+		name = germany.107.o1
+		add_stability = 0.025
+		add_war_support = 0.025
+		add_popularity = {
+			ideology = communist
+			popularity = 0.05
+		}
+		add_political_power = 150
+	}
+	option = { #Purge only Engel
+		name = germany.107.o2
+		add_stability = -0.02
+		add_popularity = {
+			ideology = communist
+			popularity = -0.03
+		}
+		add_political_power = -150
+		set_country_flag = Rippert_Not_Purged_GER
+		show_ideas_tooltip = GER_advisor_Ulrich_Rippert
+	}
+}
+
+#Pressure Poland
+country_event = {
+	id = germany.108
+	title = germany.108.t
+	desc = germany.108.d
+	picture = GFX_report_Polish_Pressure
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Resist and Fight!
+		name = germany.108.o1
+		GER = {
+			country_event = germany.109
+		}
+	}
+	option = { #A Former Shell of itself
+		name = germany.108.o2
+		GER = {
+			country_event = germany.110
+		}
+	}
+}
+#Poland Reject
+country_event = {
+	id = germany.109
+	title = germany.109.t
+	desc = germany.109.d
+	picture = GFX_report_Polish_Mobilization
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Down with the Bourgeoisie!
+		name = germany.109.o1
+		create_wargoal = {
+			type = annex_everything
+			target = POL
+		}
+	}
+}
+
+#Poland Accepts
+country_event = {
+	id = germany.110
+	title = germany.110.t
+	desc = germany.110.d
+	picture = GFX_report_Polish_Surrender
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = {
+		original_tag = GER
+	}
+	option = { #Poland Submits
+		name = germany.110.o1
+		set_state_owner = 742
+		set_state_owner = 63
+		set_state_owner = 743
+		set_state_owner = 66
+		set_state_owner = 86
+		set_state_owner = 85
+		set_state_owner = 67
+		set_state_owner = 5
+		puppet = POL
+		POL = {
+		set_politics = {
+			ruling_party = communist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = 0.4
+		}
+		set_party_name = {
+			ideology = communist
+			long_name = "Sozialistische Übergangsregierung Polens"	
+			name = "SÜP"
+		}
+		add_country_leader_role = {
+			character = GER_Patrik_Kobele
+			promote_leader = yes
+			country_leader = {
+				ideology = stalinist
+				expire = "1.1.1.1"
+				traits = { 
+					Illegitimate_Puppet_President_GER
+				}
+			}
+		}
+		}
+	}
+}
 ##### Landtags Elections #####
 #North Rhine-Westphalia 2000
 country_event = {
@@ -3944,7 +4229,7 @@ country_event = {
 		name = election_landtag_GER.3.o3
 		add_popularity = {
 			ideology = reactionary
-			popularity = 0.03
+			popularity = 0.02
 		}
 		add_popularity = {
 			ideology = market_liberal
@@ -3952,7 +4237,18 @@ country_event = {
 		}
 		add_popularity = {
 			ideology = progressive
-			popularity = 0.01
+			popularity = 0.02
+		}
+	}
+	option = {	#Die Republikaner gain popularity!
+		name = election_landtag_GER.3.o4
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.03
+		}
+		add_timed_idea = {
+			idea = GER_Republikaner_Baden_Wurttemberg
+			days = 365
 		}
 	}
 }
@@ -3994,6 +4290,18 @@ country_event = {
 			popularity = 0.01
 		}
 	}
+	option = {	#Schill gets the Ultimate success
+		name = election_landtag_GER.4.o4
+		add_popularity = {
+			ideology = reactionary
+			popularity = 0.03
+		}
+		add_timed_idea = {
+			idea = GER_Republikaner_Baden_Wurttemberg
+			days = 365
+		}
+		set_country_flag = GER_Schill_Party_Win
+	}
 }
 #Schleswig-Holstein 2000
 country_event = {
@@ -4031,6 +4339,210 @@ country_event = {
 		add_popularity = {
 			ideology = market_liberal
 			popularity = 0.01
+		}
+	}
+}
+
+
+#Communist Elections
+country_event = {
+	id = election_KP_GER.1
+	title = election_KP_GER.1.t
+	desc = election_KP_GER.1.d
+	picture = GFX_report_KP_Congress_I
+
+	is_triggered_only = yes
+
+	option = {	#Wagenknecht
+		name = election_KP_GER.1.o1
+		add_popularity = {
+			ideology = communist
+			popularity = 0.02
+		}
+		add_political_power = 50
+		add_country_leader_trait = Backed_by_the_Party_GER
+		hidden_effect = {
+			country_event = {days = 731 id = election_KP_GER.2}
+		}
+	}
+	option = {	#Krenz
+		name = election_KP_GER.1.o2
+		add_popularity = {
+			ideology = communist
+			popularity = 0.02
+		}
+		add_country_leader_role = {
+			character = GER_Egon_Krenz
+			promote_leader = yes
+			country_leader = {
+				ideology = stalinist
+				expire = "1.1.1.1"
+				traits = { 
+					Old_Guard_Socialist_GER
+					friend_of_russia
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = {days = 731 id = election_KP_GER.2}
+		}
+	}
+	option = {	#Stehr
+		name = election_KP_GER.1.o3
+		add_popularity = {
+			ideology = communist
+			popularity = 0.02
+		}
+		add_country_leader_role = {
+			character = GER_Heinz_Stehr
+			promote_leader = yes
+			country_leader = {
+				ideology = stalinist
+				expire = "1.1.1.1"
+				traits = { 
+					communist_engineer_GER
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = {days = 731 id = election_KP_GER.2}
+		}
+	}
+}
+
+#Second Communist Elections
+country_event = {
+	id = election_KP_GER.2
+	title = election_KP_GER.2.t
+	desc = election_KP_GER.2.d
+	picture = GFX_report_SH_2000
+	trigger = {
+		original_tag = GER
+		NOT = {
+			has_country_flag = No_Term_Limits_GER
+		}
+	}
+	is_triggered_only = yes
+
+	option = {	#Wagenknecht
+		name = election_KP_GER.2.o1
+		trigger = {
+			has_country_leader = {
+				character = GER_Egon_Krenz
+				ruling_only = yes
+			}
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = 0.02
+		}
+		add_country_leader_role = {
+			character = GER_Sahra_Wagenknecht
+			promote_leader = yes
+			country_leader = {
+				ideology = stalinist
+				expire = "1.1.1.1"
+				traits = { 
+					Hardcore_Pacifist_GER
+					friend_of_russia
+				}
+			}
+		}
+		add_political_power = 50
+	}
+	option = {	#Krenz
+		name = election_KP_GER.2.o2
+		trigger = {
+			has_country_leader = {
+				character = GER_Sahra_Wagenknecht
+				ruling_only = yes
+			}
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = 0.02
+		}
+		add_country_leader_role = {
+			character = GER_Egon_Krenz
+			promote_leader = yes
+			country_leader = {
+				ideology = stalinist
+				expire = "1.1.1.1"
+				traits = { 
+					Old_Guard_Socialist_GER
+					friend_of_russia
+				}
+			}
+		}
+	}
+}
+
+#Third Communist Elections
+country_event = {
+	id = election_KP_GER.3
+	title = election_KP_GER.3.t
+	desc = election_KP_GER.3.d
+	picture = GFX_report_SH_2000
+	trigger = {
+		original_tag = GER
+		NOT = {
+			has_country_flag = No_Term_Limits_GER
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {	#Hans Bauer
+		name = election_KP_GER.3.o1
+		add_popularity = {
+			ideology = communist
+			popularity = 0.02
+		}
+		add_country_leader_role = {
+			character = GER_Hans_Bauer
+			promote_leader = yes
+			country_leader = {
+				ideology = stalinist
+				expire = "1.1.1.1"
+				traits = { 
+					General_Attorney_of_the_GDR_GER
+				}
+			}
+		}
+	}
+}
+
+#Fourth Communist Elections
+country_event = {
+	id = election_KP_GER.4
+	title = election_KP_GER.4.t
+	desc = election_KP_GER.4.d
+	picture = GFX_report_SH_2000
+	trigger = {
+		original_tag = GER
+		NOT = {
+			has_country_flag = No_Term_Limits_GER
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {	#Dieter Popp
+		name = election_KP_GER.4.o1
+		add_popularity = {
+			ideology = communist
+			popularity = 0.02
+		}
+		add_country_leader_role = {
+			character = GER_Dieter_Popp
+			promote_leader = yes
+			country_leader = {
+				ideology = stalinist
+				expire = "1.1.1.1"
+				traits = { 
+					Former_Military_Spy_GER
+				}
+			}
 		}
 	}
 }

@@ -1,0 +1,3515 @@
+﻿###########################
+# Finnish Events
+###########################
+
+add_namespace = NVGCfinland
+add_namespace = FinlandRainbow
+add_namespace = NVGCfinlandNews
+
+country_event = { #Introduction event
+	id = NVGCfinland.1
+	title = NVGCfinland.1.t
+	desc = NVGCfinland.1.d
+	picture = GFX_report_event_finnish_flag
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.1.a
+	}
+}
+
+country_event = { #Rainbow Government collapses
+	id = NVGCfinland.2
+	title = NVGCfinland.2.t
+	desc = NVGCfinland.2.d
+	picture = GFX_report_event_uk_riots
+
+	trigger = {
+		has_stability < 0.45
+		NOT = {
+			has_completed_focus = FIN_rainbow_agreement
+		}
+	}
+
+	option = {
+		name = NVGCfinland.2.a
+		add_stability = -0.1
+		add_ideas = FIN_rainbow_collapse
+		hidden_effect = {
+			set_politics = { ruling_party = social_democrat elections_allowed = no }
+		}
+	}
+}
+
+country_event = { #Reduced Ukrainian grain imports
+	id = finland.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event finland.3 FROM = [From.GetName]" }
+	title = finland.3.t
+	desc = finland.3.d
+	picture = GFX_report_event_generic_read_write
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = finland.3.a
+		add_stability = -0.03
+		if = {
+			limit = { has_idea = FIN_ukrainian_grain_imports_idea }
+			swap_ideas = {
+				remove_idea = FIN_ukrainian_grain_imports_idea
+				add_idea = FIN_reduced_ukrainian_grain_imports_idea
+			}
+		}
+	}
+}
+
+country_event = { # Revolt 
+	id = NVGCfinland.4
+	title = NVGCfinland.4.t
+	desc = NVGCfinland.4.d
+	picture = GFX_report_event_finnish_flag
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.4.a
+		fourth_estate_social_democrat_increase = yes
+		fourth_estate_fascist_decrease = yes
+		add_political_power = 50
+		add_stability = 0.07 
+	}
+}
+country_event = { # Revolt 
+	id = NVGCfinland.5
+	title = NVGCfinland.5.t
+	desc = NVGCfinland.5.d
+	picture = GFX_report_event_FIN_finns_reactionary_rally
+
+	is_triggered_only = yes
+
+	option = { #
+		name = NVGCfinland.5.a
+		fourth_estate_fascist_increase = yes
+		set_politics = { ruling_party = fascist elections_allowed = no }
+		hidden_effect = {
+			random_other_country = { news_event = NVGCfinlandNews.1 }
+		}
+	}
+}
+
+country_event = { # Revolt 
+	id = NVGCfinland.6
+	title = NVGCfinland.6.t
+	desc = NVGCfinland.6.d
+	picture = GFX_report_event_FIN_kurvinen
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.6.a
+		fourth_estate_social_democrat_decrease = yes
+		fourth_estate_fascist_decrease = yes
+		fourth_estate_nationalist_increase = yes
+		set_politics = { ruling_party = nationalist elections_allowed = no }
+		complete_national_focus = FIN_kurvinens_ascendancy
+		hidden_effect = {
+			random_other_country = { news_event = NVGCfinlandNews.1 }
+		}		
+	}
+}
+
+country_event = { #Economy
+	id = NVGCfinland.19
+	title = NVGCfinland.19.t
+	desc = NVGCfinland.19.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.19.a		
+		add_stability = 0.05
+		fourth_estate_social_democrat_increase = yes
+		add_power_balance_value = {
+    		id = FIN_rainbow_government_bop
+    		value = -0.05
+		}
+		custom_effect_tooltip = tooltip_white_line
+		activate_targeted_decision = { target = ROOT decision = FIN_road_building_programme }
+		activate_targeted_decision = { target = ROOT decision = FIN_relief_fortification_work }
+	}
+	option = {
+		name = NVGCfinland.19.b	
+		fourth_estate_market_liberal_increase = yes
+		fourth_estate_conservative_increase = yes
+		add_power_balance_value = {
+    		id = FIN_rainbow_government_bop
+    		value = 0.05
+		}
+		add_timed_idea = {
+			idea = FIN_rural_aid_idea
+			days = 480
+		}
+	}
+	option = {
+		name = NVGCfinland.19.c
+		fourth_estate_social_liberal_increase = yes
+		custom_effect_tooltip = tooltip_white_line
+		activate_targeted_decision = { target = ROOT decision = FIN_road_building_programme }
+		activate_targeted_decision = { target = ROOT decision = FIN_relief_fortification_work }
+		add_timed_idea = {
+			idea = FIN_war_on_unemployment_idea
+			days = 480
+		}
+	}
+}
+
+country_event = { #Finnish snap elections
+	id = NVGCfinland.21
+	title = NVGCfinland.21.t
+	desc = NVGCfinland.21.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #The Social Democrats win!
+		name = NVGCfinland.21.a
+		trigger = {
+			NOT = { has_country_flag = FIN_holmlund_government_flag }
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_RED_SOIL }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_CENTRE }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_CONSERVATIVES }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_GREEN }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_NATIONAL_COALITION }
+				}
+			}
+		}
+		add_political_power = 150
+		fourth_estate_social_democrat_increase = yes
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_democrat
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 48
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = FIN_sdp_victory }
+			}
+			complete_national_focus = FIN_sdp_victory
+		}
+	}
+
+	option = { #The Centre wins!
+		name = NVGCfinland.21.b
+		trigger = {
+			NOT = { has_country_flag = FIN_holmlund_government_flag }
+		}
+		ai_chance = { 
+			base = 20
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_SOCDEM }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_RED_SOIL }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_CONSERVATIVES }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_NATIONAL_PROGRESSIVE }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_GREEN }
+				}
+			}
+		}
+		add_political_power = 150
+		fourth_estate_social_liberal_increase = yes
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_liberal
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 48
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+		}
+	}	
+
+	option = { #The National Coalition wins!
+		name = NVGCfinland.21.c
+		ai_chance = { 
+			base = 15
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_SOCDEM }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_RED_SOIL }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_CENTRE }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_CONSERVATIVES }
+				}
+			}
+		}
+		add_political_power = 150
+		fourth_estate_market_liberal_increase = yes
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = market_liberal
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 48
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+		}
+	}
+	
+	option = { #The Conservative Coalition wins!
+		name = NVGCfinland.21.e
+		ai_chance = { 
+			base = 10
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_SOCDEM }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_RED_SOIL }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_GREEN }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_NATIONAL_COALITION }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_CENTRE }
+				}
+			}
+		}
+		add_political_power = 150
+		if = {
+			limit = { has_country_flag = FIN_CONS_radical }
+			fourth_estate_reactionary_increase = yes
+			meta_effect = {
+				text = {
+					set_politics = {
+						ruling_party = reactionary
+						last_election = "[CURRENT_DATE]"
+						election_frequency = 48
+						elections_allowed = yes
+					}
+				}
+				CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			}		
+		}
+		else = {
+			fourth_estate_conservative_increase = yes
+			meta_effect = {
+				text = {
+					set_politics = {
+						ruling_party = conservative
+						last_election = "[CURRENT_DATE]"
+						election_frequency = 48
+						elections_allowed = yes
+					}
+				}
+				CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			}			
+		}
+	}
+	option = { #The SKS wins!
+		name = NVGCfinland.21.f
+		trigger = { 
+			has_country_flag = FIN_holmlund_government_flag
+		}
+		ai_chance = { 
+			base = 15
+			modifier = {
+				factor = 0
+				OR = {
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_SOCDEM }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_RED_SOIL }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_GREEN }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_CONSERVATIVES }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_NATIONAL_COALITION }
+					has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_CENTRE }
+				}
+			}
+		}
+		add_political_power = 150		
+		fourth_estate_fascist_increase = yes
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = fascist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 48
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+		}
+		if = {
+			limit = {
+				NOT = { has_completed_focus = FIN_the_resistance_succeeds }
+			}
+			complete_national_focus = FIN_the_resistance_succeeds
+		}
+	}
+}
+
+country_event = { #Explanation about the Red Soil government
+	id = NVGCfinland.22
+	title = NVGCfinland.22.t
+	desc = NVGCfinland.22.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.22.a
+	}
+}
+
+country_event = { #Getting rid of radicalism
+	id = NVGCfinland.23
+	title = NVGCfinland.23.t
+	desc = NVGCfinland.23.d
+	picture = GFX_report_event_election
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.23.a
+		add_stability = 0.02
+	}
+}
+
+country_event = { #Endorsing Finnish sovereignty
+	id = NVGCfinland.24
+	title = NVGCfinland.24.t
+	desc = NVGCfinland.24.d
+	picture = GFX_report_event_united_states_army
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.24.a
+		add_ideas = FIN_finnish_resolve
+	}
+}
+
+country_event = { #Mending divisions
+	id = NVGCfinland.25
+	title = NVGCfinland.25.t
+	desc = NVGCfinland.25.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.25.a
+		add_stability = 0.03
+	}
+}
+
+country_event = { #Favouring the workers/farmers (Red Soil)
+	id = NVGCfinland.26
+	title = NVGCfinland.26.t
+	desc = {
+		text = NVGCfinland.26.d.socdem
+
+		trigger = {
+			has_completed_focus = FIN_prioritize_industrial_workers
+		}
+	}
+	desc = {
+		text = NVGCfinland.26.d.soclib
+
+		trigger = {
+			has_completed_focus = FIN_support_finnish_farmers
+		}
+	}
+	picture = GFX_report_event_political_activist
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.26.a
+		add_political_power = -50
+		if = {
+			limit = { has_completed_focus = FIN_prioritize_industrial_workers }
+			add_ideas = FIN_worker_primacy
+			fourth_estate_social_democrat_decrease = yes
+		}
+		if = {
+			limit = { has_completed_focus = FIN_support_finnish_farmers }
+			add_ideas = FIN_farmer_primacy
+			fourth_estate_social_liberal_decrease = yes
+		}
+	}
+}
+
+country_event = { #Preserving the Red Soil government
+	id = NVGCfinland.27
+	title = NVGCfinland.27.t
+	desc = NVGCfinland.27.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.27.a
+		add_political_power = 25
+		add_ideas = FIN_red_soil_harmony
+	}
+}
+
+country_event = { #Favouring the workers/farmers (Centre/SocDem)
+	id = NVGCfinland.28
+	title = NVGCfinland.28.t
+	desc = {
+		text = NVGCfinland.28.d.socdem
+
+		trigger = {
+			has_government = social_democrat
+		}
+	}
+	desc = {
+		text = NVGCfinland.28.d.soclib
+
+		trigger = {
+			has_government = social_liberal
+		}
+	}
+	picture = GFX_report_event_political_activist
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.28.a
+		add_political_power = -100
+		if = {
+			limit = { has_government = social_democrat }
+			add_ideas = FIN_worker_primacy
+			fourth_estate_social_democrat_increase = yes
+		}
+		if = {
+			limit = { has_government = social_liberal }
+			add_ideas = FIN_farmer_primacy
+			fourth_estate_social_liberal_increase = yes
+		}
+	}
+}
+
+country_event = { #Confederation of Finnish Trade Unions
+	id = NVGCfinland.30
+	title = NVGCfinland.30.t
+	desc = NVGCfinland.30.d
+	picture = GFX_report_event_customers
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.30.a
+		add_ideas = FIN_sak_support
+	}
+}
+
+country_event = { #Curtailing Swedish rights
+	id = NVGCfinland.32
+	title = NVGCfinland.32.t
+	desc = NVGCfinland.32.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Go forth with it
+		name = NVGCfinland.32.a
+		ai_chance = {
+			factor = 75
+		}
+		add_political_power = 50
+		SWE = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = FIN_curtailed_swedish_rights
+			}
+		}
+		hidden_effect = { country_event = NVGCfinland.56 }
+	}
+
+	option = { #Allow them to retain autonomy
+		name = NVGCfinland.32.b
+		ai_chance = {
+			base = 25
+		}
+		add_political_power = -50
+		fourth_estate_social_liberal_decrease = yes
+		SWE = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = FIN_let_them_be
+			}
+		}
+	}
+}
+
+country_event = { #Freeing Kullervo Manner
+	id = finland.33
+	immediate = { log = "[GetDateText]: [Root.GetName]: event finland.33 FROM = [From.GetName]" }
+	title = finland.33.t
+	desc = finland.33.d
+	picture = GFX_report_event_FIN_kullervo_manner
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = finland.33.a
+		add_political_power = 100
+		add_stability = 0.02
+	}
+}
+
+country_event = { #Denouncing conservatism
+	id = NVGCfinland.34
+	title = NVGCfinland.34.t
+	desc = NVGCfinland.34.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.34.a
+		add_political_power = 50
+		add_stability = -0.03
+	}
+}
+
+country_event = { #Closing state-sponsored religious institutions
+	id = NVGCfinland.35
+	title = NVGCfinland.35.t
+	desc = NVGCfinland.35.d
+	picture = GFX_report_event_political_activist
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.35.a
+		add_political_power = 100
+		add_stability = -0.05
+	}
+}
+
+country_event = { #The socialist constitution
+	id = NVGCfinland.36
+	title = NVGCfinland.36.t
+	desc = {
+		text = NVGCfinland.36.d.socialist
+
+		trigger = {
+			OR = {
+				has_government = democratic_socialist
+				has_government = progressive
+			}
+		}
+	}
+	desc = {
+		text = NVGCfinland.36.d.communist
+
+		trigger = {
+			has_government = communist
+		}
+	}
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.36.a
+		if = {
+			limit = {
+				OR = {
+					has_government = democratic_socialist
+					has_government = progressive
+				}
+			}
+			add_ideas = FIN_socialist_constitution_idea
+		}
+		else_if = {
+			limit = {
+				has_government = communist
+			}
+			add_ideas = FIN_communist_constitution_idea
+		}
+	}
+}
+
+country_event = { #Explanation about the Left Alliance
+	id = NVGCfinland.37
+	title = NVGCfinland.37.t
+	desc = NVGCfinland.37.d
+	picture = GFX_report_event_political_activist
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.37.a
+	}
+}
+
+country_event = { #Weakening the Communist Party
+	id = NVGCfinland.38
+	title = NVGCfinland.38.t
+	desc = NVGCfinland.38.d
+	picture = GFX_report_event_chinese_soldiers
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Our operation has succeeded
+		name = NVGCfinland.38.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_future option = FIN_FUTURE_COMMUNIST }
+			}
+		}
+		add_ideas = FIN_weakened_communist_party_idea
+		set_country_flag = FIN_communist_party_weakening_success
+	}
+
+	option = { #The Red Guard have caught on
+		name = NVGCfinland.38.b
+		ai_chance = {
+			base = 50
+		}
+		add_political_power = -50
+		set_country_flag = FIN_communist_party_weakening_fail
+		hidden_effect = {
+			country_event = { id = NVGCfinland.39 days = 10 }
+		}
+	}
+}
+
+country_event = { #The Communist Party's response
+	id = NVGCfinland.39
+	title = NVGCfinland.39.t
+	desc = NVGCfinland.39.d
+	picture = GFX_report_event_red_guards
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #The Communist Party is successfully ousted
+		name = NVGCfinland.39.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_future option = FIN_FUTURE_COMMUNIST }
+			}
+		}
+		add_stability = -0.1
+		add_political_power = 100
+		set_country_flag = FIN_communist_party_ousted
+		remove_ideas = FIN_weakened_communist_party_idea
+		add_timed_idea = {
+			idea = FIN_communist_party_ousted_idea
+			days = 80
+		}
+	}
+
+	option = { #The Communist Party takes power
+		name = NVGCfinland.39.b
+		ai_chance = {
+			base = 75
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_future option = FIN_FUTURE_SOCIALIST }			
+			}
+		}
+		add_political_power = -100
+		fourth_estate_democratic_socialist_decrease = yes
+		fourth_estate_communist_increase = yes
+		set_politics = { ruling_party = communist elections_allowed = no }
+		drop_cosmetic_tag = yes
+		if = {
+			limit = { has_idea = FIN_rainbow_collapse }
+			remove_ideas = FIN_rainbow_collapse
+		}
+	}
+}
+
+country_event = { #Disbanding the Communist Party
+	id = NVGCfinland.40
+	title = NVGCfinland.40.t
+	desc = NVGCfinland.40.d
+	picture = GFX_report_event_red_guards
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #The Communist Party is disbanded
+		name = NVGCfinland.40.a
+		ai_chance = {
+			base = 75
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_future option = FIN_FUTURE_COMMUNIST }
+			}
+		}
+		add_stability = -0.1
+		add_political_power = 100
+		remove_ideas = FIN_weakened_communist_party_idea
+		add_timed_idea = {
+			idea = FIN_communist_party_ousted_idea
+			days = 80
+		}
+		country_event = {
+			id = NVGCfinland.140
+			days = 20
+		}
+	}
+
+	option = { #The Communist Party takes power
+		name = NVGCfinland.40.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_future option = FIN_FUTURE_SOCIALIST }
+			}
+		}
+		add_political_power = -100
+		fourth_estate_democratic_socialist_decrease = yes
+		fourth_estate_communist_increase = yes
+		set_politics = { ruling_party = communist elections_allowed = no }
+		drop_cosmetic_tag = yes
+		if = {
+			limit = { has_idea = FIN_rainbow_collapse }
+			remove_ideas = FIN_rainbow_collapse
+		}
+	}
+}
+
+country_event = { #Capitalist newspapers
+	id = NVGCfinland.41
+	title = NVGCfinland.41.t
+	desc = NVGCfinland.41.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.41.a
+		add_stability = 0.03
+	}
+}
+
+country_event = { #Enforcing taxation
+	id = NVGCfinland.42
+	title = NVGCfinland.42.t
+	desc = NVGCfinland.42.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.42.a
+		add_ideas = FIN_tax_collection_idea
+		add_political_power = -125
+	}
+}
+
+country_event = { #Explanation about the Communist Party
+	id = NVGCfinland.43
+	title = NVGCfinland.43.t
+	desc = NVGCfinland.43.d
+	picture = GFX_report_event_red_guards
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.43.a
+		add_political_power = 50
+	}
+}
+
+country_event = { #Second Red Terror
+	id = NVGCfinland.44
+	title = NVGCfinland.44.t
+	desc = NVGCfinland.44.d
+	picture = GFX_report_event_chinese_soldiers
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.44.a
+		add_political_power = 100
+		add_stability = -0.1
+		fourth_estate_communist_increase = yes
+		add_timed_idea = {
+			idea = FIN_punish_bourgeoisie_idea
+			days = 140
+		}
+	}
+}
+
+country_event = { #Centralised power
+	id = NVGCfinland.45
+	title = NVGCfinland.45.t
+	desc = NVGCfinland.45.d
+	picture = GFX_report_event_FIN_parliament_house
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = finland.45.a
+		add_ideas = FIN_centralised_power_idea
+		set_country_leader_ideology = stalinist
+	}
+}
+
+country_event = { #Seizure of assets
+	id = NVGCfinland.46
+	title = NVGCfinland.46.t
+	desc = NVGCfinland.46.d
+	picture = GFX_report_event_outlet_store
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.46.a
+		add_stability = -0.05
+		add_ideas = FIN_seizure_of_assets_idea
+	}
+}
+
+country_event = { #The question of our military high command
+	id = NVGCfinland.48
+	title = NVGCfinland.48.t
+	desc = NVGCfinland.48.d
+	picture = GFX_report_event_uk_military_forces
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Purge them
+		name = NVGCfinland.48.a
+		ai_chance = {
+			factor = 80
+		}
+		add_political_power = 100
+		add_timed_idea = {
+			idea = FIN_military_purges_idea
+			days = 250
+		}
+	}
+
+	option = { #We could use their expertise
+		name = NVGCfinland.48.b
+		ai_chance = {
+			factor = 20
+		}
+		add_political_power = -50
+	}
+}
+
+country_event = { #Removing globalists
+	id = NVGCfinland.49
+	title = NVGCfinland.49.t
+	desc = NVGCfinland.49.d
+	picture = GFX_report_event_FIN_finns_reactionary_rally
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.49.a
+		add_stability = 0.05
+		fourth_estate_communist_decrease = yes
+		fourth_estate_democratic_socialist_decrease = yes
+		fourth_estate_progressive_decrease = yes
+		fourth_estate_social_democrat_decrease = yes
+		fourth_estate_social_liberal_decrease = yes
+		fourth_estate_market_liberal_decrease = yes
+	}
+}
+
+country_event = { #Subjugating the clergy
+	id = NVGCfinland.50
+	title = NVGCfinland.50.t
+	desc = NVGCfinland.50.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.50.a
+		add_ideas = FIN_puppet_clergy_idea
+	}
+}
+
+country_event = { #Abolishing parliament
+	id = NVGCfinland.51
+	title = NVGCfinland.51.t
+	desc = NVGCfinland.51.d
+	picture = GFX_report_event_FIN_parliament_house
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.51.a
+		if = {
+			limit = { has_elections = yes }
+			set_politics = {
+				ruling_party = fascist
+				elections_allowed = no
+			}
+		}
+		add_political_power = 75
+		fourth_estate_social_democrat_decrease = yes
+		fourth_estate_social_liberal_decrease = yes
+		fourth_estate_market_liberal_decrease = yes
+		fourth_estate_conservative_decrease = yes	
+		add_timed_idea = {
+			idea = FIN_political_protests_idea
+			days = 250
+		}
+	}
+}
+
+country_event = { #Finland remilitarises the Aaland Islands
+	id = NVGCfinland.52
+	title = NVGCfinland.52.t
+	desc = NVGCfinland.52.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Declare war!
+		name = NVGCfinland.52.a
+
+		trigger = {
+			can_declare_war_on = FIN
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				has_idea = SWE_economic_downturn
+				factor = 0
+			}
+			modifier = {
+				strength_ratio = { tag = FIN ratio > 2.0 }
+				factor = 0
+			}
+		}
+		add_political_power = -100
+		create_wargoal = {
+			type = annex_everything
+			target = FIN
+		}
+	}
+
+	option = { #Pressure Finland to hand over the islands
+		name = NVGCfinland.52.b
+		ai_chance = {
+			base = 100
+		}
+		add_political_power = 50
+		hidden_effect = {
+			FIN = { country_event = { id = NVGCfinland.53 days = 5 } }
+		}
+	}
+}
+
+country_event = { #Sweden demands the Aaland islands
+	id = NVGCfinland.53
+	title = NVGCfinland.53.t
+	desc = NVGCfinland.53.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.53.a
+		SWE = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = FIN_snubbed_us
+			}
+		}
+	}
+}
+
+country_event = { #Curtailing Swedish rights
+	id = NVGCfinland.55
+	title = NVGCfinland.55.t
+	desc = NVGCfinland.55.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = { #Go forth with it
+		name = NVGCfinland.55.a
+		add_political_power = 100
+		add_stability = -0.13
+		SWE = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = FIN_curtailed_swedish_rights
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = NVGCfinland.56
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Aaland-ers(?) react
+	id = NVGCfinland.56
+	title = NVGCfinland.56.t
+	desc = NVGCfinland.56.d
+	picture = GFX_report_event_uk_riots
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.56.a
+		fourth_estate_fascist_increase = yes
+		if = {
+			limit = { 145 = { is_core_of = FIN } }
+			145 = {
+				remove_core_of = FIN
+				add_claim_by = FIN
+				add_claim_by = SWE
+			}
+		}
+	}
+}
+
+country_event = { #Supporting the King
+	id = finland.58
+	immediate = { log = "[GetDateText]: [Root.GetName]: event finland.58 FROM = [From.GetName]" }
+	title = finland.58.t
+	desc = finland.58.d
+	picture = GFX_report_event_FIN_king_fredrik
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = finland.58.a
+		add_stability = 0.04
+	}
+}
+
+country_event = { #Expanding SUPO
+	id = NVGCfinland.59
+	title = NVGCfinland.59.t
+	desc = NVGCfinland.59.d
+	picture = GFX_report_event_united_states_army
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.59.a
+		add_stability = 0.04
+		add_ideas = FIN_expanded_supo_idea
+	}
+}
+
+country_event = { #Stabilising Finland
+	id = NVGCfinland.60
+	title = NVGCfinland.60.t
+	desc = NVGCfinland.60.d
+	picture = GFX_report_event_uk_military_forces
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.60.a
+		add_political_power = 50
+	}
+}
+
+country_event = { #Constitution of Finland
+	id = NVGCfinland.61
+	title = NVGCfinland.61.t
+	desc = NVGCfinland.61.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.61.a
+		add_ideas = FIN_constitution_of_finland_idea
+	}
+}
+
+country_event = { #Unifying the people
+	id = NVGCfinland.62
+	title = NVGCfinland.62.t
+	desc = NVGCfinland.62.d
+	picture = GFX_report_event_FIN_kurvinen
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.62.a
+		add_stability = 0.05
+	}
+}
+
+country_event = { #Recognising Finnish Legitimacy
+	id = NVGCfinland.63
+	title = NVGCfinland.63.t
+	desc = NVGCfinland.63.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Sure
+		name = NVGCfinland.63.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0.5
+				is_in_faction_with = GER
+				FIN = {
+					NOT = {
+						has_democratic_form_of_government = yes
+					}
+				}
+			}
+			modifier = {
+				factor = 0
+				has_war_with = FIN
+			}
+			modifier = {
+				factor = 0.25
+				tag = GER
+			}
+			modifier = {
+				factor = 0.75
+				has_war = yes
+			}
+		}
+		FIN = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = FIN_recognised_our_legitimacy
+			}
+		}
+		hidden_effect = {
+			FIN = { country_event = { id = NVGCfinland.64 days = 10 } }
+		}
+	}
+
+	option = { #No
+		name = NVGCfinland.63.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0.5
+				is_in_faction_with = GER
+				FIN = {
+					NOT = {
+						has_democratic_form_of_government = yes
+					}
+				}
+			}
+			modifier = {
+				factor = 100
+				has_war_with = FIN
+			}
+			modifier = {
+				factor = 0.75
+				tag =GER
+			}
+			modifier = {
+				factor = 0.25
+				has_war = yes
+			}
+		}
+		FIN = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = FIN_did_not_recognise_our_legitimacy
+			}
+		}
+		hidden_effect = {
+			FIN = { country_event = { id = NVGCfinland.65 days = 10 } }
+		}
+	}
+}
+
+country_event = { #FROM has recognised us!
+	id = NVGCfinland.64
+	title = NVGCfinland.64.t
+	desc = NVGCfinland.64.d
+	picture = GFX_report_event_FIN_parliament_house
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.64.a
+		add_political_power = 25
+	}
+}
+
+country_event = { #FROM has not recognised us...
+	id = NVGCfinland.65
+	title = NVGCfinland.65.t
+	desc = NVGCfinland.65.d
+	picture = GFX_report_event_FIN_parliament_house
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.65.a
+		add_political_power = -50
+	}
+}
+
+country_event = { #Finland has requested to purchase foreign planes (Sweden)
+	id = NVGCfinland.76
+	title = NVGCfinland.76.t
+	desc = NVGCfinland.76.d
+	picture = GFX_news_event_german_air_force
+
+	is_triggered_only = yes
+
+	option = { #Send out the shipments
+		name = NVGCfinland.76.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0
+				enemies_strength_ratio > 1
+			}
+			modifier = {
+				has_opinion_modifier = FIN_let_them_be
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion_modifier = FIN_irridentism
+				factor = 0
+			}
+		}
+		if = {
+			limit = { has_dlc_aat = no }
+			add_timed_idea = {
+				idea = FIN_finnish_aircraft_payments_idea
+				days = 150
+			}
+		}
+		FIN = { country_event = { id = NVGCfinland.77 hours = 8 } }
+	}
+
+	option = { #Rather not, sorry
+		name = NVGCfinland.76.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_opinion_modifier = FIN_curtailed_swedish_rights
+				factor = 2
+			}
+			modifier = {
+				has_opinion_modifier = FIN_let_them_be
+				factor = 0.5
+			}
+			modifier = {
+				has_opinion_modifier = FIN_irridentism
+				factor = 2
+			}
+		}
+		add_political_power = 25
+		FIN = { country_event = { id = NVGCfinland.78 hours = 8 } }
+	}
+}
+
+country_event = { #Sweden has decided to sell us planes
+	id = NVGCfinland.77
+	title = NVGCfinland.77.t
+	desc = NVGCfinland.77.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.77.a
+		if = {
+			limit = { has_dlc_aat = yes }
+			add_equipment_subsidy = {
+				cic = 1000
+				equipment_type = small_plane_airframe
+				seller_tags = { SWE } 
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = small_plane_airframe
+				amount = 80
+				producer = SWE
+			}
+		}
+	}
+}
+
+country_event = { #Sweden has declined to sell us planes
+	id = NVGCfinland.78
+	title = NVGCfinland.78.t
+	desc = NVGCfinland.78.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.78.a
+	}
+}
+
+country_event = { #Finland has requested to purchase foreign planes (Germany)
+	id = NVGCfinland.79
+	title = NVGCfinland.79.t
+	desc = NVGCfinland.79.d
+	picture = GFX_news_event_german_air_force
+
+	is_triggered_only = yes
+
+	option = { #Send out the shipments
+		name = NVGCfinland.79.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				has_war = no
+				factor = 1.5
+			}
+		}
+		if = {
+			limit = { has_dlc_aat = no }
+			add_timed_idea = {
+				idea = FIN_finnish_aircraft_payments_idea
+				days = 150
+			}
+		}
+		FIN = { country_event = { id = NVGCfinland.80 days = 5 } }
+	}
+
+	option = { #Rather not, sorry
+		name = NVGCfinland.79.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_war = yes
+				factor = 2
+			}
+			modifier = {
+				has_war = no
+				factor = 0.5
+			}
+		}
+		add_political_power = 25
+		FIN = { country_event = { id = NVGCfinland.81 days = 5 } }
+	}
+}
+
+country_event = { #Germany has decided to sell us planes
+	id = NVGCfinland.80
+	title = NVGCfinland.80.t
+	desc = NVGCfinland.80.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.80.a
+		if = {
+			limit = { has_dlc_aat = yes }
+			add_equipment_subsidy = {
+				cic = 1000
+				equipment_type = small_plane_airframe
+				seller_tags = { GER } 
+			}
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = small_plane_airframe
+				amount = 80
+				producer = GER
+			}
+			add_timed_idea = {
+				idea = FIN_aircraft_costs_idea
+				days = 150
+			}
+		}
+	}
+}
+
+country_event = { #Germany has declined to sell us planes
+	id = NVGCfinland.81
+	title = NVGCfinland.81.t
+	desc = NVGCfinland.81.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.81.a
+	}
+}
+
+country_event = { #Finland has requested to purchase resources (Russia)
+	id = NVGCfinland.83
+	title = NVGCfinland.83.t
+	desc = NVGCfinland.83.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Send out the shipments
+		name = NVGCfinland.83.a
+		add_political_power = 25
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+			modifier = {
+				has_war = no
+				factor = 1.5
+			}
+		}
+		FIN = { country_event = { id = NVGCfinland.84 days = 5 } }
+	}
+
+	option = { #Rather not, sorry
+		name = NVGCfinland.83.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_war = yes
+				factor = 2
+			}
+			modifier = {
+				has_war = no
+				factor = 0.5
+			}
+		}
+		FIN = { country_event = { id = NVGCfinland.85 days = 5 } }
+	}
+}
+
+country_event = { #Russia has agreed to sell us resources
+	id = NVGCfinland.84
+	title = NVGCfinland.84.t
+	desc = NVGCfinland.84.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.84.a
+		if = {
+			limit = { has_idea = FIN_reliance_on_imports }
+			swap_ideas = {
+				remove_idea = FIN_reliance_on_imports
+				add_idea = FIN_increased_russian_imports
+			}
+		}
+		else_if = {
+			limit = { has_idea = FIN_reduced_imports }
+			swap_ideas = {
+				remove_idea = FIN_reduced_imports
+				add_idea = FIN_increased_russian_imports
+		}
+		}
+		else_if = {
+			limit = { has_idea = FIN_lack_of_resources }
+			swap_ideas = {
+				remove_idea = FIN_lack_of_resources
+				add_idea = FIN_increased_russian_imports
+			}
+		}
+		else = {
+		add_ideas = FIN_increased_russian_imports
+	}
+}
+}
+
+country_event = { #Russia has declined to sell us resources
+	id = NVGCfinland.85
+	title = NVGCfinland.85.t
+	desc = NVGCfinland.85.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.85.a
+		if = {
+			limit = { has_idea = FIN_reliance_on_imports }
+			swap_ideas = {
+				remove_idea = FIN_reliance_on_imports
+				add_idea = FIN_lack_of_resources
+			}
+		}
+		else_if = {
+			limit = { has_idea = FIN_reduced_imports }
+			swap_ideas = {
+				remove_idea = FIN_reduced_imports
+				add_idea = FIN_lack_of_resources
+			}
+		}
+		else_if = {
+			limit = { has_idea = FIN_increased_russian_imports }
+			swap_ideas = {
+				remove_idea = FIN_increased_russian_imports
+				add_idea = FIN_lack_of_resources
+			}
+		}
+		else = {
+			add_ideas = FIN_lack_of_resources
+		}
+	}
+}
+
+country_event = { #Finland has requested resource shipments (Germany)
+	id = NVGCfinland.91
+	title = NVGCfinland.91.t
+	desc = NVGCfinland.91.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Send out the shipments
+		name = NVGCfinland.91.a
+		ai_chance = {
+			base = 80
+			modifier = {
+				factor = 0.5
+				has_war = yes
+			}
+		}
+		add_political_power = 25
+		FIN = { country_event = { id = NVGCfinland.92 days = 5 } }
+	}
+
+	option = { #Rather not, sorry
+		name = NVGCfinland.91.b
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		FIN = { country_event = { id = NVGCfinland.93 days = 5 } }
+	}
+}
+
+country_event = { #Germany has agreed to sell us resources
+	id = NVGCfinland.92
+	title = NVGCfinland.92.t
+	desc = NVGCfinland.92.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.92.a
+		if = {
+			limit = { has_idea = FIN_reliance_on_imports }
+			swap_ideas = {
+				remove_idea = FIN_reliance_on_imports
+				add_idea = FIN_increased_eu_imports
+			}
+		}
+		else_if = {
+			limit = { has_idea = FIN_reduced_imports }
+			swap_ideas = {
+				remove_idea = FIN_reduced_imports
+				add_idea = FIN_increased_eu_imports
+			}
+		}
+		else_if = {
+			limit = { has_idea = FIN_increased_russian_imports }
+			swap_ideas = {
+				remove_idea = FIN_increased_russian_imports
+				add_idea = FIN_increased_eu_imports
+			}
+		}
+		else_if = {
+			limit = { has_idea = FIN_lack_of_resources }
+			swap_ideas = {
+				remove_idea = FIN_lack_of_resources
+				add_idea = FIN_increased_eu_imports
+			}
+		}
+		else = {
+			add_ideas = FIN_increased_eu_imports
+		}
+	}
+}
+
+country_event = { #Germany has declined to sell us resources
+	id = NVGCfinland.93
+	title = NVGCfinland.93.t
+	desc = NVGCfinland.93.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.93.a
+		if = {
+			limit = { has_idea = FIN_reliance_on_imports }
+			swap_ideas = {
+				remove_idea = FIN_reliance_on_imports
+				add_idea = FIN_lack_of_resources
+			}
+		}
+		else_if = {
+			limit = { has_idea = FIN_reduced_imports }
+			swap_ideas = {
+				remove_idea = FIN_reduced_imports
+				add_idea = FIN_lack_of_resources
+			}
+		}
+		else_if = {
+			limit = { has_idea = FIN_increased_eu_imports }
+			swap_ideas = {
+				remove_idea = FIN_increased_eu_imports
+				add_idea = FIN_lack_of_resources
+			}
+		}
+		else = {
+			add_ideas = FIN_lack_of_resources
+		}
+	}
+}
+
+country_event = { #Finland has approached us (Russia)
+	id = NVGCfinland.95
+	title = NVGCfinland.95.t
+	desc = NVGCfinland.95.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #We will reciprocate their efforts... with a few conditions
+		name = NVGCfinland.95.a
+		set_country_flag = SOV_demanded_military_access
+		hidden_effect = {
+			FIN = { country_event = { id = NVGCfinland.96 days = 5 } }
+		}
+	}
+
+	option = { #We will reciprocate their efforts
+		name = NVGCfinland.95.b
+		set_country_flag = SOV_demanded_treaty
+		hidden_effect = {
+			FIN = { country_event = { id = NVGCfinland.96 days = 5 } }
+		}
+	}
+
+	option = { #We do not need them
+		name = NVGCfinland.95.c
+		hidden_effect = {
+			FIN = { country_event = { id = NVGCfinland.98 days = 5 } }
+		}
+	}
+}
+
+country_event = { #Russia's terms
+	id = NVGCfinland.96
+	title = NVGCfinland.96.t
+	desc = {
+		text = finland.96.d
+		trigger = { RUS = { has_country_flag = SOV_demanded_military_access } }
+	}
+	desc = {
+		text = finland.96.d2
+		trigger = { RUS = { has_country_flag = SOV_demanded_treaty } }
+	}
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Accept
+		name = NVGCfinland.96.a
+		trigger = { RUS = { has_country_flag = SOV_demanded_military_access } }
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0
+				RUS = { has_country_flag = RUS_demanded_karelia }
+				NOT = { has_game_rule = { rule = FIN_foreign_policy option = FIN_FOREIGN_POLICY_ } }
+			}
+			modifier = {
+				factor = 20
+				RUS = { has_country_flag = SOV_demanded_treaty }
+			}
+			modifier = {
+				factor = 10
+				has_war = yes
+			}
+		}
+		add_ideas = SOV_FIN_neutrality
+		ROOT = {
+			diplomatic_relation = {
+				country = FROM
+				relation = non_aggression_pact
+			}
+			give_military_access = SOV
+			add_opinion_modifier = {
+				target = FROM
+				modifier = medium_increase
+			}
+		}
+		FROM = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = non_aggression_pact
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = SOV
+					is_claimed_by = ROOT
+				}
+				remove_claim_by = ROOT
+			}
+		}
+		activate_targeted_decision = { target = SOV decision = fin_join_russia }
+	}
+
+	option = { #Decline
+		name = NVGCfinland.96.b
+		trigger = { SOV = { has_country_flag = SOV_demanded_military_access } }
+		ai_chance = {
+			base = 10			
+			modifier = {
+				factor = 2
+				SOV = { has_country_flag = SOV_demanded_military_access }
+			}
+			modifier = {
+				factor = 0
+				has_war = yes
+			}
+			modifier = {
+				factor = 0
+				SOV = { has_country_flag = SOV_demanded_treaty }
+			}
+			modifier = {
+				factor = 0
+			}
+		}
+		FROM = { country_event = NVGCfinland.97 }
+	}
+	option = { #Accept
+		name = NVGCfinland.96.c
+		trigger = { SOV = { has_country_flag = SOV_demanded_treaty } }
+		add_ideas = SOV_FIN_neutrality
+		ROOT = {
+			add_opinion_modifier = {
+				target = FROM
+				modifier = medium_increase
+			}
+		}
+		FROM = {
+			diplomatic_relation = {
+				country = ROOT
+				relation = non_aggression_pact
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = SOV
+					is_claimed_by = ROOT
+				}
+				remove_claim_by = ROOT
+			}
+		}
+		activate_targeted_decision = { target = SOV decision = fin_join_russia }
+	}
+}
+
+country_event = { #Russia's terms
+	id = NVGCfinland.97
+	title = NVGCfinland.97.t
+	desc = NVGCfinland.97.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { 
+		name = NVGCfinland.97.a		
+	}
+}
+
+country_event = { #Russia has declined our advances
+	id = NVGCfinland.98
+	title = NVGCfinland.98.t
+	desc = NVGCfinland.98.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.98.a
+		add_political_power = -50
+		ROOT = {
+			add_opinion_modifier = {
+				target = FROM
+				modifier = medium_decrease
+			}
+		}
+		hidden_effect = {
+			remove_targeted_decision = { target = SOV decision = fin_join_russia }	
+		}
+	}
+}
+
+country_event = { #Ties with Finland? - Nordics
+	id = NVGCfinland.99
+	title = NVGCfinland.99.t
+	desc = NVGCfinland.99.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Accept
+		name = NVGCfinland.99.a
+		ai_chance = {
+			base = 75
+			modifier = {
+				factor = 0
+				ROOT = {
+					has_war = yes
+				}
+			}
+			modifier = {
+				factor = 1.5
+				ROOT = {
+					has_war = no
+				}
+			}
+		}
+		FIN = { country_event = { id = NVGCfinland.100 days = 5 } }
+	}
+
+	option = { #Decline
+		name = NVGCfinland.99.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 2
+				ROOT = {
+					has_war = yes
+				}
+			}
+			modifier = {
+				factor = 2
+				145 = {
+					is_demilitarized_zone = yes
+				}
+			}
+			modifier = {
+				factor = 0.5
+				ROOT = {
+					has_war = no
+				}
+			}
+		}
+		FIN = { country_event = { id = fiNVGCfinlandnland.101 days = 5 } }
+	}
+}
+
+country_event = { #Neighbor has accepted
+	id = NVGCfinland.100
+	title = NVGCfinland.100.t
+	desc = NVGCfinland.100.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #A toast to our friends
+		name = NVGCfinland.100.a
+		add_political_power = 25
+		add_opinion_modifier = {
+			target = FROM
+			modifier = small_increase
+		}
+	}
+}
+
+country_event = { #Neighbor has declined
+	id = NVGCfinland.101
+	title = NVGCfinland.101.t
+	desc = NVGCfinland.101.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Dammit
+		name = NVGCfinland.101.a
+		add_political_power = -25
+		add_opinion_modifier = {
+			target = FROM
+			modifier = small_decrease
+		}
+	}
+}
+
+country_event = { #White peace with Sweden
+	id = NVGCfinland.108
+	title = NVGCfinland.108.t
+	desc = NVGCfinland.108.d
+	picture = GFX_report_event_uk_military_forces
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = FIN
+		has_war_with = SWE
+		NOT = { surrender_progress > 0 }
+		SWE = {
+			is_valid_peace_target = yes
+			surrender_progress > 0.20
+		}
+		666 = {
+			is_owned_by = SWE
+			is_controlled_by = FIN
+		}
+	}
+	mean_time_to_happen = {
+		days = 30
+	}
+
+	option = { #Make peace
+		name = NVGCfinland.108.a
+		ai_chance = {
+			base = 100
+		}
+		hidden_effect = {
+			SWE = { country_event = { id = NVGCfinland.109 days = 5 } }
+		}
+	}
+
+	option = { #Continue the war
+		name = NVGCfinland.108.b
+		ai_chance = {
+			base = 0
+		}
+		add_political_power = -50
+	}
+}
+
+country_event = { #Finland wants to peace out?
+	id = NVGCfinland.109
+	title = NVGCfinland.109.t
+	desc = NVGCfinland.109.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_war_with = FIN
+	}
+
+	option = { #Yes
+		name = NVGCfinland.109.a
+		ai_chance = {
+			base = 100
+			}
+		FIN = {
+			transfer_state = 666
+			white_peace = ROOT
+		}
+	}
+
+	option = { #No
+		name = NVGCfinland.109.b
+		ai_chance = {
+			base = 0
+		}
+		add_political_power = -25
+		hidden_effect = {
+			FIN = { country_event = { id = NVGCfinland.110 days = 5 } }
+		}
+	}
+}
+
+country_event = { #Sweden is continuing the fight
+	id = NVGCfinland.110
+	title = NVGCfinland.110.t
+	desc = NVGCfinland.110.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Their loss
+		name = NVGCfinland.110.a
+	}
+}
+
+country_event = { #White peace with Norway
+	id = NVGCfinland.111
+	title = NVGCfinland.111.t
+	desc = NVGCfinland.111.d
+	picture = GFX_report_event_uk_military_forces
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = FIN
+		has_war_with = NOR
+		NOR = {
+			is_valid_peace_target = yes
+			surrender_progress > 0.20
+		}
+		NOT = { surrender_progress > 0 }
+		144 = {
+			is_owned_by = NOR
+			is_controlled_by = FIN
+		}
+	}
+	mean_time_to_happen = {
+		days = 30
+	}
+
+	option = { #Make peace
+		name = NVGCfinland.111.a
+		ai_chance = {
+			base = 100
+		}
+		hidden_effect = {
+			NOR = { country_event = { id = NVGCfinland.112 days = 5 } }
+		}
+	}
+
+	option = { #Continue the war
+		name = NVGCfinland.111.b
+		ai_chance = {
+			base = 0
+		}
+		add_political_power = -50
+	}
+}
+
+country_event = { #Finland wants to peace out?
+	id = NVGCfinland.112
+	title = NVGCfinland.112.t
+	desc = NVGCfinland.112.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = NVGCfinland.112.a
+		ai_chance = {
+			base = 100
+		}
+		FIN = {
+			transfer_state = 144
+			white_peace_with_ROOT = yes
+		}
+	}
+
+	option = { #No
+		name = NVGCfinland.112.b
+		ai_chance = {
+			base = 0
+		}
+		add_political_power = -25
+		hidden_effect = {
+			FIN = { country_event = { id = NVGCfinland.113 days = 5 } }
+		}
+	}
+}
+
+country_event = { #Norway is continuing the fight
+	id = NVGCfinland.113
+	title = NVGCfinland.113.t
+	desc = NVGCfinland.113.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Their loss
+		name = NVGCfinland.113.a
+	}
+}
+
+country_event = { #White peace with Russia
+	id = NVGCfinland.114
+	title = NVGCfinland.114.t
+	desc = NVGCfinland.114.d
+	picture = GFX_report_event_uk_military_forces
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = FIN
+		has_war_with = RUS
+		722 = {
+			OR = {
+				is_controlled_by = ROOT
+			}
+			owner = {
+				has_war_with = ROOT
+				tag = RUS
+			}
+		}
+		146 = {
+			OR = {
+				is_controlled_by = ROOT
+			}
+			owner = {
+				has_war_with = ROOT
+				tag = RUS
+			}
+		}
+		147 = {
+			OR = {
+				is_controlled_by = ROOT
+			}
+			owner = {
+				has_war_with = ROOT
+				tag = RUS
+			}
+		}
+	}
+	mean_time_to_happen = {
+		days = 30
+	}
+
+	option = { #Make peace
+		name = NVGCfinland.114.a
+		ai_chance = {
+			base = 100
+		}
+		hidden_effect = {
+			if = {
+				limit = { has_war_with = RUS }
+				RUS = { country_event = { id = NVGCfinland.115 days = 5 } }
+			}
+		}
+	}
+
+	option = { #Continue the war
+		name = NVGCfinland.114.b
+		ai_chance = {
+			base = 0
+		}
+		add_political_power = -50
+	}
+}
+
+country_event = { #Finland wants to peace out?
+	id = NVGCfinland.115
+	title = NVGCfinland.115.t
+	desc = NVGCfinland.115.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		FIN = {
+			save_event_target_as = white_peace_receiver
+		}
+	}
+
+	option = { #Yes
+		name = NVGCfinland.115.a
+		ai_chance = {
+			factor = 100
+		}
+		every_state = {
+			limit = {
+				OR = {
+					state = 722
+					state = 146
+					state = 147
+				}
+			}
+			transfer_state_to = FIN
+		}
+		FIN = { white_peace = ROOT }
+		if = {
+			limit = {
+				ROOT = { is_in_faction = yes }
+			}
+			every_country = {
+				limit = { is_in_faction_with = ROOT }
+				white_peace_with_TARGET = yes
+			}
+		}
+	}
+
+	option = { #No
+		name = NVGCfinland.115.b
+		ai_chance = {
+			base = 0
+		}
+		add_political_power = -25
+		hidden_effect = {
+			FIN = { country_event = { id = NVGCfinland.116 days = 5 } }
+		}
+	}
+}
+
+country_event = { #Russia is continuing the fight
+	id = NVGCfinland.116
+	title = NVGCfinland.116.t
+	desc = NVGCfinland.116.d
+	picture = GFX_report_event_political_deal2
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Their loss
+		name = NVGCfinland.116.a
+	}
+}
+
+country_event = { #Finland petitions to join the Swedish faction
+	id = NVGCfinland.117
+	title = NVGCfinland.117.t
+	desc = NVGCfinland.117.d
+	picture = GFX_report_event_uk_inquiry
+
+	is_triggered_only = yes
+
+	option = { #Welcome!
+		name = NVGCfinland.117.a
+		ai_chance = {
+			factor = 100
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_foreign_policy option = FIN_FOREIGN_POLICY_NEUTRALITY }
+			}
+		}
+		if = {
+			limit = { is_in_faction = no }
+			create_faction = NORDIC_SHIELD
+			add_to_faction = FIN
+		}
+		else_if = {
+			limit = { is_faction_leader = no }
+			faction_leader = { add_to_faction = FIN }
+		}
+		else = {
+			add_to_faction = FIN
+		}
+		FIN = {
+			country_event = NVGCfinland.118
+		}
+	}
+
+	option = { #I think not!
+		name = NVGCfinland.117.b
+		ai_chance = {
+			base = 0
+		}
+		FIN = { country_event = NVGCfinland.119 }
+	}
+}
+
+country_event = { #Sweden accepts
+	id = NVGCfinland.118
+	title = NVGCfinland.118.t
+	desc = NVGCfinland.118.d
+	picture = GFX_report_event_uk_inquiry
+
+	is_triggered_only = yes
+
+	option = { #Welcome
+		name = NVGCfinland.118.a
+		effect_tooltip = {
+			FROM = { add_to_faction = FIN }
+		}
+	}
+}
+
+country_event = { #Sweden rejects us
+	id = NVGCfinland.119
+	title = NVGCfinland.119.t
+	desc = NVGCfinland.119.d
+	picture = GFX_report_event_uk_inquiry
+
+	is_triggered_only = yes
+
+	option = { #Your loss
+		name = NVGCfinland.119.a
+	}
+}
+
+country_event = { #Finland wants to join the Shanghai Pact
+	id = NVGCfinland.120
+	title = NVGCfinland.120.t
+	desc = NVGCfinland.120.d
+	picture = GFX_report_event_political_activist
+
+	is_triggered_only = yes
+
+	option = { #Welcome, camarades!
+		name = NVGCfinland.120.a
+		ai_chance = { 
+			factor = 99
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_foreign_policy option = FIN_FOREIGN_POLICY_NEUTRALITY }
+			}
+		}
+		add_to_faction = FIN
+		FIN = { country_event = NVGCfinland.121 }
+	}
+
+	option = { #Finns? In the Shanghai Pact? Why?
+		name = NVGCfinland.120.b
+		ai_chance = { 
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_foreign_policy option = FIN_FOREIGN_POLICY_INTERNATIONALE }
+			}
+		}
+		FIN = { country_event = NVGCfinland.122 }
+	}
+}
+
+country_event = { #Finland joins the Shanghai Pact
+	id = NVGCfinland.121
+	title = NVGCfinland.121.t
+	desc = NVGCfinland.121.d
+	picture = GFX_report_event_political_activist
+
+	is_triggered_only = yes
+
+	option = { #We are glad to be part of the global struggle!
+		name = NVGCfinland.121.a
+		add_political_power = 25
+	}
+}
+
+country_event = { #Finland will not join the Shanghai Pact
+	id = NVGCfinland.122
+	title = NVGCfinland.122.t
+	desc = NVGCfinland.122.d
+	picture = GFX_report_event_political_activist
+
+	is_triggered_only = yes
+
+	option = { #Damn those bat-eaters
+		name = NVGCfinland.122.a
+		add_political_power = -25
+	}
+}
+
+country_event = { #Election of Tarja Halonen
+	id = NVGCfinland.128
+	title = NVGCfinland.128.t
+	desc = NVGCfinland.128.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.128.a
+		deactivate_advisor = advisor_martti_ahtisaari
+		activate_advisor = advisor_tarja_halonen			
+	}
+}
+
+country_event = { #Germans are asked to let Finland in
+	id = NVGCfinland.130
+	title = NVGCfinland.130.t
+	desc = NVGCfinland.130.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.130.a
+		add_to_faction = FIN
+		FIN = { country_event = NVGCfinland.132 }
+		ai_chance = { base = 100 }
+	}
+
+	option = {
+		name = NVGCfinland.130.b
+		FIN = { country_event = NVGCfinland.131 }
+		ai_chance = { base = 0 }
+	}
+}
+
+country_event = { #Germans say no
+	id = NVGCfinland.131
+	title = NVGCfinland.131.t
+	desc = NVGCfinland.131.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #I see
+		name = NVGCfinland.131.a
+	}
+}
+
+country_event = { #Germans say yes
+	id = NVGCfinland.132
+	title = NVGCfinland.132.t
+	desc = NVGCfinland.132.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #I see
+		name = NVGCfinland.132.a
+	}
+}
+
+country_event = { #Finland wants to join the CSTO
+	id = NVGCfinland.133
+	title = NVGCfinland.133.t
+	desc = NVGCfinland.133.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = { #Welcome, camarades!
+		name = NVGCfinland.120.a
+		ai_chance = { factor = 30 }
+		add_to_faction = FIN
+		FIN = { country_event = { id = NVGCfinland.134 } }
+	}
+	
+	option = { #They should renounce their claims!
+		name = NVGCfinland.133.a
+		trigger = {
+			any_owned_state = {
+				is_claimed_by = FIN
+			}
+		}
+		ai_chance = { factor = 65 }
+		FIN = { country_event = { id = NVGCfinland.136 } }
+	}
+
+	option = { #Finns? In the CSTO? Why?
+		name = NVGCfinland.120.b
+		ai_chance = { factor = 5 }
+		FIN = { country_event = { id = NVGCfinland.135 } }
+	}
+}
+country_event = { #Finland joins the CSTO
+	id = NVGCfinland.134
+	title = finland.134.t
+	desc = finland.134.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	trigger = {
+		tag = FIN
+	}
+
+	option = { #We are glad
+		name = NVGCfinland.121.a
+		add_political_power = 25
+		effect_tooltip = {
+			FROM = {
+				add_to_faction = FIN
+			}
+		}
+	}
+}
+
+country_event = { #Finland will not join the CSTO
+	id = NVGCfinland.135
+	title = NVGCfinland.135.t
+	desc = NVGCfinland.135.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	trigger = {
+		tag = FIN
+	}
+
+	option = { #Damn those gopniks
+		name = NVGCfinland.122.a
+		add_political_power = -25
+		set_country_flag = FIN_russia_refused
+		add_opinion_modifier = {
+			target = FROM
+			modifier = medium_decrease
+		}
+	}
+}
+country_event = { #Russia demands we renounce claims
+	id = NVGCfinland.136
+	title = NVGCfinland.136.t
+	desc = NVGCfinland.136.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	trigger = {
+		tag = FIN
+	}
+
+	option = { #
+		name = NVGCfinland.136.a
+		ai_chance = {
+			factor = 99
+		}
+		add_political_power = 25
+		every_state = {
+			limit = {
+				is_owned_by = FROM
+				OR = {
+					is_core_of = ROOT
+					is_claimed_by = ROOT
+				}
+			}
+			remove_claim_by = ROOT
+		}
+		effect_tooltip = { FROM = { add_to_faction = ROOT } }
+		FROM = { 
+			country_event = {
+				id = NVGCfinland.137
+				days = 2
+			}
+		}
+	}
+	option = { #No
+		name = NVGCfinland.136.a
+		ai_chance = {
+			factor = 1
+		}
+		add_political_power = -25
+		fourth_estate_fascist_increase = yes
+		add_stability = -0.05
+		FROM = { 
+			country_event = {
+				id = NVGCfinland.138
+				days = 2
+			}
+		}
+	}
+}
+country_event = { #Finland joins the CSTO
+	id = NVGCfinland.137
+	title = NVGCfinland.137.t
+	desc = NVGCfinland.137.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = { #We are glad
+		name = NVGCfinland.137.a
+		add_political_power = 25
+		effect_tooltip = {
+			FROM = {
+				add_to_faction = FIN
+			}
+		}
+	}
+}
+
+country_event = { #Finland will not join the CSTO
+	id = NVGCfinland.138
+	title = NVGCfinland.138.t
+	desc = NVGCfinland.138.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = { #Damn those vodka-drinkers
+		name = NVGCfinland.138.a
+		add_political_power = -25
+		add_opinion_modifier = {
+			target = FROM
+			modifier = medium_decrease
+		}
+	}
+}
+
+country_event = { #Communist elections?
+	id = NVGCfinland.140
+	title = NVGCfinland.140.t
+	desc = NVGCfinland.140.d
+	picture = GFX_report_event_FIN_parliament_house
+
+	is_triggered_only = yes
+	trigger = {
+		tag = FIN 
+		has_government = democratic_socialist
+	}
+
+	option = {
+		name = NVGCfinland.140.a		
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_future option = FIN_FUTURE_SOCIALIST }
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_government = progressive }
+			}
+			meta_effect = {
+				text = {
+					set_politics = {
+						ruling_party = progressive
+						last_election = "[CURRENT_DATE]"
+						election_frequency = 48
+						elections_allowed = yes
+					}
+				}
+				CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			}
+		}
+		fourth_estate_progressive_increase = yes
+	}
+	option = {
+		name = NVGCfinland.140.b	
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_future option = FIN_FUTURE_DEMOCRACY_GREEN }
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_government = democratic_socialist }
+			}
+			meta_effect = {
+				text = {
+					set_politics = {
+						ruling_party = democratic_socialist
+						last_election = "[CURRENT_DATE]"
+						election_frequency = 48
+						elections_allowed = yes
+					}
+				}
+				CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			}
+		}
+		fourth_estate_democratic_socialist_increase = yes
+	}
+}
+country_event = { #Left radicalization
+	id = NVGCfinland.141
+	title = NVGCfinland.141.t
+	desc = NVGCfinland.141.d
+	picture = GFX_report_event_political_activist
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	option = {
+		name = NVGCfinland.141.a
+		fourth_estate_democratic_socialist_increase = yes
+		fourth_estate_social_democrat_increase = yes
+	}
+}
+
+country_event = { #Liberal backlash
+	id = NVGCfinland.143
+	title = NVGCfinland.143.t
+	desc = NVGCfinland.143.d
+	picture = GFX_report_event_finnish_flag
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.143.a
+		fourth_estate_social_liberal_increase = yes
+		fourth_estate_market_liberal_increase = yes
+	}
+}
+
+country_event = { #NATO
+	id = NVGCfinland.144
+	title = NVGCfinland.144.t
+	desc = NVGCfinland.144.d
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.144.a
+		ai_chance = { 
+			factor = 99
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_foreign_policy option = FIN_FOREIGN_POLICY_NEUTRALITY }
+			}
+		}
+		add_to_faction = FIN
+	}
+
+	option = { 
+		name = NVGCfinland.144.b
+		ai_chance = { 
+			factor = 1
+			modifier = {
+				factor = 0
+				has_game_rule = { rule = FIN_foreign_policy option = FIN_FOREIGN_POLICY_ENTENTE }
+			}
+		}
+		FIN = { country_event = NVGCfinland.145 }
+	}
+}
+country_event = { #NATO
+	id = NVGCfinland.145
+	title = NVGCfinland.145.t
+	desc = NVGCfinland.145.d
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.145.a
+		add_opinion_modifier = {
+			target = FROM
+			modifier = medium_decrease
+		}
+	}
+}
+
+country_event = { #
+	id = NVGCfinland.147
+	title = NVGCfinland.147.t
+	desc = NVGCfinland.147.d
+	picture = GFX_report_event_FIN_finns_reactionary_rally
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.147.a
+		ai_chance = { factor = 20 }
+		add_political_power = -50
+		add_war_support = 0.05
+		set_country_flag = FIN_balto_finnic
+		create_wargoal = {
+   			type = take_state_focus
+    		target = 13.owner
+    		generator = { 13 }
+		}
+		FIN = {
+			every_state = {
+				limit = {
+					OR = {				
+						state = 13
+						state = 191
+						state = 840							
+						state = 213
+						state = 215
+						state = 216
+						state = 195			
+					}
+					NOT = {
+						is_core_of = ROOT
+						is_claimed_by = ROOT
+					}
+				}
+				add_claim_by = PREV
+				if = {
+					limit = { 
+						owner = { is_subject_of = ROOT }
+					}
+					transfer_state_to = ROOT
+				}
+			}
+		}
+	}
+	option = {
+		name = NVGCfinland.147.b
+		ai_chance = { factor = 0 }
+		add_political_power = -75
+		add_war_support = 0.075
+		set_country_flag = FIN_balto_finnic
+		create_wargoal = {
+   			type = take_state_focus
+    		target = 13.owner
+    		generator = { 13 }
+		}
+		FIN = {
+			every_state = {
+				limit = {
+					OR = {				
+						state = 13
+						state = 191
+						state = 840
+						state = 213
+						state = 215
+						state = 216
+						state = 195				
+					}
+					NOT = {
+						is_core_of = ROOT
+						is_claimed_by = ROOT
+					}
+				}
+				add_claim_by = PREV
+				if = {
+					limit = { 
+						owner = { is_subject_of = ROOT }
+					}
+					transfer_state_to = ROOT
+				}
+			}
+			every_state = {
+				limit = { 
+					OR = {
+						state = 214
+						state = 397
+						state = 262
+						state = 580
+						state = 208
+						state = 195
+						state = 144
+						state = 666
+					}
+				}
+				NOT = {
+						is_core_of = ROOT
+						is_claimed_by = ROOT
+					}
+				add_claim_by = PREV
+				if = {
+					limit = { 
+						owner = { is_subject_of = ROOT }
+					}
+					transfer_state_to = ROOT
+				}
+			}
+		}
+	}
+	option = {
+		name = NVGCfinland.147.c
+		ai_chance = { factor = 0 }
+		add_political_power = -100
+		add_war_support = 0.1
+		set_country_flag = FIN_finno_ugric
+		custom_effect_tooltip = FIN_finno_ugric_tt
+		create_wargoal = {
+   			type = take_state_focus
+    		target = 13.owner
+    		generator = { 13 }
+		}
+		create_wargoal = {
+   			type = annex_everything
+    		target = HUN
+		}
+		FIN = {
+			every_state = {
+				limit = {
+					OR = {				
+						state = 13
+						state = 191
+						state = 840
+						state = 213
+						state = 215
+						state = 216
+						state = 195						
+					}
+					NOT = {
+						is_core_of = ROOT
+						is_claimed_by = ROOT
+					}
+				}
+				add_claim_by = PREV
+				if = {
+					limit = { 
+						owner = { is_subject_of = ROOT }
+					}
+					transfer_state_to = ROOT
+				}
+			}
+			every_state = {
+				limit = { 
+					OR = {
+						is_core_of = HUN
+						state = 214
+						state = 397
+						state = 262
+						state = 580
+						state = 208
+						state = 195
+						state = 144
+						state = 666
+						state = 244
+						state = 264	
+						state = 351
+						state = 263
+						state = 1289	
+						state = 209
+					}
+					NOT = {
+						is_core_of = ROOT
+						is_claimed_by = ROOT
+					}
+				}
+				add_claim_by = PREV
+				if = {
+					limit = { 
+						owner = { is_subject_of = ROOT }
+					}
+					transfer_state_to = ROOT
+				}
+			}
+		}
+	}
+	option = {
+		name = NVGCfinland.147.e
+		ai_chance = { factor = 80 }
+		add_political_power = 100
+		add_stability = 0.1
+	}
+}
+
+country_event = { # 
+	id = NVGCfinland.160
+	title = NVGCfinland.160.t
+	desc = NVGCfinland.160.d
+	picture = GFX_report_event_FIN_finns_reactionary_rally
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.160.a
+		set_country_flag = FIN_sks_exists
+		fourth_estate_fascist_increase = yes
+		add_to_variable = { FIN_nrm_strength = 5 }
+		set_party_name = { 
+			ideology = fascist
+			name = FIN_party_sks
+			long_name = FIN_party_sks_long
+		}
+		if = {
+			limit = { has_country_flag = FIN_holappa_ended }
+			promote_character = {
+				character = FIN_olavi_maenpaa
+				ideology = ultranationalist
+			}
+		}
+	}
+}
+
+country_event = { # 
+	id = NVGCfinland.161
+	title = NVGCfinland.161.t
+	desc = NVGCfinland.161.d
+	picture = GFX_report_event_FIN_holmlund
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.161.a
+		fourth_estate_democratic_socialist_decrease = yes
+		if = {
+			limit = { has_country_flag = FIN_sks_exists }
+			add_to_variable = { FIN_nrm_strength = 5 }
+		}
+		add_to_variable = { FIN_sdp_strength = -10 }
+		hidden_effect = {
+			country_event = { id = NVGCfinland.29 days = 2 }
+		}
+	}
+	option = {
+		name = NVGCfinland.161.b
+		fourth_estate_democratic_socialist_decrease = yes
+		if = {
+			limit = { has_country_flag = FIN_sks_exists }
+			add_to_variable = { FIN_nrm_strength = 5 }
+		}
+		add_to_variable = { FIN_sdp_strength = -10 }
+		hidden_effect = {
+			country_event = { id = NVGCfinland.162 days = 2 }
+		}
+	}
+}
+
+country_event = { # 
+	id = NVGCfinland.162
+	title = NVGCfinland.162.t
+	desc = NVGCfinland.162.d
+	picture = GFX_report_event_FIN_holmlund
+
+	is_triggered_only = yes
+
+	option = {
+		name = finland.162.a
+		fourth_estate_democratic_socialist_decrease = yes
+		fourth_estate_progressive_decrease = yes
+		fourth_estate_social_democrat_decrease = yes
+		add_to_variable = { FIN_sdp_strength = -50 }
+		set_country_flag = FIN_left_crippled
+	}
+}
+
+country_event = { # 
+	id = NVGCfinland.163
+	title = NVGCfinland.163.t
+	desc = NVGCfinland.163.d
+	picture = GFX_report_event_FIN_klas_lund
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.163.a
+		fourth_estate_fascist_decrease = yes
+		hidden_effect = {
+			country_event = { id = NVGCfinland.164 days = 20 }
+		}
+	}
+}
+
+country_event = { # 
+	id = NVGCfinland.164
+	title = NVGCfinland.164.t
+	desc = NVGCfinland.164.d
+	picture = GFX_report_event_FIN_finns_reactionary_rally
+
+	is_triggered_only = yes
+	trigger = { has_country_flag = FIN_sks_exists }
+
+	option = {
+		name = NVGCfinland.164.a
+		fourth_estate_fascist_decrease = yes
+		clr_country_flag = FIN_sks_exists
+		hidden_effect = {
+			country_event = {
+				id = NVGCfinland.165
+				days = 50
+				random_days = 50
+			}
+		}
+	}
+}
+
+country_event = { # 
+	id = NVGCfinland.165
+	title = NVGCfinland.165.t
+	desc = NVGCfinland.165.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.165.a
+		fourth_estate_fascist_increase = yes	
+		set_party_name = {
+			ideology = fascist
+			name = FIN_party_blue_and_white_front
+			long_name = FIN_party_blue_and_white_front_long
+		}
+	}
+}
+
+country_event = { # 
+	id = NVGCfinland.168
+	title = NVGCfinland.168.t
+	desc = NVGCfinland.168.d
+	picture = GFX_report_event_FIN_haatainen
+	
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.168.a
+		set_country_flag = FIN_successful_compromise
+		fourth_estate_social_democrat_increase = yes
+		add_to_variable = { FIN_sdp_strength = 10 }
+	}
+}
+
+country_event = { # 
+	id = NVGCfinland.170
+	title = NVGCfinland.170.t
+	desc = {
+		text = NVGCfinland.170.d
+		trigger = { has_government = reactionary }
+	}
+	desc = {
+		text = NVGCfinland.170.d2
+		trigger = {
+			NOT = { has_government = reactionary }
+		}
+	}
+		
+	is_triggered_only = yes
+
+	option = {
+		name = NVGCfinland.170.a
+		if = {
+			limit = { 
+				NOT = { has_government = reactionary }
+			}
+			set_country_flag = FIN_holappa_ended
+		}
+		add_political_power = 25
+		fourth_estate_fascist_decrease = yes
+		hidden_effect = {
+			country_event = {
+				id = NVGCfinland.160
+				days = 20
+			}
+		}
+	}
+}
+
+country_event = { #RKP Reconsiders Alliances
+	id = NVGCfinland.171
+	title = NVGCfinland.171.t
+	desc = NVGCfinland.171.d
+	picture = GFX_report_event_FIN_swedish_party
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	trigger = { 
+		has_elections = yes 
+		has_socialist_government = no
+	}
+	
+	option = {
+		name = NVGCfinland.171.a
+		fourth_estate_market_liberal_increase = yes
+		add_to_variable = { FIN_kokoomus_strength = 10 }
+	}
+	option = {
+		name = NVGCfinland.171.b
+		fourth_estate_social_liberal_increase = yes
+		add_to_variable = { FIN_agrarian_strength = 10 }
+	}
+	option = {
+		name = NVGCfinland.171.c
+		fourth_estate_social_democrat_increase = yes
+		add_to_variable = { FIN_sdp_strength = 10 }
+	}
+}
+
+country_event = { #Beavers
+	id = NVGCfinland.172
+	title = NVGCfinland.172.t
+	desc = NVGCfinland.172.d
+	picture = GFX_report_event_FIN_beaver
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = NVGCfinland.172.a
+		add_stability = -0.01
+		add_political_power = 20
+	}
+}
+
+country_event = { #start the conference preparations
+	id = FinlandRainbow.1
+	title = FinlandRainbow.1.t
+	desc = FinlandRainbow.1.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name=FinlandRainbow.1.a
+		fourth_estate_social_democrat_increase = yes
+		hidden_effect = {
+			country_event = {
+				id = FinlandRainbow.2
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Left arrives
+	id = FinlandRainbow.2
+	title = FinlandRainbow.2.t
+	desc = FinlandRainbow.2.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #left power
+		name=FinlandRainbow.2.a
+		add_power_balance_value = {
+    		id = FIN_rainbow_government_bop
+    		value = -0.03
+		}
+		fourth_estate_social_democrat_increase = yes
+		hidden_effect = {
+			country_event = {
+				id = FinlandRainbow.3
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #KOK arrives
+	id = FinlandRainbow.3
+	title = FinlandRainbow.3.t
+	desc = FinlandRainbow.3.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name=FinlandRainbow.3.a
+		add_power_balance_value = {
+    		id = FIN_rainbow_government_bop
+    		value = 0.03
+		}
+		fourth_estate_social_democrat_increase = yes
+		hidden_effect = {
+			country_event = {
+				id = FinlandRainbow.4
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #let's begin
+	id = FinlandRainbow.4
+	title = FinlandRainbow.4.t
+	desc = FinlandRainbow.4.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name=FinlandRainbow.4.a
+		set_country_flag = FIN_rainbow_conference_ready_flag
+	}
+}
+
+country_event = { #President's power in the Rainbow reforms
+	id = FinlandRainbow.5
+	title = FinlandRainbow.5.t
+	desc = FinlandRainbow.5.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #yes power
+		name = FinlandRainbow.5.a
+		ai_chance = {
+			factor = 50
+		}
+		add_power_balance_value = {
+    		id = FIN_rainbow_government_bop
+    		value = 0.1
+		}
+		fourth_estate_market_liberal_increase = yes
+		add_war_support = 0.1
+		set_country_flag = FIN_empowered_president
+	}
+
+	option = { #no power
+		name = FinlandRainbow.5.b
+		ai_chance = {
+			factor = 50
+		}
+		add_power_balance_value = {
+    		id = FIN_rainbow_government_bop
+    		value = -0.1
+		}
+		fourth_estate_social_democrat_increase = yes
+		add_stability = 0.05
+	}
+}
+
+news_event = { # Overthrow of the Republic of Finland
+	id = NVGCfinlandNews.1
+	title = NVGCfinlandNews.1.t
+	picture = GFX_news_event_helsinki
+	major = yes
+	is_triggered_only = yes
+
+	desc = { #Fascist
+		text = NVGCfinlandNews.1.d.fascist
+		trigger = {
+			FIN = {
+				has_government = fascist
+			}
+		}
+	}
+
+	desc = { #Commie
+		text = NVGCfinlandNews.1.d.communist
+		trigger = {
+			FIN = {
+				OR = {
+					has_government = communist
+					has_government = democratic_socialist
+				}
+			}		
+		}
+	}
+
+	desc = { #Kurvinen
+		text = NVGCfinlandNews.1.d.Kurvinen
+		trigger = {
+			FIN = {
+				has_government = nationalist
+			}
+		}
+	}
+
+	option = {
+		name = NVGCfinlandNews.1.a
+		trigger = {
+			has_dynamic_modifier = {
+    			modifier = idea_eu_member
+			}
+			NOT = {
+				tag = FIN
+			}
+		}
+	}
+
+	option = {
+		name = NVGCfinlandNews.1.b
+		trigger = {
+			FIN = {
+				has_socialist_government = no
+			}
+			has_socialist_government = yes
+			NOT = {
+				tag = FIN
+			}
+		}
+	}
+
+	option = {
+		name = NVGCfinlandNews.1.c
+		trigger = {
+			NOT = {
+				has_dynamic_modifier = {
+    				modifier = idea_eu_member
+				}
+				tag = FIN
+			}
+			has_socialist_government = no
+		}
+	}
+
+	option = {
+		name = NVGCfinlandNews.1.d
+		trigger = {
+			tag = FIN
+		}
+	}
+
+	option = {
+		name = NVGCfinlandNews.1.e
+		trigger = {
+			FIN = {
+				has_socialist_government = yes
+			}
+			has_socialist_government = yes
+			NOT = {
+				tag = FIN
+			}
+		}
+	}
+}

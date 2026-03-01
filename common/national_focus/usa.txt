@@ -1,4 +1,4 @@
-focus_tree = {
+﻿focus_tree = {
 
 	id = united_states_focus
 
@@ -4160,8 +4160,7 @@ focus_tree = {
 
 	focus = {
 		id = USA_2000_us_pres_election
-		icon = elections
-
+		icon = GFX_focus_generic_election
 		x = 0
 		y = 1
 		relative_position_id = USA_status_quo
@@ -4191,19 +4190,19 @@ focus_tree = {
 		}
 	}
 
-	#################
-	### Democrats ###
-	#################
+	##################
+	# AL GORE AL 2000#
+	##################
 
 	focus = {
-		id = USA_pro_democratic_gerrymandering
+		id = USA_al_gore
 		icon = GFX_USA_Democratic_Party
 
 		x = -6
 		y = 1
 		relative_position_id = USA_2000_us_pres_election
 
-		cost = @Time_55_days
+		cost = @Time_10_days
 
 		prerequisite = {
 			focus = USA_2000_us_pres_election
@@ -4220,13 +4219,17 @@ focus_tree = {
 			}
 		}
 
-		bypass = {}
+		bypass = {
+			has_country_flag = usa_gore_victory_2000
+		}
 
 		completion_reward = {
 			fourth_estate_conservative_decrease = yes
 			fourth_estate_reactionary_decrease = yes
-			add_political_power = -25
+			add_political_power = 25
+			add_dynamic_modifier = { modifier = USA_Al_Gore_Admin_Modifier }
 		}
+		
 
 		ai_will_do = {
 			factor = 10
@@ -4236,62 +4239,75 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_public_appeal
+		id = USA_prescription_drugs_seniors
 		icon = peoples_vote
 
 		x = 0
 		y = 1
-		relative_position_id = USA_pro_democratic_gerrymandering
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_pro_democratic_gerrymandering
+			focus = USA_al_gore
 		}
+
 
 		bypass = {}
 
 		completion_reward = {
+			add_to_variable = {
+				var = USA_monthly_population
+				value = 0.05
+			}
+				add_to_variable = {
+				var = USA_consumer_goods_expected_value
+				value = 0.02
+			}         
+			custom_effect_tooltip = USA_prescription_drugs_seniors_tt
+
 		}
+	
 
 		ai_will_do = {
 			factor = 10
-
 			
 		}
 	}
 
 	focus = {
-		id = USA_liberal_democrats
-		icon = GFX_goal_Ideology_Social_Liberal
+		id = USA_mccain_feingold_bill
+		icon = GFX_focus_generic_diplomatic_treaty
 
-		x = 3
+		x = -2
 		y = 1
-		relative_position_id = USA_public_appeal
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
+
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_public_appeal
+			focus = USA_al_gore
 		}
 
-		mutually_exclusive = {
-			focus = USA_social_democrat_democrats
-		}
+		
 
 		available = {
 			OR = {
-				has_government = social_liberal
+				
 			}
 		}
 
 		bypass = {}
 
-		completion_reward = {add_popularity = {
-    					 ideology = social_liberal
-    					 popularity = 0.25
+		completion_reward = { 
+
+                add_political_power = 50
+                fourth_estate_conservative_decrease = yes
+			    fourth_estate_social_liberal_decrease = yes
+
 				     }
-		}
+		
 
 
 		ai_will_do = {
@@ -4302,20 +4318,18 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_strengthen_social_safety_nets
-		icon = concessions
+		id = USA_social_security_lockbox
+		icon = GFX_goal_generic_national_unity
 
-		x = 0
+
+		x = -4
 		y = 1
-		relative_position_id = USA_liberal_democrats
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_liberal_democrats
-		}
-
-		mutually_exclusive = {
+			focus = USA_al_gore
 		}
 
 		
@@ -4323,8 +4337,9 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			add_political_power = 100
-			add_stability = 0.1
+			add_political_power = 60
+			add_stability = 0.05
+            
 		}
 
 
@@ -4336,17 +4351,17 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_green_new_deal
-		icon = GFX_goal_Green_World
+		id = USA_inventor_of_internet
+		icon = GFX_focus_research2
 
-		x = 0
-		y = 2
-		relative_position_id = USA_liberal_democrats
+		x = 2
+		y = 1
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
+		cost = @Time_45_days
 
 		prerequisite = {
-			focus = USA_strengthen_social_safety_nets
+			focus = USA_al_gore
 		}
 
 		mutually_exclusive = {
@@ -4357,15 +4372,23 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
+			
+			add_tech_bonus = {
+				bonus = 0.6
+				uses = 2
+				category = electronics
+		
+				
+	     	}
+			add_to_variable = {
+				var = USA_research_speed_factor
+				value = 0.02
+
 			}
+			custom_effect_tooltip = USA_inventor_of_internet_tt
+
 		}
+	
 
 
 		ai_will_do = {
@@ -4377,17 +4400,18 @@ focus_tree = {
 
 
 	focus = {
-		id = USA_technological_innovation_fund
+		id = USA_100000_new_teachers
 		icon = GFX_goal_Supremacy_Of_Science
 
-		x = 2
+		x = 4
 		y = 1
-		relative_position_id = USA_liberal_democrats
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
+
+		cost = @Time_50_days
 
 		prerequisite = {
-			focus = USA_liberal_democrats
+			focus = USA_al_gore
 		}
 
 		mutually_exclusive = {
@@ -4398,60 +4422,30 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
+			    		
+         research_speed_factor = 0.07 
+			
 			add_tech_bonus = {
     			bonus = 0.5
-    			uses = 1
-   			category = infantry_weapons
+    			uses = 2
+   			category = electronics
 			}
-			add_tech_bonus = {
+        	 add_tech_bonus = {
     			bonus = 0.5
-    			uses = 1
+    			uses = 2
    			category = industry
 			}
-			add_tech_bonus = {
-    			bonus = 0.5
-    			uses = 1
-   			category = construction_tech
+            add_to_variable = {
+				var = USA_research_speed_factor
+				value = 0.07
+
 			}
-			add_tech_bonus = {
-    			bonus = 0.5
-    			uses = 1
-   			category = excavation_tech
-			}
-		}
+			custom_effect_tooltip = USA_100000_new_teachers_tt
 
-		ai_will_do = {
-			factor = 10
 
-			
-		}
-	}
-
-	focus = {
-		id = USA_media_regulation
-		icon = media_censorship
-
-		x = 1
-		y = 3
-		relative_position_id = USA_liberal_democrats
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_green_new_deal
-		}
-
-		mutually_exclusive = {
-		}
-
+           }
 		
 
-		bypass = {}
-
-		completion_reward = {
-			add_war_support = 0.1
-		}
-
 		ai_will_do = {
 			factor = 10
 
@@ -4459,171 +4453,45 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = USA_community_development_grants
-		icon = global_community
-
-		x = -1
-		y = 3
-		relative_position_id = USA_liberal_democrats
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_green_new_deal
-		}
-
-		mutually_exclusive = {
-		}
-
-		
-
-		bypass = {}
-
-		completion_reward = {
-			add_ideas = USA_community_grants
-		}
-
-		ai_will_do = {
-			factor = 10
-
-			
-		}
-	}
+	
 
 	focus = {
-		id = USA_social_democrat_democrats
-		icon = GFX_goal_Ideology_Social_Democracy
-
-		x = -3
-		y = 1
-		relative_position_id = USA_public_appeal
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_public_appeal
-		}
-
-		mutually_exclusive = {
-			focus = USA_liberal_democrats
-		}
-
-		available = {
-			OR = {
-				has_government = social_democrat
-			}
-		}
-
-		bypass = {}
-
-		completion_reward = {add_popularity = {
-    					 ideology = social_democrat
-    					 popularity = 0.25
-				     }
-		}
-
-
-		ai_will_do = {
-			factor = 10
-
-			
-		}
-	}
-
-	focus = {
-		id = USA_workers_rights_protection
-		icon = workers_rights
-
-		x = 0
-		y = 1
-		relative_position_id = USA_social_democrat_democrats
-
-		cost = @Time_55_days
-		prerequisite = {
-			focus = USA_social_democrat_democrats
-		}
-
-		mutually_exclusive = {
-		}
-
-		available = {
-			has_completed_focus = USA_industrial_oversight_committee
-		}
-
-		bypass = {}
-
-		completion_reward = {
-			swap_ideas = {
-				remove_idea = USA_industrial_development_program_idea1
-				add_idea = USA_industrial_development_program_idea2
-			}
-		}
-
-
-		ai_will_do = {
-			factor = 10
-
-			
-		}
-	}
-
-	focus = {
-		id = USA_progressive_taxation
-		icon = reform_taxes
+		id = USA_middle_class_tax_cuts
+		icon = GFX_focus_generic_stockpile_currency
 
 		x = -2
-		y = 2
-		relative_position_id = USA_social_democrat_democrats
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_progressive_ideology
-		}
-
-		mutually_exclusive = {
-		}
-
-		
-		bypass = {}
-
-		completion_reward = {
-			add_political_power = 100
-		}
-
-
-		ai_will_do = {
-			factor = 10
-
-			
-		}
-	}
-
-	focus = {
-		id = USA_affordable_housing_initiative
-		icon = GFX_focus_usa_guarantee_the_american_dream
-
-		x = -3
 		y = 3
-		relative_position_id = USA_social_democrat_democrats
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
+		cost = @Time_40_days
 
 		prerequisite = {
-			focus = USA_progressive_taxation
+			focus = USA_mccain_feingold_bill
 		}
 
 		mutually_exclusive = {
 		}
 
 		
+
 		bypass = {}
 
 		completion_reward = {
-			add_stability = 0.1
-		}
+			add_stability = 0.03
+			add_war_support = 0.03
+			add_to_variable = {
+				var = USA_factory_output
+				value = 0.05
 
+			}
+			add_to_variable = {
+				var = USA_dockyard_output
+				value = 0.05
+
+			}
+			custom_effect_tooltip = USA_middle_class_tax_cuts_tt
+
+		}
 
 		ai_will_do = {
 			factor = 10
@@ -4633,51 +4501,116 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_national_healthcare_expansion
-		icon = GFX_goal_Universal_Healthcare
+		id = USA_patient_bill_of_rights
+		icon = GFX_goal_generic_neutrality_focus
+		x = 0
+		y = 3
+		relative_position_id = USA_al_gore
+
+		cost = @Time_35_Days
+
+		prerequisite = {
+			focus = USA_prescription_drugs_seniors
+		}
+
+		mutually_exclusive = {
+			
+		}
+
+		available = {
+			
+		}
+
+		bypass = {}
+
+
+		completion_reward = { 
+                add_political_power = 100
+                add_stability = 0.05
+				add_to_variable = {
+				var = USA_factory_output
+				value = 0.05
+
+			}
+			add_to_variable = {
+				var = USA_monthly_population
+				value = 0.1
+
+			}
+			custom_effect_tooltip = USA_patient_bill_of_rights_tt
+
+		 }
+		
+
+
+		ai_will_do = {
+			factor = 10
+
+			
+		}
+	}
+
+
+	focus = {
+		id = USA_slash_debt
+		icon = GFX_focus_RAJ_war_taxes
+
+		x = -4
+		y = 3
+		relative_position_id = USA_al_gore
+
+		cost = @Time_80_days
+
+		prerequisite = {
+			focus = USA_social_security_lockbox
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.07   
+			add_to_variable = {
+				var = USA_research_speed_factor
+				value = 0.05
+
+			}
+			add_to_variable = {
+				var = USA_factory_output
+				value = 0.08
+
+			}
+			add_to_variable = {
+				var = USA_production_speed_buildings_factor
+				value = 0.1
+
+			}
+			custom_effect_tooltip = USA_slash_debt_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+
+			
+		}
+	}
+
+	focus = {
+		id = USA_computer_literacy_for_all
+		icon = GFX_focus_generic_university_1
 
 		x = 2
-		y = 2
-		relative_position_id = USA_social_democrat_democrats
+		y = 3
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_public_infrastructure_projects
-		}
-
-		mutually_exclusive = {
-		}
-
-		
-		bypass = {}
-
-		completion_reward = {
-			add_ideas = USA_healthcare_reform_idea
-		}
-
-
-		ai_will_do = {
-			factor = 10
-
-			
-		}
-	}
-	focus = {
-		id = USA_universal_healthcare
-		icon = GFX_USA_Healthcare
-
-		x = -1
-		y = 1
-		relative_position_id = USA_national_healthcare_expansion
-
-		cost = @Time_55_days
+		cost = @Time_80_days
 
 		prerequisite = {
-			focus = USA_national_healthcare_expansion
-		}
-		prerequisite = {
-			focus = USA_labor_union_empowerment
+			focus = USA_inventor_of_internet
 		}
 
 		mutually_exclusive = {
@@ -4688,10 +4621,23 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			swap_ideas = {
-				remove_idea = USA_healthcare_reform_idea
-				add_idea = USA_universal_healthcare_idea
+			add_political_power = 75  
+			add_to_variable = {
+				var = USA_research_speed_factor
+				value = 0.04
+
 			}
+			add_to_variable = {
+				var = USA_production_speed_buildings_factor
+				value = 0.1
+
+			}
+			add_to_variable = {
+				var = USA_army_org
+				value = 0.1
+
+			}
+			custom_effect_tooltip = USA_computer_literacy_for_all_tt
 		}
 
 		ai_will_do = {
@@ -4701,26 +4647,106 @@ focus_tree = {
 		}
 	}
 
+    	
+# this is such a bitch when you have like 7 modifiers in one focus
 	focus = {
-		id = USA_social_welfare_programs
-		icon = GFX_goal_Workers_Rights
+		id = USA_free_preschool
+		icon = GFX_goal_generic_scientific_exchange
 
-		x = 1
-		y = 1
-		relative_position_id = USA_progressive_taxation
+		x = 4
+		y = 3
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
+		cost = @Time_50_days
 
 		prerequisite = {
-			focus = USA_progressive_taxation
+			focus = USA_100000_new_teachers			
 		}
 
+		mutually_exclusive = {
+		}
+
+		
+		bypass = {}
+
 		completion_reward = {
-			add_tech_bonus = {
-    			bonus = 0.5
+
+         add_to_variable = {
+				var = USA_research_speed_factor
+				value = 0.05
+
+			}
+		add_to_variable = {
+				var = USA_production_speed_buildings_factor
+				value = 0.05
+
+			}
+		add_to_variable = {
+				var = USA_monthly_population
+				value = 0.07
+
+			}
+		add_political_power = 50
+		add_stability = 0.05
+		add_tech_bonus = {
+    			bonus = 0.65
     			uses = 1
-   			category = infantry_weapons
+   			category = construction_tech
+
+
+		}
+		custom_effect_tooltip = USA_free_preschool_tt
+		}
+
+
+		ai_will_do = {
+			factor = 10
+
+			
+		}
+	}
+	
+
+	focus = {
+		id = USA_do_ask_do_tell
+		icon = GFX_focus_generic_naval_discipline
+
+		x = -3
+		y = 5
+		relative_position_id = USA_al_gore
+
+		cost = @Time_40_days
+
+		prerequisite = {
+			focus = USA_slash_debt			
+		}
+		prerequisite = {
+			focus = USA_middle_class_tax_cuts		
+		}
+
+
+
+
+		mutually_exclusive = {
+		}
+
+		
+		bypass = {}
+
+		completion_reward = {
+			add_manpower = 150000
+			add_stability = -0.025
+			add_to_variable = {
+				var = USA_monthly_population
+				value = 0.02
+
 			}
+			add_to_variable = {
+				var = USA_good_soldier_loss
+				value = -0.03
+
+			}
+			custom_effect_tooltip = USA_do_ask_do_tell_tt
 		}
 
 
@@ -4732,110 +4758,18 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_the_united_republic
-		icon = GFX_USA_United_Republic
+		id = USA_100_mile_gallon_cars
+		icon = GFX_focus_generic_improve_roads
 
 		x = -1
-		y = 1
-		relative_position_id = USA_social_welfare_programs
+		y = 5
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_social_welfare_programs
-		}
-		prerequisite = {
-			focus = USA_affordable_housing_initiative
-		}
-
-		mutually_exclusive = {}
-
-		available = {}
-
-		bypass = {}
-
-		completion_reward = {
-			add_ideas = idea_USA_united_republic
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = USA_unite_the_nation
-		icon = GFX_goal_Untied_Race
-
-		x = -1
-		y = 1
-		relative_position_id = USA_media_regulation
-
-		cost = @Time_55_days
+		cost = @Time_40_days
 
 		prerequisite = {
-			focus = USA_media_regulation
-		}
-		prerequisite = {
-			focus = USA_community_development_grants
-		}
-
-
-		mutually_exclusive = {}
-
-		available = {}
-
-		bypass = {}
-
-		completion_reward = {
-			add_stability = 0.05
-			add_political_power = 150
-			add_war_support = 0.1
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = USA_progressive_ideology
-		icon = GFX_USA_Green_Party
-
-		x = -2
-		y = 1
-		relative_position_id = USA_social_democrat_democrats
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_social_democrat_democrats
-		}
-		available = {}
-
-		bypass = {}
-
-		completion_reward = {
-			add_ideas = idea_focus_generic_progressive_doctrine
-			fourth_estate_progressive_increase = yes
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = USA_public_infrastructure_projects
-		icon = infrastructure1
-
-		x = 0
-		y = 2
-		relative_position_id = USA_public_appeal
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_social_democrat_democrats
-			focus = USA_liberal_democrats
+			focus = USA_middle_class_tax_cuts
+			focus = USA_patient_bill_of_rights
 		}
 
 		mutually_exclusive = {
@@ -4845,48 +4779,40 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = infrastructure
-						size > 3
-					}
-				}
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = infrastructure
-				 	level = 3
-					instant_build = yes
-				 }
+			add_to_variable = {
+				var = USA_air_fuel_use
+				value = -0.1
+
 			}
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = infrastructure
-						size > 2
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-				 	level = 2
-					instant_build = yes
-				 }
+			add_to_variable = {
+				var = USA_army_fuel_use
+				value = -0.1
+
 			}
-			random_owned_state = {
-				limit = {
-					free_building_slots = {
-						building = infrastructure
-						size > 2
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-				 	level = 2
-					instant_build = yes
-				 }
+			add_to_variable = {
+				var = USA_navy_fuel_use
+				value = -0.1
+
 			}
+
+			add_stability = 0.08
+			random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = recycling_center 
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+			random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = recycling_center 
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+					custom_effect_tooltip = USA_100_mile_a_gallon_tt
 		}
 
 
@@ -4897,90 +4823,211 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = USA_education_reform
-		icon = research
+		id = USA_carbon_emission_tax
+		icon = GFX_focus_generic_land_reclamation
 
 		x = 1
-		y = 1
-		relative_position_id = USA_public_infrastructure_projects
+		y = 5
+		relative_position_id = USA_al_gore
 
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_public_infrastructure_projects
-		}
-		mutually_exclusive = {
-		}
-		bypass = {}
-
-		completion_reward = {
-			add_ideas = idea_focus_generic_education_reform
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = USA_labor_union_empowerment
-		icon = work_red
-
-		x = 0
-		y = 1
-		relative_position_id = USA_workers_rights_protection
-
-		cost = @Time_55_days
+		cost = @Time_50_days
 
 		prerequisite = {
-			focus = USA_workers_rights_protection
+			focus = USA_patient_bill_of_rights
+			focus = USA_computer_literacy_for_all
 		}
+		
 
 		mutually_exclusive = {
 		}
 
 		
+
 		bypass = {}
 
 		completion_reward = {
-			random_owned_state = {
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
-			}
-			swap_ideas = {
-				remove_idea = USA_industrial_development_program_idea2
-				add_idea = USA_industrial_development_program_idea3
-			}
-		}
+			add_to_variable = {
+				var = USA_factory_output
+				value = -0.1
 
+			}
+			add_to_variable = {
+				var = USA_dockyard_output
+				value = -0.05
+
+			}
+			add_to_variable = {
+				var = USA_fuel_gain
+				value = -0.05
+
+			}
+			custom_effect_tooltip = USA_carbon_emission_tax_tt
+			
+		}
 
 		ai_will_do = {
 			factor = 10
 
 			
+
+			
 		}
 	}
 
+	
+
 	focus = {
-		id = USA_pro_republican_gerrymandering
+		id = USA_medicare_buy_in
+		icon = GFX_focus_usa_guarantee_the_american_dream
+
+		x = 3
+		y = 5
+		relative_position_id = USA_al_gore
+
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = USA_computer_literacy_for_all
+			focus = USA_free_preschool
+		}
+		
+
+		mutually_exclusive = {}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.075
+			add_political_power = 50
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = USA_you_can_call_him_al
+		icon = GFX_focus_generic_befriend_usa
+
+		x = 0
+		y = 7
+		relative_position_id = USA_al_gore
+
+		cost = @Time_70_days
+
+		prerequisite = {
+			focus = USA_do_ask_do_tell
+		}
+		prerequisite = {
+			focus = USA_100_mile_gallon_cars
+		}
+        prerequisite = {
+			focus = USA_carbon_emission_tax
+		}
+		prerequisite = {
+			focus = USA_medicare_buy_in
+		}
+
+		mutually_exclusive = {}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.08
+			add_to_variable = {
+				var = USA_research_speed_factor
+				value = 0.3
+
+			}
+			random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = recycling_center 
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+			random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = recycling_center 
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+			random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = recycling_center 
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+			random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = recycling_center 
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+			random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = recycling_center 
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+			add_political_power = 50
+			add_tech_bonus = {
+    			bonus = 0.7
+    			uses = 4
+   			category = electronics
+			}
+			add_to_variable = {
+				var = USA_monthly_population
+				value = 0.025
+
+			}
+			add_to_variable = {
+				var = USA_factory_output
+				value = 0.05
+
+			}
+     custom_effect_tooltip = USA_you_can_call_him_al_tt
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	
+    #####################
+    # GEORGE W BUSH 2000#
+    #####################
+
+	focus = {
+		id = USA_george_w_bush
 		icon = GFX_USA_Republican_Party
 
-		x = 5
+		x = 6
 		y = 1
 		relative_position_id = USA_2000_us_pres_election
 
-		cost = @Time_55_days
+		cost = @Time_10_days
 
 		prerequisite = {
 			focus = USA_2000_us_pres_election
 		}
 
 		mutually_exclusive = {
-			focus = USA_pro_democratic_gerrymandering
+			focus = USA_al_gore
 		}
 
 		
@@ -4990,7 +5037,8 @@ focus_tree = {
 		completion_reward = {
 			fourth_estate_social_liberal_decrease = yes
 			fourth_estate_social_democrat_decrease = yes
-			add_political_power = -25
+			add_political_power = 25
+			add_dynamic_modifier = { modifier = USA_George_W_Bush_Admin_Modifier }
 		}
 
 		ai_will_do = {
@@ -5001,22 +5049,37 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_rebuilding_america
+		id = USA_2001_tax_cuts
 		icon = people_work_act
 
-		x = 0
+		x = -4
 		y = 1
-		relative_position_id = USA_pro_republican_gerrymandering
+		relative_position_id = USA_george_w_bush
 
-		cost = @Time_55_days
+		cost = @Time_60_days
 
 		prerequisite = {
-			focus = USA_pro_republican_gerrymandering
+			focus = USA_george_w_bush
 		}
 
 		bypass = {}
 
 		completion_reward = {
+			add_stability = 0.03
+			add_war_support = 0.03
+
+			add_to_variable = {
+				var = USA_factory_output
+				value = 0.05
+
+			}
+			add_to_variable = {
+				var = USA_dockyard_output
+				value = 0.05
+
+			}
+			custom_effect_tooltip = USA_2001_tax_cuts_tt
+
 		}
 
 		ai_will_do = {
@@ -5027,59 +5090,86 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_right_wing_populist_republicans
-		icon = GFX_goal_Ideology_Reactionary
-
-		x = 3
-		y = 1
-		relative_position_id = USA_rebuilding_america
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_rebuilding_america
-		}
-
-		mutually_exclusive = {
-			focus = USA_conservative_republicans
-		}
-
-		available = {
-			OR = {
-				has_government = reactionary
-			}
-		}
-
-		bypass = {}
-
-		completion_reward = {
-						add_popularity = {
-    					 ideology = reactionary
-    					 popularity = 0.25
-				     }
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = USA_conservative_republicans
-		icon = GFX_goal_Ideology_Conservative
+		id = USA_no_child_left_behind
+		icon = GFX_focus_generic_education
 
 		x = -2
 		y = 1
-		relative_position_id = USA_rebuilding_america
+		relative_position_id = USA_george_w_bush
 
-		cost = @Time_55_days
+		cost = @Time_45_days
 
 		prerequisite = {
-			focus = USA_rebuilding_america
+			focus = USA_george_w_bush
 		}
 
 		mutually_exclusive = {
-			focus = USA_right_wing_populist_republicans
+			
+		}
+
+		available = {
+			
+		}
+
+		bypass = {}
+
+		completion_reward = {
+			add_to_variable = {
+				var = USA_research_speed_factor
+				value = 0.03
+
+			}
+			add_to_variable = {
+				var = USA_factory_output
+				value = 0.1
+
+			}
+			add_to_variable = {
+				var = USA_dockyard_output
+				value = 0.1
+
+			}
+			add_to_variable = {
+				var = USA_prod_eff
+				value = 0.07
+
+			}
+			add_to_variable = {
+				var = USA_prod_eff_cap
+				value = 0.07
+
+			}
+			add_to_variable = {
+				var = USA_production_speed_buildings_factor
+				value = -0.05
+
+			}
+			custom_effect_tooltip = USA_no_child_left_behind_tt
+
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_compassionate_conservatism
+		icon = GFX_focus_generic_improve_the_administration_2
+
+		x = 0
+		y = 1
+		relative_position_id = USA_george_w_bush
+
+		cost = @Time_30_days
+
+		prerequisite = {
+			focus = USA_george_w_bush
+		}
+
+		mutually_exclusive = {
+			
 		}
 
 		available = {
@@ -5090,182 +5180,19 @@ focus_tree = {
 
 		bypass = {}
 
-		completion_reward = {add_popularity = {
-    					 ideology = conservative
-    					 popularity = 0.25
-				     }
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = USA_america_first
-		icon = GFX_USA_America_First
-
-		x = 0
-		y = 1
-		relative_position_id = USA_right_wing_populist_republicans
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_right_wing_populist_republicans
-		}
-
-		mutually_exclusive = {
-		}
-
-		
-
-		bypass = {}
-
 		completion_reward = {
-			add_war_support = 0.05
-			fourth_estate_nationalist_increase = yes
-		}
+			add_stability = 0.1
+			add_to_variable = {
+				var = USA_monthly_population
+				value = 0.05
 
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = USA_border_security
-		icon = GFX_USA_Build_That_Wall
-
-		x = 0
-		y = 2
-		relative_position_id = USA_rebuilding_america
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_right_wing_populist_republicans
-			focus = USA_conservative_republicans
-		}
-
-		mutually_exclusive = {
-		}
-
-		
-
-		bypass = {}
-
-		completion_reward = {
-			custom_effect_tooltip = USA_build_the_wall_tooltip
-
-			hidden_effect = {
-				378 = {	#California
-					add_building_construction = {
-						type = bunker
-						province = 1562
-						level = 4
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 12374
-						level = 4
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 7986
-						level = 4
-						instant_build = yes
-					}
-				}
-
-				377 = { #Arizona
-					add_building_construction = {
-						type = bunker
-						province = 10783
-						level = 4
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 3834
-						level = 4
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 7920
-						level = 4
-						instant_build = yes
-					}
-				}
-
-				376 = {	#New Mexico
-					add_building_construction = {
-						type = bunker
-						province = 5044
-						level = 4
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 12791
-						level = 4
-						instant_build = yes
-					}
-				}
-
-				375 = {	#Texas
-					add_building_construction = {
-						type = bunker
-						province = 10740
-						level = 3
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 10894
-						level = 3
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 1954
-						level = 3
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 5038
-						level = 3
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 12728
-						level = 3
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 2019
-						level = 3
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 5061
-						level = 3
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 12369
-						level = 3
-						instant_build = yes
-					}
-				}
 			}
+			add_to_variable = {
+				var = USA_consumer_goods_expected_value
+				value = 0.04
+
+			}
+			custom_effect_tooltip = USA_compassionate_conservatism_tt
 		}
 
 		ai_will_do = {
@@ -5274,17 +5201,17 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_preserve_traditions
-		icon = GFX_goal_Family_Values_1
+		id = USA_patriot_act
+		icon = GFX_goal_continuous_suppression
 
-		x = 0
-		y = 2
-		relative_position_id = USA_conservative_republicans
+		x = 2
+		y = 1
+		relative_position_id = USA_george_w_bush
 
-		cost = @Time_55_days
+		cost = @Time_50_days
 
 		prerequisite = {
-			focus = USA_defend_the_constitution
+			focus = USA_george_w_bush
 		}
 
 		mutually_exclusive = {
@@ -5295,7 +5222,62 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
+			add_to_variable = {
+				var = USA_drift_defence
+				value = 0.1
+
+			}
+			add_to_variable = {
+				var = USA_counter_intel
+				value = 0.15
+
+			}
+			add_stability = -0.08
 			add_war_support = 0.05
+			custom_effect_tooltip = USA_patriot_act_tt
+		}
+		
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_faith_based_initiatives
+		icon = GFX_focus_BEL_christian_corporatism
+
+		x = 4
+		y = 1
+		relative_position_id = USA_george_w_bush
+
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = USA_george_w_bush
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+						add_stability = 0.05
+						add_war_support = 0.03
+						add_to_variable = {
+				        var = USA_research_speed_factor
+				        value = -0.03
+
+			            }
+						add_to_variable = {
+				        var = USA_monthly_population
+				        value = 0.02
+
+			            }
+						custom_effect_tooltip = USA_faith_based_initiatives_tt
 		}
 
 		ai_will_do = {
@@ -5304,17 +5286,59 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_economic_pragmatism
-		icon = GFX_goal_Consumer_Goods_Production
+		id = USA_2003_tax_cuts
+		icon = GFX_focus_generic_monetary_union
+
+		x = -4
+		y = 3
+		relative_position_id = USA_george_w_bush
+
+		cost = @Time_60_days
+
+		prerequisite = {
+			focus = USA_2001_tax_cuts
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_war_support = 0.02
+            add_stability = 0.02
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.07
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = 0.07
+
+			}
+			custom_effect_tooltip = USA_2003_tax_cuts_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_part_d_medicare_modern
+		icon = GFX_focus_generic_field_hostpital
 
 		x = -2
-		y = 1
-		relative_position_id = USA_conservative_republicans
+		y = 3
+		relative_position_id = USA_george_w_bush
 
-		cost = @Time_55_days
+		cost = @Time_45_days
 
 		prerequisite = {
-			focus = USA_conservative_republicans
+			focus = USA_no_child_left_behind
 		}
 
 		mutually_exclusive = {
@@ -5325,15 +5349,399 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			random_owned_state = {
-				add_manpower = 1000
-				add_extra_state_shared_building_slots = 2
-				add_building_construction = {
-					type = industrial_complex
-					level = 2
-					instant_build = yes
-				}
+			add_stability = 0.03
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.05
+
 			}
+			custom_effect_tooltip = USA_part_d_medicare_modern_tt
+			
+
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = USA_clear_skies_act
+		icon = GFX_goal_generic_improve_relations
+
+		x = 0
+		y = 3
+		relative_position_id = USA_george_w_bush
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_compassionate_conservatism
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_to_variable = {
+			var = USA_factory_output
+			value = -0.02
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = -0.02
+
+			}
+			 add_stability = 0.05
+			 random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 1
+                        add_building_construction = {
+                            type = recycling_center 
+                            level = 1
+                            instant_build = yes
+                        }
+                    }
+			add_political_power = 100
+			custom_effect_tooltip = USA_clear_skies_act_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_homeland_security
+		icon = GFX_goal_generic_defence
+
+		x = 2
+		y = 3
+		relative_position_id = USA_george_w_bush
+
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = USA_patriot_act
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_to_variable = {
+			var = USA_core_attack
+			value = 0.075
+
+			}
+			add_to_variable = {
+			var = USA_core_defense
+			value = 0.12
+
+			}
+		    add_to_variable = {
+			var = USA_monthly_population
+			value = -0.05
+
+			}
+			add_to_variable = {
+			var = USA_counter_intel
+			value = 0.1
+
+			}
+			add_stability = 0.05
+			custom_effect_tooltip = USA_clear_skies_act_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+
+	focus = {
+		id = USA_stem_cell_limits
+		icon = GFX_goal_generic_military_deal
+
+		x = 4
+		y = 3
+		relative_position_id = USA_george_w_bush
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_faith_based_initiatives
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_to_variable = {
+			var = USA_research_speed_factor
+			value = -0.06
+			}
+			add_stability = -0.01
+			add_political_power = 20
+			custom_effect_tooltip = USA_stem_cell_limits_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+
+	focus = {
+		id = USA_drilling_in_the_arctic
+		icon = GFX_goal_generic_oil_refinery
+
+		x = -3
+		y = 5
+		relative_position_id = USA_george_w_bush
+
+
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = USA_2003_tax_cuts
+		}
+		prerequisite = {
+			focus = USA_part_d_medicare_modern
+		}
+
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+		add_resource = {
+
+        type = oil
+
+        amount = 43
+
+        state = 463
+
+
+		}
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_federal_religion_funding
+		icon = GFX_focus_mex_privatisation
+
+		x = -1
+		y = 5
+		relative_position_id = USA_george_w_bush
+
+
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = USA_part_d_medicare_modern
+		}
+		prerequisite = {
+			focus = USA_clear_skies_act
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.06
+
+			}
+			add_war_support = 0.05
+			add_stability = 0.05
+			custom_effect_tooltip = USA_federal_religion_funding_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = USA_private_retirement_funds
+		icon = GFX_focus_generic_welfare
+
+		x = 1
+		y = 5
+		relative_position_id = USA_george_w_bush
+
+		cost = @Time_40_days
+
+        prerequisite = {
+			focus = USA_clear_skies_act
+		}
+		prerequisite = {
+			focus = USA_homeland_security
+		}
+		available = {
+			
+		}
+		mutually_exclusive = {}
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.07
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.1
+
+			}
+			custom_effect_tooltip = USA_private_retirement_funds_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = USA_temporary_guest_workers
+		icon = GFX_focus_generic_immigration
+
+		x = 3
+		y = 5
+		relative_position_id = USA_george_w_bush
+
+		cost = @Time_55_days
+
+		prerequisite = {
+			focus = USA_homeland_security
+		}
+		prerequisite = {
+			focus = USA_stem_cell_limits
+		}
+
+		mutually_exclusive = {}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.15
+
+			}
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.15
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = 0.15
+
+			}
+			add_to_variable = {
+			var = USA_production_speed_buildings_factor
+			value = 0.15
+
+			}
+			 add_political_power = -100
+			 custom_effect_tooltip = USA_temporary_guest_workers_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_good_old_dubya
+		icon = american_constitution
+
+		x = 0
+		y = 7
+		relative_position_id = USA_george_w_bush
+
+		cost = @Time_55_days
+
+		prerequisite = {
+			focus = USA_drilling_in_the_arctic
+		}
+		prerequisite = {
+			focus = USA_federal_religion_funding
+		}
+		prerequisite = {
+			focus = USA_private_retirement_funds
+		}
+		prerequisite = {
+			focus = USA_temporary_guest_workers
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.12
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.2
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff
+			value = 0.15
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff_cap
+			value = 0.15
+
+			}
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.10
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = 0.08
+
+			}
+			add_to_variable = {
+			var = USA_research_speed_factor
+			value = 0.05
+
+			}
+			add_war_support = 0.15
+			 custom_effect_tooltip = USA_good_old_dubya_tt
 			
 		}
 
@@ -5341,19 +5749,88 @@ focus_tree = {
 			factor = 10
 		}
 	}
+
+
+	##############2004##############
+
 	focus = {
-		id = USA_bipartisan_efforts
-		icon = GFX_goal_Consumer_Goods_Production
+		id = USA_2004_pres_election
+		icon = GFX_focus_generic_election
 
-		x = -1
-		y = 1
-		relative_position_id = USA_economic_pragmatism
+		x = 0
+		y = 11
+		relative_position_id = USA_status_quo
 
-		cost = @Time_55_days
+		cost = @Time_10_days
+		prerequisite = {
+			focus = USA_good_old_dubya
+			focus = USA_you_can_call_him_al
+		}
+
+		mutually_exclusive = {
+		}
+
+		available = { 
+			date > 2004.11.2
+			has_country_flag = usa_election_2004
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			remove_ideas = USA_Al_Gore_Admin_Modifier
+			remove_ideas = USA_George_W_Bush_Admin_Modifier
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_john_kerry
+		icon = GFX_USA_Democratic_Party
+
+		x = -6
+		y = 2
+		relative_position_id = USA_2004_pres_election
+
+		cost = @Time_5_days
 
 		prerequisite = {
-			focus = USA_economic_pragmatism
-			focus = USA_technological_innovation_fund
+			focus = USA_2004_pres_election
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = USA_John_Kerry_Admin_Modifier }
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_no_tax_cuts_for_rich
+		icon = GFX_goal_generic_political_pressure
+
+		x = -4
+		y = 1
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_50_days
+		prerequisite = {
+			focus = USA_john_kerry
 		}
 
 		mutually_exclusive = {
@@ -5365,7 +5842,17 @@ focus_tree = {
 
 		completion_reward = {
 			add_stability = 0.05
-			add_political_power = 90
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.03
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = 0.03
+
+			}
+			custom_effect_tooltip = USA_no_tax_cuts_for_rich_tt
 		}
 
 		ai_will_do = {
@@ -5374,17 +5861,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_cultural_reawakening
-		icon = cultural_education
+		id = USA_reimburse_catastrophic_costs
+		icon = GFX_focus_usa_reestablish_the_gold_standard
 
-		x = -1
-		y = 2
-		relative_position_id = USA_right_wing_populist_republicans
+		x = -2
+		y = 1
+		relative_position_id = USA_john_kerry
 
-		cost = @Time_55_days
-
+		cost = @Time_50_days
 		prerequisite = {
-			focus = USA_america_first
+			focus = USA_john_kerry
 		}
 
 		mutually_exclusive = {
@@ -5395,7 +5881,14 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			fourth_estate_reactionary_increase = yes
+			add_stability = 0.03
+			add_political_power = 40
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.07
+
+			}
+			custom_effect_tooltip = USA_reimburse_catastrophic_costs_tt
 		}
 
 		ai_will_do = {
@@ -5403,22 +5896,17 @@ focus_tree = {
 		}
 	}
 
-
 	focus = {
-		id = USA_national_defense_act
-		icon = GFX_goal_Increase_Military_Spending
+		id = USA_free_healthcare_kids
+		icon = GFX_focus_generic_field_hostpital
 
-		x = -1
-		y = 3
-		relative_position_id = USA_conservative_republicans
+		x = 0
+		y = 1
+		relative_position_id = USA_john_kerry
 
-		cost = @Time_55_days
-
+		cost = @Time_40_days
 		prerequisite = {
-			focus = USA_economic_pragmatism
-		}
-		prerequisite = {
-			focus = USA_preserve_traditions
+			focus = USA_john_kerry
 		}
 
 		mutually_exclusive = {
@@ -5429,9 +5917,15 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			army_experience = 25
-			navy_experience = 25
-			air_experience = 25
+			add_stability = 0.06
+			add_political_power = 75
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.04
+
+			}
+			custom_effect_tooltip = USA_free_healthcare_kids_tt
+			
 		}
 
 		ai_will_do = {
@@ -5439,20 +5933,105 @@ focus_tree = {
 		}
 	}
 
-
 	focus = {
-		id = USA_war_with_corruption
-		icon = GFX_focus_generic_treaty
+		id = USA_small_biz_tax_credit
+		icon = GFX_focus_generic_industry_1
 
 		x = 2
 		y = 1
-		relative_position_id = USA_right_wing_populist_republicans
+		relative_position_id = USA_john_kerry
 
-
-		cost = @Time_55_days
-
+		cost = @Time_35_days
 		prerequisite = {
-			focus = USA_right_wing_populist_republicans
+			focus = USA_john_kerry
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.02
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = 0.02
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff
+			value = 0.03
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff_cap
+			value = 0.03
+
+			}
+			custom_effect_tooltip = USA_small_biz_tax_credit_tt
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_college_tax_credit
+		icon = GFX_focus_generic_currency_reforms
+
+		x = 4
+		y = 1
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_45_days
+		prerequisite = {
+			focus = USA_john_kerry
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.03
+			add_political_power = 60
+			add_to_variable = {
+			var = USA_research_speed_factor
+			value = 0.08
+
+			}
+			custom_effect_tooltip = USA_college_tax_credit_tt
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_increase_minimum_wage
+		icon = GFX_focus_generic_economic_recovery
+
+		x = -4
+		y = 2
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_50_days
+		prerequisite = {
+			focus = USA_no_tax_cuts_for_rich
 		}
 
 		mutually_exclusive = {
@@ -5464,102 +6043,29 @@ focus_tree = {
 
 		completion_reward = {
 			add_political_power = 100
-			add_war_support = -0.1
-		}
+			add_stability = 0.05
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.04
 
-		ai_will_do = {
-			factor = 10
-		}
-	}
-
-	focus = {
-		id = USA_american_greatness
-		icon = GFX_USA_UncleSam
-
-		x = 1
-		y = 1
-		relative_position_id = USA_cultural_reawakening
-
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_cultural_reawakening
-		}
-		prerequisite = {
-			focus = USA_national_self_sufficiency
-		}
-
-		mutually_exclusive = {
-		}
-
-		
-
-		bypass = {}
-
-		completion_reward = {
-			add_political_power = 250
-			add_war_support = 0.25
-			add_stability = 0.1
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = USA_national_self_sufficiency
-		icon = GFX_focus_generic_support_the_left_right
-
-		x = 1
-		y = 1
-		relative_position_id = USA_america_first
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_america_first
-		}
-		available = {
-			has_completed_focus = USA_reduce_market_regulations
-		}
-		mutually_exclusive = {}
-
-		bypass = {}
-
-		completion_reward = {
-			swap_ideas = {
-				remove_idea = USA_resource_investment_program1
-				add_idea = USA_resource_investment_program2
 			}
-		}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = 0.04
 
-		ai_will_do = {
-			factor = 10
-		}
-	}
-	focus = {
-		id = USA_militarism
-		icon = GFX_USA_Militarism
+			}
+			add_to_variable = {
+			var = USA_prod_eff
+			value = 0.05
 
-		x = 0
-		y = 1
-		relative_position_id = USA_border_security
+			}
+			add_to_variable = {
+			var = USA_prod_eff_cap
+			value = 0.05
 
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_border_security
-		}
-
-		mutually_exclusive = {}
-
-		available = {}
-
-		bypass = {}
-
-		completion_reward = {
-			add_ideas = USA_glorify_the_military_idea
+			}
+			custom_effect_tooltip = USA_increase_minimum_wage_tt
+			
 		}
 
 		ai_will_do = {
@@ -5568,17 +6074,16 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_defend_the_constitution
-		icon = american_constitution
+		id = USA_no_more_outsourcing
+		icon = GFX_focus_generic_conspiracy
 
-		x = 0
-		y = 1
-		relative_position_id = USA_conservative_republicans
+		x = -2
+		y = 2
+		relative_position_id = USA_john_kerry
 
-		cost = @Time_55_days
-
+		cost = @Time_40_days
 		prerequisite = {
-			focus = USA_conservative_republicans
+			focus = USA_reimburse_catastrophic_costs
 		}
 
 		mutually_exclusive = {
@@ -5589,7 +6094,28 @@ focus_tree = {
 		bypass = {}
 
 		completion_reward = {
-			fourth_estate_conservative_increase = yes
+			add_political_power = 50
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.07
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = 0.07
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff
+			value = 0.05
+
+			}
+			add_to_variable = {
+			var = USA_production_speed_buildings_factor
+			value = 0.1
+
+			}
+			custom_effect_tooltip = USA_no_more_outsourcing_tt
 		}
 
 		ai_will_do = {
@@ -5598,16 +6124,256 @@ focus_tree = {
 	}
 
 	focus = {
-		id = USA_presidental_leadership
-		icon = GFX_goal_demand_sudetenland
+		id = USA_earlier_medicare_buy_in
+		icon = GFX_goal_tripartite_pact
+		x = 0
+		y = 2
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_45_days
+		prerequisite = {
+			focus = USA_free_healthcare_kids
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.08
+			add_political_power = 20
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.07
+
+			}
+			custom_effect_tooltip = USA_earlier_medicare_buy_in_tt
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_fully_funded_va
+		icon = GFX_focus_usa_build_the_pentagon
+		x = 2
+		y = 2
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_45_days
+		prerequisite = {
+			focus = USA_small_biz_tax_credit
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_political_power = 40
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.04
+
+			}
+			add_to_variable = {
+			var = USA_wounded_chance
+			value = -0.25
+
+			}
+			add_to_variable = {
+			var = USA_good_soldier_loss
+			value = 0.2
+
+			}
+			custom_effect_tooltip = USA_fully_funded_va_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_national_service_program
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 4
+		y = 2
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_45_days
+		prerequisite = {
+			focus = USA_college_tax_credit
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.1
+			add_to_variable = {
+			var = USA_research_speed_factor
+			value = 0.05
+
+			}
+			add_to_variable = {
+			var = USA_army_org
+			value = 0.2
+
+			}
+			add_to_variable = {
+			var = USA_division_recovery
+			value = 0.2
+
+			}
+			custom_effect_tooltip = USA_national_service_program_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_ban_assault_rifles
+		icon = GFX_focus_NOR_broken_gun_policies
+
+		x = -3
+		y = 3
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_45_days
+		prerequisite = {
+			focus = USA_increase_minimum_wage
+		}
+		prerequisite = {
+			focus = USA_no_more_outsourcing
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.15
+			add_political_power = -75
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.02
+			}
+			add_manpower = 50000
+			custom_effect_tooltip = USA_ban_assault_rifles_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_legalize_gay_marriage
+		icon = GFX_focus_generic_treaty
+
+		x = -1
+		y = 3
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_45_days
+		prerequisite = {
+			focus = USA_earlier_medicare_buy_in
+		}
+		prerequisite = {
+			focus = USA_no_more_outsourcing
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.08
+			add_political_power = 20
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.03
+			}
+			custom_effect_tooltip = USA_legalize_gay_marriage_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_abolish_death_penalty
+		icon = GFX_focus_SWE_neither_death_nor_dishonor
 
 		x = 1
 		y = 3
-		relative_position_id = USA_conservative_republicans
+		relative_position_id = USA_john_kerry
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 		prerequisite = {
-			focus = USA_preserve_traditions
+			focus = USA_earlier_medicare_buy_in
+		}
+		prerequisite = {
+			focus = USA_fully_funded_va
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.07
+			add_political_power = 30
+			add_manpower = 1000
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_return_to_kyoto
+		icon = GFX_focus_RAJ_to_shake_the_world
+
+		x = 3
+		y = 3
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_50_days
+		prerequisite = {
+			focus = USA_national_service_program
+		}
+		prerequisite = {
+			focus = USA_fully_funded_va
 		}
 
 		mutually_exclusive = {
@@ -5619,14 +6385,851 @@ focus_tree = {
 
 		completion_reward = {
 			add_stability = 0.05
-			add_war_support = 0.05
-			add_political_power = 250
+			add_political_power = 50
+			
+
+			add_to_variable = {
+			var = USA_factory_output
+			value = -0.08
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = -0.08
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff
+			value = -0.09
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff_cap
+			value = -0.09
+
+			}
+			custom_effect_tooltip = USA_return_to_kyoto_tt
+			
 		}
 
 		ai_will_do = {
 			factor = 10
 		}
 	}
+
+	focus = {
+		id = USA_purple_heart_johnny
+		icon = GFX_focus_generic_the_giant_wakes
+
+		x = 0
+		y = 5
+		relative_position_id = USA_john_kerry
+
+		cost = @Time_70_days
+		prerequisite = {
+			focus = USA_return_to_kyoto
+		}
+		prerequisite = {
+			focus = USA_abolish_death_penalty
+		}
+		prerequisite = {
+			focus = USA_legalize_gay_marriage
+		}
+		prerequisite = {
+			focus = USA_ban_assault_rifles
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.15
+			add_political_power = 150
+			
+
+			add_to_variable = {
+			var = USA_army_org
+			value = 0.1
+
+			}
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.12
+
+			}
+			add_to_variable = {
+			var = USA_planning
+			value = 0.3
+
+			}
+			add_to_variable = {
+			var = USA_army_train_time
+			value = -0.1
+
+			}
+			custom_effect_tooltip = USA_purple_heart_johnny_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_george_w_bush_2
+		icon = GFX_USA_Republican_Party
+
+		x = 6
+		y = 2
+		relative_position_id = USA_2004_pres_election
+
+		cost = @Time_5_days
+
+		prerequisite = {
+			focus = USA_2004_pres_election
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_dynamic_modifier = { modifier = USA_George_W_Bush_2_Admin_Modifier }
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_secure_fence_act
+		icon = GFX_focus_attack_mexico
+
+		x = -4
+		y = 1
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_george_w_bush_2
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.07
+			add_political_power = 50
+			
+			add_to_variable = {
+			var = USA_production_speed_bunker_factor
+			value = 0.5
+
+			}
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_alt_energy_tax_credits
+		icon = GFX_focus_generic_central_planning
+
+		x = -2
+		y = 1
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_george_w_bush_2
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.08
+			add_political_power = 40
+			
+			random_owned_state = {
+				add_building_construction = {
+					type = recycling_center
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = recycling_center
+					level = 1
+					instant_build = yes
+				}
+			}
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_bankruptcy_reform
+		icon = GFX_focus_generic_stockpile_currency
+
+		x = 0
+		y = 1
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_40_days
+		prerequisite = {
+			focus = USA_george_w_bush_2
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 75
+			
+
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.05
+
+			}
+
+			add_to_variable = {
+			var = USA_prod_eff
+			value = 0.07
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff_cap
+			value = 0.07
+
+			}
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	
+	focus = {
+		id = USA_adam_walsh_act
+		icon = GFX_goal_generic_defence
+
+		x = 2
+		y = 1
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = USA_george_w_bush_2
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.1
+			add_political_power = 100
+			
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.08
+
+			}
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_pension_protection_act
+		icon = GFX_focus_generic_american_investments
+
+		x = 4
+		y = 1
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_george_w_bush_2
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+			
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.03
+
+			}
+
+			add_to_variable = {
+			var = USA_consumer_goods_expected_value
+			value = 0.03
+
+			}
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_reauthorize_patriot_act
+		icon = GFX_goal_generic_forceful_treaty
+
+		x = -4
+		y = 2
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_secure_fence_act
+		}
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_to_variable = {
+				var = USA_drift_defence
+				value = 0.12
+
+			}
+			add_to_variable = {
+				var = USA_counter_intel
+				value = 0.2
+
+			}
+			add_stability = -0.1
+			add_war_support = 0.1
+			custom_effect_tooltip = USA_reauthorize_patriot_act_tt
+		}
+		
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_renewable_energy_independence
+		icon = GFX_goal_continuous_increase_nu
+
+		x = -2
+		y = 2
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_alt_energy_tax_credits
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.1
+			add_political_power = 50
+			
+			random_owned_state = {
+				add_building_construction = {
+					type = recycling_center
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = recycling_center
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_building_construction = {
+					type = recycling_center
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = {
+			var = USA_factory_output
+			value = -0.05
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = -0.05
+
+			}
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_class_action_reform
+		icon = GFX_focus_generic_court
+
+		x = 0
+		y = 2
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = USA_bankruptcy_reform
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 100
+			
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_no_genetic_discrimination
+		icon = GFX_focus_generic_workers
+
+		x = 2
+		y = 2
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_45_days
+
+		prerequisite = {
+			focus = USA_adam_walsh_act
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.06
+			add_political_power = 150
+
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.08
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = 0.08
+
+			}
+
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.1
+
+			}
+			
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_combating_autism_act
+		icon = GFX_goal_generic_alliance
+
+		x = 4
+		y = 2
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = USA_pension_protection_act
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.05
+
+			}
+			
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_the_marriage_amendment
+		icon = GFX_focus_hol_the_foundations_of_defense
+
+		x = -3
+		y = 3
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_60_days
+
+		prerequisite = {
+			focus = USA_reauthorize_patriot_act
+		}
+		prerequisite = {
+			focus = USA_renewable_energy_independence
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = -0.04
+			add_political_power = 30
+
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.2
+
+			}
+			fourth_estate_conservative_increase = yes
+			
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_2007_immigration_reform
+		icon = GFX_focus_generic_swooping_falcon
+
+		x = -1
+		y = 3
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_45_days
+
+		prerequisite = {
+			focus = USA_class_action_reform
+		}
+		prerequisite = {
+			focus = USA_renewable_energy_independence
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.05
+			add_to_variable = {
+			var = USA_counter_intel
+			value = -0.15
+
+			}
+
+			add_to_variable = {
+			var = USA_monthly_population
+			value = -0.1
+
+			}
+			
+			
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_privatize_social_security
+		icon = GFX_focus_usa_voter_registration_act
+
+		x = 1
+		y = 3
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_50_days
+
+		prerequisite = {
+			focus = USA_class_action_reform
+		}
+		prerequisite = {
+			focus = USA_no_genetic_discrimination
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.03
+			add_political_power = 80
+			add_to_variable = {
+			var = USA_consumer_goods_expected_value
+			value = -0.02
+
+			}
+
+			add_to_variable = {
+			var = USA_monthly_population
+			value = -0.05
+
+			}
+			
+			
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_no_down_payment_mortgages
+		icon = GFX_focus_usa_guarantee_the_american_dream
+
+		x = 3
+		y = 3
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_no_genetic_discrimination
+		}
+		prerequisite = {
+			focus = USA_combating_autism_act
+		}
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.1
+			add_political_power = 120
+
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.12
+
+			}
+			
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_george_walker_bush
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 0
+		y = 5
+		relative_position_id = USA_george_w_bush_2
+
+		cost = @Time_45_days
+
+		prerequisite = {
+			focus = USA_the_marriage_amendment
+		}
+		prerequisite = {
+			focus = USA_2007_immigration_reform
+		}
+		prerequisite = {
+			focus = USA_privatize_social_security
+		}
+		prerequisite = {
+			focus = USA_no_down_payment_mortgages
+		}
+		
+
+		
+
+		
+
+		mutually_exclusive = {
+		}
+
+		
+
+		bypass = {}
+
+		completion_reward = {
+			add_stability = 0.15
+
+			add_to_variable = {
+			var = USA_factory_output
+			value = 0.13
+
+			}
+			add_to_variable = {
+			var = USA_dockyard_output
+			value = 0.1
+
+			}
+
+			add_to_variable = {
+			var = USA_monthly_population
+			value = 0.15
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff
+			value = 0.13
+
+			}
+			add_to_variable = {
+			var = USA_prod_eff_cap
+			value = 0.13
+
+			}
+			
+			
+			
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+
 
 	#############################
 	###			  			  ###
@@ -9979,92 +11582,7 @@ focus_tree = {
 		}
 	}
 
-	focus = {
-		id = USA_secure_fence_act
-		icon = GFX_goal_generic_defence
-
-		x = 0
-		y = 5
-		relative_position_id = USA_diplomacy_americas
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_cautious_southern_policy
-		}
-
-		mutually_exclusive = {}
-
-		available = {}
-
-		bypass = {
-			has_war_with = MEX
-		}
-
-		completion_reward = {
-			add_popularity = {
-				ideology = conservative
-				popularity = 0.02
-			}
-			hidden_effect = {
-				custom_effect_tooltip = USA_secure_fence_act_tooltip
-				375 = {	#Texas
-					add_building_construction = {
-						type = bunker
-						province = 10740
-						level = 2
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 10894
-						level = 2
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 1954
-						level = 2
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 5038
-						level = 2
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 12728
-						level = 2
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 2019
-						level = 2
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 5061
-						level = 2
-						instant_build = yes
-					}
-					add_building_construction = {
-						type = bunker
-						province = 12369
-						level = 2
-						instant_build = yes
-					}
-				}
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
+	
 
 	focus = {
 		id = USA_avenge_1812
@@ -13814,7 +15332,5 @@ focus_tree = {
 
 		ai_will_do = {
 			factor = 10
-		}
-	}
-
-}
+	    }
+	}}

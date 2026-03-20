@@ -9,7 +9,7 @@ focus_tree = {
 	}
 	default = no
 
-	continuous_focus_position = { x = 900 y = 1600 }
+	continuous_focus_position = { x = 3200 y = 1100 }
 
 	shared_focus = LLE_baltic_tiger
 
@@ -43,12 +43,16 @@ focus_tree = {
 		}
 	}
 
+	################
+	#### NORDIC ####
+	################
+
 	focus = {
 		id = EST_improve_nordic_relations
 		icon = GFX_focus_SWE_the_nordic_decentralized_nordic_army_command
 		cost = 5
-		x = 13
-		y = 8
+		x = 5
+		y = 0
 
 		completion_reward = {
 			every_country = {
@@ -200,8 +204,9 @@ focus_tree = {
 		id = EST_baltic_culture
 		icon = GFX_focus_generic_baltic_entente
 		cost = 5
-		x = 10
-		y = 9
+		x = -4
+		y = 1
+		relative_position_id = EST_improve_nordic_relations
 
 		mutually_exclusive = {
 			focus = EST_nordic_culture
@@ -443,35 +448,37 @@ focus_tree = {
 #################
 
 	focus = {
-		id = EST_regulate_public_salaries
-		icon = GFX_focus_DEN_limited_regulations
+		id = EST_finish_reforms
+		icon = GFX_focus_generic_currency_reforms
 		cost = 5
-		x = 20
+		x = 37
 		y = 0
 
 		available = {
 		}
 
 		completion_reward = {
-		}
-	}
-
-	focus = {
-		id = EST_pension_reforms
-		icon = GFX_focus_SWI_issue_war_bonds
-		cost = 5
-		x = 0
-		y = 1
-		relative_position_id = EST_regulate_public_salaries
-
-		prerequisite = {
-			focus = EST_regulate_public_salaries
-		}
-
-		available = {
-		}
-
-		completion_reward = {
+			add_stability = 0.05
+			EST_bop_very_low_decrease_effect = yes
+			custom_effect_tooltip = generic_skip_one_line_tt
+			effect_tooltip = {
+				add_advisor_role = {
+					character = EST_siim_kallas
+					advisor = {
+						slot = political_advisor
+						cost = 50
+						idea_token = EST_siim_kallas
+						traits = {
+							economic_reformer
+						}
+					}
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			unlock_decision_tooltip = est_reform_pensions
+			unlock_decision_tooltip = est_reform_public_administration
+			unlock_decision_tooltip = est_reform_finances
+			custom_effect_tooltip = EST_economic_reforms_tt
 		}
 	}
 
@@ -481,10 +488,10 @@ focus_tree = {
 		cost = 5
 		x = 0
 		y = 3
-		relative_position_id = EST_regulate_public_salaries
+		relative_position_id = EST_finish_reforms
 
 		prerequisite = {
-			focus = EST_pension_reforms
+			focus = EST_finish_reforms
 		}
 
 		prerequisite = {
@@ -510,7 +517,7 @@ focus_tree = {
 		cost = 5
 		x = -1
 		y = 4
-		relative_position_id = EST_regulate_public_salaries
+		relative_position_id = EST_finish_reforms
 
 		prerequisite = {
 			focus = EST_push_digital_transformation
@@ -529,7 +536,7 @@ focus_tree = {
 		cost = 5
 		x = 1
 		y = 4
-		relative_position_id = EST_regulate_public_salaries
+		relative_position_id = EST_finish_reforms
 
 		prerequisite = {
 			focus = EST_push_digital_transformation
@@ -552,7 +559,7 @@ focus_tree = {
 		cost = 5
 		x = 0
 		y = 5
-		relative_position_id = EST_regulate_public_salaries
+		relative_position_id = EST_finish_reforms
 
 		prerequisite = {
 			focus = EST_form_itl
@@ -661,14 +668,20 @@ focus_tree = {
 		id = EST_encourage_foreign_investment
 		icon = GFX_focus_generic_american_investments
 		cost = 5
-		x = 25
+		x = 5
 		y = 0
+
+		relative_position_id = EST_finish_reforms
 
 		available = {
 		}
 
 		completion_reward = {
 			add_offsite_building = { type = industrial_complex level = 1 }
+			add_timed_idea = {
+				idea = EST_invite_foreign_investors
+				days = 365
+			}
 		}
 	}
 
@@ -676,76 +689,16 @@ focus_tree = {
 		id = EST_promote_free_trade
 		icon = GFX_goal_generic_positive_trade_relations
 		cost = 5
-		x = 22
+		x = 7
 		y = 0
+
+		relative_position_id = EST_finish_reforms
 
 		available = {
 		}
 
 		completion_reward = {
 			add_ideas = free_trade
-		}
-	}
-
-	focus = {
-		id = EST_abolish_corporate_income_tax
-		icon = GFX_focus_BRA_pro_business_taxes
-		cost = 5
-		x = -2
-		y = 1
-		relative_position_id = EST_encourage_foreign_investment
-
-		prerequisite = {
-			focus = EST_encourage_foreign_investment
-		}
-
-		available = {
-		}
-
-		completion_reward = {
-			if = {
-				limit = { has_idea = estonia_economic_crisis }
-				swap_ideas = {
-					remove_idea = estonia_economic_crisis
-					add_idea = estonia_economic_crisis_1
-				}
-			} else = {
-				swap_ideas = {
-					remove_idea = estonia_economic_crisis_1
-					add_idea = estonia_economic_crisis_2
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = EST_reform_custom_duties
-		icon = GFX_focus_generic_agricultural_subsidies
-		cost = 5
-		x = -3
-		y = 2
-		relative_position_id = EST_encourage_foreign_investment
-
-		prerequisite = {
-			focus = EST_abolish_corporate_income_tax
-		}
-
-		available = {
-		}
-
-		completion_reward = {
-			if = {
-				limit = { has_idea = estonia_economic_crisis }
-				swap_ideas = {
-					remove_idea = estonia_economic_crisis
-					add_idea = estonia_economic_crisis_1
-				}
-			} else = {
-				swap_ideas = {
-					remove_idea = estonia_economic_crisis_1
-					add_idea = estonia_economic_crisis_2
-				}
-			}
 		}
 	}
 
@@ -758,8 +711,7 @@ focus_tree = {
 		relative_position_id = EST_encourage_foreign_investment
 
 		prerequisite = {
-			focus = EST_encourage_foreign_investment
-			focus = EST_promote_free_trade
+			focus = EST_finish_reforms
 		}
 
 		available = {
@@ -775,7 +727,6 @@ focus_tree = {
 		}
 
 		completion_reward = {
-			remove_ideas = estonia_economic_crisis_2
 			remove_ideas = EST_eea_idea
 			custom_effect_tooltip = est_privatisation_tt
 		}
@@ -1143,8 +1094,8 @@ focus_tree = {
 		id = EST_rebuild_tapa_base
 		icon = GFX_goal_generic_construct_civilian
 		cost = 10
-		x = 22
-		y = 7
+		x = 14
+		y = 0
 
 		completion_reward = {
 			remove_ideas = EST_maavagi_idea
@@ -1155,8 +1106,8 @@ focus_tree = {
 		id = EST_national_defence_development_plan
 		icon = GFX_focus_SOV_mobilization_plan
 		cost = 10
-		x = 20
-		y = 12
+		x = 12
+		y = 7
 
 		completion_reward = {
 			add_war_support = 0.05
@@ -1166,19 +1117,74 @@ focus_tree = {
 	}
 
 	focus = {
+		id = EST_open_kaitseliidu_kool
+		icon = GFX_focus_generic_advanced_military_studies
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = EST_rebuild_tapa_base
+
+		prerequisite = {
+			focus = EST_rebuild_tapa_base
+		}
+
+		completion_reward = {
+			army_experience = 10
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = modify_EST_kaitseliit_modifier_tt
+			add_to_variable = { EST_kaitseliit_modifier_equipment_capture_factor = 0.02 tooltip = equipment_capture_tt }
+			add_to_variable = { EST_kaitseliit_modifier_land_doctrine_cost_factor = -0.03 tooltip = land_doctrine_cost_factor_tt }
+			add_to_variable = { EST_kaitseliit_modifier_training_time_factor = -0.05 tooltip = training_time_factor_tt }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			EST_benno_leesik = {
+				gain_xp = 100
+			}
+			add_corps_commander_role = {
+				Character = EST_raivo_lumiste
+				skill = 1
+				trait = { trait_EST_kaitseliit_officer }
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			custom_effect_tooltip = EST_can_get_kaitseliit_trait_tt
+		}
+	}
+
+	focus = {
 		id = EST_integrate_naiskodukaitse
 		icon = EST_naiskodukaitse
 		cost = 5
-		x = 26
-		y = 10
+		x = 2
+		y = 2
+		relative_position_id = EST_rebuild_tapa_base
+
+		prerequisite = {
+			focus = EST_open_kaitseliidu_kool
+		}
 
 		completion_reward = {
 			add_stability = 0.05
 			add_war_support = 0.05
-			swap_ideas = {
-				remove_idea = EST_kaitseliit
-				add_idea = EST_kaitseliit_1
+			add_tech_bonus = {
+				name = EST_naiskodukaitse_bonus
+				bonus = 1.0
+				uses = 1
+				category = hospital_tech
 			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = modify_EST_kaitseliit_modifier_tt
+			add_to_variable = { EST_kaitseliit_modifier_army_core_defence_factor = 0.025 tooltip = army_core_defence_factor_tt }
+			add_to_variable = { EST_kaitseliit_modifier_training_time_factor = -0.025 tooltip = training_time_factor_tt }
+			add_to_variable = { EST_kaitseliit_modifier_max_dig_in_factor = 0.025 tooltip = max_dig_in_factor_tt }
+			add_to_variable = { EST_kaitseliit_modifier_recruitable_population_factor = 0.05 tooltip = recruitable_population_factor_tt }
+			custom_effect_tooltip = generic_skip_one_line_tt
 			add_corps_commander_role = {
 				Character = EST_Airi_Tooming
 				skill = 1
@@ -1198,11 +1204,87 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = EST_youth_organisations
+		icon = GFX_focus_EST_youth_organisations
+		cost = 5
+		x = 4
+		y = 2
+		relative_position_id = EST_rebuild_tapa_base
+
+		prerequisite = {
+			focus = EST_open_kaitseliidu_kool
+		}
+
+		completion_reward = {
+			add_war_support = 0.05
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = modify_EST_kaitseliit_modifier_tt
+			add_to_variable = { EST_kaitseliit_modifier_training_time_factor = -0.025 tooltip = training_time_factor_tt }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			effect_tooltip = {
+				add_advisor_role = {
+					character = EST_silver_tamm
+					activate = no
+					advisor = {
+						slot = army_chief
+						cost = 100
+						idea_token = EST_silver_tamm
+						traits = {
+							army_chief_drill_2
+						}
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = EST_kaitseliit_focus
+		icon = GFX_focus_EST_republican_defence_league
+		cost = 5
+		x = 2
+		y = 3
+		relative_position_id = EST_rebuild_tapa_base
+
+		prerequisite = {
+			focus = EST_integrate_naiskodukaitse
+		}
+
+		completion_reward = {
+			add_war_support = 0.05
+			add_tech_bonus = {
+				name = EST_mp_bonus
+				bonus = 0.5
+				uses = 1
+				category = military_police_tech
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			custom_effect_tooltip = modify_EST_kaitseliit_modifier_tt
+			add_to_variable = { EST_kaitseliit_modifier_equipment_capture_factor = 0.025 tooltip = equipment_capture_tt }
+			add_to_variable = { EST_kaitseliit_modifier_dig_in_speed_factor = 0.025 tooltip = dig_in_speed_factor_tt }
+			add_to_variable = { EST_kaitseliit_modifier_army_core_attack_factor = 0.05 tooltip = army_core_attack_factor_tt }
+			add_to_variable = { EST_kaitseliit_modifier_army_core_defence_factor = 0.1 tooltip = army_core_defence_factor_tt }
+			custom_effect_tooltip = generic_skip_one_line_tt
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
 		id = EST_support_command
 		icon = GFX_focus_generic_truck
 		cost = 5
-		x = 22
-		y = 9
+		x = 0
+		y = 2
+		relative_position_id = EST_rebuild_tapa_base
+
+		prerequisite = {
+			focus = EST_rebuild_tapa_base
+		}
 
 		completion_reward = {
 			add_equipment_to_stockpile = {
@@ -1216,6 +1298,7 @@ focus_tree = {
 				uses = 2
 				category = hospital_tech
 				category = logistics_tech
+				category = engineers_tech
 			}
 		}
 	}
@@ -1223,8 +1306,9 @@ focus_tree = {
 		id = EST_request_foreign_support
 		icon = GFX_focus_invite_finland
 		cost = 5
-		x = 18 
-		y = 9
+		x = 5
+		y = 1
+		relative_position_id = EST_improve_nordic_relations
 
 		prerequisite = {
 			focus = EST_improve_nordic_relations
@@ -1279,25 +1363,42 @@ focus_tree = {
 		id = EST_engineer_school
 		icon = GFX_goal_generic_position_armies
 		cost = 5
-		x = 22
-		y = 11
+		x = -1
+		y = 3
+		relative_position_id = EST_rebuild_tapa_base
 
 		prerequisite = {
 			focus = EST_support_command
 		}
 		prerequisite = {
 			focus = EST_request_foreign_support
+			focus = EST_open_Kkskpoluegoon
 		}
 
 		completion_reward = {
+			army_experience = 10
+			random_army_leader = {
+				add_unit_leader_trait = engineer_officer
+			}
+			add_tech_bonus = {
+				name = EST_motorized_logistics
+				bonus = 0.75
+				uses = 1
+				category = engineers_tech
+			}
 		}
 	}
 	focus = {
 		id = EST_open_Kkskpoluegoon
 		icon = estonia_training
 		cost = 5
-		x = 26
-		y = 12
+		x = -2
+		y = 1
+		relative_position_id = EST_rebuild_tapa_base
+
+		prerequisite = {
+			focus = EST_rebuild_tapa_base
+		}
 
 		completion_reward = {
 			army_experience = 15
@@ -1319,8 +1420,9 @@ focus_tree = {
 		id = EST_Kevadtorm
 		icon = GFX_focus_NORDIC_com_selector_army
 		cost = 10
-		x = 26
-		y = 14
+		x = 0
+		y = 3
+		relative_position_id = EST_open_Kkskpoluegoon
 
 		prerequisite = { focus = EST_open_Kkskpoluegoon }
 
@@ -1341,8 +1443,8 @@ focus_tree = {
 		id = EST_defense_investment_center
 		icon = GFX_focus_generic_combined_arms
 		cost = 5
-		x = 24
-		y = 10
+		x = 12
+		y = 6
 
 		completion_reward = {
 			every_military_industrial_organization = {
@@ -1364,10 +1466,39 @@ focus_tree = {
 		}
 	}
 	focus = {
+		id = EST_eog
+		icon = GFX_focus_EST_estsof
+		cost = 5
+		x = 9
+		y = 6
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = special_forces_doctrine
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			effect_tooltip = {
+				add_advisor_role = {
+					character = EST_rive_meimer
+					advisor = {
+						slot = high_command
+						cost = 150
+						idea_token = EST_rive_meimer
+						traits = {
+							army_commando_2
+						}
+					}
+				}
+			}
+		}
+	}
+	focus = {
 		id = EST_rebuild_air_force
 		icon = GFX_focus_est_air_force
 		cost = 10
-		x = 3
+		x = 21
 		y = 0
 
 		mutually_exclusive = { focus = EST_expand_naval_academy }
@@ -1843,6 +1974,14 @@ focus_tree = {
 
 		completion_reward = {
 			navy_experience = 10
+			13 = {
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
 			add_doctrine_cost_reduction = {
 				cost_reduction = 0.25
 				uses = 2
@@ -1950,6 +2089,11 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = ca_tech
+			}
 			custom_effect_tooltip = est_purchase_minesweeper_tt
 		}
 	}
@@ -2076,27 +2220,34 @@ focus_tree = {
 		}
 
 		completion_reward = {
+			army_experience = 5
 			add_tech_bonus = {
-				bonus = 1
+				name = EST_marines_doctrine
+				bonus = 1.0
 				uses = 1
 				category = marine_tech
 			}
+			
 			division_template = { 
-						name = "Meredessantpataljon"
-						#division_names_group = SOV_INF_01
-						is_locked = no
-						regiments = { 
-							marine = { x = 0 y = 0 }
-						}
-						support = {
-						}
-					}
-					13 = {
-						create_unit = {
-							division = "name = \"1. Meredessantpataljon\" division_template = \"Meredessantpataljon\" start_experience_factor = 0.6" 
-							owner = EST
-						}
-					}
+				name = "Meredessantpataljon"
+				#division_names_group = SOV_INF_01
+				is_locked = no
+				regiments = { 
+					marine = { x = 0 y = 0 }
+				}
+				support = {
+				}
+			}
+			13 = {
+				create_unit = {
+					division = "name = \"1. Meredessantpataljon\" division_template = \"Meredessantpataljon\" start_experience_factor = 0.6" 
+					owner = EST
+				}
+			}
+			random_army_leader = {
+				include_invisible = yes
+				add_unit_leader_trait = naval_invader
+			}
 		}
 	}
 

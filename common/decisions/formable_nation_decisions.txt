@@ -98,7 +98,7 @@ formable_nation_decisions = {
 	}
 	
 	form_arab_maghreb_union = {
-		visible = {
+		allowed = {
 			OR = {
 				original_tag = MOR
 				original_tag = ALG
@@ -107,18 +107,12 @@ formable_nation_decisions = {
 				original_tag = WES
 				original_tag = TUN
 			}
+		}
+		visible = {
 			is_subject = no
 		}
 		
 		available = {
-			OR = {
-				original_tag = MOR
-				original_tag = ALG
-				original_tag = LBA
-				original_tag = MRT
-				original_tag = WSH
-				original_tag = TUN
-			}
 			OR = {
 				original_tag = MOR
 				MOR = { is_subject_of = ROOT }
@@ -237,7 +231,7 @@ formable_nation_decisions = {
 	}
 	
 	form_east_africa = {
-		visible = {
+		allowed = {
 			OR = {
 				original_tag = BRD
 				original_tag = COG
@@ -257,29 +251,12 @@ formable_nation_decisions = {
 				original_tag = SNA
 				original_tag = RRA
 			}
+		}
+		visible = {
 			is_subject = no
 		}
 		
 		available = {
-			OR = {
-				original_tag = BRD
-				original_tag = COG
-				original_tag = KEN
-				original_tag = RWA
-				original_tag = SOM
-				original_tag = SSD
-				original_tag = TZN
-				original_tag = UGA
-				original_tag = MLC
-				original_tag = RCK
-				original_tag = RCD
-				original_tag = JUB
-				original_tag = JVA
-				original_tag = PUN
-				original_tag = SPF
-				original_tag = SNA
-				original_tag = RRA
-			}
 			OR = {
 				original_tag = BRD
 				BRD = { is_subject_of = ROOT }
@@ -488,28 +465,22 @@ formable_nation_decisions = {
 		}
 	}
 	
-		form_byzantium = {
-			visible = {
-				OR = {
-					original_tag = GRE
-					original_tag = CYP
-				}
-				is_subject = no
+	form_byzantium = {
+		allowed = {
+			OR = {
+				original_tag = GRE
+				original_tag = CYP
 			}
+		}
+		visible = {
+			is_subject = no
+		}
 			
 			available = {
 				OR = {
-					original_tag = GRE
-					original_tag = CYP
-				}
-				OR = {
 					has_government = nationalist
-				}
-				OR = {
-					has_government = fascist
-				}
-				OR = {
 					has_government = monarchist
+					has_government = fascist
 				}
 				OR = {
 					original_tag = GRE
@@ -613,9 +584,7 @@ formable_nation_decisions = {
 		form_mutapa = {
 
 			icon = generic_form_nation
-
-			visible = {
-				has_government = nationalist
+			allowed = {
 				OR = {
 					original_tag = SAF
 					original_tag = BOT
@@ -624,12 +593,14 @@ formable_nation_decisions = {
 					original_tag = BAR
 					original_tag = ZAM
 				}
+			}
+			visible = {
+				has_government = nationalist
 				NOT = {ROOT = { has_country_flag =  SAF_flag_vf } }
 				NOT = { has_global_flag = form_mutapa_flag }
 			}
 
 			available = {
-				#is_subject = no
 				owns_state = 681
 				owns_state = 985
 				owns_state = 719
@@ -643,8 +614,6 @@ formable_nation_decisions = {
 				owns_state = 819
 				owns_state = 818
 				owns_state = 545
-				
-				
 			}
 
 			on_map_mode = decision_view_only
@@ -770,14 +739,6 @@ formable_nation_decisions = {
 		}
 
 		visible = {
-			OR = {
-				original_tag = GUA
-				original_tag = ELS
-				original_tag = HON
-				original_tag = NIC
-				original_tag = COS
-				original_tag = BLZ
-			}
 			NOT = { has_global_flag = form_united_central_america_flag }
 		}
 
@@ -896,13 +857,6 @@ formable_nation_decisions = {
 		}
 
 		visible = {
-			OR = {
-				original_tag = GUA
-				original_tag = ELS
-				original_tag = HON
-				original_tag = NIC
-				original_tag = COS
-			}
 			has_global_flag = form_united_central_america_flag
 			NOT = { has_global_flag = integrated_panama_flag }
 		}
@@ -942,13 +896,6 @@ formable_nation_decisions = {
 		}
 
 		visible = {
-			OR = {
-				original_tag = GUA
-				original_tag = ELS
-				original_tag = HON
-				original_tag = NIC
-				original_tag = COS
-			}
 			has_global_flag = form_united_central_america_flag
 			NOT = { has_global_flag = integrated_yucatan_flag }
 		}
@@ -963,6 +910,632 @@ formable_nation_decisions = {
 
 		ai_will_do = {
 			factor = 500
+		}
+	}
+
+	form_greater_moldova = {
+
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = MOL
+		}
+
+		available = {
+			controls_state = 806
+			controls_state = 857
+			controls_state = 1143
+			controls_state = 80
+			controls_state = 198
+			controls_state = 1145
+			controls_state = 79
+		}
+
+		visible = {
+			NOT = { has_global_flag = form_greater_moldova_flag }
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = GREATER_MOL
+			set_global_flag = form_greater_moldova_flag
+
+			1143 = { add_core_of = ROOT }
+			80 = { add_core_of = ROOT }
+			198 = { add_core_of = ROOT }
+			1145 = { add_core_of = ROOT }
+			79 = { add_core_of = ROOT }
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+	form_dacian_union = {
+
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = MOL
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = form_country_romania_required_states_tt
+				controls_state = 899
+				controls_state = 46
+				controls_state = 76
+				controls_state = 81
+				controls_state = 82
+				controls_state = 83
+				controls_state = 84
+				controls_state = 265
+				controls_state = 516
+			}
+			controls_state = 192
+			controls_state = 73
+			controls_state = 977
+			controls_state = 154
+			controls_state = 48
+			controls_state = 573
+			controls_state = 565
+			controls_state = 77
+			controls_state = 1125
+			controls_state = 976
+		}
+
+		visible = {
+			original_tag = MOL
+			has_global_flag = form_greater_moldova_flag
+			NOT = { has_global_flag = form_dacian_union_flag }
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = DACIAN_UNION
+			set_global_flag = form_dacian_union_flag
+
+			899 = { add_core_of = ROOT }
+			46 = { add_core_of = ROOT }
+			76 = { add_core_of = ROOT }
+			81 = { add_core_of = ROOT }
+			82 = { add_core_of = ROOT }
+			83 = { add_core_of = ROOT }
+			84 = { add_core_of = ROOT }
+			265 = { add_core_of = ROOT }
+			516 = { add_core_of = ROOT }
+			192 = { add_core_of = ROOT }
+			73 = { add_core_of = ROOT }
+			977 = { add_core_of = ROOT }
+			154 = { add_core_of = ROOT }
+			48 = { add_core_of = ROOT }
+			573 = { add_core_of = ROOT }
+			565 = { add_core_of = ROOT }
+			77 = { add_core_of = ROOT }
+			1125 = { add_core_of = ROOT }
+			976 = { add_core_of = ROOT }
+
+			set_victory_points = {
+				province = 9619
+				value = 10
+			}
+			set_province_name = {
+				id = 9619
+				name = VICTORY_POINTS_9619_DACIAN
+			}
+			set_capital = {state = 84}
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+	form_Nile_Union = {
+		allowed = {
+			OR = {
+				original_tag = EGY
+				original_tag = SUD
+				original_tag = SSD
+				original_tag = ETH
+			}
+		}
+		visible = {
+			is_subject = no
+		}
+		
+		available = {
+			OR = {
+				original_tag = EGY
+				EGY = { is_subject_of = ROOT }
+				EGY = { exists = no }
+			}
+			OR = {
+				original_tag = SUD
+				SUD = { is_subject_of = ROOT }
+				SUD = { exists = no }
+			}
+			OR = {
+				original_tag = SSD
+				SSD = { is_subject_of = ROOT }
+				SSD = { exists = no }
+			}
+			OR = {
+				original_tag = ETH
+				ETH = { is_subject_of = ROOT }
+				ETH = { exists = no }
+			}
+			#Egypt States
+			owns_state = 453
+			owns_state = 446
+			owns_state = 813
+			owns_state = 447
+			owns_state = 452
+			owns_state = 1032
+			owns_state = 1139
+			owns_state = 457
+			owns_state = 456
+			owns_state = 552
+			#Sudan States
+			owns_state = 763
+			owns_state = 798
+			owns_state = 761
+			owns_state = 549
+			owns_state = 551
+			owns_state = 1141
+			owns_state = 1140
+			#South Sudan States
+			owns_state = 762
+			owns_state = 1262
+			owns_state = 1142
+			#Ethiopian States
+			owns_state = 867
+			owns_state = 1203
+			owns_state = 1205
+			owns_state = 1207
+			owns_state = 1206
+			owns_state = 1204
+			owns_state = 271
+			owns_state = 866
+			owns_state = 1202
+			owns_state = 674
+		}
+		
+		icon = scandinavia
+		
+		cost = 210
+		fire_only_once = yes
+		
+		complete_effect = {
+		#Egypt States
+			add_state_core = 453
+			add_state_core = 446
+			add_state_core = 813
+			add_state_core = 447
+			add_state_core = 452
+			add_state_core = 1032
+			add_state_core = 1139
+			add_state_core = 457
+			add_state_core = 456
+			add_state_core = 552
+
+		#Sudan States
+			add_state_core = 763
+			add_state_core = 798
+			add_state_core = 761
+			add_state_core = 549
+			add_state_core = 551
+			add_state_core = 1141
+			add_state_core = 1140
+
+		#South Sudan States
+			add_state_core = 762
+			add_state_core = 1262
+			add_state_core = 1142
+
+		#Ethiopian States
+			add_state_core = 867
+			add_state_core = 1203
+			add_state_core = 1205
+			add_state_core = 1207
+			add_state_core = 1206
+			add_state_core = 1204
+			add_state_core = 271
+			add_state_core = 866
+			add_state_core = 1202
+			add_state_core = 674
+
+			add_stability = 0.05
+			add_war_support = 0.05
+			set_country_flag = has_formed_nile_union
+			set_cosmetic_tag = Nile_Union
+		}
+		
+		ai_will_do = {
+			factor = 15
+		}
+	}
+	form_liga_federal = {
+
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = URG
+		}
+
+		available = {
+			controls_state = 300
+			controls_state = 510
+			controls_state = 1010
+			controls_state = 1060
+			controls_state = 1057
+			controls_state = 1278
+			controls_state = 1355
+		}
+
+		visible = {
+			original_tag = URG
+			NOT = { has_global_flag = form_liga_federal_flag }
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = LGF_UNIFIED
+			set_global_flag = form_liga_federal_flag
+
+			set_province_name = {
+				id = 10502
+				name = VICTORY_POINTS_9619_PURIFICACION
+			}
+
+			510 = { add_core_of = ROOT }
+			1057 = { add_core_of = ROOT }
+			1010 = { add_core_of = ROOT }
+			1060 = { add_core_of = ROOT }
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+	form_la_plata = {
+
+		icon = generic_form_nation
+
+		allowed = {
+			OR = {
+				original_tag = URG
+				original_tag = ARG
+			}	
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = form_country_uruguay_required_states_tt
+				controls_state = 300
+				controls_state = 1278
+				controls_state = 1355
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_argentina_required_states_tt
+				controls_state = 278
+				controls_state = 508
+				controls_state = 509
+				controls_state = 510
+				controls_state = 511
+				controls_state = 512
+				controls_state = 847
+				controls_state = 1010
+				controls_state = 1057
+				controls_state = 1058
+				controls_state = 1059
+				controls_state = 1060
+				controls_state = 1061
+				controls_state = 1062
+				controls_state = 1063
+				controls_state = 1064
+				controls_state = 1350
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_bolivia_required_states_tt
+				controls_state = 302
+				controls_state = 487
+				controls_state = 1068
+				controls_state = 1069
+			}
+			controls_state = 688
+			controls_state = 1054
+			controls_state = 861
+		}
+
+		visible = {
+			OR = {
+				original_tag = URG
+				original_tag = ARG
+			}	
+			NOT = { has_global_flag = form_la_plata_flag }
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = united_provinces_of_the_rio_de_la_plata
+			set_global_flag = form_la_plata_flag
+
+			# Uruguay 
+			300 = { add_core_of = ROOT }
+			1355 = { add_core_of = ROOT }
+			1278 = { add_core_of = ROOT }
+
+			# Argentina
+			278 = { add_core_of = ROOT }
+			508 = { add_core_of = ROOT }
+			509 = { add_core_of = ROOT }
+			510 = { add_core_of = ROOT }
+			511 = { add_core_of = ROOT }
+			512 = { add_core_of = ROOT }
+			847 = { add_core_of = ROOT }
+			1010 = { add_core_of = ROOT }
+			1057 = { add_core_of = ROOT }
+			1058 = { add_core_of = ROOT }
+			1059 = { add_core_of = ROOT }
+			1060 = { add_core_of = ROOT }
+			1061 = { add_core_of = ROOT }
+			1062 = { add_core_of = ROOT }
+			1063 = { add_core_of = ROOT }
+			1064 = { add_core_of = ROOT }
+			1350 = { add_core_of = ROOT }
+
+			# Paraguay
+			688 = { add_core_of = ROOT }
+			1054 = { add_core_of = ROOT }
+
+			# Bolivia
+			302 = { add_core_of = ROOT }
+			487 = { add_core_of = ROOT }
+			1068 = { add_core_of = ROOT }
+			1069 = { add_core_of = ROOT }
+
+			# Chile
+			861 = { add_core_of = ROOT }
+
+			# Malvinas claims
+			299 = { add_claim_by = ROOT }
+			720 = { add_claim_by = ROOT }
+
+			# Acre
+			905 = { add_claim_by = ROOT }
+		}
+
+		ai_will_do = {
+			factor = 200
+		}
+	}
+	form_west_africa = {
+
+		icon = generic_form_nation
+
+		allowed = {
+			OR = {
+				original_tag = GHA
+				original_tag = DAH
+				original_tag = TOG
+				original_tag = NGA
+				original_tag = NGR
+				original_tag = VOL
+				original_tag = IVO
+				original_tag = MLI
+				original_tag = LIB
+				original_tag = GNA
+				original_tag = SIE
+				original_tag = RUF
+				original_tag = GNB
+				original_tag = SEN
+				original_tag = GAM
+				original_tag = MRT
+				original_tag = CAB
+			}	
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = form_country_ghana_required_states_tt
+				controls_state = 274
+				controls_state = 1105
+				controls_state = 1155
+				controls_state = 777
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_togo_required_states_tt
+				controls_state = 770
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_benin_required_states_tt
+				controls_state = 1106
+				controls_state = 1107
+				controls_state = 769
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_nigeria_required_states_tt
+				controls_state = 767
+				controls_state = 558
+				controls_state = 1148
+				controls_state = 764
+				controls_state = 859
+				controls_state = 766
+				controls_state = 1114
+				controls_state = 768
+				controls_state = 765
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_niger_required_states_tt
+				controls_state = 749
+				controls_state = 748
+				controls_state = 747
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_burkina_faso_required_states_tt
+				controls_state = 750
+				controls_state = 751
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_mali_required_states_tt
+				controls_state = 746
+				controls_state = 1100
+				controls_state = 745
+				controls_state = 744
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_mauritania_required_states_tt
+				controls_state = 557
+				controls_state = 773
+				controls_state = 1099
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_senegal_required_states_tt
+				controls_state = 772
+				controls_state = 771
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_gambia_required_states_tt
+				controls_state = 701
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_guinea_bissau_required_states_tt
+				controls_state = 296
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_guinea_required_states_tt
+				controls_state = 774
+				controls_state = 775
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_sierra_leone_required_states_tt
+				controls_state = 700
+				controls_state = 1316
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_liberia_required_states_tt
+				controls_state = 298
+				controls_state = 1146
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_ivory_coast_required_states_tt
+				controls_state = 776
+				controls_state = 1103
+				controls_state = 556
+				controls_state = 1102
+				controls_state = 1101
+			}
+			custom_trigger_tooltip = {
+				tooltip = form_country_cabo_verde_required_states_tt
+				controls_state = 702
+			}
+		}
+
+		visible = {
+			OR = {
+				original_tag = GHA
+				original_tag = DAH
+				original_tag = TOG
+				original_tag = NGA
+				original_tag = NGR
+				original_tag = VOL
+				original_tag = IVO
+				original_tag = MLI
+				original_tag = LIB
+				original_tag = GNA
+				original_tag = SIE
+				original_tag = RUF
+				original_tag = GNB
+				original_tag = SEN
+				original_tag = GAM
+				original_tag = MRT
+				original_tag = CAB
+			}	
+			NOT = { has_global_flag = form_west_africa_flag }
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = west_africa
+			set_global_flag = form_west_africa_flag
+
+			# Ghana
+			274 = { add_core_of = ROOT }
+			1105 = { add_core_of = ROOT }
+			1155 = { add_core_of = ROOT }
+			777 = { add_core_of = ROOT }
+
+			# Togo
+			770 = { add_core_of = ROOT }
+
+			# Benin
+			769 = { add_core_of = ROOT }
+			1106 = { add_core_of = ROOT }
+			1107 = { add_core_of = ROOT }
+
+			# Nigeria
+			767 = { add_core_of = ROOT }
+			558 = { add_core_of = ROOT }
+			1148 = { add_core_of = ROOT }
+			764 = { add_core_of = ROOT }
+			859 = { add_core_of = ROOT }
+			766 = { add_core_of = ROOT }
+			1114 = { add_core_of = ROOT }
+			768 = { add_core_of = ROOT }
+			765 = { add_core_of = ROOT }
+
+			1147 = { add_claim_by = ROOT }
+
+			# Niger
+			749 = { add_core_of = ROOT }
+			748 = { add_core_of = ROOT }
+			747 = { add_core_of = ROOT }
+
+			# Burkina Faso
+			750 = { add_core_of = ROOT }
+			751 = { add_core_of = ROOT }
+
+			# Mali
+			746 = { add_core_of = ROOT }
+			1100 = { add_core_of = ROOT }
+			745 = { add_core_of = ROOT }
+			744 = { add_core_of = ROOT }
+
+			# Mauritania
+			557 = { add_core_of = ROOT }
+			773 = { add_core_of = ROOT }
+			1099 = { add_core_of = ROOT }
+
+			# Senegal
+			772 = { add_core_of = ROOT }
+			771 = { add_core_of = ROOT }
+
+			# Gambia
+			701 = { add_core_of = ROOT }
+
+			# Guinea-Bissau
+			296 = { add_core_of = ROOT }
+
+			# Guinea
+			774 = { add_core_of = ROOT }
+			775 = { add_core_of = ROOT }
+
+			# Sierra Leone
+			700 = { add_core_of = ROOT }
+			1316 = { add_core_of = ROOT }
+
+			# Liberia
+			298 = { add_core_of = ROOT }
+			1146 = { add_core_of = ROOT }
+
+			# Ivory Coast
+			776 = { add_core_of = ROOT }
+			1103 = { add_core_of = ROOT }
+			556 = { add_core_of = ROOT }
+			1102 = { add_core_of = ROOT }
+			1101 = { add_core_of = ROOT }
+
+			# Cabo Verde
+			702 = { add_core_of = ROOT }
+		}
+
+		ai_will_do = {
+			factor = 200
 		}
 	}
 }

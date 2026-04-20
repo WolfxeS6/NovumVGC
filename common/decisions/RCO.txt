@@ -5950,3 +5950,59 @@ CHE_decisions_category = {
 		}
 	}
 	}
+
+
+	RCO_prca_category = {
+
+	prca_RCO_resistance = {
+
+		icon = eng_propaganda_campaigns
+
+		allowed = { original_tag = RCO }
+
+		visible = { has_country_flag = rco_prca_enabled }
+
+		#available = {
+			#custom_trigger_tooltip = {
+			#tooltip = RCO_we_can_do_a_propaganda_campaign
+				#check_variable = {
+				#	RCO_available_campaign_slots > 0
+				#}
+			#}
+		#}
+
+		days_remove = 100
+
+		cost = RCO_resistance_cost
+
+		modifier = {
+			political_power_factor = 0.1
+			conscription_factor = 0.05
+		}
+
+		complete_effect = {
+			set_country_flag = RCO_resistance_in_use
+			custom_effect_tooltip = POL_increase_propaganda_cost
+			add_timed_idea = { idea = rco_poster_resistance days = 10 }
+			add_to_variable = {
+				var = RCO_resistance_cost
+				value = 15
+			}
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = -1
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = RCO_resistance_in_use
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+
+
+
+	}

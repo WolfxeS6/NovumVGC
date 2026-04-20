@@ -1362,6 +1362,13 @@ country_event = {
 			long_name = SOV_wagner_party_long
 			name = SOV_wagner_party
 		}
+		# Dissolve the Russian-led alliance (CSTO) as Wagner consolidates power.
+		every_other_country = {
+			limit = {
+				is_in_faction_with = SOV
+			}
+			leave_faction = yes
+		}
 		remove_power_balance = {
 			id = SOV_wagner_bop
 		}
@@ -1429,17 +1436,16 @@ country_event = {
 
 	is_triggered_only = yes
 
-	option = { # prigozhin is very capable
-		name = russ.28.ab
+		option = { # prigozhin is very capable
+			name = russ.28.a
 
-		#set_country_flag = sov_flag_wagner_power
-		custom_effect_tooltip = sov_wagner_power_TT
-		custom_effect_tooltip = RCO_pp_increase_20_TT
-		add_to_variable = { sov_economy_pp_gain_factor = 0.2 }
-		add_popularity = {
-				ideology = nationalist
-				popularity = 0.05
-			}
+			set_country_flag = sov_flag_wagner_power
+			custom_effect_tooltip = sov_wagner_power_TT
+			add_political_power = 50
+			add_popularity = {
+					ideology = nationalist
+					popularity = 0.05
+				}
 	}
 
 	option = { # keep him under control
@@ -1557,5 +1563,928 @@ country_event = {
 
 		add_political_power = -150
 		
+	}
+}
+
+## wagner political-economy follow-up events
+
+## regional command crackdown
+country_event = {
+	id = russ.31
+	title = russ.31.t
+	desc = russ.31.desc
+	picture = GFX_event_protests
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # tighten control
+		name = russ.31.a
+		custom_effect_tooltip = FSB_counterdeffence_increase_30_TT
+		add_to_variable = { sov_fsb_countrdef = 0.3 }
+		custom_effect_tooltip = RCO_CG_decrease_5_TT
+		add_to_variable = { sov_economy_CG = -0.05 }
+		add_stability = -0.05
+		add_political_power = -40
+	}
+
+	option = { # compromise with governors
+		name = russ.31.b
+		add_stability = 0.05
+		add_political_power = 25
+		add_to_variable = { sov_fsb_civ_int = 10 }
+	}
+}
+
+## central planning directive
+country_event = {
+	id = russ.32
+	title = russ.32.t
+	desc = russ.32.desc
+	picture = GFX_event_rco_khoz
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # military prioritization
+		name = russ.32.a
+		custom_effect_tooltip = SOV_milconscpd_increase_5_TT
+		add_to_variable = { sov_economy_mil_cons_spd = 0.05 }
+		custom_effect_tooltip = RCO_CG_increase_3_TT
+		add_to_variable = { sov_economy_CG = 0.03 }
+		add_war_support = 0.05
+		add_stability = -0.03
+	}
+
+	option = { # cautious stabilization
+		name = russ.32.b
+		custom_effect_tooltip = SOV_civ_const_spd_increase_5_TT
+		add_to_variable = { sov_economy_civ_cons_spd = 0.05 }
+		add_stability = 0.05
+		add_to_variable = { sov_economy_mil_cons_spd = -0.05 }
+	}
+}
+
+## emergency war financing
+country_event = {
+	id = russ.33
+	title = russ.33.t
+	desc = russ.33.desc
+	picture = GFX_event_rosguard
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # emergency financing
+		name = russ.33.a
+		custom_effect_tooltip = FSB_counterdeffence_increase_30_TT
+		add_to_variable = { sov_fsb_countrdef = 0.3 }
+		add_political_power = -60
+		add_stability = -0.03
+	}
+
+	option = { # restrained growth
+		name = russ.33.b
+		add_political_power = 25
+		add_to_variable = { sov_fsb_countrdef = -0.1 }
+	}
+}
+
+## recruitment doctrine split
+country_event = {
+	id = russ.34
+	title = russ.34.t
+	desc = russ.34.desc
+	picture = GFX_event_otkazniki_3
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # quality-first recruitment
+		name = russ.34.a
+		custom_effect_tooltip = FSB_networkgainfct_increase_20_TT
+		add_to_variable = { sov_fsb_int_gain_fct = 0.2 }
+		custom_effect_tooltip = FSB_armyinttoothers_decrease_20_TT
+		add_to_variable = { sov_fsb_army_int = -20 }
+		custom_effect_tooltip = SOV_research_decrease_3_TT
+		add_to_variable = { sov_economy_resspeed = -0.03 }
+	}
+
+	option = { # mass recruitment
+		name = russ.34.b
+		custom_effect_tooltip = FSB_operatives_increase_1_TT
+		add_to_variable = { sov_fsb_op_slots = 1 }
+		custom_effect_tooltip = RCO_research_increase_5_TT
+		add_to_variable = { sov_economy_resspeed = 0.05 }
+		add_to_variable = { sov_fsb_civ_int = 20 }
+		add_to_variable = { sov_fsb_army_int = 20 }
+		add_stability = -0.05
+	}
+}
+
+## digital isolation doctrine
+country_event = {
+	id = russ.35
+	title = russ.35.t
+	desc = russ.35.desc
+	picture = GFX_event_nemnogo_interneta
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # full isolation
+		name = russ.35.a
+		custom_effect_tooltip = FSB_counterdeffence_increase_30_TT
+		add_to_variable = { sov_fsb_countrdef = 0.3 }
+		custom_effect_tooltip = FSB_civinttoothers_decrease_20_TT
+		custom_effect_tooltip = FSB_armyinttoothers_decrease_20_TT
+		custom_effect_tooltip = FSB_navyinttoothers_decrease_20_TT
+		add_to_variable = { sov_fsb_civ_int = -20 }
+		add_to_variable = { sov_fsb_army_int = -20 }
+		add_to_variable = { sov_fsb_navy_int = -20 }
+		custom_effect_tooltip = SOV_research_decrease_3_TT
+		add_to_variable = { sov_economy_resspeed = -0.03 }
+		add_stability = 0.05
+	}
+
+	option = { # controlled openings
+		name = russ.35.b
+		custom_effect_tooltip = RCO_research_increase_5_TT
+		add_to_variable = { sov_economy_resspeed = 0.05 }
+		add_political_power = 25
+		add_to_variable = { sov_fsb_civ_int = 20 }
+		add_to_variable = { sov_fsb_army_int = 20 }
+		add_stability = -0.05
+	}
+}
+
+## corporate alignment choice
+country_event = {
+	id = russ.36
+	title = russ.36.t
+	desc = russ.36.desc
+	picture = GFX_event_russian_oligarchs
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # favor loyal conglomerates
+		name = russ.36.a
+		custom_effect_tooltip = RCO_maxprod_increase_5_TT
+		add_to_variable = { sov_economy_prodcap = 0.05 }
+		add_political_power = 25
+		custom_effect_tooltip = RCO_CG_increase_3_TT
+		add_to_variable = { sov_economy_CG = 0.03 }
+		add_stability = -0.05
+	}
+
+	option = { # anti-monopoly campaign
+		name = russ.36.b
+		custom_effect_tooltip = RCO_CG_decrease_5_TT
+		add_to_variable = { sov_economy_CG = -0.05 }
+		add_stability = 0.05
+		add_to_variable = { sov_economy_prodout = -0.05 }
+	}
+}
+
+## military output quota debate
+country_event = {
+	id = russ.37
+	title = russ.37.t
+	desc = russ.37.desc
+	picture = GFX_event_soviet_industry
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # emergency quotas
+		name = russ.37.a
+		custom_effect_tooltip = SOV_milconscpd_increase_10_TT
+		add_to_variable = { sov_economy_mil_cons_spd = 0.1 }
+		custom_effect_tooltip = RCO_prodgrowh_increase_5_TT
+		add_to_variable = { sov_economy_prodgrowth_fct = 0.05 }
+		custom_effect_tooltip = RCO_CG_increase_5_TT
+		add_to_variable = { sov_economy_CG = 0.05 }
+		add_stability = -0.1
+	}
+
+	option = { # realistic planning
+		name = russ.37.b
+		custom_effect_tooltip = RCO_prodoutput_increase_5_TT
+		add_to_variable = { sov_economy_prodout = 0.05 }
+		custom_effect_tooltip = SOV_prodretention_increase_10_TT
+		add_to_variable = { sov_economy_prodretention_fct = 0.1 }
+		custom_effect_tooltip = SOV_milconscpd_decrease_10_TT
+		add_to_variable = { sov_economy_mil_cons_spd = -0.1 }
+		add_war_support = -0.05
+	}
+}
+
+## state reform implementation
+country_event = {
+	id = russ.38
+	title = russ.38.t
+	desc = russ.38.desc
+	picture = GFX_event_wagner_in_rostov
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # work with old bureaucracy
+		name = russ.38.a
+		add_stability = 0.05
+		add_political_power = 25
+		custom_effect_tooltip = RCO_CG_increase_3_TT
+		add_to_variable = { sov_economy_CG = 0.03 }
+	}
+
+	option = { # revolutionary consolidation
+		name = russ.38.b
+		add_war_support = 0.1
+		custom_effect_tooltip = FSB_counterdeffence_increase_30_TT
+		add_to_variable = { sov_fsb_countrdef = 0.3 }
+		add_stability = -0.05
+		add_political_power = -50
+	}
+}
+
+## russkiy mir internal line
+country_event = {
+	id = russ.39
+	title = russ.39.t
+	desc = russ.39.desc
+	picture = GFX_event_empire_sov
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.39.a
+		add_war_support = 0.05
+		add_political_power = 25
+		add_stability = -0.03
+	}
+
+	option = {
+		name = russ.39.b
+		add_stability = 0.03
+		add_political_power = -40
+		add_war_support = -0.02
+	}
+}
+
+## caucasus control framework
+country_event = {
+	id = russ.40
+	title = russ.40.t
+	desc = russ.40.desc
+	picture = GFX_event_caucasus
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.40.a
+		every_owned_state = {
+			limit = {
+				OR = {
+					is_core_of = GEO
+					is_core_of = ARM
+					is_core_of = AZR
+				}
+			}
+			add_compliance = 0.08
+		}
+		add_stability = -0.04
+		add_war_support = 0.03
+	}
+
+	option = {
+		name = russ.40.b
+		every_owned_state = {
+			limit = {
+				OR = {
+					is_core_of = GEO
+					is_core_of = ARM
+					is_core_of = AZR
+				}
+			}
+			add_compliance = 0.03
+		}
+		add_stability = 0.04
+		add_political_power = -50
+	}
+}
+
+## defense production doctrine
+country_event = {
+	id = russ.41
+	title = russ.41.t
+	desc = russ.41.desc
+	picture = GFX_event_soviet_industry
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.41.a
+		add_war_support = 0.05
+		add_political_power = -35
+		custom_effect_tooltip = SOV_milconscpd_increase_5_TT
+		add_to_variable = { sov_economy_mil_cons_spd = 0.05 }
+	}
+
+	option = {
+		name = russ.41.b
+		add_stability = 0.04
+		add_war_support = -0.03
+		custom_effect_tooltip = SOV_civ_const_spd_increase_5_TT
+		add_to_variable = { sov_economy_civ_cons_spd = 0.05 }
+	}
+}
+
+## anti-corruption or patronage
+country_event = {
+	id = russ.42
+	title = russ.42.t
+	desc = russ.42.desc
+	picture = GFX_event_otkazniki
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.42.a
+		add_political_power = 60
+		custom_effect_tooltip = SOV_research_decrease_3_TT
+		add_to_variable = { sov_economy_resspeed = -0.03 }
+		add_stability = -0.03
+	}
+
+	option = {
+		name = russ.42.b
+		custom_effect_tooltip = RCO_CG_increase_3_TT
+		add_to_variable = { sov_economy_CG = 0.03 }
+		add_stability = 0.03
+		add_political_power = -40
+	}
+}
+
+## rosguard operational mandate
+country_event = {
+	id = russ.43
+	title = russ.43.t
+	desc = russ.43.desc
+	picture = GFX_event_rosguard
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.43.a
+		add_to_variable = { sov_fsb_civ_int = 20 }
+		add_to_variable = { sov_fsb_army_int = 20 }
+		add_political_power = -40
+		add_stability = -0.02
+	}
+
+	option = {
+		name = russ.43.b
+		add_war_support = 0.03
+		add_political_power = 20
+		custom_effect_tooltip = FSB_counterdeffence_increase_30_TT
+		add_to_variable = { sov_fsb_countrdef = 0.3 }
+	}
+}
+
+## innovation policy dispute
+country_event = {
+	id = russ.44
+	title = russ.44.t
+	desc = russ.44.desc
+	picture = GFX_event_russian_science
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.44.a
+		custom_effect_tooltip = RCO_prodoutput_increase_5_TT
+		add_to_variable = { sov_economy_prodout = 0.05 }
+		custom_effect_tooltip = RCO_CG_increase_3_TT
+		add_to_variable = { sov_economy_CG = 0.03 }
+		add_stability = -0.05
+	}
+
+	option = {
+		name = russ.44.b
+		custom_effect_tooltip = SOV_civ_const_spd_increase_5_TT
+		add_to_variable = { sov_economy_civ_cons_spd = 0.05 }
+		add_political_power = 25
+		add_war_support = -0.03
+	}
+}
+
+## occupation governance strain
+country_event = {
+	id = russ.45
+	title = russ.45.t
+	desc = russ.45.desc
+	picture = GFX_event_tired_soldiers
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.45.a
+		add_war_support = 0.05
+		add_stability = -0.08
+		add_political_power = -75
+	}
+
+	option = {
+		name = russ.45.b
+		add_stability = 0.05
+		add_war_support = -0.05
+		add_political_power = -25
+	}
+}
+
+## military buildup mission success
+country_event = {
+	id = russ.61
+	title = russ.61.t
+	desc = russ.61.desc
+	picture = GFX_event_soviet_industry
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.61.a
+		custom_effect_tooltip = RKKA_org_increase_5_TT
+		custom_effect_tooltip = RKKA_expgain_increase_5_TT
+		add_to_variable = { sov_army_org = 0.05 }
+		add_to_variable = { sov_army_exgain = 0.05 }
+		add_war_support = 0.03
+	}
+}
+
+## military buildup mission failed
+country_event = {
+	id = russ.62
+	title = russ.62.t
+	desc = russ.62.desc
+	picture = GFX_russian_ruined_industry
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.62.a
+		custom_effect_tooltip = RKKA_conscprct_decrease_4_TT
+		add_to_variable = { sov_army_conscription = -0.04 }
+		add_stability = -0.1
+		add_war_support = -0.1
+	}
+}
+
+## internal security mission success
+country_event = {
+	id = russ.63
+	title = russ.63.t
+	desc = russ.63.desc
+	picture = GFX_event_rosguard
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.63.a
+		custom_effect_tooltip = FSB_counterdeffence_increase_30_TT
+		custom_effect_tooltip = FSB_networkgainfct_increase_20_TT
+		add_to_variable = { sov_fsb_countrdef = 0.3 }
+		add_to_variable = { sov_fsb_int_gain_fct = 0.2 }
+		add_political_power = 50
+	}
+}
+
+## internal security mission failed
+country_event = {
+	id = russ.64
+	title = russ.64.t
+	desc = russ.64.desc
+	picture = GFX_event_otkazniki_2
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.64.a
+		custom_effect_tooltip = SOV_research_decrease_3_TT
+		add_to_variable = { sov_economy_resspeed = -0.03 }
+		add_to_variable = { sov_fsb_civ_int = 20 }
+		add_stability = -0.07
+	}
+}
+
+## economic recovery mission success
+country_event = {
+	id = russ.65
+	title = russ.65.t
+	desc = russ.65.desc
+	picture = GFX_event_soviet_industry
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.65.a
+		custom_effect_tooltip = RCO_prodoutput_increase_5_TT
+		custom_effect_tooltip = RCO_CG_decrease_5_TT
+		add_to_variable = { sov_economy_prodout = 0.05 }
+		add_to_variable = { sov_economy_CG = -0.05 }
+	}
+}
+
+## economic recovery mission failed
+country_event = {
+	id = russ.66
+	title = russ.66.t
+	desc = russ.66.desc
+	picture = GFX_russian_ruined_industry
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.66.a
+		custom_effect_tooltip = RCO_CG_increase_3_TT
+		custom_effect_tooltip = SOV_research_decrease_3_TT
+		add_to_variable = { sov_economy_CG = 0.03 }
+		add_to_variable = { sov_economy_resspeed = -0.03 }
+	}
+}
+
+## naval rearmament mission success
+country_event = {
+	id = russ.67
+	title = russ.67.t
+	desc = russ.67.desc
+	picture = GFX_event_russian_navy
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.67.a
+		custom_effect_tooltip = RCO_research_increase_5_TT
+		add_to_variable = { sov_economy_resspeed = 0.05 }
+		navy_experience = 35
+	}
+}
+
+## naval rearmament mission failed
+country_event = {
+	id = russ.68
+	title = russ.68.t
+	desc = russ.68.desc
+	picture = GFX_event_russian_navy
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.68.a
+		add_stability = -0.05
+		add_war_support = -0.05
+	}
+}
+
+## military command integration doctrine split
+country_event = {
+	id = russ.69
+	title = russ.69.t
+	desc = russ.69.desc
+	picture = GFX_event_commanders_rus
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # centralize under wagner command
+		name = russ.69.a
+		custom_effect_tooltip = RKKA_coordination_increase_5_TT
+		custom_effect_tooltip = RKKA_reinforce_rate_increase_1_TT
+		add_to_variable = { sov_army_coord_bonus = 0.05 }
+		add_to_variable = { sov_army_reinf_rate = 0.01 }
+		add_political_power = -20
+	}
+
+	option = { # compromise with legacy command
+		name = russ.69.b
+		custom_effect_tooltip = RKKA_org_increase_5_TT
+		custom_effect_tooltip = RKKA_attackingspeed_increase_5_TT
+		add_to_variable = { sov_army_org = 0.05 }
+		add_to_variable = { sov_army_attacking_spd = 0.05 }
+		add_stability = 0.02
+	}
+}
+
+## aerospace modernization priorities
+country_event = {
+	id = russ.70
+	title = russ.70.t
+	desc = russ.70.desc
+	picture = GFX_event_aviation_rus
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # offensive strike doctrine
+		name = russ.70.a
+		custom_effect_tooltip = RKKA_airefficiency_increase_5_TT
+		add_to_variable = { sov_army_air_eff = 0.05 }
+		air_experience = 20
+		add_stability = -0.02
+	}
+
+	option = { # defensive shield doctrine
+		name = russ.70.b
+		custom_effect_tooltip = RKKA_airexpfactor_increase_5_TT
+		custom_effect_tooltip = RKKA_cas_dam_red_increase_10_TT
+		add_to_variable = { sov_army_air_exp = 0.05 }
+		add_to_variable = { sov_cas_dam_reduction = 0.1 }
+		add_stability = 0.02
+	}
+}
+
+## fleet reorganization strategic direction
+country_event = {
+	id = russ.71
+	title = russ.71.t
+	desc = russ.71.desc
+	picture = GFX_event_fleet_rus
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # surface presence and projection
+		name = russ.71.a
+		add_doctrine_cost_reduction = {
+			name = naval_surface_push
+			cost_reduction = 0.25
+			uses = 1
+			category = naval_doctrine
+		}
+		navy_experience = 25
+		custom_effect_tooltip = RCO_CG_increase_3_TT
+		add_to_variable = { sov_economy_CG = 0.03 }
+	}
+
+	option = { # denial fleet and submarine pressure
+		name = russ.71.b
+		add_tech_bonus = {
+			name = subs_focus
+			bonus = 0.4
+			uses = 1
+			category = ss_tech
+		}
+		navy_experience = 15
+		custom_effect_tooltip = RCO_CG_decrease_3_TT
+		add_to_variable = { sov_economy_CG = -0.03 }
+	}
+}
+
+## military innovation doctrine debate
+country_event = {
+	id = russ.72
+	title = russ.72.t
+	desc = russ.72.desc
+	picture = GFX_event_wagnerrus
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { # formal innovation command
+		name = russ.72.a
+		add_country_leader_trait = military_innovator_trait
+		custom_effect_tooltip = RKKA_landdoctrcost_decrease_25_TT
+		add_to_variable = { sov_army_land_dctr_cost = -0.25 }
+		add_political_power = -25
+	}
+
+	option = { # keep conservative command culture
+		name = russ.72.b
+		custom_effect_tooltip = RKKA_org_increase_5_TT
+		add_to_variable = { sov_army_org = 0.05 }
+		add_stability = 0.03
+	}
+
+	option = { # hybrid reform model
+		name = russ.72.c
+		custom_effect_tooltip = RKKA_coordination_increase_5_TT
+		custom_effect_tooltip = RKKA_airexpfactor_increase_5_TT
+		add_to_variable = { sov_army_coord_bonus = 0.05 }
+		add_to_variable = { sov_army_air_exp = 0.05 }
+		add_political_power = 10
+	}
+}
+
+## psyop: disinformation campaign
+country_event = {
+	id = russ.52
+	title = russ.52.t
+	desc = russ.52.desc
+	picture = GFX_report_event_russian_flag
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.52.a
+		add_political_power = -45
+		random_list = {
+			55 = {
+				SOV = {
+					add_stability = -0.03
+					add_war_support = -0.02
+				}
+			}
+			45 = {
+				SOV = {
+					add_war_support = 0.02
+					add_political_power = 20
+				}
+			}
+		}
+	}
+
+	option = {
+		name = russ.52.b
+		add_political_power = 10
+	}
+}
+
+## psyop: cyber penetration
+country_event = {
+	id = russ.53
+	title = russ.53.t
+	desc = russ.53.desc
+	picture = GFX_report_event_russian_flag
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.53.a
+		add_political_power = -55
+		random_list = {
+			50 = {
+				SOV = {
+					custom_effect_tooltip = SOV_research_decrease_3_TT
+					add_to_variable = { sov_economy_resspeed = -0.03 }
+					add_political_power = -25
+				}
+			}
+			50 = {
+				SOV = {
+					add_tech_bonus = {
+						name = SOV_wag_recovered_encrypted_data
+						bonus = 0.3
+						uses = 1
+						category = electronics
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = russ.53.b
+		add_stability = 0.01
+	}
+}
+
+## psyop: economic disruption
+country_event = {
+	id = russ.54
+	title = russ.54.t
+	desc = russ.54.desc
+	picture = GFX_report_event_russian_flag
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.54.a
+		add_political_power = -35
+		random_list = {
+			60 = {
+				SOV = {
+					custom_effect_tooltip = RCO_CG_increase_3_TT
+					add_to_variable = { sov_economy_CG = 0.03 }
+					add_stability = -0.02
+				}
+			}
+			40 = {
+				SOV = {
+					custom_effect_tooltip = RCO_resource_increase_5_TT
+					add_to_variable = { sov_economy_res_gain_fct = 0.05 }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = russ.54.b
+		add_political_power = 5
+	}
+}
+
+## usa retaliation notice
+country_event = {
+	id = russ.57
+	title = russ.57.t
+	desc = russ.57.desc
+	picture = GFX_event_sov_wagnerearly
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { name = russ.57.a }
+}
+
+## leadership struggle in wagner command
+country_event = {
+	id = russ.58
+	title = russ.58.t
+	desc = russ.58.desc
+	picture = GFX_event_sov_wagnerearly
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.58.a
+		clr_country_flag = sov_wag_utkin_path
+		set_country_flag = sov_wag_prigozhin_path
+		retire_country_leader = yes
+		promote_character = SOV_Evgeniy_Prigozhin
+		set_politics = { ruling_party = fascist elections_allowed = no }
+		add_political_power = 40
+		add_war_support = 0.05
+	}
+
+	option = {
+		name = russ.58.b
+		clr_country_flag = sov_wag_prigozhin_path
+		set_country_flag = sov_wag_utkin_path
+		retire_country_leader = yes
+		promote_character = SOV_Dmitry_utkin
+		set_politics = { ruling_party = fascist elections_allowed = no }
+			add_popularity = {
+				ideology = fascist
+				popularity = 0.05
+			}
+			add_war_support = 0.03
+			add_stability = -0.03
+		}
+}
+
+## turkmen governorate administration model
+country_event = {
+	id = russ.59
+	title = russ.59.t
+	desc = russ.59.desc
+	picture = GFX_event_turkestan
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.59.a
+		if = {
+			limit = { any_owned_state = { is_core_of = TMS } }
+			release_puppet = TMS
+		}
+		add_political_power = 25
+	}
+
+	option = {
+		name = russ.59.b
+		every_owned_state = {
+			limit = { is_core_of = TMS }
+			add_compliance = 0.08
+		}
+		add_stability = 0.03
+	}
+}
+
+## caucasian governorate administration model
+country_event = {
+	id = russ.60
+	title = russ.60.t
+	desc = russ.60.desc
+	picture = GFX_event_caucasus
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.60.a
+		if = {
+			limit = { any_owned_state = { is_core_of = GEO } }
+			release_puppet = GEO
+		}
+		if = {
+			limit = { any_owned_state = { is_core_of = ARM } }
+			release_puppet = ARM
+		}
+		if = {
+			limit = { any_owned_state = { is_core_of = AZR } }
+			release_puppet = AZR
+		}
+		add_political_power = 30
+	}
+
+	option = {
+		name = russ.60.b
+		every_owned_state = {
+			limit = {
+				OR = {
+					is_core_of = GEO
+					is_core_of = ARM
+					is_core_of = AZR
+				}
+			}
+			add_compliance = 0.06
+		}
+		add_stability = 0.04
 	}
 }

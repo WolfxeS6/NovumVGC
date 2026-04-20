@@ -982,3 +982,507 @@ SOV_wagner_bop_category = {
 	}
 }
 
+SOV_wagner_state_desicions_category = {
+
+	SOV_wag_military_buildup_mission = {
+		allowed = { original_tag = SOV }
+
+		available = {
+			has_army_manpower = { size > 999999 }
+			num_of_military_factories > 79
+		}
+
+		activation = {
+			tag = SOV
+			has_completed_focus = SOV_wag_military_industrial_revival
+			NOT = { is_ai = yes }
+		}
+
+		icon = decision_mobilization
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 360
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_military_buildup_mission_success_TT
+			hidden_effect = {
+				country_event = { id = russ.61 hours = 1 }
+			}
+		}
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_military_buildup_mission_failure_TT
+			hidden_effect = {
+				country_event = { id = russ.62 hours = 1 }
+			}
+		}
+	}
+
+	SOV_wag_security_consolidation_mission = {
+		allowed = { original_tag = SOV }
+
+		available = {
+			has_completed_focus = SOV_wag_digital_iron_curtain
+			has_stability > 0.85
+		}
+
+		activation = {
+			tag = SOV
+			has_completed_focus = SOV_wag_control_internal_affairs
+			NOT = { is_ai = yes }
+		}
+
+		icon = generic_prepare_for_war
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 360
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_security_consolidation_mission_failure_TT
+			hidden_effect = {
+				country_event = { id = russ.64 hours = 1 }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_security_consolidation_mission_success_TT
+			hidden_effect = {
+				country_event = { id = russ.63 hours = 1 }
+			}
+		}
+	}
+
+	SOV_wag_economic_recovery_mission = {
+		allowed = { original_tag = SOV }
+
+		available = {
+			OR = {
+				has_completed_focus = SOV_wag_corporate_economy
+				has_completed_focus = SOV_wag_command_economy
+			}
+			num_of_factories > 85
+			OR = {
+				has_idea = SOV_Yuri_Borisov
+				has_idea = SOV_Andrey_Belousov
+			}
+		}
+
+		activation = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		icon = generic_construct_civilian
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 240
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_economic_recovery_mission_failure_TT
+			hidden_effect = {
+				country_event = { id = russ.66 hours = 1 }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_economic_recovery_mission_success_TT
+			hidden_effect = {
+				country_event = { id = russ.65 hours = 1 }
+			}
+		}
+	}
+
+	SOV_wag_naval_rearmament_mission = {
+		allowed = { original_tag = SOV }
+
+		available = {
+			has_completed_focus = SOV_wag_naval_facility
+			OR = {
+				has_completed_focus = SOV_wag_pacific_fleet_docks
+				has_completed_focus = SOV_wag_northern_fleet_docks
+			}
+			has_navy_size = { unit = carrier size > 0 }
+		}
+
+		activation = {
+			tag = SOV
+			has_completed_focus = SOV_wag_reorganize_fleet
+		}
+
+		icon = generic_naval
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 300
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_naval_rearmament_mission_failure_TT
+			hidden_effect = {
+				country_event = { id = russ.68 hours = 1 }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_naval_rearmament_mission_success_TT
+			hidden_effect = {
+				country_event = { id = russ.67 hours = 1 }
+			}
+		}
+	}
+
+	SOV_wag_psyop_disinformation_us = {
+		icon = infiltrate_state
+		allowed = { original_tag = SOV }
+
+		available = {
+			has_country_flag = SOV_wag_psyops_unlocked
+			country_exists = USA
+			NOT = { has_country_flag = SOV_wag_psyops_cooldown }
+		}
+
+		cost = 55
+		days_remove = 21
+
+		complete_effect = {
+			set_country_flag = { flag = SOV_wag_psyops_cooldown days = 90 }
+			USA = { country_event = { id = russ.52 } }
+				random_list = {
+					60 = {
+						add_political_power = 35
+						USA = {
+							add_stability = -0.03
+						add_war_support = -0.02
+					}
+					}
+					40 = {
+						add_stability = -0.03
+						add_political_power = -25
+						USA = {
+						add_war_support = 0.02
+						add_political_power = 20
+					}
+				}
+			}
+		}
+
+		ai_will_do = { base = 6 }
+	}
+
+	SOV_wag_psyop_tech_siphon_us = {
+		icon = infiltrate_state
+		allowed = { original_tag = SOV }
+
+		available = {
+			has_country_flag = SOV_wag_psyops_unlocked
+			country_exists = USA
+			NOT = { has_country_flag = SOV_wag_psyops_cooldown }
+		}
+
+		cost = 70
+		days_remove = 30
+
+		complete_effect = {
+			set_country_flag = { flag = SOV_wag_psyops_cooldown days = 90 }
+			USA = { country_event = { id = russ.53 } }
+				random_list = {
+					45 = {
+						add_tech_bonus = {
+							name = SOV_wag_stolen_us_research
+							bonus = 0.5
+						uses = 1
+						category = electronics
+					}
+					add_equipment_to_stockpile = { type = infantry_equipment_1 amount = 2500 producer = SOV }
+					add_equipment_to_stockpile = { type = support_equipment_1 amount = 700 producer = SOV }
+					USA = {
+						add_stability = -0.02
+					}
+					}
+					55 = {
+						custom_effect_tooltip = SOV_research_decrease_3_TT
+						add_to_variable = { sov_economy_resspeed = -0.03 }
+						add_political_power = -30
+					USA = {
+						add_political_power = 30
+					}
+				}
+			}
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	SOV_wag_psyop_sanctions_blackmarket = {
+		icon = infiltrate_state
+		allowed = { original_tag = SOV }
+
+		available = {
+			has_country_flag = SOV_wag_psyops_unlocked
+			country_exists = USA
+			NOT = { has_country_flag = SOV_wag_psyops_cooldown }
+		}
+
+		cost = 60
+		days_remove = 25
+
+		complete_effect = {
+			set_country_flag = { flag = SOV_wag_psyops_cooldown days = 90 }
+			USA = { country_event = { id = russ.54 } }
+				random_list = {
+					50 = {
+						custom_effect_tooltip = SOV_minexport_decrease_5_TT
+						add_to_variable = { sov_economy_min_exp = -0.05 }
+						custom_effect_tooltip = RCO_resource_increase_5_TT
+					add_to_variable = { sov_economy_res_gain_fct = 0.05 }
+					add_political_power = 40
+					USA = {
+						add_stability = -0.02
+						add_war_support = -0.01
+					}
+					}
+					50 = {
+						custom_effect_tooltip = RCO_CG_increase_3_TT
+						add_to_variable = { sov_economy_CG = 0.03 }
+						add_stability = -0.02
+					USA = {
+						add_political_power = 20
+					}
+				}
+			}
+		}
+
+		ai_will_do = { base = 5 }
+	}
+}
+
+SOV_wagner_integration_category = {
+	allowed = { original_tag = SOV }
+
+	visible = {
+		tag = SOV
+		has_country_flag = SOV_wag_can_core_conquests
+	}
+
+	SOV_wag_integrate_belarus = {
+		icon = infiltrate_state
+		fire_only_once = yes
+		cost = 75
+		days_remove = 45
+		allowed = { original_tag = SOV }
+
+		available = {
+			any_owned_state = { is_core_of = BLR }
+			all_state = {
+				OR = {
+					NOT = { is_core_of = BLR }
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = { is_core_of = BLR }
+					compliance > 79
+				}
+			}
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = BLR
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.02
+		}
+	}
+
+	SOV_wag_integrate_ukraine = {
+		icon = infiltrate_state
+		fire_only_once = yes
+		cost = 120
+		days_remove = 60
+		allowed = { original_tag = SOV }
+
+		available = {
+			any_owned_state = { is_core_of = UKR }
+			all_state = {
+				OR = {
+					NOT = { is_core_of = UKR }
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = { is_core_of = UKR }
+					compliance > 79
+				}
+			}
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = UKR
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.03
+		}
+	}
+
+	SOV_wag_integrate_baltics = {
+		icon = infiltrate_state
+		fire_only_once = yes
+		cost = 90
+		days_remove = 50
+		allowed = { original_tag = SOV }
+
+		available = {
+			any_owned_state = {
+				OR = {
+					is_core_of = EST
+					is_core_of = LAT
+					is_core_of = LIT
+				}
+			}
+			all_state = {
+				OR = {
+					NOT = {
+						OR = {
+							is_core_of = EST
+							is_core_of = LAT
+							is_core_of = LIT
+						}
+					}
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = {
+						OR = {
+							is_core_of = EST
+							is_core_of = LAT
+							is_core_of = LIT
+						}
+					}
+					compliance > 79
+				}
+			}
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = EST
+						is_core_of = LAT
+						is_core_of = LIT
+					}
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.02
+		}
+	}
+
+	SOV_wag_integrate_finland = {
+		icon = infiltrate_state
+		fire_only_once = yes
+		cost = 110
+		days_remove = 60
+		allowed = { original_tag = SOV }
+
+		available = {
+			any_owned_state = { is_core_of = FIN }
+			all_state = {
+				OR = {
+					NOT = { is_core_of = FIN }
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = { is_core_of = FIN }
+					compliance > 79
+				}
+			}
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = FIN
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.02
+		}
+	}
+
+	SOV_wag_integrate_moldova = {
+		icon = infiltrate_state
+		fire_only_once = yes
+		cost = 65
+		days_remove = 40
+		allowed = { original_tag = SOV }
+
+		available = {
+			any_owned_state = {
+				OR = {
+					is_core_of = MOL
+					is_core_of = TRA
+				}
+			}
+			all_state = {
+				OR = {
+					NOT = {
+						OR = {
+							is_core_of = MOL
+							is_core_of = TRA
+						}
+					}
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = {
+						OR = {
+							is_core_of = MOL
+							is_core_of = TRA
+						}
+					}
+					compliance > 79
+				}
+			}
+		}
+
+		complete_effect = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = MOL
+						is_core_of = TRA
+					}
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.02
+		}
+	}
+}
+

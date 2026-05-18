@@ -638,6 +638,13 @@ country_event = {
 
 	option = { # ok
 		name = russ.4.a
+		ai_chance = {
+			base = 70
+			modifier = {
+				factor = 100
+				SOV = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
 		SOV = {
 					diplomatic_relation = {
     				country = PREV
@@ -654,6 +661,13 @@ country_event = {
 
 	option = { # no
 		name = russ.4.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0
+				SOV = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
 		SOV = {
 				add_opinion_modifier = {
 					target = PREV
@@ -895,7 +909,19 @@ country_event = {
 
 	option = { # no
 		name = russ.10.b
-		FROM = { country_event = russ.11 }
+		if = {
+			limit = { FROM = { has_completed_focus = SOV_wag_secure_central_asia } }
+			FROM = {
+				create_wargoal = {
+					type = annex_everything
+					target = ROOT
+				}
+				country_event = { id = russ.14 }
+			}
+		}
+		else = {
+			FROM = { country_event = russ.11 }
+		}
 	}
 }
 
@@ -1362,6 +1388,8 @@ country_event = {
 			long_name = SOV_wagner_party_long
 			name = SOV_wagner_party
 		}
+		remove_state_core = 828
+		remove_state_core = 232
 		# Dissolve the Russian-led alliance (CSTO) as Wagner consolidates power.
 		every_other_country = {
 			limit = {
@@ -1637,7 +1665,7 @@ country_event = {
 		custom_effect_tooltip = FSB_counterdeffence_increase_30_TT
 		add_to_variable = { sov_fsb_countrdef = 0.3 }
 		add_political_power = -60
-		add_stability = -0.03
+		add_stability = 0.02
 	}
 
 	option = { # restrained growth
@@ -1746,7 +1774,7 @@ country_event = {
 	id = russ.37
 	title = russ.37.t
 	desc = russ.37.desc
-	picture = GFX_event_soviet_industry
+	picture = GFX_event_russian_economy_wagner
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -1784,19 +1812,27 @@ country_event = {
 
 	option = { # work with old bureaucracy
 		name = russ.38.a
+		custom_effect_tooltip = SOV_wag_terror_threat_mission_unlock_TT
 		add_stability = 0.05
 		add_political_power = 25
 		custom_effect_tooltip = RCO_CG_increase_3_TT
 		add_to_variable = { sov_economy_CG = 0.03 }
+		hidden_effect = {
+			set_country_flag = SOV_wag_terror_threat_mission_started
+		}
 	}
 
 	option = { # revolutionary consolidation
 		name = russ.38.b
+		custom_effect_tooltip = SOV_wag_terror_threat_mission_unlock_TT
 		add_war_support = 0.1
 		custom_effect_tooltip = FSB_counterdeffence_increase_30_TT
 		add_to_variable = { sov_fsb_countrdef = 0.3 }
 		add_stability = -0.05
 		add_political_power = -50
+		hidden_effect = {
+			set_country_flag = SOV_wag_terror_threat_mission_started
+		}
 	}
 }
 
@@ -1866,7 +1902,7 @@ country_event = {
 	}
 }
 
-## defense production doctrine
+## iran strategy: pursue trade normalization or prepare invasion
 country_event = {
 	id = russ.41
 	title = russ.41.t
@@ -1877,70 +1913,653 @@ country_event = {
 
 	option = {
 		name = russ.41.a
+		clr_country_flag = SOV_wag_iran_war_route
+		clr_country_flag = SOV_wag_iran_trade_accepted
+		clr_country_flag = SOV_wag_iran_trade_rejected
+		set_country_flag = SOV_wag_iran_peace_route
+		if = {
+			limit = { country_exists = PER }
+			PER = { country_event = { id = russ.74 days = 1 } }
+		}
+		else = {
+			set_country_flag = SOV_wag_iran_trade_rejected
+			country_event = { id = russ.14 }
+		}
+		add_stability = 0.02
+		add_war_support = -0.01
+	}
+
+	option = {
+		name = russ.41.b
+		clr_country_flag = SOV_wag_iran_peace_route
+		clr_country_flag = SOV_wag_iran_trade_accepted
+		set_country_flag = SOV_wag_iran_trade_rejected
+		set_country_flag = SOV_wag_iran_war_route
 		add_war_support = 0.05
 		add_political_power = -35
 		custom_effect_tooltip = SOV_milconscpd_increase_5_TT
 		add_to_variable = { sov_economy_mil_cons_spd = 0.05 }
 	}
+}
+
+## iran response to russian economic overture
+country_event = {
+	id = russ.74
+	title = russ.74.t
+	desc = russ.74.desc
+	picture = GFX_report_event_russian_flag
+	fire_only_once = no
+	is_triggered_only = yes
 
 	option = {
-		name = russ.41.b
-		add_stability = 0.04
-		add_war_support = -0.03
-		custom_effect_tooltip = SOV_civ_const_spd_increase_5_TT
-		add_to_variable = { sov_economy_civ_cons_spd = 0.05 }
+		name = russ.74.a
+		add_timed_idea = {
+			idea = SOV_wag_iran_trade_ties
+			days = 365
+		}
+		add_stability = 0.03
+		add_opinion_modifier = {
+			target = FROM
+			modifier = declaration_of_friendship
+		}
+		FROM = {
+			clr_country_flag = SOV_wag_iran_trade_rejected
+			set_country_flag = SOV_wag_iran_trade_accepted
+			country_event = { id = russ.15 }
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_friendship
+			}
+			custom_effect_tooltip = RCO_resource_increase_5_TT
+			add_to_variable = { sov_economy_res_gain_fct = 0.05 }
+			add_political_power = 25
+		}
+	}
+
+	option = {
+		name = russ.74.b
+		add_opinion_modifier = {
+			target = FROM
+			modifier = loyal_to_our_enemy
+		}
+		FROM = {
+			clr_country_flag = SOV_wag_iran_trade_accepted
+			set_country_flag = SOV_wag_iran_trade_rejected
+			country_event = { id = russ.14 }
+		}
 	}
 }
 
-## anti-corruption or patronage
+## china responds to russian offer for strategic trade partnership
+country_event = {
+	id = russ.78
+	title = russ.78.t
+	desc = russ.78.desc
+	picture = GFX_report_event_russian_flag
+	is_triggered_only = yes
+
+	option = {
+		name = russ.78.a
+		ai_chance = {
+			base = 70
+			modifier = {
+				factor = 100
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		add_ideas = SOV_wag_trade_with_russia_prc
+		FROM = {
+			country_event = { id = russ.15 }
+			custom_effect_tooltip = SOV_civ_const_spd_increase_5_TT
+			add_to_variable = { sov_economy_civ_cons_spd = 0.05 }
+			custom_effect_tooltip = RCO_CG_decrease_3_TT
+			add_to_variable = { sov_economy_CG = -0.03 }
+		}
+	}
+
+	option = {
+		name = russ.78.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## china decides whether to tolerate russian move on mongolia under trade partnership
+country_event = {
+	id = russ.79
+	title = russ.79.t
+	desc = russ.79.desc
+	picture = GFX_report_event_russian_flag
+	is_triggered_only = yes
+
+	option = {
+		name = russ.79.a
+		ai_chance = {
+			base = 60
+			modifier = {
+				factor = 100
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		FROM = {
+			if = {
+				limit = { country_exists = MON }
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = MON
+				}
+				country_event = { id = russ.15 }
+			}
+			else = {
+				country_event = { id = russ.14 }
+			}
+		}
+	}
+
+	option = {
+		name = russ.79.b
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 0
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		FROM = { country_event = { id = russ.80 } }
+	}
+}
+
+## russia response when china refuses to tolerate pressure on mongolia
+country_event = {
+	id = russ.80
+	title = russ.80.t
+	desc = russ.80.desc
+	picture = GFX_report_event_russian_flag
+	is_triggered_only = yes
+
+	option = {
+		name = russ.80.a
+		if = {
+			limit = { country_exists = MON }
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = MON
+			}
+		}
+		if = {
+			limit = {
+				country_exists = PRC
+				PRC = { has_idea = SOV_wag_trade_with_russia_prc }
+			}
+			PRC = { remove_ideas = SOV_wag_trade_with_russia_prc }
+		}
+	}
+
+	option = {
+		name = russ.80.b
+		country_event = { id = russ.14 }
+	}
+}
+
+## china decides whether to expand economic integration with russia
+country_event = {
+	id = russ.81
+	title = russ.81.t
+	desc = russ.81.desc
+	picture = GFX_report_event_russian_flag
+	is_triggered_only = yes
+
+	option = {
+		name = russ.81.a
+		ai_chance = {
+			base = 70
+			modifier = {
+				factor = 100
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		if = {
+			limit = { has_idea = SOV_wag_trade_with_russia_prc }
+			swap_ideas = {
+				remove_idea = SOV_wag_trade_with_russia_prc
+				add_idea = SOV_wag_trade_with_russia_prc_advanced
+			}
+		}
+		FROM = {
+			custom_effect_tooltip = SOV_research_increase_2_TT
+			add_to_variable = { sov_economy_resspeed = 0.02 }
+			custom_effect_tooltip = RCO_prodoutput_increase_5_TT
+			add_to_variable = { sov_economy_prodout = 0.05 }
+			country_event = { id = russ.15 }
+		}
+	}
+
+	option = {
+		name = russ.81.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## north korea decides whether to enter russian faction in exchange for aid
+country_event = {
+	id = russ.82
+	title = russ.82.t
+	desc = russ.82.desc
+	picture = GFX_event_kndr_soldiers
+	is_triggered_only = yes
+
+	option = {
+		name = russ.82.a
+		ai_chance = {
+			base = 65
+			modifier = {
+				factor = 100
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		add_stability = 0.2
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		add_opinion_modifier = {
+			target = SOV
+			modifier = declaration_of_friendship
+		}
+		if = {
+			limit = { is_in_faction = yes }
+			if = {
+				limit = { is_faction_leader = yes }
+				dismantle_faction = yes
+			}
+			else = {
+				leave_faction = yes
+			}
+		}
+		SOV = {
+			add_to_faction = ROOT
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_friendship
+			}
+			country_event = { id = russ.15 }
+		}
+	}
+
+	option = {
+		name = russ.82.b
+		ai_chance = {
+			base = 35
+			modifier = {
+				factor = 0
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## china decides whether to merge its alliance into russian-led bloc
+country_event = {
+	id = russ.83
+	title = russ.83.t
+	desc = russ.83.desc
+	picture = GFX_report_event_russian_flag
+	is_triggered_only = yes
+
+	option = {
+		name = russ.83.a
+		ai_chance = {
+			base = 60
+			modifier = {
+				factor = 100
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		if = {
+			limit = { is_faction_leader = yes }
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					is_in_faction_with = ROOT
+					NOT = { is_in_faction_with = SOV }
+				}
+				add_to_faction = SOV
+			}
+			dismantle_faction = yes
+		}
+		if = {
+			limit = { is_in_faction = yes }
+			leave_faction = yes
+		}
+		add_to_faction = SOV
+		SOV = { country_event = { id = russ.15 } }
+	}
+
+	option = {
+		name = russ.83.b
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 0
+				FROM = { has_focus_tree = SOV_wagner_main_focus }
+			}
+		}
+		SOV = { country_event = { id = russ.14 } }
+	}
+}
+
+## sanctions response: seize foreign assets or absorb financial shock
 country_event = {
 	id = russ.42
 	title = russ.42.t
 	desc = russ.42.desc
-	picture = GFX_event_otkazniki
+	picture = GFX_event_russian_sanctions
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	option = {
 		name = russ.42.a
-		add_political_power = 60
-		custom_effect_tooltip = SOV_research_decrease_3_TT
-		add_to_variable = { sov_economy_resspeed = -0.03 }
-		add_stability = -0.03
+		add_timed_idea = {
+			idea = SOV_wag_sanctions_shock
+			days = 180
+		}
+		random_owned_controlled_state = {
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
+		random_owned_controlled_state = {
+			add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+		}
 	}
 
 	option = {
 		name = russ.42.b
-		custom_effect_tooltip = RCO_CG_increase_3_TT
-		add_to_variable = { sov_economy_CG = 0.03 }
-		add_stability = 0.03
-		add_political_power = -40
+		add_political_power = -120
 	}
 }
 
-## rosguard operational mandate
+## democratic sanctions vote against wagner russia
+country_event = {
+	id = russ.75
+	title = russ.75.t
+	desc = russ.75.desc
+	picture = GFX_event_russian_sanctions
+	fire_only_once = no
+	is_triggered_only = yes
+	trigger = {
+		has_democratic_form_of_government = yes
+		NOT = { tag = SOV }
+	}
+
+	option = { # impose embargo
+		name = russ.75.a
+		ai_chance = { base = 85 }
+		if = {
+			limit = { NOT = { is_embargoing = SOV } }
+			send_embargo = SOV
+		}
+		if = {
+			limit = {
+				has_dlc_bba = yes
+				NOT = { is_embargoing = SOV }
+			}
+			diplomatic_relation = {
+				country = SOV
+				relation = embargo
+				active = yes
+			}
+		}
+	}
+
+	option = { # decline embargo
+		name = russ.75.b
+		ai_chance = { base = 40 }
+		add_political_power = -70
+		add_opinion_modifier = {
+			target = SOV
+			modifier = declaration_of_friendship
+		}
+	}
+}
+
+## ukraine coercive strategy choice
 country_event = {
 	id = russ.43
 	title = russ.43.t
 	desc = russ.43.desc
-	picture = GFX_event_rosguard
+	picture = GFX_event_ukraine_wagner
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	option = {
 		name = russ.43.a
-		add_to_variable = { sov_fsb_civ_int = 20 }
-		add_to_variable = { sov_fsb_army_int = 20 }
-		add_political_power = -40
-		add_stability = -0.02
+		add_political_power = -60
+		if = {
+			limit = {
+				country_exists = UKR
+				UKR = { exists = yes }
+			}
+			UKR = { country_event = { id = russ.76 days = 1 } }
+		}
+		else = {
+			set_country_flag = SOV_wag_ukr_military_route
+		}
 	}
 
 	option = {
 		name = russ.43.b
-		add_war_support = 0.03
-		add_political_power = 20
-		custom_effect_tooltip = FSB_counterdeffence_increase_30_TT
-		add_to_variable = { sov_fsb_countrdef = 0.3 }
+		add_war_support = 0.02
+		clr_country_flag = SOV_wag_ukr_diplomatic_success
+		set_country_flag = SOV_wag_ukr_military_route
+	}
+}
+
+## ukraine responds to russian pressure ultimatum
+country_event = {
+	id = russ.76
+	title = russ.76.t
+	desc = russ.76.desc
+	picture = GFX_event_ukraine_wagner
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.76.a
+		ai_chance = {
+			base = 35
+		}
+		FROM = {
+			clr_country_flag = SOV_wag_ukr_military_route
+			set_country_flag = SOV_wag_ukr_diplomatic_success
+			country_event = { id = russ.15 }
+		}
+		FROM = { puppet = PREV }
+	}
+
+	option = {
+		name = russ.76.b
+		ai_chance = {
+			base = 65
+		}
+		add_political_power = 100
+		FROM = {
+			clr_country_flag = SOV_wag_ukr_diplomatic_success
+			set_country_flag = SOV_wag_ukr_military_route
+			country_event = { id = russ.14 }
+		}
+	}
+}
+
+## ukraine reunification after diplomatic submission
+country_event = {
+	id = russ.84
+	title = russ.84.t
+	desc = russ.84.desc
+	picture = GFX_event_sov_novorossia
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.84.a
+		if = {
+			limit = {
+				country_exists = UKR
+				UKR = { is_subject_of = SOV }
+			}
+			add_political_power = 40
+			add_stability = 0.03
+		}
+	}
+
+	option = {
+		name = russ.84.b
+		if = {
+			limit = {
+				country_exists = UKR
+				UKR = { is_subject_of = SOV }
+			}
+			annex_country = {
+				target = UKR
+				transfer_troops = yes
+			}
+			add_political_power = 25
+			add_stability = -0.02
+		}
+	}
+
+	option = {
+		name = russ.84.c
+		if = {
+			limit = {
+				country_exists = UKR
+				UKR = { is_subject_of = SOV }
+			}
+			if = {
+				limit = { 137 = { owner = UKR } }
+				transfer_state = 137
+			}
+			if = {
+				limit = { 227 = { owner = UKR } }
+				transfer_state = 227
+			}
+			if = {
+				limit = { 228 = { owner = UKR } }
+				transfer_state = 228
+			}
+			add_political_power = 30
+			add_stability = 0.01
+		}
+	}
+}
+
+## terrorist attack after security deadline failure
+country_event = {
+	id = russ.77
+	title = russ.77.t
+	desc = russ.77.desc
+	picture = GFX_rco_terract_event
+	is_triggered_only = yes
+
+	option = {
+		name = russ.77.a
+		add_stability = -0.08
+		add_war_support = -0.06
 	}
 }
 
@@ -1949,7 +2568,7 @@ country_event = {
 	id = russ.44
 	title = russ.44.t
 	desc = russ.44.desc
-	picture = GFX_event_russian_science
+	picture = GFX_event_sng
 	fire_only_once = yes
 	is_triggered_only = yes
 
@@ -1971,27 +2590,40 @@ country_event = {
 	}
 }
 
-## occupation governance strain
+## anatoliy lebed criticizes new army vehicles during official visit
 country_event = {
 	id = russ.45
 	title = russ.45.t
 	desc = russ.45.desc
-	picture = GFX_event_tired_soldiers
+	picture = GFX_event_rus_lebed
 	fire_only_once = yes
 	is_triggered_only = yes
 
 	option = {
 		name = russ.45.a
-		add_war_support = 0.05
-		add_stability = -0.08
-		add_political_power = -75
+		add_corps_commander_role = {
+			Character = SOV_Anatoliy_Lebed
+			traits = { infantry_officer aggressive_assaulter commando }
+			skill = 3
+			attack_skill = 4
+			defense_skill = 4
+			planning_skill = 3
+			logistics_skill = 3
+		}
+		add_political_power = -60
 	}
 
 	option = {
 		name = russ.45.b
-		add_stability = 0.05
-		add_war_support = -0.05
 		add_political_power = -25
+		custom_effect_tooltip = RKKA_org_increase_1_TT
+		add_to_variable = { sov_army_org = 0.01 }
+	}
+
+	option = {
+		name = russ.45.c
+		add_political_power = 25
+		add_war_support = -0.03
 	}
 }
 
@@ -2154,6 +2786,7 @@ country_event = {
 		add_to_variable = { sov_army_coord_bonus = 0.05 }
 		add_to_variable = { sov_army_reinf_rate = 0.01 }
 		add_political_power = -20
+		add_stability = -0.03
 	}
 
 	option = { # compromise with legacy command
@@ -2163,6 +2796,7 @@ country_event = {
 		add_to_variable = { sov_army_org = 0.05 }
 		add_to_variable = { sov_army_attacking_spd = 0.05 }
 		add_stability = 0.02
+		add_political_power = -15
 	}
 }
 
@@ -2181,6 +2815,7 @@ country_event = {
 		add_to_variable = { sov_army_air_eff = 0.05 }
 		air_experience = 20
 		add_stability = -0.02
+		add_political_power = -10
 	}
 
 	option = { # defensive shield doctrine
@@ -2190,6 +2825,7 @@ country_event = {
 		add_to_variable = { sov_army_air_exp = 0.05 }
 		add_to_variable = { sov_cas_dam_reduction = 0.1 }
 		add_stability = 0.02
+		add_political_power = -15
 	}
 }
 
@@ -2213,6 +2849,7 @@ country_event = {
 		navy_experience = 25
 		custom_effect_tooltip = RCO_CG_increase_3_TT
 		add_to_variable = { sov_economy_CG = 0.03 }
+		add_stability = -0.01
 	}
 
 	option = { # denial fleet and submarine pressure
@@ -2226,6 +2863,7 @@ country_event = {
 		navy_experience = 15
 		custom_effect_tooltip = RCO_CG_decrease_3_TT
 		add_to_variable = { sov_economy_CG = -0.03 }
+		add_stability = -0.02
 	}
 }
 
@@ -2251,6 +2889,7 @@ country_event = {
 		custom_effect_tooltip = RKKA_org_increase_5_TT
 		add_to_variable = { sov_army_org = 0.05 }
 		add_stability = 0.03
+		add_war_support = -0.02
 	}
 
 	option = { # hybrid reform model
@@ -2260,10 +2899,26 @@ country_event = {
 		add_to_variable = { sov_army_coord_bonus = 0.05 }
 		add_to_variable = { sov_army_air_exp = 0.05 }
 		add_political_power = 10
+		add_stability = -0.02
 	}
 }
 
-## psyop: disinformation campaign
+## author disclaimer popup at game start
+country_event = {
+	id = russ.73
+	title = russ.73.t
+	desc = russ.73.desc
+	picture = GFX_event_antiextremism
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = russ.73.a
+		add_political_power = 1
+	}
+}
+
+## psyop against usa: disinformation campaign
 country_event = {
 	id = russ.52
 	title = russ.52.t
@@ -2297,7 +2952,7 @@ country_event = {
 	}
 }
 
-## psyop: cyber penetration
+## psyop against usa: cyber penetration
 country_event = {
 	id = russ.53
 	title = russ.53.t
@@ -2312,8 +2967,11 @@ country_event = {
 		random_list = {
 			50 = {
 				SOV = {
-					custom_effect_tooltip = SOV_research_decrease_3_TT
-					add_to_variable = { sov_economy_resspeed = -0.03 }
+					custom_effect_tooltip = SOV_wag_psyop_research_disruption_90d_TT
+					add_timed_idea = {
+						idea = SOV_wag_psyop_research_disruption
+						days = 90
+					}
 					add_political_power = -25
 				}
 			}
@@ -2336,7 +2994,7 @@ country_event = {
 	}
 }
 
-## psyop: economic disruption
+## psyop against usa: economic disruption
 country_event = {
 	id = russ.54
 	title = russ.54.t
@@ -2351,8 +3009,11 @@ country_event = {
 		random_list = {
 			60 = {
 				SOV = {
-					custom_effect_tooltip = RCO_CG_increase_3_TT
-					add_to_variable = { sov_economy_CG = 0.03 }
+					custom_effect_tooltip = SOV_wag_psyop_sanctions_blowback_90d_TT
+					add_timed_idea = {
+						idea = SOV_wag_psyop_sanctions_blowback
+						days = 90
+					}
 					add_stability = -0.02
 				}
 			}
@@ -2433,6 +3094,62 @@ country_event = {
 		if = {
 			limit = { any_owned_state = { is_core_of = TMS } }
 			release_puppet = TMS
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = UZB
+						is_core_of = KYR
+						is_core_of = TAJ
+						is_core_of = TMS
+					}
+				}
+				transfer_state_to = TMS
+			}
+		}
+		else_if = {
+			limit = { any_owned_state = { is_core_of = UZB } }
+			release_puppet = UZB
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = UZB
+						is_core_of = KYR
+						is_core_of = TAJ
+						is_core_of = TMS
+					}
+				}
+				transfer_state_to = UZB
+			}
+		}
+		else_if = {
+			limit = { any_owned_state = { is_core_of = KYR } }
+			release_puppet = KYR
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = UZB
+						is_core_of = KYR
+						is_core_of = TAJ
+						is_core_of = TMS
+					}
+				}
+				transfer_state_to = KYR
+			}
+		}
+		else_if = {
+			limit = { any_owned_state = { is_core_of = TAJ } }
+			release_puppet = TAJ
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = UZB
+						is_core_of = KYR
+						is_core_of = TAJ
+						is_core_of = TMS
+					}
+				}
+				transfer_state_to = TAJ
+			}
 		}
 		add_political_power = 25
 	}
@@ -2440,7 +3157,14 @@ country_event = {
 	option = {
 		name = russ.59.b
 		every_owned_state = {
-			limit = { is_core_of = TMS }
+			limit = {
+				OR = {
+					is_core_of = UZB
+					is_core_of = KYR
+					is_core_of = TAJ
+					is_core_of = TMS
+				}
+			}
 			add_compliance = 0.08
 		}
 		add_stability = 0.03
@@ -2486,5 +3210,834 @@ country_event = {
 			add_compliance = 0.06
 		}
 		add_stability = 0.04
+	}
+}
+
+## mali chooses whether to host initial wagner military mission
+country_event = {
+	id = russ.85
+	title = russ.85.t
+	desc = russ.85.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+	option = {
+		name = russ.85.a
+		ai_chance = { factor = 75 }
+		add_ideas = SOV_wagner_presence_1
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			set_country_flag = SOV_wag_africa_presence_mli_accepted
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.85.b
+		ai_chance = { factor = 25 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## mali decides on expanded wagner economic-security package
+country_event = {
+	id = russ.86
+	title = russ.86.t
+	desc = russ.86.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+	option = {
+		name = russ.86.a
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { has_idea = SOV_wagner_presence_1 }
+			swap_ideas = {
+				remove_idea = SOV_wagner_presence_1
+				add_idea = SOV_wagner_presence_2
+			}
+		}
+		if = {
+			limit = { has_idea = CFA_franc_member }
+			swap_ideas = {
+				remove_idea = CFA_franc_member
+				add_idea = wagner_sphere_member
+			}
+		}
+		else = { add_ideas = wagner_sphere_member }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			custom_effect_tooltip = RCO_CG_decrease_2_TT
+			add_to_variable = { sov_economy_CG = -0.02 }
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.86.b
+		ai_chance = { factor = 0 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## upper volta chooses whether to host initial wagner military mission
+country_event = {
+	id = russ.87
+	title = russ.87.t
+	desc = russ.87.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+	option = {
+		name = russ.87.a
+		ai_chance = { factor = 75 }
+		add_ideas = SOV_wagner_presence_1
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			set_country_flag = SOV_wag_africa_presence_vol_accepted
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.87.b
+		ai_chance = { factor = 25 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## upper volta decides on expanded wagner economic-security package
+country_event = {
+	id = russ.88
+	title = russ.88.t
+	desc = russ.88.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+	option = {
+		name = russ.88.a
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { has_idea = SOV_wagner_presence_1 }
+			swap_ideas = {
+				remove_idea = SOV_wagner_presence_1
+				add_idea = SOV_wagner_presence_2
+			}
+		}
+		if = {
+			limit = { has_idea = CFA_franc_member }
+			swap_ideas = {
+				remove_idea = CFA_franc_member
+				add_idea = wagner_sphere_member
+			}
+		}
+		else = { add_ideas = wagner_sphere_member }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			custom_effect_tooltip = RCO_CG_decrease_2_TT
+			add_to_variable = { sov_economy_CG = -0.02 }
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.88.b
+		ai_chance = { factor = 0 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## niger chooses whether to host initial wagner military mission
+country_event = {
+	id = russ.89
+	title = russ.89.t
+	desc = russ.89.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+	option = {
+		name = russ.89.a
+		ai_chance = { factor = 75 }
+		add_ideas = SOV_wagner_presence_1
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			set_country_flag = SOV_wag_africa_presence_ngr_accepted
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.89.b
+		ai_chance = { factor = 25 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## niger decides on expanded wagner economic-security package
+country_event = {
+	id = russ.90
+	title = russ.90.t
+	desc = russ.90.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+	option = {
+		name = russ.90.a
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { has_idea = SOV_wagner_presence_1 }
+			swap_ideas = {
+				remove_idea = SOV_wagner_presence_1
+				add_idea = SOV_wagner_presence_2
+			}
+		}
+		if = {
+			limit = { has_idea = CFA_franc_member }
+			swap_ideas = {
+				remove_idea = CFA_franc_member
+				add_idea = wagner_sphere_member
+			}
+		}
+		else = { add_ideas = wagner_sphere_member }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			custom_effect_tooltip = RCO_CG_decrease_2_TT
+			add_to_variable = { sov_economy_CG = -0.02 }
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.90.b
+		ai_chance = { factor = 0 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## chad chooses whether to host initial wagner military mission
+country_event = {
+	id = russ.91
+	title = russ.91.t
+	desc = russ.91.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+	option = {
+		name = russ.91.a
+		ai_chance = { factor = 75 }
+		add_ideas = SOV_wagner_presence_1
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			set_country_flag = SOV_wag_africa_presence_cha_accepted
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.91.b
+		ai_chance = { factor = 25 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## chad decides on expanded wagner economic-security package
+country_event = {
+	id = russ.92
+	title = russ.92.t
+	desc = russ.92.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+	option = {
+		name = russ.92.a
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { has_idea = SOV_wagner_presence_1 }
+			swap_ideas = {
+				remove_idea = SOV_wagner_presence_1
+				add_idea = SOV_wagner_presence_2
+			}
+		}
+		if = {
+			limit = { has_idea = CFA_franc_member }
+			swap_ideas = {
+				remove_idea = CFA_franc_member
+				add_idea = wagner_sphere_member
+			}
+		}
+		else = { add_ideas = wagner_sphere_member }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			custom_effect_tooltip = RCO_CG_decrease_2_TT
+			add_to_variable = { sov_economy_CG = -0.02 }
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.92.b
+		ai_chance = { factor = 0 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## cote d'ivoire chooses whether to host initial wagner military mission
+country_event = {
+	id = russ.93
+	title = russ.93.t
+	desc = russ.93.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+	option = {
+		name = russ.93.a
+		ai_chance = { factor = 75 }
+		add_ideas = SOV_wagner_presence_1
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			set_country_flag = SOV_wag_africa_presence_ivo_accepted
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.93.b
+		ai_chance = { factor = 25 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## cote d'ivoire decides on expanded wagner economic-security package
+country_event = {
+	id = russ.94
+	title = russ.94.t
+	desc = russ.94.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+	option = {
+		name = russ.94.a
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { has_idea = SOV_wagner_presence_1 }
+			swap_ideas = {
+				remove_idea = SOV_wagner_presence_1
+				add_idea = SOV_wagner_presence_2
+			}
+		}
+		if = {
+			limit = { has_idea = CFA_franc_member }
+			swap_ideas = {
+				remove_idea = CFA_franc_member
+				add_idea = wagner_sphere_member
+			}
+		}
+		else = { add_ideas = wagner_sphere_member }
+		give_resource_rights = { receiver = FROM state = 1102 }
+		give_resource_rights = { receiver = FROM state = 1101 }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.94.b
+		ai_chance = { factor = 0 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## central african republic chooses whether to host initial wagner military mission
+country_event = {
+	id = russ.95
+	title = russ.95.t
+	desc = russ.95.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+	option = {
+		name = russ.95.a
+		ai_chance = { factor = 75 }
+		add_ideas = SOV_wagner_presence_1
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			set_country_flag = SOV_wag_africa_presence_car_accepted
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.95.b
+		ai_chance = { factor = 25 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## central african republic decides on expanded wagner economic-security package
+country_event = {
+	id = russ.96
+	title = russ.96.t
+	desc = russ.96.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+	option = {
+		name = russ.96.a
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { has_idea = SOV_wagner_presence_1 }
+			swap_ideas = {
+				remove_idea = SOV_wagner_presence_1
+				add_idea = SOV_wagner_presence_2
+			}
+		}
+		if = {
+			limit = { has_idea = CFA_franc_member }
+			swap_ideas = {
+				remove_idea = CFA_franc_member
+				add_idea = wagner_sphere_member
+			}
+		}
+		else = { add_ideas = wagner_sphere_member }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			custom_effect_tooltip = RCO_CG_decrease_2_TT
+			add_to_variable = { sov_economy_CG = -0.02 }
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.96.b
+		ai_chance = { factor = 0 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## gabon chooses whether to host initial wagner military mission
+country_event = {
+	id = russ.97
+	title = russ.97.t
+	desc = russ.97.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+	option = {
+		name = russ.97.a
+		ai_chance = { factor = 75 }
+		add_ideas = SOV_wagner_presence_1
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			set_country_flag = SOV_wag_africa_presence_gab_accepted
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.97.b
+		ai_chance = { factor = 25 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## gabon decides on expanded wagner economic-security package
+country_event = {
+	id = russ.98
+	title = russ.98.t
+	desc = russ.98.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+	option = {
+		name = russ.98.a
+		ai_chance = { factor = 100 }
+		if = {
+			limit = { has_idea = SOV_wagner_presence_1 }
+			swap_ideas = {
+				remove_idea = SOV_wagner_presence_1
+				add_idea = SOV_wagner_presence_2
+			}
+		}
+		if = {
+			limit = { has_idea = CFA_franc_member }
+			swap_ideas = {
+				remove_idea = CFA_franc_member
+				add_idea = wagner_sphere_member
+			}
+		}
+		else = { add_ideas = wagner_sphere_member }
+		give_resource_rights = { receiver = FROM state = 539 }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 }
+		}
+	}
+	option = {
+		name = russ.98.b
+		ai_chance = { factor = 0 }
+		FROM = { country_event = { id = russ.14 } }
+	}
+}
+
+## russia is hit by a narcotics inflow wave from afghanistan through central asia
+country_event = {
+	id = russ.99
+	title = russ.99.t
+	desc = russ.99.desc
+	picture = GFX_event_sov_drugs
+	is_triggered_only = yes
+
+	trigger = {
+		tag = SOV
+		NOT = { has_country_flag = SOV_wag_afghan_deal_struck }
+	}
+
+	option = {
+		name = russ.99.a
+		custom_effect_tooltip = SOV_wag_afghan_drug_crisis_start_TT
+		set_country_flag = SOV_wag_afghan_drug_crisis_mission_started
+		if = { limit = { country_exists = KAZ } KAZ = { country_event = { id = russ.100 days = 1 } } }
+		if = { limit = { country_exists = UZB } UZB = { country_event = { id = russ.100 days = 1 } } }
+		if = { limit = { country_exists = KYR } KYR = { country_event = { id = russ.100 days = 1 } } }
+		if = { limit = { country_exists = TAJ } TAJ = { country_event = { id = russ.100 days = 1 } } }
+		if = { limit = { country_exists = TMS } TMS = { country_event = { id = russ.100 days = 1 } } }
+	}
+}
+
+## central asian states are hit by transit-trafficking pressure from afghan routes
+country_event = {
+	id = russ.100
+	title = russ.100.t
+	desc = russ.100.desc
+	picture = GFX_event_sov_drugs
+	is_triggered_only = yes
+
+	option = {
+		name = russ.100.a
+		add_timed_idea = {
+			idea = SOV_drugsbad_idea
+			days = 1000
+		}
+	}
+}
+
+## russia chooses which afghan faction to back in exchange for anti-drug corridor control
+country_event = {
+	id = russ.101
+	title = russ.101.t
+	desc = russ.101.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+
+	option = {
+		name = russ.101.a
+		trigger = { country_exists = TAL }
+		custom_effect_tooltip = SOV_wag_afghan_support_package_TT
+		TAL = { country_event = { id = russ.102 days = 1 } }
+	}
+
+	option = {
+		name = russ.101.b
+		trigger = { country_exists = AFG }
+		custom_effect_tooltip = SOV_wag_afghan_support_package_TT
+		AFG = { country_event = { id = russ.103 days = 1 } }
+	}
+}
+
+## taliban receives russian support proposal
+country_event = {
+	id = russ.102
+	title = russ.102.t
+	desc = russ.102.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+
+	option = {
+		name = russ.102.a
+		ai_chance = { base = 60 }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		add_equipment_to_stockpile = { type = infantry_equipment_1 amount = 3000 producer = SOV }
+		add_equipment_to_stockpile = { type = support_equipment_1 amount = 500 producer = SOV }
+		add_equipment_to_stockpile = { type = artillery_equipment_1 amount = 150 producer = SOV }
+		random_owned_controlled_state = {
+			create_unit = {
+				division = "division_template = \"Militia Division\" start_experience_factor = 0.70 start_manpower_factor = 1"
+				owner = TAL
+			}
+		}
+		random_owned_controlled_state = {
+			create_unit = {
+				division = "division_template = \"Militia Division\" start_experience_factor = 0.70 start_manpower_factor = 1"
+				owner = TAL
+			}
+		}
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.104 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.102.b
+		ai_chance = { base = 40 }
+		add_opinion_modifier = { target = FROM modifier = large_decrease }
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = large_decrease }
+			country_event = { id = russ.105 days = 1 }
+		}
+	}
+}
+
+## afghanistan government receives russian support proposal
+country_event = {
+	id = russ.103
+	title = russ.103.t
+	desc = russ.103.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+
+	option = {
+		name = russ.103.a
+		ai_chance = { base = 60 }
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		add_equipment_to_stockpile = { type = infantry_equipment_1 amount = 3000 producer = SOV }
+		add_equipment_to_stockpile = { type = support_equipment_1 amount = 500 producer = SOV }
+		add_equipment_to_stockpile = { type = artillery_equipment_1 amount = 150 producer = SOV }
+		hidden_effect = {
+					division_template = {
+						name = "PMC Wagner Storm Group"
+						division_names_group = RUSSIAN_INFB_01
+						priority = 0
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 2 y = 1 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							field_hospital = { x = 0 y = 1 }
+							mot_recon = { x = 0 y = 2 }
+							anti_tank = { x = 0 y = 3 }
+							mot_recon = { x = 1 y = 0 }
+						}
+					}
+		}
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+					create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+				}
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.104 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.103.b
+		ai_chance = { base = 40 }
+		add_opinion_modifier = { target = FROM modifier = large_decrease }
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = large_decrease }
+			country_event = { id = russ.105 days = 1 }
+		}
+	}
+}
+
+## afghan side accepts deal and russia shuts down drug-crisis chain
+country_event = {
+	id = russ.104
+	title = russ.104.t
+	desc = russ.104.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+
+	option = {
+		name = russ.104.a
+		set_country_flag = SOV_wag_afghan_deal_struck
+		clr_country_flag = SOV_wag_afghan_drug_crisis_mission_started
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_1 } remove_ideas = SOV_wag_afghan_drug_crisis_1 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_2 } remove_ideas = SOV_wag_afghan_drug_crisis_2 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_3 } remove_ideas = SOV_wag_afghan_drug_crisis_3 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_4 } remove_ideas = SOV_wag_afghan_drug_crisis_4 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_5 } remove_ideas = SOV_wag_afghan_drug_crisis_5 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_6 } remove_ideas = SOV_wag_afghan_drug_crisis_6 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_7 } remove_ideas = SOV_wag_afghan_drug_crisis_7 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_8 } remove_ideas = SOV_wag_afghan_drug_crisis_8 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_9 } remove_ideas = SOV_wag_afghan_drug_crisis_9 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_10 } remove_ideas = SOV_wag_afghan_drug_crisis_10 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_11 } remove_ideas = SOV_wag_afghan_drug_crisis_11 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_12 } remove_ideas = SOV_wag_afghan_drug_crisis_12 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_13 } remove_ideas = SOV_wag_afghan_drug_crisis_13 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_14 } remove_ideas = SOV_wag_afghan_drug_crisis_14 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_15 } remove_ideas = SOV_wag_afghan_drug_crisis_15 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_16 } remove_ideas = SOV_wag_afghan_drug_crisis_16 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_17 } remove_ideas = SOV_wag_afghan_drug_crisis_17 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_18 } remove_ideas = SOV_wag_afghan_drug_crisis_18 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_19 } remove_ideas = SOV_wag_afghan_drug_crisis_19 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_20 } remove_ideas = SOV_wag_afghan_drug_crisis_20 }
+		if = { limit = { country_exists = KAZ } KAZ = { country_event = { id = russ.106 days = 1 } } }
+		if = { limit = { country_exists = UZB } UZB = { country_event = { id = russ.106 days = 1 } } }
+		if = { limit = { country_exists = KYR } KYR = { country_event = { id = russ.106 days = 1 } } }
+		if = { limit = { country_exists = TAJ } TAJ = { country_event = { id = russ.106 days = 1 } } }
+		if = { limit = { country_exists = TMS } TMS = { country_event = { id = russ.106 days = 1 } } }
+	}
+}
+
+## afghan side rejects, forcing domestic containment at long-term cost
+country_event = {
+	id = russ.105
+	title = russ.105.t
+	desc = russ.105.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+
+	option = {
+		name = russ.105.a
+		set_country_flag = SOV_wag_afghan_deal_struck
+		clr_country_flag = SOV_wag_afghan_drug_crisis_mission_started
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_1 } remove_ideas = SOV_wag_afghan_drug_crisis_1 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_2 } remove_ideas = SOV_wag_afghan_drug_crisis_2 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_3 } remove_ideas = SOV_wag_afghan_drug_crisis_3 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_4 } remove_ideas = SOV_wag_afghan_drug_crisis_4 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_5 } remove_ideas = SOV_wag_afghan_drug_crisis_5 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_6 } remove_ideas = SOV_wag_afghan_drug_crisis_6 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_7 } remove_ideas = SOV_wag_afghan_drug_crisis_7 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_8 } remove_ideas = SOV_wag_afghan_drug_crisis_8 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_9 } remove_ideas = SOV_wag_afghan_drug_crisis_9 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_10 } remove_ideas = SOV_wag_afghan_drug_crisis_10 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_11 } remove_ideas = SOV_wag_afghan_drug_crisis_11 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_12 } remove_ideas = SOV_wag_afghan_drug_crisis_12 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_13 } remove_ideas = SOV_wag_afghan_drug_crisis_13 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_14 } remove_ideas = SOV_wag_afghan_drug_crisis_14 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_15 } remove_ideas = SOV_wag_afghan_drug_crisis_15 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_16 } remove_ideas = SOV_wag_afghan_drug_crisis_16 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_17 } remove_ideas = SOV_wag_afghan_drug_crisis_17 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_18 } remove_ideas = SOV_wag_afghan_drug_crisis_18 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_19 } remove_ideas = SOV_wag_afghan_drug_crisis_19 }
+		if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_20 } remove_ideas = SOV_wag_afghan_drug_crisis_20 }
+		add_stability = -0.05
+		add_to_variable = { sov_economy_CG = 0.07 }
+		if = { limit = { country_exists = KAZ } KAZ = { country_event = { id = russ.106 days = 1 } } }
+		if = { limit = { country_exists = UZB } UZB = { country_event = { id = russ.106 days = 1 } } }
+		if = { limit = { country_exists = KYR } KYR = { country_event = { id = russ.106 days = 1 } } }
+		if = { limit = { country_exists = TAJ } TAJ = { country_event = { id = russ.106 days = 1 } } }
+		if = { limit = { country_exists = TMS } TMS = { country_event = { id = russ.106 days = 1 } } }
+	}
+}
+
+## central asia receives notice that anti-drug corridor framework is reset
+country_event = {
+	id = russ.106
+	title = russ.106.t
+	desc = russ.106.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+
+	option = {
+		name = russ.106.a
+		remove_ideas = SOV_drugsbad_idea
+	}
+}
+
+## iraq decides whether to accept russian wagner military aid package
+country_event = {
+	id = russ.107
+	title = russ.107.t
+	desc = russ.107.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+
+	option = {
+		name = russ.107.a
+		ai_chance = { base = 90 }
+		add_equipment_to_stockpile = { type = infantry_equipment_1 amount = 5000 producer = SOV }
+		add_equipment_to_stockpile = { type = support_equipment_1 amount = 500 producer = SOV }
+		add_equipment_to_stockpile = { type = artillery_equipment_1 amount = 250 producer = SOV }
+		random_owned_controlled_state = {
+					limit = { ROOT = { has_full_control_of_state = PREV } }
+					create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+					create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+					create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+				}
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		add_opinion_modifier = { target = USA modifier = large_decrease }
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			if = {
+				limit = { country_exists = USA }
+				add_opinion_modifier = { target = USA modifier = large_decrease }
+				USA = { add_opinion_modifier = { target = SOV modifier = large_decrease } }
+			}
+			country_event = { id = russ.108 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.107.b
+		ai_chance = { base = 10 }
+		add_opinion_modifier = { target = FROM modifier = large_decrease }
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = large_decrease }
+			country_event = { id = russ.14 days = 1 }
+		}
+	}
+}
+
+## russia is notified that iraq accepted the aid arrangement
+country_event = {
+	id = russ.108
+	title = russ.108.t
+	desc = russ.108.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+
+	option = {
+		name = russ.108.a
+	}
+}
+
+## iraq receives notification of additional russian shipment decision
+country_event = {
+	id = russ.109
+	title = russ.109.t
+	desc = russ.109.desc
+	picture = GFX_event_wagner_in_africa
+	is_triggered_only = yes
+
+	option = {
+		name = russ.109.a
+	}
+}
+
+## libya decides whether to accept wagner support in exchange for economic concessions
+country_event = {
+	id = russ.110
+	title = russ.110.t
+	desc = russ.110.desc
+	picture = GFX_event_wagner_in_africa2
+	is_triggered_only = yes
+
+	option = {
+		name = russ.110.a
+		ai_chance = { base = 70 }
+		add_ideas = SOV_wagner_presence_2
+		add_ideas = wagner_sphere_member
+		random_owned_controlled_state = {
+			limit = { ROOT = { has_full_control_of_state = PREV } }
+			create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+			create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+			create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+			create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+			create_unit = { division = "division_template = \"PMC Wagner Storm Group\" start_experience_factor = 0.7 start_manpower_factor = 0.9 force_equipment_variants = { infantry_equipment_1 = { owner = \"SOV\" } } force_equipment_variants = { squad_equipment_0 = { owner = \"SOV\" } }" owner = SOV }
+		}
+		add_opinion_modifier = { target = FROM modifier = declaration_of_friendship }
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = declaration_of_friendship }
+			country_event = { id = russ.15 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.110.b
+		ai_chance = { base = 30 }
+		add_opinion_modifier = { target = FROM modifier = large_decrease }
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = large_decrease }
+			country_event = { id = russ.14 days = 1 }
+		}
 	}
 }

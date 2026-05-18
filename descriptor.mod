@@ -3,7 +3,7 @@ tags={
 	"National Focuses"
 }
 dependencies={
-	"Novum Vexillum Drive"
+	"Novum Vexillum"
 }
 replace_path="gfx/interface/equipmentdesigner/tanks/designer"
 name="Novum Vexillum Global Conflict"

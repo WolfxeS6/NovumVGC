@@ -1691,13 +1691,24 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
-			custom_effect_tooltip = SOV_wag_merge_factions_with_china_TT
+			army_experience = 30
+			navy_experience = 30
+			air_experience = 30
 			if = {
-				limit = { country_exists = PRC }
-				PRC = { country_event = { id = russ.83 days = 1 } }
-			}
-			else = {
-				country_event = { id = russ.14 }
+				limit = {
+					country_exists = PRC
+					PRC = {
+						OR = {
+							has_idea = SOV_wag_trade_with_russia_prc
+							has_idea = SOV_wag_trade_with_russia_prc_advanced
+						}
+					}
+				}
+				PRC = {
+					army_experience = 30
+					navy_experience = 30
+					air_experience = 30
+				}
 			}
 		}
 	}
@@ -1723,24 +1734,13 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
-			army_experience = 30
-			navy_experience = 30
-			air_experience = 30
+			custom_effect_tooltip = SOV_wag_merge_factions_with_china_TT
 			if = {
-				limit = {
-					country_exists = PRC
-					PRC = {
-						OR = {
-							has_idea = SOV_wag_trade_with_russia_prc
-							has_idea = SOV_wag_trade_with_russia_prc_advanced
-						}
-					}
-				}
-				PRC = {
-					army_experience = 30
-					navy_experience = 30
-					air_experience = 30
-				}
+				limit = { country_exists = PRC }
+				PRC = { country_event = { id = russ.83 days = 1 } }
+			}
+			else = {
+				country_event = { id = russ.14 }
 			}
 		}
 	}
@@ -1833,6 +1833,9 @@
 		prerequisite = { focus = SOV_wag_pacify_northern_caucasus }
 		relative_position_id = SOV_wag_pacify_northern_caucasus
 		ai_will_do = { factor = 5 }
+		available = {
+			has_army_manpower = { size > 699999 }
+		}
 
 		available_if_capitulated = no
 		
@@ -1882,7 +1885,9 @@
 		prerequisite = { focus = SOV_wag_asian_theater }
 		relative_position_id = SOV_wag_asian_theater
 		ai_will_do = { factor = 5 }
-		will_lead_to_war_with = KAZ
+		available = {
+			has_army_manpower = { size > 699999 }
+		}
 
 		available_if_capitulated = no
 		
@@ -1892,10 +1897,7 @@
 					country_exists = KAZ
 					KAZ = { NOT = { is_in_faction_with = SOV } }
 				}
-				create_wargoal = {
-					type = annex_everything
-					target = KAZ
-				}
+				country_event = { id = russ.114 days = 1 }
 			}
 		}
 	}
@@ -1918,35 +1920,35 @@
 					country_exists = TAJ
 					TAJ = { NOT = { is_in_faction_with = SOV } }
 				}
-				TAJ = { country_event = { id = russ.10 } }
+				TAJ = { country_event = { id = russ.122 } }
 			}
 			if = {
 				limit = {
 					country_exists = UZB
 					UZB = { NOT = { is_in_faction_with = SOV } }
 				}
-				UZB = { country_event = { id = russ.10 } }
+				UZB = { country_event = { id = russ.122 } }
 			}
 			if = {
 				limit = {
 					country_exists = TRK
 					TRK = { NOT = { is_in_faction_with = SOV } }
 				}
-				TRK = { country_event = { id = russ.10 } }
+				TRK = { country_event = { id = russ.122 } }
 			}
 			if = {
 				limit = {
 					country_exists = TMS
 					TMS = { NOT = { is_in_faction_with = SOV } }
 				}
-				TMS = { country_event = { id = russ.10 } }
+				TMS = { country_event = { id = russ.122 } }
 			}
 			if = {
 				limit = {
 					country_exists = KYR
 					KYR = { NOT = { is_in_faction_with = SOV } }
 				}
-				KYR = { country_event = { id = russ.10 } }
+				KYR = { country_event = { id = russ.122 } }
 			}
 		}
 	}
@@ -2006,6 +2008,9 @@
 			focus = SOV_wag_thrust_to_baku
 		}
 		ai_will_do = { factor = 5 }
+		available = {
+			has_army_manpower = { size > 699999 }
+		}
 
 		available_if_capitulated = no
 		
@@ -2032,6 +2037,9 @@
 			focus = SOV_wag_ally_armenia_against_azers
 		}
 		ai_will_do = { factor = 5 }
+		available = {
+			has_army_manpower = { size > 699999 }
+		}
 
 		available_if_capitulated = no
 		
@@ -2402,6 +2410,17 @@
 		relative_position_id = SOV_wag_european_theater
 		ai_will_do = { factor = 5 }
 
+		available = {
+			OR = {
+				has_completed_focus = SOV_wag_kazahstan_question
+				controls_state = 590
+				any_country = {
+					is_in_faction_with = ROOT
+					controls_state = 590
+				}
+			}
+		}
+
 		available_if_capitulated = no
 		
 		completion_reward = {
@@ -2475,7 +2494,6 @@
 		cost = 5
 		prerequisite = { focus = SOV_wag_russian_spring }
 		relative_position_id = SOV_wag_russian_spring
-		will_lead_to_war_with = UKR
 		
 		ai_will_do = { factor = 5 }
 
@@ -2489,17 +2507,8 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
-			if = {
-				limit = { country_exists = UKR }
-				create_wargoal = {
-	   				type = puppet_wargoal_focus
-	     			target = UKR
-				}
-			}
-			if = {
-				limit = { NOV = { exists = yes } }
-				puppet = NOV
-			}
+			custom_effect_tooltip = SOV_wag_svo_choice_TT
+			country_event = { id = russ.111 days = 1 }
 		}
 	}
 
@@ -3441,6 +3450,8 @@
 		            add_to_variable = { sov_economy_prodgrowth_fct = 0.1 }
 					custom_effect_tooltip = RCO_CG_increase_5_TT
 					add_to_variable = { sov_economy_CG = 0.05 }
+					custom_effect_tooltip = SOV_minexport_decrease_30_TT
+					add_to_variable = { sov_economy_min_exp = -0.3 }
 					custom_effect_tooltip = SOV_milconscpd_increase_10_TT
 					add_to_variable = { sov_economy_mil_cons_spd = 0.1 }
 					random_owned_controlled_state = {

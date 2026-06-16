@@ -972,6 +972,453 @@ country_event = {
 	}
 }
 
+## georgia decides whether to accept a russian caucasian protectorate arrangement
+country_event = {
+	id = russ.123
+	title = russ.123.t
+	desc = russ.123.desc
+	picture = GFX_event_georgia_wagner
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.123.a
+		ai_chance = {
+			base = 35
+		}
+		set_cosmetic_tag = SOVWAGGEO
+		add_opinion_modifier = {
+			target = FROM
+			modifier = declaration_of_friendship
+		}
+		FROM = {
+			clr_country_flag = SOV_wag_caucasus_governorate_geo
+			clr_country_flag = SOV_wag_caucasus_governorate_arm
+			clr_country_flag = SOV_wag_caucasus_governorate_azr
+			set_country_flag = SOV_wag_caucasus_governorate_geo
+			add_to_faction = ROOT
+			puppet = ROOT
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_friendship
+			}
+			country_event = { id = russ.15 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.123.b
+		ai_chance = {
+			base = 65
+		}
+		add_opinion_modifier = {
+			target = FROM
+			modifier = large_decrease
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = large_decrease
+			}
+			country_event = { id = russ.14 days = 1 }
+			if = {
+				limit = {
+					country_exists = GEO
+					NOT = { has_war_with = GEO }
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = GEO
+				}
+				declare_war_on = {
+					target = GEO
+					type = annex_everything
+				}
+			}
+		}
+	}
+}
+
+## armenia decides whether to accept a russian caucasian protectorate arrangement
+country_event = {
+	id = russ.124
+	title = russ.124.t
+	desc = russ.124.desc
+	picture = GFX_event_caucasus
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.124.a
+		ai_chance = {
+			base = 35
+		}
+		set_cosmetic_tag = SOVWAGGEO
+		add_opinion_modifier = {
+			target = FROM
+			modifier = declaration_of_friendship
+		}
+		FROM = {
+			clr_country_flag = SOV_wag_caucasus_governorate_geo
+			clr_country_flag = SOV_wag_caucasus_governorate_arm
+			clr_country_flag = SOV_wag_caucasus_governorate_azr
+			set_country_flag = SOV_wag_caucasus_governorate_arm
+			add_to_faction = PREV
+			puppet = PREV
+			add_opinion_modifier = {
+				target = PREV
+				modifier = declaration_of_friendship
+			}
+			country_event = { id = russ.15 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.124.b
+		ai_chance = {
+			base = 65
+		}
+		add_opinion_modifier = {
+			target = FROM
+			modifier = large_decrease
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = PREV
+				modifier = large_decrease
+			}
+			country_event = { id = russ.125 days = 1 }
+		}
+	}
+}
+
+## russia chooses how to respond after armenia refuses alignment
+country_event = {
+	id = russ.125
+	title = russ.125.t
+	desc = russ.125.desc
+	picture = GFX_event_caucasus
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.125.a
+		if = {
+			limit = {
+				country_exists = ARM
+				NOT = { has_war_with = ARM }
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ARM
+			}
+			declare_war_on = {
+				target = ARM
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				country_exists = AZR
+				NOT = { has_war_with = AZR }
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = AZR
+			}
+			declare_war_on = {
+				target = AZR
+				type = annex_everything
+			}
+		}
+	}
+
+	option = {
+		name = russ.125.b
+		if = {
+			limit = {
+				country_exists = AZR
+				AZR = { NOT = { is_in_faction_with = SOV } }
+			}
+			AZR = { country_event = { id = russ.126 days = 1 } }
+		}
+		else = {
+			country_event = { id = russ.127 days = 1 }
+		}
+	}
+}
+
+## azerbaijan receives a fallback russian protectorate proposal after armenian refusal
+country_event = {
+	id = russ.126
+	title = russ.126.t
+	desc = russ.126.desc
+	picture = GFX_event_sov_baku
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.126.a
+		ai_chance = {
+			base = 35
+		}
+		set_cosmetic_tag = SOVWAGGEO
+		add_opinion_modifier = {
+			target = FROM
+			modifier = declaration_of_friendship
+		}
+		FROM = {
+			clr_country_flag = SOV_wag_caucasus_governorate_geo
+			clr_country_flag = SOV_wag_caucasus_governorate_arm
+			clr_country_flag = SOV_wag_caucasus_governorate_azr
+			set_country_flag = SOV_wag_caucasus_governorate_azr
+			add_to_faction = PREV
+			puppet = PREV
+			add_opinion_modifier = {
+				target = PREV
+				modifier = declaration_of_friendship
+			}
+			country_event = { id = russ.15 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.126.b
+		ai_chance = {
+			base = 65
+		}
+		add_opinion_modifier = {
+			target = FROM
+			modifier = large_decrease
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = PREV
+				modifier = large_decrease
+			}
+			country_event = { id = russ.127 days = 1 }
+		}
+	}
+}
+
+## caucasian diplomacy collapses and russia turns to war
+country_event = {
+	id = russ.127
+	title = russ.127.t
+	desc = russ.127.desc
+	picture = GFX_event_caucasus
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.127.a
+		if = {
+			limit = {
+				country_exists = ARM
+				NOT = { has_war_with = ARM }
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ARM
+			}
+			declare_war_on = {
+				target = ARM
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				country_exists = AZR
+				NOT = { has_war_with = AZR }
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = AZR
+			}
+			declare_war_on = {
+				target = AZR
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				country_exists = NGK
+				NOT = { has_war_with = NGK }
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NGK
+			}
+			declare_war_on = {
+				target = NGK
+				type = annex_everything
+			}
+		}
+	}
+}
+
+## azerbaijan decides whether to accept a russian caucasian protectorate arrangement
+country_event = {
+	id = russ.128
+	title = russ.128.t
+	desc = russ.128.desc
+	picture = GFX_event_sov_baku
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.128.a
+		ai_chance = {
+			base = 35
+		}
+		set_cosmetic_tag = SOVWAGGEO
+		add_opinion_modifier = {
+			target = FROM
+			modifier = declaration_of_friendship
+		}
+		FROM = {
+			clr_country_flag = SOV_wag_caucasus_governorate_geo
+			clr_country_flag = SOV_wag_caucasus_governorate_arm
+			clr_country_flag = SOV_wag_caucasus_governorate_azr
+			set_country_flag = SOV_wag_caucasus_governorate_azr
+			add_to_faction = PREV
+			puppet = PREV
+			add_opinion_modifier = {
+				target = PREV
+				modifier = declaration_of_friendship
+			}
+			country_event = { id = russ.15 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.128.b
+		ai_chance = {
+			base = 65
+		}
+		add_opinion_modifier = {
+			target = FROM
+			modifier = large_decrease
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = PREV
+				modifier = large_decrease
+			}
+			country_event = { id = russ.129 days = 1 }
+		}
+	}
+}
+
+## russia chooses how to respond after azerbaijan refuses alignment
+country_event = {
+	id = russ.129
+	title = russ.129.t
+	desc = russ.129.desc
+	picture = GFX_event_sov_baku
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.129.a
+		if = {
+			limit = {
+				country_exists = ARM
+				NOT = { has_war_with = ARM }
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ARM
+			}
+			declare_war_on = {
+				target = ARM
+				type = annex_everything
+			}
+		}
+		if = {
+			limit = {
+				country_exists = AZR
+				NOT = { has_war_with = AZR }
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = AZR
+			}
+			declare_war_on = {
+				target = AZR
+				type = annex_everything
+			}
+		}
+	}
+
+	option = {
+		name = russ.129.b
+		if = {
+			limit = {
+				country_exists = ARM
+				ARM = { NOT = { is_in_faction_with = SOV } }
+			}
+			ARM = { country_event = { id = russ.130 days = 1 } }
+		}
+		else = {
+			country_event = { id = russ.127 days = 1 }
+		}
+	}
+}
+
+## armenia receives a fallback russian protectorate proposal after azerbaijani refusal
+country_event = {
+	id = russ.130
+	title = russ.130.t
+	desc = russ.130.desc
+	picture = GFX_event_caucasus
+	fire_only_once = no
+	is_triggered_only = yes
+
+	option = {
+		name = russ.130.a
+		ai_chance = {
+			base = 35
+		}
+		set_cosmetic_tag = SOVWAGGEO
+		add_opinion_modifier = {
+			target = FROM
+			modifier = declaration_of_friendship
+		}
+		FROM = {
+			clr_country_flag = SOV_wag_caucasus_governorate_geo
+			clr_country_flag = SOV_wag_caucasus_governorate_arm
+			clr_country_flag = SOV_wag_caucasus_governorate_azr
+			set_country_flag = SOV_wag_caucasus_governorate_arm
+			add_to_faction = PREV
+			puppet = PREV
+			add_opinion_modifier = {
+				target = PREV
+				modifier = declaration_of_friendship
+			}
+			country_event = { id = russ.15 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.130.b
+		ai_chance = {
+			base = 65
+		}
+		add_opinion_modifier = {
+			target = FROM
+			modifier = large_decrease
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = PREV
+				modifier = large_decrease
+			}
+			country_event = { id = russ.127 days = 1 }
+		}
+	}
+}
+
 ## they dont want unification
 
 country_event = {
@@ -2000,6 +2447,9 @@ country_event = {
 
 	option = {
 		name = russ.74.a
+		ai_chance = {
+			base = 80
+		}
 		add_timed_idea = {
 			idea = SOV_wag_iran_trade_ties
 			days = 365
@@ -2025,6 +2475,9 @@ country_event = {
 
 	option = {
 		name = russ.74.b
+		ai_chance = {
+			base = 20
+		}
 		add_opinion_modifier = {
 			target = FROM
 			modifier = loyal_to_our_enemy
@@ -3216,6 +3669,9 @@ country_event = {
 
 	option = {
 		name = russ.59.a
+		trigger = {
+			NOT = { has_country_flag = SOV_wag_kazakh_governorate_established }
+		}
 		if = {
 			limit = { any_owned_state = { is_core_of = TMS } }
 			release_puppet = TMS
@@ -3230,6 +3686,10 @@ country_event = {
 				}
 				transfer_state_to = TMS
 			}
+			if = { limit = { 804 = { owner = SOV } } 804 = { transfer_state = TMS } }
+			if = { limit = { 805 = { owner = SOV } } 805 = { transfer_state = TMS } }
+			if = { limit = { 589 = { owner = SOV } } 589 = { transfer_state = TMS } }
+			TMS = { set_cosmetic_tag = SOVWAGKAZ }
 		}
 		else_if = {
 			limit = { any_owned_state = { is_core_of = UZB } }
@@ -3245,6 +3705,10 @@ country_event = {
 				}
 				transfer_state_to = UZB
 			}
+			if = { limit = { 804 = { owner = SOV } } 804 = { transfer_state = UZB } }
+			if = { limit = { 805 = { owner = SOV } } 805 = { transfer_state = UZB } }
+			if = { limit = { 589 = { owner = SOV } } 589 = { transfer_state = UZB } }
+			UZB = { set_cosmetic_tag = SOVWAGKAZ }
 		}
 		else_if = {
 			limit = { any_owned_state = { is_core_of = KYR } }
@@ -3260,6 +3724,10 @@ country_event = {
 				}
 				transfer_state_to = KYR
 			}
+			if = { limit = { 804 = { owner = SOV } } 804 = { transfer_state = KYR } }
+			if = { limit = { 805 = { owner = SOV } } 805 = { transfer_state = KYR } }
+			if = { limit = { 589 = { owner = SOV } } 589 = { transfer_state = KYR } }
+			KYR = { set_cosmetic_tag = SOVWAGKAZ }
 		}
 		else_if = {
 			limit = { any_owned_state = { is_core_of = TAJ } }
@@ -3275,12 +3743,19 @@ country_event = {
 				}
 				transfer_state_to = TAJ
 			}
+			if = { limit = { 804 = { owner = SOV } } 804 = { transfer_state = TAJ } }
+			if = { limit = { 805 = { owner = SOV } } 805 = { transfer_state = TAJ } }
+			if = { limit = { 589 = { owner = SOV } } 589 = { transfer_state = TAJ } }
+			TAJ = { set_cosmetic_tag = SOVWAGKAZ }
 		}
 		add_political_power = 25
 	}
 
 	option = {
 		name = russ.59.b
+		trigger = {
+			NOT = { has_country_flag = SOV_wag_kazakh_governorate_established }
+		}
 		every_owned_state = {
 			limit = {
 				OR = {
@@ -3290,9 +3765,32 @@ country_event = {
 					is_core_of = TMS
 				}
 			}
-			add_compliance = 0.08
+			add_compliance = 12
 		}
 		add_stability = 0.03
+	}
+
+	option = {
+		name = russ.59.c
+		trigger = {
+			has_country_flag = SOV_wag_kazakh_governorate_established
+			country_exists = KAZ
+			KAZ = { is_subject_of = ROOT }
+		}
+		every_owned_state = {
+			limit = {
+				OR = {
+					is_core_of = UZB
+					is_core_of = KYR
+					is_core_of = TAJ
+					is_core_of = TMS
+				}
+			}
+			transfer_state_to = KAZ
+			add_core_of = KAZ
+		}
+		KAZ = { set_cosmetic_tag = SOVWAGKAZ }
+		add_political_power = 20
 	}
 }
 
@@ -3307,34 +3805,175 @@ country_event = {
 
 	option = {
 		name = russ.60.a
-		if = {
-			limit = { any_owned_state = { is_core_of = GEO } }
-			release_puppet = GEO
+		trigger = {
+			OR = {
+				AND = {
+					has_country_flag = SOV_wag_caucasus_governorate_geo
+					country_exists = GEO
+					GEO = { is_subject_of = ROOT }
+				}
+				AND = {
+					has_country_flag = SOV_wag_caucasus_governorate_arm
+					country_exists = ARM
+					ARM = { is_subject_of = ROOT }
+				}
+				AND = {
+					has_country_flag = SOV_wag_caucasus_governorate_azr
+					country_exists = AZR
+					AZR = { is_subject_of = ROOT }
+				}
+			}
 		}
 		if = {
-			limit = { any_owned_state = { is_core_of = ARM } }
-			release_puppet = ARM
+			limit = {
+				has_country_flag = SOV_wag_caucasus_governorate_geo
+				country_exists = GEO
+				GEO = { is_subject_of = ROOT }
+			}
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = GEO
+						is_core_of = ARM
+						is_core_of = AZR
+						is_core_of = ABK
+						is_core_of = SOS
+						is_core_of = NGK
+					}
+				}
+				add_core_of = GEO
+				transfer_state_to = GEO
+			}
+			GEO = {
+				every_owned_state = {
+					limit = {
+						OR = {
+							is_core_of = GEO
+							is_core_of = ARM
+							is_core_of = AZR
+							is_core_of = ABK
+							is_core_of = SOS
+							is_core_of = NGK
+						}
+					}
+					add_core_of = GEO
+				}
+				set_cosmetic_tag = SOVWAGGEO
+			}
 		}
-		if = {
-			limit = { any_owned_state = { is_core_of = AZR } }
-			release_puppet = AZR
+		else_if = {
+			limit = {
+				has_country_flag = SOV_wag_caucasus_governorate_arm
+				country_exists = ARM
+				ARM = { is_subject_of = ROOT }
+			}
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = GEO
+						is_core_of = ARM
+						is_core_of = AZR
+						is_core_of = ABK
+						is_core_of = SOS
+						is_core_of = NGK
+					}
+				}
+				add_core_of = ARM
+				transfer_state_to = ARM
+			}
+			ARM = {
+				every_owned_state = {
+					limit = {
+						OR = {
+							is_core_of = GEO
+							is_core_of = ARM
+							is_core_of = AZR
+							is_core_of = ABK
+							is_core_of = SOS
+							is_core_of = NGK
+						}
+					}
+					add_core_of = ARM
+				}
+				set_cosmetic_tag = SOVWAGGEO
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SOV_wag_caucasus_governorate_azr
+				country_exists = AZR
+				AZR = { is_subject_of = ROOT }
+			}
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = GEO
+						is_core_of = ARM
+						is_core_of = AZR
+						is_core_of = ABK
+						is_core_of = SOS
+						is_core_of = NGK
+					}
+				}
+				add_core_of = AZR
+				transfer_state_to = AZR
+			}
+			AZR = {
+				every_owned_state = {
+					limit = {
+						OR = {
+							is_core_of = GEO
+							is_core_of = ARM
+							is_core_of = AZR
+							is_core_of = ABK
+							is_core_of = SOS
+							is_core_of = NGK
+						}
+					}
+					add_core_of = AZR
+				}
+				set_cosmetic_tag = SOVWAGGEO
+			}
 		}
 		add_political_power = 30
 	}
 
 	option = {
 		name = russ.60.b
+		trigger = {
+			NOT = {
+				OR = {
+					AND = {
+						has_country_flag = SOV_wag_caucasus_governorate_geo
+						country_exists = GEO
+						GEO = { is_subject_of = ROOT }
+					}
+					AND = {
+						has_country_flag = SOV_wag_caucasus_governorate_arm
+						country_exists = ARM
+						ARM = { is_subject_of = ROOT }
+					}
+					AND = {
+						has_country_flag = SOV_wag_caucasus_governorate_azr
+						country_exists = AZR
+						AZR = { is_subject_of = ROOT }
+					}
+				}
+			}
+		}
 		every_owned_state = {
 			limit = {
 				OR = {
 					is_core_of = GEO
 					is_core_of = ARM
 					is_core_of = AZR
+					is_core_of = ABK
+					is_core_of = SOS
+					is_core_of = NGK
 				}
 			}
-			add_compliance = 0.06
+			add_compliance = 15
 		}
-		add_stability = 0.04
 	}
 }
 
@@ -4169,6 +4808,329 @@ country_event = {
 	}
 }
 
+## russia decides how to handle an iraq constrained by american influence
+country_event = {
+	id = russ.131
+	title = russ.131.t
+	desc = russ.131.desc
+	picture = GFX_event_wagnerrus
+	is_triggered_only = yes
+
+	option = {
+		name = russ.131.a
+		if = {
+			limit = { country_exists = IRQ }
+			IRQ = {
+				add_stability = -0.05
+				add_popularity = {
+					ideology = nationalist
+					popularity = 0.08
+				}
+				if = {
+					limit = {
+						has_civil_war = no
+						has_war = no
+						has_stability < 0.35
+					}
+					random_list = {
+						40 = {
+							start_civil_war = {
+								ideology = nationalist
+								size = 0.18
+							}
+						}
+						60 = {
+							add_war_support = -0.03
+						}
+					}
+				}
+			}
+		}
+		add_command_power = 15
+		add_war_support = 0.02
+	}
+
+	option = {
+		name = russ.131.b
+		if = {
+			limit = { country_exists = IRQ }
+			IRQ = {
+				add_stability = -0.03
+				add_popularity = {
+					ideology = nationalist
+					popularity = 0.04
+				}
+			}
+		}
+		add_political_power = 20
+	}
+}
+
+## iraq evaluates a direct russian alliance proposal
+country_event = {
+	id = russ.132
+	title = russ.132.t
+	desc = russ.132.desc
+	picture = GFX_report_event_russian_flag
+	is_triggered_only = yes
+
+	option = {
+		name = russ.132.a
+		ai_chance = { base = 70 }
+		add_stability = 0.03
+		add_opinion_modifier = {
+			target = FROM
+			modifier = declaration_of_friendship
+		}
+		give_military_access = FROM
+		if = {
+			limit = { NOT = { is_in_faction_with = FROM } }
+			FROM = { add_to_faction = ROOT }
+		}
+		if = {
+			limit = { country_exists = USA }
+			add_opinion_modifier = {
+				target = USA
+				modifier = large_decrease
+			}
+			USA = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_decrease
+				}
+			}
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_friendship
+			}
+			if = {
+				limit = { country_exists = USA }
+				add_opinion_modifier = {
+					target = USA
+					modifier = large_decrease
+				}
+				USA = {
+					add_opinion_modifier = {
+						target = SOV
+						modifier = large_decrease
+					}
+				}
+			}
+			country_event = { id = russ.15 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.132.b
+		ai_chance = { base = 30 }
+		add_opinion_modifier = {
+			target = FROM
+			modifier = large_decrease
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = large_decrease
+			}
+			country_event = { id = russ.14 days = 1 }
+		}
+	}
+}
+
+## russia decides how far to push covert warfare in iraq
+country_event = {
+	id = russ.133
+	title = russ.133.t
+	desc = russ.133.desc
+	picture = GFX_event_wagnerrus
+	is_triggered_only = yes
+
+	option = {
+		name = russ.133.a
+		if = {
+			limit = { country_exists = IRQ }
+			IRQ = {
+				add_stability = -0.06
+				add_war_support = -0.03
+				add_popularity = {
+					ideology = nationalist
+					popularity = 0.06
+				}
+				if = {
+					limit = {
+						has_civil_war = no
+						has_war = no
+						has_stability < 0.35
+					}
+					random_list = {
+						35 = {
+							start_civil_war = {
+								ideology = nationalist
+								size = 0.2
+							}
+						}
+						65 = {
+							add_war_support = -0.02
+						}
+					}
+				}
+			}
+		}
+		add_war_support = 0.03
+		add_command_power = 10
+	}
+
+	option = {
+		name = russ.133.b
+		if = {
+			limit = { country_exists = IRQ }
+			IRQ = {
+				add_stability = -0.03
+			}
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = IRQ
+			}
+		}
+		add_command_power = 20
+	}
+}
+
+## russia decides how to approach a western-aligned syria
+country_event = {
+	id = russ.134
+	title = russ.134.t
+	desc = russ.134.desc
+	picture = GFX_event_wagnerrus
+	is_triggered_only = yes
+
+	option = {
+		name = russ.134.a
+		if = {
+			limit = { country_exists = SYR }
+			SYR = {
+				add_stability = -0.05
+				add_popularity = {
+					ideology = nationalist
+					popularity = 0.07
+				}
+				if = {
+					limit = {
+						has_civil_war = no
+						has_war = no
+						has_stability < 0.35
+					}
+					random_list = {
+						25 = {
+							start_civil_war = {
+								ideology = nationalist
+								size = 0.16
+							}
+						}
+						75 = {
+							add_war_support = -0.02
+						}
+					}
+				}
+			}
+		}
+		add_command_power = 15
+	}
+
+	option = {
+		name = russ.134.b
+		if = {
+			limit = { country_exists = SYR }
+			SYR = {
+				add_stability = -0.03
+			}
+		}
+		navy_experience = 10
+		air_experience = 10
+		add_political_power = 15
+	}
+}
+
+## syria considers a russian levant security corridor proposal
+country_event = {
+	id = russ.135
+	title = russ.135.t
+	desc = russ.135.desc
+	picture = GFX_report_event_russian_flag
+	is_triggered_only = yes
+
+	option = {
+		name = russ.135.a
+		ai_chance = { base = 75 }
+		add_stability = 0.03
+		add_war_support = 0.02
+		add_opinion_modifier = {
+			target = FROM
+			modifier = declaration_of_friendship
+		}
+		give_military_access = FROM
+		if = {
+			limit = { NOT = { is_in_faction_with = FROM } }
+			FROM = { add_to_faction = ROOT }
+		}
+		if = {
+			limit = { country_exists = USA }
+			add_opinion_modifier = {
+				target = USA
+				modifier = large_decrease
+			}
+			USA = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_decrease
+				}
+			}
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = declaration_of_friendship
+			}
+			custom_effect_tooltip = RCO_resource_increase_5_TT
+			add_to_variable = { sov_economy_res_gain_fct = 0.05 }
+			navy_experience = 10
+			air_experience = 10
+			if = {
+				limit = { country_exists = USA }
+				add_opinion_modifier = {
+					target = USA
+					modifier = large_decrease
+				}
+				USA = {
+					add_opinion_modifier = {
+						target = SOV
+						modifier = large_decrease
+					}
+				}
+			}
+			country_event = { id = russ.15 days = 1 }
+		}
+	}
+
+	option = {
+		name = russ.135.b
+		ai_chance = { base = 25 }
+		add_opinion_modifier = {
+			target = FROM
+			modifier = large_decrease
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = large_decrease
+			}
+			country_event = { id = russ.14 days = 1 }
+		}
+	}
+}
+
 ## Help our Russian Brothers: choose direct war or Donbass pressure route
 country_event = {
 	id = russ.111
@@ -4345,6 +5307,7 @@ country_event = {
 		}
 		set_cosmetic_tag = SOVWAGKAZ
 		FROM = {
+			set_country_flag = SOV_wag_kazakh_governorate_established
 			puppet = PREV
 			country_event = { id = russ.15 days = 1 }
 		}

@@ -24,7 +24,7 @@
 		ai_will_do = { factor = 5 }
 
 		available_if_capitulated = no
-		
+
 		completion_reward = {
 			custom_effect_tooltip = RKKA_mil_adv_cost_decrease_75_TT
 			add_to_variable = { sov_army_adv_cost_fct = -0.75 }
@@ -1535,6 +1535,9 @@
 		ai_will_do = { factor = 5 }
 
 		available_if_capitulated = no
+		available = {
+			controls_state = 828
+		}
 		
 		completion_reward = {
 			add_political_power = 25
@@ -1753,7 +1756,7 @@
 		available = {
 			country_exists = PRC
 			PRC = {
-				has_war_with_major = yes
+				has_war_with = USA
 			}
 		}
 
@@ -1847,7 +1850,6 @@
 		ai_will_do = { factor = 5 }
 
 		available_if_capitulated = no
-		
 		completion_reward = {
 			custom_effect_tooltip = SOV_wag_trade_partnership_if_accepted_TT
 			if = {
@@ -1906,8 +1908,29 @@
 				limit = {
 					country_exists = GEO
 					GEO = { NOT = { is_in_faction_with = SOV } }
+					NOT = {
+						OR = {
+							GEO = { is_in_faction_with = SOV }
+							AZR = { is_in_faction_with = SOV }
+							ARM = { is_in_faction_with = SOV }
+						}
+					}
 				}
-				GEO = { country_event = { id = russ.10 } }
+				GEO = { country_event = { id = russ.123 days = 1 } }
+			}
+			else_if = {
+				limit = {
+					country_exists = GEO
+					GEO = { NOT = { is_in_faction_with = SOV } }
+					OR = {
+						AZR = { is_in_faction_with = SOV }
+						ARM = { is_in_faction_with = SOV }
+					}
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = GEO
+				}
 			}
 		}
 	}
@@ -1949,6 +1972,15 @@
 		ai_will_do = { factor = 5 }
 
 		available_if_capitulated = no
+		available = {
+			OR = {
+				controls_state = 805
+				AND = {
+					country_exists = KAZ
+					KAZ = { is_subject_of = SOV }
+				}
+			}
+		}
 		
 		completion_reward = {
 			if = {
@@ -2046,6 +2078,18 @@
 		ai_will_do = { factor = 5 }
 		available = {
 			has_army_manpower = { size > 699999 }
+			OR = {
+				GEO = { is_in_faction_with = SOV }
+				ARM = { is_in_faction_with = SOV }
+				AZR = { is_in_faction_with = SOV }
+				NOT = {
+					OR = {
+						GEO = { is_in_faction_with = SOV }
+						ARM = { is_in_faction_with = SOV }
+						AZR = { is_in_faction_with = SOV }
+					}
+				}
+			}
 		}
 
 		available_if_capitulated = no
@@ -2053,10 +2097,27 @@
 		completion_reward = {
 			if = {
 				limit = {
+					NOT = {
+						OR = {
+							GEO = { is_in_faction_with = SOV }
+							ARM = { is_in_faction_with = SOV }
+							AZR = { is_in_faction_with = SOV }
+						}
+					}
 					country_exists = ARM
 					ARM = { NOT = { is_in_faction_with = SOV } }
 				}
-				ARM = { country_event = russ.9 }
+				ARM = { country_event = { id = russ.124 days = 1 } }
+			}
+			else_if = {
+				limit = {
+					country_exists = AZR
+					AZR = { NOT = { is_in_faction_with = SOV } }
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = AZR
+				}
 			}
 		}
 	}
@@ -2075,6 +2136,18 @@
 		ai_will_do = { factor = 5 }
 		available = {
 			has_army_manpower = { size > 699999 }
+			OR = {
+				GEO = { is_in_faction_with = SOV }
+				ARM = { is_in_faction_with = SOV }
+				AZR = { is_in_faction_with = SOV }
+				NOT = {
+					OR = {
+						GEO = { is_in_faction_with = SOV }
+						ARM = { is_in_faction_with = SOV }
+						AZR = { is_in_faction_with = SOV }
+					}
+				}
+			}
 		}
 
 		available_if_capitulated = no
@@ -2082,10 +2155,27 @@
 		completion_reward = {
 			if = {
 				limit = {
+					NOT = {
+						OR = {
+							GEO = { is_in_faction_with = SOV }
+							ARM = { is_in_faction_with = SOV }
+							AZR = { is_in_faction_with = SOV }
+						}
+					}
 					country_exists = AZR
 					AZR = { NOT = { is_in_faction_with = SOV } }
 				}
-				AZR = { country_event = { id = russ.8 } }
+				AZR = { country_event = { id = russ.128 days = 1 } }
+			}
+			else_if = {
+				limit = {
+					country_exists = ARM
+					ARM = { NOT = { is_in_faction_with = SOV } }
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = ARM
+				}
 			}
 		}
 	}
@@ -2103,31 +2193,52 @@
 			}
 		relative_position_id = SOV_wag_pacify_northern_caucasus
 		ai_will_do = { factor = 5 }
+		available = {
+			OR = {
+				AND = {
+					country_exists = GEO
+					GEO = {
+						OR = {
+							is_in_faction_with = SOV
+							is_subject_of = SOV
+						}
+					}
+					NOT = { country_exists = ARM }
+					NOT = { country_exists = AZR }
+				}
+				AND = {
+					country_exists = ARM
+					ARM = {
+						OR = {
+							is_in_faction_with = SOV
+							is_subject_of = SOV
+						}
+					}
+					NOT = { country_exists = GEO }
+					NOT = { country_exists = AZR }
+				}
+				AND = {
+					country_exists = AZR
+					AZR = {
+						OR = {
+							is_in_faction_with = SOV
+							is_subject_of = SOV
+						}
+					}
+					NOT = { country_exists = GEO }
+					NOT = { country_exists = ARM }
+				}
+				AND = {
+					has_full_control_of_state = 229
+					has_full_control_of_state = 230
+					has_full_control_of_state = 231
+				}
+			}
+		}
 
 		available_if_capitulated = no
 		
 		completion_reward = {
-			if = {
-				limit = {
-					country_exists = GEO
-					GEO = { NOT = { is_in_faction_with = SOV } }
-				}
-				GEO = { country_event = { id = russ.8 } }
-			}
-			if = {
-				limit = {
-					country_exists = ARM
-					ARM = { NOT = { is_in_faction_with = SOV } }
-				}
-				ARM = { country_event = { id = russ.8 } }
-			}
-			if = {
-				limit = {
-					country_exists = AZR
-					AZR = { NOT = { is_in_faction_with = SOV } }
-				}
-				AZR = { country_event = { id = russ.8 } }
-			}
 			country_event = { id = russ.60 days = 3 }
 		}
 	}
@@ -2300,7 +2411,7 @@
 			if = {
 				limit = { country_exists = PER }
 				create_wargoal = {
-					type = annex_everything
+					type = puppet_wargoal_focus
 					target = PER
 				}
 			}
@@ -2382,12 +2493,24 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
+			custom_effect_tooltip = SOV_wag_ally_iraq_focus_TT
 			if = {
-				limit = {
-					country_exists = IRQ
-					IRQ = { NOT = { is_in_faction_with = SOV } }
+				limit = { country_exists = IRQ }
+				if = {
+					limit = {
+						OR = {
+							IRQ = { is_in_faction_with = USA }
+							IRQ = { is_subject_of = USA }
+						}
+					}
+					country_event = { id = russ.131 days = 1 }
 				}
-				IRQ = { country_event = russ.9 }
+				else_if = {
+					limit = {
+						IRQ = { NOT = { is_in_faction_with = SOV } }
+					}
+					IRQ = { country_event = { id = russ.132 days = 1 } }
+				}
 			}
 			add_political_power = 25
 		}
@@ -2409,11 +2532,23 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
+			custom_effect_tooltip = SOV_wag_finance_iraq_focus_TT
 			if = {
 				limit = { country_exists = IRQ }
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = IRQ
+				if = {
+					limit = {
+						OR = {
+							IRQ = { is_in_faction_with = USA }
+							IRQ = { is_subject_of = USA }
+						}
+					}
+					country_event = { id = russ.133 days = 1 }
+				}
+				else = {
+					create_wargoal = {
+						type = puppet_wargoal_focus
+						target = IRQ
+					}
 				}
 			}
 			add_war_support = 0.03
@@ -2437,15 +2572,32 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
+			custom_effect_tooltip = SOV_wag_syrian_deal_focus_TT
 			if = {
-				limit = {
-					country_exists = SYR
-					SYR = { NOT = { is_in_faction_with = SOV } }
+				limit = { country_exists = SYR }
+				if = {
+					limit = {
+						OR = {
+							SYR = { is_in_faction_with = USA }
+							SYR = { is_subject_of = USA }
+						}
+					}
+					country_event = { id = russ.134 days = 1 }
 				}
-				SYR = { country_event = russ.9 }
+				else_if = {
+					limit = {
+						SYR = { NOT = { is_in_faction_with = SOV } }
+					}
+					SYR = { country_event = { id = russ.135 days = 1 } }
+				}
+				else = {
+					SYR = { give_military_access = SOV }
+					custom_effect_tooltip = RCO_resource_increase_5_TT
+					add_to_variable = { sov_economy_res_gain_fct = 0.05 }
+					navy_experience = 10
+					air_experience = 10
+				}
 			}
-			custom_effect_tooltip = RCO_resource_increase_5_TT
-			add_to_variable = { sov_economy_res_gain_fct = 0.05 }
 		}
 	}
 

@@ -812,7 +812,19 @@ country_event = {
 		name = russ.8.a
 		ai_chance = { # AI decision logic
             base = 0 # Start at 0%
-            
+
+			modifier = {
+				factor = 0
+				OR = {
+					tag = EST
+					tag = LAT
+					tag = LIT
+					tag = FIN
+					tag = POL
+					tag = MOL
+				}
+			}
+             
             # Always add 50% chance if Russia exists
             modifier = {
                 add = 50
@@ -834,6 +846,17 @@ country_event = {
 		name = russ.8.b
 		ai_chance = {
         			base = 0  
+					modifier = {
+						add = 1000
+						OR = {
+							tag = EST
+							tag = LAT
+							tag = LIT
+							tag = FIN
+							tag = POL
+							tag = MOL
+						}
+					}
 					modifier = { 
 						is_in_faction = yes 
 						add = 150
@@ -985,6 +1008,10 @@ country_event = {
 		name = russ.123.a
 		ai_chance = {
 			base = 35
+			modifier = {
+				factor = 2.3
+				FROM = { is_ai = yes }
+			}
 		}
 		set_cosmetic_tag = SOVWAGGEO
 		add_opinion_modifier = {
@@ -1010,6 +1037,10 @@ country_event = {
 		name = russ.123.b
 		ai_chance = {
 			base = 65
+			modifier = {
+				factor = 0.45
+				FROM = { is_ai = yes }
+			}
 		}
 		add_opinion_modifier = {
 			target = FROM
@@ -1052,8 +1083,19 @@ country_event = {
 		name = russ.124.a
 		ai_chance = {
 			base = 35
+			modifier = {
+				factor = 2.3
+				FROM = { is_ai = yes }
+			}
 		}
 		set_cosmetic_tag = SOVWAGGEO
+		if = {
+			limit = { country_exists = NGK }
+			annex_country = {
+				target = NGK
+				transfer_troops = yes
+			}
+		}
 		add_opinion_modifier = {
 			target = FROM
 			modifier = declaration_of_friendship
@@ -1069,6 +1111,16 @@ country_event = {
 				target = PREV
 				modifier = declaration_of_friendship
 			}
+			if = {
+				limit = {
+					country_exists = AZR
+					NOT = { has_war_with = AZR }
+				}
+				declare_war_on = {
+					target = AZR
+					type = annex_everything
+				}
+			}
 			country_event = { id = russ.15 days = 1 }
 		}
 	}
@@ -1077,6 +1129,10 @@ country_event = {
 		name = russ.124.b
 		ai_chance = {
 			base = 65
+			modifier = {
+				factor = 0.45
+				FROM = { is_ai = yes }
+			}
 		}
 		add_opinion_modifier = {
 			target = FROM
@@ -1161,6 +1217,10 @@ country_event = {
 		name = russ.126.a
 		ai_chance = {
 			base = 35
+			modifier = {
+				factor = 2.3
+				FROM = { is_ai = yes }
+			}
 		}
 		set_cosmetic_tag = SOVWAGGEO
 		add_opinion_modifier = {
@@ -1186,6 +1246,10 @@ country_event = {
 		name = russ.126.b
 		ai_chance = {
 			base = 65
+			modifier = {
+				factor = 0.45
+				FROM = { is_ai = yes }
+			}
 		}
 		add_opinion_modifier = {
 			target = FROM
@@ -1270,6 +1334,10 @@ country_event = {
 		name = russ.128.a
 		ai_chance = {
 			base = 35
+			modifier = {
+				factor = 2.3
+				FROM = { is_ai = yes }
+			}
 		}
 		set_cosmetic_tag = SOVWAGGEO
 		add_opinion_modifier = {
@@ -1295,6 +1363,10 @@ country_event = {
 		name = russ.128.b
 		ai_chance = {
 			base = 65
+			modifier = {
+				factor = 0.45
+				FROM = { is_ai = yes }
+			}
 		}
 		add_opinion_modifier = {
 			target = FROM
@@ -1379,6 +1451,10 @@ country_event = {
 		name = russ.130.a
 		ai_chance = {
 			base = 35
+			modifier = {
+				factor = 2.3
+				FROM = { is_ai = yes }
+			}
 		}
 		set_cosmetic_tag = SOVWAGGEO
 		add_opinion_modifier = {
@@ -1404,6 +1480,10 @@ country_event = {
 		name = russ.130.b
 		ai_chance = {
 			base = 65
+			modifier = {
+				factor = 0.45
+				FROM = { is_ai = yes }
+			}
 		}
 		add_opinion_modifier = {
 			target = FROM
@@ -1960,6 +2040,33 @@ country_event = {
 
 		option = { # prigozhin is very capable
 			name = russ.28.a
+			ai_chance = {
+				base = 1
+				modifier = {
+					factor = 0
+					is_historical_focus_on = yes
+					NOT = {
+						has_game_rule = {
+							rule = SOV_AI_BEHAVIOR
+							option = SOV_WAGNER
+						}
+					}
+				}
+				modifier = {
+					factor = 0
+					has_game_rule = {
+						rule = SOV_AI_BEHAVIOR
+						option = HISTORICAL
+					}
+				}
+				modifier = {
+					factor = 100
+					has_game_rule = {
+						rule = SOV_AI_BEHAVIOR
+						option = SOV_WAGNER
+					}
+				}
+			}
 
 			set_country_flag = sov_flag_wagner_power
 			custom_effect_tooltip = sov_wagner_power_TT
@@ -1972,6 +2079,33 @@ country_event = {
 
 	option = { # keep him under control
 		name = russ.28.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 4
+				is_historical_focus_on = yes
+				NOT = {
+					has_game_rule = {
+						rule = SOV_AI_BEHAVIOR
+						option = SOV_WAGNER
+					}
+				}
+			}
+			modifier = {
+				factor = 4
+				has_game_rule = {
+					rule = SOV_AI_BEHAVIOR
+					option = HISTORICAL
+				}
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = SOV_AI_BEHAVIOR
+					option = SOV_WAGNER
+				}
+			}
+		}
 
 		set_country_flag = sov_flag_wagner_integrate
 		custom_effect_tooltip = sov_wagner_integrate_TT
@@ -1980,6 +2114,33 @@ country_event = {
 
 	option = { # improve mod instead
 		name = russ.28.c
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 12
+				is_historical_focus_on = yes
+				NOT = {
+					has_game_rule = {
+						rule = SOV_AI_BEHAVIOR
+						option = SOV_WAGNER
+					}
+				}
+			}
+			modifier = {
+				factor = 12
+				has_game_rule = {
+					rule = SOV_AI_BEHAVIOR
+					option = HISTORICAL
+				}
+			}
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = SOV_AI_BEHAVIOR
+					option = SOV_WAGNER
+				}
+			}
+		}
 
 		set_country_flag = sov_flag_wagner_mod
 		custom_effect_tooltip = RKKA_attackingspeed_increase_5_TT
@@ -2799,7 +2960,7 @@ country_event = {
 					is_in_faction_with = ROOT
 					NOT = { is_in_faction_with = SOV }
 				}
-				add_to_faction = SOV
+				SOV = { add_to_faction = PREV }
 			}
 			dismantle_faction = yes
 		}
@@ -2807,7 +2968,7 @@ country_event = {
 			limit = { is_in_faction = yes }
 			leave_faction = yes
 		}
-		add_to_faction = SOV
+		SOV = { add_to_faction = ROOT }
 		SOV = { country_event = { id = russ.15 } }
 	}
 
@@ -5291,7 +5452,13 @@ country_event = {
 
 	option = {
 		name = russ.115.a
-		ai_chance = { base = 35 }
+		ai_chance = {
+			base = 35
+			modifier = {
+				factor = 2.3
+				FROM = { is_ai = yes }
+			}
+		}
 		if = { limit = { 406 = { owner = KAZ } } 406 = { transfer_state = SOV } }
 		if = { limit = { 407 = { owner = KAZ } } 407 = { transfer_state = SOV } }
 		if = { limit = { 583 = { owner = KAZ } } 583 = { transfer_state = SOV } }
@@ -5315,7 +5482,13 @@ country_event = {
 
 	option = {
 		name = russ.115.b
-		ai_chance = { base = 65 }
+		ai_chance = {
+			base = 65
+			modifier = {
+				factor = 0.45
+				FROM = { is_ai = yes }
+			}
+		}
 		FROM = {
 			country_event = { id = russ.14 days = 1 }
 			if = {
@@ -5348,6 +5521,10 @@ country_event = {
 		name = russ.122.a
 		ai_chance = {
 			base = 35
+			modifier = {
+				factor = 2.3
+				SOV = { is_ai = yes }
+			}
 		}
 		SOV = {
 			annex_country = {
@@ -5362,6 +5539,10 @@ country_event = {
 		name = russ.122.b
 		ai_chance = {
 			base = 65
+			modifier = {
+				factor = 0.45
+				SOV = { is_ai = yes }
+			}
 		}
 		SOV = {
 			country_event = { id = russ.14 }

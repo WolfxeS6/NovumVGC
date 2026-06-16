@@ -44,6 +44,7 @@ RCO_soviet_decisions_category = {
 
 		available = {
 			hidden_trigger = { always = no }
+			NOT = { has_country_flag = RCO_terrorist_attack_threat_resolved }
 			NOT = { has_completed_focus = RCO_soviet_state_militia }
 		}
 
@@ -5923,11 +5924,13 @@ CHE_decisions_category = {
 
 		available = {
 			hidden_trigger = { always = no }
+			NOT = { has_government = fascist }
 		}
 
 		activation = {
 			tag = SOV
 			has_war_with = RCO
+			NOT = { has_government = fascist }
 			SOV = { is_ai = yes }
 			RCO = { is_ai = yes }
 		}
@@ -5943,9 +5946,11 @@ CHE_decisions_category = {
 		days_mission_timeout = 10
 
 		timeout_effect = {
-			
-			add_to_variable = {
-				sov_state_surrender_limit = -0.005
+			if = {
+				limit = { NOT = { has_government = fascist } }
+				add_to_variable = {
+					sov_state_surrender_limit = -0.005
+				}
 			}
 		}
 	}

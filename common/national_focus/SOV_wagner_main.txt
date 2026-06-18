@@ -21,10 +21,10 @@
 		y = 1
 		cost = 2
 
-		ai_will_do = { factor = 5 }
+		ai_will_do = { factor = 20 }
 
 		available_if_capitulated = no
-		
+
 		completion_reward = {
 			custom_effect_tooltip = RKKA_mil_adv_cost_decrease_75_TT
 			add_to_variable = { sov_army_adv_cost_fct = -0.75 }
@@ -959,7 +959,33 @@
 		
 		completion_reward = {
 			custom_effect_tooltip = SOVWAG_trollfactory_TT
+			custom_effect_tooltip = SOV_wag_unlock_propaganda_campaigns_TT
 			set_country_flag = SOV_wag_psyops_unlocked
+			set_country_flag = SOV_wag_propaganda_enabled
+			set_country_flag = sov_prca_leaflets_enabled
+			set_country_flag = prca_use_tileset_with_id
+			hidden_effect = {
+				set_variable = {
+					var = SOV_WAG_PosterImage
+					value = 1
+				}
+				set_variable = {
+					var = SOV_WAG_PosterImage2
+					value = 1
+				}
+				set_variable = {
+					var = SOV_WAG_PosterImage3
+					value = 1
+				}
+				set_variable = {
+					var = SOV_wag_available_campaign_slots
+					value = 3
+				}
+				set_variable = {
+					var = SOV_wag_propaganda_campaign_cost
+					value = 45
+				}
+			}
 			country_event = { id = russ.57 days = 1 }
 		}
 	}
@@ -1312,6 +1338,60 @@
 		available_if_capitulated = no
 		
 			completion_reward = {
+				hidden_effect = {
+				if = {
+				limit = { is_ai = yes }
+				random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			add_political_power = 1000
+			}
+			}
 				add_political_power = 50
 				if = {
 					limit = { NOT = { is_in_faction = yes } }
@@ -1509,6 +1589,9 @@
 		ai_will_do = { factor = 5 }
 
 		available_if_capitulated = no
+		available = {
+			controls_state = 828
+		}
 		
 		completion_reward = {
 			add_political_power = 25
@@ -1691,38 +1774,6 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
-			custom_effect_tooltip = SOV_wag_merge_factions_with_china_TT
-			if = {
-				limit = { country_exists = PRC }
-				PRC = { country_event = { id = russ.83 days = 1 } }
-			}
-			else = {
-				country_event = { id = russ.14 }
-			}
-		}
-	}
-
-	focus = {
-		id = SOV_wag_merge_factions_with_china
-		icon = GFX_focus_goal_RCO_interbrigades
-		x = -1
-		y = 1
-		cost = 4
-		prerequisite = { focus = SOV_wag_vostok_exersice }
-		prerequisite = { focus = SOV_wag_deepen_economic_cooperation }
-		relative_position_id = SOV_wag_vostok_exersice
-		ai_will_do = { factor = 5 }
-		
-		available = {
-			country_exists = PRC
-			PRC = {
-				has_war_with_major = yes
-			}
-		}
-
-		available_if_capitulated = no
-		
-		completion_reward = {
 			army_experience = 30
 			navy_experience = 30
 			air_experience = 30
@@ -1741,6 +1792,38 @@
 					navy_experience = 30
 					air_experience = 30
 				}
+			}
+		}
+	}
+
+	focus = {
+		id = SOV_wag_merge_factions_with_china
+		icon = GFX_focus_goal_RCO_interbrigades
+		x = -1
+		y = 1
+		cost = 4
+		prerequisite = { focus = SOV_wag_vostok_exersice }
+		prerequisite = { focus = SOV_wag_deepen_economic_cooperation }
+		relative_position_id = SOV_wag_vostok_exersice
+		ai_will_do = { factor = 5 }
+		
+		available = {
+			country_exists = PRC
+			PRC = {
+				has_war_with = USA
+			}
+		}
+
+		available_if_capitulated = no
+		
+		completion_reward = {
+			custom_effect_tooltip = SOV_wag_merge_factions_with_china_TT
+			if = {
+				limit = { country_exists = PRC }
+				PRC = { country_event = { id = russ.83 days = 1 } }
+			}
+			else = {
+				country_event = { id = russ.14 }
 			}
 		}
 	}
@@ -1767,33 +1850,43 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
-			add_building_construction = { type = bunker province = 3977 level = 3 instant_build = yes }
-			add_building_construction = { type = bunker province = 957 level = 2 instant_build = yes }
-			add_building_construction = { type = bunker province = 6989 level = 4 instant_build = yes }
-			add_building_construction = { type = bunker province = 6838 level = 3 instant_build = yes }
-			add_building_construction = { type = bunker province = 3787 level = 2 instant_build = yes }
-			add_building_construction = { type = bunker province = 6684 level = 4 instant_build = yes }
-			add_building_construction = { type = bunker province = 664 level = 3 instant_build = yes }
-			add_building_construction = { type = bunker province = 6686 level = 2 instant_build = yes }
-			add_building_construction = { type = bunker province = 11643 level = 4 instant_build = yes }
-			add_building_construction = { type = bunker province = 10466 level = 3 instant_build = yes }
-			add_building_construction = { type = bunker province = 12189 level = 2 instant_build = yes }
-			add_building_construction = { type = bunker province = 12192 level = 4 instant_build = yes }
-			add_building_construction = { type = bunker province = 4805 level = 3 instant_build = yes }
-			add_building_construction = { type = bunker province = 7672 level = 2 instant_build = yes }
-			add_building_construction = { type = bunker province = 10722 level = 4 instant_build = yes }
-			add_building_construction = { type = bunker province = 7801 level = 3 instant_build = yes }
-			add_building_construction = { type = bunker province = 10655 level = 2 instant_build = yes }
-			add_building_construction = { type = bunker province = 4725 level = 4 instant_build = yes }
-			add_building_construction = { type = bunker province = 13548 level = 3 instant_build = yes }
-			add_building_construction = { type = bunker province = 7763 level = 2 instant_build = yes }
-			add_building_construction = { type = bunker province = 12657 level = 4 instant_build = yes }
-			add_building_construction = { type = bunker province = 10678 level = 3 instant_build = yes }
-			add_building_construction = { type = bunker province = 7851 level = 2 instant_build = yes }
-			add_building_construction = { type = bunker province = 12543 level = 4 instant_build = yes }
-			add_building_construction = { type = bunker province = 10559 level = 3 instant_build = yes }
-			add_building_construction = { type = bunker province = 12622 level = 2 instant_build = yes }
-			add_building_construction = { type = bunker province = 4719 level = 4 instant_build = yes }
+			408 = {
+				add_building_construction = { type = bunker province = 3977 level = 3 instant_build = yes }
+				add_building_construction = { type = bunker province = 957 level = 2 instant_build = yes }
+				add_building_construction = { type = bunker province = 6989 level = 4 instant_build = yes }
+				add_building_construction = { type = bunker province = 6838 level = 3 instant_build = yes }
+				add_building_construction = { type = bunker province = 3787 level = 2 instant_build = yes }
+				add_building_construction = { type = bunker province = 6684 level = 4 instant_build = yes }
+				add_building_construction = { type = bunker province = 664 level = 3 instant_build = yes }
+				add_building_construction = { type = bunker province = 6686 level = 2 instant_build = yes }
+			}
+			409 = {
+				add_building_construction = { type = bunker province = 11643 level = 4 instant_build = yes }
+				add_building_construction = { type = bunker province = 10466 level = 3 instant_build = yes }
+				add_building_construction = { type = bunker province = 12189 level = 2 instant_build = yes }
+				add_building_construction = { type = bunker province = 12192 level = 4 instant_build = yes }
+			}
+			657 = {
+				add_building_construction = { type = bunker province = 4805 level = 3 instant_build = yes }
+				add_building_construction = { type = bunker province = 7672 level = 2 instant_build = yes }
+				add_building_construction = { type = bunker province = 10722 level = 4 instant_build = yes }
+			}
+			561 = {
+				add_building_construction = { type = bunker province = 7801 level = 3 instant_build = yes }
+				add_building_construction = { type = bunker province = 10655 level = 2 instant_build = yes }
+				add_building_construction = { type = bunker province = 4725 level = 4 instant_build = yes }
+				add_building_construction = { type = bunker province = 13548 level = 3 instant_build = yes }
+				add_building_construction = { type = bunker province = 7763 level = 2 instant_build = yes }
+				add_building_construction = { type = bunker province = 12657 level = 4 instant_build = yes }
+				add_building_construction = { type = bunker province = 10678 level = 3 instant_build = yes }
+				add_building_construction = { type = bunker province = 7851 level = 2 instant_build = yes }
+				add_building_construction = { type = bunker province = 12543 level = 4 instant_build = yes }
+			}
+			563 = {
+				add_building_construction = { type = bunker province = 10559 level = 3 instant_build = yes }
+				add_building_construction = { type = bunker province = 12622 level = 2 instant_build = yes }
+				add_building_construction = { type = bunker province = 4719 level = 4 instant_build = yes }
+			}
 		}
 	}
 
@@ -1811,7 +1904,6 @@
 		ai_will_do = { factor = 5 }
 
 		available_if_capitulated = no
-		
 		completion_reward = {
 			custom_effect_tooltip = SOV_wag_trade_partnership_if_accepted_TT
 			if = {
@@ -1833,6 +1925,9 @@
 		prerequisite = { focus = SOV_wag_pacify_northern_caucasus }
 		relative_position_id = SOV_wag_pacify_northern_caucasus
 		ai_will_do = { factor = 5 }
+		available = {
+			has_army_manpower = { size > 699999 }
+		}
 
 		available_if_capitulated = no
 		
@@ -1867,8 +1962,29 @@
 				limit = {
 					country_exists = GEO
 					GEO = { NOT = { is_in_faction_with = SOV } }
+					NOT = {
+						OR = {
+							GEO = { is_in_faction_with = SOV }
+							AZR = { is_in_faction_with = SOV }
+							ARM = { is_in_faction_with = SOV }
+						}
+					}
 				}
-				GEO = { country_event = { id = russ.10 } }
+				GEO = { country_event = { id = russ.123 days = 1 } }
+			}
+			else_if = {
+				limit = {
+					country_exists = GEO
+					GEO = { NOT = { is_in_faction_with = SOV } }
+					OR = {
+						AZR = { is_in_faction_with = SOV }
+						ARM = { is_in_faction_with = SOV }
+					}
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = GEO
+				}
 			}
 		}
 	}
@@ -1882,7 +1998,9 @@
 		prerequisite = { focus = SOV_wag_asian_theater }
 		relative_position_id = SOV_wag_asian_theater
 		ai_will_do = { factor = 5 }
-		will_lead_to_war_with = KAZ
+		available = {
+			has_army_manpower = { size > 699999 }
+		}
 
 		available_if_capitulated = no
 		
@@ -1892,10 +2010,7 @@
 					country_exists = KAZ
 					KAZ = { NOT = { is_in_faction_with = SOV } }
 				}
-				create_wargoal = {
-					type = annex_everything
-					target = KAZ
-				}
+				country_event = { id = russ.114 days = 1 }
 			}
 		}
 	}
@@ -1911,6 +2026,15 @@
 		ai_will_do = { factor = 5 }
 
 		available_if_capitulated = no
+		available = {
+			OR = {
+				controls_state = 805
+				AND = {
+					country_exists = KAZ
+					KAZ = { is_subject_of = SOV }
+				}
+			}
+		}
 		
 		completion_reward = {
 			if = {
@@ -1918,35 +2042,35 @@
 					country_exists = TAJ
 					TAJ = { NOT = { is_in_faction_with = SOV } }
 				}
-				TAJ = { country_event = { id = russ.10 } }
+				TAJ = { country_event = { id = russ.122 } }
 			}
 			if = {
 				limit = {
 					country_exists = UZB
 					UZB = { NOT = { is_in_faction_with = SOV } }
 				}
-				UZB = { country_event = { id = russ.10 } }
+				UZB = { country_event = { id = russ.122 } }
 			}
 			if = {
 				limit = {
 					country_exists = TRK
 					TRK = { NOT = { is_in_faction_with = SOV } }
 				}
-				TRK = { country_event = { id = russ.10 } }
+				TRK = { country_event = { id = russ.122 } }
 			}
 			if = {
 				limit = {
 					country_exists = TMS
 					TMS = { NOT = { is_in_faction_with = SOV } }
 				}
-				TMS = { country_event = { id = russ.10 } }
+				TMS = { country_event = { id = russ.122 } }
 			}
 			if = {
 				limit = {
 					country_exists = KYR
 					KYR = { NOT = { is_in_faction_with = SOV } }
 				}
-				KYR = { country_event = { id = russ.10 } }
+				KYR = { country_event = { id = russ.122 } }
 			}
 		}
 	}
@@ -1961,7 +2085,7 @@
 		relative_position_id = SOV_wag_kazahstan_question
 		ai_will_do = { factor = 5 }
 		available = {
-			is_at_war = no
+			has_war = no
 			has_full_control_of_state = 586
 			has_full_control_of_state = 823
 			has_full_control_of_state = 405
@@ -2006,16 +2130,48 @@
 			focus = SOV_wag_thrust_to_baku
 		}
 		ai_will_do = { factor = 5 }
+		available = {
+			has_army_manpower = { size > 699999 }
+			OR = {
+				GEO = { is_in_faction_with = SOV }
+				ARM = { is_in_faction_with = SOV }
+				AZR = { is_in_faction_with = SOV }
+				NOT = {
+					OR = {
+						GEO = { is_in_faction_with = SOV }
+						ARM = { is_in_faction_with = SOV }
+						AZR = { is_in_faction_with = SOV }
+					}
+				}
+			}
+		}
 
 		available_if_capitulated = no
 		
 		completion_reward = {
 			if = {
 				limit = {
+					NOT = {
+						OR = {
+							GEO = { is_in_faction_with = SOV }
+							ARM = { is_in_faction_with = SOV }
+							AZR = { is_in_faction_with = SOV }
+						}
+					}
 					country_exists = ARM
 					ARM = { NOT = { is_in_faction_with = SOV } }
 				}
-				ARM = { country_event = russ.9 }
+				ARM = { country_event = { id = russ.124 days = 1 } }
+			}
+			else_if = {
+				limit = {
+					country_exists = AZR
+					AZR = { NOT = { is_in_faction_with = SOV } }
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = AZR
+				}
 			}
 		}
 	}
@@ -2032,16 +2188,48 @@
 			focus = SOV_wag_ally_armenia_against_azers
 		}
 		ai_will_do = { factor = 5 }
+		available = {
+			has_army_manpower = { size > 699999 }
+			OR = {
+				GEO = { is_in_faction_with = SOV }
+				ARM = { is_in_faction_with = SOV }
+				AZR = { is_in_faction_with = SOV }
+				NOT = {
+					OR = {
+						GEO = { is_in_faction_with = SOV }
+						ARM = { is_in_faction_with = SOV }
+						AZR = { is_in_faction_with = SOV }
+					}
+				}
+			}
+		}
 
 		available_if_capitulated = no
 		
 		completion_reward = {
 			if = {
 				limit = {
+					NOT = {
+						OR = {
+							GEO = { is_in_faction_with = SOV }
+							ARM = { is_in_faction_with = SOV }
+							AZR = { is_in_faction_with = SOV }
+						}
+					}
 					country_exists = AZR
 					AZR = { NOT = { is_in_faction_with = SOV } }
 				}
-				AZR = { country_event = { id = russ.8 } }
+				AZR = { country_event = { id = russ.128 days = 1 } }
+			}
+			else_if = {
+				limit = {
+					country_exists = ARM
+					ARM = { NOT = { is_in_faction_with = SOV } }
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = ARM
+				}
 			}
 		}
 	}
@@ -2059,31 +2247,52 @@
 			}
 		relative_position_id = SOV_wag_pacify_northern_caucasus
 		ai_will_do = { factor = 5 }
+		available = {
+			OR = {
+				AND = {
+					country_exists = GEO
+					GEO = {
+						OR = {
+							is_in_faction_with = SOV
+							is_subject_of = SOV
+						}
+					}
+					NOT = { country_exists = ARM }
+					NOT = { country_exists = AZR }
+				}
+				AND = {
+					country_exists = ARM
+					ARM = {
+						OR = {
+							is_in_faction_with = SOV
+							is_subject_of = SOV
+						}
+					}
+					NOT = { country_exists = GEO }
+					NOT = { country_exists = AZR }
+				}
+				AND = {
+					country_exists = AZR
+					AZR = {
+						OR = {
+							is_in_faction_with = SOV
+							is_subject_of = SOV
+						}
+					}
+					NOT = { country_exists = GEO }
+					NOT = { country_exists = ARM }
+				}
+				AND = {
+					has_full_control_of_state = 229
+					has_full_control_of_state = 230
+					has_full_control_of_state = 231
+				}
+			}
+		}
 
 		available_if_capitulated = no
 		
 		completion_reward = {
-			if = {
-				limit = {
-					country_exists = GEO
-					GEO = { NOT = { is_in_faction_with = SOV } }
-				}
-				GEO = { country_event = { id = russ.8 } }
-			}
-			if = {
-				limit = {
-					country_exists = ARM
-					ARM = { NOT = { is_in_faction_with = SOV } }
-				}
-				ARM = { country_event = { id = russ.8 } }
-			}
-			if = {
-				limit = {
-					country_exists = AZR
-					AZR = { NOT = { is_in_faction_with = SOV } }
-				}
-				AZR = { country_event = { id = russ.8 } }
-			}
 			country_event = { id = russ.60 days = 3 }
 		}
 	}
@@ -2107,47 +2316,17 @@
 			add_to_variable = { sov_economy_min_exp = -0.05 }
 			custom_effect_tooltip = RCO_CG_decrease_5_TT
 			add_to_variable = { sov_economy_CG = -0.05 }
-			227 = {
+			232 = { # Grozny
 				add_resource = { type = oil amount = 10 }
 				add_resource = { type = rubber amount = 4 }
 			}
-			228 = {
+			234 = { # Krasnodar
 				add_resource = { type = oil amount = 8 }
 				add_resource = { type = rubber amount = 3 }
 			}
-			229 = {
-				add_resource = { type = oil amount = 17 }
-				add_resource = { type = rubber amount = 5 }
-			}
-			if = {
-				limit = {
-					OR = {
-						controls_state = 227
-						any_other_country = {
-							is_in_faction_with = SOV
-							controls_state = 227
-						}
-					}
-				}
-				227 = {
-					add_resource = { type = oil amount = 8 }
-					add_resource = { type = rubber amount = 2 }
-				}
-			}
-			if = {
-				limit = {
-					OR = {
-						controls_state = 228
-						any_other_country = {
-							is_in_faction_with = SOV
-							controls_state = 228
-						}
-					}
-				}
-				228 = {
-					add_resource = { type = oil amount = 8 }
-					add_resource = { type = rubber amount = 2 }
-				}
+			235 = { # Stavropol
+				add_resource = { type = oil amount = 6 }
+				add_resource = { type = rubber amount = 3 }
 			}
 			if = {
 				limit = {
@@ -2159,9 +2338,84 @@
 						}
 					}
 				}
-				229 = {
-					add_resource = { type = oil amount = 10 }
+				229 = { # Baku
+					add_resource = { type = oil amount = 14 }
+					add_resource = { type = rubber amount = 4 }
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						controls_state = 231
+						any_other_country = {
+							is_in_faction_with = SOV
+							controls_state = 231
+						}
+					}
+				}
+				231 = { # Georgia
+					add_resource = { type = oil amount = 6 }
 					add_resource = { type = rubber amount = 3 }
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						controls_state = 230
+						any_other_country = {
+							is_in_faction_with = SOV
+							controls_state = 230
+						}
+					}
+				}
+				230 = { # Armenia
+					add_resource = { type = oil amount = 4 }
+					add_resource = { type = rubber amount = 3 }
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						controls_state = 828
+						any_other_country = {
+							is_in_faction_with = SOV
+							controls_state = 828
+						}
+					}
+				}
+				828 = { # Chechnya
+					add_resource = { type = oil amount = 8 }
+					add_resource = { type = rubber amount = 2 }
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						controls_state = 1158
+						any_other_country = {
+							is_in_faction_with = SOV
+							controls_state = 1158
+						}
+					}
+				}
+				1158 = { # North Ossetia-Alania
+					add_resource = { type = oil amount = 5 }
+					add_resource = { type = rubber amount = 2 }
+				}
+			}
+			if = {
+				limit = {
+					OR = {
+						controls_state = 233
+						any_other_country = {
+							is_in_faction_with = SOV
+							controls_state = 233
+						}
+					}
+				}
+				233 = { # Caucasus Mountains
+					add_resource = { type = oil amount = 3 }
+					add_resource = { type = rubber amount = 2 }
 				}
 			}
 		}
@@ -2211,7 +2465,7 @@
 			if = {
 				limit = { country_exists = PER }
 				create_wargoal = {
-					type = annex_everything
+					type = puppet_wargoal_focus
 					target = PER
 				}
 			}
@@ -2293,12 +2547,24 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
+			custom_effect_tooltip = SOV_wag_ally_iraq_focus_TT
 			if = {
-				limit = {
-					country_exists = IRQ
-					IRQ = { NOT = { is_in_faction_with = SOV } }
+				limit = { country_exists = IRQ }
+				if = {
+					limit = {
+						OR = {
+							IRQ = { is_in_faction_with = USA }
+							IRQ = { is_subject_of = USA }
+						}
+					}
+					country_event = { id = russ.131 days = 1 }
 				}
-				IRQ = { country_event = russ.9 }
+				else_if = {
+					limit = {
+						IRQ = { NOT = { is_in_faction_with = SOV } }
+					}
+					IRQ = { country_event = { id = russ.132 days = 1 } }
+				}
 			}
 			add_political_power = 25
 		}
@@ -2320,11 +2586,23 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
+			custom_effect_tooltip = SOV_wag_finance_iraq_focus_TT
 			if = {
 				limit = { country_exists = IRQ }
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = IRQ
+				if = {
+					limit = {
+						OR = {
+							IRQ = { is_in_faction_with = USA }
+							IRQ = { is_subject_of = USA }
+						}
+					}
+					country_event = { id = russ.133 days = 1 }
+				}
+				else = {
+					create_wargoal = {
+						type = puppet_wargoal_focus
+						target = IRQ
+					}
 				}
 			}
 			add_war_support = 0.03
@@ -2348,15 +2626,32 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
+			custom_effect_tooltip = SOV_wag_syrian_deal_focus_TT
 			if = {
-				limit = {
-					country_exists = SYR
-					SYR = { NOT = { is_in_faction_with = SOV } }
+				limit = { country_exists = SYR }
+				if = {
+					limit = {
+						OR = {
+							SYR = { is_in_faction_with = USA }
+							SYR = { is_subject_of = USA }
+						}
+					}
+					country_event = { id = russ.134 days = 1 }
 				}
-				SYR = { country_event = russ.9 }
+				else_if = {
+					limit = {
+						SYR = { NOT = { is_in_faction_with = SOV } }
+					}
+					SYR = { country_event = { id = russ.135 days = 1 } }
+				}
+				else = {
+					SYR = { give_military_access = SOV }
+					custom_effect_tooltip = RCO_resource_increase_5_TT
+					add_to_variable = { sov_economy_res_gain_fct = 0.05 }
+					navy_experience = 10
+					air_experience = 10
+				}
 			}
-			custom_effect_tooltip = RCO_resource_increase_5_TT
-			add_to_variable = { sov_economy_res_gain_fct = 0.05 }
 		}
 	}
 
@@ -2475,9 +2770,8 @@
 		cost = 5
 		prerequisite = { focus = SOV_wag_russian_spring }
 		relative_position_id = SOV_wag_russian_spring
-		will_lead_to_war_with = UKR
 		
-		ai_will_do = { factor = 5 }
+		ai_will_do = { factor = 20 }
 
 		available = {
 			has_global_flag  = {
@@ -2489,17 +2783,8 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
-			if = {
-				limit = { country_exists = UKR }
-				create_wargoal = {
-	   				type = puppet_wargoal_focus
-	     			target = UKR
-				}
-			}
-			if = {
-				limit = { NOV = { exists = yes } }
-				puppet = NOV
-			}
+			custom_effect_tooltip = SOV_wag_svo_choice_TT
+			country_event = { id = russ.111 days = 1 }
 		}
 	}
 
@@ -2999,6 +3284,90 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
+			hidden_effect = {
+				if = {
+				limit = { is_ai = yes }
+				random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 5
+					instant_build = yes
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_2
+				amount = 120000
+				producer = SOV
+			}
+			add_political_power = 1000
+			add_stability = 0.5
+			}
+			}
 			country_event = { id = russ.58 days = 1 }
 			custom_effect_tooltip = RCO_pp_increase_5_TT
 			add_to_variable = { sov_economy_pp_gain_factor = 0.05 }
@@ -3060,6 +3429,43 @@
 		available_if_capitulated = no
 		
 		completion_reward = {
+			hidden_effect = {
+				if = {
+				limit = { is_ai = yes }
+				random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = arms_factory
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = arms_factory
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = arms_factory
+					level = 5
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = arms_factory
+					level = 5
+					instant_build = yes
+				}
+			}
+			}
+			}
 			custom_effect_tooltip = RCO_CG_decrease_5_TT
             add_to_variable = { sov_economy_CG = -0.05 }
 			custom_effect_tooltip = SOV_eq_conv_spd_increase_50_TT
@@ -3441,6 +3847,8 @@
 		            add_to_variable = { sov_economy_prodgrowth_fct = 0.1 }
 					custom_effect_tooltip = RCO_CG_increase_5_TT
 					add_to_variable = { sov_economy_CG = 0.05 }
+					custom_effect_tooltip = SOV_minexport_decrease_30_TT
+					add_to_variable = { sov_economy_min_exp = -0.3 }
 					custom_effect_tooltip = SOV_milconscpd_increase_10_TT
 					add_to_variable = { sov_economy_mil_cons_spd = 0.1 }
 					random_owned_controlled_state = {

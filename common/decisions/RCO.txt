@@ -44,6 +44,7 @@ RCO_soviet_decisions_category = {
 
 		available = {
 			hidden_trigger = { always = no }
+			NOT = { has_country_flag = RCO_terrorist_attack_threat_resolved }
 			NOT = { has_completed_focus = RCO_soviet_state_militia }
 		}
 
@@ -5923,11 +5924,13 @@ CHE_decisions_category = {
 
 		available = {
 			hidden_trigger = { always = no }
+			NOT = { has_government = fascist }
 		}
 
 		activation = {
 			tag = SOV
 			has_war_with = RCO
+			NOT = { has_government = fascist }
 			SOV = { is_ai = yes }
 			RCO = { is_ai = yes }
 		}
@@ -5943,41 +5946,36 @@ CHE_decisions_category = {
 		days_mission_timeout = 10
 
 		timeout_effect = {
-			
-			add_to_variable = {
-				sov_state_surrender_limit = -0.005
+			if = {
+				limit = { NOT = { has_government = fascist } }
+				add_to_variable = {
+					sov_state_surrender_limit = -0.005
+				}
 			}
 		}
 	}
 	}
 
 
-	RCO_prca_category = {
+RCO_prca_category = {
 
 	prca_RCO_resistance = {
 
 		icon = eng_propaganda_campaigns
 
-		allowed = { original_tag = RCO }
-
-		visible = { has_country_flag = rco_prca_enabled }
-
-		#available = {
-			#custom_trigger_tooltip = {
-			#tooltip = RCO_we_can_do_a_propaganda_campaign
-				#check_variable = {
-				#	RCO_available_campaign_slots > 0
-				#}
-			#}
-		#}
-
 		days_remove = 100
 
 		cost = RCO_resistance_cost
+		available = {
+			check_variable = {
+				RCO_available_campaign_slots > 0
+			}
+		}
 
 		modifier = {
-			political_power_factor = 0.1
-			conscription_factor = 0.05
+			war_support_factor = 0.05
+			army_morale_factor = 0.05
+			surrender_limit = 0.05
 		}
 
 		complete_effect = {
@@ -5992,9 +5990,13 @@ CHE_decisions_category = {
 				var = RCO_available_campaign_slots
 				value = -1
 			}
+			set_variable = { RCO_new_propaganda_campaign = 2 }
+			RCO_pick_propaganda_campaign_slot_effect = yes
 		}
 
 		remove_effect = {
+			set_variable = { RCO_propaganda_campaign_to_remove = 2 }
+			RCO_reset_propaganda_campaign_slot_effect = yes
 			clr_country_flag = RCO_resistance_in_use
 			add_to_variable = {
 				var = RCO_available_campaign_slots
@@ -6002,7 +6004,319 @@ CHE_decisions_category = {
 			}
 		}
 	}
+	prca_RCO_second_campaign = {
 
+		icon = eng_propaganda_campaigns
 
+		days_remove = 100
 
+		cost = RCO_resistance_cost
+		available = {
+			check_variable = {
+				RCO_available_campaign_slots > 0
+			}
+		}
+
+		modifier = {
+			army_attack_factor = 0.05
+			breakthrough_factor = 0.05
+			planning_speed = 0.07
+		}
+
+		complete_effect = {
+			set_country_flag = RCO_resistance_in_use
+			custom_effect_tooltip = POL_increase_propaganda_cost
+			add_timed_idea = { idea = rco_poster_resistance days = 10 }
+			add_to_variable = {
+				var = RCO_resistance_cost
+				value = 15
+			}
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = -1
+			}
+			set_variable = { RCO_new_propaganda_campaign = 3 }
+			RCO_pick_propaganda_campaign_slot_effect = yes
+		}
+
+		remove_effect = {
+			set_variable = { RCO_propaganda_campaign_to_remove = 3 }
+			RCO_reset_propaganda_campaign_slot_effect = yes
+			clr_country_flag = RCO_resistance_in_use
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = 1
+			}
+		}
 	}
+	prca_RCO_third_campaign = {
+
+		icon = eng_propaganda_campaigns
+
+		days_remove = 100
+
+		cost = RCO_resistance_cost
+		available = {
+			check_variable = {
+				RCO_available_campaign_slots > 0
+			}
+		}
+
+		modifier = {
+			experience_gain_army_factor = 0.07
+			army_org_factor = 0.03
+			max_planning = 0.05
+		}
+
+		complete_effect = {
+			set_country_flag = RCO_resistance_in_use
+			custom_effect_tooltip = POL_increase_propaganda_cost
+			add_timed_idea = { idea = rco_poster_resistance days = 10 }
+			add_to_variable = {
+				var = RCO_resistance_cost
+				value = 15
+			}
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = -1
+			}
+			set_variable = { RCO_new_propaganda_campaign = 4 }
+			RCO_pick_propaganda_campaign_slot_effect = yes
+		}
+
+		remove_effect = {
+			set_variable = { RCO_propaganda_campaign_to_remove = 4 }
+			RCO_reset_propaganda_campaign_slot_effect = yes
+			clr_country_flag = RCO_resistance_in_use
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+	prca_RCO_fourth_campaign = {
+
+		icon = eng_propaganda_campaigns
+
+		days_remove = 100
+
+		cost = RCO_resistance_cost
+		available = {
+			check_variable = {
+				RCO_available_campaign_slots > 0
+			}
+		}
+
+		modifier = {
+			conscription_factor = 0.05
+			weekly_manpower = 750
+			training_time_army_factor = -0.05
+		}
+
+		complete_effect = {
+			set_country_flag = RCO_resistance_in_use
+			custom_effect_tooltip = POL_increase_propaganda_cost
+			add_timed_idea = { idea = rco_poster_resistance days = 10 }
+			add_to_variable = {
+				var = RCO_resistance_cost
+				value = 15
+			}
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = -1
+			}
+			set_variable = { RCO_new_propaganda_campaign = 5 }
+			RCO_pick_propaganda_campaign_slot_effect = yes
+		}
+
+		remove_effect = {
+			set_variable = { RCO_propaganda_campaign_to_remove = 5 }
+			RCO_reset_propaganda_campaign_slot_effect = yes
+			clr_country_flag = RCO_resistance_in_use
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+	prca_RCO_fifth_campaign = {
+
+		icon = eng_propaganda_campaigns
+
+		days_remove = 100
+
+		cost = RCO_resistance_cost
+		available = {
+			check_variable = {
+				RCO_available_campaign_slots > 0
+			}
+		}
+
+		modifier = {
+			war_support_factor = 0.05
+			army_morale_factor = 0.05
+			land_reinforce_rate = 0.02
+		}
+
+		complete_effect = {
+			set_country_flag = RCO_resistance_in_use
+			custom_effect_tooltip = POL_increase_propaganda_cost
+			add_timed_idea = { idea = rco_poster_resistance days = 10 }
+			add_to_variable = {
+				var = RCO_resistance_cost
+				value = 15
+			}
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = -1
+			}
+			set_variable = { RCO_new_propaganda_campaign = 6 }
+			RCO_pick_propaganda_campaign_slot_effect = yes
+		}
+
+		remove_effect = {
+			set_variable = { RCO_propaganda_campaign_to_remove = 6 }
+			RCO_reset_propaganda_campaign_slot_effect = yes
+			clr_country_flag = RCO_resistance_in_use
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+	prca_RCO_sixth_campaign = {
+
+		icon = eng_propaganda_campaigns
+
+		days_remove = 100
+
+		cost = RCO_resistance_cost
+		available = {
+			check_variable = {
+				RCO_available_campaign_slots > 0
+			}
+		}
+
+		modifier = {
+			research_speed_factor = 0.03
+			industrial_capacity_factory = 0.05
+			production_factory_max_efficiency_factor = 0.05
+		}
+
+		complete_effect = {
+			set_country_flag = RCO_resistance_in_use
+			custom_effect_tooltip = POL_increase_propaganda_cost
+			add_timed_idea = { idea = rco_poster_resistance days = 10 }
+			add_to_variable = {
+				var = RCO_resistance_cost
+				value = 15
+			}
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = -1
+			}
+			set_variable = { RCO_new_propaganda_campaign = 7 }
+			RCO_pick_propaganda_campaign_slot_effect = yes
+		}
+
+		remove_effect = {
+			set_variable = { RCO_propaganda_campaign_to_remove = 7 }
+			RCO_reset_propaganda_campaign_slot_effect = yes
+			clr_country_flag = RCO_resistance_in_use
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+	prca_RCO_seventh_campaign = {
+
+		icon = eng_propaganda_campaigns
+
+		days_remove = 100
+
+		cost = RCO_resistance_cost
+		available = {
+			check_variable = {
+				RCO_available_campaign_slots > 0
+			}
+		}
+
+		modifier = {
+			production_speed_buildings_factor = 0.05
+			industrial_capacity_factory = 0.05
+			stability_factor = 0.03
+		}
+
+		complete_effect = {
+			set_country_flag = RCO_resistance_in_use
+			custom_effect_tooltip = POL_increase_propaganda_cost
+			add_timed_idea = { idea = rco_poster_resistance days = 10 }
+			add_to_variable = {
+				var = RCO_resistance_cost
+				value = 15
+			}
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = -1
+			}
+			set_variable = { RCO_new_propaganda_campaign = 8 }
+			RCO_pick_propaganda_campaign_slot_effect = yes
+		}
+
+		remove_effect = {
+			set_variable = { RCO_propaganda_campaign_to_remove = 8 }
+			RCO_reset_propaganda_campaign_slot_effect = yes
+			clr_country_flag = RCO_resistance_in_use
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+	prca_RCO_eighth_campaign = {
+
+		icon = eng_propaganda_campaigns
+
+		days_remove = 100
+
+		cost = RCO_resistance_cost
+		available = {
+			check_variable = {
+				RCO_available_campaign_slots > 0
+			}
+		}
+
+		modifier = {
+			production_factory_efficiency_gain_factor = 0.07
+			industrial_capacity_factory = 0.06
+			consumer_goods_expected_value = -0.02
+		}
+
+		complete_effect = {
+			set_country_flag = RCO_resistance_in_use
+			custom_effect_tooltip = POL_increase_propaganda_cost
+			add_timed_idea = { idea = rco_poster_resistance days = 10 }
+			add_to_variable = {
+				var = RCO_resistance_cost
+				value = 15
+			}
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = -1
+			}
+			set_variable = { RCO_new_propaganda_campaign = 9 }
+			RCO_pick_propaganda_campaign_slot_effect = yes
+		}
+
+		remove_effect = {
+			set_variable = { RCO_propaganda_campaign_to_remove = 9 }
+			RCO_reset_propaganda_campaign_slot_effect = yes
+			clr_country_flag = RCO_resistance_in_use
+			add_to_variable = {
+				var = RCO_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+}

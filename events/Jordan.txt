@@ -1,0 +1,721 @@
+add_namespace = jordan_event
+#Millenium Attack Trial
+country_event = {
+	id = jordan_event.1
+	title = jordan_event.1.t
+	desc =  jordan_event.1.d
+	picture = GFX_report_Palace_of_Justice
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+	}
+
+	option = { #28 Arrested, 22 Guilty, 6 Death
+		name = jordan_event.1.o1
+		add_stability = 0.05
+		add_popularity = {
+			ideology = islamist
+			popularity = -0.05
+		}
+	}
+}
+#Death of Laurence Foley
+country_event = {
+	id = jordan_event.2
+	title = jordan_event.2.t
+	desc =  jordan_event.2.d
+	picture = GFX_report_Death_of_Foley
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+		NOT = {
+			has_country_flag = JOR_Safety
+		}
+	}
+
+	option = { 
+		name = jordan_event.2.o1
+		add_stability = -0.05
+		add_political_power = -70
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.05
+		}
+		set_country_flag = JOR_Laurence_Foley_Dead
+	}
+}
+#Parliamentary Reform
+country_event = {
+	id = jordan_event.3
+	title = jordan_event.3.t
+	desc =  jordan_event.3.d
+	picture = GFX_report_Jordan_Parliament
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+	}
+
+	option = { #Elections in 100 days
+		name = jordan_event.3.o1
+		add_stability = -0.1
+		add_popularity = {
+			ideology = monarchist
+			popularity = 0.05
+		}
+		hidden_effect = {
+			country_event = { id = jordan_event.4 days = 100 }
+		}
+	}
+	option = { #Elections in 300 days
+		name = jordan_event.3.o2
+		add_stability = -0.05
+		add_popularity = {
+			ideology = monarchist
+			popularity = 0.075
+		}
+		hidden_effect = {
+			country_event = { id = jordan_event.4 days = 300 }
+		}
+	}
+	option = { #No Elections for Years
+		name = jordan_event.3.o3
+		add_stability = -0.20
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.075
+		}
+		add_popularity = {
+			ideology = communist
+			popularity = 0.075
+		}
+		add_popularity = {
+			ideology = monarchist
+			popularity = -0.15
+		}
+	}
+}
+#Parliamentary Election
+country_event = {
+	id = jordan_event.4
+	title = jordan_event.4.t
+	desc =  jordan_event.4.d
+	picture = GFX_report_Jordan_Election
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+	}
+
+	option = { #Historical
+		name = jordan_event.4.o1
+		add_stability = 0.05
+		add_popularity = {
+			ideology = monarchist
+			popularity = 0.075
+		}
+		set_global_flag = JOR_Historical_Election
+		add_ideas = advisor_JOR_Faisal_Al_Fayez
+		mark_focus_tree_layout_dirty = yes
+	}
+	option = { #IAF
+		name = jordan_event.4.o2
+		add_stability = -0.05
+		add_popularity = {
+			ideology = monarchist
+			popularity = -0.075
+		}
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.075
+		}
+		set_global_flag = JOR_IAF_Election
+		add_ideas = advisor_JOR_Ishaq_Al_Farhan
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = JOR_Path_of_Chaos
+	}
+}
+#(Israel) Water Pipe Request
+country_event = {
+	id = jordan_event.5
+	title = jordan_event.5.t
+	desc =  jordan_event.5.d
+	picture = GFX_report_Pipeline_Jordan
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+	}
+
+	option = { #Yes
+		name = jordan_event.5.o1
+		add_ideas = JOR_Israel_Jordan_Pipe
+		JOR = {
+			add_ideas = JOR_Israel_Jordan_Pipe
+		}
+	}
+	option = { #No
+		name = jordan_event.5.o2
+		add_timed_idea = {
+				idea = JOR_Draining_Dead_Sea
+				days = 730
+			}
+		JOR = {
+			add_timed_idea = {
+				idea = JOR_Draining_Dead_Sea
+				days = 730
+			}
+		}
+	}
+}
+#(GCC Countries) Investment Request
+country_event = {
+	id = jordan_event.6
+	title = jordan_event.6.t
+	desc =  jordan_event.6.d
+	picture = GFX_report_Peninsula_Shield_Force
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+	}
+
+	option = { #Yes
+		name = jordan_event.6.o1
+		add_political_power = -25
+		JOR = {
+			country_event = jordan_event.7
+		}
+		ai_will_do = {
+		factor = 70
+		}
+	}
+	option = { #No
+		name = jordan_event.6.o2
+		add_political_power = 25
+		ai_will_do = {
+		factor = 30
+		}
+	}
+}
+#(Jordan) Investment Send
+country_event = {
+	id = jordan_event.7
+	title = jordan_event.7.t
+	desc =  jordan_event.7.d
+	picture = GFX_report_Peninsula_Shield_Force
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+	}
+
+	option = { #Yes
+		name = jordan_event.7.o1
+		random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build =yes
+				}
+			}
+	}
+}
+#Higher Secret Service Funding
+country_event = {
+	id = jordan_event.8
+	title = jordan_event.8.t
+	desc =  jordan_event.8.d
+	picture = GFX_report_Peninsula_Shield_Force
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+	}
+
+	option = { #Only a little
+		name = jordan_event.8.o1
+		add_timed_idea = {
+				idea = JOR_Medium_Intelligence_Funding
+				days = 150
+			}
+	}
+	option = { #Full on
+		name = jordan_event.8.o2
+		add_political_power = -200
+		add_timed_idea = {
+				idea = JOR_High_Intelligence_Funding
+				days = 365
+			}
+		
+		set_country_flag = JOR_Amman_Bombing_Avoided
+	}
+}
+#The Amman Bombings
+country_event = {
+	id = jordan_event.9
+	title = jordan_event.9.t
+	desc =  jordan_event.9.d
+	picture = GFX_report_Amman_Bombings
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+		NOT = {
+			has_country_flag = JOR_Amman_Bombing_Avoided
+		}
+	}
+
+	option = { #Rest in Peace
+		name = jordan_event.9.o1
+		add_ideas = JOR_Aftermath_of_the_Amman_Bombings
+	}
+}
+#Death of Al-Zarqawi - Iraq War happening
+country_event = {
+	id = jordan_event.10
+	title = jordan_event.10.t
+	desc =  jordan_event.10.d
+	picture = GFX_report_Al_Zarqawi
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+		OR = {
+			IRQ = {
+				is_subject_of = USA
+			}
+			IRQ = {
+				has_war_with = USA
+			}
+		}
+		has_completed_focus = JOR_Hunt_Al_Zarqawi
+	}
+
+	option = { #Rest in Peace
+		name = jordan_event.10.o1
+		add_stability = 0.1
+		add_political_power = -25
+		JOR = {
+			add_opinion_modifier = {
+				target = USA
+				modifier = friendly_view 
+				}
+			}
+	}
+}
+#Death of Al-Zarqawi - Iraq War NOT happening
+country_event = {
+	id = jordan_event.11
+	title = jordan_event.11.t
+	desc =  jordan_event.11.d
+	picture = GFX_report_Al_Zarqawi
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+		OR = {
+			NOT ={
+				IRQ = {
+					is_subject_of = USA
+				}
+				IRQ = {
+					has_war_with = USA
+				}
+			}
+		}
+		has_completed_focus = JOR_Hunt_Al_Zarqawi
+	}
+
+	option = { #Rest in Peace
+		name = jordan_event.11.o1
+		add_stability = 0.1
+		add_political_power = -25
+		army_experience = 100
+	}
+}
+#Iraqi Refugees to Jordan
+country_event = {
+	id = jordan_event.12
+	title = jordan_event.12.t
+	desc =  jordan_event.12.d
+	picture = GFX_report_Iraqi_Refugees
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+	}
+
+	option = { 
+		name = jordan_event.12.o1
+		add_ideas = JOR_Iraqi_Refugees_idea
+	}
+}
+#SSNP Coup - NO BAATH
+country_event = {
+	id = jordan_event.13
+	title = jordan_event.13.t
+	desc =  jordan_event.13.d
+	picture = GFX_report_SSNP_Coup_Jordan
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+		has_country_flag = JOR_SSNP_Council_flag
+	}
+
+	option = { 
+		name = jordan_event.13.o1
+		set_politics = {
+			ruling_party = fascist
+			elections_allowed = no
+		}
+		add_stabiity = -0.25
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.4
+		}
+	}
+}
+#SSNP Coup - WITH BAATH
+country_event = {
+	id = jordan_event.14
+	title = jordan_event.14.t
+	desc =  jordan_event.14.d
+	picture = GFX_report_SSNP_Coup_Jordan
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_government = monarchist
+		NOT = {
+			has_country_flag = JOR_SSNP_Council_flag
+		}
+	}
+
+	option = { 
+		name = jordan_event.14.o1
+		set_politics = {
+			ruling_party = nationalist
+			elections_allowed = no
+		}
+		add_stabiity = -0.25
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.25
+		}
+		add_popularity = {
+			ideology = nationalist
+			popularity = 0.25
+		}
+	}
+}
+#Damascus-Amman Axis
+country_event = {
+	id = jordan_event.15
+	title = jordan_event.15.t
+	desc =  jordan_event.15.d
+	picture = GFX_report_Assad_Jordan
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			has_government = fascist
+		}
+		OR = {
+			has_government = nationalist
+		}
+	}
+
+	option = { #Join Axis
+		name = jordan_event.15.o1
+		JOR = {
+			add_to_faction = SYR
+		}
+		ai_chance = {
+			factor = 90
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = { #Join Axis
+		name = jordan_event.15.o2
+		add_stability = -0.05
+	}
+}
+#Pro-Iraq Coalition
+country_event = {
+	id = jordan_event.16
+	title = jordan_event.16.t
+	desc =  jordan_event.16.d
+	picture = GFX_report_Pro_Iraq_Coalition
+
+	is_triggered_only = yes
+
+	trigger = {
+		OR = {
+			has_government = fascist
+		}
+		OR = {
+			has_government = nationalist
+		}
+	}
+
+	option = { #Join Axis
+		name = jordan_event.16.o1
+		JOR = {
+			add_to_faction = IRQ
+		}
+		ai_chance = {
+			factor = 90
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+	}
+
+	option = { #Join Axis
+		name = jordan_event.16.o2
+		add_stability = -0.05
+	}
+}
+#Iraq Ultimatum
+country_event = {
+	id = jordan_event.17
+	title = jordan_event.17.t
+	desc =  jordan_event.17.d
+	picture = GFX_report_Jordan_Diplomacy
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_completed_focus = JOR_Work_with_Hussein
+	}
+
+	option = { #Annex Iraq
+		name = jordan_event.17.o1
+		JOR = {
+			annex_country = {
+    			target = IRQ
+    			transfer_troops = yes
+			}
+		}
+		ai_will_do = {
+		factor = 70
+		}
+	}
+
+	option = { #No
+		name = jordan_event.17.o2
+		JOR = {
+			create_wargoal = {
+				type = annex_everything
+				target = IRQ
+			}
+		}
+		JOR = {
+			remove_from_faction = IRQ
+		}
+		ai_will_do = {
+		factor = 30
+		}
+	}
+}
+#Syria Ultimatum
+country_event = {
+	id = jordan_event.18
+	title = jordan_event.18.t
+	desc =  jordan_event.18.d
+	picture = GFX_report_Jordan_Diplomacy
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_completed_focus = JOR_Work_with_Assad
+	}
+
+	option = { #Annex Syria
+		name = jordan_event.18.o1
+		JOR = {
+			annex_country = {
+    			target = SYR
+    			transfer_troops = yes
+			}
+		}
+		ai_will_do = {
+		factor = 70
+		}
+	}
+
+	option = { #No
+		name = jordan_event.18.o2
+		JOR = {
+			create_wargoal = {
+				type = annex_everything
+				target = SYR
+			}
+		}
+		JOR = {
+			remove_from_faction = SYR
+		}
+		ai_will_do = {
+		factor = 30
+		}
+	}
+}
+#IAF Government
+country_event = {
+	id = jordan_event.19
+	title = jordan_event.19.t
+	desc =  jordan_event.19.d
+	picture = GFX_report_IAF
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #IAF Government forms
+		name = jordan_event.19.o1
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.05
+		}
+		add_war_support = 0.075
+		add_stabiity = -0.05
+		ISR = {
+				add_opinion_modifier = {
+					target = JOR
+					modifier = ARAB_Islamic_Government 
+				}
+			}
+		add_country_leader_trait = JOR_Blockading_Stance
+		mark_focus_tree_layout_dirty = yes
+		ai_will_do = {
+		factor = 100
+		}
+	}
+}
+#SSNP Resistance
+country_event = {
+	id = jordan_event.20
+	title = jordan_event.20.t
+	desc =  jordan_event.20.d
+	picture = GFX_report_SSNP_Jordan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Resistance Group
+		name = jordan_event.20.o1
+		add_popularity = {
+			ideology = fascist
+			popularity = 0.05
+		}
+		mark_focus_tree_layout_dirty = yes
+		add_war_support = 0.1
+		add_stabiity = -0.1
+		ai_will_do = {
+		factor = 100
+		}
+	}
+}
+#Handling the Monarchy
+country_event = {
+	id = jordan_event.21
+	title = jordan_event.21.t
+	desc =  jordan_event.21.d
+	picture = GFX_report_SSNP_Jordan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Down with the Monarchy
+		name = jordan_event.21.o1
+		set_politics = {
+			ruling_party = islamist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.3
+		}
+		ai_will_do = {
+		factor = 100
+		}
+	}
+	option = { #Convert King Abdullah
+		name = jordan_event.21.o2
+		set_politics = {
+			ruling_party = islamist
+			elections_allowed = no
+		}
+		add_popularity = {
+			ideology = islamist
+			popularity = 0.3
+		}
+		add_country_leader_role = {
+			character = JOR_abdullah_ii
+			promote_leader = yes
+			country_leader = {
+				ideology = islamic_authoritarian 
+				expire = "1.1.1.1"
+				traits = { 
+					JOR_Radical_King
+				}
+			}
+		}
+		ai_will_do = {
+		factor = 100
+		}
+	}
+}
+#Druze State Request
+country_event = {
+	id = jordan_event.22
+	title = jordan_event.22.t
+	desc =  jordan_event.22.d
+	picture = GFX_report_SSNP_Jordan
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = jordan_event.22.o1
+		1181 = {
+			transfer_state_to = JOR
+		}
+		JOR = {
+			add_state_core = 1181
+		}
+		ai_will_do = {
+		factor = 90
+		}
+	}
+	option = { #No
+		name = jordan_event.22.o2
+		add_political_power = 50
+		ai_will_do = {
+		factor = 10
+		}
+	}
+}

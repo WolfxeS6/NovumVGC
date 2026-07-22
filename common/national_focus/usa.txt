@@ -11260,7 +11260,7 @@
 		}
 
 		mutually_exclusive = {
-			focus = USA_attack_the_financial_system
+			focus = USA_a_communist_government
 			focus = USA_favor_white_nationalists
 			focus = USA_establish_monarchist_party
 		}
@@ -11339,6 +11339,7 @@
 		bypass = {}
 
 		completion_reward = {
+			add_dynamic_modifier = { modifier = USA_Communist_Government_Modifier }
 			add_stability = 0.05
 			add_political_power = 100
 			add_popularity = {
@@ -11396,24 +11397,29 @@
 			focus = USA_by_reform
 		}
 
-		available = {}
+		available = {
+			  NOT = { has_war = yes }
+		}
 
 		bypass = {}
 
 		completion_reward = {
 			start_civil_war = {
-             ruling_party = ROOT
-              ideology = communist
-                 size = 0.5
-              capital = 1092
-                 states = { 
-					1092
-					1093
-					378
- 
-                        }
-    keep_unit_leaders = {
-    }
+                ruling_party = communist
+                    # Original country's ideology changes to communism
+                   ideology = ROOT
+                   # Breakaway gets old ideology of ROOT
+                   size = 0.4
+                    capital = 361
+                    states = {
+                     379 387 380 377 376 382 381 388 389 390 384 383 374 375 371 372 373 392 
+					 391 370 367 365 366 368 363 364 369 261 896 362 361 463
+                               }
+                           keep_unit_leaders = {
+                                      }
+                              keep_political_leader = yes
+                         keep_political_party_members = yes
+						 set_country_flag = USA
 }
 		}
 
@@ -11421,6 +11427,237 @@
 			factor = 10
 		}
 	}
+
+	focus = {
+		id = USA_gather_the_proletariat
+		icon = GFX_focus_PRC_join_comintern
+
+		x = 15
+		y = 4
+		relative_position_id = USA_political_revolution
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_by_revolution
+		}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+			weekly_manpower = 3000
+			add_war_support = 0.2
+			opinion_gain_monthly_same_ideology = 10
+
+			add_to_variable = {
+				var = USA_weekly_mp
+				value = 3000
+
+			}
+
+			custom_effect_tooltip = USA_proletariat_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_volunteers_from_china
+		icon = GFX_focus_prc_proclaim_the_peoples_republic
+
+		x = 13
+		y = 4
+		relative_position_id = USA_political_revolution
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_by_revolution
+		}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+			add_manpower = 100000
+			613 = {add_manpower = -100000}
+			 add_equipment_to_stockpile = {
+            type = infantry_weapons
+            amount = 200000
+            producer = USA
+        }
+		custom_effect_tooltip = USA_china_volunteer_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_great_peoples_offensive
+		icon = GFX_focus_generic_army_attack
+
+		x = 15
+		y = 5
+		relative_position_id = USA_political_revolution
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_gather_the_proletariat
+		}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+			add_to_variable = {
+				var = USA_core_attack
+				value = 0.2
+
+			}
+			add_to_variable = {
+				var = USA_div_speed
+				value = 0.1
+
+			}
+			custom_effect_tooltip = USA_commie_offensive_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_arise_ye_workers
+		icon = GFX_focus_JAP_organize_the_student_movements
+
+		x = 15
+		y = 6
+		relative_position_id = USA_political_revolution
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_great_peoples_offensive
+		}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+		       add_manpower = 300000
+			   add_war_support = 0.3
+			   add_stability = 0.2
+			   random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 4
+                        add_building_construction = {
+                            type = arms_factory
+                            level = 4
+                            instant_build = yes
+                        }
+                    }
+			    random_owned_controlled_state = {
+                        add_extra_state_shared_building_slots = 4
+                        add_building_construction = {
+                            type = arms_factory
+                            level = 4
+                            instant_build = yes
+                        }
+                    }
+					add_equipment_to_stockpile = {
+                     type = heavy_tank_chassis
+                     amount = 1000
+                     producer = USA
+                     }
+				
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_aid_from_cuba
+		icon = GFX_goal_generic_position_armies
+
+		x = 13
+		y = 7
+		relative_position_id = USA_political_revolution
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_arise_ye_workers
+		}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+			any_country = { limit  = { has_war_with = USA }
+			 CUB = { add_to_war = {
+                                    targeted_alliance = USA
+                                       enemy = PREV
+                                         hostility_reason = asked_to_join
+                                  } }
+		}
+	custom_effect_tooltip = USA_cuba_help_tt
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	focus = {
+		id = USA_push_to_washington
+		icon = GFX_focus_SOV_the_glory_of_the_red_army_communism
+
+		x = 15
+		y = 7
+		relative_position_id = USA_political_revolution
+
+		cost = @Time_35_days
+
+		prerequisite = {
+			focus = USA_arise_ye_workers
+		}
+
+		available = {}
+
+		bypass = {}
+
+		completion_reward = {
+			add_to_variable = {
+				var = USA_core_attack
+				value = 0.05
+
+			}
+			add_to_variable = {
+				var = USA_army_org
+				value = 0.15
+
+			}
+			custom_effect_tooltip = USA_washington_commie_tt
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+	}
+
+	
 
 focus = {
 		id = USA_by_reform
@@ -11608,7 +11845,6 @@ focus = {
 		bypass = {}
 
 		completion_reward = {
-			add_dynamic_modifier = { modifier = USA_Communist_Government_Modifier }
 			add_popularity = {
                ideology = communist
                popularity = 0.2
@@ -11640,6 +11876,7 @@ focus = {
 
 		prerequisite = {
 			focus = USA_red_america
+			focus = USA_push_to_washington
 		}
 
 		available = {}
@@ -12018,33 +12255,7 @@ focus = {
 
 	
 
-	focus = {
-		id = USA_gun_control_legislation
-		icon = GFX_goal_Red_Guard
-
-		x = 18
-		y = 7
-		relative_position_id = USA_political_revolution
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_censor_public_opinion
-		}
-
-		available = {}
-
-		bypass = {}
-
-		completion_reward = {
-			add_stability = -0.05
-			remove_ideas = USA_second_amendment
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
+	
 
 	focus = {
 		id = USA_recolonize_the_philippines
@@ -12106,67 +12317,11 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = USA_flames_in_france
-		icon = GFX_Focus_Attack_France
-
-		x = 14
-		y = 8
-		relative_position_id = USA_political_revolution
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_flames_of_revolution
-		}
-
-		available = {}
-
-		bypass = {}
-
-		completion_reward = {
-			create_wargoal = {
-				type = puppet_wargoal_focus
-				target = FRA
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
+	
 
 	
 
-	focus = {
-		id = USA_flames_in_mexico
-		icon = GFX_Focus_Attack_Mexico
-
-		x = 18
-		y = 8
-		relative_position_id = USA_political_revolution
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_flames_of_revolution
-		}
-
-		available = {}
-
-		bypass = {}
-
-		completion_reward = {
-			create_wargoal = {
-				type = puppet_wargoal_focus
-				target = MEX
-			}
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
+	
 
 	####################################
 	###								 ###
@@ -16137,7 +16292,7 @@ focus = {
 		}
 
 		mutually_exclusive = {
-			focus = USA_attack_the_financial_system
+			focus = USA_a_communist_government
 			focus = USA_honor_the_confederacy
 			focus = USA_establish_monarchist_party
 		}
@@ -17144,7 +17299,7 @@ focus = {
 		}
 
 		mutually_exclusive = {
-			focus = USA_attack_the_financial_system
+			focus = USA_a_communist_government
 			focus = USA_honor_the_confederacy
 			focus = USA_favor_white_nationalists
 		}
@@ -17506,7 +17661,7 @@ focus = {
 		id = USA_the_white_palace
 		icon = GFX_USA_The_White_Palace
 
-		x = 12
+		x = 11
 		y = 7
 		relative_position_id = USA_political_revolution
 

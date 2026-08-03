@@ -8511,6 +8511,7 @@
 		}
 
 		mutually_exclusive = {
+			focus = USA_barack_obama
 		}
 
 		
@@ -11587,38 +11588,6 @@
 		}
 	}
 
-	focus = {
-		id = USA_aid_from_cuba
-		icon = GFX_goal_generic_position_armies
-
-		x = 13
-		y = 7
-		relative_position_id = USA_political_revolution
-
-		cost = @Time_35_days
-
-		prerequisite = {
-			focus = USA_arise_ye_workers
-		}
-
-		available = {}
-
-		bypass = {}
-
-		completion_reward = {
-			any_country = { limit  = { has_war_with = USA }
-			 CUB = { add_to_war = {
-                                    targeted_alliance = USA
-                                       enemy = PREV
-                                         hostility_reason = asked_to_join
-                                  } }
-		}
-	custom_effect_tooltip = USA_cuba_help_tt
-		}
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	focus = {
 		id = USA_push_to_washington
@@ -19631,7 +19600,7 @@ focus = {
 		id = USA_the_white_palace
 		icon = GFX_USA_The_White_Palace
 
-		x = 11
+		x = 12
 		y = 7
 		relative_position_id = USA_political_revolution
 
@@ -19726,7 +19695,7 @@ focus = {
 		y = 12
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
 			focus = USA_imperial_ambition
@@ -19742,6 +19711,7 @@ focus = {
 			army_experience = 30
 			navy_experience = 30
 			air_experience = 30
+			add_manpower = 250000
 		}
 
 		ai_will_do = {
@@ -19804,7 +19774,20 @@ focus = {
 		bypass = {}
 
 		completion_reward = {
-			add_ideas = FRA_imperial_honor
+			add_dynamic_modifier = { modifier = USA_Imperial_Government_Modifier }
+			add_to_variable = {
+				var = USA_factory_output
+				value = 0.2
+			}
+			add_to_variable = {
+				var = USA_justify_time
+				value = -0.4
+			}
+			add_to_variable = {
+				var = USA_army_attack
+				value = 0.15
+			}
+			custom_effect_tooltip = USA_imperial_tt
 		}
 
 		ai_will_do = {
@@ -19842,14 +19825,14 @@ focus = {
 	}
 
 	focus = {
-		id = USA_strike_europe
-		icon = GFX_focus_ger_break_anglo_french_colonial_hegemony
+		id = USA_reignite_global_monarchism
+		icon = GFX_focus_generic_monarchist_sentiment
 
 		x = 12
 		y = 13
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
 			focus = USA_imperial_ambition
@@ -19864,7 +19847,7 @@ focus = {
 		bypass = {}
 
 		completion_reward = {
-			complete_national_focus = USA_europe_in_the_crosshairs
+			complete_national_focus = USA_restore_crowns
 		}
 
 		ai_will_do = {
@@ -20416,8 +20399,8 @@ focus = {
 	###################
 
 	focus = {
-		id = USA_europe_in_the_crosshairs
-		icon = GFX_focus_usa_focus_on_europe
+		id = USA_restore_crowns
+		icon = GFX_focus_generic_monarchy_1
 
 		x = 23
 		y = 8
@@ -20435,6 +20418,8 @@ focus = {
 		bypass = {}
 
 		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.25
 		}
 
 		ai_will_do = {
@@ -20443,24 +20428,24 @@ focus = {
 	}
 
 	focus = {
-		id = USA_strike_britain
-		icon = GFX_Focus_Attack_Britain
+		id = USA_look_to_europe
+		icon = GFX_focus_usa_focus_on_europe
 
 		x = 21
 		y = 9
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_europe_in_the_crosshairs
+			focus = USA_restore_crowns
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			add_political_power = 50
+			add_political_power = 200
 		}
 
 		ai_will_do = {
@@ -20469,30 +20454,23 @@ focus = {
 	}
 
 	focus = {
-		id = USA_rally_windsor_support
-		icon = GFX_goal_tfv_strengthen_commonwealth_ties
-
+		id = USA_restore_the_bourbon_throne
+		icon = GFX_focus_focus_fra_orleans_restoration
 		x = 21
 		y = 10
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_strike_britain
+			focus = USA_look_to_europe
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			ENG = {
-				fourth_estate_monarchist_increase = yes
-				add_popularity = {
-					ideology = monarchist
-					popularity = 0.15
-				}
-			}
+			create_wargoal = { type = annex_everything target = FRA }
 		}
 
 		ai_will_do = {
@@ -20501,30 +20479,23 @@ focus = {
 	}
 
 	focus = {
-		id = USA_fabricate_propaganda
-		icon = GFX_goal_tfv_sever_ties_with_uk
-
+		id = USA_restore_the_hohenzollern_crown
+		icon = GFX_focus_ger_revive_kaiserreich
 		x = 21
 		y = 11
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_rally_windsor_support
+			focus = USA_restore_the_bourbon_throne
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			ENG = {
-				fourth_estate_monarchist_increase = yes
-				add_popularity = {
-					ideology = monarchist
-					popularity = 0.15
-				}
-			}
+			create_wargoal = { type = annex_everything target = GER }
 		}
 
 		ai_will_do = {
@@ -20534,28 +20505,22 @@ focus = {
 
 	focus = {
 		id = USA_empower_the_windsors
-		icon = GFX_ENG_British_Monarchy
-
+		icon = GFX_focus_eng_god_save_the_king
 		x = 21
 		y = 12
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_fabricate_propaganda
+			focus = USA_restore_the_hohenzollern_crown
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			ENG = {
-				start_civil_war = {
-					ideology = monarchist
-					size = 0.5
-				}
-			}
+			create_wargoal = { type = annex_everything target = ENG }
 		}
 
 		ai_will_do = {
@@ -20564,24 +20529,25 @@ focus = {
 	}
 
 	focus = {
-		id = USA_strike_france
-		icon = GFX_Focus_Attack_France
+		id = USA_look_to_asia
+		icon = GFX_focus_usa_focus_on_asia
 
 		x = 23
 		y = 9
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_europe_in_the_crosshairs
+			focus = USA_restore_crowns
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			add_political_power = 50
+			add_political_power = 100
+			add_war_support = 0.1
 		}
 
 		ai_will_do = {
@@ -20590,30 +20556,23 @@ focus = {
 	}
 
 	focus = {
-		id = USA_establish_pro_monarch_groups
-		icon = GFX_focus_rom_royal_dictatorship
-
+		id = USA_bring_back_the_shah
+		icon = GFX_focus_PER_the_pahlavi_imperium
 		x = 23
 		y = 10
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_strike_france
+			focus = USA_look_to_asia
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			FRA = {
-				fourth_estate_monarchist_increase = yes
-				add_popularity = {
-					ideology = monarchist
-					popularity = 0.15
-				}
-			}
+			create_wargoal = { type = annex_everything target = PER }
 		}
 
 		ai_will_do = {
@@ -20622,30 +20581,23 @@ focus = {
 	}
 
 	focus = {
-		id = USA_rally_behind_the_pretender
-		icon = GFX_focus_generic_monarchy_2
-
+		id = USA_power_to_the_japanese_emperor
+		icon = GFX_focus_JAP_empower_the_shogun
 		x = 23
 		y = 11
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_establish_pro_monarch_groups
+			focus = USA_bring_back_the_shah
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			FRA = {
-				fourth_estate_monarchist_increase = yes
-				add_popularity = {
-					ideology = monarchist
-					popularity = 0.15
-				}
-			}
+			create_wargoal = { type = annex_everything target = JAP }
 		}
 
 		ai_will_do = {
@@ -20654,29 +20606,24 @@ focus = {
 	}
 
 	focus = {
-		id = USA_versailles_revolution
-		icon = GFX_FRA_French_Monarchy
-
+		id = USA_restore_the_mandate_of_heaven
+		icon = GFX_focus_CHI_a_second_empire_of_china
 		x = 23
 		y = 12
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_rally_behind_the_pretender
+			focus = USA_power_to_the_japanese_emperor
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			FRA = {
-				start_civil_war = {
-					ideology = monarchist
-					size = 0.5
-				}
-			}
+			create_wargoal = { type = annex_everything target = PRC }
+			create_wargoal = { type = annex_everything target = CHI }
 		}
 
 		ai_will_do = {
@@ -20684,25 +20631,29 @@ focus = {
 		}
 	}
 
+
 	focus = {
-		id = USA_strike_germany
-		icon = GFX_Focus_Attack_Germany
+		id = USA_west_european_houses
+		icon = GFX_focus_generic_approach_the_west
 
 		x = 25
 		y = 9
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_europe_in_the_crosshairs
+			focus = USA_restore_crowns
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			add_political_power = 50
+			create_wargoal = { type = annex_everything target = HOL }
+			create_wargoal = { type = annex_everything target = BEL }
+			create_wargoal = { type = annex_everything target = SPR }
+			create_wargoal = { type = annex_everything target = ITA }
 		}
 
 		ai_will_do = {
@@ -20711,30 +20662,27 @@ focus = {
 	}
 
 	focus = {
-		id = USA_influence_political_groups
-		icon = GFX_focus_ger_revive_kaiserreich
+		id = USA_east_european_houses
+		icon = GFX_focus_CZE_bohemia_crown
 
 		x = 25
 		y = 10
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_strike_germany
+			focus = USA_west_european_houses
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			GER = {
-				fourth_estate_monarchist_increase = yes
-				add_popularity = {
-					ideology = monarchist
-					popularity = 0.15
-				}
-			}
+			create_wargoal = { type = annex_everything target = POL }
+			create_wargoal = { type = annex_everything target = AUS }
+			create_wargoal = { type = annex_everything target = CZE }
+			create_wargoal = { type = annex_everything target = HUN }
 		}
 
 		ai_will_do = {
@@ -20743,30 +20691,27 @@ focus = {
 	}
 
 	focus = {
-		id = USA_promote_the_kaiser
-		icon = GFX_focus_ger_return_of_the_kaiser
+		id = USA_houses_further_east
+		icon = GFX_focus_GER_monarchy_compromise
 
 		x = 25
 		y = 11
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_influence_political_groups
+			focus = USA_east_european_houses
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			GER = {
-				fourth_estate_monarchist_increase = yes
-				add_popularity = {
-					ideology = monarchist
-					popularity = 0.15
-				}
-			}
+			create_wargoal = { type = annex_everything target = UKR }
+			create_wargoal = { type = annex_everything target = ROM }
+			create_wargoal = { type = annex_everything target = SWE }
+			create_wargoal = { type = annex_everything target = TUR }
 		}
 
 		ai_will_do = {
@@ -20775,29 +20720,24 @@ focus = {
 	}
 
 	focus = {
-		id = USA_return_of_the_kaiser
-		icon = GFX_GER_German_Monarchy
+		id = USA_return_of_the_romanovs
+		icon = GFX_focus_SOV_zemsky_sobor
 
 		x = 25
 		y = 12
 		relative_position_id = USA_political_revolution
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_promote_the_kaiser
+			focus = USA_houses_further_east
 		}
 
 		
 		bypass = {}
 
 		completion_reward = {
-			GER = {
-				start_civil_war = {
-					ideology = monarchist
-					size = 0.5
-				}
-			}
+			create_wargoal = { type = annex_everything target = SOV }
 		}
 
 		ai_will_do = {
@@ -20805,52 +20745,6 @@ focus = {
 		}
 	}
 
-	focus = {
-		id = USA_master_of_puppets
-		icon = GFX_focus_eng_imperial_federation
-
-		x = 23
-		y = 13
-		relative_position_id = USA_political_revolution
-
-		cost = @Time_55_days
-
-		prerequisite = {
-			focus = USA_return_of_the_kaiser
-		}
-
-		prerequisite = {
-			focus = USA_versailles_revolution
-		}
-
-		prerequisite = {
-			focus = USA_empower_the_windsors
-		}
-
-		available = {
-			ENG = {
-				#has_government = monarchist
-			}
-			FRA = {
-				#has_government = monarchist
-			}
-			GER = {
-				#has_government = monarchist
-			}
-		}
-
-		bypass = {}
-
-		completion_reward = {
-			####You cannot ever force puppet a nation like this
-
-
-		}
-
-		ai_will_do = {
-			factor = 10
-		}
-	}
 
 	###################
 	### Empire Tree ###

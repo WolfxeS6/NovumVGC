@@ -2142,80 +2142,74 @@ country_event = {
 	}
 }
 
-#Gus Hall dies
+#Gus Hall critically ill
 country_event = {
 	id = usa.62
 	title = usa.62.t
 	desc = usa.62.d
 	picture = GFX_report_event_fathers_of_communism
-
+	
 	is_triggered_only = yes
-
-	immediate = {
-		set_country_flag = death_of_gus_hall
-	}
-
+	
 	option = {
 		name = usa.62.o1
-
-		ai_chance = { factor = 100 }
+		
+		ai_chance = { factor = 95 }
+		retire_character = USA_gus_hall
+		promote_character = USA_sam_webb
+		hidden_effect = { country_event = { id = usa.63 days = 7 } }
 	}
-
+	
 	option = {
 		name = usa.62.o2
-		add_political_power = -50
-		add_stability = -0.02
 		fourth_estate_communist_increase = yes
 		add_popularity = {
 			ideology = communist
-			popularity = 0.05
+			popularity = 0.025
 		}
-		hidden_effect = { country_event = { id = usa.63 days = 1000 } }
-
-		ai_chance = { factor = 0 }
+		hidden_effect = { country_event = { id = usa.63 days = 720 } }
+		custom_effect_tooltip = USA_gus_hall_impending_death_tt
+		
+		ai_chance = { factor = 5 }
 	}
 }
 
-#Hall State
+#CPUSA Leadership
 country_event = {
 	id = usa.63
 	title = usa.63.t
 	desc = usa.63.d
 	picture = GFX_report_event_communism
-
+	
 	is_triggered_only = yes
-
-	trigger = {
-		has_government = communist
+	
+	option = {
+		name = usa.63.a
+		add_political_power = 10
+	}
+	
+	option = {
+		name = usa.63.b
+		retire_character = USA_sam_webb
+		promote_character = USA_angela_davis
 	}
 
 	option = {
-		name = usa.63.o1
-		add_political_power = 20
-		fourth_estate_communist_increase = yes
-		#State Names
-		386 = { set_state_name = "Halberg" }		#Washington			#Arvo Kustaa Halberg (Gus Hall)
-		363 = { set_state_name = "Vladimir" }		#North Carolina		#Vladimir Lenin
-		364 = { set_state_name = "Marx" }			#South Carolina		#Karl Marx
-		371 = { set_state_name = "Delescluze" }		#Louisiana			#Louis Charles Delescluze
-		362 = { set_state_name = "Josephia" }		#Virginia			#Joseph Stalin
-		896 = { set_state_name = "Zedong" }			#West Virginia		#Mao Zedong
-		365 = { set_state_name = "Malcolm" }		#Georgia			#Malcolm X
-		376 = { set_state_name = "Manabendra" }		#New Mexico			#Manabendra Nath Roy
-		794 = { set_state_name = "Inkpin" }			#New Hampshire		#Albert Inkpin
-		359 = { set_state_name = "Browder" }		#New Jersey			#Earl Browder
-		361 = { set_state_name = "Margot" }			#Maryland			#Margot Honecker
-		360 = { set_state_name = "Eugene" }			#Pennsylvania		#Eugene Debs
-		358 = { set_state_name = "Engels" }			#New York			#Friedrich Engels
-		#Province Names
-		set_province_name = { id = 3957 name = "Gus Hall City, D.M." }
-		set_country_flag = washington_dc_renamed_due_to_gus_hall
-		ai_chance = { factor = 100 }
+		name = usa.63.c
+		retire_character = USA_sam_webb
+		promote_character = USA_michael_myerson
 	}
 
 	option = {
-		name = usa.63.o2
-		ai_chance = { factor = 0 }
+		name = usa.63.de
+		retire_character = USA_sam_webb
+		promote_character = USA_bob_avakian
+
+		set_party_name = {
+			ideology = communist
+			long_name = "Revolutionary Communist Party, USA"
+			name = "RCP"
+		}
 	}
 }
 
@@ -2391,16 +2385,111 @@ country_event = {
 		NOT = { has_global_flag = sandbox_tabula_rasa }
 		NOT = { has_global_flag = operation_iraqi_freedom }
 	}
+	immediate = {
+		IRQ = {
+			clr_country_flag = IRQ_US_invasion_coming
+		}
+	}
 
 	option = {
 		name = usa.71.o1
-		add_political_power = 20
-		add_stability = 0.01
+		if = {
+			limit = {
+				check_variable = {
+					var = IRQ.IRQ_US_Invasion_Fear
+					value = 40
+					compare = greater_than_or_equals
+				}
+			}
+			add_war_support = -0.1
+			add_political_power = -50
+		}
+		else_if ={
+			limit = {
+				check_variable = {
+					var = IRQ.IRQ_US_Invasion_Desire
+					value = 40
+					compare = less_than_or_equals
+				}
+			}
+			add_war_support = -0.1
+			add_stability = -0.05	
+		}
+		else = {
+			add_political_power = 20
+			add_stability = 0.01
+		}
 		set_global_flag = iraq_resolution
+
 		country_event = {
 			id = USA_flavor.2
 			days = 30
 			random_days = 20
+		}
+		ai_chance = {
+			factor = 10
+			modifier = {
+				factor = 0
+				check_variable = {
+					var = IRQ.IRQ_US_Invasion_Fear
+					value = 40
+					compare = greater_than_or_equals
+				}
+			}
+			modifier = {
+				factor = 0
+				check_variable = {
+					var = IRQ.IRQ_US_Invasion_Desire
+					value = 40
+					compare = less_than_or_equals
+				}
+			}
+		}
+	}
+	option = {
+		name = usa.71.o2
+		limit = {
+			check_variable = {
+				var = IRQ.IRQ_US_Invasion_Fear
+				value = 40
+				compare = greater_than_or_equals
+			}
+		}
+		ai_chance = {
+			factor = 60
+		}
+		hidden_effect = {
+			IRQ = {
+				country_event = IRQ_focus_events.666
+			}
+		}
+	}
+	option = {
+		name = usa.71.o2
+		limit = {
+			OR = {
+				check_variable = {
+					var = IRQ.IRQ_US_Invasion_Desire
+					value = 40
+					compare = less_than_or_equals
+				}
+				is_ai = no
+				NOT = {
+					OR = {
+						has_government = social_liberal
+						has_government = reactionary
+						has_government = conservative
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			IRQ = {
+				country_event = IRQ_focus_events.666
+			}
+		}
+		ai_chance = {
+			factor = 60
 		}
 	}
 }
@@ -2432,83 +2521,73 @@ country_event = {
 
 	option = {
 		name = usa.72.o1
-		ai_chance = {
-			base = 100
-			modifier = {
-				is_historical_focus_on = yes
-			}
-		}
 		set_global_flag = american_invasion_of_iraq
 		add_timed_idea = {
 			idea = shock_and_awe_US_idea
 			days = 28
 		}
-
+		
 		IRQ = {
 			country_event = {
-				id = IRQ_flavor.9
-				hours = 1
-			}
+			id = IRQ_flavor.9
+			hours = 1
+			}	
 		}
-
 		declare_war_on = {
 			target = IRQ
 			type = puppet_wargoal_focus
 		}
-
 		KUR = {
-			add_to_war = {
+			add_to_war = { 
 				targeted_alliance = USA
 				enemy = IRQ
 				hostility_reason = asked_to_join
-			}
+			}	
 			give_military_access = USA
 		}
-
+		
 		hidden_effect = {
 			add_timed_idea = {
-				idea = flavor_no_NATO_IRQ
-				days = 240
-			}
+			idea = flavor_no_NATO_IRQ 
+			days = 240
+			} 
 			load_oob = "USA_invading_force_IRQ"
 			USA = {
 				set_province_controller = 13316
 				set_province_controller = 15984
-			}
+			}	
 		}
-
+		
 		news_event = {
 			id = fne.8
 			hours = 6
 		}
-
+		
 		IF = {
 			limit = {
 				is_ai = yes
 			}
 			load_oob = "USA_invading_force_IRQ_AI_help"
 		}
-
+		
 		IF = {
 			limit = {
 				TUR = { has_country_flag = TUR_iraqi_freedom_ok }
 			}
-
+	
 			hidden_effect = {
 				TUR = {
 					country_event = {
 						id = TUR_flavor.1
 						hours = 1
-					}
+						}
 					add_timed_idea = {
-						idea = flavor_no_NATO_IRQ
-						days = 240
-					}
-				}
-			}
+					idea = flavor_no_NATO_IRQ 
+					days = 240
+					} 
+				}	
+			}	
 		}
-
-
 		IF = {
 			limit = {
 				ENG = { has_country_flag = ENG_iraqi_freedom_ok }
@@ -2517,22 +2596,22 @@ country_event = {
 				country_event = {
 					id = ENG_flavor.1
 					hours = 1
-				}
+					}	
 				hidden_effect = {
 					add_timed_idea = {
-						idea = flavor_no_NATO_IRQ
+						idea = flavor_no_NATO_IRQ 
 						days = 240
-					}
+					} 
 					add_timed_idea = {
 						idea = shock_and_awe_US_idea
 						days = 28
 					}
 				}
-			}
-		}
+			} 
+		}	
+	
 
-
-
+	
 		IF = {
 			limit = {
 				OR = {
@@ -2554,15 +2633,6 @@ country_event = {
 			}
 		}
 	}
-		option = {
-		name = "Let's not go to war instead..."
-		ai_chance = {
-			base = 0
-			modifier = {
-				is_historical_focus_on = no
-			}
-		}
-	}
 }
 
 ## SUCCESS OF OPERATION IRAQI FREEDOM ##
@@ -2581,6 +2651,17 @@ country_event = {
 
 	immediate = {
 		set_global_flag = success_of_operation_iraqi_freedom
+		IRQ = {
+			remove_power_balance = {
+				id = IRQ_power_balance
+			}
+			retire_character = IRQ_uday_hussein
+			load_focus_tree = {
+				tree = generic_focus
+				keep_completed = yes
+			}
+		}
+
 	}
 
 	option = {
@@ -2603,6 +2684,9 @@ country_event = {
 	}
 
 	immediate = {
+		hidden_effect = {
+			retire_character = IRQ_saddam_hussein
+		}
 		set_global_flag = saddam_hussein_captured
 	}
 
@@ -2625,7 +2709,6 @@ country_event = {
 		date > 2006.12.29
 		date < 2015.1.1
 		has_global_flag = success_of_operation_iraqi_freedom
-		IRQ = { is_puppet_of = USA }
 	}
 
 	option = {
@@ -2642,13 +2725,13 @@ country_event = {
 	hidden = yes
 
 	fire_only_once = yes
-
-	trigger = {
-		date > 2011.12.17
-		date < 2015.1.1
-		has_global_flag = success_of_operation_iraqi_freedom
-		IRQ = { is_puppet_of = USA }
-	}
+	is_triggered_only = yes #not using this
+	# trigger = {
+	# 	date > 2011.12.17
+	# 	date < 2015.1.1
+	# 	has_global_flag = success_of_operation_iraqi_freedom
+	# 	IRQ = { is_puppet_of = USA }
+	# }
 
 	option = {
 		end_puppet = IRQ

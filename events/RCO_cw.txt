@@ -3245,6 +3245,9 @@ country_event = {
 		if = {
 			limit = {
 				NOT = { is_ai = yes }
+				NOT = { has_country_flag = RCO_terrorist_attack_threat_resolved }
+				NOT = { has_completed_focus = RCO_soviet_state_militia }
+				NOT = { has_completed_focus = RCO_naz_laf_enforcement }
 			}
 			activate_mission = RCO_terrorist_attack_mission
 			}
@@ -3786,6 +3789,56 @@ country_event = {
 		name = cw.89.b
 		add_political_power = 50
 		RCO = { country_event = { id = cw.64 } }
+	}
+}
+
+## propaganda
+
+country_event = {
+	id = cw.90
+	title = cw.90.t
+	desc = cw.90.d
+	picture = GFX_news_communistagitation
+
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_variable = {
+				var = RCO_PosterImage 
+				value = 1
+			}
+			set_variable = {
+				var = RCO_PosterImage1
+				value = 1
+			}
+			set_variable = {
+				var = RCO_PosterImage2
+				value = 1
+			}
+			set_variable = {
+				var = RCO_available_campaign_slots 
+				value = 3
+			}
+		}
+	}
+
+	option = { # nationalize
+		name = cw.90.a
+		add_political_power = 50
+		add_stability = -0.02
+		custom_effect_tooltip = RCO_activate_propaganda_TT
+		set_country_flag = rco_prca_enabled
+        set_country_flag = sov_prca_leaflets_enabled #Optional but recommended
+        set_country_flag = prca_use_tileset_with_id #Optional
+	}
+
+	option = { # let them operate
+		name = cw.90.b
+		add_political_power = 15
+		custom_effect_tooltip = RCO_activate_propaganda_TT
+		set_country_flag = rco_prca_enabled
+        set_country_flag = sov_prca_leaflets_enabled #Optional but recommended
+        set_country_flag = prca_use_tileset_with_id #Optional
 	}
 }
 

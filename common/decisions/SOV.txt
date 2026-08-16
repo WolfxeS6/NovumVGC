@@ -790,7 +790,7 @@ SOV_wagner_bop_category = {
 			original_tag = SOV
 		}
 
-		cost = 35
+		cost = 25
 
 		complete_effect = {
 			add_power_balance_value = {
@@ -822,7 +822,7 @@ SOV_wagner_bop_category = {
 			original_tag = SOV
 		}
 
-		cost = 45
+		cost = 35
 
 		complete_effect = {
 			add_power_balance_value = {
@@ -852,7 +852,7 @@ SOV_wagner_bop_category = {
 			original_tag = SOV
 		}
 
-		cost = 50
+		cost = 40
 
 		complete_effect = {
 			add_power_balance_value = {
@@ -882,7 +882,7 @@ SOV_wagner_bop_category = {
 			original_tag = SOV
 		}
 
-		cost = 35
+		cost = 30
 
 		complete_effect = {
 			add_power_balance_value = {
@@ -910,7 +910,7 @@ SOV_wagner_bop_category = {
 			original_tag = SOV
 		}
 
-		cost = 40
+		cost = 10
 
 		complete_effect = {
 			add_power_balance_value = {
@@ -939,7 +939,7 @@ SOV_wagner_bop_category = {
 			original_tag = SOV
 		}
 
-		cost = 40
+		cost = 35
 
 		complete_effect = {
 			add_power_balance_value = {
@@ -969,7 +969,7 @@ SOV_wagner_bop_category = {
 			original_tag = SOV
 		}
 
-		cost = 50
+		cost = 40
 
 		complete_effect = {
 			country_event = {
@@ -982,3 +982,1795 @@ SOV_wagner_bop_category = {
 	}
 }
 
+SOV_wagner_state_desicions_category = {
+
+	SOV_wag_military_buildup_mission = {
+		allowed = { original_tag = SOV }
+
+		available = {
+			NOT = { is_ai = yes }
+			has_army_manpower = { size > 999999 }
+			num_of_military_factories > 79
+		}
+
+		activation = {
+			tag = SOV
+			has_completed_focus = SOV_wag_military_industrial_revival
+			NOT = { is_ai = yes }
+		}
+
+		icon = decision_mobilization
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 360
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_military_buildup_mission_success_TT
+			hidden_effect = {
+				country_event = { id = russ.61 hours = 1 }
+			}
+		}
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_military_buildup_mission_failure_TT
+			hidden_effect = {
+				country_event = { id = russ.62 hours = 1 }
+			}
+		}
+	}
+
+	SOV_wag_security_consolidation_mission = {
+		allowed = { original_tag = SOV }
+
+		available = {
+			NOT = { is_ai = yes }
+			has_completed_focus = SOV_wag_digital_iron_curtain
+			has_stability > 0.85
+		}
+
+		activation = {
+			tag = SOV
+			has_completed_focus = SOV_wag_control_internal_affairs
+			NOT = { is_ai = yes }
+		}
+
+		icon = decision_create_national_guard
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 420
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_security_consolidation_mission_failure_TT
+			hidden_effect = {
+				country_event = { id = russ.64 hours = 1 }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_security_consolidation_mission_success_TT
+			hidden_effect = {
+				country_event = { id = russ.63 hours = 1 }
+			}
+		}
+	}
+
+	SOV_wag_economic_recovery_mission = {
+		allowed = { original_tag = SOV }
+
+		available = {
+			NOT = { is_ai = yes }
+			OR = {
+				has_completed_focus = SOV_wag_corporate_economy
+				has_completed_focus = SOV_wag_command_economy
+			}
+			num_of_factories > 85
+			OR = {
+				has_idea = SOV_Yuri_Borisov
+				has_idea = SOV_Andrey_Belousov
+			}
+		}
+
+		activation = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+			NOT = { is_ai = yes }
+		}
+
+		icon = generic_construction
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 240
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_economic_recovery_mission_failure_TT
+			hidden_effect = {
+				country_event = { id = russ.66 hours = 1 }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_economic_recovery_mission_success_TT
+			hidden_effect = {
+				country_event = { id = russ.65 hours = 1 }
+			}
+		}
+	}
+
+	SOV_wag_naval_rearmament_mission = {
+		allowed = { original_tag = SOV }
+
+		available = {
+			NOT = { is_ai = yes }
+			has_completed_focus = SOV_wag_naval_facility
+			OR = {
+				has_completed_focus = SOV_wag_pacific_fleet_docks
+				has_completed_focus = SOV_wag_northern_fleet_docks
+			}
+			has_navy_size = { unit = carrier size > 0 }
+		}
+
+		activation = {
+			tag = SOV
+			has_completed_focus = SOV_wag_reorganize_fleet
+			NOT = { is_ai = yes }
+		}
+
+		icon = generic_naval
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 300
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_naval_rearmament_mission_failure_TT
+			hidden_effect = {
+				country_event = { id = russ.68 hours = 1 }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_naval_rearmament_mission_success_TT
+			hidden_effect = {
+				country_event = { id = russ.67 hours = 1 }
+			}
+		}
+	}
+
+	SOV_wag_terror_threat_mission = {
+		icon = decision_mil_orgs
+		allowed = { original_tag = SOV }
+
+		visible = {
+			NOT = { is_ai = yes }
+			has_country_flag = SOV_wag_terror_threat_mission_started
+		}
+
+		available = {
+			NOT = { is_ai = yes }
+			has_completed_focus = SOV_wag_pacify_northern_caucasus
+			has_completed_focus = SOV_wag_control_internal_affairs
+		}
+
+		activation = {
+			tag = SOV
+			has_country_flag = SOV_wag_terror_threat_mission_started
+			NOT = { is_ai = yes }
+		}
+
+		fire_only_once = yes
+		cancel_if_not_visible = no
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 250
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_terror_threat_mission_failure_TT
+			hidden_effect = {
+				clr_country_flag = SOV_wag_terror_threat_mission_started
+				random_list = {
+					60 = { country_event = { id = russ.77 hours = 1 } }
+					40 = { }
+				}
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_terror_threat_mission_success_TT
+			hidden_effect = {
+				clr_country_flag = SOV_wag_terror_threat_mission_started
+			}
+		}
+	}
+
+	SOV_wag_afghan_drug_crisis_mission = {
+		icon = decision_mil_orgs
+		allowed = { original_tag = SOV }
+
+		visible = {
+			NOT = { is_ai = yes }
+			has_country_flag = SOV_wag_afghan_drug_crisis_mission_started
+			NOT = { has_country_flag = SOV_wag_afghan_deal_struck }
+		}
+
+		available = {
+			NOT = { is_ai = yes }
+			has_country_flag = SOV_wag_afghan_deal_struck
+		}
+
+		activation = {
+			tag = SOV
+			has_country_flag = SOV_wag_afghan_drug_crisis_mission_started
+			NOT = { has_country_flag = SOV_wag_afghan_deal_struck }
+			NOT = { is_ai = yes }
+		}
+
+		fire_only_once = no
+		cancel_if_not_visible = no
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 30
+
+		timeout_effect = {
+			custom_effect_tooltip = SOV_wag_afghan_drug_crisis_mission_failure_TT
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_1 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_2 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_3 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_4 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_5 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_6 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_7 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_8 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_9 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_10 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_11 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_12 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_13 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_14 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_15 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_16 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_17 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_18 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_19 }
+						NOT = { has_idea = SOV_wag_afghan_drug_crisis_20 }
+					}
+					add_ideas = SOV_wag_afghan_drug_crisis_1
+				}
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_1 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_1 add_idea = SOV_wag_afghan_drug_crisis_2 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_2 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_2 add_idea = SOV_wag_afghan_drug_crisis_3 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_3 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_3 add_idea = SOV_wag_afghan_drug_crisis_4 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_4 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_4 add_idea = SOV_wag_afghan_drug_crisis_5 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_5 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_5 add_idea = SOV_wag_afghan_drug_crisis_6 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_6 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_6 add_idea = SOV_wag_afghan_drug_crisis_7 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_7 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_7 add_idea = SOV_wag_afghan_drug_crisis_8 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_8 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_8 add_idea = SOV_wag_afghan_drug_crisis_9 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_9 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_9 add_idea = SOV_wag_afghan_drug_crisis_10 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_10 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_10 add_idea = SOV_wag_afghan_drug_crisis_11 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_11 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_11 add_idea = SOV_wag_afghan_drug_crisis_12 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_12 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_12 add_idea = SOV_wag_afghan_drug_crisis_13 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_13 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_13 add_idea = SOV_wag_afghan_drug_crisis_14 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_14 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_14 add_idea = SOV_wag_afghan_drug_crisis_15 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_15 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_15 add_idea = SOV_wag_afghan_drug_crisis_16 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_16 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_16 add_idea = SOV_wag_afghan_drug_crisis_17 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_17 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_17 add_idea = SOV_wag_afghan_drug_crisis_18 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_18 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_18 add_idea = SOV_wag_afghan_drug_crisis_19 } }
+				else_if = { limit = { has_idea = SOV_wag_afghan_drug_crisis_19 } swap_ideas = { remove_idea = SOV_wag_afghan_drug_crisis_19 add_idea = SOV_wag_afghan_drug_crisis_20 } }
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_afghan_drug_crisis_mission_success_TT
+			hidden_effect = {
+				clr_country_flag = SOV_wag_afghan_drug_crisis_mission_started
+				remove_ideas = SOV_wag_afghan_drug_crisis_1
+				remove_ideas = SOV_wag_afghan_drug_crisis_2
+				remove_ideas = SOV_wag_afghan_drug_crisis_3
+				remove_ideas = SOV_wag_afghan_drug_crisis_4
+				remove_ideas = SOV_wag_afghan_drug_crisis_5
+				remove_ideas = SOV_wag_afghan_drug_crisis_6
+				remove_ideas = SOV_wag_afghan_drug_crisis_7
+				remove_ideas = SOV_wag_afghan_drug_crisis_8
+				remove_ideas = SOV_wag_afghan_drug_crisis_9
+				remove_ideas = SOV_wag_afghan_drug_crisis_10
+				remove_ideas = SOV_wag_afghan_drug_crisis_11
+				remove_ideas = SOV_wag_afghan_drug_crisis_12
+				remove_ideas = SOV_wag_afghan_drug_crisis_13
+				remove_ideas = SOV_wag_afghan_drug_crisis_14
+				remove_ideas = SOV_wag_afghan_drug_crisis_15
+				remove_ideas = SOV_wag_afghan_drug_crisis_16
+				remove_ideas = SOV_wag_afghan_drug_crisis_17
+				remove_ideas = SOV_wag_afghan_drug_crisis_18
+				remove_ideas = SOV_wag_afghan_drug_crisis_19
+				remove_ideas = SOV_wag_afghan_drug_crisis_20
+			}
+		}
+	}
+
+	SOV_wag_psyop_disinformation_us = {
+		icon = infiltrate_state
+		allowed = { original_tag = SOV }
+
+		visible = {
+			has_country_flag = SOV_wag_psyops_unlocked
+			country_exists = USA
+		}
+
+		available = {
+			has_country_flag = SOV_wag_psyops_unlocked
+			country_exists = USA
+			NOT = { has_country_flag = SOV_wag_psyops_cooldown }
+		}
+
+		cost = 55
+		days_remove = 21
+
+		complete_effect = {
+			set_country_flag = { flag = SOV_wag_psyops_cooldown days = 90 }
+			USA = { country_event = { id = russ.52 } }
+				random_list = {
+					60 = {
+						add_political_power = 35
+						country_event = { id = russ.116 days = 1 }
+						USA = {
+							add_stability = -0.03
+						add_war_support = -0.02
+					}
+					}
+					40 = {
+						add_stability = -0.03
+						add_political_power = -25
+						country_event = { id = russ.117 days = 1 }
+						USA = {
+						add_war_support = 0.02
+						add_political_power = 20
+					}
+				}
+			}
+		}
+
+		ai_will_do = { base = 6 }
+	}
+
+	SOV_wag_psyop_tech_siphon_us = {
+		icon = infiltrate_state
+		allowed = { original_tag = SOV }
+
+		visible = {
+			has_country_flag = SOV_wag_psyops_unlocked
+			country_exists = USA
+		}
+
+		available = {
+			has_country_flag = SOV_wag_psyops_unlocked
+			country_exists = USA
+			NOT = { has_country_flag = SOV_wag_psyops_cooldown }
+		}
+
+		cost = 70
+		days_remove = 30
+
+		complete_effect = {
+			set_country_flag = { flag = SOV_wag_psyops_cooldown days = 90 }
+			USA = { country_event = { id = russ.53 } }
+				random_list = {
+					45 = {
+						add_tech_bonus = {
+							name = SOV_wag_stolen_us_research
+							bonus = 0.5
+						uses = 1
+						category = electronics
+					}
+					country_event = { id = russ.118 days = 1 }
+					add_equipment_to_stockpile = { type = infantry_equipment_1 amount = 2500 producer = SOV }
+					add_equipment_to_stockpile = { type = support_equipment_1 amount = 700 producer = SOV }
+					USA = {
+						add_stability = -0.02
+					}
+					}
+					55 = {
+						custom_effect_tooltip = SOV_wag_psyop_research_disruption_90d_TT
+						country_event = { id = russ.119 days = 1 }
+						add_timed_idea = {
+							idea = SOV_wag_psyop_research_disruption
+							days = 90
+						}
+						add_political_power = -30
+					USA = {
+						add_political_power = 30
+					}
+				}
+			}
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+	SOV_wag_psyop_sanctions_blackmarket = {
+		icon = infiltrate_state
+		allowed = { original_tag = SOV }
+
+		visible = {
+			has_country_flag = SOV_wag_psyops_unlocked
+			country_exists = USA
+		}
+
+		available = {
+			has_country_flag = SOV_wag_psyops_unlocked
+			country_exists = USA
+			NOT = { has_country_flag = SOV_wag_psyops_cooldown }
+		}
+
+		cost = 60
+		days_remove = 25
+
+		complete_effect = {
+			set_country_flag = { flag = SOV_wag_psyops_cooldown days = 90 }
+			USA = { country_event = { id = russ.54 } }
+				random_list = {
+					50 = {
+						custom_effect_tooltip = SOV_minexport_decrease_5_TT
+						add_to_variable = { sov_economy_min_exp = -0.05 }
+						custom_effect_tooltip = RCO_resource_increase_5_TT
+					add_to_variable = { sov_economy_res_gain_fct = 0.05 }
+					add_political_power = 40
+					country_event = { id = russ.120 days = 1 }
+					USA = {
+						add_stability = -0.02
+						add_war_support = -0.01
+					}
+					}
+					50 = {
+						custom_effect_tooltip = SOV_wag_psyop_sanctions_blowback_90d_TT
+						country_event = { id = russ.121 days = 1 }
+						add_timed_idea = {
+							idea = SOV_wag_psyop_sanctions_blowback
+							days = 90
+						}
+						add_stability = -0.02
+					USA = {
+						add_political_power = 20
+					}
+				}
+			}
+		}
+
+		ai_will_do = { base = 5 }
+	}
+
+
+	SOV_wag_dev_moscow_industrial_zone = {
+		icon = GFX_decision_generic_factory
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_moscow_industrial_zone_done }
+			num_of_factories > 70
+		}
+
+		cost = 100
+		days_remove = 180
+		fire_only_once = yes
+		ai_will_do = { factor = 85 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_moscow_industrial_zone_done
+			219 = {
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	SOV_wag_dev_ural_heavy_industry = {
+		icon = GFX_decision_steel
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_ural_heavy_industry_done }
+			num_of_factories > 75
+		}
+
+		cost = 120
+		days_remove = 190
+		fire_only_once = yes
+		ai_will_do = { factor = 82 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_ural_heavy_industry_done
+			653 = {
+				add_extra_state_shared_building_slots = 6
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	SOV_wag_dev_volga_transport_grid = {
+		icon = generic_construction
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_volga_transport_grid_done }
+			num_of_factories > 65
+		}
+
+		cost = 80
+		days_remove = 170
+		fire_only_once = yes
+		ai_will_do = { factor = 78 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_volga_transport_grid_done
+			custom_effect_tooltip = RCO_CG_decrease_1_TT
+			217 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			218 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			251 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			239 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			250 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			add_to_variable = { sov_economy_CG = -0.01 }
+		}
+	}
+
+	SOV_wag_dev_siberian_extraction_corridor = {
+		icon = GFX_decision_generic_prospect_for_resources
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_siberian_extraction_corridor_done }
+			num_of_factories > 70
+		}
+
+		cost = 90
+		days_remove = 175
+		fire_only_once = yes
+		ai_will_do = { factor = 72 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_siberian_extraction_corridor_done
+			653 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			570 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			custom_effect_tooltip = RCO_resource_increase_5_TT
+			add_to_variable = { sov_economy_res_gain_fct = 0.05 }
+		}
+	}
+
+	SOV_wag_dev_black_sea_ports = {
+		icon = generic_naval
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_black_sea_ports_done }
+			num_of_factories > 70
+		}
+
+		cost = 75
+		days_remove = 165
+		fire_only_once = yes
+		ai_will_do = { factor = 68 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_black_sea_ports_done
+			218 = {
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			236 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+		}
+	}
+
+	SOV_wag_dev_national_railway_push = {
+		icon = GFX_decision_plant_for_dec
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_national_railway_push_done }
+			num_of_factories > 80
+		}
+
+		cost = 95
+		days_remove = 185
+		fire_only_once = yes
+		ai_will_do = { factor = 80 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_national_railway_push_done
+			219 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			223 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			398 = { add_building_construction = { type = infrastructure level = 1 instant_build = yes } }
+			add_equipment_to_stockpile = { type = motorized_equipment_1 amount = 1800 producer = SOV }
+		}
+	}
+
+	SOV_wag_dev_arsenal_dispersion = {
+		icon = GFX_decision_ger_military_buildup
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_arsenal_dispersion_done }
+			num_of_military_factories > 55
+		}
+
+		cost = 110
+		days_remove = 180
+		fire_only_once = yes
+		ai_will_do = { factor = 83 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_arsenal_dispersion_done
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	SOV_wag_dev_civilian_reconstruction_directive = {
+		icon = GFX_decision_hol_attract_foreign_investors
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_civilian_reconstruction_directive_done }
+			num_of_factories > 75
+		}
+
+		cost = 85
+		days_remove = 170
+		fire_only_once = yes
+		ai_will_do = { factor = 76 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_civilian_reconstruction_directive_done
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	SOV_wag_dev_west_siberian_oil_belt = {
+		icon = oil
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_west_siberian_oil_belt_done }
+			num_of_factories > 80
+			has_full_control_of_state = 570
+			has_full_control_of_state = 653
+		}
+
+		cost = 95
+		days_remove = 180
+		fire_only_once = yes
+		ai_will_do = { factor = 74 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_west_siberian_oil_belt_done
+			570 = {
+				add_resource = { type = oil amount = 8 }
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+			}
+			653 = {
+				add_resource = { type = oil amount = 6 }
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+			}
+		}
+	}
+
+	SOV_wag_dev_ural_mining_cluster = {
+		icon = GFX_decision_chromium
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_ural_mining_cluster_done }
+			num_of_factories > 85
+			has_full_control_of_state = 398
+			has_full_control_of_state = 251
+		}
+
+		cost = 105
+		days_remove = 185
+		fire_only_once = yes
+		ai_will_do = { factor = 74 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_ural_mining_cluster_done
+			398 = {
+				add_resource = { type = chromium amount = 10 }
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+			}
+			251 = {
+				add_resource = { type = tungsten amount = 8 }
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+			}
+			223 = { add_resource = { type = steel amount = 8 } }
+		}
+	}
+
+	SOV_wag_dev_lower_volga_refining_chain = {
+		icon = GFX_decision_rubber
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+		}
+
+		available = {
+			NOT = { has_country_flag = SOV_wag_dev_lower_volga_refining_chain_done }
+			num_of_factories > 78
+			has_full_control_of_state = 239
+			has_full_control_of_state = 240
+		}
+
+		cost = 90
+		days_remove = 175
+		fire_only_once = yes
+		ai_will_do = { factor = 73 }
+
+		remove_effect = {
+			set_country_flag = SOV_wag_dev_lower_volga_refining_chain_done
+			239 = {
+				add_resource = { type = oil amount = 4 }
+				add_resource = { type = rubber amount = 4 }
+				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
+			}
+			240 = {
+				add_resource = { type = oil amount = 4 }
+				add_resource = { type = rubber amount = 3 }
+				add_building_construction = { type = industrial_complex level = 1 instant_build = yes }
+			}
+		}
+	}
+
+	SOV_wag_adopt_infrastructure_concern = {
+		icon = GFX_decision_plant_for_dec
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+			NOT = { has_idea = SOV_wag_infrastructure_concern_1 }
+			NOT = { has_idea = SOV_wag_infrastructure_concern_2 }
+			NOT = { has_idea = SOV_wag_infrastructure_concern_3 }
+		}
+
+		available = { always = yes }
+		cost = 80
+		days_remove = 20
+		fire_only_once = yes
+		ai_will_do = { factor = 88 }
+
+		complete_effect = {
+			add_ideas = SOV_wag_infrastructure_concern_1
+		}
+	}
+
+	SOV_wag_upgrade_infrastructure_concern_2 = {
+		icon = generic_construction
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_idea = SOV_wag_infrastructure_concern_1
+		}
+
+		available = { always = yes }
+		cost = 100
+		days_remove = 25
+		fire_only_once = yes
+		ai_will_do = { factor = 78 }
+
+		complete_effect = {
+			swap_ideas = {
+				remove_idea = SOV_wag_infrastructure_concern_1
+				add_idea = SOV_wag_infrastructure_concern_2
+			}
+		}
+	}
+
+	SOV_wag_upgrade_infrastructure_concern_3 = {
+		icon = GFX_decision_generic_construction
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_idea = SOV_wag_infrastructure_concern_1
+		}
+
+		available = { always = yes }
+		cost = 120
+		days_remove = 30
+		fire_only_once = yes
+		ai_will_do = { factor = 82 }
+
+		complete_effect = {
+			swap_ideas = {
+				remove_idea = SOV_wag_infrastructure_concern_1
+				add_idea = SOV_wag_infrastructure_concern_3
+			}
+		}
+	}
+
+	SOV_wag_adopt_military_industry_concern = {
+		icon = GFX_decision_generic_military
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+			NOT = { has_idea = SOV_wag_military_industry_concern_1 }
+			NOT = { has_idea = SOV_wag_military_industry_concern_2 }
+			NOT = { has_idea = SOV_wag_military_industry_concern_3 }
+		}
+
+		available = { always = yes }
+		cost = 90
+		days_remove = 20
+		fire_only_once = yes
+		ai_will_do = { factor = 90 }
+
+		complete_effect = {
+			add_ideas = SOV_wag_military_industry_concern_1
+		}
+	}
+
+	SOV_wag_upgrade_military_industry_concern = {
+		icon = GFX_decision_ger_military_buildup
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_idea = SOV_wag_military_industry_concern_1
+		}
+
+		available = { always = yes }
+		cost = 110
+		days_remove = 30
+		fire_only_once = yes
+		ai_will_do = { factor = 79 }
+
+		complete_effect = {
+			swap_ideas = {
+				remove_idea = SOV_wag_military_industry_concern_1
+				add_idea = SOV_wag_military_industry_concern_2
+			}
+		}
+	}
+
+	SOV_wag_upgrade_military_industry_tankograd = {
+		icon = GFX_decision_generic_tank
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_idea = SOV_wag_military_industry_concern_1
+		}
+
+		available = { always = yes }
+		cost = 110
+		days_remove = 30
+		fire_only_once = yes
+		ai_will_do = { factor = 81 }
+
+		complete_effect = {
+			swap_ideas = {
+				remove_idea = SOV_wag_military_industry_concern_1
+				add_idea = SOV_wag_military_industry_concern_3
+			}
+		}
+	}
+
+	SOV_wag_adopt_civilian_industry_concern = {
+		icon = GFX_decision_generic_factory
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_economic_reforms
+			NOT = { has_idea = SOV_wag_civilian_industry_concern_1 }
+			NOT = { has_idea = SOV_wag_civilian_industry_concern_2 }
+		}
+
+		available = { always = yes }
+		cost = 90
+		days_remove = 20
+		fire_only_once = yes
+		ai_will_do = { factor = 87 }
+
+		complete_effect = {
+			add_ideas = SOV_wag_civilian_industry_concern_1
+		}
+	}
+
+	SOV_wag_upgrade_civilian_industry_concern = {
+		icon = GFX_decision_generic_construction
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_idea = SOV_wag_civilian_industry_concern_1
+		}
+
+		available = { always = yes }
+		cost = 110
+		days_remove = 30
+		fire_only_once = yes
+		ai_will_do = { factor = 80 }
+
+		complete_effect = {
+			swap_ideas = {
+				remove_idea = SOV_wag_civilian_industry_concern_1
+				add_idea = SOV_wag_civilian_industry_concern_2
+			}
+		}
+	}
+}
+SOV_wagner_africa_desicions_category = {
+
+	SOV_wag_iraq_reinforcement_shipment = {
+		icon = decision_wag_money_button
+		allowed = { original_tag = SOV }
+
+		visible = {
+			tag = SOV
+			has_completed_focus = SOV_wag_support_iraq
+			country_exists = IRQ
+		}
+
+		available = {
+			country_exists = IRQ
+			IRQ = { exists = yes }
+		}
+
+		cost = 50
+		days_remove = 10
+		fire_only_once = yes
+		ai_will_do = { factor = 45 }
+
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_iraq_shipment_decision_effect_TT
+			send_equipment = {
+				equipment = infantry_equipment_1
+				amount = 2500
+				target = IRQ
+			}
+			send_equipment = {
+				equipment = support_equipment_1
+				amount = 250
+				target = IRQ
+			}
+			send_equipment = {
+				equipment = artillery_equipment_1
+				amount = 125
+				target = IRQ
+			}
+			IRQ = { country_event = { id = russ.109 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_presence_mli = {
+		icon = decision_mil_orgs
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_completed_focus = SOV_wag_far_destination country_exists = MLI }
+		available = { country_exists = MLI MLI = { exists = yes } }
+		cost = 45
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 85 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_presence_offer_sent_TT
+			MLI = { country_event = { id = russ.85 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_econ_mli = {
+		icon = decision_wag_money_button
+		allowed = { original_tag = SOV }
+		visible = {
+			tag = SOV
+			has_country_flag = SOV_wag_africa_presence_mli_accepted
+			has_completed_focus = SOV_wag_soldiers_of_fortune
+		}
+		available = { country_exists = MLI MLI = { has_idea = SOV_wagner_presence_1 } }
+		cost = 65
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 95 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_econ_offer_sent_TT
+			MLI = { country_event = { id = russ.86 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_presence_vol = {
+		icon = decision_mil_orgs
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_completed_focus = SOV_wag_far_destination country_exists = VOL }
+		available = { country_exists = VOL VOL = { exists = yes } }
+		cost = 45
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 85 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_presence_offer_sent_TT
+			VOL = { country_event = { id = russ.87 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_econ_vol = {
+		icon = decision_wag_money_button
+		allowed = { original_tag = SOV }
+		visible = {
+			tag = SOV
+			has_country_flag = SOV_wag_africa_presence_vol_accepted
+			has_completed_focus = SOV_wag_soldiers_of_fortune
+		}
+		available = { country_exists = VOL VOL = { has_idea = SOV_wagner_presence_1 } }
+		cost = 65
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 95 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_econ_offer_sent_TT
+			VOL = { country_event = { id = russ.88 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_presence_ngr = {
+		icon = decision_mil_orgs
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_completed_focus = SOV_wag_far_destination country_exists = NGR }
+		available = { country_exists = NGR NGR = { exists = yes } }
+		cost = 45
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 86 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_presence_offer_sent_TT
+			NGR = { country_event = { id = russ.89 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_econ_ngr = {
+		icon = decision_wag_money_button
+		allowed = { original_tag = SOV }
+		visible = {
+			tag = SOV
+			has_country_flag = SOV_wag_africa_presence_ngr_accepted
+			has_completed_focus = SOV_wag_soldiers_of_fortune
+		}
+		available = { country_exists = NGR NGR = { has_idea = SOV_wagner_presence_1 } }
+		cost = 65
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 96 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_econ_offer_sent_TT
+			NGR = { country_event = { id = russ.90 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_presence_cha = {
+		icon = decision_mil_orgs
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_completed_focus = SOV_wag_far_destination country_exists = CHA }
+		available = { country_exists = CHA CHA = { exists = yes } }
+		cost = 45
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 84 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_presence_offer_sent_TT
+			CHA = { country_event = { id = russ.91 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_econ_cha = {
+		icon = decision_wag_money_button
+		allowed = { original_tag = SOV }
+		visible = {
+			tag = SOV
+			has_country_flag = SOV_wag_africa_presence_cha_accepted
+			has_completed_focus = SOV_wag_soldiers_of_fortune
+		}
+		available = { country_exists = CHA CHA = { has_idea = SOV_wagner_presence_1 } }
+		cost = 65
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 95 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_econ_offer_sent_TT
+			CHA = { country_event = { id = russ.92 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_presence_ivo = {
+		icon = decision_mil_orgs
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_completed_focus = SOV_wag_far_destination country_exists = IVO }
+		available = { country_exists = IVO IVO = { exists = yes } }
+		cost = 45
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 83 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_presence_offer_sent_TT
+			IVO = { country_event = { id = russ.93 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_econ_ivo = {
+		icon = decision_wag_money_button
+		allowed = { original_tag = SOV }
+		visible = {
+			tag = SOV
+			has_country_flag = SOV_wag_africa_presence_ivo_accepted
+			has_completed_focus = SOV_wag_soldiers_of_fortune
+		}
+		available = { country_exists = IVO IVO = { has_idea = SOV_wagner_presence_1 } }
+		cost = 65
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 94 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_econ_offer_sent_TT
+			IVO = { country_event = { id = russ.94 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_presence_car = {
+		icon = decision_mil_orgs
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_completed_focus = SOV_wag_far_destination country_exists = CAR }
+		available = { country_exists = CAR CAR = { exists = yes } }
+		cost = 45
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 84 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_presence_offer_sent_TT
+			CAR = { country_event = { id = russ.95 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_econ_car = {
+		icon = decision_wag_money_button
+		allowed = { original_tag = SOV }
+		visible = {
+			tag = SOV
+			has_country_flag = SOV_wag_africa_presence_car_accepted
+			has_completed_focus = SOV_wag_soldiers_of_fortune
+		}
+		available = { country_exists = CAR CAR = { has_idea = SOV_wagner_presence_1 } }
+		cost = 65
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 95 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_econ_offer_sent_TT
+			CAR = { country_event = { id = russ.96 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_presence_gab = {
+		icon = decision_mil_orgs
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_completed_focus = SOV_wag_far_destination country_exists = GAB }
+		available = { country_exists = GAB GAB = { exists = yes } }
+		cost = 45
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 82 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_presence_offer_sent_TT
+			GAB = { country_event = { id = russ.97 days = 1 } }
+		}
+	}
+
+	SOV_wag_africa_econ_gab = {
+		icon = decision_wag_money_button
+		allowed = { original_tag = SOV }
+		visible = {
+			tag = SOV
+			has_country_flag = SOV_wag_africa_presence_gab_accepted
+			has_completed_focus = SOV_wag_soldiers_of_fortune
+		}
+		available = { country_exists = GAB GAB = { has_idea = SOV_wagner_presence_1 } }
+		cost = 65
+		days_remove = 14
+		fire_only_once = yes
+		ai_will_do = { factor = 94 }
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_africa_econ_offer_sent_TT
+			GAB = { country_event = { id = russ.98 days = 1 } }
+		}
+	}
+}
+
+SOV_wagner_integration_category = {
+
+	SOV_wag_integrate_belarus = {
+		icon = decision_ban_coalition
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_country_flag = SOV_wag_can_core_conquests any_owned_state = { is_core_of = BLR } }
+		available = {
+			any_owned_state = { is_core_of = BLR }
+			all_state = {
+				OR = {
+					NOT = { is_core_of = BLR }
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = { is_core_of = BLR }
+					compliance > 79
+				}
+			}
+		}
+		cost = 100
+		days_remove = 30
+		fire_only_once = yes
+		ai_will_do = { factor = 95 }
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = BLR
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.02
+		}
+	}
+
+	SOV_wag_integrate_ukraine = {
+		icon = decision_ban_coalition
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_country_flag = SOV_wag_can_core_conquests any_owned_state = { is_core_of = UKR } }
+		available = {
+			any_owned_state = { is_core_of = UKR }
+			all_state = {
+				OR = {
+					NOT = { is_core_of = UKR }
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = { is_core_of = UKR }
+					compliance > 79
+				}
+			}
+		}
+		cost = 125
+		days_remove = 35
+		fire_only_once = yes
+		ai_will_do = { factor = 100 }
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = UKR
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.03
+		}
+	}
+
+	SOV_wag_integrate_baltics = {
+		icon = decision_ban_coalition
+		allowed = { original_tag = SOV }
+		visible = {
+			tag = SOV
+			has_country_flag = SOV_wag_can_core_conquests
+			any_owned_state = {
+				OR = {
+					is_core_of = EST
+					is_core_of = LAT
+					is_core_of = LIT
+				}
+			}
+		}
+		available = {
+			any_owned_state = {
+				OR = {
+					is_core_of = EST
+					is_core_of = LAT
+					is_core_of = LIT
+				}
+			}
+			all_state = {
+				OR = {
+					NOT = {
+						OR = {
+							is_core_of = EST
+							is_core_of = LAT
+							is_core_of = LIT
+						}
+					}
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = {
+						OR = {
+							is_core_of = EST
+							is_core_of = LAT
+							is_core_of = LIT
+						}
+					}
+					compliance > 79
+				}
+			}
+		}
+		cost = 110
+		days_remove = 30
+		fire_only_once = yes
+		ai_will_do = { factor = 90 }
+		complete_effect = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = EST
+						is_core_of = LAT
+						is_core_of = LIT
+					}
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.02
+		}
+	}
+
+	SOV_wag_integrate_finland = {
+		icon = decision_ban_coalition
+		allowed = { original_tag = SOV }
+		visible = { tag = SOV has_country_flag = SOV_wag_can_core_conquests any_owned_state = { is_core_of = FIN } }
+		available = {
+			any_owned_state = { is_core_of = FIN }
+			all_state = {
+				OR = {
+					NOT = { is_core_of = FIN }
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = { is_core_of = FIN }
+					compliance > 79
+				}
+			}
+		}
+		cost = 100
+		days_remove = 30
+		fire_only_once = yes
+		ai_will_do = { factor = 88 }
+		complete_effect = {
+			every_state = {
+				limit = {
+					is_core_of = FIN
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.02
+		}
+	}
+
+	SOV_wag_integrate_moldova = {
+		icon = decision_ban_coalition
+		allowed = { original_tag = SOV }
+		visible = {
+			tag = SOV
+			has_country_flag = SOV_wag_can_core_conquests
+			any_owned_state = {
+				OR = {
+					is_core_of = MOL
+					is_core_of = TRA
+				}
+			}
+		}
+		available = {
+			any_owned_state = {
+				OR = {
+					is_core_of = MOL
+					is_core_of = TRA
+				}
+			}
+			all_state = {
+				OR = {
+					NOT = {
+						OR = {
+							is_core_of = MOL
+							is_core_of = TRA
+						}
+					}
+					is_owned_and_controlled_by = ROOT
+				}
+			}
+			all_owned_state = {
+				OR = {
+					NOT = {
+						OR = {
+							is_core_of = MOL
+							is_core_of = TRA
+						}
+					}
+					compliance > 79
+				}
+			}
+		}
+		cost = 100
+		days_remove = 30
+		fire_only_once = yes
+		ai_will_do = { factor = 92 }
+		complete_effect = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = MOL
+						is_core_of = TRA
+					}
+					is_owned_and_controlled_by = ROOT
+				}
+				add_core_of = ROOT
+			}
+			add_stability = 0.02
+		}
+	}
+}
+
+SOV_wagner_propaganda_campaigns_category = {
+
+	SOV_wag_prca_god_save_russia = {
+		icon = decision_wag_propaganda_button
+		allowed = { original_tag = SOV }
+		cost = SOV_wag_propaganda_campaign_cost
+		days_remove = 100
+		ai_will_do = { factor = 35 }
+		available = {
+			check_variable = {
+				SOV_wag_available_campaign_slots > 0
+			}
+		}
+		modifier = {
+			stability_factor = 0.04
+			war_support_factor = 0.04
+			drift_defence_factor = 0.08
+		}
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_increase_propaganda_cost_TT
+			add_to_variable = {
+				var = SOV_wag_propaganda_campaign_cost
+				value = 10
+			}
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = -1
+			}
+			set_variable = { SOV_WAG_new_propaganda_campaign = 2 }
+			SOV_WAG_pick_propaganda_campaign_slot_effect = yes
+		}
+		remove_effect = {
+			set_variable = { SOV_WAG_propaganda_campaign_to_remove = 2 }
+			SOV_WAG_reset_propaganda_campaign_slot_effect = yes
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+
+	SOV_wag_prca_motherland_calling_zov = {
+		icon = decision_wag_propaganda_button
+		allowed = { original_tag = SOV }
+		cost = SOV_wag_propaganda_campaign_cost
+		days_remove = 100
+		ai_will_do = { factor = 48 }
+		available = {
+			check_variable = {
+				SOV_wag_available_campaign_slots > 0
+			}
+		}
+		modifier = {
+			army_attack_factor = 0.04
+			breakthrough_factor = 0.04
+			planning_speed = 0.07
+		}
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_increase_propaganda_cost_TT
+			add_to_variable = {
+				var = SOV_wag_propaganda_campaign_cost
+				value = 10
+			}
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = -1
+			}
+			set_variable = { SOV_WAG_new_propaganda_campaign = 3 }
+			SOV_WAG_pick_propaganda_campaign_slot_effect = yes
+		}
+		remove_effect = {
+			set_variable = { SOV_WAG_propaganda_campaign_to_remove = 3 }
+			SOV_WAG_reset_propaganda_campaign_slot_effect = yes
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+
+	SOV_wag_prca_working_from_distance = {
+		icon = decision_wag_propaganda_button
+		allowed = { original_tag = SOV }
+		cost = SOV_wag_propaganda_campaign_cost
+		days_remove = 100
+		ai_will_do = { factor = 28 }
+		available = {
+			check_variable = {
+				SOV_wag_available_campaign_slots > 0
+			}
+		}
+		modifier = {
+			intel_network_gain_factor = 0.10
+			decryption_factor = 0.05
+			operation_cost = -0.05
+		}
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_increase_propaganda_cost_TT
+			add_to_variable = {
+				var = SOV_wag_propaganda_campaign_cost
+				value = 10
+			}
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = -1
+			}
+			set_variable = { SOV_WAG_new_propaganda_campaign = 4 }
+			SOV_WAG_pick_propaganda_campaign_slot_effect = yes
+		}
+		remove_effect = {
+			set_variable = { SOV_WAG_propaganda_campaign_to_remove = 4 }
+			SOV_WAG_reset_propaganda_campaign_slot_effect = yes
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+
+	SOV_wag_prca_musicians_world_knows = {
+		icon = decision_wag_propaganda_button
+		allowed = { original_tag = SOV }
+		cost = SOV_wag_propaganda_campaign_cost
+		days_remove = 100
+		ai_will_do = { factor = 34 }
+		available = {
+			check_variable = {
+				SOV_wag_available_campaign_slots > 0
+			}
+		}
+		modifier = {
+			special_forces_attack_factor = 0.05
+			special_forces_defence_factor = 0.05
+			experience_gain_army = 0.03
+		}
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_increase_propaganda_cost_TT
+			add_to_variable = {
+				var = SOV_wag_propaganda_campaign_cost
+				value = 10
+			}
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = -1
+			}
+			set_variable = { SOV_WAG_new_propaganda_campaign = 5 }
+			SOV_WAG_pick_propaganda_campaign_slot_effect = yes
+		}
+		remove_effect = {
+			set_variable = { SOV_WAG_propaganda_campaign_to_remove = 5 }
+			SOV_WAG_reset_propaganda_campaign_slot_effect = yes
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+
+	SOV_wag_prca_enlist_wagner = {
+		icon = decision_wag_propaganda_button
+		allowed = { original_tag = SOV }
+		cost = SOV_wag_propaganda_campaign_cost
+		days_remove = 100
+		ai_will_do = { factor = 44 }
+		available = {
+			check_variable = {
+				SOV_wag_available_campaign_slots > 0
+			}
+		}
+		modifier = {
+			conscription_factor = 0.04
+			weekly_manpower = 600
+			training_time_army_factor = -0.04
+		}
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_increase_propaganda_cost_TT
+			add_to_variable = {
+				var = SOV_wag_propaganda_campaign_cost
+				value = 10
+			}
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = -1
+			}
+			set_variable = { SOV_WAG_new_propaganda_campaign = 6 }
+			SOV_WAG_pick_propaganda_campaign_slot_effect = yes
+		}
+		remove_effect = {
+			set_variable = { SOV_WAG_propaganda_campaign_to_remove = 6 }
+			SOV_WAG_reset_propaganda_campaign_slot_effect = yes
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+
+	SOV_wag_prca_tanks_not_afraid = {
+		icon = decision_wag_propaganda_button
+		allowed = { original_tag = SOV }
+		cost = SOV_wag_propaganda_campaign_cost
+		days_remove = 100
+		ai_will_do = { factor = 40 }
+		available = {
+			check_variable = {
+				SOV_wag_available_campaign_slots > 0
+			}
+		}
+		modifier = {
+			army_armor_attack_factor = 0.05
+			army_armor_speed_factor = 0.04
+			mechanized_attack_factor = 0.04
+		}
+		complete_effect = {
+			custom_effect_tooltip = SOV_wag_increase_propaganda_cost_TT
+			add_to_variable = {
+				var = SOV_wag_propaganda_campaign_cost
+				value = 10
+			}
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = -1
+			}
+			set_variable = { SOV_WAG_new_propaganda_campaign = 7 }
+			SOV_WAG_pick_propaganda_campaign_slot_effect = yes
+		}
+		remove_effect = {
+			set_variable = { SOV_WAG_propaganda_campaign_to_remove = 7 }
+			SOV_WAG_reset_propaganda_campaign_slot_effect = yes
+			add_to_variable = {
+				var = SOV_wag_available_campaign_slots
+				value = 1
+			}
+		}
+	}
+}

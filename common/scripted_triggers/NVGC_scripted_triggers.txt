@@ -1,0 +1,76 @@
+is_valid_state_for_development = {
+	impassable = no
+	NOT = {
+		is_island_state = yes
+		has_state_category = state_level_0
+	}
+}
+
+prefer_home_area_states_unless_filled = {
+	OR = {
+		is_in_home_area = yes
+		NOT = {
+			owner = {
+				any_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					is_in_home_area = yes
+				}
+			}
+		}
+	}
+}
+
+prefer_home_area_states_unless_filled_dockyard = {
+	OR = {
+		is_in_home_area = yes
+		NOT = {
+			owner = {
+				any_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+					is_in_home_area = yes
+				}
+			}
+		}
+	}
+}
+
+valid_state_for_spawning_friendly_unit = {
+	is_in_home_area = yes
+	impassable = no
+}
+
+at_peace_or_same_enemies_as_FROM = {
+	OR = {
+		has_war = no
+		AND = {
+			has_war = yes
+			NOT = {
+				any_enemy_country = {
+					NOT = { has_war_with = FROM }
+				}
+			}
+		}
+	}
+}
+
+has_socialist_government = {
+	custom_trigger_tooltip = {
+		tooltip = NVGC_is_socialist
+		OR = {
+			has_government = communist
+			has_government = democratic_socialist
+			AND = {
+				has_government = progressive
+				has_country_flag = progs_are_socialists			
+			}
+		}
+	}
+}

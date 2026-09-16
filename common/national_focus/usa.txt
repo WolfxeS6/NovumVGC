@@ -18395,14 +18395,14 @@ focus = {
 	###########################
 
 	focus = {
-		id = USA_reinforce_the_monroe_doctrine
-		icon = GFX_goal_anschluss
+		id = USA_expand_nato_in_our_hemisphere
+		icon = GFX_focus_BRA_north_and_south_america
 
 		x = -2
 		y = 1
 		relative_position_id = USA_diplomacy_americas
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
 			focus = USA_diplomacy_americas
@@ -18410,6 +18410,7 @@ focus = {
 
 		mutually_exclusive = {
 			focus = USA_strength_in_the_americas
+			focus = USA_new_alliances
 		}
 
 		available = {}
@@ -18431,6 +18432,7 @@ focus = {
 					}
 					USA = { give_guarantee = PREV }
 				}
+				add_political_power = 100
 			}
 			custom_effect_tooltip = USA_maintain_the_monroe_doctrine_TT
 		}
@@ -18486,31 +18488,38 @@ focus = {
 	}
 
 	focus = {
-		id = USA_the_monroe_alliance
-		icon = GFX_goal_generic_major_alliance
+		id = USA_for_north_america
+		icon = GFX_goal_generic_alliance
 
 		x = -3
 		y = 2
 		relative_position_id = USA_diplomacy_americas
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_reinforce_the_monroe_doctrine
+			focus = USA_expand_nato_in_our_hemisphere
 		}
 
 		mutually_exclusive = {
-			focus = USA_the_double_alliance
 		}
 
 		available = {
-			USA_focus_new_alliance_available = yes
 		}
 
 		bypass = {}
 
 		completion_reward = {
-			create_faction = monroe_alliance
+			every_country = {
+				limit = {
+					NOT = { tag = USA }
+					is_on_continent = north_america
+				}
+				add_opinion_modifier = {
+					target = USA
+					modifier = NATO_commitment
+				}
+			}
 		}
 
 		ai_will_do = {
@@ -18524,21 +18533,20 @@ focus = {
 	}
 
 	focus = {
-		id = USA_the_double_alliance
-		icon = GFX_goal_generic_military_deal
+		id = USA_for_south_america
+		icon = GFX_focus_generic_promote_SA_immigration
 
 		x = -1
 		y = 2
 		relative_position_id = USA_diplomacy_americas
 
-		cost = @Time_55_days
+		cost = @Time_35_days
 
 		prerequisite = {
-			focus = USA_reinforce_the_monroe_doctrine
+			focus = USA_expand_nato_in_our_hemisphere
 		}
 
 		mutually_exclusive = {
-			focus = USA_the_monroe_alliance
 		}
 
 		available = {
@@ -18551,12 +18559,12 @@ focus = {
 			every_country = {
 				limit = {
 					NOT = { tag = USA }
-					OR = {
-						is_in_the_americas = yes
-						is_in_faction_with = USA
-					}
+					is_on_continent = south_america
 				}
-				increase_trade_influence_by_1 = yes
+				add_opinion_modifier = {
+					target = USA
+					modifier = NATO_commitment
+				}
 			}
 		}
 

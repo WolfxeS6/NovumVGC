@@ -1,0 +1,1745 @@
+###############################
+# Scandinavia Focus Tree
+###############################
+
+focus_tree = {
+	id = scandinavia_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = SCA
+		}
+	}
+
+	default = no
+	continuous_focus_position = { x = 100 y = 1500 }
+
+################
+### Politics ###
+################
+    focus = {
+		id = SCA_begin_negotiations
+		icon = improve_relations_red
+		cost = 8
+        cancelable = no
+        bypass = {
+            has_country_flag = SCA_neutrality_established
+        }
+
+		x = 10
+		y = 0
+
+		ai_will_do = { factor = 100 }
+        select_effect = {
+            
+            USA = { country_event = { id = NVGC_scandinavia_events.20 days = 8 } }
+        }
+		completion_reward = {
+			custom_effect_tooltip = SCA_negotiations_tt
+			country_event = NVGC_scandinavia_events.24
+		}
+	}
+
+	focus = {
+		id = SCA_Nordic_Constitution
+		icon = GFX_goal_support_democracy
+		cost = 30
+		cancelable = no
+
+		relative_position_id = SCA_begin_negotiations
+		x = 0
+		y = 1
+
+		ai_will_do = { factor = 100 }
+		prerequisite = {
+			focus = SCA_begin_negotiations
+		}
+		select_effect = {
+			country_event = { id = NVGC_scandinavia_events.4 days = 10 }
+		}
+		completion_reward = {
+			custom_effect_tooltip = SCA_nordic_constitution_tt
+		}
+	}
+
+	focus = {
+		id = SCA_Socialdemocratic_government
+		icon = Social_democracy
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = -2
+		y = 2
+
+		ai_will_do = { factor = 100 }
+
+		available = {
+			
+		}
+		bypass = {
+			has_government = social_democrat
+		}
+
+		prerequisite = {
+			focus = SCA_Nordic_Constitution
+		}
+
+		mutually_exclusive = {
+			focus = SCA_liberal_government focus = SCA_Conservative_government
+		}
+
+		completion_reward = {
+			meta_effect = {
+				text = {
+					set_politics = {
+						ruling_party = social_democrat
+						last_election = "[CURRENT_DATE]"
+						election_frequency = 24
+						elections_allowed = yes
+					}
+				}
+				CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			}
+			fourth_estate_social_democrat_increase = yes
+			hidden_effect = {
+				fourth_estate_social_democrat_increase = yes
+				fourth_estate_social_democrat_increase = yes
+				fourth_estate_social_democrat_increase = yes
+			}
+		}
+	}
+
+	focus = {
+		id = SCA_welfare_state
+		icon = GFX_focus_generic_welfare
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = -4
+		y = 3
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_Socialdemocratic_government
+		}
+
+		completion_reward = {
+			add_ideas = SCA_welfare_state_idea
+			add_ideas = welfare_universal_basic_income
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_MANPOWER }
+	}
+
+	focus = {
+		id = SCA_social_rights_charter
+		icon = GFX_focus_por_workers_of_iberia
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = -4
+		y = 4
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_welfare_state
+		}
+
+		completion_reward = {
+			add_stability = 0.15
+			add_political_power = 100
+		}
+		search_filters = { FOCUS_FILTER_STABILITY }
+	}
+
+	focus = {
+		id = SCA_liberal_government
+		icon = GFX_goal_Ideology_Market_Liberal
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 0
+		y = 2
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_Nordic_Constitution
+		}
+
+		mutually_exclusive = {
+			focus = SCA_Socialdemocratic_government focus = SCA_Conservative_government
+		}
+
+		available = {
+			
+		}
+		bypass = {
+			has_government = social_liberal
+		}
+
+		completion_reward = {
+			meta_effect = {
+				text = {
+					set_politics = {
+						ruling_party = social_liberal
+						last_election = "[CURRENT_DATE]"
+						election_frequency = 24
+						elections_allowed = yes
+					}
+				}
+				CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			}
+			fourth_estate_social_liberal_increase = yes
+			hidden_effect = {
+				fourth_estate_social_liberal_increase = yes
+				fourth_estate_social_liberal_increase = yes
+				fourth_estate_social_liberal_increase = yes
+			}
+		}
+	}
+
+	focus = {
+		id = SCA_Invest_in_Education
+		icon = GFX_focus_NORDIC_mon_research
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = -2
+		y = 3
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_Socialdemocratic_government
+			focus = SCA_liberal_government
+		}
+
+		completion_reward = {
+			add_ideas = SCA_educational_investments_idea
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = SCA_modernize_Healthcare
+		icon = GFX_focus_generic_field_hostpital
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = -2
+		y = 4
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_Invest_in_Education
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SCA_educational_investments_idea
+				add_idea = SCA_healthcare_investments_idea
+			}
+			custom_effect_tooltip = tooltip_white_line
+			add_tech_bonus = {
+    			bonus = 3
+    			uses = 1
+    			category = hospital_tech
+			}
+		}
+	}
+
+	focus = {
+		id = SCA_The_Nordic_Model
+		icon = GFX_focus_generic_social_democracy
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = -3
+		y = 5
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_social_rights_charter
+		}
+		prerequisite = {
+			focus = SCA_modernize_Healthcare
+		}
+
+		completion_reward = {
+			add_ideas = SCA_nordic_model
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = SCA_protect_regional_autonomy
+		icon = GFX_focus_generic_scandinavian_alliance
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 0
+		y = 3
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_liberal_government
+		}
+
+		completion_reward = {
+			add_stability = 0.15
+		}
+		search_filters = { FOCUS_FILTER_STABILITY }
+	}
+
+	focus = {
+		id = SCA_Conservative_government
+		icon = social_conservative
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 2
+		y = 2
+
+		ai_will_do = { factor = 100 }
+
+		available = {
+			
+		}
+		bypass = {
+			has_government = conservative
+		}
+
+		prerequisite = {
+			focus = SCA_Nordic_Constitution
+		}
+
+		mutually_exclusive = {
+			focus = SCA_liberal_government focus = SCA_Socialdemocratic_government
+		}
+
+		completion_reward = {
+			meta_effect = {
+				text = {
+					set_politics = {
+						ruling_party = conservative
+						last_election = "[CURRENT_DATE]"
+						election_frequency = 24
+						elections_allowed = yes
+					}
+				}
+				CURRENT_DATE = "[?global.date.GetDateStringNoHour]"
+			}
+			fourth_estate_conservative_increase = yes
+			hidden_effect = {
+				fourth_estate_conservative_increase = yes
+				fourth_estate_conservative_increase = yes
+				fourth_estate_conservative_increase = yes
+				set_party_name = {
+					ideology = conservative
+					long_name = SCA_KDU_KP_long
+					name = SCA_KDU_KP
+				}
+				add_popularity = { ideology = fascism popularity = party_popularity@market_liberal }
+				add_popularity = { ideology = market_liberal popularity = -1}
+			}
+		}
+	}
+
+	focus = {
+		id = SCA_Strengthen_the_Nordic_Bank
+		icon = GFX_focus_usa_reestablish_the_gold_standard
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 2
+		y = 3
+
+		ai_will_do = { factor = 100 }
+		prerequisite = {
+			focus = SCA_liberal_government
+			focus = SCA_Conservative_government
+		}
+
+		completion_reward = {
+			add_ideas = SCA_northern_bank_idea
+		}
+		search_filters = { FOCUS_FILTER_STABILITY }
+	}
+
+	focus = {
+		id = SCA_strategic_Economy_Investments
+		icon = GFX_focus_mex_privatisation
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 2
+		y = 4
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_Strengthen_the_Nordic_Bank
+		}
+
+		completion_reward = {
+			swap_ideas = { add_idea = SCA_northern_bank2_idea remove_idea = SCA_northern_bank_idea }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = SCA_The_Nordic_Standard
+		icon = GFX_focus_generic_the_giant_wakes
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 0
+		y = 5
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_modernize_Healthcare
+			focus = SCA_strategic_Economy_Investments
+		}
+		prerequisite = {
+			focus = SCA_protect_regional_autonomy
+		}
+
+		completion_reward = {
+			add_ideas = SCA_nordic_standard
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = SCA_strengthen_nordic_identity
+		icon = GFX_goal_generic_national_unity
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 4
+		y = 3
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_Conservative_government
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = SCA_civic_value_Education
+		icon = GFX_focus_generic_military_academy
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 4
+		y = 4
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_strengthen_nordic_identity
+		}
+
+		completion_reward = {
+			add_ideas = SCA_civic_education
+			add_stability = 0.05
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = SCA_The_Nordic_Example
+		icon = GFX_focus_generic_home_defense
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 3
+		y = 5
+
+		ai_will_do = { factor = 100 }
+
+		prerequisite = {
+			focus = SCA_strategic_Economy_Investments
+		}
+		prerequisite = {
+			focus = SCA_civic_value_Education
+		}
+
+		completion_reward = {
+			add_ideas = SCA_nordic_example
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = SCA_deepen_federation
+		icon = GFX_focus_generic_nordic_territory
+		cost = 8
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = -8
+		y = 1
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_Nordic_Constitution
+		}
+
+		available = {
+		}
+
+		completion_reward = {
+			add_stability = 0.1
+			custom_effect_tooltip = SCA_development_decisions_tt
+			set_country_flag = { flag = SCA_developed_states value = 0 }
+			hidden_effect = {
+				SCA_setup_develop_country_decisions = yes
+			}
+			if = {
+				limit = { NOT = { has_dlc = "Arms Against Tyranny" } }
+				add_political_power = 200
+			}
+			else = {
+				every_military_industrial_organization = { add_mio_size = 3 }
+			}
+		}
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = SCA_modernize_nordic_infrastructure
+		icon = GFX_focus_generic_road_investment
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = 1
+		y = 1
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_deepen_federation
+		}
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = 500
+			}
+			activate_targeted_decision = { target = THIS decision = SCA_gothenburg_to_oslo_road }
+			activate_targeted_decision = { target = THIS decision = SCA_gothenburg_to_stockholm_road }
+			activate_targeted_decision = { target = THIS decision = SCA_expand_the_oresund_bridge }
+			if = {
+				limit = { 111 = { is_core_of = ROOT } }
+				activate_targeted_decision = { target = THIS decision = SCA_connect_finland_roads }
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = SCA_develop_nordic_ports
+		icon = GFX_focus_SOV_reinforce_western_naval_bases
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = 1
+		y = 2
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_modernize_nordic_infrastructure
+		}
+
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					is_core_of = ROOT
+					is_coastal = yes
+					naval_base < 10
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_naval_base = yes
+				    }
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_BONUS FOCUS_FILTER_INDUSTRY }
+	}
+
+	focus = {
+		id = SCA_develop_nordic_resources
+		icon = GFX_focus_generic_resource_extraction
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = 2
+		y = 3
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_develop_nordic_ports
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_Invest_In_Excavation_Industry
+				bonus = 1
+				uses = 2
+				category = excavation_tech
+			}
+			#SCA_unlock_resources_decisions = yes
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = SCA_modernize_nordic_agriculture
+		icon = GFX_focus_generic_modernizing_agriculture
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = 0
+		y = 3
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_develop_nordic_ports
+		}
+
+		completion_reward = {
+			add_ideas = SCA_nordic_agricultural_policy
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = SCA_foster_nordic_enterprise
+		icon = GFX_goal_generic_construct_civ_factory
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = 1
+		y = 4
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_develop_nordic_resources
+		}
+		prerequisite = {
+			focus = SCA_modernize_nordic_agriculture
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				prioritize = { 110 142 }
+				limit = {
+					is_core_of = ROOT
+					is_valid_state_for_development = yes
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				prioritize = { 99 37 }
+				limit = {
+					is_core_of = ROOT
+					is_valid_state_for_development = yes
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				prioritize = { 139 138 }
+				limit = {
+					is_core_of = ROOT
+					is_valid_state_for_development = yes
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+	}
+
+	focus = {
+		id = SCA_Unite_Intelligence_Agencies
+		icon = GFX_focus_generic_secret_service_agency
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = -1
+		y = 1
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_deepen_federation
+		}
+
+		completion_reward = {
+			swap_ideas = { add_idea = SCA_conflicting_administrations2_idea remove_idea = SCA_conflicting_administrations_idea }
+			if = {
+				limit = {
+					has_dlc = "La Resistance"
+					has_intelligence_agency = no
+				}
+				create_intelligence_agency = yes
+				upgrade_intelligence_agency = upgrade_crypto_strength
+			}
+			else_if = {
+				limit = {
+					has_dlc = "La Resistance"
+					has_intelligence_agency = yes
+					NOT = { has_done_agency_upgrade = upgrade_crypto_strength }
+				}
+				upgrade_intelligence_agency = upgrade_crypto_strength
+			}
+			if = {
+				limit = { has_dlc = "La Resistance" }
+				add_ideas = SCA_espionage_idea_LaR
+			}
+			else = {
+				add_ideas = SCA_espionage_idea
+			}
+		}
+	}
+
+	focus = {
+		id = SCA_Unified_Schooling_System
+		icon = GFX_focus_generic_education
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = -1
+		y = 2
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_Unite_Intelligence_Agencies
+		}
+
+		completion_reward = {
+			swap_ideas = { add_idea = SCA_conflicting_administrations3_idea remove_idea = SCA_conflicting_administrations2_idea }
+		}
+	}
+
+	focus = {
+		id = SCA_promote_nordic_language_education
+		icon = GFX_focus_generic_university_1
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = -2
+		y = 3
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_Unified_Schooling_System
+		}
+
+		completion_reward = {
+			swap_ideas = { add_idea = SCA_language_barrier_idea remove_idea = SCA_conflicting_administrations3_idea }
+		}
+	}
+
+	focus = {
+		id = SCA_Federal_Exchange_Programs
+		icon = GFX_focus_generic_university_2
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = -1
+		y = 4
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_promote_nordic_language_education
+		}
+
+		completion_reward = {
+			swap_ideas = { add_idea = SCA_great_minds_idea remove_idea = SCA_language_barrier_idea }
+			add_political_power = 80
+			add_stability = 0.05
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH FOCUS_FILTER_STABILITY }
+	}
+
+	focus = {
+		id = SCA_stronger_together
+		icon = GFX_focus_generic_pan_scandinavism
+		cost = 10
+
+		relative_position_id = SCA_deepen_federation
+		x = 0
+		y = 5
+
+		ai_will_do = { factor = 30 }
+
+		prerequisite = {
+			focus = SCA_Federal_Exchange_Programs
+		}
+		prerequisite = {
+			focus = SCA_foster_nordic_enterprise
+		}
+
+		completion_reward = {
+			add_political_power = 150
+			fourth_estate_communist_decrease = yes
+			fourth_estate_nationalist_decrease = yes
+			fourth_estate_islamist_decrease = yes
+			fourth_estate_fascist_decrease = yes
+			hidden_effect = {
+				fourth_estate_communist_decrease = yes
+				fourth_estate_nationalist_decrease = yes
+				fourth_estate_islamist_decrease = yes
+				fourth_estate_fascist_decrease = yes
+			}
+		}
+	}
+
+	focus = {
+		id = SCA_nordic_federal_army
+		icon = GFX_focus_generic_military_mission
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 6
+		y = 1
+
+		prerequisite = {
+			focus = SCA_Nordic_Constitution
+		}
+		ai_will_do = { factor = 250 }
+		mutually_exclusive = {
+			focus = SCA_Maintain_national_commands
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure
+					add_idea = SCA_fragmented_defense_structure_nav_air
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure_nav_army
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure_nav_army
+					add_idea = SCA_fragmented_defense_structure_navy
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure_air_army
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure_air_army
+					add_idea = SCA_fragmented_defense_structure_air
+				}
+			}
+			else = {
+				remove_ideas = SCA_fragmented_defense_structure_army
+			}
+			army_experience = 35
+			add_ideas = SCA_federal_army_idea
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_MANPOWER }
+	}
+	focus = {
+		id = SCA_Unify_Command
+		icon = GFX_focus_PRC_army_command
+		cost = 10
+
+		relative_position_id = SCA_nordic_federal_army
+		x = 0
+		y = 1
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_nordic_federal_army
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SCA_federal_army_idea
+				add_idea = SCA_federal_army_idea_plan1
+			}
+		}
+	}
+	focus = {
+		id = SCA_Enhance_Capabilities
+		icon = GFX_focus_CZE_demonstration_of_military_achievements
+		cost = 10
+
+		relative_position_id = SCA_nordic_federal_army
+		x = 0
+		y = 2
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_Unify_Command
+		}
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = SCA_Enhance_Capabilities
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			swap_ideas = {
+				remove_idea = SCA_federal_army_idea_plan1
+				add_idea = SCA_federal_army_idea_plan2
+			}
+		}
+	}
+
+	focus = {
+		id = SCA_Maintain_national_commands
+		icon = GFX_focus_generic_little_entente
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 11
+		y = 1
+		prerequisite = {
+			focus = SCA_Nordic_Constitution
+		}
+		ai_will_do = { factor = 250 }
+		mutually_exclusive = {
+			focus = SCA_nordic_federal_army
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure
+					add_idea = SCA_fragmented_defense_structure_nav_air
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure_nav_army
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure_nav_army
+					add_idea = SCA_fragmented_defense_structure_navy
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure_air_army
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure_air_army
+					add_idea = SCA_fragmented_defense_structure_air
+				}
+			}
+			else = {
+				remove_ideas = SCA_fragmented_defense_structure_army
+			}
+			army_experience = 35
+			add_ideas = SCA_national_armies_idea
+		}
+		search_filters = { FOCUS_FILTER_MANPOWER }
+	}
+
+	focus = {
+		id = SCA_stahlberg_combined_arms
+		icon = GFX_focus_generic_combined_arms
+		cost = 10
+
+		relative_position_id = SCA_Maintain_national_commands
+		x = -3
+		y = 1
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_Maintain_national_commands
+		}
+		mutually_exclusive = {
+			focus = SCA_gustafsson_deep_strike
+			focus = SCA_nielsen_autonomous_warfare
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = SCA_Jungs_Mobile_Warfare
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			swap_ideas = {
+				remove_idea = SCA_national_armies_idea
+				add_idea = SCA_national_armies_idea_nato1
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = SCA_Nordic_Trucks
+		icon = GFX_focus_generic_mechanized
+		cost = 10
+
+		relative_position_id = SCA_Maintain_national_commands
+		x = -3
+		y = 2
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_stahlberg_combined_arms
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_Nordic_Trucks
+				bonus = 1.5
+				uses = 1
+				category = cat_mechanized_equipment
+			}
+			swap_ideas = {
+				remove_idea = SCA_national_armies_idea_nato1
+				add_idea = SCA_national_armies_idea_nato2
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = SCA_gustafsson_deep_strike
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+		cost = 10
+
+		relative_position_id = SCA_Maintain_national_commands
+		x = -1
+		y = 1
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_Maintain_national_commands
+		}
+		mutually_exclusive = {
+			focus = SCA_stahlberg_combined_arms
+			focus = SCA_nielsen_autonomous_warfare
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = SCA_Fleischers_Superior_Firepower
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			swap_ideas = {
+				remove_idea = SCA_national_armies_idea
+				add_idea = SCA_national_armies_idea_csto1
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = SCA_Modernize_arsenal
+		icon = GFX_goal_generic_army_artillery
+		cost = 10
+
+		relative_position_id = SCA_Maintain_national_commands
+		x = -1
+		y = 2
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_gustafsson_deep_strike
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_Modern_Equipment
+				bonus = 1
+				uses = 2
+				category = infantry_weapons
+				category = artillery
+			}
+			swap_ideas = {
+				remove_idea = SCA_national_armies_idea_csto1
+				add_idea = SCA_national_armies_idea_csto2
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = SCA_nielsen_autonomous_warfare
+		icon = GFX_focus_generic_army_attack
+		cost = 10
+
+		relative_position_id = SCA_Maintain_national_commands
+		x = 1
+		y = 1
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_Maintain_national_commands
+		}
+		mutually_exclusive = {
+			focus = SCA_stahlberg_combined_arms
+			focus = SCA_gustafsson_deep_strike
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = SCA_Priors_Grand_Battleplan
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+			swap_ideas = {
+				remove_idea = SCA_national_armies_idea
+				add_idea = SCA_national_armies_idea_prc1
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = SCA_empower_field_commanders
+		icon = GFX_focus_SWE_the_nordic_decentralized_nordic_army_command
+		cost = 10
+
+		relative_position_id = SCA_Maintain_national_commands
+		x = 1
+		y = 2
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_nielsen_autonomous_warfare
+		}
+
+		completion_reward = {
+			army_experience = 35
+			add_tech_bonus = {
+				name = SCA_Supreme_High_Command
+				bonus = 1
+				uses = 2
+				category = support_tech
+			}
+			swap_ideas = {
+				remove_idea = SCA_national_armies_idea_prc1
+				add_idea = SCA_national_armies_idea_prc2
+			}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	focus = {
+		id = SCA_Nordic_armored_forces
+		icon = GFX_focus_generic_heavy_tank
+		cost = 10
+
+		relative_position_id = SCA_Maintain_national_commands
+		x = -3
+		y = 3
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_Enhance_Capabilities
+			focus = SCA_Nordic_Trucks
+		}
+		mutually_exclusive = {
+			focus = SCA_Artillery_Investment
+		}
+
+		completion_reward = {
+			add_ideas = SCA_tank_forces_idea
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	focus = {
+		id = SCA_Artillery_Investment
+		icon = GFX_focus_SWE_let_fly_all_guns
+		cost = 10
+
+		relative_position_id = SCA_Maintain_national_commands
+		x = -1
+		y = 3
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_empower_field_commanders
+			focus = SCA_Modernize_arsenal
+			focus = SCA_Enhance_Capabilities
+		}
+		mutually_exclusive = {
+			focus = SCA_Nordic_Tank_Brigades
+		}
+
+		completion_reward = {
+			add_ideas = SCA_artillery_idea
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS }
+	}
+
+	focus = {
+		id = SCA_The_Joint_Exercise
+		icon = GFX_focus_SOV_mobilization_plan
+		cost = 10
+
+		relative_position_id = SCA_nordic_federal_army
+		x = 3
+		y = 4
+
+		ai_will_do = { factor = 10 }
+		prerequisite = {
+			focus = SCA_Artillery_Investment
+			focus = SCA_Nordic_armored_forces
+		}
+
+		completion_reward = {
+			army_experience = 50
+			add_ideas = SCA_volunteers_idea
+			#if = {
+			#	limit = { has_dlc = "Arms Against Tyranny" }
+			#	custom_effect_tooltip = SCA_mio_unlock_tt
+			#}
+		}
+		search_filters = { FOCUS_FILTER_ARMY_BONUS FOCUS_FILTER_ARMY_XP }
+	}
+
+	focus = {
+		id = SCA_Merge_the_National_Navies
+		icon = GFX_focus_generic_large_navy
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 17
+		y = 1
+
+		prerequisite = {
+			focus = SCA_Nordic_Constitution
+		}
+
+		ai_will_do = { factor = 4 }
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure
+					add_idea = SCA_fragmented_defense_structure_air_army
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure_nav_army
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure_nav_army
+					add_idea = SCA_fragmented_defense_structure_army
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure_nav_air
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure_nav_air
+					add_idea = SCA_fragmented_defense_structure_air
+				}
+			}
+			else = {
+				remove_ideas = SCA_fragmented_defense_structure_navy
+			}
+			navy_experience = 25
+			#if = {
+			#	limit = { has_dlc = "Arms Against Tyranny" }
+			#	custom_effect_tooltip = SCA_mio_unlock_tt
+			#}
+		}
+		search_filters = { FOCUS_FILTER_NAVY_XP FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = SCA_Atlantic_fleet
+		icon = GFX_focus_generic_north_atlantic_fleet
+		cost = 10
+
+		relative_position_id = SCA_Merge_the_National_Navies
+		x = -2
+		y = 1
+
+		ai_will_do = { factor = 4 }
+
+		prerequisite = {
+			focus = SCA_Merge_the_National_Navies
+		}
+
+		mutually_exclusive = {
+			focus = SCA_secure_baltic
+		}
+
+		completion_reward = {
+			add_ideas = SCA_Atlantic_Navy_idea
+			custom_effect_tooltip = tooltip_white_line
+			add_doctrine_cost_reduction = {
+				name = SCA_Atlantic_fleet
+				cost_reduction = 0.5
+				uses = 1
+				category = naval_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = SCA_Develop_ocean_going_destroyers
+		icon = GFX_focus_generic_destroyer
+		cost = 10
+
+		relative_position_id = SCA_Merge_the_National_Navies
+		x = -3
+		y = 2
+
+		ai_will_do = { factor = 4 }
+		prerequisite = {
+			focus = SCA_Atlantic_fleet
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = SCA_Nordic_Navy
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_Develop_ocean_going_destroyers
+				bonus = 1
+				uses = 2
+				category = ca_tech
+			}
+			if = {
+				limit = { NOT = { has_tech = improved_heavy_battery } }
+				set_technology = { improved_heavy_battery = 1 }
+			}
+			else = {
+				navy_experience = 30
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = SCA_develop_missile_cruisers
+		icon = GFX_focus_ARG_study_the_battle_of_the_river_plate
+		cost = 10
+
+		relative_position_id = SCA_Merge_the_National_Navies
+		x = -1
+		y = 2
+
+		ai_will_do = { factor = 4 }
+		prerequisite = {
+			focus = SCA_Atlantic_fleet
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = SCA_Nordic_Navy
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_develop_missile_cruisers
+				bonus = 1
+				uses = 2
+				category = bb_tech
+			}
+			navy_experience = 30
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = SCA_secure_baltic
+		icon = GFX_focus_generic_baltic_sea_fleet
+		cost = 10
+
+		relative_position_id = SCA_Merge_the_National_Navies
+		x = 2
+		y = 1
+
+		ai_will_do = { factor = 4 }
+
+		prerequisite = {
+			focus = SCA_Merge_the_National_Navies
+		}
+
+		mutually_exclusive = {
+			focus = SCA_Atlantic_fleet
+		}
+
+		completion_reward = {
+			add_ideas = SCA_Baltic_Navy_idea
+			custom_effect_tooltip = tooltip_white_line
+			add_doctrine_cost_reduction = {
+				name = SCA_secure_baltic
+				cost_reduction = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = SCA_expand_coastal_fleet
+		icon = GFX_focus_ICE_modernizing_the_coast_guard
+		cost = 10
+
+		relative_position_id = SCA_Merge_the_National_Navies
+		x = 1
+		y = 2
+
+		ai_will_do = { factor = 4 }
+
+		prerequisite = {
+			focus = SCA_secure_baltic
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = SCA_Nordic_Navy
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_expand_coastal_fleet
+				bonus = 1
+				uses = 2
+				category = dd_tech
+			}
+			if = {
+				limit = { NOT = { has_tech = improved_light_battery } }
+				set_technology = { improved_light_battery = 1 }
+			}
+			else = {
+				navy_experience = 30
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = SCA_develop_submarine_warfare
+		icon = GFX_goal_generic_navy_submarine
+		cost = 10
+
+		relative_position_id = SCA_Merge_the_National_Navies
+		x = 3
+		y = 2
+
+		ai_will_do = { factor = 4 }
+
+		prerequisite = {
+			focus = SCA_secure_baltic
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = SCA_Nordic_Navy
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_develop_submarine_warfare
+				bonus = 1
+				uses = 2
+				category = ss_tech
+			}
+			if = {
+				limit = { NOT = { has_tech = improved_ship_torpedo_launcher } }
+				set_technology = { improved_ship_torpedo_launcher = 1 }
+			}
+			else = {
+				navy_experience = 30
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = SCA_Nordic_Navy
+		icon = GFX_focus_AST_stretch_the_fleet
+		cost = 10
+
+		relative_position_id = SCA_Merge_the_National_Navies
+		x = 0
+		y = 3
+
+		ai_will_do = { factor = 4 }
+
+		prerequisite = {
+			focus = SCA_develop_submarine_warfare
+			focus = SCA_expand_coastal_fleet
+			focus = SCA_develop_missile_cruisers
+			focus = SCA_Develop_ocean_going_destroyers
+		}
+
+		completion_reward = {
+			navy_experience = 25
+			add_doctrine_cost_reduction = {
+				name = SCA_Nordic_Navy
+				cost_reduction = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+			add_ideas = SCA_Nordic_Navy_idea
+		}
+		search_filters = { FOCUS_FILTER_NAVY_XP FOCUS_FILTER_NAVY_BONUS }
+	}
+
+	focus = {
+		id = SCA_Nordic_Air_Authority
+		icon = GFX_goal_generic_build_airforce
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Constitution
+		x = 23
+		y = 1
+
+		prerequisite = {
+			focus = SCA_Nordic_Constitution
+		}
+
+		ai_will_do = { factor = 3 }
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure
+					add_idea = SCA_fragmented_defense_structure_nav_army
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure_air_army
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure_air_army
+					add_idea = SCA_fragmented_defense_structure_army
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SCA_fragmented_defense_structure_nav_air
+				}
+				swap_ideas = {
+					remove_idea = SCA_fragmented_defense_structure_nav_air
+					add_idea = SCA_fragmented_defense_structure_navy
+				}
+			}
+			else = {
+				remove_ideas = SCA_fragmented_defense_structure_air
+			}
+			add_doctrine_cost_reduction = {
+				name = SCA_Nordic_Air_Authority
+				category = air_doctrine
+				cost_reduction = 0.5
+				uses = 2
+			}
+			air_experience = 50
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	focus = {
+		id = SCA_Merge_the_National_Airforces
+		icon = GFX_focus_NORDIC_mon_airforce
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Air_Authority
+		x = 0
+		y = 1
+
+		ai_will_do = { factor = 3 }
+
+		prerequisite = {
+			focus = SCA_Nordic_Air_Authority
+		}
+
+		completion_reward = {
+			add_ideas = SCA_air_authority_idea
+			#if = {
+			#	limit = { has_dlc = "Arms Against Tyranny" = yes }
+			#	custom_effect_tooltip = SCA_mio_unlock_tt
+			#}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	focus = {
+		id = SCA_concentrate_nordic_aerospace
+		icon = GFX_focus_generic_air_research_boost
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Air_Authority
+		x = 0
+		y = 2
+
+		ai_will_do = { factor = 3 }
+
+		prerequisite = {
+			focus = SCA_Merge_the_National_Airforces
+		}
+
+		completion_reward = {
+			air_experience = 50
+			#if = {
+			#	limit = { NOT = { SWE = { has_completed_focus = SWE_saab_focus } } }
+			#	SWE_upgrade_svenska_aeroplan = yes
+			#}
+		}
+		search_filters = { FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	focus = {
+		id = SCA_Expand_the_Aircraft_Industry
+		icon = GFX_focus_generic_aircraft_production
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Air_Authority
+		x = -1
+		y = 3
+
+		ai_will_do = { factor = 3 }
+
+		prerequisite = {
+			focus = SCA_concentrate_nordic_aerospace
+		}
+
+		completion_reward = {
+			swap_ideas = { add_idea = SCA_air_authority_idea_2 remove_idea = SCA_air_authority_idea }
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	focus = {
+		id = SCA_long_range_strikes
+		icon = GFX_focus_GER_amerikabomber
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Air_Authority
+		x = 1
+		y = 3
+
+		ai_will_do = { factor = 3 }
+
+		prerequisite = {
+			focus = SCA_concentrate_nordic_aerospace
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = SCA_long_range_strikes
+				bonus = 1
+				uses = 1
+				category = tactical_bomber
+			}
+			add_tech_bonus = {
+				name = SCA_long_range_strikes
+				bonus = 0.5
+				uses = 2
+				category = cat_strategic_bomber
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+
+	focus = {
+		id = SCA_The_Nordic_Airforce
+		icon = GFX_focus_PER_raf_planes
+		cost = 10
+
+		relative_position_id = SCA_Nordic_Air_Authority
+		x = 0
+		y = 4
+
+		ai_will_do = { factor = 3 }
+
+		prerequisite = {
+			focus = SCA_Expand_the_Aircraft_Industry
+		}
+		prerequisite = {
+			focus = SCA_long_range_strikes
+		}
+
+		completion_reward = {
+			air_experience = 25
+			add_doctrine_cost_reduction = {
+				name = SCA_The_Nordic_Airforce
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+			swap_ideas = { add_idea = SCA_air_authority_idea_3 remove_idea = SCA_air_authority_idea_2 }
+		}
+		search_filters = { FOCUS_FILTER_AIR_XP FOCUS_FILTER_AIRFORCE_BONUS }
+	}
+}

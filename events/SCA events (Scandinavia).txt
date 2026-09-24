@@ -1,0 +1,906 @@
+###########################
+# Scandinavian Events
+###########################
+# By Packard and Thomahawk2k
+###########################
+add_namespace = NVGC_scandinavia_formation_events #Pre-Formation
+add_namespace = NVGC_scandinavia_events #Post-Formation
+
+### Scandinavian Intergration ###
+
+country_event = { #Nordic Council militarized
+	id = NVGC_scandinavia_formation_events.1
+	title = NVGC_scandinavia_formation_events.1.t
+	desc = NVGC_scandinavia_formation_events.1.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = { #Good idea
+		name = NVGC_scandinavia_formation_events.1.a
+		ai_chance = {
+			base = 1
+		}
+		set_country_flag = SCA_nordic_council_accepted
+		effect_tooltip = {
+			add_ideas = SCA_nordic_council_idea
+			event_target:SCA_nordic_council_leader = { country_event = scandinavia_formation_events.2 }
+		}
+		if = {
+			limit = { tag = DEN }
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = SCA_DEN_formation_tt
+		}
+		hidden_effect = {
+			every_subject_country = {
+				limit = { 
+					OR = {
+						original_tag = SWE
+						original_tag = NOR
+						original_tag = DEN
+					} 
+				}
+				set_country_flag = SCA_nordic_council_accepted
+			}
+			if = {
+				limit = {
+					any_other_country = {
+						OR = {
+							original_tag = SWE
+							original_tag = NOR
+							original_tag = DEN
+						}
+						NOT = { has_country_flag = SCA_nordic_council_accepted }
+						is_subject = no
+					}
+				}
+				random_other_country = {
+					limit = {
+						OR = {
+							original_tag = SWE
+							original_tag = NOR
+							original_tag = DEN
+						}
+						NOT = { has_country_flag = SCA_nordic_council_accepted }
+						is_subject = no
+					}
+					country_event = NVGC_scandinavia_formation_events.1
+				}
+			}
+			else = {
+				event_target:SCA_nordic_council_leader = { country_event = { id = NVGC_scandinavia_formation_events.2 hours = 8 } }
+			}
+		}
+	}
+
+	option = { #Bad idea
+		name = NVGC_scandinavia_formation_events.2.b
+		ai_chance = {
+			base = 0
+		}
+		set_global_flag = SCA_nordic_council_refused
+		if = {
+			limit = { has_completed_focus = SCANDINAVIA_nordic_council }
+			SWE = {
+				uncomplete_national_focus = {
+					focus = SCANDINAVIA_nordic_council
+					uncomplete_children = yes
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+			NOR = {
+				uncomplete_national_focus = {
+					focus = SCANDINAVIA_nordic_council
+					uncomplete_children = yes
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+			DEN = {
+				uncomplete_national_focus = {
+					focus = SCANDINAVIA_nordic_council
+					uncomplete_children = yes
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+		every_country = {
+			limit = { has_country_flag = SCA_nordic_council_accepted }
+			clr_country_flag = SCA_nordic_council_accepted
+			country_event = { id = NVGC_scandinavia_formation_events.3 days = 1 }
+		}
+	}
+}
+
+country_event = { #Found the Nordic Council
+	id = NVGC_scandinavia_formation_events.2
+	title = NVGC_scandinavia_formation_events.2.t
+	desc = NVGC_scandinavia_formation_events.2.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_formation_events.2.a
+		create_faction_from_template = { template = faction_template_defensive_democratic name = nordic_council }
+		add_ideas = SCA_nordic_council_idea
+		clr_country_flag = SCA_nordic_council_accepted
+		every_other_country = {
+			limit = { has_country_flag = SCA_nordic_council_accepted }
+			clr_country_flag = SCA_nordic_council_accepted
+			add_ideas = SCA_nordic_council_idea
+			ROOT = { add_to_faction = PREV }
+		}
+		hidden_effect = {
+			ICE = {
+				activate_targeted_decision = { target = ROOT decision = SCA_join_scandinavian_research }
+				activate_targeted_decision = { target = SCA decision = SCA_join_scandinavian_research }
+			}
+			FIN = {
+				activate_targeted_decision = { target = ROOT decision = FIN_join_nordic_council }
+				activate_targeted_decision = { target = SCA decision = FIN_join_nordic_council }
+				activate_targeted_decision = { target = ROOT decision = SCA_join_scandinavian_research }
+				activate_targeted_decision = { target = SCA decision = SCA_join_scandinavian_research }
+			}
+			EST = {
+				activate_targeted_decision = { target = ROOT decision = EST_join_nordic_council }
+				activate_targeted_decision = { target = SCA decision = EST_join_nordic_council }
+				activate_targeted_decision = { target = ROOT decision = SCA_join_scandinavian_research }
+				activate_targeted_decision = { target = SCA decision = SCA_join_scandinavian_research }
+			}
+		}
+	}
+}
+
+country_event = { #[From.GetCountryDef] rejects other proposal
+	id = NVGC_scandinavia_formation_events.3
+	title = NVGC_scandinavia_formation_events.3.t
+	desc = NVGC_scandinavia_formation_events.3.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = { #Sad
+		name = NVGC_scandinavia_formation_events.3.a
+		effect_tooltip = {
+			uncomplete_national_focus = {
+				focus = SCANDINAVIA_nordic_council
+				uncomplete_children = yes
+			}
+		}
+	}
+}
+
+country_event = { #[From.GetCountryDef] proposes Federation
+	id = NVGC_scandinavia_formation_events.13
+	title = NVGC_scandinavia_formation_events.13.t
+	desc = NVGC_scandinavia_formation_events.13.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = NVGC_scandinavia_formation_events.13.a
+		ai_chance = { base = 100 }
+		set_country_flag = SCA_federation_accepted
+		effect_tooltip = {
+			event_target:SCA_federation_initiator = { country_event = NVGC_scandinavia_formation_events.16 }
+		}
+		hidden_effect = {
+			every_subject_country = {
+				limit = { 
+					OR = {
+						original_tag = SWE
+						original_tag = NOR
+						original_tag = DEN
+					} 
+				}
+				set_country_flag = SCA_federation_accepted
+			}
+			if = {
+				limit = {
+					any_other_country = {
+						OR = {
+							original_tag = SWE
+							original_tag = NOR
+							original_tag = DEN
+						}
+						NOT = { has_country_flag = SCA_federation_accepted }
+						is_subject = no
+					}
+				}
+				random_other_country = {
+					limit = {
+						OR = {
+							original_tag = SWE
+							original_tag = NOR
+							original_tag = DEN
+						}
+						NOT = { has_country_flag = SCA_federation_accepted }
+						is_subject = no
+					}
+					country_event = NVGC_scandinavia_formation_events.13
+				}
+			}
+			else = {
+				event_target:SCA_federation_initiator = { country_event = { id = NVGC_scandinavia_formation_events.16 hours = 8 } }
+			}
+		}
+	}
+
+	option = { #No
+		name = NVGC_scandinavia_formation_events.13.b
+		ai_chance = { base = 0 }
+		if = {
+			limit = { NOT = { tag = ICE } }
+			set_global_flag = SCA_federation_refused
+			every_country = {
+				limit = { has_country_flag = SCA_federation_accepted }
+				clr_country_flag = SCA_federation_accepted
+				country_event = { id = NVGC_scandinavia_formation_events.15 days = 1 }
+			}
+		}
+	}
+}
+
+country_event = { #[From.GetCountryDef] rejects Federation proposal (hates fun)
+	id = NVGC_scandinavia_formation_events.15
+	title = NVGC_scandinavia_formation_events.15.t
+	desc = NVGC_scandinavia_formation_events.15.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = { #Sad
+		name = NVGC_scandinavia_formation_events.15.a
+	}
+}
+
+country_event = { # Nordic Federation is Accepted
+	id = NVGC_scandinavia_formation_events.16
+	title = NVGC_scandinavia_formation_events.16.t
+	desc = NVGC_scandinavia_formation_events.16.d
+	picture = GFX_report_event_government_centralization
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			SCA_get_ideologies = yes
+			random_country = {
+				limit = {
+					OR = {
+						tag = NOR
+						tag = SWE
+						tag = DEN
+						tag = ICE
+					}
+					is_ai = no
+				}
+				save_event_target_as = SCA_player
+			}
+		}
+	}
+
+	option = {
+		name = NVGC_scandinavia_formation_events.16.a
+		hidden_effect = {
+			news_event = NVGC_scandinavia_formation_events.17
+			capital_scope = {
+				SCA = {
+					add_state_core = PREV
+					transfer_state = PREV
+				}
+			}
+			SCA = {
+				set_politics = {
+					ruling_party = reactionary
+					elections_allowed = no
+				}
+				add_to_tech_sharing_group = scandinavian_research
+			}
+			every_country = { #Transfer puppets
+				limit = {
+					OR = {
+						is_subject_of = DEN
+						is_subject_of = SWE
+						is_subject_of = NOR
+					}
+				}
+				set_temp_variable = { target = THIS }
+				SCA = { puppet_country_without_changing_government = yes }
+			}
+		}
+		if = {
+			limit = { is_faction_leader = yes }
+			set_global_flag = TEMPORARY_DISABLED_FACTION_POPUP
+			add_to_faction = SCA
+			SCA = { set_faction_leader = yes }
+		}
+		else_if = {
+			limit = { is_in_faction = yes }
+			faction_leader = { add_to_faction = SCA }
+			set_global_flag = TEMPORARY_DISABLED_FACTION_POPUP
+			if = {
+				limit = {
+					faction_leader = {
+						OR = {
+							tag = SWE
+							tag = DEN
+							tag = NOR
+						}
+					}
+				}
+				SCA = { set_faction_leader = yes }
+			}
+		}
+		hidden_effect = {
+			NOR = {
+				every_core_state = { add_core_of = SCA }
+				every_owned_state = { save_current_factory_count = yes }
+				every_unit_leader = {
+					set_nationality = SCA
+				}
+			}
+			SWE = {
+				every_core_state = { add_core_of = SCA }
+				every_owned_state = { save_current_factory_count = yes }
+				every_unit_leader = {
+					set_nationality = SCA
+				}
+			}
+			DEN = {
+				every_core_state = { add_core_of = SCA }
+				every_owned_state = { save_current_factory_count = yes }
+				every_unit_leader = {
+					set_nationality = SCA
+				}
+			}
+		}
+		SCA = {
+			transfer_technology = yes
+			transfer_int_upgrade = yes
+			annex_country = {
+				target = NOR
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = SWE
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = DEN
+				transfer_troops = yes
+			}
+			if = {
+				limit = { has_subject = ICE }
+				ICE = {
+					every_core_state = { add_core_of = SCA }
+					hidden_effect = {
+						every_owned_state = { save_current_factory_count = yes }
+						every_unit_leader = {
+							set_nationality = SCA
+						}
+					}
+				}
+				annex_country = {
+					target = ICE
+					transfer_troops = yes
+				}
+			}
+			if = {
+				limit = { has_subject = FAI }
+				FAI = {
+					every_core_state = { add_core_of = SCA }
+					hidden_effect = {
+						every_owned_state = { save_current_factory_count = yes }
+						every_unit_leader = {
+							set_nationality = SCA
+						}
+					}
+				}
+				annex_country = {
+					target = FAI
+					transfer_troops = yes
+				}
+			}
+			if = {
+				limit = { has_subject = GRN }
+				GRN = {
+					every_core_state = { add_core_of = SCA }
+					hidden_effect = {
+						every_owned_state = { save_current_factory_count = yes }
+						every_unit_leader = {
+							set_nationality = SCA
+						}
+					}
+				}
+				annex_country = {
+					target = GRN
+					transfer_troops = yes
+				}
+			}
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = SCA_tt_nordic_fed_formation_tech
+			custom_effect_tooltip = tooltip_white_line
+			hidden_effect = {
+				set_capital = { state = 140 }
+				every_owned_state = { restore_previous_factory_count = yes }
+				SCA_create_starting_ship_variants = yes
+			}
+			country_event = { id = NVGC_scandinavia_events.1 days = 2 }
+			change_tag_from = event_target:SCA_player
+		}
+	}
+}
+
+#Scandinavian unification
+news_event = {
+	id = NVGC_scandinavia_formation_events.17
+	title = NVGC_scandinavia_formation_events.17.t
+	desc = NVGC_scandinavia_formation_events.17.d
+	picture = GFX_news_event_SCA_scandinavia
+
+	is_triggered_only = yes
+	fire_for_sender = no
+	major = yes
+
+	option = {
+		name = NVGC_scandinavia_formation_events.17.a
+	}
+}
+
+# The Formation of the Nordic Federation
+country_event = {
+	id = NVGC_scandinavia_events.1
+	title = NVGC_scandinavia_events.1.t
+	desc = NVGC_scandinavia_events.1.d
+	picture = GFX_report_event_political_deal
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.1.a
+		add_political_power = 100
+		hidden_effect = {
+			country_event = { id = NVGC_scandinavia_events.12 days = 70 random_days = 50 }
+			country_event = { id = NVGC_scandinavia_events.13 days = 70 random_days = 50 }
+			country_event = { id = NVGC_scandinavia_events.14 days = 70 random_days = 50 }
+			country_event = { id = NVGC_scandinavia_events.15 days = 70 random_days = 50 }
+			country_event = { id = NVGC_scandinavia_events.18 days = 70 random_days = 50 }
+		}
+		hidden_effect = {
+			news_event = NVGC_scandinavia_events.19
+			# Initializing starting armor variants
+			if = {
+				limit = { has_dlc_nsb = yes }
+				create_equipment_variant = {
+					name = "Strf 9040 A"
+					type = light_tank_chassis_0
+					parent_version = 0
+					modules = {
+						main_armament_slot = tank_heavy_machine_gun
+						turret_type_slot = tank_light_one_man_tank_turret
+						suspension_type_slot = tank_torsion_bar_suspension
+						armor_type_slot = tank_riveted_armor
+						engine_type_slot = tank_gasoline_engine
+					}
+					upgrades = {
+						tank_nsb_engine_upgrade = 2
+						tank_nsb_armor_upgrade = 1
+					}
+					obsolete = yes #used for oob
+					icon = GFX_SWE_gwtank_medium
+				}
+				create_equipment_variant = {
+					name = "Strf 9040 B"
+					type = light_tank_chassis_1
+					parent_version = 0
+					modules = {
+						main_armament_slot = tank_auto_cannon
+						turret_type_slot = tank_light_two_man_tank_turret
+						suspension_type_slot = tank_torsion_bar_suspension
+						armor_type_slot = tank_welded_armor
+						engine_type_slot = tank_gasoline_engine
+						special_type_slot_1 = tank_radio_1
+						special_type_slot_2 = additional_machine_guns
+					}
+					upgrades = {
+						tank_nsb_armor_upgrade = 2
+						tank_nsb_engine_upgrade = 3
+					}
+					icon = GFX_SWE_basic_light_tank_medium
+				}
+				if = {
+					limit = { has_tech = improved_light_tank_chassis }
+					create_equipment_variant = {
+						name = "Strf 9035"
+						type = light_tank_chassis_2
+						parent_version = 0
+						modules = {
+							main_armament_slot = tank_auto_cannon
+							turret_type_slot = tank_light_two_man_tank_turret
+							suspension_type_slot = tank_torsion_bar_suspension
+							armor_type_slot = tank_welded_armor
+							engine_type_slot = tank_gasoline_engine
+							special_type_slot_1 = tank_radio_1
+							special_type_slot_2 = additional_machine_guns
+						}
+						upgrades = {
+							tank_nsb_engine_upgrade = 3
+						}
+						icon = GFX_SWE_improved_light_tank_medium
+					}
+				}
+				if = {
+					limit = { has_tech = basic_medium_tank_chassis }
+					create_equipment_variant = {
+						name = "Stridsvagn 122"
+						type = modern_tank_chassis_2
+						parent_version = 0
+						modules = {
+							main_armament_slot = tank_auto_cannon
+							turret_type_slot = tank_light_two_man_tank_turret
+							suspension_type_slot = tank_torsion_bar_suspension
+							armor_type_slot = tank_welded_armor
+							engine_type_slot = tank_gasoline_engine
+							special_type_slot_1 = tank_radio_1
+							special_type_slot_2 = additional_machine_guns
+						}
+					}
+				}
+				if = {
+					limit = { has_tech = basic_heavy_tank_chassis }
+					create_equipment_variant = {
+						name = "Stridsvagn 123"
+						type = modern_tank_chassis_2
+						parent_version = 0
+						modules = {
+							main_armament_slot = tank_close_support_gun
+							turret_type_slot = tank_medium_three_man_tank_turret
+							suspension_type_slot = tank_torsion_bar_suspension
+							armor_type_slot = tank_welded_armor
+							engine_type_slot = tank_gasoline_engine
+							special_type_slot_1 = tank_radio_1
+							special_type_slot_2 = additional_machine_guns
+						}
+						icon = GFX_SWE_basic_heavy_tank_medium
+					}
+				}
+			}
+		}
+	}
+}
+
+# The Nordic Constitution
+country_event = {
+	id = NVGC_scandinavia_events.4
+	title = NVGC_scandinavia_events.4.t
+	desc = NVGC_scandinavia_events.4.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.4.a
+		add_political_power = 25
+		country_event = { id = NVGC_scandinavia_events.7 days = 35 }
+	}
+}
+
+# The Federal Council
+country_event = {
+	id = NVGC_scandinavia_events.5
+	title = NVGC_scandinavia_events.5.t
+	desc = NVGC_scandinavia_events.5.d
+	picture = GFX_report_event_SWE_Riksdag
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.5.a
+		add_political_power = 25
+		custom_effect_tooltip = SCA_tt_nordic_council_stays
+		country_event = { id = NVGC_scandinavia_events.9 days = 35 }
+	}
+}
+
+# nordic parliament or joint sessions
+country_event = {
+	id = NVGC_scandinavia_events.7
+	title = NVGC_scandinavia_events.7.t
+	desc = NVGC_scandinavia_events.7.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.7.a
+		add_political_power = 25
+		custom_effect_tooltip = SCA_tt_parliament_new_and_united
+		set_country_flag = SCA_parliament_new_and_united
+		country_event = { id = NVGC_scandinavia_events.5 days = 35 }
+	}
+	option = {
+		name = NVGC_scandinavia_events.7.b
+		add_political_power = 25
+		custom_effect_tooltip = SCA_tt_parliament_separate
+		set_country_flag = SCA_parliament_separate
+		country_event = { id = NVGC_scandinavia_events.5 days = 35 }
+	}
+}
+
+# Court question
+country_event = {
+	id = NVGC_scandinavia_events.9
+	title = NVGC_scandinavia_events.9.t
+	desc = NVGC_scandinavia_events.9.d
+	picture = GFX_report_event_generic_trial
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.9.a
+		add_political_power = 25
+		custom_effect_tooltip = SCA_tt_judicial_autonomy
+		set_country_flag = SCA_judicial_autonomy
+		country_event = { id = NVGC_scandinavia_events.16 days = 35 }
+	}
+	option = {
+		name = NVGC_scandinavia_events.9.b
+		add_political_power = 25
+		custom_effect_tooltip = SCA_tt_nordic_high_court
+		set_country_flag = SCA_nordic_high_court
+		country_event = { id = NVGC_scandinavia_events.16 days = 35 }
+	}
+	option = {
+		name = NVGC_scandinavia_events.9.c
+		add_political_power = 25
+		custom_effect_tooltip = SCA_tt_judicial_nordic_powah
+		set_country_flag = SCA_judicial_nordic_powah
+		country_event = { id = NVGC_scandinavia_events.16 days = 35 }
+	}
+}
+
+# The SocDem Alliance
+country_event = {
+	id = NVGC_scandinavia_events.12
+	title = NVGC_scandinavia_events.12.t
+	desc = NVGC_scandinavia_events.12.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.12.a
+		set_party_name = {
+			ideology = social_democrat
+			long_name = SCA_social_democrat_party_established_long
+			name = SCA_social_democrat_party_established
+		}
+		fourth_estate_social_democrat_increase = yes
+	}
+}
+
+# Formation of the Conservative Party
+country_event = {
+	id = NVGC_scandinavia_events.13
+	title = NVGC_scandinavia_events.13.t
+	desc = NVGC_scandinavia_events.13.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.13.a
+		set_party_name = {
+			ideology = market_liberal
+			long_name = SCA_market_liberal_party_established_long
+			name = SCA_market_liberal_party_established
+		}
+		fourth_estate_market_liberal_increase = yes
+	}
+}
+
+# Formation of the Liberal Party
+country_event = {
+	id = NVGC_scandinavia_events.14
+	title = NVGC_scandinavia_events.14.t
+	desc = NVGC_scandinavia_events.14.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.14.a
+		set_party_name = {
+			ideology = social_liberal
+			long_name = SCA_social_liberal_party_established_long
+			name = SCA_social_liberal_party_established
+		}
+		fourth_estate_social_liberal_increase = yes
+	}
+}
+
+# Unification of the Leftists
+country_event = {
+	id = NVGC_scandinavia_events.15
+	title = NVGC_scandinavia_events.15.t
+	desc = NVGC_scandinavia_events.15.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.15.a
+		set_party_name = {
+			ideology = democratic_socialist
+			long_name = SCA_socialist_party_established_long
+			name = SCA_socialist_party_established
+		}
+		set_party_name = {
+			ideology = progressive
+			long_name = SCA_socialist_party_established_long
+			name = SCA_socialist_party_established
+		}
+		set_party_name = {
+			ideology = communist
+			long_name = SCA_socialist_party_established_long
+			name = SCA_socialist_party_established
+		}
+	}
+}
+
+# Ratification of the Nordic Constitution
+country_event = {
+	id = NVGC_scandinavia_events.16
+	title = NVGC_scandinavia_events.16.t
+	desc = NVGC_scandinavia_events.16.d
+	picture = GFX_report_event_political_deal
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.16.a
+		custom_effect_tooltip = SCA_tt_Council_Inaugurated
+		if = {
+			limit = { has_country_flag = SCA_parliament_new_and_united }
+			if = {
+				limit = { has_country_flag = SCA_judicial_nordic_powah }
+				add_political_power = 150
+			}
+			else_if = {
+				limit = { has_country_flag = SCA_nordic_high_court }
+				add_political_power = 100
+				add_stability = 0.05
+			}
+			else = {
+				add_political_power = 75
+				add_stability = 0.075
+			}
+		}
+		else = {
+			if = {
+				limit = { has_country_flag = SCA_judicial_nordic_powah }
+				add_political_power = 100
+				add_stability = 0.05
+			}
+			else_if = {
+				limit = { has_country_flag = SCA_nordic_high_court }
+				add_political_power = 75
+				add_stability = 0.075
+			}
+			else = {
+				add_political_power = 50
+				add_stability = 0.1
+			}
+		}
+		complete_national_focus = SCA_Nordic_Constitution
+	}
+}
+
+# Formation of the CDU
+country_event = {
+	id = NVGC_scandinavia_events.18
+	title = NVGC_scandinavia_events.18.t
+	desc = NVGC_scandinavia_events.18.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.18.a
+		set_party_name = {
+			ideology = conservative
+			long_name = SCA_social_conservative_party_established_long
+			name = SCA_social_conservative_party_established
+		}
+		fourth_estate_conservative_increase = yes
+	}
+}
+
+country_event = { # negotiating with America-American side
+	id = NVGC_scandinavia_events.20
+	title = NVGC_scandinavia_events.20.t
+	desc = NVGC_scandinavia_events.20.d
+	is_triggered_only = yes
+
+	option = { #gib intel
+		name = NVGC_scandinavia_events.20.a
+		SCA = {
+			country_event = NVGC_scandinavia_events.21
+		}
+	}
+}
+country_event = {
+	id = NVGC_scandinavia_events.21
+	title = NVGC_scandinavia_events.21.t
+	desc = NVGC_scandinavia_events.21.d
+	is_triggered_only = yes
+
+	option = {  # SCA accepts US
+		name = NVGC_scandinavia_events.21.a
+		add_opinion_modifier = { target = USA modifier = established_diplomatic_relations }
+		USA = {
+			add_intel = {
+				target = SCA
+    			civilian_intel = 30
+    			army_intel = 20
+    			navy_intel = 10
+    			airforce_intel = 20
+			}
+		}
+		set_country_flag = SCA_negotiated_with_america
+		SOV = { country_event = { id = NVGC_scandinavia_events.22 days = 8 } }
+	}
+}
+country_event = { #negotiating with Russia-russia side
+	id = NVGC_scandinavia_events.22
+	title = NVGC_scandinavia_events.22.t
+	desc = NVGC_scandinavia_events.22.d
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.22.a
+		SCA = {
+			country_event = NVGC_scandinavia_events.23
+		}
+	}
+}
+country_event = { #SCA accepting russia's deal
+	id = NVGC_scandinavia_events.23
+	title = NVGC_scandinavia_events.23.t
+	desc = NVGC_scandinavia_events.23.d
+	is_triggered_only = yes
+
+	option = {
+		name = NVGC_scandinavia_events.23.a
+		set_country_flag = SCA_negotiated_with_russia
+		country_event = { id = NVGC_scandinavia_events.24 days = 8 }
+	}
+}
+
+country_event = { #Finishing negotiations
+	id = NVGC_scandinavia_events.24
+	title = NVGC_scandinavia_events.24.t
+	desc = NVGC_scandinavia_events.24.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = NVGC_scandinavia_events.24.a
+		add_ideas = SCA_nordic_neutrality
+		set_country_flag = SCA_neutrality_established
+	}
+}
+
+news_event = {
+	id = NVGC_scandinavia_events.19
+	title = NVGC_scandinavia_events.19.t
+	desc = NVGC_scandinavia_events.19.d
+	picture = GFX_news_event_SCA_scandinavia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	fire_for_sender = no
+
+	major = yes
+
+	option = { name = NVGC_scandinavia_events.19.a }
+}

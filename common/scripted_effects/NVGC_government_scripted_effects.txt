@@ -1,0 +1,118 @@
+# scope is the overlord
+# requires a temp variable target - the country to be puppeted
+puppet_country_without_changing_government = {
+	var:target = { get_current_government_type = yes }
+	puppet = {
+		target = var:target
+		end_wars = no
+		end_civil_wars = no
+	}
+	var:target = { restore_previous_government_type = yes }
+}
+
+get_current_government_type = {
+	clear_variable = original_government_type
+	set_variable = { original_government_type = current_party_ideology_group }
+
+	if = {
+		limit = { has_elections = yes }
+		set_country_flag = original_government_type_had_elections
+	}
+
+	get_current_popularities = yes
+
+	if = {
+		limit = { has_autonomy_state = autonomy_supervised_state }
+		set_country_flag = autonomy_supervised_state
+	}
+	else_if = {
+		limit = { has_autonomy_state = autonomy_integrated_puppet }
+		set_country_flag = autonomy_integrated_puppet
+	}
+	else_if = {
+		limit = { has_autonomy_state = autonomy_puppet }
+		set_country_flag = autonomy_puppet
+	}
+	else_if = {
+		limit = { has_autonomy_state = autonomy_colony }
+		set_country_flag = autonomy_colony
+	}
+	else_if = {
+		limit = { has_autonomy_state = autonomy_dominion }
+		set_country_flag = autonomy_dominion
+	}
+	else_if = {
+		limit = { is_subject = yes }
+		set_country_flag = default_puppet
+	}
+}
+
+get_current_popularities = {
+	clear_array = original_popularities
+	add_to_array = { original_popularities = party_popularity_100@communist }
+	add_to_array = { original_popularities = party_popularity_100@democratic_socialist }
+	add_to_array = { original_popularities = party_popularity_100@progressive }
+	add_to_array = { original_popularities = party_popularity_100@social_democrat }
+	add_to_array = { original_popularities = party_popularity_100@social_liberal }
+	add_to_array = { original_popularities = party_popularity_100@market_liberal }
+	add_to_array = { original_popularities = party_popularity_100@conservative }
+	add_to_array = { original_popularities = party_popularity_100@reactionary }
+	add_to_array = { original_popularities = party_popularity_100@monarchist }
+	add_to_array = { original_popularities = party_popularity_100@nationalist }
+	add_to_array = { original_popularities = party_popularity_100@fascist }
+
+	set_temp_variable = { sum = 100 }
+	for_each_loop = {
+		array = original_popularities
+		subtract_from_temp_variable = { sum = v }
+	}
+	add_to_array = { original_popularities = sum } #last value (fundamentalist), calculated directly to avoid rounding errors
+}
+
+restore_previous_government_type = {
+	hidden_effect = {
+		if = {
+			limit = { has_variable = original_government_type } #needed to avoid a CTD
+			if = {
+				limit = { has_country_flag = original_government_type_had_elections }
+				clr_country_flag = original_government_type_had_elections
+				set_politics = {
+					ruling_party = var:original_government_type
+					elections_allowed = yes
+				}
+			}
+			else = {
+				set_politics = {
+					ruling_party = var:original_government_type
+					elections_allowed = no
+				}
+			}
+		}
+		clear_variable = original_government_type
+
+		if = {
+			limit = { check_variable = { original_popularities^num > 0 } }
+			set_popularities = {
+				communist = original_popularities^0
+				democratic_socialist = original_popularities^1
+				progressive = original_popularities^2
+				social_democrat = original_popularities^3
+				social_liberal = original_popularities^4
+				market_liberal = original_popularities^5
+				conservative = original_popularities^6
+				reactionary = original_popularities^7
+				monarchist = original_popularities^8
+				nationalist = original_popularities^9
+				fascist = original_popularities^10
+				fundamentalist = original_popularities^11
+			}
+			clear_array = original_popularities
+		}
+
+		clr_country_flag = colonial_government
+		clr_country_flag = integrated_puppet
+		clr_country_flag = occupied_puppet
+		clr_country_flag = autonomous_puppet
+		clr_country_flag = nominal_puppet
+	}
+}

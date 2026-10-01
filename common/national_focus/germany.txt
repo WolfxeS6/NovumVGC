@@ -1029,10 +1029,8 @@ focus_tree = {
 		}
 		available = {
 			OR = {
-				has_country_leader = GER_Sahra_Wagenknecht
-			}
-			OR = {
-				has_country_leader = GER_Egon_Krenz
+				has_country_leader = { character = GER_Sahra_Wagenknecht ruling_only = yes}
+				has_country_leader = { character = GER_Egon_Krenz ruling_only = yes}
 			}
 		}
 
@@ -1410,7 +1408,7 @@ focus_tree = {
 		completion_reward = {
 			add_timed_idea = {
 				idea = GER_Socialist_Bundestag_idea
-				duration = 365
+				days = 365
 			}
 		}
 	}
@@ -1538,7 +1536,15 @@ focus_tree = {
 		completion_reward = {
 			set_country_flag = No_Term_Limits_GER
 			add_stability = -0.05
-			add_country_leader_role = Generalsektretar_Forever_GER
+			party_leader = {
+				limit = {
+					has_ideology = stalinist
+				}
+				add_trait = {
+					ideology = stalinist
+					trait = Generalsektretar_Forever_GER
+				}
+			}
 		}
 	}
 	focus = {
@@ -3364,28 +3370,6 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-		}
-
-		ai_will_do = {
-			factor = 100
-		}
-	}
-	focus = {
-		id = GER_Free_Economic_Germany
-		icon = GFX_focus_GER_tend_to_the_future
-		x = -6
-		y = 1
-		cost = @Time_50_days
-
-		relative_position_id = GER_Finish_the_Leipzig_Program
-		prerequisite = {
-			focus = GER_Finish_the_Leipzig_Program
-		}
-		prerequisite = {
-			focus = GER_Support_Nuclear_Energy
-		}
-		completion_reward = {
-			unlock_decision_category_tooltip = GER_agenda_2010_category
 		}
 
 		ai_will_do = {
@@ -8271,7 +8255,7 @@ focus_tree = {
 			every_country = {
 				limit = {
 					OR = {
-						has_idea = idea_eu_member
+						is_EU_member = yes
 						tag = POL
 						tag = CZE
 						tag = AUS
